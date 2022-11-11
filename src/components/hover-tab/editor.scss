@@ -1,0 +1,34 @@
+.block-editor-block-inspector .th-hover-control {
+    display: flex;
+    padding: 0;
+    border-top: none;
+
+    .components-button {
+        flex: 1 1 0px;
+        justify-content: center;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        padding: 0px 0px;
+        margin-left: 0;
+        font-weight: 500;
+        border: 1px solid #d5dadf;
+        margin-bottom: 15px;
+        font-size: 11px;
+        height: 27px;
+
+        &:focus {
+            outline: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        &.is-active {
+            background:#d5dadf;
+            position: relative;
+            z-index: 1;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "themehunk",
+  "version": "0.1.0",
+  "description": "Example block scaffolded with Create Block tool.",
+  "author": "The WordPress Contributors",
+  "license": "GPL-2.0-or-later",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/block-editor": "^10.3.0",
+    "@wordpress/components": "^21.3.0",
+    "@wordpress/compose": "^5.19.0",
+    "@wordpress/data": "^7.4.0",
+    "@wordpress/dom-ready": "^3.20.0",
+    "@wordpress/e2e-test-utils": "^8.4.0",
+    "@wordpress/element": "^4.18.0",
+    "@wordpress/env": "^5.5.0",
+    "@wordpress/scripts": "^24.4.0"
+  },
+  "dependencies": {
+    "@wordpress/icons": "^9.11.0",
+    "array-move": "^3.0.1",
+    "classnames": "^2.3.2",
+    "currency-symbol-map": "^5.0.1",
+    "deepmerge": "^4.2.2",
+    "hex-rgba": "^1.0.2",
+    "object-hash": "^3.0.0",
+    "radium": "^0.26.2",
+    "react-sortable-hoc": "^2.0.0",
+    "uuid": "^8.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themehunk/themehunk-block.git"
+  },
+  "bugs": {
+    "url": "https://github.com/themehunk/themehunk-block/issues"
+  },
+  "homepage": "https://github.com/themehunk/themehunk-block#readme",
+  "keywords": []
+}

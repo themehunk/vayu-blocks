@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "create-block/advance-spacer",
+	"version": "0.1.0",
+	"title": "Advance Spacer",
+	"category": "themehunk-blocks",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "themehunk-block",
+	"editorScript": "file:../../../build/advance-spacer.js",
+	"editorStyle": "file:../../../build/advance-spacer.css",
+	"style": "file:../../../build/style-advance-spacer.css"
+}
