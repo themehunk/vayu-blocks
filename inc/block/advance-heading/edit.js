@@ -247,6 +247,31 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 				
 			};
 	}
+
+	let backgroundStyle = {};
+
+	if ( 'color' === attributes.backgroundType ) {
+		backgroundStyle = {
+			backgroundColor: attributes.backgroundColor
+		};
+	}
+
+	if ( 'image' === attributes.backgroundType ) {
+		backgroundStyle = {
+			backgroundImage: `url( '${ attributes.backgroundImage?.url }' )`,
+			backgroundAttachment: attributes.backgroundAttachment,
+			backgroundPosition: `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+			backgroundRepeat: attributes.backgroundRepeat,
+			backgroundSize: attributes.backgroundSize
+		};
+	}
+
+	if ( 'gradient' === attributes.backgroundType ) {
+		backgroundStyle = {
+			backgroundImage: attributes.backgroundGradient
+		};
+	}
+
 	
 
     const style = omitBy({
@@ -262,6 +287,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		...boxShadowStyle,
 		...transitionHeadingStyle,
 		...transitionBorderStyle,
+		...backgroundStyle,
 		
     }, x => x?.includes?.( 'undefined' ));
 

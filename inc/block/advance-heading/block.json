@@ -586,6 +586,64 @@
 		},
 		"transitionBorder": {
 			"type": "number"
+		},
+		"backgroundType": {
+			"type": "string",
+			"default": "color"
+		},
+		"backgroundColor": {
+			"type": "string"
+		},
+		"backgroundImage": {
+			"type": "object"
+		},
+		"backgroundAttachment": {
+			"type": "string",
+			"default": "scroll"
+		},
+		"backgroundPosition": {
+			"type": "object"
+		},
+		"backgroundRepeat": {
+			"type": "string",
+			"default": "repeat"
+		},
+		"backgroundSize": {
+			"type": "string",
+			"default": "auto"
+		},
+		"backgroundGradient": {
+			"type": "string",
+			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
+		},
+		"backgroundTypeHvr": {
+			"type": "string",
+			"default": "color"
+		},
+		"backgroundColorHvr": {
+			"type": "string"
+		},
+		"backgroundImageHvr": {
+			"type": "object"
+		},
+		"backgroundAttachmentHvr": {
+			"type": "string",
+			"default": "scroll"
+		},
+		"backgroundPositionHvr": {
+			"type": "object"
+		},
+		"backgroundRepeatHvr": {
+			"type": "string",
+			"default": "repeat"
+		},
+		"backgroundSizeHvr": {
+			"type": "string",
+			"default": "auto"
+		},
+		"backgroundGradientHvr": {
+			"type": "string",
+			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
 		}
 	},
 	"editorScript": "file:../../../build/advance-heading.js",

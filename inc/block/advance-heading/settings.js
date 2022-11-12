@@ -22,6 +22,7 @@
 	 Suspense
  } from '@wordpress/element';
 
+ import { pick } from 'lodash';
 /**
  * Internal dependencies
  */
@@ -32,6 +33,7 @@ import ClearButton from '../../../src/components/clear-button/index.js';
 import SizingControl from '../../../src/components/sizing-control/index.js';
 import HoverControl from '../../../src/components/hover-tab/index.js';
 import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
+import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
 
 const InsSettings = ({
     attributes,
@@ -1486,6 +1488,77 @@ const InsSettings = ({
 
 				)}	
 
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Background', 'themehunk-block' ) }
+					initialOpen={ false }
+				> 
+
+                <HoverControl value={ hover }
+					options={[
+						{
+							label: __( 'Normal', 'themehunk-block' ),
+							value: 'normal'
+						},
+						{
+							label: __( 'Hover', 'themehunk-block' ),
+							value: 'hover'
+						}
+					]}
+					onChange={ setHover } />
+				<>		
+				{ 'normal' ===  hover &&  (
+                
+				<BackgroundSelectorControl
+							backgroundType={ attributes.backgroundType }
+							backgroundColor={ attributes.backgroundColor }
+							image={ attributes.backgroundImage }
+							gradient={ attributes.backgroundGradient }
+							focalPoint={ attributes.backgroundPosition }
+							backgroundAttachment={ attributes.backgroundAttachment }
+							backgroundRepeat={ attributes.backgroundRepeat }
+							backgroundSize={ attributes.backgroundSize }
+							changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
+							changeImage={ media => {
+								setAttributes({
+									backgroundImage: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ backgroundImage: undefined })}
+							changeColor={ value => setAttributes({ backgroundColor: value })}
+							changeGradient={ value => setAttributes({ backgroundGradient: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
+							changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
+							changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
+							changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
+						/>
+					
+				) || 'hover' ===  hover && (
+					<BackgroundSelectorControl
+					backgroundType={ attributes.backgroundTypeHvr }
+					backgroundColor={ attributes.backgroundColorHvr }
+					image={ attributes.backgroundImageHvr }
+					gradient={ attributes.backgroundGradientHvr }
+					focalPoint={ attributes.backgroundPositionHvr }
+					backgroundAttachment={ attributes.backgroundAttachmentHvr }
+					backgroundRepeat={ attributes.backgroundRepeatHvr }
+					backgroundSize={ attributes.backgroundSizeHvr }
+					changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
+					changeImage={ media => {
+						setAttributes({
+							backgroundImageHvr: pick( media, [ 'id', 'url' ])
+						});
+					}}
+					removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
+					changeColor={ value => setAttributes({ backgroundColorHvr: value })}
+					changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
+					changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
+					changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
+					changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
+					changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
+				/>
+				)}	
+				</>
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Responsive', 'themehunk-block' ) }
