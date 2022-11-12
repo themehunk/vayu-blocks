@@ -247,6 +247,16 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 				
 			};
 	}
+	let transitionBackgroundStyle = {};
+	if ( attributes.transitionBackground ) {
+		transitionBackgroundStyle ={
+				transition:` background ${ attributes.transitionBackground }s`,
+				WebkitTransition:` background ${ attributes.transitionBackground }s`,
+				MozTransition:` background ${ attributes.transitionBackground }s`,
+				OTransition:` background ${ attributes.transitionBackground }s`,
+				
+			};
+	}
 
 	let backgroundStyle = {};
 
@@ -287,6 +297,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		...boxShadowStyle,
 		...transitionHeadingStyle,
 		...transitionBorderStyle,
+		...transitionBackgroundStyle,
 		...backgroundStyle,
 		
     }, x => x?.includes?.( 'undefined' ));
@@ -304,6 +315,23 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 			e.target.style.borderColor = attributes.borderColorHvr;
 			e.target.style.borderStyle = attributes.borderHvrType;
 			e.target.style.boxShadow = `${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000' ), attributes.boxShadowColorOpacityHvr ) }`;
+			
+            if ( 'color' === attributes.backgroundType ) {
+			e.target.style.backgroundColor = attributes.backgroundColorHvr;	
+			}
+
+			if ( 'image' === attributes.backgroundType ) {
+				e.target.style.backgroundImage =`url( '${ attributes.backgroundImageHvr?.url }' )`,
+				e.target.style.backgroundAttachment = attributes.backgroundAttachmentHvr,
+				e.target.style.backgroundPosition = `${ Math.round( attributes.backgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
+				e.target.style.backgroundRepeat = attributes.backgroundRepeatHvr,
+				e.target.style.backgroundSize = attributes.backgroundSizeHvr
+
+			}
+
+			if ( 'gradient' === attributes.backgroundType ) {	
+			e.target.style.backgroundImage =  attributes.backgroundGradientHvr;
+			}
 
 			if ( isDesktop ) {
 				e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrType ? `${ attributes.borderWidthHvr }px` : `${ attributes.borderWidthHvrTop }px`;
@@ -343,7 +371,22 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 			e.target.style.borderColor = attributes.borderColor;
 			e.target.style.borderStyle = attributes.borderType;
 			e.target.style.boxShadow = `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#000000' ), attributes.boxShadowColorOpacity ) }`
-
+            if ( 'color' === attributes.backgroundType ) {
+				e.target.style.backgroundColor = attributes.backgroundColor;	
+				}
+	
+				if ( 'image' === attributes.backgroundType ) {
+					e.target.style.backgroundImage =`url( '${ attributes.backgroundImage?.url }' )`,
+					e.target.style.backgroundAttachment = attributes.backgroundAttachment,
+					e.target.style.backgroundPosition = `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+					e.target.style.backgroundRepeat = attributes.backgroundRepeat,
+					e.target.style.backgroundSize = attributes.backgroundSize
+	
+				}
+	
+				if ( 'gradient' === attributes.backgroundType ) {	
+				e.target.style.backgroundImage =  attributes.backgroundGradient;
+				}
 			if ( isDesktop ) {
 				e.target.style.borderTopWidth = 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }px` : `${ attributes.borderWidthTop }px`;
 			    e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }px` : `${ attributes.borderWidthBottom }px`;

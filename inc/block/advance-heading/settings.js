@@ -862,7 +862,7 @@ const InsSettings = ({
 	const customTooltipZindex = value => `${value}px`
 	const customTooltiptransitionHeading = value => `${value}`
     const customTooltiptransitionBorder = value => `${value}`
-	
+	const customTooltiptransitionBackground = value => `${value}`
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
@@ -1506,7 +1506,7 @@ const InsSettings = ({
 						}
 					]}
 					onChange={ setHover } />
-				<>		
+				
 				{ 'normal' ===  hover &&  (
                 
 				<BackgroundSelectorControl
@@ -1534,6 +1534,7 @@ const InsSettings = ({
 						/>
 					
 				) || 'hover' ===  hover && (
+					<>
 					<BackgroundSelectorControl
 					backgroundType={ attributes.backgroundTypeHvr }
 					backgroundColor={ attributes.backgroundColorHvr }
@@ -1557,8 +1558,20 @@ const InsSettings = ({
 					changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
 					changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
 				/>
-				)}	
+				<RangeControl
+				label={ __( 'Transition Duration', 'themehunk-block' ) }
+				renderTooltipContent={ customTooltiptransitionBackground }
+				value={ attributes.transitionBackground }
+				onChange={ transitionBackground => setAttributes({ transitionBackground }) }
+				step={ 0.1 }
+				min={ 0 }
+				max={ 3 }
+				allowReset={ true }
+                />
 				</>
+				
+				)}	
+				
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Responsive', 'themehunk-block' ) }
