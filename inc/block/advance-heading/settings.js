@@ -11,8 +11,7 @@
      SelectControl,
 	 Placeholder,
 	 Spinner,
-	 Button,
-	 ButtonGroup,
+	 ToggleControl,
  } from '@wordpress/components';
  
  import { useSelect } from '@wordpress/data';
@@ -32,6 +31,7 @@ import GoogleFontsControl from '../../../src/components/google-fonts-control/ind
 import ClearButton from '../../../src/components/clear-button/index.js';
 import SizingControl from '../../../src/components/sizing-control/index.js';
 import HoverControl from '../../../src/components/hover-tab/index.js';
+import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
 
 const InsSettings = ({
     attributes,
@@ -163,6 +163,58 @@ const InsSettings = ({
 		}
 	};
 
+	const getBorderWidthType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.borderWidthType;
+		case 'Tablet':
+			return attributes.borderWidthTypeTablet;
+		case 'Mobile':
+			return attributes.borderWidthTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const getBorderWidthHvrType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.borderWidthHvrType;
+		case 'Tablet':
+			return attributes.borderWidthHvrTypeTablet;
+		case 'Mobile':
+			return attributes.borderWidthHvrTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const getBorderRadiusType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.borderRadiusType;
+		case 'Tablet':
+			return attributes.borderRadiusTypeTablet;
+		case 'Mobile':
+			return attributes.borderRadiusTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const getBorderRadiusHvrType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.borderRadiusHvrType;
+		case 'Tablet':
+			return attributes.borderRadiusHvrTypeTablet;
+		case 'Mobile':
+			return attributes.borderRadiusHvrTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
 	const changePaddingType = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ paddingType: value });
@@ -172,6 +224,7 @@ const InsSettings = ({
 			setAttributes({ paddingTypeMobile: value });
 		}
 	};
+
 	const changeMarginType = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ marginType: value });
@@ -179,6 +232,45 @@ const InsSettings = ({
 			setAttributes({ marginTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ marginTypeMobile: value });
+		}
+	};
+
+	const changeBorderWidthType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ borderWidthType: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ borderWidthTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ borderWidthTypeMobile: value });
+		}
+	};
+
+	const changeBorderWidthHvrType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ borderWidthHvrType: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ borderWidthHvrTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ borderWidthHvrTypeMobile: value });
+		}
+	};
+	const changeBorderRadiusType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ borderRadiusType: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ borderRadiusTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ borderRadiusTypeMobile: value });
+		}
+	};
+
+	const changeBorderRadiusHvrType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ borderRadiusHvrType: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ borderRadiusHvrTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ borderRadiusHvrTypeMobile: value });
 		}
 	};
 
@@ -194,7 +286,30 @@ const InsSettings = ({
 		bottom: 'marginBottom',
 		left: 'marginLeft'
 	};
-
+	const desktopBorderWidthType = {
+		top: 'borderWidthTop',
+		right: 'borderWidthRight',
+		bottom: 'borderWidthBottom',
+		left: 'borderWidthLeft'
+	};
+	const desktopBorderWidthHvrType = {
+		top: 'borderWidthHvrTop',
+		right: 'borderWidthHvrRight',
+		bottom: 'borderWidthHvrBottom',
+		left: 'borderWidthHvrLeft'
+	};
+	const desktopBorderRadiusType = {
+		top: 'borderRadiusTop',
+		left: 'borderRadiusLeft',
+		right: 'borderRadiusRight',
+		bottom: 'borderRadiusBottom'
+	};
+    const desktopBorderRadiusHvrType = {
+		top: 'borderRadiusHvrTop',
+		right: 'borderRadiusHvrRight',
+		bottom: 'borderRadiusHvrBottom',
+		left: 'borderRadiusHvrLeft'
+	};
 	const tabletPaddingType = {
 		top: 'paddingTopTablet',
 		right: 'paddingRightTablet',
@@ -206,6 +321,30 @@ const InsSettings = ({
 		right: 'margingRightTablet',
 		bottom: 'marginBottomTablet',
 		left: 'marginLeftTablet'
+	};
+	const tabletBorderWidthType = {
+		top: 'borderWidthTopTablet',
+		right: 'borderWidthRightTablet',
+		bottom: 'borderWidthBottomTablet',
+		left: 'borderWidthLeftTablet'
+	};
+	const tabletBorderWidthHvrType = {
+		top: 'borderWidthHvrTopTablet',
+		right: 'borderWidthHvrRightTablet',
+		bottom: 'borderWidthHvrBottomTablet',
+		left: 'borderWidthHvrLeftTablet'
+	};
+	const tabletBorderRadiusType = {
+		top: 'borderRadiusTopTablet',
+		left: 'borderRadiusLeftTablet',
+		right: 'borderRadiusRightTablet',
+		bottom: 'borderRadiusBottomTablet'
+	};
+	const tabletBorderRadiusHvrType = {
+		top: 'borderRadiusHvrTopTablet',
+		right: 'borderRadiusHvrRightTablet',
+		bottom: 'borderRadiusHvrBottomTablet',
+		left: 'borderRadiusHvrLeftTablet'
 	};
 
 	const mobilePaddingType = {
@@ -219,6 +358,30 @@ const InsSettings = ({
 		right: 'marginRightMobile',
 		bottom: 'marginBottomMobile',
 		left: 'marginLeftMobile'
+	};
+	const mobileBorderWidthType = {
+		top: 'borderWidthTopMobile',
+		right: 'borderWidthRightMobile',
+		bottom: 'borderWidthBottomMobile',
+		left: 'borderWidthLeftMobile'
+	};
+	const mobileBorderWidthHvrType = {
+		top: 'borderWidthHvrTopMobile',
+		right: 'borderWidthHvrRightMobile',
+		bottom: 'borderWidthHvrBottomMobile',
+		left: 'borderWidthHvrLeftMobile'
+	};
+	const mobileBorderRadiusType = {
+		top: 'borderRadiusTopMobile',
+		left: 'borderRadiusLeftMobile',
+		right: 'borderRadiusRightMobile',
+		bottom: 'borderRadiusBottomMobile'
+	};
+	const mobileBorderRadiusHvrType = {
+		top: 'borderRadiusHvrTopMobile',
+		right: 'borderRadiusHvrRightMobile',
+		bottom: 'borderRadiusHvrBottomMobile',
+		left: 'borderRadiusHvrLeftMobile'
 	};
 
 	const changePadding = ( type, value ) => {
@@ -268,6 +431,110 @@ const InsSettings = ({
 				setAttributes({ marginMobile: value });
 			} else {
 				setAttributes({ [mobileMarginType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const changeBorderWidth = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.borderWidthType ) {
+				setAttributes({ borderWidth: value });
+			} else {
+				setAttributes({ [desktopBorderWidthType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.borderWidthTypeTablet ) {
+				setAttributes({ borderWidthTablet: value });
+			} else {
+				setAttributes({ [tabletBorderWidthType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.borderWidthTypeMobile ) {
+				setAttributes({ borderWidthMobile: value });
+			} else {
+				setAttributes({ [mobileBorderWidthType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const changeBorderWidthHvr = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.borderWidthHvrType ) {
+				setAttributes({ borderWidthHvr: value });
+			} else {
+				setAttributes({ [desktopBorderWidthHvrType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.borderWidthHvrTypeTablet ) {
+				setAttributes({ borderWidthHvrTablet: value });
+			} else {
+				setAttributes({ [tabletBorderWidthHvrType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.borderWidthHvrTypeMobile ) {
+				setAttributes({ borderWidthHvrMobile: value });
+			} else {
+				setAttributes({ [mobileBorderWidthHvrType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const changeBorderRadius = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.borderRadiusType ) {
+				setAttributes({ borderRadius: value });
+			} else {
+				setAttributes({ [desktopBorderRadiusType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.borderRadiusTypeTablet ) {
+				setAttributes({ borderRadiusTablet: value });
+			} else {
+				setAttributes({ [tabletBorderRadiusType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.borderRadiusTypeMobile ) {
+				setAttributes({ borderRadiusMobile: value });
+			} else {
+				setAttributes({ [mobileBorderRadiusType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const changeBorderRadiusHvr = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.borderRadiusHvrType ) {
+				setAttributes({ borderRadiusHvr: value });
+			} else {
+				setAttributes({ [desktopBorderRadiusHvrType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.borderRadiusHvrTypeTablet ) {
+				setAttributes({ borderRadiusHvrTablet: value });
+			} else {
+				setAttributes({ [tabletBorderRadiusHvrType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.borderRadiusHvrTypeMobile ) {
+				setAttributes({ borderRadiusHvrMobile: value });
+			} else {
+				setAttributes({ [mobileBorderRadiusHvrType[type]]: value });
 			}
 			break;
 		}
@@ -357,6 +624,173 @@ const InsSettings = ({
 
 		return undefined;
 	};
+	const getBorderWidth = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthTop;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthRight;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthBottom;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthLeft;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+	const getBorderWidthHvr = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrTop;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrRight;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrBottom;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrLeft;
+			case 'Tablet':
+				return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+	const getBorderRadius = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusTop;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusTopMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusLeft;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusLeftMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusRight;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusBottom;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusBottomMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+	const getBorderRadiusHvr = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrTop;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrRight;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrBottom;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrLeft;
+			case 'Tablet':
+				return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
 
 	const changeFontFamily = value => {
 		if ( ! value ) {
@@ -424,7 +858,9 @@ const InsSettings = ({
 	const customTooltipletterSpacing = value => `${value}px`
 	const customTooltipCustomWidth = value => `${value}px`
 	const customTooltipZindex = value => `${value}px`
-
+	const customTooltiptransitionHeading = value => `${value}`
+    const customTooltiptransitionBorder = value => `${value}`
+	
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
@@ -467,7 +903,6 @@ const InsSettings = ({
 					onChange={ setHover } />
 						
 				{ 'normal' ===  hover &&  (	
-
 						
 				<ColorGradientControl
 								label={ __( 'Heading Color', 'themehunk-block' ) }
@@ -477,12 +912,26 @@ const InsSettings = ({
 			 
 
 				) || 'hover' ===  hover && (
-			
+			    <>
 				<ColorGradientControl
 					label={ __( 'Heading Hover Color', 'themehunk-block' ) }
 					colorValue={ attributes.headingHvrColor }
 					onColorChange={ e => setAttributes({ headingHvrColor: e }) }
 				/>
+
+			
+				<RangeControl
+							    label={ __( 'Transition Duration', 'themehunk-block' ) }
+							    renderTooltipContent={ customTooltiptransitionHeading }
+								value={ attributes.transitionHeading }
+								onChange={ transitionHeading => setAttributes({ transitionHeading }) }
+								step={ 0.1 }
+								min={ 0 }
+								max={ 3 }
+								allowReset={ true }
+				/>
+		
+				</>
 				
 	
 				) }
@@ -683,6 +1132,380 @@ const InsSettings = ({
 							</ResponsiveControl>
 
 
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
+					initialOpen={ false }
+				> 
+                <HoverControl value={ hover }
+					options={[
+						{
+							label: __( 'Normal', 'themehunk-block' ),
+							value: 'normal'
+						},
+						{
+							label: __( 'Hover', 'themehunk-block' ),
+							value: 'hover'
+						}
+					]}
+					onChange={ setHover } />
+						
+				{ 'normal' ===  hover &&  (	
+                    <>
+					<SelectControl
+						label={ __( 'Border Type', 'themehunk-block' ) }
+						value={ attributes.borderType }
+						options={ [
+							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
+							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
+							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
+							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
+							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+						] }
+						onChange={ e => setAttributes({ borderType: e }) }
+					/>	
+					
+						
+					   { 'none' !== attributes.borderType && (
+
+						<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+						<ResponsiveControl
+								label={ __( 'Border Width', 'themehunk-block' ) }
+							>
+                            <SizingControl
+									type={ getBorderWidthType() }
+									min={ 0 }
+									max={ 500 }
+									changeType={ changeBorderWidthType }
+									onChange={ changeBorderWidth }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderWidth( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderWidth( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderWidth( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderWidth( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+									<ColorGradientControl
+								label={ __( 'Border Color', 'themehunk-block' ) }
+								colorValue={ attributes.borderColor }
+								onColorChange={ e => setAttributes({ borderColor: e }) }
+								/>
+						</Suspense>
+						
+						) }
+                        <ResponsiveControl
+								label={ __( 'Border Radius', 'themehunk-block' ) }
+							>
+                            <SizingControl
+									type={ getBorderRadiusType() }
+									min={ 0 }
+									max={ 500 }
+									changeType={ changeBorderRadiusType }
+									onChange={ changeBorderRadius }
+									options={ [
+										{
+											label: __( 'T-R', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderRadius( 'top' )
+										},
+										{
+											label: __( 'T-L', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderRadius( 'right' )
+										},
+										{
+											label: __( 'B-R', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderRadius( 'left' )
+										},
+										{
+											label: __( 'B-L', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderRadius( 'bottom' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+
+							<ControlPanelControl
+							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								boxShadow: false,
+								boxShadowColor: undefined,
+								boxShadowColorOpacity: 50,
+								boxShadowBlur: 5,
+								boxShadowSpread: 1,
+								boxShadowHorizontal: 0,
+								boxShadowVertical: 0
+							} }
+							onClick={ () => setAttributes({ boxShadow: true }) }
+						>
+						
+							<ColorGradientControl
+								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								colorValue={ attributes.boxShadowColor }
+								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+							/>
+
+							<RangeControl
+								label={ __( 'Opacity', 'themehunk-block' ) }
+								value={ attributes.boxShadowColorOpacity }
+								onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Blur', 'themehunk-block' ) }
+								value={ attributes.boxShadowBlur }
+								onChange={ e => setAttributes({ boxShadowBlur: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Spread', 'themehunk-block' ) }
+								value={ attributes.boxShadowSpread }
+								onChange={ e => setAttributes({ boxShadowSpread: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Horizontal', 'themehunk-block' ) }
+								value={ attributes.boxShadowHorizontal }
+								onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Vertical', 'themehunk-block' ) }
+								value={ attributes.boxShadowVertical }
+								onChange={ e => setAttributes({ boxShadowVertical: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+							</ControlPanelControl>
+						
+
+					</>
+
+                ) || 'hover' ===  hover && (
+                    <>
+					<SelectControl
+						label={ __( 'Border Type', 'themehunk-block' ) }
+						value={ attributes.borderHvrType }
+						options={ [
+							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
+							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
+							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
+							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
+							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+						] }
+						onChange={ e => setAttributes({ borderHvrType: e }) }
+					/>	
+					
+                    { 'none' !== attributes.borderHvrType && (
+					<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+					<ResponsiveControl
+								label={ __( 'Border Width', 'themehunk-block' ) }
+							>
+                            <SizingControl
+									type={ getBorderWidthHvrType() }
+									min={ 0 }
+									max={ 500 }
+									changeType={ changeBorderWidthHvrType }
+									onChange={ changeBorderWidthHvr }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderWidthHvr( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderWidthHvr( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderWidthHvr( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderWidthHvr( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>		
+					<ColorGradientControl
+					label={ __( 'Border Hover Color', 'themehunk-block' ) }
+					colorValue={ attributes.borderColorHvr }
+					onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+				    />
+					</Suspense>
+
+					
+					) }
+
+                            <ResponsiveControl
+								label={ __( 'Border Radius', 'themehunk-block' ) }
+							>
+                            <SizingControl
+									type={ getBorderRadiusHvrType() }
+									min={ 0 }
+									max={ 500 }
+									changeType={ changeBorderRadiusHvrType }
+									onChange={ changeBorderRadiusHvr }
+									options={ [
+										{
+											label: __( 'T-R', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderRadiusHvr( 'top' )
+										},
+										{
+											label: __( 'T-L', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderRadiusHvr( 'right' )
+										},
+										{
+											label: __( 'B-R', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderRadiusHvr( 'left' )
+										},
+										{
+											label: __( 'B-L', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderRadiusHvr( 'bottom' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+							<ControlPanelControl
+							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								boxShadowHvr: false,
+								boxShadowColorHvr: undefined,
+								boxShadowColorOpacityHvr: 50,
+								boxShadowBlurHvr: 5,
+								boxShadowSpreadHvr: 1,
+								boxShadowHorizontalHvr: 0,
+								boxShadowVerticalHvr: 0
+							} }
+							onClick={ () => setAttributes({ boxShadowHvr: true }) }
+						>
+						
+							<ColorGradientControl
+								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								colorValue={ attributes.boxShadowColorHvr }
+								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+							/>
+
+							<RangeControl
+								label={ __( 'Opacity', 'themehunk-block' ) }
+								value={ attributes.boxShadowColorOpacityHvr }
+								onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Blur', 'themehunk-block' ) }
+								value={ attributes.boxShadowBlurHvr }
+								onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Spread', 'themehunk-block' ) }
+								value={ attributes.boxShadowSpreadHvr }
+								onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Horizontal', 'themehunk-block' ) }
+								value={ attributes.boxShadowHorizontalHvr }
+								onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Vertical', 'themehunk-block' ) }
+								value={ attributes.boxShadowVerticalHvr }
+								onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+							</ControlPanelControl>
+
+							<RangeControl
+							    label={ __( 'Transition Duration', 'themehunk-block' ) }
+							    renderTooltipContent={ customTooltiptransitionBorder }
+								value={ attributes.transitionBorder }
+								onChange={ transitionBorder => setAttributes({ transitionBorder }) }
+								step={ 0.1 }
+								min={ 0 }
+								max={ 3 }
+								allowReset={ true }
+				/>
+					</>
+
+				)}	
+
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Responsive', 'themehunk-block' ) }
+					initialOpen={ false }
+				> 
+				<ToggleControl
+								label={ __( 'Hide On Desktop', 'themehunk-block' ) }
+								checked={ attributes.responsiveTogHideDesktop }
+								onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
+							/>
+			    <ToggleControl
+								label={ __( 'Hide On Tablet', 'themehunk-block' ) }
+								checked={ attributes.responsiveTogHideTablet }
+								onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
+							/>				
+                <ToggleControl
+								label={ __( 'Hide On Mobile', 'themehunk-block' ) }
+								checked={ attributes.responsiveTogHideMobile }
+								onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
+							/>
 				</PanelBody>
 		
 		     </Fragment>

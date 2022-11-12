@@ -1,6 +1,108 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@wordpress/icons/build-module/icon/index.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/icon/index.js ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * WordPress dependencies
+ */
+
+/** @typedef {{icon: JSX.Element, size?: number} & import('@wordpress/primitives').SVGProps} IconProps */
+
+/**
+ * Return an SVG icon.
+ *
+ * @param {IconProps} props icon is the SVG component to render
+ *                          size is a number specifiying the icon size in pixels
+ *                          Other props will be passed to wrapped SVG component
+ *
+ * @return {JSX.Element}  Icon component
+ */
+
+function Icon(_ref) {
+  let {
+    icon,
+    size = 24,
+    ...props
+  } = _ref;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.cloneElement)(icon, {
+    width: size,
+    height: size,
+    ...props
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Icon);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@wordpress/icons/build-module/library/backup.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/backup.js ***!
+  \**********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+const backup = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M5.5 12h1.75l-2.5 3-2.5-3H4a8 8 0 113.134 6.35l.907-1.194A6.5 6.5 0 105.5 12zm9.53 1.97l-2.28-2.28V8.5a.75.75 0 00-1.5 0V12a.747.747 0 00.218.529l1.282-.84-1.28.842 2.5 2.5a.75.75 0 101.06-1.061z"
+}));
+/* harmony default export */ __webpack_exports__["default"] = (backup);
+//# sourceMappingURL=backup.js.map
+
+/***/ }),
+
+/***/ "./node_modules/@wordpress/icons/build-module/library/settings.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/settings.js ***!
+  \************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * WordPress dependencies
+ */
+
+const settings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M14.5 13.8c-1.1 0-2.1.7-2.4 1.8H4V17h8.1c.3 1 1.3 1.8 2.4 1.8s2.1-.7 2.4-1.8H20v-1.5h-3.1c-.3-1-1.3-1.7-2.4-1.7zM11.9 7c-.3-1-1.3-1.8-2.4-1.8S7.4 6 7.1 7H4v1.5h3.1c.3 1 1.3 1.8 2.4 1.8s2.1-.7 2.4-1.8H20V7h-8.1z"
+}));
+/* harmony default export */ __webpack_exports__["default"] = (settings);
+//# sourceMappingURL=settings.js.map
+
+/***/ }),
+
 /***/ "./inc/block/advance-heading/controls.js":
 /*!***********************************************!*\
   !*** ./inc/block/advance-heading/controls.js ***!
@@ -237,20 +339,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lodash */ "lodash");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./block.json */ "./inc/block/advance-heading/block.json");
-/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controls.js */ "./inc/block/advance-heading/controls.js");
-/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./settings.js */ "./inc/block/advance-heading/settings.js");
-/* harmony import */ var _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../src/helpers/google-fonts.js */ "./src/helpers/google-fonts.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editor.scss */ "./inc/block/advance-heading/editor.scss");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var hex_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-rgba */ "./node_modules/hex-rgba/index.js");
+/* harmony import */ var hex_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_rgba__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./block.json */ "./inc/block/advance-heading/block.json");
+/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./controls.js */ "./inc/block/advance-heading/controls.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./settings.js */ "./inc/block/advance-heading/settings.js");
+/* harmony import */ var _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../src/helpers/google-fonts.js */ "./src/helpers/google-fonts.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./editor.scss */ "./inc/block/advance-heading/editor.scss");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_14__);
 
 
 /**
  * WordPress dependencies.
  */
+
 
 
 
@@ -274,7 +379,7 @@ function Edit(_ref) {
     clientId
   } = _ref;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__["default"].attach();
+    _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_12__["default"].attach();
   }, [attributes.id]);
   const {
     id
@@ -332,7 +437,15 @@ function Edit(_ref) {
       marginTop: 'linked' === attributes.marginType ? `${attributes.margin}px` : `${attributes.marginTop}px`,
       marginBottom: 'linked' === attributes.marginType ? `${attributes.margin}px` : `${attributes.marginBottom}px`,
       marginRight: 'linked' === attributes.marginType ? `${attributes.margin}px` : `${attributes.marginRight}px`,
-      marginLeft: 'linked' === attributes.marginType ? `${attributes.margin}px` : `${attributes.marginLeft}px`
+      marginLeft: 'linked' === attributes.marginType ? `${attributes.margin}px` : `${attributes.marginLeft}px`,
+      borderTopWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthTop}px`,
+      borderBottomWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthBottom}px`,
+      borderRightWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthRight}px`,
+      borderLeftWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthLeft}px`,
+      borderTopRightRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusTop}px`,
+      borderTopLeftRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusRight}px`,
+      borderBottomRightRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusLeft}px`,
+      borderBottomLeftRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusBottom}px`
     };
   }
   if (isTablet) {
@@ -350,8 +463,14 @@ function Edit(_ref) {
       marginBottom: 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}px` : `${attributes.marginBottomTablet}px`,
       marginRight: 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}px` : `${attributes.marginRightTablet}px`,
       marginLeft: 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}px` : `${attributes.marginLeftTablet}px`,
-      width: attributes.customWidthTablet,
-      maxWidh: attributes.customWidthTablet
+      borderTopWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthTopTablet}px`,
+      borderBottomWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthBottomTablet}px`,
+      borderRightWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthRightTablet}px`,
+      borderLeftWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthLeftTablet}px`,
+      borderTopRightRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusTopTablet}px`,
+      borderTopLeftRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusRightTablet}px`,
+      borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusLeftTablet}px`,
+      borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusBottomTablet}px`
     };
   }
   if (isMobile) {
@@ -369,8 +488,14 @@ function Edit(_ref) {
       marginBottom: 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}px` : `${attributes.marginBottomMobile}px`,
       marginRight: 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}px` : `${attributes.marginRightMobile}px`,
       marginLeft: 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}px` : `${attributes.marginLeftMobile}px`,
-      width: attributes.customWidthMobile,
-      maxWidh: attributes.customWidthMobile
+      borderTopWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthTopMobile}px`,
+      borderBottomWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthBottomMobile}px`,
+      borderRightWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthRightMobile}px`,
+      borderLeftWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthLeftMobile}px`,
+      borderTopRightRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusTopMobile}px`,
+      borderTopLeftRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusRightMobile}px`,
+      borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusLeftMobile}px`,
+      borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusBottomMobile}px`
     };
   }
   let customwidth;
@@ -404,31 +529,132 @@ function Edit(_ref) {
       display: 'inline-flex'
     };
   }
+  let boxShadowStyle = {};
+  if (attributes.boxShadow) {
+    boxShadowStyle = {
+      boxShadow: `${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColor ? attributes.boxShadowColor : '#000000', attributes.boxShadowColorOpacity)}`
+    };
+  }
+  let transitionHeadingStyle = {};
+  if (attributes.transitionHeading) {
+    transitionHeadingStyle = {
+      transition: `color ${attributes.transitionHeading}s`,
+      WebkitTransition: `color ${attributes.transitionHeading}s`,
+      MozTransition: `color ${attributes.transitionHeading}s`,
+      OTransition: `color ${attributes.transitionHeading}s`
+    };
+  }
+  let transitionBorderStyle = {};
+  if (attributes.transitionBorder) {
+    transitionBorderStyle = {
+      transition: ` border ${attributes.transitionBorder}s`,
+      WebkitTransition: ` border ${attributes.transitionBorder}s`,
+      MozTransition: ` border ${attributes.transitionBorder}s`,
+      OTransition: ` border ${attributes.transitionBorder}s`
+    };
+  }
   const style = (0,lodash__WEBPACK_IMPORTED_MODULE_6__.omitBy)({
     color: attributes.headingColor,
     fontFamily: attributes.fontFamily || undefined,
     fontWeight: 'regular' === attributes.fontVariant ? 'normal' : attributes.fontVariant,
     fontStyle: attributes.fontStyle || undefined,
     textTransform: attributes.textTransform || undefined,
+    borderStyle: attributes.borderType,
+    borderColor: attributes.borderColor,
     ...stylesheet,
-    ...customwidth
+    ...customwidth,
+    ...boxShadowStyle,
+    ...transitionHeadingStyle,
+    ...transitionBorderStyle
   }, x => {
     var _x$includes;
     return x === null || x === void 0 ? void 0 : (_x$includes = x.includes) === null || _x$includes === void 0 ? void 0 : _x$includes.call(x, 'undefined');
   });
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (attributes.fontFamily) {
-      _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__["default"].loadFontToBrowser(attributes.fontFamily, attributes.fontVariant);
+      _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_12__["default"].loadFontToBrowser(attributes.fontFamily, attributes.fontVariant);
     }
   }, [attributes.fontFamily]);
+  const onMouseEnter = e => {
+    e.target.style.color = attributes.headingHvrColor;
+    e.target.style.borderColor = attributes.borderColorHvr;
+    e.target.style.borderStyle = attributes.borderHvrType;
+    e.target.style.boxShadow = `${attributes.boxShadowHorizontalHvr}px ${attributes.boxShadowVerticalHvr}px ${attributes.boxShadowBlurHvr}px ${attributes.boxShadowSpreadHvr}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000', attributes.boxShadowColorOpacityHvr)}`;
+    if (isDesktop) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}px` : `${attributes.borderWidthHvrTop}px`;
+      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}px` : `${attributes.borderWidthHvrBottom}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}px` : `${attributes.borderWidthHvrRight}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}px` : `${attributes.borderWidthHvrLeft}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}px` : `${attributes.borderRadiusHvrTop}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}px` : `${attributes.borderRadiusHvrRight}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}px` : `${attributes.borderRadiusHvrLeft}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}px` : `${attributes.borderRadiusHvrBottom}px`;
+    }
+    if (isTablet) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}px` : `${attributes.borderWidthHvrTopTablet}px`;
+      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}px` : `${attributes.borderWidthHvrBottomTablet}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}px` : `${attributes.borderWidthHvrRightTablet}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}px` : `${attributes.borderWidthHvrLeftTablet}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}px` : `${attributes.borderRadiusHvrTopTablet}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}px` : `${attributes.borderRadiusHvrRightTablet}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}px` : `${attributes.borderRadiusHvrLeftTablet}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}px` : `${attributes.borderRadiusHvrBottomTablet}px`;
+    }
+    if (isMobile) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}px` : `${attributes.borderWidthHvrTopMobile}px`;
+      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}px` : `${attributes.borderWidthHvrBottomMobile}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}px` : `${attributes.borderWidthHvrRightMobile}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}px` : `${attributes.borderWidthHvrLeftMobile}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}px` : `${attributes.borderRadiusHvrTopMobile}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}px` : `${attributes.borderRadiusHvrRightMobile}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}px` : `${attributes.borderRadiusHvrLeftMobile}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}px` : `${attributes.borderRadiusHvrBottomMobile}px`;
+    }
+  };
+  const onMouseLeave = e => {
+    e.target.style.color = attributes.headingColor;
+    e.target.style.borderColor = attributes.borderColor;
+    e.target.style.borderStyle = attributes.borderType;
+    e.target.style.boxShadow = `${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColor ? attributes.boxShadowColor : '#000000', attributes.boxShadowColorOpacity)}`;
+    if (isDesktop) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthTop}px`;
+      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthBottom}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthRight}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}px` : `${attributes.borderWidthLeft}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusTop}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusRight}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusLeft}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}px` : `${attributes.borderRadiusBottom}px`;
+    }
+    if (isTablet) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthTopTablet}px`, e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthBottomTablet}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthRightTablet}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}px` : `${attributes.borderWidthLeftTablet}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusTopTablet}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusRightTablet}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusLeftTablet}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}px` : `${attributes.borderRadiusBottomTablet}px`;
+    }
+    if (isMobile) {
+      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthTopMobile}px`, e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthBottomMobile}px`;
+      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthRightMobile}px`;
+      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}px` : `${attributes.borderWidthLeftMobile}px`;
+      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusTopMobile}px`;
+      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusRightMobile}px`;
+      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusLeftMobile}px`;
+      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}px` : `${attributes.borderRadiusBottomMobile}px`;
+    }
+  };
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     id: attributes.id,
-    style
+    style,
+    onMouseEnter,
+    onMouseLeave
   });
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_controls_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_controls_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_settings_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_settings_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
@@ -616,6 +842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_components_clear_button_index_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../src/components/clear-button/index.js */ "./src/components/clear-button/index.js");
 /* harmony import */ var _src_components_sizing_control_index_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../src/components/sizing-control/index.js */ "./src/components/sizing-control/index.js");
 /* harmony import */ var _src_components_hover_tab_index_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../src/components/hover-tab/index.js */ "./src/components/hover-tab/index.js");
+/* harmony import */ var _src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../src/components/control-panel-control/index.js */ "./src/components/control-panel-control/index.js");
 
 /**
  * WordPress dependencies.
@@ -629,6 +856,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -781,6 +1009,54 @@ const InsSettings = _ref => {
         return undefined;
     }
   };
+  const getBorderWidthType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.borderWidthType;
+      case 'Tablet':
+        return attributes.borderWidthTypeTablet;
+      case 'Mobile':
+        return attributes.borderWidthTypeMobile;
+      default:
+        return undefined;
+    }
+  };
+  const getBorderWidthHvrType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.borderWidthHvrType;
+      case 'Tablet':
+        return attributes.borderWidthHvrTypeTablet;
+      case 'Mobile':
+        return attributes.borderWidthHvrTypeMobile;
+      default:
+        return undefined;
+    }
+  };
+  const getBorderRadiusType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.borderRadiusType;
+      case 'Tablet':
+        return attributes.borderRadiusTypeTablet;
+      case 'Mobile':
+        return attributes.borderRadiusTypeMobile;
+      default:
+        return undefined;
+    }
+  };
+  const getBorderRadiusHvrType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.borderRadiusHvrType;
+      case 'Tablet':
+        return attributes.borderRadiusHvrTypeTablet;
+      case 'Mobile':
+        return attributes.borderRadiusHvrTypeMobile;
+      default:
+        return undefined;
+    }
+  };
   const changePaddingType = value => {
     if ('Desktop' === getView) {
       setAttributes({
@@ -811,6 +1087,66 @@ const InsSettings = _ref => {
       });
     }
   };
+  const changeBorderWidthType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderWidthType: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderWidthTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderWidthTypeMobile: value
+      });
+    }
+  };
+  const changeBorderWidthHvrType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderWidthHvrType: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderWidthHvrTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderWidthHvrTypeMobile: value
+      });
+    }
+  };
+  const changeBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderRadiusType: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderRadiusTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderRadiusTypeMobile: value
+      });
+    }
+  };
+  const changeBorderRadiusHvrType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderRadiusHvrType: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderRadiusHvrTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderRadiusHvrTypeMobile: value
+      });
+    }
+  };
   const desktopPaddingType = {
     top: 'paddingTop',
     right: 'paddingRight',
@@ -822,6 +1158,30 @@ const InsSettings = _ref => {
     right: 'marginRight',
     bottom: 'marginBottom',
     left: 'marginLeft'
+  };
+  const desktopBorderWidthType = {
+    top: 'borderWidthTop',
+    right: 'borderWidthRight',
+    bottom: 'borderWidthBottom',
+    left: 'borderWidthLeft'
+  };
+  const desktopBorderWidthHvrType = {
+    top: 'borderWidthHvrTop',
+    right: 'borderWidthHvrRight',
+    bottom: 'borderWidthHvrBottom',
+    left: 'borderWidthHvrLeft'
+  };
+  const desktopBorderRadiusType = {
+    top: 'borderRadiusTop',
+    left: 'borderRadiusLeft',
+    right: 'borderRadiusRight',
+    bottom: 'borderRadiusBottom'
+  };
+  const desktopBorderRadiusHvrType = {
+    top: 'borderRadiusHvrTop',
+    right: 'borderRadiusHvrRight',
+    bottom: 'borderRadiusHvrBottom',
+    left: 'borderRadiusHvrLeft'
   };
   const tabletPaddingType = {
     top: 'paddingTopTablet',
@@ -835,6 +1195,30 @@ const InsSettings = _ref => {
     bottom: 'marginBottomTablet',
     left: 'marginLeftTablet'
   };
+  const tabletBorderWidthType = {
+    top: 'borderWidthTopTablet',
+    right: 'borderWidthRightTablet',
+    bottom: 'borderWidthBottomTablet',
+    left: 'borderWidthLeftTablet'
+  };
+  const tabletBorderWidthHvrType = {
+    top: 'borderWidthHvrTopTablet',
+    right: 'borderWidthHvrRightTablet',
+    bottom: 'borderWidthHvrBottomTablet',
+    left: 'borderWidthHvrLeftTablet'
+  };
+  const tabletBorderRadiusType = {
+    top: 'borderRadiusTopTablet',
+    left: 'borderRadiusLeftTablet',
+    right: 'borderRadiusRightTablet',
+    bottom: 'borderRadiusBottomTablet'
+  };
+  const tabletBorderRadiusHvrType = {
+    top: 'borderRadiusHvrTopTablet',
+    right: 'borderRadiusHvrRightTablet',
+    bottom: 'borderRadiusHvrBottomTablet',
+    left: 'borderRadiusHvrLeftTablet'
+  };
   const mobilePaddingType = {
     top: 'paddingTopMobile',
     right: 'paddingRightMobile',
@@ -846,6 +1230,30 @@ const InsSettings = _ref => {
     right: 'marginRightMobile',
     bottom: 'marginBottomMobile',
     left: 'marginLeftMobile'
+  };
+  const mobileBorderWidthType = {
+    top: 'borderWidthTopMobile',
+    right: 'borderWidthRightMobile',
+    bottom: 'borderWidthBottomMobile',
+    left: 'borderWidthLeftMobile'
+  };
+  const mobileBorderWidthHvrType = {
+    top: 'borderWidthHvrTopMobile',
+    right: 'borderWidthHvrRightMobile',
+    bottom: 'borderWidthHvrBottomMobile',
+    left: 'borderWidthHvrLeftMobile'
+  };
+  const mobileBorderRadiusType = {
+    top: 'borderRadiusTopMobile',
+    left: 'borderRadiusLeftMobile',
+    right: 'borderRadiusRightMobile',
+    bottom: 'borderRadiusBottomMobile'
+  };
+  const mobileBorderRadiusHvrType = {
+    top: 'borderRadiusHvrTopMobile',
+    right: 'borderRadiusHvrRightMobile',
+    bottom: 'borderRadiusHvrBottomMobile',
+    left: 'borderRadiusHvrLeftMobile'
   };
   const changePadding = (type, value) => {
     switch (getView) {
@@ -916,6 +1324,154 @@ const InsSettings = _ref => {
         } else {
           setAttributes({
             [mobileMarginType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const changeBorderWidth = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderWidthType) {
+          setAttributes({
+            borderWidth: value
+          });
+        } else {
+          setAttributes({
+            [desktopBorderWidthType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderWidthTypeTablet) {
+          setAttributes({
+            borderWidthTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletBorderWidthType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderWidthTypeMobile) {
+          setAttributes({
+            borderWidthMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileBorderWidthType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const changeBorderWidthHvr = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderWidthHvrType) {
+          setAttributes({
+            borderWidthHvr: value
+          });
+        } else {
+          setAttributes({
+            [desktopBorderWidthHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderWidthHvrTypeTablet) {
+          setAttributes({
+            borderWidthHvrTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletBorderWidthHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderWidthHvrTypeMobile) {
+          setAttributes({
+            borderWidthHvrMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileBorderWidthHvrType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const changeBorderRadius = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderRadiusType) {
+          setAttributes({
+            borderRadius: value
+          });
+        } else {
+          setAttributes({
+            [desktopBorderRadiusType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderRadiusTypeTablet) {
+          setAttributes({
+            borderRadiusTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletBorderRadiusType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderRadiusTypeMobile) {
+          setAttributes({
+            borderRadiusMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileBorderRadiusType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const changeBorderRadiusHvr = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderRadiusHvrType) {
+          setAttributes({
+            borderRadiusHvr: value
+          });
+        } else {
+          setAttributes({
+            [desktopBorderRadiusHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderRadiusHvrTypeTablet) {
+          setAttributes({
+            borderRadiusHvrTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletBorderRadiusHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderRadiusHvrTypeMobile) {
+          setAttributes({
+            borderRadiusHvrMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileBorderRadiusHvrType[type]]: value
           });
         }
         break;
@@ -1001,6 +1557,166 @@ const InsSettings = _ref => {
     }
     return undefined;
   };
+  const getBorderWidth = type => {
+    if ('top' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthTop;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthTopTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthTopMobile;
+      }
+    } else if ('right' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthRight;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthRightTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthRightMobile;
+      }
+    } else if ('bottom' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthBottom;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthBottomTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthBottomMobile;
+      }
+    } else if ('left' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthLeft;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthLeftTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthLeftMobile;
+      }
+    }
+    return undefined;
+  };
+  const getBorderWidthHvr = type => {
+    if ('top' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrTop;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrTopTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrTopMobile;
+      }
+    } else if ('right' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrRight;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrRightTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrRightMobile;
+      }
+    } else if ('bottom' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrBottom;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrBottomTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrBottomMobile;
+      }
+    } else if ('left' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr : attributes.borderWidthHvrLeft;
+        case 'Tablet':
+          return 'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet : attributes.borderWidthHvrLeftTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile : attributes.borderWidthHvrLeftMobile;
+      }
+    }
+    return undefined;
+  };
+  const getBorderRadius = type => {
+    if ('top' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusTop;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusTopTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusTopMobile;
+      }
+    } else if ('left' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusLeft;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusLeftTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusLeftMobile;
+      }
+    } else if ('right' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusRight;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusRightTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusRightMobile;
+      }
+    } else if ('bottom' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusBottom;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusBottomTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusBottomMobile;
+      }
+    }
+    return undefined;
+  };
+  const getBorderRadiusHvr = type => {
+    if ('top' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrTop;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrTopTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrTopMobile;
+      }
+    } else if ('right' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrRight;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrRightTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrRightMobile;
+      }
+    } else if ('bottom' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrBottom;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrBottomTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrBottomMobile;
+      }
+    } else if ('left' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr : attributes.borderRadiusHvrLeft;
+        case 'Tablet':
+          return 'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet : attributes.borderRadiusHvrLeftTablet;
+        case 'Mobile':
+          return 'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile : attributes.borderRadiusHvrLeftMobile;
+      }
+    }
+    return undefined;
+  };
   const changeFontFamily = value => {
     if (!value) {
       setAttributes({
@@ -1074,6 +1790,8 @@ const InsSettings = _ref => {
   const customTooltipletterSpacing = value => `${value}px`;
   const customTooltipCustomWidth = value => `${value}px`;
   const customTooltipZindex = value => `${value}px`;
+  const customTooltiptransitionHeading = value => `${value}`;
+  const customTooltiptransitionBorder = value => `${value}`;
   const [tab, setTab] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('style');
   const [hover, setHover] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('normal');
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_ins_setting_header_index_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -1105,13 +1823,24 @@ const InsSettings = _ref => {
     onColorChange: e => setAttributes({
       headingColor: e
     })
-  }) || 'hover' === hover && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+  }) || 'hover' === hover && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Heading Hover Color', 'themehunk-block'),
     colorValue: attributes.headingHvrColor,
     onColorChange: e => setAttributes({
       headingHvrColor: e
     })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Transition Duration', 'themehunk-block'),
+    renderTooltipContent: customTooltiptransitionHeading,
+    value: attributes.transitionHeading,
+    onChange: transitionHeading => setAttributes({
+      transitionHeading
+    }),
+    step: 0.1,
+    min: 0,
+    max: 3,
+    allowReset: true
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Alignment', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
     value: getAlignment(),
@@ -1263,7 +1992,342 @@ const InsSettings = _ref => {
     min: -999999,
     max: 999999,
     allowReset: true
-  }))))));
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border & Box Shadow', 'themehunk-block'),
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_hover_tab_index_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    value: hover,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Normal', 'themehunk-block'),
+      value: 'normal'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hover', 'themehunk-block'),
+      value: 'hover'
+    }],
+    onChange: setHover
+  }), 'normal' === hover && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Type', 'themehunk-block'),
+    value: attributes.borderType,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'themehunk-block'),
+      value: 'none'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Solid', 'themehunk-block'),
+      value: 'solid'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Double', 'themehunk-block'),
+      value: 'double'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dotted', 'themehunk-block'),
+      value: 'dotted'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dashed', 'themehunk-block'),
+      value: 'dashed'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Groove', 'themehunk-block'),
+      value: 'groove'
+    }],
+    onChange: e => setAttributes({
+      borderType: e
+    })
+  }), 'none' !== attributes.borderType && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null))
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Width', 'themehunk-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_sizing_control_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    type: getBorderWidthType(),
+    min: 0,
+    max: 500,
+    changeType: changeBorderWidthType,
+    onChange: changeBorderWidth,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Top', 'themehunk-block'),
+      type: 'top',
+      value: getBorderWidth('top')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Right', 'themehunk-block'),
+      type: 'right',
+      value: getBorderWidth('right')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bottom', 'themehunk-block'),
+      type: 'bottom',
+      value: getBorderWidth('bottom')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Left', 'themehunk-block'),
+      type: 'left',
+      value: getBorderWidth('left')
+    }]
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Color', 'themehunk-block'),
+    colorValue: attributes.borderColor,
+    onColorChange: e => setAttributes({
+      borderColor: e
+    })
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Radius', 'themehunk-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_sizing_control_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    type: getBorderRadiusType(),
+    min: 0,
+    max: 500,
+    changeType: changeBorderRadiusType,
+    onChange: changeBorderRadius,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-R', 'themehunk-block'),
+      type: 'top',
+      value: getBorderRadius('top')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-L', 'themehunk-block'),
+      type: 'right',
+      value: getBorderRadius('right')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-R', 'themehunk-block'),
+      type: 'left',
+      value: getBorderRadius('left')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-L', 'themehunk-block'),
+      type: 'bottom',
+      value: getBorderRadius('bottom')
+    }]
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow', 'themehunk-block'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    resetValues: {
+      boxShadow: false,
+      boxShadowColor: undefined,
+      boxShadowColorOpacity: 50,
+      boxShadowBlur: 5,
+      boxShadowSpread: 1,
+      boxShadowHorizontal: 0,
+      boxShadowVertical: 0
+    },
+    onClick: () => setAttributes({
+      boxShadow: true
+    })
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shadow Color', 'themehunk-block'),
+    colorValue: attributes.boxShadowColor,
+    onColorChange: e => setAttributes({
+      boxShadowColor: e
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Opacity', 'themehunk-block'),
+    value: attributes.boxShadowColorOpacity,
+    onChange: e => setAttributes({
+      boxShadowColorOpacity: e
+    }),
+    min: 0,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blur', 'themehunk-block'),
+    value: attributes.boxShadowBlur,
+    onChange: e => setAttributes({
+      boxShadowBlur: e
+    }),
+    min: 0,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Spread', 'themehunk-block'),
+    value: attributes.boxShadowSpread,
+    onChange: e => setAttributes({
+      boxShadowSpread: e
+    }),
+    min: -100,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Horizontal', 'themehunk-block'),
+    value: attributes.boxShadowHorizontal,
+    onChange: e => setAttributes({
+      boxShadowHorizontal: e
+    }),
+    min: -100,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Vertical', 'themehunk-block'),
+    value: attributes.boxShadowVertical,
+    onChange: e => setAttributes({
+      boxShadowVertical: e
+    }),
+    min: -100,
+    max: 100
+  }))) || 'hover' === hover && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Type', 'themehunk-block'),
+    value: attributes.borderHvrType,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'themehunk-block'),
+      value: 'none'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Solid', 'themehunk-block'),
+      value: 'solid'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Double', 'themehunk-block'),
+      value: 'double'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dotted', 'themehunk-block'),
+      value: 'dotted'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Dashed', 'themehunk-block'),
+      value: 'dashed'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Groove', 'themehunk-block'),
+      value: 'groove'
+    }],
+    onChange: e => setAttributes({
+      borderHvrType: e
+    })
+  }), 'none' !== attributes.borderHvrType && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, null))
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Width', 'themehunk-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_sizing_control_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    type: getBorderWidthHvrType(),
+    min: 0,
+    max: 500,
+    changeType: changeBorderWidthHvrType,
+    onChange: changeBorderWidthHvr,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Top', 'themehunk-block'),
+      type: 'top',
+      value: getBorderWidthHvr('top')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Right', 'themehunk-block'),
+      type: 'right',
+      value: getBorderWidthHvr('right')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Bottom', 'themehunk-block'),
+      type: 'bottom',
+      value: getBorderWidthHvr('bottom')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Left', 'themehunk-block'),
+      type: 'left',
+      value: getBorderWidthHvr('left')
+    }]
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Hover Color', 'themehunk-block'),
+    colorValue: attributes.borderColorHvr,
+    onColorChange: e => setAttributes({
+      borderColorHvr: e
+    })
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Radius', 'themehunk-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_sizing_control_index_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    type: getBorderRadiusHvrType(),
+    min: 0,
+    max: 500,
+    changeType: changeBorderRadiusHvrType,
+    onChange: changeBorderRadiusHvr,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-R', 'themehunk-block'),
+      type: 'top',
+      value: getBorderRadiusHvr('top')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-L', 'themehunk-block'),
+      type: 'right',
+      value: getBorderRadiusHvr('right')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-R', 'themehunk-block'),
+      type: 'left',
+      value: getBorderRadiusHvr('left')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-L', 'themehunk-block'),
+      type: 'bottom',
+      value: getBorderRadiusHvr('bottom')
+    }]
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow', 'themehunk-block'),
+    attributes: attributes,
+    setAttributes: setAttributes,
+    resetValues: {
+      boxShadowHvr: false,
+      boxShadowColorHvr: undefined,
+      boxShadowColorOpacityHvr: 50,
+      boxShadowBlurHvr: 5,
+      boxShadowSpreadHvr: 1,
+      boxShadowHorizontalHvr: 0,
+      boxShadowVerticalHvr: 0
+    },
+    onClick: () => setAttributes({
+      boxShadowHvr: true
+    })
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shadow Color', 'themehunk-block'),
+    colorValue: attributes.boxShadowColorHvr,
+    onColorChange: e => setAttributes({
+      boxShadowColorHvr: e
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Opacity', 'themehunk-block'),
+    value: attributes.boxShadowColorOpacityHvr,
+    onChange: e => setAttributes({
+      boxShadowColorOpacityHvr: e
+    }),
+    min: 0,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blur', 'themehunk-block'),
+    value: attributes.boxShadowBlurHvr,
+    onChange: e => setAttributes({
+      boxShadowBlurHvr: e
+    }),
+    min: 0,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Spread', 'themehunk-block'),
+    value: attributes.boxShadowSpreadHvr,
+    onChange: e => setAttributes({
+      boxShadowSpreadHvr: e
+    }),
+    min: -100,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Horizontal', 'themehunk-block'),
+    value: attributes.boxShadowHorizontalHvr,
+    onChange: e => setAttributes({
+      boxShadowHorizontalHvr: e
+    }),
+    min: -100,
+    max: 100
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Vertical', 'themehunk-block'),
+    value: attributes.boxShadowVerticalHvr,
+    onChange: e => setAttributes({
+      boxShadowVerticalHvr: e
+    }),
+    min: -100,
+    max: 100
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Transition Duration', 'themehunk-block'),
+    renderTooltipContent: customTooltiptransitionBorder,
+    value: attributes.transitionBorder,
+    onChange: transitionBorder => setAttributes({
+      transitionBorder
+    }),
+    step: 0.1,
+    min: 0,
+    max: 3,
+    allowReset: true
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Responsive', 'themehunk-block'),
+    initialOpen: false
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hide On Desktop', 'themehunk-block'),
+    checked: attributes.responsiveTogHideDesktop,
+    onChange: responsiveTogHideDesktop => setAttributes({
+      responsiveTogHideDesktop
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hide On Tablet', 'themehunk-block'),
+    checked: attributes.responsiveTogHideTablet,
+    onChange: responsiveTogHideTablet => setAttributes({
+      responsiveTogHideTablet
+    })
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Hide On Mobile', 'themehunk-block'),
+    checked: attributes.responsiveTogHideMobile,
+    onChange: responsiveTogHideMobile => setAttributes({
+      responsiveTogHideMobile
+    })
+  })))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (InsSettings);
 
@@ -1325,6 +2389,123 @@ const ClearButton = _ref => {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Clear', 'themehunk-block')));
 };
 /* harmony default export */ __webpack_exports__["default"] = (ClearButton);
+
+/***/ }),
+
+/***/ "./src/components/control-panel-control/index.js":
+/*!*******************************************************!*\
+  !*** ./src/components/control-panel-control/index.js ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/backup.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/components/control-panel-control/editor.scss");
+
+/**
+ * External dependencies
+ */
+
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+const ControlPanelControl = _ref => {
+  let {
+    label,
+    attributes,
+    setAttributes,
+    resetValues,
+    onClick,
+    children
+  } = _ref;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    for (const key in resetValues) {
+      if (resetValues[key] !== attributes[key]) {
+        return setActive(true);
+      }
+      setActive(false);
+    }
+  }, [attributes]);
+  const instanceId = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.useInstanceId)(ControlPanelControl);
+  const [isActive, setActive] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const id = `inspector-control-panel-control-${instanceId}`;
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "th-control-panel-control"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "components-base-control__field"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "components-base-control__title"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "components-base-control__label",
+    htmlFor: id
+  }, label), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "floating-controls"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dropdown, {
+    position: "top left",
+    headerTitle: label,
+    expandOnMobile: true,
+    renderToggle: _ref2 => {
+      let {
+        isOpen,
+        onToggle
+      } = _ref2;
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, isActive && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+        icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"]
+        }),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Reset to default', 'themehunk-block'),
+        showTooltip: true,
+        isTertiary: true,
+        onClick: () => setAttributes({
+          ...resetValues
+        })
+      }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+        id: id,
+        icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+        label: label,
+        showTooltip: true,
+        onClick: () => {
+          onToggle();
+          if (onClick) {
+            onClick();
+          }
+        },
+        "aria-expanded": isOpen,
+        className: classnames__WEBPACK_IMPORTED_MODULE_1___default()({
+          'is-active': isActive
+        })
+      }));
+    },
+    renderContent: () => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "th-popover-settings"
+    }, children)
+  })))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (ControlPanelControl);
 
 /***/ }),
 
@@ -2892,6 +4073,38 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
+/***/ "./node_modules/hex-rgba/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/hex-rgba/index.js ***!
+  \****************************************/
+/***/ (function(module) {
+
+"use strict";
+
+
+function hexToRgba(hex, opacity){
+  var opacity = opacity || 100;
+  var hex = hex.replace('#', '');
+  if(hex.length === 6) {
+    var r = parseInt(hex.substring(0, 2), 16);
+    var g = parseInt(hex.substring(2, 4), 16);
+    var b = parseInt(hex.substring(4, 6), 16);
+  } else {
+    var rd = hex.substring(0, 1) + hex.substring(0, 1);
+    var gd = hex.substring(1, 2) + hex.substring(1, 2);
+    var bd = hex.substring(2, 3) + hex.substring(2, 3);
+    var r = parseInt(rd, 16);
+    var g = parseInt(gd, 16);
+    var b = parseInt(bd, 16);
+  }
+
+  return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity / 100 + ')';
+};
+
+module.exports = hexToRgba;
+
+/***/ }),
+
 /***/ "./inc/block/advance-heading/editor.scss":
 /*!***********************************************!*\
   !*** ./inc/block/advance-heading/editor.scss ***!
@@ -2922,6 +4135,19 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./src/components/clear-button/editor.scss ***!
   \*************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/components/control-panel-control/editor.scss":
+/*!**********************************************************!*\
+  !*** ./src/components/control-panel-control/editor.scss ***!
+  \**********************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3130,7 +4356,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"content":{"type":"string","source":"html","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"}},"editorScript":"file:../../../build/advance-heading.js","editorStyle":"file:../../../build/advance-heading.css","style":"file:../../../build/style-advance-heading.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"content":{"type":"string","source":"html","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"},"transitionHeading":{"type":"number"},"responsiveTogHideDesktop":{"type":"boolean","default":false},"responsiveTogHideTablet":{"type":"boolean","default":false},"responsiveTogHideMobile":{"type":"boolean","default":false},"borderColor":{"type":"string"},"borderColorHvr":{"type":"string"},"borderType":{"type":"string","default":"none"},"borderHvrType":{"type":"string","default":"none"},"borderWidthType":{"type":"string","default":"linked"},"borderWidthTypeTablet":{"type":"string","default":"linked"},"borderWidthTypeMobile":{"type":"string","default":"linked"},"borderWidth":{"type":"number","default":0},"borderWidthTablet":{"type":"number"},"borderWidthMobile":{"type":"number"},"borderWidthTop":{"type":"number","default":0},"borderWidthTopTablet":{"type":"number"},"borderWidthTopMobile":{"type":"number"},"borderWidthBottom":{"type":"number","default":0},"borderWidthBottomTablet":{"type":"number"},"borderWidthBottomMobile":{"type":"number"},"borderWidthRight":{"type":"number","default":0},"borderWidthRightTablet":{"type":"number"},"borderWidthRightMobile":{"type":"number"},"borderWidthLeft":{"type":"number","default":0},"borderWidthLeftTablet":{"type":"number"},"borderWidthLeftMobile":{"type":"number"},"borderWidthHvrType":{"type":"string","default":"linked"},"borderWidthHvrTypeTablet":{"type":"string","default":"linked"},"borderWidthHvrTypeMobile":{"type":"string","default":"linked"},"borderWidthHvr":{"type":"number","default":0},"borderWidthHvrTablet":{"type":"number"},"borderWidthHvrMobile":{"type":"number"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrTopTablet":{"type":"number"},"borderWidthHvrTopMobile":{"type":"number"},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrBottomTablet":{"type":"number"},"borderWidthHvrBottomMobile":{"type":"number"},"borderWidthHvrRight":{"type":"number","default":0},"borderWidthHvrRightTablet":{"type":"number"},"borderWidthHvrRightMobile":{"type":"number"},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrLeftTablet":{"type":"number"},"borderWidthHvrLeftMobile":{"type":"number"},"borderRadiusType":{"type":"string","default":"linked"},"borderRadiusTypeTablet":{"type":"string","default":"linked"},"borderRadiusTypeMobile":{"type":"string","default":"linked"},"borderRadius":{"type":"number","default":0},"borderRadiusTablet":{"type":"number"},"borderRadiusMobile":{"type":"number"},"borderRadiusTop":{"type":"number","default":0},"borderRadiusTopTablet":{"type":"number"},"borderRadiusTopMobile":{"type":"number"},"borderRadiusLeft":{"type":"number","default":0},"borderRadiusLeftTablet":{"type":"number"},"borderRadiusLeftMobile":{"type":"number"},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusBottomTablet":{"type":"number"},"borderRadiusBottomMobile":{"type":"number"},"borderRadiusRight":{"type":"number","default":0},"borderRadiusRightTablet":{"type":"number"},"borderRadiusRightMobile":{"type":"number"},"borderRadiusHvrType":{"type":"string","default":"linked"},"borderRadiusHvrTypeTablet":{"type":"string","default":"linked"},"borderRadiusHvrTypeMobile":{"type":"string","default":"linked"},"borderRadiusHvr":{"type":"number","default":0},"borderRadiusHvrTablet":{"type":"number"},"borderRadiusHvrMobile":{"type":"number"},"borderRadiusHvrTop":{"type":"number","default":0},"borderRadiusHvrTopTablet":{"type":"number"},"borderRadiusHvrTopMobile":{"type":"number"},"borderRadiusHvrBottom":{"type":"number","default":0},"borderRadiusHvrBottomTablet":{"type":"number"},"borderRadiusHvrBottomMobile":{"type":"number"},"borderRadiusHvrRight":{"type":"number","default":0},"borderRadiusHvrRightTablet":{"type":"number"},"borderRadiusHvrRightMobile":{"type":"number"},"borderRadiusHvrLeft":{"type":"number","default":0},"borderRadiusHvrLeftTablet":{"type":"number"},"borderRadiusHvrLeftMobile":{"type":"number"},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string"},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string"},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"transitionBorder":{"type":"number"}},"editorScript":"file:../../../build/advance-heading.js","editorStyle":"file:../../../build/advance-heading.css","style":"file:../../../build/style-advance-heading.css"}');
 
 /***/ })
 
