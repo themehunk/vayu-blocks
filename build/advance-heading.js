@@ -813,6 +813,7 @@ const Save = _ref => {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)("style", null, `
 				   @import url(https://fonts.googleapis.com/css?family=${family.replace(/\s/g, '+')});
 				   #thmk-block-${attributes.id} {
+					    z-index:${attributes.zindex};
 						text-align:${attributes.align};
 						color:${attributes.headingColor};
 						font-size:${attributes.fontSize}px;
@@ -830,9 +831,41 @@ const Save = _ref => {
 						margin-bottom:${'linked' === attributes.marginType ? attributes.margin : attributes.marginBottom}px;
 						margin-right:${'linked' === attributes.marginType ? attributes.margin : attributes.marginRight}px;
 						margin-left:${'linked' === attributes.marginType ? attributes.margin : attributes.marginLeft}px;
-						
+
 					}
+
+					#thmk-block-${attributes.id} {
+						border-style:${attributes.borderType};
+						border-color:${attributes.borderColor};
+
+						border-bottom-width:${'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthBottom}px;
+						border-left-width:${'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthLeft}px;
+						border-right-width:${'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthRight}px;
+						border-top-width:${'linked' === attributes.borderWidthType ? attributes.borderWidth : attributes.borderWidthTop}px;
+					    
+						border-top-right-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusTop}px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusRight}px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusLeft}px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius : attributes.borderRadiusBottom}px;
+					
+					    box-shadow:${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${attributes.boxShadowColor ? attributes.boxShadowColor : '#000000'} ${attributes.boxShadowColorOpacity};
+					}
+
+					#thmk-block-${attributes.id} {
+						transition:color ${attributes.transitionHeading}s;
+				        webkit-transition:color ${attributes.transitionHeading}s;
+				        moz-transition:color ${attributes.transitionHeading}s;
+				        -o-transition:color ${attributes.transitionHeading}s;
+					}
+
+
+					#thmk-block-${attributes.id}:hover {
+						color:${attributes.headingHvrColor};
+						box-shadow:${attributes.boxShadowHorizontalHvr}px ${attributes.boxShadowVerticalHvr}px ${attributes.boxShadowBlurHvr}px ${attributes.boxShadowSpreadHvr}px ${attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000'} ${attributes.boxShadowColorOpacityHvr};	
+					}
+					
 					@media only screen and (max-width: 1024px) { #thmk-block-${attributes.id} {
+						z-index:${attributes.zindexTablet};
 						text-align:${attributes.alignTablet};
 						font-size:${attributes.fontSizeTablet}px;
 						letter-spacing:${attributes.letterSpacingTablet}px;
@@ -845,9 +878,24 @@ const Save = _ref => {
 						margin-bottom:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginBottomTablet}px;
 						margin-right:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginRightTablet}px;
 						margin-left:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginLeftTablet}px;
-					}}
+					}
+				     
+					#thmk-block-${attributes.id} {
+					    border-bottom-width:${'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthBottomTablet}px;
+						border-left-width:${'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthLeftTablet}px;
+						border-right-width:${'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthRightTablet}px;
+						border-top-width:${'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet : attributes.borderWidthTopTablet}px;
+
+						border-top-right-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusTopTablet}px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusRightTablet}px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusLeftTablet}px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet : attributes.borderRadiusBottomTablet}px;
+					}
+				
+				}
 
 					@media only screen and (max-width: 767px) { #thmk-block-${attributes.id} {
+						z-index:${attributes.zindexMobile};
 						text-align:${attributes.alignMobile};
 						font-size:${attributes.fontSizeMobile}px;
 						letter-spacing:${attributes.letterSpacingMobile}px;
@@ -860,7 +908,22 @@ const Save = _ref => {
 						margin-bottom:${'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginBottomMobile}px;
 						margin-right:${'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginRightMobile}px;
 						margin-left:${'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginLeftMobile}px;
-					}}
+					}
+
+					#thmk-block-${attributes.id} {
+					    border-bottom-width:${'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthBottomMobile}px;
+						border-left-width:${'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthLeftMobile}px;
+						border-right-width:${'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthRightMobile}px;
+						border-top-width:${'linked' === attributes.borderWidthTypeMobile ? attributes.borderWidthMobile : attributes.borderWidthTopMobile}px;
+					    
+						border-top-right-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusTopMobile}px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusRightMobile}px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusLeftMobile}px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile : attributes.borderRadiusBottomMobile}px;
+					
+					}
+				
+				}
 					`), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     tagName: attributes.tag,
     value: attributes.content
