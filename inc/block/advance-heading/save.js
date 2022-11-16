@@ -8,21 +8,83 @@ import {
 
 import { Fragment, useEffect } from '@wordpress/element';
 
-const Save = ({attributes}) => {
+import hexToRgba from 'hex-rgba';
 
-	const family = attributes.fontFamily || '';
+const Save = ({attributes}) => {
 
 	const blockProps = useBlockProps.save({
 		id:`thmk-block-${ attributes.id }`,
 	});
 
+	let backgroundStyle = {}
+    let fontStyle = {}
+
+	if(attributes.backgroundType == 'color'){
+     
+	backgroundStyle = `#thmk-block-${ attributes.id } {
+                          background-color:${attributes.backgroundColor};
+	                  }
+					  #thmk-block-${ attributes.id }:hover {
+						background-color:${attributes.backgroundColorHvr};
+					}`
+
+	}
+
+	if(attributes.backgroundType == 'image'){
+     
+		backgroundStyle = `#thmk-block-${ attributes.id } {
+							  background-image:url( '${ attributes.backgroundImage?.url }' );
+							  background-attachment: ${ attributes.backgroundAttachment };
+							  background-position:${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%;
+						      background-repeat: ${ attributes.backgroundRepeat };
+							  background-size: ${ attributes.backgroundSize };
+							}
+							
+							#thmk-block-${ attributes.id }:hover {
+								background-image:url( '${ attributes.backgroundImageHvr?.url }' );
+								background-attachment: ${ attributes.backgroundAttachmentHvr };
+								background-position:${ Math.round( attributes.backgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%;
+								background-repeat: ${ attributes.backgroundRepeatHvr };
+								background-size: ${ attributes.backgroundSizeHvr };
+							  }`
+	
+	}
+
+	if(attributes.backgroundType == 'gradient'){
+
+        backgroundStyle = `#thmk-block-${ attributes.id } {
+			background-image: ${attributes.backgroundGradient};
+		} #thmk-block-${ attributes.id }:hover {
+			background-color:${attributes.backgroundGradientHvr};
+		}`
+	}
+
+    const family = attributes.fontFamily || '';
+
+    if(family !== ''){
+
+        fontStyle = `@import url(https://fonts.googleapis.com/css?family=${ family.replace(/\s/g, '+') });
+		#thmk-block-${ attributes.id } {
+			font-family:${ attributes.fontFamily };
+			font-weight: ${ attributes.fontVariant };
+		}`
+	
+	}else{
+		
+		fontStyle = '';
+
+	}
+
 	return (
 		
 		<Fragment>
+
 			<style>
 				{ 
 				   `
-				   @import url(https://fonts.googleapis.com/css?family=${ family.replace(/\s/g, '+') });
+				   ${fontStyle}
+				   ${backgroundStyle}
+                   
 				   #thmk-block-${ attributes.id } {
 					    z-index:${ attributes.zindex };
 						text-align:${ attributes.align };
@@ -30,9 +92,7 @@ const Save = ({attributes}) => {
 						font-size:${ attributes.fontSize }px;
 						letter-spacing:${ attributes.letterSpacing }px;
 						line-height:${ attributes.lineHeight };
-						font-family:${ attributes.fontFamily };
 						font-style: ${ attributes.fontStyle };
-						font-weight: ${ attributes.fontVariant };
 		                text-transform: ${ attributes.textTransform};
 						padding-top:${'linked' === attributes.paddingType ? attributes.padding : attributes.paddingTop }px;
 						padding-bottom:${'linked' === attributes.paddingType ? attributes.padding : attributes.paddingBottom }px;
@@ -59,20 +119,38 @@ const Save = ({attributes}) => {
 						border-bottom-right-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius :attributes.borderRadiusLeft }px;
 						border-bottom-left-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius :attributes.borderRadiusBottom }px;
 					
-					    box-shadow:${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${attributes.boxShadowColor ? attributes.boxShadowColor : '#000000'} ${attributes.boxShadowColorOpacity};
+					    
+					    box-shadow:${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#000000' ), attributes.boxShadowColorOpacity ) };
+					
 					}
+                    
 
 					#thmk-block-${ attributes.id } {
-						transition:color ${ attributes.transitionHeading }s;
-				        webkit-transition:color ${ attributes.transitionHeading }s;
-				        moz-transition:color ${ attributes.transitionHeading }s;
-				        -o-transition:color ${ attributes.transitionHeading }s;
+						transition:color ${ attributes.transitionHeading }s , border ${ attributes.transitionBorder }s,background ${ attributes.transitionBackground }s;
+				        webkit-transition:color ${ attributes.transitionHeading }s , border ${ attributes.transitionBorder }s,background ${ attributes.transitionBackground }s;
+				        moz-transition:color ${ attributes.transitionHeading }s , border ${ attributes.transitionBorder }s,background ${ attributes.transitionBackground }s;
+				        -o-transition:color ${ attributes.transitionHeading }s , border ${ attributes.transitionBorder }s,background ${ attributes.transitionBackground }s;
 					}
 
 
 					#thmk-block-${ attributes.id }:hover {
 						color:${ attributes.headingHvrColor };
-						box-shadow:${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000'} ${attributes.boxShadowColorOpacityHvr};	
+					    box-shadow:${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000' ), attributes.boxShadowColorOpacityHvr ) };
+					}
+
+					#thmk-block-${ attributes.id }:hover {
+						border-style:${ attributes.borderHvrType };
+						border-color:${ attributes.borderColorHvr };
+						border-bottom-width:${'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr :attributes.borderWidthHvrBottom }px;
+						border-left-width:${'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr :attributes.borderWidthHvrLeft }px;
+						border-right-width:${'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr :attributes.borderWidthHvrRight }px;
+						border-top-width:${'linked' === attributes.borderWidthHvrType ? attributes.borderWidthHvr :attributes.borderWidthHvrTop }px;
+					    
+						border-top-right-radius:${'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr :attributes.borderRadiusHvrTop }px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr :attributes.borderRadiusHvrRight }px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr :attributes.borderRadiusHvrLeft }px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusHvrType ? attributes.borderRadiusHvr :attributes.borderRadiusHvrBottom }px;
+					
 					}
 					
 					@media only screen and (max-width: 1024px) { #thmk-block-${ attributes.id } {
@@ -89,7 +167,9 @@ const Save = ({attributes}) => {
 						margin-bottom:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginBottomTablet }px;
 						margin-right:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginRightTablet }px;
 						margin-left:${'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginLeftTablet }px;
-					}
+					
+					
+		}
 				     
 					#thmk-block-${ attributes.id } {
 					    border-bottom-width:${'linked' === attributes.borderWidthTypeTablet ? attributes.borderWidthTablet :attributes.borderWidthBottomTablet }px;
@@ -101,9 +181,24 @@ const Save = ({attributes}) => {
 						border-top-left-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet :attributes.borderRadiusRightTablet }px;
 						border-bottom-right-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet :attributes.borderRadiusLeftTablet }px;
 						border-bottom-left-radius:${'linked' === attributes.borderRadiusTypeTablet ? attributes.borderRadiusTablet :attributes.borderRadiusBottomTablet }px;
+					
+					    
+					}
+
+					#thmk-block-${ attributes.id }:hover{
+						border-bottom-width:${'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet :attributes.borderWidthHvrBottomTablet }px;
+						border-left-width:${'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet :attributes.borderWidthHvrLeftTablet }px;
+						border-right-width:${'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet :attributes.borderWidthHvrRightTablet }px;
+						border-top-width:${'linked' === attributes.borderWidthHvrTypeTablet ? attributes.borderWidthHvrTablet :attributes.borderWidthHvrTopTablet }px;
+					    
+						border-top-right-radius:${'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet :attributes.borderRadiusHvrTopTablet }px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet :attributes.borderRadiusHvrRightTablet }px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet :attributes.borderRadiusHvrLeftTablet }px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusHvrTypeTablet ? attributes.borderRadiusHvrTablet :attributes.borderRadiusHvrBottomTablet }px;
+					
 					}
 				
-				}
+				  }
 
 					@media only screen and (max-width: 767px) { #thmk-block-${ attributes.id } {
 						z-index:${ attributes.zindexMobile };
@@ -131,10 +226,23 @@ const Save = ({attributes}) => {
 						border-top-left-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile :attributes.borderRadiusRightMobile }px;
 						border-bottom-right-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile :attributes.borderRadiusLeftMobile }px;
 						border-bottom-left-radius:${'linked' === attributes.borderRadiusTypeMobile ? attributes.borderRadiusMobile :attributes.borderRadiusBottomMobile }px;
+					    
+					    
 					
 					}
+					#thmk-block-${ attributes.id }:hover{
+                        border-bottom-width:${'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile :attributes.borderWidthHvrBottomMobile }px;
+						border-left-width:${'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile :attributes.borderWidthHvrLeftMobile }px;
+						border-right-width:${'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile :attributes.borderWidthHvrRightMobile }px;
+						border-top-width:${'linked' === attributes.borderWidthHvrTypeMobile ? attributes.borderWidthHvrMobile :attributes.borderWidthHvrTopMobile }px;
+
+					    border-top-right-radius:${'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile :attributes.borderRadiusHvrTopMobile }px;
+						border-top-left-radius:${'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile :attributes.borderRadiusHvrRightMobile }px;
+						border-bottom-right-radius:${'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile :attributes.borderRadiusHvrLeftMobile }px;
+						border-bottom-left-radius:${'linked' === attributes.borderRadiusHvrTypeMobile ? attributes.borderRadiusHvrMobile :attributes.borderRadiusHvrBottomMobile }px;
+					}
 				
-				}
+				  }
 					`	 
 				}
 			</style>
