@@ -120,7 +120,7 @@ const Save = ({attributes}) => {
 						border-bottom-left-radius:${'linked' === attributes.borderRadiusType ? attributes.borderRadius :attributes.borderRadiusBottom }px;
 					
 					    
-					    box-shadow:${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#000000' ), attributes.boxShadowColorOpacity ) };
+					    box-shadow:${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#fff' ), attributes.boxShadowColorOpacity ) };
 					
 					}
                     
@@ -135,7 +135,7 @@ const Save = ({attributes}) => {
 
 					#thmk-block-${ attributes.id }:hover {
 						color:${ attributes.headingHvrColor };
-					    box-shadow:${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000' ), attributes.boxShadowColorOpacityHvr ) };
+					    box-shadow:${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#fff' ), attributes.boxShadowColorOpacityHvr ) };
 					}
 
 					#thmk-block-${ attributes.id }:hover {
