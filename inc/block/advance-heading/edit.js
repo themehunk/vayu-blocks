@@ -221,7 +221,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
 	if ( attributes.boxShadow ) {
 		boxShadowStyle = {
-			boxShadow: `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#000000' ), attributes.boxShadowColorOpacity ) }`
+			boxShadow: `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#fff' ), attributes.boxShadowColorOpacity ) }`
 		};
 	}
 
@@ -314,7 +314,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 			e.target.style.color = attributes.headingHvrColor;
 			e.target.style.borderColor = attributes.borderColorHvr;
 			e.target.style.borderStyle = attributes.borderHvrType;
-			e.target.style.boxShadow = `${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#000000' ), attributes.boxShadowColorOpacityHvr ) }`;
+			e.target.style.boxShadow = `${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#fff' ), attributes.boxShadowColorOpacityHvr ) }`;
 			
             if ( 'color' === attributes.backgroundType ) {
 			e.target.style.backgroundColor = attributes.backgroundColorHvr;	
@@ -370,7 +370,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 			e.target.style.color = attributes.headingColor;
 			e.target.style.borderColor = attributes.borderColor;
 			e.target.style.borderStyle = attributes.borderType;
-			e.target.style.boxShadow = `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#000000' ), attributes.boxShadowColorOpacity ) }`
+			e.target.style.boxShadow = `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#fff' ), attributes.boxShadowColorOpacity ) }`
             if ( 'color' === attributes.backgroundType ) {
 				e.target.style.backgroundColor = attributes.backgroundColor;	
 				}
@@ -445,8 +445,6 @@ export default function Edit({ attributes, setAttributes,clientId }) {
                 onChange={ changeContent } // Store updated content as a block attribute
                 placeholder={ __( 'Write heading…','themehunk-block' ) } // Display this text before any content has been added by the user
                 { ...blockProps }
-				
-
             />
         </Fragment>
 	);

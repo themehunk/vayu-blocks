@@ -24,25 +24,25 @@
      const getTagIcon = value => {
          switch ( value ) {
          case 'h1':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H1</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H1</text>
          case 'h2':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H2</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H2</text>;
          case 'h3':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H3</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H3</text>;
          case 'h4':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H4</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H4</text>;
          case 'h5':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H5</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H5</text>;
          case 'h6':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">H6</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">H6</text>;
          case 'div':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">DIV</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">DIV</text>;
          case 'p':
-             return <SVG style={ { width: '25px', height: '20px' } }><text x="0" y="15">P</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">P</text>;
          case 'span':
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">SPAN</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">SPAN</text>;
          default:
-             return <SVG style={ { width: '25px', height: '20px' } }><text style={ { fontSize: '12px' } } x="0" y="15">DEFAULT</text></SVG>;
+             return <text style={ { fontSize: '14px',fontWeight:'bold' } } x="0" y="15">DEFAULT</text>;
          }
      };
  
@@ -58,48 +58,48 @@
                  label={ __( 'Select tag', 'themehunk-block' ) }
                  className="components-toolbar"
                  controls={ [
-                     {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 1',
+                     { 
+                         label:__( 'Heading 1', 'themehunk-block' ),
                          icon: getTagIcon( 'h1' ),
                          onClick: () => changeTag( 'h1' )
                      },
                      {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 2',
+                         label:__( 'Heading 2', 'themehunk-block' ),
                          icon: getTagIcon( 'h2' ),
                          onClick: () => changeTag( 'h2' )
                      },
                      {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 3',
+                         label:__( 'Heading 3', 'themehunk-block' ),
                          icon: getTagIcon( 'h3' ),
                          onClick: () => changeTag( 'h3' )
                      },
                      {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 4',
+                         label:__( 'Heading 4', 'themehunk-block' ),
                          icon: getTagIcon( 'h4' ),
                          onClick: () => changeTag( 'h4' )
                      },
                      {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 5',
+                         label:__( 'Heading 5', 'themehunk-block' ),
                          icon: getTagIcon( 'h5' ),
                          onClick: () => changeTag( 'h5' )
                      },
                      {
-                         title: __( 'Heading', 'themehunk-block' ) + ' 6',
+                         label:__( 'Heading 6', 'themehunk-block' ),
                          icon: getTagIcon( 'h6' ),
                          onClick: () => changeTag( 'h6' )
                      },
                      {
-                         title: __( 'Division', 'themehunk-block' ),
+                         label:__( 'Div', 'themehunk-block' ),
                          icon: getTagIcon( 'div' ),
                          onClick: () => changeTag( 'div' )
                      },
                      {
-                         title: __( 'Paragraph', 'themehunk-block' ),
+                         label:__( 'Paragraph', 'themehunk-block' ),
                          icon: getTagIcon( 'p' ),
                          onClick: () => changeTag( 'p' )
                      },
                      {
-                         title: __( 'Span Tag', 'themehunk-block' ),
+                         label:__( 'Span', 'themehunk-block' ),
                          icon: getTagIcon( 'span' ),
                          onClick: () => changeTag( 'span' )
                      }
