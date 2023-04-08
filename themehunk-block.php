@@ -29,18 +29,5 @@ define( 'THEMEHUNK_BLOCKS_VERSION', '2.1.0' );
 define( 'THEMEHUNK_BLOCKS_PRO_SUPPORT', true );
 define( 'THEMEHUNK_BLOCKS_SHOW_NOTICES', false );
 
-
-function create_block_themehunk_block_block_init() {
-
-	$blocks = array('advance-heading/','advance-spacer/');
-
-	foreach($blocks as $block){
-
-		register_block_type( THEMEHUNK_BLOCKS_DIR_PATH . 'inc/block/'. $block);
-
-	}
-}
-
-add_action( 'init', 'create_block_themehunk_block_block_init' );
-
 require_once 'src/function.php';
+require_once 'src/render/advance-heading/advance-heading.php';

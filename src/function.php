@@ -1,5 +1,35 @@
 <?php 
 if (!defined('ABSPATH')) exit;
+
+function create_block_themehunk_block_block_init() {
+
+    $blocks = array(
+        array(
+            'name' => 'advance-heading/',
+            'render_callback' => 'themehunk_render_block_advance_heading',
+		),
+		array(
+            'name' => 'advance-spacer/',
+            'render_callback' => '',
+        )
+    );
+
+    foreach ( $blocks as $block ) {
+
+        $block_name = $block['name'];
+        $render_callback = $block['render_callback'];
+
+        register_block_type(
+            THEMEHUNK_BLOCKS_DIR_PATH . 'inc/block/' . $block_name,
+            array(
+                'render_callback' => $render_callback,
+            )
+        );
+    }
+}
+
+add_action( 'init', 'create_block_themehunk_block_block_init' );
+
 function themehunk_block_categories( $categories ) {
     return array_merge(
         $categories,
