@@ -30,4 +30,5 @@ define( 'THEMEHUNK_BLOCKS_PRO_SUPPORT', true );
 define( 'THEMEHUNK_BLOCKS_SHOW_NOTICES', false );
 
 require_once 'src/function.php';
+require_once 'src/render-style.php';
 require_once 'src/render/advance-heading/advance-heading.php';
