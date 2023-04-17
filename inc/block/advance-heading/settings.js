@@ -34,6 +34,7 @@ import SizingControl from '../../../src/components/sizing-control/index.js';
 import HoverControl from '../../../src/components/hover-tab/index.js';
 import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
+import UnitChooser from '../../../src/components/unit-picker/index.js';
 
 const InsSettings = ({
     attributes,
@@ -84,7 +85,7 @@ const InsSettings = ({
 
 	const changeFontSize = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ fontSize: value });
+			setAttributes({ fontSize: value, fontSizeTablet: value, fontSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ fontSizeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -855,7 +856,7 @@ const InsSettings = ({
 		}
 	};
     
-	const customTooltipFontsize = value => `${value}px`
+	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`
 	const customTooltiplineHeight = value => `${value}`
 	const customTooltipletterSpacing = value => `${value}px`
 	const customTooltipCustomWidth = value => `${value}px`
@@ -968,7 +969,12 @@ const InsSettings = ({
 							/>	
 						<ResponsiveControl
 								label={ __( 'Font Size', 'themehunk-block' ) }
-							>
+							>    
+							   <UnitChooser
+								value={ attributes.fontSizeUnit }
+								onClick={ ( unit ) => setAttributes( { fontSizeUnit: unit } ) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
 								<RangeControl
 								    renderTooltipContent={ customTooltipFontsize }
 									value={ getFontSize() || '' }
@@ -977,7 +983,7 @@ const InsSettings = ({
 									min={ 1 }
 									max={ 500 }
 									allowReset={ true }
-								/>
+								/>		
 						</ResponsiveControl>
 
 						<ResponsiveControl

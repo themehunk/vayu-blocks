@@ -792,6 +792,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_components_hover_tab_index_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../src/components/hover-tab/index.js */ "./src/components/hover-tab/index.js");
 /* harmony import */ var _src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../src/components/control-panel-control/index.js */ "./src/components/control-panel-control/index.js");
 /* harmony import */ var _src_components_background_selector_control_index_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../src/components/background-selector-control/index.js */ "./src/components/background-selector-control/index.js");
+/* harmony import */ var _src_components_unit_picker_index_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../src/components/unit-picker/index.js */ "./src/components/unit-picker/index.js");
 
 /**
  * WordPress dependencies.
@@ -805,6 +806,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Internal dependencies
  */
+
 
 
 
@@ -869,7 +871,9 @@ const InsSettings = _ref => {
   const changeFontSize = value => {
     if ('Desktop' === getView) {
       setAttributes({
-        fontSize: value
+        fontSize: value,
+        fontSizeTablet: value,
+        fontSizeMobile: value
       });
     } else if ('Tablet' === getView) {
       setAttributes({
@@ -1735,7 +1739,7 @@ const InsSettings = _ref => {
       });
     }
   };
-  const customTooltipFontsize = value => `${value}px`;
+  const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
   const customTooltiplineHeight = value => `${value}`;
   const customTooltipletterSpacing = value => `${value}px`;
   const customTooltipCustomWidth = value => `${value}px`;
@@ -1821,7 +1825,13 @@ const InsSettings = _ref => {
     setAttributes: setAttributes
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_responsive_control_index_js__WEBPACK_IMPORTED_MODULE_7__["default"], {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Font Size', 'themehunk-block')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_unit_picker_index_js__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    value: attributes.fontSizeUnit,
+    onClick: unit => setAttributes({
+      fontSizeUnit: unit
+    }),
+    units: ['px', 'em', '%']
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipFontsize,
     value: getFontSize() || '',
     onChange: changeFontSize,
@@ -3313,6 +3323,84 @@ const SizingControl = _ref => {
 
 /***/ }),
 
+/***/ "./src/components/unit-picker/index.js":
+/*!*********************************************!*\
+  !*** ./src/components/unit-picker/index.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ UnitChooser; }
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.scss */ "./src/components/unit-picker/editor.scss");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+
+// Import CSS
+
+
+
+
+class UnitChooser extends _wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Component {
+  render() {
+    const {
+      label,
+      value,
+      onClick,
+      units,
+      id,
+      singleOption = false
+    } = this.props;
+    const allUnits = singleOption ? [value] : units;
+    return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+      label: label,
+      id: id,
+      className: "components-gblocks-units-control-header__units"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "components-gblocks-control__units"
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ButtonGroup, {
+      className: "components-gblocks-control-buttons__units",
+      "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select Units', 'generateblocks')
+    }, allUnits.map(unit => {
+      let unitName = unit;
+      if ('px' === unit) {
+        unitName = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__._x)('Pixel', 'A size unit for CSS markup', 'generateblocks');
+      }
+      if ('em' === unit) {
+        unitName = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__._x)('Em', 'A size unit for CSS markup', 'generateblocks');
+      }
+      if ('%' === unit) {
+        unitName = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__._x)('Percentage', 'A size unit for CSS markup', 'generateblocks');
+      }
+      if ('deg' === unit) {
+        unitName = (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__._x)('Degree', 'A size unit for CSS markup', 'generateblocks');
+      }
+      return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Tooltip
+      /* translators: Unit type (px, em, %) */, {
+        text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s Units', 'generateblocks'), unitName),
+        key: unit
+      }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+        key: unit,
+        className: 'components-gblocks-control-button__units--' + unit,
+        isSmall: true,
+        isPrimary: value === unit,
+        "aria-pressed": value === unit
+        /* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */,
+        "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.sprintf)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('%s Units', 'generateblocks'), unitName),
+        onClick: () => onClick(unit)
+      }, unit));
+    }))));
+  }
+}
+
+/***/ }),
+
 /***/ "./src/helpers/google-fonts.js":
 /*!*************************************!*\
   !*** ./src/helpers/google-fonts.js ***!
@@ -4454,6 +4542,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/unit-picker/editor.scss":
+/*!************************************************!*\
+  !*** ./src/components/unit-picker/editor.scss ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "lodash":
 /*!*************************!*\
   !*** external "lodash" ***!
@@ -4588,7 +4689,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"content":{"type":"string","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"},"transitionHeading":{"type":"number","default":"0.2"},"responsiveTogHideDesktop":{"type":"boolean","default":false},"responsiveTogHideTablet":{"type":"boolean","default":false},"responsiveTogHideMobile":{"type":"boolean","default":false},"borderColor":{"type":"string"},"borderColorHvr":{"type":"string"},"borderType":{"type":"string","default":"none"},"borderHvrType":{"type":"string","default":"none"},"borderWidthType":{"type":"string","default":"linked"},"borderWidthTypeTablet":{"type":"string","default":"linked"},"borderWidthTypeMobile":{"type":"string","default":"linked"},"borderWidth":{"type":"number","default":0},"borderWidthTablet":{"type":"number"},"borderWidthMobile":{"type":"number"},"borderWidthTop":{"type":"number","default":0},"borderWidthTopTablet":{"type":"number"},"borderWidthTopMobile":{"type":"number"},"borderWidthBottom":{"type":"number","default":0},"borderWidthBottomTablet":{"type":"number"},"borderWidthBottomMobile":{"type":"number"},"borderWidthRight":{"type":"number","default":0},"borderWidthRightTablet":{"type":"number"},"borderWidthRightMobile":{"type":"number"},"borderWidthLeft":{"type":"number","default":0},"borderWidthLeftTablet":{"type":"number"},"borderWidthLeftMobile":{"type":"number"},"borderWidthHvrType":{"type":"string","default":"linked"},"borderWidthHvrTypeTablet":{"type":"string","default":"linked"},"borderWidthHvrTypeMobile":{"type":"string","default":"linked"},"borderWidthHvr":{"type":"number","default":0},"borderWidthHvrTablet":{"type":"number"},"borderWidthHvrMobile":{"type":"number"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrTopTablet":{"type":"number"},"borderWidthHvrTopMobile":{"type":"number"},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrBottomTablet":{"type":"number"},"borderWidthHvrBottomMobile":{"type":"number"},"borderWidthHvrRight":{"type":"number","default":0},"borderWidthHvrRightTablet":{"type":"number"},"borderWidthHvrRightMobile":{"type":"number"},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrLeftTablet":{"type":"number"},"borderWidthHvrLeftMobile":{"type":"number"},"borderRadiusType":{"type":"string","default":"linked"},"borderRadiusTypeTablet":{"type":"string","default":"linked"},"borderRadiusTypeMobile":{"type":"string","default":"linked"},"borderRadius":{"type":"number","default":0},"borderRadiusTablet":{"type":"number"},"borderRadiusMobile":{"type":"number"},"borderRadiusTop":{"type":"number","default":0},"borderRadiusTopTablet":{"type":"number"},"borderRadiusTopMobile":{"type":"number"},"borderRadiusLeft":{"type":"number","default":0},"borderRadiusLeftTablet":{"type":"number"},"borderRadiusLeftMobile":{"type":"number"},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusBottomTablet":{"type":"number"},"borderRadiusBottomMobile":{"type":"number"},"borderRadiusRight":{"type":"number","default":0},"borderRadiusRightTablet":{"type":"number"},"borderRadiusRightMobile":{"type":"number"},"borderRadiusHvrType":{"type":"string","default":"linked"},"borderRadiusHvrTypeTablet":{"type":"string","default":"linked"},"borderRadiusHvrTypeMobile":{"type":"string","default":"linked"},"borderRadiusHvr":{"type":"number","default":0},"borderRadiusHvrTablet":{"type":"number"},"borderRadiusHvrMobile":{"type":"number"},"borderRadiusHvrTop":{"type":"number","default":0},"borderRadiusHvrTopTablet":{"type":"number"},"borderRadiusHvrTopMobile":{"type":"number"},"borderRadiusHvrBottom":{"type":"number","default":0},"borderRadiusHvrBottomTablet":{"type":"number"},"borderRadiusHvrBottomMobile":{"type":"number"},"borderRadiusHvrRight":{"type":"number","default":0},"borderRadiusHvrRightTablet":{"type":"number"},"borderRadiusHvrRightMobile":{"type":"number"},"borderRadiusHvrLeft":{"type":"number","default":0},"borderRadiusHvrLeftTablet":{"type":"number"},"borderRadiusHvrLeftMobile":{"type":"number"},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string"},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string"},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"transitionBorder":{"type":"number","default":"0.2"},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string"},"backgroundImage":{"type":"object"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"object"},"backgroundRepeat":{"type":"string","default":"repeat"},"backgroundSize":{"type":"string","default":"auto"},"backgroundGradient":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string"},"backgroundImageHvr":{"type":"object"},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundPositionHvr":{"type":"object"},"backgroundRepeatHvr":{"type":"string","default":"repeat"},"backgroundSizeHvr":{"type":"string","default":"auto"},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"transitionBackground":{"type":"number","default":"0.2"}},"editorScript":"file:../../../build/advance-heading.js","editorStyle":"file:../../../build/advance-heading.css","style":"file:../../../build/style-advance-heading.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"content":{"type":"string","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number"},"fontSizeUnit":{"type":"string","default":"px"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"},"transitionHeading":{"type":"number","default":"0.2"},"responsiveTogHideDesktop":{"type":"boolean","default":false},"responsiveTogHideTablet":{"type":"boolean","default":false},"responsiveTogHideMobile":{"type":"boolean","default":false},"borderColor":{"type":"string"},"borderColorHvr":{"type":"string"},"borderType":{"type":"string","default":"none"},"borderHvrType":{"type":"string","default":"none"},"borderWidthType":{"type":"string","default":"linked"},"borderWidthTypeTablet":{"type":"string","default":"linked"},"borderWidthTypeMobile":{"type":"string","default":"linked"},"borderWidth":{"type":"number","default":0},"borderWidthTablet":{"type":"number"},"borderWidthMobile":{"type":"number"},"borderWidthTop":{"type":"number","default":0},"borderWidthTopTablet":{"type":"number"},"borderWidthTopMobile":{"type":"number"},"borderWidthBottom":{"type":"number","default":0},"borderWidthBottomTablet":{"type":"number"},"borderWidthBottomMobile":{"type":"number"},"borderWidthRight":{"type":"number","default":0},"borderWidthRightTablet":{"type":"number"},"borderWidthRightMobile":{"type":"number"},"borderWidthLeft":{"type":"number","default":0},"borderWidthLeftTablet":{"type":"number"},"borderWidthLeftMobile":{"type":"number"},"borderWidthHvrType":{"type":"string","default":"linked"},"borderWidthHvrTypeTablet":{"type":"string","default":"linked"},"borderWidthHvrTypeMobile":{"type":"string","default":"linked"},"borderWidthHvr":{"type":"number","default":0},"borderWidthHvrTablet":{"type":"number"},"borderWidthHvrMobile":{"type":"number"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrTopTablet":{"type":"number"},"borderWidthHvrTopMobile":{"type":"number"},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrBottomTablet":{"type":"number"},"borderWidthHvrBottomMobile":{"type":"number"},"borderWidthHvrRight":{"type":"number","default":0},"borderWidthHvrRightTablet":{"type":"number"},"borderWidthHvrRightMobile":{"type":"number"},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrLeftTablet":{"type":"number"},"borderWidthHvrLeftMobile":{"type":"number"},"borderRadiusType":{"type":"string","default":"linked"},"borderRadiusTypeTablet":{"type":"string","default":"linked"},"borderRadiusTypeMobile":{"type":"string","default":"linked"},"borderRadius":{"type":"number","default":0},"borderRadiusTablet":{"type":"number"},"borderRadiusMobile":{"type":"number"},"borderRadiusTop":{"type":"number","default":0},"borderRadiusTopTablet":{"type":"number"},"borderRadiusTopMobile":{"type":"number"},"borderRadiusLeft":{"type":"number","default":0},"borderRadiusLeftTablet":{"type":"number"},"borderRadiusLeftMobile":{"type":"number"},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusBottomTablet":{"type":"number"},"borderRadiusBottomMobile":{"type":"number"},"borderRadiusRight":{"type":"number","default":0},"borderRadiusRightTablet":{"type":"number"},"borderRadiusRightMobile":{"type":"number"},"borderRadiusHvrType":{"type":"string","default":"linked"},"borderRadiusHvrTypeTablet":{"type":"string","default":"linked"},"borderRadiusHvrTypeMobile":{"type":"string","default":"linked"},"borderRadiusHvr":{"type":"number","default":0},"borderRadiusHvrTablet":{"type":"number"},"borderRadiusHvrMobile":{"type":"number"},"borderRadiusHvrTop":{"type":"number","default":0},"borderRadiusHvrTopTablet":{"type":"number"},"borderRadiusHvrTopMobile":{"type":"number"},"borderRadiusHvrBottom":{"type":"number","default":0},"borderRadiusHvrBottomTablet":{"type":"number"},"borderRadiusHvrBottomMobile":{"type":"number"},"borderRadiusHvrRight":{"type":"number","default":0},"borderRadiusHvrRightTablet":{"type":"number"},"borderRadiusHvrRightMobile":{"type":"number"},"borderRadiusHvrLeft":{"type":"number","default":0},"borderRadiusHvrLeftTablet":{"type":"number"},"borderRadiusHvrLeftMobile":{"type":"number"},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string"},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string"},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"transitionBorder":{"type":"number","default":"0.2"},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string"},"backgroundImage":{"type":"object"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"object"},"backgroundRepeat":{"type":"string","default":"repeat"},"backgroundSize":{"type":"string","default":"auto"},"backgroundGradient":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string"},"backgroundImageHvr":{"type":"object"},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundPositionHvr":{"type":"object"},"backgroundRepeatHvr":{"type":"string","default":"repeat"},"backgroundSizeHvr":{"type":"string","default":"auto"},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"transitionBackground":{"type":"number","default":"0.2"}},"editorScript":"file:../../../build/advance-heading.js","editorStyle":"file:../../../build/advance-heading.css","style":"file:../../../build/style-advance-heading.css"}');
 
 /***/ })
 
