@@ -1,4 +1,4 @@
-.components-base-control.components-gblocks-units-control-header__units {
+.components-base-control.components-th-blocks-units-control-header__units {
 	display: block;
 	margin-bottom: 0;
 
@@ -14,8 +14,8 @@
 	}
 }
 
-.components-gblocks-control__units{
-	.components-gblocks-control-buttons__units {
+.components-th-blocks-control__units{
+	.components-th-blocks-control-buttons__units {
 		button.components-button {
 			background: #fff;
 			box-shadow: none !important;
@@ -41,3 +41,12 @@
 		}
 	}
 }
+.o-responsive-control{
+	position:relative;
+	}
+	
+	.components-base-control.components-th-blocks-units-control-header__units{
+	position:absolute;
+	right:48px;
+	top:4px;
+	}

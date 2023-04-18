@@ -80,10 +80,10 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
 		stylesheet = {
 			textAlign: attributes.align,
-			fontSize:  attributes.fontSize,
+			fontSize:  attributes.fontSize + attributes.fontSizeUnit,
 			zIndex:   attributes.zindex,
-			lineHeight: ( 3 < attributes.lineHeight ? attributes.lineHeight + 'px' : attributes.lineHeight ) || undefined,
-		    letterSpacing: attributes.letterSpacing && `${ attributes.letterSpacing }px`,
+			lineHeight: ( 3 < attributes.lineHeight ? attributes.lineHeight + attributes.lineHeightUnit : attributes.lineHeight ) || undefined,
+		    letterSpacing: attributes.letterSpacing && `${ attributes.letterSpacing }${ attributes.letterSpacingUnit }`,
 			paddingTop: 'linked' === attributes.paddingType ? `${ attributes.padding }px` : `${ attributes.paddingTop }px`,
 			paddingRight: 'linked' === attributes.paddingType ? `${ attributes.padding }px` : `${ attributes.paddingRight }px`,
 			paddingBottom: 'linked' === attributes.paddingType ? `${ attributes.padding }px` : `${ attributes.paddingBottom }px`,
@@ -107,7 +107,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		
 		stylesheet = {
 			textAlign: attributes.alignTablet,
-			fontSize:  attributes.fontSizeTablet,
+			fontSize:  attributes.fontSizeTablet + attributes.fontSizeUnit,
 			zIndex:   attributes.zindexTablet,
 			lineHeight: ( 3 < attributes.lineHeightTablet ? attributes.lineHeightTablet + 'px' : attributes.lineHeightTablet ) || undefined,
 		    letterSpacing: attributes.letterSpacingTablet && `${ attributes.letterSpacingTablet }px`,
@@ -134,7 +134,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
         stylesheet = {
 			textAlign: attributes.alignMobile,
-			fontSize:  attributes.fontSizeMobile,
+			fontSize:  attributes.fontSizeMobile + attributes.fontSizeUnit,
 			zIndex:   attributes.zindexMobile,
 			lineHeight: ( 3 < attributes.lineHeightMobile ? attributes.lineHeightMobile + 'px' : attributes.lineHeightMobile ) || undefined,
 		    letterSpacing: attributes.letterSpacingMobile && `${ attributes.letterSpacingMobile }px`,

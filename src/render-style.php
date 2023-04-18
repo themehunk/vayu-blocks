@@ -1,4 +1,5 @@
 <?php
+
 add_action( 'wp_head', 'render_server_side_css' );
 
 function render_server_side_css() {
@@ -32,22 +33,6 @@ function render_server_side_css() {
 }
 
 
-// function cycle_through_blocks( $blocks, $post_id ) {
-
-//         $css = '';
-
-// 		$attr = get_advance_heading_attributes_recursive( $blocks , $post_id);
-
-// 		if ( $attr ) {
-
-// 			$css.="#wp-block-th-advance-heading-{$attr['id']}{color:{$attr['headingColor']}}";
-			
-// 		}
-
-//     return $css;
-// }
-
-
 function cycle_through_blocks( $blocks, $post_id ) {
 
 	$css = '';
@@ -55,7 +40,12 @@ function cycle_through_blocks( $blocks, $post_id ) {
 	foreach ( $blocks as $block ) {
 		
 		if ( $block['blockName'] === 'themehunk-blocks/advance-heading' ) {
-            
+			    
+			   if ( isset($block['attrs']['fontFamily'] ) ) {
+				$font_families = explode( ',', $block['attrs']['fontFamily'] );
+				$font_family_string = str_replace( ' ', '+', implode( '|', $font_families ) );
+				wp_enqueue_style( 'th-blocks-google-fonts-' . $font_family_string, "https://fonts.googleapis.com/css?family=$font_family_string&display=swap", array(), null );
+			    }
                 $css .=advance_heading_style($block['attrs']);
     
 		} 
@@ -87,5 +77,3 @@ function cycle_through_blocks( $blocks, $post_id ) {
 
 	return $css;
 }
-
-

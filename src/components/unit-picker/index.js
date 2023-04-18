@@ -32,41 +32,41 @@ export default class UnitChooser extends Component {
 		const allUnits = singleOption ? [ value ] : units;
 
 		return (
-			<BaseControl label={ label } id={ id } className="components-gblocks-units-control-header__units">
-				<div className="components-gblocks-control__units">
-					<ButtonGroup className="components-gblocks-control-buttons__units" aria-label={ __( 'Select Units', 'generateblocks' ) }>
+			<BaseControl label={ label } id={ id } className="components-th-blocks-units-control-header__units">
+				<div className="components-th-blocks-control__units">
+					<ButtonGroup className="components-th-blocks-control-buttons__units" aria-label={ __( 'Select Units', 'themehunk-blocks' ) }>
 						{ allUnits.map( ( unit ) => {
 							let unitName = unit;
 
 							if ( 'px' === unit ) {
-								unitName = _x( 'Pixel', 'A size unit for CSS markup', 'generateblocks' );
+								unitName = _x( 'Pixel', 'A size unit for CSS markup', 'themehunk-blocks' );
 							}
 
 							if ( 'em' === unit ) {
-								unitName = _x( 'Em', 'A size unit for CSS markup', 'generateblocks' );
+								unitName = _x( 'Em', 'A size unit for CSS markup', 'themehunk-blocks' );
 							}
 
 							if ( '%' === unit ) {
-								unitName = _x( 'Percentage', 'A size unit for CSS markup', 'generateblocks' );
+								unitName = _x( 'Percentage', 'A size unit for CSS markup', 'themehunk-blocks' );
 							}
 
 							if ( 'deg' === unit ) {
-								unitName = _x( 'Degree', 'A size unit for CSS markup', 'generateblocks' );
+								unitName = _x( 'Degree', 'A size unit for CSS markup', 'themehunk-blocks' );
 							}
 
 							return <Tooltip
 								/* translators: Unit type (px, em, %) */
-								text={ sprintf( __( '%s Units', 'generateblocks' ), unitName ) }
+								text={ sprintf( __( '%s Units', 'themehunk-blocks' ), unitName ) }
 								key={ unit }
 							>
 								<Button
 									key={ unit }
-									className={ 'components-gblocks-control-button__units--' + unit }
+									className={ 'components-th-blocks-control-button__units--' + unit }
 									isSmall
 									isPrimary={ value === unit }
 									aria-pressed={ value === unit }
 									/* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
-									aria-label={ sprintf( __( '%s Units', 'generateblocks' ), unitName ) }
+									aria-label={ sprintf( __( '%s Units', 'themehunk-blocks' ), unitName ) }
 									onClick={ () => onClick( unit ) }
 								>
 									{ unit }
