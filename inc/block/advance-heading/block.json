@@ -46,6 +46,10 @@
 		"fontSize": {
 			"type": "number"
 		},
+		"fontSizeUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"fontSizeTablet": {
 			"type": "number"
 		},

@@ -23,6 +23,9 @@ import { useBlockProps } from '@wordpress/block-editor';
 import './editor.scss';
 
 import InsSettings from './settings.js';
+import { BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { edit } from '@wordpress/icons';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -38,7 +41,13 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
     <>
-      
+      <BlockControls><ToolbarGroup>
+                <ToolbarButton
+                    icon={ edit }
+                    label="Edit"
+                    onClick={ () => alert( 'Editing' ) }
+                />
+            </ToolbarGroup></BlockControls>
     <InsSettings
     attributes={ attributes }
     setAttributes={ setAttributes }

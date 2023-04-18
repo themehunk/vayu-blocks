@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 import { registerBlockType } from '@wordpress/blocks';
-
+import { __ } from '@wordpress/i18n';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * All files containing `style` keyword are bundled together. The code used
@@ -17,23 +17,26 @@ import './style.scss';
 /**
  * Internal dependencies
  */
-import Edit from './edit';
+import edit from './edit';
 import save from './save';
 import metadata from './block.json';
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
+const { name } = metadata;
 
-	/**
-	 * @see ./save.js
-	 */
+registerBlockType( name, {
+	...metadata,
+	title: __( 'Advanced Spacer', 'themehunk-block' ),
+	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	keywords: [
+		'heading',
+		'title',
+		'advanced heading'
+	],
+	edit,
 	save,
-} );
+	example: {
+		attributes: {
+			content: __( 'A spacer with more customization options', 'themehunk-block' )
+		}
+	}
+});

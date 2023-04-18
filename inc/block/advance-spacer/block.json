@@ -11,6 +11,15 @@
 		"html": false
 	},
 	"textdomain": "themehunk-block",
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"height": {
+            "type": "number",
+            "default": 50
+        }
+	},
 	"editorScript": "file:../../../build/advance-spacer.js",
 	"editorStyle": "file:../../../build/advance-spacer.css",
 	"style": "file:../../../build/style-advance-spacer.css"
