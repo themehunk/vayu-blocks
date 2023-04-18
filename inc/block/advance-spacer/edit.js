@@ -5,6 +5,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { ResizableBox } from '@wordpress/components';
+import { BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -32,17 +33,31 @@ import InsSettings from './settings.js';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes, setAttributes,toggleSelection }) {
 
-        
+  const greenBackground = {
+    backgroundColor: '#090'
+};
+const blockProps = useBlockProps( { style: greenBackground } );
+const onChangeHeight = ( newHeight ) => {
+  setAttributes( { height: newHeight } );
+};
+
+function onChangeAlignment( newAlignment ) {
+  setAttributes( { alignment: newAlignment } );
+}
 
 	return (
     <>
-      
+                
     <InsSettings
     attributes={ attributes }
     setAttributes={ setAttributes }
     />
+    <div {...blockProps}>
+    <BlockControls>
+        
+        </BlockControls>
 		<ResizableBox
   enable={{
     bottom: true,
@@ -54,11 +69,18 @@ export default function Edit({ attributes, setAttributes }) {
     topLeft: false,
     topRight: false
   }}
-  onResizeStop={function noRefCheck(){}}
+  
   size={{
-    height: 200,
+    height:attributes.height,
     width: 400
   }}
+  onResizeStop={(event, direction, elt, delta) => {
+    onChangeHeight(attributes.height + delta.height);
+    toggleSelection( true );
+}}
+onResizeStart={ () => {
+  toggleSelection( false );
+} }
 >
   <div
     style={{
@@ -72,6 +94,7 @@ export default function Edit({ attributes, setAttributes }) {
     Resize
   </div>
 </ResizableBox>
+</div>
 </>
         );
 }

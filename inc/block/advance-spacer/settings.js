@@ -58,7 +58,7 @@ const InsSettings = ({
 								onChange={ height => setAttributes({ height }) }
 								step={ 0.1 }
 								min={ 0 }
-								max={ 3 }
+								max={ 900 }
 								allowReset={ true }
 				/>
 		

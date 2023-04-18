@@ -31,6 +31,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -59,12 +60,29 @@ __webpack_require__.r(__webpack_exports__);
 function Edit(_ref) {
   let {
     attributes,
-    setAttributes
+    setAttributes,
+    toggleSelection
   } = _ref;
+  const greenBackground = {
+    backgroundColor: '#090'
+  };
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
+    style: greenBackground
+  });
+  const onChangeHeight = newHeight => {
+    setAttributes({
+      height: newHeight
+    });
+  };
+  function onChangeAlignment(newAlignment) {
+    setAttributes({
+      alignment: newAlignment
+    });
+  }
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_settings_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ResizableBox, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ResizableBox, {
     enable: {
       bottom: true,
       bottomLeft: false,
@@ -75,10 +93,16 @@ function Edit(_ref) {
       topLeft: false,
       topRight: false
     },
-    onResizeStop: function noRefCheck() {},
     size: {
-      height: 200,
+      height: attributes.height,
       width: 400
+    },
+    onResizeStop: (event, direction, elt, delta) => {
+      onChangeHeight(attributes.height + delta.height);
+      toggleSelection(true);
+    },
+    onResizeStart: () => {
+      toggleSelection(false);
     }
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
@@ -88,7 +112,7 @@ function Edit(_ref) {
       height: '100%',
       justifyContent: 'center'
     }
-  }, "Resize")));
+  }, "Resize"))));
 }
 
 /***/ }),
@@ -245,7 +269,7 @@ const InsSettings = _ref => {
     }),
     step: 0.1,
     min: 0,
-    max: 3,
+    max: 900,
     allowReset: true
   })));
 };
@@ -500,7 +524,7 @@ module.exports = window["wp"]["i18n"];
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/advance-spacer","version":"0.1.0","title":"Advance Spacer","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","supports":{"html":false},"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"height":{"type":"number","default":50}},"editorScript":"file:../../../build/advance-spacer.js","editorStyle":"file:../../../build/advance-spacer.css","style":"file:../../../build/style-advance-spacer.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"create-block/advance-spacer","version":"0.1.0","title":"Advance Spacer","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","supports":{"html":false},"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"height":{"type":"number","default":50},"alignment":{"type":"string","default":"none"}},"editorScript":"file:../../../build/advance-spacer.js","editorStyle":"file:../../../build/advance-spacer.css","style":"file:../../../build/style-advance-spacer.css"}');
 
 /***/ })
 

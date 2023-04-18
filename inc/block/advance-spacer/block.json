@@ -18,6 +18,10 @@
 		"height": {
             "type": "number",
             "default": 50
+        },
+		"alignment": {
+            "type": "string",
+            "default": "none"
         }
 	},
 	"editorScript": "file:../../../build/advance-spacer.js",
