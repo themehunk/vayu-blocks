@@ -109,7 +109,7 @@ const InsSettings = ({
 
 	const changelineHeight = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ lineHeight: value });
+			setAttributes({ lineHeight: value, lineHeightTablet: value, lineHeightMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ lineHeightTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -133,7 +133,7 @@ const InsSettings = ({
 
 	const changeletterSpacing = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ letterSpacing: value });
+			setAttributes({ letterSpacing: value, letterSpacingTablet: value, letterSpacingMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ letterSpacingTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -857,8 +857,8 @@ const InsSettings = ({
 	};
     
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`
-	const customTooltiplineHeight = value => `${value}`
-	const customTooltipletterSpacing = value => `${value}px`
+	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`
+	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`
 	const customTooltipCustomWidth = value => `${value}px`
 	const customTooltipZindex = value => `${value}px`
 	const customTooltiptransitionHeading = value => `${value}`
@@ -972,7 +972,7 @@ const InsSettings = ({
 							>    
 							   <UnitChooser
 								value={ attributes.fontSizeUnit }
-								onClick={ ( unit ) => setAttributes( { fontSizeUnit: unit } ) }
+								onClick={ fontSizeUnit => setAttributes({ fontSizeUnit }) }
 								units={ [ 'px', 'em', '%' ] }
 						       />
 								<RangeControl
@@ -989,13 +989,18 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Line Height', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.lineHeightUnit }
+								onClick={ lineHeightUnit => setAttributes({ lineHeightUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
 							<RangeControl
 							    renderTooltipContent={ customTooltiplineHeight }
 								value={ getlineHeight() || '' }
 								onChange={ changelineHeight }
 								step={ 0.1 }
 								min={ 0 }
-								max={ 3 }
+								max={ 300 }
 								allowReset={ true }
 							/>
 						</ResponsiveControl>
@@ -1003,13 +1008,18 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Letter Spacing', 'themehunk-block' ) }
 							>
+								<UnitChooser
+								value={ attributes.letterSpacingUnit }
+								onClick={ letterSpacingUnit => setAttributes({ letterSpacingUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
 							<RangeControl
 							    renderTooltipContent={ customTooltipletterSpacing }
 								value={ getletterSpacing() || '' }
 								onChange={ changeletterSpacing }
 								step={ 0.1 }
-								min={ -50 }
-								max={ 100 }
+								min={ -300 }
+								max={ 300 }
 								allowReset={ true }
 							/>
 						</ResponsiveControl>	   

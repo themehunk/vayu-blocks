@@ -71,6 +71,10 @@
 		"lineHeight": {
 			"type": "number"
 		},
+		"lineHeightUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"lineHeightTablet": {
 			"type": "number"
 		},
@@ -79,6 +83,10 @@
 		},
 		"letterSpacing": {
 			"type": "number"
+		},
+		"letterSpacingUnit": {
+			"type": "string",
+			"default":"px"
 		},
 		"letterSpacingTablet": {
 			"type": "number"
