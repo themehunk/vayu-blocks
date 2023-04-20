@@ -61,7 +61,7 @@ const InsSettings = ({
 	};
     const changeAlignment = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ align: value });
+			setAttributes({ align: value, alignTablet: value, alignMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ alignTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -220,7 +220,7 @@ const InsSettings = ({
 
 	const changePaddingType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ paddingType: value });
+			setAttributes({ paddingType: value,paddingTypeTablet: value, paddingTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ paddingTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -230,7 +230,7 @@ const InsSettings = ({
 
 	const changeMarginType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ marginType: value });
+			setAttributes({ marginType: value,marginTypeTablet: value, marginTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ marginTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -391,9 +391,10 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.paddingType ) {
-				setAttributes({ padding: value });
+				setAttributes({ padding: value,paddingTablet: value, paddingMobile: value });
 			} else {
 				setAttributes({ [desktopPaddingType[type]]: value });
+				setAttributes({ [desktopPaddingType[type]]: value,[tabletPaddingType[type]]: value, [mobilePaddingType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -417,9 +418,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.marginType ) {
-				setAttributes({ margin: value });
+				setAttributes({ margin: value, marginTablet: value, marginMobile: value });
 			} else {
-				setAttributes({ [desktopMarginType[type]]: value });
+				setAttributes({ [desktopMarginType[type]]: value,[tabletMarginType[type]]: value, [mobileMarginType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -825,7 +826,7 @@ const InsSettings = ({
 
 	const changeCustomWidth = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value });
+			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ customWidthTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -848,7 +849,7 @@ const InsSettings = ({
 
 	const changeZindex = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ zindex: value });
+			setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ zindexTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -859,7 +860,7 @@ const InsSettings = ({
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`
-	const customTooltipCustomWidth = value => `${value}px`
+	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`
 	const customTooltipZindex = value => `${value}px`
 	const customTooltiptransitionHeading = value => `${value}`
     const customTooltiptransitionBorder = value => `${value}`
@@ -1052,6 +1053,11 @@ const InsSettings = ({
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'themehunk-block' ) }
 							     >	
+								 <UnitChooser
+								value={ attributes.customWidthUnit }
+								onClick={ customWidthUnit => setAttributes({ customWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
 								<RangeControl
 								    renderTooltipContent={ customTooltipCustomWidth }
 									value={ getCustomWidth() || '' }
@@ -1068,6 +1074,11 @@ const InsSettings = ({
                             <ResponsiveControl
 								label={ __( 'Padding', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.paddingUnit }
+								onClick={ paddingUnit => setAttributes({ paddingUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />	
                             <SizingControl
 									type={ getPaddingType() }
 									min={ 0 }
@@ -1099,10 +1110,15 @@ const InsSettings = ({
 								/>
 
 							</ResponsiveControl>
-
+            
 							<ResponsiveControl
 								label={ __( 'Margin', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.marginUnit }
+								onClick={ marginUnit => setAttributes({ marginUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getMarginType() }
 									min={ 0 }
@@ -1116,19 +1132,9 @@ const InsSettings = ({
 											value: getMargin( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
-											type: 'right',
-											value: getMargin( 'right' )
-										},
-										{
 											label: __( 'Bottom', 'themehunk-block' ),
 											type: 'bottom',
 											value: getMargin( 'bottom' )
-										},
-										{
-											label: __( 'Left', 'themehunk-block' ),
-											type: 'left',
-											value: getMargin( 'left' )
 										}
 									] }
 								/>
@@ -1148,8 +1154,6 @@ const InsSettings = ({
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
-
-
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
@@ -1191,6 +1195,11 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Border Width', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderWidthUnit }
+								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderWidthType() }
 									min={ 0 }
@@ -1233,6 +1242,11 @@ const InsSettings = ({
                         <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderRadiusUnit }
+								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderRadiusType() }
 									min={ 0 }

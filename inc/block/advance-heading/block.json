@@ -134,6 +134,10 @@
 			"type": "number",
 			"default": 0
 		},
+		"paddingUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"paddingTablet": {
 			"type": "number"
 		},
@@ -196,6 +200,10 @@
 			"type": "number",
 			"default": 0
 		},
+		"marginUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"marginTablet": {
 			"type": "number"
 		},
@@ -249,6 +257,10 @@
 		"customWidth": {
 			"type": "number"
 		},
+		"customWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"customWidthTablet": {
 			"type": "number"
 		},
@@ -297,6 +309,10 @@
 		"borderWidthType": {
 			"type": "string",
 			"default": "linked"
+		},
+		"borderWidthUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"borderWidthTypeTablet": {
 			"type": "string",
@@ -421,6 +437,10 @@
 		"borderRadiusType": {
 			"type": "string",
 			"default": "linked"
+		},
+		"borderRadiusUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"borderRadiusTypeTablet": {
 			"type": "string",
