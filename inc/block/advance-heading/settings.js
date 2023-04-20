@@ -444,9 +444,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderWidthType ) {
-				setAttributes({ borderWidth: value });
+				setAttributes({ borderWidth: value , borderWidthTablet: value , borderWidthMobile: value});
 			} else {
-				setAttributes({ [desktopBorderWidthType[type]]: value });
+				setAttributes({ [desktopBorderWidthType[type]]: value, [tabletBorderWidthType[type]]: value, [mobileBorderWidthType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -496,9 +496,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderRadiusType ) {
-				setAttributes({ borderRadius: value });
+				setAttributes({ borderRadius: value , borderRadiusTablet: value , borderRadiusMobile: value });
 			} else {
-				setAttributes({ [desktopBorderRadiusType[type]]: value });
+				setAttributes({ [desktopBorderRadiusType[type]]: value , [tabletBorderRadiusType[type]]: value , [mobileBorderRadiusType[type]]: value });
 			}
 			break;
 		case 'Tablet':

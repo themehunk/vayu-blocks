@@ -92,9 +92,38 @@ function advance_heading_style($attr){
 		//z-index
 		$css .= isset( $attr['zindex'] ) ? "#wp-block-th-advance-heading-{$attr['id']}{z-index:{$attr['zindex'] }}" : '';
        
-		//border and box shadow
+		//border
 		$css .= isset( $attr['borderType'] ) ? "#wp-block-th-advance-heading-{$attr['id']}{border-style:{$attr['borderType'] }}" : '';
+        $css .= isset( $attr['borderColor'] ) ? "#wp-block-th-advance-heading-{$attr['id']}{border-color:{$attr['borderColor'] }}" : '';
+		$css .= isset( $attr['borderColorHvr'] ) ? "#wp-block-th-advance-heading-{$attr['id']}:hover{border-color:{$attr['borderColorHvr'] }}" : '';
+		
+		//border-width
+		if (isset($attr['borderWidthType']) && 'unlinked' === $attr['borderWidthType']) {
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$borderWidthTop = isset($attr['borderWidthTop']) ? $attr['borderWidthTop'] : 0;
+			$borderWidthRight = isset($attr['borderWidthRight']) ? $attr['borderWidthRight'] : 0;
+			$borderWidthBottom = isset($attr['borderWidthBottom']) ? $attr['borderWidthBottom'] : 0;
+			$borderWidthLeft = isset($attr['borderWidthLeft']) ? $attr['borderWidthLeft'] : 0;
+			$css .= "#wp-block-th-advance-heading-{$attr['id']} { border-top-width: {$borderWidthTop}{$borderWidthUnit}; border-right-width: {$borderWidthRight}{$borderWidthUnit}; border-bottom-width: {$borderWidthBottom}{$borderWidthUnit}; border-left-width: {$borderWidthLeft}{$borderWidthUnit}; }";
+		} else {
+			$borderWidth = isset($attr['borderWidth']) ? $attr['borderWidth'] : 0;
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$css .= "#wp-block-th-advance-heading-{$attr['id']} { border-width: {$borderWidth}{$borderWidthUnit}; }";
+		}
 
+		//border-radius
+		if (isset($attr['borderRadiusType']) && 'unlinked' === $attr['borderRadiusType']) {
+			$borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
+			$borderRadiusTop = isset($attr['borderRadiusTop']) ? $attr['borderRadiusTop'] : 0;
+			$borderRadiusRight = isset($attr['borderRadiusRight']) ? $attr['borderRadiusRight'] : 0;
+			$borderRadiusBottom = isset($attr['borderRadiusBottom']) ? $attr['borderRadiusBottom'] : 0;
+			$borderRadiusLeft = isset($attr['borderRadiusLeft']) ? $attr['borderRadiusLeft'] : 0;
+			$css .= "#wp-block-th-advance-heading-{$attr['id']} { border-top-width: {$borderWidthTop}{$borderWidthUnit}; border-right-width: {$borderWidthRight}{$borderWidthUnit}; border-bottom-width: {$borderWidthBottom}{$borderWidthUnit}; border-left-width: {$borderWidthLeft}{$borderWidthUnit}; }";
+		} else {
+			$borderRadius = isset($attr['borderRadius']) ? $attr['borderRadius'] : 0;
+			$borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
+			$css .= "#wp-block-th-advance-heading-{$attr['id']} { border-width: {$borderRadius}{$borderRadiusUnit}; }";
+		}
 
 		// media queries for tablet 
         $css .= "@media only screen and (max-width: 768px) {
@@ -133,6 +162,20 @@ function advance_heading_style($attr){
 			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { margin-top: {$marginTablet}{$marginUnit}; margin-bottom: {$marginTablet}{$marginUnit} }}";
 		}
 
+		//for border-width tablet
+		if (isset($attr['borderWidthTypeTablet']) && 'unlinked' === $attr['borderWidthTypeTablet']) {
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$borderWidthTopTablet = isset($attr['borderWidthTopTablet']) ? $attr['borderWidthTopTablet'] : 0;
+			$borderWidthRightTablet = isset($attr['borderWidthRightTablet']) ? $attr['borderWidthRightTablet'] : 0;
+			$borderWidthBottomTablet = isset($attr['borderWidthBottomTablet']) ? $attr['borderWidthBottomTablet'] : 0;
+			$borderWidthLeftTablet = isset($attr['borderWidthLeftTablet']) ? $attr['borderWidthLeftTablet'] : 0;
+			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { border-top-width: {$borderWidthTopTablet}{$borderWidthUnit}; border-right-width: {$borderWidthRightTablet}{$borderWidthUnit}; border-bottom-width: {$borderWidthBottomTablet}{$borderWidthUnit}; border-left-width: {$borderWidthLeftTablet}{$borderWidthUnit}; }}";
+		} else {
+			$borderWidthTablet = isset($attr['borderWidthTablet']) ? $attr['borderWidthTablet'] : 0;
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { border-width: {$borderWidthTablet}{$borderWidthUnit}; }}";
+		}
+
 		// media queries for mobile
 		 $css .= "@media only screen and (max-width: 480px) {
             " . (isset($attr['fontSizeMobile']) ? "#wp-block-th-advance-heading-{$attr['id']}{font-size:{$attr['fontSizeMobile']}" . (isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px') . "}" : '') . "
@@ -151,7 +194,7 @@ function advance_heading_style($attr){
 			$paddingRightMobile = isset($attr['paddingRightMobile']) ? $attr['paddingRightMobile'] : 0;
 			$paddingBottomMobile = isset($attr['paddingBottomMobile']) ? $attr['paddingBottomMobile'] : 0;
 			$paddingLeftMobile = isset($attr['paddingLeftMobile']) ? $attr['paddingLeftMobile'] : 0;
-			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { padding-top: {$paddingTopMobile}{$paddingUnit}; padding-right: {$paddingRightMobile}{$paddingUnit}; padding-bottom: {$paddingBottomMobile}{$paddingUnit}; padding-left: {$paddingLeftMobile}{$paddingUnit}; }}";
+			$css .= "@media only screen and (max-width: 480px) {#wp-block-th-advance-heading-{$attr['id']} { padding-top: {$paddingTopMobile}{$paddingUnit}; padding-right: {$paddingRightMobile}{$paddingUnit}; padding-bottom: {$paddingBottomMobile}{$paddingUnit}; padding-left: {$paddingLeftMobile}{$paddingUnit}; }}";
 		} else {
 			$paddingMobile = isset($attr['paddingMobile']) ? $attr['paddingMobile'] : 0;
 			$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
@@ -163,11 +206,25 @@ function advance_heading_style($attr){
 			$marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
 			$marginTopMobile = isset($attr['marginTopMobile']) ? $attr['marginTopMobile'] : 0;
 			$marginBottomMobile = isset($attr['marginBottomMobile']) ? $attr['marginBottomMobile'] : 0;
-			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { margin-top: {$marginTopMobile}{$marginUnit};  margin-bottom: {$marginBottomMobile}{$marginUnit};}}";
+			$css .= "@media only screen and (max-width: 480px) {#wp-block-th-advance-heading-{$attr['id']} { margin-top: {$marginTopMobile}{$marginUnit};  margin-bottom: {$marginBottomMobile}{$marginUnit};}}";
 		} else {
 			$marginMobile = isset($attr['marginMobile']) ? $attr['marginMobile'] : 0;
 			$marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
-			$css .= "@media only screen and (max-width: 768px) {#wp-block-th-advance-heading-{$attr['id']} { margin-top: {$marginMobile}{$marginUnit}; margin-bottom: {$marginMobile}{$marginUnit} }}";
+			$css .= "@media only screen and (max-width: 480px) {#wp-block-th-advance-heading-{$attr['id']} { margin-top: {$marginMobile}{$marginUnit}; margin-bottom: {$marginMobile}{$marginUnit} }}";
+		}
+
+		//for border-width mobile
+		if (isset($attr['borderWidthTypeMobile']) && 'unlinked' === $attr['borderWidthTypeMobile']) {
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$borderWidthTopMobile = isset($attr['borderWidthTopMobile']) ? $attr['borderWidthTopMobile'] : 0;
+			$borderWidthRightMobile = isset($attr['borderWidthRightMobile']) ? $attr['borderWidthRightMobile'] : 0;
+			$borderWidthBottomMobile = isset($attr['borderWidthBottomMobile']) ? $attr['borderWidthBottomMobile'] : 0;
+			$borderWidthLeftMobile = isset($attr['borderWidthLeftMobile']) ? $attr['borderWidthLeftMobile'] : 0;
+			$css .= "@media only screen and (max-width: 480px) {#wp-block-th-advance-heading-{$attr['id']} { border-top-width: {$borderWidthTopMobile}{$borderWidthUnit}; border-right-width: {$borderWidthRightMobile}{$borderWidthUnit}; border-bottom-width: {$borderWidthBottomMobile}{$borderWidthUnit}; border-left-width: {$borderWidthLeftMobile}{$borderWidthUnit}; }}";
+		} else {
+			$borderWidthMobile = isset($attr['borderWidthMobile']) ? $attr['borderWidthMobile'] : 0;
+			$borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+			$css .= "@media only screen and (max-width: 480px) {#wp-block-th-advance-heading-{$attr['id']} { border-width: {$borderWidthMobile}{$borderWidthUnit}; }}";
 		}
 
 	
