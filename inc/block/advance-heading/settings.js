@@ -240,7 +240,7 @@ const InsSettings = ({
 
 	const changeBorderWidthType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderWidthType: value });
+			setAttributes({ borderWidthType: value, borderWidthTypeTablet: value, borderWidthTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderWidthTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -250,7 +250,7 @@ const InsSettings = ({
 
 	const changeBorderWidthHvrType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderWidthHvrType: value });
+			setAttributes({ borderWidthHvrType: value, borderWidthHvrTypeTablet: value, borderWidthHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderWidthHvrTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -259,7 +259,7 @@ const InsSettings = ({
 	};
 	const changeBorderRadiusType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderRadiusType: value });
+			setAttributes({ borderRadiusType: value, borderRadiusTypeTablet: value, borderRadiusTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderRadiusTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -269,7 +269,7 @@ const InsSettings = ({
 
 	const changeBorderRadiusHvrType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderRadiusHvrType: value });
+			setAttributes({ borderRadiusHvrType: value, borderRadiusHvrTypeTablet: value, borderRadiusHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderRadiusHvrTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -470,9 +470,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderWidthHvrType ) {
-				setAttributes({ borderWidthHvr: value });
+				setAttributes({ borderWidthHvr: value, borderWidthHvrTablet: value, borderWidthHvrMobile: value });
 			} else {
-				setAttributes({ [desktopBorderWidthHvrType[type]]: value });
+				setAttributes({ [desktopBorderWidthHvrType[type]]: value, [tabletBorderWidthHvrType[type]]: value, [mobileBorderWidthHvrType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -522,9 +522,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderRadiusHvrType ) {
-				setAttributes({ borderRadiusHvr: value });
+				setAttributes({ borderRadiusHvr: value,  borderRadiusHvrTablet: value,  borderRadiusHvrMobile: value });
 			} else {
-				setAttributes({ [desktopBorderRadiusHvrType[type]]: value });
+				setAttributes({ [desktopBorderRadiusHvrType[type]]: value,[tabletBorderRadiusHvrType[type]]: value, [mobileBorderRadiusHvrType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -862,9 +862,7 @@ const InsSettings = ({
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`
 	const customTooltipZindex = value => `${value}px`
-	const customTooltiptransitionHeading = value => `${value}`
-    const customTooltiptransitionBorder = value => `${value}`
-	const customTooltiptransitionBackground = value => `${value}`
+	const customTooltiptransitionAll = value => `${value}`
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
@@ -924,16 +922,7 @@ const InsSettings = ({
 				/>
 
 			
-				<RangeControl
-							    label={ __( 'Transition Duration', 'themehunk-block' ) }
-							    renderTooltipContent={ customTooltiptransitionHeading }
-								value={ attributes.transitionHeading }
-								onChange={ transitionHeading => setAttributes({ transitionHeading }) }
-								step={ 0.1 }
-								min={ 0 }
-								max={ 3 }
-								allowReset={ true }
-				/>
+				
 		
 				</>
 				
@@ -1366,6 +1355,11 @@ const InsSettings = ({
 					<ResponsiveControl
 								label={ __( 'Border Width', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderWidthHvrUnit }
+								onClick={ borderWidthHvrUnit => setAttributes({ borderWidthHvrUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderWidthHvrType() }
 									min={ 0 }
@@ -1410,6 +1404,11 @@ const InsSettings = ({
                             <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderRadiusHvrUnit }
+								onClick={ borderRadiusHvrUnit => setAttributes({ borderRadiusHvrUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderRadiusHvrType() }
 									min={ 0 }
@@ -1504,16 +1503,7 @@ const InsSettings = ({
 							/>
 							</ControlPanelControl>
 
-							<RangeControl
-							    label={ __( 'Transition Duration', 'themehunk-block' ) }
-							    renderTooltipContent={ customTooltiptransitionBorder }
-								value={ attributes.transitionBorder }
-								onChange={ transitionBorder => setAttributes({ transitionBorder }) }
-								step={ 0.1 }
-								min={ 0 }
-								max={ 3 }
-								allowReset={ true }
-				/>
+							
 					</>
 
 				)}	
@@ -1588,16 +1578,7 @@ const InsSettings = ({
 					changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
 					changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
 				/>
-				<RangeControl
-				label={ __( 'Transition Duration', 'themehunk-block' ) }
-				renderTooltipContent={ customTooltiptransitionBackground }
-				value={ attributes.transitionBackground }
-				onChange={ transitionBackground => setAttributes({ transitionBackground }) }
-				step={ 0.1 }
-				min={ 0 }
-				max={ 3 }
-				allowReset={ true }
-                />
+				
 				</>
 				
 				)}	
@@ -1622,6 +1603,21 @@ const InsSettings = ({
 								checked={ attributes.responsiveTogHideMobile }
 								onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
 							/>
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Transition', 'themehunk-block' ) }
+					initialOpen={ false }
+				> 
+				<RangeControl
+				label={ __( 'Transition Duration', 'themehunk-block' ) }
+				renderTooltipContent={ customTooltiptransitionAll }
+				value={ attributes.transitionAll }
+				onChange={ transitionAll => setAttributes({ transitionAll }) }
+				step={ 0.1 }
+				min={ 0 }
+				max={ 3 }
+				allowReset={ true }
+                />
 				</PanelBody>
 		
 		     </Fragment>

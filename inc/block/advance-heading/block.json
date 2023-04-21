@@ -276,10 +276,6 @@
 		"zindexMobile": {
 			"type": "number"
 		},
-		"transitionHeading": {
-			"type": "number",
-			"default": "0.2"
-		},
 		"responsiveTogHideDesktop": {
 			"type": "boolean",
 			"default": false
@@ -375,6 +371,10 @@
 		"borderWidthHvrType": {
 			"type": "string",
 			"default": "linked"
+		},
+		"borderWidthHvrUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"borderWidthHvrTypeTablet": {
 			"type": "string",
@@ -504,6 +504,10 @@
 			"type": "string",
 			"default": "linked"
 		},
+		"borderRadiusHvrUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"borderRadiusHvrTypeTablet": {
 			"type": "string",
 			"default": "linked"
@@ -616,10 +620,6 @@
 			"type": "number",
 			"default": 0
 		},
-		"transitionBorder": {
-			"type": "number",
-			"default": "0.2"
-		},
 		"backgroundType": {
 			"type": "string",
 			"default": "color"
@@ -678,7 +678,7 @@
 			"type": "string",
 			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
 		},
-		"transitionBackground": {
+		"transitionAll": {
 			"type": "number",
 			"default": "0.2"
 		}
