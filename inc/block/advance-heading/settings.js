@@ -61,7 +61,7 @@ const InsSettings = ({
 	};
     const changeAlignment = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ align: value });
+			setAttributes({ align: value, alignTablet: value, alignMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ alignTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -220,7 +220,7 @@ const InsSettings = ({
 
 	const changePaddingType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ paddingType: value });
+			setAttributes({ paddingType: value,paddingTypeTablet: value, paddingTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ paddingTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -230,7 +230,7 @@ const InsSettings = ({
 
 	const changeMarginType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ marginType: value });
+			setAttributes({ marginType: value,marginTypeTablet: value, marginTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ marginTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -240,7 +240,7 @@ const InsSettings = ({
 
 	const changeBorderWidthType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderWidthType: value });
+			setAttributes({ borderWidthType: value, borderWidthTypeTablet: value, borderWidthTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderWidthTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -250,7 +250,7 @@ const InsSettings = ({
 
 	const changeBorderWidthHvrType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderWidthHvrType: value });
+			setAttributes({ borderWidthHvrType: value, borderWidthHvrTypeTablet: value, borderWidthHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderWidthHvrTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -259,7 +259,7 @@ const InsSettings = ({
 	};
 	const changeBorderRadiusType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderRadiusType: value });
+			setAttributes({ borderRadiusType: value, borderRadiusTypeTablet: value, borderRadiusTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderRadiusTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -269,7 +269,7 @@ const InsSettings = ({
 
 	const changeBorderRadiusHvrType = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ borderRadiusHvrType: value });
+			setAttributes({ borderRadiusHvrType: value, borderRadiusHvrTypeTablet: value, borderRadiusHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ borderRadiusHvrTypeTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -391,9 +391,10 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.paddingType ) {
-				setAttributes({ padding: value });
+				setAttributes({ padding: value,paddingTablet: value, paddingMobile: value });
 			} else {
 				setAttributes({ [desktopPaddingType[type]]: value });
+				setAttributes({ [desktopPaddingType[type]]: value,[tabletPaddingType[type]]: value, [mobilePaddingType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -417,9 +418,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.marginType ) {
-				setAttributes({ margin: value });
+				setAttributes({ margin: value, marginTablet: value, marginMobile: value });
 			} else {
-				setAttributes({ [desktopMarginType[type]]: value });
+				setAttributes({ [desktopMarginType[type]]: value,[tabletMarginType[type]]: value, [mobileMarginType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -443,9 +444,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderWidthType ) {
-				setAttributes({ borderWidth: value });
+				setAttributes({ borderWidth: value , borderWidthTablet: value , borderWidthMobile: value});
 			} else {
-				setAttributes({ [desktopBorderWidthType[type]]: value });
+				setAttributes({ [desktopBorderWidthType[type]]: value, [tabletBorderWidthType[type]]: value, [mobileBorderWidthType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -469,9 +470,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderWidthHvrType ) {
-				setAttributes({ borderWidthHvr: value });
+				setAttributes({ borderWidthHvr: value, borderWidthHvrTablet: value, borderWidthHvrMobile: value });
 			} else {
-				setAttributes({ [desktopBorderWidthHvrType[type]]: value });
+				setAttributes({ [desktopBorderWidthHvrType[type]]: value, [tabletBorderWidthHvrType[type]]: value, [mobileBorderWidthHvrType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -495,9 +496,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderRadiusType ) {
-				setAttributes({ borderRadius: value });
+				setAttributes({ borderRadius: value , borderRadiusTablet: value , borderRadiusMobile: value });
 			} else {
-				setAttributes({ [desktopBorderRadiusType[type]]: value });
+				setAttributes({ [desktopBorderRadiusType[type]]: value , [tabletBorderRadiusType[type]]: value , [mobileBorderRadiusType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -521,9 +522,9 @@ const InsSettings = ({
 		switch ( getView ) {
 		case 'Desktop':
 			if ( 'linked' === attributes.borderRadiusHvrType ) {
-				setAttributes({ borderRadiusHvr: value });
+				setAttributes({ borderRadiusHvr: value,  borderRadiusHvrTablet: value,  borderRadiusHvrMobile: value });
 			} else {
-				setAttributes({ [desktopBorderRadiusHvrType[type]]: value });
+				setAttributes({ [desktopBorderRadiusHvrType[type]]: value,[tabletBorderRadiusHvrType[type]]: value, [mobileBorderRadiusHvrType[type]]: value });
 			}
 			break;
 		case 'Tablet':
@@ -825,7 +826,7 @@ const InsSettings = ({
 
 	const changeCustomWidth = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value });
+			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ customWidthTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -848,7 +849,7 @@ const InsSettings = ({
 
 	const changeZindex = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ zindex: value });
+			setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ zindexTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -859,11 +860,9 @@ const InsSettings = ({
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`
-	const customTooltipCustomWidth = value => `${value}px`
+	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`
 	const customTooltipZindex = value => `${value}px`
-	const customTooltiptransitionHeading = value => `${value}`
-    const customTooltiptransitionBorder = value => `${value}`
-	const customTooltiptransitionBackground = value => `${value}`
+	const customTooltiptransitionAll = value => `${value}`
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
@@ -923,16 +922,7 @@ const InsSettings = ({
 				/>
 
 			
-				<RangeControl
-							    label={ __( 'Transition Duration', 'themehunk-block' ) }
-							    renderTooltipContent={ customTooltiptransitionHeading }
-								value={ attributes.transitionHeading }
-								onChange={ transitionHeading => setAttributes({ transitionHeading }) }
-								step={ 0.1 }
-								min={ 0 }
-								max={ 3 }
-								allowReset={ true }
-				/>
+				
 		
 				</>
 				
@@ -1052,6 +1042,11 @@ const InsSettings = ({
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'themehunk-block' ) }
 							     >	
+								 <UnitChooser
+								value={ attributes.customWidthUnit }
+								onClick={ customWidthUnit => setAttributes({ customWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
 								<RangeControl
 								    renderTooltipContent={ customTooltipCustomWidth }
 									value={ getCustomWidth() || '' }
@@ -1068,6 +1063,11 @@ const InsSettings = ({
                             <ResponsiveControl
 								label={ __( 'Padding', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.paddingUnit }
+								onClick={ paddingUnit => setAttributes({ paddingUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />	
                             <SizingControl
 									type={ getPaddingType() }
 									min={ 0 }
@@ -1099,10 +1099,15 @@ const InsSettings = ({
 								/>
 
 							</ResponsiveControl>
-
+            
 							<ResponsiveControl
 								label={ __( 'Margin', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.marginUnit }
+								onClick={ marginUnit => setAttributes({ marginUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getMarginType() }
 									min={ 0 }
@@ -1116,19 +1121,9 @@ const InsSettings = ({
 											value: getMargin( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
-											type: 'right',
-											value: getMargin( 'right' )
-										},
-										{
 											label: __( 'Bottom', 'themehunk-block' ),
 											type: 'bottom',
 											value: getMargin( 'bottom' )
-										},
-										{
-											label: __( 'Left', 'themehunk-block' ),
-											type: 'left',
-											value: getMargin( 'left' )
 										}
 									] }
 								/>
@@ -1148,8 +1143,6 @@ const InsSettings = ({
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
-
-
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
@@ -1191,6 +1184,11 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Border Width', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderWidthUnit }
+								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderWidthType() }
 									min={ 0 }
@@ -1233,6 +1231,11 @@ const InsSettings = ({
                         <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderRadiusUnit }
+								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderRadiusType() }
 									min={ 0 }
@@ -1352,6 +1355,11 @@ const InsSettings = ({
 					<ResponsiveControl
 								label={ __( 'Border Width', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderWidthHvrUnit }
+								onClick={ borderWidthHvrUnit => setAttributes({ borderWidthHvrUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderWidthHvrType() }
 									min={ 0 }
@@ -1396,6 +1404,11 @@ const InsSettings = ({
                             <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
 							>
+							<UnitChooser
+								value={ attributes.borderRadiusHvrUnit }
+								onClick={ borderRadiusHvrUnit => setAttributes({ borderRadiusHvrUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						    />
                             <SizingControl
 									type={ getBorderRadiusHvrType() }
 									min={ 0 }
@@ -1490,16 +1503,7 @@ const InsSettings = ({
 							/>
 							</ControlPanelControl>
 
-							<RangeControl
-							    label={ __( 'Transition Duration', 'themehunk-block' ) }
-							    renderTooltipContent={ customTooltiptransitionBorder }
-								value={ attributes.transitionBorder }
-								onChange={ transitionBorder => setAttributes({ transitionBorder }) }
-								step={ 0.1 }
-								min={ 0 }
-								max={ 3 }
-								allowReset={ true }
-				/>
+							
 					</>
 
 				)}	
@@ -1574,16 +1578,7 @@ const InsSettings = ({
 					changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
 					changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
 				/>
-				<RangeControl
-				label={ __( 'Transition Duration', 'themehunk-block' ) }
-				renderTooltipContent={ customTooltiptransitionBackground }
-				value={ attributes.transitionBackground }
-				onChange={ transitionBackground => setAttributes({ transitionBackground }) }
-				step={ 0.1 }
-				min={ 0 }
-				max={ 3 }
-				allowReset={ true }
-                />
+				
 				</>
 				
 				)}	
@@ -1608,6 +1603,21 @@ const InsSettings = ({
 								checked={ attributes.responsiveTogHideMobile }
 								onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
 							/>
+				</PanelBody>
+				<PanelBody
+					title={ __( 'Transition', 'themehunk-block' ) }
+					initialOpen={ false }
+				> 
+				<RangeControl
+				label={ __( 'Transition Duration', 'themehunk-block' ) }
+				renderTooltipContent={ customTooltiptransitionAll }
+				value={ attributes.transitionAll }
+				onChange={ transitionAll => setAttributes({ transitionAll }) }
+				step={ 0.1 }
+				min={ 0 }
+				max={ 3 }
+				allowReset={ true }
+                />
 				</PanelBody>
 		
 		     </Fragment>
