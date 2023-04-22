@@ -1,0 +1,42 @@
+.block-editor-block-inspector .th-hover-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  border-top: none;
+}
+
+.block-editor-block-inspector .th-hover-control .components-button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  cursor: pointer;
+  padding: 0px 0px;
+  margin-left: 0;
+  font-weight: 500;
+  border: 1px solid #d5dadf;
+  margin-bottom: 15px;
+  font-size: 12px;
+  height: 30px;
+}
+
+.block-editor-block-inspector .th-hover-control .components-button:focus {
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+.block-editor-block-inspector .th-hover-control .components-button.is-active {
+  background: #d5dadf;
+  position: relative;
+  z-index: 1;
+}
+/*# sourceMappingURL=editor.css.map */

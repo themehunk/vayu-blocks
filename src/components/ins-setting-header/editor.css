@@ -1,0 +1,41 @@
+.block-editor-block-inspector .th-setting-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  border-top: none;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 0;
+  height: 48px;
+  background: transparent;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  cursor: pointer;
+  padding: 3px 15px;
+  margin-left: 0;
+  font-weight: 500;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button:focus {
+  -webkit-box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+          box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) var(--wp-admin-theme-color);
+  position: relative;
+  z-index: 1;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button.is-active {
+  -webkit-box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) transparent, inset 0 -4px 0 0 var(--wp-admin-theme-color);
+          box-shadow: inset 0 0 0 var(--wp-admin-border-width-focus) transparent, inset 0 -4px 0 0 var(--wp-admin-theme-color);
+  position: relative;
+  z-index: 1;
+}
+/*# sourceMappingURL=editor.css.map */
