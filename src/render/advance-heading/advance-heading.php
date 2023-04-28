@@ -30,8 +30,7 @@ function advance_heading_style($attr){
 			$css .= isset( $attr['backgroundRepeat']) ? "background-repeat: {$attr['backgroundRepeat']};" : '';
 			$css .= isset( $attr['backgroundSize']) ? "background-size: {$attr['backgroundSize']};" : '';
 			$css .= isset( $attr['backgroundPosition']) ? "background-position-x: {$attr['backgroundPosition']['x']}; background-position-y: {$attr['backgroundPosition']['y']};" : '';
-		}
-		elseif( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'gradient' ){
+		}elseif( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'gradient' ){
 			$css .= isset( $attr['backgroundGradient'] ) ? "background-image:{$attr['backgroundGradient']};" : '';  
 		}else{
 			$css .= isset( $attr['backgroundColor'] ) ? "background-color:{$attr['backgroundColor']};" : '';
@@ -156,7 +155,7 @@ function advance_heading_style($attr){
 
 		//box shadow
         if (isset($attr['boxShadow'])){
-			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) ." ";
+			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) .";";
 		}
 		
 		//transition duration
@@ -239,7 +238,7 @@ function advance_heading_style($attr){
 			$css .= (isset($attr['alignTablet']) ? "text-align:{$attr['alignTablet']};" : '');
 			$css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
             $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
-			$css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']}}" : '');
+			$css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};}" : '');
 			
 			if (isset($attr['paddingTypeTablet']) && 'unlinked' === $attr['paddingTypeTablet']) {
 				$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
@@ -248,12 +247,12 @@ function advance_heading_style($attr){
 				$paddingBottomTablet = isset($attr['paddingBottomTablet']) ? $attr['paddingBottomTablet'] : 0;
 				$paddingLeftTablet = isset($attr['paddingLeftTablet']) ? $attr['paddingLeftTablet'] : 0;
 				$paddingTablet = "{$paddingTopTablet}{$paddingUnit} {$paddingRightTablet}{$paddingUnit} {$paddingBottomTablet}{$paddingUnit} {$paddingLeftTablet}{$paddingUnit}";
-			    $css .= "padding: {$paddingTablet}";
+			    $css .= "padding: {$paddingTablet};";
 			} else {
 				$paddingTablet = isset($attr['paddingTablet']) ? $attr['paddingTablet'] : 0;
 				$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
 				$paddingTablet = "{$paddingTablet}{$paddingUnit}";
-				$css .= "padding: {$paddingTablet}";
+				$css .= "padding: {$paddingTablet};";
 			}
 
 			//for margin tablet
@@ -269,7 +268,7 @@ function advance_heading_style($attr){
 				$marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : 0;
 				$marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
 				$css .= "margin-top: {$marginTablet}{$marginUnit}; 
-				margin-bottom: {$marginTablet}{$marginUnit}
+				margin-bottom: {$marginTablet}{$marginUnit};
 				";
 			}
 
@@ -312,7 +311,7 @@ function advance_heading_style($attr){
 				$borderWidthHvrRightTablet = isset($attr['borderWidthHvrRightTablet']) ? $attr['borderWidthHvrRightTablet'] : 0;
 				$borderWidthHvrBottomTablet = isset($attr['borderWidthHvrBottomTablet']) ? $attr['borderWidthHvrBottomTablet'] : 0;
 				$borderWidthHvrLeftTablet = isset($attr['borderWidthHvrLeftTablet']) ? $attr['borderWidthHvrLeftTablet'] : 0;
-				$css .= "border-top-width: {$borderWidthHvrTopTablet}{$borderWidthHvrUnit}; border-right-width: {$borderWidthHvrRightTablet}{$borderWidthHvrUnit}; border-bottom-width: {$borderWidthHvrBottomTablet}{$borderWidthHvrUnit}; border-left-width: {$borderWidthHvrLeftTablet}{$borderWidthHvrUnit}";
+				$css .= "border-top-width: {$borderWidthHvrTopTablet}{$borderWidthHvrUnit}; border-right-width: {$borderWidthHvrRightTablet}{$borderWidthHvrUnit}; border-bottom-width: {$borderWidthHvrBottomTablet}{$borderWidthHvrUnit}; border-left-width: {$borderWidthHvrLeftTablet}{$borderWidthHvrUnit};";
 			} else {
 				$borderWidthHvrTablet = isset($attr['borderWidthHvrTablet']) ? $attr['borderWidthHvrTablet'] : 0;
 				$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
@@ -338,13 +337,13 @@ function advance_heading_style($attr){
 			// for mobile view
 
 			$css .= "@media only screen and (max-width: 767px) { .wp-block-th-advance-heading-{$attr['id']}{";
-				$css .=(isset($attr['fontSizeMobile']) ? "font-size:{$attr['fontSizeMobile']}" . (isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px') . "" : ';');
-				$css .=(isset($attr['lineHeightMobile']) ? "line-height:{$attr['lineHeightMobile']}" . (isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px') . "" : ';');
-				$css .=(isset($attr['letterSpacingMobile']) ? "letter-spacing:{$attr['letterSpacingMobile']}" . (isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px') . "" : ';');
-				$css .=(isset($attr['alignMobile']) ? "text-align:{$attr['alignMobile']}" : '');
-				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'')."" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . "}" : ';' );
-				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'')."" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . "}" : ';' );
-				$css .=(isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']}" : ';');
+				$css .=(isset($attr['fontSizeMobile']) ? "font-size:{$attr['fontSizeMobile']}" . (isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px') . ";" : '');
+				$css .=(isset($attr['lineHeightMobile']) ? "line-height:{$attr['lineHeightMobile']}" . (isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px') . ";" : '');
+				$css .=(isset($attr['letterSpacingMobile']) ? "letter-spacing:{$attr['letterSpacingMobile']}" . (isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px') . ";" : '');
+				$css .=(isset($attr['alignMobile']) ? "text-align:{$attr['alignMobile']};" : '');
+				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').";" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";}" : '' );
+				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').";" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";}" : '' );
+				$css .=(isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']};" : '');
 			    $css .= "}}";
 
 				if (isset($attr['paddingTypeMobile']) && 'unlinked' === $attr['paddingTypeMobile']) {

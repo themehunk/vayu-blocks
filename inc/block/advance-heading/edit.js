@@ -4,23 +4,20 @@
 import { __ } from '@wordpress/i18n';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { Fragment, useEffect } from '@wordpress/element';
-import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
+import { useViewportMatch} from '@wordpress/compose';
 import { useSelect } from '@wordpress/data';
 import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
-import {
-	createBlock,
-	getDefaultBlockName
-} from '@wordpress/blocks';
+
 /**
  * Internal dependencies
  */
- import metadata from './block.json';
+
  import Controls from './controls.js';
  import InsSettings from './settings.js';
  import googleFontsLoader from '../../../src/helpers/google-fonts.js';
  import './editor.scss';
-import { Flex } from '@wordpress/components';
+
 
 export default function Edit({ attributes, setAttributes,clientId }) {
 
