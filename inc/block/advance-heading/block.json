@@ -681,6 +681,60 @@
 		"transitionAll": {
 			"type": "number",
 			"default": "0.2"
+		},
+		"alignSelf": {
+			"type": "string"
+		},
+		"alignSelfTablet": {
+			"type": "string"
+		}
+		,"alignSelfMobile": {
+			"type": "string"
+		},
+		"order": {
+			"type": "string"
+		},
+		"orderTablet": {
+			"type": "string"
+		},
+		"orderMobile": {
+			"type": "string"
+		},
+		"customOrder": {
+			"type": "string"
+		},
+		"customOrderTablet": {
+			"type": "string"
+		},
+		"customOrderMobile": {
+			"type": "string"
+		},
+		"flexSize": {
+			"type": "string"
+		},
+		"flexSizeTablet": {
+			"type": "string"
+		},
+		"flexSizeMobile": {
+			"type": "string"
+		},
+		"FlexGrowSize": {
+			"type": "string"
+		},
+		"FlexGrowSizeTablet": {
+			"type": "string"
+		},
+		"FlexGrowSizeMobile": {
+			"type": "string"
+		},
+		"FlexShrinkSize": {
+			"type": "string"
+		},
+		"FlexShrinkSizeTablet": {
+			"type": "string"
+		},
+		"FlexShrinkSizeMobile": {
+			"type": "string"
 		}
 	},
 	"editorScript": "file:../../../build/advance-heading.js",

@@ -23,12 +23,12 @@
 }
 
 .o-responsive-control .components-base-control__title .floating-controls button {
-  height: 28px;
-  border: 1px solid #555d66;
+  height: 18px;
 }
 
 .o-responsive-control .components-base-control__title .floating-controls button .dashicon {
   margin: 2px;
+  font-size:0.89rem;
 }
 
 .o-responsive-control-settings .o-responsive-control-settings-title {

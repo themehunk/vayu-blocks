@@ -3,8 +3,8 @@
 
 	.components-base-control__title {
 		display: flex;
-		justify-content: space-between;
-		margin-bottom: .5em;
+		margin:0;
+        justify-content: flex-start;
 
 		label {
 			padding: 5px 0;
@@ -14,11 +14,10 @@
 			display: flex;
 
 			button {
-				height: 28px;
-				border: 1px solid #555d66;
-
+                padding:0;
 				.dashicon {
 					margin: 2px;
+					font-size:0.89rem;
 				}
 			}
 		}
@@ -99,3 +98,33 @@
 		}
 	}
 }
+
+// global css
+	.components-button:focus:not(:disabled) {
+		box-shadow: none;
+		outline: 0;
+	}
+
+  .components-button.components-range-control__reset:before{
+	content: "\f531";
+	font-family:'dashicons';
+	font-size:0.6rem;
+	}
+	.components-button.components-range-control__reset{
+	font-size: 0;
+		border: none;
+		box-shadow: none;
+		padding: 0;
+	}
+	.th-adv-h-panel .components-button.components-toolbar__control.has-icon svg{
+		height: 18px;
+		width: 18px;
+	}
+	.th-adv-h-panel .components-button.components-toolbar__control.has-icon{
+	min-width: 28px;
+	}
+	.th-adv-h-panel .components-toolbar{
+	
+	min-height: 28px;
+	border:1px solid  #d5dadf;
+	}

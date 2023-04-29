@@ -29,12 +29,13 @@
 import InsSettingHeader from '../../../src/components/ins-setting-header/index.js';
 import ResponsiveControl from '../../../src/components/responsive-control/index.js';
 import GoogleFontsControl from '../../../src/components/google-fonts-control/index.js';
-import ClearButton from '../../../src/components/clear-button/index.js';
 import SizingControl from '../../../src/components/sizing-control/index.js';
 import HoverControl from '../../../src/components/hover-tab/index.js';
 import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
 import UnitChooser from '../../../src/components/unit-picker/index.js';
+import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
+import { alignBottom, alignCenter, alignTop } from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,
@@ -863,9 +864,163 @@ const InsSettings = ({
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`
 	const customTooltipZindex = value => `${value}px`
 	const customTooltiptransitionAll = value => `${value}`
+	const customTooltipCustomOrder = value => `${value}`
+	const customTooltipFlexGrow = value => `${value}`
+	const customTooltipFlexShrink = value => `${value}`
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
+
+	// flex align-self property
+	const getSelfAlign = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.alignSelf;
+		case 'Tablet':
+			return attributes.alignSelfTablet;
+		case 'Mobile':
+			return attributes.alignSelfMobile;
+		default:
+			return undefined;
+		}
+	};
+    const changeSelfAlign = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ alignSelf: value, alignSelfTablet: value, alignSelfMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ alignSelfTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ alignSelfMobile: value });
+		}
+	};
+
+	// flex order property
+	const getorder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.order;
+		case 'Tablet':
+			return attributes.orderTablet;
+		case 'Mobile':
+			return attributes.orderMobile;
+		default:
+			return undefined;
+		}
+	};
+
+  
+
+    const changeorder = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ order: value, orderTablet: value, orderMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ orderTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ orderMobile: value });
+		}
+
+	};
+
+    //custom order
+	const getcustomOrder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customOrder;
+		case 'Tablet':
+			return attributes.customOrderTablet;
+		case 'Mobile':
+			return attributes.customOrderMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changecustomOrder = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customOrder: value, customOrderTablet: value, customOrderMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customOrderTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customOrderMobile: value });
+		}
+	};
+    
+	// flex size property
+	const getflexSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.flexSize;
+		case 'Tablet':
+			return attributes.flexSizeTablet;
+		case 'Mobile':
+			return attributes.flexSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeflexSize = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ flexSize: value, flexSizeTablet: value, flexSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ flexSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ flexSizeMobile: value });
+		}
+
+	};
+
+	// flex grow size property
+	const getFlexGrowSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.FlexGrowSize;
+		case 'Tablet':
+			return attributes.FlexGrowSizeTablet;
+		case 'Mobile':
+			return attributes.FlexGrowSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeFlexGrowSize = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ FlexGrowSize: value, FlexGrowSizeTablet: value, FlexGrowSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ FlexGrowSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ FlexGrowSizeMobile: value });
+		}
+
+	};
+
+	// flex shrink size property
+	const getFlexShrinkSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.FlexShrinkSize;
+		case 'Tablet':
+			return attributes.FlexShrinkSizeTablet;
+		case 'Mobile':
+			return attributes.FlexShrinkSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeFlexShrinkSize = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ FlexShrinkSize: value, FlexShrinkSizeTablet: value, FlexShrinkSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ FlexShrinkSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ FlexShrinkSizeMobile: value });
+		}
+	};
     return (
     <Fragment>
         <InspectorControls>
@@ -887,9 +1042,19 @@ const InsSettings = ({
 
                 <Fragment>
 
+
                  <PanelBody title={ __( 'General', 'themehunk-block' ) }
-							className="th-adv-h-panel"
+							className="th-adv-h-panel" initialOpen={ true }
+							
 						>
+				
+                <ResponsiveControl label={ __( 'Alignment', 'themehunk-block' ) } >
+                <AlignmentToolbar
+									value={ getAlignment() }
+									onChange={ changeAlignment }
+									isCollapsed={ false }
+								/> 
+                </ResponsiveControl> 			
 
 				<HoverControl value={ hover }
 					options={[
@@ -921,26 +1086,13 @@ const InsSettings = ({
 					onColorChange={ e => setAttributes({ headingHvrColor: e }) }
 				/>
 
-			
-				
-		
 				</>
-				
-	
+			
 				) }
-			
-			
-                <ResponsiveControl label={ __( 'Alignment', 'themehunk-block' ) } >
-                <AlignmentToolbar
-									value={ getAlignment() }
-									onChange={ changeAlignment }
-									isCollapsed={ false }
-								/> 
-                </ResponsiveControl>     
 
                 </PanelBody>
 				<PanelBody title={ __( 'Typographgy', 'themehunk-block' ) }
-							className="th-adv-h-panel"
+							className="th-adv-h-panel" initialOpen={ false }
 						>	
 						<GoogleFontsControl
 								label={ __( 'Font Family', 'themehunk-block' ) }
@@ -953,10 +1105,7 @@ const InsSettings = ({
 								valueTransform={ attributes.textTransform }
 								onChangeTextTransform={ textTransform => setAttributes({ textTransform }) }
 							/>
-						<ClearButton
-								values={[ 'fontFamily', 'fontVariant', 'fontStyle', 'textTransform' ]}
-								setAttributes={ setAttributes }
-							/>	
+			
 						<ResponsiveControl
 								label={ __( 'Font Size', 'themehunk-block' ) }
 							>    
@@ -1143,6 +1292,153 @@ const InsSettings = ({
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
+							<ResponsiveControl
+									label={ __( 'Align Self', 'themehunk-block' ) }
+									className="th-alig-self-control"
+								>
+									<ToogleGroupControl
+										value={ getSelfAlign() }
+										onChange={ changeSelfAlign }
+										options={[
+											{
+												icon: alignTop,
+												label: __( 'start', 'themehunk-blocks' ),
+												value: 'start'
+											},
+											{
+												icon: alignCenter,
+												label: __( 'Center', 'themehunk-block' ),
+												value: 'center'
+											},
+											{
+												icon: alignBottom,
+												label: __( 'end', 'themehunk-blocks' ),
+												value: 'end'
+											},
+											{
+												icon: alignTop,
+												label: __( 'stretch', 'themehunk-block' ),
+												value: 'stretch'
+											}
+										]}
+										
+										hasIcon
+									/>
+								</ResponsiveControl>
+
+								<ResponsiveControl
+									label={ __( 'Order', 'themehunk-block' ) }
+									className="th-order-control"
+								>
+									<ToogleGroupControl
+										value={ getorder() }
+										onChange={ changeorder }
+										options={[
+											{
+												icon: alignTop,
+												label: __( 'start', 'themehunk-blocks' ),
+												value: 'start'
+											},
+											{
+												icon: alignBottom,
+												label: __( 'end', 'themehunk-blocks' ),
+												value: 'end'
+											},
+											{
+												icon: alignTop,
+												label: __( 'cutsom', 'themehunk-block' ),
+												value: 'custom'
+											}
+										]}
+										
+										hasIcon
+									/>
+								</ResponsiveControl>
+								{ 'custom' == attributes.order && (
+								<ResponsiveControl
+								label={ __( 'Custom Order', 'themehunk-block' ) }
+							    >    
+								<RangeControl
+								    renderTooltipContent={ customTooltipCustomOrder }
+									value={ getcustomOrder() || '' }
+								    onChange={ changecustomOrder }
+									step={ 1 }
+									min={ -9999 }
+									max={ 9999 }
+									allowReset={ true }
+								/>		
+						      </ResponsiveControl>
+
+								)}
+
+								<ResponsiveControl
+									label={ __( 'Size', 'themehunk-block' ) }
+									className="th-size-control"
+								>
+									<ToogleGroupControl
+										value={ getflexSize() }
+										onChange={ changeflexSize }
+										options={[
+											{
+												icon: alignTop,
+												label: __( 'none', 'themehunk-blocks' ),
+												value: 'none'
+											},
+											{
+												icon: alignBottom,
+												label: __( 'grow', 'themehunk-blocks' ),
+												value: 'grow'
+											},
+											{
+												icon: alignTop,
+												label: __( 'shrink', 'themehunk-block' ),
+												value: 'shrink'
+											},
+											{
+												icon: alignTop,
+												label: __( 'custom', 'themehunk-block' ),
+												value: 'custom'
+											}
+										]}
+										
+										hasIcon
+									/>
+								</ResponsiveControl>
+
+								{ 'custom' == attributes.flexSize && (
+                                <>
+								<ResponsiveControl
+								label={ __( 'Flex Grow', 'themehunk-block' ) }
+							    >    
+								<RangeControl
+								    renderTooltipContent={ customTooltipFlexGrow }
+									value={ getFlexGrowSize() || '' }
+								    onChange={ changeFlexGrowSize }
+									step={ 1 }
+									min={ 1 }
+									max={ 500 }
+									allowReset={ true }
+								/>		
+						      </ResponsiveControl>
+
+							  <ResponsiveControl
+								label={ __( 'Flex Shrink', 'themehunk-block' ) }
+								>    
+								<RangeControl
+									renderTooltipContent={ customTooltipFlexShrink }
+									value={ getFlexShrinkSize() || '' }
+									onChange={ changeFlexShrinkSize }
+									step={ 1 }
+									min={ 1 }
+									max={ 500 }
+									allowReset={ true }
+								/>		
+								</ResponsiveControl>
+                                </>
+							  
+
+								)}
+							  
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }

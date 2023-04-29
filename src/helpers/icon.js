@@ -11,7 +11,7 @@
      G,
      Path,
      Rect,
-     SVG
+     SVG,
  } from '@wordpress/primitives';
  
  export const otterIcon = ({ className }) => {
@@ -470,8 +470,13 @@
  );
  
  export const alignTop = (
-     <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-         <Path d="M9 20h6V9H9v11zM4 4v1.5h16V4H4z" />
-     </SVG>
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+    <defs>
+    </defs>
+    <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="101" y="102" width="298" height="20" rx="10" ry="10"/>
+    <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-1" x="101" y="379" width="298" height="20" rx="10" ry="10"/>
+    <rect id="Rounded_Rectangle_2_copy" data-name="Rounded Rectangle 2 copy" class="cls-1" x="182" y="148" width="46" height="205" rx="19.5" ry="19.5"/>
+    <rect id="Rounded_Rectangle_2_copy_2" data-name="Rounded Rectangle 2 copy 2" class="cls-1" x="272" y="148" width="46" height="205" rx="19.5" ry="19.5"/>
+  </svg>
  );
  
