@@ -867,6 +867,10 @@ const InsSettings = ({
 	const customTooltipCustomOrder = value => `${value}`
 	const customTooltipFlexGrow = value => `${value}`
 	const customTooltipFlexShrink = value => `${value}`
+	const customTooltiphorizontalOrientationOffset = value => `${value}${attributes.horizontalOrientationOffsetUnit}`
+	const customTooltiphorizontalOrientationOffsetRight = value => `${value}${attributes.horizontalOrientationOffsetRightUnit}`
+	const customTooltipverticalOrientationOffsetTop = value => `${value}${attributes.verticalOrientationOffsetTopUnit}`
+	const customTooltipverticalOrientationOffsetBottom = value => `${value}${attributes.verticalOrientationOffsetBottomUnit}`
 	const [ tab, setTab ] = useState( 'style' );
     const [ hover, setHover ] = useState( 'normal' );
 
@@ -1021,6 +1025,105 @@ const InsSettings = ({
 			setAttributes({ FlexShrinkSizeMobile: value });
 		}
 	};
+
+	// horizontalOrientationOffset left
+	const gethorizontalOrientationOffset = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.horizontalOrientationOffset;
+		case 'Tablet':
+			return attributes.horizontalOrientationOffsetTablet;
+		case 'Mobile':
+			return attributes.horizontalOrientationOffsetMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changehorizontalOrientationOffset = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ horizontalOrientationOffset: value, horizontalOrientationOffsetTablet: value, horizontalOrientationOffsetMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ horizontalOrientationOffsetTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ horizontalOrientationOffsetMobile: value });
+		}
+	};
+
+	// horizontalOrientationOffset right
+	const gethorizontalOrientationOffsetRight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.horizontalOrientationOffsetRight;
+		case 'Tablet':
+			return attributes.horizontalOrientationOffsetRightTablet;
+		case 'Mobile':
+			return attributes.horizontalOrientationOffsetRightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changehorizontalOrientationOffsetRight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ horizontalOrientationOffsetRight: value, horizontalOrientationOffsetRightTablet: value, horizontalOrientationOffsetRightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ horizontalOrientationOffsetRightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ horizontalOrientationOffsetRightMobile: value });
+		}
+	};
+
+
+	// verticalOrientationOffset left
+	const getverticalOrientationOffsetTop = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.verticalOrientationOffsetTop;
+		case 'Tablet':
+			return attributes.verticalOrientationOffsetTopTablet;
+		case 'Mobile':
+			return attributes.verticalOrientationOffsetTopMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeverticalOrientationOffsetTop = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ verticalOrientationOffsetTop: value, verticalOrientationOffsetTopTablet: value, verticalOrientationOffsetTopMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ verticalOrientationOffsetTopTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ verticalOrientationOffsetTopMobile: value });
+		}
+	};
+
+	// verticalOrientationOffset right
+	const getverticalOrientationOffsetBottom = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.verticalOrientationOffsetBottom;
+		case 'Tablet':
+			return attributes.verticalOrientationOffsetBottomTablet;
+		case 'Mobile':
+			return attributes.verticalOrientationOffsetBottomMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeverticalOrientationOffsetBottom = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ verticalOrientationOffsetBottom: value, verticalOrientationOffsetBottomTablet: value, verticalOrientationOffsetBottomMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ verticalOrientationOffsetBottomTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ verticalOrientationnOffsetBottomMobile: value });
+		}
+	};
+
+	
     return (
     <Fragment>
         <InspectorControls>
@@ -1278,6 +1381,148 @@ const InsSettings = ({
 								/>
 
 							</ResponsiveControl>
+
+							<SelectControl
+								label={ __( 'Position', 'themehunk-block' ) }
+								value={ attributes.position }
+								options={ [
+									{ label:  __( 'Default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'Absolute', 'themehunk-block' ), value: 'absolute' },
+									{ label: __( 'Fixed', 'themehunk-block' ), value: 'fixed' },
+								    
+								] }
+								onChange={ e => setAttributes({ position: e }) }
+							/>
+							 { ('absolute'== attributes.position || 'fixed'== attributes.position) && (
+							<>
+							<div className='th-component-group-label'>
+                            <label className='th-label'>{ __( 'Horizontal Orientation', 'themehunk-block' )}</label>
+                            <ToogleGroupControl
+
+										value={ attributes.horizontalOrientation }
+								        onChange={ horizontalOrientation => setAttributes({ horizontalOrientation }) }
+										options={[
+											{
+												icon: alignTop,
+												label: __( 'left', 'themehunk-blocks' ),
+												value: 'left'
+											},
+											{
+												icon: alignCenter,
+												label: __( 'right', 'themehunk-block' ),
+												value: 'right'
+											}
+										]}
+										
+										hasIcon
+									/>
+							</div>
+                          { 'left' == attributes.horizontalOrientation && (
+                               <ResponsiveControl
+								label={ __( 'Offset', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.horizontalOrientationOffsetUnit }
+								onClick={ horizontalOrientationOffsetUnit => setAttributes({ horizontalOrientationOffsetUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltiphorizontalOrientationOffset }
+									value={ gethorizontalOrientationOffset() || '' }
+									onChange={ changehorizontalOrientationOffset }
+									step={ 1 }
+									min={ -999 }
+									max={ 1000 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+						  )}
+						  { 'right' == attributes.horizontalOrientation && (
+							<ResponsiveControl
+								label={ __( 'Offset', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.horizontalOrientationOffsetRightUnit }
+								onClick={ horizontalOrientationOffsetRightUnit => setAttributes({ horizontalOrientationOffsetRightUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltiphorizontalOrientationOffsetRight }
+									value={ gethorizontalOrientationOffsetRight() || '' }
+									onChange={ changehorizontalOrientationOffsetRight }
+									step={ 1 }
+									min={ -999 }
+									max={ 1000 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+						  )}	
+
+                           <div className='th-component-group-label'>
+                            <label className='th-label'>{ __( 'Vertical Orientation', 'themehunk-block' )}</label>
+                            <ToogleGroupControl
+
+										value={ attributes.verticalOrientation }
+								        onChange={ verticalOrientation => setAttributes({ verticalOrientation }) }
+										options={[
+											{
+												icon: alignTop,
+												label: __( 'top', 'themehunk-blocks' ),
+												value: 'top'
+											},
+											{
+												icon: alignCenter,
+												label: __( 'bottom', 'themehunk-block' ),
+												value: 'bottom'
+											}
+										]}
+										
+										hasIcon
+									/>
+									</div>
+								{ 'top' == attributes.verticalOrientation && (
+                               <ResponsiveControl
+								label={ __( 'Offset', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.verticalOrientationOffsetTopUnit }
+								onClick={ verticalOrientationOffsetTopUnit => setAttributes({ verticalOrientationsetTopUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipverticalOrientationOffsetTop }
+									value={ getverticalOrientationOffsetTop() || '' }
+									onChange={ changeverticalOrientationOffsetTop }
+									step={ 1 }
+									min={ -999 }
+									max={ 1000 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+						  )}
+
+                          { 'bottom' == attributes.verticalOrientation && (
+							<ResponsiveControl
+								label={ __( 'Offset', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.verticalOrientationOffsetBottomUnit }
+								onClick={ verticalOrientationOffsetBottomUnit => setAttributes({ verticalOrientationOffsetBottomUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipverticalOrientationOffsetBottom }
+									value={ getverticalOrientationOffsetBottom() || '' }
+									onChange={ changeverticalOrientationOffsetBottom }
+									step={ 1 }
+									min={ -999 }
+									max={ 1000 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+						  )}  
+                         </>
+					)}	
 
 							<ResponsiveControl
 								label={ __( 'Z-index', 'themehunk-block' ) }

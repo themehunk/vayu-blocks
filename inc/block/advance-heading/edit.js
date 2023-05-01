@@ -74,6 +74,8 @@ export default function Edit({ attributes, setAttributes,clientId }) {
     let stylesheet;
 
 	let flexProperties;
+
+	let PositionProperties;
     
     if ( isDesktop ) {
 
@@ -141,8 +143,42 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 					flexShrink:attributes.FlexShrinkSize
 				}
 		}
+        
+		/********************* */
+        // position properies 
+		/********************* */
+		PositionProperties = { 
+			position: attributes.position,
+		 };
 
+		if(attributes.horizontalOrientation === 'left'){
+			PositionProperties = {...PositionProperties,
+				left:attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
+			}
 
+		 }
+		 if(attributes.horizontalOrientation === 'right'){
+			PositionProperties = {...PositionProperties,
+				right:attributes.horizontalOrientationOffsetRight + attributes.horizontalOrientationOffsetRightUnit,
+			}
+
+		 }
+
+		 if(attributes.verticalOrientation === 'top'){
+			PositionProperties = {...PositionProperties,
+				top:attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
+			}
+
+		 }
+
+		 if(attributes.verticalOrientation === 'bottom'){
+			PositionProperties = {...PositionProperties,
+				top:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
+			}
+
+		 }
+
+	
 	}
 
     if ( isTablet ) {
@@ -210,6 +246,35 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 				}
 			}
 
+            // position properties
+
+			if(attributes.horizontalOrientation === 'left'){
+				PositionProperties = {...PositionProperties,
+					left:attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
+				}
+	
+			 }
+			 if(attributes.horizontalOrientation === 'right'){
+				PositionProperties = {...PositionProperties,
+					right:attributes.horizontalOrientationOffsetRightTablet + attributes.horizontalOrientationOffsetRightUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'top'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetTopTablet + attributes.verticalOrientationOffsetTopUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'bottom'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
+				}
+	
+			 }
+
 	}
     
     if ( isMobile ) {
@@ -273,7 +338,44 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 					flexShrink:attributes.FlexShrinkSizeMobile
 				}
 			}
+
+			 // position properties
+
+			 if(attributes.horizontalOrientation === 'left'){
+				PositionProperties = {...PositionProperties,
+					left:attributes.horizontalOrientationOffsetMobile + attributes.horizontalOrientationOffsetUnit,
+				}
+	
+			 }
+			 if(attributes.horizontalOrientation === 'right'){
+				PositionProperties = {...PositionProperties,
+					right:attributes.horizontalOrientationOffsetRightMobile + attributes.horizontalOrientationOffsetRightUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'top'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetTopMobile + attributes.verticalOrientationOffsetTopUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'bottom'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
+				}
+	
+			 }
+
+
+
+
     }
+
+
+
+
 
 	let customwidth;
 
@@ -391,6 +493,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		...transitionHeadingStyle,
 		...backgroundStyle,
 		...flexProperties,
+		...PositionProperties,
 		
     }, x => x?.includes?.( 'undefined' ));
 

@@ -128,3 +128,10 @@
 	min-height: 28px;
 	border:1px solid  #d5dadf;
 	}
+
+	.th-label,.th-component-group-label{
+		margin-bottom: 8px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}

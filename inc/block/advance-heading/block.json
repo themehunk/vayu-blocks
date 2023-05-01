@@ -735,6 +735,79 @@
 		},
 		"FlexShrinkSizeMobile": {
 			"type": "string"
+		},
+		"position": {
+			"type": "string"
+		},
+		"horizontalOrientation": {
+			"type": "string"
+		},
+		"horizontalOrientationOffset": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"horizontalOrientationOffsetRight": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"verticalOrientation": {
+			"type": "string"
+		},
+		"verticalOrientationOffsetTop": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"verticalOrientationOffsetBottom": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomUnit": {
+			"type": "string",
+			"default":"px"
 		}
 	},
 	"editorScript": "file:../../../build/advance-heading.js",
