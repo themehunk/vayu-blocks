@@ -6,6 +6,7 @@
 	min-height: 36px;
 	min-width: 0px;
 	padding: 2px;
+	flex-grow:0.5;
 
 	&.has-icon {
 		margin-left: 0px;
@@ -35,6 +36,8 @@
 
 			svg {
 				fill: #2f2f2f;
+				height: 18px;
+                width: 18px;
 			}
 
 			&.is-primary {

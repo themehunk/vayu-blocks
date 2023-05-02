@@ -151,27 +151,27 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 			position: attributes.position,
 		 };
 
-		if(attributes.horizontalOrientation === 'left'){
+		if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				left:attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
 			}
 
 		 }
-		 if(attributes.horizontalOrientation === 'right'){
+		 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				right:attributes.horizontalOrientationOffsetRight + attributes.horizontalOrientationOffsetRightUnit,
 			}
 
 		 }
 
-		 if(attributes.verticalOrientation === 'top'){
+		 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				top:attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
 			}
 
 		 }
 
-		 if(attributes.verticalOrientation === 'bottom'){
+		 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				top:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
 			}
@@ -248,27 +248,27 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
             // position properties
 
-			if(attributes.horizontalOrientation === 'left'){
+			if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					left:attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
 				}
 	
 			 }
-			 if(attributes.horizontalOrientation === 'right'){
+			 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					right:attributes.horizontalOrientationOffsetRightTablet + attributes.horizontalOrientationOffsetRightUnit,
 				}
 	
 			 }
 	
-			 if(attributes.verticalOrientation === 'top'){
+			 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					top:attributes.verticalOrientationOffsetTopTablet + attributes.verticalOrientationOffsetTopUnit,
 				}
 	
 			 }
 	
-			 if(attributes.verticalOrientation === 'bottom'){
+			 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					top:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
 				}
@@ -341,27 +341,27 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
 			 // position properties
 
-			 if(attributes.horizontalOrientation === 'left'){
+			 if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					left:attributes.horizontalOrientationOffsetMobile + attributes.horizontalOrientationOffsetUnit,
 				}
 	
 			 }
-			 if(attributes.horizontalOrientation === 'right'){
+			 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					right:attributes.horizontalOrientationOffsetRightMobile + attributes.horizontalOrientationOffsetRightUnit,
 				}
 	
 			 }
 	
-			 if(attributes.verticalOrientation === 'top'){
+			 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					top:attributes.verticalOrientationOffsetTopMobile + attributes.verticalOrientationOffsetTopUnit,
 				}
 	
 			 }
 	
-			 if(attributes.verticalOrientation === 'bottom'){
+			 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					top:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
 				}

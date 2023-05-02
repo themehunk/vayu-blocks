@@ -129,7 +129,8 @@
 	border:1px solid  #d5dadf;
 	}
 
-	.th-label,.th-component-group-label{
+	.th-label,.th-component-group-label,
+	.th-component-group .components-base-control__field{
 		margin-bottom: 8px;
 		display: flex;
 		justify-content: space-between;

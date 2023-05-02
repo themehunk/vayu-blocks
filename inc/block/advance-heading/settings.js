@@ -35,7 +35,7 @@ import ControlPanelControl from '../../../src/components/control-panel-control/i
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
 import UnitChooser from '../../../src/components/unit-picker/index.js';
 import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
-import { alignBottom, alignCenter, alignTop } from '../../../src/helpers/icon.js';
+import { alignBottom, alignCenter, alignTop, Start, Center , End, Strech} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,
@@ -1386,7 +1386,7 @@ const InsSettings = ({
 								label={ __( 'Position', 'themehunk-block' ) }
 								value={ attributes.position }
 								options={ [
-									{ label:  __( 'Default', 'themehunk-block' ), value: 'default' },
+									{ label:  __( 'Default', 'themehunk-block' ), value: 'inherit' },
 									{ label: __( 'Absolute', 'themehunk-block' ), value: 'absolute' },
 									{ label: __( 'Fixed', 'themehunk-block' ), value: 'fixed' },
 								    
@@ -1539,29 +1539,29 @@ const InsSettings = ({
 							</ResponsiveControl>
 							<ResponsiveControl
 									label={ __( 'Align Self', 'themehunk-block' ) }
-									className="th-alig-self-control"
+									className="th-alig-self-control th-component-group"
 								>
 									<ToogleGroupControl
 										value={ getSelfAlign() }
 										onChange={ changeSelfAlign }
 										options={[
 											{
-												icon: alignTop,
+												icon: Start,
 												label: __( 'start', 'themehunk-blocks' ),
 												value: 'start'
 											},
 											{
-												icon: alignCenter,
+												icon: Center,
 												label: __( 'Center', 'themehunk-block' ),
 												value: 'center'
 											},
 											{
-												icon: alignBottom,
+												icon: End,
 												label: __( 'end', 'themehunk-blocks' ),
 												value: 'end'
 											},
 											{
-												icon: alignTop,
+												icon: Strech,
 												label: __( 'stretch', 'themehunk-block' ),
 												value: 'stretch'
 											}
@@ -1573,7 +1573,7 @@ const InsSettings = ({
 
 								<ResponsiveControl
 									label={ __( 'Order', 'themehunk-block' ) }
-									className="th-order-control"
+									className="th-order-control th-component-group"
 								>
 									<ToogleGroupControl
 										value={ getorder() }
@@ -1618,7 +1618,7 @@ const InsSettings = ({
 
 								<ResponsiveControl
 									label={ __( 'Size', 'themehunk-block' ) }
-									className="th-size-control"
+									className="th-size-control th-component-group"
 								>
 									<ToogleGroupControl
 										value={ getflexSize() }

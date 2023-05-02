@@ -480,3 +480,35 @@
   </svg>
  );
  
+ export const Start = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+     <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="64" y="114" width="372" height="36" rx="18" ry="18"/>
+     <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-1" x="194" y="172" width="41" height="244" rx="18" ry="18"/>
+     <rect id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-1" x="275" y="172" width="41" height="141" rx="18" ry="18"/>
+   </svg>
+ );
+
+export const Center = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+    <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="64" y="232" width="372" height="36" rx="18" ry="18"/>
+    <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-1" x="195" y="128" width="41" height="244" rx="18" ry="18"/>
+    <rect id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-1" x="262" y="180" width="41" height="141" rx="18" ry="18"/>
+  </svg>
+ );
+
+ export const End = (
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="64" y="347" width="372" height="36" rx="18" ry="18"/>
+  <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-1" x="193" y="84" width="41" height="244" rx="18" ry="18"/>
+  <rect id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-1" x="276" y="180" width="41" height="141" rx="18" ry="18"/>
+</svg>
+ );
+
+ export const Strech = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect id="Rounded_Rectangle_1" data-name="Rounded Rectangle 1" class="cls-1" x="64" y="384" width="372" height="36" rx="18" ry="18"/>
+  <rect id="Rounded_Rectangle_1_copy_3" data-name="Rounded Rectangle 1 copy 3" class="cls-1" x="64" y="80" width="372" height="36" rx="18" ry="18"/>
+  <rect id="Rounded_Rectangle_1_copy" data-name="Rounded Rectangle 1 copy" class="cls-1" x="190" y="137" width="41" height="219" rx="18" ry="18"/>
+  <rect id="Rounded_Rectangle_1_copy_2" data-name="Rounded Rectangle 1 copy 2" class="cls-1" x="276" y="137" width="41" height="219" rx="18" ry="18"/>
+  </svg>
+);
