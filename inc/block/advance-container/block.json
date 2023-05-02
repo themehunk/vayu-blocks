@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "themehunk-blocks/advance-container",
+	"version": "0.1.0",
+	"title": "Advance Container",
+	"category": "themehunk-blocks",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"textdomain": "themehunk-block",
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"containerHTMLTag": {
+			"type": "string",
+			"default": "div"
+		}
+	},
+	"editorScript": "file:../../../build/advance-container.js",
+	"editorStyle": "file:../../../build/advance-container.css",
+	"style": "file:../../../build/style-advance-container.css"
+}

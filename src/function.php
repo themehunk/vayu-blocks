@@ -10,6 +10,10 @@ function create_block_themehunk_block_block_init() {
 		),
 		array(
             'name' => 'advance-spacer/',
+            'render_callback' => 'render_spacer',
+        ),
+        array(
+            'name' => 'advance-container/',
             'render_callback' => ' render_spacer',
         )
     );
