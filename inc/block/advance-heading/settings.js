@@ -35,7 +35,7 @@ import ControlPanelControl from '../../../src/components/control-panel-control/i
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
 import UnitChooser from '../../../src/components/unit-picker/index.js';
 import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
-import { alignBottom, alignCenter, alignTop, Start, Center , End, Strech} from '../../../src/helpers/icon.js';
+import { alignBottom, alignCenter, alignTop, Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,
@@ -1403,12 +1403,12 @@ const InsSettings = ({
 								        onChange={ horizontalOrientation => setAttributes({ horizontalOrientation }) }
 										options={[
 											{
-												icon: alignTop,
+												icon: HorizontalLeft,
 												label: __( 'left', 'themehunk-blocks' ),
 												value: 'left'
 											},
 											{
-												icon: alignCenter,
+												icon: HorizontalRight,
 												label: __( 'right', 'themehunk-block' ),
 												value: 'right'
 											}
@@ -1466,12 +1466,12 @@ const InsSettings = ({
 								        onChange={ verticalOrientation => setAttributes({ verticalOrientation }) }
 										options={[
 											{
-												icon: alignTop,
+												icon: VerticalTop,
 												label: __( 'top', 'themehunk-blocks' ),
 												value: 'top'
 											},
 											{
-												icon: alignCenter,
+												icon: VerticalBottom,
 												label: __( 'bottom', 'themehunk-block' ),
 												value: 'bottom'
 											}
@@ -1580,17 +1580,17 @@ const InsSettings = ({
 										onChange={ changeorder }
 										options={[
 											{
-												icon: alignTop,
+												icon: OrderStart,
 												label: __( 'start', 'themehunk-blocks' ),
 												value: 'start'
 											},
 											{
-												icon: alignBottom,
+												icon: OrderEnd,
 												label: __( 'end', 'themehunk-blocks' ),
 												value: 'end'
 											},
 											{
-												icon: alignTop,
+												icon: Custom,
 												label: __( 'cutsom', 'themehunk-block' ),
 												value: 'custom'
 											}
@@ -1625,22 +1625,22 @@ const InsSettings = ({
 										onChange={ changeflexSize }
 										options={[
 											{
-												icon: alignTop,
+												icon: None,
 												label: __( 'none', 'themehunk-blocks' ),
 												value: 'none'
 											},
 											{
-												icon: alignBottom,
+												icon: Grow,
 												label: __( 'grow', 'themehunk-blocks' ),
 												value: 'grow'
 											},
 											{
-												icon: alignTop,
+												icon: Shrink,
 												label: __( 'shrink', 'themehunk-block' ),
 												value: 'shrink'
 											},
 											{
-												icon: alignTop,
+												icon: Custom,
 												label: __( 'custom', 'themehunk-block' ),
 												value: 'custom'
 											}
