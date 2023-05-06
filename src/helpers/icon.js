@@ -155,11 +155,11 @@ export const VerticalBottom = (
 );
 
 export const Bgclr = (
-    
-<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" data-name="Layer 1">
-<g>
- <path fill="#666666" stroke="null" id="svg_1" fill-rule="evenodd" d="m23.02653,463.77999c42.73539,-35.18797 111.25812,2.60341 138.17776,-58.78659a60.85227,69.95605 0 0 0 2.26461,-56.1412a39.81331,45.76956 0 0 0 -11.57873,-18.26583a43.39286,49.88462 0 0 0 -7.70698,-5.66871c-35.17451,-20.07142 -71.84659,8.02017 -91.31494,41.99042c-17.89773,31.19888 -25.56818,70.166 -29.87825,96.87191l0.03653,0zm197.56899,-253.45419a198.37257,228.04999 0 0 1 54.78896,75.8347l183.32386,-206.42492c11.57873,-12.59713 18.26299,-23.2207 8.40097,-42.5363a23.74188,27.29378 0 0 0 -15.23133,-9.1959a25.89692,29.77121 0 0 0 -16.83847,6.71847l-214.44399,175.60395zm-61.54627,92.37893c10.30032,6.38254 24.43588,22.04497 27.79627,39.13507l76.63149,-45.09771c-13.80682,-31.66078 -31.44886,-58.78659 -55.62906,-78.01821c-25.20292,38.92512 -20.08929,46.9033 -48.7987,83.98085z" class="cls-1"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <path class="cls-1" fill-rule="evenodd" fill="#5d5d5e" d="M77,78h62.041V422H77V78Z"/>
+  <path id="Rectangle_1_copy_3" data-name="Rectangle 1 copy 3" class="cls-2" fill-rule="evenodd" fill="#bbbbbc" d="M360.959,78H423V422H360.959V78Z"/>
+  <path id="Rectangle_1_copy" data-name="Rectangle 1 copy" class="cls-3" fill-rule="evenodd" fill="#bdbdbe" d="M139.041,78H250V422H139.041V78Z"/>
+  <path id="Rectangle_1_copy_2" data-name="Rectangle 1 copy 2" class="cls-4" fill-rule="evenodd" fill="#e3e3e5" d="M250,78H360.959V422H250V78Z"/>
 </svg>
 );
 

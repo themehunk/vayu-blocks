@@ -35,7 +35,7 @@ import ControlPanelControl from '../../../src/components/control-panel-control/i
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
 import UnitChooser from '../../../src/components/unit-picker/index.js';
 import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
-import { alignBottom, alignCenter, alignTop, Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
+import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,

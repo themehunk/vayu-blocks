@@ -4,7 +4,7 @@ module.exports = {
   entry:{
      'advance-heading':'./inc/block/advance-heading',
      'advance-spacer':'./inc/block/advance-spacer',
-     'advance-spacer':'./inc/block/advance-container',
+     'advance-container':'./inc/block/advance-container',
      'registerPlugin':'./src/plugins/registerPlugin.js',
   }
 };

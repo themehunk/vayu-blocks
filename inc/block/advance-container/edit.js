@@ -1,51 +1,93 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+ * Wordpress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import classnames from 'classnames';
+import {
+	Fragment,
+	useEffect,
+	useRef
+} from '@wordpress/element';
+import { applyFilters, doAction } from '@wordpress/hooks';
 
+import { InnerBlocks, useBlockProps , useInnerBlocksProps } from '@wordpress/block-editor';
+import { omitBy } from 'lodash';
+import BlockAppender from './BlockAppender';
 /**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
+ * Internal dependencies
  */
-
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import Controls from './controls.js';
+import InsSettings from './settings.js';
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ 
+	attributes, 
+	setAttributes, 
+	clientId
+   }){
+			const { id , useInnerContainer, isSelected} = attributes;
 
+			if ( ! id ) {
+			setAttributes( { id: clientId } );
+			}
+
+			let containerClasses = classnames({
+				[`${attributes.contentWidthType}-content`]: true,
+			  });
+            
+			const verticalAlignValues = {
+				top: 'flex-start',
+				center: 'center',
+				bottom: 'flex-end'
+			};
+
+			let containerStyles = {
+				maxWidth: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
+			};  
+
+			const style = omitBy({
+				...containerStyles,	
+			}, x => x?.includes?.( 'undefined' ));
+
+			if ( attributes.verticalAlign ) {
+				style.alignItems = verticalAlignValues[ attributes.verticalAlign ];
+			}
+			
 			const blockProps = useBlockProps({
-				id: attributes.id
+				id: attributes.id,
+				className:containerClasses,
+				style
 			});
 
+   
+			const innerBlocksProps = useInnerBlocksProps(
+				! useInnerContainer
+					? blockProps
+					: { className: 'th-inside-container' },
+				{
+					templateLock:false,
+					renderAppender: () => <BlockAppender clientId={ attributes.id } isSelected={ isSelected } attributes={ attributes } />,
+				}
+			);
+
+			const containerBlockProps = useInnerContainer ? blockProps : innerBlocksProps;
+
 			const Tag = attributes.containerHTMLTag;
+
 			return (
+				<Fragment>
+				<Controls
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+		     	/>	
+				<InsSettings
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			    />
+			   <Tag { ...containerBlockProps }>
+			    <div { ...innerBlocksProps }>{ innerBlocksProps.children }</div>
+			  </Tag>
+			</Fragment>			
+	 );
 
-							<Tag { ...blockProps } >
-							<InnerBlocks
-								templateLock={ false }
-								renderAppender={ InnerBlocks.ButtonBlockAppender }
-							/>
-							</Tag>
-							
-					);
-
-			}
+}

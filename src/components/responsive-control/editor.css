@@ -6,10 +6,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin-bottom: .5em;
+  margin: 0;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .o-responsive-control .components-base-control__title label {
@@ -23,12 +23,12 @@
 }
 
 .o-responsive-control .components-base-control__title .floating-controls button {
-  height: 18px;
+  padding: 0;
 }
 
 .o-responsive-control .components-base-control__title .floating-controls button .dashicon {
   margin: 2px;
-  font-size:0.89rem;
+  font-size: 0.89rem;
 }
 
 .o-responsive-control-settings .o-responsive-control-settings-title {
@@ -104,5 +104,53 @@
   outline: 1px dotted #555d66;
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.components-button:focus:not(:disabled) {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: 0;
+}
+
+.components-button.components-range-control__reset:before {
+  content: "\f531";
+  font-family: 'dashicons';
+  font-size: 0.6rem;
+}
+
+.components-button.components-range-control__reset {
+  font-size: 0;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding: 0;
+}
+
+.th-adv-h-panel .components-button.components-toolbar__control.has-icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.th-adv-h-panel .components-button.components-toolbar__control.has-icon {
+  min-width: 28px;
+}
+
+.th-adv-h-panel .components-toolbar {
+  min-height: 28px;
+  border: 1px solid  #d5dadf;
+}
+
+.th-label, .th-component-group-label,
+.th-component-group .components-base-control__field {
+  margin-bottom: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 /*# sourceMappingURL=editor.css.map */

@@ -1,12 +1,22 @@
 /**
- * WordPress dependencies.
+ * WordPress dependencies
  */
+import {
+	InnerBlocks,
+	useBlockProps
+} from '@wordpress/block-editor';
 
+export default function Save({attributes}){
 
-const Save = () => {
+	const blockProps = useBlockProps.save({
+		id: attributes.id
+	});
 
-	return null;
-	
-};
+	const Tag = attributes.containerHTMLTag;
 
-export default Save;
+	return (
+		<div { ...blockProps } >
+			<InnerBlocks.Content />
+		</div>
+	);
+}
