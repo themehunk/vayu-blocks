@@ -72,6 +72,10 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 	}
 
     let stylesheet;
+
+	let flexProperties;
+
+	let PositionProperties;
     
     if ( isDesktop ) {
 
@@ -97,7 +101,84 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		    borderTopLeftRadius: 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusRight }${ attributes.borderRadiusUnit }`,
 		    borderBottomRightRadius: 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusLeft }${ attributes.borderRadiusUnit }`,
 		    borderBottomLeftRadius: 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusBottom }${ attributes.borderRadiusUnit }`,
+		
+		   
 		};
+
+        /********************* */
+        // flex properies 
+		/********************* */
+
+		 // flex align self
+		 flexProperties = { alignSelf: attributes.alignSelf };
+
+		 // flex order
+		 if(attributes.order === 'start'){
+			flexProperties = {...flexProperties,order:'-9999'}
+		 }else if(attributes.order === 'end'){
+			flexProperties = {...flexProperties, order:'9999'}
+		 }else if(attributes.order === 'custom'){
+			flexProperties = {...flexProperties, order: attributes.customOrder}
+		 }
+
+		 //flex size
+        if(attributes.flexSize === 'none'){
+			flexProperties = {...flexProperties,
+				flexGrow:'0',
+				flexShrink:'0'
+			}
+		}else if(attributes.flexSize === 'grow'){
+			flexProperties = {...flexProperties,
+				flexGrow:'1',
+			    flexShrink:'0'
+			}
+		}else if(attributes.flexSize === 'shrink'){
+			flexProperties = {...flexProperties,
+					flexGrow:'0',
+					flexShrink:'1'
+				}
+		}else if(attributes.flexSize === 'custom'){
+			flexProperties = {...flexProperties,
+					flexGrow:attributes.FlexGrowSize,
+					flexShrink:attributes.FlexShrinkSize
+				}
+		}
+        
+		/********************* */
+        // position properies 
+		/********************* */
+		PositionProperties = { 
+			position: attributes.position,
+		 };
+
+		if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+			PositionProperties = {...PositionProperties,
+				left:attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
+			}
+
+		 }
+		 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+			PositionProperties = {...PositionProperties,
+				right:attributes.horizontalOrientationOffsetRight + attributes.horizontalOrientationOffsetRightUnit,
+			}
+
+		 }
+
+		 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+			PositionProperties = {...PositionProperties,
+				top:attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
+			}
+
+		 }
+
+		 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+			PositionProperties = {...PositionProperties,
+				top:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
+			}
+
+		 }
+
+	
 	}
 
     if ( isTablet ) {
@@ -124,6 +205,76 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		    borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${ attributes.borderRadiusTablet }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusLeftTablet }${ attributes.borderRadiusUnit }`,
 		    borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${ attributes.borderRadiusTablet }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusBottomTablet }${ attributes.borderRadiusUnit }`,
 		};
+
+
+		/********************* */
+        // flex properies 
+		/********************* */
+
+		 // flex align self
+		 flexProperties = {alignSelf: attributes.alignSelfTablet }
+
+		 // flex order
+		 if(attributes.orderTablet === 'start'){
+			flexProperties = {...flexProperties,order:'-9999'}
+		 }else if(attributes.orderTablet === 'end'){
+			flexProperties = {...flexProperties,order:'9999'}
+		 }else if(attributes.orderTablet === 'custom'){
+			flexProperties = {...flexProperties,order: attributes.customOrderTablet}
+		 }
+
+		 //flex size
+           if(attributes.flexSizeTablet === 'none'){
+			flexProperties = {...flexProperties,
+				flexGrow:'0',
+				flexShrink:'0'
+			}
+			}else if(attributes.flexSizeTablet === 'grow'){
+				flexProperties = {...flexProperties,
+				flexGrow:'1',
+			    flexShrink:'0'
+			}
+			}else if(attributes.flexSizeTablet === 'shrink'){
+				flexProperties = {...flexProperties,
+					flexGrow:'0',
+					flexShrink:'1'
+				}
+			}else if(attributes.flexSizeTablet === 'custom'){
+				flexProperties = {...flexProperties,
+					flexGrow:attributes.FlexGrowSizeTablet,
+					flexShrink:attributes.FlexShrinkSizeTablet
+				}
+			}
+
+            // position properties
+
+			if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					left:attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
+				}
+	
+			 }
+			 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					right:attributes.horizontalOrientationOffsetRightTablet + attributes.horizontalOrientationOffsetRightUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetTopTablet + attributes.verticalOrientationOffsetTopUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
+				}
+	
+			 }
+
 	}
     
     if ( isMobile ) {
@@ -149,8 +300,82 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		    borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${ attributes.borderRadiusMobile }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusLeftMobile }${ attributes.borderRadiusUnit }`,
 		    borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${ attributes.borderRadiusMobile }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusBottomMobile }${ attributes.borderRadiusUnit }`,
 		};
+         /********************* */
+        // flex properies 
+		/********************* */
+         
+		 // flex align self
+		 flexProperties = {alignSelf: attributes.alignSelfMobile }
+
+		 // flex order
+		 if(attributes.orderMobile === 'start'){
+			flexProperties = {...flexProperties,order:'-9999'}
+		 }else if(attributes.orderMobile === 'end'){
+			flexProperties = {...flexProperties,order:'9999'}
+		 }else if(attributes.orderMobile === 'custom'){
+			flexProperties = {...flexProperties,order: attributes.customOrderMobile}
+		 }
+
+		 //flex size
+           if(attributes.flexSizeMobile === 'none'){
+			flexProperties = {...flexProperties,
+				flexGrow:'0',
+				flexShrink:'0'
+			}
+			}else if(attributes.flexSizeMobile === 'grow'){
+				flexProperties = {...flexProperties,
+				flexGrow:'1',
+			    flexShrink:'0'
+			}
+			}else if(attributes.flexSizeMobile === 'shrink'){
+				flexProperties = {...flexProperties,
+					flexGrow:'0',
+					flexShrink:'1'
+				}
+			}else if(attributes.flexSizeMobile === 'custom'){
+				flexProperties = {...flexProperties,
+					flexGrow:attributes.FlexGrowSizeMobile,
+					flexShrink:attributes.FlexShrinkSizeMobile
+				}
+			}
+
+			 // position properties
+
+			 if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					left:attributes.horizontalOrientationOffsetMobile + attributes.horizontalOrientationOffsetUnit,
+				}
+	
+			 }
+			 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					right:attributes.horizontalOrientationOffsetRightMobile + attributes.horizontalOrientationOffsetRightUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetTopMobile + attributes.verticalOrientationOffsetTopUnit,
+				}
+	
+			 }
+	
+			 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+				PositionProperties = {...PositionProperties,
+					top:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
+				}
+	
+			 }
+
+
+
 
     }
+
+
+
+
 
 	let customwidth;
 
@@ -267,6 +492,8 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		...boxShadowStyle,
 		...transitionHeadingStyle,
 		...backgroundStyle,
+		...flexProperties,
+		...PositionProperties,
 		
     }, x => x?.includes?.( 'undefined' ));
 

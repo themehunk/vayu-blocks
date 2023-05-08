@@ -16,7 +16,7 @@
 			button {
 				width: 25px;
 				height: 28px;
-				border: 1px solid #555d66;
+				border: 1px solid #a4afb7;
 				outline: none;
 				box-shadow: none;
 
@@ -26,13 +26,14 @@
 
 				&.is-primary {
 					z-index: 0;
+					background:#a4afb7;
 
 					svg {
 						fill: #fff;
 					}
 
 					&:hover {
-						background: #007eb1;
+						background:#a4afb7;
 						border-color: none;
 						box-shadow: none;
 						color: #fff;

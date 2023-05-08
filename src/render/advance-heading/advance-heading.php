@@ -161,6 +161,60 @@ function advance_heading_style($attr){
 		//transition duration
 		$css .= "transition: all ". (isset($attr['transitionAll']) ? $attr['transitionAll'] : '0.2' ). "s ease;";
 
+		//position property
+
+		$css .= "position: " . (isset($attr['position']) ? $attr['position'] : 'inherit;' ). ";";
+		
+		if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'inherit' !== $attr['position']){
+			$horizontalOrientationOffset = isset($attr['horizontalOrientationOffset']) ? $attr['horizontalOrientationOffset'] : '0';
+			$horizontalOrientationOffsetUnit = isset($attr['horizontalOrientationOffsetUnit']) ? $attr['horizontalOrientationOffsetUnit'] : 'px';
+            $css .= "left: {$horizontalOrientationOffset}{$horizontalOrientationOffsetUnit};";
+		}
+		if(isset($attr['horizontalOrientation']) && 'right' === $attr['horizontalOrientation'] && 'inherit' !== $attr['position']){
+			$horizontalOrientationOffsetRight = isset($attr['horizontalOrientationOffsetRight']) ? $attr['horizontalOrientationOffsetRight'] : '0';
+			$horizontalOrientationOffsetRightUnit = isset($attr['horizontalOrientationOffsetRightUnit']) ? $attr['horizontalOrientationOffsetRightUnit'] : 'px';
+            $css .= "right: {$horizontalOrientationOffsetRight}{$horizontalOrientationOffsetRightUnit};";
+		}
+		if(isset($attr['verticalOrientation']) && 'top' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+			$verticalOrientationOffsetTop = isset($attr['verticalOrientationOffsetTop']) ? $attr['verticalOrientationOffsetTop'] : '0';
+			$verticalOrientationOffsetTopUnit = isset($attr['verticalOrientationOffsetTopUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+            $css .= "top: {$verticalOrientationOffsetTop}{$verticalOrientationOffsetTopUnit};";
+		}
+		if(isset($attr['verticalOrientation']) && 'bottom' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+			$verticalOrientationOffsetBottom = isset($attr['verticalOrientationOffsetBottom']) ? $attr['verticalOrientationOffsetBottom'] : '0';
+			$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+            $css .= "bottom: {$verticalOrientationOffsetBottom}{$verticalOrientationOffsetBottomUnit};";
+		}
+
+
+		// flex properties
+		$css .= "align-self: " . (isset($attr['alignSelf']) ? $attr['alignSelf'] : 'inherit;' ). ";";
+        if(isset($attr['order']) && $attr['order'] === 'start'){
+			$css .= "order:-9999;";
+		}elseif(isset($attr['order']) && $attr['order'] === 'end'){
+			$css .= "order:9999;";
+		}elseif(isset($attr['order']) && $attr['order'] === 'custom'){
+		$css .= isset( $attr['customOrder'] ) ? "order:{$attr['customOrder']};" : '';
+		}
+
+		//flex size
+        if(isset($attr['flexSize']) && $attr['flexSize'] === 'none'){
+			
+			$css .= "flex-grow:0;
+				flex-shrink:0;";
+		
+		}elseif(isset($attr['flexSize']) && $attr['flexSize'] === 'grow'){
+			$css .= "flex-grow:1;
+			flex-shrink:0;";
+
+		}elseif(isset($attr['flexSize']) && $attr['flexSize'] === 'shrink'){
+			$css .= "flex-grow:0;
+			flex-shrink:1;";
+		}elseif(isset($attr['flexSize']) && $attr['flexSize'] === 'custom'){
+			$css .= isset( $attr['FlexGrowSize'] ) ? "flex-grow:{$attr['FlexGrowSize']};" : '';
+            $css .= isset( $attr['FlexShrinkSize'] ) ? "flex-shrink:{$attr['FlexShrinkSize']};" : '';
+		}
+
 		$css .= "}";
 
 
@@ -300,6 +354,56 @@ function advance_heading_style($attr){
 				$css .= "border-radius: {$borderRadiusTablet}{$borderRadiusUnit};";
 			}
 
+			//position
+
+			if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'inherit' !== $attr['position']){
+				$horizontalOrientationOffsetTablet = isset($attr['horizontalOrientationOffsetTablet']) ? $attr['horizontalOrientationOffsetTablet'] : '0';
+				$horizontalOrientationOffsetUnit = isset($attr['horizontalOrientationOffsetUnit']) ? $attr['horizontalOrientationOffsetUnit'] : 'px';
+				$css .= "left: {$horizontalOrientationOffsetTablet}{$horizontalOrientationOffsetUnit};";
+			}
+			if(isset($attr['horizontalOrientation']) && 'right' === $attr['horizontalOrientation'] && 'inherit' !== $attr['position']){
+				$horizontalOrientationOffsetRightTablet = isset($attr['horizontalOrientationOffsetRightTablet']) ? $attr['horizontalOrientationOffsetRightTablet'] : '0';
+				$horizontalOrientationOffsetRightUnit = isset($attr['horizontalOrientationOffsetRightUnit']) ? $attr['horizontalOrientationOffsetRightUnit'] : 'px';
+				$css .= "right: {$horizontalOrientationOffsetRightTablet}{$horizontalOrientationOffsetRightUnit};";
+			}
+			if(isset($attr['verticalOrientation']) && 'top' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+				$verticalOrientationOffsetTopTablet = isset($attr['verticalOrientationOffsetTopTablet']) ? $attr['verticalOrientationOffsetTopTablet'] : '0';
+				$verticalOrientationOffsetTopUnit = isset($attr['verticalOrientationOffsetTopUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+				$css .= "top: {$verticalOrientationOffsetTopTablet}{$verticalOrientationOffsetTopUnit};";
+			}
+			if(isset($attr['verticalOrientation']) && 'bottom' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+				$verticalOrientationOffsetBottomTablet = isset($attr['verticalOrientationOffsetBottomTablet']) ? $attr['verticalOrientationOffsetBottomTablet'] : '0';
+				$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+				$css .= "bottom: {$verticalOrientationOffsetBottomTablet}{$verticalOrientationOffsetBottomUnit};";
+			}
+            
+			// flex properties
+			$css .= "align-self: " . (isset($attr['alignSelfTablet']) ? $attr['alignSelfTablet'] : 'inherit;' ). ";";
+			if(isset($attr['orderTablet']) && $attr['orderTablet'] === 'start'){
+				$css .= "order:-9999;";
+			}elseif(isset($attr['orderTablet']) && $attr['orderTablet'] === 'end'){
+				$css .= "order:9999;";
+			}elseif(isset($attr['orderTablet']) && $attr['orderTablet'] === 'custom'){
+			$css .= isset( $attr['customOrderTablet'] ) ? "order:{$attr['customOrderTablet']};" : '';
+			}
+			//flex size
+			if(isset($attr['flexSizeTablet']) && $attr['flexSizeTablet'] === 'none'){
+			
+				$css .= "flex-grow:0;
+					flex-shrink:0;";
+			
+			}elseif(isset($attr['flexSizeTablet']) && $attr['flexSizeTablet'] === 'grow'){
+				$css .= "flex-grow:1;
+				flex-shrink:0;";
+	
+			}elseif(isset($attr['flexSizeTablet']) && $attr['flexSizeTablet'] === 'shrink'){
+				$css .= "flex-grow:0;
+				flex-shrink:1;";
+			}elseif(isset($attr['flexSizeTablet']) && $attr['flexSizeTablet'] === 'custom'){
+				$css .= isset( $attr['FlexGrowSizeTablet'] ) ? "flex-grow:{$attr['FlexGrowSizeTablet']};" : '';
+				$css .= isset( $attr['FlexShrinkSizeTablet'] ) ? "flex-shrink:{$attr['FlexShrinkSizeTablet']};" : '';
+			}
+
 			$css .= "}}";
 
 			$css .= "@media only screen and (max-width: 768px) { .wp-block-th-advance-heading-{$attr['id']}:hover {";
@@ -331,6 +435,8 @@ function advance_heading_style($attr){
 				$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
 				$css .= "border-radius: {$borderRadiusHvrTablet}{$borderRadiusHvrUnit};";
 			}
+
+			
 
 			$css .= "}}";
 
@@ -398,7 +504,57 @@ function advance_heading_style($attr){
 					$css .= "border-radius: {$borderRadiusMobile}{$borderRadiusUnit};";
 				}
 
+				//position
 
+			if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'inherit' !== $attr['position']){
+				$horizontalOrientationOffsetMobile = isset($attr['horizontalOrientationOffsetMobile']) ? $attr['horizontalOrientationOffsetMobile'] : '0';
+				$horizontalOrientationOffsetUnit = isset($attr['horizontalOrientationOffsetUnit']) ? $attr['horizontalOrientationOffsetUnit'] : 'px';
+				$css .= "left: {$horizontalOrientationOffsetMobil}{$horizontalOrientationOffsetUnit};";
+			}
+			if(isset($attr['horizontalOrientation']) && 'right' === $attr['horizontalOrientation'] && 'inherit' !== $attr['position']){
+				$horizontalOrientationOffsetRightMobile = isset($attr['horizontalOrientationOffsetRightMobile']) ? $attr['horizontalOrientationOffsetRightMobile'] : '0';
+				$horizontalOrientationOffsetRightUnit = isset($attr['horizontalOrientationOffsetRightUnit']) ? $attr['horizontalOrientationOffsetRightUnit'] : 'px';
+				$css .= "right: {$horizontalOrientationOffsetRightMobil}{$horizontalOrientationOffsetRightUnit};";
+			}
+			if(isset($attr['verticalOrientation']) && 'top' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+				$verticalOrientationOffsetTopMobile = isset($attr['verticalOrientationOffsetTopMobile']) ? $attr['verticalOrientationOffsetTopMobile'] : '0';
+				$verticalOrientationOffsetTopUnit = isset($attr['verticalOrientationOffsetTopUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+				$css .= "top: {$verticalOrientationOffsetTopMobil}{$verticalOrientationOffsetTopUnit};";
+			}
+			if(isset($attr['verticalOrientation']) && 'bottom' === $attr['verticalOrientation'] && 'inherit' !== $attr['position']){
+				$verticalOrientationOffsetBottomMobile = isset($attr['verticalOrientationOffsetBottomMobile']) ? $attr['verticalOrientationOffsetBottomMobile'] : '0';
+				$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
+				$css .= "bottom: {$verticalOrientationOffsetBottomMobile}{$verticalOrientationOffsetBottomUnit};";
+			}
+
+			// flex properties
+			$css .= "align-self: " . (isset($attr['alignSelfMobile']) ? $attr['alignSelfMobile'] : 'inherit;' ). ";";
+			if(isset($attr['orderMobile']) && $attr['orderMobile'] === 'start'){
+				$css .= "order:-9999;";
+			}elseif(isset($attr['orderMobile']) && $attr['orderMobile'] === 'end'){
+				$css .= "order:9999;";
+			}elseif(isset($attr['orderMobile']) && $attr['orderMobile'] === 'custom'){
+			$css .= isset( $attr['customOrderMobile'] ) ? "order:{$attr['customOrderMobile']};" : '';
+			}
+			//flex size
+			if(isset($attr['flexSizeMobile']) && $attr['flexSizeMobile'] === 'none'){
+			
+				$css .= "flex-grow:0;
+					flex-shrink:0;";
+			
+			}elseif(isset($attr['flexSizeMobile']) && $attr['flexSizeMobile'] === 'grow'){
+				$css .= "flex-grow:1;
+				flex-shrink:0;";
+	
+			}elseif(isset($attr['flexSizeMobile']) && $attr['flexSizeMobile'] === 'shrink'){
+				$css .= "flex-grow:0;
+				flex-shrink:1;";
+			}elseif(isset($attr['flexSizeMobile']) && $attr['flexSizeMobile'] === 'custom'){
+				$css .= isset( $attr['FlexGrowSizeMobile'] ) ? "flex-grow:{$attr['FlexGrowSizeMobile']};" : '';
+				$css .= isset( $attr['FlexShrinkSizeMobile'] ) ? "flex-shrink:{$attr['FlexShrinkSizeMobile']};" : '';
+			}
+
+			$css .= "}}";
             // for mobile view hover
 
 			$css .= "@media only screen and (max-width: 767px) { .wp-block-th-advance-heading-{$attr['id']}:hover{";

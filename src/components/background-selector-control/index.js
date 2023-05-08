@@ -25,7 +25,7 @@ import { Fragment } from '@wordpress/element';
  * Internal dependencies
  */
 import './editor.scss';
-import { barcodeIcon } from '../../helpers/icon.js';
+import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
 import ControlPanelControl from '../control-panel-control/index.js';
 
 const BackgroundSelectorControl = ({
@@ -58,7 +58,7 @@ const BackgroundSelectorControl = ({
 					<label className="components-base-control__label">{ __( 'Background Type', 'themehunk-block' ) }</label>
 					<ButtonGroup className="linking-controls">
 						<Button
-							icon={ 'admin-customizer' }
+							icon={ () => <Icon icon={ Bgclr } /> }
 							label={ __( 'Color', 'themehunk-block' ) }
 							showTooltip={ true }
 							isPrimary={ 'color' === backgroundType }
@@ -66,7 +66,7 @@ const BackgroundSelectorControl = ({
 						/>
 
 						<Button
-							icon={ 'format-image' }
+							icon={ () => <Icon icon={ BgImg } /> }
 							label={ __( 'Image', 'themehunk-block' ) }
 							showTooltip={ true }
 							isPrimary={ 'image' === backgroundType }
@@ -74,7 +74,7 @@ const BackgroundSelectorControl = ({
 						/>
 
 						<Button
-							icon={ () => <Icon icon={ barcodeIcon } /> }
+							icon={ () => <Icon icon={ BgGraclr } /> }
 							label={ __( 'Gradient', 'themehunk-block' ) }
 							showTooltip={ true }
 							isPrimary={ 'gradient' === backgroundType }

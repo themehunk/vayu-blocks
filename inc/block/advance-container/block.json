@@ -1,0 +1,118 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "themehunk-blocks/advance-container",
+	"version": "0.1.0",
+	"title": "Advance Container",
+	"category": "themehunk-blocks",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"textdomain": "themehunk-block",
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"containerHTMLTag": {
+			"type": "string",
+			"default": "div"
+		},
+		"verticalAlign": {
+			"type": "string"
+		},
+		"contentWidthType": {
+			"type": "string",
+			"default":"boxed"
+		},
+		"boxedcontentWidth": {
+			"type": "number"
+		},
+		"boxedcontentWidthTablet": {
+			"type": "number"
+		},
+		"boxedcontentWidthMobile": {
+			"type": "number"
+		},
+		"boxedcontentWidthUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"fullcontentWidth": {
+			"type": "number"
+		},
+		"fullcontentWidthTablet": {
+			"type": "number"
+		},
+		"fullcontentWidthMobile": {
+			"type": "number"
+		},
+		"fullcontentWidthUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"contentMinHgt": {
+			"type": "number"
+		},
+		"contentMinHgtTablet": {
+			"type": "number"
+		},
+		"contentMinHgtMobile": {
+			"type": "number"
+		},
+		"contentMinHgtUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"direction": {
+			"type": "string"
+		},
+		"directionTablet": {
+			"type": "string"
+		},
+		"directionMobile": {
+			"type": "string"
+		},
+		"Justify": {
+			"type": "string"
+		},
+		"JustifyTablet": {
+			"type": "string"
+		},
+		"JustifyMobile": {
+			"type": "string"
+		},
+		"AlignItem": {
+			"type": "string"
+		},
+		"AlignItemTablet": {
+			"type": "string"
+		},
+		"AlignItemMobile": {
+			"type": "string"
+		},
+		"Wrap": {
+			"type": "string"
+		},
+		"WrapTablet": {
+			"type": "string"
+		},
+		"WrapMobile": {
+			"type": "string"
+		},
+		"AlignContent": {
+			"type": "string"
+		},
+		"AlignContentTablet": {
+			"type": "string"
+		},
+		"AlignContentMobile": {
+			"type": "string"
+		}
+	},
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false
+	},
+	"editorScript": "file:../../../build/advance-container.js",
+	"editorStyle": "file:../../../build/advance-container.css",
+	"style": "file:../../../build/style-advance-container.css"
+}
