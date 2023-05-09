@@ -50,6 +50,8 @@ const InsSettings = ({
 	}, []);
 
     const [ tab, setTab ] = useState( 'layout' );
+	const [ hover, setHover ] = useState( 'normal' );
+	
     //boxed width
     const getBoxedcontentWidth = () => {
 		switch ( getView ) {
@@ -352,22 +354,22 @@ const InsSettings = ({
 											{
 												icon: HorizontalLeft,
 												label: __( 'row-horizontal', 'themehunk-blocks' ),
-												value: 'row-horizontal'
+												value: 'row'
 											},
 											{
 												icon: HorizontalRight,
 												label: __( 'column-vertical', 'themehunk-block' ),
-												value: 'column-vertical'
+												value: 'column'
 											},
                                             {
 												icon: HorizontalRight,
 												label: __( 'row-reversed', 'themehunk-block' ),
-												value: 'row-reversed'
+												value: 'row-reverse'
 											},
                                             {
 												icon: HorizontalRight,
 												label: __( 'column-reversed', 'themehunk-block' ),
-												value: 'column-reversed'
+												value: 'column-reverse'
 											}
 										]}
 										
@@ -387,7 +389,7 @@ const InsSettings = ({
 											{
 												icon: HorizontalLeft,
 												label: __( 'start', 'themehunk-blocks' ),
-												value: 'start'
+												value: 'flex-start'
 											},
 											{
 												icon: HorizontalRight,
@@ -397,7 +399,7 @@ const InsSettings = ({
                                             {
 												icon: HorizontalRight,
 												label: __( 'end', 'themehunk-block' ),
-												value: 'end'
+												value: 'flex-end'
 											},
                                             {
 												icon: HorizontalRight,
@@ -430,23 +432,28 @@ const InsSettings = ({
                                             options={[
                                                 {
                                                     icon: HorizontalLeft,
-                                                    label: __( 'row-horizontal', 'themehunk-blocks' ),
-                                                    value: 'row-horizontal'
+                                                    label: __( 'start', 'themehunk-blocks' ),
+                                                    value: 'flex-start'
                                                 },
                                                 {
                                                     icon: HorizontalRight,
-                                                    label: __( 'column-vertical', 'themehunk-block' ),
-                                                    value: 'column-vertical'
+                                                    label: __( 'center', 'themehunk-block' ),
+                                                    value: 'center'
                                                 },
                                                 {
                                                     icon: HorizontalRight,
-                                                    label: __( 'row-reversed', 'themehunk-block' ),
-                                                    value: 'row-reversed'
+                                                    label: __( 'end', 'themehunk-block' ),
+                                                    value: 'flex-end'
                                                 },
                                                 {
                                                     icon: HorizontalRight,
-                                                    label: __( 'column-reversed', 'themehunk-block' ),
-                                                    value: 'column-reversed'
+                                                    label: __( 'baseline', 'themehunk-block' ),
+                                                    value: 'baseline'
+                                                },
+                                                {
+                                                    icon: HorizontalRight,
+                                                    label: __( 'stretch', 'themehunk-block' ),
+                                                    value: 'stretch'
                                                 }
                                             ]}
                                             
@@ -466,7 +473,7 @@ const InsSettings = ({
                                                 {
                                                     icon: HorizontalLeft,
                                                     label: __( 'no-wrap', 'themehunk-blocks' ),
-                                                    value: 'no-wrap'
+                                                    value: 'nowrap'
                                                 },
                                                 {
                                                     icon: HorizontalRight,
@@ -503,6 +510,85 @@ const InsSettings = ({
         </Fragment>
 
         )}
+
+		{'style' === tab && (
+
+						<PanelBody
+						title={ __( 'Background', 'themehunk-block' ) }
+						initialOpen={ false }
+						> 
+
+						<HoverControl value={ hover }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setHover } />
+
+						{ 'normal' ===  hover &&  (
+
+						<BackgroundSelectorControl
+								backgroundType={ attributes.backgroundType }
+								backgroundColor={ attributes.backgroundColor }
+								image={ attributes.backgroundImage }
+								gradient={ attributes.backgroundGradient }
+								focalPoint={ attributes.backgroundPosition }
+								backgroundAttachment={ attributes.backgroundAttachment }
+								backgroundRepeat={ attributes.backgroundRepeat }
+								backgroundSize={ attributes.backgroundSize }
+								changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
+								changeImage={ media => {
+									setAttributes({
+										backgroundImage: pick( media, [ 'id', 'url' ])
+									});
+								}}
+								removeImage={ () => setAttributes({ backgroundImage: undefined })}
+								changeColor={ value => setAttributes({ backgroundColor: value })}
+								changeGradient={ value => setAttributes({ backgroundGradient: value }) }
+								changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
+								changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
+								changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
+								changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
+							/>
+
+						) || 'hover' ===  hover && (
+						<>
+						<BackgroundSelectorControl
+						backgroundType={ attributes.backgroundTypeHvr }
+						backgroundColor={ attributes.backgroundColorHvr }
+						image={ attributes.backgroundImageHvr }
+						gradient={ attributes.backgroundGradientHvr }
+						focalPoint={ attributes.backgroundPositionHvr }
+						backgroundAttachment={ attributes.backgroundAttachmentHvr }
+						backgroundRepeat={ attributes.backgroundRepeatHvr }
+						backgroundSize={ attributes.backgroundSizeHvr }
+						changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
+						changeImage={ media => {
+							setAttributes({
+								backgroundImageHvr: pick( media, [ 'id', 'url' ])
+							});
+						}}
+						removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
+						changeColor={ value => setAttributes({ backgroundColorHvr: value })}
+						changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
+						changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
+						changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
+						changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
+						changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
+						/>
+
+						</>
+
+						)}	
+
+						</PanelBody>
+		)}
 
         </InspectorControls>
         </Fragment>
