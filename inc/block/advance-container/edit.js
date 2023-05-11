@@ -80,6 +80,11 @@ export default function Edit({
 
 			const hasChildBlocks = 0 < getInnerBlocksCount;
 
+			const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
+			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
+			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
+            || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
+
 			let containerClasses = classnames({
 				
 				[`${attributes.contentWidthType}-content`]: true,
@@ -215,6 +220,42 @@ export default function Edit({
 				insidecontainerStyles = {...insidecontainerStyles, alignItems: verticalAlignValues[ attributes.verticalAlign ]};
 			}
 
+			let overlayBackground;
+
+            if ( 'color' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					'--background-overlay': attributes.overlaybackgroundColor,
+				    opacity:0.6
+				};
+			}
+			if ( 'color' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundColorHvr,
+				    opacity:0.6
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay': attributes.overlaybackgroundGradient,
+				    opacity:0.6
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundGradientHvr,
+				    opacity:0.6
+				};
+			}
+
+			const overlayStyle = {
+				...overlayBackground,
+			};
+
 			const style = omitBy({
 				...containerStyles,
 				...backgroundStyle,
@@ -256,6 +297,13 @@ export default function Edit({
 				setAttributes={ setAttributes }
 			    />
 			   <Tag { ...containerBlockProps } >
+			   { showShouldOverlay && (
+					<div
+						className="wp-block-th-blocks-container-overlay"
+						style={ overlayStyle }
+					>
+					</div>
+				) }
 			   <div { ...innerBlocksProps } >{ innerBlocksProps.children }</div>
 			   </Tag>
 			   </Fragment>			
