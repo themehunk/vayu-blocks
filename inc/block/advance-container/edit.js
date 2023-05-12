@@ -80,6 +80,11 @@ export default function Edit({
 
 			const hasChildBlocks = 0 < getInnerBlocksCount;
 
+			const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
+			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
+			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
+            || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
+
 			let containerClasses = classnames({
 				
 				[`${attributes.contentWidthType}-content`]: true,
@@ -96,6 +101,31 @@ export default function Edit({
             let containerStyles;
 			//inside container
 			let insidecontainerStyles
+			let flexcontainerStyles
+			let backgroundStyle;
+
+			if ( 'color' === attributes.backgroundType ) {
+				backgroundStyle = {
+					'--background': attributes.backgroundColor,
+					'--background-color-hover': attributes.backgroundColorHvr
+				};
+			}
+
+			if ( 'image' === attributes.backgroundType ) {
+				backgroundStyle = {
+					'--background-image': `url( '${ attributes.backgroundImage?.url }' )`,
+					'--background-attachment': attributes.backgroundAttachment,
+					'--background-position': `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+					'--background-repeat': attributes.backgroundRepeat,
+					'--background-size': attributes.backgroundSize
+				};
+			}
+
+			if ( 'gradient' === attributes.backgroundType ) {
+				backgroundStyle = {
+					backgroundImage: attributes.backgroundGradient
+				};
+			}
 
 			if ( isDesktop ) {
 
@@ -107,19 +137,35 @@ export default function Edit({
 	
 				}
 
-				if ( attributes.contentMinHgt ) {
-					style.minHeight = attributes.contentMinHgt + attributes.contentMinHgtUnit;
-				}
-
 				if(attributes.contentWidthType=='boxed'){
 					insidecontainerStyles = {
 						maxWidth: attributes.boxedcontentWidth + attributes.boxedcontentWidthUnit,
 						marginLeft:'auto',
 						marginRight:'auto',
-		
 					}; 
 				}
 
+				if ( attributes.contentMinHgt ) {
+					insidecontainerStyles = {...insidecontainerStyles,
+						minHeight:attributes.contentMinHgt + attributes.contentMinHgtUnit,
+					}
+				}
+
+				flexcontainerStyles = {
+					flexDirection: attributes.direction,
+					justifyContent:attributes.Justify,
+					alignItems:attributes.AlignItem,
+					flexWrap:attributes.Wrap,
+				};
+
+				if(attributes.Wrap=='wrap'){
+
+					flexcontainerStyles = { ...flexcontainerStyles,
+						alignContent: attributes.AlignContent	
+					};
+
+				}
+				
 			}
 
 			if ( isTablet ) {
@@ -141,7 +187,6 @@ export default function Edit({
 						maxWidth: attributes.boxedcontentWidthTablet  + attributes.boxedcontentWidthUnit,
 						marginLeft:'auto',
 						marginRight:'auto',
-		
 					}; 
 				}
 
@@ -166,18 +211,54 @@ export default function Edit({
 						maxWidth: attributes.boxedcontentWidthMobile  + attributes.boxedcontentWidthUnit,
 						marginLeft:'auto',
 						marginRight:'auto',
-		
 					}; 
 				}
 
 			}
 
 			if ( attributes.verticalAlign ) {
-				style.alignItems = verticalAlignValues[ attributes.verticalAlign ];
+				insidecontainerStyles = {...insidecontainerStyles, alignItems: verticalAlignValues[ attributes.verticalAlign ]};
 			}
 
+			let overlayBackground;
+
+            if ( 'color' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					'--background-overlay': attributes.overlaybackgroundColor,
+				    opacity:0.6
+				};
+			}
+			if ( 'color' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundColorHvr,
+				    opacity:0.6
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay': attributes.overlaybackgroundGradient,
+				    opacity:0.6
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundGradientHvr,
+				    opacity:0.6
+				};
+			}
+
+			const overlayStyle = {
+				...overlayBackground,
+			};
+
 			const style = omitBy({
-				...containerStyles,	
+				...containerStyles,
+				...backgroundStyle,
 			}, x => x?.includes?.( 'undefined' ));
 
 			
@@ -188,7 +269,8 @@ export default function Edit({
 			});
 
 			const innerstyle = omitBy({
-				...insidecontainerStyles,	
+				...insidecontainerStyles,
+				...flexcontainerStyles,
 			}, x => x?.includes?.( 'undefined' ));
 
 			const innerBlocksProps = useInnerBlocksProps(
@@ -198,7 +280,6 @@ export default function Edit({
 					templateLock:false,
 					renderAppender: () => <BlockAppender clientId={ attributes.id } isSelected={ isSelected } attributes={ attributes } />,
 				}
-
 			);
 
 			const containerBlockProps = blockProps;
@@ -216,6 +297,13 @@ export default function Edit({
 				setAttributes={ setAttributes }
 			    />
 			   <Tag { ...containerBlockProps } >
+			   { showShouldOverlay && (
+					<div
+						className="wp-block-th-blocks-container-overlay"
+						style={ overlayStyle }
+					>
+					</div>
+				) }
 			   <div { ...innerBlocksProps } >{ innerBlocksProps.children }</div>
 			   </Tag>
 			   </Fragment>			
