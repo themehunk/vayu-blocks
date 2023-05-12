@@ -1640,10 +1640,20 @@ const InsSettings = ({
 											value: getMargin( 'top' )
 										},
 										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getMargin( 'right' )
+										},
+										{
 											label: __( 'Bottom', 'themehunk-block' ),
 											type: 'bottom',
 											value: getMargin( 'bottom' )
-										}
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getMargin( 'left' )
+										},
 									] }
 								/>
 

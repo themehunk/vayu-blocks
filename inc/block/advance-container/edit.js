@@ -12,7 +12,7 @@ import { applyFilters, doAction } from '@wordpress/hooks';
 import { useSelect } from '@wordpress/data';
 import { useViewportMatch } from '@wordpress/compose';
 
-import { InnerBlocks, useBlockProps , useInnerBlocksProps } from '@wordpress/block-editor';
+import { InnerBlocks, useBlockProps , useInnerBlocksProps , store as blockEditorStore,} from '@wordpress/block-editor';
 import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
 /**
@@ -78,8 +78,6 @@ export default function Edit({
 
 			const InnerBlocksCount = getInnerBlocksCount( clientId );
 
-			const hasChildBlocks = 0 < getInnerBlocksCount;
-
 			const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
 			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
 			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
@@ -103,6 +101,8 @@ export default function Edit({
 			let insidecontainerStyles
 			let flexcontainerStyles
 			let backgroundStyle;
+			let flexProperties;
+			let PositionProperties;
 
 			if ( 'color' === attributes.backgroundType ) {
 				backgroundStyle = {
@@ -129,10 +129,23 @@ export default function Edit({
 
 			if ( isDesktop ) {
 
+				containerStyles = {
+					zIndex:   attributes.zindex,
+					'--padding-top': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
+					'--padding-right': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
+					'--padding-bottom': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
+					'--padding-left': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
+					'--margin-top': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginTop }${ attributes.marginUnit }`,
+					'--margin-bottom': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginBottom }${ attributes.marginUnit }`,
+				    '--margin-right': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginRight }${ attributes.marginUnit }`,
+				    '--margin-left': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginLeft }${ attributes.marginUnit }`,
+				   
+				}
+
 				if(attributes.contentWidthType=='fullwidth'){
 
-					containerStyles = {
-						maxWidth: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
+					containerStyles = {...containerStyles,
+						width: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
 					}; 
 	
 				}
@@ -165,22 +178,105 @@ export default function Edit({
 					};
 
 				}
+
+				/********************* */
+				// flex properies 
+				/********************* */
+				
+				// flex align self
+				flexProperties = { alignSelf: attributes.alignSelf };
+		
+				// flex order
+				if(attributes.order === 'start'){
+					flexProperties = {...flexProperties,order:'-9999'}
+				}else if(attributes.order === 'end'){
+					flexProperties = {...flexProperties, order:'9999'}
+				}else if(attributes.order === 'custom'){
+					flexProperties = {...flexProperties, order: attributes.customOrder}
+				}
+		
+					//flex size
+					if(attributes.flexSize === 'none'){
+						flexProperties = {...flexProperties,
+							flexGrow:'0',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSize === 'grow'){
+						flexProperties = {...flexProperties,
+							flexGrow:'1',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSize === 'shrink'){
+						flexProperties = {...flexProperties,
+								flexGrow:'0',
+								flexShrink:'1'
+							}
+					}else if(attributes.flexSize === 'custom'){
+						flexProperties = {...flexProperties,
+								flexGrow:attributes.FlexGrowSize,
+								flexShrink:attributes.FlexShrinkSize
+							}
+					}
+
+					/********************* */
+					// position properies 
+					/********************* */
+					PositionProperties = { 
+						position: attributes.position,
+					};
+
+					if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							left:attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
+						}
+
+					}
+					if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							right:attributes.horizontalOrientationOffsetRight + attributes.horizontalOrientationOffsetRightUnit,
+						}
+
+					}
+
+					if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							top:attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
+						}
+
+					}
+
+					if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							top:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
+						}
+
+					}
 				
 			}
 
 			if ( isTablet ) {
+
+				containerStyles = {
+					zIndex:   attributes.zindexTablet,
+					'--padding-top': 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingTopTablet }${ attributes.paddingUnit }`,
+					'--padding-right': 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingRightTablet }${ attributes.paddingUnit }`,
+					'--padding-bottom': 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingBottomTablet }${ attributes.paddingUnit }`,
+					'--padding-left': 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingLeftTablet }${ attributes.paddingUnit }`,
+					'--margin-top': 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginTopTablet }${ attributes.marginUnit }`,
+					'--margin-bottom': 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginBottomTablet }${ attributes.marginUnit }`,
+				    '--margin-right': 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginRightTablet }${ attributes.marginUnit }`,
+				    '--margin-left': 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginLeftTablet }${ attributes.marginUnit }`,
+				   
+				}
                 
 				if(attributes.contentWidthType=='fullwidth'){
 
-					containerStyles = {
+					containerStyles = { ...containerStyles,
 						maxWidth: attributes.fullcontentWidthTablet + attributes.fullcontentWidthUnit,
 					}; 
 	
 				}
 
-				if ( attributes.contentMinHgtTablet ) {
-					style.minHeight = attributes.contentMinHgtTablet + attributes.contentMinHgtUnit;
-				}
 
 				if(attributes.contentWidthType=='boxed'){
 					insidecontainerStyles = {
@@ -190,20 +286,102 @@ export default function Edit({
 					}; 
 				}
 
+				if ( attributes.contentMinHgtTablet ) {
+					insidecontainerStyles = {...insidecontainerStyles,
+						minHeight:attributes.contentMinHgtTablet + attributes.contentMinHgtUnit,
+					}
+				}
+
+				// flex align self
+				flexProperties = { alignSelf: attributes.alignSelfTablet };
+		
+				// flex order
+				if(attributes.orderTablet === 'start'){
+					flexProperties = {...flexProperties,order:'-9999'}
+				}else if(attributes.orderTablet === 'end'){
+					flexProperties = {...flexProperties, order:'9999'}
+				}else if(attributes.orderTablet === 'custom'){
+					flexProperties = {...flexProperties, order: attributes.customOrderTablet}
+				}
+		
+					//flex size
+					if(attributes.flexSizeTablet === 'none'){
+						flexProperties = {...flexProperties,
+							flexGrow:'0',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSizeTablet === 'grow'){
+						flexProperties = {...flexProperties,
+							flexGrow:'1',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSizeTablet === 'shrink'){
+						flexProperties = {...flexProperties,
+								flexGrow:'0',
+								flexShrink:'1'
+							}
+					}else if(attributes.flexSizeTablet === 'custom'){
+						flexProperties = {...flexProperties,
+								flexGrow:attributes.FlexGrowSizeTablet,
+								flexShrink:attributes.FlexShrinkSizeTablet
+							}
+					}
+
+					/********************* */
+					// position properies 
+					/********************* */
+
+					if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							left:attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
+						}
+			
+					 }
+					 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							right:attributes.horizontalOrientationOffsetRightTablet + attributes.horizontalOrientationOffsetRightUnit,
+						}
+			
+					 }
+			
+					 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							top:attributes.verticalOrientationOffsetTopTablet + attributes.verticalOrientationOffsetTopUnit,
+						}
+			
+					 }
+			
+					 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+						PositionProperties = {...PositionProperties,
+							top:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
+						}
+			
+					 }
+
 			}
 
 			if ( isMobile ) {
 
+				
+				containerStyles = {
+					zIndex:   attributes.zindexTablet,
+					'--padding-top': 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingTopMobile }${ attributes.paddingUnit }`,
+					'--padding-right': 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingRightMobile }${ attributes.paddingUnit }`,
+					'--padding-bottom': 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingBottomMobile }${ attributes.paddingUnit }`,
+					'--padding-left': 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingLeftMobile }${ attributes.paddingUnit }`,
+					'--margin-top': 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginTopMobile }${ attributes.marginUnit }`,
+					'--margin-bottom': 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginBottomMobile }${ attributes.marginUnit }`,
+				    '--margin-right': 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginRightMobile }${ attributes.marginUnit }`,
+				    '--margin-left': 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginLeftMobile }${ attributes.marginUnit }`,
+				   
+				}
+
 				if(attributes.contentWidthType=='fullwidth'){
 
-					containerStyles = {
+					containerStyles = {...containerStyles,
 						maxWidth: attributes.fullcontentWidthMobile + attributes.fullcontentWidthUnit,
 					}; 
 	
-				}
-
-				if ( attributes.contentMinHgtMobile ) {
-					style.minHeight = attributes.contentMinHgtMobile + attributes.contentMinHgtUnit;
 				}
 
 				if(attributes.contentWidthType=='boxed'){
@@ -213,8 +391,41 @@ export default function Edit({
 						marginRight:'auto',
 					}; 
 				}
+				if ( attributes.contentMinHgtMobile ) {
+					insidecontainerStyles = {...insidecontainerStyles,
+						minHeight:attributes.contentMinHgtMobile + attributes.contentMinHgtUnit,
+					}
+				}
+				// position properties
 
-			}
+				if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+					PositionProperties = {...PositionProperties,
+						left:attributes.horizontalOrientationOffsetMobile + attributes.horizontalOrientationOffsetUnit,
+					}
+		
+				 }
+				 if(attributes.horizontalOrientation === 'right' && attributes.position !== 'inherit'){
+					PositionProperties = {...PositionProperties,
+						right:attributes.horizontalOrientationOffsetRightMobile + attributes.horizontalOrientationOffsetRightUnit,
+					}
+		
+				 }
+		
+				 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
+					PositionProperties = {...PositionProperties,
+						top:attributes.verticalOrientationOffsetTopMobile + attributes.verticalOrientationOffsetTopUnit,
+					}
+		
+				 }
+		
+				 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
+					PositionProperties = {...PositionProperties,
+						top:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
+					}
+		
+				 }
+
+		   }
 
 			if ( attributes.verticalAlign ) {
 				insidecontainerStyles = {...insidecontainerStyles, alignItems: verticalAlignValues[ attributes.verticalAlign ]};
@@ -256,9 +467,12 @@ export default function Edit({
 				...overlayBackground,
 			};
 
+
 			const style = omitBy({
 				...containerStyles,
 				...backgroundStyle,
+				...flexProperties,
+				...PositionProperties,
 			}, x => x?.includes?.( 'undefined' ));
 
 			
@@ -286,27 +500,55 @@ export default function Edit({
 
 			const Tag = attributes.containerHTMLTag;
 
+			const supportsLayout = useSelect( ( select ) => {
+				const {
+					getSettings,
+				} = select( blockEditorStore );
+		
+				return getSettings().supportsLayout || false;
+			}, [] );
+
+			let rootContainerClassName = "";
+			rootContainerClassName = supportsLayout
+				? `th-root-block-container align${attributes.align} wp-block-${attributes.id}`
+				: 'wp-block';
+
 			return (
 				<Fragment>
 				<Controls
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-		     	/>	
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>	
 				<InsSettings
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-			    />
-			   <Tag { ...containerBlockProps } >
-			   { showShouldOverlay && (
-					<div
-						className="wp-block-th-blocks-container-overlay"
-						style={ overlayStyle }
-					>
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+				{InnerBlocksCount > 1 && (
+					<div className={rootContainerClassName}>
+					<Tag {...containerBlockProps}>
+						{showShouldOverlay && (
+						<div
+							className="wp-block-th-blocks-container-overlay"
+							style={overlayStyle}
+						/>
+						)}
+						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
+					</Tag>
 					</div>
-				) }
-			   <div { ...innerBlocksProps } >{ innerBlocksProps.children }</div>
-			   </Tag>
-			   </Fragment>			
+				)}
+				{InnerBlocksCount === 1 && (
+					<Tag {...containerBlockProps}>
+					{showShouldOverlay && (
+						<div
+						className="wp-block-th-blocks-container-overlay"
+						style={overlayStyle}
+						/>
+					)}
+					<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
+					</Tag>
+				)}
+				</Fragment>
+							
 	        );
 
-}
+    }
