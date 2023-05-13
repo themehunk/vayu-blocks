@@ -305,7 +305,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 		/********************* */
          
 		 // flex align self
-		 flexProperties = {alignSelf: attributes.alignSelfMobile }
+		 flexProperties = {alignSelf: attributes.alignSelfMobile}
 
 		 // flex order
 		 if(attributes.orderMobile === 'start'){
@@ -368,14 +368,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 	
 			 }
 
-
-
-
     }
-
-
-
-
 
 	let customwidth;
 

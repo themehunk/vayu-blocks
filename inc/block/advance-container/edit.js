@@ -11,7 +11,6 @@ import {
 import { applyFilters, doAction } from '@wordpress/hooks';
 import { useSelect } from '@wordpress/data';
 import { useViewportMatch } from '@wordpress/compose';
-
 import { InnerBlocks, useBlockProps , useInnerBlocksProps , store as blockEditorStore,} from '@wordpress/block-editor';
 import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
@@ -27,7 +26,9 @@ export default function Edit({
 	setAttributes, 
 	clientId
    }){
-			const { id , useInnerContainer, isSelected } = attributes;
+
+			const { id } = attributes;
+
 			const {
 				isViewportAvailable,
 				isPreviewDesktop,
@@ -71,8 +72,7 @@ export default function Edit({
 			function getInnerBlocksCount(clientId) {
 				const block = useSelect((select) => {
 				  return select('core/block-editor').getBlock(clientId);
-				});
-			  
+				});  
 				return block ? block.innerBlocks.length : 0;
 			}
 
@@ -487,14 +487,23 @@ export default function Edit({
 				...flexcontainerStyles,
 			}, x => x?.includes?.( 'undefined' ));
 
+			const isSelected = useSelect((select) => {
+				return select('core/block-editor').getBlockSelectionStart() === clientId;
+			  }, [clientId]);
+
 			const innerBlocksProps = useInnerBlocksProps(
-				{   
+				{ 
 					style: innerstyle,
-					className: 'th-inside-container th-con',
-					templateLock:false,
-					renderAppender: () => <BlockAppender clientId={ attributes.id } isSelected={ isSelected } attributes={ attributes } />,
+					className: 'th-inside-container th-con' 
+				},
+				{   
+				  
+				  templateLock:false,
+				  renderAppender: () => (
+					<BlockAppender clientId={ clientId } isSelected={ isSelected } attributes={ attributes } />
+				  ),
 				}
-			);
+			  );
 
 			const containerBlockProps = blockProps;
 
@@ -523,30 +532,30 @@ export default function Edit({
 					attributes={attributes}
 					setAttributes={setAttributes}
 				/>
-				{InnerBlocksCount > 1 && (
-					<div className={rootContainerClassName}>
+				{InnerBlocksCount > 1 ? (
+				<div className={rootContainerClassName}>
 					<Tag {...containerBlockProps}>
 						{showShouldOverlay && (
+							<div
+								className="wp-block-th-blocks-container-overlay"
+								style={overlayStyle}
+							/>
+						)}
+						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
+					</Tag>
+				</div>
+			    ) : (
+				<Tag {...containerBlockProps}>
+					{showShouldOverlay && (
 						<div
 							className="wp-block-th-blocks-container-overlay"
 							style={overlayStyle}
 						/>
-						)}
-						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
-					</Tag>
-					</div>
-				)}
-				{InnerBlocksCount === 1 && (
-					<Tag {...containerBlockProps}>
-					{showShouldOverlay && (
-						<div
-						className="wp-block-th-blocks-container-overlay"
-						style={overlayStyle}
-						/>
 					)}
 					<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
-					</Tag>
-				)}
+				</Tag>
+			   )}
+			
 				</Fragment>
 							
 	        );
