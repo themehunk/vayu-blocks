@@ -611,7 +611,6 @@ export default function Edit({
 					className: 'th-inside-container th-con' 
 				},
 				{   
-				  
 				  templateLock:false,
 				  renderAppender: () => (
 					<BlockAppender clientId={ clientId } isSelected={ isSelected } attributes={ attributes } />
@@ -620,9 +619,7 @@ export default function Edit({
 			  );
 
 			const containerBlockProps = blockProps;
-
 			const Tag = attributes.containerHTMLTag;
-
 			const supportsLayout = useSelect( ( select ) => {
 				const {
 					getSettings,
