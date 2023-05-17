@@ -1498,6 +1498,7 @@ const InsSettings = ({
                         <>
 						<PanelBody
 						title={ __( 'Background', 'themehunk-block' ) }
+						className="th-container-panel"
 						initialOpen={ false }
 						> 
 
@@ -1574,7 +1575,7 @@ const InsSettings = ({
 						<PanelBody
 						title={ __( 'Overlay', 'themehunk-block' ) }
 						initialOpen={ false }
-						className="th-overlay-control"
+						className="th-container-panel th-overlay-control"
 						> 
 
 						<HoverControl value={ hover }
@@ -1592,27 +1593,55 @@ const InsSettings = ({
 
 						{ 'normal' ===  hover &&  (
 
-						<BackgroundSelectorControl
-						        image={''}
-								backgroundType={ attributes.overlaybackgroundType }
-								backgroundColor={ attributes.overlaybackgroundColor }
-								gradient={ attributes.overlaybackgroundGradient }
-								changeColor={ value => setAttributes({ overlaybackgroundColor: value })}
-								changeGradient={ value => setAttributes({ overlaybackgroundGradient: value }) }
-								changeBackgroundType={ value => setAttributes({ overlaybackgroundType: value }) }
-							/>
+							<BackgroundSelectorControl
+							backgroundType={ attributes.overlaybackgroundType }
+							backgroundColor={ attributes.overlaybackgroundColor }
+							image={ attributes.overlaybackgroundImage }
+							gradient={ attributes.overlaybackgroundGradient }
+							focalPoint={ attributes.overlaybackgroundPosition }
+							backgroundAttachment={ attributes.overlaybackgroundAttachment }
+							backgroundRepeat={ attributes.overlaybackgroundRepeat }
+							backgroundSize={ attributes.overlaybackgroundSize }
+							changeBackgroundType={ value => setAttributes({ overlaybackgroundType: value }) }
+							changeImage={ media => {
+								setAttributes({
+									overlaybackgroundImage: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ overlaybackgroundImage: undefined })}
+							changeColor={ value => setAttributes({ overlaybackgroundColor: value })}
+							changeGradient={ value => setAttributes({ overlaybackgroundGradient: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ overlaybackgroundAttachment: value })}
+							changeBackgroundRepeat={ value => setAttributes({ overlaybackgroundRepeat: value })}
+							changeFocalPoint={ value => setAttributes({ overlaybackgroundPosition: value }) }
+							changeBackgroundSize={ value => setAttributes({ overlaybackgroundSize: value }) }
+							/>	
 
 						) || 'hover' ===  hover && (
 						<>
 						<BackgroundSelectorControl
-						image={''}
-						backgroundType={ attributes.overlaybackgroundTypeHvr }
-						backgroundColor={ attributes.overlaybackgroundColorHvr }
-						changeColor={ value => setAttributes({ overlaybackgroundColorHvr: value })}
-						changeGradient={ value => setAttributes({ overlaybackgroundGradientHvr: value }) }
-						changeBackgroundType={ value => setAttributes({ overlaybackgroundTypeHvr: value }) }
-						
-						/>
+							backgroundType={ attributes.overlaybackgroundTypeHvr }
+							backgroundColor={ attributes.overlaybackgroundColorHvr }
+							image={ attributes.overlaybackgroundImageHvr }
+							gradient={ attributes.overlaybackgroundGradientHvr }
+							focalPoint={ attributes.overlaybackgroundPositionHvr }
+							backgroundAttachment={ attributes.overlaybackgroundAttachmentHvr }
+							backgroundRepeat={ attributes.overlaybackgroundRepeatHvr }
+							backgroundSize={ attributes.overlaybackgroundSizeHvr }
+							changeBackgroundType={ value => setAttributes({ overlaybackgroundTypeHvr: value }) }
+							changeImage={ media => {
+								setAttributes({
+									overlaybackgroundImageHvr: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ overlaybackgroundImageHvr: undefined })}
+							changeColor={ value => setAttributes({ overlaybackgroundColorHvr: value })}
+							changeGradient={ value => setAttributes({ overlaybackgroundGradientHvr: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ overlaybackgroundAttachmentHvr: value })}
+							changeBackgroundRepeat={ value => setAttributes({ overlaybackgroundRepeatHvr: value })}
+							changeFocalPoint={ value => setAttributes({ overlaybackgroundPositionHvr: value }) }
+							changeBackgroundSize={ value => setAttributes({ overlaybackgroundSizeHvr: value }) }
+							/>	
 
 						</>
 
@@ -1626,6 +1655,7 @@ const InsSettings = ({
 			 <Fragment>
 				<PanelBody
 					title={ __( 'Layout', 'themehunk-block' ) }
+					className="th-container-panel"
 					initialOpen={ false }
 				> 
 				  <ResponsiveControl
@@ -2013,6 +2043,7 @@ const InsSettings = ({
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
+					className="th-container-panel"
 					initialOpen={ false }
 				> 
                 <HoverControl value={ hover }
@@ -2379,6 +2410,7 @@ const InsSettings = ({
 
 				<PanelBody
 					title={ __( 'Responsive', 'themehunk-block' ) }
+					className="th-container-panel"
 					initialOpen={ false }
 				> 
 				<ToggleControl
@@ -2399,6 +2431,7 @@ const InsSettings = ({
 				</PanelBody>
 				<PanelBody
 					title={ __( 'Transition', 'themehunk-block' ) }
+					className="th-container-panel"
 					initialOpen={ false }
 				> 
 				<RangeControl

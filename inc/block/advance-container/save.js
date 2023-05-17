@@ -25,8 +25,18 @@ export default function Save({attributes}){
 
 	const Tag = attributes.containerHTMLTag;
 
+	const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
+			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
+			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
+            || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
+			|| ( 'image' === attributes.overlaybackgroundType && attributes.overlaybackgroundImage )
+            || ( 'image' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundImageHvr );
+
 	return (
 		<Tag { ...blockProps } >
+			{showShouldOverlay && (
+						<div className="wp-block-th-blocks-container-overlay"/>
+			)}
 			<div className='th-inside-content-wrap th-con' >
 				<InnerBlocks.Content />
 			</div>

@@ -7,6 +7,14 @@
 .wp-block-create-block-themehunk-block {
 	border: 1px dotted #f00;
 }
+
+.components-panel__body.th-container-panel label,
+.components-panel__body.th-container-panel span{
+    text-transform: capitalize!important;
+    font-size: 13px!important;
+    line-height: 1.4em!important;
+    font-weight:normal!important;
+}
 	
 // .wp-block-themehunk-blocks-advance-container.block-editor-block-list__block{
 // 	border: 1px dashed #888;
@@ -19,10 +27,6 @@
 .wp-block-themehunk-blocks-advance-container .block-editor-button-block-appender.components-button.components-button{
 		box-shadow:none;
 		padding:0;
-}
-
-.th-overlay-control button[aria-label='Image']{
-display:none;
 }
 
 .wp-block-themehunk-blocks-advance-container{
@@ -121,18 +125,32 @@ display:none;
 
 .wp-block-th-blocks-container-overlay {
 	--background-overlay: transparent;
+	--background-overlay-image: initial;
 	position: absolute;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
+	z-index: 1;
 	background: var(--background-overlay);
 	transition:var(--transition);
+	background-image: var(--background-overlay-image);
+	background-repeat: var(--background-overlay-repeat);
+	background-size: var(--background-overlay-size);
+	background-position: var(--background-overlay-position);
+	background-attachment: var(--background-overlay-attachment);
+
 }
 
 .wp-block-themehunk-blocks-advance-container:hover .wp-block-th-blocks-container-overlay{
 	--background-overlay-hvr: transparent;
+	--background-overlay-image-hvr: initial;
 	background: var(--background-overlay-hvr);
+	background-image: var(--background-overlay-image-hvr);
+	background-repeat: var(--background-overlay-repeat-hvr);
+	background-size: var(--background-overlay-size-hvr);
+	background-position: var(--background-overlay-position-hvr);
+	background-attachment: var(--background-overlay-attachment-hvr);
 }
 
 .th-root-block-container {
@@ -182,10 +200,10 @@ display:none;
 		
 	}
 
-	.block-editor-block-list__layout .block-editor-block-list__block.th-hide-tablet.wp-block-themehunk-blocks-advance-container{
-	 position: initial;
+.block-editor-block-list__layout .block-editor-block-list__block.th-hide-tablet.wp-block-themehunk-blocks-advance-container{
+	position: initial;
 	pointer-events:none;
-	}
+}
 
 }
 

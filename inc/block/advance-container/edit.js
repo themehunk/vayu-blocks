@@ -31,20 +31,44 @@ export default function Edit({
 			const { id } = attributes;
 
 			const {
+				adjacentBlockClientId,
+				adjacentBlock,
+				parentBlock,
+				hasInnerBlocks,
+				parentClientId,
 				isViewportAvailable,
 				isPreviewDesktop,
 				isPreviewTablet,
 				isPreviewMobile
-			} = useSelect( select => {
-				const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+			} = useSelect( 
+				select => {
+					const {
+						getAdjacentBlockClientId,
+						getBlock,
+						getBlockRootClientId
+					} = select( 'core/block-editor' );
+					 const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+					 const block = getBlock( clientId );
+					 const adjacentBlockClientId = getAdjacentBlockClientId( clientId );
+					 const adjacentBlock = getBlock( adjacentBlockClientId );
+					 const parentClientId = getBlockRootClientId( clientId );
+					 const parentBlock = getBlock( parentClientId );
+					 const hasInnerBlocks = !! ( block && block.innerBlocks.length );
 		
 				return {
+					adjacentBlockClientId,
+					adjacentBlock,
+					parentBlock: parentBlock ? parentBlock.name : null,
+					hasInnerBlocks,
+					parentClientId,
 					isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
 					isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
 					isPreviewTablet: __experimentalGetPreviewDeviceType ? 'Tablet' === __experimentalGetPreviewDeviceType() : false,
 					isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
 				};
 			}, []);
+
+			console.log(parentBlock);
 		
 			const isLarger = useViewportMatch( 'large', '>=' );
 		
@@ -70,21 +94,14 @@ export default function Edit({
 			setAttributes( { id: clientId } );
 			}
 
-			function getInnerBlocksCount(clientId) {
-				const block = useSelect((select) => {
-				  return select('core/block-editor').getBlock(clientId);
-				});  
-				return block ? block.innerBlocks.length : 0;
-			}
-
-			const InnerBlocksCount = getInnerBlocksCount( clientId );
-			const hasChildBlocks = 0 < InnerBlocksCount;
 
 			const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
 			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
 			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
             || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
-			
+			|| ( 'image' === attributes.overlaybackgroundType && attributes.overlaybackgroundImage )
+            || ( 'image' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundImageHvr )
+
 			let containerClasses = classnames({
 				
 				[`${attributes.contentWidthType}-content`]: true,
@@ -135,11 +152,6 @@ export default function Edit({
 					'--background-position': `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
 					'--background-repeat': attributes.backgroundRepeat,
 					'--background-size': attributes.backgroundSize,
-					'--background-image-hvr': `url( '${ attributes.backgroundImageHvr?.url }' )`,
-					'--background-attachment-hvr': attributes.backgroundAttachmentHvr,
-					'--background-position-hvr': `${ Math.round( attributes.backgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
-					'--background-repeat-hvr': attributes.backgroundRepeatHvr,
-					'--background-size-hvr': attributes.backgroundSizeHvr
 				};
 			}
 			if ( 'image' === attributes.backgroundTypeHvr ) {
@@ -574,6 +586,31 @@ export default function Edit({
 				};
 			}
 
+            if ( 'image' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-image': `url( '${ attributes.overlaybackgroundImage?.url }' )`,
+					'--background-overlay-attachment': attributes.overlaybackgroundAttachment,
+					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+					'--background-overlay-repeat': attributes.overlaybackgroundRepeat,
+					'--background-overlay-size': attributes.overlaybackgroundSize,
+				    opacity:0.6
+				};
+			}
+
+			if ( 'image' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-image-hvr': `url( '${ attributes.overlaybackgroundImageHvr?.url }' )`,
+					'--background-overlay-attachment-hvr': attributes.overlaybackgroundAttachmentHvr,
+					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
+					'--background-overlay-repeat-hvr': attributes.overlaybackgroundRepeatHvr,
+					'--background-overlay-size-hvr': attributes.overlaybackgroundSizeHvr,
+				    opacity:0.6
+				};
+			}
+
+			
 
 			const overlayStyle = {
 				...overlayBackground,
@@ -643,8 +680,20 @@ export default function Edit({
 					attributes={attributes}
 					setAttributes={setAttributes}
 				/>
-				{ hasChildBlocks ? (
-				<div className={rootContainerClassName}>
+				{ ( parentBlock == 'themehunk-blocks/advance-container' || !hasInnerBlocks) ? (
+
+				<Tag {...containerBlockProps}>
+				{showShouldOverlay && (
+					<div
+						className="wp-block-th-blocks-container-overlay"
+						style={overlayStyle}
+					/>
+				)}
+				<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
+				</Tag>
+
+			    ) : (
+					<div className={rootContainerClassName}>
 					<Tag {...containerBlockProps}>
 						{showShouldOverlay && (
 							<div
@@ -655,16 +704,7 @@ export default function Edit({
 						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 					</Tag>
 				</div>
-			    ) : (
-				<Tag {...containerBlockProps}>
-					{showShouldOverlay && (
-						<div
-							className="wp-block-th-blocks-container-overlay"
-							style={overlayStyle}
-						/>
-					)}
-					<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
-				</Tag>
+				
 			   )}
 			
 				</Fragment>
