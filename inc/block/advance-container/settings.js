@@ -1186,8 +1186,37 @@ const InsSettings = ({
 		return undefined;
 	};
    
-	const customTooltiptransitionAll = value => `${value}`
+	const customTooltiptransitionAll = value => `${value}`;
 
+
+    // unit switch max value
+	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
+	const maxBoxedcontentWidth = boxedcontentWidthUnit === 'px' ? 1500 : boxedcontentWidthUnit === 'em' ? 50 : boxedcontentWidthUnit === '%' ? 100:'';
+    const [fullcontentWidthUnit, setfullcontentWidthUnit] = useState('px');
+	const maxfullcontentWidthUnit = fullcontentWidthUnit === 'px' ? 1500 : fullcontentWidthUnit === 'em' ? 50 : fullcontentWidthUnit === '%' ? 100:'';
+	const [contentMinHgtUnit, setcontentMinHgtUnit] = useState('px');
+	const maxcontentMinHgtUnit = contentMinHgtUnit === 'px' ? 1500 : contentMinHgtUnit === 'em' ? 50 : contentMinHgtUnit === '%' ? 100:'';
+	const [paddingUnit, setpaddingUnit] = useState('px');
+	const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100:'';
+	const [marginUnit, setmarginUnit] = useState('px');
+	const maxmarginUnit = marginUnit === 'px' ? 1500 : marginUnit === 'em' ? 50 : marginUnit === '%' ? 100:'';
+	const [horizontalOrientationOffsetUnit, sethorizontalOrientationOffsetUnit] = useState('px');
+	const maxhorizontalOrientationOffsetUnit = horizontalOrientationOffsetUnit === 'px' ? 1500 : horizontalOrientationOffsetUnit === 'em' ? 50 : horizontalOrientationOffsetUnit === '%' ? 100:'';
+	const [horizontalOrientationOffsetRightUnit, sethorizontalOrientationOffsetRightUnit] = useState('px');
+	const maxhorizontalOrientationOffsetRightUnit = horizontalOrientationOffsetRightUnit === 'px' ? 1500 : horizontalOrientationOffsetRightUnit === 'em' ? 50 : horizontalOrientationOffsetRightUnit === '%' ? 100:'';	
+	const [verticalOrientationOffsetTopUnit, setverticalOrientationOffsetTopUnit] = useState('px');
+	const maxverticalOrientationOffsetTopUnit = verticalOrientationOffsetTopUnit === 'px' ? 1500 : verticalOrientationOffsetTopUnit === 'em' ? 50 : verticalOrientationOffsetTopUnit === '%' ? 100:'';
+	const [verticalOrientationOffsetBottomUnit, setverticalOrientationOffsetBottomUnit] = useState('px');
+	const maxverticalOrientationOffsetBottomUnit = verticalOrientationOffsetBottomUnit === 'px' ? 1500 : verticalOrientationOffsetBottomUnit === 'em' ? 50 : verticalOrientationOffsetBottomUnit === '%' ? 100:'';
+	const [borderWidthUnit, setborderWidthUnit] = useState('px');
+	const maxborderWidthUnit = borderWidthUnit === 'px' ? 1500 : borderWidthUnit === 'em' ? 50 : borderWidthUnit === '%' ? 100:'';
+	const [borderRadiusUnit, setborderRadiusUnit] = useState('px');
+	const maxborderRadiusUnit = borderRadiusUnit === 'px' ? 1500 : borderRadiusUnit === 'em' ? 50 : borderRadiusUnit === '%' ? 100:'';
+	const [borderWidthHvrUnit, setborderWidthHvrUnit] = useState('px');
+	const maxborderWidthHvrUnit = borderWidthHvrUnit === 'px' ? 1500 : borderWidthHvrUnit === 'em' ? 50 : borderWidthHvrUnit === '%' ? 100:'';
+	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
+	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
+	
 	return (
         <Fragment>
         <InspectorControls>
@@ -1230,7 +1259,10 @@ const InsSettings = ({
                         >	
                         <UnitChooser
                         value={ attributes.boxedcontentWidthUnit }
-                        onClick={ boxedcontentWidthUnit => setAttributes({ boxedcontentWidthUnit }) }
+						onClick={boxedcontentWidthUnit => {
+							setAttributes({ boxedcontentWidthUnit });
+							setBoxedcontentWidthUnit(boxedcontentWidthUnit);
+						  }}
                         units={ [ 'px', 'em', '%' ] }
                         />
                         <RangeControl
@@ -1239,7 +1271,7 @@ const InsSettings = ({
                             onChange={ changeBoxedcontentWidth }
                             step={ 1 }
                             min={ 1 }
-                            max={ 1000 }
+                            max={maxBoxedcontentWidth}
                             allowReset={ true }
                         />
                         </ResponsiveControl>
@@ -1251,7 +1283,11 @@ const InsSettings = ({
                         >	
                         <UnitChooser
                         value={ attributes.fullcontentWidthUnit }
-                        onClick={ fullcontentWidthUnit => setAttributes({ fullcontentWidthUnit }) }
+						onClick={fullcontentWidthUnit => {
+							setAttributes({ fullcontentWidthUnit });
+							setfullcontentWidthUnit(fullcontentWidthUnit);
+						  }}
+                       
                         units={ [ 'px', 'em', '%' ] }
                         />
                         <RangeControl
@@ -1260,7 +1296,7 @@ const InsSettings = ({
                             onChange={ changeFullcontentWidth }
                             step={ 1 }
                             min={ 1 }
-                            max={ 1000 }
+                            max={maxfullcontentWidthUnit}
                             allowReset={ true }
                         />
                         </ResponsiveControl>
@@ -1270,7 +1306,11 @@ const InsSettings = ({
                         >	
                         <UnitChooser
                         value={ attributes.contentMinHgtUnit }
-                        onClick={ contentMinHgtUnit => setAttributes({ contentMinHgtUnit }) }
+						onClick={contentMinHgtUnit => {
+							setAttributes({ contentMinHgtUnit });
+							setcontentMinHgtUnit(contentMinHgtUnit);
+						  }}
+                        
                         units={ [ 'px', 'em', '%' ] }
                         />
                         <RangeControl
@@ -1279,7 +1319,7 @@ const InsSettings = ({
                             onChange={ changeContentMinHgt }
                             step={ 1 }
                             min={ 1 }
-                            max={ 1000 }
+                            max={ maxcontentMinHgtUnit }
                             allowReset={ true }
                         />
                         </ResponsiveControl>
@@ -1663,13 +1703,16 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.paddingUnit }
-								onClick={ paddingUnit => setAttributes({ paddingUnit }) }
+								onClick={paddingUnit => {
+									setAttributes({ paddingUnit });
+									setpaddingUnit(paddingUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />	
                             <SizingControl
 									type={ getPaddingType() }
 									min={ 0 }
-									max={ 500 }
+									max={maxpaddingUnit}
 									changeType={ changePaddingType }
 									onChange={ changePadding }
 									options={ [
@@ -1702,13 +1745,17 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.marginUnit }
-								onClick={ marginUnit => setAttributes({ marginUnit }) }
+								
+								onClick={marginUnit => {
+									setAttributes({ marginUnit });
+									setmarginUnit(marginUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getMarginType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxmarginUnit }
 									changeType={ changeMarginType }
 									onChange={ changeMargin }
 									options={ [
@@ -1740,7 +1787,7 @@ const InsSettings = ({
 								label={ __( 'Position', 'themehunk-block' ) }
 								value={ attributes.position }
 								options={ [
-									{ label:  __( 'Default', 'themehunk-block' ), value: 'inherit' },
+									{ label:  __( 'Default', 'themehunk-block' ), value: 'relative' },
 									{ label: __( 'Absolute', 'themehunk-block' ), value: 'absolute' },
 									{ label: __( 'Fixed', 'themehunk-block' ), value: 'fixed' },
 								    
@@ -1778,7 +1825,10 @@ const InsSettings = ({
 							     >	
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetUnit }
-								onClick={ horizontalOrientationOffsetUnit => setAttributes({ horizontalOrientationOffsetUnit }) }
+								onClick={horizontalOrientationOffsetUnit => {
+									setAttributes({ horizontalOrientationOffsetUnit });
+									sethorizontalOrientationOffsetUnit(horizontalOrientationOffsetUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						        />
 								<RangeControl
@@ -1787,7 +1837,7 @@ const InsSettings = ({
 									onChange={ changehorizontalOrientationOffset }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={maxhorizontalOrientationOffsetUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1798,7 +1848,11 @@ const InsSettings = ({
 							     >	
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetRightUnit }
-								onClick={ horizontalOrientationOffsetRightUnit => setAttributes({ horizontalOrientationOffsetRightUnit }) }
+								onClick={horizontalOrientationOffsetRightUnit => {
+									setAttributes({ horizontalOrientationOffsetRightUnit });
+									sethorizontalOrientationOffsetRightUnit(horizontalOrientationOffsetRightUnit);
+								  }}
+								
 								units={ [ 'px', 'em', '%' ] }
 						        />
 								<RangeControl
@@ -1807,7 +1861,7 @@ const InsSettings = ({
 									onChange={ changehorizontalOrientationOffsetRight }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxhorizontalOrientationOffsetRightUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1841,7 +1895,11 @@ const InsSettings = ({
 							     >	
 								<UnitChooser
 								value={ attributes.verticalOrientationOffsetTopUnit }
-								onClick={ verticalOrientationOffsetTopUnit => setAttributes({ verticalOrientationsetTopUnit }) }
+								onClick={verticalOrientationOffsetTopUnit => {
+									setAttributes({ verticalOrientationOffsetTopUnit });
+									setverticalOrientationOffsetTopUnit(verticalOrientationOffsetTopUnit);
+								  }}
+					
 								units={ [ 'px', 'em', '%' ] }
 						        />
 								<RangeControl
@@ -1850,7 +1908,7 @@ const InsSettings = ({
 									onChange={ changeverticalOrientationOffsetTop }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxverticalOrientationOffsetTopUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1862,7 +1920,11 @@ const InsSettings = ({
 							     >	
 								<UnitChooser
 								value={ attributes.verticalOrientationOffsetBottomUnit }
-								onClick={ verticalOrientationOffsetBottomUnit => setAttributes({ verticalOrientationOffsetBottomUnit }) }
+								onClick={verticalOrientationOffsetBottomUnit => {
+									setAttributes({ verticalOrientationOffsetBottomUnit });
+									setverticalOrientationOffsetBottomUnit(verticalOrientationOffsetBottomUnit);
+								  }}
+			
 								units={ [ 'px', 'em', '%' ] }
 						        />
 								<RangeControl
@@ -1871,7 +1933,7 @@ const InsSettings = ({
 									onChange={ changeverticalOrientationOffsetBottom }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxverticalOrientationOffsetBottomUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -2084,13 +2146,16 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderWidthUnit }
-								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								onClick={borderWidthUnit => {
+									setAttributes({borderWidthUnit });
+									setborderWidthUnit(borderWidthUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderWidthType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderWidthUnit }
 									changeType={ changeBorderWidthType }
 									onChange={ changeBorderWidth }
 									options={ [
@@ -2131,13 +2196,17 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusUnit }
-								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								onClick={borderRadiusUnit => {
+									setAttributes({borderRadiusUnit });
+									setborderRadiusUnit(borderRadiusUnit);
+								  }}
+						
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderRadiusType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderRadiusUnit }
 									changeType={ changeBorderRadiusType }
 									onChange={ changeBorderRadius }
 									options={ [
@@ -2255,13 +2324,17 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderWidthHvrUnit }
-								onClick={ borderWidthHvrUnit => setAttributes({ borderWidthHvrUnit }) }
+								
+								onClick={borderWidthHvrUnit => {
+									setAttributes({borderWidthHvrUnit });
+									setborderWidthHvrUnit(borderWidthHvrUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderWidthHvrType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderWidthHvrUnit }
 									changeType={ changeBorderWidthHvrType }
 									onChange={ changeBorderWidthHvr }
 									options={ [
@@ -2304,13 +2377,16 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusHvrUnit }
-								onClick={ borderRadiusHvrUnit => setAttributes({ borderRadiusHvrUnit }) }
+								onClick={borderRadiusHvrUnit => {
+									setAttributes({borderRadiusHvrUnit });
+									setborderRadiusHvrUnit(borderRadiusHvrUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderRadiusHvrType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderRadiusHvrUnit }
 									changeType={ changeBorderRadiusHvrType }
 									onChange={ changeBorderRadiusHvr }
 									options={ [

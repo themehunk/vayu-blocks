@@ -67,8 +67,6 @@ export default function Edit({
 					isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
 				};
 			}, []);
-
-			console.log(parentBlock);
 		
 			const isLarger = useViewportMatch( 'large', '>=' );
 		
