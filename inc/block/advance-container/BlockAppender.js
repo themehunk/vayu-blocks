@@ -5,16 +5,17 @@ import { __, sprintf, _x } from '@wordpress/i18n';
 import { Button, Icon, Tooltip } from '@wordpress/components';
 import { applyFilters } from '@wordpress/hooks';
 import { plus } from '@wordpress/icons';
-
-function getInnerBlocksCount(clientId) {
-	const block = useSelect((select) => {
-	  return select('core/block-editor').getBlock(clientId);
-	});
-  
-	return block ? block.innerBlocks.length : 0;
-  }
   
 export default ( { clientId, isSelected, attributes } ) => {
+
+	function getInnerBlocksCount(clientId) {
+		const block = useSelect((select) => {
+		  return select('core/block-editor').getBlock(clientId);
+		});
+	  
+		return block ? block.innerBlocks.length : 0;
+	}
+
 	const { isBlockPreview } = attributes;
 	const innerBlocksCount = getInnerBlocksCount( clientId );
 	const hasChildBlocks = 0 < innerBlocksCount;
@@ -65,12 +66,27 @@ export default ( { clientId, isSelected, attributes } ) => {
 			/>
 		);
 	}
+	// Selected Container.
+	if ( isSelected ) {
+		appender = <ButtonBlockAppender />;
+	}
 
-	appender = <ButtonBlockAppender />;
+	// Empty non-selected Container.
+	if ( ! hasChildBlocks && ! isSelected ) {
+		appender = <Button
+			className="th-blocks-container-selector"
+			onClick={ () => selectBlock( clientId ) }
+			aria-label={ __( 'Select Container', 'themehunk-blocks' ) }
+		>
+			<span className="th-blocks-container-selector__icon">
+			<Icon icon={ plus } />
+			</span>
+		</Button>;
+	}
 
 	return applyFilters(
-		'themehunkblocks.editor.containerAppender',
-		 appender,
+		'themehunk-block.editor.containerAppender',
+		appender,
 		{ clientId, isSelected, attributes }
 	);
 };

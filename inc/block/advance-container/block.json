@@ -12,6 +12,9 @@
 		"id": {
 			"type": "string"
 		},
+		"uniqueID": {
+			"type": "string"
+		},
 		"containerHTMLTag": {
 			"type": "string",
 			"default": "div"
@@ -169,21 +172,56 @@
 			"type": "string",
 			"default": "color"
 		},
-		"overlaybackgroundTypeHvr": {
-			"type": "string",
-			"default": "color"
-		},
 		"overlaybackgroundColor": {
 			"type": "string"
 		},
-		"overlaybackgroundColorHvr": {
-			"type": "string"
+		"overlaybackgroundImage": {
+			"type": "object"
+		},
+		"overlaybackgroundAttachment": {
+			"type": "string",
+			"default": "scroll"
+		},
+		"overlaybackgroundPosition": {
+			"type": "object"
+		},
+		"overlaybackgroundRepeat": {
+			"type": "string",
+			"default": "repeat"
+		},
+		"overlaybackgroundSize": {
+			"type": "string",
+			"default": "auto"
 		},
 		"overlaybackgroundGradient": {
 			"type": "string",
 			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
 		},
-
+		"overlaybackgroundTypeHvr": {
+			"type": "string",
+			"default": "color"
+		},
+		"overlaybackgroundColorHvr": {
+			"type": "string"
+		},
+		"overlaybackgroundImageHvr": {
+			"type": "object"
+		},
+		"overlaybackgroundAttachmentHvr": {
+			"type": "string",
+			"default": "scroll"
+		},
+		"overlaybackgroundPositionHvr": {
+			"type": "object"
+		},
+		"overlaybackgroundRepeatHvr": {
+			"type": "string",
+			"default": "repeat"
+		},
+		"overlaybackgroundSizeHvr": {
+			"type": "string",
+			"default": "auto"
+		},
 		"overlaybackgroundGradientHvr": {
 			"type": "string",
 			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"

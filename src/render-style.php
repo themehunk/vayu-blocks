@@ -40,16 +40,18 @@ function cycle_through_blocks( $blocks, $post_id ) {
 	foreach ( $blocks as $block ) {
 		
 		if ( $block['blockName'] === 'themehunk-blocks/advance-heading' ) {
-			    
 			   if ( isset($block['attrs']['fontFamily'] ) ) {
 				$font_families = explode( ',', $block['attrs']['fontFamily'] );
 				$font_family_string = str_replace( ' ', '+', implode( '|', $font_families ) );
 				wp_enqueue_style( 'th-blocks-google-fonts-' . $font_family_string, "https://fonts.googleapis.com/css?family=$font_family_string&display=swap", array(), null );
 			    }
                 $css .=advance_heading_style($block['attrs']);
-    
 		} 
-		
+
+		if ( $block['blockName'] === 'themehunk-blocks/advance-container' ) {
+			 $css .=advance_container_style($block['attrs']);
+	    } 
+
 		if ( ! empty( $block['innerBlocks'] ) ) {
 			$inner_css = cycle_through_blocks( $block['innerBlocks'], $post_id );
 			if ( $inner_css ) {
