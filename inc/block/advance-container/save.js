@@ -17,10 +17,9 @@ export default function Save({attributes}){
 		"th-hide-tablet": attributes.responsiveTogHideTablet,
 		"th-hide-mobile": attributes.responsiveTogHideMobile,
 	  });
-
 	const blockProps = useBlockProps.save({
-		id: attributes.id,
-		className: `th-container-outside-wrapper wp-block-th-advance-container-${attributes.id} ${containerClasses}`,
+		id:attributes.uniqueID,
+		className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`,
 	});
 
 	const Tag = attributes.containerHTMLTag;

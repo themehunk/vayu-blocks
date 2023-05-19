@@ -3,10 +3,11 @@
 function advance_container_style($attr){
 
     $css = '';
+	
 
-    if(isset( $attr['id'] )){
+    if(isset( $attr['uniqueID'] )){
         
-		$css .= ".wp-block-th-advance-container-{$attr['id']}.boxed-content .th-inside-content-wrap{";
+		$css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
         // boxed-width
 		if (isset($attr['boxedcontentWidth'])) {
 			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -17,7 +18,7 @@ function advance_container_style($attr){
         }
         $css .= "}";
 
-        $css .= ".wp-block-th-advance-container-{$attr['id']}.fullwidth-content{";
+        $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
             // boxed-width
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
@@ -28,7 +29,7 @@ function advance_container_style($attr){
        $css .= "}";
 
 
-       $css .= ".wp-block-th-advance-container-{$attr['id']}{";
+       $css .= ".th-c{$attr['uniqueID']}{";
       
        // min-height
        if (isset($attr['contentMinHgt'])) {
@@ -198,7 +199,7 @@ function advance_container_style($attr){
         $css .= "}";
 
         // overlay
-        $css .= ".wp-block-th-advance-container-{$attr['id']} .wp-block-th-blocks-container-overlay{";
+        $css .= ".th-c{$attr['uniqueID']} .wp-block-th-blocks-container-overlay{";
         if ( isset( $attr['overlaybackgroundType'] ) && $attr['overlaybackgroundType'] == 'image' ) {
 			$css .= isset( $attr['overlaybackgroundImage']['url'] ) ? "background-image: url({$attr['overlaybackgroundImage']['url']});" : '';
 			$css .= isset( $attr['overlaybackgroundAttachment']) ? "background-attachment: {$attr['overlaybackgroundAttachment']};" : '';
@@ -214,7 +215,7 @@ function advance_container_style($attr){
         $css .= "}";
 
         // overlay hover
-        $css .= ".wp-block-th-advance-container-{$attr['id']}:hover .wp-block-th-blocks-container-overlay{";
+        $css .= ".th-c{$attr['uniqueID']}:hover .wp-block-th-blocks-container-overlay{";
             if ( isset( $attr['overlaybackgroundTypeHvr'] ) && $attr['overlaybackgroundTypeHvr'] == 'image' ) {
                 $css .= isset( $attr['overlaybackgroundImageHvr']['url'] ) ? "background-image: url({$attr['overlaybackgroundImageHvr']['url']});" : '';
                 $css .= isset( $attr['overlaybackgroundAttachmentHvr']) ? "background-attachment: {$attr['overlaybackgroundAttachmentHvr']};" : '';
@@ -230,7 +231,7 @@ function advance_container_style($attr){
             $css .= "}";
 
         //inside wrap
-        $css .= ".wp-block-th-advance-container-{$attr['id']} .th-inside-content-wrap{";
+        $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
              //flex-direction
              $css .= isset($attr['direction']) ? "flex-direction: {$attr['direction']}; " : '';
              //justifiy-content
@@ -246,7 +247,7 @@ function advance_container_style($attr){
         $css .= "}";
 
         // Hover
-        $css .= ".wp-block-th-advance-container-{$attr['id']}:hover{";
+        $css .= ".th-c{$attr['uniqueID']}:hover{";
         //hvr background
 		if ( isset( $attr['backgroundTypeHvr'] ) && $attr['backgroundTypeHvr'] == 'image' ) {
                 $css .= isset( $attr['backgroundImageHvr']['url'] ) ? "background-image: url({$attr['backgroundImageHvr']['url']});" : '';
@@ -312,7 +313,7 @@ function advance_container_style($attr){
       //    tablet view
       $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
       
-      $css .= ".wp-block-th-advance-container-{$attr['id']}.boxed-content .th-inside-content-wrap{";
+      $css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
             // boxed-width
             if (isset($attr['boxedcontentWidthTablet'])) {
                 $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -322,7 +323,7 @@ function advance_container_style($attr){
             }
             $css .= "}";
     
-            $css .= ".wp-block-th-advance-container-{$attr['id']}.fullwidth-content{";
+            $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
                 // boxed-width
                 if (isset($attr['fullcontentWidthTablet'])){
                     $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
@@ -333,7 +334,7 @@ function advance_container_style($attr){
            $css .= "}";
     
     
-           $css .= ".wp-block-th-advance-container-{$attr['id']}{";
+           $css .= ".th-c{$attr['uniqueID']}{";
           
            // min-height
            if (isset($attr['contentMinHgtTablet'])) {
@@ -464,7 +465,7 @@ function advance_container_style($attr){
             $css .= "}";
 
             //inside wrap
-            $css .= ".wp-block-th-advance-container-{$attr['id']} .th-inside-content-wrap{";
+            $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
                 //flex-direction
                 $css .= isset($attr['directionTablet']) ? "flex-direction: {$attr['directionTablet']}; " : '';
                 //justifiy-content
@@ -479,7 +480,7 @@ function advance_container_style($attr){
                 }
             $css .= "}";
 
-            $css .= ".wp-block-th-advance-container-{$attr['id']}:hover {";
+            $css .= ".th-c{$attr['uniqueID']}:hover {";
                 //for border-width hover tablet
 			if (isset($attr['borderWidthHvrTypeTablet']) && 'unlinked' === $attr['borderWidthHvrTypeTablet']) {
 				$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
@@ -514,7 +515,7 @@ function advance_container_style($attr){
       //    mobile view
       $css .= "@media only screen and (max-width: 767px){";
       
-        $css .= ".wp-block-th-advance-container-{$attr['id']}.boxed-content .th-inside-content-wrap{";
+        $css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
               // boxed-width
               if (isset($attr['boxedcontentWidthMobile'])){
                   $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -524,7 +525,7 @@ function advance_container_style($attr){
               }
               $css .= "}";
       
-              $css .= ".wp-block-th-advance-container-{$attr['id']}.fullwidth-content{";
+              $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
                       $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
@@ -535,7 +536,7 @@ function advance_container_style($attr){
              $css .= "}";
       
       
-             $css .= ".wp-block-th-advance-container-{$attr['id']}{";
+             $css .= ".th-c{$attr['uniqueID']}{";
             
              // min-height
              if (isset($attr['contentMinHgtMobile'])) {
@@ -658,7 +659,7 @@ function advance_container_style($attr){
 
             $css .= "}";
 
-            $css .= ".wp-block-th-advance-container-{$attr['id']}:hover {";
+            $css .= ".th-c{$attr['uniqueID']}:hover {";
                 if (isset($attr['borderWidthHvrTypeMobile']) && 'unlinked' === $attr['borderWidthHvrTypeMobile']) {
 					$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
 					$borderWidthHvrTopMobile = isset($attr['borderWidthHvrTopMobile']) ? $attr['borderWidthHvrTopMobile'] : 0;
@@ -688,7 +689,7 @@ function advance_container_style($attr){
             $css .= "}";
 
             //inside wrap
-            $css .= ".wp-block-th-advance-container-{$attr['id']} .th-inside-content-wrap{";
+            $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
                 //flex-direction
                 $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : '';
                 //justifiy-content
@@ -706,15 +707,15 @@ function advance_container_style($attr){
         $css .= " }";
 
         if (isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop'] == true){
-            $css .= "@media only screen and (min-width: 1024px) {#wp-block-th-advance-container-{$attr['id']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 1024px) {#th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Tablet
         if (isset($attr['responsiveTogHideTablet']) && $attr['responsiveTogHideTablet'] == true){
-            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { {#wp-block-th-advance-container-{$attr['id']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { {#th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Mobile
         if (isset($attr['responsiveTogHideMobile']) && $attr['responsiveTogHideMobile'] == true){
-            $css .= "@media only screen and (max-width: 767px) {#wp-block-th-advance-container-{$attr['id']}{display:none;}}";
+            $css .= "@media only screen and (max-width: 767px) {#th-c{$attr['uniqueID']}{display:none;}}";
         }
 
     }

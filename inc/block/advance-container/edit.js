@@ -9,10 +9,9 @@ import {
 	useRef
 } from '@wordpress/element';
 import hexToRgba from 'hex-rgba';
-import { applyFilters, doAction } from '@wordpress/hooks';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch  } from '@wordpress/data';
 import { useViewportMatch } from '@wordpress/compose';
-import { InnerBlocks, useBlockProps , useInnerBlocksProps , store as blockEditorStore,} from '@wordpress/block-editor';
+import { useBlockProps , useInnerBlocksProps , store as blockEditorStore} from '@wordpress/block-editor';
 import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
 /**
@@ -20,16 +19,41 @@ import BlockAppender from './BlockAppender';
  */
 import Controls from './controls.js';
 import InsSettings from './settings.js';
+import getUniqueId from '../../../src/helpers/get-unique-id.js';
 import './editor.scss';
 
 export default function Edit({ 
 	attributes, 
 	setAttributes, 
-	clientId
+	clientId,
+	uniqueID
    }){
 
 			const { id } = attributes;
 
+			const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+			const { isUniqueID, isUniqueBlock} = useSelect(
+				( select ) => {
+					return {
+						isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
+						isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+						
+					};
+				},
+				[ clientId ]
+			);
+
+			useEffect( () => {
+			const uniqueId = getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlock );
+			if ( uniqueId !== uniqueID ) {
+				attributes.uniqueID = uniqueId;
+				setAttributes( { uniqueID: uniqueId } );
+				addUniqueID( uniqueId, clientId );
+			} else {
+				addUniqueID( uniqueId, clientId );
+			}
+			}, [] );
+			
 			const {
 				adjacentBlockClientId,
 				adjacentBlock,
@@ -626,7 +650,7 @@ export default function Edit({
 
 			
 			const blockProps = useBlockProps({
-				id: attributes.id,
+				id:`th-block-container-${attributes.uniqueID}`,
 				className:containerClasses,
 				style
 			});
@@ -665,7 +689,7 @@ export default function Edit({
 
 			let rootContainerClassName = "";
 			rootContainerClassName = supportsLayout
-				? `th-root-block-container align${attributes.align} wp-block-${attributes.id}`
+				? `th-root-block-container align${attributes.align} th-block-container-${attributes.uniqueID}`
 				: 'wp-block';
 
 			return (
