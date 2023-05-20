@@ -5,7 +5,6 @@
 	"version": "0.1.0",
 	"title": "Advance Container",
 	"category": "themehunk-blocks",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"textdomain": "themehunk-block",
 	"attributes": {

@@ -15,11 +15,12 @@ import { __ } from '@wordpress/i18n';
 import './style.scss';
 
 /**
- * Internal dependencies
+ * Internal dependencies 
  */
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import { HeadingIcon as icon } from '../../../src/helpers/icon.js';
 
 const { name } = metadata;
 
@@ -27,6 +28,7 @@ registerBlockType( name, {
 	...metadata,
 	title: __( 'Advanced Heading', 'themehunk-block' ),
 	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	icon,
 	keywords: [
 		'heading',
 		'title',

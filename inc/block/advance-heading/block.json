@@ -5,7 +5,6 @@
 	"version": "0.1.0",
 	"title": "Advance Heading",
 	"category": "themehunk-blocks",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"keywords": [ "heading", "title", "advanced heading" ],
 	"textdomain": "themehunk-block",

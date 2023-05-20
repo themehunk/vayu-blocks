@@ -40,8 +40,9 @@ import { Start, Center , End, Strech,
 	  HorizontalLeft, HorizontalRight, 
 	  VerticalTop, VerticalBottom,
 	  ArwLft, ArwRgt, ArwUp, ArwDn,JfCntstr,JfCntend,JfCntctr,JfCntspbtn,JfCntsparnd,JfCntspevn,
-	  JfCntstr1,JfCntend1,JfCntctr1,JfCntspbtn1,JfCntsparnd1,JfCntspevn1,alignitemstr,alignitemcnt,alignitemend,alignitemstrech
-	 } from '../../../src/helpers/icon.js';
+	  JfCntstr1,JfCntend1,JfCntctr1,JfCntspbtn1,JfCntsparnd1,JfCntspevn1,alignitemstr,alignitemcnt,alignitemend,alignitemstrech,
+	  alignitemstr1,alignitemcnt1,alignitemend1,alignitemstrech1
+	  , JfCntstrRR, JfCntendRR} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,
@@ -1359,8 +1360,8 @@ const InsSettings = ({
                                     </ResponsiveControl>
 						</div>
 
-						{ 
-									(attributes.direction === 'row' || attributes.direction === 'row-reverse') ? (
+						{ (attributes.direction === 'row') ? (
+									
 										<ResponsiveControl
 										label={ __( 'Justify Content', 'themehunk-block' ) }
 										>
@@ -1402,8 +1403,95 @@ const InsSettings = ({
 											hasIcon
 										/>
 										</ResponsiveControl>
+						) : (attributes.direction === 'row-reverse') ? (
+
+                                   <ResponsiveControl
+								   label={ __( 'Justify Content', 'themehunk-block' ) }
+								   >
+								   <ToogleGroupControl
+									   value={ getJustify() }
+									   onChange={ changeJustify }
+									   options={[
+									   {
+										   icon: JfCntstrRR,
+										   label: __( 'start', 'themehunk-blocks' ),
+										   value: 'flex-start'
+									   },
+									   {
+										   icon: JfCntctr1,
+										   label: __( 'center', 'themehunk-block' ),
+										   value: 'center'
+									   },
+									   {
+										   icon: JfCntendRR,
+										   label: __( 'end', 'themehunk-block' ),
+										   value: 'flex-end'
+									   },
+									   {
+										   icon: JfCntspbtn1,
+										   label: __( 'space-between', 'themehunk-block' ),
+										   value: 'space-between'
+									   },
+									   {
+										   icon: JfCntsparnd1,
+										   label: __( 'space-around', 'themehunk-block' ),
+										   value: 'space-around'
+									   },
+									   {
+										   icon: JfCntspevn1,
+										   label: __( 'space-evenly', 'themehunk-block' ),
+										   value: 'space-evenly'
+									   }
+									   ]}
+									   hasIcon
+								   />
+								   </ResponsiveControl>
+							): (attributes.direction === 'column-reverse') ? (
+							
+								<ResponsiveControl
+								label={ __( 'Justify Content', 'themehunk-block' ) }
+								>
+								<ToogleGroupControl
+									value={ getJustify() }
+									onChange={ changeJustify }
+									options={[
+									{
+										icon: JfCntend,
+										label: __( 'start', 'themehunk-blocks' ),
+										value: 'flex-start'
+									},
+									{
+										icon: JfCntctr,
+										label: __( 'center', 'themehunk-block' ),
+										value: 'center'
+									},
+									{
+										icon: JfCntstr,
+										label: __( 'end', 'themehunk-block' ),
+										value: 'flex-end'
+									},
+									{
+										icon: JfCntspbtn,
+										label: __( 'space-between', 'themehunk-block' ),
+										value: 'space-between'
+									},
+									{
+										icon: JfCntsparnd,
+										label: __( 'space-around', 'themehunk-block' ),
+										value: 'space-around'
+									},
+									{
+										icon: JfCntspevn,
+										label: __( 'space-evenly', 'themehunk-block' ),
+										value: 'space-evenly'
+									}
+									]}
+									hasIcon
+								/>
+								</ResponsiveControl>
+										
 									) : (
-										<ResponsiveControl
+                                     <ResponsiveControl
 										label={ __( 'Justify Content', 'themehunk-block' ) }
 										>
 										<ToogleGroupControl
@@ -1421,7 +1509,7 @@ const InsSettings = ({
 												value: 'center'
 											},
 											{
-												icon: JfCntend,
+												icon:JfCntend,
 												label: __( 'end', 'themehunk-block' ),
 												value: 'flex-end'
 											},
@@ -1444,12 +1532,48 @@ const InsSettings = ({
 											hasIcon
 										/>
 										</ResponsiveControl>
-									)
-									}
+					  )
+					}
 
-
-                                <div className='th-component-group-label'>
+                        {(attributes.direction === 'row' || attributes.direction === 'row-reverse') ? (
+								 <div className='th-component-group-label'>			
                                 <ResponsiveControl
+                                label={ __( 'AlignItem', 'themehunk-block' ) }
+                                >
+                                <ToogleGroupControl
+                                            value={getAlignItem()}
+                                            onChange={changeAlignItem}
+                                            options={[
+                                                {
+                                                    icon: alignitemstr1,
+                                                    label: __( 'start', 'themehunk-blocks' ),
+                                                    value: 'flex-start'
+                                                },
+                                                {
+                                                    icon: alignitemcnt1,
+                                                    label: __( 'center', 'themehunk-block' ),
+                                                    value: 'center'
+                                                },
+                                                {
+                                                    icon: alignitemend1,
+                                                    label: __( 'end', 'themehunk-block' ),
+                                                    value: 'flex-end'
+                                                },
+                                                
+                                                {
+                                                    icon: alignitemstrech1,
+                                                    label: __( 'stretch', 'themehunk-block' ),
+                                                    value: 'stretch'
+                                                }
+                                            ]}
+                                            
+                                            hasIcon
+                                        />
+                                        </ResponsiveControl>
+										</div>
+								) : (		
+									<div className='th-component-group-label'>
+										<ResponsiveControl
                                 label={ __( 'AlignItem', 'themehunk-block' ) }
                                 >
                                 <ToogleGroupControl
@@ -1482,7 +1606,10 @@ const InsSettings = ({
                                             hasIcon
                                         />
                                         </ResponsiveControl>
+                                 
                                 </div>
+								)
+							}
 
                                 <div className='th-component-group-label'>
                                 <ResponsiveControl

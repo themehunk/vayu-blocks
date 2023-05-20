@@ -10,6 +10,7 @@ import './style.scss';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
+import { ConatinerIcon as icon } from '../../../src/helpers/icon.js';
 
 const { name } = metadata;
 
@@ -17,6 +18,7 @@ registerBlockType( name, {
 	...metadata,
 	title: __( 'Advanced Container', 'themehunk-block' ),
 	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	icon,
 	keywords: [
 		__( 'section' ),
 		__( 'container' )
