@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 
-import {AlignmentToolbar, __experimentalColorGradientControl as ColorGradientControl,InspectorControls} from '@wordpress/block-editor';
+import {InspectorAdvancedControls , __experimentalColorGradientControl as ColorGradientControl,InspectorControls} from '@wordpress/block-editor';
 
 import {
     PanelBody,
@@ -11,7 +11,7 @@ import {
     SelectControl,
     Placeholder,
     Spinner,
-    ToggleControl,
+    ToggleControl,TextControl
 } from '@wordpress/components';
 
 import { useSelect } from '@wordpress/data';
@@ -59,7 +59,7 @@ const InsSettings = ({
 
     const [ tab, setTab ] = useState( 'layout' );
 	const [ hover, setHover ] = useState( 'normal' );
-	
+	const ANCHOR_REGEX = /[\s#]/g;
     //boxed width
     const getBoxedcontentWidth = () => {
 		switch ( getView ) {
@@ -2651,8 +2651,33 @@ const InsSettings = ({
 			 </Fragment>
 
 		 )}
-
+         
         </InspectorControls>
+
+		<InspectorAdvancedControls>
+				    <SelectControl
+							label={ __( 'HTML Tag', 'themehunk-block' ) }
+							value={ attributes.containerHTMLTag }
+							options={ [
+								{ label: __( 'Default (div)', 'themehunk-block' ), value: 'div' },
+								{ label: 'section', value: 'section' },
+								{ label: 'header', value: 'header' },
+								{ label: 'footer', value: 'footer' },
+								{ label: 'article', value: 'article' },
+								{ label: 'main', value: 'main' }
+							] }
+							onChange={ value => setAttributes({ containerHTMLTag: value }) }
+						/>
+						<TextControl
+						label={ __( 'HTML Anchor', 'themehunk-block' ) }
+						help={ __( 'Anchors lets you link directly to a section on a page.', 'themehunk-block' ) }
+						value={ attributes.anchor || '' }
+						onChange={ ( value ) => {
+							const anchorValue = value.replace( ANCHOR_REGEX, '-' );
+							setAttributes( { anchor: anchorValue } );
+						} } />
+		</InspectorAdvancedControls>
+		
         </Fragment>
     );
 

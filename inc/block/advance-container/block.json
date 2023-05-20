@@ -18,6 +18,10 @@
 			"type": "string",
 			"default": "div"
 		},
+		"anchor": {
+			"type": "string",
+			"default": ""
+		},
 		"verticalAlign": {
 			"type": "string"
 		},

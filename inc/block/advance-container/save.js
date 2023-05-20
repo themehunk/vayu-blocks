@@ -17,11 +17,12 @@ export default function Save({attributes}){
 		"th-hide-tablet": attributes.responsiveTogHideTablet,
 		"th-hide-mobile": attributes.responsiveTogHideMobile,
 	  });
+	  
 	const blockProps = useBlockProps.save({
-		id:attributes.uniqueID,
+		id:attributes.anchor,
 		className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`,
 	});
-
+     
 	const Tag = attributes.containerHTMLTag;
 
 	const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 

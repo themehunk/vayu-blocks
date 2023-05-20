@@ -14,6 +14,7 @@ import { useViewportMatch } from '@wordpress/compose';
 import { useBlockProps , useInnerBlocksProps , store as blockEditorStore} from '@wordpress/block-editor';
 import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
+
 /**
  * Internal dependencies
  */
@@ -702,6 +703,7 @@ export default function Edit({
 					attributes={attributes}
 					setAttributes={setAttributes}
 				/>
+
 				{ ( parentBlock == 'themehunk-blocks/advance-container' || !hasInnerBlocks) ? (
 
 				<Tag {...containerBlockProps}>
