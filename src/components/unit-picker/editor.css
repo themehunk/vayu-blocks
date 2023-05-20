@@ -1,0 +1,57 @@
+.components-base-control.components-th-blocks-units-control-header__units {
+  display: block;
+  margin-bottom: 0;
+}
+
+.components-base-control.components-th-blocks-units-control-header__units .components-base-control__field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.components-base-control.components-th-blocks-units-control-header__units .components-base-control__label {
+  margin-bottom: 0;
+}
+
+.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button {
+  background: #fff;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  color: #929da7;
+  font-size: 10px;
+  padding: 0 5px;
+  position: relative;
+  text-align: center;
+  text-shadow: none;
+  border: 0;
+  border-radius: 0 !important;
+  line-height: 20px;
+  padding: 0 5px;
+  height: auto;
+}
+
+.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button.is-primary {
+  background: #fff !important;
+  color: #000 !important;
+  cursor: default;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.o-responsive-control {
+  position: relative;
+}
+
+.components-base-control.components-th-blocks-units-control-header__units {
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
+/*# sourceMappingURL=editor.css.map */

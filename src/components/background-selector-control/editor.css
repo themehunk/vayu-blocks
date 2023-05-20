@@ -1,0 +1,65 @@
+.th-background-selector-control {
+  margin: 0 0 1.5em 0;
+}
+
+.th-background-selector-control .components-base-control__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.th-background-selector-control .components-base-control__title label {
+  padding: 5px 0;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button {
+  width: 25px;
+  height: 28px;
+  border: 1px solid #a4afb7;
+  outline: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button svg {
+  width: 20px;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button.is-primary {
+  z-index: 0;
+  background: #a4afb7;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button.is-primary svg {
+  fill: #fff;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button.is-primary:hover {
+  background: #a4afb7;
+  border-color: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button.is-primary:focus:not(:disabled) {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.th-background-selector-control .components-base-control__title .linking-controls button .dashicon {
+  margin: 2px;
+}
+/*# sourceMappingURL=editor.css.map */

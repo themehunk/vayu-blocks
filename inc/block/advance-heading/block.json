@@ -46,6 +46,10 @@
 		"fontSize": {
 			"type": "number"
 		},
+		"fontSizeUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"fontSizeTablet": {
 			"type": "number"
 		},
@@ -67,6 +71,10 @@
 		"lineHeight": {
 			"type": "number"
 		},
+		"lineHeightUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"lineHeightTablet": {
 			"type": "number"
 		},
@@ -75,6 +83,10 @@
 		},
 		"letterSpacing": {
 			"type": "number"
+		},
+		"letterSpacingUnit": {
+			"type": "string",
+			"default":"px"
 		},
 		"letterSpacingTablet": {
 			"type": "number"
@@ -121,6 +133,10 @@
 		"padding": {
 			"type": "number",
 			"default": 0
+		},
+		"paddingUnit": {
+			"type": "string",
+			"default":"px"
 		},
 		"paddingTablet": {
 			"type": "number"
@@ -184,6 +200,10 @@
 			"type": "number",
 			"default": 0
 		},
+		"marginUnit": {
+			"type": "string",
+			"default":"px"
+		},
 		"marginTablet": {
 			"type": "number"
 		},
@@ -237,6 +257,10 @@
 		"customWidth": {
 			"type": "number"
 		},
+		"customWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"customWidthTablet": {
 			"type": "number"
 		},
@@ -251,10 +275,6 @@
 		},
 		"zindexMobile": {
 			"type": "number"
-		},
-		"transitionHeading": {
-			"type": "number",
-			"default": "0.2"
 		},
 		"responsiveTogHideDesktop": {
 			"type": "boolean",
@@ -285,6 +305,10 @@
 		"borderWidthType": {
 			"type": "string",
 			"default": "linked"
+		},
+		"borderWidthUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"borderWidthTypeTablet": {
 			"type": "string",
@@ -348,6 +372,10 @@
 			"type": "string",
 			"default": "linked"
 		},
+		"borderWidthHvrUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"borderWidthHvrTypeTablet": {
 			"type": "string",
 			"default": "linked"
@@ -410,6 +438,10 @@
 			"type": "string",
 			"default": "linked"
 		},
+		"borderRadiusUnit": {
+			"type": "string",
+			"default": "px"
+		},
 		"borderRadiusTypeTablet": {
 			"type": "string",
 			"default": "linked"
@@ -471,6 +503,10 @@
 		"borderRadiusHvrType": {
 			"type": "string",
 			"default": "linked"
+		},
+		"borderRadiusHvrUnit": {
+			"type": "string",
+			"default": "px"
 		},
 		"borderRadiusHvrTypeTablet": {
 			"type": "string",
@@ -584,10 +620,6 @@
 			"type": "number",
 			"default": 0
 		},
-		"transitionBorder": {
-			"type": "number",
-			"default": "0.2"
-		},
 		"backgroundType": {
 			"type": "string",
 			"default": "color"
@@ -646,9 +678,136 @@
 			"type": "string",
 			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
 		},
-		"transitionBackground": {
+		"transitionAll": {
 			"type": "number",
 			"default": "0.2"
+		},
+		"alignSelf": {
+			"type": "string"
+		},
+		"alignSelfTablet": {
+			"type": "string"
+		}
+		,"alignSelfMobile": {
+			"type": "string"
+		},
+		"order": {
+			"type": "string"
+		},
+		"orderTablet": {
+			"type": "string"
+		},
+		"orderMobile": {
+			"type": "string"
+		},
+		"customOrder": {
+			"type": "string"
+		},
+		"customOrderTablet": {
+			"type": "string"
+		},
+		"customOrderMobile": {
+			"type": "string"
+		},
+		"flexSize": {
+			"type": "string"
+		},
+		"flexSizeTablet": {
+			"type": "string"
+		},
+		"flexSizeMobile": {
+			"type": "string"
+		},
+		"FlexGrowSize": {
+			"type": "string"
+		},
+		"FlexGrowSizeTablet": {
+			"type": "string"
+		},
+		"FlexGrowSizeMobile": {
+			"type": "string"
+		},
+		"FlexShrinkSize": {
+			"type": "string"
+		},
+		"FlexShrinkSizeTablet": {
+			"type": "string"
+		},
+		"FlexShrinkSizeMobile": {
+			"type": "string"
+		},
+		"position": {
+			"type": "string"
+		},
+		"horizontalOrientation": {
+			"type": "string"
+		},
+		"horizontalOrientationOffset": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"horizontalOrientationOffsetRight": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"horizontalOrientationOffsetRightUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"verticalOrientation": {
+			"type": "string"
+		},
+		"verticalOrientationOffsetTop": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetTopUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"verticalOrientationOffsetBottom": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomTablet": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomMobile": {
+			"type": "number",
+			"default": "0"
+		},
+		"verticalOrientationOffsetBottomUnit": {
+			"type": "string",
+			"default":"px"
 		}
 	},
 	"editorScript": "file:../../../build/advance-heading.js",

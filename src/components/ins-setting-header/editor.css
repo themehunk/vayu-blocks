@@ -1,0 +1,39 @@
+.block-editor-block-inspector .th-setting-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  border-top: none;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 0;
+  height: 48px;
+  background: #eeeeee7a;
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  cursor: pointer;
+  padding: 3px 15px;
+  margin-left: 0;
+  font-weight: 500;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button:focus {
+  background: #c3c3c37d;
+  position: relative;
+  z-index: 1;
+}
+
+.block-editor-block-inspector .th-setting-header .components-button.is-active {
+  background: #c3c3c37d;
+  position: relative;
+  z-index: 1;
+}
+/*# sourceMappingURL=editor.css.map */

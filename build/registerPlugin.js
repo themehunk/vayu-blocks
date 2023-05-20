@@ -35,8 +35,10 @@ const DEFAULT_STATE = {
   showOnboarding: Boolean(themehunkblock.showOnboarding) && 'false' !== ((_localStorage = localStorage) === null || _localStorage === void 0 ? void 0 : _localStorage.getItem('o-show-onboarding')),
   viewType: 'Desktop',
   visiblePopover: 'themehunk-blocks/dynamic-value',
-  dynamicData: {}
+  dynamicData: {},
+  uniqueIDs: {} // Add uniqueIDs to the default state
 };
+
 const actions = {
   updateView(viewType) {
     return {
@@ -68,6 +70,13 @@ const actions = {
       type: 'FETCH_FROM_API',
       path
     };
+  },
+  addUniqueID(uniqueID, clientID) {
+    return {
+      type: 'ADD_UNIQUE_ID',
+      uniqueID,
+      clientID
+    };
   }
 };
 (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.registerStore)('themehunk-blocks/data', {
@@ -76,25 +85,39 @@ const actions = {
     let action = arguments.length > 1 ? arguments[1] : undefined;
     if ('UPDATE_VIEW' === action.type) {
       return {
+        ...state,
         viewType: action.viewType
       };
     }
     if ('UPDATE_ONBOARDING' === action.type) {
       return {
+        ...state,
         showOnboarding: action.showOnboarding
       };
     }
     if ('UPDATE_POPOVER' === action.type) {
       return {
+        ...state,
         visiblePopover: action.visiblePopover
       };
     }
     if ('SET_DYNAMIC_DATA' === action.type) {
       return {
+        ...state,
         dynamicData: {
           ...state.dynamicData,
           [action.key]: action.value
         }
+      };
+    }
+    if ('ADD_UNIQUE_ID' === action.type) {
+      const updatedIDs = {
+        ...state.uniqueIDs,
+        [action.uniqueID]: action.clientID
+      };
+      return {
+        ...state,
+        uniqueIDs: updatedIDs
       };
     }
     return state;
@@ -113,6 +136,32 @@ const actions = {
     getDynamicData(state, attrs) {
       const key = object_hash__WEBPACK_IMPORTED_MODULE_0___default()(attrs);
       return state.dynamicData[key];
+    },
+    getUniqueIDs(state) {
+      return state.uniqueIDs;
+    },
+    isUniqueID(state, uniqueID) {
+      const {
+        uniqueIDs
+      } = state;
+      let isUniqueID = true;
+      if (uniqueIDs.hasOwnProperty(uniqueID)) {
+        isUniqueID = false;
+      }
+      return isUniqueID;
+    },
+    isUniqueBlock(state, uniqueID, clientID) {
+      const {
+        uniqueIDs
+      } = state;
+      let isUniqueBlock = false;
+      if (uniqueIDs.hasOwnProperty(uniqueID)) {
+        // Compare clientID if they match then it just means we've switched to iframe view and so we don't need a new ID.
+        if (uniqueIDs[uniqueID] === clientID) {
+          isUniqueBlock = true;
+        }
+      }
+      return isUniqueBlock;
     }
   },
   controls: {

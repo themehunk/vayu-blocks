@@ -8,6 +8,10 @@ function create_block_themehunk_block_block_init() {
             'name' => 'advance-heading/',
             'render_callback' => 'themehunk_render_block_advance_heading',
 		),
+        array(
+            'name' => 'advance-container/',
+            'render_callback' => '',
+        ),
 		array(
             'name' => 'advance-spacer/',
             'render_callback' => 'render_spacer',
@@ -19,12 +23,13 @@ function create_block_themehunk_block_block_init() {
         $block_name = $block['name'];
         $render_callback = $block['render_callback'];
 
-        register_block_type(
-            THEMEHUNK_BLOCKS_DIR_PATH . 'inc/block/' . $block_name,
-            array(
-                'render_callback' => $render_callback,
-            )
-        );
+            register_block_type(
+                THEMEHUNK_BLOCKS_DIR_PATH . 'inc/block/' . $block_name,
+                array(
+                    'render_callback' => $render_callback,
+                )
+                );
+
     }
 }
 
