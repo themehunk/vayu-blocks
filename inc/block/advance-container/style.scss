@@ -55,11 +55,10 @@
 }
 
 .th-shape svg{
-   fill:#9E9E9E;
    position: relative;
 }
 
-.th-shape.flip svg{
+.th-shape.flip-top svg,.th-shape.flip-bottom svg{
    left: 50%;
    transform: translateX(-50%) rotateY(180deg);
 }

@@ -1194,7 +1194,7 @@ const InsSettings = ({
     const customTooltipshapeBottomWidth = value => `${value}${attributes.shapeBottomWidthUnit}`;
 	const customTooltipshapeTopHeight = value => `${value}${attributes.shapeTopHeightUnit}`;
     const customTooltipshapeBottomHeight = value => `${value}${attributes.shapeBottomHeightUnit}`;
-	
+
 	// shaper width top
 	const getShapeTopWidth = () => {
 		switch ( getView ) {
@@ -1971,7 +1971,7 @@ const InsSettings = ({
 								
 				             	/>
 								 <ColorGradientControl
-								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 label={ __( 'Color', 'themehunk-block' ) }
 								 colorValue={ attributes.shapeTopClr }
 								 onColorChange={ e => setAttributes({ shapeTopClr: e }) }
 								 />
@@ -2020,6 +2020,28 @@ const InsSettings = ({
 										allowReset={ true }
 									/>
 									</ResponsiveControl>
+
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Flip', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeTopFlip }
+												onChange={ shapeTopFlip => setAttributes({ shapeTopFlip }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
 								 </>
 						) || 'bottom' ===  shaper && (
                             <>
@@ -2063,11 +2085,11 @@ const InsSettings = ({
 								 />
 								 </ResponsiveControl>
 								 <ResponsiveControl
-								 label={ __( 'Width', 'themehunk-block' ) }
+								 label={ __( 'Height', 'themehunk-block' ) }
 								 >	
 								 <UnitChooser
 								 value={ attributes.shapeBottomHeightUnit }
-								 onClick={shapeBottomWidthUnit => {
+								 onClick={shapeBottomHeightUnit => {
 									 setAttributes({ shapeBottomHeightUnit });
 									 setshapeBottomHeightUnit(shapeBottomHeightUnit);
 								 }}
@@ -2084,6 +2106,27 @@ const InsSettings = ({
 									 allowReset={ true }
 								 />
 								 </ResponsiveControl>
+								 <div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Flip', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeBottomFlip }
+												onChange={ shapeBottomFlip => setAttributes({ shapeBottomFlip }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
 								 </>
 						)}
                         </PanelBody>

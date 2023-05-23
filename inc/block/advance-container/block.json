@@ -846,7 +846,8 @@
 			"default": "0.2"
 		},
 		"shapeTop": {
-			"type": "string"
+			"type": "string",
+			"default": "default"
 		},
 		"shapeTopWidth": {
 			"type": "number"
@@ -872,8 +873,13 @@
 		"shapeTopHeightUnit": {
 			"type": "string"
 		},
+		"shapeTopFlip": {
+			"type": "boolean",
+			"default": false
+		},
 		"shapeBottom": {
-			"type": "string"
+			"type": "string",
+			"default": "default"
 		},
 		"shapeBottomHeight": {
 			"type": "number"
@@ -904,6 +910,10 @@
 		},
 		"shapeBottomClr": {
 			"type": "string"
+		},
+		"shapeBottomFlip": {
+			"type": "boolean",
+			"default": false
 		}
 
 	},
