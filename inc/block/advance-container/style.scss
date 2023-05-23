@@ -41,4 +41,37 @@
 		min-height:  40px;
 		min-width: 40px;
 	   fill:"#000"
-	}
+}
+
+.th-shape{
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    direction: ltr;
+    top:-1px;
+    
+}
+
+.th-shape svg{
+   fill:#9E9E9E;
+   position: relative;
+}
+
+.th-shape.flip svg{
+   left: 50%;
+   transform: translateX(-50%) rotateY(180deg);
+}
+
+.th-shape-top {
+    top: -1px;
+}
+
+.th-shape-bottom {
+    bottom: -1px;
+}
+
+.th-shape-bottom{
+transform: rotate(180deg);
+}

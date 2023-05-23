@@ -20,6 +20,7 @@ import BlockAppender from './BlockAppender';
  */
 import Controls from './controls.js';
 import InsSettings from './settings.js';
+import ThShaper from './shaper.js';
 import getUniqueId from '../../../src/helpers/get-unique-id.js';
 import './editor.scss';
 
@@ -713,6 +714,7 @@ export default function Edit({
 						style={overlayStyle}
 					/>
 				)}
+				<ThShaper attributes={attributes} />
 				<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 				</Tag>
 
@@ -725,6 +727,7 @@ export default function Edit({
 								style={overlayStyle}
 							/>
 						)}
+						<ThShaper attributes={attributes} />
 						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 					</Tag>
 				</div>

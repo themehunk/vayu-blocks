@@ -844,6 +844,66 @@
 		"transitionAll": {
 			"type": "number",
 			"default": "0.2"
+		},
+		"shapeTop": {
+			"type": "string"
+		},
+		"shapeTopWidth": {
+			"type": "number"
+		},
+		"shapeTopWidthTablet": {
+			"type": "number"
+		},
+		"shapeTopWidthMobile": {
+			"type": "number"
+		},
+		"shapeTopWidthUnit": {
+			"type": "string"
+		},
+		"shapeTopHeight": {
+			"type": "number"
+		},
+		"shapeTopHeightTablet": {
+			"type": "number"
+		},
+		"shapeTopHeightMobile": {
+			"type": "number"
+		},
+		"shapeTopHeightUnit": {
+			"type": "string"
+		},
+		"shapeBottom": {
+			"type": "string"
+		},
+		"shapeBottomHeight": {
+			"type": "number"
+		},
+		"shapeBottomHeightTablet": {
+			"type": "number"
+		},
+		"shapeBottomHeightMobile": {
+			"type": "number"
+		},
+		"shapeBottomHeightUnit": {
+			"type": "string"
+		},
+		"shapeBottomWidth": {
+			"type": "number"
+		},
+		"shapeBottomWidthTablet": {
+			"type": "number"
+		},
+		"shapeBottomWidthMobile": {
+			"type": "number"
+		},
+		"shapeBottomWidthUnit": {
+			"type": "string"
+		},
+		"shapeTopClr": {
+			"type": "string"
+		},
+		"shapeBottomClr": {
+			"type": "string"
 		}
 
 	},

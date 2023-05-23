@@ -59,6 +59,7 @@ const InsSettings = ({
 
     const [ tab, setTab ] = useState( 'layout' );
 	const [ hover, setHover ] = useState( 'normal' );
+	const [ shaper, setShaper ] = useState( 'top' );
 	const ANCHOR_REGEX = /[\s#]/g;
     //boxed width
     const getBoxedcontentWidth = () => {
@@ -1189,6 +1190,115 @@ const InsSettings = ({
    
 	const customTooltiptransitionAll = value => `${value}`;
 
+	const customTooltipshapeTopWidth = value => `${value}${attributes.shapeTopWidthUnit}`;
+    const customTooltipshapeBottomWidth = value => `${value}${attributes.shapeBottomWidthUnit}`;
+	const customTooltipshapeTopHeight = value => `${value}${attributes.shapeTopHeightUnit}`;
+    const customTooltipshapeBottomHeight = value => `${value}${attributes.shapeBottomHeightUnit}`;
+	
+	// shaper width top
+	const getShapeTopWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeTopWidth;
+		case 'Tablet':
+			return attributes.shapeTopWidthTablet;
+		case 'Mobile':
+			return attributes.shapeTopWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeTopWidth = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeTopWidth: value, shapeTopWidthTablet: value, shapeTopWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeTopWidthTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeTopWidthMobile: value });
+		}
+
+	};
+
+	// shaper top height
+	const getShapeTopHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeTopHeight;
+		case 'Tablet':
+			return attributes.shapeTopHeightTablet;
+		case 'Mobile':
+			return attributes.shapeTopHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeTopHeight = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeTopHeight: value, shapeTopHeightTablet: value, shapeTopHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeTopHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeTopHeightMobile: value });
+		}
+
+	};
+
+	// shaper width Bottom
+	const getShapeBottomWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeBottomWidth;
+		case 'Tablet':
+			return attributes.shapeBottomWidthTablet;
+		case 'Mobile':
+			return attributes.shapeBottomWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeBottomWidth = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeBottomWidth: value, shapeBottomWidthTablet: value, shapeBottomWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeBottomWidthTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeBottomWidthMobile: value });
+		}
+
+	};
+
+	// shaper height Bottom
+	const getShapeBottomHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeBottomHeight;
+		case 'Tablet':
+			return attributes.shapeBottomHeightTablet;
+		case 'Mobile':
+			return attributes.shapeBottomHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeBottomHeight = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeBottomHeight: value, shapeBottomHeightTablet: value, shapeBottomHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeBottomHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeBottomHeightMobile: value });
+		}
+
+	};
+
 
     // unit switch max value
 	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
@@ -1218,6 +1328,17 @@ const InsSettings = ({
 	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
 	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
 	
+	const [shapeTopWidthUnit, setshapeTopWidthUnit] = useState('px');
+	const maxShapeTopWidthUnit = shapeTopWidthUnit === 'px' ? 1500 : shapeTopWidthUnit === 'em' ? 50 : shapeTopWidthUnit === '%' ? 100:'';
+    
+	const [shapeBottomWidthUnit, setshapeBottomWidthUnit] = useState('px');
+	const maxShapeBottomWidthUnit = shapeBottomWidthUnit === 'px' ? 1500 : shapeBottomWidthUnit === 'em' ? 50 : shapeBottomWidthUnit === '%' ? 100:'';
+	
+	const [shapeTopHeightUnit, setshapeTopHeightUnit] = useState('px');
+	const maxShapeTopHeightUnit = shapeTopHeightUnit === 'px' ? 1500 : shapeTopHeightUnit === 'em' ? 50 : shapeTopWidthUnit === '%' ? 100:'';
+    
+	const [shapeBottomHeightUnit, setshapeBottomHeightUnit] = useState('px');
+	const maxShapeBottomHeightUnit = shapeBottomHeightUnit === 'px' ? 1500 : shapeBottomHeightUnit === 'em' ? 50 : shapeBottomHeightUnit === '%' ? 100:'';
 	return (
         <Fragment>
         <InspectorControls>
@@ -1815,8 +1936,159 @@ const InsSettings = ({
 						)}	
                         
 						</PanelBody>
+
+						<PanelBody
+						title={ __( 'Shape Divider', 'themehunk-block' ) }
+						initialOpen={ false }
+						className="th-container-panel th-Shape-ivider-control"
+						> 
+
+                        <HoverControl value={ shaper }
+						options={[
+							{
+								label: __( 'Top', 'themehunk-block' ),
+								value: 'top'
+							},
+							{
+								label: __( 'Bottom', 'themehunk-block' ),
+								value: 'bottom'
+							}
+						]}
+						onChange={ setShaper } />
+                        { 'top' ===  shaper &&  (
+							<>
+                            <SelectControl
+								value={ attributes.shapeTop }
+								onChange={ e => setAttributes({ shapeTop: e }) }
+								options={ [
+									{ label:  __( 'default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'curve', 'themehunk-block' ), value: 'curve' },
+									{ label: __( 'triangle', 'themehunk-block' ), value: 'triangle' },
+                                    { label: __( 'wave', 'themehunk-block' ), value: 'wave' },
+                                    { label: __( 'mountain', 'themehunk-block' ), value: 'mountain' },         
+								] }
+
+								
+				             	/>
+								 <ColorGradientControl
+								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 colorValue={ attributes.shapeTopClr }
+								 onColorChange={ e => setAttributes({ shapeTopClr: e }) }
+								 />
+
+									<ResponsiveControl
+									label={ __( 'Width', 'themehunk-block' ) }
+									>	
+									<UnitChooser
+									value={ attributes.shapeTopWidthUnit }
+									onClick={shapeTopWidthUnit => {
+										setAttributes({ shapeTopWidthUnit });
+										setshapeTopWidthUnit(shapeTopWidthUnit);
+									}}
+									
+									units={ [ 'px', 'em', '%' ] }
+									/>
+									<RangeControl
+										renderTooltipContent={ customTooltipshapeTopWidth }
+										value={ getShapeTopWidth() || '' }
+										onChange={ changeShapeTopWidth }
+										step={ 1 }
+										min={ 1 }
+										max={ maxShapeTopWidthUnit }
+										allowReset={ true }
+									/>
+									</ResponsiveControl>
+									<ResponsiveControl
+									label={ __( 'Height', 'themehunk-block' ) }
+									>	
+									<UnitChooser
+									value={ attributes.shapeTopHeightUnit }
+									onClick={shapeTopHeightUnit => {
+										setAttributes({ shapeTopHeightUnit });
+										setshapeTopHeightUnit(shapeTopHeightUnit);
+									}}
+									
+									units={ [ 'px', 'em', '%' ] }
+									/>
+									<RangeControl
+										renderTooltipContent={ customTooltipshapeTopHeight }
+										value={ getShapeTopHeight() || '' }
+										onChange={ changeShapeTopHeight }
+										step={ 1 }
+										min={ 1 }
+										max={ maxShapeTopHeightUnit }
+										allowReset={ true }
+									/>
+									</ResponsiveControl>
+								 </>
+						) || 'bottom' ===  shaper && (
+                            <>
+                            <SelectControl
+								value={ attributes.shapeBottom }
+								onChange={ e => setAttributes({ shapeBottom: e }) }
+								options={ [
+									{ label:  __( 'default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'curve', 'themehunk-block' ), value: 'curve' },
+									{ label: __( 'triangle', 'themehunk-block' ), value: 'triangle' },
+                                    { label: __( 'wave', 'themehunk-block' ), value: 'wave' },
+                                    { label: __( 'mountain', 'themehunk-block' ), value: 'mountain' },         
+								] }
+				             	/>
+								 <ColorGradientControl
+								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 colorValue={ attributes.shapeBottomClr }
+								 onColorChange={ e => setAttributes({ shapeBottomClr: e }) }
+								 />
+								 
+								 <ResponsiveControl
+								 label={ __( 'Width', 'themehunk-block' ) }
+								 >	
+								 <UnitChooser
+								 value={ attributes.shapeBottomWidthUnit }
+								 onClick={shapeBottomWidthUnit => {
+									 setAttributes({ shapeBottomWidthUnit });
+									 setshapeBottomWidthUnit(shapeBottomWidthUnit);
+								 }}
+								 
+								 units={ [ 'px', 'em', '%' ] }
+								 />
+								 <RangeControl
+									 renderTooltipContent={ customTooltipshapeBottomWidth }
+									 value={ getShapeBottomWidth() || '' }
+									 onChange={ changeShapeBottomWidth }
+									 step={ 1 }
+									 min={ 1 }
+									 max={ maxShapeBottomWidthUnit }
+									 allowReset={ true }
+								 />
+								 </ResponsiveControl>
+								 <ResponsiveControl
+								 label={ __( 'Width', 'themehunk-block' ) }
+								 >	
+								 <UnitChooser
+								 value={ attributes.shapeBottomHeightUnit }
+								 onClick={shapeBottomWidthUnit => {
+									 setAttributes({ shapeBottomHeightUnit });
+									 setshapeBottomHeightUnit(shapeBottomHeightUnit);
+								 }}
+								 
+								 units={ [ 'px', 'em', '%' ] }
+								 />
+								 <RangeControl
+									 renderTooltipContent={ customTooltipshapeBottomHeight }
+									 value={ getShapeBottomHeight() || '' }
+									 onChange={ changeShapeBottomHeight }
+									 step={ 1 }
+									 min={ 1 }
+									 max={ maxShapeBottomHeightUnit }
+									 allowReset={ true }
+								 />
+								 </ResponsiveControl>
+								 </>
+						)}
+                        </PanelBody>
 						</>
-		)}
+		 )}
 
          {'advanced' === tab && (
 			 <Fragment>
