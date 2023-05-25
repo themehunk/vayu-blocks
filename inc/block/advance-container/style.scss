@@ -51,11 +51,16 @@
     line-height: 0;
     direction: ltr;
     top:-1px;
+    z-index: -1;
     
 }
 
 .th-shape svg{
-   position: relative;
+    display: block;
+    width:100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .th-shape.flip-top svg,.th-shape.flip-bottom svg{

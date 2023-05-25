@@ -7,6 +7,7 @@ import {
 } from '@wordpress/block-editor';
 
 import classnames from 'classnames';
+import ThShaper from './shaper.js';
 
 export default function Save({attributes}){
 
@@ -37,6 +38,7 @@ export default function Save({attributes}){
 			{showShouldOverlay && (
 						<div className="wp-block-th-blocks-container-overlay"/>
 			)}
+			<ThShaper attributes={attributes} />
 			<div className='th-inside-content-wrap th-con' >
 				<InnerBlocks.Content />
 			</div>

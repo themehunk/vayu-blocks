@@ -859,7 +859,8 @@
 			"type": "number"
 		},
 		"shapeTopWidthUnit": {
-			"type": "string"
+			"type": "string",
+			"default": "%"
 		},
 		"shapeTopHeight": {
 			"type": "number"
@@ -871,7 +872,8 @@
 			"type": "number"
 		},
 		"shapeTopHeightUnit": {
-			"type": "string"
+			"type": "string",
+			"default": "px"
 		},
 		"shapeTopFlip": {
 			"type": "boolean",
@@ -891,7 +893,8 @@
 			"type": "number"
 		},
 		"shapeBottomHeightUnit": {
-			"type": "string"
+			"type": "string",
+			"default": "px"
 		},
 		"shapeBottomWidth": {
 			"type": "number"
@@ -903,7 +906,8 @@
 			"type": "number"
 		},
 		"shapeBottomWidthUnit": {
-			"type": "string"
+			"type": "string",
+			"default": "%"
 		},
 		"shapeTopClr": {
 			"type": "string"

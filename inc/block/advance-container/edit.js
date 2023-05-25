@@ -156,6 +156,8 @@ export default function Edit({
 			let flexProperties;
 			let PositionProperties;
 
+			let ShaperStyle;
+
 			if ( 'color' === attributes.backgroundType ) {
 				backgroundStyle = {
 					'--background': attributes.backgroundColor
@@ -252,6 +254,7 @@ export default function Edit({
 					'--border-TopLeft-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRight }${ attributes.borderRadiusHvrUnit }`,
 					'--border-BottomRight-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
 					'--border-BottomLeft-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
+				    
 				}
 
 				if(attributes.contentWidthType=='fullwidth'){
@@ -363,6 +366,15 @@ export default function Edit({
 						}
 
 					}
+
+					//svg properties
+					ShaperStyle = { 
+						'--shaper-top-width': (attributes.shapeTopWidth || '100') + '%',
+						'--shaper-top-height': attributes.shapeTopHeight + 'px' ,
+					    '--shaper-bottom-width': (attributes.shapeBottomWidth || '100') + '%',
+						'--shaper-bottom-height': attributes.shapeBottomHeight  + 'px' ,
+					};
+
 				
 			}
 
@@ -488,6 +500,14 @@ export default function Edit({
 			
 					 }
 
+					//svg properties
+					ShaperStyle = { 
+						'--shaper-top-width': (attributes.shapeTopWidthTablet || '100') + '%',
+						'--shaper-top-height': attributes.shapeTopHeightTablet + 'px' ,
+					    '--shaper-bottom-width': (attributes.shapeBottomWidthTablet || '100') + '%',
+						'--shaper-bottom-height': attributes.shapeBottomHeightTablet  + 'px' ,
+					};
+
 			}
 
 			if ( isMobile ) {
@@ -571,7 +591,17 @@ export default function Edit({
 		
 				 }
 
+				//svg properties
+				ShaperStyle = { 
+					'--shaper-top-width': (attributes.shapeTopWidthMobile || '100') + '%',
+					'--shaper-top-height': attributes.shapeTopHeightMobile + 'px' ,
+					'--shaper-bottom-width': (attributes.shapeBottomWidthMobile || '100') + '%',
+					'--shaper-bottom-height': attributes.shapeBottomHeightMobile  + 'px' ,
+				};
+
+
 		   }
+		   //end mobile
 
 			if ( attributes.verticalAlign ) {
 				insidecontainerStyles = {...insidecontainerStyles, alignItems: verticalAlignValues[ attributes.verticalAlign ]};
@@ -647,6 +677,7 @@ export default function Edit({
 				...borderStyle,
 				...boxShadowStyle,
 				...transitiondur,
+				...ShaperStyle
 			}, x => x?.includes?.( 'undefined' ));
 
 			

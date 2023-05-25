@@ -1979,44 +1979,28 @@ const InsSettings = ({
 									<ResponsiveControl
 									label={ __( 'Width', 'themehunk-block' ) }
 									>	
-									<UnitChooser
-									value={ attributes.shapeTopWidthUnit }
-									onClick={shapeTopWidthUnit => {
-										setAttributes({ shapeTopWidthUnit });
-										setshapeTopWidthUnit(shapeTopWidthUnit);
-									}}
 									
-									units={ [ 'px', 'em', '%' ] }
-									/>
 									<RangeControl
 										renderTooltipContent={ customTooltipshapeTopWidth }
 										value={ getShapeTopWidth() || '' }
 										onChange={ changeShapeTopWidth }
 										step={ 1 }
-										min={ 1 }
-										max={ maxShapeTopWidthUnit }
+										min={ 100 }
+										max={ 300 }
 										allowReset={ true }
 									/>
 									</ResponsiveControl>
 									<ResponsiveControl
 									label={ __( 'Height', 'themehunk-block' ) }
 									>	
-									<UnitChooser
-									value={ attributes.shapeTopHeightUnit }
-									onClick={shapeTopHeightUnit => {
-										setAttributes({ shapeTopHeightUnit });
-										setshapeTopHeightUnit(shapeTopHeightUnit);
-									}}
 									
-									units={ [ 'px', 'em', '%' ] }
-									/>
 									<RangeControl
 										renderTooltipContent={ customTooltipshapeTopHeight }
 										value={ getShapeTopHeight() || '' }
 										onChange={ changeShapeTopHeight }
 										step={ 1 }
 										min={ 1 }
-										max={ maxShapeTopHeightUnit }
+										max={ 1500 }
 										allowReset={ true }
 									/>
 									</ResponsiveControl>
@@ -2057,7 +2041,7 @@ const InsSettings = ({
 								] }
 				             	/>
 								 <ColorGradientControl
-								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 label={ __( 'Color', 'themehunk-block' ) }
 								 colorValue={ attributes.shapeBottomClr }
 								 onColorChange={ e => setAttributes({ shapeBottomClr: e }) }
 								 />
@@ -2065,44 +2049,28 @@ const InsSettings = ({
 								 <ResponsiveControl
 								 label={ __( 'Width', 'themehunk-block' ) }
 								 >	
-								 <UnitChooser
-								 value={ attributes.shapeBottomWidthUnit }
-								 onClick={shapeBottomWidthUnit => {
-									 setAttributes({ shapeBottomWidthUnit });
-									 setshapeBottomWidthUnit(shapeBottomWidthUnit);
-								 }}
-								 
-								 units={ [ 'px', 'em', '%' ] }
-								 />
+								
 								 <RangeControl
 									 renderTooltipContent={ customTooltipshapeBottomWidth }
 									 value={ getShapeBottomWidth() || '' }
 									 onChange={ changeShapeBottomWidth }
 									 step={ 1 }
-									 min={ 1 }
-									 max={ maxShapeBottomWidthUnit }
+									 min={ 100 }
+									 max={ 300 }
 									 allowReset={ true }
 								 />
 								 </ResponsiveControl>
 								 <ResponsiveControl
 								 label={ __( 'Height', 'themehunk-block' ) }
 								 >	
-								 <UnitChooser
-								 value={ attributes.shapeBottomHeightUnit }
-								 onClick={shapeBottomHeightUnit => {
-									 setAttributes({ shapeBottomHeightUnit });
-									 setshapeBottomHeightUnit(shapeBottomHeightUnit);
-								 }}
 								 
-								 units={ [ 'px', 'em', '%' ] }
-								 />
 								 <RangeControl
 									 renderTooltipContent={ customTooltipshapeBottomHeight }
 									 value={ getShapeBottomHeight() || '' }
 									 onChange={ changeShapeBottomHeight }
 									 step={ 1 }
 									 min={ 1 }
-									 max={ maxShapeBottomHeightUnit }
+									 max={ 1500 }
 									 allowReset={ true }
 								 />
 								 </ResponsiveControl>
