@@ -4,10 +4,12 @@ const ThShaper = ({ attributes }) => {
     
     const ShaperTopClasses = classnames({
         "flip-top": attributes.shapeTopFlip,
+        
       });
 
     const ShaperBottomClasses = classnames({
         'flip-bottom': attributes.shapeBottomFlip,
+        
       });
     
   return (

@@ -879,6 +879,14 @@
 			"type": "boolean",
 			"default": false
 		},
+		"shapeTopFront": {
+			"type": "boolean",
+			"default": false
+		},
+		"shapeTopInvert": {
+			"type": "boolean",
+			"default": false
+		},
 		"shapeBottom": {
 			"type": "string",
 			"default": "default"
@@ -916,6 +924,14 @@
 			"type": "string"
 		},
 		"shapeBottomFlip": {
+			"type": "boolean",
+			"default": false
+		},
+		"shapeBottomFront": {
+			"type": "boolean",
+			"default": false
+		},
+		"shapeBottomInvert": {
 			"type": "boolean",
 			"default": false
 		}

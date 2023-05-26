@@ -180,6 +180,13 @@ background:#000;
     height:var(--shaper-bottom-height);
 }
 
+.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-top{
+	z-index:var(--shaper-z-index-top);
+}
+.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-bottom{
+	z-index:var(--shaper-z-index-bottom);
+}
+
 .th-root-block-container {
 	position:relative
 }

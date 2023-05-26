@@ -373,6 +373,9 @@ export default function Edit({
 						'--shaper-top-height': attributes.shapeTopHeight + 'px' ,
 					    '--shaper-bottom-width': (attributes.shapeBottomWidth || '100') + '%',
 						'--shaper-bottom-height': attributes.shapeBottomHeight  + 'px' ,
+                        '--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+						'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
+						
 					};
 
 				
@@ -506,6 +509,8 @@ export default function Edit({
 						'--shaper-top-height': attributes.shapeTopHeightTablet + 'px' ,
 					    '--shaper-bottom-width': (attributes.shapeBottomWidthTablet || '100') + '%',
 						'--shaper-bottom-height': attributes.shapeBottomHeightTablet  + 'px' ,
+						'--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+						'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
 					};
 
 			}
@@ -597,6 +602,8 @@ export default function Edit({
 					'--shaper-top-height': attributes.shapeTopHeightMobile + 'px' ,
 					'--shaper-bottom-width': (attributes.shapeBottomWidthMobile || '100') + '%',
 					'--shaper-bottom-height': attributes.shapeBottomHeightMobile  + 'px' ,
+					'--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+					'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
 				};
 
 

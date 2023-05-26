@@ -2026,6 +2026,28 @@ const InsSettings = ({
 												
 											/>
 									</div>
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Bring to Front', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeTopFront }
+												onChange={ shapeTopFront => setAttributes({ shapeTopFront }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
+									
 								 </>
 						) || 'bottom' ===  shaper && (
                             <>
@@ -2095,6 +2117,26 @@ const InsSettings = ({
 												
 											/>
 									</div>
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Bring to Front', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+												value={ attributes.shapeBottomFront }
+												onChange={ shapeBottomFront => setAttributes({ shapeBottomFront }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+											/>
+									</div>
+									
 								 </>
 						)}
                         </PanelBody>
