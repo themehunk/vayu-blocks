@@ -281,6 +281,23 @@ export const JfCntend1 = (
 </svg>
 );
 
+// row reverse
+export const JfCntstrRR = (
+  <svg xmlns="http://www.w3.org/2000/svg" id="Justify_content" data-name="Justify content" width="500" height="500" viewBox="0 0 500 500">
+    <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="165" y="128" width="42" height="245" rx="9" ry="9"/>
+    <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" fill="#5d5d5e" class="cls-1" x="221" y="128" width="42" height="245" rx="9" ry="9"/>
+    <rect id="Rounded_Rectangle_5_copy_2" data-name="Rounded Rectangle 5 copy 2" fill="#a1a1a2" class="cls-2" x="286" y="92" width="26" height="318" rx="9" ry="9"/>
+  </svg>
+  );
+export const JfCntendRR = (
+  <svg xmlns="http://www.w3.org/2000/svg" id="Justify_content" data-name="Justify content" width="500" height="500" viewBox="0 0 500 500">
+  <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="282" y="128" width="42" height="245" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" fill="#5d5d5e" class="cls-1" x="226" y="128" width="42" height="245" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_5_copy_2" data-name="Rounded Rectangle 5 copy 2" fill="#a1a1a2" class="cls-2" x="177" y="91" width="26" height="318" rx="9" ry="9"/>
+  </svg>
+  );    
+/************************* */
+
 export const JfCntspbtn1 = (
   <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
   <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="161" y="128" width="42" height="245" rx="9" ry="9"/>
@@ -290,15 +307,15 @@ export const JfCntspbtn1 = (
 </svg>
 );
 export const JfCntsparnd1 = (
-  <svg xmlns="http://www.w3.org/2000/svg" id="Justify_content_more" data-name="Justify content more" width="500" height="500" viewBox="0 0 500 500">
-  <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="133" y="204" width="235" height="42" rx="9" ry="9"/>
-  <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" fill="#5d5d5e" class="cls-1" x="133" y="255" width="235" height="42" rx="9" ry="9"/>
-  <rect id="Rounded_Rectangle_5_copy_2" data-name="Rounded Rectangle 5 copy 2" fill="#a1a1a2" class="cls-2" x="107" y="345" width="287" height="36" rx="9" ry="9"/>
-  <rect id="Rounded_Rectangle_5_copy_5" data-name="Rounded Rectangle 5 copy 5" fill="#a1a1a2" class="cls-2" x="107" y="119" width="287" height="36" rx="9" ry="9"/>
+  <svg xmlns="http://www.w3.org/2000/svg" id="Justify_content" data-name="Justify content" width="500" height="500" viewBox="0 0 500 500">
+  <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="201" y="128" width="42" height="245" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" fill="#5d5d5e" class="cls-1" x="258" y="128" width="42" height="245" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_5_copy_2" data-name="Rounded Rectangle 5 copy 2" fill="#a1a1a2" class="cls-2" x="360" y="91" width="26" height="318" rx="9" ry="9"/>
+  <rect id="Rounded_Rectangle_5_copy_7" data-name="Rounded Rectangle 5 copy 7" fill="#a1a1a2" class="cls-2" x="114" y="91" width="26" height="318" rx="9" ry="9"/>
 </svg>
 );
 
-export const JfCntspevn1 = (
+export const JfCntspevn1 = ( 
   <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
   <rect id="Rounded_Rectangle_5_copy" data-name="Rounded Rectangle 5 copy" fill="#5d5d5e" class="cls-1" x="198" y="128" width="42" height="245" rx="9" ry="9"/>
   <rect id="Rounded_Rectangle_5_copy_3" data-name="Rounded Rectangle 5 copy 3" fill="#5d5d5e" class="cls-1" x="261" y="128" width="42" height="245" rx="9" ry="9"/>
@@ -339,3 +356,80 @@ export const alignitemstrech = (
   <rect id="Rounded_Rectangle_6_copy" data-name="Rounded Rectangle 6 copy" fill="#5d5d5e" class="cls-2" x="139" y="258" width="225" height="52" rx="24" ry="24"/>
   </svg>
 );
+
+export const alignitemstr1 = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+    <rect class="cls-1" x="78" y="142" width="344" height="22" rx="11" ry="11"/>
+    <rect class="cls-1" x="201" y="177" width="40" height="182" rx="16" ry="16"/>
+    <rect id="Rectangle_8_copy" data-name="Rectangle 8 copy" fill="#5d5d5e" class="cls-1" x="259" y="177" width="40" height="120" rx="16" ry="16"/>
+  </svg>
+  );
+
+  export const alignitemcnt1 = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect class="cls-1" x="78" y="239" width="344" height="22" rx="11" ry="11"/>
+  <rect class="cls-1" x="200" y="131" width="40" height="238" rx="16" ry="16"/>
+  <rect id="Rectangle_8_copy" data-name="Rectangle 8 copy" fill="#5d5d5e" class="cls-1" x="259" y="190" width="40" height="120" rx="16" ry="16"/>
+</svg>
+  );
+  
+  export const alignitemend1 = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+    <rect class="cls-1" x="78" y="337" width="344" height="22" rx="11" ry="11"/>
+    <rect class="cls-1" x="259" y="142" width="40" height="182" rx="16" ry="16"/>
+    <rect id="Rectangle_8_copy" data-name="Rectangle 8 copy" fill="#5d5d5e" class="cls-1" x="201" y="204" width="40" height="120" rx="16" ry="16"/>
+  </svg>
+  );
+
+  export const alignitemstrech1 = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect class="cls-1" x="92" y="97" width="316" height="22" rx="11" ry="11"/>
+  <rect id="Rectangle_7_copy" data-name="Rectangle 7 copy" fill="#5d5d5e" class="cls-1" x="92" y="384" width="316" height="22" rx="11" ry="11"/>
+  <rect class="cls-1" x="196" y="131" width="40" height="238" rx="16" ry="16"/>
+  <rect id="Rectangle_8_copy_2" data-name="Rectangle 8 copy 2" fill="#5d5d5e" class="cls-1" x="264" y="131" width="40" height="238" rx="16" ry="16"/>
+</svg>
+  );
+
+  export const wrap1 = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect class="cls-1" x="92" y="97" width="316" height="22" rx="11" ry="11"/>
+  <rect id="Rectangle_7_copy" data-name="Rectangle 7 copy" fill="#5d5d5e" class="cls-1" x="92" y="384" width="316" height="22" rx="11" ry="11"/>
+  <rect class="cls-1" x="196" y="131" width="40" height="238" rx="16" ry="16"/>
+  <rect id="Rectangle_8_copy_2" data-name="Rectangle 8 copy 2" fill="#5d5d5e" class="cls-1" x="264" y="131" width="40" height="238" rx="16" ry="16"/>
+</svg>
+  );
+
+  export const wrap2 = (
+    <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect class="cls-1" x="92" y="97" width="316" height="22" rx="11" ry="11"/>
+  <rect id="Rectangle_7_copy" data-name="Rectangle 7 copy" fill="#5d5d5e" class="cls-1" x="92" y="384" width="316" height="22" rx="11" ry="11"/>
+  <rect class="cls-1" x="196" y="131" width="40" height="238" rx="16" ry="16"/>
+  <rect id="Rectangle_8_copy_2" data-name="Rectangle 8 copy 2" fill="#5d5d5e" class="cls-1" x="264" y="131" width="40" height="238" rx="16" ry="16"/>
+</svg>
+  );
+
+  export const HeadingIcon = (
+    <svg  class="th-block-icon" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <text id="H" font-size='347.65px' text-anchor='middle' font-family='Comfortaa' font-weight='700' fill="#777778" class="cls-1" transform="matrix(1.184, 0, 0, 1.184, 250, 405.422)"><tspan x="0">H</tspan></text>
+</svg>
+  );
+
+  export const ConatinerIcon = (
+  <svg class="th-block-icon" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <rect id="Rounded_Rectangle_10" data-name="Rounded Rectangle 10" fill="#5d5d5e" class="cls-1" x="110" y="112" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy" data-name="Rounded Rectangle 10 copy" fill="#5d5d5e" class="cls-1" x="110" y="112" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_2" data-name="Rounded Rectangle 10 copy 2" fill="#5d5d5e" class="cls-1" x="307" y="381" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_3" data-name="Rounded Rectangle 10 copy 3" fill="#5d5d5e" class="cls-1" x="382" y="306" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_6" data-name="Rounded Rectangle 10 copy 6" fill="#5d5d5e" class="cls-1" x="110" y="306" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_7" data-name="Rounded Rectangle 10 copy 7" fill="#5d5d5e" class="cls-1" x="110" y="381" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_4" data-name="Rounded Rectangle 10 copy 4" fill="#5d5d5e" class="cls-1" x="382" y="112" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_5" data-name="Rounded Rectangle 10 copy 5" fill="#5d5d5e" class="cls-1" x="307" y="112" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_8" data-name="Rounded Rectangle 10 copy 8" fill="#5d5d5e" class="cls-2" x="214" y="112" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_9" data-name="Rounded Rectangle 10 copy 9" fill="#777778" class="cls-2" x="110" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_10" data-name="Rounded Rectangle 10 copy 10" fill="#777778" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_11" data-name="Rounded Rectangle 10 copy 11" fill="#777778" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_12" data-name="Rounded Rectangle 10 copy 12" fill="#777778" x="214" y="381" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_13" data-name="Rounded Rectangle 10 copy 13" fill="#777778" x="214" y="246" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_14" data-name="Rounded Rectangle 10 copy 14" fill="#777778" x="246" y="214" width="8" height="72" rx="4" ry="4"/>
+  </svg>
+  );

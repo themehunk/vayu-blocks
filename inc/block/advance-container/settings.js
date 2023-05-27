@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 
-import {AlignmentToolbar, __experimentalColorGradientControl as ColorGradientControl,InspectorControls} from '@wordpress/block-editor';
+import {InspectorAdvancedControls , __experimentalColorGradientControl as ColorGradientControl,InspectorControls} from '@wordpress/block-editor';
 
 import {
     PanelBody,
@@ -11,7 +11,7 @@ import {
     SelectControl,
     Placeholder,
     Spinner,
-    ToggleControl,
+    ToggleControl,TextControl
 } from '@wordpress/components';
 
 import { useSelect } from '@wordpress/data';
@@ -40,8 +40,9 @@ import { Start, Center , End, Strech,
 	  HorizontalLeft, HorizontalRight, 
 	  VerticalTop, VerticalBottom,
 	  ArwLft, ArwRgt, ArwUp, ArwDn,JfCntstr,JfCntend,JfCntctr,JfCntspbtn,JfCntsparnd,JfCntspevn,
-	  JfCntstr1,JfCntend1,JfCntctr1,JfCntspbtn1,JfCntsparnd1,JfCntspevn1,alignitemstr,alignitemcnt,alignitemend,alignitemstrech
-	 } from '../../../src/helpers/icon.js';
+	  JfCntstr1,JfCntend1,JfCntctr1,JfCntspbtn1,JfCntsparnd1,JfCntspevn1,alignitemstr,alignitemcnt,alignitemend,alignitemstrech,
+	  alignitemstr1,alignitemcnt1,alignitemend1,alignitemstrech1
+	  , JfCntstrRR, JfCntendRR} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
     attributes,
@@ -58,7 +59,8 @@ const InsSettings = ({
 
     const [ tab, setTab ] = useState( 'layout' );
 	const [ hover, setHover ] = useState( 'normal' );
-	
+	const [ shaper, setShaper ] = useState( 'top' );
+	const ANCHOR_REGEX = /[\s#]/g;
     //boxed width
     const getBoxedcontentWidth = () => {
 		switch ( getView ) {
@@ -1188,6 +1190,115 @@ const InsSettings = ({
    
 	const customTooltiptransitionAll = value => `${value}`;
 
+	const customTooltipshapeTopWidth = value => `${value}${attributes.shapeTopWidthUnit}`;
+    const customTooltipshapeBottomWidth = value => `${value}${attributes.shapeBottomWidthUnit}`;
+	const customTooltipshapeTopHeight = value => `${value}${attributes.shapeTopHeightUnit}`;
+    const customTooltipshapeBottomHeight = value => `${value}${attributes.shapeBottomHeightUnit}`;
+
+	// shaper width top
+	const getShapeTopWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeTopWidth;
+		case 'Tablet':
+			return attributes.shapeTopWidthTablet;
+		case 'Mobile':
+			return attributes.shapeTopWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeTopWidth = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeTopWidth: value, shapeTopWidthTablet: value, shapeTopWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeTopWidthTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeTopWidthMobile: value });
+		}
+
+	};
+
+	// shaper top height
+	const getShapeTopHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeTopHeight;
+		case 'Tablet':
+			return attributes.shapeTopHeightTablet;
+		case 'Mobile':
+			return attributes.shapeTopHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeTopHeight = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeTopHeight: value, shapeTopHeightTablet: value, shapeTopHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeTopHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeTopHeightMobile: value });
+		}
+
+	};
+
+	// shaper width Bottom
+	const getShapeBottomWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeBottomWidth;
+		case 'Tablet':
+			return attributes.shapeBottomWidthTablet;
+		case 'Mobile':
+			return attributes.shapeBottomWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeBottomWidth = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeBottomWidth: value, shapeBottomWidthTablet: value, shapeBottomWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeBottomWidthTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeBottomWidthMobile: value });
+		}
+
+	};
+
+	// shaper height Bottom
+	const getShapeBottomHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.shapeBottomHeight;
+		case 'Tablet':
+			return attributes.shapeBottomHeightTablet;
+		case 'Mobile':
+			return attributes.shapeBottomHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeShapeBottomHeight = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ shapeBottomHeight: value, shapeBottomHeightTablet: value, shapeBottomHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ shapeBottomHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ shapeBottomHeightMobile: value });
+		}
+
+	};
+
 
     // unit switch max value
 	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
@@ -1217,6 +1328,17 @@ const InsSettings = ({
 	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
 	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
 	
+	const [shapeTopWidthUnit, setshapeTopWidthUnit] = useState('px');
+	const maxShapeTopWidthUnit = shapeTopWidthUnit === 'px' ? 1500 : shapeTopWidthUnit === 'em' ? 50 : shapeTopWidthUnit === '%' ? 100:'';
+    
+	const [shapeBottomWidthUnit, setshapeBottomWidthUnit] = useState('px');
+	const maxShapeBottomWidthUnit = shapeBottomWidthUnit === 'px' ? 1500 : shapeBottomWidthUnit === 'em' ? 50 : shapeBottomWidthUnit === '%' ? 100:'';
+	
+	const [shapeTopHeightUnit, setshapeTopHeightUnit] = useState('px');
+	const maxShapeTopHeightUnit = shapeTopHeightUnit === 'px' ? 1500 : shapeTopHeightUnit === 'em' ? 50 : shapeTopWidthUnit === '%' ? 100:'';
+    
+	const [shapeBottomHeightUnit, setshapeBottomHeightUnit] = useState('px');
+	const maxShapeBottomHeightUnit = shapeBottomHeightUnit === 'px' ? 1500 : shapeBottomHeightUnit === 'em' ? 50 : shapeBottomHeightUnit === '%' ? 100:'';
 	return (
         <Fragment>
         <InspectorControls>
@@ -1359,8 +1481,8 @@ const InsSettings = ({
                                     </ResponsiveControl>
 						</div>
 
-						{ 
-									(attributes.direction === 'row' || attributes.direction === 'row-reverse') ? (
+						{ (attributes.direction === 'row') ? (
+									
 										<ResponsiveControl
 										label={ __( 'Justify Content', 'themehunk-block' ) }
 										>
@@ -1402,8 +1524,95 @@ const InsSettings = ({
 											hasIcon
 										/>
 										</ResponsiveControl>
+						) : (attributes.direction === 'row-reverse') ? (
+
+                                   <ResponsiveControl
+								   label={ __( 'Justify Content', 'themehunk-block' ) }
+								   >
+								   <ToogleGroupControl
+									   value={ getJustify() }
+									   onChange={ changeJustify }
+									   options={[
+									   {
+										   icon: JfCntstrRR,
+										   label: __( 'start', 'themehunk-blocks' ),
+										   value: 'flex-start'
+									   },
+									   {
+										   icon: JfCntctr1,
+										   label: __( 'center', 'themehunk-block' ),
+										   value: 'center'
+									   },
+									   {
+										   icon: JfCntendRR,
+										   label: __( 'end', 'themehunk-block' ),
+										   value: 'flex-end'
+									   },
+									   {
+										   icon: JfCntspbtn1,
+										   label: __( 'space-between', 'themehunk-block' ),
+										   value: 'space-between'
+									   },
+									   {
+										   icon: JfCntsparnd1,
+										   label: __( 'space-around', 'themehunk-block' ),
+										   value: 'space-around'
+									   },
+									   {
+										   icon: JfCntspevn1,
+										   label: __( 'space-evenly', 'themehunk-block' ),
+										   value: 'space-evenly'
+									   }
+									   ]}
+									   hasIcon
+								   />
+								   </ResponsiveControl>
+							): (attributes.direction === 'column-reverse') ? (
+							
+								<ResponsiveControl
+								label={ __( 'Justify Content', 'themehunk-block' ) }
+								>
+								<ToogleGroupControl
+									value={ getJustify() }
+									onChange={ changeJustify }
+									options={[
+									{
+										icon: JfCntend,
+										label: __( 'start', 'themehunk-blocks' ),
+										value: 'flex-start'
+									},
+									{
+										icon: JfCntctr,
+										label: __( 'center', 'themehunk-block' ),
+										value: 'center'
+									},
+									{
+										icon: JfCntstr,
+										label: __( 'end', 'themehunk-block' ),
+										value: 'flex-end'
+									},
+									{
+										icon: JfCntspbtn,
+										label: __( 'space-between', 'themehunk-block' ),
+										value: 'space-between'
+									},
+									{
+										icon: JfCntsparnd,
+										label: __( 'space-around', 'themehunk-block' ),
+										value: 'space-around'
+									},
+									{
+										icon: JfCntspevn,
+										label: __( 'space-evenly', 'themehunk-block' ),
+										value: 'space-evenly'
+									}
+									]}
+									hasIcon
+								/>
+								</ResponsiveControl>
+										
 									) : (
-										<ResponsiveControl
+                                     <ResponsiveControl
 										label={ __( 'Justify Content', 'themehunk-block' ) }
 										>
 										<ToogleGroupControl
@@ -1421,7 +1630,7 @@ const InsSettings = ({
 												value: 'center'
 											},
 											{
-												icon: JfCntend,
+												icon:JfCntend,
 												label: __( 'end', 'themehunk-block' ),
 												value: 'flex-end'
 											},
@@ -1444,12 +1653,48 @@ const InsSettings = ({
 											hasIcon
 										/>
 										</ResponsiveControl>
-									)
-									}
+					  )
+					}
 
-
-                                <div className='th-component-group-label'>
+                        {(attributes.direction === 'row' || attributes.direction === 'row-reverse') ? (
+								 <div className='th-component-group-label'>			
                                 <ResponsiveControl
+                                label={ __( 'AlignItem', 'themehunk-block' ) }
+                                >
+                                <ToogleGroupControl
+                                            value={getAlignItem()}
+                                            onChange={changeAlignItem}
+                                            options={[
+                                                {
+                                                    icon: alignitemstr1,
+                                                    label: __( 'start', 'themehunk-blocks' ),
+                                                    value: 'flex-start'
+                                                },
+                                                {
+                                                    icon: alignitemcnt1,
+                                                    label: __( 'center', 'themehunk-block' ),
+                                                    value: 'center'
+                                                },
+                                                {
+                                                    icon: alignitemend1,
+                                                    label: __( 'end', 'themehunk-block' ),
+                                                    value: 'flex-end'
+                                                },
+                                                
+                                                {
+                                                    icon: alignitemstrech1,
+                                                    label: __( 'stretch', 'themehunk-block' ),
+                                                    value: 'stretch'
+                                                }
+                                            ]}
+                                            
+                                            hasIcon
+                                        />
+                                        </ResponsiveControl>
+										</div>
+								) : (		
+									<div className='th-component-group-label'>
+										<ResponsiveControl
                                 label={ __( 'AlignItem', 'themehunk-block' ) }
                                 >
                                 <ToogleGroupControl
@@ -1482,7 +1727,10 @@ const InsSettings = ({
                                             hasIcon
                                         />
                                         </ResponsiveControl>
+                                 
                                 </div>
+								)
+							}
 
                                 <div className='th-component-group-label'>
                                 <ResponsiveControl
@@ -1688,8 +1936,212 @@ const InsSettings = ({
 						)}	
                         
 						</PanelBody>
+
+						<PanelBody
+						title={ __( 'Shape Divider', 'themehunk-block' ) }
+						initialOpen={ false }
+						className="th-container-panel th-Shape-ivider-control"
+						> 
+
+                        <HoverControl value={ shaper }
+						options={[
+							{
+								label: __( 'Top', 'themehunk-block' ),
+								value: 'top'
+							},
+							{
+								label: __( 'Bottom', 'themehunk-block' ),
+								value: 'bottom'
+							}
+						]}
+						onChange={ setShaper } />
+                        { 'top' ===  shaper &&  (
+							<>
+                            <SelectControl
+								value={ attributes.shapeTop }
+								onChange={ e => setAttributes({ shapeTop: e }) }
+								options={ [
+									{ label:  __( 'default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'curve', 'themehunk-block' ), value: 'curve' },
+									{ label: __( 'triangle', 'themehunk-block' ), value: 'triangle' },
+                                    { label: __( 'wave', 'themehunk-block' ), value: 'wave' },
+                                    { label: __( 'mountain', 'themehunk-block' ), value: 'mountain' },         
+								] }
+
+								
+				             	/>
+								 <ColorGradientControl
+								 label={ __( 'Color', 'themehunk-block' ) }
+								 colorValue={ attributes.shapeTopClr }
+								 onColorChange={ e => setAttributes({ shapeTopClr: e }) }
+								 />
+
+									<ResponsiveControl
+									label={ __( 'Width', 'themehunk-block' ) }
+									>	
+									
+									<RangeControl
+										renderTooltipContent={ customTooltipshapeTopWidth }
+										value={ getShapeTopWidth() || '' }
+										onChange={ changeShapeTopWidth }
+										step={ 1 }
+										min={ 100 }
+										max={ 300 }
+										allowReset={ true }
+									/>
+									</ResponsiveControl>
+									<ResponsiveControl
+									label={ __( 'Height', 'themehunk-block' ) }
+									>	
+									
+									<RangeControl
+										renderTooltipContent={ customTooltipshapeTopHeight }
+										value={ getShapeTopHeight() || '' }
+										onChange={ changeShapeTopHeight }
+										step={ 1 }
+										min={ 1 }
+										max={ 1500 }
+										allowReset={ true }
+									/>
+									</ResponsiveControl>
+
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Flip', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeTopFlip }
+												onChange={ shapeTopFlip => setAttributes({ shapeTopFlip }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Bring to Front', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeTopFront }
+												onChange={ shapeTopFront => setAttributes({ shapeTopFront }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
+									
+								 </>
+						) || 'bottom' ===  shaper && (
+                            <>
+                            <SelectControl
+								value={ attributes.shapeBottom }
+								onChange={ e => setAttributes({ shapeBottom: e }) }
+								options={ [
+									{ label:  __( 'default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'curve', 'themehunk-block' ), value: 'curve' },
+									{ label: __( 'triangle', 'themehunk-block' ), value: 'triangle' },
+                                    { label: __( 'wave', 'themehunk-block' ), value: 'wave' },
+                                    { label: __( 'mountain', 'themehunk-block' ), value: 'mountain' },         
+								] }
+				             	/>
+								 <ColorGradientControl
+								 label={ __( 'Color', 'themehunk-block' ) }
+								 colorValue={ attributes.shapeBottomClr }
+								 onColorChange={ e => setAttributes({ shapeBottomClr: e }) }
+								 />
+								 
+								 <ResponsiveControl
+								 label={ __( 'Width', 'themehunk-block' ) }
+								 >	
+								
+								 <RangeControl
+									 renderTooltipContent={ customTooltipshapeBottomWidth }
+									 value={ getShapeBottomWidth() || '' }
+									 onChange={ changeShapeBottomWidth }
+									 step={ 1 }
+									 min={ 100 }
+									 max={ 300 }
+									 allowReset={ true }
+								 />
+								 </ResponsiveControl>
+								 <ResponsiveControl
+								 label={ __( 'Height', 'themehunk-block' ) }
+								 >	
+								 
+								 <RangeControl
+									 renderTooltipContent={ customTooltipshapeBottomHeight }
+									 value={ getShapeBottomHeight() || '' }
+									 onChange={ changeShapeBottomHeight }
+									 step={ 1 }
+									 min={ 1 }
+									 max={ 1500 }
+									 allowReset={ true }
+								 />
+								 </ResponsiveControl>
+								 <div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Flip', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.shapeBottomFlip }
+												onChange={ shapeBottomFlip => setAttributes({ shapeBottomFlip }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+												
+											/>
+									</div>
+									<div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Bring to Front', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+												value={ attributes.shapeBottomFront }
+												onChange={ shapeBottomFront => setAttributes({ shapeBottomFront }) }
+												options={[
+													{
+													
+														label: __( 'On', 'themehunk-blocks' ),
+														value: true
+													},
+													{
+										
+														label: __( 'Off', 'themehunk-block' ),
+														value: false
+													}
+												]}
+											/>
+									</div>
+									
+								 </>
+						)}
+                        </PanelBody>
 						</>
-		)}
+		 )}
 
          {'advanced' === tab && (
 			 <Fragment>
@@ -2524,8 +2976,33 @@ const InsSettings = ({
 			 </Fragment>
 
 		 )}
-
+         
         </InspectorControls>
+
+		<InspectorAdvancedControls>
+				    <SelectControl
+							label={ __( 'HTML Tag', 'themehunk-block' ) }
+							value={ attributes.containerHTMLTag }
+							options={ [
+								{ label: __( 'Default (div)', 'themehunk-block' ), value: 'div' },
+								{ label: 'section', value: 'section' },
+								{ label: 'header', value: 'header' },
+								{ label: 'footer', value: 'footer' },
+								{ label: 'article', value: 'article' },
+								{ label: 'main', value: 'main' }
+							] }
+							onChange={ value => setAttributes({ containerHTMLTag: value }) }
+						/>
+						<TextControl
+						label={ __( 'HTML Anchor', 'themehunk-block' ) }
+						help={ __( 'Anchors lets you link directly to a section on a page.', 'themehunk-block' ) }
+						value={ attributes.anchor || '' }
+						onChange={ ( value ) => {
+							const anchorValue = value.replace( ANCHOR_REGEX, '-' );
+							setAttributes( { anchor: anchorValue } );
+						} } />
+		</InspectorAdvancedControls>
+		
         </Fragment>
     );
 

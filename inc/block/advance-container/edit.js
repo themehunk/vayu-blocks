@@ -14,11 +14,13 @@ import { useViewportMatch } from '@wordpress/compose';
 import { useBlockProps , useInnerBlocksProps , store as blockEditorStore} from '@wordpress/block-editor';
 import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
+
 /**
  * Internal dependencies
  */
 import Controls from './controls.js';
 import InsSettings from './settings.js';
+import ThShaper from './shaper.js';
 import getUniqueId from '../../../src/helpers/get-unique-id.js';
 import './editor.scss';
 
@@ -116,7 +118,6 @@ export default function Edit({
 			setAttributes( { id: clientId } );
 			}
 
-
 			const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
 			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
 			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
@@ -154,6 +155,8 @@ export default function Edit({
 			let flexcontainerStyles
 			let flexProperties;
 			let PositionProperties;
+
+			let ShaperStyle;
 
 			if ( 'color' === attributes.backgroundType ) {
 				backgroundStyle = {
@@ -251,6 +254,7 @@ export default function Edit({
 					'--border-TopLeft-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRight }${ attributes.borderRadiusHvrUnit }`,
 					'--border-BottomRight-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
 					'--border-BottomLeft-Radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
+				    
 				}
 
 				if(attributes.contentWidthType=='fullwidth'){
@@ -362,6 +366,18 @@ export default function Edit({
 						}
 
 					}
+
+					//svg properties
+					ShaperStyle = { 
+						'--shaper-top-width': (attributes.shapeTopWidth || '100') + '%',
+						'--shaper-top-height': attributes.shapeTopHeight + 'px' ,
+					    '--shaper-bottom-width': (attributes.shapeBottomWidth || '100') + '%',
+						'--shaper-bottom-height': attributes.shapeBottomHeight  + 'px' ,
+                        '--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+						'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
+						
+					};
+
 				
 			}
 
@@ -487,6 +503,16 @@ export default function Edit({
 			
 					 }
 
+					//svg properties
+					ShaperStyle = { 
+						'--shaper-top-width': (attributes.shapeTopWidthTablet || '100') + '%',
+						'--shaper-top-height': attributes.shapeTopHeightTablet + 'px' ,
+					    '--shaper-bottom-width': (attributes.shapeBottomWidthTablet || '100') + '%',
+						'--shaper-bottom-height': attributes.shapeBottomHeightTablet  + 'px' ,
+						'--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+						'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
+					};
+
 			}
 
 			if ( isMobile ) {
@@ -570,7 +596,19 @@ export default function Edit({
 		
 				 }
 
+				//svg properties
+				ShaperStyle = { 
+					'--shaper-top-width': (attributes.shapeTopWidthMobile || '100') + '%',
+					'--shaper-top-height': attributes.shapeTopHeightMobile + 'px' ,
+					'--shaper-bottom-width': (attributes.shapeBottomWidthMobile || '100') + '%',
+					'--shaper-bottom-height': attributes.shapeBottomHeightMobile  + 'px' ,
+					'--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
+					'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
+				};
+
+
 		   }
+		   //end mobile
 
 			if ( attributes.verticalAlign ) {
 				insidecontainerStyles = {...insidecontainerStyles, alignItems: verticalAlignValues[ attributes.verticalAlign ]};
@@ -646,6 +684,7 @@ export default function Edit({
 				...borderStyle,
 				...boxShadowStyle,
 				...transitiondur,
+				...ShaperStyle
 			}, x => x?.includes?.( 'undefined' ));
 
 			
@@ -702,6 +741,7 @@ export default function Edit({
 					attributes={attributes}
 					setAttributes={setAttributes}
 				/>
+
 				{ ( parentBlock == 'themehunk-blocks/advance-container' || !hasInnerBlocks) ? (
 
 				<Tag {...containerBlockProps}>
@@ -711,6 +751,7 @@ export default function Edit({
 						style={overlayStyle}
 					/>
 				)}
+				<ThShaper attributes={attributes} />
 				<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 				</Tag>
 
@@ -723,6 +764,7 @@ export default function Edit({
 								style={overlayStyle}
 							/>
 						)}
+						<ThShaper attributes={attributes} />
 						<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 					</Tag>
 				</div>

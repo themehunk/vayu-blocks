@@ -7,6 +7,7 @@ import {
 } from '@wordpress/block-editor';
 
 import classnames from 'classnames';
+import ThShaper from './shaper.js';
 
 export default function Save({attributes}){
 
@@ -17,11 +18,12 @@ export default function Save({attributes}){
 		"th-hide-tablet": attributes.responsiveTogHideTablet,
 		"th-hide-mobile": attributes.responsiveTogHideMobile,
 	  });
+	  
 	const blockProps = useBlockProps.save({
-		id:attributes.uniqueID,
+		id:attributes.anchor,
 		className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`,
 	});
-
+     
 	const Tag = attributes.containerHTMLTag;
 
 	const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
@@ -36,6 +38,7 @@ export default function Save({attributes}){
 			{showShouldOverlay && (
 						<div className="wp-block-th-blocks-container-overlay"/>
 			)}
+			<ThShaper attributes={attributes} />
 			<div className='th-inside-content-wrap th-con' >
 				<InnerBlocks.Content />
 			</div>

@@ -34,3 +34,48 @@
 	padding: 0!important;
 
 }
+
+.block-editor-block-icon.has-colors svg.th-block-icon{
+	max-height: 40px;
+		max-width: 40px;
+		min-height:  40px;
+		min-width: 40px;
+	   fill:"#000"
+}
+
+.th-shape{
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    direction: ltr;
+    top:-1px;
+    z-index: -1;
+    
+}
+
+.th-shape svg{
+    display: block;
+    width:100%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.th-shape.flip-top svg,.th-shape.flip-bottom svg{
+   left: 50%;
+   transform: translateX(-50%) rotateY(180deg);
+}
+
+.th-shape-top {
+    top: -1px;
+}
+
+.th-shape-bottom {
+    bottom: -1px;
+}
+
+.th-shape-bottom{
+transform: rotate(180deg);
+}
