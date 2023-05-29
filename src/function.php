@@ -50,7 +50,7 @@ function themehunk_block_categories( $categories ) {
         ]
     );
 }
-add_filter( 'block_categories_all', 'themehunk_block_categories', 10, 2 );
+add_filter( 'block_categories_all', 'themehunk_block_categories', 11, 2);
 
 
 function themehunk_block_editor_assets(){

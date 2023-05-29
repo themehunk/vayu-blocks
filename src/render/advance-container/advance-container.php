@@ -14,7 +14,7 @@ function advance_container_style($attr){
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
-            $css .= "max-width: {100%};";
+            $css .= "max-width:100%;";
         }
         $css .= "}";
 
@@ -24,7 +24,7 @@ function advance_container_style($attr){
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
                 $css .= "width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit}; ";
             }else{
-                $css .= "width: {100%};";
+                $css .= "width:100%;";
             }
        $css .= "}";
 
@@ -310,6 +310,25 @@ function advance_container_style($attr){
 
         $css .= "}";
 
+	//shaper
+	    $css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
+		$css .= isset( $attr['shapeTopWidth'] ) ? "width:{$attr['shapeTopWidth'] }%;" : '';
+		$css .= isset( $attr['shapeTopHeight'] ) ? "height:{$attr['shapeTopHeight'] }px;" : '';
+	    $css .= "}";
+
+		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom svg{";	
+		$css .= isset( $attr['shapeBottomWidth'] ) ? "width:{$attr['shapeBottomWidth'] }%;" : '';
+		$css .= isset( $attr['shapeBottomHeight'] ) ? "height:{$attr['shapeBottomHeight'] }px;" : '';
+		$css .= "}";
+
+		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top {";
+		$css .= isset( $attr['shapeTopFront'] ) ? "z-index:1" : 'z-index:-1';	
+		$css .= "}";
+
+		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom {";
+		$css .= isset( $attr['shapeBottomFront'] ) ? "z-index:1" : 'z-index:-1';	
+		$css .= "}";
+
       //    tablet view
       $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
       
@@ -510,6 +529,17 @@ function advance_container_style($attr){
 			}
             $css .= " }";
 
+			//shaper
+			$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
+				$css .= isset( $attr['shapeTopWidthTablet'] ) ? "width:{$attr['shapeTopWidthTablet'] }%;" : '';
+				$css .= isset( $attr['shapeTopHeightTablet'] ) ? "height:{$attr['shapeTopHeightTablet'] }px;" : '';
+				$css .= "}";
+		
+				$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom svg{";	
+				$css .= isset( $attr['shapeBottomWidthTablet'] ) ? "width:{$attr['shapeBottomWidthTablet'] }%;" : '';
+				$css .= isset( $attr['shapeBottomHeightTablet'] ) ? "height:{$attr['shapeBottomHeightTablet'] }px;" : '';
+				$css .= "}";
+
       $css .= " }";
 
       //    mobile view
@@ -703,6 +733,17 @@ function advance_container_style($attr){
                 $css .= isset($attr['AlignContentMobile']) ? "align-content: {$attr['AlignContentMobile']}; " : '';
                 }
             $css .= "}";
+
+			//shaper
+			$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
+				$css .= isset( $attr['shapeTopWidthMobile'] ) ? "width:{$attr['shapeTopWidthMobile'] }%;" : '';
+				$css .= isset( $attr['shapeTopHeightMobile'] ) ? "height:{$attr['shapeTopHeightMobile'] }px;" : '';
+				$css .= "}";
+		
+				$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom svg{";	
+				$css .= isset( $attr['shapeBottomWidthMobile'] ) ? "width:{$attr['shapeBottomWidthMobile'] }%;" : '';
+				$css .= isset( $attr['shapeBottomHeightMobile'] ) ? "height:{$attr['shapeBottomHeightMobile'] }px;" : '';
+				$css .= "}";
   
         $css .= " }";
 
