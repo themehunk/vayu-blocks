@@ -25,18 +25,18 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Advanced Spacer', 'themehunk-block' ),
-	description: __( 'Advanced Spacer gives a spin to editor\'s Spacer block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	title: __( 'Advanced Button', 'themehunk-block' ),
+	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
 	keywords: [
 		'heading',
 		'title',
-		'advanced heading'
+		'advance button'
 	],
 	edit,
 	save,
 	example: {
 		attributes: {
-			content: __( 'A spacer with more customization options', 'themehunk-block' )
+			content: __( 'A Button with more customization options', 'themehunk-block' )
 		}
 	}
 });
