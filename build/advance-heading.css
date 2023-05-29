@@ -292,7 +292,7 @@
   display: block;
   text-align: center;
   font-size: 9px;
-  text-transform: uppercase;
+  text-transform: initial;
   padding-top: 2px;
 }
 .th-sizing-control .th-sizing-control-wrapper .th-sizing-control-item:first-child .th-sizing-control-item-input {

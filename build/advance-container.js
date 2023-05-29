@@ -3765,7 +3765,8 @@ const BackgroundSelectorControl = _ref => {
   })))), ('color' === backgroundType || undefined === backgroundType) && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Background Color', 'themehunk-block'),
     colorValue: backgroundColor,
-    onColorChange: changeColor
+    onColorChange: changeColor,
+    enableAlpha: true
   }), 'image' === backgroundType && (image !== null && image !== void 0 && image.url ? (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FocalPointPicker, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Focal point picker', 'themehunk-block'),
     url: image.url,

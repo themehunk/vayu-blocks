@@ -14,7 +14,11 @@ function create_block_themehunk_block_block_init() {
         ),
 		array(
             'name' => 'advance-spacer/',
-            'render_callback' => 'render_spacer',
+            'render_callback' => '',
+        ),
+        array(
+            'name' => 'advance-button/',
+            'render_callback' => '',
         )
     );
 

@@ -1093,27 +1093,7 @@ const InsSettings = ({
 									initialOpen={ true }
 									className="th-spacer-panel"
 								> 
-								<ResponsiveControl
-								label={ __( 'Height', 'themehunk-block' ) }
-								>
-								<UnitChooser
-								value={ attributes.heightUnit }
-								onClick={ heightUnit => {
-									setAttributes({ heightUnit }); 
-									setheightUnit(heightUnit);
-								}}
-								units={ [ 'px', 'em', '%' ] }
-								/>
-								<RangeControl
-								renderTooltipContent={ customTooltipHeight }
-								value={ getHeight() || '' }
-								onChange={ changeHeight }
-								step={ 1 }
-								min={ 0 }
-								max={ maxheightUnit }
-								allowReset={ true }
-								/>
-								</ResponsiveControl>
+								
 								</PanelBody>
 								</Fragment>
 
@@ -1121,6 +1101,7 @@ const InsSettings = ({
 
             ) || 'advanced' === tab && (
                 <Fragment>
+					
 				<PanelBody
 					title={ __( 'Layout', 'themehunk-block' ) }
 					initialOpen={ false }

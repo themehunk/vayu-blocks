@@ -1,3 +1,7 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./inc/block/advance-button/editor.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+
 /*!**********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/ins-setting-header/editor.scss ***!
   \**********************************************************************************************************************************************************************************************************************************************************************/
@@ -259,6 +263,55 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
   position: relative;
   z-index: 1;
 }
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/unit-picker/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+.components-base-control.components-th-blocks-units-control-header__units {
+  display: block;
+  margin-bottom: 0;
+}
+.components-base-control.components-th-blocks-units-control-header__units .components-base-control__field {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+.components-base-control.components-th-blocks-units-control-header__units .components-base-control__label {
+  margin-bottom: 0;
+}
+
+.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button {
+  background: #fff;
+  box-shadow: none !important;
+  color: #929da7;
+  font-size: 10px;
+  padding: 0 5px;
+  position: relative;
+  text-align: center;
+  text-shadow: none;
+  border: 0;
+  border-radius: 0 !important;
+  line-height: 20px;
+  padding: 0 5px;
+  height: auto;
+}
+.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button.is-primary {
+  background: #fff !important;
+  color: #000 !important;
+  cursor: default;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.o-responsive-control {
+  position: relative;
+}
+
+.components-base-control.components-th-blocks-units-control-header__units {
+  position: absolute;
+  right: 0;
+  top: 4px;
+}
 /*!*************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/control-panel-control/editor.scss ***!
   \*************************************************************************************************************************************************************************************************************************************************************************/
@@ -352,55 +405,6 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
 .th-background-selector-control .components-base-control__title .linking-controls button .dashicon {
   margin: 2px;
 }
-/*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/unit-picker/editor.scss ***!
-  \***************************************************************************************************************************************************************************************************************************************************************/
-.components-base-control.components-th-blocks-units-control-header__units {
-  display: block;
-  margin-bottom: 0;
-}
-.components-base-control.components-th-blocks-units-control-header__units .components-base-control__field {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
-}
-.components-base-control.components-th-blocks-units-control-header__units .components-base-control__label {
-  margin-bottom: 0;
-}
-
-.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button {
-  background: #fff;
-  box-shadow: none !important;
-  color: #929da7;
-  font-size: 10px;
-  padding: 0 5px;
-  position: relative;
-  text-align: center;
-  text-shadow: none;
-  border: 0;
-  border-radius: 0 !important;
-  line-height: 20px;
-  padding: 0 5px;
-  height: auto;
-}
-.components-th-blocks-control__units .components-th-blocks-control-buttons__units button.components-button.is-primary {
-  background: #fff !important;
-  color: #000 !important;
-  cursor: default;
-  z-index: 1;
-  font-weight: bold;
-}
-
-.o-responsive-control {
-  position: relative;
-}
-
-.components-base-control.components-th-blocks-units-control-header__units {
-  position: absolute;
-  right: 0;
-  top: 4px;
-}
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/toogle-group-control/editor.scss ***!
   \************************************************************************************************************************************************************************************************************************************************************************/
@@ -459,237 +463,5 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
   box-shadow: none;
   border-radius: 0px;
 }
-/*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./inc/block/advance-container/editor.scss ***!
-  \****************************************************************************************************************************************************************************************************************************************************************/
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-.wp-block-create-block-themehunk-block {
-  border: 1px dotted #f00;
-}
 
-.components-panel__body.th-container-panel label,
-.components-panel__body.th-container-panel span {
-  text-transform: capitalize !important;
-  font-size: 13px !important;
-  line-height: 1.4em !important;
-  font-weight: normal !important;
-}
-
-.block-list-appender.wp-block,
-.th-blocks-container-selector {
-  width: 100%;
-}
-
-.block-editor-block-list__block:not(.is-selected) .th-inside-container > .block-list-appender:only-child:after {
-  border: 1px dashed;
-  border-radius: 2px;
-  bottom: 0;
-  content: "";
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.th-blocks-container-selector__icon {
-  visibility: hidden;
-}
-
-.is-selected > .th-inside-container > .block-list-appender {
-  width: auto;
-}
-
-.is-selected > .th-inside-container > .block-list-appender > .block-editor-inserter > button {
-  padding: 0;
-  color: #fff;
-  background: #000;
-}
-
-.wp-block-themehunk-blocks-advance-container {
-  --background: transparent;
-  --background-image: initial;
-  --background-repeat: no-repeat;
-  --background-size: cover;
-  --background-position: center center;
-  --background-attachment: initial;
-  --background-image-hvr: initial;
-  --background-repeat-hvr: no-repeat;
-  --background-size-hvr: cover;
-  --background-position-hvr: center center;
-  --background-attachment-hvr: initial;
-  --background-color-hover: var(--background);
-  --padding-top:initial;
-  --padding-right:initial;
-  --padding-bottom:initial;
-  --padding-left:initial;
-  --margin-top:0;
-  --margin-right:0;
-  --margin-bottom:0;
-  --margin-left:0;
-  --border-style:none;
-  --border-color:initial;
-  --border-style-hvr:none;
-  --border-color-hvr:initial;
-  --border-top:0;
-  --border-bottom:0;
-  --border-right:0;
-  --border-left:0;
-  --border-TopRight-Radius:0;
-  --border-TopLeft-Radius:0;
-  --border-BottomRight-Radius:0;
-  --border-BottomLeft-Radius:0;
-  --border-top-hvr:0;
-  --border-bottom-hvr:0;
-  --border-right-hvr:0;
-  --border-left-hvr:0;
-  --border-TopRight-Radius-hvr:0;
-  --border-TopLeft-Radius-hvr:0;
-  --border-BottomRight-Radius-hvr:0;
-  --border-BottomLeft-Radius-hvr:0;
-  --boxShadow:none;
-  --boxShadow-hvr:none;
-  --transition:0.2s;
-  background: var(--background);
-  background-image: var(--background-image);
-  background-repeat: var(--background-repeat);
-  background-size: var(--background-size);
-  background-position: var(--background-position);
-  background-attachment: var(--background-attachment);
-  padding-top: var(--padding-top);
-  padding-right: var(--padding-right);
-  padding-bottom: var(--padding-bottom);
-  padding-left: var(--padding-left);
-  margin-top: var(--margin-top);
-  margin-right: var(--margin-right) !important;
-  margin-bottom: var(--margin-bottom);
-  margin-left: var(--margin-left) !important;
-  border-style: var(--border-style);
-  border-color: var(--border-color);
-  border-top-width: var(--border-top);
-  border-bottom-width: var(--border-bottom);
-  border-right-width: var(--border-right);
-  border-left-width: var(--border-left);
-  border-top-right-radius: var(--border-TopRight-Radius);
-  border-top-left-radius: var(--border-TopLeft-Radius);
-  border-bottom-right-radius: var(--border-BottomRight-Radius);
-  border-bottom-left-radius: var(--border-BottomLeft-Radius);
-  box-shadow: var(--boxShadow);
-  transition: var(--transition);
-}
-.wp-block-themehunk-blocks-advance-container:hover {
-  background: var(--background-color-hover);
-  background-image: var(--background-image-hvr);
-  background-repeat: var(--background-repeat-hvr);
-  background-size: var(--background-size-hvr);
-  background-position: var(--background-position-hvr);
-  background-attachment: var(--background-attachment-hvr);
-  border-style: var(--border-style-hvr);
-  border-color: var(--border-color-hvr);
-  box-shadow: var(--boxShadow-hvr);
-  border-top-width: var(--border-top-hvr);
-  border-bottom-width: var(--border-bottom-hvr);
-  border-right-width: var(--border-right-hvr);
-  border-left-width: var(--border-left-hvr);
-  border-top-right-radius: var(--border-TopRight-Radius-hvr);
-  border-top-left-radius: var(--border-TopLeft-Radius-hvr);
-  border-bottom-right-radius: var(--border-BottomRight-Radius-hvr);
-  border-bottom-left-radius: var(--border-BottomLeft-Radius-hvr);
-  transition: var(--transition);
-}
-
-.wp-block-th-blocks-container-overlay {
-  --background-overlay: transparent;
-  --background-overlay-image: initial;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background: var(--background-overlay);
-  transition: var(--transition);
-  background-image: var(--background-overlay-image);
-  background-repeat: var(--background-overlay-repeat);
-  background-size: var(--background-overlay-size);
-  background-position: var(--background-overlay-position);
-  background-attachment: var(--background-overlay-attachment);
-}
-
-.wp-block-themehunk-blocks-advance-container:hover .wp-block-th-blocks-container-overlay {
-  --background-overlay-hvr: transparent;
-  --background-overlay-image-hvr: initial;
-  background: var(--background-overlay-hvr);
-  background-image: var(--background-overlay-image-hvr);
-  background-repeat: var(--background-overlay-repeat-hvr);
-  background-size: var(--background-overlay-size-hvr);
-  background-position: var(--background-overlay-position-hvr);
-  background-attachment: var(--background-overlay-attachment-hvr);
-}
-
-.th-root-block-container {
-  position: relative;
-}
-
-.wp-block-themehunk-blocks-advance-container *,
-.wp-block-themehunk-blocks-advance-containe {
-  box-sizing: border-box;
-}
-
-@media only screen and (min-width: 1024px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-desktop:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: hsla(0deg, 0%, 100%, 0.6);
-    z-index: 99999999;
-  }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-desktop.wp-block-themehunk-blocks-advance-container {
-    position: initial;
-    pointer-events: none;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-tablet:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: hsla(0deg, 0%, 100%, 0.6);
-    z-index: 99999999;
-  }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-tablet.wp-block-themehunk-blocks-advance-container {
-    position: initial;
-    pointer-events: none;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-mobile:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: hsla(0deg, 0%, 100%, 0.6);
-    z-index: 99999999;
-  }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-mobile.wp-block-themehunk-blocks-advance-container {
-    position: initial;
-    pointer-events: none;
-  }
-}
-
-/*# sourceMappingURL=advance-container.css.map*/
+/*# sourceMappingURL=advance-button.css.map*/
