@@ -157,6 +157,7 @@ export default function Edit({
 			let PositionProperties;
 
 			let ShaperStyle;
+			let gap;
 
 			if ( 'color' === attributes.backgroundType ) {
 				backgroundStyle = {
@@ -378,6 +379,11 @@ export default function Edit({
 						
 					};
 
+                   //gap
+				   gap = { 
+					'--gap':attributes.elementGap + attributes.elementGapUnit,
+					}
+
 				
 			}
 
@@ -513,6 +519,11 @@ export default function Edit({
 						'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
 					};
 
+					 //gap
+					 gap = { 
+						'--gap':attributes.elementGapTablet + attributes.elementGapUnit,
+						}
+
 			}
 
 			if ( isMobile ) {
@@ -605,6 +616,10 @@ export default function Edit({
 					'--shaper-z-index-top': attributes.shapeTopFront ? 1 : 0 ,
 					'--shaper-z-index-bottom': attributes.shapeBottomFront ? 1 : 0 ,
 				};
+				 //gap
+				 gap = { 
+					'--gap':attributes.elementGapMobile + attributes.elementGapUnit,
+					}
 
 
 		   }
@@ -697,6 +712,7 @@ export default function Edit({
 			const innerstyle = omitBy({
 				...insidecontainerStyles,
 				...flexcontainerStyles,
+				...gap,
 			}, x => x?.includes?.( 'undefined' ));
 
 			const isSelected = useSelect((select) => {

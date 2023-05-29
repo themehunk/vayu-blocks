@@ -934,6 +934,22 @@
 		"shapeBottomInvert": {
 			"type": "boolean",
 			"default": false
+		},
+		"elementGap": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapTablet": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapMobile": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapUnit": {
+			"type": "string",
+			"default": "px"
 		}
 
 	},

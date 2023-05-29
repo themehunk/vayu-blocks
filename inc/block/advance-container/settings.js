@@ -1194,7 +1194,7 @@ const InsSettings = ({
     const customTooltipshapeBottomWidth = value => `${value}${attributes.shapeBottomWidthUnit}`;
 	const customTooltipshapeTopHeight = value => `${value}${attributes.shapeTopHeightUnit}`;
     const customTooltipshapeBottomHeight = value => `${value}${attributes.shapeBottomHeightUnit}`;
-
+    const customTooltipElementGap = value => `${value}${attributes.elementGapUnit}`;
 	// shaper width top
 	const getShapeTopWidth = () => {
 		switch ( getView ) {
@@ -1299,6 +1299,30 @@ const InsSettings = ({
 
 	};
 
+	// element gap
+	const getElementGap = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.elementGap;
+		case 'Tablet':
+			return attributes.elementGapTablet;
+		case 'Mobile':
+			return attributes.elementGapMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeElementGap = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ elementGap: value, elementGapTablet: value, elementGapMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ elementGapTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ elementGapMobile: value });
+		}
+	};
+
 
     // unit switch max value
 	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
@@ -1339,6 +1363,10 @@ const InsSettings = ({
     
 	const [shapeBottomHeightUnit, setshapeBottomHeightUnit] = useState('px');
 	const maxShapeBottomHeightUnit = shapeBottomHeightUnit === 'px' ? 1500 : shapeBottomHeightUnit === 'em' ? 50 : shapeBottomHeightUnit === '%' ? 100:'';
+	
+	const [elementGapUnit, setelementGapUnit] = useState('px');
+	const maxelementGapUnit = elementGapUnit === 'px' ? 1500 : elementGapUnit === 'em' ? 50 : elementGapUnit === '%' ? 100:'';
+	
 	return (
         <Fragment>
         <InspectorControls>
@@ -1755,7 +1783,31 @@ const InsSettings = ({
                                             hasIcon
                                         />
                                         </ResponsiveControl>
+								
                                 </div>
+								<ResponsiveControl
+								label={ __( 'Gap between elements', 'themehunk-block' ) }
+								>	
+								<UnitChooser
+								value={ attributes.elementGapUnit }
+								onClick={elementGapUnit => {
+									setAttributes({ elementGapUnit });
+									setelementGapUnit(elementGapUnit);
+								}}
+								
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipElementGap }
+									initialPosition={20}
+									value={ getElementGap() || '' }
+									onChange={ changeElementGap }
+									step={ 1 }
+									min={ 1 }
+									max={ maxelementGapUnit }
+									allowReset={ true }
+								/>
+                                </ResponsiveControl>
 								{ 'wrap' == attributes.Wrap && (
                                 <ResponsiveControl
                                 label={ __( 'Align Content', 'themehunk-block' ) }

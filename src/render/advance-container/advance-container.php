@@ -240,10 +240,18 @@ function advance_container_style($attr){
              $css .= isset($attr['AlignItem']) ? "align-items: {$attr['AlignItem']}; " : '';
              //flex-wrap
              $css .= isset($attr['Wrap']) ? "flex-wrap: {$attr['Wrap']}; " : '';
+			 
              //  align content
              if (isset($attr['Wrap']) && $attr['Wrap']=='wrap') {
              $css .= isset($attr['AlignContent']) ? "align-content: {$attr['AlignContent']}; " : '';
              }
+
+			 //gap
+			 if (isset($attr['elementGap'])) {
+			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+             $css .= "gap: {$attr['elementGap']}{$elementGapUnit};";
+			 }
+
         $css .= "}";
 
         // Hover
@@ -340,6 +348,7 @@ function advance_container_style($attr){
             }else{
                 $css .= "max-width: {100%};";
             }
+			
             $css .= "}";
     
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
@@ -497,6 +506,11 @@ function advance_container_style($attr){
                 if (isset($attr['WrapTablet']) && $attr['WrapTablet']=='wrap') {
                 $css .= isset($attr['AlignContentTablet']) ? "align-content: {$attr['AlignContentTablet']}; " : '';
                 }
+				//gap
+				if (isset($attr['elementGapTablet'])) {
+					$elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+					$css .= "gap: {$attr['elementGapTablet']}{$elementGapUnit};";
+				}
             $css .= "}";
 
             $css .= ".th-c{$attr['uniqueID']}:hover {";
@@ -732,6 +746,11 @@ function advance_container_style($attr){
                 if (isset($attr['WrapMobile']) && $attr['WrapMobile']=='wrap') {
                 $css .= isset($attr['AlignContentMobile']) ? "align-content: {$attr['AlignContentMobile']}; " : '';
                 }
+				//gap
+				if (isset($attr['elementGapMobile'])) {
+					$elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+					$css .= "gap: {$attr['elementGapMobile']}{$elementGapUnit};";
+				}
             $css .= "}";
 
 			//shaper
