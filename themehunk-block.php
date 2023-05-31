@@ -33,3 +33,4 @@ require_once 'src/function.php';
 require_once 'src/render-style.php';
 require_once 'src/render/advance-heading/advance-heading.php';
 require_once 'src/render/advance-container/advance-container.php';
+require_once 'src/render/advance-spacer/advance-spacer.php';

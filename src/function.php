@@ -14,7 +14,11 @@ function create_block_themehunk_block_block_init() {
         ),
 		array(
             'name' => 'advance-spacer/',
-            'render_callback' => 'render_spacer',
+            'render_callback' => '',
+        ),
+        array(
+            'name' => 'advance-button/',
+            'render_callback' => '',
         )
     );
 
@@ -75,5 +79,8 @@ function themehunk_block_editor_assets(){
 add_action( 'enqueue_block_editor_assets', 'themehunk_block_editor_assets' );
 
 function render_spacer(){
-    return true;
+
+		return '<div class="wp-block-advance-spacer"></div>';
+	
+
 }

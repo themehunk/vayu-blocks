@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "themehunk-blocks/advance-button",
+	"version": "0.1.0",
+	"title": "Advance Button",
+	"category": "themehunk-blocks",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "themehunk-block",
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"uniqueID": {
+			"type": "string"
+		},
+		"tag": {
+			"default": "h2",
+			"type": "string"
+		},
+		"linkUrl": {
+			"type": "string"
+		},
+		"linkTarget": {
+			"type": "string"
+		},
+		"content":{
+			"type": "string"
+		}
+	},
+	"editorScript": "file:../../../build/advance-button.js",
+	"editorStyle": "file:../../../build/advance-button.css",
+	"style": "file:../../../build/style-advance-button.css"
+}

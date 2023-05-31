@@ -131,6 +131,7 @@ export default function Edit({
 				"th-hide-desktop": attributes.responsiveTogHideDesktop,
 				"th-hide-tablet": attributes.responsiveTogHideTablet,
 				"th-hide-mobile": attributes.responsiveTogHideMobile,
+				"th-has-child": hasInnerBlocks ? true : false,
 			  });
             
 			const verticalAlignValues = {

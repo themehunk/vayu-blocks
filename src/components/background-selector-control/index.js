@@ -90,6 +90,7 @@ const BackgroundSelectorControl = ({
 						label={ __( 'Background Color', 'themehunk-block' ) }
 						colorValue={ backgroundColor }
 						onColorChange={ changeColor }
+						enableAlpha={true} 
 					/>
 				)
 			}
