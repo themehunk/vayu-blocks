@@ -15,7 +15,7 @@ import { useInstanceId } from '@wordpress/compose';
 /**
  * Internal dependencies
  */
-import './editor.scss';
+
 import Field from './field.js';
 
 const SizingControl = ({

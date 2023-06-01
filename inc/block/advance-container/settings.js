@@ -26,14 +26,17 @@ import { pick } from 'lodash';
 /**
 * Internal dependencies
 */
-import InsSettingHeader from '../../../src/components/ins-setting-header/index.js';
-import ResponsiveControl from '../../../src/components/responsive-control/index.js';
-import SizingControl from '../../../src/components/sizing-control/index.js';
-import HoverControl from '../../../src/components/hover-tab/index.js';
-import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
-import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js'; 
-import UnitChooser from '../../../src/components/unit-picker/index.js';
-import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
+import {
+	InsSettingHeader,
+	ResponsiveControl,
+	SizingControl,
+	HoverControl,
+	ControlPanelControl,
+	BackgroundSelectorControl,
+	UnitChooser,
+	ToogleGroupControl
+} from '../../../src/components/index.js';
+
 import { Start, Center , End, Strech, 
 	  OrderStart, OrderEnd,
 	  Custom, None, Shrink, Grow, 

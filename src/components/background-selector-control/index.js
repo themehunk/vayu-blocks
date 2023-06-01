@@ -24,7 +24,6 @@ import { Fragment } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import './editor.scss';
 import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
 import ControlPanelControl from '../control-panel-control/index.js';
 

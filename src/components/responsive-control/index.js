@@ -27,7 +27,7 @@ import {
 /**
  * Internal dependencies
  */
-import './editor.scss';
+
 
 import { checkIcon } from '../../helpers/icon.js';
 

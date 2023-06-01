@@ -14,7 +14,7 @@ import {
 /**
  * Internal dependencies
  */
-import './editor.scss';
+
 
 
 const ToogleGroupControl = ({

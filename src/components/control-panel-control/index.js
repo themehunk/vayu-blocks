@@ -25,7 +25,6 @@ import {
 /**
  * Internal dependencies
  */
-import './editor.scss';
 
 const ControlPanelControl = ({
 	label,

@@ -11,7 +11,6 @@
  /**
    * Internal dependencies.
    */
-  import './editor.scss';
  
   const HoverControl = ({
      value,
