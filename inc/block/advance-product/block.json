@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "themehunk-blocks/advance-product",
+	"version": "0.1.0",
+	"title": "Advance Product",
+	"category": "themehunk-blocks",
+	"icon": "smiley",
+	"description": "Example block scaffolded with Create Block tool.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "themehunk-block",
+	"attributes": {
+		"id": {
+			"type": "string"
+		},
+		"uniqueID": {
+			"type": "string"
+		}
+	},
+	"editorScript": "file:../../../build/advance-product.js",
+	"editorStyle": "file:../../../build/advance-product.css",
+	"style": "file:../../../build/style-advance-product.css"
+}

@@ -19,6 +19,10 @@ function create_block_themehunk_block_block_init() {
         array(
             'name' => 'advance-button/',
             'render_callback' => '',
+        ),
+        array(
+            'name' => 'advance-product/',
+            'render_callback' => '',
         )
     );
 
@@ -56,6 +60,7 @@ add_filter( 'block_categories_all', 'themehunk_block_categories', 11, 2);
 function themehunk_block_editor_assets(){
 
     $asset_file = require_once THEMEHUNK_BLOCKS_DIR_PATH .'build/registerPlugin.asset.php';
+    $asset_file = require_once THEMEHUNK_BLOCKS_DIR_PATH .'build/component-editor.asset.php';
 
 	wp_enqueue_script(
 		'registerPlugin-block',
@@ -66,7 +71,6 @@ function themehunk_block_editor_assets(){
 		'1.0.0',
 		true
 	);
-
     wp_localize_script(
         'registerPlugin-block',
         'themehunkblock',
@@ -75,12 +79,13 @@ function themehunk_block_editor_assets(){
         )
     );
 
+    wp_enqueue_style(
+        'component-editor-css',
+        THEMEHUNK_BLOCKS_URL . 'build/component-editor.css',
+        array_merge(
+			$asset_file['dependencies']
+		),	'1.0.0'
+    );
+
 }
 add_action( 'enqueue_block_editor_assets', 'themehunk_block_editor_assets' );
-
-function render_spacer(){
-
-		return '<div class="wp-block-advance-spacer"></div>';
-	
-
-}

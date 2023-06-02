@@ -409,27 +409,27 @@ export const alignitemstr1 = (
   );
 
   export const HeadingIcon = (
-    <svg  class="th-block-icon" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+  <svg  class="th-block-icon" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
   <text id="H" font-size='347.65px' text-anchor='middle' font-family='Comfortaa' font-weight='700' fill="#777778" class="cls-1" transform="matrix(1.184, 0, 0, 1.184, 250, 405.422)"><tspan x="0">H</tspan></text>
-</svg>
+  </svg>
   );
 
   export const ConatinerIcon = (
   <svg class="th-block-icon" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
-  <rect id="Rounded_Rectangle_10" data-name="Rounded Rectangle 10" fill="#5d5d5e" class="cls-1" x="110" y="112" width="83" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy" data-name="Rounded Rectangle 10 copy" fill="#5d5d5e" class="cls-1" x="110" y="112" width="8" height="83" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_2" data-name="Rounded Rectangle 10 copy 2" fill="#5d5d5e" class="cls-1" x="307" y="381" width="83" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_3" data-name="Rounded Rectangle 10 copy 3" fill="#5d5d5e" class="cls-1" x="382" y="306" width="8" height="83" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_6" data-name="Rounded Rectangle 10 copy 6" fill="#5d5d5e" class="cls-1" x="110" y="306" width="8" height="83" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_7" data-name="Rounded Rectangle 10 copy 7" fill="#5d5d5e" class="cls-1" x="110" y="381" width="83" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_4" data-name="Rounded Rectangle 10 copy 4" fill="#5d5d5e" class="cls-1" x="382" y="112" width="8" height="83" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_5" data-name="Rounded Rectangle 10 copy 5" fill="#5d5d5e" class="cls-1" x="307" y="112" width="83" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_8" data-name="Rounded Rectangle 10 copy 8" fill="#5d5d5e" class="cls-2" x="214" y="112" width="72" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_9" data-name="Rounded Rectangle 10 copy 9" fill="#777778" class="cls-2" x="110" y="214" width="8" height="72" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_10" data-name="Rounded Rectangle 10 copy 10" fill="#777778" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_11" data-name="Rounded Rectangle 10 copy 11" fill="#777778" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_12" data-name="Rounded Rectangle 10 copy 12" fill="#777778" x="214" y="381" width="72" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_13" data-name="Rounded Rectangle 10 copy 13" fill="#777778" x="214" y="246" width="72" height="8" rx="4" ry="4"/>
-  <rect id="Rounded_Rectangle_10_copy_14" data-name="Rounded Rectangle 10 copy 14" fill="#777778" x="246" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10" data-name="Rounded Rectangle 10" fill="#000" class="cls-1" x="110" y="112" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy" data-name="Rounded Rectangle 10 copy" fill="#000" class="cls-1" x="110" y="112" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_2" data-name="Rounded Rectangle 10 copy 2" fill="#000" class="cls-1" x="307" y="381" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_3" data-name="Rounded Rectangle 10 copy 3" fill="#000" class="cls-1" x="382" y="306" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_6" data-name="Rounded Rectangle 10 copy 6" fill="#000" class="cls-1" x="110" y="306" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_7" data-name="Rounded Rectangle 10 copy 7" fill="#000" class="cls-1" x="110" y="381" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_4" data-name="Rounded Rectangle 10 copy 4" fill="#000" class="cls-1" x="382" y="112" width="8" height="83" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_5" data-name="Rounded Rectangle 10 copy 5" fill="#000" class="cls-1" x="307" y="112" width="83" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_8" data-name="Rounded Rectangle 10 copy 8" fill="#000" class="cls-2" x="214" y="112" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_9" data-name="Rounded Rectangle 10 copy 9" fill="#000" class="cls-2" x="110" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_10" data-name="Rounded Rectangle 10 copy 10" fill="#000" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_11" data-name="Rounded Rectangle 10 copy 11" fill="#000" x="382" y="214" width="8" height="72" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_12" data-name="Rounded Rectangle 10 copy 12" fill="#000" x="214" y="381" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_13" data-name="Rounded Rectangle 10 copy 13" fill="#000" x="214" y="246" width="72" height="8" rx="4" ry="4"/>
+  <rect id="Rounded_Rectangle_10_copy_14" data-name="Rounded Rectangle 10 copy 14" fill="#000" x="246" y="214" width="8" height="72" rx="4" ry="4"/>
   </svg>
   );

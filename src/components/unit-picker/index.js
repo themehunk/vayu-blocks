@@ -1,5 +1,3 @@
-// Import CSS
-import './editor.scss';
 
 import {
 	Component,
