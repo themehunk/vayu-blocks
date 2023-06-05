@@ -37,8 +37,9 @@
                 variant="primary"
                 onClick={ onToggle }
                 aria-expanded={ isOpen }
+                icon={ link }
             >
-                Toggle Popover!
+                
             </Button>
         ) }
         renderContent={ () => 

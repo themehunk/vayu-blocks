@@ -31,6 +31,8 @@ import UnitChooser from '../../../src/components/unit-picker/index.js';
 import ControlPanelControl from '../../../src/components/control-panel-control/index.js';
 import BackgroundSelectorControl from '../../../src/components/background-selector-control/index.js';
 import ToogleGroupControl from '../../../src/components/toogle-group-control/index.js';
+
+import IconPicker from '../../../src/components/icon-picker/index.js';
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
@@ -1069,6 +1071,28 @@ const InsSettings = ({
 	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
 	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
 
+	// flex align-self property
+	const getButtonAlign = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.align;
+		case 'Tablet':
+			return attributes.alignTablet;
+		case 'Mobile':
+			return attributes.alignMobile;
+		default:
+			return undefined;
+		}
+	};
+    const changeButtonAlign = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ align: value, alignTablet: value, alignMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ alignTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ alignMobile: value });
+		}
+	};
 
     return (<Fragment>
         <InspectorControls>
@@ -1077,6 +1101,10 @@ const InsSettings = ({
 						{
 							label: __( 'Setting', 'themehunk-block' ),
 							value: 'setting'
+						},
+						{
+							label: __( 'Style', 'themehunk-block' ),
+							value: 'style'
 						},
 						{
 							label: __( 'Advanced', 'themehunk-block' ),
@@ -1093,6 +1121,71 @@ const InsSettings = ({
 									initialOpen={ true }
 									className="th-spacer-panel"
 								> 
+								<ResponsiveControl
+									label={ __( 'Alignment', 'themehunk-block' ) }
+									className="th-alig-self-control th-component-group"
+								>
+									<ToogleGroupControl
+										value={ getButtonAlign() }
+										onChange={ changeButtonAlign }
+										options={[
+											{
+												icon: Start,
+												label: __( 'Left', 'themehunk-blocks' ),
+												value: 'start'
+											},
+											{
+												icon: Center,
+												label: __( 'Center', 'themehunk-block' ),
+												value: 'center'
+											},
+											{
+												icon: End,
+												label: __( 'Right', 'themehunk-blocks' ),
+												value: 'end'
+											},
+											{
+												icon: Strech,
+												label: __( 'Justify', 'themehunk-block' ),
+												value: 'space-around'
+											}
+										]}
+										
+										hasIcon
+									/>
+								</ResponsiveControl>
+
+								<IconPicker
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									attrIcon={ 'icon' }
+									attrRemoveText={ 'removeText' }
+									attrAriaLabel={ 'ariaLabel' }
+									id= ''
+								/>
+
+							<div className='th-component-group-label'>
+                            	<label className='th-label'>{ __( 'Position', 'themehunk-block' )}</label>
+                           	 <ToogleGroupControl
+
+										value={ attributes.iconPosition }
+								        onChange={ iconPosition => setAttributes({ iconPosition }) }
+										options={[
+											{
+												icon: HorizontalLeft,
+												label: __( 'Before', 'themehunk-blocks' ),
+												value: 'before'
+											},
+											{
+												icon: HorizontalRight,
+												label: __( 'After', 'themehunk-block' ),
+												value: 'after'
+											}
+										]}
+										
+										hasIcon
+									/>
+							</div>
 								
 								</PanelBody>
 								</Fragment>

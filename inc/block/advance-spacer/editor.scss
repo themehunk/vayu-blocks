@@ -102,7 +102,7 @@
 	bottom: var(--bottom);
 }
 
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-themehunk-blocks-advance-spacer:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
 	--maxWidth-fullwidth: 650px;
 	max-width: var(--maxWidth-fullwidth)!important;
 }

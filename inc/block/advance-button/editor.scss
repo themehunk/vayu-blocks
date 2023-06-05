@@ -1,0 +1,57 @@
+
+.th-button-inside{
+    width: auto;
+    display: inline-flex;
+}
+
+.wp-block-themehunk-blocks-advance-button{
+    --width:'100%';
+	width: var(--width);
+	max-width: var(--maxWidth);
+	--display: flex;
+	display: var(--display);
+    justify-content: var(--justify-content);
+    padding-top: var(--paddingTop);
+	padding-right: var(--paddingRight);
+	padding-bottom: var(--paddingBottom);
+	padding-left: var(--paddingLeft);
+	margin-top: var(--marginTop);
+	margin-right: var(--marginRight);
+	margin-bottom: var(--marginBottom);
+	margin-left: var(--marginLeft);
+    --background-color:rgb(238, 238, 238);
+	background-color: var(--background-color);
+	background-image: var(--backgroundImage);
+	background-attachment: var(--backgroundAttachment);
+	background-position: var(--backgroundPosition);
+	background-repeat: var(--backgroundRepeat);
+	background-size: var(--backgroundSize);
+	
+	--border-style:none;
+	--border-color:initial;
+	--border-style-hvr:none;
+	--border-color-hvr:initial;
+	border-style: var(--border-style);
+	border-color: var(--border-color);
+
+	border-top-width: var(--border-top-width);
+	border-bottom-width: var(--border-bottom-width);
+	border-right-width: var(--border-right-width);
+	border-left-width: var(--border-left-width);
+	border-top-right-radius: var(--borderTopRightRadius);
+	border-top-left-radius: var(--borderTopLeftRadius);
+	border-bottom-right-radius: var(--borderBottomRightRadius);
+	border-bottom-left-radius: var(--borderBottomLeftRadius);
+	box-shadow: var(--boxShadow);
+
+	align-self: var(--align-self);
+	order: var(--order);
+	flex-grow: var(--flex-grow);
+	flex-shrink: var(--flex-shrink);
+	transition: var(--transition) ;
+	-webkit-transition: var(--WebkitTransition) ;
+	-moz-transition: var(--MozTransition);
+	-o-transition: var(--OTransition);
+	z-index: var(--zIndex);
+}
+
