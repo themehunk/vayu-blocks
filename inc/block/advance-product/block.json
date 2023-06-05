@@ -18,8 +18,5 @@
 		"uniqueID": {
 			"type": "string"
 		}
-	},
-	"editorScript": "file:../../../build/advance-product.js",
-	"editorStyle": "file:../../../build/advance-product.css",
-	"style": "file:../../../build/style-advance-product.css"
+	}
 }

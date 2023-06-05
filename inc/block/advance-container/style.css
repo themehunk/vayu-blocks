@@ -9,4 +9,73 @@
   color: #fff;
   padding: 2px;
 }
-/*# sourceMappingURL=style.css.map */
+
+.wp-block-themehunk-blocks-advance-container {
+  flex-grow: 1;
+  position: relative;
+}
+
+.th-con {
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 1;
+}
+
+.wp-block-th-blocks-container-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: none;
+  opacity: 0.6;
+  padding: 0 !important;
+}
+
+.block-editor-block-icon.has-colors svg.th-block-icon {
+  max-height: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  fill: #000;
+}
+
+.th-shape {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+  top: -1px;
+  z-index: -1;
+}
+
+.th-shape svg {
+  display: block;
+  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.th-shape.flip-top svg, .th-shape.flip-bottom svg {
+  left: 50%;
+  transform: translateX(-50%) rotateY(180deg);
+}
+
+.th-shape-top {
+  top: -1px;
+}
+
+.th-shape-bottom {
+  bottom: -1px;
+}
+
+.th-shape-bottom {
+  transform: rotate(180deg);
+}/*# sourceMappingURL=style.css.map */

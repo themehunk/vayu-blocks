@@ -713,8 +713,5 @@
 			"type": "number",
 			"default": "0.2"
 		}
-	},
-	"editorScript": "file:../../../build/advance-spacer.js",
-	"editorStyle": "file:../../../build/advance-spacer.css",
-	"style": "file:../../../build/style-advance-spacer.css"
+	}
 }

@@ -2029,6 +2029,7 @@ const InsSettings = ({
 								 label={ __( 'Color', 'themehunk-block' ) }
 								 colorValue={ attributes.shapeTopClr }
 								 onColorChange={ e => setAttributes({ shapeTopClr: e }) }
+								 enableAlpha={true} 
 								 />
 
 									<ResponsiveControl
@@ -2121,6 +2122,7 @@ const InsSettings = ({
 								 label={ __( 'Color', 'themehunk-block' ) }
 								 colorValue={ attributes.shapeBottomClr }
 								 onColorChange={ e => setAttributes({ shapeBottomClr: e }) }
+								 enableAlpha={true} 
 								 />
 								 
 								 <ResponsiveControl
@@ -2690,10 +2692,11 @@ const InsSettings = ({
 								/>
 
 							</ResponsiveControl>
-									<ColorGradientControl
+							<ColorGradientControl
 								label={ __( 'Border Color', 'themehunk-block' ) }
 								colorValue={ attributes.borderColor }
 								onColorChange={ e => setAttributes({ borderColor: e }) }
+								enableAlpha={true} 
 								/>
 						</Suspense>
 						
@@ -2762,6 +2765,7 @@ const InsSettings = ({
 								label={ __( 'Shadow Color', 'themehunk-block' ) }
 								colorValue={ attributes.boxShadowColor }
 								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+								enableAlpha={true} 
 							/>
 
 							<RangeControl
@@ -2873,6 +2877,7 @@ const InsSettings = ({
 					label={ __( 'Border Hover Color', 'themehunk-block' ) }
 					colorValue={ attributes.borderColorHvr }
 					onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+					enableAlpha={true} 
 				    />
 					</Suspense>
 
@@ -2941,6 +2946,7 @@ const InsSettings = ({
 								label={ __( 'Shadow Color', 'themehunk-block' ) }
 								colorValue={ attributes.boxShadowColorHvr }
 								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+								enableAlpha={true} 
 							/>
 
 							<RangeControl

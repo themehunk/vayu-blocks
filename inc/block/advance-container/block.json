@@ -956,8 +956,5 @@
 	"supports": {
 		"align": [ "wide", "full" ],
 		"html": false
-	},
-	"editorScript": "file:../../../build/advance-container.js",
-	"editorStyle": "file:../../../build/advance-container.css",
-	"style": "file:../../../build/style-advance-container.css"
+	}
 }
