@@ -9,4 +9,11 @@
   color: #fff;
   padding: 2px;
 }
-/*# sourceMappingURL=style.css.map */
+
+.block-editor-block-icon.has-colors svg.th-block-icon {
+  max-height: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  fill: "#000";
+}/*# sourceMappingURL=style.css.map */

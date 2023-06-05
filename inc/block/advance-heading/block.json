@@ -12,6 +12,9 @@
 		"id": {
 			"type": "string"
 		},
+		"uniqueID": {
+			"type": "string"
+		},
 		"content": {
 			"type": "string",
 			"selector": "h1,h2,h3,h4,h5,h6,div,p,span",
@@ -808,8 +811,5 @@
 			"type": "string",
 			"default":"px"
 		}
-	},
-	"editorScript": "file:../../../build/advance-heading.js",
-	"editorStyle": "file:../../../build/advance-heading.css",
-	"style": "file:../../../build/style-advance-heading.css"
+	}
 }

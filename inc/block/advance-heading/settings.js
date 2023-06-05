@@ -34,7 +34,8 @@ import {
 	ControlPanelControl,
 	BackgroundSelectorControl,
 	UnitChooser,
-	ToogleGroupControl
+	ToogleGroupControl,
+	GoogleFontsControl
 } from '../../../src/components/index.js';
 
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
@@ -1180,6 +1181,7 @@ const InsSettings = ({
 								label={ __( 'Heading Color', 'themehunk-block' ) }
 								colorValue={ attributes.headingColor }
 								onColorChange={ e => setAttributes({ headingColor: e }) }
+								enableAlpha={true}
 							/>	
 			 
 
@@ -1189,6 +1191,7 @@ const InsSettings = ({
 					label={ __( 'Heading Hover Color', 'themehunk-block' ) }
 					colorValue={ attributes.headingHvrColor }
 					onColorChange={ e => setAttributes({ headingHvrColor: e }) }
+					enableAlpha={true}
 				/>
 
 				</>
@@ -1767,6 +1770,7 @@ const InsSettings = ({
 								label={ __( 'Border Color', 'themehunk-block' ) }
 								colorValue={ attributes.borderColor }
 								onColorChange={ e => setAttributes({ borderColor: e }) }
+								enableAlpha={true}
 								/>
 						</Suspense>
 						
@@ -1831,6 +1835,7 @@ const InsSettings = ({
 								label={ __( 'Shadow Color', 'themehunk-block' ) }
 								colorValue={ attributes.boxShadowColor }
 								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+								enableAlpha={true}
 							/>
 
 							<RangeControl
@@ -1938,6 +1943,7 @@ const InsSettings = ({
 					label={ __( 'Border Hover Color', 'themehunk-block' ) }
 					colorValue={ attributes.borderColorHvr }
 					onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+					enableAlpha={true}
 				    />
 					</Suspense>
 
@@ -2003,6 +2009,7 @@ const InsSettings = ({
 								label={ __( 'Shadow Color', 'themehunk-block' ) }
 								colorValue={ attributes.boxShadowColorHvr }
 								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+								enableAlpha={true}
 							/>
 
 							<RangeControl
