@@ -258,8 +258,7 @@ export default function Edit({ attributes, setAttributes, clientId,
 		...iconPositionStyle,
 		...buttonWrapperStyle,
 	}
-
-
+	
 	const blockProps = useBlockProps({
 			id: attributes.id,
 			className: 'th-button-wrapper',

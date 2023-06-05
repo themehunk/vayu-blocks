@@ -3,9 +3,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
-import { Fragment, useEffect } from '@wordpress/element';
+import {
+	Fragment,
+	useEffect,
+	useRef
+} from '@wordpress/element';
 import { useViewportMatch} from '@wordpress/compose';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
 
@@ -16,10 +20,11 @@ import hexToRgba from 'hex-rgba';
  import Controls from './controls.js';
  import InsSettings from './settings.js';
  import googleFontsLoader from '../../../src/helpers/google-fonts.js';
+ import getUniqueId from '../../../src/helpers/get-unique-id.js';
  import './editor.scss';
 
 
-export default function Edit({ attributes, setAttributes,clientId }) {
+export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
 
 	useEffect( () => {
 		googleFontsLoader.attach();
@@ -28,8 +33,31 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 	const { id } = attributes;
 
 	if ( ! id ) {
-        setAttributes( { id: clientId } );
-    }
+		setAttributes( { id: clientId } );
+	}
+
+	const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+			const { isUniqueID, isUniqueBlock} = useSelect(
+				( select ) => {
+					return {
+						isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
+						isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+						
+					};
+				},
+				[ clientId ]
+			);
+
+			useEffect( () => {
+			const uniqueId = getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlock );
+			if ( uniqueId !== uniqueID ) {
+				attributes.uniqueID = uniqueId;
+				setAttributes( { uniqueID: uniqueId } );
+				addUniqueID( uniqueId, clientId );
+			} else {
+				addUniqueID( uniqueId, clientId );
+			}
+			}, [] );
 
     const changeContent = value => {
 		setAttributes({ content: value });
@@ -609,7 +637,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 	}
 
     const blockProps = useBlockProps({
-		id: attributes.id,
+		id:`th-block-heading-${attributes.uniqueID}`,
 		style,
 		onMouseEnter,
 		onMouseLeave
@@ -617,7 +645,7 @@ export default function Edit({ attributes, setAttributes,clientId }) {
 
 	return (
         <Fragment>
-            <Controls
+            <Controls 
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>

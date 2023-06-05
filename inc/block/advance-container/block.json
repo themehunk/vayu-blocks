@@ -243,7 +243,7 @@
 		},
 		"padding": {
 			"type": "number",
-			"default": 0
+			"default": 10
 		},
 		"paddingUnit": {
 			"type": "string",
@@ -934,14 +934,27 @@
 		"shapeBottomInvert": {
 			"type": "boolean",
 			"default": false
+		},
+		"elementGap": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapTablet": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapMobile": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapUnit": {
+			"type": "string",
+			"default": "px"
 		}
 
 	},
 	"supports": {
 		"align": [ "wide", "full" ],
 		"html": false
-	},
-	"editorScript": "file:../../../build/advance-container.js",
-	"editorStyle": "file:../../../build/advance-container.css",
-	"style": "file:../../../build/style-advance-container.css"
+	}
 }

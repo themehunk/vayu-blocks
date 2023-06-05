@@ -729,8 +729,5 @@
 			"type": "number",
 			"default": "0.2"
 		}
-	},
-	"editorScript": "file:../../../build/advance-button.js",
-	"editorStyle": "file:../../../build/advance-button.css",
-	"style": "file:../../../build/style-advance-button.css"
+	}
 }

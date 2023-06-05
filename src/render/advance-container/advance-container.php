@@ -19,7 +19,7 @@ function advance_container_style($attr){
         $css .= "}";
 
         $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
-            // boxed-width
+            // full-width
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
                 $css .= "width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit}; ";
@@ -68,7 +68,7 @@ function advance_container_style($attr){
 			padding-left: {$paddingLeft}{$paddingUnit}; 
 		    ";
 		} else {
-			$padding = isset($attr['padding']) ? $attr['padding'] : 0;
+			$padding = isset($attr['padding']) ? $attr['padding'] : 10;
 			$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
 			$css .= "padding: {$padding}{$paddingUnit};";
 		}
@@ -240,10 +240,19 @@ function advance_container_style($attr){
              $css .= isset($attr['AlignItem']) ? "align-items: {$attr['AlignItem']}; " : '';
              //flex-wrap
              $css .= isset($attr['Wrap']) ? "flex-wrap: {$attr['Wrap']}; " : '';
+			 
              //  align content
              if (isset($attr['Wrap']) && $attr['Wrap']=='wrap') {
              $css .= isset($attr['AlignContent']) ? "align-content: {$attr['AlignContent']}; " : '';
              }
+
+			 //gap
+			
+			 $elementGap = isset($attr['elementGap']) ? $attr['elementGap'] : '10';	
+			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+             $css .= "gap: {$elementGap}{$elementGapUnit};";
+		
+
         $css .= "}";
 
         // Hover
@@ -340,6 +349,7 @@ function advance_container_style($attr){
             }else{
                 $css .= "max-width: {100%};";
             }
+			
             $css .= "}";
     
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
@@ -497,6 +507,12 @@ function advance_container_style($attr){
                 if (isset($attr['WrapTablet']) && $attr['WrapTablet']=='wrap') {
                 $css .= isset($attr['AlignContentTablet']) ? "align-content: {$attr['AlignContentTablet']}; " : '';
                 }
+				//gap
+			
+			 $elementGapTablet = isset($attr['elementGapTablet']) ? $attr['elementGapTablet'] : '10';	
+			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+             $css .= "gap: {$elementGapTablet}{$elementGapUnit};";
+
             $css .= "}";
 
             $css .= ".th-c{$attr['uniqueID']}:hover {";
@@ -732,7 +748,11 @@ function advance_container_style($attr){
                 if (isset($attr['WrapMobile']) && $attr['WrapMobile']=='wrap') {
                 $css .= isset($attr['AlignContentMobile']) ? "align-content: {$attr['AlignContentMobile']}; " : '';
                 }
-            $css .= "}";
+				//gap
+				$elementGapMobile = isset($attr['elementGapMobile']) ? $attr['elementGapMobile'] : '10';	
+			    $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+                $css .= "gap: {$elementGapMobile}{$elementGapUnit};";
+                $css .= "}";
 
 			//shaper
 			$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
