@@ -70,6 +70,14 @@ function themehunk_blocks_register_blocks() {
            
             
         ),
+        array(
+			'name'           => 'themehunk-blocks/advance-product',
+			'script_handle'  => 'advance-product',
+			'editor_style'   => 'advance-product-editor-style',
+			'frontend_style' => 'advance-product-frontend-style',
+           
+            
+        ),
 	);
 
 	foreach ( $blocks as $block ) {
