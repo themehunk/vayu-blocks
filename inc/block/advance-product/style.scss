@@ -114,3 +114,32 @@
     z-index: 99;
     opacity: 0.7;
 }
+
+.th-pagination {
+    width: 100%;
+    text-align: center;
+    margin:2rem 0;
+}
+.th-pagination button{
+border: 1px solid #dcdcdc;
+    text-align: center;
+    vertical-align: middle;
+    color: #b7b7b7;
+    padding: 0.5rem;
+    display: inline-flex;
+    background:transparent;
+    margin:0 0.3rem;
+    cursor:pointer;
+}
+.th-pagination button:hover:not([disabled]) {
+    background: #0A472E;
+    border-color: #0A472E;
+    color: #fff;
+}
+
+.th-pagination button span {
+    font-size: 0.89rem;
+    height: auto;
+    width: auto;
+    line-height: normal;
+}
