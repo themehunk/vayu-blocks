@@ -12,8 +12,7 @@ import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
-import {useEffect} from '@wordpress/element';
-import {Fragment,useState,Suspense} from '@wordpress/element';
+import {Fragment,useState,Suspense,useEffect} from '@wordpress/element';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -44,80 +43,135 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 
-export default function Edit({ attributes, setAttributes, toggleSelection, clientId,
-	uniqueID }) {
+export default function Edit({ attributes, setAttributes, toggleSelection, clientId, uniqueID }) {
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const homeUrl = ThBlockData.homeUrl;
 
-		const [categories, setCategories] = useState([]);
-		const [selectedCategory, setSelectedCategory] = useState('');
-		const [products, setProducts] = useState([]);
-		const homeUrl = themehunkblock.homeUrl;
+  // useEffect hook to fetch product categories
+  useEffect(() => {
+    // Fetch product categories
+    fetch(`${homeUrl}/wp-json/wc/store/v1/products/categories`)
+      .then(response => response.json())
+      .then(data => {
+        setCategories(data);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }, []);
 
-		// useEffect hook to fetch product categories
-		useEffect(() => {
-			// Fetch product categories
-			fetch(`${homeUrl}/wp-json/wc/store/v1/products/categories`)
-			  .then(response => response.json())
-			  .then(data => {
-				setCategories(data);
-			  })
-			  .catch(error => {
-				console.error('Error fetching categories:', error);
-			  });
-		  }, []);
+  // useEffect hook to fetch products based on selected category
+  useEffect(() => {
+    if (selectedCategory) {
+      setIsLoading(true);
+      // Fetch products based on selected category
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}`)
+        .then(response => response.json())
+        .then(data => {
+          setProducts(data);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching products:', error);
+        });
+    } else {
+      setIsLoading(true);
+      // Fetch all products if no category is selected
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products`)
+        .then(response => response.json())
+        .then(data => {
+          setProducts(data);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching products:', error);
+        });
+    }
+  }, [selectedCategory]);
 
-		  // useEffect hook to fetch products based on selected category
-			useEffect(() => {
-				if (selectedCategory) {
-				// Fetch products based on selected category
-				fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}`)
-					.then(response => response.json())
-					.then(data => {
-					setProducts(data);
-					})
-					.catch(error => {
-					console.error('Error fetching products:', error);
-					});
-				}
-			}, [selectedCategory]);
+  // Event handler for tab click
+  const handleTabClick = categoryId => {
+    setSelectedCategory(categoryId);
+  };
+  
+  // show start rating
+  const RatingStars = ({ rating, maxRating = 5, filledColor = 'gold', emptyColor = 'lightgray' }) => {
+    const starCount = Math.min(Math.floor(rating), maxRating);
+  
+    return (
+      <div>
+        {Array(maxRating)
+          .fill()
+          .map((_, index) => (
+            <span
+              key={index}
+              style={{ color: index < starCount ? filledColor : emptyColor }}
+            >
+              &#9733;
+            </span>
+          ))}
+      </div>
+    );
+  };
 
-			// Event handler for category selection change
-			const handleCategoryChange = e => {
-				setSelectedCategory(e.target.value);
-			};
-	
-		const blockProps = useBlockProps();
-        return (
-			<div>
-			<h2>Show All Products with Filter Category</h2>
-			{categories.length > 0 ? (
-			  <div>
-				<label htmlFor="category">Select Category:</label>
-				<select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-				  <option value="">All</option>
-				  {categories.map(category => (
-					<option key={category.id} value={category.id}>
-					  {category.name}
-					</option>
-				  ))}
-				</select>
-			  </div>
-			) : (
-			  <p>Loading categories...</p>
-			)}
-			{products.length > 0 ? (
-			  <ul>
-				{products.map(product => (
-				  <li key={product.id}>
-					<h3>{product.name}</h3>
-					<p>Price: {product.price}</p>
-					<p>Description: {product.description}</p>
-					<img src={product.images[0].src} alt={product.name} />
-				  </li>
-				))}
-			  </ul>
-			) : (
-			  <p>Loading products...</p>
-			)}
-		  </div>
-        );
+  console.log(products);
+  return (
+    <div className="th-product-block-wrapper">
+      {products.length > 0 ? (
+        <>
+          <div className="th-product-block-cat-filter">
+            <ul className="category-tabs">
+              <li
+                className={!selectedCategory ? 'active' : ''}
+                onClick={() => handleTabClick('')}
+              >
+              All
+              </li>
+              {categories.map(category => (
+                <li
+                  key={category.id}
+                  className={selectedCategory === category.id ? 'active' : ''}
+                  onClick={() => handleTabClick(category.id)}
+                >
+                  {category.name}
+                </li>
+              ))}
+            </ul>
+          </div> 
+         <div className="th-product-block-product-content">
+        
+           <div className="th-product-block-product-item-wrap">
+           {isLoading && <div className="th-block-loader"></div>}
+            {products.map(product => (
+            <div className="th-product-item" key={product.id}>
+              <div className="th-product-block-content-wrap">
+                <div className="th-product-imgae">
+                {product.on_sale && <span className="sale-tag">Sale</span>}  
+                <div className="th-product-sale"></div>  
+                <img src={product.images[0].thumbnail} alt={product.name} />
+                </div>
+                <div className="th-product-cat">
+                {product.categories.map((category) => (
+                 <a key={category.id} href={category.link}>{category.name}</a>
+                ))}
+                </div>
+                <h3 className="th-product-title"><a key={product.id} href={product.permalink}>{product.name}</a></h3>
+                <div className="th-product-price" dangerouslySetInnerHTML={{ __html: product.price_html }}></div>
+                <div className="th-product-rating"><RatingStars rating={parseFloat(product.average_rating)} maxRating={5} filledColor="gold" emptyColor="lightgray" /></div>
+                <div className="th-product-btn">{product.add_to_cart.text}</div>
+              </div>
+            </div>
+            ))}
+         </div>
+        </div>
+         </>
+        ) : (
+        <p>Loading products...</p>
+      ) }
+     
+    </div>
+  );
 }
