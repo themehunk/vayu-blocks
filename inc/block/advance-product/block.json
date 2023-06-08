@@ -7,9 +7,6 @@
 	"category": "themehunk-blocks",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
-	"supports": {
-		"html": false
-	},
 	"textdomain": "themehunk-block",
 	"attributes": {
 		"id": {
@@ -17,6 +14,13 @@
 		},
 		"uniqueID": {
 			"type": "string"
+		},
+		"productCategories":{
+			"type": "string"
 		}
+	},
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false
 	}
 }

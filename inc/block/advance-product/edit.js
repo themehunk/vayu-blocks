@@ -26,7 +26,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-
+import InsSettings from './settings.js';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -34,6 +34,11 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+
+/**
+ * Internal dependencies
+ */
+
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -117,12 +122,23 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     );
   };
 
-  const productsPerPage = 3; // Number of products to display per page
+  const productsPerPage = 4; // Number of products to display per page
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = products.slice(startIndex, endIndex);
 
+  const blockProps = useBlockProps({
+    id:attributes.id,
+  });
+  
+  console.log(attributes.productCategories);
   return (
+     <Fragment>
+		<InsSettings
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>	
+    <div {...blockProps} >   
     <div className="th-product-block-wrapper">
       {products.length > 0 ? (
         <>
@@ -191,9 +207,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
             </div>
           </div>
         </>
-      ) : (
-        <p>Loading products...</p>
-      )}
+        ) : (
+          <p>Loading products...</p>
+        )}
     </div>
+    </div> 
+    </Fragment>
   );
 }
