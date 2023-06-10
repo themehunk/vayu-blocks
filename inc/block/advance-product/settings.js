@@ -42,6 +42,16 @@ const InsSettings = ({
     attributes,
     setAttributes
 }) => {
+
+     const getView = useSelect( select => {
+
+		const { getView } = select( 'themehunk-blocks/data' );
+
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  	}, []);
+
     const [ tab, setTab ] = useState( 'setting' );
    
     const homeUrl = ThBlockData.homeUrl;
@@ -55,7 +65,7 @@ const InsSettings = ({
           .then((data) => {
             // Map through the data and convert it to the expected format
             const mappedCategories = data.map((category) => ({
-              value: category.slug,
+              value: category.id,
               label: category.name,
             }));
             setSelectCategories(mappedCategories);
@@ -65,6 +75,51 @@ const InsSettings = ({
           });
       }, []);
 
+    //show product per page
+    const getProductShow = () => {
+      switch ( getView ) {
+      case 'Desktop':
+        return attributes.productShow;
+      case 'Tablet':
+        return attributes.productShowTablet;
+      case 'Mobile':
+        return attributes.productShowMobile;
+      default:
+        return undefined;
+      }
+    };
+    const changeProductShow = value => {
+      if ( 'Desktop' === getView ) {
+        setAttributes({ productShow: value, productShowTablet: value, productShowMobile: value });
+      } else if ( 'Tablet' === getView ) {
+        setAttributes({ productShowTablet: value });
+      } else if ( 'Mobile' === getView ) {
+        setAttributes({ productShowMobile: value });
+      }
+    };
+    //show product per page
+    const getCol = () => {
+      switch ( getView ) {
+      case 'Desktop':
+        return attributes.productCol;
+      case 'Tablet':
+        return attributes.productColTablet;
+      case 'Mobile':
+        return attributes.productColMobile;
+      default:
+        return undefined;
+      }
+    };
+    const changeCol = value => {
+      if ( 'Desktop' === getView ) {
+        setAttributes({ productCol: value, productColTablet: value, productColMobile: value });
+      } else if ( 'Tablet' === getView ) {
+        setAttributes({ productColTablet: value });
+      } else if ( 'Mobile' === getView ) {
+        setAttributes({ productColMobile: value });
+      }
+    };
+    
     return (
         <Fragment>
            <InspectorControls>
@@ -89,17 +144,57 @@ const InsSettings = ({
                 
             >
             <Select
-            value={attributes.productCategories || [] }
-            onChange={(value) => {
-                setAttributes({ productCategories: value ? value : [] });
-            }}
-            id="terms-selection"
+            value={attributes.productCategories}
+            id="th-cat-select"
             options={SelectCategories}
             isMulti
             isClearable
             maxMenuHeight={300}
             placeholder={__('Choose Category', 'themehunk-block')}
+            onChange={( value ) => {
+              setAttributes( { productCategories: ( value ? value : [] ) } );
+            }}
             />
+            <SelectControl
+								label={ __( 'Source', 'themehunk-block' ) }
+								value={ attributes.productType }
+								options={ [
+									{ label:  __( 'Latest Product', 'themehunk-block' ), value: 'recent' },
+									{ label: __( 'Sale', 'themehunk-block' ), value: 'sale' },
+                  { label: __( 'Featured', 'themehunk-block' ), value: 'featured' },
+                  { label: __( 'Manual Product', 'themehunk-block' ), value: 'manual' },
+								] }
+								onChange={ e => setAttributes({ productType: e }) }
+					  />
+             <ResponsiveControl
+                        label={ __( 'Number of product to show per page', 'themehunk-block' ) }
+                        >
+               <RangeControl
+                            value={ getProductShow() || '' }
+                            onChange={ changeProductShow }
+                            step={ 1 }
+                            min={ 1 }
+                            max={500}
+                            allowReset={ true }
+                   />            
+
+            </ResponsiveControl>
+
+            <ResponsiveControl
+                        label={ __( 'Number of column', 'themehunk-block' ) }
+                        >
+               <RangeControl
+                            
+                            value={ getCol() || '' }
+                            onChange={ changeCol }
+                            step={ 1 }
+                            min={ 1 }
+                            max={10}
+                            allowReset={ true }
+                   />            
+
+            </ResponsiveControl>
+            
             </PanelBody>
             </Fragment>
              ) || 'advanced' === tab && (

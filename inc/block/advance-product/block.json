@@ -16,7 +16,30 @@
 			"type": "string"
 		},
 		"productCategories":{
-			"type": "string"
+			"type": "array",
+	        "default": []
+		},
+		"productType":{
+			"type": "string",
+			"default": "recent"
+		},
+		"productShow":{
+			"type": "number"
+		},
+		"productShowTablet":{
+			"type": "number"
+		},
+		"productShowMobile":{
+			"type": "number"
+		},
+		"productCol":{
+			"type": "number"
+		},
+		"productColTablet":{
+			"type": "number"
+		},
+		"productColMobile":{
+			"type": "number"
 		}
 	},
 	"supports": {

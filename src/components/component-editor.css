@@ -556,4 +556,8 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
 }
 .th-background-selector-control .components-base-control__title .linking-controls button .dashicon {
   margin: 2px;
+}
+
+#th-cat-select {
+  margin-bottom: 20px;
 }/*# sourceMappingURL=component-editor.css.map */

@@ -27,6 +27,7 @@ import { useBlockProps } from '@wordpress/block-editor';
  * Internal dependencies
  */
 import InsSettings from './settings.js';
+import getUniqueId from '../../../src/helpers/get-unique-id.js';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -50,32 +51,31 @@ import './editor.scss';
  */
 
 export default function Edit({ attributes, setAttributes, toggleSelection, clientId, uniqueID }) {
-  const [categories, setCategories] = useState([]);
+
   const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const homeUrl = ThBlockData.homeUrl;
   const [currentPage, setCurrentPage] = useState(1);
-
-  // useEffect hook to fetch product categories
-  useEffect(() => {
-    // Fetch product categories
-    fetch(`${homeUrl}/wp-json/wc/store/v1/products/categories`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategories(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching categories:', error);
-      });
-  }, []);
+  
+  let prdType; 
+  if (attributes.productType === 'featured') {
+    prdType = '&featured=true';
+  }
+  if (attributes.productType === 'recent') {
+    prdType = '&orderby=date';
+  } else if (attributes.productType === 'popular') {
+    prdType = '&orderby=popularity';
+  } else if (attributes.productType === 'featured') {
+    prdType = '&featured=true';
+  }
 
   // useEffect hook to fetch products based on selected category
   useEffect(() => {
     if (selectedCategory) {
       setIsLoading(true);
       // Fetch products based on selected category
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}`)
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}${prdType}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
@@ -87,7 +87,12 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     } else {
       setIsLoading(true);
       // Fetch all products if no category is selected
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products`)
+      let categoryParam = '';
+      if (attributes.productCategories && attributes.productCategories.length > 0) {
+        const selectedCategories = attributes.productCategories.map((category) => category.value);
+        categoryParam = selectedCategories.join(',');
+      }
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${categoryParam}${prdType}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
@@ -97,14 +102,14 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
           console.error('Error fetching products:', error);
         });
     }
-  }, [selectedCategory, currentPage]);
+  }, [selectedCategory, currentPage, attributes.productCategories, prdType]);
   
   // Event handler for tab click
   const handleTabClick = (categoryId) => {
     setSelectedCategory(categoryId);
     setCurrentPage(1);
   };
-
+   
   // Show star rating
   const RatingStars = ({ rating, maxRating = 5, filledColor = 'gold', emptyColor = 'lightgray' }) => {
     const starCount = Math.min(Math.floor(rating), maxRating);
@@ -121,17 +126,24 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       </div>
     );
   };
-
-  const productsPerPage = 4; // Number of products to display per page
+ 
+  const productsPerPage = attributes.productShow || 4; // Number of products to display per page
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = products.slice(startIndex, endIndex);
 
+  const ColStyles={};
+
+  const style = omitBy({
+    ...ColStyles,
+  }, x => x?.includes?.( 'undefined' ));
+
   const blockProps = useBlockProps({
     id:attributes.id,
+    style
   });
   
-  console.log(attributes.productCategories);
+
   return (
      <Fragment>
 		<InsSettings
@@ -140,28 +152,27 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			/>	
     <div {...blockProps} >   
     <div className="th-product-block-wrapper">
-      {products.length > 0 ? (
+     
         <>
           <div className="th-product-block-cat-filter">
             <ul className="category-tabs">
-              <li className={!selectedCategory ? 'active' : ''} onClick={() => handleTabClick('')}>
-                All
-              </li>
-              {categories.map((category) => (
+              {attributes.productCategories.map((category) => (
                 <li
-                  key={category.id}
-                  className={selectedCategory === category.id ? 'active' : ''}
-                  onClick={() => handleTabClick(category.id)}
-                >
-                  {category.name}
+                  key={category.value}
+                  className={selectedCategory === category.value ? 'active' : ''}
+                  onClick={() => handleTabClick(category.value)}
+                  >
+                  {category.label}
                 </li>
               ))}
             </ul>
           </div>
           <div className="th-product-block-product-content">
             <div className="th-product-block-product-item-wrap">
-              {isLoading && <div className="th-block-loader"></div>}
-              {displayedProducts.map((product) => (
+             {isLoading && (
+              <div className="th-block-loader">Loading...</div>
+             )}
+                {displayedProducts.map((product) => (
                 <div className="th-product-item" key={product.id}>
                   <div className="th-product-block-content-wrap">
                     <div className="th-product-imgae">
@@ -207,9 +218,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
             </div>
           </div>
         </>
-        ) : (
-          <p>Loading products...</p>
-        )}
+        
     </div>
     </div> 
     </Fragment>
