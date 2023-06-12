@@ -5,3 +5,12 @@
     line-height: 1.4em!important;
     text-transform: capitalize!important;
 }
+
+.th-product-block-product-item-wrap{
+    grid-template-columns: repeat(var(--grid-col), 1fr);
+}
+
+.th-product-block-product-item-wrap img {
+    border: none;
+    max-width: 100%;
+}

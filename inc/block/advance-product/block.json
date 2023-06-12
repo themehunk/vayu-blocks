@@ -40,6 +40,20 @@
 		},
 		"productColMobile":{
 			"type": "number"
+		},
+		"productOrderby":{
+			"type": "string"
+		},
+		"productOrder":{
+			"type": "string"
+		},
+		"manualProduct":{
+			"type": "array",
+	        "default": []
+		},
+		"excludeProduct":{
+			"type": "array",
+	        "default": []
 		}
 	},
 	"supports": {

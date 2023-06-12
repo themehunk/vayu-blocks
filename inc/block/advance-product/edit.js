@@ -51,23 +51,118 @@ import './editor.scss';
  */
 
 export default function Edit({ attributes, setAttributes, toggleSelection, clientId, uniqueID }) {
+  const { id } = attributes;
+
+  const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+  const { isUniqueID, isUniqueBlock} = useSelect(
+    ( select ) => {
+      return {
+        isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
+        isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+        
+      };
+    },
+    [ clientId ]
+  );
+
+  useEffect( () => {
+  const uniqueId = getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlock );
+  if ( uniqueId !== uniqueID ) {
+    attributes.uniqueID = uniqueId;
+    setAttributes( { uniqueID: uniqueId } );
+    addUniqueID( uniqueId, clientId );
+  } else {
+    addUniqueID( uniqueId, clientId );
+  }
+  }, [] );
+  
+  const {
+		isViewportAvailable,
+		isPreviewDesktop,
+		isPreviewTablet,
+		isPreviewMobile
+	} = useSelect( select => {
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return {
+			isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
+			isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewTablet: __experimentalGetPreviewDeviceType ? 'Tablet' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
+		};
+	}, []);
+
+    const isLarger = useViewportMatch( 'large', '>=' );
+
+	const isLarge = useViewportMatch( 'large', '<=' );
+
+	const isSmall = useViewportMatch( 'small', '>=' );
+
+	const isSmaller = useViewportMatch( 'small', '<=' );
+
+    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isMobile = ! isLarger && ! isLarge && ! isSmall && ! isSmaller;
+
+    if ( isViewportAvailable && ! isMobile ) {
+		isDesktop = isPreviewDesktop;
+		isTablet = isPreviewTablet;
+		isMobile = isPreviewMobile;
+	}
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const homeUrl = ThBlockData.homeUrl;
   const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  const productsPerPage = attributes.productShow || 4;
   
-  let prdType; 
-  if (attributes.productType === 'featured') {
-    prdType = '&featured=true';
-  }
-  if (attributes.productType === 'recent') {
-    prdType = '&orderby=date';
-  } else if (attributes.productType === 'popular') {
-    prdType = '&orderby=popularity';
+  let prdType = ''; 
+  let prdOrderBy = '';
+  let prdOrder = '';
+
+  if (attributes.productType === 'sale') {
+    prdType = '&on_sale=true';
   } else if (attributes.productType === 'featured') {
     prdType = '&featured=true';
+  } else if (attributes.productType === 'manual') {
+    // Fetch all products if no category is selected
+    let manualProductParam = '';
+    if (attributes.manualProduct && attributes.manualProduct.length > 0) {
+      const selectedManualProduct = attributes.manualProduct.map((maualP) => maualP.value);
+      manualProductParam = selectedManualProduct.join(',');
+    }
+    prdType = `&include=${manualProductParam}`;
+  }
+
+  //orderby
+  if (attributes.productOrderby === 'date') {
+    prdOrderBy = '&orderby=date';
+  } else if (attributes.productOrderby === 'price') {
+    prdOrderBy = '&orderby=price';
+  } else if (attributes.productOrderby === 'popularity') {
+    prdOrderBy = '&orderby=popularity';
+  } else if (attributes.productOrderby === 'rating') {
+    prdOrderBy = '&orderby=rating';
+  } else if (attributes.productOrderby === 'menu-order') {
+    prdOrderBy = '&orderby=menu_order';
+  }
+  
+  // order
+  if (attributes.productOrder === 'desc') {
+    prdOrder = '&order=desc';
+  } else {
+    prdOrder = '&order=asc';
+  }
+
+  // product exclude
+  let excludeProductParam = '';
+  if (attributes.excludeProduct && attributes.excludeProduct.length > 0) {
+    const selectedExcludeProduct = attributes.excludeProduct.map((excldeP) => excldeP.value);
+    excludeProductParam = `&exclude=${selectedExcludeProduct.join(',')}`;
   }
 
   // useEffect hook to fetch products based on selected category
@@ -75,11 +170,12 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     if (selectedCategory) {
       setIsLoading(true);
       // Fetch products based on selected category
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}${prdType}`)
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}&page=${currentPage}&per_page=${productsPerPage}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
           setIsLoading(false);
+          setHasNextPage(data.length === productsPerPage);
         })
         .catch((error) => {
           console.error('Error fetching products:', error);
@@ -87,22 +183,23 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     } else {
       setIsLoading(true);
       // Fetch all products if no category is selected
-      let categoryParam = '';
+      let categoryParam="";
       if (attributes.productCategories && attributes.productCategories.length > 0) {
         const selectedCategories = attributes.productCategories.map((category) => category.value);
-        categoryParam = selectedCategories.join(',');
+        categoryParam = `&category=${selectedCategories.join(',')}`;
       }
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${categoryParam}${prdType}`)
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?page=${currentPage}&per_page=${productsPerPage}${categoryParam}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
           setIsLoading(false);
+          setHasNextPage(data.length === productsPerPage);
         })
         .catch((error) => {
           console.error('Error fetching products:', error);
         });
     }
-  }, [selectedCategory, currentPage, attributes.productCategories, prdType]);
+  }, [selectedCategory, currentPage, productsPerPage, attributes.productCategories, prdType, prdOrderBy, prdOrder, excludeProductParam]);
   
   // Event handler for tab click
   const handleTabClick = (categoryId) => {
@@ -126,13 +223,28 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       </div>
     );
   };
- 
-  const productsPerPage = attributes.productShow || 4; // Number of products to display per page
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const displayedProducts = products.slice(startIndex, endIndex);
 
-  const ColStyles={};
+
+  let ColStyles;
+
+  if ( isDesktop ) {
+    ColStyles = { 
+      '--grid-col': (attributes.productCol || '4'),
+    }
+
+  }
+  if ( isTablet ) {
+    ColStyles = { 
+      '--grid-col': (attributes.productColTablet || '4'),
+    }
+
+  }
+  if ( isMobile) {
+    ColStyles = { 
+      '--grid-col': (attributes.productColMobile || '4'),
+    }
+
+  }
 
   const style = omitBy({
     ...ColStyles,
@@ -172,7 +284,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
              {isLoading && (
               <div className="th-block-loader">Loading...</div>
              )}
-                {displayedProducts.map((product) => (
+                {products.map((product) => (
                 <div className="th-product-item" key={product.id}>
                   <div className="th-product-block-content-wrap">
                     <div className="th-product-imgae">
@@ -205,17 +317,13 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
               ))}
             </div>
             <div className="th-pagination">
-              <button disabled={currentPage === 1}
-                onClick={() => setCurrentPage(currentPage - 1)}>
-                          <span className="dashicons dashicons-arrow-left-alt2"></span>
-                        </button>
-                        <button
-                disabled={endIndex >= products.length}
-                onClick={() => setCurrentPage(currentPage + 1)}
-              >
-                <span className="dashicons dashicons-arrow-right-alt2"></span>
-              </button>
-            </div>
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+            <span className="dashicons dashicons-arrow-left-alt2"></span>
+            </button>
+            <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
+            <span className="dashicons dashicons-arrow-right-alt2"></span>
+            </button>
+          </div>
           </div>
         </>
         

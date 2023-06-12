@@ -57,7 +57,9 @@ const InsSettings = ({
     const homeUrl = ThBlockData.homeUrl;
     
     const [SelectCategories, setSelectCategories] = useState([]);
-
+    const [SelectProduct, setSelectProduct] = useState([]);
+    
+    // fetch category
     useEffect(() => {
         // Fetch product categories
         fetch(`${homeUrl}/wp-json/wc/store/v1/products/categories`)
@@ -74,6 +76,24 @@ const InsSettings = ({
             console.error('Error fetching categories:', error);
           });
       }, []);
+
+    //fetch product
+    useEffect(() => {
+      // Fetch product categories
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Map through the data and convert it to the expected format
+          const mappedProduct = data.map((product) => ({
+            value: product.id,
+            label: product.name,
+          }));
+          setSelectProduct(mappedProduct);
+        })
+        .catch((error) => {
+          console.error('Error fetching categories:', error);
+        });
+    }, []);
 
     //show product per page
     const getProductShow = () => {
@@ -166,6 +186,20 @@ const InsSettings = ({
 								] }
 								onChange={ e => setAttributes({ productType: e }) }
 					  />
+            {'manual' === attributes.productType && (
+            <Select
+            value={attributes.manualProduct}
+            id="th-product-select"
+            options={SelectProduct}
+            isMulti
+            isClearable
+            maxMenuHeight={300}
+            placeholder={__('Choose Product', 'themehunk-block')}
+            onChange={( value ) => {
+              setAttributes( { manualProduct: ( value ? value : [] ) } );
+            }}
+            />
+            )}
              <ResponsiveControl
                         label={ __( 'Number of product to show per page', 'themehunk-block' ) }
                         >
@@ -194,16 +228,49 @@ const InsSettings = ({
                    />            
 
             </ResponsiveControl>
-            
+
+            <SelectControl
+								label={ __( 'OrderBy', 'themehunk-block' ) }
+								value={ attributes.productOrderby }
+								options={ [
+									{ label:  __( 'Date Product', 'themehunk-block' ), value: 'date' },
+									{ label: __( 'Price', 'themehunk-block' ), value: 'price' },
+                  { label: __( 'popularity', 'themehunk-block' ), value: 'popularity' },
+                  { label: __( 'Rating', 'themehunk-block' ), value: 'rating' },
+                  { label: __( 'Menu Order', 'themehunk-block' ), value: 'menu-order' },
+								] }
+								onChange={ e => setAttributes({ productOrderby: e }) }
+					  />
+
+            <SelectControl
+								label={ __( 'OrderBy', 'themehunk-block' ) }
+								value={ attributes.productOrder }
+								options={ [
+									{ label:  __( 'ASC', 'themehunk-block' ), value: 'asc' },
+									{ label: __( 'DESC', 'themehunk-block' ), value: 'desc' },
+								] }
+								onChange={ e => setAttributes({ productOrder: e }) }
+					   />
+
+           <Select
+            value={attributes.excludeProduct}
+            id="th-product-select"
+            options={SelectProduct}
+            isMulti
+            isClearable
+            maxMenuHeight={300}
+            placeholder={__('Exclude Product', 'themehunk-block')}
+            onChange={( value ) => {
+              setAttributes( { excludeProduct: ( value ? value : [] ) } );
+            }}
+            />
             </PanelBody>
             </Fragment>
              ) || 'advanced' === tab && (
             <Fragment>
                 <PanelBody title={ __( 'General', 'themehunk-block' ) }
-                            className="th-adv-h-panel" initialOpen={ true }
-                            
+                     className="th-adv-h-panel" initialOpen={ true }         
                 >
-
              </PanelBody>
             </Fragment>
          )}
