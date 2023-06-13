@@ -38,6 +38,8 @@ import {
    GoogleFontsControl,
 } from '../../../src/components/index.js';
 
+import LayoutBuilder from './sortable-layout-.js';
+
 const InsSettings = ({
     attributes,
     setAttributes
@@ -139,6 +141,15 @@ const InsSettings = ({
         setAttributes({ productColMobile: value });
       }
     };
+
+    // stock status
+    const stockstatus = [
+      { value: 'instock', label: 'In Stock' },
+      { value: 'outofstock', label: 'Out of Stock' },
+      { value: 'backorder', label: 'On Backorder' }
+    ];
+    
+    const selectedStockStatus = attributes.stockStatus || ['instock', 'outofstock', 'backorder'];
     
     return (
         <Fragment>
@@ -264,7 +275,29 @@ const InsSettings = ({
               setAttributes( { excludeProduct: ( value ? value : [] ) } );
             }}
             />
+            <Select
+              value={stockstatus.filter((option) => attributes.stockStatus.includes(option.value))}
+              id="th-stock-status"
+              options={stockstatus}
+              isMulti
+              isClearable
+              maxMenuHeight={300}
+              placeholder={__('Stock Status', 'themehunk-block')}
+              onChange={(selectedOptions) => {
+                const values = selectedOptions ? selectedOptions.map((option) => option.value) : [];
+                setAttributes({ stockStatus: values });
+              }}
+            />
             </PanelBody>
+            <PanelBody
+						title={ __( 'Product Elements', 'themehunk-block' ) }
+						initialOpen={ false }
+					  >
+						<LayoutBuilder
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+						/>
+					 </PanelBody>
             </Fragment>
              ) || 'advanced' === tab && (
             <Fragment>

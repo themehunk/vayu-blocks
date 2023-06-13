@@ -1,3 +1,138 @@
+// sortable
+.th-sortable-item-area {
+	margin: 10px 0;
+	z-index: 999999;
+
+	&.th-sortable-item-area-meta {
+		.th-sortable-control-area {
+			padding: 20px 15px 10px;
+		}
+	}
+
+	.th-sortable-item {
+		display: flex;
+		background: #ffffff;
+		border: 1px solid #d5dadf;
+
+		&:hover {
+			background: #fafafb;
+		}
+
+		&.disabled {
+			.th-sortable-label {
+				flex-basis: 80%;
+				padding-left: 15px;
+			}
+		}
+
+		&.editable {
+			.th-sortable-label {
+				flex-basis: 40%;
+				flex-grow: 1;
+			}
+
+			&.disabled {
+				.th-sortable-label {
+					flex-basis: 60%;
+				}
+			}
+		}
+
+		&.hidden {
+			color: #e5e5e5;
+
+			.th-sortable-handle {
+				span {
+					background: linear-gradient(180deg,#e5e5e5,#e5e5e5 20%,#fff 0,#fff 40%,#e5e5e5 0,#e5e5e5 60%,#fff 0,#fff 80%,#e5e5e5 0,#e5e5e5);
+				}
+			}
+
+			.th-sortable-label {
+				color: #e5e5e5;
+			}
+
+			.th-sortable-button {
+				svg {
+					fill :#e5e5e5;
+				}
+			}
+		}
+
+		.th-sortable-handle {
+			display: flex;
+			justify-content: center;
+			align-self: center;
+			flex-basis: 20%;
+			padding: 15px 0;
+			cursor: move;
+
+			&:focus {
+				box-shadow: inset 0 0 0 1px #6c7781,inset 0 0 0 2px #fff;
+			}
+
+			span {
+				display: flex;
+				align-self: center;
+				width: 18px;
+				height: 11px;
+				background: linear-gradient(180deg,#000,#000 20%,#fff 0,#fff 40%,#000 0,#000 60%,#fff 0,#fff 80%,#000 0,#000);
+			}
+		}
+
+		.th-sortable-label {
+			cursor: default;
+			flex-basis: 60%;
+			display: flex;
+			align-items: center;
+
+			&::selection {
+				background: none;
+			}
+		}
+
+		.th-sortable-button {
+			height: auto;
+			flex-basis: 20%;
+			justify-content: center;
+			padding: 10px 5px;
+			border-left: 1px solid #d5dadf;
+			border-radius: 0;
+
+			&.components-icon-button:not(:disabled):not([aria-disabled="true"]):not(.is-default) {
+
+				&:hover {
+					background: #fafafb;
+					border-radius: 0;
+					box-shadow: none;
+				}
+			}
+
+			.dashicon {
+				margin: 2px;
+			}
+		}
+	}
+
+	.th-sortable-control-area {
+		background: #ffffff;
+		border: 1px solid #d5dadf;
+		border-top: none;
+		padding: 10px 15px;
+		display: none;
+
+		&.opened {
+			display: block;
+
+			.components-base-control {
+				margin: 24px 0;
+
+				&:first-child {
+					margin-top: 8px;
+				}
+			}
+		}
+	}
+}
 .components-panel__body.th-adv-product-panel label, 
 .components-panel__body.th-adv-product-panel span {
     font-size: 13px!important;

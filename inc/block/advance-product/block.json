@@ -54,6 +54,53 @@
 		"excludeProduct":{
 			"type": "array",
 	        "default": []
+		},
+		"stockStatus":{
+			"type": "array",
+	        "default": []
+		},
+		"template": {
+			"type": "array",
+			"default": [
+				"image",
+				"category",
+				"title",
+				"price", 
+				"rating", 
+				"button"
+			]
+		},
+		"displayFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayCategory": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayDescription":{
+			"type": "boolean",
+			"default": true
+		},
+		"displayRating": {
+			"type": "boolean",
+			"default": true
+		},
+		"displayButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"cropImage": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"supports": {

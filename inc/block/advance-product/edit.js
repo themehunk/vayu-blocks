@@ -112,13 +112,37 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 		isMobile = isPreviewMobile;
 	}
 
+  let ColStyles;
+  let productsPerPage;
+
+  if ( isDesktop ) {
+    productsPerPage = attributes.productShow || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productCol || '4'),
+    }
+
+  }
+  if ( isTablet ) {
+    productsPerPage = attributes.productShowTablet || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productColTablet || '4'),
+    }
+
+  }
+  if ( isMobile) {
+    productsPerPage = attributes.productShowMobile || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productColMobile || '4'),
+    }
+
+  }
   const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const homeUrl = ThBlockData.homeUrl;
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
-  const productsPerPage = attributes.productShow || 4;
+  
   
   let prdType = ''; 
   let prdOrderBy = '';
@@ -165,12 +189,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     excludeProductParam = `&exclude=${selectedExcludeProduct.join(',')}`;
   }
 
+  //stock status
+  let stockParam = '';
+  if (attributes.stockStatus && attributes.stockStatus.length > 0) {
+    stockParam = `&stock_status=['outofstock']`;
+  }
+
+  console.log(stockParam);
+
   // useEffect hook to fetch products based on selected category
   useEffect(() => {
     if (selectedCategory) {
       setIsLoading(true);
       // Fetch products based on selected category
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}&page=${currentPage}&per_page=${productsPerPage}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}`)
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}&page=${currentPage}&per_page=${productsPerPage}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}${stockParam}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
@@ -188,7 +220,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
         const selectedCategories = attributes.productCategories.map((category) => category.value);
         categoryParam = `&category=${selectedCategories.join(',')}`;
       }
-      fetch(`${homeUrl}/wp-json/wc/store/v1/products?page=${currentPage}&per_page=${productsPerPage}${categoryParam}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}`)
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?page=${currentPage}&per_page=${productsPerPage}${categoryParam}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}${stockParam}`)
         .then((response) => response.json())
         .then((data) => {
           setProducts(data);
@@ -224,28 +256,6 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     );
   };
 
-
-  let ColStyles;
-
-  if ( isDesktop ) {
-    ColStyles = { 
-      '--grid-col': (attributes.productCol || '4'),
-    }
-
-  }
-  if ( isTablet ) {
-    ColStyles = { 
-      '--grid-col': (attributes.productColTablet || '4'),
-    }
-
-  }
-  if ( isMobile) {
-    ColStyles = { 
-      '--grid-col': (attributes.productColMobile || '4'),
-    }
-
-  }
-
   const style = omitBy({
     ...ColStyles,
   }, x => x?.includes?.( 'undefined' ));
@@ -256,7 +266,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   });
   
 
-  return (
+  return ( 
      <Fragment>
 		<InsSettings
 				attributes={ attributes }
@@ -287,32 +297,71 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                 {products.map((product) => (
                 <div className="th-product-item" key={product.id}>
                   <div className="th-product-block-content-wrap">
-                    <div className="th-product-imgae">
-                      {product.on_sale && <span className="sale-tag">Sale</span>}
-                      <div className="th-product-sale"></div>
-                      <img src={product.images[0].thumbnail} alt={product.name} />
+                  {attributes.template.map((element) => {
+                      switch (element) {
+                        case 'image':
+                          return (
+                            attributes.displayFeaturedImage && (
+                            <div className="th-product-imgae">
+                              {product.on_sale && <span className="sale-tag">Sale</span>}
+                              <div className="th-product-sale"></div>
+                              <img src={product.images[0].thumbnail} alt={product.name} />
+                            </div>
+                            )
+                          );
+                        case 'category':
+                          return (
+                            attributes.displayCategory && (
+                            <div className="th-product-cat">
+                              {product.categories.map((category) => (
+                                <a key={category.id} href={category.link}>
+                                  {category.name}
+                                </a>
+                              ))}
+                            </div>
+                            )
+                          );
+                        case 'title':
+                          return (
+                            attributes.displayTitle && (
+                            <h3 className="th-product-title">
+                              <a key={product.id} href={product.permalink}>
+                                {product.name}
+                              </a>
+                            </h3>
+                            )
+                          );
+                        case 'price':
+                          return (
+                            attributes.displayPrice && (
+                            <div
+                              className="th-product-price"
+                              dangerouslySetInnerHTML={{ __html: product.price_html }}
+                            ></div>
+                            )
+                          );
+                        case 'rating':
+                          return (
+                            attributes.displayRating && (
+                            <div className="th-product-rating">
+                              <RatingStars
+                                rating={parseFloat(product.average_rating)}
+                                maxRating={5}
+                                filledColor="gold"
+                                emptyColor="lightgray"
+                              />
+                            </div>
+                            )
+                          );
+                        case 'button':
+                          return attributes.displayButton && (
+                          <div className="th-product-btn">{product.add_to_cart.text}</div>
+                          );
+                        default:
+                          return null; 
+                      }
+                    })}
                     </div>
-                    <div className="th-product-cat">
-                      {product.categories.map((category) => (
-                        <a key={category.id} href={category.link}>
-                          {category.name}
-                        </a>
-                      ))}
-                    </div>
-                    <h3 className="th-product-title">
-                      <a key={product.id} href={product.permalink}>
-                        {product.name}
-                      </a>
-                    </h3>
-                    <div
-                      className="th-product-price"
-                      dangerouslySetInnerHTML={{ __html: product.price_html }}
-                    ></div>
-                    <div className="th-product-rating">
-                      <RatingStars rating={parseFloat(product.average_rating)} maxRating={5} filledColor="gold" emptyColor="lightgray" />
-                    </div>
-                    <div className="th-product-btn">{product.add_to_cart.text}</div>
-                  </div>
                 </div>
               ))}
             </div>
