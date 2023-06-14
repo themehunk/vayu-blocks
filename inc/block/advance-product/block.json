@@ -101,6 +101,78 @@
 		"cropImage": {
 			"type": "boolean",
 			"default": false
+		},
+		"prouctTitleTag": {
+			"type": "number",
+			"default": "h3"
+		},
+		"titleTypography":{
+			"type": "boolean",
+			"default": false
+		},
+		"titlefontFamily": {
+		    "type": "string",
+			"default": "default"
+		},
+		"titlefontVariant": {
+			"type": "string"
+		},
+		"titlefontStyle": {
+			"type": "string"
+		},
+		"titletextTransform": {
+			"type": "string"
+		},
+		"titlefontSize": {
+			"type": "number"
+		},
+		"titlefontSizeTablet": {
+			"type": "number"
+		},
+		"titlefontSizeMobile": {
+			"type": "number"
+		},
+		"titlefontSizeUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"titlelineHeight": {
+			"type": "number"
+		},
+		"titlelineHeightTablet": {
+			"type": "number"
+		},
+		"titlelineHeightMobile": {
+			"type": "number"
+		},
+		"titlelineHeightUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"titleletterSpacing": {
+			"type": "number"
+		},
+		"titleletterSpacingTablet": {
+			"type": "number"
+		},
+		"titleletterSpacingMobile": {
+			"type": "number"
+		},
+		"titleletterSpacingUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"titleColor":{
+			"type": "boolean",
+			"default": false
+		},
+		"productTitleColor":{
+			"type": "string",
+			"default": ""
+		},
+		"productTitleColorHvr":{
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

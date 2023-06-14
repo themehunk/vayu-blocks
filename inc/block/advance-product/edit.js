@@ -192,10 +192,9 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   //stock status
   let stockParam = '';
   if (attributes.stockStatus && attributes.stockStatus.length > 0) {
-    stockParam = `&stock_status=['outofstock']`;
+    stockParam = `&stockstatus=['${attributes.stockStatus}']`;
   }
 
-  console.log(stockParam);
 
   // useEffect hook to fetch products based on selected category
   useEffect(() => {
@@ -231,7 +230,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
           console.error('Error fetching products:', error);
         });
     }
-  }, [selectedCategory, currentPage, productsPerPage, attributes.productCategories, prdType, prdOrderBy, prdOrder, excludeProductParam]);
+  }, [selectedCategory, currentPage, productsPerPage, attributes.productCategories, prdType, prdOrderBy, prdOrder, excludeProductParam, stockParam]);
   
   // Event handler for tab click
   const handleTabClick = (categoryId) => {
@@ -256,15 +255,27 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     );
   };
 
+  
+
+  // title setting
+  const TitleTag = attributes.prouctTitleTag;
+
+  let ProductStyles;
+  
+  ProductStyles = {
+    '--title-color': attributes.productTitleColor,
+    '--title-color-hvr': attributes.productTitleColorHvr,
+  }
+
   const style = omitBy({
     ...ColStyles,
+    ...ProductStyles,
   }, x => x?.includes?.( 'undefined' ));
 
   const blockProps = useBlockProps({
     id:attributes.id,
     style
   });
-  
 
   return ( 
      <Fragment>
@@ -324,11 +335,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                         case 'title':
                           return (
                             attributes.displayTitle && (
-                            <h3 className="th-product-title">
+                            <TitleTag className="th-product-title">
                               <a key={product.id} href={product.permalink}>
                                 {product.name}
                               </a>
-                            </h3>
+                            </TitleTag>
                             )
                           );
                         case 'price':

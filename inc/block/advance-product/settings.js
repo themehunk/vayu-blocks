@@ -146,10 +146,8 @@ const InsSettings = ({
     const stockstatus = [
       { value: 'instock', label: 'In Stock' },
       { value: 'outofstock', label: 'Out of Stock' },
-      { value: 'backorder', label: 'On Backorder' }
+      { value: 'onbackorder', label: 'On Backorder' }
     ];
-    
-    const selectedStockStatus = attributes.stockStatus || ['instock', 'outofstock', 'backorder'];
     
     return (
         <Fragment>
@@ -262,7 +260,10 @@ const InsSettings = ({
 								] }
 								onChange={ e => setAttributes({ productOrder: e }) }
 					   />
-
+             <div className='components-base-control'>
+            <label>
+            { __( 'Exclude Product', 'themehunk-block' ) }
+           </label>
            <Select
             value={attributes.excludeProduct}
             id="th-product-select"
@@ -275,6 +276,11 @@ const InsSettings = ({
               setAttributes( { excludeProduct: ( value ? value : [] ) } );
             }}
             />
+            </div>
+            <div className='components-base-control'>
+            <label>
+            { __( 'Stock Status', 'themehunk-block' ) }
+            </label>
             <Select
               value={stockstatus.filter((option) => attributes.stockStatus.includes(option.value))}
               id="th-stock-status"
@@ -288,6 +294,7 @@ const InsSettings = ({
                 setAttributes({ stockStatus: values });
               }}
             />
+            </div>
             </PanelBody>
             <PanelBody
 						title={ __( 'Product Elements', 'themehunk-block' ) }

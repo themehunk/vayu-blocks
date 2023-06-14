@@ -139,6 +139,9 @@
     font-weight: 400!important;
     line-height: 1.4em!important;
     text-transform: capitalize!important;
+    margin-bottom:8px;
+	display:block;
+
 }
 
 .th-product-block-product-item-wrap{
@@ -148,4 +151,9 @@
 .th-product-block-product-item-wrap img {
     border: none;
     max-width: 100%;
+}
+
+.th-product-block-product-content .th-product-item .th-product-title a{
+	--title-color: #000;
+	color:var(--title-color);
 }
