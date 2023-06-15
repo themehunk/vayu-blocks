@@ -176,7 +176,7 @@ export const SortableItem = ({
 	const [titlefontSizeUnit, settitlefontSizeUnit] = useState('px');
 	const maxtitlefontSizeUnit = titlefontSizeUnit === 'px' ? 150 : titlefontSizeUnit === 'em' ? 10 : titlefontSizeUnit === '%' ? 100:'';
 	const customTooltiptitlefontSize = value => `${value}${attributes.titlefontSizeUnit}`;
-	// verticalOrientationOffset bottom
+
 	const gettitlefontSize = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -227,8 +227,204 @@ export const SortableItem = ({
 		}
 	};
 
-	const [ title, settitle ] = useState( 'normal' );
+	// cat font family
+	const changecatFontFamily = value => {
+		if ( ! value ) {
+			setAttributes({
+				catfontFamily: value,
+				catfontVariant: value
+			});
+		} else {
+			setAttributes({
+				catfontFamily: value,
+				catfontVariant: 'normal',
+				catfontStyle: 'normal'
+			});
+		}
+	};
+	//cat lineheight
+	const [catlineHeightUnit, setcatlineHeightUnit] = useState('px');
+	const maxcatlineHeightUnit = catlineHeightUnit === 'px' ? 150 : catlineHeightUnit === 'em' ? 10 : catlineHeightUnit === '%' ? 100:'';
+	const customTooltipcatlineHeight = value => `${value}${attributes.catlineHeightUnit}`;
 
+	const getcatlineHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.catlineHeight;
+		case 'Tablet':
+			return attributes.catlineHeightTablet;
+		case 'Mobile':
+			return attributes.catlineHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changecatlineHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ catlineHeight: value, catlineHeightTablet: value, catlineHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ catlineHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ catlineHeightMobile: value });
+		}
+	};
+
+	//title fontsize
+	const [catfontSizeUnit, setcatfontSizeUnit] = useState('px');
+	const maxcatfontSizeUnit = titlefontSizeUnit === 'px' ? 150 : catfontSizeUnit === 'em' ? 10 : catfontSizeUnit === '%' ? 100:'';
+	const customTooltipcatfontSize = value => `${value}${attributes.catfontSizeUnit}`;
+
+	const getcatfontSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.catfontSize;
+		case 'Tablet':
+			return attributes.catfontSizeTablet;
+		case 'Mobile':
+			return attributes.catfontSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+    const changecatfontSize = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ catfontSize: value, catfontSizeTablet: value, catfontSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ catfontSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ catfontSizeMobile: value });
+		}
+	};
+
+	//title letter spacing
+	const [catletterSpacingUnit, setcatletterSpacingUnit] = useState('px');
+	const maxcatletterSpacingUnit = catletterSpacingUnit === 'px' ? 150 : catletterSpacingUnit === 'em' ? 10 : catletterSpacingUnit === '%' ? 100:'';
+	const customTooltipcatletterSpacing = value => `${value}${attributes.catletterSpacingUnit}`;
+
+	const getcatletterSpacing = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.catletterSpacing;
+		case 'Tablet':
+			return attributes.catletterSpacingTablet;
+		case 'Mobile':
+			return attributes.catletterSpacingMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changecatletterSpacing = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ catletterSpacing: value, catletterSpacingTablet: value, catletterSpacingMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ catletterSpacingTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ catletterSpacingMobile: value });
+		}
+	};
+    // cat font family
+	const changepriceFontFamily = value => {
+		if ( ! value ) {
+			setAttributes({
+				pricefontFamily: value,
+				pricefontVariant: value
+			});
+		} else {
+			setAttributes({
+				pricefontFamily: value,
+				pricefontVariant: 'normal',
+				pricefontStyle: 'normal'
+			});
+		}
+	};
+	//cat lineheight
+	const [pricelineHeightUnit, setpricelineHeightUnit] = useState('px');
+	const maxpricelineHeightUnit = pricelineHeightUnit === 'px' ? 150 : pricelineHeightUnit === 'em' ? 10 : pricelineHeightUnit === '%' ? 100:'';
+	const customTooltippricelineHeight = value => `${value}${attributes.pricelineHeightUnit}`;
+
+	const getpricelineHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.pricelineHeight;
+		case 'Tablet':
+			return attributes.pricelineHeightTablet;
+		case 'Mobile':
+			return attributes.pricelineHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changepricelineHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ pricelineHeight: value, pricelineHeightTablet: value, pricelineHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ pricelineHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ pricelineHeightMobile: value });
+		}
+	};
+
+	//title fontsize
+	const [pricefontSizeUnit, setpricefontSizeUnit] = useState('px');
+	const maxpricefontSizeUnit = pricefontSizeUnit === 'px' ? 150 : pricefontSizeUnit === 'em' ? 10 : pricefontSizeUnit === '%' ? 100:'';
+	const customTooltippricefontSize = value => `${value}${attributes.pricefontSizeUnit}`;
+
+	const getpricefontSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.pricefontSize;
+		case 'Tablet':
+			return attributes.pricefontSizeTablet;
+		case 'Mobile':
+			return attributes.pricefontSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+    const changepricefontSize = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ pricefontSize: value, pricefontSizeTablet: value, pricefontSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ pricefontSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ pricefontSizeMobile: value });
+		}
+	};
+
+	//title letter spacing
+	const [priceletterSpacingUnit, setpriceletterSpacingUnit] = useState('px');
+	const maxpriceletterSpacingUnit = catletterSpacingUnit === 'px' ? 150 : priceletterSpacingUnit === 'em' ? 10 : priceletterSpacingUnit === '%' ? 100:'';
+	const customTooltippriceletterSpacing = value => `${value}${attributes.priceletterSpacingUnit}`;
+
+	const getpriceletterSpacing = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.priceletterSpacing;
+		case 'Tablet':
+			return attributes.priceletterSpacingTablet;
+		case 'Mobile':
+			return attributes.priceletterSpacingMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changepriceletterSpacing = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ priceletterSpacing: value, priceletterSpacingTablet: value, priceletterSpacingMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ priceletterSpacingTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ priceletterSpacingMobile: value });
+		}
+	};
+
+	const [ title, settitle ] = useState( 'normal' );
+    const [ cat, setcat ] = useState( 'normal' );
+	
 	return (
 		<div
 			className={ classnames(
@@ -297,7 +493,154 @@ export const SortableItem = ({
 
                    { ( 'category' === template ) && (
 						<Fragment >
-							<h3>category</h3>
+							<ControlPanelControl
+								label={ __( 'Typography', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ catTypography: true }) }
+								resetValues={
+									{
+										catTypography:false,
+										catfontFamily:"default",
+										catfontVariant:"regular",
+										catfontStyle:"regular",
+										cattextTransform:"default",
+										catfontSize:"",
+										catlineHeight:"",
+										catletterSpacing:"",
+										catfontSizeUnit:"px",
+										catlineHeightUnit:"px",
+										catletterSpacingUnit:"px"
+									}
+								}
+							>
+							<GoogleFontsControl
+								label={ __( 'Font Family', 'themehunk-block' ) }
+								value={ attributes.catfontFamily }
+								onChangeFontFamily={ changecatFontFamily }
+								valueVariant={ attributes.catfontVariant }
+								onChangeFontVariant={ catfontVariant => setAttributes({ catfontVariant }) }
+								valueStyle={ attributes.catfontStyle }
+								onChangeFontStyle={ catfontStyle => setAttributes({ catfontStyle }) }
+								valueTransform={ attributes.cattextTransform }
+								onChangeTextTransform={ cattextTransform => setAttributes({ cattextTransform }) }
+							    
+							/>
+							<ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.catfontSizeUnit }
+								onClick={catfontSizeUnit => {
+									setAttributes({ catfontSizeUnit });
+									setcatfontSizeUnit(catfontSizeUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipcatfontSize }
+									value={ getcatfontSize() || '' }
+									onChange={ changecatfontSize }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxcatfontSizeUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+                               <ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.catlineHeightUnit }
+								onClick={catlineHeightUnit => {
+									setAttributes({ catlineHeightUnit });
+									setcatlineHeightUnit(catlineHeightUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipcatlineHeight }
+									value={ getcatlineHeight() || '' }
+									onChange={ changecatlineHeight }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxcatlineHeightUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+							<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.catletterSpacingUnit }
+								onClick={catletterSpacingUnit => {
+									setAttributes({catletterSpacingUnit });
+									setcatletterSpacingUnit(catletterSpacingUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipcatletterSpacing }
+									value={ getcatletterSpacing() || '' }
+									onChange={ changecatletterSpacing }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxcatletterSpacingUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+						</ControlPanelControl>
+						<ControlPanelControl
+								label={ __( 'Color', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ catColor: true }) }
+								resetValues={
+									{
+										catTypography:false,
+										catTxtColor:"",
+										catTxtColorHvr:"",
+										
+									}
+								}
+								
+							>
+                       <HoverControl value={ cat }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setcat } 
+						/>
+                        { 'normal' ===  cat &&  (
+                                <ColorGradientControl
+								 label={ __( ' Color', 'themehunk-block' ) }
+								 colorValue={ attributes.catTxtColor }
+								 onColorChange={ e => setAttributes({ catTxtColor: e }) }
+								 enableAlpha={true} 
+								 />
+						) || 'hover' ===  cat && (
+								 <ColorGradientControl
+								 label={ __( ' Hover Color ', 'themehunk-block' ) }
+								 colorValue={ attributes.catTxtColorHvr }
+								 onColorChange={ e => setAttributes({ catTxtColorHvr: e }) }
+								 enableAlpha={true} 
+								 />
+						)}
+
+						</ControlPanelControl>
 						</Fragment>
 					) }
 
@@ -495,7 +838,140 @@ export const SortableItem = ({
 
 					{ ( 'price' === template ) && (
 						<Fragment>
-							<h3>price</h3>
+							<ControlPanelControl
+								label={ __( 'Typography', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ priceTypography: true }) }
+								resetValues={
+									{
+										priceTypography:false,
+										pricefontFamily:"default",
+										pricefontVariant:"regular",
+										pricefontStyle:"regular",
+										pricetextTransform:"default",
+										pricefontSize:"",
+										pricelineHeight:"",
+										priceletterSpacing:"",
+										pricefontSizeUnit:"px",
+										pricelineHeightUnit:"px",
+										priceletterSpacingUnit:"px"
+									}
+								}
+							>
+							<GoogleFontsControl
+								label={ __( 'Font Family', 'themehunk-block' ) }
+								value={ attributes.pricefontFamily }
+								onChangeFontFamily={ changepriceFontFamily }
+								valueVariant={ attributes.pricefontVariant }
+								onChangeFontVariant={ pricefontVariant => setAttributes({ pricefontVariant }) }
+								valueStyle={ attributes.pricefontStyle }
+								onChangeFontStyle={ pricefontStyle => setAttributes({ pricefontStyle }) }
+								valueTransform={ attributes.pricetextTransform }
+								onChangeTextTransform={ pricetextTransform => setAttributes({ pricetextTransform }) }
+							    
+							/>
+							<ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.pricefontSizeUnit }
+								onClick={pricefontSizeUnit => {
+									setAttributes({ pricefontSizeUnit });
+									setpricefontSizeUnit(pricefontSizeUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltippricefontSize }
+									value={ getpricefontSize() || '' }
+									onChange={ changepricefontSize }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxpricefontSizeUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+                               <ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.pricelineHeightUnit }
+								onClick={pricelineHeightUnit => {
+									setAttributes({ pricelineHeightUnit });
+									setpricelineHeightUnit(pricelineHeightUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltippricelineHeight }
+									value={ getpricelineHeight() || '' }
+									onChange={ changepricelineHeight }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxpricelineHeightUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+							<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.priceletterSpacingUnit }
+								onClick={priceletterSpacingUnit => {
+									setAttributes({priceletterSpacingUnit });
+									setpriceletterSpacingUnit(priceletterSpacingUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltippriceletterSpacing }
+									value={ getpriceletterSpacing() || '' }
+									onChange={ changepriceletterSpacing }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxpriceletterSpacingUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+						</ControlPanelControl>
+						<ControlPanelControl
+								label={ __( 'Color', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ PriceColor: true }) }
+								resetValues={
+									{
+										PriceColor:false,
+										priceColor:"",
+										priceColorHvr:"",
+										
+									}
+								}
+								
+							>
+                          <ColorGradientControl
+								 label={ __( 'Color', 'themehunk-block' ) }
+								 colorValue={ attributes.priceColor }
+								 onColorChange={ e => setAttributes({ priceColor: e }) }
+								 enableAlpha={true} 
+								 />
+						   <ColorGradientControl
+								 label={ __( 'Del Color', 'themehunk-block' ) }
+								 colorValue={ attributes.priceDelColor }
+								 onColorChange={ e => setAttributes({ priceDelColor: e }) }
+								 enableAlpha={true} 
+								 />		 
+
+                       
+                        
+						</ControlPanelControl>
 						</Fragment>
 					) }
 

@@ -173,6 +173,142 @@
 		"productTitleColorHvr":{
 			"type": "string",
 			"default": ""
+		},
+		"catTypography":{
+			"type": "boolean",
+			"default": false
+		},
+		"catfontFamily": {
+		    "type": "string",
+			"default": "default"
+		},
+		"catfontVariant": {
+			"type": "string"
+		},
+		"catfontStyle": {
+			"type": "string"
+		},
+		"cattextTransform": {
+			"type": "string"
+		},
+		"catfontSize": {
+			"type": "number"
+		},
+		"catfontSizeTablet": {
+			"type": "number"
+		},
+		"catfontSizeMobile": {
+			"type": "number"
+		},
+		"catfontSizeUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"catlineHeight": {
+			"type": "number"
+		},
+		"catlineHeightTablet": {
+			"type": "number"
+		},
+		"catlineHeightMobile": {
+			"type": "number"
+		},
+		"catlineHeightUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"catletterSpacing": {
+			"type": "number"
+		},
+		"catletterSpacingTablet": {
+			"type": "number"
+		},
+		"catletterSpacingMobile": {
+			"type": "number"
+		},
+		"catletterSpacingUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"catColor":{
+			"type": "boolean",
+			"default": false
+		},
+		"catTxtColor":{
+			"type": "string",
+			"default": ""
+		},
+		"catTxtColorHvr":{
+			"type": "string",
+			"default": ""
+		},
+		"priceTypography":{
+			"type": "boolean",
+			"default": false
+		},
+		"pricefontFamily": {
+		    "type": "string",
+			"default": "default"
+		},
+		"pricefontVariant": {
+			"type": "string"
+		},
+		"pricefontStyle": {
+			"type": "string"
+		},
+		"pricetextTransform": {
+			"type": "string"
+		},
+		"pricefontSize": {
+			"type": "number"
+		},
+		"pricefontSizeTablet": {
+			"type": "number"
+		},
+		"pricefontSizeMobile": {
+			"type": "number"
+		},
+		"pricefontSizeUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"pricelineHeight": {
+			"type": "number"
+		},
+		"pricelineHeightTablet": {
+			"type": "number"
+		},
+		"pricelineHeightMobile": {
+			"type": "number"
+		},
+		"pricelineHeightUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"priceletterSpacing": {
+			"type": "number"
+		},
+		"priceletterSpacingTablet": {
+			"type": "number"
+		},
+		"priceletterSpacingMobile": {
+			"type": "number"
+		},
+		"priceletterSpacingUnit": {
+			"type": "string",
+			"default":"px"
+		},
+		"PriceColor":{
+			"type": "boolean",
+			"default": false
+		},
+		"priceColor":{
+			"type": "string",
+			"default": ""
+		},
+		"priceDelColor":{
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

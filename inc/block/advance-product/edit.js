@@ -28,6 +28,7 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 import InsSettings from './settings.js';
 import getUniqueId from '../../../src/helpers/get-unique-id.js';
+import googleFontsLoader from '../../../src/helpers/google-fonts.js';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -51,7 +52,16 @@ import './editor.scss';
  */
 
 export default function Edit({ attributes, setAttributes, toggleSelection, clientId, uniqueID }) {
+  
   const { id } = attributes;
+
+  if ( ! id ) {
+		setAttributes( { id: clientId } );
+	}
+
+  useEffect( () => {
+		googleFontsLoader.attach();
+	}, [ attributes.id ]);
 
   const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
   const { isUniqueID, isUniqueBlock} = useSelect(
@@ -255,16 +265,94 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     );
   };
 
-  
+  const deviceAttributeMap = {
+    desktop: {
+      titlefontSize: attributes.titlefontSize + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeight + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacing + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSize + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeight + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacing + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSize + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeight + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacing + attributes.priceletterSpacingUnit,
+    },
+    tablet: {
+      titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeightTablet + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacingTablet + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSizeTablet + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeightTablet + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacingTablet + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSizeTablet + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeightTablet + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacingTablet + attributes.priceletterSpacingUnit,
+    },
+    mobile: {
+      titlefontSize: attributes.titlefontSizeMobile + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeightMobile + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacingMobile + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSizeMobile + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeightMobile + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacingMobile + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSizeMobile + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeightMobile + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacingMobile + attributes.priceletterSpacingUnit,
+    },
+  };
+  const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
+  // googlefontload
+  useEffect( () => {
+		if ( attributes.titlefontFamily ) {
+			googleFontsLoader.loadFontToBrowser( attributes.titlefontFamily, attributes.titlefontVariant );
+		  googleFontsLoader.loadFontToBrowser( attributes.catfontFamily, attributes.catfontVariant );
+      googleFontsLoader.loadFontToBrowser( attributes.pricefontFamily, attributes.pricefontVariant );
+    }
+	}, [ attributes.titlefontFamily, attributes.catfontFamily, attributes.pricefontFamily ]);
+
 
   // title setting
-  const TitleTag = attributes.prouctTitleTag;
+  const TitleTag = attributes.prouctTitleTag || 'h3';
 
   let ProductStyles;
+  const TitleFontSize = deviceAttributeMap[deviceType].titlefontSize;
+  const TitleLineHeight = deviceAttributeMap[deviceType].titlelineHeight;
+  const TitleLetterSpacing = deviceAttributeMap[deviceType].titleletterSpacing;
+  const CatFontSize = deviceAttributeMap[deviceType].catfontSize;
+  const CatLineHeight = deviceAttributeMap[deviceType].catlineHeight;
+  const CatLetterSpacing = deviceAttributeMap[deviceType].catletterSpacing;
+  const PriceFontSize = deviceAttributeMap[deviceType].pricefontSize;
+  const PriceLineHeight = deviceAttributeMap[deviceType].pricelineHeight;
+  const PriceLetterSpacing = deviceAttributeMap[deviceType].priceletterSpacing;
   
   ProductStyles = {
     '--title-color': attributes.productTitleColor,
     '--title-color-hvr': attributes.productTitleColorHvr,
+    '--title-font-family':attributes.titlefontFamily,
+    '--title-font-variant':attributes.titlefontVariant,
+    '--title-font-style':attributes.titlefontStyle,
+    '--title-font-transform':attributes.titletextTransform,
+    '--title-font-size':TitleFontSize,
+    '--title-line-height':TitleLineHeight,
+    '--title-letter-spacing':TitleLetterSpacing,
+    '--cat-color': attributes.catTxtColor,
+    '--cat-color-hvr': attributes.catTxtColorHvr,
+    '--cat-font-family':attributes.catfontFamily,
+    '--cat-font-variant':attributes.catfontVariant,
+    '--cat-font-style':attributes.catfontStyle,
+    '--cat-font-transform':attributes.cattextTransform,
+    '--cat-font-size':CatFontSize,
+    '--cat-line-height':CatLineHeight,
+    '--cat-letter-spacing':CatLetterSpacing,
+    '--price-color': attributes.priceColor,
+    '--price-color-del': attributes.priceDelColor,
+    '--price-font-family':attributes.pricefontFamily,
+    '--price-font-variant':attributes.pricefontVariant,
+    '--price-font-style':attributes.pricefontStyle,
+    '--price-font-transform':attributes.pricetextTransform,
+    '--price-font-size':PriceFontSize,
+    '--price-line-height':PriceLineHeight,
+    '--price-letter-spacing':PriceLetterSpacing,
   }
 
   const style = omitBy({
@@ -285,7 +373,6 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			/>	
     <div {...blockProps} >   
     <div className="th-product-block-wrapper">
-     
         <>
           <div className="th-product-block-cat-filter">
             <ul className="category-tabs">
