@@ -635,14 +635,14 @@ export default function Edit({
             if ( 'color' === attributes.overlaybackgroundType ) {
 				overlayBackground = {
 					'--background-overlay': attributes.overlaybackgroundColor,
-				    opacity:0.6
+				    
 				};
 			}
 			if ( 'color' === attributes.overlaybackgroundTypeHvr ) {
 				overlayBackground = {
 					...overlayBackground,
 					'--background-overlay-hvr': attributes.overlaybackgroundColorHvr,
-				    opacity:0.6
+				    
 				};
 			}
 
@@ -650,7 +650,7 @@ export default function Edit({
 				overlayBackground = {
 					...overlayBackground,
 					'--background-overlay': attributes.overlaybackgroundGradient,
-				    opacity:0.6
+				   
 				};
 			}
 
@@ -658,7 +658,7 @@ export default function Edit({
 				overlayBackground = {
 					...overlayBackground,
 					'--background-overlay-hvr': attributes.overlaybackgroundGradientHvr,
-				    opacity:0.6
+				  
 				};
 			}
 
@@ -670,7 +670,7 @@ export default function Edit({
 					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
 					'--background-overlay-repeat': attributes.overlaybackgroundRepeat,
 					'--background-overlay-size': attributes.overlaybackgroundSize,
-				    opacity:0.6
+				    
 				};
 			}
 
@@ -682,7 +682,7 @@ export default function Edit({
 					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
 					'--background-overlay-repeat-hvr': attributes.overlaybackgroundRepeatHvr,
 					'--background-overlay-size-hvr': attributes.overlaybackgroundSizeHvr,
-				    opacity:0.6
+				    
 				};
 			}
 

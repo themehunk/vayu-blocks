@@ -54,7 +54,7 @@
 		},
 		"fontSizeTablet": {
 			"type": "number"
-		},
+		}, 
 		"fontSizeMobile": {
 			"type": "number"
 		},
