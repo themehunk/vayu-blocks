@@ -324,7 +324,7 @@ export const SortableItem = ({
 			setAttributes({ catletterSpacingMobile: value });
 		}
 	};
-    // cat font family
+    // price font family
 	const changepriceFontFamily = value => {
 		if ( ! value ) {
 			setAttributes({
@@ -339,7 +339,7 @@ export const SortableItem = ({
 			});
 		}
 	};
-	//cat lineheight
+	//price lineheight
 	const [pricelineHeightUnit, setpricelineHeightUnit] = useState('px');
 	const maxpricelineHeightUnit = pricelineHeightUnit === 'px' ? 150 : pricelineHeightUnit === 'em' ? 10 : pricelineHeightUnit === '%' ? 100:'';
 	const customTooltippricelineHeight = value => `${value}${attributes.pricelineHeightUnit}`;
@@ -367,7 +367,7 @@ export const SortableItem = ({
 		}
 	};
 
-	//title fontsize
+	//price fontsize
 	const [pricefontSizeUnit, setpricefontSizeUnit] = useState('px');
 	const maxpricefontSizeUnit = pricefontSizeUnit === 'px' ? 150 : pricefontSizeUnit === 'em' ? 10 : pricefontSizeUnit === '%' ? 100:'';
 	const customTooltippricefontSize = value => `${value}${attributes.pricefontSizeUnit}`;
@@ -394,7 +394,7 @@ export const SortableItem = ({
 		}
 	};
 
-	//title letter spacing
+	//price letter spacing
 	const [priceletterSpacingUnit, setpriceletterSpacingUnit] = useState('px');
 	const maxpriceletterSpacingUnit = catletterSpacingUnit === 'px' ? 150 : priceletterSpacingUnit === 'em' ? 10 : priceletterSpacingUnit === '%' ? 100:'';
 	const customTooltippriceletterSpacing = value => `${value}${attributes.priceletterSpacingUnit}`;
@@ -422,9 +422,411 @@ export const SortableItem = ({
 		}
 	};
 
+	//rating lineheight
+	const [ratinglineHeightUnit, setratinglineHeightUnit] = useState('px');
+	const maxratinglineHeightUnit = ratinglineHeightUnit === 'px' ? 150 : ratinglineHeightUnit === 'em' ? 10 : ratinglineHeightUnit === '%' ? 100:'';
+	const customTooltipratinglineHeight = value => `${value}${attributes.ratinglineHeightUnit}`;
+
+	const getratinglineHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.ratinglineHeight;
+		case 'Tablet':
+			return attributes.ratinglineHeightTablet;
+		case 'Mobile':
+			return attributes.ratinglineHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeratinglineHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ ratinglineHeight: value, ratinglineHeightTablet: value, ratinglineHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ ratinglineHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ ratinglineHeightMobile: value });
+		}
+	};
+
+	//rating fontsize
+	const [ratingfontSizeUnit, setratingfontSizeUnit] = useState('px');
+	const maxratingfontSizeUnit = ratingfontSizeUnit === 'px' ? 150 : ratingfontSizeUnit === 'em' ? 10 : ratingfontSizeUnit === '%' ? 100:'';
+	const customTooltipratingfontSize = value => `${value}${attributes.ratingfontSizeUnit}`;
+
+	const getratingfontSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.ratingfontSize;
+		case 'Tablet':
+			return attributes.ratingfontSizeTablet;
+		case 'Mobile':
+			return attributes.ratingfontSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+    const changeratingfontSize = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ ratingfontSize: value, ratingfontSizeTablet: value, ratingfontSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ ratingfontSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ ratingfontSizeMobile: value });
+		}
+	};
+
+	//rating letter spacing
+	const [ratingletterSpacingUnit, setratingletterSpacingUnit] = useState('px');
+	const maxratingletterSpacingUnit = catletterSpacingUnit === 'px' ? 150 : ratingletterSpacingUnit === 'em' ? 10 : ratingletterSpacingUnit === '%' ? 100:'';
+	const customTooltipratingletterSpacing = value => `${value}${attributes.ratingletterSpacingUnit}`;
+
+	const getratingletterSpacing = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.ratingletterSpacing;
+		case 'Tablet':
+			return attributes.ratingletterSpacingTablet;
+		case 'Mobile':
+			return attributes.ratingletterSpacingMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changeratingletterSpacing = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ ratingletterSpacing: value, ratingletterSpacingTablet: value, ratingletterSpacingMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ ratingletterSpacingTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ ratingletterSpacingMobile: value });
+		}
+	};
+
+
+	    // button font family
+		const changebuttonFontFamily = value => {
+			if ( ! value ) {
+				setAttributes({
+					buttonfontFamily: value,
+					buttonfontVariant: value
+				});
+			} else {
+				setAttributes({
+					buttonfontFamily: value,
+					buttonfontVariant: 'normal',
+					buttonfontStyle: 'normal'
+				});
+			}
+		};
+		//button lineheight
+		const [buttonlineHeightUnit, setbuttonlineHeightUnit] = useState('px');
+		const maxbuttonlineHeightUnit = buttonlineHeightUnit === 'px' ? 150 : buttonlineHeightUnit === 'em' ? 10 : buttonlineHeightUnit === '%' ? 100:'';
+		const customTooltipbuttonlineHeight = value => `${value}${attributes.buttonlineHeightUnit}`;
+	
+		const getbuttonlineHeight = () => {
+			switch ( getView ) {
+			case 'Desktop':
+				return attributes.buttonlineHeight;
+			case 'Tablet':
+				return attributes.buttonlineHeightTablet;
+			case 'Mobile':
+				return attributes.buttonlineHeightMobile;
+			default:
+				return undefined;
+			}
+		};
+	
+		const changebuttonlineHeight = value => {
+			if ( 'Desktop' === getView ) {
+				setAttributes({buttonlineHeight: value, buttonlineHeightTablet: value, buttonlineHeightMobile: value });
+			} else if ( 'Tablet' === getView ) {
+				setAttributes({buttonlineHeightTablet: value });
+			} else if ( 'Mobile' === getView ) {
+				setAttributes({buttonlineHeightMobile: value });
+			}
+		};
+	
+		//button fontsize
+		const [buttonfontSizeUnit, setbuttonfontSizeUnit] = useState('px');
+		const maxbuttonfontSizeUnit = buttonfontSizeUnit === 'px' ? 150 : buttonfontSizeUnit === 'em' ? 10 : buttonfontSizeUnit === '%' ? 100:'';
+		const customTooltipbuttonfontSize = value => `${value}${attributes.buttonfontSizeUnit}`;
+	
+		const getbuttonfontSize = () => {
+			switch ( getView ) {
+			case 'Desktop':
+				return attributes.buttonfontSize;
+			case 'Tablet':
+				return attributes.buttonfontSizeTablet;
+			case 'Mobile':
+				return attributes.buttonfontSizeMobile;
+			default:
+				return undefined;
+			}
+		};
+		const changebuttonfontSize = value => {
+			if ( 'Desktop' === getView ) {
+				setAttributes({ buttonfontSize: value, buttonfontSizeTablet: value, buttonfontSizeMobile: value });
+			} else if ( 'Tablet' === getView ) {
+				setAttributes({ buttonfontSizeTablet: value });
+			} else if ( 'Mobile' === getView ) {
+				setAttributes({ buttonfontSizeMobile: value });
+			}
+		};
+	
+		//button letter spacing
+		const [buttonletterSpacingUnit, setbuttonletterSpacingUnit] = useState('px');
+		const maxbuttonletterSpacingUnit = buttonletterSpacingUnit === 'px' ? 150 : buttonletterSpacingUnit === 'em' ? 10 : buttonletterSpacingUnit === '%' ? 100:'';
+		const customTooltipbuttonletterSpacing = value => `${value}${attributes.buttonletterSpacingUnit}`;
+	
+		const getbuttonletterSpacing = () => {
+			switch ( getView ) {
+			case 'Desktop':
+				return attributes.buttonletterSpacing;
+			case 'Tablet':
+				return attributes.buttonletterSpacingTablet;
+			case 'Mobile':
+				return attributes.buttonletterSpacingMobile;
+			default:
+				return undefined;
+			}
+		};
+	
+		const changebuttonletterSpacing = value => {
+			if ( 'Desktop' === getView ) {
+				setAttributes({ buttonletterSpacing: value, buttonletterSpacingTablet: value, buttonletterSpacingMobile: value });
+			} else if ( 'Tablet' === getView ) {
+				setAttributes({ buttonletterSpacingTablet: value });
+			} else if ( 'Mobile' === getView ) {
+				setAttributes({ buttonletterSpacingMobile: value });
+			}
+		};
+    // button boder
+	const [buttonborderWidthUnit, setbuttonborderWidthUnit] = useState('px');
+	const maxbuttonborderWidthUnit = buttonborderWidthUnit === 'px' ? 1500 : buttonborderWidthUnit === 'em' ? 50 : buttonborderWidthUnit === '%' ? 100:'';
+    
+	const getButtonborderWidthType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonborderWidthType;
+		case 'Tablet':
+			return attributes.buttonborderWidthTypeTablet;
+		case 'Mobile':
+			return attributes.buttonborderWidthTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changeButtonborderWidthType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonborderWidthType: value, buttonborderWidthTypeTablet: value, buttonborderWidthTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonborderWidthTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonborderWidthTypeMobile: value });
+		}
+	};
+	const desktopButtonBorderWidthType = {
+		top: 'buttonborderWidthTop',
+		right: 'buttonborderWidthRight',
+		bottom: 'buttonborderWidthBottom',
+		left: 'buttonborderWidthLeft'
+	};
+	const tabletButtonBorderWidthType = {
+		top: 'buttonborderWidthTopTablet',
+		right: 'buttonborderWidthRightTablet',
+		bottom: 'buttonborderWidthBottomTablet',
+		left: 'buttonborderWidthLeftTablet'
+	};
+	const mobileButtonBorderWidthType = {
+		top: 'buttonborderWidthTopMobile',
+		right: 'buttonborderWidthRightMobile',
+		bottom: 'buttonborderWidthBottomMobile',
+		left: 'buttonborderWidthLeftMobile'
+	};
+	const changeButtonBorderWidth = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonborderWidthType ) {
+				setAttributes({ buttonborderWidth: value , buttonborderWidthTablet: value , buttonborderWidthMobile: value});
+			} else {
+				setAttributes({ [desktopButtonBorderWidthType[type]]: value, [tabletButtonBorderWidthType[type]]: value, [mobileButtonBorderWidthType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonborderWidthTypeTablet ) {
+				setAttributes({ buttonborderWidthTablet: value });
+			} else {
+				setAttributes({ [tabletButtonBorderWidthType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonborderWidthTypeMobile ) {
+				setAttributes({ buttonborderWidthMobile: value });
+			} else {
+				setAttributes({ [mobileButtonBorderWidthType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getButtonBorderWidth = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+    // button Spacing boder
+	const [buttonSpaceUnit, setbuttonSpaceUnit] = useState('px');
+	const maxbuttonSpaceUnit = buttonSpaceUnit === 'px' ? 1500 : buttonSpaceUnit === 'em' ? 50 : buttonSpaceUnit === '%' ? 100:'';
+    
+	const getbuttonSpaceType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonSpaceType;
+		case 'Tablet':
+			return attributes.buttonSpaceTypeTablet;
+		case 'Mobile':
+			return attributes.buttonSpaceTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changebuttonSpaceType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonSpaceType: value, buttonSpaceTypeTablet: value, buttonSpaceTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonSpaceTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonSpaceTypeMobile: value });
+		}
+	};
+	const desktopbuttonSpaceType = {
+		top: 'buttonSpaceTop',
+		right: 'buttonSpaceRight',
+		bottom: 'buttonSpaceBottom',
+		left: 'buttonSpaceLeft'
+	};
+	const tabletbuttonSpaceType = {
+		top: 'buttonSpaceTopTablet',
+		right: 'buttonSpaceRightTablet',
+		bottom: 'buttonSpaceBottomTablet',
+		left: 'buttonSpaceLeftTablet'
+	};
+	const mobilebuttonSpaceType = {
+		top: 'buttonSpaceTopMobile',
+		right: 'buttonSpaceRightMobile',
+		bottom: 'buttonSpaceBottomMobile',
+		left: 'buttonSpaceLeftMobile'
+	};
+	const changebuttonSpace = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonSpaceType ) {
+				setAttributes({ buttonSpace: value , buttonSpaceTablet: value , buttonSpaceMobile: value});
+			} else {
+				setAttributes({ [desktopbuttonSpaceType[type]]: value, [tabletbuttonSpaceType[type]]: value, [mobilebuttonSpaceType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonSpaceTypeTablet ) {
+				setAttributes({ buttonSpaceTablet: value });
+			} else {
+				setAttributes({ [tabletbuttonSpaceType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonSpaceTypeMobile ) {
+				setAttributes({ buttonSpaceMobile: value });
+			} else {
+				setAttributes({ [mobilebuttonSpaceType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getbuttonSpace = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonSpaceType ? attributes.buttonSpace : attributes.buttonSpaceTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonSpaceTypeTablet ? attributes.buttonSpaceTablet : attributes.buttonSpaceTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonSpaceTypeMobile ? attributes.buttonSpaceMobile : attributes.buttonSpaceTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonSpaceType ? attributes.buttonSpace : attributes.buttonSpaceRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonSpaceTypeTablet ? attributes.buttonSpaceTablet : attributes.buttonSpaceRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonSpaceTypeMobile ? attributes.buttonSpaceMobile : attributes.buttonSpaceRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonSpaceType ? attributes.buttonSpace : attributes.buttonSpaceBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonSpaceTypeTablet ? attributes.buttonSpaceTablet : attributes.buttonSpaceBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonSpaceTypeMobile ? attributes.buttonSpaceMobile : attributes.buttonSpaceBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonSpaceType ? attributes.buttonSpace : attributes.buttonSpaceLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonSpaceTablet ? attributes.buttonSpaceTablet : attributes.buttonSpaceLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonSpaceMobile ? attributes.buttonSpaceMobile : attributes.buttonSpaceLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
 	const [ title, settitle ] = useState( 'normal' );
     const [ cat, setcat ] = useState( 'normal' );
-	
+	const [ buttonclr, setbuttonclr ] = useState( 'normal' );
 	return (
 		<div
 			className={ classnames(
@@ -977,13 +1379,401 @@ export const SortableItem = ({
 
 					{ ( 'rating' === template ) && (
 						<Fragment >
-							<h3>rating</h3>
+							<ControlPanelControl
+								label={ __( 'Typography', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ ratingTypography: true }) }
+								resetValues={
+									  {
+										ratingTypography:false,
+										ratingfontSize:"",
+										ratinglineHeight:"",
+										ratingletterSpacing:"",
+										ratingfontSizeUnit:"px",
+										ratinglineHeightUnit:"px",
+										ratingletterSpacingUnit:"px"
+									  }
+								   }
+							  >	
+							  <ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.ratingfontSizeUnit }
+								onClick={ratingfontSizeUnit => {
+									setAttributes({ ratingfontSizeUnit });
+									setratingfontSizeUnit(ratingfontSizeUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltippricefontSize }
+									value={ getratingfontSize() || '' }
+									onChange={ changeratingfontSize }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxratingfontSizeUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+                               <ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.ratinglineHeightUnit }
+								onClick={ratinglineHeightUnit => {
+									setAttributes({ ratinglineHeightUnit });
+									setratinglineHeightUnit(ratinglineHeightUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipratinglineHeight }
+									value={ getratinglineHeight() || '' }
+									onChange={ changeratinglineHeight }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxratinglineHeightUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+							<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.ratingletterSpacingUnit }
+								onClick={ ratingletterSpacingUnit => {
+									setAttributes({ratingletterSpacingUnit });
+									setratingletterSpacingUnit(ratingletterSpacingUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipratingletterSpacing }
+									value={ getratingletterSpacing() || '' }
+									onChange={ changeratingletterSpacing }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxratingletterSpacingUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+							</ControlPanelControl>
+							<ControlPanelControl
+								label={ __( 'Color', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ RatingColor: true }) }
+								resetValues={
+									{
+										ratingColor:false,
+										ratingColor:"",
+										ratingColorHvr:"",
+										
+									}
+								}
+							>
+                           <ColorGradientControl
+								 label={ __( 'Star Color', 'themehunk-block' ) }
+								 colorValue={ attributes.ratingColor }
+								 onColorChange={ e => setAttributes({ ratingColor: e }) }
+								 enableAlpha={true} 
+								 />
+						   <ColorGradientControl
+								 label={ __( 'Empty Star Color', 'themehunk-block' ) }
+								 colorValue={ attributes.emptyratingColor }
+								 onColorChange={ e => setAttributes({ emptyratingColor: e }) }
+								 enableAlpha={true} 
+								 />		 
+						   </ControlPanelControl>
 						</Fragment>
 					) }
 
                     { ( 'button' === template ) && (
 						<Fragment >
-							<h3>button</h3>
+							<ControlPanelControl
+								label={ __( 'Typography', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ buttonTypography: true }) }
+								resetValues={
+									{
+										buttonTypography:false,
+										buttonfontFamily:"default",
+										buttonfontVariant:"regular",
+										buttonfontStyle:"regular",
+										buttontextTransform:"default",
+										buttonfontSize:"",
+										buttonlineHeight:"",
+										buttonletterSpacing:"",
+										buttonfontSizeUnit:"px",
+										buttonlineHeightUnit:"px",
+										buttonletterSpacingUnit:"px"
+									}
+								}
+							>
+							<GoogleFontsControl
+								label={ __( 'Font Family', 'themehunk-block' ) }
+								value={ attributes.buttonfontFamily }
+								onChangeFontFamily={ changebuttonFontFamily }
+								valueVariant={ attributes.buttonfontVariant }
+								onChangeFontVariant={ buttonfontVariant => setAttributes({ buttonfontVariant }) }
+								valueStyle={ attributes.buttonfontStyle }
+								onChangeFontStyle={ buttonfontStyle => setAttributes({ buttonfontStyle }) }
+								valueTransform={ attributes.buttontextTransform }
+								onChangeTextTransform={ buttontextTransform => setAttributes({ buttontextTransform }) }
+							    
+							/>
+							<ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.buttonfontSizeUnit }
+								onClick={buttonfontSizeUnit => {
+									setAttributes({ buttonfontSizeUnit });
+									setbuttonfontSizeUnit(buttonfontSizeUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipbuttonfontSize }
+									value={ getbuttonfontSize() || '' }
+									onChange={ changebuttonfontSize }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxbuttonfontSizeUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+                                <ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.buttonlineHeightUnit }
+								onClick={buttonlineHeightUnit => {
+									setAttributes({ buttonlineHeightUnit });
+									setbuttonlineHeightUnit(buttonlineHeightUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipbuttonlineHeight }
+									value={ getbuttonlineHeight() || '' }
+									onChange={ changebuttonlineHeight }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxbuttonlineHeightUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+							<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.buttonletterSpacingUnit }
+								onClick={buttonletterSpacingUnit => {
+									setAttributes({buttonletterSpacingUnit });
+									setbuttonletterSpacingUnit(buttonletterSpacingUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipbuttonletterSpacing }
+									value={ getbuttonletterSpacing() || '' }
+									onChange={ changebuttonletterSpacing }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxbuttonletterSpacingUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+						</ControlPanelControl>
+						<ControlPanelControl
+								label={ __( 'Color', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ buttonClr: true }) }
+								resetValues={
+									{
+										buttonClr:false,
+										buttonTxtClr:"",
+										buttonBgClr:"",
+										buttonBrdrClr:"",
+										buttonTxtClrHvr:"",
+										buttonBgClrHvr:"",
+										buttonBrdrClrHvr:"",
+									}
+								}
+						>
+						<HoverControl value={ buttonclr }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setbuttonclr } 
+						/>
+                        { 'normal' ===  buttonclr &&  (		
+						<>
+                        <ColorGradientControl
+								 label={ __( 'Text Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonTxtClr }
+								 onColorChange={ e => setAttributes({ buttonTxtClr: e }) }
+								 enableAlpha={true} 
+								 />
+						<ColorGradientControl
+								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonBgClr }
+								 onColorChange={ e => setAttributes({ buttonBgClr: e }) }
+								 enableAlpha={true} 
+								 />	
+						<ColorGradientControl
+								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonBrdrClr }
+								 onColorChange={ e => setAttributes({ buttonBrdrClr: e }) }
+								 enableAlpha={true} 
+								 />	
+							</>
+						) || 'hover' ===  buttonclr  && (
+						<>
+						<ColorGradientControl
+								 label={ __( 'Text Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonTxtClrHvr }
+								 onColorChange={ e => setAttributes({ buttonTxtClrHvr: e }) }
+								 enableAlpha={true} 
+								 />
+						<ColorGradientControl
+								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonBgClrHvr }
+								 onColorChange={ e => setAttributes({ buttonBgClrHvr: e }) }
+								 enableAlpha={true} 
+								 />	
+						<ColorGradientControl
+								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 colorValue={ attributes.buttonBrdrClrHvr }
+								 onColorChange={ e => setAttributes({ buttonBrdrClrHvr: e }) }
+								 enableAlpha={true} 
+								 />	
+								 </>
+						
+						) }		 	 
+						</ControlPanelControl>
+						<SelectControl
+						label={ __( 'Border Type', 'themehunk-block' ) }
+						value={ attributes.buttonBrdrType }
+						options={ [
+							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
+							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
+							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
+							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
+							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+						] }
+						onChange={ e => setAttributes({ buttonBrdrType: e }) }
+					   />	
+                        { 'none' !== attributes.buttonBrdrType && (
+                            <ResponsiveControl
+								label={ __( 'Border Width', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonborderWidthUnit }
+								
+								onClick={buttonborderWidthUnit => {
+									setAttributes({buttonborderWidthUnit });
+									setbuttonborderWidthUnit(buttonborderWidthUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getButtonborderWidthType() }
+									min={ 0 }
+									max={ maxbuttonborderWidthUnit }
+									changeType={ changeButtonborderWidthType }
+									onChange={ changeButtonBorderWidth }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getButtonBorderWidth( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getButtonBorderWidth( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getButtonBorderWidth( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getButtonBorderWidth( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>	
+						)}
+
+                           <ResponsiveControl
+								label={ __( 'Button Spacing', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonSpaceUnit }
+								
+								onClick={buttonSpaceUnit => {
+									setAttributes({buttonSpaceUnit });
+									setbuttonSpaceUnit(buttonSpaceUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getbuttonSpaceType() }
+									min={ 0 }
+									max={ maxbuttonSpaceUnit }
+									changeType={ changebuttonSpaceType }
+									onChange={ changebuttonSpace }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getbuttonSpace( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getbuttonSpace( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getbuttonSpace( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getbuttonSpace( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
 						</Fragment>
 					) }
 

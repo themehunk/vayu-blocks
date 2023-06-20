@@ -276,6 +276,21 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       pricefontSize: attributes.pricefontSize + attributes.pricefontSizeUnit,
       pricelineHeight: attributes.pricelineHeight + attributes.pricelineHeightUnit,
       priceletterSpacing: attributes.priceletterSpacing + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSize + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeight + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacing + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSize + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeight + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacing + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTop }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottom }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRight }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeft}${ attributes.buttonborderWidthUnit }`,
+      buttonSpacetop : 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTop}${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottom}${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRight}${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeft}${ attributes.buttonSpaceUnit }`,
+    
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -287,6 +302,23 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       pricefontSize: attributes.pricefontSizeTablet + attributes.pricefontSizeUnit,
       pricelineHeight: attributes.pricelineHeightTablet + attributes.pricelineHeightUnit,
       priceletterSpacing: attributes.priceletterSpacingTablet + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSizeTablet + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeightTablet + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacingTablet + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSizeTablet + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeightTablet + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacingTablet + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTopTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftTablet}${ attributes.buttonborderWidthUnit }`,
+     
+      buttonSpacetop : 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTopTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftTablet}${ attributes.buttonSpaceUnit }`,
+   
+   
     },
     mobile: {
       titlefontSize: attributes.titlefontSizeMobile + attributes.titlefontSizeUnit,
@@ -298,6 +330,21 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       pricefontSize: attributes.pricefontSizeMobile + attributes.pricefontSizeUnit,
       pricelineHeight: attributes.pricelineHeightMobile + attributes.pricelineHeightUnit,
       priceletterSpacing: attributes.priceletterSpacingMobile + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSizeMobile + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeightMobile + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacingMobile + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSizeMobile + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeightMobile + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacingMobile + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTopMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftMobile}${ attributes.buttonborderWidthUnit }`,
+      
+      buttonSpacetop : 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTopMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftMobile}${ attributes.buttonSpaceUnit }`,
     },
   };
   const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
@@ -307,8 +354,9 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			googleFontsLoader.loadFontToBrowser( attributes.titlefontFamily, attributes.titlefontVariant );
 		  googleFontsLoader.loadFontToBrowser( attributes.catfontFamily, attributes.catfontVariant );
       googleFontsLoader.loadFontToBrowser( attributes.pricefontFamily, attributes.pricefontVariant );
+      googleFontsLoader.loadFontToBrowser( attributes.buttonfontFamily, attributes.buttonfontVariant );
     }
-	}, [ attributes.titlefontFamily, attributes.catfontFamily, attributes.pricefontFamily ]);
+	}, [ attributes.titlefontFamily, attributes.catfontFamily, attributes.pricefontFamily, attributes.buttonfontFamily ]);
 
 
   // title setting
@@ -324,7 +372,22 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const PriceFontSize = deviceAttributeMap[deviceType].pricefontSize;
   const PriceLineHeight = deviceAttributeMap[deviceType].pricelineHeight;
   const PriceLetterSpacing = deviceAttributeMap[deviceType].priceletterSpacing;
-  
+  const RatingFontSize = deviceAttributeMap[deviceType].ratingfontSize;
+  const RatingLineHeight = deviceAttributeMap[deviceType].ratinglineHeight;
+  const RatingLetterSpacing = deviceAttributeMap[deviceType].ratingletterSpacing;
+  const ButtonFontSize = deviceAttributeMap[deviceType].buttonfontSize;
+  const ButtonLineHeight = deviceAttributeMap[deviceType].buttonlineHeight;
+  const ButtonLetterSpacing = deviceAttributeMap[deviceType].buttonletterSpacing;
+  const ButtonBorderTop = deviceAttributeMap[deviceType].buttonBordertop;
+  const ButtonBorderBottom = deviceAttributeMap[deviceType].buttonBorderbottom;
+  const ButtonBorderRight = deviceAttributeMap[deviceType].buttonBorderright;
+  const ButtonBorderLeft = deviceAttributeMap[deviceType].buttonBorderleft;
+
+  const ButtonSpaceTop = deviceAttributeMap[deviceType].buttonSpacetop;
+  const ButtonSpaceBottom = deviceAttributeMap[deviceType].buttonSpacebottom;
+  const ButtonSpaceRight = deviceAttributeMap[deviceType].buttonSpaceright;
+  const ButtonSpaceLeft = deviceAttributeMap[deviceType].buttonSpaceleft;
+
   ProductStyles = {
     '--title-color': attributes.productTitleColor,
     '--title-color-hvr': attributes.productTitleColorHvr,
@@ -353,6 +416,31 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--price-font-size':PriceFontSize,
     '--price-line-height':PriceLineHeight,
     '--price-letter-spacing':PriceLetterSpacing,
+    '--rating-font-size':RatingFontSize,
+    '--rating-line-height':RatingLineHeight,
+    '--rating-letter-spacing':RatingLetterSpacing,
+    '--button-font-family':attributes.buttonfontFamily,
+    '--button-font-variant':attributes.buttonfontVariant,
+    '--button-font-style':attributes.buttonfontStyle,
+    '--button-font-transform':attributes.buttontextTransform,
+    '--button-font-size':ButtonFontSize,
+    '--button-line-height':ButtonLineHeight,
+    '--button-letter-spacing':ButtonLetterSpacing,
+    '--button-color': attributes.buttonTxtClr,
+    '--button-bg-color': attributes.buttonBgClr,
+    '--button-border-color': attributes.buttonBrdrClr,
+    '--button-hvr-color': attributes.buttonTxtClrHvr,
+    '--button-bg-hvr-color': attributes.buttonBgClrHvr,
+    '--button-border-hvr-color': attributes.buttonBrdrClrHvr,
+    '--button-border-type': attributes.buttonBrdrType,
+    '--button-border-width-top': ButtonBorderTop,
+    '--button-border-width-bottom':ButtonBorderBottom,
+    '--button-border-width-right':ButtonBorderRight,
+    '--button-border-width-left':ButtonBorderLeft,
+    '--button-padding-top': ButtonSpaceTop,
+    '--button-padding-bottom':ButtonSpaceBottom,
+    '--button-padding-right':ButtonSpaceRight,
+    '--button-padding-left':ButtonSpaceLeft,
   }
 
   const style = omitBy({
@@ -445,8 +533,8 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                               <RatingStars
                                 rating={parseFloat(product.average_rating)}
                                 maxRating={5}
-                                filledColor="gold"
-                                emptyColor="lightgray"
+                                filledColor={attributes.ratingColor}
+                                emptyColor={attributes.emptyratingColor}
                               />
                             </div>
                             )
