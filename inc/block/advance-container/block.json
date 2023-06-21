@@ -810,24 +810,20 @@
 			"type": "string"
 		},
 		"boxShadowColorOpacityHvr": {
-			"type": "number",
-			"default": 50
+			"type": "number"
 		},
 		"boxShadowBlurHvr": {
-			"type": "number",
-			"default": 5
+			"type": "number"
 		},
 		"boxShadowSpreadHvr": {
-			"type": "number",
-			"default": 1
+			"type": "number"
 		},
 		"boxShadowHorizontalHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
+			
 		},
 		"boxShadowVerticalHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"responsiveTogHideDesktop": {
 			"type": "boolean",

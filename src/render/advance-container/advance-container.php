@@ -38,20 +38,16 @@ function advance_container_style($attr){
         }else{
             $css .= "min-height:auto;";
         }
-        //flex-direction
-        $css .= isset($attr['direction']) ? "flex-direction: {$attr['direction']}; " : '';
-        //justifiy-content
-        $css .= isset($attr['direction']) ? "flex-direction: {$attr['direction']}; " : '';
 
         //background
         if ( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'image' ) {
 			$css .= isset( $attr['backgroundImage']['url'] ) ? "background-image: url({$attr['backgroundImage']['url']});" : '';
-			$css .= isset( $attr['backgroundAttachment']) ? "background-attachment: {$attr['backgroundAttachment']};" : '';
-			$css .= isset( $attr['backgroundRepeat']) ? "background-repeat: {$attr['backgroundRepeat']};" : '';
-			$css .= isset( $attr['backgroundSize']) ? "background-size: {$attr['backgroundSize']};" : '';
-			$css .= isset( $attr['backgroundPosition']) ? "background-position-x: {$attr['backgroundPosition']['x']}%; background-position-y: {$attr['backgroundPosition']['y']}%;" : '';
+			$css .= isset( $attr['backgroundAttachment']) ? "background-attachment: {$attr['backgroundAttachment']};" : 'background-attachment:scroll;';
+			$css .= isset( $attr['backgroundRepeat']) ? "background-repeat: {$attr['backgroundRepeat']};" : 'background-repeat:repeat;';
+			$css .= isset( $attr['backgroundSize']) ? "background-size: {$attr['backgroundSize']};" : 'background-size:auto;';
+			$css .= isset($attr['backgroundPosition']) ? "background-position-x: " . ($attr['backgroundPosition']['x'] * 100) . "%; background-position-y: " . ($attr['backgroundPosition']['y'] * 100) . "%;" : '';
 		}elseif( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'gradient' ){
-			$css .= isset( $attr['backgroundGradient'] ) ? "background-image:{$attr['backgroundGradient']};" : '';  
+			$css .= isset( $attr['backgroundGradient'] ) ? "background-image:{$attr['backgroundGradient']};" : 'background-image:linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)';  
 		}else{
 			$css .= isset( $attr['backgroundColor'] ) ? "background-color:{$attr['backgroundColor']};" : '';
 		}
@@ -197,15 +193,15 @@ function advance_container_style($attr){
 		}
 
         $css .= "}";
-
+        
         // overlay
         $css .= ".th-c{$attr['uniqueID']} .wp-block-th-blocks-container-overlay{";
         if ( isset( $attr['overlaybackgroundType'] ) && $attr['overlaybackgroundType'] == 'image' ) {
 			$css .= isset( $attr['overlaybackgroundImage']['url'] ) ? "background-image: url({$attr['overlaybackgroundImage']['url']});" : '';
-			$css .= isset( $attr['overlaybackgroundAttachment']) ? "background-attachment: {$attr['overlaybackgroundAttachment']};" : '';
-			$css .= isset( $attr['overlaybackgroundRepeat']) ? "background-repeat: {$attr['overlaybackgroundRepeat']};" : '';
-			$css .= isset( $attr['overlaybackgroundSize']) ? "background-size: {$attr['overlaybackgroundSize']};" : '';
-			$css .= isset( $attr['overlaybackgroundPosition']) ? "background-position-x: {$attr['overlaybackgroundPosition']['x']}%; background-position-y: {$attr['overlaybackgroundPosition']['y']}%;" : '';
+			$css .= isset( $attr['overlaybackgroundAttachment']) ? "background-attachment: {$attr['overlaybackgroundAttachment']};" : 'background-attachment:scroll;';
+			$css .= isset( $attr['overlaybackgroundRepeat']) ? "background-repeat: {$attr['overlaybackgroundRepeat']};" : 'background-repeat:repeat;';
+			$css .= isset( $attr['overlaybackgroundSize']) ? "background-size: {$attr['overlaybackgroundSize']};" : 'background-size:auto;';
+		    $css .= isset($attr['overlaybackgroundPosition']) ? "background-position-x: " . ($attr['overlaybackgroundPosition']['x'] * 100) . "%; background-position-y: " . ($attr['overlaybackgroundPosition']['y'] * 100) . "%;" : '';
 		}elseif( isset( $attr['overlaybackgroundType'] ) && $attr['overlaybackgroundType'] == 'gradient' ){
 			$css .= isset( $attr['overlaybackgroundGradient'] ) ? "background-image:{$attr['overlaybackgroundGradient']};" : '';  
 		}else{
@@ -218,11 +214,11 @@ function advance_container_style($attr){
         $css .= ".th-c{$attr['uniqueID']}:hover .wp-block-th-blocks-container-overlay{";
             if ( isset( $attr['overlaybackgroundTypeHvr'] ) && $attr['overlaybackgroundTypeHvr'] == 'image' ) {
                 $css .= isset( $attr['overlaybackgroundImageHvr']['url'] ) ? "background-image: url({$attr['overlaybackgroundImageHvr']['url']});" : '';
-                $css .= isset( $attr['overlaybackgroundAttachmentHvr']) ? "background-attachment: {$attr['overlaybackgroundAttachmentHvr']};" : '';
-                $css .= isset( $attr['overlaybackgroundRepeatHvr']) ? "background-repeat: {$attr['overlaybackgroundRepeatHvr']};" : '';
-                $css .= isset( $attr['overlaybackgroundSizeHvr']) ? "background-size: {$attr['overlaybackgroundSizeHvr']};" : '';
-                $css .= isset( $attr['overlaybackgroundPositionHvr']) ? "background-position-x: {$attr['overlaybackgroundPositionHvr']['x']}%; background-position-y: {$attr['overlaybackgroundPositionHvr']['y']}%;" : '';
-            }elseif( isset( $attr['overlaybackgroundTypeHvr'] ) && $attr['overlaybackgroundTypeHvr'] == 'gradient' ){
+                $css .= isset( $attr['overlaybackgroundAttachmentHvr']) ? "background-attachment: {$attr['overlaybackgroundAttachmentHvr']};" : 'background-attachment:scroll;';
+                $css .= isset( $attr['overlaybackgroundRepeatHvr']) ? "background-repeat: {$attr['overlaybackgroundRepeatHvr']};" : 'background-repeat:repeat;';
+                $css .= isset( $attr['overlaybackgroundSizeHvr']) ? "background-size: {$attr['overlaybackgroundSizeHvr']};" : 'background-size:auto;';
+                $css .= isset($attr['overlaybackgroundPositionHvr']) ? "background-position-x: " . ($attr['overlaybackgroundPositionHvr']['x'] * 100) . "%; background-position-y: " . ($attr['overlaybackgroundPositionHvr']['y'] * 100) . "%;" : '';
+			}elseif( isset( $attr['overlaybackgroundTypeHvr'] ) && $attr['overlaybackgroundTypeHvr'] == 'gradient' ){
                 $css .= isset( $attr['overlaybackgroundGradientHvr'] ) ? "background-image:{$attr['overlaybackgroundGradientHvr']};" : '';  
             }else{
                 $css .= isset( $attr['overlaybackgroundColorHvr'] ) ? "background-color:{$attr['overlaybackgroundColorHvr']};" : '';
@@ -331,11 +327,11 @@ function advance_container_style($attr){
 		$css .= "}";
 
 		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top {";
-		$css .= isset( $attr['shapeTopFront'] ) ? "z-index:1" : 'z-index:-1';	
+		$css .= isset( $attr['shapeTopFront'] ) ? "z-index:1" : 'z-index:0';	
 		$css .= "}";
 
 		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom {";
-		$css .= isset( $attr['shapeBottomFront'] ) ? "z-index:1" : 'z-index:-1';	
+		$css .= isset( $attr['shapeBottomFront'] ) ? "z-index:1" : 'z-index:0';	
 		$css .= "}";
 
       //    tablet view
@@ -659,7 +655,7 @@ function advance_container_style($attr){
 			if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'relative' !== $attr['position']){
 				$horizontalOrientationOffsetMobile = isset($attr['horizontalOrientationOffsetMobile']) ? $attr['horizontalOrientationOffsetMobile'] : '0';
 				$horizontalOrientationOffsetUnit = isset($attr['horizontalOrientationOffsetUnit']) ? $attr['horizontalOrientationOffsetUnit'] : 'px';
-				$css .= "left: {$horizontalOrientationOffsetMobil}{$horizontalOrientationOffsetUnit};";
+				$css .= "left: {$horizontalOrientationOffsetMobile}{$horizontalOrientationOffsetUnit};";
 			}
 			if(isset($attr['horizontalOrientation']) && 'right' === $attr['horizontalOrientation'] && 'relative' !== $attr['position']){
 				$horizontalOrientationOffsetRightMobile = isset($attr['horizontalOrientationOffsetRightMobile']) ? $attr['horizontalOrientationOffsetRightMobile'] : '0';

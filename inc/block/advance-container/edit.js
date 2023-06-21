@@ -167,14 +167,14 @@ export default function Edit({
 			}
 			if ( 'color' === attributes.backgroundTypeHvr ) {
 				backgroundStyle = {...backgroundStyle,
-					'--background-color-hover': attributes.backgroundColorHvr
+					'--background-hover': attributes.backgroundColorHvr
 				};
 			}
 
 			if ( 'image' === attributes.backgroundType ) {
 				backgroundStyle = {
 					...backgroundStyle,
-					'--background-image': `url( '${ attributes.backgroundImage?.url }' )`,
+					'--background': `url( '${ attributes.backgroundImage?.url }' )`,
 					'--background-attachment': attributes.backgroundAttachment,
 					'--background-position': `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
 					'--background-repeat': attributes.backgroundRepeat,
@@ -184,7 +184,7 @@ export default function Edit({
 			if ( 'image' === attributes.backgroundTypeHvr ) {
 				backgroundStyle = {
 					...backgroundStyle,
-					'--background-image-hvr': `url( '${ attributes.backgroundImageHvr?.url }' )`,
+					'--background-hover': `url( '${ attributes.backgroundImageHvr?.url }' )`,
 					'--background-attachment-hvr': attributes.backgroundAttachmentHvr,
 					'--background-position-hvr': `${ Math.round( attributes.backgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
 					'--background-repeat-hvr': attributes.backgroundRepeatHvr,
@@ -195,14 +195,14 @@ export default function Edit({
 			if ( 'gradient' === attributes.backgroundType ) {
 				backgroundStyle = {
 					...backgroundStyle,
-					'--background-image': attributes.backgroundGradient,
+					'--background': attributes.backgroundGradient,
 				};
 			}
 			
 			if ( 'gradient' === attributes.backgroundTypeHvr ) {
 				backgroundStyle = {
 					...backgroundStyle,
-					'--background-image-hvr': attributes.backgroundGradientHvr
+					'--background-hover': attributes.backgroundGradientHvr
 				};
 			}
 
@@ -443,7 +443,21 @@ export default function Edit({
 						minHeight:attributes.contentMinHgtTablet + attributes.contentMinHgtUnit,
 					}
 				}
+                
+				flexcontainerStyles = {
+					flexDirection: attributes.directionTablet,
+					justifyContent:attributes.JustifyTablet,
+					alignItems:attributes.AlignItemTablet,
+					flexWrap:attributes.WrapTablet,
+				};
 
+				if(attributes.Wrap=='wrap'){
+
+					flexcontainerStyles = { ...flexcontainerStyles,
+						alignContent: attributes.AlignContentTablet	
+					};
+
+				}
 				// flex align self
 				flexProperties = { alignSelf: attributes.alignSelfTablet };
 		
@@ -622,6 +636,54 @@ export default function Edit({
 					'--gap':attributes.elementGapMobile + attributes.elementGapUnit,
 					}
 
+				flexcontainerStyles = {
+						flexDirection: attributes.directionMobile,
+						justifyContent:attributes.JustifyMobile,
+						alignItems:attributes.AlignItemMobile,
+						flexWrap:attributes.WrapMobile,
+					};
+	
+					if(attributes.Wrap=='wrap'){
+	
+						flexcontainerStyles = { ...flexcontainerStyles,
+							alignContent: attributes.AlignContentMobile	
+						};
+	
+					}
+                // flex align self
+				flexProperties = { alignSelf: attributes.alignSelfMobile };
+		
+				// flex order
+				if(attributes.orderMobile === 'start'){
+					flexProperties = {...flexProperties,order:'-9999'}
+				}else if(attributes.orderMobile === 'end'){
+					flexProperties = {...flexProperties, order:'9999'}
+				}else if(attributes.orderMobile === 'custom'){
+					flexProperties = {...flexProperties, order: attributes.customOrderMobile}
+				}
+		
+					//flex size
+					if(attributes.flexSizeMobile === 'none'){
+						flexProperties = {...flexProperties,
+							flexGrow:'0',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSizeMobile === 'grow'){
+						flexProperties = {...flexProperties,
+							flexGrow:'1',
+							flexShrink:'0'
+						}
+					}else if(attributes.flexSizeMobile === 'shrink'){
+						flexProperties = {...flexProperties,
+								flexGrow:'0',
+								flexShrink:'1'
+							}
+					}else if(attributes.flexSizeMobile === 'custom'){
+						flexProperties = {...flexProperties,
+								flexGrow:attributes.FlexGrowSizeMobile,
+								flexShrink:attributes.FlexShrinkSizeMobile
+							}
+					}
 
 		   }
 		   //end mobile
@@ -665,7 +727,7 @@ export default function Edit({
             if ( 'image' === attributes.overlaybackgroundType ) {
 				overlayBackground = {
 					...overlayBackground,
-					'--background-overlay-image': `url( '${ attributes.overlaybackgroundImage?.url }' )`,
+					'--background-overlay': `url( '${ attributes.overlaybackgroundImage?.url }' )`,
 					'--background-overlay-attachment': attributes.overlaybackgroundAttachment,
 					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
 					'--background-overlay-repeat': attributes.overlaybackgroundRepeat,
@@ -677,7 +739,7 @@ export default function Edit({
 			if ( 'image' === attributes.overlaybackgroundTypeHvr ) {
 				overlayBackground = {
 					...overlayBackground,
-					'--background-overlay-image-hvr': `url( '${ attributes.overlaybackgroundImageHvr?.url }' )`,
+					'--background-overlay-hvr': `url( '${ attributes.overlaybackgroundImageHvr?.url }' )`,
 					'--background-overlay-attachment-hvr': attributes.overlaybackgroundAttachmentHvr,
 					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
 					'--background-overlay-repeat-hvr': attributes.overlaybackgroundRepeatHvr,
