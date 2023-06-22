@@ -2873,16 +2873,16 @@ const InsSettings = ({
 								/>
 
 							</ResponsiveControl>		
-					<ColorGradientControl
-					label={ __( 'Border Hover Color', 'themehunk-block' ) }
-					colorValue={ attributes.borderColorHvr }
-					onColorChange={ e => setAttributes({ borderColorHvr: e }) }
-					enableAlpha={true} 
-				    />
-					</Suspense>
+							<ColorGradientControl
+							label={ __( 'Border Hover Color', 'themehunk-block' ) }
+							colorValue={ attributes.borderColorHvr }
+							onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+							enableAlpha={true} 
+							/>
+					        </Suspense>
 
 					
-					) }
+				        	) }
 
                             <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
