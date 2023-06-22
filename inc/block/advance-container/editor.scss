@@ -71,6 +71,7 @@ width:auto;
 	}
 
 .wp-block-themehunk-blocks-advance-container{
+	--background:none;
 	--background-hover: var(--background);
 	--transition:0.2s;
 	--boxShadow-hvr:var(--boxShadow);
@@ -78,19 +79,15 @@ width:auto;
 	--background-position-hvr:var(--background-position);
 	--background-repeat-hvr:var(--background-repeat);
 	--background-size-hvr:var(--background-size);
-
 	--border-top-hvr:var(--border-top);
 	--border-bottom-hvr:var(--border-bottom);
 	--border-right-hvr:var(--border-right);
 	--border-left-hvr:var(--border-left);
-
 	--border-TopRight-Radius-hvr:var(--border-TopRight-Radius);
 	--border-TopLeft-Radius-hvr:var(--border-TopLeft-Radius);
 	--border-BottomRight-Radius-hvr:var(--border-BottomRight-Radius);
 	--border-BottomLeft-Radius-hvr:var(--border-BottomLeft-Radius);
-
 	--border-style-hvr:var(--border-style);
-
 	background: var(--background);
 	background-repeat: var(--background-repeat);
 	background-size: var(--background-size);
@@ -117,7 +114,6 @@ width:auto;
 	box-shadow:var(--boxShadow);
 	gap:var(--gap);
 	
-
 	&:hover {
 		background: var(--background-hover);
 		background-repeat: var(--background-repeat-hvr);

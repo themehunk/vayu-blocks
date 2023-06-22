@@ -160,51 +160,56 @@ export default function Edit({
 			let ShaperStyle;
 			let gap;
 
-			if ( 'color' === attributes.backgroundType ) {
+			if ('color' === attributes.backgroundType) {
 				backgroundStyle = {
-					'--background': attributes.backgroundColor
+				  ...backgroundStyle,
+				  '--background': attributes.backgroundColor,
 				};
-			}
-			if ( 'color' === attributes.backgroundTypeHvr ) {
-				backgroundStyle = {...backgroundStyle,
-					'--background-hover': attributes.backgroundColorHvr
-				};
-			}
-
-			if ( 'image' === attributes.backgroundType ) {
+			  }
+			  
+			  if ('color' === attributes.backgroundTypeHvr) {
 				backgroundStyle = {
-					...backgroundStyle,
-					'--background': `url( '${ attributes.backgroundImage?.url }' )`,
-					'--background-attachment': attributes.backgroundAttachment,
-					'--background-position': `${ Math.round( attributes.backgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
-					'--background-repeat': attributes.backgroundRepeat,
-					'--background-size': attributes.backgroundSize,
+				  ...backgroundStyle,
+				  '--background-hover': attributes.backgroundColorHvr,
 				};
-			}
-			if ( 'image' === attributes.backgroundTypeHvr ) {
+			  }
+			  
+			  if ('image' === attributes.backgroundType) {
 				backgroundStyle = {
-					...backgroundStyle,
-					'--background-hover': `url( '${ attributes.backgroundImageHvr?.url }' )`,
-					'--background-attachment-hvr': attributes.backgroundAttachmentHvr,
-					'--background-position-hvr': `${ Math.round( attributes.backgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
-					'--background-repeat-hvr': attributes.backgroundRepeatHvr,
-					'--background-size-hvr': attributes.backgroundSizeHvr
+				  ...backgroundStyle,
+				  '--background': attributes.backgroundImage?.url ? `url('${attributes.backgroundImage.url}')` : 'none',
+				  '--background-attachment': attributes.backgroundAttachment,
+				  '--background-position': `${Math.round(attributes.backgroundPosition?.x * 100)}% ${Math.round(attributes.backgroundPosition?.y * 100)}%`,
+				  '--background-repeat': attributes.backgroundRepeat,
+				  '--background-size': attributes.backgroundSize,
 				};
-			}
-
-			if ( 'gradient' === attributes.backgroundType ) {
+			  }
+			  
+			  if ('image' === attributes.backgroundTypeHvr) {
 				backgroundStyle = {
-					...backgroundStyle,
-					'--background': attributes.backgroundGradient,
+				  ...backgroundStyle,
+				  '--background-hover': attributes.backgroundImageHvr?.url ? `url('${attributes.backgroundImageHvr.url}')` : 'none',
+				  '--background-attachment-hvr': attributes.backgroundAttachmentHvr,
+				  '--background-position-hvr': `${Math.round(attributes.backgroundPositionHvr?.x * 100)}% ${Math.round(attributes.backgroundPositionHvr?.y * 100)}%`,
+				  '--background-repeat-hvr': attributes.backgroundRepeatHvr,
+				  '--background-size-hvr': attributes.backgroundSizeHvr,
 				};
-			}
-			
-			if ( 'gradient' === attributes.backgroundTypeHvr ) {
+			  }
+			  
+			  if ('gradient' === attributes.backgroundType) {
 				backgroundStyle = {
-					...backgroundStyle,
-					'--background-hover': attributes.backgroundGradientHvr
+				  ...backgroundStyle,
+				  '--background': attributes.backgroundGradient,
 				};
-			}
+			  }
+			  
+			  if ('gradient' === attributes.backgroundTypeHvr) {
+				backgroundStyle = {
+				  ...backgroundStyle,
+				  '--background-hover': attributes.backgroundGradientHvr,
+				};
+			  }
+			  
 
 
 			// border and box shadow style
