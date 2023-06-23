@@ -46,7 +46,8 @@
 			"type": "string"
 		},
 		"fontSize": {
-			"type": "number"
+			"type": "number",
+			"default":"34"
 		},
 		"fontSizeUnit": {
 			"type": "string",
@@ -297,12 +298,11 @@
 			"type": "string"
 		},
 		"borderType": {
-			"type": "string",
+			"type": "string", 
 			"default": "none"
 		},
 		"borderHvrType": {
-			"type": "string",
-			"default": "none"
+			"type": "string"
 		},
 		"borderWidthType": {
 			"type": "string",

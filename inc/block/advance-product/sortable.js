@@ -272,7 +272,7 @@ export const SortableItem = ({
 
 	//title fontsize
 	const [catfontSizeUnit, setcatfontSizeUnit] = useState('px');
-	const maxcatfontSizeUnit = titlefontSizeUnit === 'px' ? 150 : catfontSizeUnit === 'em' ? 10 : catfontSizeUnit === '%' ? 100:'';
+	const maxcatfontSizeUnit = catfontSizeUnit === 'px' ? 150 : catfontSizeUnit === 'em' ? 10 : catfontSizeUnit === '%' ? 100:'';
 	const customTooltipcatfontSize = value => `${value}${attributes.catfontSizeUnit}`;
 
 	const getcatfontSize = () => {
