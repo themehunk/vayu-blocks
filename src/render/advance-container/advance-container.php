@@ -22,9 +22,13 @@ function advance_container_style($attr){
             // full-width
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                $css .= "width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit}; ";
+                $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
+				 margin-left: auto;
+				margin-right: auto; ";
             }else{
-                $css .= "width:100%;";
+                $css .= "max-width:100%;  
+				margin-left: auto;
+				margin-right: auto;";
             }
        $css .= "}";
 
@@ -349,12 +353,17 @@ function advance_container_style($attr){
             $css .= "}";
     
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
-                // boxed-width
+              
                 if (isset($attr['fullcontentWidthTablet'])){
                     $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                    $css .= "width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; ";
+                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; 
+					margin-left: auto;
+					margin-right: auto;";
                 }else{
-                    $css .= "width: {100%};";
+                    $css .= "
+					max-width: {100%};
+					margin-left: auto;
+					margin-right: auto;";
                 }
            $css .= "}";
     
@@ -575,9 +584,13 @@ function advance_container_style($attr){
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
                       $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                      $css .= "width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; ";
+                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
+					  margin-left: auto;
+					  margin-right: auto;";
                   }else{
-                      $css .= "width: {100%};";
+                      $css .= "max-width:100%;
+					  margin-left: auto;
+					  margin-right: auto;";
                   }
              $css .= "}";
       
