@@ -32,7 +32,8 @@ import {
 	BackgroundSelectorControl,
 	UnitChooser,
 	ToogleGroupControl,
-	IconPicker
+	IconPicker,
+	GoogleFontsControl
 } from '../../../src/components/index.js';
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
@@ -75,31 +76,80 @@ const InsSettings = ({
 	};
 
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
+	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
+	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`;
 
-	const getHeight = () => {
+	const getFontSize = () => {
 		switch ( getView ) {
 		case 'Desktop':
-			return attributes.height;
+			return attributes.fontSize;
 		case 'Tablet':
-			return attributes.heightTablet;
+			return attributes.fontSizeTablet;
 		case 'Mobile':
-			return attributes.heightMobile;
+			return attributes.fontSizeMobile;
 		default:
 			return undefined;
 		}
 	};
 
-	const changeHeight = value => {
+	const changeFontSize = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ height: value, heightTablet: value, heightMobile: value });
+			setAttributes({ fontSize: value, fontSizeTablet: value, fontSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ heightTablet: value });
+			setAttributes({ fontSizeTablet: value });
 		} else if ( 'Mobile' === getView ) {
-			setAttributes({ heightMobile: value });
+			setAttributes({ fontSizeMobile: value });
 		}
 	};
 
-	const customTooltipHeight = value => `${value}${attributes.heightUnit}`
+
+	const getlineHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.lineHeight;
+		case 'Tablet':
+			return attributes.lineHeightTablet;
+		case 'Mobile':
+			return attributes.lineHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changelineHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ lineHeight: value, lineHeightTablet: value, lineHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ lineHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ lineHeightMobile: value });
+		}
+	};
+
+ 
+	const getletterSpacing = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.letterSpacing;
+		case 'Tablet':
+			return attributes.letterSpacingTablet;
+		case 'Mobile':
+			return attributes.letterSpacingMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeletterSpacing = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ letterSpacing: value, letterSpacingTablet: value, letterSpacingMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ letterSpacingTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ letterSpacingMobile: value });
+		}
+	};
 
 	//Padding
 	const desktopPaddingType = {
@@ -327,6 +377,120 @@ const InsSettings = ({
 		return undefined;
 	};
 
+	// Button PADDING PROPERTIES
+	//Padding
+	const desktopPaddingButtonType = {
+		top: 'buttonpaddingTop',
+		right: 'buttonpaddingRight',
+		bottom: 'buttonpaddingBottom',
+		left: 'buttonpaddingLeft'
+	};
+
+	const tabletPaddingButtonType = {
+		top: 'buttonpaddingTopTablet',
+		right: 'buttonpaddingRightTablet',
+		bottom: 'buttonpaddingBottomTablet',
+		left: 'buttonpaddingLeftTablet'
+	};
+
+	const mobilePaddingButtonType = {
+		top: 'buttonpaddingTopMobile',
+		right: 'buttonpaddingRightMobile',
+		bottom: 'buttonpaddingBottomMobile',
+		left: 'buttonpaddingLeftMobile'
+	};
+	const getPaddingButtonType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonpaddingType;
+		case 'Tablet':
+			return attributes.buttonpaddingTypeTablet;
+		case 'Mobile':
+			return attributes.buttonpaddingTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changePaddingButtonType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonpaddingType: value,buttonpaddingTypeTablet: value, buttonpaddingTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonpaddingTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonpaddingTypeMobile: value });
+		}
+	};
+
+	const changeButtonPadding = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonpaddingType ) {
+				setAttributes({ buttonpadding: value,buttonpaddingTablet: value, buttonpaddingMobile: value });
+			} else {
+				setAttributes({ [desktopPaddingButtonType[type]]: value });
+				setAttributes({ [desktopPaddingButtonType[type]]: value,[tabletPaddingButtonType[type]]: value, [mobilePaddingButtonType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonpaddingTypeTablet ) {
+				setAttributes({ buttonpaddingTablet: value });
+			} else {
+				setAttributes({ [tabletPaddingButtonType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonpaddingTypeMobile ) {
+				setAttributes({ buttonpaddingMobile: value });
+			} else {
+				setAttributes({ [mobilePaddingButtonType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getButtonPadding = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes.buttonpaddingTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes.buttonpaddingTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes.buttonpaddingTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes.buttonpaddingRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes.buttonpaddingRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes.buttonpaddingRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes.buttonpaddingBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes.buttonpaddingBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes.buttonpaddingBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes.buttonpaddingLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes.buttonpaddingLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes.buttonpaddingLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
 	//Z Index
 	const customTooltipZindex = value => `${value}px`
 
@@ -464,6 +628,48 @@ const InsSettings = ({
 		return undefined;
 	};
 
+	const getBorderWidthButton = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderWidthType ? attributes.buttonborderWidth : attributes.buttonborderWidthLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderWidthTypeTablet ? attributes.buttonborderWidthTablet : attributes.buttonborderWidthLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderWidthTypeMobile ? attributes.buttonborderWidthMobile : attributes.buttonborderWidthLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
 	const desktopBorderWidthType = {
 		top: 'borderWidthTop',
 		right: 'borderWidthRight',
@@ -525,6 +731,48 @@ const InsSettings = ({
 		left: 'borderRadiusLeftMobile',
 		right: 'borderRadiusRightMobile',
 		bottom: 'borderRadiusBottomMobile'
+	};
+
+	const desktopBorderWidthTypeButton = {
+		top: 'buttonborderWidthTop',
+		right: 'buttonborderWidthRight',
+		bottom: 'buttonborderWidthBottom',
+		left: 'buttonborderWidthLeft'
+	};
+	
+	const tabletBorderWidthTypeButton = {
+		top: 'buttonborderWidthTopTablet',
+		right: 'buttonborderWidthRightTablet',
+		bottom: 'buttonborderWidthBottomTablet',
+		left: 'buttonborderWidthLeftTablet'
+	};
+	
+	const mobileBorderWidthTypeButton = {
+		top: 'buttonborderWidthTopMobile',
+		right: 'buttonborderWidthRightMobile',
+		bottom: 'buttonborderWidthBottomMobile',
+		left: 'buttonborderWidthLeftMobile'
+	};
+	
+	const desktopBorderRadiusTypeButton = {
+		top: 'buttonborderRadiusTop',
+		left: 'buttonborderRadiusLeft',
+		right: 'buttonborderRadiusRight',
+		bottom: 'buttonborderRadiusBottom'
+	};
+	
+	const tabletBorderRadiusTypeButton = {
+		top: 'buttonborderRadiusTopTablet',
+		left: 'buttonborderRadiusLeftTablet',
+		right: 'buttonborderRadiusRightTablet',
+		bottom: 'buttonborderRadiusBottomTablet'
+	};
+	
+	const mobileBorderRadiusTypeButton = {
+		top: 'buttonborderRadiusTopMobile',
+		left: 'buttonborderRadiusLeftMobile',
+		right: 'buttonborderRadiusRightMobile',
+		bottom: 'buttonborderRadiusBottomMobile'
 	};
 
 	const changeBorderWidthType = value => {
@@ -612,18 +860,6 @@ const InsSettings = ({
 		}
 	};
 	
-	const getBorderRadiusHvrType = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.borderRadiusHvrType;
-		case 'Tablet':
-			return attributes.borderRadiusHvrTypeTablet;
-		case 'Mobile':
-			return attributes.borderRadiusHvrTypeMobile;
-		default:
-			return undefined;
-		}
-	};
 
 	const changeBorderWidthHvrType = value => {
 		if ( 'Desktop' === getView ) {
@@ -701,6 +937,19 @@ const InsSettings = ({
 		}
 
 		return undefined;
+	};
+
+	const getBorderRadiusHvrType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.borderRadiusHvrType;
+		case 'Tablet':
+			return attributes.borderRadiusHvrTypeTablet;
+		case 'Mobile':
+			return attributes.borderRadiusHvrTypeMobile;
+		default:
+			return undefined;
+		}
 	};
 
 	const changeBorderRadiusHvrType = value => {
@@ -781,6 +1030,151 @@ const InsSettings = ({
 
 		return undefined;
 	};
+
+	//Button Border & Box Shadow
+
+	const getBorderWidthTypeButton = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonborderWidthType;
+		case 'Tablet':
+			return attributes.buttonborderWidthTypeTablet;
+		case 'Mobile':
+			return attributes.buttonborderWidthTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeBorderWidthTypeButton = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonborderWidthType: value, buttonborderWidthTypeTablet: value, buttonborderWidthTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonborderWidthTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonborderWidthTypeMobile: value });
+		}
+	};
+
+	const changeBorderWidthButton = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonborderWidthType ) {
+				setAttributes({ buttonborderWidth: value , buttonborderWidthTablet: value , buttonborderWidthMobile: value});
+			} else {
+				setAttributes({ [desktopBorderWidthTypeButton[type]]: value, [tabletBorderWidthTypeButton[type]]: value, [mobileBorderWidthTypeButton[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonborderWidthTypeTablet ) {
+				setAttributes({ buttonborderWidthTablet: value });
+			} else {
+				setAttributes({ [tabletBorderWidthTypeButton[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonborderWidthTypeMobile ) {
+				setAttributes({ buttonborderWidthMobile: value });
+			} else {
+				setAttributes({ [mobileBorderWidthTypeButton[type]]: value });
+			}
+			break;
+		}
+	};
+
+	
+	const getBorderRadiusButtonType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonborderRadiusType;
+		case 'Tablet':
+			return attributes.buttonborderRadiusTypeTablet;
+		case 'Mobile':
+			return attributes.buttonborderRadiusTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeBorderRadiusButtonType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonborderRadiusType: value, buttonborderRadiusTypeTablet: value, buttonborderRadiusTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonborderRadiusTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonborderRadiusTypeMobile: value });
+		}
+	};
+
+	const changeBorderButtonRadius = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonborderRadiusType ) {
+				setAttributes({ buttonborderRadius: value , buttonborderRadiusTablet: value , buttonborderRadiusMobile: value });
+			} else {
+				setAttributes({ [desktopBorderRadiusTypeButton[type]]: value , [tabletBorderRadiusTypeButton[type]]: value , [mobileBorderRadiusTypeButton[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonborderRadiusTypeTablet ) {
+				setAttributes({ buttonborderRadiusTablet: value });
+			} else {
+				setAttributes({ [tabletBorderRadiusTypeButton[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonborderRadiusTypeMobile ) {
+				setAttributes({ buttonborderRadiusMobile: value });
+			} else {
+				setAttributes({ [mobileBorderRadiusTypeButton[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getBorderRadiusButton = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderRadiusType ? attributes.buttonborderRadius : attributes.buttonborderRadiusTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderRadiusTypeTablet ? attributes.buttonborderRadiusTablet : attributes.buttonborderRadiusTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderRadiusTypeMobile ? attributes.buttonborderRadiusMobile : attributes.buttonborderRadiusTopMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderRadiusType ? attributes.buttonborderRadius : attributes.buttonborderRadiusLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderRadiusTypeTablet ? attributes.buttonborderRadiusTablet : attributes.buttonborderRadiusLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderRadiusTypeMobile ? attributes.buttonborderRadiusMobile : attributes.buttonborderRadiusLeftMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderRadiusType ? attributes.buttonborderRadius : attributes.buttonborderRadiusRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderRadiusTypeTablet ? attributes.buttonborderRadiusTablet : attributes.buttonborderRadiusRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderRadiusTypeMobile ? attributes.buttonborderRadiusMobile : attributes.buttonborderRadiusRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonborderRadiusType ? attributes.buttonborderRadius : attributes.buttonborderRadiusBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonborderRadiusTypeTablet ? attributes.buttonborderRadiusTablet : attributes.buttonborderRadiusBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonborderRadiusTypeMobile ? attributes.buttonborderRadiusMobile : attributes.buttonborderRadiusBottomMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+	
 
 	//Position
 	const customTooltiphorizontalOrientationOffset = value => `${value}${attributes.horizontalOrientationOffsetUnit}`
@@ -1071,6 +1465,10 @@ const InsSettings = ({
 	const maxborderWidthHvrUnit = borderWidthHvrUnit === 'px' ? 1500 : borderWidthHvrUnit === 'em' ? 50 : borderWidthHvrUnit === '%' ? 100:'';
 	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
 	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
+	const [borderRadiusButtonUnit, setborderRadiusButtonUnit] = useState('px');
+	const maxborderRadiusButtonUnit = borderRadiusButtonUnit === 'px' ? 1500 : borderRadiusButtonUnit === 'em' ? 50 : borderRadiusButtonUnit === '%' ? 100:'';
+	const [paddingButtonUnit, setpaddingButtonUnit] = useState('px');
+	const maxpaddingButtonUnit = paddingButtonUnit === 'px' ? 1500 : paddingButtonUnit === 'em' ? 50 : paddingButtonUnit === '%' ? 100:'';
 
 	// flex align-self property
 	const getButtonAlign = () => {
@@ -1092,6 +1490,22 @@ const InsSettings = ({
 			setAttributes({ alignTablet: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ alignMobile: value });
+		}
+	};
+
+	// Typography
+	const changeFontFamily = value => {
+		if ( ! value ) {
+			setAttributes({
+				fontFamily: value,
+				fontVariant: value
+			});
+		} else {
+			setAttributes({
+				fontFamily: value,
+				fontVariant: 'normal',
+				fontStyle: 'normal'
+			});
 		}
 	};
 
@@ -1120,7 +1534,7 @@ const InsSettings = ({
 								<PanelBody
 									title={ __( 'General', 'themehunk-block' ) }
 									initialOpen={ true }
-									className="th-spacer-panel"
+									className="th-button-panel"
 								> 
 								<ResponsiveControl
 									label={ __( 'Alignment', 'themehunk-block' ) }
@@ -1187,6 +1601,14 @@ const InsSettings = ({
 										hasIcon
 									/>
 							</div>
+
+							<RangeControl
+								label={ __( 'Icon Spacing', 'themehunk-block' ) }
+								value={ attributes.iconSpacing }
+								onChange={ e => setAttributes({ iconSpacing: e }) }
+								min={ 0 }
+								max={ 108 }
+							/>
 								
 								</PanelBody>
 								</Fragment>
@@ -1199,7 +1621,7 @@ const InsSettings = ({
 				<PanelBody
 					title={ __( 'Layout', 'themehunk-block' ) }
 					initialOpen={ false }
-					className="th-spacer-panel"
+					className="th-button-panel"
 				>           
 				            <SelectControl
 								label={ __( 'Width', 'themehunk-block' ) }
@@ -1648,7 +2070,7 @@ const InsSettings = ({
 				<PanelBody
 					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
 					initialOpen={ false }
-					className="th-spacer-panel"
+					className="th-button-panel"
 				> 
                 <HoverControl value={ hover }
 					options={[
@@ -2030,7 +2452,7 @@ const InsSettings = ({
 				<PanelBody
 					title={ __( 'Background', 'themehunk-block' ) }
 					initialOpen={ false }
-					className="th-spacer-panel"
+					className="th-button-panel"
 				> 
 
                 <HoverControl value={ hover }
@@ -2107,7 +2529,7 @@ const InsSettings = ({
 				<PanelBody
 					title={ __( 'Responsive', 'themehunk-block' ) }
 					initialOpen={ false }
-					className="th-spacer-panel"
+					className="th-button-panel"
 				> 
 				<ToggleControl
 								label={ __( 'Hide On Desktop', 'themehunk-block' ) }
@@ -2128,7 +2550,7 @@ const InsSettings = ({
 				<PanelBody
 					title={ __( 'Transition', 'themehunk-block' ) }
 					initialOpen={ false }
-					className="th-spacer-panel"
+					className="th-button-panel"
 				> 
 				<RangeControl
 				label={ __( 'Transition Duration', 'themehunk-block' ) }
@@ -2143,7 +2565,413 @@ const InsSettings = ({
 				</PanelBody>
 				
                 </Fragment>
-            )
+            ) || 'style' === tab && (
+				<Fragment>
+					<PanelBody
+						title={ __( 'Button', 'themehunk-block' ) }
+						initialOpen={ true }
+						className="th-button-panel"
+					> 
+
+					<ResponsiveControl
+								label={ __( 'Padding', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonpaddingUnit }
+								onClick={ buttonpaddingUnit => {
+									setAttributes({ buttonpaddingUnit });
+									setpaddingButtonUnit( buttonpaddingUnit );
+								 }}
+								units={ [ 'px', 'em', '%' ] }
+						    />	
+                            <SizingControl
+									type={ getPaddingButtonType() }
+									min={ 0 }
+									max={ maxpaddingUnit }
+									changeType={ changePaddingButtonType }
+									onChange={ changeButtonPadding }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getButtonPadding( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getButtonPadding( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getButtonPadding( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getButtonPadding( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>  
+
+					<HoverControl value={ hover }
+					options={[
+						{
+							label: __( 'Normal', 'themehunk-block' ),
+							value: 'normal'
+						},
+						{
+							label: __( 'Hover', 'themehunk-block' ),
+							value: 'hover'
+						}
+					]}
+					onChange={ setHover } />
+				
+				{ 'normal' ===  hover &&  (
+                <>
+				<BackgroundSelectorControl
+							backgroundType={ attributes.buttonbackgroundType }
+							backgroundColor={ attributes.buttonbackgroundColor }
+							image={ attributes.buttonbackgroundImage }
+							gradient={ attributes.buttonbackgroundGradient }
+							focalPoint={ attributes.buttonbackgroundPosition }
+							backgroundAttachment={ attributes.buttonbackgroundAttachment }
+							backgroundRepeat={ attributes.buttonbackgroundRepeat }
+							backgroundSize={ attributes.buttonbackgroundSize }
+							changeBackgroundType={ value => setAttributes({ buttonbackgroundType: value }) }
+							changeImage={ media => {
+								setAttributes({
+									buttonbackgroundImage: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ buttonbackgroundImage: undefined })}
+							changeColor={ value => setAttributes({ buttonbackgroundColor: value })}
+							changeGradient={ value => setAttributes({ buttonbackgroundGradient: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ buttonbackgroundAttachment: value })}
+							changeBackgroundRepeat={ value => setAttributes({ buttonbackgroundRepeat: value })}
+							changeFocalPoint={ value => setAttributes({ buttonbackgroundPosition: value }) }
+							changeBackgroundSize={ value => setAttributes({ buttonbackgroundSize: value }) }
+						/>
+						<ColorGradientControl
+					label={ __( 'Color', 'themehunk-block' ) }
+					colorValue={ attributes.buttonColor }
+				    onColorChange={ e => setAttributes({ buttonColor: e }) }
+					enableAlpha={true}
+				/>
+				</>
+						
+					
+				) || 'hover' ===  hover && (
+					<>
+					<BackgroundSelectorControl
+					backgroundType={ attributes.buttonbackgroundTypeHvr }
+					backgroundColor={ attributes.buttonbackgroundColorHvr }
+					image={ attributes.buttonbackgroundImageHvr }
+					gradient={ attributes.buttonbackgroundGradientHvr }
+					focalPoint={ attributes.buttonbackgroundPositionHvr }
+					backgroundAttachment={ attributes.buttonbackgroundAttachmentHvr }
+					backgroundRepeat={ attributes.buttonbackgroundRepeatHvr }
+					backgroundSize={ attributes.buttonbackgroundSizeHvr }
+					changeBackgroundType={ value => setAttributes({ buttonbackgroundTypeHvr: value }) }
+					changeImage={ media => {
+						setAttributes({
+							buttonbackgroundImageHvr: pick( media, [ 'id', 'url' ])
+						});
+					}}
+					removeImage={ () => setAttributes({ buttonbackgroundImageHvr: undefined })}
+					changeColor={ value => setAttributes({ buttonbackgroundColorHvr: value })}
+					changeGradient={ value => setAttributes({ buttonbackgroundGradientHvr: value }) }
+					changeBackgroundAttachment={ value => setAttributes({ buttonbackgroundAttachmentHvr: value })}
+					changeBackgroundRepeat={ value => setAttributes({ buttonbackgroundRepeatHvr: value })}
+					changeFocalPoint={ value => setAttributes({ buttonbackgroundPositionHvr: value }) }
+					changeBackgroundSize={ value => setAttributes({ buttonbackgroundSizeHvr: value }) }
+				/>
+				
+				<ColorGradientControl
+					label={ __( 'Color', 'themehunk-block' ) }
+					colorValue={ attributes.buttonColorHvr }
+				    onColorChange={ e => setAttributes({ buttonColorHvr: e }) }
+					enableAlpha={true}
+				/>
+
+				<ColorGradientControl
+					label={ __( 'Border Hover Color', 'themehunk-block' ) }
+					colorValue={ attributes.buttonborderColorHvr }
+					onColorChange={ e => setAttributes({ buttonborderColorHvr: e }) }
+					enableAlpha={true} 
+				/>
+				
+
+				</>
+				
+				)}
+				</PanelBody>
+
+				<PanelBody
+					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
+					initialOpen={ false }
+					className="th-button-panel"
+				> 
+				<>
+				<SelectControl
+						label={ __( 'Border Type', 'themehunk-block' ) }
+						value={ attributes.buttonborderType }
+						options={ [
+							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
+							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
+							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
+							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
+							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+						] }
+						onChange={ e => setAttributes({ buttonborderType: e }) }
+					/>	
+					
+						
+					   { 'none' !== attributes.buttonborderType && (
+
+						<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+						<ResponsiveControl
+								label={ __( 'Border Width', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonborderWidthUnit }
+								onClick={buttonborderWidthUnit => {
+									setAttributes({buttonborderWidthUnit });
+									setborderWidthUnit(buttonborderWidthUnit);
+								  }}
+								units={ [ 'px', 'em' ] }
+						    />
+                            <SizingControl
+									type={ getBorderWidthTypeButton() }
+									min={ 0 }
+									max={ maxborderWidthUnit }
+									changeType={ changeBorderWidthTypeButton }
+									onChange={ changeBorderWidthButton }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderWidthButton( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderWidthButton( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderWidthButton( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderWidthButton( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+									<ColorGradientControl
+								label={ __( 'Border Color', 'themehunk-block' ) }
+								colorValue={ attributes.buttonborderColor }
+								onColorChange={ e => setAttributes({ buttonborderColor: e }) }
+								enableAlpha={true} 
+								/>
+						</Suspense>
+						
+						) }
+                        <ResponsiveControl
+								label={ __( 'Border Radius', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonborderRadiusUnit }
+								onClick={buttonborderRadiusUnit => {
+									setAttributes({buttonborderRadiusUnit });
+									setborderRadiusButtonUnit(borderRadiusButtonUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getBorderRadiusButtonType() }
+									min={ 0 }
+									max={  maxborderRadiusButtonUnit }
+									changeType={ changeBorderRadiusButtonType }
+									onChange={ changeBorderButtonRadius }
+									options={ [
+										{
+											label: __( 'T-R', 'themehunk-block' ),
+											type: 'top',
+											value: getBorderRadiusButton( 'top' )
+										},
+										{
+											label: __( 'T-L', 'themehunk-block' ),
+											type: 'right',
+											value: getBorderRadiusButton( 'right' )
+										},
+										{
+											label: __( 'B-R', 'themehunk-block' ),
+											type: 'left',
+											value: getBorderRadiusButton( 'left' )
+										},
+										{
+											label: __( 'B-L', 'themehunk-block' ),
+											type: 'bottom',
+											value: getBorderRadiusButton( 'bottom' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+
+							<ControlPanelControl
+							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								buttonboxShadow: false,
+								buttonboxShadowColor: undefined,
+								buttonboxShadowColorOpacity: 50,
+								buttonboxShadowBlur: 5,
+								buttonboxShadowSpread: 1,
+								buttonboxShadowHorizontal: 0,
+								buttonboxShadowVertical: 0
+							} }
+							onClick={ () => setAttributes({ buttonboxShadow: true }) }
+						>
+						
+							<ColorGradientControl
+								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								colorValue={ attributes.buttonboxShadowColor }
+								onColorChange={ e => setAttributes({ buttonboxShadowColor: e }) }
+								enableAlpha={true} 
+							/>
+
+							<RangeControl
+								label={ __( 'Opacity', 'themehunk-block' ) }
+								value={ attributes.buttonboxShadowColorOpacity }
+								onChange={ e => setAttributes({ buttonboxShadowColorOpacity: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Blur', 'themehunk-block' ) }
+								value={ attributes.buttonboxShadowBlur }
+								onChange={ e => setAttributes({ buttonboxShadowBlur: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Spread', 'themehunk-block' ) }
+								value={ attributes.buttonboxShadowSpread }
+								onChange={ e => setAttributes({ buttonboxShadowSpread: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Horizontal', 'themehunk-block' ) }
+								value={ attributes.buttonboxShadowHorizontal }
+								onChange={ e => setAttributes({ buttonboxShadowHorizontal: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Vertical', 'themehunk-block' ) }
+								value={ attributes.buttonboxShadowVertical }
+								onChange={ e => setAttributes({ buttonboxShadowVertical: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+							</ControlPanelControl>
+				</>
+
+				</PanelBody>
+
+				<PanelBody title={ __( 'Typographgy', 'themehunk-block' ) }
+							className="th-adv-h-panel" initialOpen={ false }
+						>	
+						<GoogleFontsControl
+								label={ __( 'Font Family', 'themehunk-block' ) }
+								value={ attributes.fontFamily }
+								onChangeFontFamily={ changeFontFamily }
+								valueVariant={ attributes.fontVariant }
+								onChangeFontVariant={ fontVariant => setAttributes({ fontVariant }) }
+								valueStyle={ attributes.fontStyle }
+								onChangeFontStyle={ fontStyle => setAttributes({ fontStyle }) }
+								valueTransform={ attributes.textTransform }
+								onChangeTextTransform={ textTransform => setAttributes({ textTransform }) }
+							/>
+
+						<ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							>    
+							   <UnitChooser
+								value={ attributes.fontSizeUnit }
+								onClick={ fontSizeUnit => setAttributes({ fontSizeUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
+								<RangeControl
+								    renderTooltipContent={ customTooltipFontsize }
+									value={ getFontSize() || '' }
+									onChange={ changeFontSize }
+									step={ 0.1 }
+									min={ 1 }
+									max={ 500 }
+									allowReset={ true }
+								/>		
+						</ResponsiveControl>
+
+						<ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.lineHeightUnit }
+								onClick={ lineHeightUnit => setAttributes({ lineHeightUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
+							<RangeControl
+							    renderTooltipContent={ customTooltiplineHeight }
+								value={ getlineHeight() || '' }
+								onChange={ changelineHeight }
+								step={ 0.1 }
+								min={ 0 }
+								max={ 300 }
+								allowReset={ true }
+							/>
+						</ResponsiveControl>
+
+						<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							>
+								<UnitChooser
+								value={ attributes.letterSpacingUnit }
+								onClick={ letterSpacingUnit => setAttributes({ letterSpacingUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+						       />
+							<RangeControl
+							    renderTooltipContent={ customTooltipletterSpacing }
+								value={ getletterSpacing() || '' }
+								onChange={ changeletterSpacing }
+								step={ 0.1 }
+								min={ -300 }
+								max={ 300 }
+								allowReset={ true }
+							/>
+						</ResponsiveControl>					
+			
+							   
+
+                </PanelBody>
+
+				</Fragment>
+			)
             
           }
 
@@ -2152,7 +2980,8 @@ const InsSettings = ({
 
 
       
-    </Fragment>);
+    </Fragment>
+	);
 }
 
 export default InsSettings;

@@ -29,7 +29,7 @@
      return (
          <BlockControls>
              <Dropdown
-        className="my-container-class-name"
+        className="th-link-button"
         contentClassName="my-popover-content-classname"
         popoverProps={ { placement: 'bottom-start' } }
         renderToggle={ ( { isOpen, onToggle } ) => (
@@ -50,11 +50,11 @@
                 {
                     id: 'opensInNewTab',
                     title: 'New tab?',
-                },
-                {
-                    id: 'customDifferentSetting',
-                    title: 'Has this custom setting?'
                 }
+                // ,{
+                //     id: 'customDifferentSetting',
+                //     title: 'Has this custom setting?'
+                // }
             ]}
             onChange={ ( newPost ) => setAttributes( { post: newPost } ) }
             withCreateSuggestion={true}

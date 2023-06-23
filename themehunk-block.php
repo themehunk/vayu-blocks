@@ -34,6 +34,7 @@ require_once 'src/render-style.php';
 require_once 'src/render/advance-heading/advance-heading.php';
 require_once 'src/render/advance-container/advance-container.php';
 require_once 'src/render/advance-spacer/advance-spacer.php';
+require_once 'src/render/advance-button/advance-button.php';
 
 function themehunk_blocks_register_blocks() {
 

@@ -1,2 +1,155 @@
-.th-blocks-icon-chooser{display:flex;flex-wrap:wrap;list-style:none;margin-left:-3px;margin-top:0}.th-blocks-icon-chooser li{display:block;margin:0 0 3px 3px;padding:0}.th-blocks-icon-chooser li button.components-button{background:#fafafa;border:0;border-radius:0;box-shadow:none;color:#000;font-size:15px;height:30px;justify-content:center;line-height:normal;padding:8px;width:30px}.th-blocks-icon-chooser li button.components-button span{line-height:0}.th-blocks-icon-chooser li button.components-button:hover{background:#fff;box-shadow:none}.th-blocks-icon-chooser li button.components-button svg{height:1em;width:1em}.th-icon{line-height:0}.th-icon svg{fill:currentColor;height:1em;width:1em}button.components-icon-picker-item{background:#efefef;border:1px solid #ddd;cursor:pointer;font-size:30px;height:50px;line-height:50px;margin-bottom:10px;width:50px}button.components-icon-picker-item svg{height:1em;width:1em}.components-icon-picker-item>span{align-items:center;display:flex;justify-content:center}.components-icon-picker-item:focus,.components-icon-picker-item:hover{background:#fafafa}.th-svg-html .components-base-control{margin-bottom:0}.th-icon-preview{align-items:center;display:flex;font-size:25px}.th-icon-preview svg{height:1em;margin-right:10px;width:1em}.th-blocks-icon-panel:not(:first-child){border-top:1px solid #eee!important}.th-button-inside span:first-of-type{order:var(--order)}.th-button-inside span:nth-of-type(2){order:10}.th-blocks-icon-panel h2{background:transparent!important;outline:1px solid #757575;position:absolute;right:9px;top:-52px}.th-blocks-icon-panel .components-panel__body-toggle.components-button .components-panel__arrow{right:-4px}.th-blocks-icon-panel h2 button.components-panel__body-toggle.components-button{color:#111;height:29px;padding:5px 21px 5px 5px;position:relative}.th-icon-label{display:inline-flex;float:left}.th-icon-preview{padding-left:47px}.th-icon-preview button{height:29px!important}.th-blocks-icon-panel.is-opened{margin-top:40px!important}.th-icon-chooser{position:relative}
-.wp-block-create-block-themehunk-block{border:1px dotted red}
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/components/icon-picker/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+.th-blocks-icon-chooser {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 0;
+  margin-left: -3px;
+}
+.th-blocks-icon-chooser li {
+  display: block;
+  margin: 0 0 3px 3px;
+  padding: 0;
+}
+.th-blocks-icon-chooser li button.components-button {
+  background: #fafafa;
+  color: #000;
+  height: 30px;
+  width: 30px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 8px;
+  line-height: normal;
+  font-size: 15px;
+  justify-content: center;
+}
+.th-blocks-icon-chooser li button.components-button span {
+  line-height: 0;
+}
+.th-blocks-icon-chooser li button.components-button:hover {
+  background: #fff;
+  box-shadow: none;
+}
+.th-blocks-icon-chooser li button.components-button svg {
+  width: 1em;
+  height: 1em;
+}
+
+.th-icon {
+  line-height: 0;
+}
+
+.th-icon svg {
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}
+
+button.components-icon-picker-item {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
+  background: #efefef;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+button.components-icon-picker-item svg {
+  height: 1em;
+  width: 1em;
+}
+
+.components-icon-picker-item > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.components-icon-picker-item:hover, .components-icon-picker-item:focus {
+  background: #fafafa;
+}
+
+.th-svg-html .components-base-control {
+  margin-bottom: 0;
+}
+
+.th-icon-preview {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+.th-icon-preview svg {
+  margin-right: 10px;
+  width: 1em;
+  height: 1em;
+}
+
+.th-blocks-icon-panel:not(:first-child) {
+  border-top: 1px solid #eee !important;
+}
+
+.th-button-inside span:nth-of-type(1) {
+  order: var(--order);
+  margin: var(--iconMargin);
+}
+
+.th-button-inside span:nth-of-type(2) {
+  order: 10;
+}
+
+.th-blocks-icon-panel h2 {
+  position: absolute;
+  top: -52px;
+  right: 9px;
+  background: transparent !important;
+  outline: 1px solid rgb(117, 117, 117);
+}
+
+.th-blocks-icon-panel .components-panel__body-toggle.components-button .components-panel__arrow {
+  right: -4px;
+}
+
+.th-blocks-icon-panel h2 button.components-panel__body-toggle.components-button {
+  padding: 5px 21px 5px 5px;
+  color: #111;
+  height: 29px;
+  position: relative;
+}
+
+.th-icon-label {
+  display: inline-flex;
+  float: left;
+}
+
+.th-icon-preview {
+  padding-left: 47px;
+}
+
+.th-icon-preview button {
+  height: 29px !important;
+}
+
+.th-blocks-icon-panel.is-opened {
+  margin-top: 40px !important;
+}
+
+.th-icon-chooser {
+  position: relative;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./inc/block/advance-heading/editor.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-themehunk-block {
+  border: 1px dotted #f00;
+}
+
+/*# sourceMappingURL=advance-heading.css.map*/

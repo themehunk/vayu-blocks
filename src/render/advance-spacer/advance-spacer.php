@@ -35,7 +35,7 @@ function advance_spacer_style($attr){
         }elseif( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'gradient' ){
           $css .= isset( $attr['backgroundGradient'] ) ? "background-image:{$attr['backgroundGradient']};" : '';  
         }else{
-          $css .= isset( $attr['backgroundColor'] ) ? "background-color:{$attr['backgroundColor']};" : '';
+          $css .= isset( $attr['backgroundColor'] ) ? "background:{$attr['backgroundColor']};" : '';
         }
 
           //padding
@@ -127,7 +127,9 @@ function advance_spacer_style($attr){
     
       //position property
 
-		$css .= "position: " . (isset($attr['position']) ? $attr['position'] : 'relative' ). ";";
+	  if( isset($attr['position']) && $attr['position'] == 'absolute' || isset($attr['position']) && $attr['position'] == 'fixed' ){
+
+		$css .= "position: {$attr['position']};";
 		
 		if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'relative' !== $attr['position']){
 			$horizontalOrientationOffset = isset($attr['horizontalOrientationOffset']) ? $attr['horizontalOrientationOffset'] : '0';
@@ -149,6 +151,10 @@ function advance_spacer_style($attr){
 			$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
             $css .= "bottom: {$verticalOrientationOffsetBottom}{$verticalOrientationOffsetBottomUnit};";
 		}
+	}
+	else{
+		$css .= "position: relative;";
+	}
 
       // flex properties
       $css .= "align-self: " . (isset($attr['alignSelf']) ? $attr['alignSelf'] : 'inherit;' ). ";";
@@ -181,6 +187,11 @@ function advance_spacer_style($attr){
       //z-index
 		$css .= isset( $attr['zindex'] ) ? "z-index:{$attr['zindex'] };" : '';
 
+	//Responsive Hide
+if(isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop'] ){
+	$css .= "display: none";
+}
+
      $css .= "}"; 
 
 
@@ -197,7 +208,7 @@ function advance_spacer_style($attr){
     elseif( isset( $attr['backgroundTypeHvr'] ) && $attr['backgroundTypeHvr'] == 'gradient' ){
           $css .= isset( $attr['backgroundGradientHvr'] ) ? "background-image:{$attr['backgroundGradientHvr']};" : '';  
     }else{
-          $css .= isset( $attr['backgroundColorHvr'] ) ? "background-color:{$attr['backgroundColorHvr']};" : '';
+          $css .= isset( $attr['backgroundColorHvr'] ) ? "background:{$attr['backgroundColorHvr']};" : '';
     }
 
      //border hover
@@ -216,7 +227,7 @@ function advance_spacer_style($attr){
 				 border-bottom-width: {$borderWidthHvrBottom}{$borderWidthHvrUnit}; 
 				 border-left-width: {$borderWidthHvrLeft}{$borderWidthHvrUnit}; 
 				";
-			} else {
+			} elseif(isset($attr['borderWidthHvr'])) {
 				$borderWidthHvr = isset($attr['borderWidthHvr']) ? $attr['borderWidthHvr'] : 0;
 				$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
 				$css .= "border-width: {$borderWidthHvr}{$borderWidthHvrUnit};";
@@ -234,7 +245,7 @@ function advance_spacer_style($attr){
 				 border-bottom-right-radius: {$borderRadiusHvrBottom}{$borderRadiusHvrUnit}; 
 				 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
 				";
-			} else {
+			} elseif(isset($attr['borderRadiusHvr'])) {
 				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 0;
 				$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
 				$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
@@ -251,9 +262,14 @@ function advance_spacer_style($attr){
 
      //    tablet view
      $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
+
      $css .= ".th-spacer{$attr['uniqueID']}{";
-      $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
-      $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
+
+	$heightUnit = isset($attr['heightUnit']) ? $attr['heightUnit'] : 'px';
+    $css .= isset($attr['heightTablet']) ? "height: {$attr['heightTablet']}{$heightUnit};" : '';
+
+      $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
+      $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' ;
     
       //margin
       if (isset($attr['marginTypeTablet']) && 'unlinked' === $attr['marginTypeTablet']) {
@@ -327,6 +343,8 @@ function advance_spacer_style($attr){
 
       //position
 
+	  	if( isset($attr['position']) && $attr['position'] == 'absolute' || isset($attr['position']) && $attr['position'] == 'fixed' ){
+
 			if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'inherit' !== $attr['position']){
 				$horizontalOrientationOffsetTablet = isset($attr['horizontalOrientationOffsetTablet']) ? $attr['horizontalOrientationOffsetTablet'] : '0';
 				$horizontalOrientationOffsetUnit = isset($attr['horizontalOrientationOffsetUnit']) ? $attr['horizontalOrientationOffsetUnit'] : 'px';
@@ -347,6 +365,8 @@ function advance_spacer_style($attr){
 				$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
 				$css .= "bottom: {$verticalOrientationOffsetBottomTablet}{$verticalOrientationOffsetBottomUnit};";
 			}
+
+		}
 
       // flex properties
 			$css .= "align-self: " . (isset($attr['alignSelfTablet']) ? $attr['alignSelfTablet'] : 'inherit;' ). ";";
@@ -375,8 +395,56 @@ function advance_spacer_style($attr){
 				$css .= isset( $attr['FlexShrinkSizeTablet'] ) ? "flex-shrink:{$attr['FlexShrinkSizeTablet']};" : '';
 			}
 
+			//Responsive Hide
+			if(isset($attr['responsiveTogHideTablet']) && $attr['responsiveTogHideTablet'] ){
+				$css .= "display: none";
+			}
+			else{
+				$css .= "display: block";
+			}
 
       $css .= "}";
+
+	  $css .= ".th-spacer{$attr['uniqueID']}:hover{";
+		
+		//border-radius hover
+		if (isset($attr['borderRadiusHvrTypeTablet']) && 'unlinked' === $attr['borderRadiusHvrTypeTablet']) {
+			$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+			$borderRadiusHvrTop = isset($attr['borderRadiusHvrTopTablet']) ? $attr['borderRadiusHvrTopTablet'] : 0;
+			$borderRadiusHvrRight = isset($attr['borderRadiusHvrRightTablet']) ? $attr['borderRadiusHvrRightTablet'] : 0;
+			$borderRadiusHvrBottom = isset($attr['borderRadiusHvrBottomTablet']) ? $attr['borderRadiusHvrBottomTablet'] : 0;
+			$borderRadiusHvrLeft = isset($attr['borderRadiusHvrLeftTablet']) ? $attr['borderRadiusHvrLeftTablet'] : 0;
+			$css .= "border-top-right-radius: {$borderRadiusHvrTop}{$borderRadiusHvrUnit};
+			 border-top-left-radius: {$borderRadiusHvrRight}{$borderRadiusHvrUnit}; 
+			 border-bottom-right-radius: {$borderRadiusHvrBottom}{$borderRadiusHvrUnit}; 
+			 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
+			";
+		} elseif(isset($attr['borderRadiusHvrTablet'])) {
+			$borderRadiusHvr = isset($attr['borderRadiusHvrTablet']) ? $attr['borderRadiusHvrTablet'] : 0;
+			$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+			$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
+		}
+
+		//border-width hover
+		if (isset($attr['borderWidthHvrTypeTablet']) && 'unlinked' === $attr['borderWidthHvrTypeTablet']) {
+			$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
+			$borderWidthHvrTop = isset($attr['borderWidthHvrTopTablet']) ? $attr['borderWidthHvrTopTablet'] : 0;
+			$borderWidthHvrRight = isset($attr['borderWidthHvrRightTablet']) ? $attr['borderWidthHvrRightTablet'] : 0;
+			$borderWidthHvrBottom = isset($attr['borderWidthHvrBottomTablet']) ? $attr['borderWidthHvrBottomTablet'] : 0;
+			$borderWidthHvrLeft = isset($attr['borderWidthHvrLeftTablet']) ? $attr['borderWidthHvrLeftTablet'] : 0;
+			$css .= "border-top-width: {$borderWidthHvrTop}{$borderWidthHvrUnit}; 
+			 border-right-width: {$borderWidthHvrRight}{$borderWidthHvrUnit};
+			 border-bottom-width: {$borderWidthHvrBottom}{$borderWidthHvrUnit}; 
+			 border-left-width: {$borderWidthHvrLeft}{$borderWidthHvrUnit}; 
+			";
+		} elseif(isset($attr['borderWidthHvrTablet'])) {
+			$borderWidthHvr = isset($attr['borderWidthHvrTablet']) ? $attr['borderWidthHvrTablet'] : 0;
+			$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
+			$css .= "border-width: {$borderWidthHvr}{$borderWidthHvrUnit};";
+		}
+
+	  $css .= "}";
+
      $css .= "}";
 
      
@@ -384,8 +452,11 @@ function advance_spacer_style($attr){
     $css .= "@media screen and (max-width: 767px){";
     $css .= ".th-spacer{$attr['uniqueID']}{";
     
-      $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
-      $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
+	$heightUnit = isset($attr['heightUnit']) ? $attr['heightUnit'] : 'px';
+    $css .= isset($attr['heightMobile']) ? "height: {$attr['heightMobile']}{$heightUnit};" : '';
+
+      $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
+      $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
     
       //margin
       if (isset($attr['marginTypeMobile']) && 'unlinked' === $attr['marginTypeMobile']) {
@@ -458,6 +529,7 @@ function advance_spacer_style($attr){
 			}
 
       //position
+	  	if( isset($attr['position']) && $attr['position'] == 'absolute' || isset($attr['position']) && $attr['position'] == 'fixed' ){
 
 			if(isset($attr['horizontalOrientation']) && 'left' === $attr['horizontalOrientation']  && 'inherit' !== $attr['position']){
 				$horizontalOrientationOffsetMobile = isset($attr['horizontalOrientationOffsetMobile']) ? $attr['horizontalOrientationOffsetMobile'] : '0';
@@ -479,6 +551,8 @@ function advance_spacer_style($attr){
 				$verticalOrientationOffsetBottomUnit = isset($attr['verticalOrientationOffsetBottomUnit']) ? $attr['verticalOrientationOffsetBottomUnit'] : 'px';
 				$css .= "bottom: {$verticalOrientationOffsetBottomMobile}{$verticalOrientationOffsetBottomUnit};";
 			}
+
+		}
 
       // flex properties
 			$css .= "align-self: " . (isset($attr['alignSelfMobile']) ? $attr['alignSelfMobile'] : 'inherit;' ). ";";
@@ -507,7 +581,56 @@ function advance_spacer_style($attr){
 				$css .= isset( $attr['FlexShrinkSizeMobile'] ) ? "flex-shrink:{$attr['FlexShrinkSizeMobile']};" : '';
 			}
     
+			//Responsive Hide
+			if(isset($attr['responsiveTogHideMobile']) && $attr['responsiveTogHideMobile'] ){
+				$css .= "display: none";
+			}
+			else{
+				$css .= "display: block";
+			}
+
     $css .= "}";
+
+	$css .= ".th-spacer{$attr['uniqueID']}:hover{";
+		
+		//border-radius hover
+		if (isset($attr['borderRadiusHvrTypeMobile']) && 'unlinked' === $attr['borderRadiusHvrTypeMobile']) {
+			$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+			$borderRadiusHvrTop = isset($attr['borderRadiusHvrTopMobile']) ? $attr['borderRadiusHvrTopMobile'] : 0;
+			$borderRadiusHvrRight = isset($attr['borderRadiusHvrRightMobile']) ? $attr['borderRadiusHvrRightMobile'] : 0;
+			$borderRadiusHvrBottom = isset($attr['borderRadiusHvrBottomMobile']) ? $attr['borderRadiusHvrBottomMobile'] : 0;
+			$borderRadiusHvrLeft = isset($attr['borderRadiusHvrLeftMobile']) ? $attr['borderRadiusHvrLeftMobile'] : 0;
+			$css .= "border-top-right-radius: {$borderRadiusHvrTop}{$borderRadiusHvrUnit};
+			 border-top-left-radius: {$borderRadiusHvrRight}{$borderRadiusHvrUnit}; 
+			 border-bottom-right-radius: {$borderRadiusHvrBottom}{$borderRadiusHvrUnit}; 
+			 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
+			";
+		} elseif(isset($attr['borderRadiusHvrMobile'])) {
+			$borderRadiusHvr = isset($attr['borderRadiusHvrMobile']) ? $attr['borderRadiusHvrMobile'] : 0;
+			$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+			$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
+		}
+
+		//border-width hover
+		if (isset($attr['borderWidthHvrTypeMobile']) && 'unlinked' === $attr['borderWidthHvrTypeMobile']) {
+			$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
+			$borderWidthHvrTop = isset($attr['borderWidthHvrTopMobile']) ? $attr['borderWidthHvrTopMobile'] : 0;
+			$borderWidthHvrRight = isset($attr['borderWidthHvrRightMobile']) ? $attr['borderWidthHvrRightMobile'] : 0;
+			$borderWidthHvrBottom = isset($attr['borderWidthHvrBottomMobile']) ? $attr['borderWidthHvrBottomMobile'] : 0;
+			$borderWidthHvrLeft = isset($attr['borderWidthHvrLeftMobile']) ? $attr['borderWidthHvrLeftMobile'] : 0;
+			$css .= "border-top-width: {$borderWidthHvrTop}{$borderWidthHvrUnit}; 
+			 border-right-width: {$borderWidthHvrRight}{$borderWidthHvrUnit};
+			 border-bottom-width: {$borderWidthHvrBottom}{$borderWidthHvrUnit}; 
+			 border-left-width: {$borderWidthHvrLeft}{$borderWidthHvrUnit}; 
+			";
+		} elseif(isset($attr['borderWidthHvrMobile'])) {
+			$borderWidthHvr = isset($attr['borderWidthHvrMobile']) ? $attr['borderWidthHvrMobile'] : 0;
+			$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
+			$css .= "border-width: {$borderWidthHvr}{$borderWidthHvrUnit};";
+		}
+
+	  $css .= "}";
+
     $css .= "}";
 
     }
