@@ -16,6 +16,8 @@
 .wp-block-themehunk-blocks-advance-container {
   flex-grow: 1;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .th-con {
@@ -23,8 +25,9 @@
   display: flex;
   flex-direction: column;
   flex-basis: auto;
-  flex-grow: 0;
+  flex-grow: 1;
   flex-shrink: 1;
+  position: relative;
 }
 
 .wp-block-th-blocks-container-overlay {
@@ -33,9 +36,6 @@
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
-  background: none;
-  opacity: 0.6;
   padding: 0 !important;
 }
 

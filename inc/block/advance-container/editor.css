@@ -73,10 +73,24 @@
 }
 
 .wp-block-themehunk-blocks-advance-container {
-  --background-color-hover: var(--background);
+  --background:none;
+  --background-hover: var(--background);
   --transition:0.2s;
+  --boxShadow-hvr:var(--boxShadow);
+  --background-attachment-hvr:var(--background-attachment);
+  --background-position-hvr:var(--background-position);
+  --background-repeat-hvr:var(--background-repeat);
+  --background-size-hvr:var(--background-size);
+  --border-top-hvr:var(--border-top);
+  --border-bottom-hvr:var(--border-bottom);
+  --border-right-hvr:var(--border-right);
+  --border-left-hvr:var(--border-left);
+  --border-TopRight-Radius-hvr:var(--border-TopRight-Radius);
+  --border-TopLeft-Radius-hvr:var(--border-TopLeft-Radius);
+  --border-BottomRight-Radius-hvr:var(--border-BottomRight-Radius);
+  --border-BottomLeft-Radius-hvr:var(--border-BottomLeft-Radius);
+  --border-style-hvr:var(--border-style);
   background: var(--background);
-  background-image: var(--background-image);
   background-repeat: var(--background-repeat);
   background-size: var(--background-size);
   background-position: var(--background-position);
@@ -104,8 +118,7 @@
   transition: var(--transition);
 }
 .wp-block-themehunk-blocks-advance-container:hover {
-  background: var(--background-color-hover);
-  background-image: var(--background-image-hvr);
+  background: var(--background-hover);
   background-repeat: var(--background-repeat-hvr);
   background-size: var(--background-size-hvr);
   background-position: var(--background-position-hvr);
@@ -130,17 +143,18 @@
 }
 
 .wp-block-th-blocks-container-overlay {
-  --background-overlay: transparent;
-  --background-overlay-image: initial;
+  --background-overlay-hvr:var(--background-overlay);
+  --background-overlay-repeat-hvr: var(--background-overlay-repeat);
+  --background-overlay-size-hvr: var(--background-overlay-size);
+  --background-overlay-position-hvr: var(--background-overlay-position);
+  --background-overlay-attachment-hvr: var(--background-overlay-attachment);
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  z-index: 1;
   background: var(--background-overlay);
   transition: var(--transition);
-  background-image: var(--background-overlay-image);
   background-repeat: var(--background-overlay-repeat);
   background-size: var(--background-overlay-size);
   background-position: var(--background-overlay-position);
@@ -148,10 +162,7 @@
 }
 
 .wp-block-themehunk-blocks-advance-container:hover .wp-block-th-blocks-container-overlay {
-  --background-overlay-hvr: transparent;
-  --background-overlay-image-hvr: initial;
   background: var(--background-overlay-hvr);
-  background-image: var(--background-overlay-image-hvr);
   background-repeat: var(--background-overlay-repeat-hvr);
   background-size: var(--background-overlay-size-hvr);
   background-position: var(--background-overlay-position-hvr);

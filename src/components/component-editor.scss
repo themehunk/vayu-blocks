@@ -8,6 +8,7 @@
 	min-width: 0px;
 	padding: 2px;
 	flex-grow:0.5;
+    margin-bottom:8px;
 
 	&.has-icon {
 		margin-left: 0px;
@@ -400,7 +401,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     }
 
     //hovertab
-    .block-editor-block-inspector .th-hover-control {
+   .th-hover-control {
         display: flex;
         padding: 0;
         border-top: none;
@@ -567,12 +568,13 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     }
     //controll-panel
     .th-control-panel-control {
-        padding: 10px 0;
+      
     
         .components-base-control__title {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width:100%;
     
             label {
                 padding: 5px 0;
@@ -684,6 +686,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             }
         }
     }
+
 .th-link-button button.components-button.is-primary{
     height: 100%;
     background: transparent;
@@ -693,3 +696,10 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     background: transparent;
     color: #111;
 }
+    #th-cat-select{
+        margin-bottom: 20px;
+    }
+    .th-sortable-control-area .th-component-group-label{
+     display:block;
+    }
+

@@ -12,8 +12,8 @@ import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
-import {useEffect} from '@wordpress/element';
-import {Fragment,useState,Suspense} from '@wordpress/element';
+import {Fragment,useState,Suspense,useEffect} from '@wordpress/element';
+
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -26,7 +26,9 @@ import { useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-
+import InsSettings from './settings.js';
+import getUniqueId from '../../../src/helpers/get-unique-id.js';
+import googleFontsLoader from '../../../src/helpers/google-fonts.js';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -34,6 +36,11 @@ import { useBlockProps } from '@wordpress/block-editor';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+
+/**
+ * Internal dependencies
+ */
+
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -44,80 +51,519 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 
-export default function Edit({ attributes, setAttributes, toggleSelection, clientId,
-	uniqueID }) {
+export default function Edit({ attributes, setAttributes, toggleSelection, clientId, uniqueID }) {
+  
+  const { id } = attributes;
 
-		const [categories, setCategories] = useState([]);
-		const [selectedCategory, setSelectedCategory] = useState('');
-		const [products, setProducts] = useState([]);
-		const homeUrl = themehunkblock.homeUrl;
+  if ( ! id ) {
+		setAttributes( { id: clientId } );
+	}
 
-		// useEffect hook to fetch product categories
-		useEffect(() => {
-			// Fetch product categories
-			fetch(`${homeUrl}/wp-json/wc/store/v1/products/categories`)
-			  .then(response => response.json())
-			  .then(data => {
-				setCategories(data);
-			  })
-			  .catch(error => {
-				console.error('Error fetching categories:', error);
-			  });
-		  }, []);
+  useEffect( () => {
+		googleFontsLoader.attach();
+	}, [ attributes.id ]);
 
-		  // useEffect hook to fetch products based on selected category
-			useEffect(() => {
-				if (selectedCategory) {
-				// Fetch products based on selected category
-				fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}`)
-					.then(response => response.json())
-					.then(data => {
-					setProducts(data);
-					})
-					.catch(error => {
-					console.error('Error fetching products:', error);
-					});
-				}
-			}, [selectedCategory]);
+  const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+  const { isUniqueID, isUniqueBlock} = useSelect(
+    ( select ) => {
+      return {
+        isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
+        isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+        
+      };
+    },
+    [ clientId ]
+  );
 
-			// Event handler for category selection change
-			const handleCategoryChange = e => {
-				setSelectedCategory(e.target.value);
-			};
-	
-		const blockProps = useBlockProps();
-        return (
-			<div>
-			<h2>Show All Products with Filter Category</h2>
-			{categories.length > 0 ? (
-			  <div>
-				<label htmlFor="category">Select Category:</label>
-				<select id="category" value={selectedCategory} onChange={handleCategoryChange}>
-				  <option value="">All</option>
-				  {categories.map(category => (
-					<option key={category.id} value={category.id}>
-					  {category.name}
-					</option>
-				  ))}
-				</select>
-			  </div>
-			) : (
-			  <p>Loading categories...</p>
-			)}
-			{products.length > 0 ? (
-			  <ul>
-				{products.map(product => (
-				  <li key={product.id}>
-					<h3>{product.name}</h3>
-					<p>Price: {product.price}</p>
-					<p>Description: {product.description}</p>
-					<img src={product.images[0].src} alt={product.name} />
-				  </li>
-				))}
-			  </ul>
-			) : (
-			  <p>Loading products...</p>
-			)}
-		  </div>
-        );
+  useEffect( () => {
+  const uniqueId = getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlock );
+  if ( uniqueId !== uniqueID ) {
+    attributes.uniqueID = uniqueId;
+    setAttributes( { uniqueID: uniqueId } );
+    addUniqueID( uniqueId, clientId );
+  } else {
+    addUniqueID( uniqueId, clientId );
+  }
+  }, [] );
+  
+  const {
+		isViewportAvailable,
+		isPreviewDesktop,
+		isPreviewTablet,
+		isPreviewMobile
+	} = useSelect( select => {
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return {
+			isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
+			isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewTablet: __experimentalGetPreviewDeviceType ? 'Tablet' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
+		};
+	}, []);
+
+    const isLarger = useViewportMatch( 'large', '>=' );
+
+	const isLarge = useViewportMatch( 'large', '<=' );
+
+	const isSmall = useViewportMatch( 'small', '>=' );
+
+	const isSmaller = useViewportMatch( 'small', '<=' );
+
+    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isMobile = ! isLarger && ! isLarge && ! isSmall && ! isSmaller;
+
+    if ( isViewportAvailable && ! isMobile ) {
+		isDesktop = isPreviewDesktop;
+		isTablet = isPreviewTablet;
+		isMobile = isPreviewMobile;
+	}
+
+  let ColStyles;
+  let productsPerPage;
+
+  if ( isDesktop ) {
+    productsPerPage = attributes.productShow || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productCol || '4'),
+    }
+
+  }
+  if ( isTablet ) {
+    productsPerPage = attributes.productShowTablet || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productColTablet || '4'),
+    }
+
+  }
+  if ( isMobile) {
+    productsPerPage = attributes.productShowMobile || 4;
+    ColStyles = { 
+      '--grid-col': (attributes.productColMobile || '4'),
+    }
+
+  }
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const homeUrl = ThBlockData.homeUrl;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(true);
+  
+  
+  let prdType = ''; 
+  let prdOrderBy = '';
+  let prdOrder = '';
+
+  if (attributes.productType === 'sale') {
+    prdType = '&on_sale=true';
+  } else if (attributes.productType === 'featured') {
+    prdType = '&featured=true';
+  } else if (attributes.productType === 'manual') {
+    // Fetch all products if no category is selected
+    let manualProductParam = '';
+    if (attributes.manualProduct && attributes.manualProduct.length > 0) {
+      const selectedManualProduct = attributes.manualProduct.map((maualP) => maualP.value);
+      manualProductParam = selectedManualProduct.join(',');
+    }
+    prdType = `&include=${manualProductParam}`;
+  }
+
+  //orderby
+  if (attributes.productOrderby === 'date') {
+    prdOrderBy = '&orderby=date';
+  } else if (attributes.productOrderby === 'price') {
+    prdOrderBy = '&orderby=price';
+  } else if (attributes.productOrderby === 'popularity') {
+    prdOrderBy = '&orderby=popularity';
+  } else if (attributes.productOrderby === 'rating') {
+    prdOrderBy = '&orderby=rating';
+  } else if (attributes.productOrderby === 'menu-order') {
+    prdOrderBy = '&orderby=menu_order';
+  }
+  
+  // order
+  if (attributes.productOrder === 'desc') {
+    prdOrder = '&order=desc';
+  } else {
+    prdOrder = '&order=asc';
+  }
+
+  // product exclude
+  let excludeProductParam = '';
+  if (attributes.excludeProduct && attributes.excludeProduct.length > 0) {
+    const selectedExcludeProduct = attributes.excludeProduct.map((excldeP) => excldeP.value);
+    excludeProductParam = `&exclude=${selectedExcludeProduct.join(',')}`;
+  }
+
+  //stock status
+  let stockParam = '';
+  if (attributes.stockStatus && attributes.stockStatus.length > 0) {
+    stockParam = `&stockstatus=['${attributes.stockStatus}']`;
+  }
+
+
+  // useEffect hook to fetch products based on selected category
+  useEffect(() => {
+    if (selectedCategory) {
+      setIsLoading(true);
+      // Fetch products based on selected category
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?category=${selectedCategory}&page=${currentPage}&per_page=${productsPerPage}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}${stockParam}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setProducts(data);
+          setIsLoading(false);
+          setHasNextPage(data.length === productsPerPage);
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error);
+        });
+    } else {
+      setIsLoading(true);
+      // Fetch all products if no category is selected
+      let categoryParam="";
+      if (attributes.productCategories && attributes.productCategories.length > 0) {
+        const selectedCategories = attributes.productCategories.map((category) => category.value);
+        categoryParam = `&category=${selectedCategories.join(',')}`;
+      }
+      fetch(`${homeUrl}/wp-json/wc/store/v1/products?page=${currentPage}&per_page=${productsPerPage}${categoryParam}${prdType}${prdOrderBy}${prdOrder}${excludeProductParam}${stockParam}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setProducts(data);
+          setIsLoading(false);
+          setHasNextPage(data.length === productsPerPage);
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error);
+        });
+    }
+  }, [selectedCategory, currentPage, productsPerPage, attributes.productCategories, prdType, prdOrderBy, prdOrder, excludeProductParam, stockParam]);
+  
+  // Event handler for tab click
+  const handleTabClick = (categoryId) => {
+    setSelectedCategory(categoryId);
+    setCurrentPage(1);
+  };
+   
+  // Show star rating
+  const RatingStars = ({ rating, maxRating = 5, filledColor = 'gold', emptyColor = 'lightgray' }) => {
+    const starCount = Math.min(Math.floor(rating), maxRating);
+
+    return (
+      <div>
+        {Array(maxRating)
+          .fill()
+          .map((_, index) => (
+            <span key={index} style={{ color: index < starCount ? filledColor : emptyColor }}>
+              &#9733;
+            </span>
+          ))}
+      </div>
+    );
+  };
+
+  const deviceAttributeMap = {
+    desktop: {
+      titlefontSize: attributes.titlefontSize + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeight + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacing + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSize + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeight + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacing + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSize + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeight + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacing + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSize + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeight + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacing + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSize + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeight + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacing + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTop }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottom }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRight }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthType ? `${ attributes.buttonborderWidth }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeft}${ attributes.buttonborderWidthUnit }`,
+      buttonSpacetop : 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTop}${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottom}${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRight}${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeft}${ attributes.buttonSpaceUnit }`,
+    
+    },
+    tablet: {
+      titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeightTablet + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacingTablet + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSizeTablet + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeightTablet + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacingTablet + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSizeTablet + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeightTablet + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacingTablet + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSizeTablet + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeightTablet + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacingTablet + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSizeTablet + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeightTablet + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacingTablet + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTopTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightTablet }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftTablet}${ attributes.buttonborderWidthUnit }`,
+     
+      buttonSpacetop : 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTopTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightTablet }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftTablet}${ attributes.buttonSpaceUnit }`,
+   
+   
+    },
+    mobile: {
+      titlefontSize: attributes.titlefontSizeMobile + attributes.titlefontSizeUnit,
+      titlelineHeight: attributes.titlelineHeightMobile + attributes.titlelineHeightUnit,
+      titleletterSpacing: attributes.titleletterSpacingMobile + attributes.titleletterSpacingUnit,
+      catfontSize: attributes.catfontSizeMobile + attributes.catfontSizeUnit,
+      catlineHeight: attributes.catlineHeightMobile + attributes.catlineHeightUnit,
+      catletterSpacing: attributes.catletterSpacingMobile + attributes.catletterSpacingUnit,
+      pricefontSize: attributes.pricefontSizeMobile + attributes.pricefontSizeUnit,
+      pricelineHeight: attributes.pricelineHeightMobile + attributes.pricelineHeightUnit,
+      priceletterSpacing: attributes.priceletterSpacingMobile + attributes.priceletterSpacingUnit,
+      ratingfontSize: attributes.ratingfontSizeMobile + attributes.ratingfontSizeUnit,
+      ratinglineHeight: attributes.ratinglineHeightMobile + attributes.ratinglineHeightUnit,
+      ratingletterSpacing: attributes.ratingletterSpacingMobile + attributes.ratingletterSpacingUnit,
+      buttonfontSize: attributes.buttonfontSizeMobile + attributes.buttonfontSizeUnit,
+      buttonlineHeight: attributes.buttonlineHeightMobile + attributes.buttonlineHeightUnit,
+      buttonletterSpacing: attributes.buttonletterSpacingMobile + attributes.buttonletterSpacingUnit,
+      buttonBordertop : 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthTopMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderbottom: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderright: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightMobile }${ attributes.buttonborderWidthUnit }`,
+			buttonBorderleft: 'linked' === attributes.buttonborderWidthTypeMobile ? `${ attributes.buttonborderWidthMobile }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftMobile}${ attributes.buttonborderWidthUnit }`,
+      
+      buttonSpacetop : 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceTopMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightMobile }${ attributes.buttonSpaceUnit }`,
+			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftMobile}${ attributes.buttonSpaceUnit }`,
+    },
+  };
+  const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
+  // googlefontload
+  useEffect( () => {
+		if ( attributes.titlefontFamily ) {
+			googleFontsLoader.loadFontToBrowser( attributes.titlefontFamily, attributes.titlefontVariant );
+		  googleFontsLoader.loadFontToBrowser( attributes.catfontFamily, attributes.catfontVariant );
+      googleFontsLoader.loadFontToBrowser( attributes.pricefontFamily, attributes.pricefontVariant );
+      googleFontsLoader.loadFontToBrowser( attributes.buttonfontFamily, attributes.buttonfontVariant );
+    }
+	}, [ attributes.titlefontFamily, attributes.catfontFamily, attributes.pricefontFamily, attributes.buttonfontFamily ]);
+
+
+  // title setting
+  const TitleTag = attributes.prouctTitleTag || 'h3';
+
+  let ProductStyles;
+  const TitleFontSize = deviceAttributeMap[deviceType].titlefontSize;
+  const TitleLineHeight = deviceAttributeMap[deviceType].titlelineHeight;
+  const TitleLetterSpacing = deviceAttributeMap[deviceType].titleletterSpacing;
+  const CatFontSize = deviceAttributeMap[deviceType].catfontSize;
+  const CatLineHeight = deviceAttributeMap[deviceType].catlineHeight;
+  const CatLetterSpacing = deviceAttributeMap[deviceType].catletterSpacing;
+  const PriceFontSize = deviceAttributeMap[deviceType].pricefontSize;
+  const PriceLineHeight = deviceAttributeMap[deviceType].pricelineHeight;
+  const PriceLetterSpacing = deviceAttributeMap[deviceType].priceletterSpacing;
+  const RatingFontSize = deviceAttributeMap[deviceType].ratingfontSize;
+  const RatingLineHeight = deviceAttributeMap[deviceType].ratinglineHeight;
+  const RatingLetterSpacing = deviceAttributeMap[deviceType].ratingletterSpacing;
+  const ButtonFontSize = deviceAttributeMap[deviceType].buttonfontSize;
+  const ButtonLineHeight = deviceAttributeMap[deviceType].buttonlineHeight;
+  const ButtonLetterSpacing = deviceAttributeMap[deviceType].buttonletterSpacing;
+  const ButtonBorderTop = deviceAttributeMap[deviceType].buttonBordertop;
+  const ButtonBorderBottom = deviceAttributeMap[deviceType].buttonBorderbottom;
+  const ButtonBorderRight = deviceAttributeMap[deviceType].buttonBorderright;
+  const ButtonBorderLeft = deviceAttributeMap[deviceType].buttonBorderleft;
+
+  const ButtonSpaceTop = deviceAttributeMap[deviceType].buttonSpacetop;
+  const ButtonSpaceBottom = deviceAttributeMap[deviceType].buttonSpacebottom;
+  const ButtonSpaceRight = deviceAttributeMap[deviceType].buttonSpaceright;
+  const ButtonSpaceLeft = deviceAttributeMap[deviceType].buttonSpaceleft;
+
+  ProductStyles = {
+    '--title-color': attributes.productTitleColor,
+    '--title-color-hvr': attributes.productTitleColorHvr,
+    '--title-font-family':attributes.titlefontFamily,
+    '--title-font-variant':attributes.titlefontVariant,
+    '--title-font-style':attributes.titlefontStyle,
+    '--title-font-transform':attributes.titletextTransform,
+    '--title-font-size':TitleFontSize,
+    '--title-line-height':TitleLineHeight,
+    '--title-letter-spacing':TitleLetterSpacing,
+    '--cat-color': attributes.catTxtColor,
+    '--cat-color-hvr': attributes.catTxtColorHvr,
+    '--cat-font-family':attributes.catfontFamily,
+    '--cat-font-variant':attributes.catfontVariant,
+    '--cat-font-style':attributes.catfontStyle,
+    '--cat-font-transform':attributes.cattextTransform,
+    '--cat-font-size':CatFontSize,
+    '--cat-line-height':CatLineHeight,
+    '--cat-letter-spacing':CatLetterSpacing,
+    '--price-color': attributes.priceColor,
+    '--price-color-del': attributes.priceDelColor,
+    '--price-font-family':attributes.pricefontFamily,
+    '--price-font-variant':attributes.pricefontVariant,
+    '--price-font-style':attributes.pricefontStyle,
+    '--price-font-transform':attributes.pricetextTransform,
+    '--price-font-size':PriceFontSize,
+    '--price-line-height':PriceLineHeight,
+    '--price-letter-spacing':PriceLetterSpacing,
+    '--rating-font-size':RatingFontSize,
+    '--rating-line-height':RatingLineHeight,
+    '--rating-letter-spacing':RatingLetterSpacing,
+    '--button-font-family':attributes.buttonfontFamily,
+    '--button-font-variant':attributes.buttonfontVariant,
+    '--button-font-style':attributes.buttonfontStyle,
+    '--button-font-transform':attributes.buttontextTransform,
+    '--button-font-size':ButtonFontSize,
+    '--button-line-height':ButtonLineHeight,
+    '--button-letter-spacing':ButtonLetterSpacing,
+    '--button-color': attributes.buttonTxtClr,
+    '--button-bg-color': attributes.buttonBgClr,
+    '--button-border-color': attributes.buttonBrdrClr,
+    '--button-hvr-color': attributes.buttonTxtClrHvr,
+    '--button-bg-hvr-color': attributes.buttonBgClrHvr,
+    '--button-border-hvr-color': attributes.buttonBrdrClrHvr,
+    '--button-border-type': attributes.buttonBrdrType,
+    '--button-border-width-top': ButtonBorderTop,
+    '--button-border-width-bottom':ButtonBorderBottom,
+    '--button-border-width-right':ButtonBorderRight,
+    '--button-border-width-left':ButtonBorderLeft,
+    '--button-padding-top': ButtonSpaceTop,
+    '--button-padding-bottom':ButtonSpaceBottom,
+    '--button-padding-right':ButtonSpaceRight,
+    '--button-padding-left':ButtonSpaceLeft,
+  }
+
+  const style = omitBy({
+    ...ColStyles,
+    ...ProductStyles,
+  }, x => x?.includes?.( 'undefined' ));
+
+  const blockProps = useBlockProps({
+    id:attributes.id,
+    style
+  });
+
+  return ( 
+     <Fragment>
+		<InsSettings
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+			/>	
+    <div {...blockProps} >   
+    <div className="th-product-block-wrapper">
+        <>
+          <div className="th-product-block-cat-filter">
+            <ul className="category-tabs">
+              {attributes.productCategories.map((category) => (
+                <li
+                  key={category.value}
+                  className={selectedCategory === category.value ? 'active' : ''}
+                  onClick={() => handleTabClick(category.value)}
+                  >
+                  {category.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="th-product-block-product-content">
+            <div className="th-product-block-product-item-wrap">
+             {isLoading && (
+              <div className="th-block-loader">Loading...</div>
+             )}
+                {products.map((product) => (
+                <div className="th-product-item" key={product.id}>
+                  <div className="th-product-block-content-wrap">
+                  {attributes.template.map((element) => {
+                      switch (element) {
+                        case 'image':
+                          return (
+                            attributes.displayFeaturedImage && (
+                            <div className="th-product-imgae">
+                              {product.on_sale && <span className="sale-tag">Sale</span>}
+                              <div className="th-product-sale"></div>
+                              <img src={product.images[0].thumbnail} alt={product.name} />
+                            </div>
+                            )
+                          );
+                        case 'category':
+                          return (
+                            attributes.displayCategory && (
+                            <div className="th-product-cat">
+                              {product.categories.map((category) => (
+                                <a key={category.id} href={category.link}>
+                                  {category.name}
+                                </a>
+                              ))}
+                            </div>
+                            )
+                          );
+                        case 'title':
+                          return (
+                            attributes.displayTitle && (
+                            <TitleTag className="th-product-title">
+                              <a key={product.id} href={product.permalink}>
+                                {product.name}
+                              </a>
+                            </TitleTag>
+                            )
+                          );
+                        case 'price':
+                          return (
+                            attributes.displayPrice && (
+                            <div
+                              className="th-product-price"
+                              dangerouslySetInnerHTML={{ __html: product.price_html }}
+                            ></div>
+                            )
+                          );
+                        case 'rating':
+                          return (
+                            attributes.displayRating && (
+                            <div className="th-product-rating">
+                              <RatingStars
+                                rating={parseFloat(product.average_rating)}
+                                maxRating={5}
+                                filledColor={attributes.ratingColor}
+                                emptyColor={attributes.emptyratingColor}
+                              />
+                            </div>
+                            )
+                          );
+                        case 'button':
+                          return attributes.displayButton && (
+                          <div className="th-product-btn">{product.add_to_cart.text}</div>
+                          );
+                        default:
+                          return null; 
+                      }
+                    })}
+                    </div>
+                </div>
+              ))}
+            </div>
+            <div className="th-pagination">
+            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+            <span className="dashicons dashicons-arrow-left-alt2"></span>
+            </button>
+            <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
+            <span className="dashicons dashicons-arrow-right-alt2"></span>
+            </button>
+          </div>
+          </div>
+        </>
+        
+    </div>
+    </div> 
+    </Fragment>
+  );
 }

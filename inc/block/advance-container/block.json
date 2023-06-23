@@ -508,8 +508,8 @@
 			"default": "none"
 		},
 		"borderHvrType": {
-			"type": "string",
-			"default": "none"
+			"type": "string"
+		
 		},
 		"borderWidthType": {
 			"type": "string",
@@ -594,8 +594,7 @@
 			"default": "linked"
 		},
 		"borderWidthHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderWidthHvrTablet": {
 			"type": "number"
@@ -604,8 +603,7 @@
 			"type": "number"
 		},
 		"borderWidthHvrTop": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderWidthHvrTopTablet": {
 			"type": "number"
@@ -614,8 +612,7 @@
 			"type": "number"
 		},
 		"borderWidthHvrBottom": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderWidthHvrBottomTablet": {
 			"type": "number"
@@ -624,8 +621,7 @@
 			"type": "number"
 		},
 		"borderWidthHvrRight": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderWidthHvrRightTablet": {
 			"type": "number"
@@ -634,8 +630,7 @@
 			"type": "number"
 		},
 		"borderWidthHvrLeft": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderWidthHvrLeftTablet": {
 			"type": "number"
@@ -726,8 +721,7 @@
 			"default": "linked"
 		},
 		"borderRadiusHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderRadiusHvrTablet": {
 			"type": "number"
@@ -736,8 +730,7 @@
 			"type": "number"
 		},
 		"borderRadiusHvrTop": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderRadiusHvrTopTablet": {
 			"type": "number"
@@ -756,8 +749,7 @@
 			"type": "number"
 		},
 		"borderRadiusHvrRight": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderRadiusHvrRightTablet": {
 			"type": "number"
@@ -766,8 +758,7 @@
 			"type": "number"
 		},
 		"borderRadiusHvrLeft": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"borderRadiusHvrLeftTablet": {
 			"type": "number"
@@ -810,24 +801,20 @@
 			"type": "string"
 		},
 		"boxShadowColorOpacityHvr": {
-			"type": "number",
-			"default": 50
+			"type": "number"
 		},
 		"boxShadowBlurHvr": {
-			"type": "number",
-			"default": 5
+			"type": "number"
 		},
 		"boxShadowSpreadHvr": {
-			"type": "number",
-			"default": 1
+			"type": "number"
 		},
 		"boxShadowHorizontalHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
+			
 		},
 		"boxShadowVerticalHvr": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"responsiveTogHideDesktop": {
 			"type": "boolean",

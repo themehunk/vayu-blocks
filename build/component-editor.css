@@ -10,6 +10,7 @@
   min-width: 0px;
   padding: 2px;
   flex-grow: 0.5;
+  margin-bottom: 8px;
 }
 .th-toggle-group-control.has-icon {
   margin-left: 0px;
@@ -325,12 +326,12 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
   z-index: 1;
 }
 
-.block-editor-block-inspector .th-hover-control {
+.th-hover-control {
   display: flex;
   padding: 0;
   border-top: none;
 }
-.block-editor-block-inspector .th-hover-control .components-button {
+.th-hover-control .components-button {
   flex: 1 1 0px;
   justify-content: center;
   border-radius: 0;
@@ -346,12 +347,12 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
   font-size: 12px;
   height: 30px;
 }
-.block-editor-block-inspector .th-hover-control .components-button:focus {
+.th-hover-control .components-button:focus {
   outline: none;
   position: relative;
   z-index: 1;
 }
-.block-editor-block-inspector .th-hover-control .components-button.is-active {
+.th-hover-control .components-button.is-active {
   background: #d5dadf;
   position: relative;
   z-index: 1;
@@ -465,13 +466,11 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     top: 16px;
   }
 }
-.th-control-panel-control {
-  padding: 10px 0;
-}
 .th-control-panel-control .components-base-control__title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 .th-control-panel-control .components-base-control__title label {
   padding: 5px 0;
@@ -570,6 +569,14 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
 .th-link-button button.components-button.is-primary:hover {
   background: transparent;
   color: #111;
+}
+
+#th-cat-select {
+  margin-bottom: 20px;
+}
+
+.th-sortable-control-area .th-component-group-label {
+  display: block;
 }
 
 /*# sourceMappingURL=component-editor.css.map*/

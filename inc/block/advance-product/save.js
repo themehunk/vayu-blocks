@@ -16,6 +16,8 @@ import { useBlockProps} from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function Save({ attributes }) {
-	return null;
+export default function Save() {
+	
+	return;
+
 }
