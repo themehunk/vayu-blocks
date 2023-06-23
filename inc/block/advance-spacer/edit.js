@@ -166,9 +166,9 @@ const isLarger = useViewportMatch( 'large', '>=' );
       '--height':attributes.height + attributes.heightUnit, 
       
       '--paddingTop': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
-			'--paddingRight': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
-			'--paddingBottom': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
-			'--paddingLeft': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
+	  '--paddingRight': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
+	  '--paddingBottom': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
+	  '--paddingLeft': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
       
       '--marginTop': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginTop }${ attributes.marginUnit }`,
       '--marginRight': 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginRight }${ attributes.marginUnit }`,
@@ -178,9 +178,9 @@ const isLarger = useViewportMatch( 'large', '>=' );
       '--zIndex':   attributes.zindex,
 
       '--border-top-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthTop }${ attributes.borderWidthUnit }`,
-		  '--border-bottom-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthBottom }${ attributes.borderWidthUnit }`,
-		  '--border-right-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthRight }${ attributes.borderWidthUnit }`,
-		  '--border-left-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthLeft }${ attributes.borderWidthUnit }`,
+	  '--border-bottom-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthBottom }${ attributes.borderWidthUnit }`,
+	  '--border-right-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthRight }${ attributes.borderWidthUnit }`,
+	  '--border-left-width': 'linked' === attributes.borderWidthType ? `${ attributes.borderWidth }${ attributes.borderWidthUnit }` : `${ attributes.borderWidthLeft }${ attributes.borderWidthUnit }`,
       
       '--border-top-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${ attributes.borderWidthHvr }${ attributes.borderWidthHvrUnit }` : `${ attributes.borderWidthHvrTop }${ attributes.borderWidthHvrUnit }`,
       '--border-bottom-width-hvr' : 'linked' === attributes.borderWidthHvrType ? `${ attributes.borderWidthHvr }${ attributes.borderWidthHvrUnit }` : `${ attributes.borderWidthHvrBottom }${ attributes.borderWidthHvrUnit }`,
@@ -188,14 +188,14 @@ const isLarger = useViewportMatch( 'large', '>=' );
       '--border-left-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${ attributes.borderWidthHvr }${ attributes.borderWidthHvrUnit }` : `${ attributes.borderWidthHvrLeft }${ attributes.borderWidthHvrUnit }`,
 
       '--borderTopRightRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusTop }${ attributes.borderRadiusUnit }`,
-		  '--borderTopLeftRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusRight }${ attributes.borderRadiusUnit }`,
-		  '--borderBottomRightRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusLeft }${ attributes.borderRadiusUnit }`,
-		  '--borderBottomLeftRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusBottom }${ attributes.borderRadiusUnit }`,
+	  '--borderTopLeftRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusRight }${ attributes.borderRadiusUnit }`,
+	  '--borderBottomRightRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusLeft }${ attributes.borderRadiusUnit }`,
+	  '--borderBottomLeftRadius': 'linked' === attributes.borderRadiusType ? `${ attributes.borderRadius }${ attributes.borderRadiusUnit }` : `${ attributes.borderRadiusBottom }${ attributes.borderRadiusUnit }`,
     
       '--borderTopRightRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrTop }${ attributes.borderRadiusHvrUnit }`,
-			'--borderTopLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRight }${ attributes.borderRadiusHvrUnit }`,
-			'--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
-			'--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
+	  '--borderTopLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRight }${ attributes.borderRadiusHvrUnit }`,
+	  '--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
+	  '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
     
     };
 
@@ -205,6 +205,8 @@ const isLarger = useViewportMatch( 'large', '>=' );
 		PositionProperties = { 
 			'--position': attributes.position,
 		 };
+
+		 	if(attributes.position == 'absolute' || attributes.position == 'fixed'){
 
 		if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
@@ -232,6 +234,8 @@ const isLarger = useViewportMatch( 'large', '>=' );
 			}
 
 		 }
+
+		}
 
      
     /********************* */
@@ -314,6 +318,7 @@ const isLarger = useViewportMatch( 'large', '>=' );
 
      // position properties
 
+	 	if(attributes.position == 'absolute' || attributes.position == 'fixed'){
 			if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					'--left':attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
@@ -340,6 +345,7 @@ const isLarger = useViewportMatch( 'large', '>=' );
 				}
 	
 			 }
+		}
 
        
 		/********************* */
@@ -422,6 +428,8 @@ const isLarger = useViewportMatch( 'large', '>=' );
 
     // position properties
 
+	if(attributes.position == 'absolute' || attributes.position == 'fixed'){
+
     if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
       PositionProperties = {...PositionProperties,
         '--left':attributes.horizontalOrientationOffsetMobile + attributes.horizontalOrientationOffsetUnit,
@@ -448,6 +456,7 @@ const isLarger = useViewportMatch( 'large', '>=' );
       }
 
      }
+	}
 
       /********************* */
         // flex properies 
@@ -637,8 +646,7 @@ const blockProps = useBlockProps({
   >
 		<ResizableBox
     
-    
-  enable={{
+  	enable={{
     bottom: true,
     bottomLeft: false,
     bottomRight: false,
@@ -661,6 +669,7 @@ const blockProps = useBlockProps({
 onResizeStart={ () => {
   toggleSelection( false );
 } }
+
 
 >
  

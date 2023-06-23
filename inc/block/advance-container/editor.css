@@ -73,6 +73,7 @@
 }
 
 .wp-block-themehunk-blocks-advance-container {
+  --background:none;
   --background-hover: var(--background);
   --transition:0.2s;
   --boxShadow-hvr:var(--boxShadow);

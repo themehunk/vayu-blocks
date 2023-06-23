@@ -4,8 +4,12 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps} from '@wordpress/block-editor';
+import { RichText, useBlockProps} from '@wordpress/block-editor';
+import DOMPurify from 'dompurify';
 
+function sanitizeSVG( svg ) {
+	return DOMPurify.sanitize( svg, { USE_PROFILES: { svg: true, svgFilters: true } } );
+}
 
 /**
  * The save function defines the way in which the different attributes should
@@ -16,6 +20,33 @@ import { useBlockProps} from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
+
 export default function Save({ attributes }) {
-	return null;
+
+	const blockProps = useBlockProps.save({
+		id: attributes.uniqueID,
+		className:`th-button-wrapper${attributes.uniqueID}`,
+		href: attributes.post.url ? attributes.post.url : '',
+		target: attributes.post.opensInNewTab ? '_blank' : '_self',
+		rel:"noopener"
+	  });
+
+	  const blockPropsButton = {
+		className: 'th-button th-button-inside',
+};
+
+	return (
+		<a {...blockProps}>
+			<div {...blockPropsButton}>
+			<span dangerouslySetInnerHTML={ { __html: sanitizeSVG( attributes.icon ) } } />
+			<span>
+					<RichText.Content
+						tagName="span" // The tag here is the element output and editable in the admin
+						value={ attributes.content }
+					/>
+			</span>
+			</div>
+
+		</a>
+	);
 }

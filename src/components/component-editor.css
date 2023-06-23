@@ -557,6 +557,17 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
   margin: 2px;
 }
 
+.th-link-button button.components-button.is-primary {
+  height: 100%;
+  background: transparent;
+  color: #111;
+}
+
+.th-link-button button.components-button.is-primary:hover {
+  background: transparent;
+  color: #111;
+}
+
 #th-cat-select {
   margin-bottom: 20px;
 }
