@@ -12,7 +12,7 @@ import { useViewportMatch} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
-
+import classnames from 'classnames';
 /**
  * Internal dependencies
  */
@@ -587,10 +587,17 @@ export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
 			googleFontsLoader.loadFontToBrowser( attributes.fontFamily, attributes.fontVariant );
 		}
 	}, [ attributes.fontFamily ]);
+   
 
+	let Classes = classnames({
+		"th-hide-desktop": attributes.responsiveTogHideDesktop,
+		"th-hide-tablet": attributes.responsiveTogHideTablet,
+		"th-hide-mobile": attributes.responsiveTogHideMobile,
+	  });
 
     const blockProps = useBlockProps({
 		id:`th-block-heading-${attributes.uniqueID}`,
+		className:Classes,
 		style
 	});
 

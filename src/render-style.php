@@ -54,7 +54,11 @@ function cycle_through_blocks( $blocks, $post_id ) {
 
 		if ( $block['blockName'] === 'themehunk-blocks/advance-spacer' ) {
 			 $css .=advance_spacer_style($block['attrs']);
-	 } 
+	 	} 
+
+		 if ( $block['blockName'] === 'themehunk-blocks/advance-button' ) {
+			 $css .=advance_button_style($block['attrs']);
+		} 
 
 		if ( ! empty( $block['innerBlocks'] ) ) {
 			$inner_css = cycle_through_blocks( $block['innerBlocks'], $post_id );

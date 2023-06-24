@@ -1310,7 +1310,7 @@ const InsSettings = ({
 								value={ getletterSpacing() || '' }
 								onChange={ changeletterSpacing }
 								step={ 0.1 }
-								min={ -300 }
+								min={50}
 								max={ maxletterSpacingUnit }
 								allowReset={ true }
 							/>

@@ -11,3 +11,4 @@ export { default as UnitChooser } from './unit-picker/index.js';
 export { default as ToogleGroupControl } from './toogle-group-control/index.js';
 export { default as ClearButton } from './clear-button/index.js';
 export { default as GoogleFontsControl } from './google-fonts-control/index.js';
+export { default as IconPicker } from './icon-picker/index.js';

@@ -64,6 +64,8 @@
   background-position: var(--backgroundPosition-hvr);
   background-repeat: var(--backgroundRepeat-hvr);
   background-size: var(--backgroundSize-hvr);
+  --border-style-hvr: var(--border-style);
+  --border-color-hvr: var(--border-color);
   border-style: var(--border-style-hvr);
   border-color: var(--border-color-hvr);
   --border-top-width-hvr:var(--border-top-width);
@@ -82,6 +84,7 @@
   border-top-left-radius: var(--borderTopLeftRadiushvr);
   border-bottom-right-radius: var(--borderBottomRightRadiushvr);
   border-bottom-left-radius: var(--borderBottomLeftRadiushvr);
+  --boxShadow-hvr: var(--boxShadow);
   box-shadow: var(--boxShadow-hvr);
 }
 
@@ -95,6 +98,10 @@
   right: var(--right);
   top: var(--top);
   bottom: var(--bottom);
+  --width:"100%";
+  --maxWidth: "100%";
+  width: var(--width);
+  max-width: var(--maxWidth);
 }
 
 .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-themehunk-blocks-advance-spacer:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
@@ -108,6 +115,25 @@
   font-size: 13px !important;
   line-height: 1.4em !important;
   font-weight: normal !important;
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-themehunk-blocks-advance-spacer {
+  border-top-right-radius: var(--borderTopRightRadius);
+  border-top-left-radius: var(--borderTopLeftRadius);
+  border-bottom-right-radius: var(--borderBottomRightRadius);
+  border-bottom-left-radius: var(--borderBottomLeftRadius);
+  box-shadow: var(--boxShadow);
+}
+
+.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-themehunk-blocks-advance-spacer:hover {
+  --borderTopRightRadiushvr: var(--borderTopRightRadius);
+  --borderTopLeftRadiushvr: var(--borderTopLeftRadius);
+  --borderBottomRightRadiushvr: var(--borderBottomRightRadius);
+  --borderBottomLeftRadiushvr: var(--borderBottomLeftRadius);
+  border-top-right-radius: var(--borderTopRightRadiushvr);
+  border-top-left-radius: var(--borderTopLeftRadiushvr);
+  border-bottom-right-radius: var(--borderBottomRightRadiushvr);
+  border-bottom-left-radius: var(--borderBottomLeftRadiushvr);
 }
 
 @media only screen and (min-width: 1024px) {

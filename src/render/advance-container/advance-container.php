@@ -785,15 +785,15 @@ function advance_container_style($attr){
         $css .= " }";
 
         if (isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop'] == true){
-            $css .= "@media only screen and (min-width: 1024px) {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 1024px) {.th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Tablet
         if (isset($attr['responsiveTogHideTablet']) && $attr['responsiveTogHideTablet'] == true){
-            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { .th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Mobile
         if (isset($attr['responsiveTogHideMobile']) && $attr['responsiveTogHideMobile'] == true){
-            $css .= "@media only screen and (max-width: 767px) {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (max-width: 767px) {.th-c{$attr['uniqueID']}{display:none;}}";
         }
 
     }
