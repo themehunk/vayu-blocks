@@ -713,6 +713,116 @@ export const SortableItem = ({
 
 		return undefined;
 	};
+    // button boder radius
+	const [buttonBrdrRadiusUnit, setbuttonBrdrRadiusUnit] = useState('px');
+	const maxbuttonBrdrRadiusUnit = buttonBrdrRadiusUnit === 'px' ? 1500 : buttonBrdrRadiusUnit === 'em' ? 50 : buttonBrdrRadiusUnit === '%' ? 100:'';
+    
+	const getButtonBrdrRadiusType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.buttonBrdrRadiusType;
+		case 'Tablet':
+			return attributes.buttonBrdrRadiusTypeTablet;
+		case 'Mobile':
+			return attributes.buttonBrdrRadiusTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changeButtonBrdrRadiusType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ buttonBrdrRadiusType: value, buttonBrdrRadiusTypeTablet: value, buttonBrdrRadiusTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ buttonBrdrRadiusTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ buttonBrdrRadiusTypeMobile: value });
+		}
+	};
+	const desktopButtonBrdrRadiusType = {
+		top: 'buttonBrdrRadiusTop',
+		right: 'buttonBrdrRadiusRight',
+		bottom: 'buttonBrdrRadiusBottom',
+		left: 'buttonBrdrRadiusLeft'
+	};
+	const tabletButtonBrdrRadiusType = {
+		top: 'buttonBrdrRadiusTopTablet',
+		right: 'buttonBrdrRadiusRightTablet',
+		bottom: 'buttonBrdrRadiusBottomTablet',
+		left: 'buttonBrdrRadiusLeftTablet'
+	};
+	const mobileButtonBrdrRadiusType = {
+		top: 'buttonBrdrRadiusTopMobile',
+		right: 'buttonBrdrRadiusRightMobile',
+		bottom: 'buttonBrdrRadiusBottomMobile',
+		left: 'buttonBrdrRadiusLeftMobile'
+	};
+	const changeButtonBrdrRadius = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.buttonBrdrRadiusType ) {
+				setAttributes({ buttonBrdrRadius: value , buttonBrdrRadiusTablet: value , buttonBrdrRadiusMobile: value});
+			} else {
+				setAttributes({ [desktopButtonBrdrRadiusType[type]]: value, [tabletButtonBrdrRadiusType[type]]: value, [mobileButtonBrdrRadiusType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.buttonBrdrRadiusTypeTablet ) {
+				setAttributes({ buttonBrdrRadiusTablet: value });
+			} else {
+				setAttributes({ [tabletButtonBrdrRadiusType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.buttonBrdrRadiusTypeMobile ) {
+				setAttributes({ buttonBrdrRadiusMobile: value });
+			} else {
+				setAttributes({ [mobileButtonBrdrRadiusType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getButtonBrdrRadius = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusTop;
+			case 'Tablet':
+				return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusRight;
+			case 'Tablet':
+				return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusBottom;
+			case 'Tablet':
+				return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusLeft;
+			case 'Tablet':
+				return 'linked' === attributes.buttonBrdrRadiusTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.buttonBrdrRadiusMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
 
     // button Spacing boder
 	const [buttonSpaceUnit, setbuttonSpaceUnit] = useState('px');
@@ -1686,6 +1796,7 @@ export const SortableItem = ({
 						onChange={ e => setAttributes({ buttonBrdrType: e }) }
 					   />	
                         { 'none' !== attributes.buttonBrdrType && (
+							<>
                             <ResponsiveControl
 								label={ __( 'Border Width', 'themehunk-block' ) }
 							>
@@ -1728,7 +1839,53 @@ export const SortableItem = ({
 									] }
 								/>
 
-							</ResponsiveControl>	
+							</ResponsiveControl>
+							
+							<ResponsiveControl
+								label={ __( 'Border Radius', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.buttonBrdrRadiusUnit }
+								
+								onClick={buttonBrdrRadiusUnit => {
+									setAttributes({buttonBrdrRadiusUnit });
+									setbuttonBrdrRadiusUnit(buttonBrdrRadiusUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getButtonBrdrRadiusType() }
+									min={ 0 }
+									max={ maxbuttonBrdrRadiusUnit }
+									changeType={ changeButtonBrdrRadiusType }
+									onChange={ changeButtonBrdrRadius }
+									options={ [
+										{
+											label: __(  'T-R', 'themehunk-block'),
+											type: 'top',
+											value: getButtonBrdrRadius( 'top' )
+										},
+										{
+											label: __(  'T-L', 'themehunk-block' ),
+											type: 'right',
+											value: getButtonBrdrRadius( 'right' )
+										},
+										
+										{
+											label: __( 'B-R', 'themehunk-block'  ),
+											type: 'left',
+											value: getButtonBrdrRadius( 'left' )
+										},
+										{
+											label: __( 'B-L', 'themehunk-block'),
+											type: 'bottom',
+											value: getButtonBrdrRadius( 'bottom' )
+										},
+									] }
+								/>
+
+							</ResponsiveControl>
+							</>
 						)}
 
                            <ResponsiveControl

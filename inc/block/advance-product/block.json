@@ -532,8 +532,7 @@
 			"default": "linked"
 		},
 		"buttonSpace": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"buttonSpaceTablet": {
 			"type": "number"
@@ -542,8 +541,7 @@
 			"type": "number"
 		},
 		"buttonSpaceTop": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"buttonSpaceTopTablet": {
 			"type": "number"
@@ -552,8 +550,7 @@
 			"type": "number"
 		},
 		"buttonSpaceBottom": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"buttonSpaceBottomTablet": {
 			"type": "number"
@@ -562,8 +559,7 @@
 			"type": "number"
 		},
 		"buttonSpaceRight": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"buttonSpaceRightTablet": {
 			"type": "number"
@@ -572,13 +568,73 @@
 			"type": "number"
 		},
 		"buttonSpaceLeft": {
-			"type": "number",
-			"default": 0
+			"type": "number"
 		},
 		"buttonSpaceLeftTablet": {
 			"type": "number"
 		},
 		"buttonSpaceLeftMobile": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusType": {
+			"type": "string",
+			"default": "linked"
+		},
+		"buttonBrdrRadiusUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"buttonBrdrRadiusTypeTablet": {
+			"type": "string",
+			"default": "linked"
+		},
+		"buttonBrdrRadiusTypeMobile": {
+			"type": "string",
+			"default": "linked"
+		},
+		"buttonBrdrRadius": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusTablet": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusMobile": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusTop": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusTopTablet": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusTopMobile": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusBottom": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusBottomTablet": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusBottomMobile": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusRight": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusRightTablet": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusRightMobile": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusLeft": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusLeftTablet": {
+			"type": "number"
+		},
+		"buttonBrdrRadiusLeftMobile": {
 			"type": "number"
 		}
 

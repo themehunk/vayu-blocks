@@ -1081,7 +1081,11 @@ function Edit(_ref) {
       buttonSpacetop: 'linked' === attributes.buttonSpaceType ? `${attributes.buttonSpace}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceTop}${attributes.buttonSpaceUnit}`,
       buttonSpacebottom: 'linked' === attributes.buttonSpaceType ? `${attributes.buttonSpace}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceBottom}${attributes.buttonSpaceUnit}`,
       buttonSpaceright: 'linked' === attributes.buttonSpaceType ? `${attributes.buttonSpace}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceRight}${attributes.buttonSpaceUnit}`,
-      buttonSpaceleft: 'linked' === attributes.buttonSpaceType ? `${attributes.buttonSpace}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeft}${attributes.buttonSpaceUnit}`
+      buttonSpaceleft: 'linked' === attributes.buttonSpaceType ? `${attributes.buttonSpace}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeft}${attributes.buttonSpaceUnit}`,
+      buttonBrdrRadiustopright: 'linked' === attributes.buttonBrdrRadiusType ? `${attributes.buttonBrdrRadius}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusTop}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusType ? `${attributes.buttonBrdrRadius}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusBottom}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusType ? `${attributes.buttonBrdrRadius}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusRight}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusType ? `${attributes.buttonBrdrRadius}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusLeft}${attributes.buttonBrdrRadiusUnit}`
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -1106,7 +1110,11 @@ function Edit(_ref) {
       buttonSpacetop: 'linked' === attributes.buttonSpaceTypeTablet ? `${attributes.buttonSpaceTablet}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceTopTablet}${attributes.buttonSpaceUnit}`,
       buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeTablet ? `${attributes.buttonSpaceTablet}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceBottomTablet}${attributes.buttonSpaceUnit}`,
       buttonSpaceright: 'linked' === attributes.buttonSpaceTypeTablet ? `${attributes.buttonSpaceTablet}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceRightTablet}${attributes.buttonSpaceUnit}`,
-      buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeTablet ? `${attributes.buttonSpaceTablet}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeftTablet}${attributes.buttonSpaceUnit}`
+      buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeTablet ? `${attributes.buttonSpaceTablet}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeftTablet}${attributes.buttonSpaceUnit}`,
+      buttonBrdrRadiustopright: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${attributes.buttonBrdrRadiusTablet}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusTopTablet}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${attributes.buttonBrdrRadiusTablet}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusBottomTablet}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${attributes.buttonBrdrRadiusTablet}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusRightTablet}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${attributes.buttonBrdrRadiusTablet}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusLeftTablet}${attributes.buttonBrdrRadiusUnit}`
     },
     mobile: {
       titlefontSize: attributes.titlefontSizeMobile + attributes.titlefontSizeUnit,
@@ -1131,7 +1139,11 @@ function Edit(_ref) {
       buttonSpacetop: 'linked' === attributes.buttonSpaceTypeMobile ? `${attributes.buttonSpaceMobile}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceTopMobile}${attributes.buttonSpaceUnit}`,
       buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeMobile ? `${attributes.buttonSpaceMobile}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceBottomMobile}${attributes.buttonSpaceUnit}`,
       buttonSpaceright: 'linked' === attributes.buttonSpaceTypeMobile ? `${attributes.buttonSpaceMobile}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceRightMobile}${attributes.buttonSpaceUnit}`,
-      buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeMobile ? `${attributes.buttonSpaceMobile}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeftMobile}${attributes.buttonSpaceUnit}`
+      buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeMobile ? `${attributes.buttonSpaceMobile}${attributes.buttonSpaceUnit}` : `${attributes.buttonSpaceLeftMobile}${attributes.buttonSpaceUnit}`,
+      buttonBrdrRadiustopright: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${attributes.buttonBrdrRadiusMobile}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusTopMobile}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${attributes.buttonBrdrRadiusMobile}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusBottomMobile}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${attributes.buttonBrdrRadiusMobile}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusRightMobile}${attributes.buttonBrdrRadiusUnit}`,
+      buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${attributes.buttonBrdrRadiusMobile}${attributes.buttonBrdrRadiusUnit}` : `${attributes.buttonBrdrRadiusLeftMobile}${attributes.buttonBrdrRadiusUnit}`
     }
   };
   const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
@@ -1171,6 +1183,10 @@ function Edit(_ref) {
   const ButtonSpaceBottom = deviceAttributeMap[deviceType].buttonSpacebottom;
   const ButtonSpaceRight = deviceAttributeMap[deviceType].buttonSpaceright;
   const ButtonSpaceLeft = deviceAttributeMap[deviceType].buttonSpaceleft;
+  const ButtonBrdrRadiusTopRight = deviceAttributeMap[deviceType].buttonBrdrRadiustopright;
+  const ButtonBrdrRadiusTopLeft = deviceAttributeMap[deviceType].buttonBrdrRadiustopleft;
+  const ButtonBrdrRadiusBottomLeft = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomright;
+  const ButtonBrdrRadiusBottomRight = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomleft;
   ProductStyles = {
     '--title-color': attributes.productTitleColor,
     '--title-color-hvr': attributes.productTitleColorHvr,
@@ -1223,7 +1239,11 @@ function Edit(_ref) {
     '--button-padding-top': ButtonSpaceTop,
     '--button-padding-bottom': ButtonSpaceBottom,
     '--button-padding-right': ButtonSpaceRight,
-    '--button-padding-left': ButtonSpaceLeft
+    '--button-padding-left': ButtonSpaceLeft,
+    '--button-border-radius-top-right': ButtonBrdrRadiusTopRight,
+    '--button-border-radius-top-left': ButtonBrdrRadiusTopLeft,
+    '--button-border-radius-bottom-right': ButtonBrdrRadiusBottomRight,
+    '--button-border-radius-bottom-left': ButtonBrdrRadiusBottomLeft
   };
   const style = (0,lodash__WEBPACK_IMPORTED_MODULE_5__.omitBy)({
     ...ColStyles,
@@ -2637,6 +2657,137 @@ const SortableItem = _ref => {
     }
     return undefined;
   };
+  // button boder radius
+  const [buttonBrdrRadiusUnit, setbuttonBrdrRadiusUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxbuttonBrdrRadiusUnit = buttonBrdrRadiusUnit === 'px' ? 1500 : buttonBrdrRadiusUnit === 'em' ? 50 : buttonBrdrRadiusUnit === '%' ? 100 : '';
+  const getButtonBrdrRadiusType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.buttonBrdrRadiusType;
+      case 'Tablet':
+        return attributes.buttonBrdrRadiusTypeTablet;
+      case 'Mobile':
+        return attributes.buttonBrdrRadiusTypeMobile;
+      default:
+        return undefined;
+    }
+  };
+  const changeButtonBrdrRadiusType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        buttonBrdrRadiusType: value,
+        buttonBrdrRadiusTypeTablet: value,
+        buttonBrdrRadiusTypeMobile: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        buttonBrdrRadiusTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        buttonBrdrRadiusTypeMobile: value
+      });
+    }
+  };
+  const desktopButtonBrdrRadiusType = {
+    top: 'buttonBrdrRadiusTop',
+    right: 'buttonBrdrRadiusRight',
+    bottom: 'buttonBrdrRadiusBottom',
+    left: 'buttonBrdrRadiusLeft'
+  };
+  const tabletButtonBrdrRadiusType = {
+    top: 'buttonBrdrRadiusTopTablet',
+    right: 'buttonBrdrRadiusRightTablet',
+    bottom: 'buttonBrdrRadiusBottomTablet',
+    left: 'buttonBrdrRadiusLeftTablet'
+  };
+  const mobileButtonBrdrRadiusType = {
+    top: 'buttonBrdrRadiusTopMobile',
+    right: 'buttonBrdrRadiusRightMobile',
+    bottom: 'buttonBrdrRadiusBottomMobile',
+    left: 'buttonBrdrRadiusLeftMobile'
+  };
+  const changeButtonBrdrRadius = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.buttonBrdrRadiusType) {
+          setAttributes({
+            buttonBrdrRadius: value,
+            buttonBrdrRadiusTablet: value,
+            buttonBrdrRadiusMobile: value
+          });
+        } else {
+          setAttributes({
+            [desktopButtonBrdrRadiusType[type]]: value,
+            [tabletButtonBrdrRadiusType[type]]: value,
+            [mobileButtonBrdrRadiusType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.buttonBrdrRadiusTypeTablet) {
+          setAttributes({
+            buttonBrdrRadiusTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletButtonBrdrRadiusType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.buttonBrdrRadiusTypeMobile) {
+          setAttributes({
+            buttonBrdrRadiusMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileButtonBrdrRadiusType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const getButtonBrdrRadius = type => {
+    if ('top' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusTop;
+        case 'Tablet':
+          return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusTopTablet;
+        case 'Mobile':
+          return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusTopMobile;
+      }
+    } else if ('right' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusRight;
+        case 'Tablet':
+          return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusRightTablet;
+        case 'Mobile':
+          return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusRightMobile;
+      }
+    } else if ('bottom' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusBottom;
+        case 'Tablet':
+          return 'linked' === attributes.buttonBrdrRadiusTypeTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusBottomTablet;
+        case 'Mobile':
+          return 'linked' === attributes.buttonBrdrRadiusTypeMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusBottomMobile;
+      }
+    } else if ('left' == type) {
+      switch (getView) {
+        case 'Desktop':
+          return 'linked' === attributes.buttonBrdrRadiusType ? attributes.buttonBrdrRadius : attributes.buttonBrdrRadiusLeft;
+        case 'Tablet':
+          return 'linked' === attributes.buttonBrdrRadiusTablet ? attributes.buttonBrdrRadiusTablet : attributes.buttonBrdrRadiusLeftTablet;
+        case 'Mobile':
+          return 'linked' === attributes.buttonBrdrRadiusMobile ? attributes.buttonBrdrRadiusMobile : attributes.buttonBrdrRadiusLeftMobile;
+      }
+    }
+    return undefined;
+  };
 
   // button Spacing boder
   const [buttonSpaceUnit, setbuttonSpaceUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
@@ -3500,7 +3651,7 @@ const SortableItem = _ref => {
     onChange: e => setAttributes({
       buttonBrdrType: e
     })
-  }), 'none' !== attributes.buttonBrdrType && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.ResponsiveControl, {
+  }), 'none' !== attributes.buttonBrdrType && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Border Width', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.UnitChooser, {
     value: attributes.buttonborderWidthUnit,
@@ -3535,6 +3686,40 @@ const SortableItem = _ref => {
       value: getButtonBorderWidth('left')
     }]
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.ResponsiveControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Border Radius', 'themehunk-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.UnitChooser, {
+    value: attributes.buttonBrdrRadiusUnit,
+    onClick: buttonBrdrRadiusUnit => {
+      setAttributes({
+        buttonBrdrRadiusUnit
+      });
+      setbuttonBrdrRadiusUnit(buttonBrdrRadiusUnit);
+    },
+    units: ['px', 'em', '%']
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.SizingControl, {
+    type: getButtonBrdrRadiusType(),
+    min: 0,
+    max: maxbuttonBrdrRadiusUnit,
+    changeType: changeButtonBrdrRadiusType,
+    onChange: changeButtonBrdrRadius,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('T-R', 'themehunk-block'),
+      type: 'top',
+      value: getButtonBrdrRadius('top')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('T-L', 'themehunk-block'),
+      type: 'right',
+      value: getButtonBrdrRadius('right')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('B-R', 'themehunk-block'),
+      type: 'left',
+      value: getButtonBrdrRadius('left')
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('B-L', 'themehunk-block'),
+      type: 'bottom',
+      value: getButtonBrdrRadius('bottom')
+    }]
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Button Spacing', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.UnitChooser, {
     value: attributes.buttonSpaceUnit,
@@ -21653,7 +21838,7 @@ function _unsupportedIterableToArray(o, minLen) {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-product","version":"0.1.0","title":"Advance Product","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"uniqueID":{"type":"string"},"productCategories":{"type":"array","default":[]},"productType":{"type":"string","default":"recent"},"productShow":{"type":"number"},"productShowTablet":{"type":"number"},"productShowMobile":{"type":"number"},"productCol":{"type":"number"},"productColTablet":{"type":"number"},"productColMobile":{"type":"number"},"productOrderby":{"type":"string"},"productOrder":{"type":"string"},"manualProduct":{"type":"array","default":[]},"excludeProduct":{"type":"array","default":[]},"stockStatus":{"type":"array","default":[]},"template":{"type":"array","default":["image","category","title","price","rating","button"]},"displayFeaturedImage":{"type":"boolean","default":true},"displayCategory":{"type":"boolean","default":true},"displayTitle":{"type":"boolean","default":true},"displayPrice":{"type":"boolean","default":true},"displayDescription":{"type":"boolean","default":true},"displayRating":{"type":"boolean","default":true},"displayButton":{"type":"boolean","default":true},"cropImage":{"type":"boolean","default":false},"prouctTitleTag":{"type":"number","default":"h3"},"titleTypography":{"type":"boolean","default":false},"titlefontFamily":{"type":"string","default":"default"},"titlefontVariant":{"type":"string"},"titlefontStyle":{"type":"string"},"titletextTransform":{"type":"string"},"titlefontSize":{"type":"number"},"titlefontSizeTablet":{"type":"number"},"titlefontSizeMobile":{"type":"number"},"titlefontSizeUnit":{"type":"string","default":"px"},"titlelineHeight":{"type":"number"},"titlelineHeightTablet":{"type":"number"},"titlelineHeightMobile":{"type":"number"},"titlelineHeightUnit":{"type":"string","default":"px"},"titleletterSpacing":{"type":"number"},"titleletterSpacingTablet":{"type":"number"},"titleletterSpacingMobile":{"type":"number"},"titleletterSpacingUnit":{"type":"string","default":"px"},"titleColor":{"type":"boolean","default":false},"productTitleColor":{"type":"string","default":""},"productTitleColorHvr":{"type":"string","default":""},"catTypography":{"type":"boolean","default":false},"catfontFamily":{"type":"string","default":"default"},"catfontVariant":{"type":"string"},"catfontStyle":{"type":"string"},"cattextTransform":{"type":"string"},"catfontSize":{"type":"number"},"catfontSizeTablet":{"type":"number"},"catfontSizeMobile":{"type":"number"},"catfontSizeUnit":{"type":"string","default":"px"},"catlineHeight":{"type":"number"},"catlineHeightTablet":{"type":"number"},"catlineHeightMobile":{"type":"number"},"catlineHeightUnit":{"type":"string","default":"px"},"catletterSpacing":{"type":"number"},"catletterSpacingTablet":{"type":"number"},"catletterSpacingMobile":{"type":"number"},"catletterSpacingUnit":{"type":"string","default":"px"},"catColor":{"type":"boolean","default":false},"catTxtColor":{"type":"string","default":""},"catTxtColorHvr":{"type":"string","default":""},"priceTypography":{"type":"boolean","default":false},"pricefontFamily":{"type":"string","default":"default"},"pricefontVariant":{"type":"string"},"pricefontStyle":{"type":"string"},"pricetextTransform":{"type":"string"},"pricefontSize":{"type":"number"},"pricefontSizeTablet":{"type":"number"},"pricefontSizeMobile":{"type":"number"},"pricefontSizeUnit":{"type":"string","default":"px"},"pricelineHeight":{"type":"number"},"pricelineHeightTablet":{"type":"number"},"pricelineHeightMobile":{"type":"number"},"pricelineHeightUnit":{"type":"string","default":"px"},"priceletterSpacing":{"type":"number"},"priceletterSpacingTablet":{"type":"number"},"priceletterSpacingMobile":{"type":"number"},"priceletterSpacingUnit":{"type":"string","default":"px"},"PriceColor":{"type":"boolean","default":false},"priceColor":{"type":"string","default":""},"priceDelColor":{"type":"string","default":""},"ratingfontSize":{"type":"number"},"ratingfontSizeTablet":{"type":"number"},"ratingfontSizeMobile":{"type":"number"},"ratingfontSizeUnit":{"type":"string","default":"px"},"ratinglineHeight":{"type":"number"},"ratinglineHeightTablet":{"type":"number"},"ratinglineHeightMobile":{"type":"number"},"ratinglineHeightUnit":{"type":"string","default":"px"},"ratingletterSpacing":{"type":"number"},"ratingletterSpacingTablet":{"type":"number"},"ratingletterSpacingMobile":{"type":"number"},"ratingletterSpacingUnit":{"type":"string","default":"px"},"RatingColor":{"type":"boolean","default":false},"ratingColor":{"type":"string","default":""},"emptyratingColor":{"type":"string","default":""},"buttonTypography":{"type":"boolean","default":false},"buttonfontFamily":{"type":"string","default":"default"},"buttonfontVariant":{"type":"string"},"buttonfontStyle":{"type":"string"},"buttontextTransform":{"type":"string"},"buttonfontSize":{"type":"number"},"buttonfontSizeTablet":{"type":"number"},"buttonfontSizeMobile":{"type":"number"},"buttonfontSizeUnit":{"type":"string","default":"px"},"buttonlineHeight":{"type":"number"},"buttonlineHeightTablet":{"type":"number"},"buttonlineHeightMobile":{"type":"number"},"buttonlineHeightUnit":{"type":"string","default":"px"},"buttonletterSpacing":{"type":"number"},"buttonletterSpacingTablet":{"type":"number"},"buttonletterSpacingMobile":{"type":"number"},"buttonletterSpacingUnit":{"type":"string","default":"px"},"buttonClr":{"type":"boolean","default":false},"buttonTxtClr":{"type":"string","default":""},"buttonBgClr":{"type":"string","default":""},"buttonBrdrClr":{"type":"string","default":""},"buttonTxtClrHvr":{"type":"string","default":""},"buttonBgClrHvr":{"type":"string","default":""},"buttonBrdrClrHvr":{"type":"string","default":""},"buttonBrdrType":{"type":"string","default":""},"buttonborderWidthType":{"type":"string","default":"linked"},"buttonborderWidthUnit":{"type":"string","default":"px"},"buttonborderWidthTypeTablet":{"type":"string","default":"linked"},"buttonborderWidthTypeMobile":{"type":"string","default":"linked"},"buttonborderWidth":{"type":"number","default":0},"buttonborderWidthTablet":{"type":"number"},"buttonborderWidthMobile":{"type":"number"},"buttonborderWidthTop":{"type":"number","default":0},"buttonborderWidthTopTablet":{"type":"number"},"buttonborderWidthTopMobile":{"type":"number"},"buttonborderWidthBottom":{"type":"number","default":0},"buttonborderWidthBottomTablet":{"type":"number"},"buttonborderWidthBottomMobile":{"type":"number"},"buttonborderWidthRight":{"type":"number","default":0},"buttonborderWidthRightTablet":{"type":"number"},"buttonborderWidthRightMobile":{"type":"number"},"buttonborderWidthLeft":{"type":"number","default":0},"buttonborderWidthLeftTablet":{"type":"number"},"buttonborderWidthLeftMobile":{"type":"number"},"buttonSpaceType":{"type":"string","default":"linked"},"buttonSpaceUnit":{"type":"string","default":"px"},"buttonSpaceTypeTablet":{"type":"string","default":"linked"},"buttonSpaceTypeMobile":{"type":"string","default":"linked"},"buttonSpace":{"type":"number","default":0},"buttonSpaceTablet":{"type":"number"},"buttonSpaceMobile":{"type":"number"},"buttonSpaceTop":{"type":"number","default":0},"buttonSpaceTopTablet":{"type":"number"},"buttonSpaceTopMobile":{"type":"number"},"buttonSpaceBottom":{"type":"number","default":0},"buttonSpaceBottomTablet":{"type":"number"},"buttonSpaceBottomMobile":{"type":"number"},"buttonSpaceRight":{"type":"number","default":0},"buttonSpaceRightTablet":{"type":"number"},"buttonSpaceRightMobile":{"type":"number"},"buttonSpaceLeft":{"type":"number","default":0},"buttonSpaceLeftTablet":{"type":"number"},"buttonSpaceLeftMobile":{"type":"number"}},"supports":{"align":["wide","full"],"html":false}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-product","version":"0.1.0","title":"Advance Product","category":"themehunk-blocks","icon":"smiley","description":"Example block scaffolded with Create Block tool.","textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"uniqueID":{"type":"string"},"productCategories":{"type":"array","default":[]},"productType":{"type":"string","default":"recent"},"productShow":{"type":"number"},"productShowTablet":{"type":"number"},"productShowMobile":{"type":"number"},"productCol":{"type":"number"},"productColTablet":{"type":"number"},"productColMobile":{"type":"number"},"productOrderby":{"type":"string"},"productOrder":{"type":"string"},"manualProduct":{"type":"array","default":[]},"excludeProduct":{"type":"array","default":[]},"stockStatus":{"type":"array","default":[]},"template":{"type":"array","default":["image","category","title","price","rating","button"]},"displayFeaturedImage":{"type":"boolean","default":true},"displayCategory":{"type":"boolean","default":true},"displayTitle":{"type":"boolean","default":true},"displayPrice":{"type":"boolean","default":true},"displayDescription":{"type":"boolean","default":true},"displayRating":{"type":"boolean","default":true},"displayButton":{"type":"boolean","default":true},"cropImage":{"type":"boolean","default":false},"prouctTitleTag":{"type":"number","default":"h3"},"titleTypography":{"type":"boolean","default":false},"titlefontFamily":{"type":"string","default":"default"},"titlefontVariant":{"type":"string"},"titlefontStyle":{"type":"string"},"titletextTransform":{"type":"string"},"titlefontSize":{"type":"number"},"titlefontSizeTablet":{"type":"number"},"titlefontSizeMobile":{"type":"number"},"titlefontSizeUnit":{"type":"string","default":"px"},"titlelineHeight":{"type":"number"},"titlelineHeightTablet":{"type":"number"},"titlelineHeightMobile":{"type":"number"},"titlelineHeightUnit":{"type":"string","default":"px"},"titleletterSpacing":{"type":"number"},"titleletterSpacingTablet":{"type":"number"},"titleletterSpacingMobile":{"type":"number"},"titleletterSpacingUnit":{"type":"string","default":"px"},"titleColor":{"type":"boolean","default":false},"productTitleColor":{"type":"string","default":""},"productTitleColorHvr":{"type":"string","default":""},"catTypography":{"type":"boolean","default":false},"catfontFamily":{"type":"string","default":"default"},"catfontVariant":{"type":"string"},"catfontStyle":{"type":"string"},"cattextTransform":{"type":"string"},"catfontSize":{"type":"number"},"catfontSizeTablet":{"type":"number"},"catfontSizeMobile":{"type":"number"},"catfontSizeUnit":{"type":"string","default":"px"},"catlineHeight":{"type":"number"},"catlineHeightTablet":{"type":"number"},"catlineHeightMobile":{"type":"number"},"catlineHeightUnit":{"type":"string","default":"px"},"catletterSpacing":{"type":"number"},"catletterSpacingTablet":{"type":"number"},"catletterSpacingMobile":{"type":"number"},"catletterSpacingUnit":{"type":"string","default":"px"},"catColor":{"type":"boolean","default":false},"catTxtColor":{"type":"string","default":""},"catTxtColorHvr":{"type":"string","default":""},"priceTypography":{"type":"boolean","default":false},"pricefontFamily":{"type":"string","default":"default"},"pricefontVariant":{"type":"string"},"pricefontStyle":{"type":"string"},"pricetextTransform":{"type":"string"},"pricefontSize":{"type":"number"},"pricefontSizeTablet":{"type":"number"},"pricefontSizeMobile":{"type":"number"},"pricefontSizeUnit":{"type":"string","default":"px"},"pricelineHeight":{"type":"number"},"pricelineHeightTablet":{"type":"number"},"pricelineHeightMobile":{"type":"number"},"pricelineHeightUnit":{"type":"string","default":"px"},"priceletterSpacing":{"type":"number"},"priceletterSpacingTablet":{"type":"number"},"priceletterSpacingMobile":{"type":"number"},"priceletterSpacingUnit":{"type":"string","default":"px"},"PriceColor":{"type":"boolean","default":false},"priceColor":{"type":"string","default":""},"priceDelColor":{"type":"string","default":""},"ratingfontSize":{"type":"number"},"ratingfontSizeTablet":{"type":"number"},"ratingfontSizeMobile":{"type":"number"},"ratingfontSizeUnit":{"type":"string","default":"px"},"ratinglineHeight":{"type":"number"},"ratinglineHeightTablet":{"type":"number"},"ratinglineHeightMobile":{"type":"number"},"ratinglineHeightUnit":{"type":"string","default":"px"},"ratingletterSpacing":{"type":"number"},"ratingletterSpacingTablet":{"type":"number"},"ratingletterSpacingMobile":{"type":"number"},"ratingletterSpacingUnit":{"type":"string","default":"px"},"RatingColor":{"type":"boolean","default":false},"ratingColor":{"type":"string","default":""},"emptyratingColor":{"type":"string","default":""},"buttonTypography":{"type":"boolean","default":false},"buttonfontFamily":{"type":"string","default":"default"},"buttonfontVariant":{"type":"string"},"buttonfontStyle":{"type":"string"},"buttontextTransform":{"type":"string"},"buttonfontSize":{"type":"number"},"buttonfontSizeTablet":{"type":"number"},"buttonfontSizeMobile":{"type":"number"},"buttonfontSizeUnit":{"type":"string","default":"px"},"buttonlineHeight":{"type":"number"},"buttonlineHeightTablet":{"type":"number"},"buttonlineHeightMobile":{"type":"number"},"buttonlineHeightUnit":{"type":"string","default":"px"},"buttonletterSpacing":{"type":"number"},"buttonletterSpacingTablet":{"type":"number"},"buttonletterSpacingMobile":{"type":"number"},"buttonletterSpacingUnit":{"type":"string","default":"px"},"buttonClr":{"type":"boolean","default":false},"buttonTxtClr":{"type":"string","default":""},"buttonBgClr":{"type":"string","default":""},"buttonBrdrClr":{"type":"string","default":""},"buttonTxtClrHvr":{"type":"string","default":""},"buttonBgClrHvr":{"type":"string","default":""},"buttonBrdrClrHvr":{"type":"string","default":""},"buttonBrdrType":{"type":"string","default":""},"buttonborderWidthType":{"type":"string","default":"linked"},"buttonborderWidthUnit":{"type":"string","default":"px"},"buttonborderWidthTypeTablet":{"type":"string","default":"linked"},"buttonborderWidthTypeMobile":{"type":"string","default":"linked"},"buttonborderWidth":{"type":"number","default":0},"buttonborderWidthTablet":{"type":"number"},"buttonborderWidthMobile":{"type":"number"},"buttonborderWidthTop":{"type":"number","default":0},"buttonborderWidthTopTablet":{"type":"number"},"buttonborderWidthTopMobile":{"type":"number"},"buttonborderWidthBottom":{"type":"number","default":0},"buttonborderWidthBottomTablet":{"type":"number"},"buttonborderWidthBottomMobile":{"type":"number"},"buttonborderWidthRight":{"type":"number","default":0},"buttonborderWidthRightTablet":{"type":"number"},"buttonborderWidthRightMobile":{"type":"number"},"buttonborderWidthLeft":{"type":"number","default":0},"buttonborderWidthLeftTablet":{"type":"number"},"buttonborderWidthLeftMobile":{"type":"number"},"buttonSpaceType":{"type":"string","default":"linked"},"buttonSpaceUnit":{"type":"string","default":"px"},"buttonSpaceTypeTablet":{"type":"string","default":"linked"},"buttonSpaceTypeMobile":{"type":"string","default":"linked"},"buttonSpace":{"type":"number"},"buttonSpaceTablet":{"type":"number"},"buttonSpaceMobile":{"type":"number"},"buttonSpaceTop":{"type":"number"},"buttonSpaceTopTablet":{"type":"number"},"buttonSpaceTopMobile":{"type":"number"},"buttonSpaceBottom":{"type":"number"},"buttonSpaceBottomTablet":{"type":"number"},"buttonSpaceBottomMobile":{"type":"number"},"buttonSpaceRight":{"type":"number"},"buttonSpaceRightTablet":{"type":"number"},"buttonSpaceRightMobile":{"type":"number"},"buttonSpaceLeft":{"type":"number"},"buttonSpaceLeftTablet":{"type":"number"},"buttonSpaceLeftMobile":{"type":"number"},"buttonBrdrRadiusType":{"type":"string","default":"linked"},"buttonBrdrRadiusUnit":{"type":"string","default":"px"},"buttonBrdrRadiusTypeTablet":{"type":"string","default":"linked"},"buttonBrdrRadiusTypeMobile":{"type":"string","default":"linked"},"buttonBrdrRadius":{"type":"number"},"buttonBrdrRadiusTablet":{"type":"number"},"buttonBrdrRadiusMobile":{"type":"number"},"buttonBrdrRadiusTop":{"type":"number"},"buttonBrdrRadiusTopTablet":{"type":"number"},"buttonBrdrRadiusTopMobile":{"type":"number"},"buttonBrdrRadiusBottom":{"type":"number"},"buttonBrdrRadiusBottomTablet":{"type":"number"},"buttonBrdrRadiusBottomMobile":{"type":"number"},"buttonBrdrRadiusRight":{"type":"number"},"buttonBrdrRadiusRightTablet":{"type":"number"},"buttonBrdrRadiusRightMobile":{"type":"number"},"buttonBrdrRadiusLeft":{"type":"number"},"buttonBrdrRadiusLeftTablet":{"type":"number"},"buttonBrdrRadiusLeftMobile":{"type":"number"}},"supports":{"align":["wide","full"],"html":false}}');
 
 /***/ })
 
