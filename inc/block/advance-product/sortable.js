@@ -8,7 +8,7 @@ import {
 	SortableElement,
 	SortableHandle
 } from 'react-sortable-hoc';
-
+import { debounce } from 'lodash';
 /**
  * WordPress dependencies
  */
@@ -995,11 +995,112 @@ export const SortableItem = ({
 				    >
 					{ ( 'image' === template ) && (
 						<Fragment >
-							<ToggleControl
-								label={ __( 'Crop Image to Fit', 'otter-blocks' ) }
-								checked={ attributes.cropImage }
-								onChange={ cropImage => setAttributes({ cropImage }) }
+							
+							<SelectControl 
+								label={ __( 'Image Size', 'themehunk-block' ) }
+								value={ attributes.prdImage }
+								options={ [
+									{ label:  __( 'woocommerce_thumbnail', 'themehunk-block' ), value: 'woocommerce_thumbnail' },
+									{ label: __( 'woocommerce_single', 'themehunk-block' ), value: 'woocommerce_single' },
+									{ label: __( 'woocommerce_gallery_thumbnail', 'themehunk-block' ), value: 'woocommerce_gallery_thumbnail' },
+								    
+								] }
+								onChange={ e => setAttributes({ prdImage: e }) }
 							/>
+
+                             <ToggleControl
+								label={ __( 'Sale', 'themehunk-block' ) }
+								checked={ attributes.showSale }
+								onChange={ showSale => setAttributes({showSale}) }
+							 />
+							  { ( attributes.showSale == true ) && (
+                              <>
+							  <SelectControl 
+								label={ __( 'Sale Style', 'themehunk-block' ) }
+								value={ attributes.saleStyle }
+								options={ [
+									{ label:  __( 'Classic', 'themehunk-block' ), value: 'style1' },
+									{ label: __( 'Ribbon', 'themehunk-block' ), value: 'style2' },
+									{ label: __( 'Circle', 'themehunk-block' ), value: 'style3' },
+								    
+								] }
+								onChange={ e => setAttributes({ saleStyle: e }) }
+							  />
+							  <div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Position', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.salePosition }
+												onChange={ salePosition => setAttributes({ salePosition }) }
+												options={[
+													
+													{
+										
+														label: __( 'Right', 'themehunk-block' ),
+														value: 'saleright'
+													},
+													{
+													
+														label: __( 'Left', 'themehunk-blocks' ),
+														value: 'saleleft'
+													}
+												]}
+												
+											/>
+								</div>
+							  <div className='th-component-group-label'>
+									<label className='th-label'>{ __( 'Design', 'themehunk-block' )}</label>
+									<ToogleGroupControl
+
+												value={ attributes.saleDesign }
+												onChange={ saleDesign => setAttributes({ saleDesign }) }
+												options={[
+													{
+													
+														label: __( 'Text', 'themehunk-blocks' ),
+														value: 'saletext'
+													},
+													{
+										
+														label: __( 'Digit', 'themehunk-block' ),
+														value: 'saledigit'
+													}
+												]}
+												
+											/>
+								</div>
+                                { ( attributes.saleDesign == 'saletext' ) && (
+								<TextControl
+									label={ __( 'Sale Text', 'themehunk-block' ) }
+									value={ attributes.saleText }
+									onChange={ ( saleText ) => setAttributes({saleText}) }
+							    />
+								)}
+							  <ColorGradientControl
+								 label={ __( 'Sale Color', 'themehunk-block' ) }
+								 colorValue={ attributes.saleClr }
+								 onColorChange={ e => setAttributes({ saleClr: e }) }
+								 enableAlpha={true} 
+								/>
+								<ColorGradientControl
+								 label={ __( 'Sale Bg Color', 'themehunk-block' ) }
+								 colorValue={ attributes.saleBgClr }
+								 onColorChange={ e => setAttributes({ saleBgClr: e }) }
+								 enableAlpha={true} 
+								/>
+								</>
+							  )}
+
+							  <ToggleControl
+								label={ __( 'Wishlist', 'themehunk-block' ) }
+								checked={ attributes.showWishlist }
+								onChange={ showWishlist => setAttributes({showWishlist}) }
+							 />
+							 <ToggleControl
+								label={ __( 'Compare', 'themehunk-block' ) }
+								checked={ attributes.showCompare }
+								onChange={ showCompare => setAttributes({ showCompare }) }
+							 />
 						</Fragment>
 					) }
 

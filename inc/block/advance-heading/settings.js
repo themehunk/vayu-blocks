@@ -1439,7 +1439,7 @@ const InsSettings = ({
 
 							</ResponsiveControl>
 
-							<SelectControl
+							<SelectControl 
 								label={ __( 'Position', 'themehunk-block' ) }
 								value={ attributes.position }
 								options={ [

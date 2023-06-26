@@ -465,7 +465,10 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--button-border-radius-top-left':ButtonBrdrRadiusTopLeft,
     '--button-border-radius-bottom-right':ButtonBrdrRadiusBottomRight,
     '--button-border-radius-bottom-left':ButtonBrdrRadiusBottomLeft,
+    '--sale-color':attributes.saleClr,
+    '--sale-bg-color':attributes.saleBgClr
   }
+  
 
   const style = omitBy({
     ...ColStyles,
@@ -513,8 +516,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                           return (
                             attributes.displayFeaturedImage && (
                             <div className="th-product-imgae">
-                              {product.on_sale && <span className="sale-tag">Sale</span>}
-                              <div className="th-product-sale"></div>
+                              {product.on_sale &&
+                              <div className={`th-product-sale ${attributes.saleStyle} ${attributes.saleDesign} ${attributes.salePosition}`}>
+                              <span className="sale-tag">{attributes.saleText}</span>
+                              </div>
+                              }
                               <img src={product.images[0].thumbnail} alt={product.name} />
                             </div>
                             )

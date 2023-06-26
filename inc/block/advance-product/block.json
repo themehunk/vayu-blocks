@@ -102,6 +102,43 @@
 			"type": "boolean",
 			"default": false
 		},
+		"prdImage": {
+			"type": "string"
+		},
+		"showSale": {
+			"type": "boolean",
+			"default": true
+		},
+		"showWishlist": {
+			"type": "boolean",
+			"default": false
+		},
+		"showCompare": {
+			"type": "boolean",
+			"default": false
+		},
+		"saleClr": {
+			"type": "string"
+		},
+		"saleBgClr": {
+			"type": "string"
+		},
+		"saleStyle":{
+			"type": "string",
+			"default":"classic"
+		},
+		"saleDesign":{
+			"type": "string",
+			"default":"saletext"
+		},
+		"saleText":{
+			"type": "string",
+			"default":"sale"
+		},
+		"salePosition":{
+			"type": "string",
+			"default":"saleright"
+		},
 		"prouctTitleTag": {
 			"type": "number",
 			"default": "h3"
