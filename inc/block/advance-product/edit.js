@@ -14,7 +14,7 @@ import { omitBy } from 'lodash';
 import hexToRgba from 'hex-rgba';
 import {Fragment,useState,Suspense,useEffect} from '@wordpress/element';
 
-
+import { IoIosHeartEmpty,IoMdRepeat,IoIosExpand} from "react-icons/io";
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -36,6 +36,7 @@ import googleFontsLoader from '../../../src/helpers/google-fonts.js';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+import { Button } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -466,7 +467,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--button-border-radius-bottom-right':ButtonBrdrRadiusBottomRight,
     '--button-border-radius-bottom-left':ButtonBrdrRadiusBottomLeft,
     '--sale-color':attributes.saleClr,
-    '--sale-bg-color':attributes.saleBgClr
+    '--sale-bg-color':attributes.saleBgClr,
+    '--post-meta-color':attributes.postMetaClr,
+    '--post-meta-bg-color':attributes.postMetaBgClr,
+    '--post-meta-hvr-color':attributes.postMetaHvrClr,
+    '--post-meta-bg-hvr-color':attributes.postMetaBgHvrClr
   }
   
 
@@ -516,12 +521,42 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                           return (
                             attributes.displayFeaturedImage && (
                             <div className="th-product-imgae">
-                              {product.on_sale &&
+                              {product.on_sale && attributes.showSale == true &&
                               <div className={`th-product-sale ${attributes.saleStyle} ${attributes.saleDesign} ${attributes.salePosition}`}>
-                              <span className="sale-tag">{attributes.saleText}</span>
+                               {attributes.saleDesign =='saletext' &&
+                               <span className="discount-percentage">{attributes.saleText}</span>
+                               }
+
+                               {attributes.saleDesign =='saledigit' && product.prices.regular_price &&  product.prices.sale_price && (
+                                <span className="discount-percentage">
+                                  {Math.round(
+                                    ((product.prices.regular_price - product.prices.sale_price) /
+                                    product.prices.regular_price) *
+                                      100
+                                  )}
+                                  {__( '%', 'themehunk-blocks' )}
+                                </span>
+                              )}
                               </div>
                               }
                               <img src={product.images[0].thumbnail} alt={product.name} />
+                              <div className="th-product-meta">
+                                {attributes.showWishlist == true &&
+                                  <div className="th-icon th-wishlist-button">
+                                 <IoIosHeartEmpty></IoIosHeartEmpty>
+                                 </div>
+                                }
+                                 {attributes.showCompare == true &&
+                                 <div className="th-icon th-compare-button">
+                                 <IoMdRepeat></IoMdRepeat>
+                                 </div>
+                                }
+                                 {attributes.showView == true &&
+                                 <div className="th-icon th-quickview-button">
+                                 <IoIosExpand></IoIosExpand>
+                                 </div>
+                                }
+                              </div>
                             </div>
                             )
                           );
