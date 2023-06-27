@@ -1126,8 +1126,40 @@ const InsSettings = ({
 		}
 	};
 
+	const [fontSizeUnit, setfontSizeUnit] = useState('px');
+	const maxfontSizeUnit = fontSizeUnit === 'px' ? 150 :fontSizeUnit === 'em' ? 10 : fontSizeUnit === '%' ? 100:'';
+    const [lineHeightUnit, setlineHeightUnit] = useState('px');
+	const maxlineHeightUnit = lineHeightUnit === 'px' ? 150 :lineHeightUnit === 'em' ? 10 : lineHeightUnit === '%' ? 100:'';
+	const [letterSpacingUnit, setletterSpacingUnit] = useState('px');
+	const maxletterSpacingUnit = letterSpacingUnit === 'px' ? 150 :letterSpacingUnit === 'em' ? 10 : letterSpacingUnit === '%' ? 100:'';
+	const [paddingUnit, setpaddingUnit] = useState('px');
+	const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100:'';
+	const [marginUnit, setmarginUnit] = useState('px');
+	const maxmarginUnit = marginUnit === 'px' ? 1500 : marginUnit === 'em' ? 50 : marginUnit === '%' ? 100:'';
 	
-    return (
+	const [horizontalOrientationOffsetUnit, sethorizontalOrientationOffsetUnit] = useState('px');
+	const maxhorizontalOrientationOffsetUnit = horizontalOrientationOffsetUnit === 'px' ? 1500 : horizontalOrientationOffsetUnit === 'em' ? 50 : horizontalOrientationOffsetUnit === '%' ? 100:'';
+    
+	const [horizontalOrientationOffsetRightUnit, sethorizontalOrientationOffsetRightUnit] = useState('px');
+	const maxhorizontalOrientationOffsetRightUnit = horizontalOrientationOffsetRightUnit === 'px' ? 1500 : horizontalOrientationOffsetRightUnit === 'em' ? 50 : horizontalOrientationOffsetRightUnit === '%' ? 100:'';
+	
+	const [verticalOrientationOffsetTopUnit, setverticalOrientationOffsetTopUnit] = useState('px');
+	const maxverticalOrientationOffsetTopUnit = verticalOrientationOffsetTopUnit === 'px' ? 1500 : verticalOrientationOffsetTopUnit === 'em' ? 50 : verticalOrientationOffsetTopUnit === '%' ? 100:'';
+    
+	const [verticalOrientationOffsetBottomUnit, setverticalOrientationOffsetBottomUnit] = useState('px');
+	const maxverticalOrientationOffsetBottomUnit = verticalOrientationOffsetBottomUnit === 'px' ? 1500 : verticalOrientationOffsetBottomUnit === 'em' ? 50 : verticalOrientationOffsetBottomUnit === '%' ? 100:'';
+	
+	const [borderWidthUnit, setborderWidthUnit] = useState('px');
+	const maxborderWidthUnit = borderWidthUnit === 'px' ? 1500 : borderWidthUnit === 'em' ? 50 : borderWidthUnit === '%' ? 100:'';
+	
+	const [borderRadiusUnit, setborderRadiusUnit] = useState('px');
+	const maxborderRadiusUnit = borderRadiusUnit === 'px' ? 1500 : borderRadiusUnit === 'em' ? 50 : borderRadiusUnit === '%' ? 100:'';
+    
+	const [borderWidthHvrUnit, setborderWidthHvrUnit] = useState('px');
+	const maxborderWidthHvrUnit = borderWidthHvrUnit === 'px' ? 1500 : borderWidthHvrUnit === 'em' ? 50 : borderWidthHvrUnit === '%' ? 100:'';
+	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
+	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
+	return (
     <Fragment>
         <InspectorControls>
             <InsSettingHeader value={ tab }
@@ -1217,18 +1249,23 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Font Size', 'themehunk-block' ) }
 							>    
+							   
 							   <UnitChooser
 								value={ attributes.fontSizeUnit }
-								onClick={ fontSizeUnit => setAttributes({ fontSizeUnit }) }
+								onClick={fontSizeUnit => {
+									setAttributes({ fontSizeUnit });
+									setfontSizeUnit(fontSizeUnit);
+								  }}
+			
 								units={ [ 'px', 'em', '%' ] }
-						       />
+						        />
 								<RangeControl
 								    renderTooltipContent={ customTooltipFontsize }
 									value={ getFontSize() || '' }
 									onChange={ changeFontSize }
 									step={ 0.1 }
 									min={ 1 }
-									max={ 500 }
+									max={ maxfontSizeUnit }
 									allowReset={ true }
 								/>		
 						</ResponsiveControl>
@@ -1238,16 +1275,20 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.lineHeightUnit }
-								onClick={ lineHeightUnit => setAttributes({ lineHeightUnit }) }
+								onClick={lineHeightUnit => {
+									setAttributes({lineHeightUnit });
+									setlineHeightUnit(lineHeightUnit);
+								  }}
+			
 								units={ [ 'px', 'em', '%' ] }
-						       />
+						    />	
 							<RangeControl
 							    renderTooltipContent={ customTooltiplineHeight }
 								value={ getlineHeight() || '' }
 								onChange={ changelineHeight }
 								step={ 0.1 }
 								min={ 0 }
-								max={ 300 }
+								max={ maxlineHeightUnit }
 								allowReset={ true }
 							/>
 						</ResponsiveControl>
@@ -1255,18 +1296,22 @@ const InsSettings = ({
 						<ResponsiveControl
 								label={ __( 'Letter Spacing', 'themehunk-block' ) }
 							>
-								<UnitChooser
+							   <UnitChooser
 								value={ attributes.letterSpacingUnit }
-								onClick={ letterSpacingUnit => setAttributes({ letterSpacingUnit }) }
+								onClick={ letterSpacingUnit => {
+									setAttributes({letterSpacingUnit});
+									setletterSpacingUnit(letterSpacingUnit);
+								  }}
+			
 								units={ [ 'px', 'em', '%' ] }
-						       />
+						    />
 							<RangeControl
 							    renderTooltipContent={ customTooltipletterSpacing }
 								value={ getletterSpacing() || '' }
 								onChange={ changeletterSpacing }
 								step={ 0.1 }
-								min={ -300 }
-								max={ 300 }
+								min={50}
+								max={ maxletterSpacingUnit }
 								allowReset={ true }
 							/>
 						</ResponsiveControl>	   
@@ -1320,15 +1365,19 @@ const InsSettings = ({
                             <ResponsiveControl
 								label={ __( 'Padding', 'themehunk-block' ) }
 							>
+							
 							<UnitChooser
 								value={ attributes.paddingUnit }
-								onClick={ paddingUnit => setAttributes({ paddingUnit }) }
+								onClick={paddingUnit => {
+									setAttributes({ paddingUnit });
+									setpaddingUnit(paddingUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />	
                             <SizingControl
 									type={ getPaddingType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxpaddingUnit }
 									changeType={ changePaddingType }
 									onChange={ changePadding }
 									options={ [
@@ -1360,15 +1409,18 @@ const InsSettings = ({
 							<ResponsiveControl
 								label={ __( 'Margin', 'themehunk-block' ) }
 							>
-							<UnitChooser
+                            <UnitChooser
 								value={ attributes.marginUnit }
-								onClick={ marginUnit => setAttributes({ marginUnit }) }
+								onClick={marginUnit => {
+									setAttributes({ marginUnit });
+									setmarginUnit(marginUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
-						    />
+						    />	
                             <SizingControl
 									type={ getMarginType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxmarginUnit }
 									changeType={ changeMarginType }
 									onChange={ changeMargin }
 									options={ [
@@ -1387,7 +1439,7 @@ const InsSettings = ({
 
 							</ResponsiveControl>
 
-							<SelectControl
+							<SelectControl 
 								label={ __( 'Position', 'themehunk-block' ) }
 								value={ attributes.position }
 								options={ [
@@ -1426,18 +1478,22 @@ const InsSettings = ({
                                <ResponsiveControl
 								label={ __( 'Offset', 'themehunk-block' ) }
 							     >	
+								
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetUnit }
-								onClick={ horizontalOrientationOffsetUnit => setAttributes({ horizontalOrientationOffsetUnit }) }
+								onClick={horizontalOrientationOffsetUnit => {
+									setAttributes({ horizontalOrientationOffsetUnit });
+									sethorizontalOrientationOffsetUnit(horizontalOrientationOffsetUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
-						        />
+						        />	
 								<RangeControl
 								    renderTooltipContent={ customTooltiphorizontalOrientationOffset }
 									value={ gethorizontalOrientationOffset() || '' }
 									onChange={ changehorizontalOrientationOffset }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxhorizontalOrientationOffsetUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1446,18 +1502,23 @@ const InsSettings = ({
 							<ResponsiveControl
 								label={ __( 'Offset', 'themehunk-block' ) }
 							     >	
+	
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetRightUnit }
-								onClick={ horizontalOrientationOffsetRightUnit => setAttributes({ horizontalOrientationOffsetRightUnit }) }
+								onClick={horizontalOrientationOffsetRightUnit => {
+									setAttributes({ horizontalOrientationOffsetRightUnit });
+									sethorizontalOrientationOffsetRightUnit(horizontalOrientationOffsetRightUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
-						        />
+						        />	
+								
 								<RangeControl
 								    renderTooltipContent={ customTooltiphorizontalOrientationOffsetRight }
 									value={ gethorizontalOrientationOffsetRight() || '' }
 									onChange={ changehorizontalOrientationOffsetRight }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxhorizontalOrientationOffsetRightUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1489,18 +1550,22 @@ const InsSettings = ({
                                <ResponsiveControl
 								label={ __( 'Offset', 'themehunk-block' ) }
 							     >	
+							
 								<UnitChooser
 								value={ attributes.verticalOrientationOffsetTopUnit }
-								onClick={ verticalOrientationOffsetTopUnit => setAttributes({ verticalOrientationsetTopUnit }) }
+								onClick={verticalOrientationOffsetTopUnit => {
+									setAttributes({ verticalOrientationOffsetTopUnit });
+									setverticalOrientationOffsetTopUnit(verticalOrientationOffsetTopUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
-						        />
+						        />	
 								<RangeControl
 								    renderTooltipContent={ customTooltipverticalOrientationOffsetTop }
 									value={ getverticalOrientationOffsetTop() || '' }
 									onChange={ changeverticalOrientationOffsetTop }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={ maxverticalOrientationOffsetTopUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1515,13 +1580,22 @@ const InsSettings = ({
 								onClick={ verticalOrientationOffsetBottomUnit => setAttributes({ verticalOrientationOffsetBottomUnit }) }
 								units={ [ 'px', 'em', '%' ] }
 						        />
+
+                                <UnitChooser
+								value={ attributes.verticalOrientationOffsetBottomUnit }
+								onClick={verticalOrientationOffsetBottomUnit => {
+									setAttributes({ verticalOrientationOffsetBottomUnit });
+									setverticalOrientationOffsetBottomUnit(verticalOrientationOffsetBottomUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						        />	
 								<RangeControl
 								    renderTooltipContent={ customTooltipverticalOrientationOffsetBottom }
 									value={ getverticalOrientationOffsetBottom() || '' }
 									onChange={ changeverticalOrientationOffsetBottom }
 									step={ 1 }
 									min={ -999 }
-									max={ 1000 }
+									max={maxverticalOrientationOffsetBottomUnit }
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
@@ -1732,13 +1806,16 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderWidthUnit }
-								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								onClick={borderWidthUnit => {
+									setAttributes({borderWidthUnit });
+									setborderWidthUnit(borderWidthUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderWidthType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderWidthUnit }
 									changeType={ changeBorderWidthType }
 									onChange={ changeBorderWidth }
 									options={ [
@@ -1780,13 +1857,17 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusUnit }
-								onClick={ borderWidthUnit => setAttributes({ borderWidthUnit }) }
+								onClick={borderRadiusUnit => {
+									setAttributes({borderRadiusUnit });
+									setborderRadiusUnit(borderRadiusUnit);
+								  }}
+						
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderRadiusType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderRadiusUnit }
 									changeType={ changeBorderRadiusType }
 									onChange={ changeBorderRadius }
 									options={ [
@@ -1905,13 +1986,17 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderWidthHvrUnit }
-								onClick={ borderWidthHvrUnit => setAttributes({ borderWidthHvrUnit }) }
+								
+								onClick={borderWidthHvrUnit => {
+									setAttributes({borderWidthHvrUnit });
+									setborderWidthHvrUnit(borderWidthHvrUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderWidthHvrType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderWidthHvrUnit }
 									changeType={ changeBorderWidthHvrType }
 									onChange={ changeBorderWidthHvr }
 									options={ [
@@ -1955,13 +2040,16 @@ const InsSettings = ({
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusHvrUnit }
-								onClick={ borderRadiusHvrUnit => setAttributes({ borderRadiusHvrUnit }) }
+								onClick={borderRadiusHvrUnit => {
+									setAttributes({borderRadiusHvrUnit });
+									setborderRadiusHvrUnit(borderRadiusHvrUnit);
+								  }}
 								units={ [ 'px', 'em', '%' ] }
 						    />
                             <SizingControl
 									type={ getBorderRadiusHvrType() }
 									min={ 0 }
-									max={ 500 }
+									max={ maxborderRadiusHvrUnit }
 									changeType={ changeBorderRadiusHvrType }
 									onChange={ changeBorderRadiusHvr }
 									options={ [

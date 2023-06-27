@@ -124,7 +124,7 @@ export default function Edit({
             || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
 			|| ( 'image' === attributes.overlaybackgroundType && attributes.overlaybackgroundImage )
             || ( 'image' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundImageHvr )
-
+ 
 			let containerClasses = classnames({
 				
 				[`${attributes.contentWidthType}-content`]: true,

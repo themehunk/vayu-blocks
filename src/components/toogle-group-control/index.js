@@ -25,6 +25,7 @@ const ToogleGroupControl = ({
   }) => {
 	const handleClick = (option) => {
 	  const newValue = value === option.value ? null : option.value;
+	  //const newValue = value === option.value ? value : option.value;
 	  onChange(newValue);
 	};
   

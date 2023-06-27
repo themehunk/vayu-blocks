@@ -19,7 +19,7 @@ export default function Save({attributes}){
 		"th-hide-mobile": attributes.responsiveTogHideMobile,
 	  });
 	  
-	const blockProps = useBlockProps.save({
+	const blockProps = useBlockProps.save({ 
 		id:attributes.anchor,
 		className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`,
 	});

@@ -291,6 +291,12 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonSpaceright: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRight}${ attributes.buttonSpaceUnit }`,
 			buttonSpaceleft: 'linked' === attributes.buttonSpaceType ? `${ attributes.buttonSpace }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeft}${ attributes.buttonSpaceUnit }`,
     
+
+      buttonBrdrRadiustopright : 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusTop}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusBottom}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRight}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeft}${ attributes.buttonBrdrRadiusUnit }`,
+    
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -317,7 +323,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomTablet }${ attributes.buttonSpaceUnit }`,
 			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightTablet }${ attributes.buttonSpaceUnit }`,
 			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeTablet ? `${ attributes.buttonSpaceTablet }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftTablet}${ attributes.buttonSpaceUnit }`,
-   
+      
+      buttonBrdrRadiustopright : 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusTopTablet}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusBottomTablet}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRightTablet}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeftTablet}${ attributes.buttonBrdrRadiusUnit }`,
    
     },
     mobile: {
@@ -345,6 +355,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonSpacebottom: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceBottomMobile }${ attributes.buttonSpaceUnit }`,
 			buttonSpaceright: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceRightMobile }${ attributes.buttonSpaceUnit }`,
 			buttonSpaceleft: 'linked' === attributes.buttonSpaceTypeMobile ? `${ attributes.buttonSpaceMobile }${ attributes.buttonSpaceUnit }` : `${ attributes.buttonSpaceLeftMobile}${ attributes.buttonSpaceUnit }`,
+     
+      buttonBrdrRadiustopright : 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusTopMobile}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusBottomMobile}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRightMobile}${ attributes.buttonBrdrRadiusUnit }`,
+			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeftMobile}${ attributes.buttonBrdrRadiusUnit }`,
     },
   };
   const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
@@ -387,6 +402,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const ButtonSpaceBottom = deviceAttributeMap[deviceType].buttonSpacebottom;
   const ButtonSpaceRight = deviceAttributeMap[deviceType].buttonSpaceright;
   const ButtonSpaceLeft = deviceAttributeMap[deviceType].buttonSpaceleft;
+
+  const ButtonBrdrRadiusTopRight    = deviceAttributeMap[deviceType].buttonBrdrRadiustopright;
+  const ButtonBrdrRadiusTopLeft     = deviceAttributeMap[deviceType].buttonBrdrRadiustopleft;
+  const ButtonBrdrRadiusBottomLeft  = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomright;
+  const ButtonBrdrRadiusBottomRight = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomleft;
 
   ProductStyles = {
     '--title-color': attributes.productTitleColor,
@@ -441,7 +461,14 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--button-padding-bottom':ButtonSpaceBottom,
     '--button-padding-right':ButtonSpaceRight,
     '--button-padding-left':ButtonSpaceLeft,
+    '--button-border-radius-top-right':ButtonBrdrRadiusTopRight,
+    '--button-border-radius-top-left':ButtonBrdrRadiusTopLeft,
+    '--button-border-radius-bottom-right':ButtonBrdrRadiusBottomRight,
+    '--button-border-radius-bottom-left':ButtonBrdrRadiusBottomLeft,
+    '--sale-color':attributes.saleClr,
+    '--sale-bg-color':attributes.saleBgClr
   }
+  
 
   const style = omitBy({
     ...ColStyles,
@@ -489,8 +516,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                           return (
                             attributes.displayFeaturedImage && (
                             <div className="th-product-imgae">
-                              {product.on_sale && <span className="sale-tag">Sale</span>}
-                              <div className="th-product-sale"></div>
+                              {product.on_sale &&
+                              <div className={`th-product-sale ${attributes.saleStyle} ${attributes.saleDesign} ${attributes.salePosition}`}>
+                              <span className="sale-tag">{attributes.saleText}</span>
+                              </div>
+                              }
                               <img src={product.images[0].thumbnail} alt={product.name} />
                             </div>
                             )
