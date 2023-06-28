@@ -297,7 +297,19 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusBottom}${ attributes.buttonBrdrRadiusUnit }`,
 			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRight}${ attributes.buttonBrdrRadiusUnit }`,
 			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusType ? `${ attributes.buttonBrdrRadius }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeft}${ attributes.buttonBrdrRadiusUnit }`,
-    
+      
+      elementGap: attributes.elementGap + attributes.elementGapUnit,
+
+      productPaddingtop : 'linked' === attributes.productPaddingType ? `${ attributes.productPadding }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingTop}${ attributes.productPaddingUnit }`,
+			productPaddingbottom: 'linked' === attributes.productPaddingType ? `${ attributes.productPadding }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingBottom}${ attributes.productPaddingUnit }`,
+			productPaddingright: 'linked' === attributes.productPaddingType ? `${ attributes.productPadding }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingRight}${ attributes.productPaddingUnit }`,
+			productPaddingleft: 'linked' === attributes.productPaddingType ? `${ attributes.productPadding }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingLeft}${ attributes.productPaddingUnit }`,
+      
+      productBrdrRadiustopright : 'linked' === attributes.productBrdrRadiusType ? `${ attributes.productBrdrRadius }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusTop}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiustopleft: 'linked' === attributes.productBrdrRadiusType ? `${ attributes.productBrdrRadius }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusBottom}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomright: 'linked' === attributes.productBrdrRadiusType ? `${ attributes.productBrdrRadius }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusRight}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomleft: 'linked' === attributes.productBrdrRadiusType ? `${ attributes.productBrdrRadius }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusLeft}${ attributes.productBrdrRadiusUnit }`,
+   
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -330,6 +342,18 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRightTablet}${ attributes.buttonBrdrRadiusUnit }`,
 			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeTablet ? `${ attributes.buttonBrdrRadiusTablet }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeftTablet}${ attributes.buttonBrdrRadiusUnit }`,
    
+      elementGap: attributes.elementGapTablet + attributes.elementGapUnit,
+
+      productPaddingtop : 'linked' === attributes.productPaddingTypeTablet ? `${ attributes.productPaddingTablet }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingTopTablet}${ attributes.productPaddingUnit }`,
+			productPaddingbottom: 'linked' === attributes.productPaddingTypeTablet ? `${ attributes.productPaddingTablet }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingBottomTablet}${ attributes.productPaddingUnit }`,
+			productPaddingright: 'linked' === attributes.productPaddingTypeTablet ? `${ attributes.productPaddingTablet }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingRightTablet}${ attributes.productPaddingUnit }`,
+			productPaddingleft: 'linked' === attributes.productPaddingTypeTablet ? `${ attributes.productPaddingTablet }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingLeftTablet}${ attributes.productPaddingUnit }`,
+      
+      productBrdrRadiustopright : 'linked' === attributes.productBrdrRadiusTypeTablet ? `${ attributes.productBrdrRadiusTablet }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusTopTablet}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiustopleft: 'linked' === attributes.productBrdrRadiusTypeTablet ? `${ attributes.productBrdrRadiusTablet }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusBottomTablet}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomright: 'linked' === attributes.productBrdrRadiusTypeTablet ? `${ attributes.productBrdrRadiusTablet }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusRightTablet}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomleft: 'linked' === attributes.productBrdrRadiusTypeTablet ? `${ attributes.productBrdrRadiusTablet }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusLeftTablet}${ attributes.productBrdrRadiusUnit }`,
+    
     },
     mobile: {
       titlefontSize: attributes.titlefontSizeMobile + attributes.titlefontSizeUnit,
@@ -361,6 +385,19 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			buttonBrdrRadiustopleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusBottomMobile}${ attributes.buttonBrdrRadiusUnit }`,
 			buttonBrdrRadiusbottomright: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusRightMobile}${ attributes.buttonBrdrRadiusUnit }`,
 			buttonBrdrRadiusbottomleft: 'linked' === attributes.buttonBrdrRadiusTypeMobile ? `${ attributes.buttonBrdrRadiusMobile }${ attributes.buttonBrdrRadiusUnit }` : `${ attributes.buttonBrdrRadiusLeftMobile}${ attributes.buttonBrdrRadiusUnit }`,
+      
+      elementGap: attributes.elementGapMobile + attributes.elementGapUnit,
+
+      productPaddingtop : 'linked' === attributes.productPaddingTypeMobile ? `${ attributes.productPaddingMobile }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingTopMobile}${ attributes.productPaddingUnit }`,
+			productPaddingbottom: 'linked' === attributes.productPaddingTyptMobile ? `${ attributes.productPaddingMobile }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingBottomMobile}${ attributes.productPaddingUnit }`,
+			productPaddingright: 'linked' === attributes.productPaddingTypeMobile ? `${ attributes.productPaddingMobile }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingRightMobile}${ attributes.productPaddingUnit }`,
+			productPaddingleft: 'linked' === attributes.productPaddingTypeMobile ? `${ attributes.productPaddingMobile }${ attributes.productPaddingUnit }` : `${ attributes.productPaddingLeftMobile}${ attributes.productPaddingUnit }`,
+      
+      productBrdrRadiustopright : 'linked' === attributes.productBrdrRadiusTypeMobile ? `${ attributes.productBrdrRadiusMobile }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusTopMobile}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiustopleft: 'linked' === attributes.productBrdrRadiusTypeMobile ? `${ attributes.productBrdrRadiusMobile }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusBottomMobile}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomright: 'linked' === attributes.productBrdrRadiusTypeMobile ? `${ attributes.productBrdrRadiusMobile }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusRightMobile}${ attributes.productBrdrRadiusUnit }`,
+			productBrdrRadiusbottomleft: 'linked' === attributes.productBrdrRadiusTypeMobile ? `${ attributes.productBrdrRadiusMobile }${ attributes.productBrdrRadiusUnit }` : `${ attributes.productBrdrRadiusLeftMobile}${ attributes.productBrdrRadiusUnit }`,
+    
     },
   };
   const deviceType = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
@@ -408,6 +445,18 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const ButtonBrdrRadiusTopLeft     = deviceAttributeMap[deviceType].buttonBrdrRadiustopleft;
   const ButtonBrdrRadiusBottomLeft  = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomright;
   const ButtonBrdrRadiusBottomRight = deviceAttributeMap[deviceType].buttonBrdrRadiusbottomleft;
+
+  const ElementGap = deviceAttributeMap[deviceType].elementGap;
+  
+  const ProductPaddingTop = deviceAttributeMap[deviceType].productPaddingtop;
+  const ProductPaddingBottom = deviceAttributeMap[deviceType].productPaddingbottom;
+  const ProductPaddingRight = deviceAttributeMap[deviceType].productPaddingright;
+  const ProductPaddingLeft = deviceAttributeMap[deviceType].productPaddingleft;
+
+  const ProductBrdrRadiusTopRight    = deviceAttributeMap[deviceType].productBrdrRadiustopright;
+  const ProductBrdrRadiusTopLeft     = deviceAttributeMap[deviceType].productBrdrRadiustopleft;
+  const ProductBrdrRadiusBottomLeft  = deviceAttributeMap[deviceType].productBrdrRadiusbottomright;
+  const ProductBrdrRadiusBottomRight = deviceAttributeMap[deviceType].productBrdrRadiusbottomleft;
 
   ProductStyles = {
     '--title-color': attributes.productTitleColor,
@@ -471,10 +520,21 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--post-meta-color':attributes.postMetaClr,
     '--post-meta-bg-color':attributes.postMetaBgClr,
     '--post-meta-hvr-color':attributes.postMetaHvrClr,
-    '--post-meta-bg-hvr-color':attributes.postMetaBgHvrClr
+    '--post-meta-bg-hvr-color':attributes.postMetaBgHvrClr,
+    '--alignment':attributes.productAlign,
+    '--element-gap':ElementGap,
+    '--element-padding-top':ProductPaddingTop,
+    '--element-padding-bottom':ProductPaddingBottom,
+    '--element-padding-right':ProductPaddingRight,
+    '--element-padding-left':ProductPaddingLeft,
+    '--product-box':attributes.productboxClr,
+    '--product-box-hvr':attributes.productboxHvrClr,
+    '--product-border-radius-top-right':ProductBrdrRadiusTopRight,
+    '--product-border-radius-top-left':ProductBrdrRadiusTopLeft,
+    '--product-border-radius-bottom-right':ProductBrdrRadiusBottomRight,
+    '--product-border-radius-bottom-left':ProductBrdrRadiusBottomLeft,
   }
   
-
   const style = omitBy({
     ...ColStyles,
     ...ProductStyles,

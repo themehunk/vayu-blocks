@@ -689,6 +689,154 @@
 		},
 		"buttonBrdrRadiusLeftMobile": {
 			"type": "number"
+		},
+		"productAlign":{
+			"type": "string",
+			"default": "center"
+		},
+		"productPaddingType": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productPaddingUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"productPaddingTypeTablet": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productPaddingTypeMobile": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productPadding": {
+			"type": "number"
+		},
+		"productPaddingTablet": {
+			"type": "number"
+		},
+		"productPaddingMobile": {
+			"type": "number"
+		},
+		"productPaddingTop": {
+			"type": "number"
+		},
+		"productPaddingTopTablet": {
+			"type": "number"
+		},
+		"productPaddingTopMobile": {
+			"type": "number"
+		},
+		"productPaddingBottom": {
+			"type": "number"
+		},
+		"productPaddingBottomTablet": {
+			"type": "number"
+		},
+		"productPaddingBottomMobile": {
+			"type": "number"
+		},
+		"productPaddingRight": {
+			"type": "number"
+		},
+		"productPaddingRightTablet": {
+			"type": "number"
+		},
+		"productPaddingRightMobile": {
+			"type": "number"
+		},
+		"productPaddingLeft": {
+			"type": "number"
+		},
+		"productPaddingLeftTablet": {
+			"type": "number"
+		},
+		"productPaddingLeftMobile": {
+			"type": "number"
+		},
+		"elementGap": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapTablet": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapMobile": {
+			"type": "number",
+			"default": "20"
+		},
+		"elementGapUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"productboxClr": {
+			"type": "string"
+		},
+		"productboxHvrClr": {
+			"type": "string"
+		},
+		"productBrdrRadiusType": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productBrdrRadiusUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"productBrdrRadiusTypeTablet": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productBrdrRadiusTypeMobile": {
+			"type": "string",
+			"default": "linked"
+		},
+		"productBrdrRadius": {
+			"type": "number"
+		},
+		"productBrdrRadiusTablet": {
+			"type": "number"
+		},
+		"productBrdrRadiusMobile": {
+			"type": "number"
+		},
+		"productBrdrRadiusTop": {
+			"type": "number"
+		},
+		"productBrdrRadiusTopTablet": {
+			"type": "number"
+		},
+		"productBrdrRadiusTopMobile": {
+			"type": "number"
+		},
+		"productBrdrRadiusBottom": {
+			"type": "number"
+		},
+		"productBrdrRadiusBottomTablet": {
+			"type": "number"
+		},
+		"productBrdrRadiusBottomMobile": {
+			"type": "number"
+		},
+		"productBrdrRadiusRight": {
+			"type": "number"
+		},
+		"productBrdrRadiusRightTablet": {
+			"type": "number"
+		},
+		"productBrdrRadiusRightMobile": {
+			"type": "number"
+		},
+		"productBrdrRadiusLeft": {
+			"type": "number"
+		},
+		"productBrdrRadiusLeftTablet": {
+			"type": "number"
+		},
+		"productBrdrRadiusLeftMobile": {
+			"type": "number"
 		}
 
 	},

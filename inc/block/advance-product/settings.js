@@ -149,7 +149,260 @@ const InsSettings = ({
       { value: 'onbackorder', label: 'On Backorder' }
     ];
     
-    return (
+     // product box padding
+	const [productPaddingUnit, setproductPaddingUnit] = useState('px');
+	const maxproductPaddingUnit = productPaddingUnit === 'px' ? 1500 : productPaddingUnit === 'em' ? 50 : productPaddingUnit === '%' ? 100:'';
+    
+	const getproductPaddingType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.productPaddingType;
+		case 'Tablet':
+			return attributes.productPaddingTypeTablet;
+		case 'Mobile':
+			return attributes.productPaddingTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changeproductPaddingType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ productPaddingType: value, productPaddingTypeTablet: value, productPaddingTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ productPaddingTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ productPaddingTypeMobile: value });
+		}
+	};
+	const desktopproductPaddingType = {
+		top: 'productPaddingTop',
+		right: 'productPaddingRight',
+		bottom: 'productPaddingBottom',
+		left: 'productPaddingLeft'
+	};
+	const tabletproductPaddingType = {
+		top: 'productPaddingTopTablet',
+		right: 'productPaddingRightTablet',
+		bottom: 'productPaddingBottomTablet',
+		left: 'productPaddingLeftTablet'
+	};
+	const mobileproductPaddingType = {
+		top: 'productPaddingTopMobile',
+		right: 'productPaddingRightMobile',
+		bottom: 'productPaddingBottomMobile',
+		left: 'productPaddingLeftMobile'
+	};
+	const changeproductPadding = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.productPaddingType ) {
+				setAttributes({ productPadding: value , productPaddingTablet: value , productPaddingMobile: value});
+			} else {
+				setAttributes({ [desktopproductPaddingType[type]]: value, [tabletproductPaddingType[type]]: value, [mobileproductPaddingType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.productPaddingTypeTablet ) {
+				setAttributes({ productPaddingTablet: value });
+			} else {
+				setAttributes({ [tabletproductPaddingType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.productPaddingTypeMobile ) {
+				setAttributes({ productPaddingMobile: value });
+			} else {
+				setAttributes({ [mobileproductPaddingType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getproductPadding = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productPaddingType ? attributes.productPadding : attributes.productPaddingTop;
+			case 'Tablet':
+				return 'linked' === attributes.productPaddingTypeTablet ? attributes.productPaddingTablet : attributes.productPaddingTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productPaddingTypeMobile ? attributes.productPaddingMobile : attributes.productPaddingTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productPaddingType ? attributes.productPadding : attributes.productPaddingRight;
+			case 'Tablet':
+				return 'linked' === attributes.productPaddingTypeTablet ? attributes.productPaddingTablet : attributes.productPaddingRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productPaddingTypeMobile ? attributes.productPaddingMobile : attributes.productPaddingRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productPaddingType ? attributes.productPadding : attributes.productPaddingBottom;
+			case 'Tablet':
+				return 'linked' === attributes.productPaddingTypeTablet ? attributes.productPaddingTablet : attributes.productPaddingBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productPaddingTypeMobile ? attributes.productPaddingMobile : attributes.productPaddingBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productPaddingType ? attributes.productPadding : attributes.productPaddingLeft;
+			case 'Tablet':
+				return 'linked' === attributes.productPaddingTablet ? attributes.productPaddingTablet : attributes.productPaddingLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productPaddingMobile ? attributes.productPaddingMobile : attributes.productPaddingLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+  const customTooltipElementGap = value => `${value}${attributes.elementGapUnit}`;
+  const [elementGapUnit, setelementGapUnit] = useState('px');
+	const maxelementGapUnit = elementGapUnit === 'px' ? 1500 : elementGapUnit === 'em' ? 50 : elementGapUnit === '%' ? 100:'';
+  // element gap
+	const getElementGap = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.elementGap;
+		case 'Tablet':
+			return attributes.elementGapTablet;
+		case 'Mobile':
+			return attributes.elementGapMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeElementGap = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ elementGap: value, elementGapTablet: value, elementGapMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ elementGapTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ elementGapMobile: value });
+		}
+	}; 
+
+  const [ productelementclr, setproductelementclr ] = useState( 'normal' );
+  
+
+  // product boder radius
+	const [productBrdrRadiusUnit, setproductBrdrRadiusUnit] = useState('px');
+	const maxproductBrdrRadiusUnit = productBrdrRadiusUnit === 'px' ? 1500 : productBrdrRadiusUnit === 'em' ? 50 : productBrdrRadiusUnit === '%' ? 100:'';
+    
+	const getproductBrdrRadiusType = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.productBrdrRadiusType;
+		case 'Tablet':
+			return attributes.productBrdrRadiusTypeTablet;
+		case 'Mobile':
+			return attributes.productBrdrRadiusTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changeproductBrdrRadiusType = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ productBrdrRadiusType: value, productBrdrRadiusTypeTablet: value, productBrdrRadiusTypeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ productBrdrRadiusTypeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ productBrdrRadiusTypeMobile: value });
+		}
+	};
+	const desktopproductBrdrRadiusType = {
+		top: 'productBrdrRadiusTop',
+		right: 'productBrdrRadiusRight',
+		bottom: 'productBrdrRadiusBottom',
+		left: 'productBrdrRadiusLeft'
+	};
+	const tabletproductBrdrRadiusType = {
+		top: 'productBrdrRadiusTopTablet',
+		right: 'productBrdrRadiusRightTablet',
+		bottom: 'productBrdrRadiusBottomTablet',
+		left: 'productBrdrRadiusLeftTablet'
+	};
+	const mobileproductBrdrRadiusType = {
+		top: 'productBrdrRadiusTopMobile',
+		right: 'productBrdrRadiusRightMobile',
+		bottom: 'productBrdrRadiusBottomMobile',
+		left: 'productBrdrRadiusLeftMobile'
+	};
+	const changeproductBrdrRadius = ( type, value ) => {
+		switch ( getView ) {
+		case 'Desktop':
+			if ( 'linked' === attributes.productBrdrRadiusType ) {
+				setAttributes({ productBrdrRadius: value , productBrdrRadiusTablet: value , productBrdrRadiusMobile: value});
+			} else {
+				setAttributes({ [desktopproductBrdrRadiusType[type]]: value, [tabletproductBrdrRadiusType[type]]: value, [mobileproductBrdrRadiusType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ( 'linked' === attributes.productBrdrRadiusTypeTablet ) {
+				setAttributes({ productBrdrRadiusTablet: value });
+			} else {
+				setAttributes({ [tabletproductBrdrRadiusType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ( 'linked' === attributes.productBrdrRadiusTypeMobile ) {
+				setAttributes({ productBrdrRadiusMobile: value });
+			} else {
+				setAttributes({ [mobileproductBrdrRadiusType[type]]: value });
+			}
+			break;
+		}
+	};
+
+	const getproductBrdrRadius = type => {
+		if ( 'top' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productBrdrRadiusType ? attributes.productBrdrRadius : attributes.productBrdrRadiusTop;
+			case 'Tablet':
+				return 'linked' === attributes.productBrdrRadiusTypeTablet ? attributes.productBrdrRadiusTablet : attributes.productBrdrRadiusTopTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productBrdrRadiusTypeMobile ? attributes.productBrdrRadiusMobile : attributes.productBrdrRadiusTopMobile;
+			}
+		} else if ( 'right' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productBrdrRadiusType ? attributes.productBrdrRadius : attributes.productBrdrRadiusRight;
+			case 'Tablet':
+				return 'linked' === attributes.productBrdrRadiusTypeTablet ? attributes.productBrdrRadiusTablet : attributes.productBrdrRadiusRightTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productBrdrRadiusTypeMobile ? attributes.productBrdrRadiusMobile : attributes.productBrdrRadiusRightMobile;
+			}
+		} else if ( 'bottom' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productBrdrRadiusType ? attributes.productBrdrRadius : attributes.productBrdrRadiusBottom;
+			case 'Tablet':
+				return 'linked' === attributes.productBrdrRadiusTypeTablet ? attributes.productBrdrRadiusTablet : attributes.productBrdrRadiusBottomTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productBrdrRadiusTypeMobile ? attributes.productBrdrRadiusMobile : attributes.productBrdrRadiusBottomMobile;
+			}
+		} else if ( 'left' == type ) {
+			switch ( getView ) {
+			case 'Desktop':
+				return 'linked' === attributes.productBrdrRadiusType ? attributes.productBrdrRadius : attributes.productBrdrRadiusLeft;
+			case 'Tablet':
+				return 'linked' === attributes.productBrdrRadiusTablet ? attributes.productBrdrRadiusTablet : attributes.productBrdrRadiusLeftTablet;
+			case 'Mobile':
+				return 'linked' === attributes.productBrdrRadiusMobile ? attributes.productBrdrRadiusMobile : attributes.productBrdrRadiusLeftMobile;
+			}
+		}
+
+		return undefined;
+	};
+
+
+  return (
         <Fragment>
            <InspectorControls>
            <InsSettingHeader value={ tab }
@@ -304,6 +557,168 @@ const InsSettings = ({
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 						/>
+					 </PanelBody>
+           <PanelBody
+						title={ __( 'Product Box', 'themehunk-block' ) }
+						initialOpen={ false }
+					  >
+               <div className='th-component-group-label'>
+
+            <label className='th-label'>{ __( 'Alignment', 'themehunk-block' ) } </label>
+						<AlignmentToolbar
+
+									value={ attributes.productAlign }
+									onChange={ e => setAttributes({ productAlign: e }) }
+									isCollapsed={ false }
+							/>
+              </div>
+
+              <ResponsiveControl
+								label={ __( 'Padding', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.productPaddingUnit }
+								
+								onClick={productPaddingUnit => {
+									setAttributes({productPaddingUnit });
+									setproductPaddingUnit(productPaddingUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getproductPaddingType() }
+									min={ 0 }
+									max={ maxproductPaddingUnit }
+									changeType={ changeproductPaddingType }
+									onChange={ changeproductPadding }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getproductPadding( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getproductPadding( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getproductPadding( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getproductPadding( 'left' )
+										}
+									] }
+								/>
+              
+							</ResponsiveControl>
+              <ResponsiveControl
+								label={ __( 'Border Radius', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.productBrdrRadiusUnit }
+								
+								onClick={productBrdrRadiusUnit => {
+									setAttributes({productBrdrRadiusUnit });
+									setproductBrdrRadiusUnit(productBrdrRadiusUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getproductBrdrRadiusType() }
+									min={ 0 }
+									max={ maxproductBrdrRadiusUnit }
+									changeType={ changeproductBrdrRadiusType }
+									onChange={ changeproductBrdrRadius }
+									options={ [
+										{
+											label: __(  'T-R', 'themehunk-block'),
+											type: 'top',
+											value: getproductBrdrRadius( 'top' )
+										},
+										{
+											label: __(  'T-L', 'themehunk-block' ),
+											type: 'right',
+											value: getproductBrdrRadius( 'right' )
+										},
+										
+										{
+											label: __( 'B-R', 'themehunk-block'  ),
+											type: 'left',
+											value: getproductBrdrRadius( 'left' )
+										},
+										{
+											label: __( 'B-L', 'themehunk-block'),
+											type: 'bottom',
+											value: getproductBrdrRadius( 'bottom' )
+										},
+									] }
+								/>
+
+							</ResponsiveControl>
+              <ResponsiveControl
+								label={ __( 'Gap between elements', 'themehunk-block' ) }
+								>	
+								<UnitChooser
+								value={ attributes.elementGapUnit }
+								onClick={elementGapUnit => {
+									setAttributes({ elementGapUnit });
+									setelementGapUnit(elementGapUnit);
+								}}
+								
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipElementGap }
+									initialPosition={20}
+									value={ getElementGap() || '' }
+									onChange={ changeElementGap }
+									step={ 1 }
+									min={ 1 }
+									max={ maxelementGapUnit }
+									allowReset={ true }
+								/>
+                 </ResponsiveControl>
+
+                 <HoverControl value={ productelementclr }
+								options={[
+									{
+										label: __( 'Normal', 'themehunk-block' ),
+										value: 'normal'
+									},
+									{
+										label: __( 'Hover', 'themehunk-block' ),
+										value: 'hover'
+									}
+								]}
+						       onChange={ setproductelementclr } 
+						   />
+                { 'normal' ===  productelementclr &&  (
+                               <>
+                               <ColorGradientControl
+								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 colorValue={ attributes.productboxClr }
+								 onColorChange={ e => setAttributes({ productboxClr: e }) }
+								 enableAlpha={true} 
+								/>
+								  
+								</>
+						) || 'hover' ===  productelementclr  && (
+							<>
+							 <ColorGradientControl
+							  label={ __( 'Bg Hover Color', 'themehunk-block' ) }
+							  colorValue={ attributes.productboxHvrClr }
+							  onColorChange={ e => setAttributes({ productboxHvrClr: e }) }
+							  enableAlpha={true} 
+							 />
+							 </>
+
+						)
+            }  
 					 </PanelBody>
             </Fragment>
              ) || 'advanced' === tab && (
