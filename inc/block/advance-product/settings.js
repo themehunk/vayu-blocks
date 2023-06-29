@@ -401,8 +401,546 @@ const InsSettings = ({
 		return undefined;
 	};
 
+  // tab font family
+	const changetabFontFamily = value => {
+		if ( ! value ) {
+			setAttributes({
+				tabfontFamily: value,
+				tabfontVariant: value
+			});
+		} else {
+			setAttributes({
+				tabfontFamily: value,
+				tabfontVariant: 'normal',
+				tabfontStyle: 'normal'
+			});
+		}
+	};
+	//title lineheight
+	const [tablineHeightUnit, settablineHeightUnit] = useState('px');
+	const maxtablineHeightUnit = tablineHeightUnit === 'px' ? 150 : tablineHeightUnit === 'em' ? 10 : tablineHeightUnit === '%' ? 100:'';
+	const customTooltiptablineHeight = value => `${value}${attributes.tablineHeightUnit}`;
 
-  return (
+	const gettablineHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.tablineHeight;
+		case 'Tablet':
+			return attributes.tablineHeightTablet;
+		case 'Mobile':
+			return attributes.tablineHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changetablineHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ tablineHeight: value, tablineHeightTablet: value, tablineHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ tablineHeightTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ tablineHeightMobile: value });
+		}
+	};
+
+	//title fontsize
+	const [tabfontSizeUnit, settabfontSizeUnit] = useState('px');
+	const maxtabfontSizeUnit = tabfontSizeUnit === 'px' ? 150 : tabfontSizeUnit === 'em' ? 10 : tabfontSizeUnit === '%' ? 100:'';
+	const customTooltiptabfontSize = value => `${value}${attributes.tabfontSizeUnit}`;
+
+	const gettabfontSize = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.tabfontSize;
+		case 'Tablet':
+			return attributes.tabfontSizeTablet;
+		case 'Mobile':
+			return attributes.tabfontSizeMobile;
+		default:
+			return undefined;
+		}
+	};
+	const changetabfontSize = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ tabfontSize: value, tabfontSizeTablet: value, tabfontSizeMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ tabfontSizeTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ tabfontSizeMobile: value });
+		}
+	};
+
+	//tab letter spacing
+	const [tabletterSpacingUnit, settabletterSpacingUnit] = useState('px');
+	const maxtabletterSpacingUnit = tabletterSpacingUnit === 'px' ? 150 : tabletterSpacingUnit === 'em' ? 10 : tabletterSpacingUnit === '%' ? 100:'';
+	const customTooltiptabletterSpacing = value => `${value}${attributes.tabletterSpacingUnit}`;
+	
+	const gettabletterSpacing = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.tabletterSpacing;
+		case 'Tablet':
+			return attributes.tabletterSpacingTablet;
+		case 'Mobile':
+			return attributes.tabletterSpacingMobile;
+		default:
+			return undefined;
+		}
+	};
+
+    const changetabletterSpacing = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ tabletterSpacing: value, tabletterSpacingTablet: value, tabletterSpacingMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ tabletterSpacingTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ tabletterSpacingMobile: value });
+		}
+	};
+ 
+ const [ filtertab, setfiltertab ] = useState( 'normal' );
+// tab padding
+const [tabPaddingUnit, settabPaddingUnit] = useState('px');
+const maxtabPaddingUnit = tabPaddingUnit === 'px' ? 1500 : tabPaddingUnit === 'em' ? 50 : tabPaddingUnit === '%' ? 100:'';
+
+const gettabPaddingType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.tabPaddingType;
+	case 'Tablet':
+		return attributes.tabPaddingTypeTablet;
+	case 'Mobile':
+		return attributes.tabPaddingTypeMobile;
+	default:
+		return undefined;
+	}
+};
+const changetabPaddingType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ tabPaddingType: value, tabPaddingTypeTablet: value, tabPaddingTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ tabPaddingTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ tabPaddingTypeMobile: value });
+	}
+};
+const desktoptabPaddingType = {
+	top: 'tabPaddingTop',
+	right: 'tabPaddingRight',
+	bottom: 'tabPaddingBottom',
+	left: 'tabPaddingLeft'
+};
+const tablettabPaddingType = {
+	top: 'tabPaddingTopTablet',
+	right: 'tabPaddingRightTablet',
+	bottom: 'tabPaddingBottomTablet',
+	left: 'tabPaddingLeftTablet'
+};
+const mobiletabPaddingType = {
+	top: 'tabPaddingTopMobile',
+	right: 'tabPaddingRightMobile',
+	bottom: 'tabPaddingBottomMobile',
+	left: 'tabPaddingLeftMobile'
+};
+const changetabPadding = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.tabPaddingType ) {
+			setAttributes({ tabPadding: value , tabPaddingTablet: value , tabPaddingMobile: value});
+		} else {
+			setAttributes({ [desktoptabPaddingType[type]]: value, [tablettabPaddingType[type]]: value, [mobiletabPaddingType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.tabPaddingTypeTablet ) {
+			setAttributes({ tabPaddingTablet: value });
+		} else {
+			setAttributes({ [tablettabPaddingType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.tabPaddingTypeMobile ) {
+			setAttributes({ tabPaddingMobile: value });
+		} else {
+			setAttributes({ [mobiletabPaddingType[type]]: value });
+		}
+		break;
+	}
+};
+
+const gettabPadding = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabPaddingType ? attributes.tabPadding : attributes.tabPaddingTop;
+		case 'Tablet':
+			return 'linked' === attributes.tabPaddingTypeTablet ? attributes.tabPaddingTablet : attributes.tabPaddingTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabPaddingTypeMobile ? attributes.tabPaddingMobile : attributes.tabPaddingTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabPaddingType ? attributes.tabPadding : attributes.tabPaddingRight;
+		case 'Tablet':
+			return 'linked' === attributes.tabPaddingTypeTablet ? attributes.tabPaddingTablet : attributes.tabPaddingRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabPaddingTypeMobile ? attributes.tabPaddingMobile : attributes.tabPaddingRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabPaddingType ? attributes.tabPadding : attributes.tabPaddingBottom;
+		case 'Tablet':
+			return 'linked' === attributes.tabPaddingTypeTablet ? attributes.tabPaddingTablet : attributes.tabPaddingBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabPaddingTypeMobile ? attributes.tabPaddingMobile : attributes.tabPaddingBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabPaddingType ? attributes.tabPadding : attributes.tabPaddingLeft;
+		case 'Tablet':
+			return 'linked' === attributes.tabPaddingTablet ? attributes.tabPaddingTablet : attributes.tabPaddingLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabPaddingMobile ? attributes.tabPaddingMobile : attributes.tabPaddingLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+// tabMargin
+const gettabMarginType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.tabMarginType;
+	case 'Tablet':
+		return attributes.tabMarginTypeTablet;
+	case 'Mobile':
+		return attributes.tabMarginTypeMobile;
+	default:
+		return undefined;
+	}
+};
+const changetabMarginType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ tabMarginType: value,tabMarginTypeTablet: value, tabMarginTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ tabMarginTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ tabMarginTypeMobile: value });
+	}
+};
+const desktoptabMarginType = {
+	top: 'tabMarginTop',
+	right: 'tabMarginRight',
+	bottom: 'tabMarginBottom',
+	left: 'tabMarginLeft'
+};
+const tablettabMarginType = {
+	top: 'tabMarginTopTablet',
+	right: 'tabMargingRightTablet',
+	bottom: 'tabMarginBottomTablet',
+	left: 'tabMarginLeftTablet'
+};
+const mobiletabMarginType = {
+	top: 'tabMarginTopMobile',
+	right: 'tabMarginRightMobile',
+	bottom: 'tabMarginBottomMobile',
+	left: 'tabMarginLeftMobile'
+};
+const changetabMargin = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.tabMarginType ) {
+			setAttributes({ tabMargin: value, tabMarginTablet: value, tabMarginMobile: value });
+		} else {
+			setAttributes({ [desktoptabMarginType[type]]: value,[tablettabMarginType[type]]: value, [mobiletabMarginType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.tabMarginTypeTablet ) {
+			setAttributes({ tabMarginTablet: value });
+		} else {
+			setAttributes({ [tablettabMarginType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.tabMarginTypeMobile ) {
+			setAttributes({ tabMarginMobile: value });
+		} else {
+			setAttributes({ [mobiletabMarginType[type]]: value });
+		}
+		break;
+	}
+};
+const gettabMargin = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabMarginType ? attributes.tabMargin : attributes.tabMarginTop;
+		case 'Tablet':
+			return 'linked' === attributes.tabMarginTypeTablet ? attributes.tabMarginTablet : attributes.tabMarginTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabMarginTypeMobile ? attributes.tabMarginMobile : attributes.tabMarginTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabMarginType ? attributes.tabMargin : attributes.tabMarginRight;
+		case 'Tablet':
+			return 'linked' === attributes.tabMarginTypeTablet ? attributes.tabMarginTablet : attributes.tabMarginRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabMarginTypeMobile ? attributes.tabMarginMobile : attributes.tabMarginRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabMarginType ? attributes.tabMargin : attributes.tabMarginBottom;
+		case 'Tablet':
+			return 'linked' === attributes.tabMarginTypeTablet ? attributes.tabMarginTablet : attributes.tabMarginBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabMarginTypeMobile ? attributes.tabMarginMobile : attributes.tabMarginBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabMarginType ? attributes.tabMargin : attributes.tabMarginLeft;
+		case 'Tablet':
+			return 'linked' === attributes.tabMarginTypeTablet ? attributes.tabMarginTablet : attributes.tabMarginLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabMarginTypeMobile ? attributes.tabMarginMobile : attributes.tabMarginLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+const [tabMarginUnit, settabMarginUnit] = useState('px');
+const maxtabMarginUnit = tabMarginUnit === 'px' ? 1500 : tabMarginUnit === 'em' ? 50 : tabMarginUnit === '%' ? 100:'';
+  
+// tab border-width
+const [tabBorderWidthUnit, settabBorderWidthUnit] = useState('px');
+const maxtabBorderWidthUnit = tabBorderWidthUnit === 'px' ? 1500 : tabBorderWidthUnit === 'em' ? 50 : tabBorderWidthUnit === '%' ? 100:'';
+
+const gettabBorderWidthType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.tabBorderWidthType;
+	case 'Tablet':
+		return attributes.tabBorderWidthTypeTablet;
+	case 'Mobile':
+		return attributes.tabBorderWidthTypeMobile;
+	default:
+		return undefined;
+	}
+};
+const changetabBorderWidthType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ tabBorderWidthType: value, tabBorderWidthTypeTablet: value, tabBorderWidthTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ tabBorderWidthTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ tabBorderWidthTypeMobile: value });
+	}
+};
+const desktoptabBorderWidthType = {
+	top: 'tabBorderWidthTop',
+	right: 'tabBorderWidthRight',
+	bottom: 'tabBorderWidthBottom',
+	left: 'tabBorderWidthLeft'
+};
+const tablettabBorderWidthType = {
+	top: 'tabBorderWidthTopTablet',
+	right: 'tabBorderWidthRightTablet',
+	bottom: 'tabBorderWidthBottomTablet',
+	left: 'tabBorderWidthLeftTablet'
+};
+const mobiletabBorderWidthType = {
+	top: 'tabBorderWidthTopMobile',
+	right: 'tabBorderWidthRightMobile',
+	bottom: 'tabBorderWidthBottomMobile',
+	left: 'tabBorderWidthLeftMobile'
+};
+const changetabBorderWidth = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.tabBorderWidthType ) {
+			setAttributes({ tabBorderWidth: value , tabBorderWidthTablet: value , tabBorderWidthMobile: value});
+		} else {
+			setAttributes({ [desktoptabBorderWidthType[type]]: value, [tablettabBorderWidthType[type]]: value, [mobiletabBorderWidthType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.tabBorderWidthTypeTablet ) {
+			setAttributes({ tabBorderWidthTablet: value });
+		} else {
+			setAttributes({ [tablettabBorderWidthType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.tabBorderWidthTypeMobile ) {
+			setAttributes({ tabBorderWidthMobile: value });
+		} else {
+			setAttributes({ [mobiletabBorderWidthType[type]]: value });
+		}
+		break;
+	}
+};
+
+const gettabBorderWidth = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderWidthType ? attributes.tabBorderWidth : attributes.tabBorderWidthTop;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderWidthTypeTablet ? attributes.tabBorderWidthTablet : attributes.tabBorderWidthTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderWidthTypeMobile ? attributes.tabBorderWidthMobile : attributes.tabBorderWidthTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderWidthType ? attributes.tabBorderWidth : attributes.tabBorderWidthRight;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderWidthTypeTablet ? attributes.tabBorderWidthTablet : attributes.tabBorderWidthRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderWidthTypeMobile ? attributes.tabBorderWidthMobile : attributes.tabBorderWidthRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderWidthType ? attributes.tabBorderWidth : attributes.tabBorderWidthBottom;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderWidthTypeTablet ? attributes.tabBorderWidthTablet : attributes.tabBorderWidthBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderWidthTypeMobile ? attributes.tabBorderWidthMobile : attributes.tabBorderWidthBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderWidthType ? attributes.tabBorderWidth : attributes.tabBorderWidthLeft;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderWidthTablet ? attributes.tabBorderWidthTablet : attributes.tabBorderWidthLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderWidthMobile ? attributes.tabBorderWidthMobile : attributes.tabBorderWidthLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+
+// tab border-radius
+const [tabBorderRadiusUnit, settabBorderRadiusUnit] = useState('px');
+const maxtabBorderRadiusUnit = tabBorderRadiusUnit === 'px' ? 1500 : tabBorderRadiusUnit === 'em' ? 50 : tabBorderRadiusUnit === '%' ? 100:'';
+
+const gettabBorderRadiusType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.tabBorderRadiusType;
+	case 'Tablet':
+		return attributes.tabBorderRadiusTypeTablet;
+	case 'Mobile':
+		return attributes.tabBorderRadiusTypeMobile;
+	default:
+		return undefined;
+	}
+};
+const changetabBorderRadiusType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ tabBorderRadiusType: value, tabBorderRadiusTypeTablet: value, tabBorderRadiusTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ tabBorderRadiusTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ tabBorderRadiusTypeMobile: value });
+	}
+};
+const desktoptabBorderRadiusType = {
+	top: 'tabBorderRadiusTop',
+	right: 'tabBorderRadiusRight',
+	bottom: 'tabBorderRadiusBottom',
+	left: 'tabBorderRadiusLeft'
+};
+const tablettabBorderRadiusType = {
+	top: 'tabBorderRadiusTopTablet',
+	right: 'tabBorderRadiusRightTablet',
+	bottom: 'tabBorderRadiusBottomTablet',
+	left: 'tabBorderRadiusLeftTablet'
+};
+const mobiletabBorderRadiusType = {
+	top: 'tabBorderRadiusTopMobile',
+	right: 'tabBorderRadiusRightMobile',
+	bottom: 'tabBorderRadiusBottomMobile',
+	left: 'tabBorderRadiusLeftMobile'
+};
+const changetabBorderRadius = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.tabBorderRadiusType ) {
+			setAttributes({ tabBorderRadius: value , tabBorderRadiusTablet: value , tabBorderRadiusMobile: value});
+		} else {
+			setAttributes({ [desktoptabBorderRadiusType[type]]: value, [tablettabBorderRadiusType[type]]: value, [mobiletabBorderRadiusType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.tabBorderRadiusTypeTablet ) {
+			setAttributes({ tabBorderRadiusTablet: value });
+		} else {
+			setAttributes({ [tablettabBorderRadiusType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.tabBorderRadiusTypeMobile ) {
+			setAttributes({ tabBorderRadiusMobile: value });
+		} else {
+			setAttributes({ [mobiletabBorderRadiusType[type]]: value });
+		}
+		break;
+	}
+};
+
+const gettabBorderRadius = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderRadiusType ? attributes.tabBorderRadius : attributes.tabBorderRadiusTop;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderRadiusTypeTablet ? attributes.tabBorderRadiusTablet : attributes.tabBorderRadiusTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderRadiusTypeMobile ? attributes.tabBorderRadiusMobile : attributes.tabBorderRadiusTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderRadiusType ? attributes.tabBorderRadius : attributes.tabBorderRadiusRight;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderRadiusTypeTablet ? attributes.tabBorderRadiusTablet : attributes.tabBorderRadiusRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderRadiusTypeMobile ? attributes.tabBorderRadiusMobile : attributes.tabBorderRadiusRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderRadiusType ? attributes.tabBorderRadius : attributes.tabBorderRadiusBottom;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderRadiusTypeTablet ? attributes.tabBorderRadiusTablet : attributes.tabBorderRadiusBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderRadiusTypeMobile ? attributes.tabBorderRadiusMobile : attributes.tabBorderRadiusBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.tabBorderRadiusType ? attributes.tabBorderRadius : attributes.tabBorderRadiusLeft;
+		case 'Tablet':
+			return 'linked' === attributes.tabBorderRadiusTablet ? attributes.tabBorderRadiusTablet : attributes.tabBorderRadiusLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.tabBorderRadiusMobile ? attributes.tabBorderRadiusMobile : attributes.tabBorderRadiusLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+return (
         <Fragment>
            <InspectorControls>
            <InsSettingHeader value={ tab }
@@ -558,7 +1096,7 @@ const InsSettings = ({
 							setAttributes={ setAttributes }
 						/>
 					 </PanelBody>
-           <PanelBody
+                     <PanelBody
 						title={ __( 'Product Box', 'themehunk-block' ) }
 						initialOpen={ false }
 					  >
@@ -697,7 +1235,7 @@ const InsSettings = ({
 								]}
 						       onChange={ setproductelementclr } 
 						   />
-                { 'normal' ===  productelementclr &&  (
+                 { 'normal' ===  productelementclr &&  (
                                <>
                                <ColorGradientControl
 								 label={ __( 'Bg Color', 'themehunk-block' ) }
@@ -705,8 +1243,69 @@ const InsSettings = ({
 								 onColorChange={ e => setAttributes({ productboxClr: e }) }
 								 enableAlpha={true} 
 								/>
-								  
-								</>
+								<ControlPanelControl
+								label={ __( 'Box Shadow', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								resetValues={ {
+									boxShadow: false,
+									boxShadowColor: undefined,
+									boxShadowColorOpacity: 50,
+									boxShadowBlur: 5,
+									boxShadowSpread: 1,
+									boxShadowHorizontal: 0,
+									boxShadowVertical: 0
+								} }
+								onClick={ () => setAttributes({ boxShadow: true }) }
+							>
+							<ColorGradientControl
+								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								colorValue={ attributes.boxShadowColor }
+								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+								enableAlpha={true} 
+							/>
+
+							<RangeControl
+								label={ __( 'Opacity', 'themehunk-block' ) }
+								value={ attributes.boxShadowColorOpacity }
+								onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Blur', 'themehunk-block' ) }
+								value={ attributes.boxShadowBlur }
+								onChange={ e => setAttributes({ boxShadowBlur: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Spread', 'themehunk-block' ) }
+								value={ attributes.boxShadowSpread }
+								onChange={ e => setAttributes({ boxShadowSpread: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Horizontal', 'themehunk-block' ) }
+								value={ attributes.boxShadowHorizontal }
+								onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Vertical', 'themehunk-block' ) }
+								value={ attributes.boxShadowVertical }
+								onChange={ e => setAttributes({ boxShadowVertical: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+							</ControlPanelControl>
+							</>
 						) || 'hover' ===  productelementclr  && (
 							<>
 							 <ColorGradientControl
@@ -715,11 +1314,463 @@ const InsSettings = ({
 							  onColorChange={ e => setAttributes({ productboxHvrClr: e }) }
 							  enableAlpha={true} 
 							 />
+							 <ControlPanelControl
+							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								boxShadowHvr: false,
+								boxShadowColorHvr: undefined,
+								boxShadowColorOpacityHvr: 50,
+								boxShadowBlurHvr: 5,
+								boxShadowSpreadHvr: 1,
+								boxShadowHorizontalHvr: 0,
+								boxShadowVerticalHvr: 0
+							} }
+							onClick={ () => setAttributes({ boxShadowHvr: true }) }
+						>
+						
+							<ColorGradientControl
+								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								colorValue={ attributes.boxShadowColorHvr }
+								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+								enableAlpha={true} 
+							/>
+
+							<RangeControl
+								label={ __( 'Opacity', 'themehunk-block' ) }
+								value={ attributes.boxShadowColorOpacityHvr }
+								onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Blur', 'themehunk-block' ) }
+								value={ attributes.boxShadowBlurHvr }
+								onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
+								min={ 0 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Spread', 'themehunk-block' ) }
+								value={ attributes.boxShadowSpreadHvr }
+								onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Horizontal', 'themehunk-block' ) }
+								value={ attributes.boxShadowHorizontalHvr }
+								onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+
+							<RangeControl
+								label={ __( 'Vertical', 'themehunk-block' ) }
+								value={ attributes.boxShadowVerticalHvr }
+								onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
+								min={ -100 }
+								max={ 100 }
+							/>
+							</ControlPanelControl>
 							 </>
 
 						)
-            }  
+                }  
 					 </PanelBody>
+					 <PanelBody
+						title={ __( 'Tab Filter', 'themehunk-block' ) }
+						initialOpen={ false }
+					  >
+						<ToggleControl
+								label={ __( 'Show Tab', 'themehunk-block' ) }
+								checked={ attributes.showTab }
+								onChange={ showTab => setAttributes({showTab}) }
+							 />
+						<ControlPanelControl
+								label={ __( 'Typography', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ tabTypography: true }) }
+								resetValues={
+									{
+										tabTypography:false,
+										tabfontFamily:"default",
+										tabfontVariant:"regular",
+										tabfontStyle:"regular",
+										tabtextTransform:"default",
+										tabfontSize:"",
+										tablineHeight:"",
+										tabletterSpacing:"",
+										tabfontSizeUnit:"px",
+										tablineHeightUnit:"px",
+										tabletterSpacingUnit:"px"
+									}
+								}
+							>
+							<GoogleFontsControl
+								label={ __( 'Font Family', 'themehunk-block' ) }
+								value={ attributes.tabfontFamily }
+								onChangeFontFamily={ changetabFontFamily }
+								valueVariant={ attributes.tabfontVariant }
+								onChangeFontVariant={tabfontVariant => setAttributes({ tabfontVariant }) }
+								valueStyle={ attributes.tabfontStyle }
+								onChangeFontStyle={ tabfontStyle => setAttributes({ tabfontStyle }) }
+								valueTransform={ attributes.tabtextTransform }
+								onChangeTextTransform={ tabtextTransform => setAttributes({ tabtextTransform }) }
+							    
+							/>
+							<ResponsiveControl
+								label={ __( 'Font Size', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.tabfontSizeUnit }
+								onClick={tabfontSizeUnit => {
+									setAttributes({ tabfontSizeUnit });
+									settabfontSizeUnit(tabfontSizeUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltiptabfontSize }
+									value={ gettabfontSize() || '' }
+									onChange={ changetabfontSize }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxtabfontSizeUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+                               <ResponsiveControl
+								label={ __( 'Line Height', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.tablineHeightUnit }
+								onClick={tablineHeightUnit => {
+									setAttributes({ tablineHeightUnit });
+									settablineHeightUnit(tablineHeightUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltiptablineHeight }
+									value={ gettablineHeight() || '' }
+									onChange={ changetablineHeight }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxtablineHeightUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+							<ResponsiveControl
+								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+							     >	
+								<UnitChooser
+								value={ attributes.tabletterSpacingUnit }
+								onClick={tabletterSpacingUnit => {
+									setAttributes({ tabletterSpacingUnit });
+									settabletterSpacingUnit(tabletterSpacingUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltiptabletterSpacing }
+									value={ gettabletterSpacing() || '' }
+									onChange={ changetabletterSpacing }
+									step={ 0.1 }
+									min={ 0 }
+									max={ maxtabletterSpacingUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+
+						</ControlPanelControl>
+						<ControlPanelControl
+								label={ __( 'Color', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ tabColorset: true }) }
+								resetValues={
+									{
+										
+										tabColor:"",
+										tabColorHvr:"",
+										
+									}
+								}
+								
+							>
+                       <HoverControl value={ filtertab }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Active / Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setfiltertab } 
+						/>
+                        { 'normal' ===  filtertab &&  (
+							   <>
+                                <ColorGradientControl
+								 label={ __( 'Tab Color', 'themehunk-block' ) }
+								 colorValue={ attributes.tabColor }
+								 onColorChange={ e => setAttributes({ tabColor: e }) }
+								 enableAlpha={true} 
+								 />
+								 <ColorGradientControl
+								 label={ __( 'Tab BG Color', 'themehunk-block' ) }
+								 colorValue={ attributes.tabBgColor }
+								 onColorChange={ e => setAttributes({ tabBgColor : e }) }
+								 enableAlpha={true} 
+								 />
+								 </>
+						) || 'hover' ===  filtertab && (
+							     <>
+								 <ColorGradientControl
+								 label={ __( 'Tab Hover/Active Color ', 'themehunk-block' ) }
+								 colorValue={ attributes.tabColorHvr }
+								 onColorChange={ e => setAttributes({ tabColorHvr: e }) }
+								 enableAlpha={true} 
+								 /> 
+								 <ColorGradientControl
+								 label={ __( 'Tab BG Hover/Active Color ', 'themehunk-block' ) }
+								 colorValue={ attributes.tabBgColorHvr }
+								 onColorChange={ e => setAttributes({ tabBgColorHvr: e }) }
+								 enableAlpha={true} 
+								 />
+								 </>
+						)}
+
+						</ControlPanelControl>
+						<ControlPanelControl
+								label={ __( 'Border', 'themehunk-block' ) }
+								attributes={ attributes }
+								setAttributes={ setAttributes }
+								onClick={ () => setAttributes({ tabBorder: true }) }
+								resetValues={
+									{
+										
+										tabborderType:"none",
+										tabBorderWidthUnit:"px",
+										tabBorderRadiusUnit:"px",
+										tabBorderColor:"",
+										tabBorderRadiusType:"linked",
+										tabBorderWidthType:"linked",
+
+									}
+								}
+							>
+                        <SelectControl
+						label={ __( 'Border Type', 'themehunk-block' ) }
+						value={ attributes.tabborderType }
+						options={ [
+							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
+							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
+							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
+							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
+							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+						] }
+						onChange={ e => setAttributes({ tabborderType: e }) }
+					   />	
+					   { 'none' !== attributes.tabborderType && (
+						   <>
+							<ResponsiveControl
+									label={ __( 'Border Width', 'themehunk-block' ) }
+								>
+								<UnitChooser
+									value={ attributes.tabBorderWidthUnit }
+									onClick={tabBorderWidthUnit => {
+										setAttributes({tabBorderWidthUnit });
+										settabBorderWidthUnit(tabBorderWidthUnit);
+									}}
+									units={ [ 'px', 'em', '%' ] }
+								/>
+								<SizingControl
+										type={ gettabBorderWidthType() }
+										min={ 0 }
+										max={ maxtabBorderWidthUnit }
+										changeType={ changetabBorderWidthType }
+										onChange={ changetabBorderWidth }
+										options={ [
+											{
+												label: __( 'Top', 'themehunk-block' ),
+												type: 'top',
+												value: gettabBorderWidth( 'top' )
+											},
+											{
+												label: __( 'Right', 'themehunk-block' ),
+												type: 'right',
+												value: gettabBorderWidth( 'right' )
+											},
+											{
+												label: __( 'Bottom', 'themehunk-block' ),
+												type: 'bottom',
+												value: gettabBorderWidth( 'bottom' )
+											},
+											{
+												label: __( 'Left', 'themehunk-block' ),
+												type: 'left',
+												value: gettabBorderWidth( 'left' )
+											}
+										] }
+									/>
+
+								</ResponsiveControl>
+								<ResponsiveControl
+									label={ __( 'Border Radius', 'themehunk-block' ) }
+								>
+								<UnitChooser
+									value={ attributes.tabBorderRadiusUnit }
+									onClick={tabBorderRadiusUnit => {
+										setAttributes({tabBorderRadiusUnit });
+										settabBorderRadiusUnit(tabBorderRadiusUnit);
+									}}
+									units={ [ 'px', 'em', '%' ] }
+								/>
+								<SizingControl
+										type={ gettabBorderRadiusType() }
+										min={ 0 }
+										max={ maxtabBorderRadiusUnit }
+										changeType={ changetabBorderRadiusType }
+										onChange={ changetabBorderRadius }
+										options={ [
+											{
+												label: __( 'Top', 'themehunk-block' ),
+												type: 'top',
+												value: gettabBorderRadius( 'top' )
+											},
+											{
+												label: __( 'Right', 'themehunk-block' ),
+												type: 'right',
+												value: gettabBorderRadius( 'right' )
+											},
+											{
+												label: __( 'Bottom', 'themehunk-block' ),
+												type: 'bottom',
+												value: gettabBorderRadius( 'bottom' )
+											},
+											{
+												label: __( 'Left', 'themehunk-block' ),
+												type: 'left',
+												value: gettabBorderRadius( 'left' )
+											}
+										] }
+									/>
+
+								</ResponsiveControl>
+								<ColorGradientControl
+									label={ __( 'Border Color', 'themehunk-block' ) }
+									colorValue={ attributes.tabBorderColor }
+									onColorChange={ e => setAttributes({ tabBorderColor: e }) }
+									enableAlpha={true} 
+									/>
+							     </>
+
+							) }
+						</ControlPanelControl>
+
+						<ResponsiveControl
+								label={ __( 'Padding', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.tabPaddingUnit }
+								
+								onClick={tabPaddingUnit => {
+									setAttributes({tabPaddingUnit });
+									settabPaddingUnit(tabPaddingUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ gettabPaddingType() }
+									min={ 0 }
+									max={ maxtabPaddingUnit }
+									changeType={ changetabPaddingType }
+									onChange={ changetabPadding }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: gettabPadding( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: gettabPadding( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: gettabPadding( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: gettabPadding( 'left' )
+										}
+									] }
+								/>
+              
+							</ResponsiveControl>
+							<ResponsiveControl
+								label={ __( 'Margin', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.tabMarginUnit }
+								
+								onClick={tabMarginUnit => {
+									setAttributes({ tabMarginUnit });
+									settabMarginUnit(tabMarginUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ gettabMarginType() }
+									min={ 0 }
+									max={ maxtabMarginUnit }
+									changeType={ changetabMarginType }
+									onChange={ changetabMargin }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: gettabMargin( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: gettabMargin( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: gettabMargin( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: gettabMargin( 'left' )
+										},
+									] }
+								/>
+
+							</ResponsiveControl>
+
+                    </PanelBody>
             </Fragment>
              ) || 'advanced' === tab && (
             <Fragment>
