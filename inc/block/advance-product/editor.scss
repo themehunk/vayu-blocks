@@ -210,6 +210,7 @@
 	--tab-hvr-color:var(--tab-color);
     --tab-bg-hvr-color:var(--tab-bg-color);
 	--tab-font-size:14px;
+	--tab-border-color-hvr:var(--tab-border-color);
 
 	.th-product-block-product-content .th-product-block-product-item-wrap {
 		grid-row-gap: var(--element-gap);
@@ -379,11 +380,14 @@
 			&:hover {
 				color:var(--tab-hvr-color);
 				background:var(--tab-bg-hvr-color);
+				border-color:var(--tab-border-color-hvr);
 				}
 			&.active {
 				color:var(--tab-hvr-color);
 				background:var(--tab-bg-hvr-color);
-				  }
+				border-color:var(--tab-border-color-hvr);
+				  
+			}
 
 	  }
 }

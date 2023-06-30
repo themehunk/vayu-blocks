@@ -677,10 +677,10 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
     '--tab-border-width-style':attributes.tabborderType,
     '--tab-border-color':attributes.tabBorderColor,
+    '--tab-border-color-hvr':attributes.tabBorderColorHvr,
 
 
   }
-  
   
 
   const style = omitBy({
@@ -702,6 +702,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     <div {...blockProps} >   
     <div className="th-product-block-wrapper">
         <>
+        {attributes.showTab && (
           <div className="th-product-block-cat-filter">
             <ul className="category-tabs">
               {attributes.productCategories.map((category) => (
@@ -715,6 +716,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
               ))}
             </ul>
           </div>
+        )}
           <div className="th-product-block-product-content">
             <div className="th-product-block-product-item-wrap">
              {isLoading && (

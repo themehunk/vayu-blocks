@@ -940,6 +940,279 @@ const gettabBorderRadius = type => {
 
 	return undefined;
 };
+
+//padding
+const getPaddingType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.paddingType;
+	case 'Tablet':
+		return attributes.paddingTypeTablet;
+	case 'Mobile':
+		return attributes.paddingTypeMobile;
+	default:
+		return undefined;
+	}
+};
+
+const changePaddingType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ paddingType: value,paddingTypeTablet: value, paddingTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ paddingTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ paddingTypeMobile: value });
+	}
+};
+const desktopPaddingType = {
+	top: 'paddingTop',
+	right: 'paddingRight',
+	bottom: 'paddingBottom',
+	left: 'paddingLeft'
+};
+const tabletPaddingType = {
+	top: 'paddingTopTablet',
+	right: 'paddingRightTablet',
+	bottom: 'paddingBottomTablet',
+	left: 'paddingLeftTablet'
+};
+const mobilePaddingType = {
+	top: 'paddingTopMobile',
+	right: 'paddingRightMobile',
+	bottom: 'paddingBottomMobile',
+	left: 'paddingLeftMobile'
+};
+const changePadding = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.paddingType ) {
+			setAttributes({ padding: value,paddingTablet: value, paddingMobile: value });
+		} else {
+			setAttributes({ [desktopPaddingType[type]]: value });
+			setAttributes({ [desktopPaddingType[type]]: value,[tabletPaddingType[type]]: value, [mobilePaddingType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.paddingTypeTablet ) {
+			setAttributes({ paddingTablet: value });
+		} else {
+			setAttributes({ [tabletPaddingType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.paddingTypeMobile ) {
+			setAttributes({ paddingMobile: value });
+		} else {
+			setAttributes({ [mobilePaddingType[type]]: value });
+		}
+		break;
+	}
+};
+
+const getPadding = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.paddingType ? attributes.padding : attributes.paddingTop;
+		case 'Tablet':
+			return 'linked' === attributes.paddingTypeTablet ? attributes.paddingTablet : attributes.paddingTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.paddingTypeMobile ? attributes.paddingMobile : attributes.paddingTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.paddingType ? attributes.padding : attributes.paddingRight;
+		case 'Tablet':
+			return 'linked' === attributes.paddingTypeTablet ? attributes.paddingTablet : attributes.paddingRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.paddingTypeMobile ? attributes.paddingMobile : attributes.paddingRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.paddingType ? attributes.padding : attributes.paddingBottom;
+		case 'Tablet':
+			return 'linked' === attributes.paddingTypeTablet ? attributes.paddingTablet : attributes.paddingBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.paddingTypeMobile ? attributes.paddingMobile : attributes.paddingBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.paddingType ? attributes.padding : attributes.paddingLeft;
+		case 'Tablet':
+			return 'linked' === attributes.paddingTypeTablet ? attributes.paddingTablet : attributes.paddingLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.paddingTypeMobile ? attributes.paddingMobile : attributes.paddingLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+const [paddingUnit, setpaddingUnit] = useState('px');
+const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100:'';
+// margin
+const getMarginType = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.marginType;
+	case 'Tablet':
+		return attributes.marginTypeTablet;
+	case 'Mobile':
+		return attributes.marginTypeMobile;
+	default:
+		return undefined;
+	}
+};
+const changeMarginType = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ marginType: value,marginTypeTablet: value, marginTypeMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ marginTypeTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ marginTypeMobile: value });
+	}
+};
+const desktopMarginType = {
+	top: 'marginTop',
+	right: 'marginRight',
+	bottom: 'marginBottom',
+	left: 'marginLeft'
+};
+const tabletMarginType = {
+	top: 'marginTopTablet',
+	right: 'margingRightTablet',
+	bottom: 'marginBottomTablet',
+	left: 'marginLeftTablet'
+};
+const mobileMarginType = {
+	top: 'marginTopMobile',
+	right: 'marginRightMobile',
+	bottom: 'marginBottomMobile',
+	left: 'marginLeftMobile'
+};
+const changeMargin = ( type, value ) => {
+	switch ( getView ) {
+	case 'Desktop':
+		if ( 'linked' === attributes.marginType ) {
+			setAttributes({ margin: value, marginTablet: value, marginMobile: value });
+		} else {
+			setAttributes({ [desktopMarginType[type]]: value,[tabletMarginType[type]]: value, [mobileMarginType[type]]: value });
+		}
+		break;
+	case 'Tablet':
+		if ( 'linked' === attributes.marginTypeTablet ) {
+			setAttributes({ marginTablet: value });
+		} else {
+			setAttributes({ [tabletMarginType[type]]: value });
+		}
+		break;
+	case 'Mobile':
+		if ( 'linked' === attributes.marginTypeMobile ) {
+			setAttributes({ marginMobile: value });
+		} else {
+			setAttributes({ [mobileMarginType[type]]: value });
+		}
+		break;
+	}
+};
+const getMargin = type => {
+	if ( 'top' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.marginType ? attributes.margin : attributes.marginTop;
+		case 'Tablet':
+			return 'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginTopTablet;
+		case 'Mobile':
+			return 'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginTopMobile;
+		}
+	} else if ( 'right' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.marginType ? attributes.margin : attributes.marginRight;
+		case 'Tablet':
+			return 'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginRightTablet;
+		case 'Mobile':
+			return 'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginRightMobile;
+		}
+	} else if ( 'bottom' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.marginType ? attributes.margin : attributes.marginBottom;
+		case 'Tablet':
+			return 'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginBottomTablet;
+		case 'Mobile':
+			return 'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginBottomMobile;
+		}
+	} else if ( 'left' == type ) {
+		switch ( getView ) {
+		case 'Desktop':
+			return 'linked' === attributes.marginType ? attributes.margin : attributes.marginLeft;
+		case 'Tablet':
+			return 'linked' === attributes.marginTypeTablet ? attributes.marginTablet : attributes.marginLeftTablet;
+		case 'Mobile':
+			return 'linked' === attributes.marginTypeMobile ? attributes.marginMobile : attributes.marginLeftMobile;
+		}
+	}
+
+	return undefined;
+};
+const [marginUnit, setmarginUnit] = useState('px');
+const maxmarginUnit = marginUnit === 'px' ? 1500 : marginUnit === 'em' ? 50 : marginUnit === '%' ? 100:'';
+
+const getCustomWidth = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.customWidth;
+	case 'Tablet':
+		return attributes.customWidthTablet;
+	case 'Mobile':
+		return attributes.customWidthMobile;
+	default:
+		return undefined;
+	}
+};
+
+const changeCustomWidth = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ customWidthTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ customWidthMobile: value });
+	}
+};
+const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+const [customWidthUnit, setcustomWidthUnit] = useState('px');
+const maxcustomWidthUnit = customWidthUnit === 'px' ? 3000 : customWidthUnit === 'em' ? 10 : customWidthUnit === '%' ? 100:'';
+
+const customTooltipZindex = value => `${value}px`
+const getZindex = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.zindex;
+	case 'Tablet':
+		return attributes.zindexTablet;
+	case 'Mobile':
+		return attributes.zindexMobile;
+	default:
+		return undefined;
+	}
+};
+
+const changeZindex = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ zindexTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ zindexMobile: value });
+	}
+};
+const [ hover, setHover ] = useState( 'normal' );
+const customTooltiptransitionAll = value => `${value}`;
+
 return (
         <Fragment>
            <InspectorControls>
@@ -1678,6 +1951,12 @@ return (
 									onColorChange={ e => setAttributes({ tabBorderColor: e }) }
 									enableAlpha={true} 
 									/>
+								<ColorGradientControl
+									label={ __( 'Border Hover Color', 'themehunk-block' ) }
+									colorValue={ attributes.tabBorderColorHvr }
+									onColorChange={ e => setAttributes({ tabBorderColorHvr: e }) }
+									enableAlpha={true} 
+									/>	
 							     </>
 
 							) }
@@ -1774,10 +2053,340 @@ return (
             </Fragment>
              ) || 'advanced' === tab && (
             <Fragment>
-                <PanelBody title={ __( 'General', 'themehunk-block' ) }
-                     className="th-adv-h-panel" initialOpen={ true }         
+              <PanelBody title={ __( 'Layout', 'themehunk-block' ) }
+						initialOpen={ true }        
                 >
-             </PanelBody>
+				<ResponsiveControl
+								label={ __( 'Padding', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.paddingUnit }
+								onClick={paddingUnit => {
+									setAttributes({ paddingUnit });
+									setpaddingUnit(paddingUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />	
+                            <SizingControl
+									type={ getPaddingType() }
+									min={ 0 }
+									max={maxpaddingUnit}
+									changeType={ changePaddingType }
+									onChange={ changePadding }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getPadding( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getPadding( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getPadding( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getPadding( 'left' )
+										}
+									] }
+								/>
+
+							</ResponsiveControl>
+							<ResponsiveControl
+								label={ __( 'Margin', 'themehunk-block' ) }
+							>
+							<UnitChooser
+								value={ attributes.marginUnit }
+								
+								onClick={marginUnit => {
+									setAttributes({ marginUnit });
+									setmarginUnit(marginUnit);
+								  }}
+								units={ [ 'px', 'em', '%' ] }
+						    />
+                            <SizingControl
+									type={ getMarginType() }
+									min={ 0 }
+									max={ maxmarginUnit }
+									changeType={ changeMarginType }
+									onChange={ changeMargin }
+									options={ [
+										{
+											label: __( 'Top', 'themehunk-block' ),
+											type: 'top',
+											value: getMargin( 'top' )
+										},
+										{
+											label: __( 'Right', 'themehunk-block' ),
+											type: 'right',
+											value: getMargin( 'right' )
+										},
+										{
+											label: __( 'Bottom', 'themehunk-block' ),
+											type: 'bottom',
+											value: getMargin( 'bottom' )
+										},
+										{
+											label: __( 'Left', 'themehunk-block' ),
+											type: 'left',
+											value: getMargin( 'left' )
+										},
+									] }
+								/>
+
+							</ResponsiveControl>
+
+							<SelectControl
+								label={ __( 'Width', 'themehunk-block' ) }
+								value={ attributes.widthType }
+								options={ [
+									{ label:  __( 'Default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'Full Width(100%)', 'themehunk-block' ), value: 'fullwidth' },
+									{ label: __( 'Inline(Auto)', 'themehunk-block' ), value: 'inlinewidth' },
+								    { label: __( 'Custom', 'themehunk-block' ), value: 'customwidth' },
+								] }
+								onChange={ e => setAttributes({ widthType: e }) }
+							/>
+							{ 'customwidth' == attributes.widthType && (
+
+							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+							<ResponsiveControl
+							label={ __( 'Custom Width', 'themehunk-block' ) }
+							>
+
+							<UnitChooser
+								value={ attributes.customWidthUnit }
+								onClick={customWidthUnit => {
+									setAttributes({ customWidthUnit });
+									setcustomWidthUnit(customWidthUnit);
+								  }}
+			
+								units={ [ 'px', 'em', '%' ] }
+						        />
+								<RangeControl
+								    renderTooltipContent={ customTooltipCustomWidth }
+									value={ getCustomWidth() || ''  }
+									onChange={ changeCustomWidth }
+									step={ 1 }
+									min={ 0 }
+									max={ maxcustomWidthUnit }
+									allowReset={ true }
+								/>
+								</ResponsiveControl>
+							</Suspense>
+
+							) }
+
+                             <ResponsiveControl
+								label={ __( 'Z-index', 'themehunk-block' ) }
+							     >	
+								<RangeControl
+								    renderTooltipContent={ customTooltipZindex }
+									value={ getZindex() || '' }
+									onChange={ changeZindex }
+									step={ 1 }
+									min={ -999999 }
+									max={ 999999 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+                       </PanelBody>
+			           <PanelBody
+						title={ __( 'Background', 'themehunk-block' ) }
+						className="th-product-panel"
+						initialOpen={ false }
+						> 
+
+						<HoverControl value={ hover }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setHover } />
+
+						{ 'normal' ===  hover &&  (
+
+						<BackgroundSelectorControl
+								backgroundType={ attributes.backgroundType }
+								backgroundColor={ attributes.backgroundColor }
+								image={ attributes.backgroundImage }
+								gradient={ attributes.backgroundGradient }
+								focalPoint={ attributes.backgroundPosition }
+								backgroundAttachment={ attributes.backgroundAttachment }
+								backgroundRepeat={ attributes.backgroundRepeat }
+								backgroundSize={ attributes.backgroundSize }
+								changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
+								changeImage={ media => {
+									setAttributes({
+										backgroundImage: pick( media, [ 'id', 'url' ])
+									});
+								}}
+								removeImage={ () => setAttributes({ backgroundImage: undefined })}
+								changeColor={ value => setAttributes({ backgroundColor: value })}
+								changeGradient={ value => setAttributes({ backgroundGradient: value }) }
+								changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
+								changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
+								changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
+								changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
+							/>
+
+						) || 'hover' ===  hover && (
+						<>
+						<BackgroundSelectorControl
+						backgroundType={ attributes.backgroundTypeHvr }
+						backgroundColor={ attributes.backgroundColorHvr }
+						image={ attributes.backgroundImageHvr }
+						gradient={ attributes.backgroundGradientHvr }
+						focalPoint={ attributes.backgroundPositionHvr }
+						backgroundAttachment={ attributes.backgroundAttachmentHvr }
+						backgroundRepeat={ attributes.backgroundRepeatHvr }
+						backgroundSize={ attributes.backgroundSizeHvr }
+						changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
+						changeImage={ media => {
+							setAttributes({
+								backgroundImageHvr: pick( media, [ 'id', 'url' ])
+							});
+						}}
+						removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
+						changeColor={ value => setAttributes({ backgroundColorHvr: value })}
+						changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
+						changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
+						changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
+						changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
+						changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
+						/>
+
+						</>
+
+						)}	
+                        
+			          </PanelBody>
+					  <PanelBody
+						title={ __( 'Overlay', 'themehunk-block' ) }
+						initialOpen={ false }
+						className="th-product-panel th-overlay-control"
+						> 
+
+						<HoverControl value={ hover }
+						options={[
+							{
+								label: __( 'Normal', 'themehunk-block' ),
+								value: 'normal'
+							},
+							{
+								label: __( 'Hover', 'themehunk-block' ),
+								value: 'hover'
+							}
+						]}
+						onChange={ setHover } />
+
+						{ 'normal' ===  hover &&  (
+
+							<BackgroundSelectorControl
+							backgroundType={ attributes.overlaybackgroundType }
+							backgroundColor={ attributes.overlaybackgroundColor }
+							image={ attributes.overlaybackgroundImage }
+							gradient={ attributes.overlaybackgroundGradient }
+							focalPoint={ attributes.overlaybackgroundPosition }
+							backgroundAttachment={ attributes.overlaybackgroundAttachment }
+							backgroundRepeat={ attributes.overlaybackgroundRepeat }
+							backgroundSize={ attributes.overlaybackgroundSize }
+							changeBackgroundType={ value => setAttributes({ overlaybackgroundType: value }) }
+							changeImage={ media => {
+								setAttributes({
+									overlaybackgroundImage: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ overlaybackgroundImage: undefined })}
+							changeColor={ value => setAttributes({ overlaybackgroundColor: value })}
+							changeGradient={ value => setAttributes({ overlaybackgroundGradient: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ overlaybackgroundAttachment: value })}
+							changeBackgroundRepeat={ value => setAttributes({ overlaybackgroundRepeat: value })}
+							changeFocalPoint={ value => setAttributes({ overlaybackgroundPosition: value }) }
+							changeBackgroundSize={ value => setAttributes({ overlaybackgroundSize: value }) }
+							/>	
+
+						) || 'hover' ===  hover && (
+						<>
+						<BackgroundSelectorControl
+							backgroundType={ attributes.overlaybackgroundTypeHvr }
+							backgroundColor={ attributes.overlaybackgroundColorHvr }
+							image={ attributes.overlaybackgroundImageHvr }
+							gradient={ attributes.overlaybackgroundGradientHvr }
+							focalPoint={ attributes.overlaybackgroundPositionHvr }
+							backgroundAttachment={ attributes.overlaybackgroundAttachmentHvr }
+							backgroundRepeat={ attributes.overlaybackgroundRepeatHvr }
+							backgroundSize={ attributes.overlaybackgroundSizeHvr }
+							changeBackgroundType={ value => setAttributes({ overlaybackgroundTypeHvr: value }) }
+							changeImage={ media => {
+								setAttributes({
+									overlaybackgroundImageHvr: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ overlaybackgroundImageHvr: undefined })}
+							changeColor={ value => setAttributes({ overlaybackgroundColorHvr: value })}
+							changeGradient={ value => setAttributes({ overlaybackgroundGradientHvr: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ overlaybackgroundAttachmentHvr: value })}
+							changeBackgroundRepeat={ value => setAttributes({ overlaybackgroundRepeatHvr: value })}
+							changeFocalPoint={ value => setAttributes({ overlaybackgroundPositionHvr: value }) }
+							changeBackgroundSize={ value => setAttributes({ overlaybackgroundSizeHvr: value }) }
+							/>	
+
+						</>
+
+						)}	
+                        
+						</PanelBody>
+						<PanelBody
+							title={ __( 'Transition', 'themehunk-block' ) }
+							className="th-product-panel"
+							initialOpen={ false }
+						> 
+						<RangeControl
+						label={ __( 'Transition Duration', 'themehunk-block' ) }
+						renderTooltipContent={ customTooltiptransitionAll }
+						value={ attributes.transitionAll }
+						onChange={ transitionAll => setAttributes({ transitionAll }) }
+						step={ 0.1 }
+						min={ 0 }
+						max={ 3 }
+						allowReset={ true }
+						/>
+						</PanelBody>
+
+						<PanelBody
+							title={ __( 'Responsive', 'themehunk-block' ) }
+							className="th-product-panel"
+							initialOpen={ false }
+						> 
+						<ToggleControl
+										label={ __( 'Hide On Desktop', 'themehunk-block' ) }
+										checked={ attributes.responsiveTogHideDesktop }
+										onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
+									/>
+						<ToggleControl
+										label={ __( 'Hide On Tablet', 'themehunk-block' ) }
+										checked={ attributes.responsiveTogHideTablet }
+										onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
+									/>				
+						<ToggleControl
+										label={ __( 'Hide On Mobile', 'themehunk-block' ) }
+										checked={ attributes.responsiveTogHideMobile }
+										onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
+									/>
+						</PanelBody>
             </Fragment>
          )}
            </InspectorControls>
