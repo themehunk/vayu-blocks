@@ -937,6 +937,7 @@ export const SortableItem = ({
 	const [ title, settitle ] = useState( 'normal' );
     const [ cat, setcat ] = useState( 'normal' );
 	const [ buttonclr, setbuttonclr ] = useState( 'normal' );
+	const [ postmetaclr, setpostmetaclr ] = useState( 'normal' );
 	return (
 		<div
 			className={ classnames(
@@ -1101,6 +1102,56 @@ export const SortableItem = ({
 								checked={ attributes.showCompare }
 								onChange={ showCompare => setAttributes({ showCompare }) }
 							 />
+							 <ToggleControl
+								label={ __( 'Quick View', 'themehunk-block' ) }
+								checked={ attributes.showView }
+								onChange={ showView => setAttributes({ showView }) }
+							 />
+							 <HoverControl value={ postmetaclr }
+								options={[
+									{
+										label: __( 'Normal', 'themehunk-block' ),
+										value: 'normal'
+									},
+									{
+										label: __( 'Hover', 'themehunk-block' ),
+										value: 'hover'
+									}
+								]}
+						       onChange={ setpostmetaclr } 
+						/>
+                        { 'normal' ===  postmetaclr &&  (
+                               <>
+                               <ColorGradientControl
+								 label={ __( 'Post Meta Color', 'themehunk-block' ) }
+								 colorValue={ attributes.postMetaClr }
+								 onColorChange={ e => setAttributes({ postMetaClr: e }) }
+								 enableAlpha={true} 
+								/>
+								<ColorGradientControl
+								 label={ __( 'Post Meta Bg Color', 'themehunk-block' ) }
+								 colorValue={ attributes.postMetaBgClr }
+								 onColorChange={ e => setAttributes({ postMetaBgClr: e }) }
+								 enableAlpha={true} 
+								/>    
+								</>
+						) || 'hover' ===  postmetaclr  && (
+							<>
+							 <ColorGradientControl
+							  label={ __( 'Post Meta Hover Color', 'themehunk-block' ) }
+							  colorValue={ attributes.postMetaHvrClr }
+							  onColorChange={ e => setAttributes({ postMetaHvrClr: e }) }
+							  enableAlpha={true} 
+							 />
+							 <ColorGradientControl
+							  label={ __( 'Post Meta Bg Hover Color', 'themehunk-block' ) }
+							  colorValue={ attributes.postMetaBgHvrClr }
+							  onColorChange={ e => setAttributes({ postMetaBgHvrClr: e }) }
+							  enableAlpha={true} 
+							 />    
+							 </>
+
+						)}  
 						</Fragment>
 					) }
 
@@ -1406,7 +1457,7 @@ export const SortableItem = ({
 								onClick={ () => setAttributes({ titleColor: true }) }
 								resetValues={
 									{
-										titleTypography:false,
+										
 										productTitleColor:"",
 										productTitleColorHvr:"",
 										
@@ -1590,6 +1641,11 @@ export const SortableItem = ({
 
 					{ ( 'rating' === template ) && (
 						<Fragment >
+							<ToggleControl
+								label={ __( 'Hide Rating', 'themehunk-block' ) }
+								checked={ attributes.hideRating }
+								onChange={ hideRating => setAttributes({hideRating}) }
+							 />
 							<ControlPanelControl
 								label={ __( 'Typography', 'themehunk-block' ) }
 								attributes={ attributes }
