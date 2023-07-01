@@ -333,6 +333,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 			tabBorderRadiusbottom: 'linked' === attributes.tabBorderRadiusType ? `${ attributes.tabBorderRadius }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusBottom}${ attributes.tabBorderRadiusUnit }`,
 			tabBorderRadiusright: 'linked' === attributes.tabBorderRadiusType ? `${ attributes.tabBorderRadius }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusRight}${ attributes.tabBorderRadiusUnit }`,
 			tabBorderRadiusleft: 'linked' === attributes.tabBorderRadiusType ? `${ attributes.tabBorderRadius }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusLeft}${ attributes.tabBorderRadiusUnit }`,
+    
+      paddingTop: 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
+      paddingRight: 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
+      paddingBottom: 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
+      paddingLeft: 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
+    
+      marginTop: 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginTop }${ attributes.marginUnit }`,
+      marginBottom: 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginBottom }${ attributes.marginUnit }`,
+      marginRight: 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginRight }${ attributes.marginUnit }`,
+      marginLeft: 'linked' === attributes.marginType ? `${ attributes.margin }${ attributes.marginUnit }` : `${ attributes.marginLeft }${ attributes.marginUnit }`,   
+      
+     
+      
+      zindex: attributes.zindex,
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -400,7 +414,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       tabBorderRadiusbottom: 'linked' === attributes.tabBorderRadiusTypeTablet ? `${ attributes.tabBorderRadiusTablet }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusBottomTablet}${ attributes.tabBorderRadiusUnit }`,
       tabBorderRadiusright: 'linked' === attributes.tabBorderRadiusTypeTablet ? `${ attributes.tabBorderRadiusTablet }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusRightTablet}${ attributes.tabBorderRadiusUnit }`,
       tabBorderRadiusleft: 'linked' === attributes.tabBorderRadiusTypeTablet ? `${ attributes.tabBorderRadiusTablet }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusLeftTablet}${ attributes.tabBorderRadiusUnit }`,
-
+      
+      paddingTop: 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingTopTablet }${ attributes.paddingUnit }`,
+      paddingRight: 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingRightTablet }${ attributes.paddingUnit }`,
+      paddingBottom: 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingBottomTablet }${ attributes.paddingUnit }`,
+      paddingLeft: 'linked' === attributes.paddingTypeTablet ? `${ attributes.paddingTablet }${ attributes.paddingUnit }` : `${ attributes.paddingLeftTablet }${ attributes.paddingUnit }`,
+    
+      marginTop: 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginTopTablet }${ attributes.marginUnit }`,
+      marginBottom: 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginBottomTablet }${ attributes.marginUnit }`,
+      marginRight: 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginRightTablet }${ attributes.marginUnit }`,
+      marginLeft: 'linked' === attributes.marginTypeTablet ? `${ attributes.marginTablet }${ attributes.marginUnit }` : `${ attributes.marginLeftTablet }${ attributes.marginUnit }`,   
+      
+     
+      
+      zindex: attributes.zindexTablet,
     
     },
     mobile: {
@@ -470,6 +497,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
       tabBorderRadiusright: 'linked' === attributes.tabBorderRadiusTypeMobile ? `${ attributes.tabBorderRadiusMobile }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusRightMobile}${ attributes.tabBorderRadiusUnit }`,
       tabBorderRadiusleft: 'linked' === attributes.tabBorderRadiusTypeMobile ? `${ attributes.tabBorderRadiusMobile }${ attributes.tabBorderRadiusUnit }` : `${ attributes.tabBorderRadiusLeftMobile}${ attributes.tabBorderRadiusUnit }`,
 
+      paddingTop: 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingTopMobile }${ attributes.paddingUnit }`,
+      paddingRight: 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingRightMobile }${ attributes.paddingUnit }`,
+      paddingBottom: 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingBottomMobile }${ attributes.paddingUnit }`,
+      paddingLeft: 'linked' === attributes.paddingTypeMobile ? `${ attributes.paddingMobile }${ attributes.paddingUnit }` : `${ attributes.paddingLeftMobile }${ attributes.paddingUnit }`,
+      
+      marginTop: 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginTopMobile }${ attributes.marginUnit }`,
+      marginBottom: 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginBottomMobile }${ attributes.marginUnit }`,
+      marginRight: 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginRightMobile }${ attributes.marginUnit }`,
+      marginLeft: 'linked' === attributes.marginTypeMobile ? `${ attributes.marginMobile }${ attributes.marginUnit }` : `${ attributes.marginLeftMobile }${ attributes.marginUnit }`,   
+      
+    
+      
+      zindex: attributes.zindexMobile,
+    
     }
 
   };
@@ -556,7 +597,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const TabBorderRadiusRight = deviceAttributeMap[deviceType].tabBorderRadiusright;
   const TabBorderRadiusLeft = deviceAttributeMap[deviceType].tabBorderRadiusleft;
 
+  const PaddingTop    = deviceAttributeMap[deviceType].paddingTop;
+  const PaddingBottom = deviceAttributeMap[deviceType].paddingBottom;
+  const PaddingRight  = deviceAttributeMap[deviceType].paddingRight;
+  const PaddingLeft   = deviceAttributeMap[deviceType].paddingLeft;
+
+  const MarginTop     = deviceAttributeMap[deviceType].marginTop;
+  const MarginBottom  = deviceAttributeMap[deviceType].marginBottom;
+  const MarginRight   = deviceAttributeMap[deviceType].marginRight;
+  const MarginLeft    = deviceAttributeMap[deviceType].marginLeft;
+
+  const Zindex   = deviceAttributeMap[deviceType].zindex;
+
   let boxShadowStyle;
+ 
 
   if ( attributes.boxShadow ) {
     boxShadowStyle = {
@@ -569,8 +623,121 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     };
   }
 
+  let backgroundStyle;
+
+  if ('color' === attributes.backgroundType) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background': attributes.backgroundColor,
+    };
+    }
+    
+    if ('color' === attributes.backgroundTypeHvr) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': attributes.backgroundColorHvr,
+    };
+    }
+    
+    if ('image' === attributes.backgroundType) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background': attributes.backgroundImage?.url ? `url('${attributes.backgroundImage.url}')` : 'none',
+      '--background-attachment': attributes.backgroundAttachment,
+      '--background-position': `${Math.round(attributes.backgroundPosition?.x * 100)}% ${Math.round(attributes.backgroundPosition?.y * 100)}%`,
+      '--background-repeat': attributes.backgroundRepeat,
+      '--background-size': attributes.backgroundSize,
+    };
+    }
+    
+    if ('image' === attributes.backgroundTypeHvr) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': attributes.backgroundImageHvr?.url ? `url('${attributes.backgroundImageHvr.url}')` : 'none',
+      '--background-attachment-hvr': attributes.backgroundAttachmentHvr,
+      '--background-position-hvr': `${Math.round(attributes.backgroundPositionHvr?.x * 100)}% ${Math.round(attributes.backgroundPositionHvr?.y * 100)}%`,
+      '--background-repeat-hvr': attributes.backgroundRepeatHvr,
+      '--background-size-hvr': attributes.backgroundSizeHvr,
+    };
+    }
+    
+    if ('gradient' === attributes.backgroundType) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background': attributes.backgroundGradient,
+    };
+    }
+    
+    if ('gradient' === attributes.backgroundTypeHvr) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': attributes.backgroundGradientHvr,
+    };
+    }
+
+    let customwidth;
+
+    if( attributes.widthType=='customwidth' ) {
+
+		if ( isDesktop ) {
+
+		customwidth = {
+             
+			'--custom-width':attributes.customWidth + attributes.customWidthUnit,
+			'--custom-max-width':attributes.customWidth + attributes.customWidthUnit,
+			
+		};
+
+	   }
+
+	   if ( isTablet ) {
+
+		customwidth = {
+             
+			'--custom-width':attributes.customWidthTablet + attributes.customWidthUnit,
+			'--custom-max-width':attributes.customWidthTablet + attributes.customWidthUnit,
+			
+		};
+
+	   }
+
+	   if ( isMobile ) {
+
+		customwidth = {
+             
+			'--custom-width':attributes.customWidthMobile + attributes.customWidthUnit,
+			'--custom-max-width':attributes.customWidthMobile + attributes.customWidthUnit,
+			
+		};
+		
+	   }
+
+	}
+
+	if( attributes.widthType =='fullwidth' ) {
+
+		customwidth = {
+             
+			'--custom-width':'100%',
+      '--custom-max-width':'100%'
+			
+		};
+
+	}
+
+    if( attributes.widthType =='inlinewidth' ) {
+
+		customwidth = {
+             
+	    '--display':'inline-flex',
+			
+		};
+
+	}
   ProductStyles = {
     ...boxShadowStyle,
+    ...backgroundStyle,
+    ...customwidth,
     '--title-color': attributes.productTitleColor,
     '--title-color-hvr': attributes.productTitleColorHvr,
     '--title-font-family':attributes.titlefontFamily,
@@ -679,9 +846,94 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--tab-border-color':attributes.tabBorderColor,
     '--tab-border-color-hvr':attributes.tabBorderColorHvr,
 
+    '--padding-top':PaddingTop,
+    '--padding-bottom':PaddingBottom,
+    '--padding-right':PaddingRight,
+    '--padding-left':PaddingLeft,
 
+    '--margin-top':MarginTop,
+    '--margin-bottom':MarginBottom,
+    '--margin-right':MarginRight,
+    '--margin-left':MarginLeft,
+    '--z-index':Zindex,
+    '--transition': attributes.transitionAll + 's',
+    
   }
   
+  let overlayBackground;
+  const showShouldOverlay = ( 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor ) 
+			|| ( 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient ) 
+			|| ( 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr )
+            || ( 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr )
+			|| ( 'image' === attributes.overlaybackgroundType && attributes.overlaybackgroundImage )
+            || ( 'image' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundImageHvr )
+      if ( 'color' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					'--background-overlay': attributes.overlaybackgroundColor,
+				    
+				};
+			}
+			if ( 'color' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundColorHvr,
+				    
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay': attributes.overlaybackgroundGradient,
+				   
+				};
+			}
+
+			if ( 'gradient' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': attributes.overlaybackgroundGradientHvr,
+				  
+				};
+			}
+
+            if ( 'image' === attributes.overlaybackgroundType ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay': `url( '${ attributes.overlaybackgroundImage?.url }' )`,
+					'--background-overlay-attachment': attributes.overlaybackgroundAttachment,
+					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+					'--background-overlay-repeat': attributes.overlaybackgroundRepeat,
+					'--background-overlay-size': attributes.overlaybackgroundSize,
+				    
+				};
+			}
+
+			if ( 'image' === attributes.overlaybackgroundTypeHvr ) {
+				overlayBackground = {
+					...overlayBackground,
+					'--background-overlay-hvr': `url( '${ attributes.overlaybackgroundImageHvr?.url }' )`,
+					'--background-overlay-attachment-hvr': attributes.overlaybackgroundAttachmentHvr,
+					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
+					'--background-overlay-repeat-hvr': attributes.overlaybackgroundRepeatHvr,
+					'--background-overlay-size-hvr': attributes.overlaybackgroundSizeHvr,
+				    
+				};
+			}
+
+	
+
+	const overlayStyle = {
+				...overlayBackground,
+	};
+
+  let containerClasses = classnames({
+				
+    "th-hide-desktop": attributes.responsiveTogHideDesktop,
+    "th-hide-tablet": attributes.responsiveTogHideTablet,
+    "th-hide-mobile": attributes.responsiveTogHideMobile,
+
+    });
 
   const style = omitBy({
     ...ColStyles,
@@ -690,6 +942,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
   const blockProps = useBlockProps({
     id:attributes.id,
+    className:containerClasses,
     style
   });
 
@@ -700,7 +953,14 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 				setAttributes={ setAttributes }
 			/>	
     <div {...blockProps} >   
+   
     <div className="th-product-block-wrapper">
+    {showShouldOverlay && (
+							<div
+								className="wp-block-th-blocks-overlay"
+								style={overlayStyle}
+							/>
+		)}
         <>
         {attributes.showTab && (
           <div className="th-product-block-cat-filter">
