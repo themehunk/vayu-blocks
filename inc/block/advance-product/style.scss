@@ -130,14 +130,14 @@
    }
    
    .th-product-block-cat-filter ul.category-tabs {
-       -js-display: flex;
+    list-style: none;
        display: flex;
        flex-wrap: wrap;
        margin: 0;
        padding: 0;
        width: 100%;
        justify-content: center;
-   margin-bottom:1.5rem
+        margin-bottom:1.5rem
    }
    
    .th-product-block-cat-filter ul.category-tabs li {

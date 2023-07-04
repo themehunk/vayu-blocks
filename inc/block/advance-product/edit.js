@@ -947,7 +947,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   });
 
   return ( 
-     <Fragment>
+    <Fragment>
 		<InsSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }

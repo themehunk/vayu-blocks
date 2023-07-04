@@ -18,7 +18,6 @@ import './style.scss';
  * Internal dependencies
  */
 import edit from './edit';
-import save from './save';
 import metadata from './block.json';
 
 const { name } = metadata;
@@ -33,7 +32,7 @@ registerBlockType( name, {
 		'advance product'
 	],
 	edit,
-	save,
+	save: () => null,
 	example: {
 		attributes: {
 			content: __( 'A product with more customization options', 'themehunk-block' )
