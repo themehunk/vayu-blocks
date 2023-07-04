@@ -37,6 +37,107 @@ import {
 } from '../../../src/components/index.js';
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
+import Select from 'react-select';
+
+const AnimationSelectControlObject = {
+	// None.
+	'none': { value: '', label: __( 'None', 'ultimate-addons-for-gutenberg' ) },
+
+	// Fade.
+	'fade': { value: 'fade', label: __( 'Fade', 'ultimate-addons-for-gutenberg' ) },
+	'fade-down': { value: 'fade-down', label: __( 'Fade Down', 'ultimate-addons-for-gutenberg' ) },
+	'fade-up': { value: 'fade-up', label: __( 'Fade Up', 'ultimate-addons-for-gutenberg' ) },
+	'fade-left': { value: 'fade-left', label: __( 'Fade Left', 'ultimate-addons-for-gutenberg' ) },
+	'fade-right': { value: 'fade-right', label: __( 'Fade Right', 'ultimate-addons-for-gutenberg' ) },	
+
+	// Flip.
+	'flip-down': { value: 'flip-down', label: __( 'Flip Down', 'ultimate-addons-for-gutenberg' ) },
+	'flip-up': { value: 'flip-up', label: __( 'Flip Up', 'ultimate-addons-for-gutenberg' ) },
+	'flip-left': { value: 'flip-left', label: __( 'Flip Left', 'ultimate-addons-for-gutenberg' ) },
+	'flip-right': { value: 'flip-right', label: __( 'Flip Right', 'ultimate-addons-for-gutenberg' ) },
+
+	// Slide.
+	'slide-down': { value: 'slide-down', label: __( 'Slide Down', 'ultimate-addons-for-gutenberg' ) },
+	'slide-up': { value: 'slide-up', label: __( 'Slide Up', 'ultimate-addons-for-gutenberg' ) },
+	'slide-left': { value: 'slide-left', label: __( 'Slide Left', 'ultimate-addons-for-gutenberg' ) },
+	'slide-right': { value: 'slide-right', label: __( 'Slide Right', 'ultimate-addons-for-gutenberg' ) },
+
+	// Zoom.
+	'zoom-in': { value: 'zoom-in', label: __( 'Zoom-In', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-in-down': { value: 'zoom-in-down', label: __( 'Zoom-In Down', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-in-up': { value: 'zoom-in-up', label: __( 'Zoom-In Up', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-in-left': { value: 'zoom-in-left', label: __( 'Zoom-In Left', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-in-right': { value: 'zoom-in-right', label: __( 'Zoom-In Right', 'ultimate-addons-for-gutenberg' ) },
+
+	'zoom-out': { value: 'zoom-out', label: __( 'Zoom-Out', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-out-down': { value: 'zoom-out-down', label: __( 'Zoom-Out Down', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-out-up': { value: 'zoom-out-up', label: __( 'Zoom-Out Up', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-out-left': { value: 'zoom-out-left', label: __( 'Zoom-Out Left', 'ultimate-addons-for-gutenberg' ) },
+	'zoom-out-right': { value: 'zoom-out-right', label: __( 'Zoom-Out Right', 'ultimate-addons-for-gutenberg' ) },
+};
+const AnimationList = [
+	// None.
+	{ value: '', label: __( 'None', 'ultimate-addons-for-gutenberg' ) },
+
+	// Fade.
+	{
+		label: __( 'Fade', 'ultimate-addons-for-gutenberg' ),
+		options: [
+			{ value: 'fade', label: __( 'Fade', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'fade-down', label: __( 'Fade Down', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'fade-up', label: __( 'Fade Up', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'fade-left', label: __( 'Fade Left', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'fade-right', label: __( 'Fade Right', 'ultimate-addons-for-gutenberg' ) },
+		],
+	},
+	
+	// Flip.
+	{
+		label: __( 'Flip', 'ultimate-addons-for-gutenberg' ),
+		options: [
+			{ value: 'flip-down', label: __( 'Flip Down', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'flip-up', label: __( 'Flip Up', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'flip-left', label: __( 'Flip Left', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'flip-right', label: __( 'Flip Right', 'ultimate-addons-for-gutenberg' ) },
+		],
+	},
+
+	// Slide.
+	{
+		label: __( 'Slide', 'ultimate-addons-for-gutenberg' ),
+		options: [
+			{ value: 'slide-down', label: __( 'Slide Down', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'slide-up', label: __( 'Slide Up', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'slide-left', label: __( 'Slide Left', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'slide-right', label: __( 'Slide Right', 'ultimate-addons-for-gutenberg' ) },
+		],
+	},
+
+	// Zoom-In.
+	{
+		label: __( 'Zoom-In', 'ultimate-addons-for-gutenberg' ),
+		options: [
+			{ value: 'zoom-in', label: __( 'Zoom-In', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-in-down', label: __( 'Zoom-In Down', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-in-up', label: __( 'Zoom-In Up', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-in-left', label: __( 'Zoom-In Left', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-in-right', label: __( 'Zoom-In Right', 'ultimate-addons-for-gutenberg' ) },
+		],
+	},
+
+	// Zoom-Out.
+	{
+		label: __( 'Zoom-Out', 'ultimate-addons-for-gutenberg' ),
+		options: [
+			{ value: 'zoom-out', label: __( 'Zoom-Out', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-out-down', label: __( 'Zoom-Out Down', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-out-up', label: __( 'Zoom-Out Up', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-out-left', label: __( 'Zoom-Out Left', 'ultimate-addons-for-gutenberg' ) },
+			{ value: 'zoom-out-right', label: __( 'Zoom-Out Right', 'ultimate-addons-for-gutenberg' ) },
+		],
+	},
+
+];
 const InsSettings = ({
     attributes,
     setAttributes
@@ -1509,6 +1610,75 @@ const InsSettings = ({
 		}
 	};
 
+
+	//Animation
+	// Get the easing functions from Pro.
+	const AnimationEasingFunctions = '';
+
+	// Function to trigger animation in editor (when changing animation type or clicking on play button).
+	// animationType - holds UAGAnimationType attribute by default but sometimes the attribute is not updated instantaneously, so we pass in the value from the Animation Type select component.
+	const playAnimation = ( animationType = attributes.UAGAnimationType ) => {
+		// For responsive preview.
+		const editorIframe = document.querySelector( 'iframe[name="editor-canvas"]' );
+		const innerDoc = editorIframe?.contentDocument || editorIframe?.contentWindow.document;
+
+		// Get block and the setTimeout code to clear from previous usage. Also check responsive preview.
+		const animatedBlock = editorIframe
+			? innerDoc.getElementById( 'block-' + attributes.uniqueID )
+			: document.getElementById( 'block-' + attributes.uniqueID );
+
+		const aosWaitPreviousCode = parseInt( localStorage.getItem( `aosWaitTimeoutCode-${ attributes.uniqueID }` ) );
+		const aosRemoveClassesTimeoutPreviousCode = parseInt(
+			localStorage.getItem( `aosRemoveClassesTimeoutCode-${ attributes.uniqueID }` )
+		);
+
+		// If the animation is played previously, remove the AOS class and attribute first.
+		// We ensure that the AOS class and attribute is removed in case the user repeated taps the play button.
+		if ( aosWaitPreviousCode ) {
+			animatedBlock.removeAttribute( 'data-aos' );
+			animatedBlock.classList.remove( 'aos-animate' );
+		}
+
+		// transition duration is set to 0s, cause the block first goes to the last frame (animated in reverse) when the AOS attribute is added and this should be instantaneous.
+		animatedBlock.style.transitionDuration = '0s';
+		// Add back the AOS attribute.
+		animatedBlock.setAttribute( 'data-aos', animationType );
+
+		// Due to CSS conflicts across themes in the editor, we set the easing using JS.
+		// Also we only provide default 'ease' in the free version, so if the easing function list is empty then use the default 'ease' function.
+		animatedBlock.style.transitionTimingFunction = AnimationEasingFunctions
+			? AnimationEasingFunctions[ UAGAnimationEasing ]
+			: 'cubic-bezier(.250, .100, .250, 1)';
+
+		// Clear previous timeouts.
+		clearTimeout( aosWaitPreviousCode );
+		clearTimeout( aosRemoveClassesTimeoutPreviousCode );
+
+		// Add the aos-animate class to play the animation with the given duration.
+		const aosWait = setTimeout( () => {
+			// Astra theme overrides (or even other themes may) the transition duration to a fixed value.
+			// Hence we do the calculation on the next line.
+			animatedBlock.style.transitionDuration = UAGAnimationTime / 1000 + 's';
+			animatedBlock.classList.add( 'aos-animate' );
+		}, 0 );
+
+		// Remove the classes and attributes after the animation has played.
+		// Keeping the classes and attributes after the animation has played can lead to buggy behavior in the editor.
+		const aosRemoveClasses = setTimeout( () => {
+			animatedBlock.removeAttribute( 'data-aos' );
+			animatedBlock.classList.remove( 'aos-animate' );
+			animatedBlock.style.transitionDuration = '';
+			animatedBlock.style.transitionTimingFunction = '';
+		}, UAGAnimationDelay + UAGAnimationTime );
+
+		// Set local storage so we can fetch the value during later usage to clear the intervals.
+		localStorage.setItem( `aosWaitTimeoutCode-${ attributes.uniqueID }`, aosWait );
+		localStorage.setItem( `aosRemoveClassesTimeoutCode-${ attributes.uniqueID }`, aosRemoveClasses );
+	};
+
+
+	console.log(attributes.UAGAnimationType);
+	// console.log(attributes.attributes.uniqueID);
     return (<Fragment>
         <InspectorControls>
         <InsSettingHeader value={ tab }
@@ -2966,7 +3136,22 @@ const InsSettings = ({
 							/>
 						</ResponsiveControl>					
 			
-							   
+						<Select
+								placeholder = { __( 'Animation Type', 'themehunk-block' ) }
+								value={
+									attributes.UAGAnimationType !== ''
+										? AnimationSelectControlObject[ attributes.UAGAnimationType ]
+										: AnimationSelectControlObject.none
+								}
+								options={ AnimationList }
+								onChange={ ( selection ) => {
+									setAttributes( { UAGAnimationType: selection.value } );
+									// Play animation when the animation type is changed.
+									// We pass in 'value' since the UAGAnimationType may still hold the old animation type value.
+									playAnimation( selection.value );
+								} }
+								isSearchable={ true }
+							/>		   
 
                 </PanelBody>
 

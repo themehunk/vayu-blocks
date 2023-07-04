@@ -740,7 +740,7 @@ function Edit(_ref) {
     setAttributes: setAttributes
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ResizableBox, {
     enable: {
-      bottom: true,
+      bottom: false,
       bottomLeft: false,
       bottomRight: false,
       left: false,

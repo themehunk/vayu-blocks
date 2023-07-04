@@ -8,7 +8,6 @@
  */
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import { ResizableBox } from '@wordpress/components';
 import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
@@ -177,20 +176,20 @@ else{
 
 	if(attributes.iconPosition == 'before'){
 		iconPositionStyle = {
-			'--order': 5,
+			'--orderButton': 5,
 			'--iconMargin' : `0 ${ attributes.iconSpacing }px 0 0`
 		  };
 	}
 	else{
 		iconPositionStyle = {
-			'--order': 15,
+			'--orderButton': 15,
 			'--iconMargin' : `0 0 0 ${ attributes.iconSpacing }px`
 		  };
 	}
 	
 	if(isDesktop){
 		buttonWrapperStyle = {
-	  	'--justify-content': attributes.align,
+	'--justify-content': attributes.align,
 
 	'--paddingTop': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
 	'--paddingRight': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
@@ -224,7 +223,6 @@ else{
 	'--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
 	'--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
 
-
 	}
 	 /********************* */
       // position properies 
@@ -245,14 +243,12 @@ else{
 			}
 
 		 }
-
 		 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--top':attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
 			}
 
 		 }
-
 		 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--bottom':attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
@@ -359,16 +355,12 @@ else{
       '--borderTopRightRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrTopTablet }${ attributes.borderRadiusHvrUnit }`,
       '--borderTopLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRightTablet }${ attributes.borderRadiusHvrUnit }`,
       '--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeftTablet }${ attributes.borderRadiusHvrUnit }`,
-      '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottomTablet }${ attributes.borderRadiusHvrUnit }`,
-
-      
+      '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottomTablet }${ attributes.borderRadiusHvrUnit }`,   
 	  
 	}
-
-		
+	
      // position properties
-
-			if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+	 if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					'--left':attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
 				}
@@ -394,7 +386,6 @@ else{
 				}
 	
 			 }
-
        
 		/********************* */
         // flex properies 
@@ -447,9 +438,8 @@ else{
       '--border-bottom-width':'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomTablet }${ attributes.buttonborderWidthUnit }`,
       '--border-right-width': 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightTablet }${ attributes.buttonborderWidthUnit }`,
       '--border-left-width': 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftTablet }${ attributes.buttonborderWidthUnit }`,
-      
 
-      '--borderTopRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusTopTablet }${ attributes.buttonborderRadiusUnit }`,
+    '--borderTopRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusTopTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderTopLeftRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusRightTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderBottomRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusLeftTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderBottomLeftRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusBottomTablet }${ attributes.buttonborderRadiusUnit }`,
