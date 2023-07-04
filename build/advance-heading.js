@@ -304,11 +304,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var hex_rgba__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! hex-rgba */ "./node_modules/hex-rgba/index.js");
 /* harmony import */ var hex_rgba__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(hex_rgba__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./controls.js */ "./inc/block/advance-heading/controls.js");
-/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./settings.js */ "./inc/block/advance-heading/settings.js");
-/* harmony import */ var _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../src/helpers/google-fonts.js */ "./src/helpers/google-fonts.js");
-/* harmony import */ var _src_helpers_get_unique_id_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../src/helpers/get-unique-id.js */ "./src/helpers/get-unique-id.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./editor.scss */ "./inc/block/advance-heading/editor.scss");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _controls_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./controls.js */ "./inc/block/advance-heading/controls.js");
+/* harmony import */ var _settings_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./settings.js */ "./inc/block/advance-heading/settings.js");
+/* harmony import */ var _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../src/helpers/google-fonts.js */ "./src/helpers/google-fonts.js");
+/* harmony import */ var _src_helpers_get_unique_id_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../src/helpers/get-unique-id.js */ "./src/helpers/get-unique-id.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./editor.scss */ "./inc/block/advance-heading/editor.scss");
 
 
 /**
@@ -339,7 +341,7 @@ function Edit(_ref) {
     uniqueID
   } = _ref;
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_10__["default"].attach();
+    _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__["default"].attach();
   }, [attributes.id]);
   const {
     id
@@ -362,7 +364,7 @@ function Edit(_ref) {
     };
   }, [clientId]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    const uniqueId = (0,_src_helpers_get_unique_id_js__WEBPACK_IMPORTED_MODULE_11__["default"])(uniqueID, clientId, isUniqueID, isUniqueBlock);
+    const uniqueId = (0,_src_helpers_get_unique_id_js__WEBPACK_IMPORTED_MODULE_12__["default"])(uniqueID, clientId, isUniqueID, isUniqueBlock);
     if (uniqueId !== uniqueID) {
       attributes.uniqueID = uniqueId;
       setAttributes({
@@ -409,27 +411,48 @@ function Edit(_ref) {
   let stylesheet;
   let flexProperties;
   let PositionProperties;
+  stylesheet = {
+    '--heading-color': attributes.headingColor,
+    '--heading-hvr-color': attributes.headingHvrColor,
+    '--heading-font-family': attributes.fontFamily || undefined,
+    '--heading-font-weight': 'regular' === attributes.fontVariant ? 'normal' : attributes.fontVariant,
+    '--heading-font-style': attributes.fontStyle || undefined,
+    '--heading-text-transform': attributes.textTransform || undefined,
+    '--heading-border-style': attributes.borderType,
+    '--heading-border-color': attributes.borderColor,
+    '--heading-border-hvr-style': attributes.borderHvrType,
+    '--heading-border-hvr-color': attributes.borderColorHvr
+  };
   if (isDesktop) {
     stylesheet = {
-      textAlign: attributes.align,
-      fontSize: attributes.fontSize + attributes.fontSizeUnit,
-      zIndex: attributes.zindex,
-      lineHeight: (3 < attributes.lineHeight ? attributes.lineHeight + attributes.lineHeightUnit : attributes.lineHeight) || undefined,
-      letterSpacing: attributes.letterSpacing && `${attributes.letterSpacing}${attributes.letterSpacingUnit}`,
-      paddingTop: 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingTop}${attributes.paddingUnit}`,
-      paddingRight: 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingRight}${attributes.paddingUnit}`,
-      paddingBottom: 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingBottom}${attributes.paddingUnit}`,
-      paddingLeft: 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingLeft}${attributes.paddingUnit}`,
-      marginTop: 'linked' === attributes.marginType ? `${attributes.margin}${attributes.marginUnit}` : `${attributes.marginTop}${attributes.marginUnit}`,
-      marginBottom: 'linked' === attributes.marginType ? `${attributes.margin}${attributes.marginUnit}` : `${attributes.marginBottom}${attributes.marginUnit}`,
-      borderTopWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthTop}${attributes.borderWidthUnit}`,
-      borderBottomWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottom}${attributes.borderWidthUnit}`,
-      borderRightWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthRight}${attributes.borderWidthUnit}`,
-      borderLeftWidth: 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeft}${attributes.borderWidthUnit}`,
-      borderTopRightRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTop}${attributes.borderRadiusUnit}`,
-      borderTopLeftRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRight}${attributes.borderRadiusUnit}`,
-      borderBottomRightRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeft}${attributes.borderRadiusUnit}`,
-      borderBottomLeftRadius: 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottom}${attributes.borderRadiusUnit}`
+      ...stylesheet,
+      '--text-align': attributes.align,
+      '--font-size': attributes.fontSize + attributes.fontSizeUnit,
+      '--z-index': attributes.zindex,
+      '--line-height': (3 < attributes.lineHeight ? attributes.lineHeight + attributes.lineHeightUnit : attributes.lineHeight) || undefined,
+      '--letter-spacing': attributes.letterSpacing && `${attributes.letterSpacing}${attributes.letterSpacingUnit}`,
+      '--padding-top': 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingTop}${attributes.paddingUnit}`,
+      '--padding-right': 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingRight}${attributes.paddingUnit}`,
+      '--padding-bottom': 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingBottom}${attributes.paddingUnit}`,
+      '--padding-left': 'linked' === attributes.paddingType ? `${attributes.padding}${attributes.paddingUnit}` : `${attributes.paddingLeft}${attributes.paddingUnit}`,
+      '--margin-top': 'linked' === attributes.marginType ? `${attributes.margin}${attributes.marginUnit}` : `${attributes.marginTop}${attributes.marginUnit}`,
+      '--margin-bottom': 'linked' === attributes.marginType ? `${attributes.margin}${attributes.marginUnit}` : `${attributes.marginBottom}${attributes.marginUnit}`,
+      '--border-top-width': 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthTop}${attributes.borderWidthUnit}`,
+      '--border-bottom-width': 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottom}${attributes.borderWidthUnit}`,
+      '--border-right-width': 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthRight}${attributes.borderWidthUnit}`,
+      '--border-left-width': 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeft}${attributes.borderWidthUnit}`,
+      '--border-top-right-radius': 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTop}${attributes.borderRadiusUnit}`,
+      '--border-top-left-radius': 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRight}${attributes.borderRadiusUnit}`,
+      '--border-bottom-right-radius': 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeft}${attributes.borderRadiusUnit}`,
+      '--border-bottom-left-radius': 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottom}${attributes.borderRadiusUnit}`,
+      '--border-top-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTop}${attributes.borderWidthHvrUnit}`,
+      '--border-bottom-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottom}${attributes.borderWidthHvrUnit}`,
+      '--border-right-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRight}${attributes.borderWidthHvrUnit}`,
+      '--border-left-width-hvr': 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeft}${attributes.borderWidthHvrUnit}`,
+      '--border-top-right-radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTop}${attributes.borderRadiusHvrUnit}`,
+      '--border-top-left-radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRight}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-right-radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeft}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-left-radius-hvr': 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottom}${attributes.borderRadiusHvrUnit}`
     };
 
     /********************* */
@@ -519,25 +542,34 @@ function Edit(_ref) {
   }
   if (isTablet) {
     stylesheet = {
-      textAlign: attributes.alignTablet,
-      fontSize: attributes.fontSizeTablet + attributes.fontSizeUnit,
-      zIndex: attributes.zindexTablet,
-      lineHeight: (3 < attributes.lineHeightTablet ? attributes.lineHeightTablet + attributes.lineHeightUnit : attributes.lineHeightTablet) || undefined,
-      letterSpacing: attributes.letterSpacingTablet && `${attributes.letterSpacingTablet}${attributes.letterSpacingUnit}`,
-      paddingTop: 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingTopTablet}${attributes.paddingUnit}`,
-      paddingRight: 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingRightTablet}${attributes.paddingUnit}`,
-      paddingBottom: 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingBottomTablet}${attributes.paddingUnit}`,
-      paddingLeft: 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingLeftTablet}${attributes.paddingUnit}`,
-      marginTop: 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}${attributes.marginUnit}` : `${attributes.marginTopTablet}${attributes.marginUnit}`,
-      marginBottom: 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}${attributes.marginUnit}` : `${attributes.marginBottomTablet}${attributes.marginUnit}`,
-      borderTopWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopTablet}${attributes.borderWidthUnit}`,
-      borderBottomWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomTablet}${attributes.borderWidthUnit}`,
-      borderRightWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightTablet}${attributes.borderWidthUnit}`,
-      borderLeftWidth: 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftTablet}${attributes.borderWidthUnit}`,
-      borderTopRightRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopTablet}${attributes.borderRadiusUnit}`,
-      borderTopLeftRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightTablet}${attributes.borderRadiusUnit}`,
-      borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftTablet}${attributes.borderRadiusUnit}`,
-      borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomTablet}${attributes.borderRadiusUnit}`
+      ...stylesheet,
+      '--text-align': attributes.alignTablet,
+      '--font-size': attributes.fontSizeTablet + attributes.fontSizeUnit,
+      '--z-Index': attributes.zindexTablet,
+      '--line-height': (3 < attributes.lineHeightTablet ? attributes.lineHeightTablet + attributes.lineHeightUnit : attributes.lineHeightTablet) || undefined,
+      '--letter-spacing': attributes.letterSpacingTablet && `${attributes.letterSpacingTablet}${attributes.letterSpacingUnit}`,
+      '--padding-top': 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingTopTablet}${attributes.paddingUnit}`,
+      '--padding-right': 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingRightTablet}${attributes.paddingUnit}`,
+      '--padding-bottom': 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingBottomTablet}${attributes.paddingUnit}`,
+      '--padding-left': 'linked' === attributes.paddingTypeTablet ? `${attributes.paddingTablet}${attributes.paddingUnit}` : `${attributes.paddingLeftTablet}${attributes.paddingUnit}`,
+      '--margin-top': 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}${attributes.marginUnit}` : `${attributes.marginTopTablet}${attributes.marginUnit}`,
+      '--margin-bottom': 'linked' === attributes.marginTypeTablet ? `${attributes.marginTablet}${attributes.marginUnit}` : `${attributes.marginBottomTablet}${attributes.marginUnit}`,
+      '--border-top-width': 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopTablet}${attributes.borderWidthUnit}`,
+      '--border-bottom-width': 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomTablet}${attributes.borderWidthUnit}`,
+      '--border-right-width': 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightTablet}${attributes.borderWidthUnit}`,
+      '--border-left-width': 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftTablet}${attributes.borderWidthUnit}`,
+      '--border-top-right-radius': 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopTablet}${attributes.borderRadiusUnit}`,
+      '--border-top-left-radius': 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightTablet}${attributes.borderRadiusUnit}`,
+      '--border-bottom-right-radius': 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftTablet}${attributes.borderRadiusUnit}`,
+      '--border-bottom-left-radius': 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomTablet}${attributes.borderRadiusUnit}`,
+      '--border-top-width-hvr': 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTopTablet}${attributes.borderWidthHvrUnit}`,
+      '--border-bottom-width-hvr': 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottomTablet}${attributes.borderWidthHvrUnit}`,
+      '--border-right-width-hvr': 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRightTablet}${attributes.borderWidthHvrUnit}`,
+      '--border-left-width-hvr': 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeftTablet}${attributes.borderWidthHvrUnit}`,
+      '--border-top-right-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTopTablet}${attributes.borderRadiusHvrUnit}`,
+      '--border-top-left-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRightTablet}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-right-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeftTablet}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-left-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottomTablet}${attributes.borderRadiusHvrUnit}`
     };
 
     /********************* */
@@ -623,25 +655,34 @@ function Edit(_ref) {
   }
   if (isMobile) {
     stylesheet = {
-      textAlign: attributes.alignMobile,
-      fontSize: attributes.fontSizeMobile + attributes.fontSizeUnit,
-      zIndex: attributes.zindexMobile,
-      lineHeight: (3 < attributes.lineHeightMobile ? attributes.lineHeightMobile + attributes.lineHeightUnit : attributes.lineHeightMobile) || undefined,
-      letterSpacing: attributes.letterSpacingMobile && `${attributes.letterSpacingMobile}${attributes.letterSpacingUnit}`,
-      paddingTop: 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingTopMobile}${attributes.paddingUnit}`,
-      paddingRight: 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingRightMobile}${attributes.paddingUnit}`,
-      paddingBottom: 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingBottomMobile}${attributes.paddingUnit}`,
-      paddingLeft: 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingLeftMobile}${attributes.paddingUnit}`,
-      marginTop: 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}${attributes.marginUnit}` : `${attributes.marginTopMobile}${attributes.marginUnit}`,
-      marginBottom: 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}${attributes.marginUnit}` : `${attributes.marginBottomMobile}${attributes.marginUnit}`,
-      borderTopWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopMobile}${attributes.borderWidthUnit}`,
-      borderBottomWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomMobile}${attributes.borderWidthUnit}`,
-      borderRightWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightMobile}${attributes.borderWidthUnit}`,
-      borderLeftWidth: 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftMobile}${attributes.borderWidthUnit}`,
-      borderTopRightRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopMobile}${attributes.borderRadiusUnit}`,
-      borderTopLeftRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightMobile}${attributes.borderRadiusUnit}`,
-      borderBottomRightRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftMobile}${attributes.borderRadiusUnit}`,
-      borderBottomLeftRadius: 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomMobile}${attributes.borderRadiusUnit}`
+      ...stylesheet,
+      '--text-align': attributes.alignMobile,
+      '--font-size': attributes.fontSizeMobile + attributes.fontSizeUnit,
+      '--z-index': attributes.zindexMobile,
+      '--line-height': (3 < attributes.lineHeightMobile ? attributes.lineHeightMobile + attributes.lineHeightUnit : attributes.lineHeightMobile) || undefined,
+      '--letter-spacing': attributes.letterSpacingMobile && `${attributes.letterSpacingMobile}${attributes.letterSpacingUnit}`,
+      '--padding-top': 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingTopMobile}${attributes.paddingUnit}`,
+      '--padding-right': 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingRightMobile}${attributes.paddingUnit}`,
+      '--padding-bottom': 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingBottomMobile}${attributes.paddingUnit}`,
+      '--padding-left': 'linked' === attributes.paddingTypeMobile ? `${attributes.paddingMobile}${attributes.paddingUnit}` : `${attributes.paddingLeftMobile}${attributes.paddingUnit}`,
+      '--margin-top': 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}${attributes.marginUnit}` : `${attributes.marginTopMobile}${attributes.marginUnit}`,
+      '--margin-bottom': 'linked' === attributes.marginTypeMobile ? `${attributes.marginMobile}${attributes.marginUnit}` : `${attributes.marginBottomMobile}${attributes.marginUnit}`,
+      '--border-top-width': 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopMobile}${attributes.borderWidthUnit}`,
+      '--border-bottom-width': 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomMobile}${attributes.borderWidthUnit}`,
+      '--border-right-width': 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightMobile}${attributes.borderWidthUnit}`,
+      '--border-left-width': 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftMobile}${attributes.borderWidthUnit}`,
+      '--border-top-right-radius': 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopMobile}${attributes.borderRadiusUnit}`,
+      '--border-top-left-radius': 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightMobile}${attributes.borderRadiusUnit}`,
+      '--border-bottom-right-radius': 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftMobile}${attributes.borderRadiusUnit}`,
+      '--border-bottom-left-radius': 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomMobile}${attributes.borderRadiusUnit}`,
+      '--border-top-width-hvr': 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTopMobile}${attributes.borderWidthHvrUnit}`,
+      '--border-bottom-width-hvr': 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottomMobile}${attributes.borderWidthHvrUnit}`,
+      '--border-right-width-hvr': 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRightMobile}${attributes.borderWidthHvrUnit}`,
+      '--border-left-width-hvr': 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeftMobile}${attributes.borderWidthHvrUnit}`,
+      '--border-top-right-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTopMobile}${attributes.borderRadiusHvrUnit}`,
+      '--border-top-left-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRightMobile}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-right-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeftMobile}${attributes.borderRadiusHvrUnit}`,
+      '--border-bottom-left-radius-hvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottomMobile}${attributes.borderRadiusHvrUnit}`
     };
     /********************* */
     // flex properies 
@@ -728,20 +769,20 @@ function Edit(_ref) {
   if (attributes.widthType == 'customwidth') {
     if (isDesktop) {
       customwidth = {
-        width: attributes.customWidth + attributes.customWidthUnit,
-        maxWidh: attributes.customWidth + attributes.customWidthUnit
+        '--width': attributes.customWidth + attributes.customWidthUnit,
+        '--max-width': attributes.customWidth + attributes.customWidthUnit
       };
     }
     if (isTablet) {
       customwidth = {
-        width: attributes.customWidthTablet + attributes.customWidthUnit,
-        maxWidh: attributes.customWidthTablet + attributes.customWidthUnit
+        '--width': attributes.customWidthTablet + attributes.customWidthUnit,
+        '--max-width': attributes.customWidthTablet + attributes.customWidthUnit
       };
     }
     if (isMobile) {
       customwidth = {
-        width: attributes.customWidthMobile + attributes.customWidthUnit,
-        maxWidh: attributes.customWidthMobile + attributes.customWidthUnit
+        '--width': attributes.customWidthMobile + attributes.customWidthUnit,
+        '--max-width': attributes.customWidthMobile + attributes.customWidthUnit
       };
     }
   }
@@ -758,47 +799,69 @@ function Edit(_ref) {
   let boxShadowStyle = {};
   if (attributes.boxShadow) {
     boxShadowStyle = {
-      boxShadow: `${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColor ? attributes.boxShadowColor : '#fff', attributes.boxShadowColorOpacity)}`
+      '--boxShadow': `${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColor ? attributes.boxShadowColor : '#fff', attributes.boxShadowColorOpacity)}`
+    };
+  }
+  if (attributes.boxShadowHvr) {
+    boxShadowStyle = {
+      ...boxShadowStyle,
+      '--boxShadow-hvr': `${attributes.boxShadowHorizontalHvr}px ${attributes.boxShadowVerticalHvr}px ${attributes.boxShadowBlurHvr}px ${attributes.boxShadowSpreadHvr}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#fff', attributes.boxShadowColorOpacityHvr)}`
     };
   }
   let transitionHeadingStyle = {};
   if (attributes.transitionAll) {
     transitionHeadingStyle = {
-      transition: `all ${attributes.transitionAll}s`,
-      WebkitTransition: `all ${attributes.transitionAll}s`,
-      MozTransition: `all ${attributes.transitionAll}s`,
-      OTransition: `all ${attributes.transitionAll}s`
+      '--transition': attributes.transitionAll + 's'
     };
   }
   let backgroundStyle = {};
   if ('color' === attributes.backgroundType) {
     backgroundStyle = {
-      backgroundColor: attributes.backgroundColor
+      ...backgroundStyle,
+      '--background': attributes.backgroundColor
+    };
+  }
+  if ('color' === attributes.backgroundTypeHvr) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': attributes.backgroundColorHvr
     };
   }
   if ('image' === attributes.backgroundType) {
     var _attributes$backgroun, _attributes$backgroun2, _attributes$backgroun3;
     backgroundStyle = {
-      backgroundImage: `url( '${(_attributes$backgroun = attributes.backgroundImage) === null || _attributes$backgroun === void 0 ? void 0 : _attributes$backgroun.url}' )`,
-      backgroundAttachment: attributes.backgroundAttachment,
-      backgroundPosition: `${Math.round(((_attributes$backgroun2 = attributes.backgroundPosition) === null || _attributes$backgroun2 === void 0 ? void 0 : _attributes$backgroun2.x) * 100)}% ${Math.round(((_attributes$backgroun3 = attributes.backgroundPosition) === null || _attributes$backgroun3 === void 0 ? void 0 : _attributes$backgroun3.y) * 100)}%`,
-      backgroundRepeat: attributes.backgroundRepeat,
-      backgroundSize: attributes.backgroundSize
+      ...backgroundStyle,
+      '--background': (_attributes$backgroun = attributes.backgroundImage) !== null && _attributes$backgroun !== void 0 && _attributes$backgroun.url ? `url('${attributes.backgroundImage.url}')` : 'none',
+      '--background-attachment': attributes.backgroundAttachment,
+      '--background-position': `${Math.round(((_attributes$backgroun2 = attributes.backgroundPosition) === null || _attributes$backgroun2 === void 0 ? void 0 : _attributes$backgroun2.x) * 100)}% ${Math.round(((_attributes$backgroun3 = attributes.backgroundPosition) === null || _attributes$backgroun3 === void 0 ? void 0 : _attributes$backgroun3.y) * 100)}%`,
+      '--background-repeat': attributes.backgroundRepeat,
+      '--background-size': attributes.backgroundSize
+    };
+  }
+  if ('image' === attributes.backgroundTypeHvr) {
+    var _attributes$backgroun4, _attributes$backgroun5, _attributes$backgroun6;
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': (_attributes$backgroun4 = attributes.backgroundImageHvr) !== null && _attributes$backgroun4 !== void 0 && _attributes$backgroun4.url ? `url('${attributes.backgroundImageHvr.url}')` : 'none',
+      '--background-attachment-hvr': attributes.backgroundAttachmentHvr,
+      '--background-position-hvr': `${Math.round(((_attributes$backgroun5 = attributes.backgroundPositionHvr) === null || _attributes$backgroun5 === void 0 ? void 0 : _attributes$backgroun5.x) * 100)}% ${Math.round(((_attributes$backgroun6 = attributes.backgroundPositionHvr) === null || _attributes$backgroun6 === void 0 ? void 0 : _attributes$backgroun6.y) * 100)}%`,
+      '--background-repeat-hvr': attributes.backgroundRepeatHvr,
+      '--background-size-hvr': attributes.backgroundSizeHvr
     };
   }
   if ('gradient' === attributes.backgroundType) {
     backgroundStyle = {
-      backgroundImage: attributes.backgroundGradient
+      ...backgroundStyle,
+      '--background': attributes.backgroundGradient
+    };
+  }
+  if ('gradient' === attributes.backgroundTypeHvr) {
+    backgroundStyle = {
+      ...backgroundStyle,
+      '--background-hover': attributes.backgroundGradientHvr
     };
   }
   const style = (0,lodash__WEBPACK_IMPORTED_MODULE_6__.omitBy)({
-    color: attributes.headingColor,
-    fontFamily: attributes.fontFamily || undefined,
-    fontWeight: 'regular' === attributes.fontVariant ? 'normal' : attributes.fontVariant,
-    fontStyle: attributes.fontStyle || undefined,
-    textTransform: attributes.textTransform || undefined,
-    borderStyle: attributes.borderType,
-    borderColor: attributes.borderColor,
     ...stylesheet,
     ...customwidth,
     ...boxShadowStyle,
@@ -812,109 +875,23 @@ function Edit(_ref) {
   });
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     if (attributes.fontFamily) {
-      _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_10__["default"].loadFontToBrowser(attributes.fontFamily, attributes.fontVariant);
+      _src_helpers_google_fonts_js__WEBPACK_IMPORTED_MODULE_11__["default"].loadFontToBrowser(attributes.fontFamily, attributes.fontVariant);
     }
   }, [attributes.fontFamily]);
-  const onMouseEnter = e => {
-    e.target.style.color = attributes.headingHvrColor;
-    e.target.style.borderColor = attributes.borderColorHvr;
-    e.target.style.borderStyle = attributes.borderHvrType;
-    e.target.style.boxShadow = `${attributes.boxShadowHorizontalHvr}px ${attributes.boxShadowVerticalHvr}px ${attributes.boxShadowBlurHvr}px ${attributes.boxShadowSpreadHvr}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#fff', attributes.boxShadowColorOpacityHvr)}`;
-    if ('color' === attributes.backgroundType) {
-      e.target.style.backgroundColor = attributes.backgroundColorHvr;
-    }
-    if ('image' === attributes.backgroundType) {
-      var _attributes$backgroun4, _attributes$backgroun5, _attributes$backgroun6;
-      e.target.style.backgroundImage = `url( '${(_attributes$backgroun4 = attributes.backgroundImageHvr) === null || _attributes$backgroun4 === void 0 ? void 0 : _attributes$backgroun4.url}' )`, e.target.style.backgroundAttachment = attributes.backgroundAttachmentHvr, e.target.style.backgroundPosition = `${Math.round(((_attributes$backgroun5 = attributes.backgroundPositionHvr) === null || _attributes$backgroun5 === void 0 ? void 0 : _attributes$backgroun5.x) * 100)}% ${Math.round(((_attributes$backgroun6 = attributes.backgroundPositionHvr) === null || _attributes$backgroun6 === void 0 ? void 0 : _attributes$backgroun6.y) * 100)}%`, e.target.style.backgroundRepeat = attributes.backgroundRepeatHvr, e.target.style.backgroundSize = attributes.backgroundSizeHvr;
-    }
-    if ('gradient' === attributes.backgroundType) {
-      e.target.style.backgroundImage = attributes.backgroundGradientHvr;
-    }
-    if (isDesktop) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTop}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottom}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRight}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrType ? `${attributes.borderWidthHvr}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeft}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTop}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRight}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeft}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrType ? `${attributes.borderRadiusHvr}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottom}${attributes.borderRadiusHvrUnit}`;
-    }
-    if (isTablet) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTopTablet}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottomTablet}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRightTablet}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrTypeTablet ? `${attributes.borderWidthHvrTablet}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeftTablet}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTopTablet}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRightTablet}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeftTablet}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrTypeTablet ? `${attributes.borderRadiusHvrTablet}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottomTablet}${attributes.borderRadiusHvrUnit}`;
-    }
-    if (isMobile) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrTopMobile}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrBottomMobile}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrRightMobile}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthHvrTypeMobile ? `${attributes.borderWidthHvrMobile}${attributes.borderWidthHvrUnit}` : `${attributes.borderWidthHvrLeftMobile}${attributes.borderWidthHvrUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrTopMobile}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrRightMobile}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrLeftMobile}${attributes.borderRadiusHvrUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusHvrTypeMobile ? `${attributes.borderRadiusHvrMobile}${attributes.borderRadiusHvrUnit}` : `${attributes.borderRadiusHvrBottomMobile}${attributes.borderRadiusHvrUnit}`;
-    }
-  };
-  const onMouseLeave = e => {
-    e.target.style.color = attributes.headingColor;
-    e.target.style.borderColor = attributes.borderColor;
-    e.target.style.borderStyle = attributes.borderType;
-    e.target.style.boxShadow = `${attributes.boxShadowHorizontal}px ${attributes.boxShadowVertical}px ${attributes.boxShadowBlur}px ${attributes.boxShadowSpread}px ${hex_rgba__WEBPACK_IMPORTED_MODULE_7___default()(attributes.boxShadowColor ? attributes.boxShadowColor : '#fff', attributes.boxShadowColorOpacity)}`;
-    if ('color' === attributes.backgroundType) {
-      e.target.style.backgroundColor = attributes.backgroundColor;
-    }
-    if ('image' === attributes.backgroundType) {
-      var _attributes$backgroun7, _attributes$backgroun8, _attributes$backgroun9;
-      e.target.style.backgroundImage = `url( '${(_attributes$backgroun7 = attributes.backgroundImage) === null || _attributes$backgroun7 === void 0 ? void 0 : _attributes$backgroun7.url}' )`, e.target.style.backgroundAttachment = attributes.backgroundAttachment, e.target.style.backgroundPosition = `${Math.round(((_attributes$backgroun8 = attributes.backgroundPosition) === null || _attributes$backgroun8 === void 0 ? void 0 : _attributes$backgroun8.x) * 100)}% ${Math.round(((_attributes$backgroun9 = attributes.backgroundPosition) === null || _attributes$backgroun9 === void 0 ? void 0 : _attributes$backgroun9.y) * 100)}%`, e.target.style.backgroundRepeat = attributes.backgroundRepeat, e.target.style.backgroundSize = attributes.backgroundSize;
-    }
-    if ('gradient' === attributes.backgroundType) {
-      e.target.style.backgroundImage = attributes.backgroundGradient;
-    }
-    if (isDesktop) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthTop}${attributes.borderWidthUnit}`;
-      e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottom}${attributes.borderWidthUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthRight}${attributes.borderWidthUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthType ? `${attributes.borderWidth}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeft}${attributes.borderWidthUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTop}${attributes.borderRadiusUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRight}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeft}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusType ? `${attributes.borderRadius}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottom}${attributes.borderRadiusUnit}`;
-    }
-    if (isTablet) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopTablet}${attributes.borderWidthUnit}`, e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomTablet}${attributes.borderWidthUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightTablet}${attributes.borderWidthUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthTypeTablet ? `${attributes.borderWidthTablet}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftTablet}${attributes.borderWidthUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopTablet}${attributes.borderRadiusUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightTablet}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftTablet}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusTypeTablet ? `${attributes.borderRadiusTablet}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomTablet}${attributes.borderRadiusUnit}`;
-    }
-    if (isMobile) {
-      e.target.style.borderTopWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthTopMobile}${attributes.borderWidthUnit}`, e.target.style.borderBottomWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthBottomMobile}${attributes.borderWidthUnit}`;
-      e.target.style.borderRightWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthRightMobile}${attributes.borderWidthUnit}`;
-      e.target.style.borderLeftWidth = 'linked' === attributes.borderWidthTypeMobile ? `${attributes.borderWidthMobile}${attributes.borderWidthUnit}` : `${attributes.borderWidthLeftMobile}${attributes.borderWidthUnit}`;
-      e.target.style.borderTopRightRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusTopMobile}${attributes.borderRadiusUnit}`;
-      e.target.style.borderTopLeftRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusRightMobile}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomRightRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusLeftMobile}${attributes.borderRadiusUnit}`;
-      e.target.style.borderBottomLeftRadius = 'linked' === attributes.borderRadiusTypeMobile ? `${attributes.borderRadiusMobile}${attributes.borderRadiusUnit}` : `${attributes.borderRadiusBottomMobile}${attributes.borderRadiusUnit}`;
-    }
-  };
+  let Classes = classnames__WEBPACK_IMPORTED_MODULE_8___default()({
+    "th-hide-desktop": attributes.responsiveTogHideDesktop,
+    "th-hide-tablet": attributes.responsiveTogHideTablet,
+    "th-hide-mobile": attributes.responsiveTogHideMobile
+  });
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
     id: `th-block-heading-${attributes.uniqueID}`,
-    style,
-    onMouseEnter,
-    onMouseLeave
+    className: Classes,
+    style
   });
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_controls_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_controls_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_settings_js__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_settings_js__WEBPACK_IMPORTED_MODULE_10__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
@@ -1006,19 +983,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_3__);
 
 
 /**
  * WordPress dependencies.
  */
 
+
 const Save = _ref => {
   let {
     attributes
   } = _ref;
+  let Classes = classnames__WEBPACK_IMPORTED_MODULE_3___default()({
+    [`wp-block-th-advance-heading th-h${attributes.uniqueID}`]: true,
+    "th-hide-desktop": attributes.responsiveTogHideDesktop,
+    "th-hide-tablet": attributes.responsiveTogHideTablet,
+    "th-hide-mobile": attributes.responsiveTogHideMobile
+  });
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
     id: attributes.uniqueID,
-    className: `wp-block-th-advance-heading th-h${attributes.uniqueID}`
+    className: Classes
   });
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
     tagName: attributes.tag,
@@ -2364,6 +2350,32 @@ const InsSettings = _ref => {
       });
     }
   };
+  const [fontSizeUnit, setfontSizeUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxfontSizeUnit = fontSizeUnit === 'px' ? 150 : fontSizeUnit === 'em' ? 10 : fontSizeUnit === '%' ? 100 : '';
+  const [lineHeightUnit, setlineHeightUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxlineHeightUnit = lineHeightUnit === 'px' ? 150 : lineHeightUnit === 'em' ? 10 : lineHeightUnit === '%' ? 100 : '';
+  const [letterSpacingUnit, setletterSpacingUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxletterSpacingUnit = letterSpacingUnit === 'px' ? 150 : letterSpacingUnit === 'em' ? 10 : letterSpacingUnit === '%' ? 100 : '';
+  const [paddingUnit, setpaddingUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100 : '';
+  const [marginUnit, setmarginUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxmarginUnit = marginUnit === 'px' ? 1500 : marginUnit === 'em' ? 50 : marginUnit === '%' ? 100 : '';
+  const [horizontalOrientationOffsetUnit, sethorizontalOrientationOffsetUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxhorizontalOrientationOffsetUnit = horizontalOrientationOffsetUnit === 'px' ? 1500 : horizontalOrientationOffsetUnit === 'em' ? 50 : horizontalOrientationOffsetUnit === '%' ? 100 : '';
+  const [horizontalOrientationOffsetRightUnit, sethorizontalOrientationOffsetRightUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxhorizontalOrientationOffsetRightUnit = horizontalOrientationOffsetRightUnit === 'px' ? 1500 : horizontalOrientationOffsetRightUnit === 'em' ? 50 : horizontalOrientationOffsetRightUnit === '%' ? 100 : '';
+  const [verticalOrientationOffsetTopUnit, setverticalOrientationOffsetTopUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxverticalOrientationOffsetTopUnit = verticalOrientationOffsetTopUnit === 'px' ? 1500 : verticalOrientationOffsetTopUnit === 'em' ? 50 : verticalOrientationOffsetTopUnit === '%' ? 100 : '';
+  const [verticalOrientationOffsetBottomUnit, setverticalOrientationOffsetBottomUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxverticalOrientationOffsetBottomUnit = verticalOrientationOffsetBottomUnit === 'px' ? 1500 : verticalOrientationOffsetBottomUnit === 'em' ? 50 : verticalOrientationOffsetBottomUnit === '%' ? 100 : '';
+  const [borderWidthUnit, setborderWidthUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxborderWidthUnit = borderWidthUnit === 'px' ? 1500 : borderWidthUnit === 'em' ? 50 : borderWidthUnit === '%' ? 100 : '';
+  const [borderRadiusUnit, setborderRadiusUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxborderRadiusUnit = borderRadiusUnit === 'px' ? 1500 : borderRadiusUnit === 'em' ? 50 : borderRadiusUnit === '%' ? 100 : '';
+  const [borderWidthHvrUnit, setborderWidthHvrUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxborderWidthHvrUnit = borderWidthHvrUnit === 'px' ? 1500 : borderWidthHvrUnit === 'em' ? 50 : borderWidthHvrUnit === '%' ? 100 : '';
+  const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('px');
+  const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100 : '';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.InsSettingHeader, {
     value: tab,
     options: [{
@@ -2432,9 +2444,12 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Font Size', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.fontSizeUnit,
-    onClick: fontSizeUnit => setAttributes({
-      fontSizeUnit
-    }),
+    onClick: fontSizeUnit => {
+      setAttributes({
+        fontSizeUnit
+      });
+      setfontSizeUnit(fontSizeUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipFontsize,
@@ -2442,15 +2457,18 @@ const InsSettings = _ref => {
     onChange: changeFontSize,
     step: 0.1,
     min: 1,
-    max: 500,
+    max: maxfontSizeUnit,
     allowReset: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Line Height', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.lineHeightUnit,
-    onClick: lineHeightUnit => setAttributes({
-      lineHeightUnit
-    }),
+    onClick: lineHeightUnit => {
+      setAttributes({
+        lineHeightUnit
+      });
+      setlineHeightUnit(lineHeightUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltiplineHeight,
@@ -2458,23 +2476,26 @@ const InsSettings = _ref => {
     onChange: changelineHeight,
     step: 0.1,
     min: 0,
-    max: 300,
+    max: maxlineHeightUnit,
     allowReset: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Letter Spacing', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.letterSpacingUnit,
-    onClick: letterSpacingUnit => setAttributes({
-      letterSpacingUnit
-    }),
+    onClick: letterSpacingUnit => {
+      setAttributes({
+        letterSpacingUnit
+      });
+      setletterSpacingUnit(letterSpacingUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipletterSpacing,
     value: getletterSpacing() || '',
     onChange: changeletterSpacing,
     step: 0.1,
-    min: -300,
-    max: 300,
+    min: 50,
+    max: maxletterSpacingUnit,
     allowReset: true
   })))) || 'advanced' === tab && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Layout', 'themehunk-block'),
@@ -2520,14 +2541,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Padding', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.paddingUnit,
-    onClick: paddingUnit => setAttributes({
-      paddingUnit
-    }),
+    onClick: paddingUnit => {
+      setAttributes({
+        paddingUnit
+      });
+      setpaddingUnit(paddingUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getPaddingType(),
     min: 0,
-    max: 500,
+    max: maxpaddingUnit,
     changeType: changePaddingType,
     onChange: changePadding,
     options: [{
@@ -2551,14 +2575,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Margin', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.marginUnit,
-    onClick: marginUnit => setAttributes({
-      marginUnit
-    }),
+    onClick: marginUnit => {
+      setAttributes({
+        marginUnit
+      });
+      setmarginUnit(marginUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getMarginType(),
     min: 0,
-    max: 500,
+    max: maxmarginUnit,
     changeType: changeMarginType,
     onChange: changeMargin,
     options: [{
@@ -2609,9 +2636,12 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.horizontalOrientationOffsetUnit,
-    onClick: horizontalOrientationOffsetUnit => setAttributes({
-      horizontalOrientationOffsetUnit
-    }),
+    onClick: horizontalOrientationOffsetUnit => {
+      setAttributes({
+        horizontalOrientationOffsetUnit
+      });
+      sethorizontalOrientationOffsetUnit(horizontalOrientationOffsetUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltiphorizontalOrientationOffset,
@@ -2619,15 +2649,18 @@ const InsSettings = _ref => {
     onChange: changehorizontalOrientationOffset,
     step: 1,
     min: -999,
-    max: 1000,
+    max: maxhorizontalOrientationOffsetUnit,
     allowReset: true
   })), 'right' == attributes.horizontalOrientation && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.horizontalOrientationOffsetRightUnit,
-    onClick: horizontalOrientationOffsetRightUnit => setAttributes({
-      horizontalOrientationOffsetRightUnit
-    }),
+    onClick: horizontalOrientationOffsetRightUnit => {
+      setAttributes({
+        horizontalOrientationOffsetRightUnit
+      });
+      sethorizontalOrientationOffsetRightUnit(horizontalOrientationOffsetRightUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltiphorizontalOrientationOffsetRight,
@@ -2635,7 +2668,7 @@ const InsSettings = _ref => {
     onChange: changehorizontalOrientationOffsetRight,
     step: 1,
     min: -999,
-    max: 1000,
+    max: maxhorizontalOrientationOffsetRightUnit,
     allowReset: true
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-component-group-label"
@@ -2660,9 +2693,12 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.verticalOrientationOffsetTopUnit,
-    onClick: verticalOrientationOffsetTopUnit => setAttributes({
-      verticalOrientationsetTopUnit
-    }),
+    onClick: verticalOrientationOffsetTopUnit => {
+      setAttributes({
+        verticalOrientationOffsetTopUnit
+      });
+      setverticalOrientationOffsetTopUnit(verticalOrientationOffsetTopUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipverticalOrientationOffsetTop,
@@ -2670,7 +2706,7 @@ const InsSettings = _ref => {
     onChange: changeverticalOrientationOffsetTop,
     step: 1,
     min: -999,
-    max: 1000,
+    max: maxverticalOrientationOffsetTopUnit,
     allowReset: true
   })), 'bottom' == attributes.verticalOrientation && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'themehunk-block')
@@ -2680,13 +2716,22 @@ const InsSettings = _ref => {
       verticalOrientationOffsetBottomUnit
     }),
     units: ['px', 'em', '%']
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
+    value: attributes.verticalOrientationOffsetBottomUnit,
+    onClick: verticalOrientationOffsetBottomUnit => {
+      setAttributes({
+        verticalOrientationOffsetBottomUnit
+      });
+      setverticalOrientationOffsetBottomUnit(verticalOrientationOffsetBottomUnit);
+    },
+    units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipverticalOrientationOffsetBottom,
     value: getverticalOrientationOffsetBottom() || '',
     onChange: changeverticalOrientationOffsetBottom,
     step: 1,
     min: -999,
-    max: 1000,
+    max: maxverticalOrientationOffsetBottomUnit,
     allowReset: true
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Z-index', 'themehunk-block')
@@ -2840,14 +2885,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Width', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.borderWidthUnit,
-    onClick: borderWidthUnit => setAttributes({
-      borderWidthUnit
-    }),
+    onClick: borderWidthUnit => {
+      setAttributes({
+        borderWidthUnit
+      });
+      setborderWidthUnit(borderWidthUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getBorderWidthType(),
     min: 0,
-    max: 500,
+    max: maxborderWidthUnit,
     changeType: changeBorderWidthType,
     onChange: changeBorderWidth,
     options: [{
@@ -2878,14 +2926,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Radius', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.borderRadiusUnit,
-    onClick: borderWidthUnit => setAttributes({
-      borderWidthUnit
-    }),
+    onClick: borderRadiusUnit => {
+      setAttributes({
+        borderRadiusUnit
+      });
+      setborderRadiusUnit(borderRadiusUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getBorderRadiusType(),
     min: 0,
-    max: 500,
+    max: maxborderRadiusUnit,
     changeType: changeBorderRadiusType,
     onChange: changeBorderRadius,
     options: [{
@@ -2999,14 +3050,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Width', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.borderWidthHvrUnit,
-    onClick: borderWidthHvrUnit => setAttributes({
-      borderWidthHvrUnit
-    }),
+    onClick: borderWidthHvrUnit => {
+      setAttributes({
+        borderWidthHvrUnit
+      });
+      setborderWidthHvrUnit(borderWidthHvrUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getBorderWidthHvrType(),
     min: 0,
-    max: 500,
+    max: maxborderWidthHvrUnit,
     changeType: changeBorderWidthHvrType,
     onChange: changeBorderWidthHvr,
     options: [{
@@ -3037,14 +3091,17 @@ const InsSettings = _ref => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border Radius', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.UnitChooser, {
     value: attributes.borderRadiusHvrUnit,
-    onClick: borderRadiusHvrUnit => setAttributes({
-      borderRadiusHvrUnit
-    }),
+    onClick: borderRadiusHvrUnit => {
+      setAttributes({
+        borderRadiusHvrUnit
+      });
+      setborderRadiusHvrUnit(borderRadiusHvrUnit);
+    },
     units: ['px', 'em', '%']
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.SizingControl, {
     type: getBorderRadiusHvrType(),
     min: 0,
-    max: 500,
+    max: maxborderRadiusHvrUnit,
     changeType: changeBorderRadiusHvrType,
     onChange: changeBorderRadiusHvr,
     options: [{
@@ -5403,6 +5460,7 @@ const ToogleGroupControl = _ref => {
   } = _ref;
   const handleClick = option => {
     const newValue = value === option.value ? null : option.value;
+    //const newValue = value === option.value ? value : option.value;
     onChange(newValue);
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
@@ -9581,7 +9639,7 @@ function _extends() {
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"uniqueID":{"type":"string"},"content":{"type":"string","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number"},"fontSizeUnit":{"type":"string","default":"px"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightUnit":{"type":"string","default":"px"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingUnit":{"type":"string","default":"px"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingUnit":{"type":"string","default":"px"},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginUnit":{"type":"string","default":"px"},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthUnit":{"type":"string","default":"px"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"},"responsiveTogHideDesktop":{"type":"boolean","default":false},"responsiveTogHideTablet":{"type":"boolean","default":false},"responsiveTogHideMobile":{"type":"boolean","default":false},"borderColor":{"type":"string"},"borderColorHvr":{"type":"string"},"borderType":{"type":"string","default":"none"},"borderHvrType":{"type":"string","default":"none"},"borderWidthType":{"type":"string","default":"linked"},"borderWidthUnit":{"type":"string","default":"px"},"borderWidthTypeTablet":{"type":"string","default":"linked"},"borderWidthTypeMobile":{"type":"string","default":"linked"},"borderWidth":{"type":"number","default":0},"borderWidthTablet":{"type":"number"},"borderWidthMobile":{"type":"number"},"borderWidthTop":{"type":"number","default":0},"borderWidthTopTablet":{"type":"number"},"borderWidthTopMobile":{"type":"number"},"borderWidthBottom":{"type":"number","default":0},"borderWidthBottomTablet":{"type":"number"},"borderWidthBottomMobile":{"type":"number"},"borderWidthRight":{"type":"number","default":0},"borderWidthRightTablet":{"type":"number"},"borderWidthRightMobile":{"type":"number"},"borderWidthLeft":{"type":"number","default":0},"borderWidthLeftTablet":{"type":"number"},"borderWidthLeftMobile":{"type":"number"},"borderWidthHvrType":{"type":"string","default":"linked"},"borderWidthHvrUnit":{"type":"string","default":"px"},"borderWidthHvrTypeTablet":{"type":"string","default":"linked"},"borderWidthHvrTypeMobile":{"type":"string","default":"linked"},"borderWidthHvr":{"type":"number","default":0},"borderWidthHvrTablet":{"type":"number"},"borderWidthHvrMobile":{"type":"number"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrTopTablet":{"type":"number"},"borderWidthHvrTopMobile":{"type":"number"},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrBottomTablet":{"type":"number"},"borderWidthHvrBottomMobile":{"type":"number"},"borderWidthHvrRight":{"type":"number","default":0},"borderWidthHvrRightTablet":{"type":"number"},"borderWidthHvrRightMobile":{"type":"number"},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrLeftTablet":{"type":"number"},"borderWidthHvrLeftMobile":{"type":"number"},"borderRadiusType":{"type":"string","default":"linked"},"borderRadiusUnit":{"type":"string","default":"px"},"borderRadiusTypeTablet":{"type":"string","default":"linked"},"borderRadiusTypeMobile":{"type":"string","default":"linked"},"borderRadius":{"type":"number","default":0},"borderRadiusTablet":{"type":"number"},"borderRadiusMobile":{"type":"number"},"borderRadiusTop":{"type":"number","default":0},"borderRadiusTopTablet":{"type":"number"},"borderRadiusTopMobile":{"type":"number"},"borderRadiusLeft":{"type":"number","default":0},"borderRadiusLeftTablet":{"type":"number"},"borderRadiusLeftMobile":{"type":"number"},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusBottomTablet":{"type":"number"},"borderRadiusBottomMobile":{"type":"number"},"borderRadiusRight":{"type":"number","default":0},"borderRadiusRightTablet":{"type":"number"},"borderRadiusRightMobile":{"type":"number"},"borderRadiusHvrType":{"type":"string","default":"linked"},"borderRadiusHvrUnit":{"type":"string","default":"px"},"borderRadiusHvrTypeTablet":{"type":"string","default":"linked"},"borderRadiusHvrTypeMobile":{"type":"string","default":"linked"},"borderRadiusHvr":{"type":"number","default":0},"borderRadiusHvrTablet":{"type":"number"},"borderRadiusHvrMobile":{"type":"number"},"borderRadiusHvrTop":{"type":"number","default":0},"borderRadiusHvrTopTablet":{"type":"number"},"borderRadiusHvrTopMobile":{"type":"number"},"borderRadiusHvrBottom":{"type":"number","default":0},"borderRadiusHvrBottomTablet":{"type":"number"},"borderRadiusHvrBottomMobile":{"type":"number"},"borderRadiusHvrRight":{"type":"number","default":0},"borderRadiusHvrRightTablet":{"type":"number"},"borderRadiusHvrRightMobile":{"type":"number"},"borderRadiusHvrLeft":{"type":"number","default":0},"borderRadiusHvrLeftTablet":{"type":"number"},"borderRadiusHvrLeftMobile":{"type":"number"},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string"},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string"},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string"},"backgroundImage":{"type":"object"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"object"},"backgroundRepeat":{"type":"string","default":"repeat"},"backgroundSize":{"type":"string","default":"auto"},"backgroundGradient":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string"},"backgroundImageHvr":{"type":"object"},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundPositionHvr":{"type":"object"},"backgroundRepeatHvr":{"type":"string","default":"repeat"},"backgroundSizeHvr":{"type":"string","default":"auto"},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"transitionAll":{"type":"number","default":"0.2"},"alignSelf":{"type":"string"},"alignSelfTablet":{"type":"string"},"alignSelfMobile":{"type":"string"},"order":{"type":"string"},"orderTablet":{"type":"string"},"orderMobile":{"type":"string"},"customOrder":{"type":"string"},"customOrderTablet":{"type":"string"},"customOrderMobile":{"type":"string"},"flexSize":{"type":"string"},"flexSizeTablet":{"type":"string"},"flexSizeMobile":{"type":"string"},"FlexGrowSize":{"type":"string"},"FlexGrowSizeTablet":{"type":"string"},"FlexGrowSizeMobile":{"type":"string"},"FlexShrinkSize":{"type":"string"},"FlexShrinkSizeTablet":{"type":"string"},"FlexShrinkSizeMobile":{"type":"string"},"position":{"type":"string"},"horizontalOrientation":{"type":"string"},"horizontalOrientationOffset":{"type":"number","default":"0"},"horizontalOrientationOffsetTablet":{"type":"number","default":"0"},"horizontalOrientationOffsetMobile":{"type":"number","default":"0"},"horizontalOrientationOffsetUnit":{"type":"string","default":"px"},"horizontalOrientationOffsetRight":{"type":"number","default":"0"},"horizontalOrientationOffsetRightTablet":{"type":"number","default":"0"},"horizontalOrientationOffsetRightMobile":{"type":"number","default":"0"},"horizontalOrientationOffsetRightUnit":{"type":"string","default":"px"},"verticalOrientation":{"type":"string"},"verticalOrientationOffsetTop":{"type":"number","default":"0"},"verticalOrientationOffsetTopTablet":{"type":"number","default":"0"},"verticalOrientationOffsetTopMobile":{"type":"number","default":"0"},"verticalOrientationOffsetTopUnit":{"type":"string","default":"px"},"verticalOrientationOffsetBottom":{"type":"number","default":"0"},"verticalOrientationOffsetBottomTablet":{"type":"number","default":"0"},"verticalOrientationOffsetBottomMobile":{"type":"number","default":"0"},"verticalOrientationOffsetBottomUnit":{"type":"string","default":"px"}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"themehunk-blocks/advance-heading","version":"0.1.0","title":"Advance Heading","category":"themehunk-blocks","description":"Example block scaffolded with Create Block tool.","keywords":["heading","title","advanced heading"],"textdomain":"themehunk-block","attributes":{"id":{"type":"string"},"uniqueID":{"type":"string"},"content":{"type":"string","selector":"h1,h2,h3,h4,h5,h6,div,p,span","default":""},"tag":{"default":"h2","type":"string"},"align":{"type":"string"},"alignTablet":{"type":"string"},"alignMobile":{"type":"string"},"headingColor":{"type":"string"},"headingHvrColor":{"type":"string"},"highlightColor":{"type":"string"},"highlightBackground":{"type":"string"},"fontSize":{"type":"number","default":"34"},"fontSizeUnit":{"type":"string","default":"px"},"fontSizeTablet":{"type":"number"},"fontSizeMobile":{"type":"number"},"fontFamily":{"type":"string"},"fontVariant":{"type":"string"},"fontStyle":{"type":"string"},"textTransform":{"type":"string"},"lineHeight":{"type":"number"},"lineHeightUnit":{"type":"string","default":"px"},"lineHeightTablet":{"type":"number"},"lineHeightMobile":{"type":"number"},"letterSpacing":{"type":"number"},"letterSpacingUnit":{"type":"string","default":"px"},"letterSpacingTablet":{"type":"number"},"letterSpacingMobile":{"type":"number"},"textShadow":{"type":"boolean","default":false},"textShadowColor":{"type":"string","default":"#000000"},"textShadowColorOpacity":{"type":"number","default":50},"textShadowBlur":{"type":"number","default":5},"textShadowHorizontal":{"type":"number","default":0},"textShadowVertical":{"type":"number","default":0},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"padding":{"type":"number","default":0},"paddingUnit":{"type":"string","default":"px"},"paddingTablet":{"type":"number"},"paddingMobile":{"type":"number"},"paddingTop":{"type":"number","default":0},"paddingTopTablet":{"type":"number"},"paddingTopMobile":{"type":"number"},"paddingRight":{"type":"number","default":0},"paddingRightTablet":{"type":"number"},"paddingRightMobile":{"type":"number"},"paddingBottom":{"type":"number","default":0},"paddingBottomTablet":{"type":"number"},"paddingBottomMobile":{"type":"number"},"paddingLeft":{"type":"number","default":0},"paddingLeftTablet":{"type":"number"},"paddingLeftMobile":{"type":"number"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"margin":{"type":"number","default":0},"marginUnit":{"type":"string","default":"px"},"marginTablet":{"type":"number"},"marginMobile":{"type":"number"},"marginTop":{"type":"number","default":0},"marginTopTablet":{"type":"number"},"marginTopMobile":{"type":"number"},"marginBottom":{"type":"number","default":0},"marginBottomTablet":{"type":"number"},"marginBottomMobile":{"type":"number"},"marginRight":{"type":"number","default":0},"marginRightTablet":{"type":"number"},"marginRightMobile":{"type":"number"},"marginLeft":{"type":"number","default":0},"marginLeftTablet":{"type":"number"},"marginLeftMobile":{"type":"number"},"widthType":{"type":"string","default":"none"},"customWidth":{"type":"number"},"customWidthUnit":{"type":"string","default":"px"},"customWidthTablet":{"type":"number"},"customWidthMobile":{"type":"number"},"zindex":{"type":"number"},"zindexTablet":{"type":"number"},"zindexMobile":{"type":"number"},"responsiveTogHideDesktop":{"type":"boolean","default":false},"responsiveTogHideTablet":{"type":"boolean","default":false},"responsiveTogHideMobile":{"type":"boolean","default":false},"borderColor":{"type":"string"},"borderColorHvr":{"type":"string"},"borderType":{"type":"string","default":"none"},"borderHvrType":{"type":"string"},"borderWidthType":{"type":"string","default":"linked"},"borderWidthUnit":{"type":"string","default":"px"},"borderWidthTypeTablet":{"type":"string","default":"linked"},"borderWidthTypeMobile":{"type":"string","default":"linked"},"borderWidth":{"type":"number","default":0},"borderWidthTablet":{"type":"number"},"borderWidthMobile":{"type":"number"},"borderWidthTop":{"type":"number","default":0},"borderWidthTopTablet":{"type":"number"},"borderWidthTopMobile":{"type":"number"},"borderWidthBottom":{"type":"number","default":0},"borderWidthBottomTablet":{"type":"number"},"borderWidthBottomMobile":{"type":"number"},"borderWidthRight":{"type":"number","default":0},"borderWidthRightTablet":{"type":"number"},"borderWidthRightMobile":{"type":"number"},"borderWidthLeft":{"type":"number","default":0},"borderWidthLeftTablet":{"type":"number"},"borderWidthLeftMobile":{"type":"number"},"borderWidthHvrType":{"type":"string","default":"linked"},"borderWidthHvrUnit":{"type":"string","default":"px"},"borderWidthHvrTypeTablet":{"type":"string","default":"linked"},"borderWidthHvrTypeMobile":{"type":"string","default":"linked"},"borderWidthHvr":{"type":"number","default":0},"borderWidthHvrTablet":{"type":"number"},"borderWidthHvrMobile":{"type":"number"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrTopTablet":{"type":"number"},"borderWidthHvrTopMobile":{"type":"number"},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrBottomTablet":{"type":"number"},"borderWidthHvrBottomMobile":{"type":"number"},"borderWidthHvrRight":{"type":"number","default":0},"borderWidthHvrRightTablet":{"type":"number"},"borderWidthHvrRightMobile":{"type":"number"},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrLeftTablet":{"type":"number"},"borderWidthHvrLeftMobile":{"type":"number"},"borderRadiusType":{"type":"string","default":"linked"},"borderRadiusUnit":{"type":"string","default":"px"},"borderRadiusTypeTablet":{"type":"string","default":"linked"},"borderRadiusTypeMobile":{"type":"string","default":"linked"},"borderRadius":{"type":"number","default":0},"borderRadiusTablet":{"type":"number"},"borderRadiusMobile":{"type":"number"},"borderRadiusTop":{"type":"number","default":0},"borderRadiusTopTablet":{"type":"number"},"borderRadiusTopMobile":{"type":"number"},"borderRadiusLeft":{"type":"number","default":0},"borderRadiusLeftTablet":{"type":"number"},"borderRadiusLeftMobile":{"type":"number"},"borderRadiusBottom":{"type":"number","default":0},"borderRadiusBottomTablet":{"type":"number"},"borderRadiusBottomMobile":{"type":"number"},"borderRadiusRight":{"type":"number","default":0},"borderRadiusRightTablet":{"type":"number"},"borderRadiusRightMobile":{"type":"number"},"borderRadiusHvrType":{"type":"string","default":"linked"},"borderRadiusHvrUnit":{"type":"string","default":"px"},"borderRadiusHvrTypeTablet":{"type":"string","default":"linked"},"borderRadiusHvrTypeMobile":{"type":"string","default":"linked"},"borderRadiusHvr":{"type":"number","default":0},"borderRadiusHvrTablet":{"type":"number"},"borderRadiusHvrMobile":{"type":"number"},"borderRadiusHvrTop":{"type":"number","default":0},"borderRadiusHvrTopTablet":{"type":"number"},"borderRadiusHvrTopMobile":{"type":"number"},"borderRadiusHvrBottom":{"type":"number","default":0},"borderRadiusHvrBottomTablet":{"type":"number"},"borderRadiusHvrBottomMobile":{"type":"number"},"borderRadiusHvrRight":{"type":"number","default":0},"borderRadiusHvrRightTablet":{"type":"number"},"borderRadiusHvrRightMobile":{"type":"number"},"borderRadiusHvrLeft":{"type":"number","default":0},"borderRadiusHvrLeftTablet":{"type":"number"},"borderRadiusHvrLeftMobile":{"type":"number"},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string"},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string"},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string"},"backgroundImage":{"type":"object"},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundPosition":{"type":"object"},"backgroundRepeat":{"type":"string","default":"repeat"},"backgroundSize":{"type":"string","default":"auto"},"backgroundGradient":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string"},"backgroundImageHvr":{"type":"object"},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundPositionHvr":{"type":"object"},"backgroundRepeatHvr":{"type":"string","default":"repeat"},"backgroundSizeHvr":{"type":"string","default":"auto"},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"},"transitionAll":{"type":"number","default":"0.2"},"alignSelf":{"type":"string"},"alignSelfTablet":{"type":"string"},"alignSelfMobile":{"type":"string"},"order":{"type":"string"},"orderTablet":{"type":"string"},"orderMobile":{"type":"string"},"customOrder":{"type":"string"},"customOrderTablet":{"type":"string"},"customOrderMobile":{"type":"string"},"flexSize":{"type":"string"},"flexSizeTablet":{"type":"string"},"flexSizeMobile":{"type":"string"},"FlexGrowSize":{"type":"string"},"FlexGrowSizeTablet":{"type":"string"},"FlexGrowSizeMobile":{"type":"string"},"FlexShrinkSize":{"type":"string"},"FlexShrinkSizeTablet":{"type":"string"},"FlexShrinkSizeMobile":{"type":"string"},"position":{"type":"string"},"horizontalOrientation":{"type":"string"},"horizontalOrientationOffset":{"type":"number","default":"0"},"horizontalOrientationOffsetTablet":{"type":"number","default":"0"},"horizontalOrientationOffsetMobile":{"type":"number","default":"0"},"horizontalOrientationOffsetUnit":{"type":"string","default":"px"},"horizontalOrientationOffsetRight":{"type":"number","default":"0"},"horizontalOrientationOffsetRightTablet":{"type":"number","default":"0"},"horizontalOrientationOffsetRightMobile":{"type":"number","default":"0"},"horizontalOrientationOffsetRightUnit":{"type":"string","default":"px"},"verticalOrientation":{"type":"string"},"verticalOrientationOffsetTop":{"type":"number","default":"0"},"verticalOrientationOffsetTopTablet":{"type":"number","default":"0"},"verticalOrientationOffsetTopMobile":{"type":"number","default":"0"},"verticalOrientationOffsetTopUnit":{"type":"string","default":"px"},"verticalOrientationOffsetBottom":{"type":"number","default":"0"},"verticalOrientationOffsetBottomTablet":{"type":"number","default":"0"},"verticalOrientationOffsetBottomMobile":{"type":"number","default":"0"},"verticalOrientationOffsetBottomUnit":{"type":"string","default":"px"}}}');
 
 /***/ })
 

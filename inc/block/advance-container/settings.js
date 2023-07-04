@@ -2752,7 +2752,7 @@ const InsSettings = ({
 							resetValues={ {
 								boxShadow: false,
 								boxShadowColor: undefined,
-								boxShadowColorOpacity: 50,
+								boxShadowColorOpacity: 50, 
 								boxShadowBlur: 5,
 								boxShadowSpread: 1,
 								boxShadowHorizontal: 0,
@@ -2927,7 +2927,7 @@ const InsSettings = ({
 
 							</ResponsiveControl>
 							<ControlPanelControl
-							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							label={ __( 'Box Shadow Hover', 'themehunk-block' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							resetValues={ {

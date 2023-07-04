@@ -22,9 +22,13 @@ function advance_container_style($attr){
             // full-width
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                $css .= "width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit}; ";
+                $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
+				 margin-left: auto;
+				margin-right: auto; ";
             }else{
-                $css .= "width:100%;";
+                $css .= "max-width:100%;  
+				margin-left: auto;
+				margin-right: auto;";
             }
        $css .= "}";
 
@@ -349,12 +353,17 @@ function advance_container_style($attr){
             $css .= "}";
     
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
-                // boxed-width
+              
                 if (isset($attr['fullcontentWidthTablet'])){
                     $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                    $css .= "width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; ";
+                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; 
+					margin-left: auto;
+					margin-right: auto;";
                 }else{
-                    $css .= "width: {100%};";
+                    $css .= "
+					max-width: {100%};
+					margin-left: auto;
+					margin-right: auto;";
                 }
            $css .= "}";
     
@@ -575,9 +584,13 @@ function advance_container_style($attr){
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
                       $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                      $css .= "width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; ";
+                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
+					  margin-left: auto;
+					  margin-right: auto;";
                   }else{
-                      $css .= "width: {100%};";
+                      $css .= "max-width:100%;
+					  margin-left: auto;
+					  margin-right: auto;";
                   }
              $css .= "}";
       
@@ -772,15 +785,15 @@ function advance_container_style($attr){
         $css .= " }";
 
         if (isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop'] == true){
-            $css .= "@media only screen and (min-width: 1024px) {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 1024px) {.th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Tablet
         if (isset($attr['responsiveTogHideTablet']) && $attr['responsiveTogHideTablet'] == true){
-            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) { .th-c{$attr['uniqueID']}{display:none;}}";
         }
         //hide on Mobile
         if (isset($attr['responsiveTogHideMobile']) && $attr['responsiveTogHideMobile'] == true){
-            $css .= "@media only screen and (max-width: 767px) {#th-c{$attr['uniqueID']}{display:none;}}";
+            $css .= "@media only screen and (max-width: 767px) {.th-c{$attr['uniqueID']}{display:none;}}";
         }
 
     }

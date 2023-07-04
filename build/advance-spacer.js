@@ -5127,6 +5127,7 @@ const ToogleGroupControl = _ref => {
   } = _ref;
   const handleClick = option => {
     const newValue = value === option.value ? null : option.value;
+    //const newValue = value === option.value ? value : option.value;
     onChange(newValue);
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {

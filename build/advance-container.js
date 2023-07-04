@@ -4136,7 +4136,7 @@ const InsSettings = _ref => {
       value: getBorderRadiusHvr('bottom')
     }]
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_6__.ControlPanelControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow', 'themehunk-block'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow Hover', 'themehunk-block'),
     attributes: attributes,
     setAttributes: setAttributes,
     resetValues: {
@@ -6551,6 +6551,7 @@ const ToogleGroupControl = _ref => {
   } = _ref;
   const handleClick = option => {
     const newValue = value === option.value ? null : option.value;
+    //const newValue = value === option.value ? value : option.value;
     onChange(newValue);
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ButtonGroup, {
