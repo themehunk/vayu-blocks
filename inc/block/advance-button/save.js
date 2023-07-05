@@ -26,8 +26,8 @@ export default function Save({ attributes }) {
 	const blockProps = useBlockProps.save({
 		id: attributes.uniqueID,
 		className:`th-button-wrapper${attributes.uniqueID}`,
-		href: attributes.post.url ? attributes.post.url : '',
-		target: attributes.post.opensInNewTab ? '_blank' : '_self',
+		href: ('post' in attributes) ? attributes.post.url : '',
+		target: ('post' in attributes) ? '_blank' : '_self',
 		rel:"noopener"
 	  });
 

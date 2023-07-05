@@ -4,10 +4,11 @@ function advance_button_style($attr){
 	
     if(isset( $attr['uniqueID'] )){
       $css .= ".th-button-wrapper{$attr['uniqueID']}{";
+
         
        //Width
        if( isset($attr['widthType']) && $attr['widthType'] == 'fullwidth' ){
-        $css .= "width: 100%;max-width: 100%!important;";
+        $css .= "width: 100%;max-width: 100%!important;display: flex;";
       }
       elseif( isset($attr['widthType']) && $attr['widthType'] == 'inlinewidth' ){
         $css .= "width: auto;display: inline-flex;";
@@ -15,6 +16,7 @@ function advance_button_style($attr){
       elseif( isset($attr['widthType']) && $attr['widthType'] == 'customwidth' ){
         $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
         $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
+        $css .= "display: flex;";
       }
       else {
         $css .= "width: 100%;display: flex;";
@@ -347,9 +349,9 @@ function advance_button_style($attr){
 
      //Typography Font Family
      $css .= "font-family: " . (isset($attr['fontFamily']) ? $attr['fontFamily'] : 'sans-serif') . ';';
-     $css .= "font-weight: " . (isset($attr['fontVariant']) ? $attr['fontVariant'] : '') . ';';
-     $css .= "font-style: " . (isset($attr['fontStyle']) ? $attr['fontStyle'] : '') . ';';
-     $css .= "text-transform: " . (isset($attr['textTransform']) ? $attr['textTransform'] : '') . ';';
+     $css .= "font-weight: " . (isset($attr['fontVariant']) ? $attr['fontVariant'] : 'inherit') . ';';
+     $css .= "font-style: " . (isset($attr['fontStyle']) ? $attr['fontStyle'] : 'normal') . ';';
+     $css .= "text-transform: " . (isset($attr['textTransform']) ? $attr['textTransform'] : 'none') . ';';
 
     // Font Size
 		if (isset($attr['fontSize'])) {
@@ -563,7 +565,7 @@ function advance_button_style($attr){
                     else{
                         $css .= "display: block";
                     }
-        
+
               $css .= "}";
 
               $css .= ".th-button-wrapper{$attr['uniqueID']}:hover{";
@@ -663,6 +665,24 @@ function advance_button_style($attr){
     $buttonborderRadius = isset($attr['buttonborderRadiusTablet']) ? $attr['buttonborderRadiusTablet'] : 0;
     $buttonborderRadiusUnit = isset($attr['buttonborderRadiusUnit']) ? $attr['buttonborderRadiusUnit'] : 'px';
     $css .= "border-radius: {$buttonborderRadius}{$buttonborderRadiusUnit};";
+  }
+
+  // Font Size
+  if (isset($attr['fontSizeTablet'])) {
+    $fontSizeUnit = isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px';
+    $css .= "font-size: {$attr['fontSizeTablet']}{$fontSizeUnit}; ";
+  }
+
+  // Line Height
+  if (isset($attr['lineHeightTablet'])) {
+    $lineHeightUnit = isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px';
+    $css .= "line-height: {$attr['lineHeightTablet']}{$lineHeightUnit}; ";
+  }
+
+  // Letter Spacing
+  if (isset($attr['letterSpacingTablet'])) {
+    $letterSpacingUnit = isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px';
+    $css .= "letter-spacing: {$attr['letterSpacingTablet']}{$letterSpacingUnit}; ";
   }
 
     $css .= "}";
@@ -905,12 +925,31 @@ function advance_button_style($attr){
     $css .= "border-radius: {$buttonborderRadius}{$buttonborderRadiusUnit};";
   }
 
+  // Font Size
+  if (isset($attr['fontSizeMobile'])) {
+    $fontSizeUnit = isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px';
+    $css .= "font-size: {$attr['fontSizeMobile']}{$fontSizeUnit}; ";
+  }
+
+  // Line Height
+  if (isset($attr['lineHeightMobile'])) {
+    $lineHeightUnit = isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px';
+    $css .= "line-height: {$attr['lineHeightMobile']}{$lineHeightUnit}; ";
+  }
+
+  // Letter Spacing
+  if (isset($attr['letterSpacingMobile'])) {
+    $letterSpacingUnit = isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px';
+    $css .= "letter-spacing: {$attr['letterSpacingMobile']}{$letterSpacingUnit}; ";
+  }
+  
     $css .= "}";
 
     $css .= "}";
 
 
-
+    $css .= ".th-button-wrapper{$attr['uniqueID']}:focus{outline: none;}";
+     
     
 
 

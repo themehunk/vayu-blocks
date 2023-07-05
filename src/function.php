@@ -45,6 +45,25 @@ function themehunk_block_editor_assets(){
 		),	'1.0.0'
     );
 
+        // Animation
+        $animation_asset_file = require_once THEMEHUNK_BLOCKS_DIR_PATH .'build/animation-index.asset.php';
+        wp_enqueue_script(
+            'registerPlugin-block-animation',
+            THEMEHUNK_BLOCKS_URL . 'build/animation-index.js',
+            array_merge(
+                $animation_asset_file['dependencies']
+            ),
+            '1.0.0',
+            true
+        );
+
+        wp_enqueue_style(
+            'component-editor-css-animation',
+            THEMEHUNK_BLOCKS_URL . 'build/animation-index.css',
+            array_merge(
+                $animation_asset_file['dependencies']
+            ),	'1.0.0'
+        );
 }
 add_action( 'enqueue_block_editor_assets', 'themehunk_block_editor_assets' );
 
