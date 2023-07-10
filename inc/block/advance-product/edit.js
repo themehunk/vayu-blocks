@@ -945,7 +945,8 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     className:containerClasses,
     style
   });
-
+  
+  console.log(attributes.showSale);
   return ( 
     <Fragment>
 		<InsSettings
@@ -990,7 +991,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                         case 'image':
                           return (
                             attributes.displayFeaturedImage && (
-                            <div className="th-product-imgae">
+                            <div className="th-product-image">
                               {product.on_sale && attributes.showSale == true &&
                               <div className={`th-product-sale ${attributes.saleStyle} ${attributes.saleDesign} ${attributes.salePosition}`}>
                                {attributes.saleDesign =='saletext' &&
