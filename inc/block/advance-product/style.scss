@@ -112,7 +112,7 @@
    color:#888;
    }
    
-   .th-product-btn{
+   .th-product-btn ,.th-product-add-btn a{
        color: #ffffff;
        display: inline-block;
        line-height: inherit;
@@ -134,6 +134,11 @@
    margin-bottom:0.4rem;
    }
    
+   .th-product-rating{
+    text-align: center;
+    display: inline-flex;
+    color: #ffd700;
+   }
    .th-product-block-cat-filter ul.category-tabs {
     list-style: none;
        display: flex;
