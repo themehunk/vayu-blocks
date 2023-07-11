@@ -6045,7 +6045,7 @@ const SortableItem = ({
     }),
     enableAlpha: true
   }))), 'rating' === template && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Hide Rating', 'themehunk-block'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Show Rating', 'themehunk-block'),
     checked: attributes.hideRating,
     onChange: hideRating => setAttributes({
       hideRating

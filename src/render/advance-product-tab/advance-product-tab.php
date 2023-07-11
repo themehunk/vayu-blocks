@@ -2,6 +2,7 @@
 
 class Advance_Product_Tab {
 
+
     public function render_callback( $attr ) {
 
         $block_content = '
@@ -36,18 +37,15 @@ class Advance_Product_Tab {
    }
 
 
-   public function get_fetch_product( $attr ) {
-
-    //print_r($attr);
-  
+   public function get_fetch_product($attr){
     $args = array(
         'status' => 'publish',
-        'limit' => -1, 
-
+        'limit' => -1,
+        'orderby' => 'date',
+        'order' => 'DESC',
     );
 
-    // selected category
-
+    // Selected category
     if (isset($attr['productCategories']) && is_array($attr['productCategories'])) {
         $term_slugs = array();
         foreach ($attr['productCategories'] as $category) {
@@ -61,80 +59,147 @@ class Advance_Product_Tab {
         }
     }
 
+    //product type
+    if (isset($attr['productType'])) {
+
+        switch ($attr['productType']) {
+
+            case 'sale':
+                // Fetch sale products
+                add_filter( 'woocommerce_product_data_store_cpt_get_products_query', array( $this, 'handle_sale_products_query_var' ), 10, 2 );
+                break;
+
+            case 'featured':
+                // Fetch featured products
+                $args['featured'] = true;
+
+                break;
+            default:
+                // No specific product type specified
+                break;
+        }
+    }
 
     $products = wc_get_products($args);
-
     $product_content = '';
+    
+    // Check if 'template' key exists
+    // Default template array
+    $default_template = [
+        "image",
+        "category",
+        "title",
+        "price",
+        "rating",
+        "button"
+    ];
+
+    // Get the 'template' attribute from $attr or use the default template
+    $template = isset($attr['template']) && is_array($attr['template']) ? $attr['template'] : $default_template;
 
     foreach ($products as $product) {
         $product_content .= '
             <div class="th-product-item" key="' . esc_attr($product->get_id()) . '">
-            <div class="th-product-block-content-wrap">';
+                <div class="th-product-block-content-wrap">';
 
-            $product_content .= '<div class="th-product-image">';
+        foreach ($template as $element) {
+            switch ($element) {
+                case 'image':
+                    // Image
+                    $displayFeaturedImage = isset($attr['displayFeaturedImage']) ? $attr['displayFeaturedImage'] : true;
+                    if($displayFeaturedImage):
+                    $product_content .= '<div class="th-product-image">';
 
-            // sale
-           $sale = get_post_meta($product->get_id() , '_sale_price', true);
+                    // Sale
+                    $sale = get_post_meta($product->get_id(), '_sale_price', true);
 
-           if ($sale && empty($attr['showSale'])):
-            
-                $product_content .= '<div class="th-product-sale ' . (isset($attr['saleStyle']) ? $attr['saleStyle'] : '') . ' ' . (isset($attr['saleDesign']) ? $attr['saleDesign'] : '') . ' ' . (isset($attr['salePosition']) ? $attr['salePosition'] : '') . '"> ';
-                
-                if (isset($attr['saleDesign']) && $attr['saleDesign'] == 'saledigit' && $product->get_regular_price() && $product->get_sale_price()) {
-                    $discountPercentage = round((($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100);
-                    $product_content .= '<span class="discount-percentage">' . (float) $discountPercentage . __( '%', 'themehunk-blocks' ) . '</span>';
-                } else {
-                    $product_content .= '<span class="discount-percentage">' . (isset($attr['saleText']) ? esc_html($attr['saleText']) : __( 'sale', 'themehunk-blocks' )) . '</span>';
-                }
+                    if ($sale && empty($attr['showSale'])) {
+                        $product_content .= '<div class="th-product-sale ' . (isset($attr['saleStyle']) ? esc_attr($attr['saleStyle']) : '') . ' ' . (isset($attr['saleDesign']) ? esc_attr($attr['saleDesign']) : '') . ' ' . (isset($attr['salePosition']) ? esc_attr($attr['salePosition']) : '') . '"> ';
 
-                $product_content .= '</div>';
+                        if (isset($attr['saleDesign']) && $attr['saleDesign'] === 'saledigit' && $product->get_regular_price() && $product->get_sale_price()) {
+                            $discountPercentage = round((($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100);
+                            $product_content .= '<span class="discount-percentage">' . (float) $discountPercentage . __( '%', 'themehunk-blocks' ) . '</span>';
+                        } else {
+                            $product_content .= '<span class="discount-percentage">' . (isset($attr['saleText']) ? esc_html($attr['saleText']) : __( 'sale', 'themehunk-blocks' )) . '</span>';
+                        }
 
-            endif;   
-             
-            $product_content .= '<a href="' . esc_url($product->get_permalink()) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                 '.get_the_post_thumbnail( $product->get_id(), 'woocommerce_thumbnail' ).'
-            </a>';
-            
-            $product_content .= '</div>';
+                        $product_content .= '</div>';
+                    }
 
+                    $product_content .= '<a href="' . esc_url($product->get_permalink()) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                        ' . get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail') . '
+                    </a>';
 
-            $product_content .= '<div class="th-product-cat">';
-            foreach ($product->get_category_ids() as $category_id) {
-                $category = get_term($category_id, 'product_cat');
-                $product_content .= '<a href="' . esc_url(get_category_link($category_id)) . '">' . esc_html($category->name) . '</a>';
+                    $product_content .= '</div>';
+
+                    endif;
+                    break;
+
+                case 'category':
+                    // Category
+                    $displayCategory = isset($attr['displayCategory']) ? $attr['displayCategory'] : true;
+                    if($displayCategory):
+                    $product_content .= '<div class="th-product-cat">';
+                    foreach ($product->get_category_ids() as $category_id) {
+                        $category = get_term($category_id, 'product_cat');
+                        $product_content .= '<a href="' . esc_url(get_category_link($category_id)) . '">' . esc_html($category->name) . '</a>';
+                    }
+                    $product_content .= '</div>';
+                    endif;
+                    break;
+
+                case 'title':
+                    // Title
+                    $displayTitle = isset($attr['displayTitle']) ? $attr['displayTitle'] : true;
+                    if($displayTitle):
+                    $product_content .= '<' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . ' class="th-product-title">
+                        <a href="' . esc_url($product->get_permalink()) . '">' . esc_html($product->get_name()) . '</a>   
+                    </' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . '>';
+                    endif;
+                    break;
+
+                case 'price':
+                    // Price
+                    $displayPrice = isset($attr['displayPrice']) ? $attr['displayPrice'] : true;
+                    if($displayPrice):
+                    $product_content .= '<div class="th-product-price">
+                        ' . $product->get_price_html() . '
+                    </div>';
+                    endif;
+                    break;
+
+                case 'rating':
+                    // Rating
+                    $displayRating = isset($attr['displayRating']) ? $attr['displayRating'] : true;
+                    $hideRating = isset($attr['hideRating']) ? $attr['hideRating'] : true;
+                    if($displayRating && $hideRating):
+                    $product_content .= '<div class="th-product-rating">
+                        ' . wc_get_rating_html($product->get_average_rating()) . '
+                    </div>';
+                    endif;
+                    break;
+
+                case 'button':
+                    // Button
+                    $displayButton = isset($attr['displayButton']) ? $attr['displayButton'] : true;
+                    if($displayButton):
+                    $product_content .= '<div class="th-product-add-btn">
+                        ' . $this->add_to_cart_url($product) . '
+                    </div>';
+                    endif;
+                    break;
+
+                default:
+                    break;
             }
-            $product_content .= '</div>';
+        }
 
-            $product_content .= '<'.(isset($attr['prouctTitleTag']) ? $attr['prouctTitleTag']:'h3').' class="th-product-title">
-            <a href="' . esc_url($product->get_permalink()) . '">' . esc_html($product->get_name()) . '</a>   
-            </'.(isset($attr['prouctTitleTag']) ? $attr['prouctTitleTag']:'h3').'>';
-
-            $product_content .= '<div class="th-product-price">
-            ' .$product->get_price_html(). '
-            ';
-            $product_content .= '</div>';
-
-
-            $product_content .= '<div class="th-product-rating">
-            ' .wc_get_rating_html($product->get_average_rating()). '
-            ';
-            $product_content .= '</div>';
-            
-            $product_content .= '<div class="th-product-add-btn">
-            
-            '.$this->add_to_cart_url($product).'
-            
-            ';
-
-            $product_content .= '</div>';
-
-            $product_content .= '</div>
-            </div>';
+        $product_content .= '</div></div>';
     }
 
     return $product_content;
+}
 
-  }
 
   public function add_to_cart_url($product){
     $args = array();
@@ -184,7 +249,17 @@ class Advance_Product_Tab {
     }
 }
 
-
+function handle_sale_products_query_var( $query) {
+	
+		$query['meta_query'][] = array(
+			'key' => '_sale_price',
+			'value' => 0,
+			'compare' => '>',
+			'type' => 'NUMERIC',
+		);
+	
+	return $query;
+}
 
 
 }
