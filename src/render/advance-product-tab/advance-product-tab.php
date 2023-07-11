@@ -41,7 +41,6 @@ class Advance_Product_Tab {
     $args = array(
         'status' => 'publish',
         'limit' => -1,
-        'orderby' => 'date',
         'order' => 'DESC',
     );
 
@@ -59,6 +58,25 @@ class Advance_Product_Tab {
         }
     }
 
+    if (isset($attr['productOrder'])) {
+
+        switch ($attr['productOrder']) {
+
+            case 'desc':
+                
+                $args['order'] = 'desc';
+
+                break;
+               
+            default:
+                    
+                $args['order'] = 'asc';
+    
+                break;    
+            
+        }
+    }
+     
     //product type
     if (isset($attr['productType'])) {
 
@@ -74,11 +92,67 @@ class Advance_Product_Tab {
                 $args['featured'] = true;
 
                 break;
+
+            case 'manual':
+
+                $manualProductIDs = array();
+                
+                    if (isset($attr['manualProduct']) && is_array($attr['manualProduct'])) {
+                        foreach ($attr['manualProduct'] as $product) {
+                            if (isset($product['value'])) {
+                                $manualProductIDs[] = absint($product['value']);
+                            }
+                        }
+                    }
+
+                    $args['include'] = $manualProductIDs;
+    
+                break;    
             default:
                 // No specific product type specified
                 break;
         }
     }
+   
+    //orderby
+    if (isset($attr['productOrderby'])) {
+
+        switch ($attr['productOrderby']) {
+
+            case 'date':
+                
+                $args['orderby'] = 'date';
+                break;
+
+            case 'price':
+                
+                $args['orderby'] = 'meta_value_num';
+                $args['meta_key'] = '_price';
+
+                break;
+            case 'popularity':
+                    
+                $args['orderby'] = 'meta_value_num';
+                $args['meta_key'] = 'total_sales';
+    
+                 break; 
+            case 'rating':
+                    
+                $args['orderby'] = 'meta_value_num';
+                $args['meta_key'] = '_wc_average_rating';
+    
+                 break; 
+             case 'menu-order':
+                    
+                $args['orderby'] = 'menu_order';
+        
+                break;    
+            default:
+                // No specific product type specified
+                break;
+        }
+    }
+
 
     $products = wc_get_products($args);
     $product_content = '';
