@@ -52,6 +52,10 @@ function cycle_through_blocks( $blocks, $post_id ) {
 			 $css .=advance_container_style($block['attrs']);
 	    } 
 
+		if ( $block['blockName'] === 'themehunk-blocks/advance-product' ) {
+			$css .=advance_product_tab_style($block['attrs']);
+	     } 
+
 		if ( $block['blockName'] === 'themehunk-blocks/advance-spacer' ) {
 			 $css .=advance_spacer_style($block['attrs']);
 	 	} 

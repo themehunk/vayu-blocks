@@ -40,9 +40,25 @@ class Advance_Product_Tab {
    public function get_fetch_product($attr){
     $args = array(
         'status' => 'publish',
-        'limit' => -1,
-        'order' => 'DESC',
     );
+
+    //product per page
+
+    $device_type = $this->device_check();
+
+    if ($device_type === 'tablet' && isset($attr['productShowTablet'])) {
+
+        $args['posts_per_page'] = $attr['productShowTablet'];
+
+    } elseif ($device_type === 'mobile' && isset($attr['productShowMobile'])) {
+
+        $args['posts_per_page'] = $attr['productShowMobile'];
+
+    } else {
+
+        $args['posts_per_page'] = isset($attr['productShow']) ? $attr['productShow'] : 4;
+
+    }
 
     // Selected category
     if (isset($attr['productCategories']) && is_array($attr['productCategories'])) {
@@ -96,7 +112,7 @@ class Advance_Product_Tab {
             case 'manual':
 
                 $manualProductIDs = array();
-                
+
                     if (isset($attr['manualProduct']) && is_array($attr['manualProduct'])) {
                         foreach ($attr['manualProduct'] as $product) {
                             if (isset($product['value'])) {
@@ -333,6 +349,53 @@ function handle_sale_products_query_var( $query) {
 		);
 	
 	return $query;
+}
+
+
+public function device_check() {
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    $mobile_agents = array(
+        'Mobile',
+        'Android',
+        'Silk/',
+        'Kindle',
+        'BlackBerry',
+        'Opera Mini',
+        'Opera Mobi'
+    );
+
+    $tablet_agents = array(
+        'iPad',
+        'Android Tablet',
+        'Kindle Fire',
+        'Silk'
+    );
+
+    $is_mobile = false;
+    $is_tablet = false;
+
+    foreach ($mobile_agents as $agent) {
+        if (stripos($user_agent, $agent) !== false) {
+            $is_mobile = true;
+            break;
+        }
+    }
+
+    foreach ($tablet_agents as $agent) {
+        if (stripos($user_agent, $agent) !== false) {
+            $is_tablet = true;
+            break;
+        }
+    }
+
+    if ($is_tablet) {
+        return 'tablet';
+    } elseif ($is_mobile) {
+        return 'mobile';
+    } else {
+        return 'desktop';
+    }
 }
 
 

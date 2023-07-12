@@ -43,6 +43,7 @@ class Themehunk_Block_Plugin {
         require_once 'src/render/advance-spacer/advance-spacer.php';
         require_once 'src/render/advance-button/advance-button.php';
 		require_once 'src/render/advance-product-tab/advance-product-tab.php';
+        require_once 'src/render/advance-product-tab/advance-product-tab-style.php';
 
         add_action( 'init', array( $this, 'register_blocks' ) );
 
