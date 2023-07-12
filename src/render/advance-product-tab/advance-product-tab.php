@@ -2,8 +2,47 @@
 
 class Advance_Product_Tab {
 
+      /**
+		 * Member Variable
+		 *
+		 * @var object instance
+		 */
+		private static $instance;
 
-    public function render_callback( $attr ) {
+		/**
+		 * Initiator
+		 */
+		public static function get_instance() {
+			if ( ! isset( self::$instance ) ) {
+				self::$instance = new self();
+			}
+			return self::$instance;
+		}
+        /**
+		 * Constructor
+		 */
+		public function __construct(){
+
+            add_action( 'wp_enqueue_scripts',array( $this, 'front_scripts' ));
+            add_action('wp_ajax_load_category_products', array( $this,'load_category_products'));
+            add_action('wp_ajax_nopriv_load_category_products',array( $this,'load_category_products'));
+
+        }
+
+
+        public function front_scripts(){
+
+            wp_enqueue_script( 'advance-product-tab-script', THEMEHUNK_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
+            wp_localize_script(
+                'advance-product-tab-script',
+                'advance_product_tab_ajax',
+                array(
+                    'ajax_url' => admin_url('admin-ajax.php'),
+                )
+            );
+        }
+
+        public function render_callback( $attr ) {
 
         $block_content = '
         <div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-themehunk-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
@@ -28,6 +67,14 @@ class Advance_Product_Tab {
                     <div class="th-product-block-product-item-wrap">' 
                     .$this->get_fetch_product($attr).
                     '</div>
+                    <div class="th-pagination">
+                        <button class="prev-page" disabled>
+                            <span class="dashicons dashicons-arrow-left-alt2"></span>
+                        </button>
+                        <button class="next-page" disabled>
+                            <span class="dashicons dashicons-arrow-right-alt2"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>';
@@ -38,8 +85,10 @@ class Advance_Product_Tab {
 
 
    public function get_fetch_product($attr){
+
     $args = array(
         'status' => 'publish',
+        'visibility' => 'catalog',
     );
 
     //product per page
@@ -70,7 +119,13 @@ class Advance_Product_Tab {
         }
 
         if (!empty($term_slugs)) {
-            $args['category'] = $term_slugs;
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'slug',
+                    'terms' => $term_slugs,
+                ),
+            );
         }
     }
 
@@ -128,6 +183,17 @@ class Advance_Product_Tab {
                 // No specific product type specified
                 break;
         }
+    }
+
+    //exclude product
+    if (isset($attr['excludeProduct']) && is_array($attr['excludeProduct'])) {
+        $excludeProductProductIDs = array();
+        foreach ($attr['excludeProduct'] as $product) {
+            if (isset($product['value'])) {
+                $excludeProductProductIDs[] = absint($product['value']);
+            }
+        }
+        $args['exclude'] = $excludeProductProductIDs;
     }
    
     //orderby
@@ -288,7 +354,7 @@ class Advance_Product_Tab {
     }
 
     return $product_content;
-}
+  }
 
 
   public function add_to_cart_url($product){
@@ -398,5 +464,22 @@ public function device_check() {
     }
 }
 
+
+public function load_category_products(){
+
+    $category_id = isset($_POST['category_id']) ? sanitize_text_field($_POST['category_id']) : '';
+    
+    $product_content = $this->get_fetch_product(array(
+        'productCategories' => array(
+            array('slug' => $category_id)
+        )
+       )
+    );
+    
+    echo $product_content;
+
+    exit;
+
+}
 
 }
