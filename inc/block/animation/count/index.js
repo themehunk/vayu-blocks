@@ -22,11 +22,11 @@ import {
  */
 import InlineControls from './inline-controls.js';
 
-const name = 'themeisle-blocks/count-animation';
+const name = 'themehunk-block/count-animation';
 
 export const format = {
 	name,
-	title: __( 'Count Animation', 'otter-blocks' ),
+	title: __( 'Count Animation', 'themehunk-block' ),
 	tagName: 'o-anim-count',
 	className: null,
 
@@ -48,7 +48,7 @@ export const format = {
 			<Fragment>
 				<RichTextToolbarButton
 					icon={ brush }
-					title={ __( 'Count Animation', 'otter-blocks' ) }
+					title={ __( 'Count Animation', 'themehunk-block' ) }
 					isDisabled={ ! isActive && null === regex.exec( value.text.substring( value.start, value.end ) ) }
 					onClick={ onToggle }
 					isActive={ isActive }

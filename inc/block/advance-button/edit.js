@@ -163,7 +163,7 @@ else if( attributes.widthType =='inlinewidth' ) {
 else{
 	customwidth = {       
 		'--width':'100%',
-		'--maxWidth-fullwidth':'100%',  
+		'--maxWidth-fullwidth':'650px',  
 	  };
 }
 
@@ -186,6 +186,13 @@ else{
 			'--iconMargin' : `0 0 0 ${ attributes.iconSpacing }px`
 		  };
 	}
+
+	/********************* */
+      // position properies
+	/********************* */
+		PositionProperties = { 
+			'--position': attributes.position,
+		 };
 	
 	if(isDesktop){
 		buttonWrapperStyle = {
@@ -225,12 +232,8 @@ else{
 
 	}
 	 /********************* */
-      // position properies 
+      // position properies Offsets Values
 		/********************* */
-		PositionProperties = { 
-			'--position': attributes.position,
-		 };
-
 		if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--left':attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
@@ -749,7 +752,7 @@ else{
 	
 	}
 
-  if ( 'gradient' === attributes.backgroundTypeHvr ) {	
+  if ( 'gradient' === attributes.buttonbackgroundTypeHvr ) {	
 	backgroundStyleButton = {...backgroundStyleButton,
 			'--backgroundImage-hvr': attributes.buttonbackgroundGradientHvr
 		};
@@ -812,7 +815,7 @@ else{
 					<RichText
 						tagName="span" // The tag here is the element output and editable in the admin
 						value={ attributes.content } // Any existing content, either from the database or an attribute default
-						allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+						allowedFormats={ [ 'core/bold', 'core/italic', 'themehunk-block/typing-animation' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
 						onChange={ ( content ) => setAttributes( { content } ) } // Store updated content as a block attribute
 						placeholder={ __( 'Button...','themehunk-blocks' ) } // Display this text before any content has been added by the user
 					/>

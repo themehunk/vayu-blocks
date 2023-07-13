@@ -123,7 +123,7 @@ function AnimationControls({
 	const [ animation, setAnimation ] = useState( 'none' );
 	const [ delay, setDelay ] = useState( 'none' );
 	const [ speed, setSpeed ] = useState( 'none' );
-	const [ currentAnimationLabel, setCurrentAnimationLabel ] = useState( __( 'None', 'otter-blocks' ) );
+	const [ currentAnimationLabel, setCurrentAnimationLabel ] = useState( __( 'None', 'themehunk-block' ) );
 
 	const updateAnimation = ( e ) => {
 		let classes;
@@ -206,8 +206,8 @@ function AnimationControls({
 
 	return (
 		<PanelBody
-			title={ __( 'Animations', 'otter-blocks' ) }
-			initialOpen={ true }
+			title={ __( 'Animations', 'themehunk-block' ) }
+			initialOpen={ false }
 		>
 			<div className="o-animations-control">
 				<AnimationPopover
@@ -220,14 +220,14 @@ function AnimationControls({
 				{ 'none' !== animation && (
 					<Fragment>
 						<SelectControl
-							label={ __( 'Delay', 'otter-blocks' ) }
+							label={ __( 'Delay', 'themehunk-block' ) }
 							value={ delay || 'none' }
 							options={ delayList }
 							onChange={  value => updateAnimConfig( AnimationType.default, delay, value, () => setDelay( value ), attributes, setAttributes ) }
 						/>
 
 						<SelectControl
-							label={ __( 'Speed', 'otter-blocks' ) }
+							label={ __( 'Speed', 'themehunk-block' ) }
 							value={ speed || 'none' }
 							options={ speedList }
 							onChange={ value => updateAnimConfig( AnimationType.default, speed, value, () => setSpeed( value ), attributes, setAttributes ) }
@@ -237,41 +237,43 @@ function AnimationControls({
 							variant="secondary"
 							onClick={ replayAnimation }
 						>
-							{ __( 'Replay Animation', 'otter-blocks' ) }
+							{ __( 'Replay Animation', 'themehunk-block' ) }
 						</Button>
 					</Fragment>
 				) }
 			</div>
 
+			{/* //This code is to enable cout animation.
 			<ControlPanelControl
-				label={ __( 'Count Animations', 'otter-blocks' ) }
+				label={ __( 'Count Animations', 'themehunk-block' ) }
 			>
 				<img
 					src={ ' ' }
-					alt={ _( 'Using Count Animation in the Block Editor', 'otter-blocks' ) }
-					className="otter-animations-count-image"
+					alt={ _( 'Using Count Animation in the Block Editor', 'themehunk-block' ) }
+					className="th-animations-count-image"
 				/>
 
-				<p>{ __( 'You can add counting animation from the format toolbar of this block.', 'otter-blocks' ) }</p>
-				<p>{ __( 'Note: This feature is not available in all the blocks.', 'otter-blocks' ) }</p>
+				<p>{ __( 'You can add counting animation from the format toolbar of this block.', 'themehunk-block' ) }</p>
+				<p>{ __( 'Note: This feature is not available in all the blocks.', 'themehunk-block' ) }</p>
 			</ControlPanelControl>
+			 */}
 
 			<ControlPanelControl
-				label={ __( 'Typing Animations', 'otter-blocks' ) }
+				label={ __( 'Typing Animations', 'themehunk-block' ) }
 			>
 				<img
 					src={ ' ' }
-					alt={ _( 'Using Typing Animation in the Block Editor', 'otter-blocks' ) }
-					className="otter-animations-count-image"
+					alt={ _( 'Using Typing Animation in the Block Editor', 'themehunk-block' ) }
+					className="th-animations-count-image"
 				/>
 
-				<p>{ __( 'You can add typing animation from the format toolbar of this block.', 'otter-blocks' ) }</p>
-				<p>{ __( 'Note: This feature is not available in all the blocks.', 'otter-blocks' ) }</p>
+				<p>{ __( 'You can add typing animation from the format toolbar of this block.', 'themehunk-block' ) }</p>
+				<p>{ __( 'Note: This feature is not available in all the blocks.', 'themehunk-block' ) }</p>
 			</ControlPanelControl>
 
 			<div className="o-fp-wrap">
-				{ applyFilters( 'otter.feedback', '', 'animations' ) }
-				{ applyFilters( 'otter.poweredBy', '' ) }
+				{ applyFilters( 'thenehunk-block.feedback', '', 'animations' ) }
+				{ applyFilters( 'themehunk-block.poweredBy', '' ) }
 			</div>
 		</PanelBody>
 	);

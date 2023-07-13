@@ -5,7 +5,7 @@ function advance_button_style($attr){
     if(isset( $attr['uniqueID'] )){
       $css .= ".th-button-wrapper{$attr['uniqueID']}{";
 
-        
+        $css .= "box-sizing: border-box;";
        //Width
        if( isset($attr['widthType']) && $attr['widthType'] == 'fullwidth' ){
         $css .= "width: 100%;max-width: 100%!important;display: flex;";
@@ -186,7 +186,7 @@ function advance_button_style($attr){
   
       //Responsive Hide
   if(isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop'] ){
-      $css .= "display: none";
+      $css .= "display: none;";
   }
 
   $css .= "text-decoration: none;";
@@ -358,7 +358,6 @@ function advance_button_style($attr){
 			$fontSizeUnit = isset($attr['fontSizeUnit']) ? $attr['fontSizeUnit'] : 'px';
 			$css .= "font-size: {$attr['fontSize']}{$fontSizeUnit}; ";
 		}
-
 		// Line Height
 		if (isset($attr['lineHeight'])) {
 			$lineHeightUnit = isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px';
@@ -409,17 +408,18 @@ function advance_button_style($attr){
     $css .= "}";
 
     // Icon Position & Spacing
-    $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside span:nth-of-type(1){";
+    $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside > span:nth-of-type(1){";
       if(isset( $attr['iconPosition'] ) && $attr['iconPosition'] == 'after' ){
       
         $css .= isset( $attr['iconSpacing'] ) ? "margin:0 0 0 {$attr['iconSpacing'] }px;" : '';
-        $css .= "order: 15;";
+        $css .= "order: 15; display: flex; align-items: center;";
       }
       else{
         
         $css .= isset( $attr['iconSpacing'] ) ? "margin:0 {$attr['iconSpacing'] }px 0 0;" : '';
-        $css .= "order: 5;";
+        $css .= "order: 5; display: flex; align-items: center;";
       }
+      
     $css .= "}";
 
     $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside span:nth-of-type(2){";
@@ -474,8 +474,8 @@ function advance_button_style($attr){
                 $css .= "padding: {$paddingTablet}{$paddingUnit};";
               }
             
-              $css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};}" : '');
-             
+              // $css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};}" : '');
+              $css .= isset( $attr['zindexTablet'] ) ? "z-index:{$attr['zindexTablet'] };" : '';
               //for border-width tablet
                     if (isset($attr['borderWidthTypeTablet']) && 'unlinked' === $attr['borderWidthTypeTablet']) {
                         $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
@@ -563,7 +563,7 @@ function advance_button_style($attr){
                         $css .= "display: none";
                     }
                     else{
-                        $css .= "display: block";
+                        $css .= "display: flex";
                     }
 
               $css .= "}";
@@ -736,7 +736,7 @@ function advance_button_style($attr){
         ";
       }
     
-      $css .= (isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']};}" : '');
+      $css .= isset( $attr['zindexMobile'] ) ? "z-index:{$attr['zindexMobile'] };" : '';
      
       //for border-width Mobile
 			if (isset($attr['borderWidthTypeMobile']) && 'unlinked' === $attr['borderWidthTypeMobile']) {
@@ -824,7 +824,7 @@ function advance_button_style($attr){
 				$css .= "display: none";
 			}
 			else{
-				$css .= "display: block";
+				$css .= "display: flex";
 			}
      $css .= "}";
 
@@ -948,11 +948,10 @@ function advance_button_style($attr){
     $css .= "}";
 
 
-    $css .= ".th-button-wrapper{$attr['uniqueID']}:focus{outline: none;}";
-     
+    $css .= ".th-button-wrapper{$attr['uniqueID']}:focus{outline: none;
+    text-decoration: none;
+    }"; 
     
-
-
     }
 
     return $css;

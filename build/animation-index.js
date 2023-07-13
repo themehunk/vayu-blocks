@@ -196,7 +196,7 @@ function AnimationPopover(_ref) {
   };
   const id = `inspector-o-animations-control-${instanceId}`;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animation', 'otter-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animation', 'themehunk-block'),
     id: id
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
     contentClassName: "o-animations-control__popover",
@@ -218,9 +218,9 @@ function AnimationPopover(_ref) {
         onToggle
       } = _ref3;
       return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.MenuGroup, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'otter-blocks')
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'themehunk-block')
       }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Search', 'otter-blocks'),
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Search', 'themehunk-block'),
         value: currentInput,
         onChange: e => {
           setCurrentInput(e);
@@ -234,7 +234,7 @@ function AnimationPopover(_ref) {
             className: "o-animations-control__category"
           }, category.label) : '';
         }), getAnimations(animation, onToggle));
-      }), !animationFound && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Nothing found. Try searching for something else!', 'otter-blocks'))));
+      }), !animationFound && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Nothing found. Try searching for something else!', 'themehunk-block'))));
     }
   }));
 }
@@ -281,10 +281,10 @@ __webpack_require__.r(__webpack_exports__);
  * Internal dependencies.
  */
 
-const name = 'themeisle-blocks/count-animation';
+const name = 'themehunk-block/count-animation';
 const format = {
   name,
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'otter-blocks'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'themehunk-block'),
   tagName: 'o-anim-count',
   className: null,
   edit: _ref => {
@@ -304,7 +304,7 @@ const format = {
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichTextToolbarButton, {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'otter-blocks'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'themehunk-block'),
       isDisabled: !isActive && null === regex.exec(value.text.substring(value.start, value.end)),
       onClick: onToggle,
       isActive: isActive
@@ -412,17 +412,17 @@ const InlineControls = _ref => {
     className: "o-animation-popover"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, {
     level: 4
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'otter-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'otter-blocks'),
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animation', 'themehunk-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'themehunk-block'),
     value: countDelay || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_6__.delayList,
     onChange: (value => (0,_editor_js__WEBPACK_IMPORTED_MODULE_8__.updateAnimConfig)('count', countDelay, value, () => setCountDelay(value)), attributes, setAttributes)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'otter-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'themehunk-block'),
     value: countSpeed || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_6__.speedList,
     onChange: (value => (0,_editor_js__WEBPACK_IMPORTED_MODULE_8__.updateAnimConfig)('count', countSpeed, value, () => setTypingSpeed(value)), attributes, setAttributes)
-  }), (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__.applyFilters)('otter.poweredBy', ''));
+  }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (InlineControls);
 
@@ -450,248 +450,248 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 const animationsList = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'themehunk-block'),
   value: 'none'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Down', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Down', 'themehunk-block'),
   value: 'backInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Left', 'themehunk-block'),
   value: 'backInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Right', 'themehunk-block'),
   value: 'backInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Up', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Back In Up', 'themehunk-block'),
   value: 'backInUp'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce', 'themehunk-block'),
   value: 'bounce'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In', 'themehunk-block'),
   value: 'bounceIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Down', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Down', 'themehunk-block'),
   value: 'bounceInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Left', 'themehunk-block'),
   value: 'bounceInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Right', 'themehunk-block'),
   value: 'bounceInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Up', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bounce In Up', 'themehunk-block'),
   value: 'bounceInUp'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In', 'themehunk-block'),
   value: 'fadeIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Down', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Down', 'themehunk-block'),
   value: 'fadeInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Down Big', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Down Big', 'themehunk-block'),
   value: 'fadeInDownBig'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Left', 'themehunk-block'),
   value: 'fadeInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Left Big', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Left Big', 'themehunk-block'),
   value: 'fadeInLeftBig'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Right', 'themehunk-block'),
   value: 'fadeInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Right Big', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Right Big', 'themehunk-block'),
   value: 'fadeInRightBig'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Up', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Up', 'themehunk-block'),
   value: 'fadeInUp'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Top Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Top Left', 'themehunk-block'),
   value: 'fadeInTopLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Top Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Top Right', 'themehunk-block'),
   value: 'fadeInTopRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Bottom Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Bottom Left', 'themehunk-block'),
   value: 'fadeInBottomLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Bottom Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fade In Bottom Right', 'themehunk-block'),
   value: 'fadeInBottomRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip', 'themehunk-block'),
   value: 'flip'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip In X', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip In X', 'themehunk-block'),
   value: 'flipInX'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip In Y', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flip In Y', 'themehunk-block'),
   value: 'flipInY'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In', 'themehunk-block'),
   value: 'rotateIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Down Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Down Left', 'themehunk-block'),
   value: 'rotateInDownLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Down Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Down Right', 'themehunk-block'),
   value: 'rotateInDownRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Up Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Up Left', 'themehunk-block'),
   value: 'rotateInUpLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Up Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotate In Up Right', 'themehunk-block'),
   value: 'rotateInUpRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Down', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Down', 'themehunk-block'),
   value: 'slideInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Left', 'themehunk-block'),
   value: 'slideInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Right', 'themehunk-block'),
   value: 'slideInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Up', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slide In Up', 'themehunk-block'),
   value: 'slideInUp'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In', 'themehunk-block'),
   value: 'zoomIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Down', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Down', 'themehunk-block'),
   value: 'zoomInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Left', 'themehunk-block'),
   value: 'zoomInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Right', 'themehunk-block'),
   value: 'zoomInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Up', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom In Up', 'themehunk-block'),
   value: 'zoomInUp'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Roll In', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Roll In', 'themehunk-block'),
   value: 'rollIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed In Right', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed In Right', 'themehunk-block'),
   value: 'lightSpeedInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed In Left', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed In Left', 'themehunk-block'),
   value: 'lightSpeedInLeft'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flash', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flash', 'themehunk-block'),
   value: 'flash'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pulse', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pulse', 'themehunk-block'),
   value: 'pulse'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rubber Band', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rubber Band', 'themehunk-block'),
   value: 'rubberBand'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shake X', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shake X', 'themehunk-block'),
   value: 'shakeX'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shake Y', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Shake Y', 'themehunk-block'),
   value: 'shakeY'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Head Shake', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Head Shake', 'themehunk-block'),
   value: 'headShake'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Swing', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Swing', 'themehunk-block'),
   value: 'swing'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('TaDa', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('TaDa', 'themehunk-block'),
   value: 'tada'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Wobble', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Wobble', 'themehunk-block'),
   value: 'wobble'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Jello', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Jello', 'themehunk-block'),
   value: 'jello'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Heart Beat', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Heart Beat', 'themehunk-block'),
   value: 'heartBeat'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hinge', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hinge', 'themehunk-block'),
   value: 'hinge'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Jack In The Box', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Jack In The Box', 'themehunk-block'),
   value: 'jackInTheBox'
 }];
 const categories = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Backing', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Backing', 'themehunk-block'),
   value: 'backInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bouncing', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Bouncing', 'themehunk-block'),
   value: 'bounce'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fading', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fading', 'themehunk-block'),
   value: 'fadeIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flipping', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Flipping', 'themehunk-block'),
   value: 'flip'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotating', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rotating', 'themehunk-block'),
   value: 'rotateIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sliding', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Sliding', 'themehunk-block'),
   value: 'slideInDown'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zooming', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zooming', 'themehunk-block'),
   value: 'zoomIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rolling', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rolling', 'themehunk-block'),
   value: 'rollIn'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Light Speed', 'themehunk-block'),
   value: 'lightSpeedInRight'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Other', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Other', 'themehunk-block'),
   value: 'flash'
 }];
 const outAnimation = ['backOutDown', 'backOutLeft', 'backOutRight', 'backOutUp', 'bounceOut', 'bounceOutDown', 'bounceOutLeft', 'bounceOutRight', 'bounceOutUp', 'fadeOut', 'fadeOutDown', 'fadeOutDownBig', 'fadeOutLeft', 'fadeOutLeftBig', 'fadeOutRight', 'fadeOutRightBig', 'fadeOutUp', 'fadeOutUpBig', 'fadeOutTopLeft', 'fadeOutTopRight', 'fadeOutBottomRight', 'fadeOutBottomLeft', 'flipOutX', 'flipOutY', 'lightSpeedOutRight', 'lightSpeedOutLeft', 'rotateOut', 'rotateOutDownLeft', 'rotateOutDownRight', 'rotateOutUpLeft', 'rotateOutUpRight', 'slideOutDown', 'slideOutLeft', 'slideOutRight', 'slideOutUp', 'zoomOut', 'zoomOutDown', 'zoomOutLeft', 'zoomOutRight', 'zoomOutUp', 'rollOut'];
 const delayList = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('None', 'themehunk-block'),
   value: 'none'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('100 Milliseconds', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('100 Milliseconds', 'themehunk-block'),
   value: 'delay-100ms'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('200 Milliseconds', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('200 Milliseconds', 'themehunk-block'),
   value: 'delay-200ms'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('500 Milliseconds', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('500 Milliseconds', 'themehunk-block'),
   value: 'delay-500ms'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('One Second', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('One Second', 'themehunk-block'),
   value: 'delay-1s'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Two Second', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Two Second', 'themehunk-block'),
   value: 'delay-2s'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Three Second', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Three Second', 'themehunk-block'),
   value: 'delay-3s'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Four Second', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Four Second', 'themehunk-block'),
   value: 'delay-4s'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Five Second', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Five Second', 'themehunk-block'),
   value: 'delay-5s'
 }];
 const speedList = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slow', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slow', 'themehunk-block'),
   value: 'slow'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slower', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Slower', 'themehunk-block'),
   value: 'slower'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'themehunk-block'),
   value: 'none'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fast', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fast', 'themehunk-block'),
   value: 'fast'
 }, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Faster', 'otter-blocks'),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Faster', 'themehunk-block'),
   value: 'faster'
 }];
 
@@ -812,7 +812,7 @@ function AnimationControls(_ref) {
   const [animation, setAnimation] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('none');
   const [delay, setDelay] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('none');
   const [speed, setSpeed] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('none');
-  const [currentAnimationLabel, setCurrentAnimationLabel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'otter-blocks'));
+  const [currentAnimationLabel, setCurrentAnimationLabel] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'themehunk-block'));
   const updateAnimation = e => {
     let classes;
     let animationValue = 'none' !== e ? e : '';
@@ -878,8 +878,8 @@ function AnimationControls(_ref) {
     }), 100);
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'otter-blocks'),
-    initialOpen: true
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'themehunk-block'),
+    initialOpen: false
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "o-animations-control"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_animation_popover_js__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -888,33 +888,27 @@ function AnimationControls(_ref) {
     currentAnimationLabel: currentAnimationLabel,
     setCurrentAnimationLabel: setCurrentAnimationLabel
   }), 'none' !== animation && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'otter-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'themehunk-block'),
     value: delay || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_4__.delayList,
     onChange: value => updateAnimConfig(AnimationType.default, delay, value, () => setDelay(value), attributes, setAttributes)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'otter-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'themehunk-block'),
     value: speed || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_4__.speedList,
     onChange: value => updateAnimConfig(AnimationType.default, speed, value, () => setSpeed(value), attributes, setAttributes)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     variant: "secondary",
     onClick: replayAnimation
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Replay Animation', 'otter-blocks')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Count Animations', 'otter-blocks')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Replay Animation', 'themehunk-block')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animations', 'themehunk-block')
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: ' ',
-    alt: _('Using Count Animation in the Block Editor', 'otter-blocks'),
-    className: "otter-animations-count-image"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can add counting animation from the format toolbar of this block.', 'otter-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Note: This feature is not available in all the blocks.', 'otter-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_control_panel_control_index_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animations', 'otter-blocks')
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: ' ',
-    alt: _('Using Typing Animation in the Block Editor', 'otter-blocks'),
-    className: "otter-animations-count-image"
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can add typing animation from the format toolbar of this block.', 'otter-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Note: This feature is not available in all the blocks.', 'otter-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    alt: _('Using Typing Animation in the Block Editor', 'themehunk-block'),
+    className: "th-animations-count-image"
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('You can add typing animation from the format toolbar of this block.', 'themehunk-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Note: This feature is not available in all the blocks.', 'themehunk-block'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "o-fp-wrap"
-  }, (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.applyFilters)('otter.feedback', '', 'animations'), (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.applyFilters)('otter.poweredBy', '')));
+  }, (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.applyFilters)('thenehunk-block.feedback', '', 'animations'), (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_3__.applyFilters)('themehunk-block.poweredBy', '')));
 }
 /* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.memo)(AnimationControls));
 
@@ -959,10 +953,10 @@ __webpack_require__.r(__webpack_exports__);
  * Internal dependencies.
  */
 
-const name = 'themeisle-blocks/typing-animation';
+const name = 'themehunk-block/typing-animation';
 const format = {
   name,
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'otter-blocks'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'themehunk-block'),
   tagName: 'o-anim-typing',
   className: null,
   edit: _ref => {
@@ -979,7 +973,7 @@ const format = {
     };
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichTextToolbarButton, {
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"],
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'otter-blocks'),
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'themehunk-block'),
       onClick: onToggle,
       isActive: isActive
     }), isActive && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_inline_controls_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -1086,17 +1080,17 @@ const InlineControls = _ref => {
     className: "o-animation-popover"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, {
     level: 4
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'otter-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'otter-blocks'),
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Typing Animation', 'themehunk-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Delay', 'themehunk-block'),
     value: typingDelay || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_6__.delayList,
     onChange: value => (0,_editor_js__WEBPACK_IMPORTED_MODULE_8__.updateAnimConfig)('typing', typingDelay, value, () => setTypingDelay(value), attributes, setAttributes)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'otter-blocks'),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Speed', 'themehunk-block'),
     value: typingSpeed || 'none',
     options: _data_js__WEBPACK_IMPORTED_MODULE_6__.speedList,
     onChange: value => (0,_editor_js__WEBPACK_IMPORTED_MODULE_8__.updateAnimConfig)('typing', typingSpeed, value, () => setTypingSpeed(value), attributes, setAttributes)
-  }), (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_4__.applyFilters)('otter.poweredBy', ''));
+  }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (InlineControls);
 
@@ -1537,7 +1531,7 @@ const BlockAnimation = (el, props) => {
         var _props$attributes, _props$attributes$cla;
         return Boolean(props === null || props === void 0 ? void 0 : (_props$attributes = props.attributes) === null || _props$attributes === void 0 ? void 0 : (_props$attributes$cla = _props$attributes.className) === null || _props$attributes$cla === void 0 ? void 0 : _props$attributes$cla.includes('animated'));
       },
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'otter-blocks'),
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Animations', 'themehunk-block'),
       onDeselect: () => {
         var _window, _window$blocksAnimati;
         return (_window = window) === null || _window === void 0 ? void 0 : (_window$blocksAnimati = _window.blocksAnimation) === null || _window$blocksAnimati === void 0 ? void 0 : _window$blocksAnimati.removeAnimation();
@@ -1556,10 +1550,12 @@ const withInspectorControls = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_5__
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(BlockEdit, props);
   };
 }, 'withInspectorControl');
-if (Boolean((_window2 = window) === null || _window2 === void 0 ? void 0 : (_window2$blocksAnimat = _window2.blocksAnimation) === null || _window2$blocksAnimat === void 0 ? void 0 : _window2$blocksAnimat.hasOtter)) {
+
+//Very Important
+if (Boolean((_window2 = window) === null || _window2 === void 0 ? void 0 : (_window2$blocksAnimat = _window2.blocksAnimation) === null || _window2$blocksAnimat === void 0 ? void 0 : _window2$blocksAnimat.hasThemehunkBlock)) {
   (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__.addFilter)('otter.blockTools', 'themeisle-animations/with-inspector-controls', BlockAnimation, 1);
 } else {
-  (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__.addFilter)('editor.BlockEdit', 'themeisle-animations/with-inspector-controls', withInspectorControls);
+  (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_6__.addFilter)('editor.BlockEdit', 'themehunk-animations/with-inspector-controls', withInspectorControls);
 }
 }();
 /******/ })()

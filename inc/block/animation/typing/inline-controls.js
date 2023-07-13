@@ -93,23 +93,23 @@ const InlineControls = ({
 			focusOnMount={ false }
 			className="o-animation-popover"
 		>
-			<Heading level={ 4 }>{ __( 'Typing Animation', 'otter-blocks' ) }</Heading>
+			<Heading level={ 4 }>{ __( 'Typing Animation', 'themehunk-block' ) }</Heading>
 
 			<SelectControl
-				label={ __( 'Delay', 'otter-blocks' ) }
+				label={ __( 'Delay', 'themehunk-block' ) }
 				value={ typingDelay || 'none' }
 				options={ delayList }
 				onChange={ value => updateAnimConfig( 'typing', typingDelay, value, () => setTypingDelay( value ), attributes, setAttributes ) }
 			/>
 
 			<SelectControl
-				label={ __( 'Speed', 'otter-blocks' ) }
+				label={ __( 'Speed', 'themehunk-block' ) }
 				value={ typingSpeed || 'none' }
 				options={ speedList }
 				onChange={ value => updateAnimConfig( 'typing', typingSpeed, value, () => setTypingSpeed( value ), attributes, setAttributes ) }
 			/>
 
-			{ applyFilters( 'otter.poweredBy', '' ) }
+			
 		</Popover>
 	);
 };
