@@ -71,6 +71,7 @@ const InsSettings = ({
             const mappedCategories = data.map((category) => ({
               value: category.id,
               label: category.name,
+			  slug: category.slug,
             }));
             setSelectCategories(mappedCategories);
           })

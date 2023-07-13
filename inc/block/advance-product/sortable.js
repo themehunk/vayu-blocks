@@ -1642,7 +1642,7 @@ export const SortableItem = ({
 					{ ( 'rating' === template ) && (
 						<Fragment >
 							<ToggleControl
-								label={ __( 'Hide Rating', 'themehunk-block' ) }
+								label={ __( 'Show Rating', 'themehunk-block' ) }
 								checked={ attributes.hideRating }
 								onChange={ hideRating => setAttributes({hideRating}) }
 							 />
