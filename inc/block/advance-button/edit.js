@@ -8,7 +8,6 @@
  */
 import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
-import { ResizableBox } from '@wordpress/components';
 import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { omitBy } from 'lodash';
@@ -164,7 +163,7 @@ else if( attributes.widthType =='inlinewidth' ) {
 else{
 	customwidth = {       
 		'--width':'100%',
-		'--maxWidth-fullwidth':'100%',  
+		'--maxWidth-fullwidth':'650px',  
 	  };
 }
 
@@ -177,20 +176,27 @@ else{
 
 	if(attributes.iconPosition == 'before'){
 		iconPositionStyle = {
-			'--order': 5,
+			'--orderButton': 5,
 			'--iconMargin' : `0 ${ attributes.iconSpacing }px 0 0`
 		  };
 	}
 	else{
 		iconPositionStyle = {
-			'--order': 15,
+			'--orderButton': 15,
 			'--iconMargin' : `0 0 0 ${ attributes.iconSpacing }px`
 		  };
 	}
+
+	/********************* */
+      // position properies
+	/********************* */
+		PositionProperties = { 
+			'--position': attributes.position,
+		 };
 	
 	if(isDesktop){
 		buttonWrapperStyle = {
-	  	'--justify-content': attributes.align,
+	'--justify-content': attributes.align,
 
 	'--paddingTop': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
 	'--paddingRight': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
@@ -224,15 +230,10 @@ else{
 	'--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeft }${ attributes.borderRadiusHvrUnit }`,
 	'--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrType ? `${ attributes.borderRadiusHvr }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottom }${ attributes.borderRadiusHvrUnit }`,
 
-
 	}
 	 /********************* */
-      // position properies 
+      // position properies Offsets Values
 		/********************* */
-		PositionProperties = { 
-			'--position': attributes.position,
-		 };
-
 		if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--left':attributes.horizontalOrientationOffset + attributes.horizontalOrientationOffsetUnit,
@@ -245,14 +246,12 @@ else{
 			}
 
 		 }
-
 		 if(attributes.verticalOrientation === 'top' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--top':attributes.verticalOrientationOffsetTop + attributes.verticalOrientationOffsetTopUnit,
 			}
 
 		 }
-
 		 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 			PositionProperties = {...PositionProperties,
 				'--bottom':attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
@@ -359,16 +358,12 @@ else{
       '--borderTopRightRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrTopTablet }${ attributes.borderRadiusHvrUnit }`,
       '--borderTopLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrRightTablet }${ attributes.borderRadiusHvrUnit }`,
       '--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeftTablet }${ attributes.borderRadiusHvrUnit }`,
-      '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottomTablet }${ attributes.borderRadiusHvrUnit }`,
-
-      
+      '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeTablet ? `${ attributes.borderRadiusHvrTablet }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottomTablet }${ attributes.borderRadiusHvrUnit }`,   
 	  
 	}
-
-		
+	
      // position properties
-
-			if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
+	 if(attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit'){
 				PositionProperties = {...PositionProperties,
 					'--left':attributes.horizontalOrientationOffsetTablet + attributes.horizontalOrientationOffsetUnit,
 				}
@@ -394,7 +389,6 @@ else{
 				}
 	
 			 }
-
        
 		/********************* */
         // flex properies 
@@ -447,9 +441,8 @@ else{
       '--border-bottom-width':'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthBottomTablet }${ attributes.buttonborderWidthUnit }`,
       '--border-right-width': 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthRightTablet }${ attributes.buttonborderWidthUnit }`,
       '--border-left-width': 'linked' === attributes.buttonborderWidthTypeTablet ? `${ attributes.buttonborderWidthTablet }${ attributes.buttonborderWidthUnit }` : `${ attributes.buttonborderWidthLeftTablet }${ attributes.buttonborderWidthUnit }`,
-      
 
-      '--borderTopRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusTopTablet }${ attributes.buttonborderRadiusUnit }`,
+    '--borderTopRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusTopTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderTopLeftRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusRightTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderBottomRightRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusLeftTablet }${ attributes.buttonborderRadiusUnit }`,
 	'--borderBottomLeftRadius': 'linked' === attributes.buttonborderRadiusTypeTablet ? `${ attributes.buttonborderRadiusTablet }${ attributes.buttonborderRadiusUnit }` : `${ attributes.buttonborderRadiusBottomTablet }${ attributes.buttonborderRadiusUnit }`,
@@ -759,7 +752,7 @@ else{
 	
 	}
 
-  if ( 'gradient' === attributes.backgroundTypeHvr ) {	
+  if ( 'gradient' === attributes.buttonbackgroundTypeHvr ) {	
 	backgroundStyleButton = {...backgroundStyleButton,
 			'--backgroundImage-hvr': attributes.buttonbackgroundGradientHvr
 		};
@@ -822,7 +815,7 @@ else{
 					<RichText
 						tagName="span" // The tag here is the element output and editable in the admin
 						value={ attributes.content } // Any existing content, either from the database or an attribute default
-						allowedFormats={ [ 'core/bold', 'core/italic' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+						allowedFormats={ [ 'core/bold', 'core/italic', 'themehunk-block/typing-animation' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
 						onChange={ ( content ) => setAttributes( { content } ) } // Store updated content as a block attribute
 						placeholder={ __( 'Button...','themehunk-blocks' ) } // Display this text before any content has been added by the user
 					/>

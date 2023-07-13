@@ -1087,7 +1087,28 @@
 		},
 		"fontSizeMobile": {
 			"type": "number"
+		},
+		"UAGAnimationType": {
+			"type": "string",
+			"default": ""
+		},
+		"UAGAnimationTime": {
+			"type": "number",
+			"default": 400
+		},
+		"UAGAnimationDelay": {
+			"type": "number",
+			"default": 0
+		},
+		"UAGAnimationEasing": {
+			"type": "string",
+			"default": "esae"
+		},
+		"UAGAnimationRepeat": {
+			"type": "boolean",
+			"default": false
 		}
+		
 
 	}
 }

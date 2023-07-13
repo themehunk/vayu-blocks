@@ -45,6 +45,7 @@ function themehunk_block_editor_assets(){
 		),	'1.0.0'
     );
 
+        
 }
 add_action( 'enqueue_block_editor_assets', 'themehunk_block_editor_assets' );
 

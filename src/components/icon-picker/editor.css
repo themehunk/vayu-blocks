@@ -90,7 +90,7 @@ button.components-icon-picker-item svg {
 }
 
 .th-button-inside span:nth-of-type(1) {
-  order: var(--order);
+  order: var(--orderButton);
   margin: var(--iconMargin);
 }
 
@@ -123,7 +123,7 @@ button.components-icon-picker-item svg {
 }
 
 .th-icon-preview {
-  padding-left: 47px;
+  padding-left: 34px;
 }
 
 .th-icon-preview button {

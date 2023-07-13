@@ -37,6 +37,8 @@ import {
 } from '../../../src/components/index.js';
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
+import Select from 'react-select';
+
 const InsSettings = ({
     attributes,
     setAttributes
@@ -2964,9 +2966,7 @@ const InsSettings = ({
 								max={ 300 }
 								allowReset={ true }
 							/>
-						</ResponsiveControl>					
-			
-							   
+						</ResponsiveControl>					   
 
                 </PanelBody>
 

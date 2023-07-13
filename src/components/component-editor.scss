@@ -630,6 +630,12 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
         justify-content: flex-end;
         margin: 5px 0;
     }
+    .th-icon-preview > span{
+        min-width: 29px;
+    }
+    .th-icon-preview {
+        padding-left: 34px!important;
+    }      
     // background
     .th-background-selector-control {
         margin: 0 0 1.5em 0;

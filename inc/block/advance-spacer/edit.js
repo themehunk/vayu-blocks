@@ -647,7 +647,7 @@ const blockProps = useBlockProps({
 		<ResizableBox
     
   	enable={{
-    bottom: true,
+    bottom: false,
     bottomLeft: false,
     bottomRight: false,
     left: false,

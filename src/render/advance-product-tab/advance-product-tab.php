@@ -349,22 +349,8 @@ class Advance_Product_Tab {
 
     $product_content .= '<div>';
 
-    // Pagination buttons
-    $prev_button_disabled = ($paged <= 1) ? 'disabled' : '';
-    $next_button_disabled = ($paged >= $max_num_pages) ? 'disabled' : '';
-
-    $pagination_buttons = '
-        <button class="prev-page" ' . $prev_button_disabled . ' data-page="' . ($paged - 1) . '">
-            <span class="dashicons dashicons-arrow-left-alt2"></span>
-        </button>
-        <button class="next-page" ' . $next_button_disabled . ' data-page="' . ($paged + 1) . '">
-            <span class="dashicons dashicons-arrow-right-alt2"></span>
-        </button>
-    ';
-
-    $product_content .= '<div class="th-pagination">' . $pagination_buttons . '</div>';
-
     return $product_content;
+    
   }
 
 
