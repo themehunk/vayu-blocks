@@ -58,23 +58,15 @@ class Advance_Product_Tab {
                                         ' . (isset($category['label']) ? esc_html($category['label']) : '') . '
                                     </li>';
                             }
+
                         }
+
                         $block_content .= '
                     </ul>
                 </div>
     
                 <div class="th-product-block-product-content">
-                    <div class="th-product-block-product-item-wrap">' 
-                    .$this->get_fetch_product($attr).
-                    '</div>
-                    <div class="th-pagination">
-                        <button class="prev-page" disabled>
-                            <span class="dashicons dashicons-arrow-left-alt2"></span>
-                        </button>
-                        <button class="next-page" disabled>
-                            <span class="dashicons dashicons-arrow-right-alt2"></span>
-                        </button>
-                    </div>
+                '.$this->get_fetch_product($attr).'
                 </div>
             </div>
         </div>';
@@ -252,6 +244,8 @@ class Advance_Product_Tab {
 
     // Get the 'template' attribute from $attr or use the default template
     $template = isset($attr['template']) && is_array($attr['template']) ? $attr['template'] : $default_template;
+    
+    $product_content .= '<div class="th-product-block-product-item-wrap">';
 
     foreach ($products as $product) {
         $product_content .= '
@@ -352,6 +346,23 @@ class Advance_Product_Tab {
 
         $product_content .= '</div></div>';
     }
+
+    $product_content .= '<div>';
+
+    // Pagination buttons
+    $prev_button_disabled = ($paged <= 1) ? 'disabled' : '';
+    $next_button_disabled = ($paged >= $max_num_pages) ? 'disabled' : '';
+
+    $pagination_buttons = '
+        <button class="prev-page" ' . $prev_button_disabled . ' data-page="' . ($paged - 1) . '">
+            <span class="dashicons dashicons-arrow-left-alt2"></span>
+        </button>
+        <button class="next-page" ' . $next_button_disabled . ' data-page="' . ($paged + 1) . '">
+            <span class="dashicons dashicons-arrow-right-alt2"></span>
+        </button>
+    ';
+
+    $product_content .= '<div class="th-pagination">' . $pagination_buttons . '</div>';
 
     return $product_content;
   }
