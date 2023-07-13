@@ -52,7 +52,7 @@
   display: flex;
 }
 .o-animations-control .components-button.is-secondary {
-  margin-top: 24px;
+  margin-top: 18px;
 }
 .o-animations-control .o-animations-control__button {
   background: transparent;
@@ -95,7 +95,7 @@
   position: absolute;
 }
 
-.otter-animations-count-image {
+.th-animations-count-image {
   width: 100%;
 }
 

@@ -2,10 +2,10 @@
 /**
  * Class for Animation logic.
  *
- * @package ThemeIsle
+ * @package ThemeHunk
  */
 
-namespace ThemeIsle\GutenbergBlocks;
+namespace ThemeHunk\GutenbergBlocks;
 
 /**
  * Class Blocks_Animation
@@ -58,57 +58,57 @@ class Blocks_Animation {
 	 * @access  public
 	 */
 	public function enqueue_editor_assets() {
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation/index.asset.php';
+		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation-index.asset.php';
 
 		wp_enqueue_style(
-			'otter-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation/index.css',
+			'themehunk-block-animation',
+			BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
 		);
 
-		if ( defined( 'OTTER_BLOCKS_VERSION' ) ) {
-			array_push( $asset_file['dependencies'], 'otter-blocks' );
-		}
+		// if ( defined( 'TH_BLOCKS_VERSION' ) ) {
+		// 	array_push( $asset_file['dependencies'], 'themehunk-block' );
+		// }
 
 		wp_enqueue_script(
-			'otter-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation/index.js',
+			'themehunk-block-animation',
+			BLOCKS_ANIMATION_URL . 'build/animation-index.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 
 		wp_localize_script(
-			'otter-animation',
+			'themehunk-block-animation',
 			'blocksAnimation',
 			array(
-				'hasOtter' => defined( 'OTTER_BLOCKS_VERSION' ),
+				'hasThemehunkBlock' => defined( 'NONTHEMEHUNK_BLOCKS_VERSION' ),
 			)
 		);
 
-		wp_set_script_translations( 'otter-animation', 'blocks-animation' );
+		wp_set_script_translations( 'themehunk-block-animation', 'blocks-animation' );
 
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation/anim-count.asset.php';
+		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 		wp_enqueue_script(
-			'otter-count',
-			BLOCKS_ANIMATION_URL . 'build/animation/anim-count.js',
+			'themehunk-block-count',
+			BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 
-		wp_script_add_data( 'otter-count', 'defer', true );
+		wp_script_add_data( 'themehunk-block-count', 'defer', true );
 
 		wp_enqueue_script(
-			'otter-typing',
-			BLOCKS_ANIMATION_URL . 'build/animation/anim-typing.js',
+			'themehunk-block-typing',
+			BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 
-		wp_script_add_data( 'otter-typing', 'defer', true );
+		wp_script_add_data( 'themehunk-block-typing', 'defer', true );
 	}
 
 	/**
@@ -138,11 +138,11 @@ class Blocks_Animation {
 	 * @since 2.0.5
 	 */
 	public function frontend_load( $block_content, $block ) {
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation/frontend.asset.php';
+		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/frontend.asset.php';
 
 		wp_register_style(
-			'otter-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation/index.css',
+			'themehunk-block-animation',
+			BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
 		);
@@ -152,19 +152,18 @@ class Blocks_Animation {
 		}
 
 		if ( ! self::$scripts_loaded['animation'] && strpos( $block_content, 'animated' ) ) {
-			if ( ! defined( 'OTTER_BLOCKS_VERSION' ) || ( defined( 'OTTER_BLOCKS_VERSION' ) && ! get_option( 'themeisle_blocks_settings_optimize_animations_css', true ) ) ) {
-				wp_enqueue_style( 'otter-animation' );
-			}
+			
+			wp_enqueue_style( 'themehunk-block-animation' );
 
 			wp_enqueue_script(
-				'otter-animation-frontend',
-				BLOCKS_ANIMATION_URL . 'build/animation/frontend.js',
+				'themehunk-block-animation-frontend',
+				BLOCKS_ANIMATION_URL . 'build/frontend.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'otter-animation-frontend', 'async', true );
+			wp_script_add_data( 'themehunk-block-animation-frontend', 'async', true );
 
 			add_action( 'wp_head', array( $this, 'add_fontend_anim_inline_style' ), 10 );
 
@@ -172,30 +171,30 @@ class Blocks_Animation {
 		}
 
 		if ( ! self::$scripts_loaded['count'] && strpos( $block_content, 'o-anim-count' ) ) {
-			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation/anim-count.asset.php';
+			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 			wp_enqueue_script(
-				'otter-count',
-				BLOCKS_ANIMATION_URL . 'build/animation/anim-count.js',
+				'themehunk-block-count',
+				BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'otter-count', 'defer', true );
+			wp_script_add_data( 'themehunk-block-count', 'defer', true );
 			self::$scripts_loaded['count'] = true;
 		}
 
 		if ( ! self::$scripts_loaded['typing'] && strpos( $block_content, 'o-anim-typing' ) ) {
-			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation/anim-typing.asset.php';
+			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-typing.asset.php';
 			wp_enqueue_script(
-				'otter-typing',
-				BLOCKS_ANIMATION_URL . 'build/animation/anim-typing.js',
+				'themehunk-block-typing',
+				BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'otter-typing', 'defer', true );
+			wp_script_add_data( 'themehunk-block-typing', 'defer', true );
 			self::$scripts_loaded['typing'] = true;
 		}
 
@@ -261,3 +260,5 @@ class Blocks_Animation {
 		_doing_it_wrong( __FUNCTION__, 'Cheatin&#8217; huh?', '1.0.0' );
 	}
 }
+
+	Blocks_Animation::instance();

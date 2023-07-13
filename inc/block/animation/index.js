@@ -39,7 +39,7 @@ const BlockAnimation = ( el, props ) => {
 
 				<ToolsPanelItem
 					hasValue={ () => Boolean( props?.attributes?.className?.includes( 'animated' ) ) }
-					label={ __( 'Animations', 'otter-blocks' ) }
+					label={ __( 'Animations', 'themehunk-block' ) }
 					onDeselect={ () => window?.blocksAnimation?.removeAnimation() }
 					isShownByDefault={ showAsDefault }
 				>
@@ -76,8 +76,9 @@ const withInspectorControls = createHigherOrderComponent( BlockEdit => {
 	};
 }, 'withInspectorControl' );
 
-if ( Boolean( window?.blocksAnimation?.hasOtter ) ) {
+//Very Important
+if ( Boolean( window?.blocksAnimation?.hasThemehunkBlock ) ) {
 	addFilter( 'otter.blockTools', 'themeisle-animations/with-inspector-controls', BlockAnimation, 1 );
 } else {
-	addFilter( 'editor.BlockEdit', 'themeisle-animations/with-inspector-controls', withInspectorControls );
+	addFilter( 'editor.BlockEdit', 'themehunk-animations/with-inspector-controls', withInspectorControls );
 }
