@@ -33,7 +33,7 @@ class Advance_Product_Tab {
 
         public function render_callback( $attr ) {
 
-          wp_enqueue_script( 'advance-product-tab-script', THEMEHUNK_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'advance-product-tab-script', THEMEHUNK_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
 
             wp_localize_script(
                 'advance-product-tab-script',
@@ -44,11 +44,12 @@ class Advance_Product_Tab {
                 )
             );
 
-        $block_content = '
-        <div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-themehunk-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
+        $block_content = '<div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-themehunk-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
             <div class="th-product-block-wrapper">
-                <div class="wp-block-th-blocks-overlay"></div>
-                <div class="th-product-block-cat-filter">
+                <div class="wp-block-th-blocks-overlay"></div>';
+                    $showTab = isset($attr['showTab']) ? $attr['showTab'] : true;
+                    if($showTab):
+                    $block_content .= '<div class="th-product-block-cat-filter">
                     <ul class="category-tabs">';
                         if (isset($attr['productCategories']) && is_array($attr['productCategories'])) {
                             foreach ($attr['productCategories'] as $category) {
@@ -60,12 +61,9 @@ class Advance_Product_Tab {
                             }
 
                         }
-
-                        $block_content .= '
-                    </ul>
-                </div>
-    
-                <div class="th-product-block-product-content">
+                    $block_content .= '</ul></div>';
+                    endif;
+                $block_content .= '<div class="th-product-block-product-content">
                 '.$this->get_fetch_product($attr).'
                 </div>
             </div>
