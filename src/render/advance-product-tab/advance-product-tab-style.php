@@ -109,7 +109,67 @@ function advance_product_tab_style($attr){
         $css .= "}";
         endif;
 
+        //product box
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item{";
+        $css .= isset( $attr['productAlign'] ) ? "text-align:{$attr['productAlign'] };" : 'text-align:center;';
+        $css .= "}";
+        
+        // product-box-padding
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap{";
+        if (isset($attr['productPaddingType']) && 'unlinked' === $attr['productPaddingType']) {
+			$productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+			$productPaddingTop = isset($attr['productPaddingTop']) ? $attr['productPaddingTop'] : 0;
+			$productPaddingRight = isset($attr['productPaddingRight']) ? $attr['productPaddingRight'] : 0;
+			$productPaddingBottom = isset($attr['productPaddingBottom']) ? $attr['productPaddingBottom'] : 0;
+			$productPaddingLeft = isset($attr['productPaddingLeft']) ? $attr['productPaddingLeft'] : 0;
+			$css .= "padding-top: {$productPaddingTop}{$productPaddingUnit}; 
+			padding-right: {$productPaddingRight}{$productPaddingUnit}; 
+			padding-bottom: {$productPaddingBottom}{$productPaddingUnit}; 
+			padding-left: {$productPaddingLeft}{$productPaddingUnit}; 
+		    ";
+		} else {
+			$productPadding = isset($attr['productPadding']) ? $attr['productPadding'] : 10;
+			$productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+			$css .= "padding: {$productPadding}{$productPaddingUnit};";
+		}
+         // product-box-border-radius
+        if (isset($attr['productBrdrRadiusType']) && 'unlinked' === $attr['productBrdrRadiusType']) {
+			$productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+			$productBrdrRadiusTop = isset($attr['productBrdrRadiusTop']) ? $attr['productBrdrRadiusTop'] : 0;
+			$productBrdrRadiusRight = isset($attr['productBrdrRadiusRight']) ? $attr['productBrdrRadiusRight'] : 0;
+			$productBrdrRadiusBottom = isset($attr['productBrdrRadiusBottom']) ? $attr['productBrdrRadiusBottom'] : 0;
+			$productBrdrRadiusLeft = isset($attr['productBrdrRadiusLeft']) ? $attr['productBrdrRadiusLeft'] : 0;
+			$css .= "border-top-right-radius: {$productBrdrRadiusTop}{$productBrdrRadiusUnit}; 
+            border-top-left-radius: {$productBrdrRadiusRight}{$productBrdrRadiusUnit};
+            border-bottom-right-radius: {$productBrdrRadiusBottom}{$productBrdrRadiusUnit};
+            border-bottom-left-radius: {$productBrdrRadiusLeft}{$productBrdrRadiusUnit};
+			 ";
+		} else {
+			$productBrdrRadius = isset($attr['productBrdrRadius']) ? $attr['productBrdrRadius'] : 0;
+			$productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+			$css .= "border-radius: {$productBrdrRadius}{$productBrdrRadiusUnit};";
+		}
 
+        //bg color
+        $css .= isset( $attr['productboxClr'] ) ? "background:{$attr['productboxClr'] };" : '';
+        //box shadow
+        if (isset($attr['boxShadow'])){
+			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) .";";
+		}
+        $css .= "}";
+
+        //gap
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-block-product-item-wrap{";
+        $elementGap = isset($attr['elementGap']) ? $attr['elementGap'] : 20;
+        $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+        $css .= "grid-row-gap: {$elementGap}{$elementGapUnit};";
+        $css .= "grid-column-gap: {$elementGap}{$elementGapUnit};";
+        $css .= "}";
+
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap:hover{";
+        $css .= isset( $attr['productboxHvrClr'] ) ? "background:{$attr['productboxHvrClr'] };" : '';
+        $css .= "}";   
+        
         //end desktop view
         // tablet view
         $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
@@ -183,10 +243,10 @@ function advance_product_tab_style($attr){
                         //tabMargin
                         if (isset($attr['tabMarginTypeTablet']) && 'unlinked' === $attr['tabMarginType']) {
                             $tabMarginUnit = isset($attr['tabMarginUnit']) ? $attr['tabMarginUnit'] : 'px';
-                            $tabMarginTop = isset($attr['tabMarginTopTablet']) ? $attr['tabMarginTopTablet'] : 8;
-                            $tabMarginBottom = isset($attr['tabMarginBottomTablet']) ? $attr['tabMarginBottomTablet'] : 8;
-                            $tabMarginLeft = isset($attr['tabMarginLeftTablet']) ? $attr['tabMarginLeftTablet'] : 8;
-                            $tabMarginRight = isset($attr['tabMarginRightTablet']) ? $attr['tabMarginRightTablet'] : 8;
+                            $tabMarginTopTablet = isset($attr['tabMarginTopTablet']) ? $attr['tabMarginTopTablet'] : 8;
+                            $tabMarginBottomTablet = isset($attr['tabMarginBottomTablet']) ? $attr['tabMarginBottomTablet'] : 8;
+                            $tabMarginLeftTablet = isset($attr['tabMarginLeftTablet']) ? $attr['tabMarginLeftTablet'] : 8;
+                            $tabMarginRightTablet = isset($attr['tabMarginRightTablet']) ? $attr['tabMarginRightTablet'] : 8;
                             $css .= "
                             margin-top: {$tabMarginTopTablet}{$tabMarginUnit}; 
                             margin-bottom: {$tabMarginBottomTablet}{$tabMarginUnit}; 
@@ -201,6 +261,52 @@ function advance_product_tab_style($attr){
                         }
                     $css .= "}";
                 endif;
+
+            // product-box-padding
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap{";
+            if (isset($attr['productPaddingTypeTablet']) && 'unlinked' === $attr['productPaddingTypeTablet']) {
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $productPaddingTopTablet = isset($attr['productPaddingTopTablet']) ? $attr['productPaddingTopTablet'] : 0;
+                $productPaddingRightTablet = isset($attr['productPaddingRightTablet']) ? $attr['productPaddingRightTablet'] : 0;
+                $productPaddingBottomTablet = isset($attr['productPaddingBottomTablet']) ? $attr['productPaddingBottomTablet'] : 0;
+                $productPaddingLeftTablet = isset($attr['productPaddingLeftTablet']) ? $attr['productPaddingLeftTablet'] : 0;
+                $css .= "padding-top: {$productPaddingTopTablet}{$productPaddingUnit}; 
+                padding-right: {$productPaddingRightTablet}{$productPaddingUnit}; 
+                padding-bottom: {$productPaddingBottomTablet}{$productPaddingUnit}; 
+                padding-left: {$productPaddingLeftTablet}{$productPaddingUnit}; 
+                ";
+            } else {
+                $productPaddingTablet = isset($attr['productPaddingTablet']) ? $attr['productPaddingTablet'] : 10;
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $css .= "padding: {$productPaddingTablet}{$productPaddingUnit};";
+            }
+             // product-box-border-radius
+            if (isset($attr['productBrdrRadiusTypeTablet']) && 'unlinked' === $attr['productBrdrRadiusTypeTablet']) {
+                $productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+                $productBrdrRadiusTopTablet = isset($attr['productBrdrRadiusTopTablet']) ? $attr['productBrdrRadiusTopTablet'] : 0;
+                $productBrdrRadiusRightTablet = isset($attr['productBrdrRadiusRightTablet']) ? $attr['productBrdrRadiusRightTablet'] : 0;
+                $productBrdrRadiusBottomTablet = isset($attr['productBrdrRadiusBottomTablet']) ? $attr['productBrdrRadiusBottomTablet'] : 0;
+                $productBrdrRadiusLeftTablet = isset($attr['productBrdrRadiusLeftTablet']) ? $attr['productBrdrRadiusLeftTablet'] : 0;
+                $css .= "border-top-right-radius: {$productBrdrRadiusTopTablet}{$productBrdrRadiusUnit}; 
+                border-top-left-radius: {$productBrdrRadiusRightTablet}{$productBrdrRadiusUnit};
+                border-bottom-right-radius: {$productBrdrRadiusBottomTablet}{$productBrdrRadiusUnit};
+                border-bottom-left-radius: {$productBrdrRadiusLeftTablet}{$productBrdrRadiusUnit};
+                 ";
+            } else {
+                $productBrdrRadiusTablet = isset($attr['productBrdrRadiusTablet']) ? $attr['productBrdrRadiusTablet'] : 0;
+                $productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+                $css .= "border-radius: {$productBrdrRadiusTablet}{$productBrdrRadiusUnit};";
+            }
+    
+        $css .= "}";
+
+        //gap
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-block-product-item-wrap{";
+            $elementGapTablet = isset($attr['elementGapTablet']) ? $attr['elementGapTablet'] : 20;
+            $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+            $css .= "grid-row-gap: {$elementGapTablet}{$elementGapUnit};";
+            $css .= "grid-column-gap: {$elementGapTablet}{$elementGapUnit};";
+            $css .= "}";
 
         $css .= "}";
         
@@ -276,10 +382,10 @@ function advance_product_tab_style($attr){
                     //tabMargin
                     if (isset($attr['tabMarginTypeMobile']) && 'unlinked' === $attr['tabMarginType']) {
                         $tabMarginUnit = isset($attr['tabMarginUnit']) ? $attr['tabMarginUnit'] : 'px';
-                        $tabMarginTop = isset($attr['tabMarginTopMobile']) ? $attr['tabMarginTopMobile'] : 8;
-                        $tabMarginBottom = isset($attr['tabMarginBottomMobile']) ? $attr['tabMarginBottomMobile'] : 8;
-                        $tabMarginLeft = isset($attr['tabMarginLeftMobile']) ? $attr['tabMarginLeftMobile'] : 8;
-                        $tabMarginRight = isset($attr['tabMarginRightMobile']) ? $attr['tabMarginRightMobile'] : 8;
+                        $tabMarginTopMobile = isset($attr['tabMarginTopMobile']) ? $attr['tabMarginTopMobile'] : 8;
+                        $tabMarginBottomMobile = isset($attr['tabMarginBottomMobile']) ? $attr['tabMarginBottomMobile'] : 8;
+                        $tabMarginLeftMobile = isset($attr['tabMarginLeftMobile']) ? $attr['tabMarginLeftMobile'] : 8;
+                        $tabMarginRightMobile = isset($attr['tabMarginRightMobile']) ? $attr['tabMarginRightMobile'] : 8;
                         $css .= "
                         margin-top: {$tabMarginTopMobile}{$tabMarginUnit}; 
                         margin-bottom: {$tabMarginBottomMobile}{$tabMarginUnit}; 
@@ -294,8 +400,52 @@ function advance_product_tab_style($attr){
                     }
                 $css .= "}";
             endif;
-        $css .= "}";
 
+            // product-box-padding
+           $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap{";
+            if (isset($attr['productPaddingTypeMobile']) && 'unlinked' === $attr['productPaddingTypeMobile']) {
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $productPaddingTopMobile = isset($attr['productPaddingTopMobile']) ? $attr['productPaddingTopMobile'] : 0;
+                $productPaddingRightMobile = isset($attr['productPaddingRightMobile']) ? $attr['productPaddingRightMobile'] : 0;
+                $productPaddingBottomMobile = isset($attr['productPaddingBottomMobile']) ? $attr['productPaddingBottomMobile'] : 0;
+                $productPaddingLeftMobile = isset($attr['productPaddingLeftMobile']) ? $attr['productPaddingLeftMobile'] : 0;
+                $css .= "padding-top: {$productPaddingTopMobile}{$productPaddingUnit}; 
+                padding-right: {$productPaddingRightMobile}{$productPaddingUnit}; 
+                padding-bottom: {$productPaddingBottomMobile}{$productPaddingUnit}; 
+                padding-left: {$productPaddingLeftMobile}{$productPaddingUnit}; 
+                ";
+            } else {
+                $productPaddingMobile = isset($attr['productPaddingMobile']) ? $attr['productPaddingMobile'] : 10;
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $css .= "padding: {$productPaddingMobile}{$productPaddingUnit};";
+            }
+             // product-box-border-radius
+            if (isset($attr['productBrdrRadiusTypeMobile']) && 'unlinked' === $attr['productBrdrRadiusTypeMobile']) {
+                $productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+                $productBrdrRadiusTopMobile = isset($attr['productBrdrRadiusTopMobile']) ? $attr['productBrdrRadiusTopMobile'] : 0;
+                $productBrdrRadiusRightMobile = isset($attr['productBrdrRadiusRightMobile']) ? $attr['productBrdrRadiusRightMobile'] : 0;
+                $productBrdrRadiusBottomMobile = isset($attr['productBrdrRadiusBottomMobile']) ? $attr['productBrdrRadiusBottomMobile'] : 0;
+                $productBrdrRadiusLeftMobile = isset($attr['productBrdrRadiusLeftMobile']) ? $attr['productBrdrRadiusLeftMobile'] : 0;
+                $css .= "border-top-right-radius: {$productBrdrRadiusTopMobile}{$productBrdrRadiusUnit}; 
+                border-top-left-radius: {$productBrdrRadiusRightMobile}{$productBrdrRadiusUnit};
+                border-bottom-right-radius: {$productBrdrRadiusBottomMobile}{$productBrdrRadiusUnit};
+                border-bottom-left-radius: {$productBrdrRadiusLeftMobile}{$productBrdrRadiusUnit};
+                 ";
+            } else {
+                $productBrdrRadiusMobile = isset($attr['productBrdrRadiusMobile']) ? $attr['productBrdrRadiusMobile'] : 0;
+                $productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
+                $css .= "border-radius: {$productBrdrRadiusMobile}{$productBrdrRadiusUnit};";
+            }
+
+            //gap
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-block-product-item-wrap{";
+            $elementGapMobile = isset($attr['elementGapMobile']) ? $attr['elementGapMobile'] : 20;
+            $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
+            $css .= "grid-row-gap: {$elementGapMobile}{$elementGapUnit};";
+            $css .= "grid-column-gap: {$elementGapMobile}{$elementGapUnit};";
+            $css .= "}";
+    
+        $css .= "}";
 
     }
 
