@@ -168,8 +168,118 @@ function advance_product_tab_style($attr){
 
         $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap:hover{";
         $css .= isset( $attr['productboxHvrClr'] ) ? "background:{$attr['productboxHvrClr'] };" : '';
-        $css .= "}";   
+        $css .= "}"; 
         
+        if(isset( $attr['catTxtColor'] )):
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-cat a{";
+        $css .= "color:{$attr['catTxtColor']}";
+        $css .= "}";
+        endif;
+
+        if(isset( $attr['catTxtColorHvr'] )):
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-cat a:hover{";
+        $css .= "color:{$attr['catTxtColorHvr']}";
+        $css .= "}";
+        endif;
+
+        if(isset( $attr['productTitleColor'] )):
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-title a{";
+            $css .= "color:{$attr['productTitleColor']}";
+            $css .= "}";
+            endif;
+    
+            if(isset( $attr['productTitleColorHvr'] )):
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-title a:hover{";
+            $css .= "color:{$attr['productTitleColorHvr']}";
+            $css .= "}";
+            endif;
+
+            if(isset( $attr['priceColor'] )):
+                $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-item .th-product-price span{";
+                $css .= "color:{$attr['priceColor']}";
+                $css .= "}";
+                endif;
+        
+            if(isset( $attr['priceDelColor'] )):
+                $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-price del,.wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-price del span{";
+                $css .= "color:{$attr['priceDelColor']}";
+                $css .= "}";
+                endif;
+
+        //button
+
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a{";
+        $css .= isset( $attr['buttonTxtClr'] ) ? "color:{$attr['buttonTxtClr'] };" : 'color:#fff;';
+        $css .= isset( $attr['buttonBgClr'] ) ? "background:{$attr['buttonBgClr'] };" : '';
+        $css .= isset( $attr['buttonBrdrClr'] ) ? "border-color:{$attr['buttonBrdrClr'] };" : '';
+        $css .= isset( $attr['buttonBrdrType'] ) ? "border-style:{$attr['buttonBrdrType'] };" : '';
+        
+          //border-width
+		if (isset($attr['buttonborderWidthType']) && 'unlinked' === $attr['buttonborderWidthType']) {
+			$buttonborderWidthUnit = isset($attr['buttonborderWidthUnit']) ? $attr['buttonborderWidthUnit'] : 'px';
+			$buttonborderWidthTop = isset($attr['buttonborderWidthTop']) ? $attr['buttonborderWidthTop'] : 0;
+			$buttonborderWidthRight = isset($attr['buttonborderWidthRight']) ? $attr['buttonborderWidthRight'] : 0;
+			$buttonborderWidthBottom = isset($attr['buttonborderWidthBottom']) ? $attr['buttonborderWidthBottom'] : 0;
+			$buttonborderWidthLeft = isset($attr['buttonborderWidthLeft']) ? $attr['buttonborderWidthLeft'] : 0;
+			$css .= "border-top-width: {$buttonborderWidthTop}{$buttonborderWidthUnit}; 
+			border-right-width: {$buttonborderWidthRight}{$buttonborderWidthUnit}; 
+			border-bottom-width: {$buttonborderWidthBottom}{$buttonborderWidthUnit}; 
+			border-left-width: {$buttonborderWidthLeft}{$buttonborderWidthUnit}; 
+		   ";
+		} else {
+			$buttonborderWidth = isset($attr['buttonborderWidth']) ? $attr['buttonborderWidth'] : 0;
+			$buttonborderWidthUnit = isset($attr['buttonborderWidthUnit']) ? $attr['buttonborderWidthUnit'] : 'px';
+			$css .= "border-width: {$buttonborderWidth}{$buttonborderWidthUnit}; ";
+		}
+        
+        //Border-radius
+		if (isset($attr['buttonBrdrRadiusType']) && 'unlinked' === $attr['buttonBrdrRadiusType']) {
+			$buttonBrdrRadiusUnit = isset($attr['buttonBrdrRadiusUnit']) ? $attr['buttonBrdrRadiusUnit'] : 'px';
+			$buttonBrdrRadiusTop = isset($attr['buttonBrdrRadiusTop']) ? $attr['buttonBrdrRadiusTop'] : 20;
+			$buttonBrdrRadiusRight = isset($attr['buttonBrdrRadiusRight']) ? $attr['buttonBrdrRadiusRight'] : 20;
+			$buttonBrdrRadiusBottom = isset($attr['buttonBrdrRadiusBottom']) ? $attr['buttonBrdrRadiusBottom'] : 20;
+			$buttonBrdrRadiusLeft = isset($attr['buttonBrdrRadiusLeft']) ? $attr['buttonBrdrRadiusLeft'] : 20;
+			$css .= "border-top-right-radius: {$buttonBrdrRadiusTop}{$buttonBrdrRadiusUnit}; 
+            border-top-left-radius: {$buttonBrdrRadiusRight}{$buttonBrdrRadiusUnit};
+            border-bottom-right-radius: {$buttonBrdrRadiusBottom}{$buttonBrdrRadiusUnit};
+            border-bottom-left-radius: {$buttonBrdrRadiusLeft}{$buttonBrdrRadiusUnit};
+			 ";
+		} else {
+			$buttonBrdrRadius = isset($attr['buttonBrdrRadius']) ? $attr['buttonBrdrRadius'] : 0;
+			$buttonBrdrRadiusUnit = isset($attr['buttonBrdrRadiusUnit']) ? $attr['buttonBrdrRadiusUnit'] : 'px';
+			$css .= "border-radius: {$buttonBrdrRadius}{$buttonBrdrRadiusUnit};";
+		}
+
+        // product-box-padding
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap{";
+            if (isset($attr['buttonSpaceType']) && 'unlinked' === $attr['buttonSpaceType']) {
+                $buttonSpaceUnit = isset($attr['buttonSpaceUnit']) ? $attr['buttonSpaceUnit'] : 'px';
+                $buttonSpaceTop = isset($attr['buttonSpaceTop']) ? $attr['buttonSpaceTop'] : 0;
+                $buttonSpaceRight = isset($attr['buttonSpaceRight']) ? $attr['buttonSpaceRight'] : 0;
+                $buttonSpaceBottom = isset($attr['buttonSpaceBottom']) ? $attr['buttonSpaceBottom'] : 0;
+                $buttonSpaceLeft = isset($attr['buttonSpaceLeft']) ? $attr['buttonSpaceLeft'] : 0;
+                $css .= "padding-top: {$buttonSpaceTop}{$buttonSpaceUnit}; 
+                padding-right: {$buttonSpaceRight}{$buttonSpaceUnit}; 
+                padding-bottom: {$buttonSpaceBottom}{$buttonSpaceUnit}; 
+                padding-left: {$buttonSpaceLeft}{$buttonSpaceUnit}; 
+                ";
+            } else {
+                $buttonSpace = isset($attr['buttonSpace']) ? $attr['buttonSpace'] : 10;
+                $buttonSpaceUnit = isset($attr['buttonSpaceUnit']) ? $attr['buttonSpaceUnit'] : 'px';
+                $css .= "padding: {$buttonSpace}{$buttonSpaceUnit};";
+            }
+        
+        $css .= "}";
+
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a:hover{";
+        $css .= isset( $attr['buttonTxtClrHvr'] ) ? "color:{$attr['buttonTxtClrHvr'] };" : '';
+        $css .= isset( $attr['buttonBgClrHvr'] ) ? "background:{$attr['buttonBgClrHvr'] };" : '';
+        $css .= isset( $attr['buttonBrdrClrHvr'] ) ? "border-color:{$attr['buttonBrdrClrHvr'] };" : '';
+        $css .= "}";
+
+
+
+
         //end desktop view
         // tablet view
         $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
