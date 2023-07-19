@@ -5495,23 +5495,7 @@ const SortableItem = _ref => {
     className: classnames__WEBPACK_IMPORTED_MODULE_1___default()('th-sortable-control-area', {
       'opened': isOpen && canEdit
     })
-  }, 'image' === template && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Image Size', 'themehunk-block'),
-    value: attributes.prdImage,
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('woocommerce_thumbnail', 'themehunk-block'),
-      value: 'woocommerce_thumbnail'
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('woocommerce_single', 'themehunk-block'),
-      value: 'woocommerce_single'
-    }, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('woocommerce_gallery_thumbnail', 'themehunk-block'),
-      value: 'woocommerce_gallery_thumbnail'
-    }],
-    onChange: e => setAttributes({
-      prdImage: e
-    })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
+  }, 'image' === template && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Sale', 'themehunk-block'),
     checked: attributes.showSale,
     onChange: showSale => setAttributes({

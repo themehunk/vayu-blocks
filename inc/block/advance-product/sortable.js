@@ -997,7 +997,7 @@ export const SortableItem = ({
 					{ ( 'image' === template ) && (
 						<Fragment >
 							
-							<SelectControl 
+							{/* <SelectControl 
 								label={ __( 'Image Size', 'themehunk-block' ) }
 								value={ attributes.prdImage }
 								options={ [
@@ -1007,7 +1007,7 @@ export const SortableItem = ({
 								    
 								] }
 								onChange={ e => setAttributes({ prdImage: e }) }
-							/>
+							/> */}
 
                              <ToggleControl
 								label={ __( 'Sale', 'themehunk-block' ) }
