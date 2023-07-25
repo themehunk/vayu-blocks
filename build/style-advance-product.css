@@ -234,7 +234,7 @@
   opacity: 1;
 }
 
-.th-product-meta .th-icon {
+.th-product-meta .th-icons {
   background: #0A472E;
   color: #fff;
   margin: 0.6rem 0.2rem;
@@ -245,6 +245,17 @@
   border-radius: 50%;
   cursor: pointer;
   text-align: center;
+}
+
+.th-compare-button .th-product-compare-btn,
+.th-product-meta .yith-wcwl-add-to-wishlist,
+.th-product-meta .yith-wcwl-add-to-wishlist i,
+.th-product-meta .yith-wcwl-add-to-wishlist .feedback .yith-wcwl-icon {
+  margin: 0;
+}
+
+.th-product-meta .th-icons a {
+  color: #fff;
 }
 
 /*# sourceMappingURL=style-advance-product.css.map*/

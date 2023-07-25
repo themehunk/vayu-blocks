@@ -1102,11 +1102,11 @@ export const SortableItem = ({
 								checked={ attributes.showCompare }
 								onChange={ showCompare => setAttributes({ showCompare }) }
 							 />
-							 <ToggleControl
+							 {/* <ToggleControl
 								label={ __( 'Quick View', 'themehunk-block' ) }
 								checked={ attributes.showView }
 								onChange={ showView => setAttributes({ showView }) }
-							 />
+							 /> */}
 							 <HoverControl value={ postmetaclr }
 								options={[
 									{

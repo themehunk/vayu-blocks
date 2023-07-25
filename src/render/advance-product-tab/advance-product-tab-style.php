@@ -176,10 +176,13 @@ function advance_product_tab_style($attr){
 
         //bg color
         $css .= isset( $attr['productboxClr'] ) ? "background:{$attr['productboxClr'] };" : '';
+        
         //box shadow
+
         if (isset($attr['boxShadow'])){
 			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) .";";
 		}
+
         $css .= "}";
 
         //gap
@@ -319,7 +322,7 @@ function advance_product_tab_style($attr){
                 $padding = isset($attr['padding']) ? $attr['padding'] : 10;
                 $paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
                 $css .= "padding: {$padding}{$paddingUnit};";
-         }
+            }
          $css .= "}";
 
          //margin
@@ -511,11 +514,12 @@ function advance_product_tab_style($attr){
             }
         $css .= "}";
 
-        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a{";
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a{";
             $css .= "font-family: " . (isset($attr['buttonfontFamily']) ? $attr['buttonfontFamily'] : 'inherit') . ';';
             $css .= "font-weight: " . (isset($attr['buttonfontVariant']) ? $attr['buttonfontVariant'] : 'inherit') . ';';
             $css .= "font-style: " . (isset($attr['buttonfontStyle']) ? $attr['buttonfontStyle'] : 'normal') . ';';
             $css .= "text-transform: " . (isset($attr['buttontextTransform']) ? $attr['buttontextTransform'] : 'none') . ';';
+           
             // Font Size
             if (isset($attr['buttonfontSize'])) {
                 $buttonfontSizeUnit = isset($attr['buttonfontSizeUnit']) ? $attr['buttonfontSizeUnit'] : 'px';
@@ -526,13 +530,52 @@ function advance_product_tab_style($attr){
                 $buttonlineHeightUnit = isset($attr['buttonlineHeightUnit']) ? $attr['buttonlineHeightUnit'] : 'px';
                 $css .= "line-height: {$attr['buttonlineHeight']}{$buttonlineHeightUnit}; ";
             }
-    
             // Letter Spacing
             if (isset($attr['buttonletterSpacing'])) {
                 $buttonletterSpacingUnit = isset($attr['buttonletterSpacingUnit']) ? $attr['buttonletterSpacingUnit'] : 'px';
                 $css .= "letter-spacing: {$attr['buttonletterSpacing']}{$buttonletterSpacingUnit}; ";
             }
         $css .= "}";
+
+        if (isset($attr['saleClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-sale{";
+            $css .= "color: {$attr['saleClr']};";
+            $css .= "}";
+        }
+
+        if (isset($attr['saleBgClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-sale{";
+            $css .= "background: {$attr['saleBgClr']};";
+            $css .= "}";
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-sale.style2:before{";
+            $css .= "border-right-color: {$attr['saleBgClr']};border-left-color: {$attr['saleBgClr']};";
+            $css .= "}";
+        }
+
+        if (isset($attr['postMetaClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons,.wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons a{";
+            $css .= "color: {$attr['postMetaClr']};";
+            $css .= "}";
+        }
+
+        if (isset($attr['postMetaBgClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons{";
+            $css .= "background: {$attr['postMetaBgClr']};";
+            $css .= "}";
+        }
+
+        if (isset($attr['postMetaHvrClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons:hover,.wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons:hover a{";
+            $css .= "color: {$attr['postMetaHvrClr']};";
+            $css .= "}";
+        }
+
+        if (isset($attr['postMetaBgHvrClr'])) {
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-meta .th-icons:hover{";
+            $css .= "background: {$attr['postMetaBgHvrClr']};";
+            $css .= "}";
+        }
+
         //end desktop view
         
         // tablet view

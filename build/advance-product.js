@@ -1662,12 +1662,10 @@ function Edit(_ref) {
         }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "th-product-meta"
         }, attributes.showWishlist == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "th-icon th-wishlist-button"
+          className: "th-icons th-wishlist-button"
         }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_io__WEBPACK_IMPORTED_MODULE_13__.IoIosHeartEmpty, null)), attributes.showCompare == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "th-icon th-compare-button"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_io__WEBPACK_IMPORTED_MODULE_13__.IoMdRepeat, null)), attributes.showView == true && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-          className: "th-icon th-quickview-button"
-        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_io__WEBPACK_IMPORTED_MODULE_13__.IoIosExpand, null))));
+          className: "th-icons th-compare-button"
+        }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_io__WEBPACK_IMPORTED_MODULE_13__.IoMdRepeat, null))));
       case 'category':
         return attributes.displayCategory && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
           className: "th-product-cat"
@@ -5580,12 +5578,6 @@ const SortableItem = _ref => {
     checked: attributes.showCompare,
     onChange: showCompare => setAttributes({
       showCompare
-    })
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.ToggleControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Quick View', 'themehunk-block'),
-    checked: attributes.showView,
-    onChange: showView => setAttributes({
-      showView
     })
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_src_components_index_js__WEBPACK_IMPORTED_MODULE_7__.HoverControl, {
     value: postmetaclr,

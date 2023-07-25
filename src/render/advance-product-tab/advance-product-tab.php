@@ -33,8 +33,9 @@ class Advance_Product_Tab {
 
         public function render_callback( $attr ) {
 
+        wp_enqueue_style( 'th-icon', THEMEHUNK_BLOCKS_URL . '/src/th-icon/style.css', '', '1.0.0' );
         wp_enqueue_script( 'advance-product-tab-script', THEMEHUNK_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
-
+        
             wp_localize_script(
                 'advance-product-tab-script',
                 'advance_product_tab_ajax',
@@ -272,7 +273,29 @@ class Advance_Product_Tab {
                     // Image
                     $displayFeaturedImage = isset($attr['displayFeaturedImage']) ? $attr['displayFeaturedImage'] : true;
                     if($displayFeaturedImage):
+
                     $product_content .= '<div class="th-product-image">';
+
+                    //post meta
+                    $product_content .= '<div class="th-product-meta">';
+                    //wishlist
+                    $product_content .= '<div class="th-icons th-wishlist-button">';
+                    if( shortcode_exists( 'yith_wcwl_add_to_wishlist' ) ){
+                    $product_content .= '<div class="thunk-wishlist">
+                        <span class="thunk-wishlist-inner">'.do_shortcode('[yith_wcwl_add_to_wishlist  product_id=' . esc_attr($product->get_id()) . ' icon="th-icon th-icon-heart1" label="" already_in_wishslist_text="" browse_wishlist_text="" product_added_text=""]' ).'</div></span>';
+                     }
+                    $product_content .= '</div>';
+
+                    //compare
+                    $product_content .= '<div class="th-icons th-compare-button">';
+                    if(class_exists('th_product_compare') || class_exists('Tpcp_product_compare')){
+                        $product_content .= '<div class="thunk-compare"><span class="compare-list"><div class="woocommerce product compare-button">
+                              <a class="th-product-compare-btn compare" data-th-product-id="' . esc_attr($product->get_id()) . '"><span class="th-icon th-icon-repeat"></span></a>
+                              </div></span></div>';
+                    } 
+                    $product_content .= '</div>';
+                    
+                    $product_content .= '</div>';
 
                     // Sale
                     $sale = get_post_meta($product->get_id(), '_sale_price', true);
