@@ -135,10 +135,19 @@
    }
    
    .th-product-rating{
-    text-align: center;
-    display: inline-flex;
     color: #ffd700;
+    display: inline-block;
    }
+   .th-product-rating.woocommerce .star-rating{
+    color:#ffd700;
+    margin:0;
+    width: 4rem;
+    }
+    
+    .th-product-rating.woocommerce .star-rating span::before,
+    .th-product-rating.woocommerce .star-rating::before{
+    font-size:12px;
+    }
    .th-product-block-cat-filter ul.category-tabs {
     list-style: none;
        display: flex;

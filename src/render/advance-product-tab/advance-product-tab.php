@@ -329,7 +329,7 @@ class Advance_Product_Tab {
                     $product_content .= '<div class="th-product-cat">';
                     foreach ($product->get_category_ids() as $category_id) {
                         $category = get_term($category_id, 'product_cat');
-                        $product_content .= '<a href="' . esc_url(get_category_link($category_id)) . '">' . esc_html($category->name) . '</a>';
+                        $product_content .= ' <a href="' . esc_url(get_category_link($category_id)) . '">' . esc_html($category->name) . '</a>';
                     }
                     $product_content .= '</div>';
                     endif;
@@ -360,7 +360,7 @@ class Advance_Product_Tab {
                     $displayRating = isset($attr['displayRating']) ? $attr['displayRating'] : true;
                     $hideRating = isset($attr['hideRating']) ? $attr['hideRating'] : true;
                     if($displayRating && $hideRating):
-                    $product_content .= '<div class="th-product-rating">
+                    $product_content .= '<div class="th-product-rating woocommerce">
                         ' . wc_get_rating_html($product->get_average_rating()) . '
                     </div>';
                     endif;

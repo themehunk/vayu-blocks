@@ -233,6 +233,14 @@ function advance_product_tab_style($attr){
                 $css .= "}";
                 endif;
 
+        //rating
+
+        if(isset( $attr['ratingColor'] )):
+            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-rating.woocommerce .star-rating{";
+            $css .= "color:{$attr['ratingColor']}";
+            $css .= "}";
+            endif;
+
         //button
 
         $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a{";
@@ -280,21 +288,21 @@ function advance_product_tab_style($attr){
 
         // product-box-padding
         $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-item .th-product-block-content-wrap{";
-            if (isset($attr['buttonSpaceType']) && 'unlinked' === $attr['buttonSpaceType']) {
-                $buttonSpaceUnit = isset($attr['buttonSpaceUnit']) ? $attr['buttonSpaceUnit'] : 'px';
-                $buttonSpaceTop = isset($attr['buttonSpaceTop']) ? $attr['buttonSpaceTop'] : 0;
-                $buttonSpaceRight = isset($attr['buttonSpaceRight']) ? $attr['buttonSpaceRight'] : 0;
-                $buttonSpaceBottom = isset($attr['buttonSpaceBottom']) ? $attr['buttonSpaceBottom'] : 0;
-                $buttonSpaceLeft = isset($attr['buttonSpaceLeft']) ? $attr['buttonSpaceLeft'] : 0;
-                $css .= "padding-top: {$buttonSpaceTop}{$buttonSpaceUnit}; 
-                padding-right: {$buttonSpaceRight}{$buttonSpaceUnit}; 
-                padding-bottom: {$buttonSpaceBottom}{$buttonSpaceUnit}; 
-                padding-left: {$buttonSpaceLeft}{$buttonSpaceUnit}; 
+            if (isset($attr['productPaddingType']) && 'unlinked' === $attr['productPaddingType']) {
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $productPaddingTop = isset($attr['productPaddingTop']) ? $attr['productPaddingTop'] : 0;
+                $productPaddingRight = isset($attr['productPaddingRight']) ? $attr['productPaddingRight'] : 0;
+                $productPaddingBottom = isset($attr['productPaddingBottom']) ? $attr['productPaddingBottom'] : 0;
+                $productPaddingLeft = isset($attr['productPaddingLeft']) ? $attr['productPaddingLeft'] : 0;
+                $css .= "padding-top: {$productPaddingTop}{$productPaddingUnit}; 
+                padding-right: {$productPaddingRight}{$productPaddingUnit}; 
+                padding-bottom: {$productPaddingBottom}{$productPaddingUnit}; 
+                padding-left: {$productPaddingLeft}{$productPaddingUnit}; 
                 ";
             } else {
-                $buttonSpace = isset($attr['buttonSpace']) ? $attr['buttonSpace'] : 10;
-                $buttonSpaceUnit = isset($attr['buttonSpaceUnit']) ? $attr['buttonSpaceUnit'] : 'px';
-                $css .= "padding: {$buttonSpace}{$buttonSpaceUnit};";
+                $productPadding = isset($attr['productPadding']) ? $attr['productPadding'] : 10;
+                $productPaddingUnit = isset($attr['productPaddingUnit']) ? $attr['productPaddingUnit'] : 'px';
+                $css .= "padding: {$productPadding}{$productPaddingUnit};";
             }
         
         $css .= "}";
@@ -513,6 +521,25 @@ function advance_product_tab_style($attr){
                 $css .= "letter-spacing: {$attr['priceletterSpacing']}{$priceletterSpacingUnit}; ";
             }
         $css .= "}";
+
+        // rating font size
+
+        if (isset($attr['ratingfontSize'])) {
+            $ratingfontSizeUnit = isset($attr['ratingfontSizeUnit']) ? $attr['ratingfontSizeUnit'] : 'px';
+            $css .= "font-size: {$attr['ratingfontSize']}{$ratingfontSizeUnit}; ";
+        }
+        
+        // Line Height
+        if (isset($attr['ratinglineHeight'])) {
+            $ratinglineHeightUnit = isset($attr['ratinglineHeightUnit']) ? $attr['ratinglineHeightUnit'] : 'px';
+            $css .= "line-height: {$attr['ratinglineHeight']}{$ratinglineHeightUnit}; ";
+        }
+
+        // Letter Spacing
+        if (isset($attr['ratingletterSpacing'])) {
+            $ratingletterSpacingUnit = isset($attr['ratingletterSpacingUnit']) ? $attr['ratingletterSpacingUnit'] : 'px';
+            $css .= "letter-spacing: {$attr['ratingletterSpacing']}{$ratingletterSpacingUnit}; ";
+        }
 
             $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-add-btn a{";
             $css .= "font-family: " . (isset($attr['buttonfontFamily']) ? $attr['buttonfontFamily'] : 'inherit') . ';';
