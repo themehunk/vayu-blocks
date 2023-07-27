@@ -33,6 +33,13 @@ function render_server_side_css() {
 }
 
 
+function enqueue_google_fonts($font_family_string)
+{
+    $font_families = explode(',', $font_family_string);
+    $font_family_string = str_replace(' ', '+', implode('|', $font_families));
+    wp_enqueue_style('th-blocks-google-fonts-' . $font_family_string, "https://fonts.googleapis.com/css?family=$font_family_string&display=swap", array(), null);
+}
+
 function cycle_through_blocks( $blocks, $post_id ) {
 
 	$css = '';
@@ -40,10 +47,8 @@ function cycle_through_blocks( $blocks, $post_id ) {
 	foreach ( $blocks as $block ) {
 		
 		if ( $block['blockName'] === 'themehunk-blocks/advance-heading' ) {
-			   if ( isset($block['attrs']['fontFamily'] ) ) {
-				$font_families = explode( ',', $block['attrs']['fontFamily'] );
-				$font_family_string = str_replace( ' ', '+', implode( '|', $font_families ) );
-				wp_enqueue_style( 'th-blocks-google-fonts-' . $font_family_string, "https://fonts.googleapis.com/css?family=$font_family_string&display=swap", array(), null );
+			   if ( isset($block['attrs']['fontFamily'] ) ){
+				  enqueue_google_fonts($block['attrs']['fontFamily']);
 			    }
                 $css .=advance_heading_style($block['attrs']);
 		} 
@@ -52,7 +57,28 @@ function cycle_through_blocks( $blocks, $post_id ) {
 			 $css .=advance_container_style($block['attrs']);
 	    } 
 
-		if ( $block['blockName'] === 'themehunk-blocks/advance-product' ) {
+		if ( $block['blockName'] === 'themehunk-blocks/advance-product' ){
+
+			if ( isset($block['attrs']['tabfontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['tabfontFamily']);
+			  }
+
+			if ( isset($block['attrs']['catfontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['catfontFamily']);
+			  } 
+			
+			if ( isset($block['attrs']['titlefontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['titlefontFamily']);
+			  }
+			
+			if ( isset($block['attrs']['pricefontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['pricefontFamily']);
+			  }
+			
+			if ( isset($block['attrs']['buttonfontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['buttonfontFamily']);
+			  }
+
 			$css .=advance_product_tab_style($block['attrs']);
 	     } 
 

@@ -997,7 +997,7 @@ export const SortableItem = ({
 					{ ( 'image' === template ) && (
 						<Fragment >
 							
-							<SelectControl 
+							{/* <SelectControl 
 								label={ __( 'Image Size', 'themehunk-block' ) }
 								value={ attributes.prdImage }
 								options={ [
@@ -1007,7 +1007,7 @@ export const SortableItem = ({
 								    
 								] }
 								onChange={ e => setAttributes({ prdImage: e }) }
-							/>
+							/> */}
 
                              <ToggleControl
 								label={ __( 'Sale', 'themehunk-block' ) }
@@ -1102,11 +1102,11 @@ export const SortableItem = ({
 								checked={ attributes.showCompare }
 								onChange={ showCompare => setAttributes({ showCompare }) }
 							 />
-							 <ToggleControl
+							 {/* <ToggleControl
 								label={ __( 'Quick View', 'themehunk-block' ) }
 								checked={ attributes.showView }
 								onChange={ showView => setAttributes({ showView }) }
-							 />
+							 /> */}
 							 <HoverControl value={ postmetaclr }
 								options={[
 									{
