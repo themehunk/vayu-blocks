@@ -116,7 +116,6 @@ function advance_product_tab_style($attr){
 			$tablineHeightUnit = isset($attr['tablineHeightUnit']) ? $attr['tablineHeightUnit'] : 'px';
 			$css .= "line-height: {$attr['tablineHeight']}{$tablineHeightUnit}; ";
 		}
-
 		// Letter Spacing
 		if (isset($attr['tabletterSpacing'])) {
 			$tabletterSpacingUnit = isset($attr['tabletterSpacingUnit']) ? $attr['tabletterSpacingUnit'] : 'px';
