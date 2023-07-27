@@ -267,6 +267,8 @@ function advance_button_style($attr){
       // Button Inside Style
     $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside{";
 
+      $css .= "box-sizing: border-box; 
+               max-width: 100%;";
       //button buttonbackground
       if ( isset( $attr['buttonbackgroundType'] ) && $attr['buttonbackgroundType'] == 'image' ) {
         $css .= isset( $attr['buttonbackgroundImage']['url'] ) ? "background-image: url({$attr['buttonbackgroundImage']['url']});" : '';

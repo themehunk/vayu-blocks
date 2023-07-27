@@ -71,7 +71,7 @@ function AnimationPopover({
 	const id = `inspector-o-animations-control-${ instanceId }`;
 
 	return (
-		<BaseControl label={ __( 'Animation', 'themehunk-block' ) } id={ id }>
+		<BaseControl label={ __( 'Choose Animation', 'themehunk-block' ) } id={ id }>
 			<Dropdown
 				contentClassName="o-animations-control__popover"
 				position="bottom center"

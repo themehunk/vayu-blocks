@@ -20,7 +20,7 @@ import './style.scss';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
-import { HeadingIcon as icon } from '../../../src/helpers/icon.js';
+import { RxHeading as icon } from "react-icons/rx";
 
 const { name } = metadata;
 

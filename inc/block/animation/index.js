@@ -26,12 +26,12 @@ import Edit from './editor.js';
 import './count/index.js';
 import './typing/index.js';
 
-const excludedBlocks = [ 'themeisle-blocks/popup' ];
+const excludedBlocks = [ '' ];
 
 const BlockAnimation = ( el, props ) => {
 	if ( hasBlockSupport( props.name, 'customClassName', true ) && ! excludedBlocks.includes( props.name ) ) {
 
-		const showAsDefault = Boolean( select( 'core/preferences' )?.get( 'themeisle/otter-blocks', 'show-animations' ) );
+		const showAsDefault = false;
 
 		return (
 			<Fragment>
@@ -78,7 +78,7 @@ const withInspectorControls = createHigherOrderComponent( BlockEdit => {
 
 //Very Important
 if ( Boolean( window?.blocksAnimation?.hasThemehunkBlock ) ) {
-	addFilter( 'otter.blockTools', 'themeisle-animations/with-inspector-controls', BlockAnimation, 1 );
+	addFilter( 'themehunk-block.blockTools', 'themehunk-animations/with-inspector-controls', BlockAnimation, 1 );
 } else {
-	addFilter( 'editor.BlockEdit', 'themehunk-animations/with-inspector-controls', withInspectorControls );
+	addFilter( 'editor.BlockEdit', 'themehunk-animations/with-inspector-controls', withInspectorControls, 108 );
 }

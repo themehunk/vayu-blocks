@@ -21,12 +21,15 @@ import edit from './edit';
 import save from './save';
 import metadata from './block.json';
 
+import { RxButton as icon } from "react-icons/rx";
+
 const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Advanced Button', 'themehunk-block' ),
 	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	icon,
 	keywords: [
 		'heading',
 		'title',
@@ -36,7 +39,7 @@ registerBlockType( name, {
 	save,
 	example: {
 		attributes: {
-			content: __( 'A Button with more customization options', 'themehunk-block' )
+			content: __( 'Read', 'themehunk-block' )
 		}
 	}
 });

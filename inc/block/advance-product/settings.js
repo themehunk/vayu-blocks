@@ -1221,11 +1221,13 @@ return (
 					options={[
 						{
 							label: __( 'Setting', 'themehunk-block' ),
-							value: 'setting'
+							value: 'setting',
+							icon: 'colorwand'
 						},
 						{
 							label: __( 'Advanced', 'themehunk-block' ),
-							value: 'advanced'
+							value: 'advanced',
+							icon: 'colorpalette'
 						}
 					]}
 					onChange={ setTab }

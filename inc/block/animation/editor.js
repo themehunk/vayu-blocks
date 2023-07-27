@@ -267,8 +267,8 @@ function AnimationControls({
 					className="th-animations-count-image"
 				/>
 
-				<p>{ __( 'You can add typing animation from the format toolbar of this block.', 'themehunk-block' ) }</p>
-				<p>{ __( 'Note: This feature is not available in all the blocks.', 'themehunk-block' ) }</p>
+				<p>{ __( 'Typing Animation located in Block Toolbar of a Block ', 'themehunk-block' ) }</p>
+				<p>{ __( 'Note: This is available in some blocks.', 'themehunk-block' ) }</p>
 			</ControlPanelControl>
 
 			<div className="o-fp-wrap">

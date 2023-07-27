@@ -21,12 +21,15 @@ import edit from './edit';
 import save from './save';
 import metadata from './block.json';
 
+import { AiOutlineArrowsAlt as icon } from "react-icons/ai";
+
 const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Advanced Spacer', 'themehunk-block' ),
 	description: __( 'Advanced Spacer gives a spin to editor\'s Spacer block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	icon,
 	keywords: [
 		'heading',
 		'title',
