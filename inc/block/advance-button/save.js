@@ -27,17 +27,26 @@ export default function Save({ attributes }) {
 		id: attributes.uniqueID,
 		className:`th-button-wrapper${attributes.uniqueID}`,
 		href: ('post' in attributes) ? attributes.post.url : '',
-		target: ('post' in attributes) ? '_blank' : '_self',
+		target: ('post' in attributes) && attributes.post.openInNewTab === true ? '_blank' : '_self',
 		rel:"noopener"
 	  });
 
+	  const {
+		href,
+		target,
+		rel
+	  } = blockProps;
+
 	  const blockPropsButton = {
 		className: 'th-button th-button-inside',
+		href,
+		target,
+		rel
 };
 
 	return (
-		<a {...blockProps}>
-			<div {...blockPropsButton}>
+		<div {...blockProps}>
+			<a {...blockPropsButton}>
 			<span dangerouslySetInnerHTML={ { __html: sanitizeSVG( attributes.icon ) } } />
 			<span>
 					<RichText.Content
@@ -45,8 +54,8 @@ export default function Save({ attributes }) {
 						value={ attributes.content }
 					/>
 			</span>
-			</div>
+			</a>
 
-		</a>
+		</div>
 	);
 }

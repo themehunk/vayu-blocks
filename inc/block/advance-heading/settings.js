@@ -1166,11 +1166,13 @@ const InsSettings = ({
 					options={[
 						{
 							label: __( 'Style', 'themehunk-block' ),
-							value: 'style'
+							value: 'style',
+							icon: 'colorwand'
 						},
 						{
 							label: __( 'Advanced', 'themehunk-block' ),
-							value: 'advanced'
+							value: 'advanced',
+							icon: 'colorpalette'
 						}
 					]}
 					onChange={ setTab }

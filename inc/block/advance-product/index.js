@@ -20,12 +20,15 @@ import './style.scss';
 import edit from './edit';
 import metadata from './block.json';
 
+import { SiWoo as icon } from "react-icons/si";
+
 const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Advanced Product', 'themehunk-block' ),
 	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	icon,
 	keywords: [
 		'heading',
 		'title',

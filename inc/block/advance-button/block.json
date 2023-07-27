@@ -5,7 +5,6 @@
 	"version": "0.1.0",
 	"title": "Advance Button",
 	"category": "themehunk-blocks",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false
@@ -43,9 +42,6 @@
 		},
 		"alignMobile": {
 			"type": "string"
-		},
-		"icon": {
-			"type": "html"
 		},
 		"hasIcon": {
 			"type": "boolean",
@@ -734,8 +730,6 @@
 			"type": "number",
 			"default": "0.2"
 		},
-
-
 		"buttonColor": {
 			"type": "string"
 		},
@@ -801,7 +795,6 @@
 			"type": "string",
 			"default": "linear-gradient(90deg,rgba(54,209,220,1) 0%,rgba(91,134,229,1) 100%)"
 		},
-
 		"buttonborderType": {
 			"type": "string",
 			"default": "none"
@@ -1087,28 +1080,7 @@
 		},
 		"fontSizeMobile": {
 			"type": "number"
-		},
-		"UAGAnimationType": {
-			"type": "string",
-			"default": ""
-		},
-		"UAGAnimationTime": {
-			"type": "number",
-			"default": 400
-		},
-		"UAGAnimationDelay": {
-			"type": "number",
-			"default": 0
-		},
-		"UAGAnimationEasing": {
-			"type": "string",
-			"default": "esae"
-		},
-		"UAGAnimationRepeat": {
-			"type": "boolean",
-			"default": false
 		}
-		
 
 	}
 }

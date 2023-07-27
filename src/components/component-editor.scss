@@ -22,9 +22,9 @@
 		flex: 1;
 
 		.components-button {
-			flex: 1;
+			flex: 1 auto;
 			justify-content: center;
-			height: 25px;
+			height: 29px;
 			width: 100%;
 			box-shadow: none;
 
@@ -166,13 +166,13 @@
 
 			&:first-child {
 				.th-sizing-control-item-input {
-					border-radius: 5px 0 0 5px;
+					border-radius: 4px 0 0 4px;
 				}
 			}
 
 			&:last-child {
 				.th-sizing-control-item-input {
-					border-radius: 0 5px 5px 0;
+					border-radius: 0 4px 4px 0;
 				}
 			}
 
@@ -374,17 +374,21 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
         border-top: none;
     
         .components-button {
+            width: 100%;
             flex: 1 1 0px;
             justify-content: center;
             border-radius: 0;
-            height: 48px;
+            height: auto;
             background:#eeeeee7a;
             border: none;
             box-shadow: none;
             cursor: pointer;
-            padding: 3px 15px;
+            padding: 9px 15px;
             margin-left: 0;
             font-weight: 500;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
     
             &:focus {
                 background:#c3c3c37d;
@@ -397,6 +401,16 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
                 position: relative;
                 z-index: 1;
             }
+
+            svg{
+                width: 100%;
+                margin-bottom: 5px;
+                font-size: 21px;
+            }
+        }
+
+        .th-tab-wrap{
+            flex-grow: 2;
         }
     }
 
@@ -420,7 +434,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             border: 1px solid #d5dadf;
             margin-bottom: 15px;
             font-size: 12px;
-            height: 30px;
+            min-height: 38px;
     
             &:focus {
                 outline: none;
@@ -533,9 +547,9 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
         border: 1px solid #8d96a0;
         border-radius: 4px;
         box-shadow: 0 0 0 transparent;
-        height: auto;
+        min-height: 38px;
         line-height: 28px;
-        padding: 0 12px 2px;
+        padding: 8px 12px;
         position: relative;
         transition: box-shadow .1s linear;
         width: 100%;
@@ -551,8 +565,9 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
         margin-right: 2px;
         pointer-events: none;
         position: absolute;
-        right: 8px;
-        top: 12px;
+        right: 9px;
+        top: 50%;
+        transform: translateY(-50%);
         width: 0;
     }
     @media ( max-width: 782px ) {
@@ -654,7 +669,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     
                 button {
                     width: 25px;
-                    height: 28px;
+                    height: 32px;
                     border: 1px solid #a4afb7;
                     outline: none;
                     box-shadow: none;
@@ -709,3 +724,103 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
      display:block;
     }
 
+    .editor-block-list-item-themehunk-blocks-advance-button svg,
+    .editor-block-list-item-themehunk-blocks-advance-spacer svg,
+    .editor-block-list-item-themehunk-blocks-advance-heading svg,
+    .editor-block-list-item-themehunk-blocks-advance-container svg,
+    .editor-block-list-item-themehunk-blocks-advance-product svg,
+    .editor-block-list-item-themehunk-blocks-advance-button:hover svg,
+    .editor-block-list-item-themehunk-blocks-advance-spacer:hover svg,
+    .editor-block-list-item-themehunk-blocks-advance-heading:hover svg,
+    .editor-block-list-item-themehunk-blocks-advance-container:hover svg,
+    .editor-block-list-item-themehunk-blocks-advance-product:hover svg{
+      color: #e724b2!important;
+    }
+    .components-panel .components-base-control select.components-select-control__input,
+    .o-animations-control .o-animations-control__button{
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: hsl(0,0%,100%);
+    border-color: hsl(0,0%,80%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    min-height: 38px;
+    outline: 0 !important;
+    position: relative;
+    -webkit-transition: all 100ms;
+    transition: all 100ms;
+    box-sizing: border-box;
+    color: hsl(0,0%,50%);
+    padding: 8px;
+    height: auto;
+    }
+    .components-panel .components-base-control select.components-select-control__input + span .components-spacer{
+        top: 50%;
+        transform: translateY(-50%);
+        padding-right: 9px;
+    }
+    .components-panel .components-base-control select.components-select-control__input:hover,
+    .o-animations-control .o-animations-control__button:hover{
+        border-color: hsl(0,0%,70%);
+    }
+    .components-panel .components-base-control select.components-select-control__input + span .components-spacer svg{
+        width: 27px;
+        height: 27px;
+        fill: hsl(0,0%,80%);
+    }
+    .components-panel .components-base-control select.components-select-control__input option,
+    .o-animations-control .o-animations-control__button option{
+        color: #111;
+    }
+
+    .components-panel__body.is-opened .components-panel__body-toggle{
+        text-transform: capitalize;
+        font-size: 13px;
+        line-height: 1.4em;
+        font-weight: normal;
+        color: #1E1E1E;
+    }
+
+    div.components-toolbar>div{
+        align-items: center;
+    }
+    .components-accessible-toolbar .components-button, .components-toolbar .components-button{
+        padding-top: 0;
+        padding-bottom: 0;
+        height: 38px;
+    }
+
+    .components-toolbar{
+        min-height: 38px;
+    }
+
+    .th-gfont-control .components-select-control label,
+    .th-gfont-control label,
+    .o-animations-control label,
+    .components-panel__body label,
+    span.components-base-control__label,
+    .components-popover__content label.components-base-control__label{
+        text-transform: capitalize!important;
+        font-size: 13px!important;
+        line-height: 1.4em!important;
+        font-weight: 400!important;
+        color: #1e1e1e;
+    }
+    .components-button-group .components-button:first-child{
+        border-radius: 4px 0 0 4px;
+    }
+    .components-button-group .components-button:last-child{
+        border-radius: 0 4px 4px 0;
+    }

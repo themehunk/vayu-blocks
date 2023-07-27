@@ -10,7 +10,7 @@ import './style.scss';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
-import { ConatinerIcon as icon } from '../../../src/helpers/icon.js';
+import { RxGroup as icon } from "react-icons/rx";
 
 const { name } = metadata;
 

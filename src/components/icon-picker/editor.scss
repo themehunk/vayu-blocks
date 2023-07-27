@@ -133,7 +133,11 @@ button.components-icon-picker-item {
 .th-blocks-icon-panel.is-opened{
     margin-top: 40px!important;
 }
-
 .th-icon-chooser{
     position: relative;
+}
+.th-icon-preview button.components-button.is-secondary,
+.th-icon-preview button.components-button.is-secondary:hover{
+	box-shadow: inset 0 0 0 1px #757575;
+	color: GREEN;
 }

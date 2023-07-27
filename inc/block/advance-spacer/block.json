@@ -5,7 +5,6 @@
 	"version": "0.1.0",
 	"title": "Advance Spacer",
 	"category": "themehunk-blocks",
-	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false

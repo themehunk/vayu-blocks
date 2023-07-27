@@ -60,7 +60,7 @@ const InsSettings = ({
 		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
 	}, []);
 
-    const [ tab, setTab ] = useState( 'layout' );
+    const [ tab, setTab ] = useState( 'setting' );
 	const [ hover, setHover ] = useState( 'normal' );
 	const [ shaper, setShaper ] = useState( 'top' );
 	const ANCHOR_REGEX = /[\s#]/g;
@@ -1376,22 +1376,25 @@ const InsSettings = ({
         <InsSettingHeader value={ tab }
 					options={[
 						{
-							label: __( 'Layout', 'themehunk-block' ),
-							value: 'layout'
+							label: __( 'Setting', 'themehunk-block' ),
+							value: 'setting',
+							icon: 'colorwand'
 						},
 						{
 							label: __( 'Style', 'themehunk-block' ),
-							value: 'style'
+							value: 'style',
+							icon: 'diamond'
 						},
 						{
 							label: __( 'Advanced', 'themehunk-block' ),
-							value: 'advanced'
+							value: 'advanced',
+							icon: 'colorpalette'
 						}
 					]}
 					onChange={ setTab }
             />
 
-        {'layout' === tab && (
+        {'setting' === tab && (
 
         <Fragment>
         <PanelBody title={ __( 'Container', 'themehunk-block' ) } className="th-container-panel" initialOpen={ true }>

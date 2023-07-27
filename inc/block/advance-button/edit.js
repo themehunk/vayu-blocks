@@ -491,7 +491,6 @@ else{
       '--borderBottomRightRadiushvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${ attributes.borderRadiusHvrMobile }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrLeftMobile }${ attributes.borderRadiusHvrUnit }`,
       '--borderBottomLeftRadiushvr': 'linked' === attributes.borderRadiusHvrTypeMobile ? `${ attributes.borderRadiusHvrMobile }${ attributes.borderRadiusHvrUnit }` : `${ attributes.borderRadiusHvrBottomMobile }${ attributes.borderRadiusHvrUnit }`,
     
-	
 	}
 
 		// position properties
@@ -522,7 +521,6 @@ else{
 			}
 	  
 		   }
-	  
 			/********************* */
 			  // flex properies 
 			  /********************* */
@@ -624,8 +622,7 @@ else{
    if ( 'color' === attributes.backgroundTypeHvr ) {
 		 backgroundStyle = {...backgroundStyle,
 			 '--background-color-hvr':  attributes.backgroundColorHvr
-		 };
-	 
+		 }; 
 	 }
  
    if ( 'image' === attributes.backgroundTypeHvr ) {
@@ -672,10 +669,10 @@ else{
 	 '--border-color-hvr':attributes.borderColorHvr,
    };
  
-   let transitionSpacerStyle = {};
+   let transitionButtonStyle = {};
  
 	 if ( attributes.transitionAll ) {
-			 transitionSpacerStyle ={
+			 transitionButtonStyle ={
 				 '--transition':`all ${ attributes.transitionAll }s`,
 				 '--WebkitTransition':`all ${ attributes.transitionAll }s`,
 				 '--MozTransition':`all ${ attributes.transitionAll }s`,
@@ -698,7 +695,7 @@ else{
 		...backgroundStyle,
 		...PositionProperties,
 		...flexProperties,
-		...transitionSpacerStyle,
+		...transitionButtonStyle,
 	}
 	
 	const blockProps = useBlockProps({

@@ -1278,7 +1278,7 @@ const InsSettings = ({
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ verticalOrientationOffsetBottomTablet: value });
 		} else if ( 'Mobile' === getView ) {
-			setAttributes({ verticalOrientationnOffsetBottomMobile: value });
+			setAttributes({ verticalOrientationOffsetBottomMobile: value });
 		}
 	};
 
@@ -1517,15 +1517,18 @@ const InsSettings = ({
 					options={[
 						{
 							label: __( 'Setting', 'themehunk-block' ),
-							value: 'setting'
+							value: 'setting',
+							icon: 'colorwand'
 						},
 						{
 							label: __( 'Style', 'themehunk-block' ),
-							value: 'style'
+							value: 'style',
+							icon: 'diamond'
 						},
 						{
 							label: __( 'Advanced', 'themehunk-block' ),
-							value: 'advanced'
+							value: 'advanced',
+							icon: 'colorpalette'
 						}
 					]}
 					onChange={ setTab }
