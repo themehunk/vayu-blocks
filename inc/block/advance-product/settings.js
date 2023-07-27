@@ -1430,7 +1430,7 @@ return (
 								/>
               
 							</ResponsiveControl>
-              <ResponsiveControl
+                            <ResponsiveControl
 								label={ __( 'Border Radius', 'themehunk-block' ) }
 							>
 							<UnitChooser
@@ -2149,7 +2149,7 @@ return (
 								label={ __( 'Width', 'themehunk-block' ) }
 								value={ attributes.widthType }
 								options={ [
-									{ label:  __( 'Default', 'themehunk-block' ), value: 'default' },
+									{ label: __( 'Default', 'themehunk-block' ), value: 'default' },
 									{ label: __( 'Full Width(100%)', 'themehunk-block' ), value: 'fullwidth' },
 									{ label: __( 'Inline(Auto)', 'themehunk-block' ), value: 'inlinewidth' },
 								    { label: __( 'Custom', 'themehunk-block' ), value: 'customwidth' },

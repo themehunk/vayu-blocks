@@ -43,6 +43,7 @@ Just upload the `themehunk-block.zip` to the `/wp-content/plugins/` directory, a
 
 
 == Changelog ==
+* Panel Style Modified.
 
 
 == Upgrade Notice ==

@@ -1013,20 +1013,20 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                               <img src={product.images[0].thumbnail} alt={product.name} />
                               <div className="th-product-meta">
                                 {attributes.showWishlist == true &&
-                                  <div className="th-icon th-wishlist-button">
+                                  <div className="th-icons th-wishlist-button">
                                  <IoIosHeartEmpty></IoIosHeartEmpty>
                                  </div>
                                 }
                                  {attributes.showCompare == true &&
-                                 <div className="th-icon th-compare-button">
+                                 <div className="th-icons th-compare-button">
                                  <IoMdRepeat></IoMdRepeat>
                                  </div>
                                 }
-                                 {attributes.showView == true &&
+                                 {/* {attributes.showView == true &&
                                  <div className="th-icon th-quickview-button">
                                  <IoIosExpand></IoIosExpand>
                                  </div>
-                                }
+                                } */}
                               </div>
                             </div>
                             )

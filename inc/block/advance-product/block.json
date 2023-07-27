@@ -1093,7 +1093,7 @@
 			"type": "boolean",
 			"default": false
 		},
-		"tabBorderType": {
+		"tabborderType": {
 			"type": "string"
 		},
 		"tabBorderWidthType": {
