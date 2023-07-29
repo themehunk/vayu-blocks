@@ -88,17 +88,19 @@ class Advance_Product_Tab {
 
     if ($device_type === 'tablet' && isset($attr['productShowTablet'])) {
 
-        $args['posts_per_page'] = $attr['productShowTablet'];
+        $perpageproduct = $attr['productShowTablet'];
 
     } elseif ($device_type === 'mobile' && isset($attr['productShowMobile'])) {
 
-        $args['posts_per_page'] = $attr['productShowMobile'];
+        $perpageproduct = $attr['productShowMobile'];
 
     } else {
 
-        $args['posts_per_page'] = isset($attr['productShow']) ? $attr['productShow'] : 4;
+        $perpageproduct = isset($attr['productShow']) ? $attr['productShow'] : 4;
 
     }
+    
+    $args['posts_per_page'] = $perpageproduct;
 
     // Selected category
     if(isset($_POST['category_id'])){
@@ -236,9 +238,14 @@ class Advance_Product_Tab {
         }
     }
 
-    $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
+    $total_pages = $this->get_total_pages_count($args , $perpageproduct);
 
-    $args['page'] = $paged;
+    // Get the current page number from the AJAX request
+    $page = isset($_POST['page']) ? sanitize_text_field($_POST['page']) : '1';
+    $args['paged'] = $page;
+
+    // Get the products for the current page
+    $args['offset'] = ($page - 1) * $perpageproduct;
 
     $products = wc_get_products($args);
 
@@ -279,21 +286,25 @@ class Advance_Product_Tab {
                     //post meta
                     $product_content .= '<div class="th-product-meta">';
                     //wishlist
-                    $product_content .= '<div class="th-icons th-wishlist-button">';
                     if( shortcode_exists( 'yith_wcwl_add_to_wishlist' ) ){
+                    $product_content .= '<div class="th-icons th-wishlist-button">';
+                    
                     $product_content .= '<div class="thunk-wishlist">
                         <span class="thunk-wishlist-inner">'.do_shortcode('[yith_wcwl_add_to_wishlist  product_id=' . esc_attr($product->get_id()) . ' icon="th-icon th-icon-heart1" label="" already_in_wishslist_text="" browse_wishlist_text="" product_added_text=""]' ).'</div></span>';
-                     }
+                    
                     $product_content .= '</div>';
+                   }
 
                     //compare
-                    $product_content .= '<div class="th-icons th-compare-button">';
                     if(class_exists('th_product_compare') || class_exists('Tpcp_product_compare')){
+                    $product_content .= '<div class="th-icons th-compare-button">';
+                    
                         $product_content .= '<div class="thunk-compare"><span class="compare-list"><div class="woocommerce product compare-button">
                               <a class="th-product-compare-btn compare" data-th-product-id="' . esc_attr($product->get_id()) . '"><span class="th-icon th-icon-repeat"></span></a>
                               </div></span></div>';
-                    } 
+                   
                     $product_content .= '</div>';
+                    } 
                     
                     $product_content .= '</div>';
 
@@ -385,190 +396,32 @@ class Advance_Product_Tab {
     }
 
     $product_content .= '</div>';
-   // $product_content .= '<div class="th-pagination">' . $this->pagination_add($attr , $paged) . '</div>';
-
+    
+    $product_content .= '<div class="th-pagination" total-page="'.esc_attr($total_pages).'">
+            <button class="prev">
+            <span class="dashicons dashicons-arrow-left-alt2"></span>
+            </button>
+            <button class="next">
+            <span class="dashicons dashicons-arrow-right-alt2"></span>
+            </button>
+            </div>';
 
     return $product_content;
+    exit;
 
   }
 
+  public function get_total_pages_count($args , $perpageproduct) {
+    // Get total products count without pagination
+    $args['posts_per_page'] = -1;
+    $products = wc_get_products($args);
+    $total_products = count($products);
+    $total_pages = ceil($total_products / $perpageproduct);
+    return $total_pages;
+}
+  
 
-  public function pagination_add($attr , $paged) {
-
-    $args = array(
-        'status' => 'publish',
-        'visibility' => 'catalog',
-        'paginate' => true, 
-    );
-
-    //product per page
-
-    $device_type = $this->device_check();
-
-    if ($device_type === 'tablet' && isset($attr['productShowTablet'])) {
-
-        $args['posts_per_page'] = $attr['productShowTablet'];
-
-    } elseif ($device_type === 'mobile' && isset($attr['productShowMobile'])) {
-
-        $args['posts_per_page'] = $attr['productShowMobile'];
-
-    } else {
-
-        $args['posts_per_page'] = isset($attr['productShow']) ? $attr['productShow'] : 4;
-
-    }
-
-    // Selected category
-    if (isset($attr['productCategories']) && is_array($attr['productCategories'])) {
-        $term_slugs = array();
-        foreach ($attr['productCategories'] as $category) {
-            if (isset($category['slug'])) {
-                $term_slugs[] = sanitize_title($category['slug']);
-            }
-        }
-
-        if (!empty($term_slugs)) {
-            $args['tax_query'] = array(
-                array(
-                    'taxonomy' => 'product_cat',
-                    'field' => 'slug',
-                    'terms' => $term_slugs,
-                ),
-            );
-        }
-    }
-
-    if (isset($attr['productOrder'])) {
-
-        switch ($attr['productOrder']) {
-
-            case 'desc':
-                
-                $args['order'] = 'desc';
-
-                break;
-               
-            default:
-                    
-                $args['order'] = 'asc';
-    
-                break;    
-            
-        }
-    }
-     
-    //product type
-    if (isset($attr['productType'])) {
-
-        switch ($attr['productType']) {
-
-            case 'sale':
-                // Fetch sale products
-                add_filter( 'woocommerce_product_data_store_cpt_get_products_query', array( $this, 'handle_sale_products_query_var' ), 10, 2 );
-                break;
-
-            case 'featured':
-                // Fetch featured products
-                $args['featured'] = true;
-
-                break;
-
-            case 'manual':
-
-                $manualProductIDs = array();
-
-                    if (isset($attr['manualProduct']) && is_array($attr['manualProduct'])) {
-                        foreach ($attr['manualProduct'] as $product) {
-                            if (isset($product['value'])) {
-                                $manualProductIDs[] = absint($product['value']);
-                            }
-                        }
-                    }
-
-                    $args['include'] = $manualProductIDs;
-    
-                break;    
-            default:
-                // No specific product type specified
-                break;
-        }
-    }
-
-    //exclude product
-    if (isset($attr['excludeProduct']) && is_array($attr['excludeProduct'])) {
-        $excludeProductProductIDs = array();
-        foreach ($attr['excludeProduct'] as $product) {
-            if (isset($product['value'])) {
-                $excludeProductProductIDs[] = absint($product['value']);
-            }
-        }
-        $args['exclude'] = $excludeProductProductIDs;
-    }
-   
-    //orderby
-    if (isset($attr['productOrderby'])) {
-
-        switch ($attr['productOrderby']) {
-
-            case 'date':
-                
-                $args['orderby'] = 'date';
-                break;
-
-            case 'price':
-                
-                $args['orderby'] = 'meta_value_num';
-                $args['meta_key'] = '_price';
-
-                break;
-            case 'popularity':
-                    
-                $args['orderby'] = 'meta_value_num';
-                $args['meta_key'] = 'total_sales';
-    
-                 break; 
-            case 'rating':
-                    
-                $args['orderby'] = 'meta_value_num';
-                $args['meta_key'] = '_wc_average_rating';
-    
-                 break; 
-             case 'menu-order':
-                    
-                $args['orderby'] = 'menu_order';
-        
-                break;    
-            default:
-                // No specific product type specified
-                break;
-        }
-    }
-
-    $products = wc_get_products( $args );
-
-    // Calculate total number of pages
-    // $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
-    $max_num_pages = $products->max_num_pages;
-
-    $prev_button_disabled = ($paged <= 1) ? 'disabled' : '';
-    $next_button_disabled = ($paged >= $max_num_pages) ? 'disabled' : '';
-
-    $pagination_buttons = '
-        <button class="prev-page" ' . $prev_button_disabled . ' data-page="' . ($paged - 1) . '">
-            <span class="dashicons dashicons-arrow-left-alt2"></span>
-        </button>
-        <button class="next-page" ' . $next_button_disabled . ' data-page="' . ($paged + 1) . '">
-            <span class="dashicons dashicons-arrow-right-alt2"></span>
-        </button>
-    ';
-
-    return $pagination_buttons;
-
-  }
-
-
-  public function add_to_cart_url($product){
+public function add_to_cart_url($product){
     $args = array();
     if ( $product ){
         $url = $product->add_to_cart_url();
@@ -682,20 +535,12 @@ public function load_category_products() {
     
     $attributes = isset($_POST['attr']) ? $_POST['attr'] : array();
 
-    $product_content = $this->get_fetch_product($attributes,$category_id);
+    $product_content = $this->get_fetch_product($attributes, $category_id);
 
     echo $product_content;
 
     exit;
 
-}
-
-// public function load_pagi() {
-//     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
-//     $product_content = $this->get_fetch_product(array(), $paged);
-
-//     echo $product_content;
-//     exit;
-// }
+  }
 
 }
