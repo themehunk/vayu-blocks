@@ -1217,6 +1217,7 @@ const customTooltiptransitionAll = value => `${value}`;
 return (
         <Fragment>
            <InspectorControls>
+			<div className='th-block-ins'>
            <InsSettingHeader value={ tab }
 					options={[
 						{
@@ -1376,7 +1377,7 @@ return (
 						title={ __( 'Product Box', 'themehunk-block' ) }
 						initialOpen={ false }
 					  >
-               <div className='th-component-group-label'>
+               <div className='th-component-group-label th-ins-alignment'>
 
             <label className='th-label'>{ __( 'Alignment', 'themehunk-block' ) } </label>
 						<AlignmentToolbar
@@ -2392,6 +2393,7 @@ return (
 						</PanelBody>
             </Fragment>
          )}
+		 </div>
            </InspectorControls>
         </Fragment>
         );

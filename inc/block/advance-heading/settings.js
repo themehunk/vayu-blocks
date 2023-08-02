@@ -1162,6 +1162,7 @@ const InsSettings = ({
 	return (
     <Fragment>
         <InspectorControls>
+			<div className='th-block-ins'>
             <InsSettingHeader value={ tab }
 					options={[
 						{
@@ -2263,7 +2264,7 @@ const InsSettings = ({
 		     </Fragment>
 
             )}
-
+	</div>
         </InspectorControls>
     </Fragment>
     );

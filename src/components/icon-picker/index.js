@@ -1,14 +1,12 @@
 /**
  * Internal dependencies
  */
-import './editor.scss';
 import generalSvgs from './svgs-list';
 import DOMPurify from 'dompurify';
 
 function sanitizeSVG( svg ) {
 	return DOMPurify.sanitize( svg, { USE_PROFILES: { svg: true, svgFilters: true } } );
 }
-
 
 /**
  * WordPress dependencies
