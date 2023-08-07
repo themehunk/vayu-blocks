@@ -150,6 +150,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const [selectedCategory, setSelectedCategory] = useState('');
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [noproduct, setNoproduct] = useState();
   const homeUrl = ThBlockData.homeUrl;
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -236,6 +237,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
           setProducts(data);
           setIsLoading(false);
           setHasNextPage(data.length === productsPerPage);
+          if (data.length === 0) {
+            setNoproduct(true);
+          } else {
+            setNoproduct(false);
+          }
         })
         .catch((error) => {
           console.error('Error fetching products:', error);
@@ -946,7 +952,6 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     style
   });
   
-  console.log(attributes.showSale);
   return ( 
     <Fragment>
 		<InsSettings
@@ -983,6 +988,13 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
              {isLoading && (
               <div className="th-block-loader">Loading...</div>
              )}
+
+             {noproduct && (
+              <p>No Product</p>
+             )}
+
+
+            
                 {products.map((product) => (
                 <div className="th-product-item" key={product.id}>
                   <div className="th-product-block-content-wrap">
@@ -1089,6 +1101,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                 </div>
               ))}
             </div>
+            {!noproduct && (
             <div className="th-pagination">
             <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
             <span className="dashicons dashicons-arrow-left-alt2"></span>
@@ -1096,7 +1109,8 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
             <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
             <span className="dashicons dashicons-arrow-right-alt2"></span>
             </button>
-          </div>
+            </div>
+            )}
           </div>
         </>
         
