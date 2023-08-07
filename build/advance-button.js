@@ -1077,7 +1077,7 @@ const {
 } = _block_json__WEBPACK_IMPORTED_MODULE_5__;
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(name, {
   ..._block_json__WEBPACK_IMPORTED_MODULE_5__,
-  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Advanced Button', 'themehunk-block'),
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Button', 'themehunk-block'),
   description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block'),
   icon: react_icons_rx__WEBPACK_IMPORTED_MODULE_6__.RxButton,
   keywords: ['heading', 'title', 'advance button'],

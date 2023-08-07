@@ -41,9 +41,9 @@ class Blocks_Animation {
 	 * Initialize the class
 	 */
 	public function init() {
-		if ( ! defined( 'BLOCKS_ANIMATION_URL' ) ) {
-			define( 'BLOCKS_ANIMATION_URL', THEMEHUNK_BLOCKS_URL );
-			define( 'BLOCKS_ANIMATION_PATH', THEMEHUNK_BLOCKS_PATH );
+		if ( ! defined( 'VAYU_BLOCKS_ANIMATION_URL' ) ) {
+			define( 'VAYU_BLOCKS_ANIMATION_URL', THEMEHUNK_BLOCKS_URL );
+			define( 'VAYU_BLOCKS_ANIMATION_PATH', THEMEHUNK_BLOCKS_PATH );
 		}
 
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_assets' ) );
@@ -58,11 +58,11 @@ class Blocks_Animation {
 	 * @access  public
 	 */
 	public function enqueue_editor_assets() {
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/animation-index.asset.php';
+		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/animation-index.asset.php';
 
 		wp_enqueue_style(
 			'themehunk-block-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation-index.css',
+			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
 		);
@@ -73,7 +73,7 @@ class Blocks_Animation {
 
 		wp_enqueue_script(
 			'themehunk-block-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation-index.js',
+			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
@@ -89,10 +89,10 @@ class Blocks_Animation {
 
 		wp_set_script_translations( 'themehunk-block-animation', 'blocks-animation' );
 
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
+		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 		wp_enqueue_script(
 			'themehunk-block-count',
-			BLOCKS_ANIMATION_URL . 'build/anim-count.js',
+			VAYU_BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
@@ -102,7 +102,7 @@ class Blocks_Animation {
 
 		wp_enqueue_script(
 			'themehunk-block-typing',
-			BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
+			VAYU_BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
@@ -138,11 +138,11 @@ class Blocks_Animation {
 	 * @since 2.0.5
 	 */
 	public function frontend_load( $block_content, $block ) {
-		$asset_file = include BLOCKS_ANIMATION_PATH . '/build/frontend.asset.php';
+		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/frontend.asset.php';
 
 		wp_register_style(
 			'themehunk-block-animation',
-			BLOCKS_ANIMATION_URL . 'build/animation-index.css',
+			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
 		);
@@ -157,7 +157,7 @@ class Blocks_Animation {
 
 			wp_enqueue_script(
 				'themehunk-block-animation-frontend',
-				BLOCKS_ANIMATION_URL . 'build/frontend.js',
+				VAYU_BLOCKS_ANIMATION_URL . 'build/frontend.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
@@ -171,10 +171,10 @@ class Blocks_Animation {
 		}
 
 		if ( ! self::$scripts_loaded['count'] && strpos( $block_content, 'o-anim-count' ) ) {
-			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
+			$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 			wp_enqueue_script(
 				'themehunk-block-count',
-				BLOCKS_ANIMATION_URL . 'build/anim-count.js',
+				VAYU_BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
@@ -185,10 +185,10 @@ class Blocks_Animation {
 		}
 
 		if ( ! self::$scripts_loaded['typing'] && strpos( $block_content, 'o-anim-typing' ) ) {
-			$asset_file = include BLOCKS_ANIMATION_PATH . '/build/anim-typing.asset.php';
+			$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-typing.asset.php';
 			wp_enqueue_script(
 				'themehunk-block-typing',
-				BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
+				VAYU_BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true

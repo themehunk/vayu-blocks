@@ -26,7 +26,7 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Advanced Product', 'themehunk-block' ),
+	title: __( 'Products', 'themehunk-block' ),
 	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
 	icon,
 	keywords: [

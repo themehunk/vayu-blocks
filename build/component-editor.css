@@ -58,7 +58,8 @@
   border-radius: 0px;
 }
 
-.components-button.is-secondary:active:not(:disabled), .components-button.is-tertiary:active:not(:disabled) {
+.components-button.is-secondary:active:not(:disabled),
+.components-button.is-tertiary:active:not(:disabled) {
   background: rgba(138, 27, 255, 0.1215686275);
   color: #6c1bc3;
 }
