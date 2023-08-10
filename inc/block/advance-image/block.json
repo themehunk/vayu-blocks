@@ -1,16 +1,16 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "themehunk-blocks/advance-image",
+	"name": "vayu-blocks/advance-image",
 	"version": "0.1.0",
 	"title": "Advance Image",
-	"category": "themehunk-blocks",
+	"category": "vayu-blocks",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false
 	},
-	"textdomain": "themehunk-block",
+	"textdomain": "vayu-blocks",
 	"attributes": {
 		"id": {
 			"type": "string"

@@ -26,8 +26,8 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Heading', 'themehunk-block' ),
-	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	title: __( 'Heading', 'vayu-blocks' ),
+	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
 	icon,
 	keywords: [
 		'heading',
@@ -38,7 +38,7 @@ registerBlockType( name, {
 	save,
 	example: {
 		attributes: {
-			content: __( 'A heading with more customization options', 'themehunk-block' )
+			content: __( 'A heading with more customization options', 'vayu-blocks' )
 		}
 	}
 });

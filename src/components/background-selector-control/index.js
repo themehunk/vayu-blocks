@@ -54,11 +54,11 @@ const BackgroundSelectorControl = ({
 		<div id={ id } className="components-base-control th-background-selector-control">
 			<div className="components-base-control__field">
 				<div className="components-base-control__title">
-					<label className="components-base-control__label">{ __( 'Background Type', 'themehunk-block' ) }</label>
+					<label className="components-base-control__label">{ __( 'Background Type', 'vayu-blocks' ) }</label>
 					<ButtonGroup className="linking-controls">
 						<Button
 							icon={ () => <Icon icon={ Bgclr } /> }
-							label={ __( 'Color', 'themehunk-block' ) }
+							label={ __( 'Color', 'vayu-blocks' ) }
 							showTooltip={ true }
 							isPrimary={ 'color' === backgroundType }
 							onClick={ () => changeBackgroundType( 'color' ) }
@@ -66,7 +66,7 @@ const BackgroundSelectorControl = ({
 
 						<Button
 							icon={ () => <Icon icon={ BgImg } /> }
-							label={ __( 'Image', 'themehunk-block' ) }
+							label={ __( 'Image', 'vayu-blocks' ) }
 							showTooltip={ true }
 							isPrimary={ 'image' === backgroundType }
 							onClick={ () => changeBackgroundType( 'image' ) }
@@ -74,7 +74,7 @@ const BackgroundSelectorControl = ({
 
 						<Button
 							icon={ () => <Icon icon={ BgGraclr } /> }
-							label={ __( 'Gradient', 'themehunk-block' ) }
+							label={ __( 'Gradient', 'vayu-blocks' ) }
 							showTooltip={ true }
 							isPrimary={ 'gradient' === backgroundType }
 							onClick={ () => changeBackgroundType( 'gradient' ) }
@@ -86,7 +86,7 @@ const BackgroundSelectorControl = ({
 			{
 				( 'color' === backgroundType || undefined === backgroundType ) && (
 					<ColorGradientControl
-						label={ __( 'Background Color', 'themehunk-block' ) }
+						label={ __( 'Background Color', 'vayu-blocks' ) }
 						colorValue={ backgroundColor }
 						onColorChange={ changeColor }
 						enableAlpha={true} 
@@ -98,7 +98,7 @@ const BackgroundSelectorControl = ({
 					image?.url ? (
 						<Fragment>
 							<FocalPointPicker
-								label={ __( 'Focal point picker', 'themehunk-block' ) }
+								label={ __( 'Focal point picker', 'vayu-blocks' ) }
 								url={ image.url }
 								value={ focalPoint }
 								onDragStart={ changeFocalPoint }
@@ -107,36 +107,36 @@ const BackgroundSelectorControl = ({
 							/>
 
 							<ControlPanelControl
-								label={ __( 'Background Settings', 'themehunk-block' ) }
+								label={ __( 'Background Settings', 'vayu-blocks' ) }
 							>
 								<SelectControl
-									label={ __( 'Background Attachment', 'themehunk-block' ) }
+									label={ __( 'Background Attachment', 'vayu-blocks' ) }
 									value={ backgroundAttachment }
 									options={ [
-										{ label: __( 'Scroll', 'themehunk-block' ), value: 'scroll' },
-										{ label: __( 'Fixed', 'themehunk-block' ), value: 'fixed' },
-										{ label: __( 'Local', 'themehunk-block' ), value: 'local' }
+										{ label: __( 'Scroll', 'vayu-blocks' ), value: 'scroll' },
+										{ label: __( 'Fixed', 'vayu-blocks' ), value: 'fixed' },
+										{ label: __( 'Local', 'vayu-blocks' ), value: 'local' }
 									] }
 									onChange={ changeBackgroundAttachment }
 								/>
 
 								<SelectControl
-									label={ __( 'Background Repeat', 'themehunk-block' ) }
+									label={ __( 'Background Repeat', 'vayu-blocks' ) }
 									value={ backgroundRepeat }
 									options={ [
-										{ label: __( 'Repeat', 'themehunk-block' ), value: 'repeat' },
-										{ label: __( 'No-repeat', 'themehunk-block' ), value: 'no-repeat' }
+										{ label: __( 'Repeat', 'vayu-blocks' ), value: 'repeat' },
+										{ label: __( 'No-repeat', 'vayu-blocks' ), value: 'no-repeat' }
 									] }
 									onChange={ changeBackgroundRepeat }
 								/>
 
 								<SelectControl
-									label={ __( 'Background Size', 'themehunk-block' ) }
+									label={ __( 'Background Size', 'vayu-blocks' ) }
 									value={ backgroundSize }
 									options={ [
-										{ label: __( 'Auto', 'themehunk-block' ), value: 'auto' },
-										{ label: __( 'Cover', 'themehunk-block' ), value: 'cover' },
-										{ label: __( 'Contain', 'themehunk-block' ), value: 'contain' }
+										{ label: __( 'Auto', 'vayu-blocks' ), value: 'auto' },
+										{ label: __( 'Cover', 'vayu-blocks' ), value: 'cover' },
+										{ label: __( 'Contain', 'vayu-blocks' ), value: 'contain' }
 									] }
 									onChange={ changeBackgroundSize }
 								/>
@@ -148,7 +148,7 @@ const BackgroundSelectorControl = ({
 									isSecondary
 									onClick={ removeImage }
 								>
-									{ __( 'Clear Image', 'themehunk-block' ) }
+									{ __( 'Clear Image', 'vayu-blocks' ) }
 								</Button>
 							</PanelRow>
 						</Fragment>
@@ -156,8 +156,8 @@ const BackgroundSelectorControl = ({
 						<MediaPlaceholder
 							icon="format-image"
 							labels={ {
-								title: __( 'Background Image', 'themehunk-block' ),
-								name: __( 'an image', 'themehunk-block' )
+								title: __( 'Background Image', 'vayu-blocks' ),
+								name: __( 'an image', 'vayu-blocks' )
 							} }
 							value={ image?.id }
 							onSelect={ changeImage }
@@ -170,7 +170,7 @@ const BackgroundSelectorControl = ({
 			{
 				'gradient' === backgroundType && (
 					<ColorGradientControl
-						label={ __( 'Background Gradient', 'themehunk-block' ) }
+						label={ __( 'Background Gradient', 'vayu-blocks' ) }
 						gradientValue={ gradient }
 						disableCustomColors={ true }
 						onGradientChange={ changeGradient }

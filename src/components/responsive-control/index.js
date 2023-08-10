@@ -49,13 +49,13 @@ const ResponsiveControl = ({
 	const isMobile = ! isLarger && ! isLarge && ! isSmall && ! isSmaller;
 
 	const getView = useSelect( select => {
-		const { getView } = select( 'themehunk-blocks/data' );
+		const { getView } = select( 'vayu-blocks/data' );
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 
 		return __experimentalGetPreviewDeviceType && ! isMobile ? __experimentalGetPreviewDeviceType() : getView();
 	}, []);
 
-	const { updateView } = useDispatch( 'themehunk-blocks/data' );
+	const { updateView } = useDispatch( 'vayu-blocks/data' );
 	const { __experimentalSetPreviewDeviceType } = useDispatch( 'core/edit-post' ) ? useDispatch( 'core/edit-post' ) : false;
 
 	const setView = __experimentalSetPreviewDeviceType && ! isMobile ? __experimentalSetPreviewDeviceType : updateView;
@@ -79,7 +79,7 @@ const ResponsiveControl = ({
 							renderToggle={ ({ isOpen, onToggle }) => (
 								<Button
 									icon={ 'Mobile' === getView ? 'smartphone' : getView.toLowerCase() }
-									label={ __( 'Responsiveness Settings', 'themehunk-block' ) }
+									label={ __( 'Responsiveness Settings', 'vayu-blocks' ) }
 									showTooltip={ true }
 									className="is-button"
 									onClick={ onToggle }
@@ -89,7 +89,7 @@ const ResponsiveControl = ({
 							renderContent={ () => (
 								<div className="o-responsive-control-settings">
 									<div className="o-responsive-control-settings-title">
-										{ __( 'View', 'themehunk-block' ) }
+										{ __( 'View', 'vayu-blocks' ) }
 									</div>
 
 									<Button
@@ -101,7 +101,7 @@ const ResponsiveControl = ({
 									>
 										{ 'Desktop' === getView && <Icon icon={ checkIcon } /> }
 										<span className="popover-title">
-											{ __( 'Desktop', 'themehunk-block' ) }
+											{ __( 'Desktop', 'vayu-blocks' ) }
 										</span>
 									</Button>
 
@@ -114,7 +114,7 @@ const ResponsiveControl = ({
 									>
 										{ 'Tablet' === getView && <Icon icon={ checkIcon } /> }
 										<span className="popover-title">
-											{ __( 'Tablet', 'themehunk-block' ) }
+											{ __( 'Tablet', 'vayu-blocks' ) }
 										</span>
 									</Button>
 
@@ -127,7 +127,7 @@ const ResponsiveControl = ({
 									>
 										{ 'Mobile' === getView && <Icon icon={ checkIcon } /> }
 										<span className="popover-title">
-											{ __( 'Mobile', 'themehunk-block' ) }
+											{ __( 'Mobile', 'vayu-blocks' ) }
 										</span>
 									</Button>
 								</div>

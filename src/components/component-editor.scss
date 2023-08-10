@@ -851,6 +851,7 @@ button.components-icon-picker-item {
     right: 9px;
     background: transparent!important;
     outline: 1px solid #B9B9B9;
+    border-radius: 2px;
 	
 }
 .th-blocks-icon-panel .components-panel__body-toggle.components-button .components-panel__arrow{
@@ -880,20 +881,23 @@ button.components-icon-picker-item {
 }
 .th-icon-preview button.components-button.is-secondary,
 .th-icon-preview button.components-button.is-secondary:hover{
-	box-shadow: inset 0 0 0 1px #B9B9B9;
+	// box-shadow: inset 0 0 0 1px #B9B9B9;
+    box-shadow: none;
+    border: 1px solid #B9B9B9;
+    border-radius: 2px;
 	color: GREEN;
 }
 // Editor Global Style CSS
-    .editor-block-list-item-themehunk-blocks-advance-button svg,
-    .editor-block-list-item-themehunk-blocks-advance-spacer svg,
-    .editor-block-list-item-themehunk-blocks-advance-heading svg,
-    .editor-block-list-item-themehunk-blocks-advance-container svg,
-    .editor-block-list-item-themehunk-blocks-advance-product svg,
-    .editor-block-list-item-themehunk-blocks-advance-button:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-spacer:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-heading:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-container:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-product:hover svg{
+    .editor-block-list-item-vayu-blocks-advance-button svg,
+    .editor-block-list-item-vayu-blocks-advance-spacer svg,
+    .editor-block-list-item-vayu-blocks-advance-heading svg,
+    .editor-block-list-item-vayu-blocks-advance-container svg,
+    .editor-block-list-item-vayu-blocks-advance-product svg,
+    .editor-block-list-item-vayu-blocks-advance-button:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-spacer:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-heading:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-container:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-product:hover svg{
       color: #6c1bc3!important;
     }
     .components-panel .components-base-control select.components-select-control__input,

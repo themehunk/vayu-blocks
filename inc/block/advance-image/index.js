@@ -25,8 +25,8 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Advanced Image', 'themehunk-block' ),
-	description: __( 'Advanced Image gives a spin to editor\'s Spacer block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	title: __( 'Advanced Image', 'vayu-blocks' ),
+	description: __( 'Advanced Image gives a spin to editor\'s Spacer block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
 	keywords: [
 		'imag',
 		'image',
@@ -36,7 +36,7 @@ registerBlockType( name, {
 	save,
 	example: {
 		attributes: {
-			content: __( 'A Image with more customization options', 'themehunk-block' )
+			content: __( 'A Image with more customization options', 'vayu-blocks' )
 		}
 	}
 });

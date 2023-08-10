@@ -25,35 +25,26 @@ export default function Save({ attributes }) {
 
 	const blockProps = useBlockProps.save({
 		id: attributes.uniqueID,
-		className:`th-button-wrapper${attributes.uniqueID}`,
-		href: ('post' in attributes) ? attributes.post.url : '',
-		target: ('post' in attributes) && attributes.post.openInNewTab === true ? '_blank' : '_self',
-		rel:"noopener"
+		className:`th-button-wrapper${attributes.uniqueID}`
 	  });
-
-	  const {
-		href,
-		target,
-		rel
-	  } = blockProps;
 
 	  const blockPropsButton = {
 		className: 'th-button th-button-inside',
-		href,
-		target,
-		rel
+		href: ('post' in attributes) ? attributes.post.url : '',
+		target: ('post' in attributes) && attributes.post.opensInNewTab === true ? '_blank' : '_self',
+		rel:"noopener"
 };
 
 	return (
 		<div {...blockProps}>
 			<a {...blockPropsButton}>
-			<span dangerouslySetInnerHTML={ { __html: sanitizeSVG( attributes.icon ) } } />
-			<span>
-					<RichText.Content
-						tagName="span" // The tag here is the element output and editable in the admin
-						value={ attributes.content }
-					/>
-			</span>
+				<span dangerouslySetInnerHTML={ { __html: sanitizeSVG( attributes.icon ) } } />
+				<span>
+						<RichText.Content
+							tagName="span" // The tag here is the element output and editable in the admin
+							value={ attributes.content }
+						/>
+				</span>
 			</a>
 
 		</div>

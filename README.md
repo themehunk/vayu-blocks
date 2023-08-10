@@ -1,2 +1,2 @@
-# themehunk-block
+# vayu-blocks
 themhunk blocks plugin

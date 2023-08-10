@@ -2,10 +2,10 @@
 /**
  * Class for Animation logic.
  *
- * @package ThemeHunk
+ * @package Vayu
  */
 
-namespace ThemeHunk\GutenbergBlocks;
+namespace Vayu\GutenbergBlocks;
 
 /**
  * Class Blocks_Animation
@@ -42,8 +42,8 @@ class Blocks_Animation {
 	 */
 	public function init() {
 		if ( ! defined( 'VAYU_BLOCKS_ANIMATION_URL' ) ) {
-			define( 'VAYU_BLOCKS_ANIMATION_URL', THEMEHUNK_BLOCKS_URL );
-			define( 'VAYU_BLOCKS_ANIMATION_PATH', THEMEHUNK_BLOCKS_PATH );
+			define( 'VAYU_BLOCKS_ANIMATION_URL', VAYU_BLOCKS_URL );
+			define( 'VAYU_BLOCKS_ANIMATION_PATH', VAYU_BLOCKS_PATH );
 		}
 
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_assets' ) );
@@ -61,18 +61,18 @@ class Blocks_Animation {
 		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/animation-index.asset.php';
 
 		wp_enqueue_style(
-			'themehunk-block-animation',
+			'vayu-block-animation',
 			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
 		);
 
 		// if ( defined( 'TH_BLOCKS_VERSION' ) ) {
-		// 	array_push( $asset_file['dependencies'], 'themehunk-block' );
+		// 	array_push( $asset_file['dependencies'], 'vayu-blocks' );
 		// }
 
 		wp_enqueue_script(
-			'themehunk-block-animation',
+			'vayu-block-animation',
 			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
@@ -80,35 +80,35 @@ class Blocks_Animation {
 		);
 
 		wp_localize_script(
-			'themehunk-block-animation',
+			'vayu-block-animation',
 			'blocksAnimation',
 			array(
-				'hasThemehunkBlock' => defined( 'NONTHEMEHUNK_BLOCKS_VERSION' ),
+				'hasVaYuBlock' => defined( 'NONVAYU_BLOCKS_VERSION' ),
 			)
 		);
 
-		wp_set_script_translations( 'themehunk-block-animation', 'blocks-animation' );
+		wp_set_script_translations( 'vayu-block-animation', 'blocks-animation' );
 
 		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 		wp_enqueue_script(
-			'themehunk-block-count',
+			'vayu-block-count',
 			VAYU_BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 
-		wp_script_add_data( 'themehunk-block-count', 'defer', true );
+		wp_script_add_data( 'vayu-block-count', 'defer', true );
 
 		wp_enqueue_script(
-			'themehunk-block-typing',
+			'vayu-block-typing',
 			VAYU_BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
 
-		wp_script_add_data( 'themehunk-block-typing', 'defer', true );
+		wp_script_add_data( 'vayu-block-typing', 'defer', true );
 	}
 
 	/**
@@ -135,13 +135,13 @@ class Blocks_Animation {
 	 * @param string $block_content Content of block.
 	 * @param array  $block Block Attributes.
 	 * @return string
-	 * @since 2.0.5
+	 * @since 1.0.0
 	 */
 	public function frontend_load( $block_content, $block ) {
 		$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/frontend.asset.php';
 
 		wp_register_style(
-			'themehunk-block-animation',
+			'vayu-block-animation',
 			VAYU_BLOCKS_ANIMATION_URL . 'build/animation-index.css',
 			array(),
 			$asset_file['version']
@@ -153,17 +153,17 @@ class Blocks_Animation {
 
 		if ( ! self::$scripts_loaded['animation'] && strpos( $block_content, 'animated' ) ) {
 			
-			wp_enqueue_style( 'themehunk-block-animation' );
+			wp_enqueue_style( 'vayu-block-animation' );
 
 			wp_enqueue_script(
-				'themehunk-block-animation-frontend',
+				'vayu-block-animation-frontend',
 				VAYU_BLOCKS_ANIMATION_URL . 'build/frontend.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'themehunk-block-animation-frontend', 'async', true );
+			wp_script_add_data( 'vayu-block-animation-frontend', 'async', true );
 
 			add_action( 'wp_head', array( $this, 'add_fontend_anim_inline_style' ), 10 );
 
@@ -173,28 +173,28 @@ class Blocks_Animation {
 		if ( ! self::$scripts_loaded['count'] && strpos( $block_content, 'o-anim-count' ) ) {
 			$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-count.asset.php';
 			wp_enqueue_script(
-				'themehunk-block-count',
+				'vayu-block-count',
 				VAYU_BLOCKS_ANIMATION_URL . 'build/anim-count.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'themehunk-block-count', 'defer', true );
+			wp_script_add_data( 'vayu-block-count', 'defer', true );
 			self::$scripts_loaded['count'] = true;
 		}
 
 		if ( ! self::$scripts_loaded['typing'] && strpos( $block_content, 'o-anim-typing' ) ) {
 			$asset_file = include VAYU_BLOCKS_ANIMATION_PATH . '/build/anim-typing.asset.php';
 			wp_enqueue_script(
-				'themehunk-block-typing',
+				'vayu-block-typing',
 				VAYU_BLOCKS_ANIMATION_URL . 'build/anim-typing.js',
 				$asset_file['dependencies'],
 				$asset_file['version'],
 				true
 			);
 
-			wp_script_add_data( 'themehunk-block-typing', 'defer', true );
+			wp_script_add_data( 'vayu-block-typing', 'defer', true );
 			self::$scripts_loaded['typing'] = true;
 		}
 
@@ -205,7 +205,7 @@ class Blocks_Animation {
 	 * Add no script tag.
 	 *
 	 * @access public
-	 * @since 2.0.14
+	 * @since 1.0.0
 	 */
 	public static function add_fontend_anim_inline_style() {
 		echo '<style id="o-anim-hide-inline-css"> .animated:not(.o-anim-ready) {

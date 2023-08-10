@@ -1,12 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "themehunk-blocks/advance-container",
+	"name": "vayu-blocks/advance-container",
 	"version": "0.1.0",
 	"title": "Advance Container",
-	"category": "themehunk-blocks",
+	"category": "vayu-blocks",
 	"description": "Example block scaffolded with Create Block tool.",
-	"textdomain": "themehunk-block",
+	"textdomain": "vayu-blocks",
 	"attributes": {
 		"id": {
 			"type": "string"

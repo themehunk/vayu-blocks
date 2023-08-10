@@ -42,7 +42,7 @@ const InsSettings = ({
 }) => {
 
     const getView = useSelect( select => {
-		const { getView } = select( 'themehunk-blocks/data' );
+		const { getView } = select( 'vayu-blocks/data' );
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 
 		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
@@ -1079,12 +1079,12 @@ const InsSettings = ({
         <InsSettingHeader value={ tab }
 					options={[
 						{
-							label: __( 'Setting', 'themehunk-block' ),
+							label: __( 'Setting', 'vayu-blocks' ),
 							value: 'setting',
 							icon: 'colorwand'
 						},
 						{
-							label: __( 'Advanced', 'themehunk-block' ),
+							label: __( 'Advanced', 'vayu-blocks' ),
 							value: 'advanced',
 							icon: 'colorpalette'
 						}
@@ -1095,12 +1095,12 @@ const InsSettings = ({
             {'setting' === tab && (
 								<Fragment>
 								<PanelBody
-									title={ __( 'General', 'themehunk-block' ) }
+									title={ __( 'General', 'vayu-blocks' ) }
 									initialOpen={ true }
 									className="th-spacer-panel"
 								> 
 								<ResponsiveControl
-								label={ __( 'Height', 'themehunk-block' ) }
+								label={ __( 'Height', 'vayu-blocks' ) }
 								>
 								<UnitChooser
 								value={ attributes.heightUnit }
@@ -1128,18 +1128,18 @@ const InsSettings = ({
             ) || 'advanced' === tab && (
                 <Fragment>
 				<PanelBody
-					title={ __( 'Layout', 'themehunk-block' ) }
+					title={ __( 'Layout', 'vayu-blocks' ) }
 					initialOpen={ false }
 					className="th-spacer-panel"
 				>           
 				            <SelectControl
-								label={ __( 'Width', 'themehunk-block' ) }
+								label={ __( 'Width', 'vayu-blocks' ) }
 								value={ attributes.widthType }
 								options={ [
-									{ label:  __( 'Default', 'themehunk-block' ), value: 'default' },
-									{ label: __( 'Full Width(100%)', 'themehunk-block' ), value: 'fullwidth' },
-									{ label: __( 'Inline(Auto)', 'themehunk-block' ), value: 'inlinewidth' },
-								    { label: __( 'Custom', 'themehunk-block' ), value: 'customwidth' },
+									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
+									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
+									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
+								    { label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
 								] }
 								onChange={ e => setAttributes({ widthType: e }) }
 							/>
@@ -1147,7 +1147,7 @@ const InsSettings = ({
 
 							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 							<ResponsiveControl
-							label={ __( 'Custom Width', 'themehunk-block' ) }
+							label={ __( 'Custom Width', 'vayu-blocks' ) }
 							>	
 							<UnitChooser
 							value={ attributes.customWidthUnit }
@@ -1172,7 +1172,7 @@ const InsSettings = ({
 							) }
 
 						  <ResponsiveControl
-								label={ __( 'Padding', 'themehunk-block' ) }
+								label={ __( 'Padding', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.paddingUnit }
@@ -1190,22 +1190,22 @@ const InsSettings = ({
 									onChange={ changePadding }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getPadding( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getPadding( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getPadding( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getPadding( 'left' )
 										}
@@ -1216,7 +1216,7 @@ const InsSettings = ({
 
 							
 							<ResponsiveControl
-								label={ __( 'Margin', 'themehunk-block' ) }
+								label={ __( 'Margin', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.marginUnit }
@@ -1234,22 +1234,22 @@ const InsSettings = ({
 									onChange={ changeMargin }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getMargin( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getMargin( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getMargin( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getMargin( 'left' )
 										}
@@ -1259,12 +1259,12 @@ const InsSettings = ({
 							</ResponsiveControl>
 
 							<SelectControl
-								label={ __( 'Position', 'themehunk-block' ) }
+								label={ __( 'Position', 'vayu-blocks' ) }
 								value={ attributes.position }
 								options={ [
-									{ label:  __( 'Default', 'themehunk-block' ), value: 'relative' },
-									{ label: __( 'Absolute', 'themehunk-block' ), value: 'absolute' },
-									{ label: __( 'Fixed', 'themehunk-block' ), value: 'fixed' },
+									{ label:  __( 'Default', 'vayu-blocks' ), value: 'relative' },
+									{ label: __( 'Absolute', 'vayu-blocks' ), value: 'absolute' },
+									{ label: __( 'Fixed', 'vayu-blocks' ), value: 'fixed' },
 								    
 								] }
 								onChange={ e => setAttributes({ position: e }) }
@@ -1273,7 +1273,7 @@ const InsSettings = ({
 							{ ('absolute'== attributes.position || 'fixed'== attributes.position) && (
 							<>
 							<div className='th-component-group-label'>
-                            <label className='th-label'>{ __( 'Horizontal Orientation', 'themehunk-block' )}</label>
+                            <label className='th-label'>{ __( 'Horizontal Orientation', 'vayu-blocks' )}</label>
                             <ToogleGroupControl
 
 										value={ attributes.horizontalOrientation }
@@ -1281,12 +1281,12 @@ const InsSettings = ({
 										options={[
 											{
 												icon: HorizontalLeft,
-												label: __( 'left', 'themehunk-blocks' ),
+												label: __( 'left', 'vayu-blocks' ),
 												value: 'left'
 											},
 											{
 												icon: HorizontalRight,
-												label: __( 'right', 'themehunk-block' ),
+												label: __( 'right', 'vayu-blocks' ),
 												value: 'right'
 											}
 										]}
@@ -1296,7 +1296,7 @@ const InsSettings = ({
 							</div>
                           { 'left' == attributes.horizontalOrientation && (
                                <ResponsiveControl
-								label={ __( 'Offset', 'themehunk-block' ) }
+								label={ __( 'Offset', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetUnit }
@@ -1319,7 +1319,7 @@ const InsSettings = ({
 						  )}
 						  { 'right' == attributes.horizontalOrientation && (
 							<ResponsiveControl
-								label={ __( 'Offset', 'themehunk-block' ) }
+								label={ __( 'Offset', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.horizontalOrientationOffsetRightUnit }
@@ -1342,7 +1342,7 @@ const InsSettings = ({
 						  )}	
 
                            <div className='th-component-group-label'>
-                            <label className='th-label'>{ __( 'Vertical Orientation', 'themehunk-block' )}</label>
+                            <label className='th-label'>{ __( 'Vertical Orientation', 'vayu-blocks' )}</label>
                             <ToogleGroupControl
 
 										value={ attributes.verticalOrientation }
@@ -1350,12 +1350,12 @@ const InsSettings = ({
 										options={[
 											{
 												icon: VerticalTop,
-												label: __( 'top', 'themehunk-blocks' ),
+												label: __( 'top', 'vayu-blocks' ),
 												value: 'top'
 											},
 											{
 												icon: VerticalBottom,
-												label: __( 'bottom', 'themehunk-block' ),
+												label: __( 'bottom', 'vayu-blocks' ),
 												value: 'bottom'
 											}
 										]}
@@ -1365,7 +1365,7 @@ const InsSettings = ({
 									</div>
 								{ 'top' == attributes.verticalOrientation && (
                                <ResponsiveControl
-								label={ __( 'Offset', 'themehunk-block' ) }
+								label={ __( 'Offset', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.verticalOrientationOffsetTopUnit }
@@ -1389,7 +1389,7 @@ const InsSettings = ({
 
                           { 'bottom' == attributes.verticalOrientation && (
 							<ResponsiveControl
-								label={ __( 'Offset', 'themehunk-block' ) }
+								label={ __( 'Offset', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.verticalOrientationOffsetBottomUnit }
@@ -1414,7 +1414,7 @@ const InsSettings = ({
 					)}
 
 							<ResponsiveControl
-								label={ __( 'Z-index', 'themehunk-block' ) }
+								label={ __( 'Z-index', 'vayu-blocks' ) }
 							     >	
 								<RangeControl
 								    renderTooltipContent={ customTooltipZindex }
@@ -1428,7 +1428,7 @@ const InsSettings = ({
 							</ResponsiveControl> 
 
 							<ResponsiveControl
-									label={ __( 'Align Self', 'themehunk-block' ) }
+									label={ __( 'Align Self', 'vayu-blocks' ) }
 									className="th-alig-self-control th-component-group"
 								>
 									<ToogleGroupControl
@@ -1437,22 +1437,22 @@ const InsSettings = ({
 										options={[
 											{
 												icon: Start,
-												label: __( 'Start', 'themehunk-blocks' ),
+												label: __( 'Start', 'vayu-blocks' ),
 												value: 'start'
 											},
 											{
 												icon: Center,
-												label: __( 'Center', 'themehunk-block' ),
+												label: __( 'Center', 'vayu-blocks' ),
 												value: 'center'
 											},
 											{
 												icon: End,
-												label: __( 'End', 'themehunk-blocks' ),
+												label: __( 'End', 'vayu-blocks' ),
 												value: 'end'
 											},
 											{
 												icon: Strech,
-												label: __( 'Stretch', 'themehunk-block' ),
+												label: __( 'Stretch', 'vayu-blocks' ),
 												value: 'stretch'
 											}
 										]}
@@ -1462,7 +1462,7 @@ const InsSettings = ({
 								</ResponsiveControl>
 
 								<ResponsiveControl
-									label={ __( 'Order', 'themehunk-block' ) }
+									label={ __( 'Order', 'vayu-blocks' ) }
 									className="th-order-control th-component-group"
 								>
 									<ToogleGroupControl
@@ -1471,17 +1471,17 @@ const InsSettings = ({
 										options={[
 											{
 												icon: OrderStart,
-												label: __( 'Start', 'themehunk-blocks' ),
+												label: __( 'Start', 'vayu-blocks' ),
 												value: 'start'
 											},
 											{
 												icon: OrderEnd,
-												label: __( 'End', 'themehunk-blocks' ),
+												label: __( 'End', 'vayu-blocks' ),
 												value: 'end'
 											},
 											{
 												icon: Custom,
-												label: __( 'Cutsom', 'themehunk-block' ),
+												label: __( 'Cutsom', 'vayu-blocks' ),
 												value: 'custom'
 											}
 										]}
@@ -1491,7 +1491,7 @@ const InsSettings = ({
 								</ResponsiveControl>
 								{ 'custom' == attributes.order && (
 								<ResponsiveControl
-								label={ __( 'Custom Order', 'themehunk-block' ) }
+								label={ __( 'Custom Order', 'vayu-blocks' ) }
 							    >    
 								<RangeControl
 								    renderTooltipContent={ customTooltipCustomOrder }
@@ -1507,7 +1507,7 @@ const InsSettings = ({
 								)}
 
 							  <ResponsiveControl
-									label={ __( 'Size', 'themehunk-block' ) }
+									label={ __( 'Size', 'vayu-blocks' ) }
 									className="th-size-control th-component-group"
 								>
 									<ToogleGroupControl
@@ -1516,22 +1516,22 @@ const InsSettings = ({
 										options={[
 											{
 												icon: None,
-												label: __( 'None', 'themehunk-blocks' ),
+												label: __( 'None', 'vayu-blocks' ),
 												value: 'none'
 											},
 											{
 												icon: Grow,
-												label: __( 'Grow', 'themehunk-blocks' ),
+												label: __( 'Grow', 'vayu-blocks' ),
 												value: 'grow'
 											},
 											{
 												icon: Shrink,
-												label: __( 'Shrink', 'themehunk-block' ),
+												label: __( 'Shrink', 'vayu-blocks' ),
 												value: 'shrink'
 											},
 											{
 												icon: Custom,
-												label: __( 'Custom', 'themehunk-block' ),
+												label: __( 'Custom', 'vayu-blocks' ),
 												value: 'custom'
 											}
 										]}
@@ -1542,7 +1542,7 @@ const InsSettings = ({
 								{ 'custom' == attributes.flexSize && (
                                 <>
 								<ResponsiveControl
-								label={ __( 'Flex Grow', 'themehunk-block' ) }
+								label={ __( 'Flex Grow', 'vayu-blocks' ) }
 							    >    
 								<RangeControl
 								    renderTooltipContent={ customTooltipFlexGrow }
@@ -1556,7 +1556,7 @@ const InsSettings = ({
 						      </ResponsiveControl>
 
 							  <ResponsiveControl
-								label={ __( 'Flex Shrink', 'themehunk-block' ) }
+								label={ __( 'Flex Shrink', 'vayu-blocks' ) }
 								>    
 								<RangeControl
 									renderTooltipContent={ customTooltipFlexShrink }
@@ -1577,18 +1577,18 @@ const InsSettings = ({
 				</PanelBody>
 
 				<PanelBody
-					title={ __( 'Border & Box Shadow', 'themehunk-block' ) }
+					title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
 					initialOpen={ false }
 					className="th-spacer-panel"
 				> 
                 <HoverControl value={ hover }
 					options={[
 						{
-							label: __( 'Normal', 'themehunk-block' ),
+							label: __( 'Normal', 'vayu-blocks' ),
 							value: 'normal'
 						},
 						{
-							label: __( 'Hover', 'themehunk-block' ),
+							label: __( 'Hover', 'vayu-blocks' ),
 							value: 'hover'
 						}
 					]}
@@ -1597,15 +1597,15 @@ const InsSettings = ({
 				{ 'normal' ===  hover &&  (	
                     <>
 					<SelectControl
-						label={ __( 'Border Type', 'themehunk-block' ) }
+						label={ __( 'Border Type', 'vayu-blocks' ) }
 						value={ attributes.borderType }
 						options={ [
-							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
-							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
-							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
-							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
-						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
-							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+							{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+							{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+							{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+							{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+							{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
 						] }
 						onChange={ e => setAttributes({ borderType: e }) }
 					/>	
@@ -1615,7 +1615,7 @@ const InsSettings = ({
 
 						<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 						<ResponsiveControl
-								label={ __( 'Border Width', 'themehunk-block' ) }
+								label={ __( 'Border Width', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.borderWidthUnit }
@@ -1633,22 +1633,22 @@ const InsSettings = ({
 									onChange={ changeBorderWidth }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getBorderWidth( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getBorderWidth( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getBorderWidth( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getBorderWidth( 'left' )
 										}
@@ -1657,7 +1657,7 @@ const InsSettings = ({
 
 							</ResponsiveControl>
 									<ColorGradientControl
-								label={ __( 'Border Color', 'themehunk-block' ) }
+								label={ __( 'Border Color', 'vayu-blocks' ) }
 								colorValue={ attributes.borderColor }
 								onColorChange={ e => setAttributes({ borderColor: e }) }
 								enableAlpha={true} 
@@ -1666,7 +1666,7 @@ const InsSettings = ({
 						
 						) }
                         <ResponsiveControl
-								label={ __( 'Border Radius', 'themehunk-block' ) }
+								label={ __( 'Border Radius', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusUnit }
@@ -1684,22 +1684,22 @@ const InsSettings = ({
 									onChange={ changeBorderRadius }
 									options={ [
 										{
-											label: __( 'T-R', 'themehunk-block' ),
+											label: __( 'T-R', 'vayu-blocks' ),
 											type: 'top',
 											value: getBorderRadius( 'top' )
 										},
 										{
-											label: __( 'T-L', 'themehunk-block' ),
+											label: __( 'T-L', 'vayu-blocks' ),
 											type: 'right',
 											value: getBorderRadius( 'right' )
 										},
 										{
-											label: __( 'B-R', 'themehunk-block' ),
+											label: __( 'B-R', 'vayu-blocks' ),
 											type: 'left',
 											value: getBorderRadius( 'left' )
 										},
 										{
-											label: __( 'B-L', 'themehunk-block' ),
+											label: __( 'B-L', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getBorderRadius( 'bottom' )
 										}
@@ -1709,7 +1709,7 @@ const InsSettings = ({
 							</ResponsiveControl>
 
 							<ControlPanelControl
-							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							label={ __( 'Box Shadow', 'vayu-blocks' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							resetValues={ {
@@ -1725,14 +1725,14 @@ const InsSettings = ({
 						>
 						
 							<ColorGradientControl
-								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								label={ __( 'Shadow Color', 'vayu-blocks' ) }
 								colorValue={ attributes.boxShadowColor }
 								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
 								enableAlpha={true} 
 							/>
 
 							<RangeControl
-								label={ __( 'Opacity', 'themehunk-block' ) }
+								label={ __( 'Opacity', 'vayu-blocks' ) }
 								value={ attributes.boxShadowColorOpacity }
 								onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
 								min={ 0 }
@@ -1740,7 +1740,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Blur', 'themehunk-block' ) }
+								label={ __( 'Blur', 'vayu-blocks' ) }
 								value={ attributes.boxShadowBlur }
 								onChange={ e => setAttributes({ boxShadowBlur: e }) }
 								min={ 0 }
@@ -1748,7 +1748,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Spread', 'themehunk-block' ) }
+								label={ __( 'Spread', 'vayu-blocks' ) }
 								value={ attributes.boxShadowSpread }
 								onChange={ e => setAttributes({ boxShadowSpread: e }) }
 								min={ -100 }
@@ -1756,7 +1756,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Horizontal', 'themehunk-block' ) }
+								label={ __( 'Horizontal', 'vayu-blocks' ) }
 								value={ attributes.boxShadowHorizontal }
 								onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
 								min={ -100 }
@@ -1764,7 +1764,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Vertical', 'themehunk-block' ) }
+								label={ __( 'Vertical', 'vayu-blocks' ) }
 								value={ attributes.boxShadowVertical }
 								onChange={ e => setAttributes({ boxShadowVertical: e }) }
 								min={ -100 }
@@ -1780,15 +1780,15 @@ const InsSettings = ({
                 ) 	|| 'hover' ===  hover && (
 					<>
 					<SelectControl
-						label={ __( 'Border Type', 'themehunk-block' ) }
+						label={ __( 'Border Type', 'vayu-blocks' ) }
 						value={ attributes.borderHvrType }
 						options={ [
-							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
-							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
-							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
-							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
-						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
-							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+							{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+							{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+							{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+							{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+							{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
 						] }
 						onChange={ e => setAttributes({ borderHvrType: e }) }
 					/>	
@@ -1796,7 +1796,7 @@ const InsSettings = ({
 				{ 'none' !== attributes.borderHvrType && (
 					<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 					<ResponsiveControl
-								label={ __( 'Border Width', 'themehunk-block' ) }
+								label={ __( 'Border Width', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.borderWidthHvrUnit }
@@ -1814,22 +1814,22 @@ const InsSettings = ({
 									onChange={ changeBorderWidthHvr }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getBorderWidthHvr( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getBorderWidthHvr( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getBorderWidthHvr( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getBorderWidthHvr( 'left' )
 										}
@@ -1838,7 +1838,7 @@ const InsSettings = ({
 
 							</ResponsiveControl>		
 					<ColorGradientControl
-					label={ __( 'Border Hover Color', 'themehunk-block' ) }
+					label={ __( 'Border Hover Color', 'vayu-blocks' ) }
 					colorValue={ attributes.borderColorHvr }
 					onColorChange={ e => setAttributes({ borderColorHvr: e }) }
 				    />
@@ -1847,7 +1847,7 @@ const InsSettings = ({
 					) }
 
 							<ResponsiveControl
-								label={ __( 'Border Radius', 'themehunk-block' ) }
+								label={ __( 'Border Radius', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.borderRadiusHvrUnit }
@@ -1865,22 +1865,22 @@ const InsSettings = ({
 									onChange={ changeBorderRadiusHvr }
 									options={ [
 										{
-											label: __( 'T-R', 'themehunk-block' ),
+											label: __( 'T-R', 'vayu-blocks' ),
 											type: 'top',
 											value: getBorderRadiusHvr( 'top' )
 										},
 										{
-											label: __( 'T-L', 'themehunk-block' ),
+											label: __( 'T-L', 'vayu-blocks' ),
 											type: 'right',
 											value: getBorderRadiusHvr( 'right' )
 										},
 										{
-											label: __( 'B-R', 'themehunk-block' ),
+											label: __( 'B-R', 'vayu-blocks' ),
 											type: 'left',
 											value: getBorderRadiusHvr( 'left' )
 										},
 										{
-											label: __( 'B-L', 'themehunk-block' ),
+											label: __( 'B-L', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getBorderRadiusHvr( 'bottom' )
 										}
@@ -1890,7 +1890,7 @@ const InsSettings = ({
 							</ResponsiveControl>
 
 							<ControlPanelControl
-							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							label={ __( 'Box Shadow', 'vayu-blocks' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							resetValues={ {
@@ -1906,14 +1906,14 @@ const InsSettings = ({
 						>
 						
 							<ColorGradientControl
-								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								label={ __( 'Shadow Color', 'vayu-blocks' ) }
 								colorValue={ attributes.boxShadowColorHvr }
 								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
 								enableAlpha={true} 
 							/>
 
 							<RangeControl
-								label={ __( 'Opacity', 'themehunk-block' ) }
+								label={ __( 'Opacity', 'vayu-blocks' ) }
 								value={ attributes.boxShadowColorOpacityHvr }
 								onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
 								min={ 0 }
@@ -1921,7 +1921,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Blur', 'themehunk-block' ) }
+								label={ __( 'Blur', 'vayu-blocks' ) }
 								value={ attributes.boxShadowBlurHvr }
 								onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
 								min={ 0 }
@@ -1929,7 +1929,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Spread', 'themehunk-block' ) }
+								label={ __( 'Spread', 'vayu-blocks' ) }
 								value={ attributes.boxShadowSpreadHvr }
 								onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
 								min={ -100 }
@@ -1937,7 +1937,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Horizontal', 'themehunk-block' ) }
+								label={ __( 'Horizontal', 'vayu-blocks' ) }
 								value={ attributes.boxShadowHorizontalHvr }
 								onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
 								min={ -100 }
@@ -1945,7 +1945,7 @@ const InsSettings = ({
 							/>
 
 							<RangeControl
-								label={ __( 'Vertical', 'themehunk-block' ) }
+								label={ __( 'Vertical', 'vayu-blocks' ) }
 								value={ attributes.boxShadowVerticalHvr }
 								onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
 								min={ -100 }
@@ -1959,7 +1959,7 @@ const InsSettings = ({
 						</PanelBody>
 
 				<PanelBody
-					title={ __( 'Background', 'themehunk-block' ) }
+					title={ __( 'Background', 'vayu-blocks' ) }
 					initialOpen={ false }
 					className="th-spacer-panel"
 				> 
@@ -1967,11 +1967,11 @@ const InsSettings = ({
                 <HoverControl value={ hover }
 					options={[
 						{
-							label: __( 'Normal', 'themehunk-block' ),
+							label: __( 'Normal', 'vayu-blocks' ),
 							value: 'normal'
 						},
 						{
-							label: __( 'Hover', 'themehunk-block' ),
+							label: __( 'Hover', 'vayu-blocks' ),
 							value: 'hover'
 						}
 					]}
@@ -2036,33 +2036,33 @@ const InsSettings = ({
 				</PanelBody>
 
 				<PanelBody
-					title={ __( 'Responsive', 'themehunk-block' ) }
+					title={ __( 'Responsive', 'vayu-blocks' ) }
 					initialOpen={ false }
 					className="th-spacer-panel"
 				> 
 				<ToggleControl
-								label={ __( 'Hide On Desktop', 'themehunk-block' ) }
+								label={ __( 'Hide On Desktop', 'vayu-blocks' ) }
 								checked={ attributes.responsiveTogHideDesktop }
 								onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
 							/>
 			    <ToggleControl
-								label={ __( 'Hide On Tablet', 'themehunk-block' ) }
+								label={ __( 'Hide On Tablet', 'vayu-blocks' ) }
 								checked={ attributes.responsiveTogHideTablet }
 								onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
 							/>				
                 <ToggleControl
-								label={ __( 'Hide On Mobile', 'themehunk-block' ) }
+								label={ __( 'Hide On Mobile', 'vayu-blocks' ) }
 								checked={ attributes.responsiveTogHideMobile }
 								onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
 							/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Transition', 'themehunk-block' ) }
+					title={ __( 'Transition', 'vayu-blocks' ) }
 					initialOpen={ false }
 					className="th-spacer-panel"
 				> 
 				<RangeControl
-				label={ __( 'Transition Duration', 'themehunk-block' ) }
+				label={ __( 'Transition Duration', 'vayu-blocks' ) }
 				renderTooltipContent={ customTooltiptransitionAll }
 				value={ attributes.transitionAll }
 				onChange={ transitionAll => setAttributes({ transitionAll }) }

@@ -123,7 +123,7 @@ function AnimationControls({
 	const [ animation, setAnimation ] = useState( 'none' );
 	const [ delay, setDelay ] = useState( 'none' );
 	const [ speed, setSpeed ] = useState( 'none' );
-	const [ currentAnimationLabel, setCurrentAnimationLabel ] = useState( __( 'None', 'themehunk-block' ) );
+	const [ currentAnimationLabel, setCurrentAnimationLabel ] = useState( __( 'None', 'vayu-blocks' ) );
 
 	const updateAnimation = ( e ) => {
 		let classes;
@@ -206,7 +206,7 @@ function AnimationControls({
 
 	return (
 		<PanelBody
-			title={ __( 'Animations', 'themehunk-block' ) }
+			title={ __( 'Animations', 'vayu-blocks' ) }
 			initialOpen={ false }
 		>
 			<div className="o-animations-control">
@@ -220,14 +220,14 @@ function AnimationControls({
 				{ 'none' !== animation && (
 					<Fragment>
 						<SelectControl
-							label={ __( 'Delay', 'themehunk-block' ) }
+							label={ __( 'Delay', 'vayu-blocks' ) }
 							value={ delay || 'none' }
 							options={ delayList }
 							onChange={  value => updateAnimConfig( AnimationType.default, delay, value, () => setDelay( value ), attributes, setAttributes ) }
 						/>
 
 						<SelectControl
-							label={ __( 'Speed', 'themehunk-block' ) }
+							label={ __( 'Speed', 'vayu-blocks' ) }
 							value={ speed || 'none' }
 							options={ speedList }
 							onChange={ value => updateAnimConfig( AnimationType.default, speed, value, () => setSpeed( value ), attributes, setAttributes ) }
@@ -237,7 +237,7 @@ function AnimationControls({
 							variant="secondary"
 							onClick={ replayAnimation }
 						>
-							{ __( 'Replay Animation', 'themehunk-block' ) }
+							{ __( 'Replay Animation', 'vayu-blocks' ) }
 						</Button>
 					</Fragment>
 				) }
@@ -245,35 +245,35 @@ function AnimationControls({
 
 			{/* //This code is to enable cout animation.
 			<ControlPanelControl
-				label={ __( 'Count Animations', 'themehunk-block' ) }
+				label={ __( 'Count Animations', 'vayu-blocks' ) }
 			>
 				<img
 					src={ ' ' }
-					alt={ _( 'Using Count Animation in the Block Editor', 'themehunk-block' ) }
+					alt={ _( 'Using Count Animation in the Block Editor', 'vayu-blocks' ) }
 					className="th-animations-count-image"
 				/>
 
-				<p>{ __( 'You can add counting animation from the format toolbar of this block.', 'themehunk-block' ) }</p>
-				<p>{ __( 'Note: This feature is not available in all the blocks.', 'themehunk-block' ) }</p>
+				<p>{ __( 'You can add counting animation from the format toolbar of this block.', 'vayu-blocks' ) }</p>
+				<p>{ __( 'Note: This feature is not available in all the blocks.', 'vayu-blocks' ) }</p>
 			</ControlPanelControl>
 			 */}
 
 			<ControlPanelControl
-				label={ __( 'Typing Animations', 'themehunk-block' ) }
+				label={ __( 'Typing Animations', 'vayu-blocks' ) }
 			>
 				<img
 					src={ ' ' }
-					alt={ _( 'Using Typing Animation in the Block Editor', 'themehunk-block' ) }
+					alt={ _( 'Using Typing Animation in the Block Editor', 'vayu-blocks' ) }
 					className="th-animations-count-image"
 				/>
 
-				<p>{ __( 'Typing Animation located in Block Toolbar of a Block ', 'themehunk-block' ) }</p>
-				<p>{ __( 'Note: This is available in some blocks.', 'themehunk-block' ) }</p>
+				<p>{ __( 'Typing Animation located in Block Toolbar of a Block ', 'vayu-blocks' ) }</p>
+				<p>{ __( 'Note: This is available in some blocks.', 'vayu-blocks' ) }</p>
 			</ControlPanelControl>
 
 			<div className="o-fp-wrap">
 				{ applyFilters( 'thenehunk-block.feedback', '', 'animations' ) }
-				{ applyFilters( 'themehunk-block.poweredBy', '' ) }
+				{ applyFilters( 'vayu-blocks.poweredBy', '' ) }
 			</div>
 		</PanelBody>
 	);

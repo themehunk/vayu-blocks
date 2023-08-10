@@ -16,9 +16,9 @@ import { registerStore } from '@wordpress/data';
 const getQueryStringFromObject = params => Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
 const DEFAULT_STATE = {
-  showOnboarding: Boolean(themehunkblock.showOnboarding) && 'false' !== localStorage?.getItem('o-show-onboarding'),
+  showOnboarding: Boolean(vayublock.showOnboarding) && 'false' !== localStorage?.getItem('o-show-onboarding'),
   viewType: 'Desktop',
-  visiblePopover: 'themehunk-blocks/dynamic-value',
+  visiblePopover: 'vayu-blocks/dynamic-value',
   dynamicData: {},
   uniqueIDs: {}, // Add uniqueIDs to the default state
 };
@@ -64,7 +64,7 @@ const actions = {
   },
 };
 
-registerStore('themehunk-blocks/data', {
+registerStore('vayu-blocks/data', {
   reducer(state = DEFAULT_STATE, action) {
     if ('UPDATE_VIEW' === action.type) {
       return {

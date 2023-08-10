@@ -63,7 +63,7 @@ class IconPicker extends Component {
 
 		let iconSVGSets = {
 			general: {
-				group: __( 'Icon Library', 'themehunk-block' ),
+				group: __( 'Icon Library', 'vayu-blocks' ),
 				svgs: generalSvgs,
 			}
 		};
@@ -74,7 +74,7 @@ class IconPicker extends Component {
 			<Fragment>
 				<BaseControl className="th-svg-html">
 					
-					<div className="th-icon-label">{ __( 'Icon', 'themehunk-block' ) }</div>
+					<div className="th-icon-label">{ __( 'Icon', 'vayu-blocks' ) }</div>
 					<div className="th-icon-preview">
 						<span dangerouslySetInnerHTML={ { __html: sanitizeSVG( attributes[ attrIcon ] ) } } />
 
@@ -90,7 +90,7 @@ class IconPicker extends Component {
 							} }
 						>
 							<span className="editor-block-types-list__item-icon">
-								{ __( 'Clear', 'themehunk-block' ) }
+								{ __( 'Clear', 'vayu-blocks' ) }
 							</span>
 						</Button>
 					</div>
@@ -150,7 +150,7 @@ class IconPicker extends Component {
 												}
 							</ul>
 						<TextControl
-						label={ __( 'SVG Markup', 'themehunk-block' ) }
+						label={ __( 'SVG Markup', 'vayu-blocks' ) }
 						value={ attributes[ attrIcon ] }
 						onChange={ ( value ) => {
 							setAttributes( {
@@ -170,7 +170,7 @@ class IconPicker extends Component {
 							}
 						} }
 					/>
-					<span>{ __( 'Can also enter custom code', 'themehunk-block' ) }</span>
+					<span>{ __( 'Can also enter custom code', 'vayu-blocks' ) }</span>
 										</BaseControl>
 									</PanelRow>
 								</PanelBody>
@@ -182,7 +182,7 @@ class IconPicker extends Component {
 
 				{ ( typeof attributes[ attrRemoveText ] !== 'undefined' && !! attributes[ attrIcon ] ) &&
 					<ToggleControl
-						label={ __( 'Remove Text', 'themehunk-block' ) }
+						label={ __( 'Remove Text', 'vayu-blocks' ) }
 						checked={ !! attributes[ attrRemoveText ] }
 						onChange={ ( value ) => {
 							setAttributes( {

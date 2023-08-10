@@ -3,7 +3,7 @@
  *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-themehunk-block {
+.wp-block-create-block-vayu-blocks {
   border: 1px dotted #f00;
 }
 
@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.wp-block-themehunk-blocks-advance-container:not(.is-selected):before {
+.wp-block-vayu-blocks-advance-container:not(.is-selected):before {
   border: 1px dashed;
   border-radius: 2px;
   bottom: 0;
@@ -32,7 +32,7 @@
   top: 0;
 }
 
-.wp-block-themehunk-blocks-advance-container.th-has-child.block-editor-block-list__block:not(.is-selected):before {
+.wp-block-vayu-blocks-advance-container.th-has-child.block-editor-block-list__block:not(.is-selected):before {
   border: 0;
 }
 
@@ -72,7 +72,7 @@
   background: #000;
 }
 
-.wp-block-themehunk-blocks-advance-container {
+.wp-block-vayu-blocks-advance-container {
   --background:none;
   --background-hover: var(--background);
   --transition:0.2s;
@@ -117,7 +117,7 @@
   gap: var(--gap);
   transition: var(--transition);
 }
-.wp-block-themehunk-blocks-advance-container:hover {
+.wp-block-vayu-blocks-advance-container:hover {
   background: var(--background-hover);
   background-repeat: var(--background-repeat-hvr);
   background-size: var(--background-size-hvr);
@@ -137,7 +137,7 @@
   transition: var(--transition);
 }
 
-.wp-block-themehunk-blocks-advance-container .th-con {
+.wp-block-vayu-blocks-advance-container .th-con {
   --gap:initial;
   gap: var(--gap);
 }
@@ -161,7 +161,7 @@
   background-attachment: var(--background-overlay-attachment);
 }
 
-.wp-block-themehunk-blocks-advance-container:hover .wp-block-th-blocks-container-overlay {
+.wp-block-vayu-blocks-advance-container:hover .wp-block-th-blocks-container-overlay {
   background: var(--background-overlay-hvr);
   background-repeat: var(--background-overlay-repeat-hvr);
   background-size: var(--background-overlay-size-hvr);
@@ -169,21 +169,21 @@
   background-attachment: var(--background-overlay-attachment-hvr);
 }
 
-.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-top svg {
+.wp-block-vayu-blocks-advance-container .th-shaper .th-shape-top svg {
   width: var(--shaper-top-width);
   height: var(--shaper-top-height);
 }
 
-.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-bottom svg {
+.wp-block-vayu-blocks-advance-container .th-shaper .th-shape-bottom svg {
   width: var(--shaper-bottom-width);
   height: var(--shaper-bottom-height);
 }
 
-.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-top {
+.wp-block-vayu-blocks-advance-container .th-shaper .th-shape-top {
   z-index: var(--shaper-z-index-top);
 }
 
-.wp-block-themehunk-blocks-advance-container .th-shaper .th-shape-bottom {
+.wp-block-vayu-blocks-advance-container .th-shaper .th-shape-bottom {
   z-index: var(--shaper-z-index-bottom);
 }
 
@@ -191,8 +191,8 @@
   position: relative;
 }
 
-.wp-block-themehunk-blocks-advance-container *,
-.wp-block-themehunk-blocks-advance-containe {
+.wp-block-vayu-blocks-advance-container *,
+.wp-block-vayu-blocks-advance-containe {
   box-sizing: border-box;
 }
 
@@ -201,7 +201,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-desktop:before {
+  .wp-block-vayu-blocks-advance-container.th-hide-desktop:before {
     content: "";
     display: block;
     position: absolute;
@@ -212,13 +212,13 @@
     background-color: hsla(0, 0%, 100%, 0.6);
     z-index: 99999999;
   }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-desktop.wp-block-themehunk-blocks-advance-container {
+  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-desktop.wp-block-vayu-blocks-advance-container {
     position: initial;
     pointer-events: none;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-tablet:before {
+  .wp-block-vayu-blocks-advance-container.th-hide-tablet:before {
     content: "";
     display: block;
     position: absolute;
@@ -229,13 +229,13 @@
     background-color: hsla(0, 0%, 100%, 0.6);
     z-index: 99999999;
   }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-tablet.wp-block-themehunk-blocks-advance-container {
+  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-tablet.wp-block-vayu-blocks-advance-container {
     position: initial;
     pointer-events: none;
   }
 }
 @media only screen and (max-width: 767px) {
-  .wp-block-themehunk-blocks-advance-container.th-hide-mobile:before {
+  .wp-block-vayu-blocks-advance-container.th-hide-mobile:before {
     content: "";
     display: block;
     position: absolute;
@@ -246,7 +246,7 @@
     background-color: hsla(0, 0%, 100%, 0.6);
     z-index: 99999999;
   }
-  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-mobile.wp-block-themehunk-blocks-advance-container {
+  .block-editor-block-list__layout .block-editor-block-list__block.th-hide-mobile.wp-block-vayu-blocks-advance-container {
     position: initial;
     pointer-events: none;
   }

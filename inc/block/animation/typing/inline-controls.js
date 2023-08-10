@@ -93,17 +93,17 @@ const InlineControls = ({
 			focusOnMount={ false }
 			className="o-animation-popover"
 		>
-			<Heading level={ 4 }>{ __( 'Typing Animation', 'themehunk-block' ) }</Heading>
+			<Heading level={ 4 }>{ __( 'Typing Animation', 'vayu-blocks' ) }</Heading>
 
 			<SelectControl
-				label={ __( 'Delay', 'themehunk-block' ) }
+				label={ __( 'Delay', 'vayu-blocks' ) }
 				value={ typingDelay || 'none' }
 				options={ delayList }
 				onChange={ value => updateAnimConfig( 'typing', typingDelay, value, () => setTypingDelay( value ), attributes, setAttributes ) }
 			/>
 
 			<SelectControl
-				label={ __( 'Speed', 'themehunk-block' ) }
+				label={ __( 'Speed', 'vayu-blocks' ) }
 				value={ typingSpeed || 'none' }
 				options={ speedList }
 				onChange={ value => updateAnimConfig( 'typing', typingSpeed, value, () => setTypingSpeed( value ), attributes, setAttributes ) }

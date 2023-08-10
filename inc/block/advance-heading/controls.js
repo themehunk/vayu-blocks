@@ -55,51 +55,51 @@
          <BlockControls>
              <DropdownMenu
                  icon={ getTagIcon( attributes.tag ) }
-                 label={ __( 'Select tag', 'themehunk-block' ) }
+                 label={ __( 'Select tag', 'vayu-blocks' ) }
                  className="components-toolbar"
                  controls={ [
                      { 
-                         label:__( 'Heading 1', 'themehunk-block' ),
+                         label:__( 'Heading 1', 'vayu-blocks' ),
                          icon: getTagIcon( 'h1' ),
                          onClick: () => changeTag( 'h1' )
                      },
                      {
-                         label:__( 'Heading 2', 'themehunk-block' ),
+                         label:__( 'Heading 2', 'vayu-blocks' ),
                          icon: getTagIcon( 'h2' ),
                          onClick: () => changeTag( 'h2' )
                      },
                      {
-                         label:__( 'Heading 3', 'themehunk-block' ),
+                         label:__( 'Heading 3', 'vayu-blocks' ),
                          icon: getTagIcon( 'h3' ),
                          onClick: () => changeTag( 'h3' )
                      },
                      {
-                         label:__( 'Heading 4', 'themehunk-block' ),
+                         label:__( 'Heading 4', 'vayu-blocks' ),
                          icon: getTagIcon( 'h4' ),
                          onClick: () => changeTag( 'h4' )
                      },
                      {
-                         label:__( 'Heading 5', 'themehunk-block' ),
+                         label:__( 'Heading 5', 'vayu-blocks' ),
                          icon: getTagIcon( 'h5' ),
                          onClick: () => changeTag( 'h5' )
                      },
                      {
-                         label:__( 'Heading 6', 'themehunk-block' ),
+                         label:__( 'Heading 6', 'vayu-blocks' ),
                          icon: getTagIcon( 'h6' ),
                          onClick: () => changeTag( 'h6' )
                      },
                      {
-                         label:__( 'Div', 'themehunk-block' ),
+                         label:__( 'Div', 'vayu-blocks' ),
                          icon: getTagIcon( 'div' ),
                          onClick: () => changeTag( 'div' )
                      },
                      {
-                         label:__( 'Paragraph', 'themehunk-block' ),
+                         label:__( 'Paragraph', 'vayu-blocks' ),
                          icon: getTagIcon( 'p' ),
                          onClick: () => changeTag( 'p' )
                      },
                      {
-                         label:__( 'Span', 'themehunk-block' ),
+                         label:__( 'Span', 'vayu-blocks' ),
                          icon: getTagIcon( 'span' ),
                          onClick: () => changeTag( 'span' )
                      }

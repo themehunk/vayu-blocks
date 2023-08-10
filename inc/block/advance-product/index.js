@@ -26,8 +26,8 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Products', 'themehunk-block' ),
-	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	title: __( 'Products', 'vayu-blocks' ),
+	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
 	icon,
 	keywords: [
 		'heading',
@@ -38,7 +38,7 @@ registerBlockType( name, {
 	save: () => null,
 	example: {
 		attributes: {
-			content: __( 'A product with more customization options', 'themehunk-block' )
+			content: __( 'A product with more customization options', 'vayu-blocks' )
 		}
 	}
 });

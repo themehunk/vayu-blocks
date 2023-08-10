@@ -93,17 +93,17 @@ const InlineControls = ({
 			focusOnMount={ false }
 			className="o-animation-popover"
 		>
-			<Heading level={ 4 }>{ __( 'Count Animation', 'themehunk-block' ) }</Heading>
+			<Heading level={ 4 }>{ __( 'Count Animation', 'vayu-blocks' ) }</Heading>
 
 			<SelectControl
-				label={ __( 'Delay', 'themehunk-block' ) }
+				label={ __( 'Delay', 'vayu-blocks' ) }
 				value={ countDelay || 'none' }
 				options={ delayList }
 				onChange={ value => updateAnimConfig( 'count', countDelay, value, () => setCountDelay( value ) ), attributes, setAttributes }
 			/>
 
 			<SelectControl
-				label={ __( 'Speed', 'themehunk-block' ) }
+				label={ __( 'Speed', 'vayu-blocks' ) }
 				value={ countSpeed || 'none' }
 				options={ speedList }
 				onChange={ value => updateAnimConfig( 'count', countSpeed, value, () => setTypingSpeed( value ) ), attributes, setAttributes }

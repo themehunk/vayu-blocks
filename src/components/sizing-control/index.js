@@ -32,7 +32,7 @@ const SizingControl = ({
 	const id = `inspector-sizing-control-${ instanceId }`;
 
 	if ( options && 1 > options.length ) {
-		return __( 'Please specify more options.', 'themehunk-block' );
+		return __( 'Please specify more options.', 'vayu-blocks' );
 	}
 
 	return (
@@ -78,7 +78,7 @@ const SizingControl = ({
 						>
 							<Button
 								icon={ 'linked' === type ? 'admin-links' : 'editor-unlink' }
-								label={ 'linked' === type ? __( 'Unlink Values', 'themehunk-block' ) : __( 'Link Values', 'themehunk-block' ) }
+								label={ 'linked' === type ? __( 'Unlink Values', 'vayu-blocks' ) : __( 'Link Values', 'vayu-blocks' ) }
 								showTooltip={ true }
 								className="th-sizing-control-item-input"
 								onClick={ () => changeType( 'linked' === type ? 'unlinked' : 'linked' ) }

@@ -43,9 +43,9 @@ export default ( { clientId, isSelected, attributes } ) => {
 					const label = hasSingleBlockType
 						? sprintf(
 							// translators: %s: the name of the block when there is only one
-							_x( 'Add %s', 'directly add the only allowed block', 'themehunk-block' ),
+							_x( 'Add %s', 'directly add the only allowed block', 'vayu-blocks' ),
 							blockTitle
-						) : _x( 'Add block', 'Generic label for block inserter button', 'themehunk-block' );
+						) : _x( 'Add block', 'Generic label for block inserter button', 'vayu-blocks' );
 
 					return (
 						<Tooltip text={ label }>
@@ -76,7 +76,7 @@ export default ( { clientId, isSelected, attributes } ) => {
 		appender = <Button
 			className="th-blocks-container-selector"
 			onClick={ () => selectBlock( clientId ) }
-			aria-label={ __( 'Select Container', 'themehunk-blocks' ) }
+			aria-label={ __( 'Select Container', 'vayu-blocks' ) }
 		>
 			<span className="th-blocks-container-selector__icon">
 			<Icon icon={ plus } />
@@ -85,7 +85,7 @@ export default ( { clientId, isSelected, attributes } ) => {
 	}
 
 	return applyFilters(
-		'themehunk-block.editor.containerAppender',
+		'vayu-blocks.editor.containerAppender',
 		appender,
 		{ clientId, isSelected, attributes }
 	);

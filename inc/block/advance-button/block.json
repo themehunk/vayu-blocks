@@ -1,15 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "themehunk-blocks/advance-button",
+	"name": "vayu-blocks/advance-button",
 	"version": "0.1.0",
 	"title": "Advance Button",
-	"category": "themehunk-blocks",
+	"category": "vayu-blocks",
 	"description": "Example block scaffolded with Create Block tool.",
 	"supports": {
 		"html": false
 	},
-	"textdomain": "themehunk-block",
+	"textdomain": "vayu-blocks",
 	"attributes": {
 		"id": {
 			"type": "string"
