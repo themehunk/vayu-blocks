@@ -986,3 +986,38 @@ box-sizing: border-box;
     flex-direction: column;
     cursor: pointer;
 }
+
+// pattern contain
+ .pattern-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pattern-tab-button {
+    padding: 10px 15px;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    width:100%;
+    background: #fff;
+  }
+  
+  .pattern-tab-content {
+    flex: 1;
+    margin-left: 1.5rem;
+  }
+
+  .th-block-templates-pattern{
+   display:flex;
+  }
+  .th-block-templates-sites .import{padding: 6px 14px;
+    min-height: auto;
+    line-height: normal;
+    border-radius: 2px;
+    margin:1rem 0rem;
+    background:#3F51B5;
+}
+.pattern-tab-button.active {
+    background-color: #3F51B5;
+    color: #fff;
+}

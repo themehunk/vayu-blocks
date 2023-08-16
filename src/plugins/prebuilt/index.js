@@ -8,13 +8,13 @@ import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
 import { FaTimes } from 'react-icons/fa';
 
-import templatesData from './templates.json'; 
+import templatesData from './templates.json';
+import patternData from './pattern.json'; 
 
 Modal.setAppElement('#wpwrap');
 
 function ToolbarLibrary() {
     const [isModalOpen, setModalOpen] = useState(false); // Use useState within the functional component
-    const { dispatch } = useDispatch(blockEditorStore);
     const [activeTab, setActiveTab] = useState('page'); 
 
     const openModal = () => {
@@ -37,49 +37,116 @@ function ToolbarLibrary() {
 
     const TabContent = ({ tab }) => {
 
-
-        const homeUrl = ThBlockData.homeUrl;
-
         const [templates, setTemplates] = useState([]);
-
+        const [pattern, setPattern] = useState([]);
+        const [activePatternCategory, setActivePatternCategory] = useState('all');
+        const [importLoading, setImportLoading] = useState(false);
+    
+        const handlePatternCategoryChange = (category) => {
+          setActivePatternCategory(category);
+        };
+    
         useEffect(() => {
-            // Set the fetched data from the imported JSON
             setTemplates(templatesData);
         }, []);
+    
+        useEffect(() => {
+            setPattern(patternData);
+        }, []);
+
+        const importPattern = async (patternCode) => {
+            try {
+                setImportLoading(true);
+                const { insertBlocks } = wp.data.dispatch('core/block-editor');
+                const parsedBlocks = wp.blocks.parse(patternCode);
+                insertBlocks(parsedBlocks);
+
+            } catch (error) {
+                console.error('Error importing pattern:', error);
+            } finally {
+                setImportLoading(false);
+            }
+        };
 
         switch (tab) {
             case 'page':
                 return (
-                   <div className="th-block-templates-sites">
-                    {templates.map((template, index) => (
-                        <div className="item single-site" key={index}>
-                            <div className="inner">
-                                <span className="grid-item-badge">{template.badge}</span>
-                                <div
-                                    className="screenshot"
-                                    style={{
-                                        backgroundImage: `url("${template.image}")`
-                                    }}
-                                ></div>
-                                <div className="heading-wrap">
-                                    <h3 className="title">{template.title}</h3>
-                                    <div className="sub-title">{template.subTitle}</div>
+                    <div className="th-block-templates-sites">
+                        {templates.map((template, index) => (
+                            <div className="item single-site" key={index}>
+                                <div className="inner">
+                                    <span className="grid-item-badge">{template.badge}</span>
+                                    <div
+                                        className="screenshot"
+                                        style={{
+                                            backgroundImage: `url("${template.image}")`
+                                        }}
+                                    ></div>
+                                    <div className="heading-wrap">
+                                        <h3 className="title">{template.title}</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
                 );
             case 'pattern':
-                return <div>Pattern Content</div>;
-            case 'wireframe':
-                return <div>WireFrame Content</div>;
+                const filteredPatternData =
+                    activePatternCategory === 'all'
+                    ? pattern
+                    : pattern.filter((item) => item.cat === activePatternCategory);
+    
+                return (
+                    <div className="th-block-templates-pattern">
+                        <div className="pattern-tabs-filter">
+                            <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
+                            <button
+                                className={`pattern-tab-button ${activePatternCategory === 'all' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('all')}
+                            >
+                                {__('All', 'themehunk-blocks')}
+                            </button>
+                            <button
+                                className={`pattern-tab-button ${activePatternCategory === 'cat1' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('cat1')}
+                            >
+                                {__('cat1', 'themehunk-blocks')}
+                            </button>
+                            <button
+                                className={`pattern-tab-button ${activePatternCategory === 'cat2' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('cat2')}
+                            >
+                                {__('cat2', 'themehunk-blocks')}
+                            </button>
+                        </div>
+                        <div className="pattern-tab-content">
+                            <div className="th-block-templates-sites">
+                                {filteredPatternData.map((patternItem, index) => (
+                                    <div className="item single-site" key={index}>
+                                        <div className="inner">
+                                            <div
+                                                className="screenshot"
+                                                style={{
+                                                    backgroundImage: `url("${patternItem.image}")`,
+                                                }}
+                                            ></div>
+                                            <button className="import button-primary" onClick={() => importPattern(patternItem.content)}>
+                                            {importLoading ? 'Importing...' : 'Import'}
+                                           
+                                        </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                );
             default:
                 return null;
         }
     };
     
-
+    
     const modalContent = (
         <div className="th-design-template-modal">
            
@@ -101,12 +168,6 @@ function ToolbarLibrary() {
                     onClick={() => setActiveTab('pattern')}
                 >
                     {__('Pattern', 'themehunk-blocks')}
-                </div>
-                <div
-                    className={`th-menu-item ${activeTab === 'wireframe' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('wireframe')}
-                >
-                    {__('WireFrame', 'themehunk-blocks')}
                 </div>
                  </div>
                  <div className="th-close-wrap">
