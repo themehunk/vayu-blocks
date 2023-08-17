@@ -44,9 +44,14 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 
 == Changelog ==
 * Panel Style Modified.
+* Vayu Blocks Updated.
+* Import Panel Added.
+* Vayu Blocks & Import Panel Merged.
 
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release
+* Panel Style Modified.
+* Vayu Blocks Updated.
+* Import Panel Added.
+* Vayu Blocks & Import Panel Merged.
