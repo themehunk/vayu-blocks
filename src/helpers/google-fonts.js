@@ -25,7 +25,7 @@ class GoogleFontsLoader {
 
 		this.node = document.createElement( 'style' );
 		this.node.type = 'text/css';
-		this.node.setAttribute( 'data-generator', 'themehunk-blocks-fonts-loader' );
+		this.node.setAttribute( 'data-generator', 'vayu-blocks-fonts-loader' );
 		this.isAttaching = false;
 
 		this.usedFonts = [];
@@ -153,7 +153,7 @@ class GoogleFontsLoader {
 			this.isAttaching = true;
 			setTimeout( () => {
 				const currentDocument = getEditorIframe()?.contentWindow?.document ?? document;
-				if ( ! currentDocument?.querySelector( '[data-generator*="themehunk-blocks-fonts-loader"' ) ) {
+				if ( ! currentDocument?.querySelector( '[data-generator*="vayu-blocks-fonts-loader"' ) ) {
 					currentDocument?.head?.appendChild( this.node );
 				}
 				this.isAttaching = false;

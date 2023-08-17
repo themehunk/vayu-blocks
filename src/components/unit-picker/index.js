@@ -32,29 +32,29 @@ export default class UnitChooser extends Component {
 		return (
 			<BaseControl label={ label } id={ id } className="components-th-blocks-units-control-header__units">
 				<div className="components-th-blocks-control__units">
-					<ButtonGroup className="components-th-blocks-control-buttons__units" aria-label={ __( 'Select Units', 'themehunk-blocks' ) }>
+					<ButtonGroup className="components-th-blocks-control-buttons__units" aria-label={ __( 'Select Units', 'vayu-blocks' ) }>
 						{ allUnits.map( ( unit ) => {
 							let unitName = unit;
 
 							if ( 'px' === unit ) {
-								unitName = _x( 'Pixel', 'A size unit for CSS markup', 'themehunk-blocks' );
+								unitName = _x( 'Pixel', 'A size unit for CSS markup', 'vayu-blocks' );
 							}
 
 							if ( 'em' === unit ) {
-								unitName = _x( 'Em', 'A size unit for CSS markup', 'themehunk-blocks' );
+								unitName = _x( 'Em', 'A size unit for CSS markup', 'vayu-blocks' );
 							}
 
 							if ( '%' === unit ) {
-								unitName = _x( 'Percentage', 'A size unit for CSS markup', 'themehunk-blocks' );
+								unitName = _x( 'Percentage', 'A size unit for CSS markup', 'vayu-blocks' );
 							}
 
 							if ( 'deg' === unit ) {
-								unitName = _x( 'Degree', 'A size unit for CSS markup', 'themehunk-blocks' );
+								unitName = _x( 'Degree', 'A size unit for CSS markup', 'vayu-blocks' );
 							}
 
 							return <Tooltip
 								/* translators: Unit type (px, em, %) */
-								text={ sprintf( __( '%s Units', 'themehunk-blocks' ), unitName ) }
+								text={ sprintf( __( '%s Units', 'vayu-blocks' ), unitName ) }
 								key={ unit }
 							>
 								<Button
@@ -64,7 +64,7 @@ export default class UnitChooser extends Component {
 									isPrimary={ value === unit }
 									aria-pressed={ value === unit }
 									/* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
-									aria-label={ sprintf( __( '%s Units', 'themehunk-blocks' ), unitName ) }
+									aria-label={ sprintf( __( '%s Units', 'vayu-blocks' ), unitName ) }
 									onClick={ () => onClick( unit ) }
 								>
 									{ unit }

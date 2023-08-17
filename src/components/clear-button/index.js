@@ -45,7 +45,7 @@ const ClearButton = ({
 				isSecondary
 				onClick={ clearValues }
 			>
-				{ __( 'Clear', 'themehunk-block' ) }
+				{ __( 'Clear', 'vayu-blocks' ) }
 			</Button>
 		</div>
 	);

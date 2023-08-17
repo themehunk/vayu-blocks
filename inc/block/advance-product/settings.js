@@ -47,7 +47,7 @@ const InsSettings = ({
 
      const getView = useSelect( select => {
 
-		const { getView } = select( 'themehunk-blocks/data' );
+		const { getView } = select( 'vayu-blocks/data' );
 
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 
@@ -1217,15 +1217,16 @@ const customTooltiptransitionAll = value => `${value}`;
 return (
         <Fragment>
            <InspectorControls>
+			<div className='th-block-ins'>
            <InsSettingHeader value={ tab }
 					options={[
 						{
-							label: __( 'Setting', 'themehunk-block' ),
+							label: __( 'Setting', 'vayu-blocks' ),
 							value: 'setting',
 							icon: 'colorwand'
 						},
 						{
-							label: __( 'Advanced', 'themehunk-block' ),
+							label: __( 'Advanced', 'vayu-blocks' ),
 							value: 'advanced',
 							icon: 'colorpalette'
 						}
@@ -1235,7 +1236,7 @@ return (
              {'setting' === tab && (
 
             <Fragment>
-            <PanelBody title={ __( 'General', 'themehunk-block' ) }
+            <PanelBody title={ __( 'General', 'vayu-blocks' ) }
                 className="th-adv-product-panel" initialOpen={ true }
                 
             >
@@ -1246,19 +1247,19 @@ return (
             isMulti
             isClearable
             maxMenuHeight={300}
-            placeholder={__('Choose Category', 'themehunk-block')}
+            placeholder={__('Choose Category', 'vayu-blocks')}
             onChange={( value ) => {
               setAttributes( { productCategories: ( value ? value : [] ) } );
             }}
             />
             <SelectControl
-								label={ __( 'Source', 'themehunk-block' ) }
+								label={ __( 'Source', 'vayu-blocks' ) }
 								value={ attributes.productType }
 								options={ [
-									{ label:  __( 'Latest Product', 'themehunk-block' ), value: 'recent' },
-									{ label: __( 'Sale', 'themehunk-block' ), value: 'sale' },
-                  { label: __( 'Featured', 'themehunk-block' ), value: 'featured' },
-                  { label: __( 'Manual Product', 'themehunk-block' ), value: 'manual' },
+									{ label:  __( 'Latest Product', 'vayu-blocks' ), value: 'recent' },
+									{ label: __( 'Sale', 'vayu-blocks' ), value: 'sale' },
+                  { label: __( 'Featured', 'vayu-blocks' ), value: 'featured' },
+                  { label: __( 'Manual Product', 'vayu-blocks' ), value: 'manual' },
 								] }
 								onChange={ e => setAttributes({ productType: e }) }
 					  />
@@ -1270,14 +1271,14 @@ return (
             isMulti
             isClearable
             maxMenuHeight={300}
-            placeholder={__('Choose Product', 'themehunk-block')}
+            placeholder={__('Choose Product', 'vayu-blocks')}
             onChange={( value ) => {
               setAttributes( { manualProduct: ( value ? value : [] ) } );
             }}
             />
             )}
              <ResponsiveControl
-                        label={ __( 'Number of product to show per page', 'themehunk-block' ) }
+                        label={ __( 'Number of product to show per page', 'vayu-blocks' ) }
                         >
                <RangeControl
                             value={ getProductShow() || '' }
@@ -1291,7 +1292,7 @@ return (
             </ResponsiveControl>
 
             <ResponsiveControl
-                        label={ __( 'Number of column', 'themehunk-block' ) }
+                        label={ __( 'Number of column', 'vayu-blocks' ) }
                         >
                <RangeControl
                             
@@ -1306,30 +1307,30 @@ return (
             </ResponsiveControl>
 
             <SelectControl
-								label={ __( 'OrderBy', 'themehunk-block' ) }
+								label={ __( 'OrderBy', 'vayu-blocks' ) }
 								value={ attributes.productOrderby }
 								options={ [
-									{ label:  __( 'Date Product', 'themehunk-block' ), value: 'date' },
-									{ label: __( 'Price', 'themehunk-block' ), value: 'price' },
-                  { label: __( 'popularity', 'themehunk-block' ), value: 'popularity' },
-                  { label: __( 'Rating', 'themehunk-block' ), value: 'rating' },
-                  { label: __( 'Menu Order', 'themehunk-block' ), value: 'menu-order' },
+									{ label:  __( 'Date Product', 'vayu-blocks' ), value: 'date' },
+									{ label: __( 'Price', 'vayu-blocks' ), value: 'price' },
+                  { label: __( 'popularity', 'vayu-blocks' ), value: 'popularity' },
+                  { label: __( 'Rating', 'vayu-blocks' ), value: 'rating' },
+                  { label: __( 'Menu Order', 'vayu-blocks' ), value: 'menu-order' },
 								] }
 								onChange={ e => setAttributes({ productOrderby: e }) }
 					  />
 
             <SelectControl
-								label={ __( 'OrderBy', 'themehunk-block' ) }
+								label={ __( 'OrderBy', 'vayu-blocks' ) }
 								value={ attributes.productOrder }
 								options={ [
-									{ label:  __( 'ASC', 'themehunk-block' ), value: 'asc' },
-									{ label: __( 'DESC', 'themehunk-block' ), value: 'desc' },
+									{ label:  __( 'ASC', 'vayu-blocks' ), value: 'asc' },
+									{ label: __( 'DESC', 'vayu-blocks' ), value: 'desc' },
 								] }
 								onChange={ e => setAttributes({ productOrder: e }) }
 					   />
              <div className='components-base-control'>
             <label>
-            { __( 'Exclude Product', 'themehunk-block' ) }
+            { __( 'Exclude Product', 'vayu-blocks' ) }
            </label>
            <Select
             value={attributes.excludeProduct}
@@ -1338,7 +1339,7 @@ return (
             isMulti
             isClearable
             maxMenuHeight={300}
-            placeholder={__('Exclude Product', 'themehunk-block')}
+            placeholder={__('Exclude Product', 'vayu-blocks')}
             onChange={( value ) => {
               setAttributes( { excludeProduct: ( value ? value : [] ) } );
             }}
@@ -1346,7 +1347,7 @@ return (
             </div>
             <div className='components-base-control'>
             <label>
-            { __( 'Stock Status', 'themehunk-block' ) }
+            { __( 'Stock Status', 'vayu-blocks' ) }
             </label>
             <Select
               value={stockstatus.filter((option) => attributes.stockStatus.includes(option.value))}
@@ -1355,7 +1356,7 @@ return (
               isMulti
               isClearable
               maxMenuHeight={300}
-              placeholder={__('Stock Status', 'themehunk-block')}
+              placeholder={__('Stock Status', 'vayu-blocks')}
               onChange={(selectedOptions) => {
                 const values = selectedOptions ? selectedOptions.map((option) => option.value) : [];
                 setAttributes({ stockStatus: values });
@@ -1364,7 +1365,7 @@ return (
             </div>
             </PanelBody>
             <PanelBody
-						title={ __( 'Product Elements', 'themehunk-block' ) }
+						title={ __( 'Product Elements', 'vayu-blocks' ) }
 						initialOpen={ false }
 					  >
 						<LayoutBuilder
@@ -1373,12 +1374,12 @@ return (
 						/>
 					 </PanelBody>
                      <PanelBody
-						title={ __( 'Product Box', 'themehunk-block' ) }
+						title={ __( 'Product Box', 'vayu-blocks' ) }
 						initialOpen={ false }
 					  >
-               <div className='th-component-group-label'>
+               <div className='th-component-group-label th-ins-alignment'>
 
-            <label className='th-label'>{ __( 'Alignment', 'themehunk-block' ) } </label>
+            <label className='th-label'>{ __( 'Alignment', 'vayu-blocks' ) } </label>
 						<AlignmentToolbar
 
 									value={ attributes.productAlign }
@@ -1388,7 +1389,7 @@ return (
               </div>
 
               <ResponsiveControl
-								label={ __( 'Padding', 'themehunk-block' ) }
+								label={ __( 'Padding', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.productPaddingUnit }
@@ -1407,22 +1408,22 @@ return (
 									onChange={ changeproductPadding }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getproductPadding( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getproductPadding( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getproductPadding( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getproductPadding( 'left' )
 										}
@@ -1431,7 +1432,7 @@ return (
               
 							</ResponsiveControl>
                             <ResponsiveControl
-								label={ __( 'Border Radius', 'themehunk-block' ) }
+								label={ __( 'Border Radius', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.productBrdrRadiusUnit }
@@ -1450,23 +1451,23 @@ return (
 									onChange={ changeproductBrdrRadius }
 									options={ [
 										{
-											label: __(  'T-R', 'themehunk-block'),
+											label: __(  'T-R', 'vayu-blocks'),
 											type: 'top',
 											value: getproductBrdrRadius( 'top' )
 										},
 										{
-											label: __(  'T-L', 'themehunk-block' ),
+											label: __(  'T-L', 'vayu-blocks' ),
 											type: 'right',
 											value: getproductBrdrRadius( 'right' )
 										},
 										
 										{
-											label: __( 'B-R', 'themehunk-block'  ),
+											label: __( 'B-R', 'vayu-blocks'  ),
 											type: 'left',
 											value: getproductBrdrRadius( 'left' )
 										},
 										{
-											label: __( 'B-L', 'themehunk-block'),
+											label: __( 'B-L', 'vayu-blocks'),
 											type: 'bottom',
 											value: getproductBrdrRadius( 'bottom' )
 										},
@@ -1475,7 +1476,7 @@ return (
 
 							</ResponsiveControl>
               <ResponsiveControl
-								label={ __( 'Gap between elements', 'themehunk-block' ) }
+								label={ __( 'Gap between elements', 'vayu-blocks' ) }
 								>	
 								<UnitChooser
 								value={ attributes.elementGapUnit }
@@ -1501,11 +1502,11 @@ return (
                  <HoverControl value={ productelementclr }
 								options={[
 									{
-										label: __( 'Normal', 'themehunk-block' ),
+										label: __( 'Normal', 'vayu-blocks' ),
 										value: 'normal'
 									},
 									{
-										label: __( 'Hover', 'themehunk-block' ),
+										label: __( 'Hover', 'vayu-blocks' ),
 										value: 'hover'
 									}
 								]}
@@ -1514,13 +1515,13 @@ return (
                  { 'normal' ===  productelementclr &&  (
                                <>
                                <ColorGradientControl
-								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 label={ __( 'Bg Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.productboxClr }
 								 onColorChange={ e => setAttributes({ productboxClr: e }) }
 								 enableAlpha={true} 
 								/>
 								<ControlPanelControl
-								label={ __( 'Box Shadow', 'themehunk-block' ) }
+								label={ __( 'Box Shadow', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								resetValues={ {
@@ -1535,14 +1536,14 @@ return (
 								onClick={ () => setAttributes({ boxShadow: true }) }
 							>
 							<ColorGradientControl
-								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								label={ __( 'Shadow Color', 'vayu-blocks' ) }
 								colorValue={ attributes.boxShadowColor }
 								onColorChange={ e => setAttributes({ boxShadowColor: e }) }
 								enableAlpha={true} 
 							/>
 
 							<RangeControl
-								label={ __( 'Opacity', 'themehunk-block' ) }
+								label={ __( 'Opacity', 'vayu-blocks' ) }
 								value={ attributes.boxShadowColorOpacity }
 								onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
 								min={ 0 }
@@ -1550,7 +1551,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Blur', 'themehunk-block' ) }
+								label={ __( 'Blur', 'vayu-blocks' ) }
 								value={ attributes.boxShadowBlur }
 								onChange={ e => setAttributes({ boxShadowBlur: e }) }
 								min={ 0 }
@@ -1558,7 +1559,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Spread', 'themehunk-block' ) }
+								label={ __( 'Spread', 'vayu-blocks' ) }
 								value={ attributes.boxShadowSpread }
 								onChange={ e => setAttributes({ boxShadowSpread: e }) }
 								min={ -100 }
@@ -1566,7 +1567,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Horizontal', 'themehunk-block' ) }
+								label={ __( 'Horizontal', 'vayu-blocks' ) }
 								value={ attributes.boxShadowHorizontal }
 								onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
 								min={ -100 }
@@ -1574,7 +1575,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Vertical', 'themehunk-block' ) }
+								label={ __( 'Vertical', 'vayu-blocks' ) }
 								value={ attributes.boxShadowVertical }
 								onChange={ e => setAttributes({ boxShadowVertical: e }) }
 								min={ -100 }
@@ -1585,13 +1586,13 @@ return (
 						) || 'hover' ===  productelementclr  && (
 							<>
 							 <ColorGradientControl
-							  label={ __( 'Bg Hover Color', 'themehunk-block' ) }
+							  label={ __( 'Bg Hover Color', 'vayu-blocks' ) }
 							  colorValue={ attributes.productboxHvrClr }
 							  onColorChange={ e => setAttributes({ productboxHvrClr: e }) }
 							  enableAlpha={true} 
 							 />
 							 <ControlPanelControl
-							label={ __( 'Box Shadow', 'themehunk-block' ) }
+							label={ __( 'Box Shadow', 'vayu-blocks' ) }
 							attributes={ attributes }
 							setAttributes={ setAttributes }
 							resetValues={ {
@@ -1607,14 +1608,14 @@ return (
 						>
 						
 							<ColorGradientControl
-								label={ __( 'Shadow Color', 'themehunk-block' ) }
+								label={ __( 'Shadow Color', 'vayu-blocks' ) }
 								colorValue={ attributes.boxShadowColorHvr }
 								onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
 								enableAlpha={true} 
 							/>
 
 							<RangeControl
-								label={ __( 'Opacity', 'themehunk-block' ) }
+								label={ __( 'Opacity', 'vayu-blocks' ) }
 								value={ attributes.boxShadowColorOpacityHvr }
 								onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
 								min={ 0 }
@@ -1622,7 +1623,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Blur', 'themehunk-block' ) }
+								label={ __( 'Blur', 'vayu-blocks' ) }
 								value={ attributes.boxShadowBlurHvr }
 								onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
 								min={ 0 }
@@ -1630,7 +1631,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Spread', 'themehunk-block' ) }
+								label={ __( 'Spread', 'vayu-blocks' ) }
 								value={ attributes.boxShadowSpreadHvr }
 								onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
 								min={ -100 }
@@ -1638,7 +1639,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Horizontal', 'themehunk-block' ) }
+								label={ __( 'Horizontal', 'vayu-blocks' ) }
 								value={ attributes.boxShadowHorizontalHvr }
 								onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
 								min={ -100 }
@@ -1646,7 +1647,7 @@ return (
 							/>
 
 							<RangeControl
-								label={ __( 'Vertical', 'themehunk-block' ) }
+								label={ __( 'Vertical', 'vayu-blocks' ) }
 								value={ attributes.boxShadowVerticalHvr }
 								onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
 								min={ -100 }
@@ -1659,16 +1660,16 @@ return (
                 }  
 					 </PanelBody>
 					 <PanelBody
-						title={ __( 'Tab Filter', 'themehunk-block' ) }
+						title={ __( 'Tab Filter', 'vayu-blocks' ) }
 						initialOpen={ false }
 					  >
 						<ToggleControl
-								label={ __( 'Show Tab', 'themehunk-block' ) }
+								label={ __( 'Show Tab', 'vayu-blocks' ) }
 								checked={ attributes.showTab }
 								onChange={ showTab => setAttributes({showTab}) }
 							 />
 						<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ tabTypography: true }) }
@@ -1689,7 +1690,7 @@ return (
 								}
 							>
 							<GoogleFontsControl
-								label={ __( 'Font Family', 'themehunk-block' ) }
+								label={ __( 'Font Family', 'vayu-blocks' ) }
 								value={ attributes.tabfontFamily }
 								onChangeFontFamily={ changetabFontFamily }
 								valueVariant={ attributes.tabfontVariant }
@@ -1701,7 +1702,7 @@ return (
 							    
 							/>
 							<ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.tabfontSizeUnit }
@@ -1724,7 +1725,7 @@ return (
 							</ResponsiveControl>
 
                                <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.tablineHeightUnit }
@@ -1747,7 +1748,7 @@ return (
 							</ResponsiveControl>
 
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.tabletterSpacingUnit }
@@ -1771,7 +1772,7 @@ return (
 
 						</ControlPanelControl>
 						<ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ tabColorset: true }) }
@@ -1788,11 +1789,11 @@ return (
                        <HoverControl value={ filtertab }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Active / Hover', 'themehunk-block' ),
+								label: __( 'Active / Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -1801,13 +1802,13 @@ return (
                         { 'normal' ===  filtertab &&  (
 							   <>
                                 <ColorGradientControl
-								 label={ __( 'Tab Color', 'themehunk-block' ) }
+								 label={ __( 'Tab Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.tabColor }
 								 onColorChange={ e => setAttributes({ tabColor: e }) }
 								 enableAlpha={true} 
 								 />
 								 <ColorGradientControl
-								 label={ __( 'Tab BG Color', 'themehunk-block' ) }
+								 label={ __( 'Tab BG Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.tabBgColor }
 								 onColorChange={ e => setAttributes({ tabBgColor : e }) }
 								 enableAlpha={true} 
@@ -1816,13 +1817,13 @@ return (
 						) || 'hover' ===  filtertab && (
 							     <>
 								 <ColorGradientControl
-								 label={ __( 'Tab Hover/Active Color ', 'themehunk-block' ) }
+								 label={ __( 'Tab Hover/Active Color ', 'vayu-blocks' ) }
 								 colorValue={ attributes.tabColorHvr }
 								 onColorChange={ e => setAttributes({ tabColorHvr: e }) }
 								 enableAlpha={true} 
 								 /> 
 								 <ColorGradientControl
-								 label={ __( 'Tab BG Hover/Active Color ', 'themehunk-block' ) }
+								 label={ __( 'Tab BG Hover/Active Color ', 'vayu-blocks' ) }
 								 colorValue={ attributes.tabBgColorHvr }
 								 onColorChange={ e => setAttributes({ tabBgColorHvr: e }) }
 								 enableAlpha={true} 
@@ -1832,7 +1833,7 @@ return (
 
 						</ControlPanelControl>
 						<ControlPanelControl
-								label={ __( 'Border', 'themehunk-block' ) }
+								label={ __( 'Border', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ tabBorder: true }) }
@@ -1850,22 +1851,22 @@ return (
 								}
 							>
                         <SelectControl
-						label={ __( 'Border Type', 'themehunk-block' ) }
+						label={ __( 'Border Type', 'vayu-blocks' ) }
 						value={ attributes.tabborderType }
 						options={ [
-							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
-							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
-							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
-							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
-						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
-							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+							{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+							{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+							{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+							{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+							{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
 						] }
 						onChange={ e => setAttributes({ tabborderType: e }) }
 					   />	
 					   { 'none' !== attributes.tabborderType && (
 						   <>
 							<ResponsiveControl
-									label={ __( 'Border Width', 'themehunk-block' ) }
+									label={ __( 'Border Width', 'vayu-blocks' ) }
 								>
 								<UnitChooser
 									value={ attributes.tabBorderWidthUnit }
@@ -1883,22 +1884,22 @@ return (
 										onChange={ changetabBorderWidth }
 										options={ [
 											{
-												label: __( 'Top', 'themehunk-block' ),
+												label: __( 'Top', 'vayu-blocks' ),
 												type: 'top',
 												value: gettabBorderWidth( 'top' )
 											},
 											{
-												label: __( 'Right', 'themehunk-block' ),
+												label: __( 'Right', 'vayu-blocks' ),
 												type: 'right',
 												value: gettabBorderWidth( 'right' )
 											},
 											{
-												label: __( 'Bottom', 'themehunk-block' ),
+												label: __( 'Bottom', 'vayu-blocks' ),
 												type: 'bottom',
 												value: gettabBorderWidth( 'bottom' )
 											},
 											{
-												label: __( 'Left', 'themehunk-block' ),
+												label: __( 'Left', 'vayu-blocks' ),
 												type: 'left',
 												value: gettabBorderWidth( 'left' )
 											}
@@ -1907,7 +1908,7 @@ return (
 
 								</ResponsiveControl>
 								<ResponsiveControl
-									label={ __( 'Border Radius', 'themehunk-block' ) }
+									label={ __( 'Border Radius', 'vayu-blocks' ) }
 								>
 								<UnitChooser
 									value={ attributes.tabBorderRadiusUnit }
@@ -1925,22 +1926,22 @@ return (
 										onChange={ changetabBorderRadius }
 										options={ [
 											{
-												label: __( 'Top', 'themehunk-block' ),
+												label: __( 'Top', 'vayu-blocks' ),
 												type: 'top',
 												value: gettabBorderRadius( 'top' )
 											},
 											{
-												label: __( 'Right', 'themehunk-block' ),
+												label: __( 'Right', 'vayu-blocks' ),
 												type: 'right',
 												value: gettabBorderRadius( 'right' )
 											},
 											{
-												label: __( 'Bottom', 'themehunk-block' ),
+												label: __( 'Bottom', 'vayu-blocks' ),
 												type: 'bottom',
 												value: gettabBorderRadius( 'bottom' )
 											},
 											{
-												label: __( 'Left', 'themehunk-block' ),
+												label: __( 'Left', 'vayu-blocks' ),
 												type: 'left',
 												value: gettabBorderRadius( 'left' )
 											}
@@ -1949,13 +1950,13 @@ return (
 
 								</ResponsiveControl>
 								<ColorGradientControl
-									label={ __( 'Border Color', 'themehunk-block' ) }
+									label={ __( 'Border Color', 'vayu-blocks' ) }
 									colorValue={ attributes.tabBorderColor }
 									onColorChange={ e => setAttributes({ tabBorderColor: e }) }
 									enableAlpha={true} 
 									/>
 								<ColorGradientControl
-									label={ __( 'Border Hover Color', 'themehunk-block' ) }
+									label={ __( 'Border Hover Color', 'vayu-blocks' ) }
 									colorValue={ attributes.tabBorderColorHvr }
 									onColorChange={ e => setAttributes({ tabBorderColorHvr: e }) }
 									enableAlpha={true} 
@@ -1966,7 +1967,7 @@ return (
 						</ControlPanelControl>
 
 						<ResponsiveControl
-								label={ __( 'Padding', 'themehunk-block' ) }
+								label={ __( 'Padding', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.tabPaddingUnit }
@@ -1985,22 +1986,22 @@ return (
 									onChange={ changetabPadding }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: gettabPadding( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: gettabPadding( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: gettabPadding( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: gettabPadding( 'left' )
 										}
@@ -2009,7 +2010,7 @@ return (
               
 							</ResponsiveControl>
 							<ResponsiveControl
-								label={ __( 'Margin', 'themehunk-block' ) }
+								label={ __( 'Margin', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.tabMarginUnit }
@@ -2028,22 +2029,22 @@ return (
 									onChange={ changetabMargin }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: gettabMargin( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: gettabMargin( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: gettabMargin( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: gettabMargin( 'left' )
 										},
@@ -2056,11 +2057,11 @@ return (
             </Fragment>
              ) || 'advanced' === tab && (
             <Fragment>
-              <PanelBody title={ __( 'Layout', 'themehunk-block' ) }
+              <PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
 						initialOpen={ true }        
                 >
 				<ResponsiveControl
-								label={ __( 'Padding', 'themehunk-block' ) }
+								label={ __( 'Padding', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.paddingUnit }
@@ -2078,22 +2079,22 @@ return (
 									onChange={ changePadding }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getPadding( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getPadding( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getPadding( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getPadding( 'left' )
 										}
@@ -2102,7 +2103,7 @@ return (
 
 							</ResponsiveControl>
 							<ResponsiveControl
-								label={ __( 'Margin', 'themehunk-block' ) }
+								label={ __( 'Margin', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.marginUnit }
@@ -2121,22 +2122,22 @@ return (
 									onChange={ changeMargin }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getMargin( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getMargin( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getMargin( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getMargin( 'left' )
 										},
@@ -2146,13 +2147,13 @@ return (
 							</ResponsiveControl>
 
 							<SelectControl
-								label={ __( 'Width', 'themehunk-block' ) }
+								label={ __( 'Width', 'vayu-blocks' ) }
 								value={ attributes.widthType }
 								options={ [
-									{ label: __( 'Default', 'themehunk-block' ), value: 'default' },
-									{ label: __( 'Full Width(100%)', 'themehunk-block' ), value: 'fullwidth' },
-									{ label: __( 'Inline(Auto)', 'themehunk-block' ), value: 'inlinewidth' },
-								    { label: __( 'Custom', 'themehunk-block' ), value: 'customwidth' },
+									{ label: __( 'Default', 'vayu-blocks' ), value: 'default' },
+									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
+									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
+								    { label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
 								] }
 								onChange={ e => setAttributes({ widthType: e }) }
 							/>
@@ -2160,7 +2161,7 @@ return (
 
 							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 							<ResponsiveControl
-							label={ __( 'Custom Width', 'themehunk-block' ) }
+							label={ __( 'Custom Width', 'vayu-blocks' ) }
 							>
 
 							<UnitChooser
@@ -2187,7 +2188,7 @@ return (
 							) }
 
                              <ResponsiveControl
-								label={ __( 'Z-index', 'themehunk-block' ) }
+								label={ __( 'Z-index', 'vayu-blocks' ) }
 							     >	
 								<RangeControl
 								    renderTooltipContent={ customTooltipZindex }
@@ -2201,7 +2202,7 @@ return (
 							</ResponsiveControl>
                        </PanelBody>
 			           <PanelBody
-						title={ __( 'Background', 'themehunk-block' ) }
+						title={ __( 'Background', 'vayu-blocks' ) }
 						className="th-product-panel"
 						initialOpen={ false }
 						> 
@@ -2209,11 +2210,11 @@ return (
 						<HoverControl value={ hover }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Hover', 'themehunk-block' ),
+								label: __( 'Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -2277,7 +2278,7 @@ return (
                         
 			          </PanelBody>
 					  <PanelBody
-						title={ __( 'Overlay', 'themehunk-block' ) }
+						title={ __( 'Overlay', 'vayu-blocks' ) }
 						initialOpen={ false }
 						className="th-product-panel th-overlay-control"
 						> 
@@ -2285,11 +2286,11 @@ return (
 						<HoverControl value={ hover }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Hover', 'themehunk-block' ),
+								label: __( 'Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -2353,12 +2354,12 @@ return (
                         
 						</PanelBody>
 						<PanelBody
-							title={ __( 'Transition', 'themehunk-block' ) }
+							title={ __( 'Transition', 'vayu-blocks' ) }
 							className="th-product-panel"
 							initialOpen={ false }
 						> 
 						<RangeControl
-						label={ __( 'Transition Duration', 'themehunk-block' ) }
+						label={ __( 'Transition Duration', 'vayu-blocks' ) }
 						renderTooltipContent={ customTooltiptransitionAll }
 						value={ attributes.transitionAll }
 						onChange={ transitionAll => setAttributes({ transitionAll }) }
@@ -2370,28 +2371,29 @@ return (
 						</PanelBody>
 
 						<PanelBody
-							title={ __( 'Responsive', 'themehunk-block' ) }
+							title={ __( 'Responsive', 'vayu-blocks' ) }
 							className="th-product-panel"
 							initialOpen={ false }
 						> 
 						<ToggleControl
-										label={ __( 'Hide On Desktop', 'themehunk-block' ) }
+										label={ __( 'Hide On Desktop', 'vayu-blocks' ) }
 										checked={ attributes.responsiveTogHideDesktop }
 										onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
 									/>
 						<ToggleControl
-										label={ __( 'Hide On Tablet', 'themehunk-block' ) }
+										label={ __( 'Hide On Tablet', 'vayu-blocks' ) }
 										checked={ attributes.responsiveTogHideTablet }
 										onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
 									/>				
 						<ToggleControl
-										label={ __( 'Hide On Mobile', 'themehunk-block' ) }
+										label={ __( 'Hide On Mobile', 'vayu-blocks' ) }
 										checked={ attributes.responsiveTogHideMobile }
 										onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
 									/>
 						</PanelBody>
             </Fragment>
          )}
+		 </div>
            </InspectorControls>
         </Fragment>
         );

@@ -4,10 +4,10 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-themehunk-blocks-themehunk-block {
+.wp-block-vayu-blocks-vayu-blocks {
 	border: 1px dotted #f00;
 }
-.wp-block-themehunk-blocks-advance-spacer{
+.wp-block-vayu-blocks-advance-spacer{
 	--width:'100%';
 	align-items: center;
 	justify-content: center;
@@ -96,7 +96,7 @@
 		box-shadow: var(--boxShadow-hvr);
 	}
 }
-.block-editor-block-list__layout .block-editor-block-list__block.wp-block-themehunk-blocks-advance-spacer{
+.block-editor-block-list__layout .block-editor-block-list__block.wp-block-vayu-blocks-advance-spacer{
 	position: var(--position);
 	--left: initial;
 	--right: initial;
@@ -111,7 +111,7 @@
 	width: var(--width);
 	max-width: var(--maxWidth);
 }
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-themehunk-blocks-advance-spacer:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-vayu-blocks-advance-spacer:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
 	--maxWidth-fullwidth: 650px;
 	max-width: var(--maxWidth-fullwidth)!important;
 }
@@ -122,14 +122,14 @@
     line-height: 1.4em !important;
     font-weight: normal !important;
 }
-.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-themehunk-blocks-advance-spacer{
+.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-vayu-blocks-advance-spacer{
 	border-top-right-radius: var(--borderTopRightRadius);
 	border-top-left-radius: var(--borderTopLeftRadius);
 	border-bottom-right-radius: var(--borderBottomRightRadius);
 	border-bottom-left-radius: var(--borderBottomLeftRadius);
 	box-shadow: var(--boxShadow);
 }
-.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-themehunk-blocks-advance-spacer:hover{
+.block-editor-block-list__layout .block-editor-block-list__block.is-selected.wp-block-vayu-blocks-advance-spacer:hover{
 	--borderTopRightRadiushvr: var(--borderTopRightRadius);
 		--borderTopLeftRadiushvr: var(--borderTopLeftRadius);
 		--borderBottomRightRadiushvr: var(--borderBottomRightRadius);
@@ -142,7 +142,7 @@
 
 }
 @media only screen and (min-width: 1024px)  {
-	.wp-block-themehunk-blocks-advance-spacer.th-hide-desktop:before {
+	.wp-block-vayu-blocks-advance-spacer.th-hide-desktop:before {
 		content: "";
 		display: block;
 		position: absolute;
@@ -156,7 +156,7 @@
 	}	
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-	.wp-block-themehunk-blocks-advance-spacer.th-hide-tablet:before {
+	.wp-block-vayu-blocks-advance-spacer.th-hide-tablet:before {
 		content: "";
 		display: block;
 		position: absolute;
@@ -170,7 +170,7 @@
 }
 
 @media only screen and (max-width: 767px) {
-	.wp-block-themehunk-blocks-advance-spacer.th-hide-mobile:before {
+	.wp-block-vayu-blocks-advance-spacer.th-hide-mobile:before {
 		content: "";
 		display: block;
 		position: absolute;

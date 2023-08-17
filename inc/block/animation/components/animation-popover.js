@@ -71,7 +71,7 @@ function AnimationPopover({
 	const id = `inspector-o-animations-control-${ instanceId }`;
 
 	return (
-		<BaseControl label={ __( 'Choose Animation', 'themehunk-block' ) } id={ id }>
+		<BaseControl label={ __( 'Choose Animation', 'vayu-blocks' ) } id={ id }>
 			<Dropdown
 				contentClassName="o-animations-control__popover"
 				position="bottom center"
@@ -86,9 +86,9 @@ function AnimationPopover({
 					</Button>
 				) }
 				renderContent={ ({ onToggle }) => (
-					<MenuGroup label={ __( 'Animations', 'themehunk-block' ) }>
+					<MenuGroup label={ __( 'Animations', 'vayu-blocks' ) }>
 						<TextControl
-							placeholder={ __( 'Search', 'themehunk-block' ) }
+							placeholder={ __( 'Search', 'vayu-blocks' ) }
 							value={ currentInput }
 							onChange={ ( e ) => {
 								setCurrentInput( e );
@@ -121,7 +121,7 @@ function AnimationPopover({
 								<div>
 									{ __(
 										'Nothing found. Try searching for something else!',
-										'themehunk-block'
+										'vayu-blocks'
 									) }
 								</div>
 							) }

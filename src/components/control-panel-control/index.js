@@ -71,7 +71,7 @@ const ControlPanelControl = ({
 									{ isActive && (
 										<Button
 											icon={ <Icon icon={ backup } /> }
-											label={ __( 'Reset to default', 'themehunk-block' ) }
+											label={ __( 'Reset to default', 'vayu-blocks' ) }
 											showTooltip={ true }
 											isTertiary
 											onClick={ () => setAttributes({ ...resetValues }) }

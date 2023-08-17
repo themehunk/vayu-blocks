@@ -46,18 +46,18 @@ function cycle_through_blocks( $blocks, $post_id ) {
 
 	foreach ( $blocks as $block ) {
 		
-		if ( $block['blockName'] === 'themehunk-blocks/advance-heading' ) {
+		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
 				  enqueue_google_fonts($block['attrs']['fontFamily']);
 			    }
                 $css .=advance_heading_style($block['attrs']);
 		} 
 
-		if ( $block['blockName'] === 'themehunk-blocks/advance-container' ) {
+		if ( $block['blockName'] === 'vayu-blocks/advance-container' ) {
 			 $css .=advance_container_style($block['attrs']);
 	    } 
 
-		if ( $block['blockName'] === 'themehunk-blocks/advance-product' ){
+		if ( $block['blockName'] === 'vayu-blocks/advance-product' ){
 
 			if ( isset($block['attrs']['tabfontFamily'] ) ){
 				enqueue_google_fonts($block['attrs']['tabfontFamily']);
@@ -82,11 +82,11 @@ function cycle_through_blocks( $blocks, $post_id ) {
 			$css .=advance_product_tab_style($block['attrs']);
 	     } 
 
-		if ( $block['blockName'] === 'themehunk-blocks/advance-spacer' ) {
+		if ( $block['blockName'] === 'vayu-blocks/advance-spacer' ) {
 			 $css .=advance_spacer_style($block['attrs']);
 	 	} 
 
-		 if ( $block['blockName'] === 'themehunk-blocks/advance-button' ) {
+		 if ( $block['blockName'] === 'vayu-blocks/advance-button' ) {
 			 $css .=advance_button_style($block['attrs']);
 		} 
 

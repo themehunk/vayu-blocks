@@ -79,7 +79,7 @@ const GoogleFontsControl = ({
 							id={ id }
 							options={ [
 								{
-									label: __( 'Default', 'themehunk-block' ),
+									label: __( 'Default', 'vayu-blocks' ),
 									value: ''
 								},
 								...fonts.map( i => {
@@ -96,11 +96,11 @@ const GoogleFontsControl = ({
 								if ( '' === e ) {
 									variants = [
 										{
-											'label': __( 'Regular', 'themehunk-block' ),
+											'label': __( 'Regular', 'vayu-blocks' ),
 											'value': 'regular'
 										},
 										{
-											'label': __( 'Italic', 'themehunk-block' ),
+											'label': __( 'Italic', 'vayu-blocks' ),
 											'value': 'italic'
 										}
 									];
@@ -136,11 +136,11 @@ const GoogleFontsControl = ({
 									onClick={ onToggle }
 									aria-expanded={ isOpen }
 								>
-									{ value ? value : __( 'Select Font Family', 'themehunk-block' ) }
+									{ value ? value : __( 'Select Font Family', 'vayu-blocks' ) }
 								</Button>
 							) }
 							renderContent={ ({ onToggle }) => (
-								<MenuGroup label={ __( 'Google Fonts', 'themehunk-block' ) }>
+								<MenuGroup label={ __( 'Google Fonts', 'vayu-blocks' ) }>
 									<TextControl
 										value={ search }
 										onChange={ e => setSearch( e ) }
@@ -155,7 +155,7 @@ const GoogleFontsControl = ({
 												setSearch( '' );
 											}}
 										>
-											{ __( 'Default', 'themehunk-block' ) }
+											{ __( 'Default', 'vayu-blocks' ) }
 										</MenuItem>
 
 										{ ( fonts ).map( ( i, index ) => {
@@ -194,13 +194,13 @@ const GoogleFontsControl = ({
 						/>
 					)
 				) : (
-					__( 'Loading…', 'themehunk-block' )
+					__( 'Loading…', 'vayu-blocks' )
 				) }
 			</BaseControl>
 
 			{ variants && (
 				<SelectControl
-					label={ __( 'Font Weight', 'themehunk-block' ) }
+					label={ __( 'Font Weight', 'vayu-blocks' ) }
 					value={ valueVariant || 'regular' }
 					options={ variants }
 					onChange={ onChangeFontVariant }
@@ -208,15 +208,15 @@ const GoogleFontsControl = ({
 			) }
 
 			<SelectControl
-				label={ __( 'Font Style', 'themehunk-block' ) }
+				label={ __( 'Font Style', 'vayu-blocks' ) }
 				value={ valueStyle }
 				options={ [
 					{
-						label: __( 'Regular', 'themehunk-block' ),
+						label: __( 'Regular', 'vayu-blocks' ),
 						value: 'normal'
 					},
 					{
-						label: __( 'Italic', 'themehunk-block' ),
+						label: __( 'Italic', 'vayu-blocks' ),
 						value: 'italic'
 					}
 				] }
@@ -224,23 +224,23 @@ const GoogleFontsControl = ({
 			/>
 
 			<SelectControl
-				label={ __( 'Font Transform', 'themehunk-block' ) }
+				label={ __( 'Font Transform', 'vayu-blocks' ) }
 				value={ valueTransform }
 				options={ [
 					{
-						label: __( 'Default', 'themehunk-block' ),
+						label: __( 'Default', 'vayu-blocks' ),
 						value: 'none'
 					},
 					{
-						label: __( 'Uppercase', 'themehunk-block' ),
+						label: __( 'Uppercase', 'vayu-blocks' ),
 						value: 'uppercase'
 					},
 					{
-						label: __( 'Lowercase', 'themehunk-block' ),
+						label: __( 'Lowercase', 'vayu-blocks' ),
 						value: 'lowercase'
 					},
 					{
-						label: __( 'Capitalize', 'themehunk-block' ),
+						label: __( 'Capitalize', 'vayu-blocks' ),
 						value: 'capitalize'
 					}
 				] }

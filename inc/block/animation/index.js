@@ -39,7 +39,7 @@ const BlockAnimation = ( el, props ) => {
 
 				<ToolsPanelItem
 					hasValue={ () => Boolean( props?.attributes?.className?.includes( 'animated' ) ) }
-					label={ __( 'Animations', 'themehunk-block' ) }
+					label={ __( 'Animations', 'vayu-blocks' ) }
 					onDeselect={ () => window?.blocksAnimation?.removeAnimation() }
 					isShownByDefault={ showAsDefault }
 				>
@@ -77,8 +77,8 @@ const withInspectorControls = createHigherOrderComponent( BlockEdit => {
 }, 'withInspectorControl' );
 
 //Very Important
-if ( Boolean( window?.blocksAnimation?.hasThemehunkBlock ) ) {
-	addFilter( 'themehunk-block.blockTools', 'themehunk-animations/with-inspector-controls', BlockAnimation, 1 );
+if ( Boolean( window?.blocksAnimation?.hasVaYuBlock ) ) {
+	addFilter( 'vayu-blocks.blockTools', 'vayu-animations/with-inspector-controls', BlockAnimation, 1 );
 } else {
-	addFilter( 'editor.BlockEdit', 'themehunk-animations/with-inspector-controls', withInspectorControls, 108 );
+	addFilter( 'editor.BlockEdit', 'vayu-animations/with-inspector-controls', withInspectorControls, 108 );
 }

@@ -1,28 +1,28 @@
 <?php 
 if (!defined('ABSPATH')) exit;
 
-function themehunk_block_categories( $categories ) {
+function vayu_blocks_categories( $categories ) {
     return array_merge(
         $categories,
         [
             [
-                'slug'  => 'themehunk-blocks',
-                'title' => __( 'Themehunk Blocks', 'themehunk-block' ),
+                'slug'  => 'vayu-blocks',
+                'title' => __( 'Vayu Blocks', 'vayu-blocks' ),
             ],
         ]
     );
 }
-add_filter( 'block_categories_all', 'themehunk_block_categories', 11, 2);
+add_filter( 'block_categories_all', 'vayu_blocks_categories', 11, 2);
 
 
-function themehunk_block_editor_assets(){
+function vayu_blocks_editor_assets(){
 
-    $asset_file = require_once THEMEHUNK_BLOCKS_DIR_PATH .'build/registerPlugin.asset.php';
-    $asset_file = require_once THEMEHUNK_BLOCKS_DIR_PATH .'build/component-editor.asset.php';
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/registerPlugin.asset.php';
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/component-editor.asset.php';
 
 	wp_enqueue_script(
 		'registerPlugin-block',
-		THEMEHUNK_BLOCKS_URL . 'build/registerPlugin.js',
+		VAYU_BLOCKS_URL . 'build/registerPlugin.js',
 		array_merge(
 			$asset_file['dependencies']
 		),
@@ -31,7 +31,7 @@ function themehunk_block_editor_assets(){
 	);
     wp_localize_script(
         'registerPlugin-block',
-        'themehunkblock',
+        'vayublock',
         array(
             'showOnboarding' => '',
         )
@@ -39,7 +39,7 @@ function themehunk_block_editor_assets(){
 
     wp_enqueue_style(
         'component-editor-css',
-        THEMEHUNK_BLOCKS_URL . 'build/component-editor.css',
+        VAYU_BLOCKS_URL . 'build/component-editor.css',
         array_merge(
 			$asset_file['dependencies']
 		),	'1.0.0'
@@ -47,5 +47,5 @@ function themehunk_block_editor_assets(){
 
         
 }
-add_action( 'enqueue_block_editor_assets', 'themehunk_block_editor_assets' );
+add_action( 'enqueue_block_editor_assets', 'vayu_blocks_editor_assets' );
 

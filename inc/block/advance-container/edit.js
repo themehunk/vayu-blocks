@@ -33,12 +33,12 @@ export default function Edit({
 
 			const { id } = attributes;
 
-			const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+			const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 			const { isUniqueID, isUniqueBlock} = useSelect(
 				( select ) => {
 					return {
-						isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
-						isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+						isUniqueID: ( value ) => select( 'vayu-blocks/data' ).isUniqueID( value ),
+						isUniqueBlock: ( value, clientId ) => select( 'vayu-blocks/data' ).isUniqueBlock( value, clientId ),
 						
 					};
 				},
@@ -826,7 +826,7 @@ export default function Edit({
 					setAttributes={setAttributes}
 				/>
 
-				{ ( parentBlock == 'themehunk-blocks/advance-container' || !hasInnerBlocks) ? (
+				{ ( parentBlock == 'vayu-blocks/advance-container' || !hasInnerBlocks) ? (
 
 				<Tag {...containerBlockProps}>
 				{showShouldOverlay && (

@@ -33,8 +33,8 @@ class Advance_Product_Tab {
 
         public function render_callback( $attr ) {
 
-        wp_enqueue_style( 'th-icon', THEMEHUNK_BLOCKS_URL . '/src/th-icon/style.css', '', '1.0.0' );
-        wp_enqueue_script( 'advance-product-tab-script', THEMEHUNK_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_style( 'th-icon', VAYU_BLOCKS_URL . '/src/th-icon/style.css', '', '1.0.0' );
+        wp_enqueue_script( 'advance-product-tab-script', VAYU_BLOCKS_URL .'/src/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
         
             wp_localize_script(
                 'advance-product-tab-script',
@@ -45,7 +45,7 @@ class Advance_Product_Tab {
                 )
             );
 
-        $block_content = '<div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-themehunk-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
+        $block_content = '<div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-vayu-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
             <div class="th-product-block-wrapper">
                 <div class="wp-block-th-blocks-overlay"></div>';
                     $showTab = isset($attr['showTab']) ? $attr['showTab'] : true;
@@ -316,9 +316,9 @@ class Advance_Product_Tab {
 
                         if (isset($attr['saleDesign']) && $attr['saleDesign'] === 'saledigit' && $product->get_regular_price() && $product->get_sale_price()) {
                             $discountPercentage = round((($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100);
-                            $product_content .= '<span class="discount-percentage">' . (float) $discountPercentage . __( '%', 'themehunk-blocks' ) . '</span>';
+                            $product_content .= '<span class="discount-percentage">' . (float) $discountPercentage . __( '%', 'vayu-blocks' ) . '</span>';
                         } else {
-                            $product_content .= '<span class="discount-percentage">' . (isset($attr['saleText']) ? esc_html($attr['saleText']) : __( 'sale', 'themehunk-blocks' )) . '</span>';
+                            $product_content .= '<span class="discount-percentage">' . (isset($attr['saleText']) ? esc_html($attr['saleText']) : __( 'sale', 'vayu-blocks' )) . '</span>';
                         }
 
                         $product_content .= '</div>';

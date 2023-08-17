@@ -118,7 +118,7 @@
   max-width: 100%;
 }
 
-.wp-block-themehunk-blocks-advance-product {
+.wp-block-vayu-blocks-advance-product {
   --title-color: #111;
   --title-color-hvr: var(--title-color);
   --cat-color: #888;
@@ -137,7 +137,7 @@
   --button-padding-right:0.6rem;
   --button-padding-left:0.6rem;
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-title a {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-title a {
   color: var(--title-color);
   font-family: var(--title-font-family);
   font-weight: var(--title-font-variant);
@@ -147,10 +147,10 @@
   line-height: var(--title-line-height);
   letter-spacing: var(--title-letter-spacing);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-title a:hover {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-title a:hover {
   color: var(--title-color-hvr);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-cat a {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-cat a {
   color: var(--cat-color);
   font-family: var(--cat-font-family);
   font-weight: var(--cat-font-variant);
@@ -160,10 +160,10 @@
   line-height: var(--cat-line-height);
   letter-spacing: var(--cat-letter-spacing);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-cat a:hover {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-cat a:hover {
   color: var(--cat-color-hvr);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price span {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price span {
   color: var(--price-color);
   font-family: var(--price-font-family);
   font-weight: var(--price-font-variant);
@@ -173,15 +173,15 @@
   line-height: var(--price-line-height);
   letter-spacing: var(--price-letter-spacing);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price del, .wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price del span {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price del, .wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-price del span {
   color: var(--price-color-del);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-rating span {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-rating span {
   font-size: var(--rating-font-size);
   line-height: var(--rating-line-height);
   letter-spacing: var(--rating-letter-spacing);
 }
-.wp-block-themehunk-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-btn {
+.wp-block-vayu-blocks-advance-product .th-product-block-product-content .th-product-item .th-product-btn {
   font-family: var(--button-font-family);
   font-weight: var(--button-font-variant);
   font-style: var(--button-font-style);
