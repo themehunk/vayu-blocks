@@ -22,11 +22,11 @@ import {
  */
 import InlineControls from './inline-controls.js';
 
-const name = 'themehunk-block/typing-animation';
+const name = 'vayu-blocks/typing-animation';
 
 export const format = {
 	name,
-	title: __( 'Typing Animation', 'themehunk-block' ),
+	title: __( 'Typing Animation', 'vayu-blocks' ),
 	tagName: 'o-anim-typing',
 	className: null,
 
@@ -44,7 +44,7 @@ export const format = {
 			<Fragment>
 				<RichTextToolbarButton
 					icon={ brush }
-					title={ __( 'Typing Animation', 'themehunk-block' ) }
+					title={ __( 'Typing Animation', 'vayu-blocks' ) }
 					onClick={ onToggle }
 					isActive={ isActive }
 				/>

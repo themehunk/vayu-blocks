@@ -1,8 +1,8 @@
-// toggel
+// toggle
 .th-toggle-group-control {
 	display: flex;
 	background: rgb(255, 255, 255) none repeat scroll 0% 0%;
-	border: 1px solid rgb(117, 117, 117);
+	border: 1px solid #EEE;
 	border-radius: 2px;
 	min-height: 36px;
 	min-width: 0px;
@@ -43,8 +43,8 @@
 			}
 
 			&.is-primary {
-				color: #fff;
-				background-color: #a4afb7;
+				color: #6c1bc3;
+				background-color: #8a1bff1f;
 				box-shadow: none;
 				border-radius: 0;
 
@@ -53,7 +53,7 @@
 				}
 
 				svg {
-					fill: #fff;
+					fill: #6c1bc3;
 				}
 			}
 
@@ -65,6 +65,12 @@
 		}
 	}
 
+}
+
+.components-button.is-secondary:active:not(:disabled), 
+.components-button.is-tertiary:active:not(:disabled){
+    background:#8a1bff1f;
+    color: #6c1bc3;
 }
 
 //unit
@@ -194,13 +200,13 @@
 
 				&.is-linked {
 					.th-sizing-control-item-input {
-						background: #a4afb7;
-						color: #fff;
+						background: #8a1bff1f;
+						color: #6c1bc3;
 
 						&:hover {
 							&:not(:disabled):not([aria-disabled="true"]):not(.is-secondary):not(.is-primary):not(.is-tertiary):not(.is-link) {
-								background: #a4afb7;
-								color: #fff;
+								background: #8a1bff1f;
+								color: #6c1bc3;
 								box-shadow: inset 0 0 0 1px #e2e4e7,inset 0 0 0 2px #a4afb7,0 1px 1px rgba(25,30,35,.2);
 							}
 						}
@@ -379,8 +385,9 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             justify-content: center;
             border-radius: 0;
             height: auto;
-            background:#eeeeee7a;
-            border: none;
+            background:#fff;
+            color: #111;
+            border: .5px solid #eee;
             box-shadow: none;
             cursor: pointer;
             padding: 9px 15px;
@@ -391,13 +398,15 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             flex-wrap: wrap;
     
             &:focus {
-                background:#c3c3c37d;
+                background:#8a1bff1f;
+                color: #6c1bc3;
                 position: relative;
                 z-index: 1;
             }
     
             &.is-active {
-                background:#c3c3c37d;
+                background:#8a1bff1f;
+                color: #6c1bc3;
                 position: relative;
                 z-index: 1;
             }
@@ -413,7 +422,10 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             flex-grow: 2;
         }
     }
-
+    .block-editor-block-inspector .th-setting-header .th-tab-wrap:nth-of-type(2) .components-button{
+        border-left: 0;
+        border-right: 0;
+    }
     //hovertab
    .th-hover-control {
         display: flex;
@@ -431,7 +443,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             padding: 0px 0px;
             margin-left: 0;
             font-weight: 500;
-            border: 1px solid #d5dadf;
+            border: 1px solid #EEE;
             margin-bottom: 15px;
             font-size: 12px;
             min-height: 38px;
@@ -443,9 +455,13 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
             }
     
             &.is-active {
-                background:#d5dadf;
+                background:#8a1bff1f;
+                color: #6c1bc3;
                 position: relative;
                 z-index: 1;
+            }
+            &:hover{
+                color: #6c1bc3;
             }
         }
     }
@@ -544,7 +560,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     
     .th-gfont-control .th-gfont-button {
         background: transparent;
-        border: 1px solid #8d96a0;
+        border: 1px solid hsl(0,0%,80%);
         border-radius: 4px;
         box-shadow: 0 0 0 transparent;
         min-height: 38px;
@@ -670,7 +686,7 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
                 button {
                     width: 25px;
                     height: 32px;
-                    border: 1px solid #a4afb7;
+                    border: 1px solid #EEE;
                     outline: none;
                     box-shadow: none;
     
@@ -680,17 +696,17 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     
                     &.is-primary {
                         z-index: 0;
-                        background:#a4afb7;
+                        background:#8a1bff1f;
     
                         svg {
-                            fill: #fff;
+                            fill: #6c1bc3;
                         }
     
                         &:hover {
-                            background:#a4afb7;
+                            background:#8a1bff1f;
                             border-color: none;
                             box-shadow: none;
-                            color: #fff;
+                            color: #6c1bc3;
                             text-decoration: none;
                             text-shadow:none;
                         }
@@ -724,17 +740,165 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
      display:block;
     }
 
-    .editor-block-list-item-themehunk-blocks-advance-button svg,
-    .editor-block-list-item-themehunk-blocks-advance-spacer svg,
-    .editor-block-list-item-themehunk-blocks-advance-heading svg,
-    .editor-block-list-item-themehunk-blocks-advance-container svg,
-    .editor-block-list-item-themehunk-blocks-advance-product svg,
-    .editor-block-list-item-themehunk-blocks-advance-button:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-spacer:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-heading:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-container:hover svg,
-    .editor-block-list-item-themehunk-blocks-advance-product:hover svg{
-      color: #e724b2!important;
+// Icon Picker
+.th-blocks-icon-chooser {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	list-style: none;
+	margin-top: 0;
+	margin-left: -3px;
+
+	li {
+		display: block;
+	    margin: 0 0 3px 3px;
+	    padding: 0;
+
+		button.components-button {
+			background: #fafafa;
+			color: #000;
+			height: 30px;
+			width: 30px;
+			border: 0;
+			border-radius: 0;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			padding: 8px;
+			line-height: normal;
+			font-size: 15px;
+			justify-content: center;
+
+			span {
+				line-height: 0;
+			}
+
+			&:hover {
+				background: #fff;
+				box-shadow: none;
+			}
+
+			svg {
+				width: 1em;
+				height: 1em;
+			}
+		}
+	}
+}
+.th-icon {
+	line-height: 0;
+}
+.th-icon svg {
+	height: 1em;
+	width: 1em;
+	fill: currentColor;
+}
+button.components-icon-picker-item {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    line-height: 50px;
+    background: #efefef;
+    cursor: pointer;
+    border: 1px solid #ddd;
+	margin-bottom: 10px;
+
+	svg {
+		height: 1em;
+		width: 1em;
+	}
+}
+
+.components-icon-picker-item > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.components-icon-picker-item:hover, .components-icon-picker-item:focus {
+    background: #fafafa;
+}
+
+.th-svg-html .components-base-control {
+    margin-bottom: 0;
+}
+
+.th-icon-preview {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+
+	svg {
+		margin-right: 10px;
+		width: 1em;
+		height: 1em;
+	}
+}
+
+.th-blocks-icon-panel:not(:first-child) {
+	border-top: 1px solid #eee !important;
+}
+.th-button-inside span:nth-of-type(1){
+    order: var(--orderButton);
+	margin: var(--iconMargin);
+}
+.th-button-inside span:nth-of-type(2){
+    order: 10;
+}
+.th-blocks-icon-panel h2{
+    position: absolute;
+    top: -52px;
+    right: 9px;
+    background: transparent!important;
+    outline: 1px solid #B9B9B9;
+    border-radius: 2px;
+	
+}
+.th-blocks-icon-panel .components-panel__body-toggle.components-button .components-panel__arrow{
+	right: -4px;
+}
+.th-blocks-icon-panel h2 button.components-panel__body-toggle.components-button{
+    padding: 5px 21px 5px 5px;
+    color: #111;
+    height: 29px;
+	position: relative;
+}
+.th-icon-label{
+    display: inline-flex;
+    float: left;
+}
+.th-icon-preview{
+    padding-left: 47px;
+}
+.th-icon-preview button{
+    height: 29px!important;
+}
+.th-blocks-icon-panel.is-opened{
+    margin-top: 40px!important;
+}
+.th-icon-chooser{
+    position: relative;
+}
+.th-icon-preview button.components-button.is-secondary,
+.th-icon-preview button.components-button.is-secondary:hover{
+	// box-shadow: inset 0 0 0 1px #B9B9B9;
+    box-shadow: none;
+    border: 1px solid #B9B9B9;
+    border-radius: 2px;
+	color: GREEN;
+}
+// Editor Global Style CSS
+    .editor-block-list-item-vayu-blocks-advance-button svg,
+    .editor-block-list-item-vayu-blocks-advance-spacer svg,
+    .editor-block-list-item-vayu-blocks-advance-heading svg,
+    .editor-block-list-item-vayu-blocks-advance-container svg,
+    .editor-block-list-item-vayu-blocks-advance-product svg,
+    .editor-block-list-item-vayu-blocks-advance-button:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-spacer:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-heading:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-container:hover svg,
+    .editor-block-list-item-vayu-blocks-advance-product:hover svg{
+      color: #6c1bc3!important;
     }
     .components-panel .components-base-control select.components-select-control__input,
     .o-animations-control .o-animations-control__button{
@@ -784,7 +948,6 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     .o-animations-control .o-animations-control__button option{
         color: #111;
     }
-
     .components-panel__body.is-opened .components-panel__body-toggle{
         text-transform: capitalize;
         font-size: 13px;
@@ -792,26 +955,34 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
         font-weight: normal;
         color: #1E1E1E;
     }
-
     div.components-toolbar>div{
         align-items: center;
     }
-    .components-accessible-toolbar .components-button, .components-toolbar .components-button{
+    .th-ins-alignment .components-accessible-toolbar .components-button, 
+    .th-ins-alignment .components-toolbar .components-button{
         padding-top: 0;
         padding-bottom: 0;
         height: 38px;
     }
-
+    .th-ins-alignment .components-toolbar .components-button.is-pressed:before{
+        background:#8a1bff1f;
+    }
+    .th-ins-alignment .components-toolbar .components-button.is-pressed svg{
+        color: #6c1bc3;
+    }
+    .th-ins-alignment .components-toolbar{
+        border-color: #EEE;
+    }
     .components-toolbar{
         min-height: 38px;
     }
-
     .th-gfont-control .components-select-control label,
     .th-gfont-control label,
     .o-animations-control label,
     .components-panel__body label,
     span.components-base-control__label,
-    .components-popover__content label.components-base-control__label{
+    .components-popover__content label.components-base-control__label,
+    .components-menu-group__label{
         text-transform: capitalize!important;
         font-size: 13px!important;
         line-height: 1.4em!important;
@@ -826,6 +997,17 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     }
 
 // pre-built style
+
+    .th-block-ins .components-panel__body span{
+        font-size: 13px!important;
+    }
+    .th-block-ins .dashicons-admin-links:before{
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
 /* Overlay for the modal */
 .th-design-template-modal-popover {
     position: fixed;
@@ -881,7 +1063,6 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
     flex: 1;
     align-items: center;
     justify-content: center;
-
 }
 
 .th-close-wrap{
@@ -896,23 +1077,29 @@ input[type=number].th-sizing-control-item-input:focus::-webkit-inner-spin-button
 .th-close-wrap button{
 height:auto;
 padding:0;
+color: #818080;
 }
 
 .th-menu-item {
     line-height: 1em;
-    padding: 18px 12px;
+    padding: 10px 12px;
     display: inline-block;
     text-align: center;
     font-weight: 600;
-    color: #444;
+    color: #818080;
     font-size: 13px;
-    border-bottom: 3px solid transparent;
     cursor: pointer;
+    margin: 0 0.3rem;
+    border: 2px dashed;
+    border-color: transparent;
 }
+
 .th-menu-item.active {
-    border-color: #0073aa;
-    color: #0073aa;
+    border-color: #6C1BC3;
+    color: #6C1BC3;
+    border: 2px dashed;
 }
+
 .th-template-block-wrap {
     padding: 35px 25px 0 25px;
 }
@@ -922,12 +1109,12 @@ padding:0;
     flex-wrap: wrap;
 }
 
-.th-block-templates-sites .item {
+.th-block-templates-sites .item {  
     width: 25%;
     padding:1%;
     margin: 0;
     box-shadow: none;
-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .th-block-templates-sites .item .inner {
@@ -1010,7 +1197,8 @@ box-sizing: border-box;
   .th-block-templates-pattern{
    display:flex;
   }
-  .th-block-templates-sites .import{padding: 6px 14px;
+  .th-block-templates-sites .import{
+    padding: 6px 14px;
     min-height: auto;
     line-height: normal;
     border-radius: 2px;
@@ -1018,6 +1206,13 @@ box-sizing: border-box;
     background:#3F51B5;
 }
 .pattern-tab-button.active {
-    background-color: #3F51B5;
+    background-color: #6C1BC3;
     color: #fff;
+}
+
+
+.pattern-tabs-filter-wrap{ 
+    height: 100%;
+    max-height: calc(95vh - 204px);
+    overflow: auto;
 }

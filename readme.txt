@@ -1,5 +1,5 @@
-====== Gutenberg Blocks - ThemeHunk Block For Gutenberg ========
-Contributors: themehunk
+====== Gutenberg Blocks - Vayu Blocks For Gutenberg ========
+Contributors: ThemeHunk
 Author URI: : http://www.themehunk.com/
 Tags: gutenberg, blocks, gutenberg blocks, editor, block
 Requires PHP: 5.6
@@ -8,14 +8,14 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-ThemeHunk Block: WordPress Gutenberg Blocks is the editor blocks that are used to create content layouts that you can insert onto anywhere on your WordPress post or pages.
+Vayu Blocks: WordPress Gutenberg Blocks is the editor blocks that are used to create content layouts that you can insert onto anywhere on your WordPress post or pages.
 
 == Description ==
 
-The ThemeHunk Block is an Addon Plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites.
-Free ThemeHunk Block plugin that amplifies the default WordPress Gutenberg Editor with 17+ powerful blocks.
+The Vayu Blocks is an Addon Plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites.
+Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with 17+ powerful blocks.
 
-ThemeHunk Block is the editor blocks that are used to create content layouts that you can insert onto anywhere on your WordPress post or pages.
+Vayu Blocks is the editor blocks that are used to create content layouts that you can insert onto anywhere on your WordPress post or pages.
 
 1. [Docs](https://themehunk.com/docs/unlimited-blocks-for-gutenberg/)
 
@@ -31,22 +31,27 @@ ThemeHunk Block is the editor blocks that are used to create content layouts tha
 
 == Installation ==
 
-1. Upload the `themehunk-block.zip` to the `/wp-content/plugins/` directory
+1. Upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
 = How to Install Plugin =
-Just upload the `themehunk-block.zip` to the `/wp-content/plugins/` directory, and then activate it from 'Plugins' menu in WordPress.
+Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and then activate it from 'Plugins' menu in WordPress.
 
 == Screenshots ==
 
 
 == Changelog ==
 * Panel Style Modified.
+* Vayu Blocks Updated.
+* Import Panel Added.
+* Vayu Blocks & Import Panel Merged.
 
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release
+* Panel Style Modified.
+* Vayu Blocks Updated.
+* Import Panel Added.
+* Vayu Blocks & Import Panel Merged.

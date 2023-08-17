@@ -59,13 +59,13 @@ export default function Edit({ attributes, setAttributes, clientId,
 
 	const { id } = attributes;
 
-	const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+	const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 	
 	const { isUniqueID, isUniqueBlock} = useSelect(
 				( select ) => {
 					return {
-						isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
-						isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+						isUniqueID: ( value ) => select( 'vayu-blocks/data' ).isUniqueID( value ),
+						isUniqueBlock: ( value, clientId ) => select( 'vayu-blocks/data' ).isUniqueBlock( value, clientId ),
 						
 					};
 				},
@@ -812,9 +812,9 @@ else{
 					<RichText
 						tagName="span" // The tag here is the element output and editable in the admin
 						value={ attributes.content } // Any existing content, either from the database or an attribute default
-						allowedFormats={ [ 'core/bold', 'core/italic', 'themehunk-block/typing-animation' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
+						allowedFormats={ [ 'core/bold', 'core/italic', 'vayu-blocks/typing-animation' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
 						onChange={ ( content ) => setAttributes( { content } ) } // Store updated content as a block attribute
-						placeholder={ __( 'Button...','themehunk-blocks' ) } // Display this text before any content has been added by the user
+						placeholder={ __( 'Button...','vayu-blocks' ) } // Display this text before any content has been added by the user
 					/>
 				</div>
 			</div>

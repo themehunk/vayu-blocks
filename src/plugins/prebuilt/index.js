@@ -8,6 +8,7 @@ import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
 import { FaTimes } from 'react-icons/fa';
 
+
 import templatesData from './templates.json';
 import patternData from './pattern.json'; 
 
@@ -40,8 +41,6 @@ function ToolbarLibrary() {
         const [templates, setTemplates] = useState([]);
         const [pattern, setPattern] = useState([]);
         const [activePatternCategory, setActivePatternCategory] = useState('all');
-        const [importLoading, setImportLoading] = useState(false);
-    
         const handlePatternCategoryChange = (category) => {
           setActivePatternCategory(category);
         };
@@ -54,18 +53,31 @@ function ToolbarLibrary() {
             setPattern(patternData);
         }, []);
 
-        const importPattern = async (patternCode) => {
-            try {
-                setImportLoading(true);
-                const { insertBlocks } = wp.data.dispatch('core/block-editor');
-                const parsedBlocks = wp.blocks.parse(patternCode);
-                insertBlocks(parsedBlocks);
+    
+        const ImportButton = ({ patternCode }) => {
 
-            } catch (error) {
-                console.error('Error importing pattern:', error);
-            } finally {
-                setImportLoading(false);
-            }
+            const [importLoading, setImportLoading] = useState(false);
+        
+            const importPattern = async () => {
+                try {
+                    console.log('Setting importLoading to true');
+                    setImportLoading(true);
+                    const { insertBlocks } = wp.data.dispatch('core/block-editor');
+                    const parsedBlocks = wp.blocks.parse(patternCode);
+                    insertBlocks(parsedBlocks);
+                } catch (error) {
+                    console.error('Error importing pattern:', error);
+                } finally {
+                    console.log('Setting importLoading to false');
+                    setImportLoading(false);
+                }
+            };
+        
+            return (
+                <button className="import button-primary" onClick={importPattern}>
+                    {importLoading ? 'Importing...' : 'Import'}
+                </button>
+            );
         };
 
         switch (tab) {
@@ -100,6 +112,7 @@ function ToolbarLibrary() {
                     <div className="th-block-templates-pattern">
                         <div className="pattern-tabs-filter">
                             <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
+                           <div className="pattern-tabs-filter-wrap">
                             <button
                                 className={`pattern-tab-button ${activePatternCategory === 'all' ? 'active' : ''}`}
                                 onClick={() => handlePatternCategoryChange('all')}
@@ -118,6 +131,7 @@ function ToolbarLibrary() {
                             >
                                 {__('cat2', 'themehunk-blocks')}
                             </button>
+                            </div>
                         </div>
                         <div className="pattern-tab-content">
                             <div className="th-block-templates-sites">
@@ -130,10 +144,7 @@ function ToolbarLibrary() {
                                                     backgroundImage: `url("${patternItem.image}")`,
                                                 }}
                                             ></div>
-                                            <button className="import button-primary" onClick={() => importPattern(patternItem.content)}>
-                                            {importLoading ? 'Importing...' : 'Import'}
-                                           
-                                        </button>
+                                            <ImportButton patternCode={patternItem.content} />
                                         </div>
                                     </div>
                                 ))}

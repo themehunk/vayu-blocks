@@ -36,12 +36,12 @@ export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
 		setAttributes( { id: clientId } );
 	}
 
-	const { addUniqueID } = useDispatch( 'themehunk-blocks/data' );
+	const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 			const { isUniqueID, isUniqueBlock} = useSelect(
 				( select ) => {
 					return {
-						isUniqueID: ( value ) => select( 'themehunk-blocks/data' ).isUniqueID( value ),
-						isUniqueBlock: ( value, clientId ) => select( 'themehunk-blocks/data' ).isUniqueBlock( value, clientId ),
+						isUniqueID: ( value ) => select( 'vayu-blocks/data' ).isUniqueID( value ),
+						isUniqueBlock: ( value, clientId ) => select( 'vayu-blocks/data' ).isUniqueBlock( value, clientId ),
 						
 					};
 				},
@@ -617,7 +617,7 @@ export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
                 value={ attributes.content } // Any existing content, either from the database or an attribute default
                 allowedFormats={ [ 'core/bold', 'core/italic','core/link' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
                 onChange={ changeContent } // Store updated content as a block attribute
-                placeholder={ __( 'Write heading…','themehunk-block' ) } // Display this text before any content has been added by the user
+                placeholder={ __( 'Write heading…','vayu-blocks' ) } // Display this text before any content has been added by the user
                 { ...blockProps }
             />
         </Fragment>

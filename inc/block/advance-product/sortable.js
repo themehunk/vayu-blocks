@@ -79,7 +79,7 @@ export const SortableItem = ({
 }) => {
 	const getView = useSelect( select => {
 
-		const { getView } = select( 'themehunk-blocks/data' );
+		const { getView } = select( 'vayu-blocks/data' );
 
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 
@@ -122,11 +122,11 @@ export const SortableItem = ({
 	const icon = canEdit ? 'visibility' : 'hidden';
 
 	/* translators: %s Label */
-	let message = sprintf( __( 'Display %s', 'themehunk-block' ), label );
+	let message = sprintf( __( 'Display %s', 'vayu-blocks' ), label );
 	if ( canEdit ) {
 
 		/* translators: %s Label */
-		message = sprintf( __( 'Hide %s', 'themehunk-block' ), label );
+		message = sprintf( __( 'Hide %s', 'vayu-blocks' ), label );
 	}
 
 	// title font family
@@ -964,7 +964,7 @@ export const SortableItem = ({
 				{ canEdit && (
 					<Button
 						icon={ isOpen ? 'arrow-up-alt2' : 'arrow-down-alt2' }
-						label={ isOpen ? __( 'Close Settings', 'themehunk-block' ) : __( 'Open Settings', 'themehunk-block' ) }
+						label={ isOpen ? __( 'Close Settings', 'vayu-blocks' ) : __( 'Open Settings', 'vayu-blocks' ) }
 						showTooltip={ true }
 						className="th-sortable-button"
 						onClick={ () => setOpen( ! isOpen ) }
@@ -998,37 +998,37 @@ export const SortableItem = ({
 						<Fragment >
 							
 							{/* <SelectControl 
-								label={ __( 'Image Size', 'themehunk-block' ) }
+								label={ __( 'Image Size', 'vayu-blocks' ) }
 								value={ attributes.prdImage }
 								options={ [
-									{ label:  __( 'woocommerce_thumbnail', 'themehunk-block' ), value: 'woocommerce_thumbnail' },
-									{ label: __( 'woocommerce_single', 'themehunk-block' ), value: 'woocommerce_single' },
-									{ label: __( 'woocommerce_gallery_thumbnail', 'themehunk-block' ), value: 'woocommerce_gallery_thumbnail' },
+									{ label:  __( 'woocommerce_thumbnail', 'vayu-blocks' ), value: 'woocommerce_thumbnail' },
+									{ label: __( 'woocommerce_single', 'vayu-blocks' ), value: 'woocommerce_single' },
+									{ label: __( 'woocommerce_gallery_thumbnail', 'vayu-blocks' ), value: 'woocommerce_gallery_thumbnail' },
 								    
 								] }
 								onChange={ e => setAttributes({ prdImage: e }) }
 							/> */}
 
                              <ToggleControl
-								label={ __( 'Sale', 'themehunk-block' ) }
+								label={ __( 'Sale', 'vayu-blocks' ) }
 								checked={ attributes.showSale }
 								onChange={ showSale => setAttributes({showSale}) }
 							 />
 							  { ( attributes.showSale == true ) && (
                               <>
 							  <SelectControl 
-								label={ __( 'Sale Style', 'themehunk-block' ) }
+								label={ __( 'Sale Style', 'vayu-blocks' ) }
 								value={ attributes.saleStyle }
 								options={ [
-									{ label:  __( 'Classic', 'themehunk-block' ), value: 'style1' },
-									{ label: __( 'Ribbon', 'themehunk-block' ), value: 'style2' },
-									{ label: __( 'Circle', 'themehunk-block' ), value: 'style3' },
+									{ label:  __( 'Classic', 'vayu-blocks' ), value: 'style1' },
+									{ label: __( 'Ribbon', 'vayu-blocks' ), value: 'style2' },
+									{ label: __( 'Circle', 'vayu-blocks' ), value: 'style3' },
 								    
 								] }
 								onChange={ e => setAttributes({ saleStyle: e }) }
 							  />
 							  <div className='th-component-group-label'>
-									<label className='th-label'>{ __( 'Position', 'themehunk-block' )}</label>
+									<label className='th-label'>{ __( 'Position', 'vayu-blocks' )}</label>
 									<ToogleGroupControl
 
 												value={ attributes.salePosition }
@@ -1037,12 +1037,12 @@ export const SortableItem = ({
 													
 													{
 										
-														label: __( 'Right', 'themehunk-block' ),
+														label: __( 'Right', 'vayu-blocks' ),
 														value: 'saleright'
 													},
 													{
 													
-														label: __( 'Left', 'themehunk-blocks' ),
+														label: __( 'Left', 'vayu-blocks' ),
 														value: 'saleleft'
 													}
 												]}
@@ -1050,7 +1050,7 @@ export const SortableItem = ({
 											/>
 								</div>
 							  <div className='th-component-group-label'>
-									<label className='th-label'>{ __( 'Design', 'themehunk-block' )}</label>
+									<label className='th-label'>{ __( 'Design', 'vayu-blocks' )}</label>
 									<ToogleGroupControl
 
 												value={ attributes.saleDesign }
@@ -1058,12 +1058,12 @@ export const SortableItem = ({
 												options={[
 													{
 													
-														label: __( 'Text', 'themehunk-blocks' ),
+														label: __( 'Text', 'vayu-blocks' ),
 														value: 'saletext'
 													},
 													{
 										
-														label: __( 'Digit', 'themehunk-block' ),
+														label: __( 'Digit', 'vayu-blocks' ),
 														value: 'saledigit'
 													}
 												]}
@@ -1072,19 +1072,19 @@ export const SortableItem = ({
 								</div>
                                 { ( attributes.saleDesign == 'saletext' ) && (
 								<TextControl
-									label={ __( 'Sale Text', 'themehunk-block' ) }
+									label={ __( 'Sale Text', 'vayu-blocks' ) }
 									value={ attributes.saleText }
 									onChange={ ( saleText ) => setAttributes({saleText}) }
 							    />
 								)}
 							  <ColorGradientControl
-								 label={ __( 'Sale Color', 'themehunk-block' ) }
+								 label={ __( 'Sale Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.saleClr }
 								 onColorChange={ e => setAttributes({ saleClr: e }) }
 								 enableAlpha={true} 
 								/>
 								<ColorGradientControl
-								 label={ __( 'Sale Bg Color', 'themehunk-block' ) }
+								 label={ __( 'Sale Bg Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.saleBgClr }
 								 onColorChange={ e => setAttributes({ saleBgClr: e }) }
 								 enableAlpha={true} 
@@ -1093,28 +1093,28 @@ export const SortableItem = ({
 							  )}
 
 							  <ToggleControl
-								label={ __( 'Wishlist', 'themehunk-block' ) }
+								label={ __( 'Wishlist', 'vayu-blocks' ) }
 								checked={ attributes.showWishlist }
 								onChange={ showWishlist => setAttributes({showWishlist}) }
 							 />
 							 <ToggleControl
-								label={ __( 'Compare', 'themehunk-block' ) }
+								label={ __( 'Compare', 'vayu-blocks' ) }
 								checked={ attributes.showCompare }
 								onChange={ showCompare => setAttributes({ showCompare }) }
 							 />
 							 {/* <ToggleControl
-								label={ __( 'Quick View', 'themehunk-block' ) }
+								label={ __( 'Quick View', 'vayu-blocks' ) }
 								checked={ attributes.showView }
 								onChange={ showView => setAttributes({ showView }) }
 							 /> */}
 							 <HoverControl value={ postmetaclr }
 								options={[
 									{
-										label: __( 'Normal', 'themehunk-block' ),
+										label: __( 'Normal', 'vayu-blocks' ),
 										value: 'normal'
 									},
 									{
-										label: __( 'Hover', 'themehunk-block' ),
+										label: __( 'Hover', 'vayu-blocks' ),
 										value: 'hover'
 									}
 								]}
@@ -1123,13 +1123,13 @@ export const SortableItem = ({
                         { 'normal' ===  postmetaclr &&  (
                                <>
                                <ColorGradientControl
-								 label={ __( 'Post Meta Color', 'themehunk-block' ) }
+								 label={ __( 'Post Meta Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.postMetaClr }
 								 onColorChange={ e => setAttributes({ postMetaClr: e }) }
 								 enableAlpha={true} 
 								/>
 								<ColorGradientControl
-								 label={ __( 'Post Meta Bg Color', 'themehunk-block' ) }
+								 label={ __( 'Post Meta Bg Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.postMetaBgClr }
 								 onColorChange={ e => setAttributes({ postMetaBgClr: e }) }
 								 enableAlpha={true} 
@@ -1138,13 +1138,13 @@ export const SortableItem = ({
 						) || 'hover' ===  postmetaclr  && (
 							<>
 							 <ColorGradientControl
-							  label={ __( 'Post Meta Hover Color', 'themehunk-block' ) }
+							  label={ __( 'Post Meta Hover Color', 'vayu-blocks' ) }
 							  colorValue={ attributes.postMetaHvrClr }
 							  onColorChange={ e => setAttributes({ postMetaHvrClr: e }) }
 							  enableAlpha={true} 
 							 />
 							 <ColorGradientControl
-							  label={ __( 'Post Meta Bg Hover Color', 'themehunk-block' ) }
+							  label={ __( 'Post Meta Bg Hover Color', 'vayu-blocks' ) }
 							  colorValue={ attributes.postMetaBgHvrClr }
 							  onColorChange={ e => setAttributes({ postMetaBgHvrClr: e }) }
 							  enableAlpha={true} 
@@ -1158,7 +1158,7 @@ export const SortableItem = ({
                    { ( 'category' === template ) && (
 						<Fragment >
 							<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ catTypography: true }) }
@@ -1179,7 +1179,7 @@ export const SortableItem = ({
 								}
 							>
 							<GoogleFontsControl
-								label={ __( 'Font Family', 'themehunk-block' ) }
+								label={ __( 'Font Family', 'vayu-blocks' ) }
 								value={ attributes.catfontFamily }
 								onChangeFontFamily={ changecatFontFamily }
 								valueVariant={ attributes.catfontVariant }
@@ -1191,7 +1191,7 @@ export const SortableItem = ({
 							    
 							/>
 							<ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.catfontSizeUnit }
@@ -1214,7 +1214,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
                                <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.catlineHeightUnit }
@@ -1237,7 +1237,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.catletterSpacingUnit }
@@ -1261,7 +1261,7 @@ export const SortableItem = ({
 
 						</ControlPanelControl>
 						<ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ catColor: true }) }
@@ -1278,11 +1278,11 @@ export const SortableItem = ({
                        <HoverControl value={ cat }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Hover', 'themehunk-block' ),
+								label: __( 'Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -1290,14 +1290,14 @@ export const SortableItem = ({
 						/>
                         { 'normal' ===  cat &&  (
                                 <ColorGradientControl
-								 label={ __( ' Color', 'themehunk-block' ) }
+								 label={ __( ' Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.catTxtColor }
 								 onColorChange={ e => setAttributes({ catTxtColor: e }) }
 								 enableAlpha={true} 
 								 />
 						) || 'hover' ===  cat && (
 								 <ColorGradientControl
-								 label={ __( ' Hover Color ', 'themehunk-block' ) }
+								 label={ __( ' Hover Color ', 'vayu-blocks' ) }
 								 colorValue={ attributes.catTxtColorHvr }
 								 onColorChange={ e => setAttributes({ catTxtColorHvr: e }) }
 								 enableAlpha={true} 
@@ -1311,34 +1311,34 @@ export const SortableItem = ({
                     { ( 'title' === template ) && (
 						<Fragment >
 							<div className='th-component-group-label'>
-							<label className='th-label'>{ __( 'Tag', 'themehunk-block' )}</label>
+							<label className='th-label'>{ __( 'Tag', 'vayu-blocks' )}</label>
                              <ToogleGroupControl
                                         value={ attributes.prouctTitleTag }
                                         onChange={ prouctTitleTag => setAttributes({ prouctTitleTag })  }
 										options={[
 											{
 												
-												label: __( 'H2', 'themehunk-blocks' ),
+												label: __( 'H2', 'vayu-blocks' ),
 												value: 'h2'
 											},
 											{
 												
-												label: __( 'H3', 'themehunk-block' ),
+												label: __( 'H3', 'vayu-blocks' ),
 												value: 'h3'
 											},
                                             {
 												
-												label: __( 'H4', 'themehunk-block' ),
+												label: __( 'H4', 'vayu-blocks' ),
 												value: 'h4'
 											},
                                             {
 												
-												label: __( 'H5', 'themehunk-block' ),
+												label: __( 'H5', 'vayu-blocks' ),
 												value: 'h5'
 											},
                                             {
 												
-												label: __( 'H6', 'themehunk-block' ),
+												label: __( 'H6', 'vayu-blocks' ),
 												value: 'h6'
 											}
 										]}
@@ -1347,7 +1347,7 @@ export const SortableItem = ({
 									/>
 
 							<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ titleTypography: true }) }
@@ -1368,7 +1368,7 @@ export const SortableItem = ({
 								}
 							>
 							<GoogleFontsControl
-								label={ __( 'Font Family', 'themehunk-block' ) }
+								label={ __( 'Font Family', 'vayu-blocks' ) }
 								value={ attributes.titlefontFamily }
 								onChangeFontFamily={ changetitleFontFamily }
 								valueVariant={ attributes.titlefontVariant }
@@ -1380,7 +1380,7 @@ export const SortableItem = ({
 							    
 							/>
 							<ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.titlefontSizeUnit }
@@ -1403,7 +1403,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
                                <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.titlelineHeightUnit }
@@ -1426,7 +1426,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.titleletterSpacingUnit }
@@ -1451,7 +1451,7 @@ export const SortableItem = ({
 						</ControlPanelControl>
 
 						   <ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ titleColor: true }) }
@@ -1468,11 +1468,11 @@ export const SortableItem = ({
                        <HoverControl value={ title }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Hover', 'themehunk-block' ),
+								label: __( 'Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -1480,14 +1480,14 @@ export const SortableItem = ({
 						/>
                         { 'normal' ===  title &&  (
                                 <ColorGradientControl
-								 label={ __( 'Title Color', 'themehunk-block' ) }
+								 label={ __( 'Title Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.productTitleColor }
 								 onColorChange={ e => setAttributes({ productTitleColor: e }) }
 								 enableAlpha={true} 
 								 />
 						) || 'hover' ===  title && (
 								 <ColorGradientControl
-								 label={ __( 'Title Hover Color ', 'themehunk-block' ) }
+								 label={ __( 'Title Hover Color ', 'vayu-blocks' ) }
 								 colorValue={ attributes.productTitleColorHvr }
 								 onColorChange={ e => setAttributes({ productTitleColorHvr: e }) }
 								 enableAlpha={true} 
@@ -1503,7 +1503,7 @@ export const SortableItem = ({
 					{ ( 'price' === template ) && (
 						<Fragment>
 							<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ priceTypography: true }) }
@@ -1524,7 +1524,7 @@ export const SortableItem = ({
 								}
 							>
 							<GoogleFontsControl
-								label={ __( 'Font Family', 'themehunk-block' ) }
+								label={ __( 'Font Family', 'vayu-blocks' ) }
 								value={ attributes.pricefontFamily }
 								onChangeFontFamily={ changepriceFontFamily }
 								valueVariant={ attributes.pricefontVariant }
@@ -1536,7 +1536,7 @@ export const SortableItem = ({
 							    
 							/>
 							<ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.pricefontSizeUnit }
@@ -1559,7 +1559,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
                                <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.pricelineHeightUnit }
@@ -1582,7 +1582,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.priceletterSpacingUnit }
@@ -1606,7 +1606,7 @@ export const SortableItem = ({
 
 						</ControlPanelControl>
 						<ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ PriceColor: true }) }
@@ -1621,13 +1621,13 @@ export const SortableItem = ({
 								
 							>
                           <ColorGradientControl
-								 label={ __( 'Color', 'themehunk-block' ) }
+								 label={ __( 'Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.priceColor }
 								 onColorChange={ e => setAttributes({ priceColor: e }) }
 								 enableAlpha={true} 
 								 />
 						   <ColorGradientControl
-								 label={ __( 'Del Color', 'themehunk-block' ) }
+								 label={ __( 'Del Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.priceDelColor }
 								 onColorChange={ e => setAttributes({ priceDelColor: e }) }
 								 enableAlpha={true} 
@@ -1642,12 +1642,12 @@ export const SortableItem = ({
 					{ ( 'rating' === template ) && (
 						<Fragment >
 							<ToggleControl
-								label={ __( 'Show Rating', 'themehunk-block' ) }
+								label={ __( 'Show Rating', 'vayu-blocks' ) }
 								checked={ attributes.hideRating }
 								onChange={ hideRating => setAttributes({hideRating}) }
 							 />
 							<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ ratingTypography: true }) }
@@ -1664,7 +1664,7 @@ export const SortableItem = ({
 								   }
 							  >	
 							  <ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.ratingfontSizeUnit }
@@ -1686,7 +1686,7 @@ export const SortableItem = ({
 								/>
 							</ResponsiveControl>
                                <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.ratinglineHeightUnit }
@@ -1708,7 +1708,7 @@ export const SortableItem = ({
 								/>
 							</ResponsiveControl>
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.ratingletterSpacingUnit }
@@ -1730,7 +1730,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 							</ControlPanelControl>
 							<ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ RatingColor: true }) }
@@ -1744,13 +1744,13 @@ export const SortableItem = ({
 								}
 							>
                            <ColorGradientControl
-								 label={ __( 'Star Color', 'themehunk-block' ) }
+								 label={ __( 'Star Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.ratingColor }
 								 onColorChange={ e => setAttributes({ ratingColor: e }) }
 								 enableAlpha={true} 
 								 />
 						   <ColorGradientControl
-								 label={ __( 'Empty Star Color', 'themehunk-block' ) }
+								 label={ __( 'Empty Star Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.emptyratingColor }
 								 onColorChange={ e => setAttributes({ emptyratingColor: e }) }
 								 enableAlpha={true} 
@@ -1762,7 +1762,7 @@ export const SortableItem = ({
                     { ( 'button' === template ) && (
 						<Fragment >
 							<ControlPanelControl
-								label={ __( 'Typography', 'themehunk-block' ) }
+								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ buttonTypography: true }) }
@@ -1783,7 +1783,7 @@ export const SortableItem = ({
 								}
 							>
 							<GoogleFontsControl
-								label={ __( 'Font Family', 'themehunk-block' ) }
+								label={ __( 'Font Family', 'vayu-blocks' ) }
 								value={ attributes.buttonfontFamily }
 								onChangeFontFamily={ changebuttonFontFamily }
 								valueVariant={ attributes.buttonfontVariant }
@@ -1795,7 +1795,7 @@ export const SortableItem = ({
 							    
 							/>
 							<ResponsiveControl
-								label={ __( 'Font Size', 'themehunk-block' ) }
+								label={ __( 'Font Size', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.buttonfontSizeUnit }
@@ -1818,7 +1818,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
                                 <ResponsiveControl
-								label={ __( 'Line Height', 'themehunk-block' ) }
+								label={ __( 'Line Height', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.buttonlineHeightUnit }
@@ -1841,7 +1841,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 
 							<ResponsiveControl
-								label={ __( 'Letter Spacing', 'themehunk-block' ) }
+								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
 							     >	
 								<UnitChooser
 								value={ attributes.buttonletterSpacingUnit }
@@ -1865,7 +1865,7 @@ export const SortableItem = ({
 
 						</ControlPanelControl>
 						<ControlPanelControl
-								label={ __( 'Color', 'themehunk-block' ) }
+								label={ __( 'Color', 'vayu-blocks' ) }
 								attributes={ attributes }
 								setAttributes={ setAttributes }
 								onClick={ () => setAttributes({ buttonClr: true }) }
@@ -1884,11 +1884,11 @@ export const SortableItem = ({
 						<HoverControl value={ buttonclr }
 						options={[
 							{
-								label: __( 'Normal', 'themehunk-block' ),
+								label: __( 'Normal', 'vayu-blocks' ),
 								value: 'normal'
 							},
 							{
-								label: __( 'Hover', 'themehunk-block' ),
+								label: __( 'Hover', 'vayu-blocks' ),
 								value: 'hover'
 							}
 						]}
@@ -1897,19 +1897,19 @@ export const SortableItem = ({
                         { 'normal' ===  buttonclr &&  (		
 						<>
                         <ColorGradientControl
-								 label={ __( 'Text Color', 'themehunk-block' ) }
+								 label={ __( 'Text Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonTxtClr }
 								 onColorChange={ e => setAttributes({ buttonTxtClr: e }) }
 								 enableAlpha={true} 
 								 />
 						<ColorGradientControl
-								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 label={ __( 'Bg Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonBgClr }
 								 onColorChange={ e => setAttributes({ buttonBgClr: e }) }
 								 enableAlpha={true} 
 								 />	
 						<ColorGradientControl
-								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 label={ __( 'Border Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonBrdrClr }
 								 onColorChange={ e => setAttributes({ buttonBrdrClr: e }) }
 								 enableAlpha={true} 
@@ -1918,19 +1918,19 @@ export const SortableItem = ({
 						) || 'hover' ===  buttonclr  && (
 						<>
 						<ColorGradientControl
-								 label={ __( 'Text Color', 'themehunk-block' ) }
+								 label={ __( 'Text Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonTxtClrHvr }
 								 onColorChange={ e => setAttributes({ buttonTxtClrHvr: e }) }
 								 enableAlpha={true} 
 								 />
 						<ColorGradientControl
-								 label={ __( 'Bg Color', 'themehunk-block' ) }
+								 label={ __( 'Bg Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonBgClrHvr }
 								 onColorChange={ e => setAttributes({ buttonBgClrHvr: e }) }
 								 enableAlpha={true} 
 								 />	
 						<ColorGradientControl
-								 label={ __( 'Border Color', 'themehunk-block' ) }
+								 label={ __( 'Border Color', 'vayu-blocks' ) }
 								 colorValue={ attributes.buttonBrdrClrHvr }
 								 onColorChange={ e => setAttributes({ buttonBrdrClrHvr: e }) }
 								 enableAlpha={true} 
@@ -1940,22 +1940,22 @@ export const SortableItem = ({
 						) }		 	 
 						</ControlPanelControl>
 						<SelectControl
-						label={ __( 'Border Type', 'themehunk-block' ) }
+						label={ __( 'Border Type', 'vayu-blocks' ) }
 						value={ attributes.buttonBrdrType }
 						options={ [
-							{ label:  __( 'None', 'themehunk-block' ), value: 'none' },
-							{ label: __( 'Solid', 'themehunk-block' ), value: 'solid' },
-							{ label: __( 'Double', 'themehunk-block' ), value: 'double' },
-							{ label: __( 'Dotted', 'themehunk-block' ), value: 'dotted' },
-						    { label: __( 'Dashed', 'themehunk-block' ), value: 'dashed' },
-							{ label: __( 'Groove', 'themehunk-block' ), value: 'groove' },
+							{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+							{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+							{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+							{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+						    { label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+							{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
 						] }
 						onChange={ e => setAttributes({ buttonBrdrType: e }) }
 					   />	
                         { 'none' !== attributes.buttonBrdrType && (
 							<>
                             <ResponsiveControl
-								label={ __( 'Border Width', 'themehunk-block' ) }
+								label={ __( 'Border Width', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.buttonborderWidthUnit }
@@ -1974,22 +1974,22 @@ export const SortableItem = ({
 									onChange={ changeButtonBorderWidth }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getButtonBorderWidth( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getButtonBorderWidth( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getButtonBorderWidth( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getButtonBorderWidth( 'left' )
 										}
@@ -1999,7 +1999,7 @@ export const SortableItem = ({
 							</ResponsiveControl>
 							
 							<ResponsiveControl
-								label={ __( 'Border Radius', 'themehunk-block' ) }
+								label={ __( 'Border Radius', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.buttonBrdrRadiusUnit }
@@ -2018,23 +2018,23 @@ export const SortableItem = ({
 									onChange={ changeButtonBrdrRadius }
 									options={ [
 										{
-											label: __(  'T-R', 'themehunk-block'),
+											label: __(  'T-R', 'vayu-blocks'),
 											type: 'top',
 											value: getButtonBrdrRadius( 'top' )
 										},
 										{
-											label: __(  'T-L', 'themehunk-block' ),
+											label: __(  'T-L', 'vayu-blocks' ),
 											type: 'right',
 											value: getButtonBrdrRadius( 'right' )
 										},
 										
 										{
-											label: __( 'B-R', 'themehunk-block'  ),
+											label: __( 'B-R', 'vayu-blocks'  ),
 											type: 'left',
 											value: getButtonBrdrRadius( 'left' )
 										},
 										{
-											label: __( 'B-L', 'themehunk-block'),
+											label: __( 'B-L', 'vayu-blocks'),
 											type: 'bottom',
 											value: getButtonBrdrRadius( 'bottom' )
 										},
@@ -2046,7 +2046,7 @@ export const SortableItem = ({
 						)}
 
                            <ResponsiveControl
-								label={ __( 'Button Spacing', 'themehunk-block' ) }
+								label={ __( 'Button Spacing', 'vayu-blocks' ) }
 							>
 							<UnitChooser
 								value={ attributes.buttonSpaceUnit }
@@ -2065,22 +2065,22 @@ export const SortableItem = ({
 									onChange={ changebuttonSpace }
 									options={ [
 										{
-											label: __( 'Top', 'themehunk-block' ),
+											label: __( 'Top', 'vayu-blocks' ),
 											type: 'top',
 											value: getbuttonSpace( 'top' )
 										},
 										{
-											label: __( 'Right', 'themehunk-block' ),
+											label: __( 'Right', 'vayu-blocks' ),
 											type: 'right',
 											value: getbuttonSpace( 'right' )
 										},
 										{
-											label: __( 'Bottom', 'themehunk-block' ),
+											label: __( 'Bottom', 'vayu-blocks' ),
 											type: 'bottom',
 											value: getbuttonSpace( 'bottom' )
 										},
 										{
-											label: __( 'Left', 'themehunk-block' ),
+											label: __( 'Left', 'vayu-blocks' ),
 											type: 'left',
 											value: getbuttonSpace( 'left' )
 										}

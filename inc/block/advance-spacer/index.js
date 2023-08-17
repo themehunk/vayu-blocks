@@ -27,8 +27,8 @@ const { name } = metadata;
 
 registerBlockType( name, {
 	...metadata,
-	title: __( 'Advanced Spacer', 'themehunk-block' ),
-	description: __( 'Advanced Spacer gives a spin to editor\'s Spacer block with much needed customization options. Powered by themehunk.', 'themehunk-block' ),
+	title: __( 'Spacer', 'vayu-blocks' ),
+	description: __( 'Advanced Spacer gives a spin to editor\'s Spacer block with much needed customization options. Powered by Vayu.', 'vayu-blocks' ),
 	icon,
 	keywords: [
 		'heading',
@@ -39,7 +39,7 @@ registerBlockType( name, {
 	save,
 	example: {
 		attributes: {
-			content: __( 'A spacer with more customization options', 'themehunk-block' )
+			content: __( 'A spacer with more customization options', 'vayu-blocks' )
 		}
 	}
 });
