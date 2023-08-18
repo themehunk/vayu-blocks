@@ -97,6 +97,9 @@ function ToolbarLibrary() {
                                     <div className="heading-wrap">
                                         <h3 className="title">{template.title}</h3>
                                     </div>
+                                     <button className="import import-template button-primary">
+                                     {__('Import', 'themehunk-blocks')}
+                                    </button>
                                 </div>
                             </div>
                         ))}

@@ -1124,23 +1124,20 @@ color: #818080;
     position: relative;
     border-radius: 3px;
     transition: all .4s;
-    padding: 5px;
 }
 
 .th-block-templates-sites .single-site .grid-item-badge {
-    background: #ffc107;
-    color: #000;
+    background: #74b956;
+    color: #fff;
     padding: 4px 12px;
     font-size: 11px;
     top: 0;
-    right: -5px;
+    right: 0;
     text-transform: uppercase;
     position: absolute;
     z-index: 999;
-    border-radius: 2px;
     font-weight: 600;
-    letter-spacing: .3px;
-    transform: translateY(-30%);
+    letter-spacing: 0.3px;
 }
 
 .th-block-templates-sites .item .screenshot {
@@ -1202,7 +1199,7 @@ color: #818080;
     min-height: auto;
     line-height: normal;
     border-radius: 2px;
-    margin:1rem 0rem;
+    margin:12px 15px;
     background:#3F51B5;
 }
 .pattern-tab-button.active {
@@ -1216,3 +1213,10 @@ color: #818080;
     max-height: calc(95vh - 204px);
     overflow: auto;
 }
+.import.import-template{
+    margin:0px 0px 15px 15px;
+    }
+    
+.th-block-templates-sites .item .heading-wrap h3{
+    margin:15px 0px;
+    }
