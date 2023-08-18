@@ -142,5 +142,4 @@ class Vayu_Block_Plugin {
         }
     }
 }
-
 new Vayu_Block_Plugin();

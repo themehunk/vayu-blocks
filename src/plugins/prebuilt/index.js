@@ -8,6 +8,7 @@ import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
 import { FaTimes } from 'react-icons/fa';
 
+
 import templatesData from './templates.json';
 import patternData from './pattern.json'; 
 
@@ -59,6 +60,7 @@ function ToolbarLibrary() {
         
             const importPattern = async () => {
                 try {
+                    console.log('Setting importLoading to true');
                     setImportLoading(true);
                     const { insertBlocks } = wp.data.dispatch('core/block-editor');
                     const parsedBlocks = wp.blocks.parse(patternCode);
@@ -66,6 +68,7 @@ function ToolbarLibrary() {
                 } catch (error) {
                     console.error('Error importing pattern:', error);
                 } finally {
+                    console.log('Setting importLoading to false');
                     setImportLoading(false);
                 }
             };
@@ -94,6 +97,9 @@ function ToolbarLibrary() {
                                     <div className="heading-wrap">
                                         <h3 className="title">{template.title}</h3>
                                     </div>
+                                     <button className="import import-template button-primary">
+                                     {__('Import', 'themehunk-blocks')}
+                                    </button>
                                 </div>
                             </div>
                         ))}
