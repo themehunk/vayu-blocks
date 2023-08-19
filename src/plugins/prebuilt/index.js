@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
 import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
 import { FaTimes } from 'react-icons/fa';
+import Masonry from 'react-masonry-css';
 
 
 import templatesData from './templates.json';
@@ -44,16 +45,23 @@ function ToolbarLibrary() {
         const handlePatternCategoryChange = (category) => {
           setActivePatternCategory(category);
         };
+        const breakpointColumnsObj = {
+            default:3,
+            1100: 3,
+            700: 2,
+            500: 2
+          };
+        const [isLoading, setIsLoading] = useState(true);
     
         useEffect(() => {
-            setTemplates(templatesData);
-        }, []);
-    
-        useEffect(() => {
-            setPattern(patternData);
-        }, []);
+            // Simulating a brief loading period using setTimeout
+            setTimeout(() => {
+              setTemplates(templatesData);
+              setPattern(patternData);
+              setIsLoading(false);
+            }, 1000); // Simulating 1 second loading time
+          }, []);
 
-    
         const ImportButton = ({ patternCode }) => {
 
             const [importLoading, setImportLoading] = useState(false);
@@ -70,6 +78,7 @@ function ToolbarLibrary() {
                 } finally {
                     console.log('Setting importLoading to false');
                     setImportLoading(false);
+                    setModalOpen(false);
                 }
             };
         
@@ -84,26 +93,34 @@ function ToolbarLibrary() {
             case 'page':
                 return (
                     <div className="th-block-templates-sites">
-                        {templates.map((template, index) => (
-                            <div className="item single-site" key={index}>
-                                <div className="inner">
-                                    <span className="grid-item-badge">{template.badge}</span>
-                                    <div
-                                        className="screenshot"
-                                        style={{
-                                            backgroundImage: `url("${template.image}")`
-                                        }}
-                                    ></div>
-                                    <div className="heading-wrap">
-                                        <h3 className="title">{template.title}</h3>
-                                    </div>
-                                     <button className="import import-template button-primary">
-                                     {__('Import', 'themehunk-blocks')}
-                                    </button>
-                                </div>
+                         
+                    {isLoading ? (
+                        <div className="loading-wrap">
+                        <div className="loading-icon"></div>
+                        </div>
+                    ) : (
+                        templates.map((template, index) => (
+                        <div className="item single-site" key={index}>
+                            <div className="inner">
+                            <span className="grid-item-badge">{template.badge}</span>
+                            <div
+                                className="screenshot"
+                                style={{
+                                backgroundImage: `url("${template.image}")`
+                                }}
+                            ></div>
+                            <div className="heading-wrap">
+                                <h3 className="title">{template.title}</h3>
                             </div>
-                        ))}
+                            <button className="import import-template button-primary">
+                                {__('Import', 'themehunk-blocks')}
+                            </button>
+                            </div>
+                        </div>
+                        ))
+                    )}
                     </div>
+
                 );
             case 'pattern':
                 const filteredPatternData =
@@ -113,6 +130,13 @@ function ToolbarLibrary() {
     
                 return (
                     <div className="th-block-templates-pattern">
+                        
+                        {isLoading ? (
+                         <div className="loading-wrap">
+                         <div className="loading-icon"></div>
+                         </div>
+                       ) : (
+                        <>
                         <div className="pattern-tabs-filter">
                             <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
                            <div className="pattern-tabs-filter-wrap">
@@ -123,36 +147,47 @@ function ToolbarLibrary() {
                                 {__('All', 'themehunk-blocks')}
                             </button>
                             <button
-                                className={`pattern-tab-button ${activePatternCategory === 'cat1' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('cat1')}
+                                className={`pattern-tab-button ${activePatternCategory === 'header' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('header')}
                             >
-                                {__('cat1', 'themehunk-blocks')}
+                                {__('header', 'themehunk-blocks')}
                             </button>
                             <button
-                                className={`pattern-tab-button ${activePatternCategory === 'cat2' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('cat2')}
+                                className={`pattern-tab-button ${activePatternCategory === 'featured' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('featured')}
                             >
-                                {__('cat2', 'themehunk-blocks')}
+                                {__('featured', 'themehunk-blocks')}
                             </button>
+                            <button
+                                className={`pattern-tab-button ${activePatternCategory === 'call-to-action' ? 'active' : ''}`}
+                                onClick={() => handlePatternCategoryChange('call-to-action')}
+                            >
+                                {__('call-to-action', 'themehunk-blocks')}
+                            </button>
+                            
                             </div>
                         </div>
                         <div className="pattern-tab-content">
                             <div className="th-block-templates-sites">
+                            
+                            <Masonry breakpointCols={breakpointColumnsObj}
+                            className="masonry-grid"
+                            columnClassName="masonry-grid_column">
                                 {filteredPatternData.map((patternItem, index) => (
                                     <div className="item single-site" key={index}>
                                         <div className="inner">
-                                            <div
-                                                className="screenshot"
-                                                style={{
-                                                    backgroundImage: `url("${patternItem.image}")`,
-                                                }}
-                                            ></div>
+                                        <div className="thumbnail">
+                                            <img src={patternItem.image}></img>
+                                        </div>
                                             <ImportButton patternCode={patternItem.content} />
                                         </div>
                                     </div>
                                 ))}
+                            </Masonry>
                             </div>
                         </div>
+                        </>
+                       )}
                     </div>
                 );
             default:

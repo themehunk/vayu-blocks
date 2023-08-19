@@ -49,3 +49,20 @@ function vayu_blocks_editor_assets(){
 }
 add_action( 'enqueue_block_editor_assets', 'vayu_blocks_editor_assets' );
 
+
+function admin_react_script() {
+
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/adminDashboard.asset.php';
+   
+    wp_enqueue_script(
+		'adminDashboard-block',
+		VAYU_BLOCKS_URL . 'build/adminDashboard.js',
+		array_merge(
+			$asset_file['dependencies']
+		),
+		'1.0.0',
+		true
+	);
+}
+add_action('admin_enqueue_scripts',  'admin_react_script');
+

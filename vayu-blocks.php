@@ -48,6 +48,8 @@ class Vayu_Block_Plugin {
 
         add_action( 'init', array( $this, 'register_blocks' ) );
 
+        add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
+
     }
 
     public function register_blocks() {
@@ -141,5 +143,42 @@ class Vayu_Block_Plugin {
             register_block_type( $block['name'], $block_args );
         }
     }
+    
+    // plugin menu option add
+    public function vayu_plugin_menu() {
+        add_menu_page(
+            'Vayu Blocks',
+            'Vayu Blocks',
+            'manage_options', 
+            'vayu-blocks',
+            array( $this, 'vayu_plugin_page_callback' ),
+            'dashicons-admin-plugins',
+            10 
+        );
+        add_submenu_page(
+            'vayu-blocks',
+            'Blocks',
+            'blocks',
+            'manage_options',
+            'vayu-blocks&path=blocks',
+            array( $this, 'vayu_plugin_page_callback' )
+        );
+    }
+    
+    public function vayu_plugin_page_callback() {
+        
+		if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+		}?>
+
+        <div class="vayu-blocks-wrap">
+        <div id="vayu-blocks-container"></div>
+        </div>
+
+    <?php }
+
+
+
+
 }
 new Vayu_Block_Plugin();
