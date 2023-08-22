@@ -33,6 +33,7 @@ function vayu_blocks_editor_assets(){
         'registerPlugin-block',
         'vayublock',
         array(
+            'homeUrl' => plugins_url( '/', __FILE__ ),
             'showOnboarding' => '',
         )
     );
@@ -53,7 +54,7 @@ add_action( 'enqueue_block_editor_assets', 'vayu_blocks_editor_assets' );
 function admin_react_script() {
 
     $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/adminDashboard.asset.php';
-   
+
     wp_enqueue_script(
 		'adminDashboard-block',
 		VAYU_BLOCKS_URL . 'build/adminDashboard.js',
@@ -63,6 +64,21 @@ function admin_react_script() {
 		'1.0.0',
 		true
 	);
+
+    wp_localize_script(
+        'adminDashboard-block',
+        'vayublock',
+        array(
+            'homeUrl' => plugins_url( '/', __FILE__ ),
+        )
+    );
+
+
+    wp_enqueue_style(
+        'adminDashboard-style',
+        VAYU_BLOCKS_URL . 'build/adminDashboard-style.css',
+        '1.0.0'
+    );
 }
 add_action('admin_enqueue_scripts',  'admin_react_script');
 

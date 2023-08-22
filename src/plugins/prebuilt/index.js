@@ -6,9 +6,8 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
-import { FaTimes } from 'react-icons/fa';
 import Masonry from 'react-masonry-css';
-
+import { RxFile,RxStack, RxCross1, RxArrowDown} from "react-icons/rx";
 
 import templatesData from './templates.json';
 import patternData from './pattern.json'; 
@@ -84,10 +83,12 @@ function ToolbarLibrary() {
         
             return (
                 <button className="import button-primary" onClick={importPattern}>
-                    {importLoading ? 'Importing...' : 'Import'}
+                    {importLoading ? 'Importing...' : 'Import'}<RxArrowDown></RxArrowDown>
                 </button>
             );
         };
+        
+       
 
         switch (tab) {
             case 'page':
@@ -113,7 +114,7 @@ function ToolbarLibrary() {
                                 <h3 className="title">{template.title}</h3>
                             </div>
                             <button className="import import-template button-primary">
-                                {__('Import', 'themehunk-blocks')}
+                                {__('Import', 'themehunk-blocks')}<RxArrowDown></RxArrowDown>
                             </button>
                             </div>
                         </div>
@@ -195,33 +196,37 @@ function ToolbarLibrary() {
         }
     };
     
+    const homeUrl = vayublock.homeUrl;
     
     const modalContent = (
         <div className="th-design-template-modal">
            
             <div className="th-design-template-modal-wrap">
             <div className="th-inner-wrap">
+                
             <div className="th-header">
                 <div className="th-logo-wrap">
-                  <h2>{__('Themehunk-Kit', 'themehunk-blocks')}</h2>
+                <img src={`${homeUrl}plugins/dashboard/img/vayu.png`} />
+                  <h2>{__('Blocks', 'themehunk-blocks')}</h2>
                 </div>
                  <div className="th-menu-wrap">
                  <div
                     className={`th-menu-item ${activeTab === 'page' ? 'active' : ''}`}
                     onClick={() => setActiveTab('page')}
                 >
-                    {__('Page', 'themehunk-blocks')}
+                    <RxFile></RxFile>{__('Page', 'themehunk-blocks')}
                 </div>
                 <div
                     className={`th-menu-item ${activeTab === 'pattern' ? 'active' : ''}`}
                     onClick={() => setActiveTab('pattern')}
                 >
-                    {__('Pattern', 'themehunk-blocks')}
+                    <RxStack></RxStack>{__('Pattern', 'themehunk-blocks')}
                 </div>
                  </div>
                  <div className="th-close-wrap">
-                 <Button onClick={closeModal}><FaTimes /> {__('Close', 'themehunk-blocks')}</Button>
+                 <Button onClick={closeModal}><RxCross1></RxCross1></Button>
                  </div>
+      
             </div>
             <div className="th-template-block-wrap">
             <TabContent tab={activeTab} />

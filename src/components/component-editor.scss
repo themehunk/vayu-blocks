@@ -1053,7 +1053,7 @@ button.components-icon-picker-item {
     z-index: 3;
     box-shadow: 0 4px 10px rgba(0,0,0,.05);
     border-radius:0;
-    padding:0.5rem;
+    padding: 0.5rem 3rem;
     position: fixed;
     width: -webkit-fill-available;
     height: 50px;
@@ -1061,6 +1061,11 @@ button.components-icon-picker-item {
 }
 .th-logo-wrap{
     align-self: center;
+    display:flex;
+}
+
+.th-logo-wrap img{
+max-width:58px;
 }
 
 .th-menu-wrap {
@@ -1086,9 +1091,9 @@ color: #818080;
 }
 
 .th-menu-item {
-    line-height: 1em;
-    padding: 10px 12px;
-    display: inline-block;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
     text-align: center;
     font-weight: 600;
     color: #818080;
@@ -1098,6 +1103,14 @@ color: #818080;
     border: 2px dashed;
     border-color: transparent;
 }
+.th-menu-item svg,.th-close-wrap svg{
+    font-size: 1.2rem;
+    margin-right: 0.2rem;
+    }
+    
+    .th-close-wrap button:hover{
+    color:#6C1BC3;
+    }
 
 .th-menu-item.active {
     border-color: #6C1BC3;
@@ -1131,6 +1144,7 @@ color: #818080;
     position: relative;
     border-radius: 3px;
     transition: all .4s;
+    display: flow-root;
 }
 
 .th-block-templates-sites .single-site .grid-item-badge {
@@ -1201,23 +1215,30 @@ color: #818080;
   .th-block-templates-pattern{
    display:flex;
   }
-  .th-block-templates-sites .import{
-    padding: 6px 14px;
-    min-height: auto;
-    line-height: normal;
-    border-radius: 2px;
-    margin:12px 15px;
-    background:#3F51B5;
-}
+  .th-block-templates-sites .import {
+    padding: 8px 10px 8px 14px;
+      min-height: auto;
+      line-height: normal;
+      border-radius: 2px;
+      margin: 12px 15px;
+      background: #3F51B5;
+      display: flex;
+      align-items: center;
+  }
+  
+  .th-block-templates-sites .import svg {
+      margin-left: 0.3rem;
+  }  
 .pattern-tab-button.active {
     background-color: #6C1BC3;
     color: #fff;
 }
 
 .pattern-tabs-filter{
-    max-width:280px;
+    max-width: 250px;
     position: fixed;
     height: 100%;
+    padding: 20px;
 }
 .pattern-tabs-filter-wrap{ 
     height: 100%;
@@ -1267,7 +1288,8 @@ color: #818080;
   
   .th-template-block-wrap .loading-icon {
     position:absolute;
-      left:48%;top:50%;
+    left:50%;
+    top:50%;
     width: 20px;
     height: 20px;
     border: 2px solid rgba(0, 0, 0, 0.2);
