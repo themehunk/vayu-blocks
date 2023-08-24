@@ -79,6 +79,7 @@ function admin_react_script() {
         VAYU_BLOCKS_URL . 'build/adminDashboard-style.css',
         '1.0.0'
     );
+    
 }
 add_action('admin_enqueue_scripts',  'admin_react_script');
 

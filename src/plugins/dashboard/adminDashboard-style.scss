@@ -16,9 +16,8 @@
         position: relative;
         z-index: 3;
         border-radius: 0;
-        padding: 0.5rem;
         width: -webkit-fill-available;
-        height: 50px;
+        height: 60px;
         align-items: center;
     }
     
@@ -147,8 +146,10 @@
         display: inline-flex;
         padding: 0.3rem 0.7rem;
         margin: 0;
-        font-size: 12px;
+        font-size: 11px;
         border: 1px solid #6c1bc3;
+        font-weight: 700;
+        letter-spacing: 0.4px;
         }
         
         #vayu-blocks-container .th-block-item .th-block-view:hover,#vayu-blocks-container .sidebar-section .sidebar-link:hover{
@@ -158,3 +159,23 @@
         .sidebar-section hr{
         margin:2rem 0;
         }
+
+        #vayu-blocks-container .section-heading{
+            display:flex;
+            align-items: center;
+            }
+            
+            #vayu-blocks-container .section-heading svg{
+            font-size:1.2rem;
+            margin-right:0.5rem;
+            color:#6C1BC3;
+            }
+            
+            #vayu-blocks-container .section-heading h3{
+            margin:0;
+            }
+
+            .th-last-wrap span{
+
+                font-weight:700;
+            }
