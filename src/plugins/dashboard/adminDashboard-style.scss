@@ -150,6 +150,7 @@
         border: 1px solid #6c1bc3;
         font-weight: 700;
         letter-spacing: 0.4px;
+        text-decoration: none;
         }
         
         #vayu-blocks-container .th-block-item .th-block-view:hover,#vayu-blocks-container .sidebar-section .sidebar-link:hover{
@@ -178,4 +179,10 @@
             .th-last-wrap span{
 
                 font-weight:700;
+            }
+
+            .toplevel_page_vayu-blocks a.toplevel_page_vayu-blocks img{
+                width: 24px;
+                height: 24px;
+                padding: 4px 0!important;
             }

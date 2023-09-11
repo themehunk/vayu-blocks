@@ -146,24 +146,27 @@ class Vayu_Block_Plugin {
     
     // plugin menu option add
     public function vayu_plugin_menu() {
+        
         add_menu_page(
             'Vayu Blocks',
             'Vayu Blocks',
             'manage_options', 
             'vayu-blocks',
             array( $this, 'vayu_plugin_page_callback' ),
-            'dashicons-admin-plugins',
+            plugins_url( 'vayu-blocks/src/th-icon/menu-logo.png' ),
             10 
         );
+    
         add_submenu_page(
             'vayu-blocks',
             'Blocks',
-            'blocks',
+            'Blocks',
             'manage_options',
             'vayu-blocks&path=blocks',
             array( $this, 'vayu_plugin_page_callback' )
         );
     }
+    
     
     public function vayu_plugin_page_callback() {
         

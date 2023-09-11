@@ -31,7 +31,7 @@ function ToolbarLibrary() {
             className="th-toolbar-design-button"
             isPrimary
             onClick={openModal}
-        >
+        > <img src={`${homeUrl}plugins/dashboard/img/menu-logo.png`} />
             {__('Design Library', 'themehunk-blocks')}
         </Button>
     );
@@ -206,7 +206,7 @@ function ToolbarLibrary() {
                 
             <div className="th-header">
                 <div className="th-logo-wrap">
-                <img src={`${homeUrl}plugins/dashboard/img/vayu.png`} />
+                <img src={`${homeUrl}plugins/dashboard/img/logo-vayu.png`} />
                   <h2>{__('Blocks', 'themehunk-blocks')}</h2>
                 </div>
                  <div className="th-menu-wrap">
