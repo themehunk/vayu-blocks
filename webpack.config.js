@@ -8,10 +8,12 @@ module.exports = {
      'advance-button':'./inc/block/advance-button',
      'advance-product':'./inc/block/advance-product',
      'registerPlugin':'./src/plugins/registerPlugin.js',
+     'adminDashboard':'./src/plugins/dashboard/index.js',
      'component-editor': './src/components/component-editor.scss',
      'animation-index': './inc/block/animation',
-			'frontend': './inc/block/animation/frontend.js',
-			'anim-count': './inc/block/animation/frontend/count/index.js',
-			'anim-typing': './inc/block/animation/frontend/typing/index.js'
+		 'frontend': './inc/block/animation/frontend.js',
+		 'anim-count': './inc/block/animation/frontend/count/index.js',
+		 'anim-typing': './inc/block/animation/frontend/typing/index.js',
+     'adminDashboard-style': './src/plugins/dashboard/adminDashboard-style.scss',
   }
 };

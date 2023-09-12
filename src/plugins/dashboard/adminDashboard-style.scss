@@ -1,0 +1,188 @@
+    .toplevel_page_vayu-blocks #wpcontent {
+        padding-left: 0;
+    }
+    
+    #vayu-blocks-container .th-inner-wrap {
+    position: relative;
+        
+    }
+    
+    #vayu-blocks-container .th-header{
+    background:#fff;
+    }
+    
+    #vayu-blocks-container .th-header-wrap{
+        display: flex;
+        position: relative;
+        z-index: 3;
+        border-radius: 0;
+        width: -webkit-fill-available;
+        height: 60px;
+        align-items: center;
+    }
+    
+    #vayu-blocks-container .th-conatiner{    
+    max-width: 1100px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #vayu-blocks-container .th-logo-wrap {
+        align-self: center;
+        display: flex;
+    }
+    #vayu-blocks-container .th-logo-wrap img{
+        max-width: 58px;
+        }
+        
+        #vayu-blocks-container .th-logo-wrap h2{
+        color:#6C1BC3;
+        }
+    #vayu-blocks-container .th-menu-wrap {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    }
+    #vayu-blocks-container h2, #vayu-blocks-container h3 {
+        color: #111;
+        font-size: 1.3em;
+        margin: 1em 0;
+    }
+    #vayu-blocks-container p , #vayu-blocks-container a{
+        font-size:0.89rem;
+        line-height: 1.5;
+        margin: 1em 0;
+    }
+    
+    #vayu-blocks-container a{
+    display:block;
+    }
+    
+    #vayu-blocks-container .th-menu-item.active {
+        border-color: #6C1BC3;
+        color: #6C1BC3;
+        border: 2px dashed;
+    }
+    #vayu-blocks-container .th-menu-item {
+        line-height: 1em;
+        padding: 10px 12px;
+        display: inline-block;
+        text-align: center;
+        font-weight: 600;
+        color: #111;
+        font-size: 0.89rem;
+        cursor: pointer;
+        margin: 0 0.3rem;
+        border: 2px dashed;
+        border-color: transparent;
+    }
+    
+    #vayu-blocks-container .th-content-wrap{
+        width: 100%;
+        display: flex;
+    justify-content: space-between;
+    }
+    
+    #vayu-blocks-container .th-main{
+    width:70%;
+    }
+    
+    #vayu-blocks-container .th-sidebar{
+    width:30%;
+    }
+    #vayu-blocks-container .th-content {
+        margin-top: 2rem;
+    }
+    
+    
+    #vayu-blocks-container .th-main{
+        background: #fff;
+        padding: 30px;
+        box-sizing: border-box;
+        color: #525151;
+    }
+    #vayu-blocks-container .sidebar-section {
+        color: #525151;
+        padding:30px;
+        background: #fff;
+    }
+    
+    #vayu-blocks-container .th-block .th-main{
+    width:100%;
+    }
+    #vayu-blocks-container .th-block-item-content{
+        display: flex;
+    }
+    #vayu-blocks-container .th-block-wrap{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 20px;
+    }
+    #vayu-blocks-container .th-block-item{
+        width: 49%;
+        padding: 20px;
+        box-sizing: border-box;
+        border:1px solid #eee;
+    }
+    #vayu-blocks-container .th-block-desc{
+    margin-left:1rem;
+    }
+    
+    #vayu-blocks-container .th-block-icon svg{
+    font-size:2rem;
+    color:#6C1BC3;
+    }
+    #vayu-blocks-container .th-block-desc h3{
+    margin:0;
+    }
+
+
+    #vayu-blocks-container .th-block-item .th-block-view,
+    #vayu-blocks-container .sidebar-section .sidebar-link {
+        color: #6c1bc3;
+        display: inline-flex;
+        padding: 0.3rem 0.7rem;
+        margin: 0;
+        font-size: 11px;
+        border: 1px solid #6c1bc3;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        text-decoration: none;
+        }
+        
+        #vayu-blocks-container .th-block-item .th-block-view:hover,#vayu-blocks-container .sidebar-section .sidebar-link:hover{
+        opacity:0.8;
+        }
+        
+        .sidebar-section hr{
+        margin:2rem 0;
+        }
+
+        #vayu-blocks-container .section-heading{
+            display:flex;
+            align-items: center;
+            }
+            
+            #vayu-blocks-container .section-heading svg{
+            font-size:1.2rem;
+            margin-right:0.5rem;
+            color:#6C1BC3;
+            }
+            
+            #vayu-blocks-container .section-heading h3{
+            margin:0;
+            }
+
+            .th-last-wrap span{
+
+                font-weight:700;
+            }
+
+            .toplevel_page_vayu-blocks a.toplevel_page_vayu-blocks img{
+                width: 24px;
+                height: 24px;
+                padding: 4px 0!important;
+            }

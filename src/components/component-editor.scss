@@ -1044,6 +1044,7 @@ button.components-icon-picker-item {
 }
 .th-design-template-modal-wrap>.th-inner-wrap {
     position: relative;
+    display: flex;
 }
 .th-header{
     display: flex;
@@ -1052,10 +1053,19 @@ button.components-icon-picker-item {
     z-index: 3;
     box-shadow: 0 4px 10px rgba(0,0,0,.05);
     border-radius:0;
-    padding:0.5rem;
+    padding: 0.5rem 3rem;
+    position: fixed;
+    width: -webkit-fill-available;
+    height:60px;
+
 }
 .th-logo-wrap{
     align-self: center;
+    display:flex;
+}
+
+.th-logo-wrap img{
+max-width:58px;
 }
 
 .th-menu-wrap {
@@ -1081,9 +1091,9 @@ color: #818080;
 }
 
 .th-menu-item {
-    line-height: 1em;
-    padding: 10px 12px;
-    display: inline-block;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
     text-align: center;
     font-weight: 600;
     color: #818080;
@@ -1093,6 +1103,14 @@ color: #818080;
     border: 2px dashed;
     border-color: transparent;
 }
+.th-menu-item svg,.th-close-wrap svg{
+    font-size: 1.2rem;
+    margin-right: 0.2rem;
+    }
+    
+    .th-close-wrap button:hover{
+    color:#6C1BC3;
+    }
 
 .th-menu-item.active {
     border-color: #6C1BC3;
@@ -1102,6 +1120,8 @@ color: #818080;
 
 .th-template-block-wrap {
     padding: 35px 25px 0 25px;
+    margin-top: 55px;
+    width: -webkit-fill-available;
 }
 
 .th-block-templates-sites {
@@ -1124,6 +1144,7 @@ color: #818080;
     position: relative;
     border-radius: 3px;
     transition: all .4s;
+    display: flow-root;
 }
 
 .th-block-templates-sites .single-site .grid-item-badge {
@@ -1187,27 +1208,38 @@ color: #818080;
   }
   
   .pattern-tab-content {
-    flex: 1;
-    margin-left: 1.5rem;
+    width: calc(100% - 305px);
+    margin-left: auto;
   }
 
   .th-block-templates-pattern{
    display:flex;
   }
-  .th-block-templates-sites .import{
-    padding: 6px 14px;
-    min-height: auto;
-    line-height: normal;
-    border-radius: 2px;
-    margin:12px 15px;
-    background:#3F51B5;
-}
+  .th-block-templates-sites .import {
+    padding: 8px 10px 8px 14px;
+      min-height: auto;
+      line-height: normal;
+      border-radius: 2px;
+      margin: 12px 15px;
+      background: #3F51B5;
+      display: flex;
+      align-items: center;
+  }
+  
+  .th-block-templates-sites .import svg {
+      margin-left: 0.3rem;
+  }  
 .pattern-tab-button.active {
     background-color: #6C1BC3;
     color: #fff;
 }
 
-
+.pattern-tabs-filter{
+    max-width: 250px;
+    position: fixed;
+    height: 100%;
+    padding: 20px;
+}
 .pattern-tabs-filter-wrap{ 
     height: 100%;
     max-height: calc(95vh - 204px);
@@ -1219,4 +1251,74 @@ color: #818080;
     
 .th-block-templates-sites .item .heading-wrap h3{
     margin:15px 0px;
+    }
+.th-block-templates-sites .inner img {
+        max-width: 100%;
+        vertical-align: middle;
+}
+
+.th-block-templates-pattern .masonry-grid {
+    display: flex;
+    margin-left: -16px; /* Adjust as needed */
+    width: auto;
+  }
+  
+  .th-block-templates-pattern .masonry-grid_column {
+    padding-left: 16px; /* Adjust as needed */
+    background-clip: padding-box;
+  }
+  
+  .th-block-templates-pattern .item.single-site {
+    margin-bottom: 16px; 
+  width: 100%;
+  }
+  
+  .th-block-templates-pattern .thumbnail img {
+    max-width: 100%;
+    height: auto;
+  }
+
+//   loader panel
+/* Add this CSS to your stylesheet */
+@keyframes spinner {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .th-template-block-wrap .loading-icon {
+    position:absolute;
+    left:50%;
+    top:50%;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #6c1bc3;
+    border-radius: 50%;
+    animation: spinner 0.6s linear infinite;
+  
+  }
+  
+  .th-template-block-wrap .loading-wrap {
+  position:fixed;
+      width:100%;
+      left:0;
+  right:0;
+  top:0;
+  bottom:0;
+      background-color: rgba(255,255,255,0.7);
+  z-index:9999;
+  }
+  
+  .th-template-block-wrap{
+  position:relative;
+  
+  }
+
+  .th-logo-wrap h2{line-height: initial;
+    color: #6C1BC3;
+}
+
+.themehunk-toolbar-design-library button.th-toolbar-design-button img{
+    width:30px;
     }
