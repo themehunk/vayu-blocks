@@ -80,18 +80,23 @@ class Vayu_Block_Plugin {
                 'script_handle'  => 'advance-button',
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
-            ),
-            array(
-                'name'            => 'vayu-blocks/advance-product',
+            )
+        );
+
+        // Check if WooCommerce is active
+        if (is_plugin_active('woocommerce/woocommerce.php')) {
+            // Add the 'vayu-blocks/advance-product' block registration array
+            $blocks[] = array(
+                'name'           => 'vayu-blocks/advance-product',
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
-				'render_callback' => array( 
-                      new Advance_Product_Tab(),
-                     'render_callback' 
-                     )
-            ),
-        );
+                'render_callback' => array( 
+                    new Advance_Product_Tab(),
+                    'render_callback' 
+                )
+            );
+        }
 
         foreach ( $blocks as $block ) {
             // Register JavaScript file
