@@ -84,7 +84,7 @@ class Vayu_Block_Plugin {
         );
 
         // Check if WooCommerce is active
-        if (is_plugin_active('woocommerce/woocommerce.php')) {
+        if (class_exists('WooCommerce')) {
             // Add the 'vayu-blocks/advance-product' block registration array
             $blocks[] = array(
                 'name'           => 'vayu-blocks/advance-product',
