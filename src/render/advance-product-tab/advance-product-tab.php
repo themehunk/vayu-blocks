@@ -1,5 +1,9 @@
 <?php
 
+if ( ! class_exists( 'WooCommerce' ) ){
+	return;
+}
+
 class Advance_Product_Tab {
 
       /**
@@ -361,7 +365,7 @@ class Advance_Product_Tab {
                     $displayPrice = isset($attr['displayPrice']) ? $attr['displayPrice'] : true;
                     if($displayPrice):
                     $product_content .= '<div class="th-product-price">
-                        ' . $product->get_price_html() . '
+                        ' . wp_kses_post($product->get_price_html()) . '
                     </div>';
                     endif;
                     break;
@@ -382,7 +386,7 @@ class Advance_Product_Tab {
                     $displayButton = isset($attr['displayButton']) ? $attr['displayButton'] : true;
                     if($displayButton):
                     $product_content .= '<div class="th-product-add-btn">
-                        ' . $this->add_to_cart_url($product) . '
+                        ' . wp_kses_post($this->add_to_cart_url($product)) . '
                     </div>';
                     endif;
                     break;
@@ -537,7 +541,7 @@ public function load_category_products() {
 
     $product_content = $this->get_fetch_product($attributes, $category_id);
 
-    echo $product_content;
+    echo wp_kses_post($product_content);
 
     exit;
 

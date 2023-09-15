@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
                 attr: advance_product_tab_ajax.attributes,
             },
             success: function(response) {
+                
                 // Update the product items on the page
                 $('.th-product-block-product-content').html(response);
 
