@@ -35,7 +35,7 @@ import {
 	IconPicker,
 	GoogleFontsControl
 } from '../../../src/components/index.js';
-import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
+import { alignitemstr,alignitemcnt,alignitemend,alignitemstrech, Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 import Select from 'react-select';
 
@@ -1551,22 +1551,22 @@ const InsSettings = ({
 										onChange={ changeButtonAlign }
 										options={[
 											{
-												icon: Start,
+												icon: alignitemstr,
 												label: __( 'Left', 'vayu-blocks' ),
 												value: 'start'
 											},
 											{
-												icon: Center,
+												icon: alignitemcnt,
 												label: __( 'Center', 'vayu-blocks' ),
 												value: 'center'
 											},
 											{
-												icon: End,
+												icon: alignitemend,
 												label: __( 'Right', 'vayu-blocks' ),
 												value: 'end'
 											},
 											{
-												icon: Strech,
+												icon: alignitemstrech,
 												label: __( 'Justify', 'vayu-blocks' ),
 												value: 'space-around'
 											}

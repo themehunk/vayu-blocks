@@ -123,6 +123,11 @@ function cycle_through_blocks( $blocks, $post_id ) {
 	 	} 
 
 		 if ( $block['blockName'] === 'vayu-blocks/advance-button' ) {
+
+			if ( isset($block['attrs']['fontFamily'] ) ){
+				enqueue_google_fonts($block['attrs']['fontFamily']);
+			  }
+
 			 $css .=advance_button_style($block['attrs']);
 		} 
 
