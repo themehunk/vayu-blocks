@@ -47,6 +47,7 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 * Vayu Blocks Updated.
 * Import Panel Added.
 * Vayu Blocks & Import Panel Merged.
+* Button Aligment Icon changed.
 
 
 == Upgrade Notice ==
@@ -55,3 +56,4 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 * Vayu Blocks Updated.
 * Import Panel Added.
 * Vayu Blocks & Import Panel Merged.
+* Button Aligment Icon changed.

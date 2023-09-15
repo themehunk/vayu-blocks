@@ -27,7 +27,7 @@ import { RichText, useBlockProps } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-
+import googleFontsLoader from '../../../src/helpers/google-fonts.js';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -56,6 +56,10 @@ function sanitizeSVG( svg ) {
  */
 export default function Edit({ attributes, setAttributes, clientId,
 	uniqueID }) {
+
+	useEffect( () => {
+			googleFontsLoader.attach();
+		}, [ attributes.id ]);
 
 	const { id } = attributes;
 
@@ -697,6 +701,12 @@ else{
 		...flexProperties,
 		...transitionButtonStyle,
 	}
+
+	useEffect( () => {
+		if ( attributes.fontFamily ) {
+			googleFontsLoader.loadFontToBrowser( attributes.fontFamily, attributes.fontVariant );
+		}
+	}, [ attributes.fontFamily ]);
 	
 	const blockProps = useBlockProps({
 			id: attributes.id,
