@@ -21,12 +21,11 @@ Vayu Blocks is the editor blocks that are used to create content layouts that yo
 
 <strong>An Unlimited Gutenberg Blocks Library</strong>
 <ul>
-    <li>Advanced Heading</li>
-    <li>Advanced Spacer</li>
-    <li>Advanced Product</li>
-    <li>Advanced Button</li>
-    <li></li>
-    
+    <li>Heading</li>
+    <li>Spacer</li>
+    <li>Spacer</li>
+    <li>WooProduct</li>
+    <li>Button</li> 
 </ul>
 
 == Installation ==

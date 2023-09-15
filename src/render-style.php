@@ -1,8 +1,42 @@
 <?php
 
-add_action( 'wp_head', 'render_server_side_css' );
+function render_init(){
+
+	add_action( 'wp_head', 'render_server_side_css',999 );
+}
+
+add_action( 'init', 'render_init', 99);
+
+
 
 function render_server_side_css() {
+
+	if ( ! ( function_exists( 'get_block_templates' ) && function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && current_theme_supports( 'block-templates' ) ) ) {
+		return;
+	}
+
+	global $_wp_current_template_content;
+
+	$content         = '';
+	$slugs           = array();
+
+	$template_blocks = parse_blocks( $_wp_current_template_content );
+
+	foreach ( $template_blocks as $template_block ) {
+		if ( 'core/template-part' === $template_block['blockName'] ) {
+			$slugs[] = $template_block['attrs']['slug'];
+		}
+	}
+
+	$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
+
+	foreach ( $templates_parts as $templates_part ) {
+		if ( isset( $templates_part->content ) && isset( $templates_part->slug ) && in_array( $templates_part->slug, $slugs ) ) {
+			$content .= $templates_part->content;
+		}
+	}
+
+	$content .= $_wp_current_template_content;
 
 	if ( function_exists( 'has_blocks' ) && has_blocks( get_the_ID() ) ) {
 
@@ -12,7 +46,9 @@ function render_server_side_css() {
 			return;
 		}
 
-		$blocks = parse_blocks( $post->post_content );
+		$content .= get_post_field( 'post_content', get_the_ID() );
+
+		$blocks = parse_blocks( $content );
 
 		if ( ! is_array( $blocks ) || empty( $blocks ) ) {
 			return;
@@ -24,7 +60,7 @@ function render_server_side_css() {
 			return;
 		}
 
-		$style  = "\n" . '<style type="text/css" media="all">' . "\n";
+		$style  = "\n" . '<style id="vayu-block-css">' . "\n";
 		$style .= $css;
 		$style .= "\n" . '</style>' . "\n";
 
