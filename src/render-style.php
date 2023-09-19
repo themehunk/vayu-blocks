@@ -3,6 +3,7 @@
 function render_init(){
 
 	add_action( 'wp_head', 'render_server_side_css',999 );
+	
 }
 
 add_action( 'init', 'render_init', 99);
@@ -36,7 +37,7 @@ function render_server_side_css() {
 		}
 	}
 
-	$content .= $_wp_current_template_content;
+	$content .= $_wp_current_template_content; 
 
 	if ( function_exists( 'has_blocks' ) && has_blocks( get_the_ID() ) ) {
 
