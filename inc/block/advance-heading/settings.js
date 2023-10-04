@@ -1131,7 +1131,7 @@ const InsSettings = ({
     const [lineHeightUnit, setlineHeightUnit] = useState('px');
 	const maxlineHeightUnit = lineHeightUnit === 'px' ? 150 :lineHeightUnit === 'em' ? 10 : lineHeightUnit === '%' ? 100:'';
 	const [letterSpacingUnit, setletterSpacingUnit] = useState('px');
-	const maxletterSpacingUnit = letterSpacingUnit === 'px' ? 150 :letterSpacingUnit === 'em' ? 10 : letterSpacingUnit === '%' ? 100:'';
+	const maxletterSpacingUnit = letterSpacingUnit === 'px' ? 10 :letterSpacingUnit === 'em' ? 10 : letterSpacingUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
 	const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100:'';
 	const [marginUnit, setmarginUnit] = useState('px');
@@ -1313,7 +1313,7 @@ const InsSettings = ({
 								value={ getletterSpacing() || '' }
 								onChange={ changeletterSpacing }
 								step={ 0.1 }
-								min={50}
+								min={0}
 								max={ maxletterSpacingUnit }
 								allowReset={ true }
 							/>

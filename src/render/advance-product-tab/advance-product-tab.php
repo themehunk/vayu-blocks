@@ -425,53 +425,103 @@ class Advance_Product_Tab {
 }
   
 
+// public function add_to_cart_url($product){
+//     $args = array();
+//     if ( $product ){
+//         $url = $product->add_to_cart_url();
+//         $label = $product->add_to_cart_text();
+//         $class = $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '';
+//         $attributes = array(
+//             'data-product_id'  => $product->get_id(),
+//             'data-product_sku' => $product->get_sku(),
+//             'aria-label'       => $product->add_to_cart_description(),
+//             'rel'              => 'nofollow',
+//         );
+
+//         $args = apply_filters( 'woocommerce_loop_add_to_cart_args', array(
+//             'quantity'   => isset( $args['quantity'] ) ? $args['quantity'] : 1,
+//             'class'      => isset( $args['class'] ) ? $args['class'] : $class,
+//             'attributes' => $attributes,
+//             'product'    => $product,
+//         ) );
+
+//         if ( isset( $args['attributes']['aria-label'] ) ) {
+//             $args['attributes']['aria-label'] = wp_strip_all_tags( $args['attributes']['aria-label'] );
+//         }
+
+//         $button = sprintf(
+//             '<a href="%s" %s>%s</a>',
+//             esc_url( $url ),
+//             wc_implode_html_attributes( $args['attributes'] ),
+//             esc_html( $label )
+//         );
+
+//         if ( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ) {
+//             $args['class'] = isset( $args['class'] ) ? $args['class'] : '';
+//             $args['class'] .= ' ajax_add_to_cart';
+//             $button = sprintf(
+//                 '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
+//                 esc_url( $url ),
+//                 esc_attr( $args['quantity'] ),
+//                 esc_attr( $args['class'] ),
+//                 wc_implode_html_attributes( $args['attributes'] ),
+//                 esc_html( $label )
+//             );
+//         }
+
+//         return apply_filters( 'woocommerce_loop_add_to_cart_link', $button, $product, $args );
+//     }
+// }
+
 public function add_to_cart_url($product){
-    $args = array();
-    if ( $product ){
+    if ($product) {
         $url = $product->add_to_cart_url();
         $label = $product->add_to_cart_text();
         $class = $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '';
         $attributes = array(
             'data-product_id'  => $product->get_id(),
             'data-product_sku' => $product->get_sku(),
-            'aria-label'       => $product->add_to_cart_description(),
+            'aria-label'       => wp_strip_all_tags($product->add_to_cart_description()),
             'rel'              => 'nofollow',
         );
 
-        $args = apply_filters( 'woocommerce_loop_add_to_cart_args', array(
-            'quantity'   => isset( $args['quantity'] ) ? $args['quantity'] : 1,
-            'class'      => isset( $args['class'] ) ? $args['class'] : $class,
+        $quantity = 1;
+        $class = isset($class) ? $class : '';
+        $args = array(
+            'quantity'   => $quantity,
+            'class'      => $class,
             'attributes' => $attributes,
             'product'    => $product,
-        ) );
+        );
 
-        if ( isset( $args['attributes']['aria-label'] ) ) {
-            $args['attributes']['aria-label'] = wp_strip_all_tags( $args['attributes']['aria-label'] );
+        if (isset($attributes['aria-label'])) {
+            $attributes['aria-label'] = wp_strip_all_tags($attributes['aria-label']);
         }
 
         $button = sprintf(
             '<a href="%s" %s>%s</a>',
-            esc_url( $url ),
-            wc_implode_html_attributes( $args['attributes'] ),
-            esc_html( $label )
+            esc_url($url),
+            wc_implode_html_attributes($attributes),
+            esc_html($label)
         );
 
-        if ( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ) {
-            $args['class'] = isset( $args['class'] ) ? $args['class'] : '';
-            $args['class'] .= ' ajax_add_to_cart';
+        if ($product->supports('ajax_add_to_cart') && $product->is_purchasable() && $product->is_in_stock()) {
+            $class = isset($class) ? $class : '';
+            $class .= ' ajax_add_to_cart';
             $button = sprintf(
                 '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
-                esc_url( $url ),
-                esc_attr( $args['quantity'] ),
-                esc_attr( $args['class'] ),
-                wc_implode_html_attributes( $args['attributes'] ),
-                esc_html( $label )
+                esc_url($url),
+                esc_attr($quantity),
+                esc_attr($class),
+                wc_implode_html_attributes($attributes),
+                esc_html($label)
             );
         }
 
-        return apply_filters( 'woocommerce_loop_add_to_cart_link', $button, $product, $args );
+        return $button;
     }
 }
+
 
 function handle_sale_products_query_var( $query) {
 	
@@ -541,7 +591,7 @@ public function load_category_products() {
 
     $product_content = $this->get_fetch_product($attributes, $category_id);
 
-    echo wp_kses_post($product_content);
+    echo $product_content;
 
     exit;
 

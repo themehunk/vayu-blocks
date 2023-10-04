@@ -940,6 +940,7 @@ function advance_product_tab_style($attr){
                 $productBrdrRadiusUnit = isset($attr['productBrdrRadiusUnit']) ? $attr['productBrdrRadiusUnit'] : 'px';
                 $css .= "border-radius: {$productBrdrRadiusMobile}{$productBrdrRadiusUnit};";
             }
+            $css .= "}";
 
             //gap
             $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-product-content .th-product-block-product-item-wrap{";
