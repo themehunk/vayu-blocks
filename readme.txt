@@ -47,6 +47,7 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 * Import Panel Added.
 * Vayu Blocks & Import Panel Merged.
 * Button Aligment Icon changed.
+* 'vayu-blocks/typing-animation' removed in allowedFormats={ [ 'core/bold', 'core/italic', 'vayu-blocks/typing-animation' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
 
 
 == Upgrade Notice ==
