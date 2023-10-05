@@ -24,17 +24,17 @@ import classnames from 'classnames';
  import './editor.scss';
 
 
-export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
-
-	useEffect( () => {
-		googleFontsLoader.attach();
-	}, [ attributes.id ]);
-
+ export default function Edit({ attributes, setAttributes, clientId, uniqueID }) {
+  
 	const { id } = attributes;
-
+  
 	if ( ! id ) {
-		setAttributes( { id: clientId } );
-	}
+		  setAttributes( { id: clientId } );
+	  }
+  
+	useEffect( () => {
+		  googleFontsLoader.attach();
+	  }, [ attributes.id ]);
 
 	const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 			const { isUniqueID, isUniqueBlock} = useSelect(
@@ -104,6 +104,12 @@ export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
 	let flexProperties;
 
 	let PositionProperties;
+
+	useEffect( () => {
+		if ( attributes.fontFamily ) {
+			googleFontsLoader.loadFontToBrowser( attributes.fontFamily, attributes.fontVariant );
+		}
+	}, [ attributes.fontFamily ]);
 
 	stylesheet = {
 		'--heading-color':attributes.headingColor,
@@ -581,13 +587,6 @@ export default function Edit({ attributes, setAttributes,clientId,uniqueID }) {
 		...PositionProperties,
 		
     }, x => x?.includes?.( 'undefined' ));
-
-	useEffect( () => {
-		if ( attributes.fontFamily ) {
-			googleFontsLoader.loadFontToBrowser( attributes.fontFamily, attributes.fontVariant );
-		}
-	}, [ attributes.fontFamily ]);
-   
 
 	let Classes = classnames({
 		"th-hide-desktop": attributes.responsiveTogHideDesktop,

@@ -1,5 +1,5 @@
 import { registerPlugin } from '@wordpress/plugins';
-import { render } from '@wordpress/element';
+import { createRoot } from '@wordpress/element';
 import { useState, useEffect } from '@wordpress/element'; // Import useState here
 import { useDispatch, subscribe } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
@@ -237,13 +237,22 @@ function ToolbarLibrary() {
         </div>
     );
 
+    // const renderButton = (selector) => {
+    //     const patternButton = document.createElement('div');
+    //     patternButton.classList.add('themehunk-toolbar-design-library');
+    //     selector.appendChild(patternButton);
+    //     render(<LibraryButton />, patternButton);
+    // };
+    
     const renderButton = (selector) => {
         const patternButton = document.createElement('div');
         patternButton.classList.add('themehunk-toolbar-design-library');
         selector.appendChild(patternButton);
-        render(<LibraryButton />, patternButton);
-    };
-
+      
+        // Use createRoot to create a root instance and then render the component
+        const root = createRoot(patternButton);
+        root.render(<LibraryButton />);
+      };
     // Watch for the toolbar to be visible and the design library button to be missing.
     let unsubscribe = subscribe(() => {
         const editToolbar = document.querySelector('.edit-post-header-toolbar');

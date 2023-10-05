@@ -1,4 +1,4 @@
-import { render, useState,useEffect } from '@wordpress/element';
+import { createRoot, useState,useEffect } from '@wordpress/element';
 import { RxGroup , RxHeading, RxButton} from "react-icons/rx";
 import { AiOutlineArrowsAlt } from "react-icons/ai";
 import { SiWoo } from "react-icons/si";
@@ -184,5 +184,7 @@ function MyPluginContent(){
 const container = document.getElementById('vayu-blocks-container');
 
 if (container) {
-render(<MyPluginContent />, container);
+  // Use createRoot to create a root instance and then render the component
+  const root = createRoot(container);
+  root.render(<MyPluginContent />);
 }
