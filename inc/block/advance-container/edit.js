@@ -68,7 +68,7 @@ export default function Edit({
 				isPreviewMobile
 			} = useSelect( 
 				select => {
-					const {
+					const { 
 						getAdjacentBlockClientId,
 						getBlock,
 						getBlockRootClientId
@@ -838,7 +838,6 @@ export default function Edit({
 				<ThShaper attributes={attributes} />
 				<div {...innerBlocksProps}>{innerBlocksProps.children}</div>
 				</Tag>
-
 			    ) : (
 					<div className={rootContainerClassName}>
 					<Tag {...containerBlockProps}>

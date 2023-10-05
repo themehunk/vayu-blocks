@@ -142,7 +142,7 @@ registerStore('vayu-blocks/data', {
 			const { uniqueIDs } = state;
 			let isUniqueBlock = false;
 			if ( uniqueIDs.hasOwnProperty( uniqueID ) ) {
-				// Compare clientID if they match then it just means we've switched to iframe view and so we don't need a new ID.
+				
 				if ( uniqueIDs[uniqueID] === clientID ) {
 					isUniqueBlock = true;
 				}

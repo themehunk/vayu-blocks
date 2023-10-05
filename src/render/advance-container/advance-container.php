@@ -7,7 +7,7 @@ function advance_container_style($attr){
 
     if(isset( $attr['uniqueID'] )){
         
-		$css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
+		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
 		if (isset($attr['boxedcontentWidth'])) {
 			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -199,7 +199,7 @@ function advance_container_style($attr){
         $css .= "}";
         
         // overlay
-        $css .= ".th-c{$attr['uniqueID']} .wp-block-th-blocks-container-overlay{";
+        $css .= ".th-c{$attr['uniqueID']} > .wp-block-th-blocks-container-overlay{";
         if ( isset( $attr['overlaybackgroundType'] ) && $attr['overlaybackgroundType'] == 'image' ) {
 			$css .= isset( $attr['overlaybackgroundImage']['url'] ) ? "background-image: url({$attr['overlaybackgroundImage']['url']});" : '';
 			$css .= isset( $attr['overlaybackgroundAttachment']) ? "background-attachment: {$attr['overlaybackgroundAttachment']};" : 'background-attachment:scroll;';
@@ -215,7 +215,7 @@ function advance_container_style($attr){
         $css .= "}";
 
         // overlay hover
-        $css .= ".th-c{$attr['uniqueID']}:hover .wp-block-th-blocks-container-overlay{";
+        $css .= ".th-c{$attr['uniqueID']}:hover > .wp-block-th-blocks-container-overlay{";
             if ( isset( $attr['overlaybackgroundTypeHvr'] ) && $attr['overlaybackgroundTypeHvr'] == 'image' ) {
                 $css .= isset( $attr['overlaybackgroundImageHvr']['url'] ) ? "background-image: url({$attr['overlaybackgroundImageHvr']['url']});" : '';
                 $css .= isset( $attr['overlaybackgroundAttachmentHvr']) ? "background-attachment: {$attr['overlaybackgroundAttachmentHvr']};" : 'background-attachment:scroll;';
@@ -231,7 +231,7 @@ function advance_container_style($attr){
             $css .= "}";
 
         //inside wrap
-        $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
+        $css .= ".th-c{$attr['uniqueID']} > .th-inside-content-wrap{";
              //flex-direction
              $css .= isset($attr['direction']) ? "flex-direction: {$attr['direction']}; " : '';
              //justifiy-content
@@ -320,28 +320,28 @@ function advance_container_style($attr){
         $css .= "}";
 
 	//shaper
-	    $css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
+	    $css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-top svg{";	
 		$css .= isset( $attr['shapeTopWidth'] ) ? "width:{$attr['shapeTopWidth'] }%;" : '';
 		$css .= isset( $attr['shapeTopHeight'] ) ? "height:{$attr['shapeTopHeight'] }px;" : '';
 	    $css .= "}";
 
-		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom svg{";	
+		$css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-bottom svg{";	
 		$css .= isset( $attr['shapeBottomWidth'] ) ? "width:{$attr['shapeBottomWidth'] }%;" : '';
 		$css .= isset( $attr['shapeBottomHeight'] ) ? "height:{$attr['shapeBottomHeight'] }px;" : '';
 		$css .= "}";
 
-		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top {";
+		$css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-top {";
 		$css .= isset( $attr['shapeTopFront'] ) ? "z-index:1" : 'z-index:0';	
 		$css .= "}";
 
-		$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom {";
+		$css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-bottom {";
 		$css .= isset( $attr['shapeBottomFront'] ) ? "z-index:1" : 'z-index:0';	
 		$css .= "}";
 
       //    tablet view
       $css .= "@media only screen and (min-width: 768px) and (max-width: 1023px) {";
       
-      $css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
+      $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
             // boxed-width
             if (isset($attr['boxedcontentWidthTablet'])) {
                 $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -499,7 +499,7 @@ function advance_container_style($attr){
             $css .= "}";
 
             //inside wrap
-            $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
+            $css .= ".th-c{$attr['uniqueID']} > .th-inside-content-wrap{";
                 //flex-direction
                 $css .= isset($attr['directionTablet']) ? "flex-direction: {$attr['directionTablet']}; " : '';
                 //justifiy-content
@@ -555,12 +555,12 @@ function advance_container_style($attr){
             $css .= " }";
 
 			//shaper
-			$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-top svg{";	
+			$css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-top svg{";	
 				$css .= isset( $attr['shapeTopWidthTablet'] ) ? "width:{$attr['shapeTopWidthTablet'] }%;" : '';
 				$css .= isset( $attr['shapeTopHeightTablet'] ) ? "height:{$attr['shapeTopHeightTablet'] }px;" : '';
 				$css .= "}";
 		
-				$css .= ".th-c{$attr['uniqueID']} .th-shaper .th-shape-bottom svg{";	
+				$css .= ".th-c{$attr['uniqueID']} > .th-shaper .th-shape-bottom svg{";	
 				$css .= isset( $attr['shapeBottomWidthTablet'] ) ? "width:{$attr['shapeBottomWidthTablet'] }%;" : '';
 				$css .= isset( $attr['shapeBottomHeightTablet'] ) ? "height:{$attr['shapeBottomHeightTablet'] }px;" : '';
 				$css .= "}";
@@ -570,7 +570,7 @@ function advance_container_style($attr){
       //    mobile view
       $css .= "@media only screen and (max-width: 767px){";
       
-        $css .= ".th-c{$attr['uniqueID']}.boxed-content .th-inside-content-wrap{";
+        $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
               // boxed-width
               if (isset($attr['boxedcontentWidthMobile'])){
                   $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
@@ -752,7 +752,7 @@ function advance_container_style($attr){
             $css .= "}";
 
             //inside wrap
-            $css .= ".th-c{$attr['uniqueID']} .th-inside-content-wrap{";
+            $css .= ".th-c{$attr['uniqueID']} > .th-inside-content-wrap{";
                 //flex-direction
                 $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : '';
                 //justifiy-content
