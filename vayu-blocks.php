@@ -36,15 +36,15 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_PRO_SUPPORT', true );
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
-        require_once 'src/function.php';
-        require_once 'src/render-style.php';
-        require_once 'src/render/advance-animation/class-blocks-animation.php';
-        require_once 'src/render/advance-heading/advance-heading.php';
-        require_once 'src/render/advance-container/advance-container.php';
-        require_once 'src/render/advance-spacer/advance-spacer.php';
-        require_once 'src/render/advance-button/advance-button.php';
-		require_once 'src/render/advance-product-tab/advance-product-tab.php';
-        require_once 'src/render/advance-product-tab/advance-product-tab-style.php';
+        require_once 'inc/function.php';
+        require_once 'inc/render-style.php';
+        require_once 'inc/render/advance-animation/class-blocks-animation.php';
+        require_once 'inc/render/advance-heading/advance-heading.php';
+        require_once 'inc/render/advance-container/advance-container.php';
+        require_once 'inc/render/advance-spacer/advance-spacer.php';
+        require_once 'inc/render/advance-button/advance-button.php';
+		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
+        require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
 
         add_action( 'init', array( $this, 'register_blocks' ) );
 
@@ -158,7 +158,7 @@ class Vayu_Block_Plugin {
             'manage_options', 
             'vayu-blocks',
             array( $this, 'vayu_plugin_page_callback' ),
-            plugins_url( 'vayu-blocks/src/th-icon/menu-logo.png' ),
+            plugins_url( 'vayu-blocks/inc/assets/img/menu-logo.png' ),
             10 
         );
     

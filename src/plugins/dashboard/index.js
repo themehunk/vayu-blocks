@@ -36,7 +36,7 @@ function MyPluginContent(){
                 <div className="th-conatiner">
                 <div class="th-header-wrap">   
                 <div class="th-logo-wrap">
-                <img src={`${homeUrl}plugins/dashboard/img/logo-vayu.png`} />
+                <img src={`${homeUrl}assets/img/logo-vayu.png`} />
                 <h2> {__('Blocks', 'vayu-blocks')} </h2>
                 </div>
                 <div class="th-menu-wrap">

@@ -9,8 +9,8 @@ import Modal from 'react-modal';
 import Masonry from 'react-masonry-css';
 import { RxFile,RxStack, RxCross1, RxArrowDown} from "react-icons/rx";
 
-import templatesData from './templates.json';
-import patternData from './pattern.json'; 
+import templatesData from '../../../inc/assets/json/templates.json';
+import patternData from '../../../inc/assets/json/pattern.json'; 
 
 Modal.setAppElement('#wpwrap');
 
@@ -31,7 +31,7 @@ function ToolbarLibrary() {
             className="th-toolbar-design-button"
             isPrimary
             onClick={openModal}
-        > <img src={`${homeUrl}plugins/dashboard/img/menu-logo.png`} />
+        > <img src={`${homeUrl}assets/img/menu-logo.png`} />
             {__('Design Library', 'themehunk-blocks')}
         </Button>
     );
@@ -197,7 +197,7 @@ function ToolbarLibrary() {
     };
     
     const homeUrl = vayublock.homeUrl;
-    
+
     const modalContent = (
         <div className="th-design-template-modal">
            
@@ -206,7 +206,7 @@ function ToolbarLibrary() {
                 
             <div className="th-header">
                 <div className="th-logo-wrap">
-                <img src={`${homeUrl}plugins/dashboard/img/logo-vayu.png`} />
+                <img src={`${homeUrl}assets/img/logo-vayu.png`} />
                   <h2>{__('Blocks', 'themehunk-blocks')}</h2>
                 </div>
                  <div className="th-menu-wrap">
