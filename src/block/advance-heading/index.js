@@ -14,7 +14,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.scss';
 
-/**
+/** 
  * Internal dependencies 
  */
 import edit from './edit';
@@ -27,7 +27,7 @@ const { name } = metadata;
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Heading', 'vayu-blocks' ),
-	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
+	description: __( 'Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks' ),
 	icon,
 	keywords: [
 		'heading',
