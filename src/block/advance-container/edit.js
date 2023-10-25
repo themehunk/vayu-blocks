@@ -437,7 +437,7 @@ export default function Edit({
 
 				if(attributes.contentWidthType=='boxed'){
 					insidecontainerStyles = {
-						maxWidth: attributes.boxedcontentWidthTablet  + attributes.boxedcontentWidthUnit,
+						maxWidth: attributes.boxedcontentWidthTablet  + attributes.boxedcontentWidthUnitTablet,
 						marginLeft:'auto',
 						marginRight:'auto',
 					}; 
@@ -588,7 +588,7 @@ export default function Edit({
 
 				if(attributes.contentWidthType=='boxed'){
 					insidecontainerStyles = {
-						maxWidth: attributes.boxedcontentWidthMobile  + attributes.boxedcontentWidthUnit,
+						maxWidth: attributes.boxedcontentWidthMobile  + attributes.boxedcontentWidthUnitMobile,
 						marginLeft:'auto',
 						marginRight:'auto',
 					}; 

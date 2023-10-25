@@ -36,10 +36,17 @@
 			"type": "number"
 		},
 		"boxedcontentWidthMobile": {
-			"type": "number",
-			"default":"100"
+			"type": "number"
 		},
 		"boxedcontentWidthUnit": {
+			"type": "string",
+			"default":"%"
+		},
+		"boxedcontentWidthUnitTablet": {
+			"type": "string",
+			"default":"%"
+		},
+		"boxedcontentWidthUnitMobile": {
 			"type": "string",
 			"default":"%"
 		},
@@ -50,10 +57,17 @@
 			"type": "number"
 		},
 		"fullcontentWidthMobile": {
-			"type": "number",
-			"default":"100"
+			"type": "number"
 		},
 		"fullcontentWidthUnit": {
+			"type": "string",
+			"default":"%"
+		},
+		"fullcontentWidthUnitTablet": {
+			"type": "string",
+			"default":"%"
+		},
+		"fullcontentWidthUnitMobile": {
 			"type": "string",
 			"default":"%"
 		},

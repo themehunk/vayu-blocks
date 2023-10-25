@@ -10,7 +10,7 @@ function advance_container_style($attr){
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
 		if (isset($attr['boxedcontentWidth'])) {
-			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : '%';
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
@@ -21,7 +21,7 @@ function advance_container_style($attr){
         $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
             // full-width
             if (isset($attr['fullcontentWidth'])) {
-                $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
+                $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : '%';
                 $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
 				width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
 				margin-left: auto;
@@ -346,7 +346,7 @@ function advance_container_style($attr){
       $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
             // boxed-width
             if (isset($attr['boxedcontentWidthTablet'])) {
-                $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+                $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnitTablet']) ? $attr['boxedcontentWidthUnitTablet'] : '%';
                 $css .= "max-width: {$attr['boxedcontentWidthTablet']}{$boxedcontentWidthUnit}; ";
             }else{
                 $css .= "max-width:100%;";
@@ -577,7 +577,7 @@ function advance_container_style($attr){
         $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
               // boxed-width
               if (isset($attr['boxedcontentWidthMobile'])){
-                  $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+                  $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnitMobile']) ? $attr['boxedcontentWidthUnitMobile'] : '%';
                   $css .= "max-width: {$attr['boxedcontentWidthMobile']}{$boxedcontentWidthUnit}; ";
               }else{
                   $css .= "max-width:100%;";
