@@ -734,7 +734,7 @@ export default function Edit({
 					...overlayBackground,
 					'--background-overlay': `url( '${ attributes.overlaybackgroundImage?.url }' )`,
 					'--background-overlay-attachment': attributes.overlaybackgroundAttachment,
-					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.backgroundPosition?.y * 100 ) }%`,
+					'--background-overlay-position': `${ Math.round( attributes.overlaybackgroundPosition?.x * 100 ) }% ${ Math.round( attributes.overlaybackgroundPosition?.y * 100 ) }%`,
 					'--background-overlay-repeat': attributes.overlaybackgroundRepeat,
 					'--background-overlay-size': attributes.overlaybackgroundSize,
 				    
@@ -746,7 +746,7 @@ export default function Edit({
 					...overlayBackground,
 					'--background-overlay-hvr': `url( '${ attributes.overlaybackgroundImageHvr?.url }' )`,
 					'--background-overlay-attachment-hvr': attributes.overlaybackgroundAttachmentHvr,
-					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.backgroundPositionHvr?.y * 100 ) }%`,
+					'--background-overlay-position-hvr': `${ Math.round( attributes.overlaybackgroundPositionHvr?.x * 100 ) }% ${ Math.round( attributes.overlaybackgroundPositionHvr?.y * 100 ) }%`,
 					'--background-overlay-repeat-hvr': attributes.overlaybackgroundRepeatHvr,
 					'--background-overlay-size-hvr': attributes.overlaybackgroundSizeHvr,
 				    

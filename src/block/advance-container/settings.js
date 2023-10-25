@@ -80,7 +80,7 @@ const InsSettings = ({
 
 	const changeBoxedcontentWidth = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ boxedcontentWidth: value, boxedcontentWidthTablet: value, boxedcontentWidthMobile: value });
+			setAttributes({ boxedcontentWidth: value, boxedcontentWidthTablet: value});
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ boxedcontentWidthTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -106,7 +106,7 @@ const InsSettings = ({
 
 	const changeFullcontentWidth = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ fullcontentWidth: value, fullcontentWidthTablet: value, fullcontentWidthMobile: value });
+			setAttributes({ fullcontentWidth: value, fullcontentWidthTablet: value});
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ fullcontentWidthTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -156,7 +156,7 @@ const InsSettings = ({
 	};
     const changeDirection = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ direction: value, directionTablet: value, directionMobile: value });
+			setAttributes({ direction: value, directionTablet: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ directionTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -193,7 +193,7 @@ const InsSettings = ({
 		case 'Desktop':
 			return attributes.AlignItem;
 		case 'Tablet':
-			return attributes.AlignItemyTablet;
+			return attributes.AlignItemTablet;
 		case 'Mobile':
 			return attributes.AlignItemMobile;
 		default:
@@ -1328,9 +1328,9 @@ const InsSettings = ({
 
 
     // unit switch max value
-	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
+	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('%');
 	const maxBoxedcontentWidth = boxedcontentWidthUnit === 'px' ? 1500 : boxedcontentWidthUnit === 'em' ? 50 : boxedcontentWidthUnit === '%' ? 100:'';
-    const [fullcontentWidthUnit, setfullcontentWidthUnit] = useState('px');
+    const [fullcontentWidthUnit, setfullcontentWidthUnit] = useState('%');
 	const maxfullcontentWidthUnit = fullcontentWidthUnit === 'px' ? 1500 : fullcontentWidthUnit === 'em' ? 50 : fullcontentWidthUnit === '%' ? 100:'';
 	const [contentMinHgtUnit, setcontentMinHgtUnit] = useState('px');
 	const maxcontentMinHgtUnit = contentMinHgtUnit === 'px' ? 1500 : contentMinHgtUnit === 'em' ? 50 : contentMinHgtUnit === '%' ? 100:'';
@@ -1424,6 +1424,7 @@ const InsSettings = ({
                         />
                         <RangeControl
                             renderTooltipContent={ customTooltipBoxedcontentWidth }
+							initialPosition={100}
                             value={ getBoxedcontentWidth() || '' }
                             onChange={ changeBoxedcontentWidth }
                             step={ 1 }
@@ -1449,6 +1450,7 @@ const InsSettings = ({
                         />
                         <RangeControl
                             renderTooltipContent={ customTooltipFullcontentWidth }
+							initialPosition={100}
                             value={ getFullcontentWidth() || '' }
                             onChange={ changeFullcontentWidth }
                             step={ 1 }

@@ -36,11 +36,12 @@
 			"type": "number"
 		},
 		"boxedcontentWidthMobile": {
-			"type": "number"
+			"type": "number",
+			"default":"100"
 		},
 		"boxedcontentWidthUnit": {
 			"type": "string",
-			"default":"px"
+			"default":"%"
 		},
 		"fullcontentWidth": {
 			"type": "number"
@@ -49,11 +50,12 @@
 			"type": "number"
 		},
 		"fullcontentWidthMobile": {
-			"type": "number"
+			"type": "number",
+			"default":"100"
 		},
 		"fullcontentWidthUnit": {
 			"type": "string",
-			"default":"px"
+			"default":"%"
 		},
 		"contentMinHgt": {
 			"type": "number"
@@ -75,7 +77,8 @@
 			"type": "string"
 		},
 		"directionMobile": {
-			"type": "string"
+			"type": "string",
+			"default":"column"
 		},
 		"Justify": {
 			"type": "string"

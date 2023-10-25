@@ -159,6 +159,8 @@ width:auto;
 	background-size: var(--background-overlay-size);
 	background-position: var(--background-overlay-position);
 	background-attachment: var(--background-overlay-attachment);
+	border-radius: inherit;
+	
 }
 
 .wp-block-vayu-blocks-advance-container:hover .wp-block-th-blocks-container-overlay{
@@ -167,6 +169,7 @@ width:auto;
 	background-size: var(--background-overlay-size-hvr);
 	background-position: var(--background-overlay-position-hvr);
 	background-attachment: var(--background-overlay-attachment-hvr);
+	border-radius: inherit;
 }
 
 .wp-block-vayu-blocks-advance-container .th-shaper .th-shape-top svg{

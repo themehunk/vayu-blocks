@@ -108,7 +108,7 @@ class GoogleFontsLoader {
 	 * @param {boolen} force Force the request to trigger again.
 	 * @returns {Promise<import('../components/google-fonts-control/types').GoogleFontItem[] | Promise<import('../components/google-fonts-control/types').GoogleFontItem[]>>} Return the result or the request that is in pending.
 	 */
-	async requestFonts( force = false ) {
+	 async requestFonts( force = false ) {
 		if ( 'done' === this.status ) {
 			return this.fonts;
 		}

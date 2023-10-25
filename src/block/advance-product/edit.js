@@ -103,7 +103,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 		};
 	}, []);
 
-    const isLarger = useViewportMatch( 'large', '>=' );
+  const isLarger = useViewportMatch( 'large', '>=' );
 
 	const isLarge = useViewportMatch( 'large', '<=' );
 
@@ -111,7 +111,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
 	const isSmaller = useViewportMatch( 'small', '<=' );
 
-    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+  let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
 
 	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
 
@@ -1104,16 +1104,17 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                 </div>
               ))}
             </div>
-            {!noproduct && (
-            <div className="th-pagination">
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
-            <span className="dashicons dashicons-arrow-left-alt2"></span>
-            </button>
-            <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
-            <span className="dashicons dashicons-arrow-right-alt2"></span>
-            </button>
-            </div>
-            )}
+            {attributes.showNavs && !noproduct && (
+  <div className="th-pagination">
+    <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+      <span className="dashicons dashicons-arrow-left-alt2"></span>
+    </button>
+    <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
+      <span className="dashicons dashicons-arrow-right-alt2"></span>
+    </button>
+  </div>
+)}
+
           </div>
         </>
         

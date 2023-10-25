@@ -87,7 +87,7 @@ class Vayu_Block_Plugin {
         if (class_exists('WooCommerce')) {
             // Add the 'vayu-blocks/advance-product' block registration array
             $blocks[] = array(
-                'name'           => 'vayu-blocks/advance-product',
+                'name'            => 'vayu-blocks/advance-product',
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
@@ -99,6 +99,8 @@ class Vayu_Block_Plugin {
         }
 
         foreach ( $blocks as $block ) {
+
+            
             // Register JavaScript file
             wp_register_script(
                 $block['script_handle'],
@@ -142,6 +144,7 @@ class Vayu_Block_Plugin {
             // Check if the render callback is set and not null
             if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
                 $block_args['render_callback'] = $block['render_callback'];
+               
             }
 
             // Register each block

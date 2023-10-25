@@ -40,7 +40,7 @@ class Advance_Product_Tab {
         wp_enqueue_style( 'th-icon', VAYU_BLOCKS_URL . '/inc/th-icon/style.css', '', '1.0.0' );
         wp_enqueue_script( 'advance-product-tab-script', VAYU_BLOCKS_URL .'/inc/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
         
-            wp_localize_script(
+        wp_localize_script(
                 'advance-product-tab-script',
                 'advance_product_tab_ajax',
                 array(
@@ -68,7 +68,7 @@ class Advance_Product_Tab {
                         }
                     $block_content .= '</ul></div>';
                     endif;
-                $block_content .= '<div class="th-product-block-product-content">
+                   $block_content .= '<div class="th-product-block-product-content">
                 '.$this->get_fetch_product($attr).'
                 </div>
             </div>
@@ -400,7 +400,9 @@ class Advance_Product_Tab {
     }
 
     $product_content .= '</div>';
-    
+
+    $showNavs = isset($attr['showNavs']) ? $attr['showNavs'] : true;
+    if($showNavs =='true'){
     $product_content .= '<div class="th-pagination" total-page="'.esc_attr($total_pages).'">
             <button class="prev">
             <span class="dashicons dashicons-arrow-left-alt2"></span>
@@ -409,7 +411,7 @@ class Advance_Product_Tab {
             <span class="dashicons dashicons-arrow-right-alt2"></span>
             </button>
             </div>';
-
+    } 
     return $product_content;
     exit;
 
@@ -424,55 +426,6 @@ class Advance_Product_Tab {
     return $total_pages;
 }
   
-
-// public function add_to_cart_url($product){
-//     $args = array();
-//     if ( $product ){
-//         $url = $product->add_to_cart_url();
-//         $label = $product->add_to_cart_text();
-//         $class = $product->is_purchasable() && $product->is_in_stock() ? 'add_to_cart_button' : '';
-//         $attributes = array(
-//             'data-product_id'  => $product->get_id(),
-//             'data-product_sku' => $product->get_sku(),
-//             'aria-label'       => $product->add_to_cart_description(),
-//             'rel'              => 'nofollow',
-//         );
-
-//         $args = apply_filters( 'woocommerce_loop_add_to_cart_args', array(
-//             'quantity'   => isset( $args['quantity'] ) ? $args['quantity'] : 1,
-//             'class'      => isset( $args['class'] ) ? $args['class'] : $class,
-//             'attributes' => $attributes,
-//             'product'    => $product,
-//         ) );
-
-//         if ( isset( $args['attributes']['aria-label'] ) ) {
-//             $args['attributes']['aria-label'] = wp_strip_all_tags( $args['attributes']['aria-label'] );
-//         }
-
-//         $button = sprintf(
-//             '<a href="%s" %s>%s</a>',
-//             esc_url( $url ),
-//             wc_implode_html_attributes( $args['attributes'] ),
-//             esc_html( $label )
-//         );
-
-//         if ( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ) {
-//             $args['class'] = isset( $args['class'] ) ? $args['class'] : '';
-//             $args['class'] .= ' ajax_add_to_cart';
-//             $button = sprintf(
-//                 '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
-//                 esc_url( $url ),
-//                 esc_attr( $args['quantity'] ),
-//                 esc_attr( $args['class'] ),
-//                 wc_implode_html_attributes( $args['attributes'] ),
-//                 esc_html( $label )
-//             );
-//         }
-
-//         return apply_filters( 'woocommerce_loop_add_to_cart_link', $button, $product, $args );
-//     }
-// }
-
 public function add_to_cart_url($product){
     if ($product) {
         $url = $product->add_to_cart_url();

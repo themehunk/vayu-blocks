@@ -1,5 +1,7 @@
 jQuery(document).ready(function($) {
 
+    console.log(advance_product_tab_ajax.attributes);
+
     var currentPage = 1;
     var totalPages = $('.th-pagination').attr('total-page');
 

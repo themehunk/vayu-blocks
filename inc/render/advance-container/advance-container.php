@@ -23,10 +23,12 @@ function advance_container_style($attr){
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
                 $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
-				 margin-left: auto;
+				width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
+				margin-left: auto;
 				margin-right: auto; ";
             }else{
-                $css .= "max-width:100%;  
+                $css .= "max-width:100%;
+				width:100%;  
 				margin-left: auto;
 				margin-right: auto;";
             }
@@ -211,7 +213,7 @@ function advance_container_style($attr){
 		}else{
 			$css .= isset( $attr['overlaybackgroundColor'] ) ? "background-color:{$attr['overlaybackgroundColor']};" : '';
 		}
-
+        $css .= "border-radius:inherit";
         $css .= "}";
 
         // overlay hover
@@ -227,7 +229,7 @@ function advance_container_style($attr){
             }else{
                 $css .= isset( $attr['overlaybackgroundColorHvr'] ) ? "background-color:{$attr['overlaybackgroundColorHvr']};" : '';
             }
-    
+            $css .= "border-radius:inherit";
             $css .= "}";
 
         //inside wrap
@@ -305,7 +307,7 @@ function advance_container_style($attr){
 				 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
 				";
 			} else {
-				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 0;
+				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 'inherit';
 				$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
 				$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
 			}
@@ -347,7 +349,7 @@ function advance_container_style($attr){
                 $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
                 $css .= "max-width: {$attr['boxedcontentWidthTablet']}{$boxedcontentWidthUnit}; ";
             }else{
-                $css .= "max-width: {100%};";
+                $css .= "max-width:100%;";
             }
 			
             $css .= "}";
@@ -357,10 +359,12 @@ function advance_container_style($attr){
                 if (isset($attr['fullcontentWidthTablet'])){
                     $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
                     $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; 
+					width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit};
 					margin-left: auto;
 					margin-right: auto;";
                 }else{
                     $css .= "
+					width:100%;
 					max-width: {100%};
 					margin-left: auto;
 					margin-right: auto;";
@@ -576,7 +580,7 @@ function advance_container_style($attr){
                   $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
                   $css .= "max-width: {$attr['boxedcontentWidthMobile']}{$boxedcontentWidthUnit}; ";
               }else{
-                  $css .= "max-width: {100%};";
+                  $css .= "max-width:100%;";
               }
               $css .= "}";
       
@@ -584,11 +588,14 @@ function advance_container_style($attr){
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
                       $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
+                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit};
+					  width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
 					  margin-left: auto;
 					  margin-right: auto;";
                   }else{
-                      $css .= "max-width:100%;
+                      $css .= "
+					  width:100%;
+					  max-width:100%;
 					  margin-left: auto;
 					  margin-right: auto;";
                   }
@@ -754,7 +761,7 @@ function advance_container_style($attr){
             //inside wrap
             $css .= ".th-c{$attr['uniqueID']} > .th-inside-content-wrap{";
                 //flex-direction
-                $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : '';
+                $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : 'flex-direction:column;';
                 //justifiy-content
                 $css .= isset($attr['JustifyMobile']) ? "justify-content: {$attr['JustifyMobile']}; " : '';
                 //align-Items

@@ -1363,6 +1363,11 @@ return (
               }}
             />
             </div>
+			<ToggleControl
+								label={ __( 'Show Nav', 'vayu-blocks' ) }
+								checked={ attributes.showNavs }
+								onChange={ showNavs => setAttributes({showNavs}) }
+							 />
             </PanelBody>
             <PanelBody
 						title={ __( 'Product Elements', 'vayu-blocks' ) }

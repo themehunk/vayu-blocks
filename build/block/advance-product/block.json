@@ -1526,6 +1526,10 @@
     "transitionAll": {
       "type": "number",
       "default": "0.2"
+    },
+    "showNavs": {
+      "type": "boolean",
+      "default": true
     }
   },
   "supports": {
