@@ -429,7 +429,7 @@ export default function Edit({
 				if(attributes.contentWidthType=='fullwidth'){
 
 					containerStyles = { ...containerStyles,
-						maxWidth: attributes.fullcontentWidthTablet + attributes.fullcontentWidthUnit,
+						maxWidth: attributes.fullcontentWidthTablet + attributes.fullcontentWidthUnitTablet,
 					}; 
 	
 				}
@@ -581,7 +581,7 @@ export default function Edit({
 				if(attributes.contentWidthType=='fullwidth'){
 
 					containerStyles = {...containerStyles,
-						maxWidth: attributes.fullcontentWidthMobile + attributes.fullcontentWidthUnit,
+						maxWidth: attributes.fullcontentWidthMobile + attributes.fullcontentWidthUnitMobile,
 					}; 
 	
 				}

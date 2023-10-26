@@ -357,9 +357,9 @@ function advance_container_style($attr){
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
               
                 if (isset($attr['fullcontentWidthTablet'])){
-                    $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; 
-					width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit};
+                    $fullcontentWidthUnitTablet = isset($attr['fullcontentWidthUnitTablet']) ? $attr['fullcontentWidthUnitTablet'] : '%';
+                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnitTablet}; 
+					width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnitTablet};
 					margin-left: auto;
 					margin-right: auto;";
                 }else{
@@ -587,9 +587,9 @@ function advance_container_style($attr){
               $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
-                      $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit};
-					  width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
+                      $fullcontentWidthUnitMobile = isset($attr['fullcontentWidthUnitMobile']) ? $attr['fullcontentWidthUnitMobile'] : '%';
+                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnitMobile};
+					  width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnitMobile}; 
 					  margin-left: auto;
 					  margin-right: auto;";
                   }else{
