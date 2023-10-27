@@ -353,6 +353,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
      
       
       zindex: attributes.zindex,
+      tabAlign: attributes.tabAlign
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -434,6 +435,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
      
       
       zindex: attributes.zindexTablet,
+      tabAlign: attributes.tabAlignTablet
     
     },
     mobile: {
@@ -516,6 +518,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     
       
       zindex: attributes.zindexMobile,
+      tabAlign: attributes.tabAlignMobile
     
     }
 
@@ -614,6 +617,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const MarginLeft    = deviceAttributeMap[deviceType].marginLeft;
 
   const Zindex   = deviceAttributeMap[deviceType].zindex;
+  const TabAlign   = deviceAttributeMap[deviceType].tabAlign;
 
   let boxShadowStyle;
  
@@ -851,6 +855,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--tab-border-width-style':attributes.tabborderType,
     '--tab-border-color':attributes.tabBorderColor,
     '--tab-border-color-hvr':attributes.tabBorderColorHvr,
+    '--tab-alignment':TabAlign,
 
     '--padding-top':PaddingTop,
     '--padding-bottom':PaddingBottom,

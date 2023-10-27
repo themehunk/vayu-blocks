@@ -1211,6 +1211,36 @@ const changeZindex = value => {
 		setAttributes({ zindexMobile: value });
 	}
 };
+
+
+// tab alignment
+const getTabAlign = () => {
+	switch (getView) {
+		case 'Desktop':
+			return attributes.tabAlign;
+		case 'Tablet':
+			return attributes.tabAlignTablet;
+		case 'Mobile':
+			return attributes.tabAlignMobile;
+		default:
+			return 'center';
+	}
+};
+
+const changeTabAlign = value => {
+	if ('Desktop' === getView) {
+		setAttributes({ 
+			tabAlign: value, 
+			tabAlignTablet: value, 
+			tabAlignMobile: value 
+		});
+	} else if ('Tablet' === getView) {
+		setAttributes({ tabAlignTablet: value });
+	} else if ('Mobile' === getView) {
+		setAttributes({ tabAlignMobile: value });
+	}
+};
+
 const [ hover, setHover ] = useState( 'normal' );
 const customTooltiptransitionAll = value => `${value}`;
 
@@ -1673,6 +1703,18 @@ return (
 								checked={ attributes.showTab }
 								onChange={ showTab => setAttributes({showTab}) }
 							 />
+
+                        <ResponsiveControl
+								label={ __( 'Alignment', 'vayu-blocks' ) }
+							     >
+									<div className='th-component-group-label th-ins-alignment'>
+									<AlignmentToolbar
+												value={ getTabAlign() }
+									            onChange={ changeTabAlign }
+												isCollapsed={ false }
+										/>
+										</div>
+						</ResponsiveControl>
 						<ControlPanelControl
 								label={ __( 'Typography', 'vayu-blocks' ) }
 								attributes={ attributes }

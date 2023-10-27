@@ -20,6 +20,10 @@ function advance_product_tab_style($attr){
 
         $showTab = isset($attr['showTab']) ? $attr['showTab'] : true;
         if($showTab):
+        $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs{";
+        $css .= isset( $attr['tabAlign'] ) ? "justify-content:{$attr['tabAlign'] };" : 'justify-content:center;';
+        $css .= "}";
+
         $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs li{";
         $css .= isset( $attr['tabColor'] ) ? "color:{$attr['tabColor'] };" : 'color:#111;';
         $css .= isset( $attr['tabBgColor'] ) ? "background:{$attr['tabBgColor'] };" : 'background:transparent;';
@@ -618,6 +622,9 @@ function advance_product_tab_style($attr){
                 }   
 
                 if($showTab):
+                    $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs{";
+                        $css .= isset( $attr['tabAlignTablet'] ) ? "justify-content:{$attr['tabAlignTablet'] };" : 'justify-content:center;';
+                        $css .= "}";
                     $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs li{";
                      //tabborder-width
                         if (isset($attr['tabBorderWidthTypeTablet']) && 'unlinked' === $attr['tabBorderWidthTypeTablet']) {
@@ -828,6 +835,9 @@ function advance_product_tab_style($attr){
             }
 
             if($showTab):
+                $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs{";
+                    $css .= isset( $attr['tabAlignMobile'] ) ? "justify-content:{$attr['tabAlignMobile'] };" : 'justify-content:center;';
+                    $css .= "}";
                 $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']} .th-product-block-cat-filter ul.category-tabs li{";
                  //tabborder-width
                     if (isset($attr['tabBorderWidthTypeMobile']) && 'unlinked' === $attr['tabBorderWidthTypeMobile']) {

@@ -1530,6 +1530,18 @@
     "showNavs": {
       "type": "boolean",
       "default": true
+    },
+    "tabAlign": {
+      "type": "string",
+      "default": "center"
+    },
+    "tabAlignTablet": {
+      "type": "string",
+      "default": "center"
+    },
+    "tabAlignMobile": {
+      "type": "string",
+      "default": "center"
     }
   },
   "supports": {

@@ -173,10 +173,10 @@
 	--button-padding-right:0.8rem;
 	--button-padding-left:0.8rem;
 	--button-font-size: 0.89rem;
-	--button-border-radius-top-right:21px;
-	--button-border-radius-top-left:21px;
-	--button-border-radius-bottom-right:21px;
-	--button-border-radius-bottom-left:21px;
+	--button-border-radius-top-right:0;
+	--button-border-radius-top-left:0;
+	--button-border-radius-bottom-right:0;
+	--button-border-radius-bottom-left:0;
 	--price-font-size:1rem;
     --sale-bg-color:#A8B324;
 	--sale-color:#fff;
@@ -209,6 +209,7 @@
     --tab-bg-hvr-color:var(--tab-bg-color);
 	--tab-font-size:14px;
 	--tab-border-color-hvr:var(--tab-border-color);
+	--tab-alignment:center;
 	--background:none;
 	--background-hover: var(--background);
 	--transition:0.2s;
@@ -381,6 +382,9 @@
 		background:var(--post-meta-bg-hvr-color);
 		}
 
+	  }
+	  .th-product-block-cat-filter ul.category-tabs{
+		justify-content:var(--tab-alignment);
 	  }
 
 	  .th-product-block-cat-filter ul.category-tabs li{

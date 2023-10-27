@@ -39,17 +39,16 @@ class Advance_Product_Tab {
 
         wp_enqueue_style( 'th-icon', VAYU_BLOCKS_URL . '/inc/th-icon/style.css', '', '1.0.0' );
         wp_enqueue_script( 'advance-product-tab-script', VAYU_BLOCKS_URL .'/inc/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
-        
         wp_localize_script(
                 'advance-product-tab-script',
                 'advance_product_tab_ajax',
                 array(
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
-                    'attributes' => $attr,
+                  
                 )
             );
 
-        $block_content = '<div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '" class="wp-block-vayu-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
+        $block_content = '<div id="wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '"  data-attr= "' . esc_attr(json_encode($attr)) . '" class="wp-block-vayu-blocks-advance-product wp-block-th-advance-product-tag-' . esc_attr($attr['uniqueID']) . '  align' . (isset($attr['align']) ? esc_attr($attr['align']) : '') . '">
             <div class="th-product-block-wrapper">
                 <div class="wp-block-th-blocks-overlay"></div>';
                     $showTab = isset($attr['showTab']) ? $attr['showTab'] : true;
@@ -69,10 +68,22 @@ class Advance_Product_Tab {
                     $block_content .= '</ul></div>';
                     endif;
                    $block_content .= '<div class="th-product-block-product-content">
-                '.$this->get_fetch_product($attr).'
-                </div>
-            </div>
-        </div>';
+                   '.$this->get_fetch_product($attr).'
+                   </div>';
+
+                   $showNavs = isset($attr['showNavs']) ? $attr['showNavs'] : true;
+                   if($showNavs =='true'){
+                    $block_content .= '<div class="th-pagination">
+                            <button class="prev" disabled="disabled">
+                            <span class="dashicons dashicons-arrow-left-alt2"></span>
+                            </button>
+                            <button class="next">
+                            <span class="dashicons dashicons-arrow-right-alt2"></span>
+                            </button>
+                            </div>';
+                    } 
+
+                   $block_content .= '</div></div>';
     
     return $block_content;
 
@@ -80,12 +91,16 @@ class Advance_Product_Tab {
 
 
    public function get_fetch_product($attr){
-
+   
     $args = array(
         'status' => 'publish',
         'visibility' => 'catalog',
     );
+    
+    if(isset($_POST['attr'])){
 
+        $attr=$_POST['attr'];
+    }
     //product per page
 
     $device_type = $this->device_check();
@@ -270,7 +285,7 @@ class Advance_Product_Tab {
     // Get the 'template' attribute from $attr or use the default template
     $template = isset($attr['template']) && is_array($attr['template']) ? $attr['template'] : $default_template;
     
-    $product_content .= '<div class="th-product-block-product-item-wrap">';
+    $product_content .= '<div class="th-product-block-product-item-wrap" total-page="'.esc_attr($total_pages).'">';
 
     foreach ($products as $product) {
 
@@ -289,6 +304,9 @@ class Advance_Product_Tab {
 
                     //post meta
                     $product_content .= '<div class="th-product-meta">';
+
+                    $showWishlist = isset($attr['showWishlist']) ? $attr['showWishlist'] : false;
+                    if($showWishlist):
                     //wishlist
                     if( shortcode_exists( 'yith_wcwl_add_to_wishlist' ) ){
                     $product_content .= '<div class="th-icons th-wishlist-button">';
@@ -298,17 +316,19 @@ class Advance_Product_Tab {
                     
                     $product_content .= '</div>';
                    }
+                   endif;
 
                     //compare
+                    $showCompare = isset($attr['showCompare']) ? $attr['showCompare'] : false;
+                    if($showCompare):
                     if(class_exists('th_product_compare') || class_exists('Tpcp_product_compare')){
                     $product_content .= '<div class="th-icons th-compare-button">';
-                    
-                        $product_content .= '<div class="thunk-compare"><span class="compare-list"><div class="woocommerce product compare-button">
+                    $product_content .= '<div class="thunk-compare"><span class="compare-list"><div class="woocommerce product compare-button">
                               <a class="th-product-compare-btn compare" data-th-product-id="' . esc_attr($product->get_id()) . '"><span class="th-icon th-icon-repeat"></span></a>
                               </div></span></div>';
-                   
                     $product_content .= '</div>';
                     } 
+                    endif;
                     
                     $product_content .= '</div>';
 
@@ -400,18 +420,6 @@ class Advance_Product_Tab {
     }
 
     $product_content .= '</div>';
-
-    $showNavs = isset($attr['showNavs']) ? $attr['showNavs'] : true;
-    if($showNavs =='true'){
-    $product_content .= '<div class="th-pagination" total-page="'.esc_attr($total_pages).'">
-            <button class="prev">
-            <span class="dashicons dashicons-arrow-left-alt2"></span>
-            </button>
-            <button class="next">
-            <span class="dashicons dashicons-arrow-right-alt2"></span>
-            </button>
-            </div>';
-    } 
     return $product_content;
     exit;
 
@@ -536,13 +544,14 @@ public function device_check() {
 }
 
 
-public function load_category_products() {
+public function load_category_products(){
 
     $category_id = isset($_POST['category_id']) ? sanitize_text_field($_POST['category_id']) : '';
-    
-    $attributes = isset($_POST['attr']) ? $_POST['attr'] : array();
+    $page = isset($_POST['page']) ? sanitize_text_field($_POST['page']) : '';
 
-    $product_content = $this->get_fetch_product($attributes, $category_id);
+    $attrr = isset($_POST['attr']) ? sanitize_text_field($_POST['attr']) : array();
+  
+    $product_content = $this->get_fetch_product($attrr, $category_id, $page);
 
     echo $product_content;
 

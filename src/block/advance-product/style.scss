@@ -258,3 +258,13 @@ border: 1px solid #dcdcdc;
      .th-product-meta .th-icons a{
             color: #fff;
     }
+
+    .thunk-wishlist-inner .yith-wcwl-wishlistexistsbrowse a,.thunk-wishlist-inner .yith-wcwl-wishlistexistsbrowse span,.thunk-wishlist-inner .yith-wcwl-wishlistaddedbrowse span,.thunk-wishlist-inner .yith-wcwl-wishlistaddedbrowse a,.thunk-wishlist-inner .single_add_to_wishlist a span{
+        font-size:0;
+        }
+        .thunk-wishlist-inner .yith-wcwl-add-button span{
+        display:none;
+        }
+        .thunk-wishlist-inner i.yith-wcwl-icon{
+        font-size: 16px;
+        }
