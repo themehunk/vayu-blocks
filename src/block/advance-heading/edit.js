@@ -36,7 +36,7 @@ import classnames from 'classnames';
 		  googleFontsLoader.attach();
 	  }, [ attributes.id ]);
 
-	const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
+	        const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 			const { isUniqueID, isUniqueBlock} = useSelect(
 				( select ) => {
 					return {

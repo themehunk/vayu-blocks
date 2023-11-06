@@ -103,7 +103,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 		};
 	}, []);
 
-    const isLarger = useViewportMatch( 'large', '>=' );
+  const isLarger = useViewportMatch( 'large', '>=' );
 
 	const isLarge = useViewportMatch( 'large', '<=' );
 
@@ -111,7 +111,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
 	const isSmaller = useViewportMatch( 'small', '<=' );
 
-    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+  let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
 
 	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
 
@@ -353,6 +353,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
      
       
       zindex: attributes.zindex,
+      tabAlign: attributes.tabAlign
     },
     tablet: {
       titlefontSize: attributes.titlefontSizeTablet + attributes.titlefontSizeUnit,
@@ -434,6 +435,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
      
       
       zindex: attributes.zindexTablet,
+      tabAlign: attributes.tabAlignTablet
     
     },
     mobile: {
@@ -516,6 +518,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     
       
       zindex: attributes.zindexMobile,
+      tabAlign: attributes.tabAlignMobile
     
     }
 
@@ -614,6 +617,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   const MarginLeft    = deviceAttributeMap[deviceType].marginLeft;
 
   const Zindex   = deviceAttributeMap[deviceType].zindex;
+  const TabAlign   = deviceAttributeMap[deviceType].tabAlign;
 
   let boxShadowStyle;
  
@@ -851,6 +855,7 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
     '--tab-border-width-style':attributes.tabborderType,
     '--tab-border-color':attributes.tabBorderColor,
     '--tab-border-color-hvr':attributes.tabBorderColorHvr,
+    '--tab-alignment':TabAlign,
 
     '--padding-top':PaddingTop,
     '--padding-bottom':PaddingBottom,
@@ -1104,16 +1109,17 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                 </div>
               ))}
             </div>
-            {!noproduct && (
-            <div className="th-pagination">
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
-            <span className="dashicons dashicons-arrow-left-alt2"></span>
-            </button>
-            <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
-            <span className="dashicons dashicons-arrow-right-alt2"></span>
-            </button>
-            </div>
-            )}
+            {attributes.showNavs && !noproduct && (
+  <div className="th-pagination">
+    <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+      <span className="dashicons dashicons-arrow-left-alt2"></span>
+    </button>
+    <button disabled={!hasNextPage} onClick={() => setCurrentPage(currentPage + 1)}>
+      <span className="dashicons dashicons-arrow-right-alt2"></span>
+    </button>
+  </div>
+)}
+
           </div>
         </>
         

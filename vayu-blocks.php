@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:       Vayu Blocks
- * Description:       Example block scaffolded with Create Block tool.
+ * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
  * Requires at least: 5.9
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            ThemeHunk
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -87,7 +87,7 @@ class Vayu_Block_Plugin {
         if (class_exists('WooCommerce')) {
             // Add the 'vayu-blocks/advance-product' block registration array
             $blocks[] = array(
-                'name'           => 'vayu-blocks/advance-product',
+                'name'            => 'vayu-blocks/advance-product',
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
@@ -99,6 +99,8 @@ class Vayu_Block_Plugin {
         }
 
         foreach ( $blocks as $block ) {
+
+            
             // Register JavaScript file
             wp_register_script(
                 $block['script_handle'],
@@ -142,6 +144,7 @@ class Vayu_Block_Plugin {
             // Check if the render callback is set and not null
             if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
                 $block_args['render_callback'] = $block['render_callback'];
+               
             }
 
             // Register each block

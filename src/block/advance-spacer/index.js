@@ -28,13 +28,8 @@ const { name } = metadata;
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Spacer', 'vayu-blocks' ),
-	description: __( 'Advanced Spacer gives a spin to editor\'s Spacer block with much needed customization options. Powered by Vayu.', 'vayu-blocks' ),
+	description: __( 'Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks' ),
 	icon,
-	keywords: [
-		'heading',
-		'title',
-		'advanced heading'
-	],
 	edit,
 	save,
 	example: {

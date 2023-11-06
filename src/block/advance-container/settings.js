@@ -64,58 +64,206 @@ const InsSettings = ({
 	const [ hover, setHover ] = useState( 'normal' );
 	const [ shaper, setShaper ] = useState( 'top' );
 	const ANCHOR_REGEX = /[\s#]/g;
-    //boxed width
-    const getBoxedcontentWidth = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.boxedcontentWidth;
-		case 'Tablet':
-			return attributes.boxedcontentWidthTablet;
-		case 'Mobile':
-			return attributes.boxedcontentWidthMobile;
+    // boxed width
+const getBoxedcontentWidth = () => {
+	switch (getView) {
+	  case 'Desktop':
+		return attributes.boxedcontentWidth;
+	  case 'Tablet':
+		return attributes.boxedcontentWidthTablet;
+	  case 'Mobile':
+		return attributes.boxedcontentWidthMobile !== undefined ? attributes.boxedcontentWidthMobile : 100; // Default value for mobile view
+	  default:
+		return undefined;
+	}
+  };
+  
+  const changeBoxedcontentWidth = (value) => {
+	switch (getView) {
+	  case 'Desktop':
+		setAttributes({ boxedcontentWidth: value });
+		break;
+	  case 'Tablet':
+		setAttributes({ boxedcontentWidthTablet: value });
+		break;
+	  case 'Mobile':
+		setAttributes({ boxedcontentWidthMobile: value });
+		break;
+	  default:
+		break;
+	}
+  };
+  
+  // Set the default value to 100 for boxedcontentWidthMobile
+  if (getView === 'Mobile' && attributes.boxedcontentWidthMobile === undefined) {
+	setAttributes({ boxedcontentWidthMobile: 100 });
+  }
+
+  const getBoxedcontentWidthUnitValue = () => {
+	switch (getView) {
+	  case 'Desktop':
+		return attributes.boxedcontentWidthUnit;
+	  case 'Tablet':
+		return attributes.boxedcontentWidthUnitTablet;
+	  case 'Mobile':
+		return attributes.boxedcontentWidthUnitMobile;
 		default:
-			return undefined;
-		}
-	};
+			break;
+	}
+  };
+  
+  const handleBoxedcontentWidthUnitChange = (boxedcontentWidthUnit) => {
+	switch (getView) {
+	  case 'Desktop':
+		setAttributes({ ...attributes, boxedcontentWidthUnit: boxedcontentWidthUnit });
+		break;
+	  case 'Tablet':
+		setAttributes({ ...attributes, boxedcontentWidthUnitTablet: boxedcontentWidthUnit });
+		break;
+	  case 'Mobile':
+		setAttributes({ ...attributes, boxedcontentWidthUnitMobile: boxedcontentWidthUnit });
+		break;
+	  default:
+		break;
+	}
+  };
 
-	const changeBoxedcontentWidth = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ boxedcontentWidth: value, boxedcontentWidthTablet: value, boxedcontentWidthMobile: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ boxedcontentWidthTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ boxedcontentWidthMobile: value });
-		}
-	};
 
-    const customTooltipBoxedcontentWidth = value => `${value}${attributes.boxedcontentWidthUnit}`;
-    
-     //full width width
-     const getFullcontentWidth = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.fullcontentWidth;
-		case 'Tablet':
-			return attributes.fullcontentWidthTablet;
-		case 'Mobile':
-			return attributes.fullcontentWidthMobile;
+  let maxBoxedcontentWidth;
+  
+  if (getView === 'Desktop') {
+  if (attributes.boxedcontentWidthUnit === 'px') {
+	  maxBoxedcontentWidth = 2500;
+  } else if (attributes.boxedcontentWidthUnit === 'em') {
+	  maxBoxedcontentWidth = 50;
+  } else if (attributes.boxedcontentWidthUnit === '%') {
+	  maxBoxedcontentWidth = 100;
+  }
+  } else if (getView === 'Tablet') {
+  // Set maxBoxedcontentWidth for Tablet
+
+  if (attributes.boxedcontentWidthUnitTablet === 'px') {
+	  maxBoxedcontentWidth = 2500;
+  } else if (attributes.boxedcontentWidthUnitTablet === 'em') {
+	  maxBoxedcontentWidth = 50;
+  } else if (attributes.boxedcontentWidthUnitTablet === '%') {
+	  maxBoxedcontentWidth = 100;
+  }
+  } else if (getView === 'Mobile') {
+  // Set maxBoxedcontentWidth for Mobile
+
+  if (attributes.boxedcontentWidthUnitMobile === 'px') {
+	  maxBoxedcontentWidth = 2500;
+  } else if (attributes.boxedcontentWidthUnitMobile === 'em') {
+	  maxBoxedcontentWidth = 50;
+  } else if (attributes.boxedcontentWidthUnitMobile === '%') {
+	  maxBoxedcontentWidth = 100;
+  }
+}
+
+const customTooltipBoxedcontentWidth = value => `${value}${attributes.boxedcontentWidthUnit}`;
+        
+// FULL WIDTH 
+const getfullcontentWidth = () => {
+	switch (getView) {
+	  case 'Desktop':
+		return attributes.fullcontentWidth;
+	  case 'Tablet':
+		return attributes.fullcontentWidthTablet;
+	  case 'Mobile':
+		return attributes.fullcontentWidthMobile !== undefined ? attributes.fullcontentWidthMobile : 100; // Default value for mobile view
+	  default:
+		return undefined;
+	}
+  };
+  
+  const changefullcontentWidth = (value) => {
+	switch (getView) {
+	  case 'Desktop':
+		setAttributes({ fullcontentWidth: value });
+		break;
+	  case 'Tablet':
+		setAttributes({ fullcontentWidthTablet: value });
+		break;
+	  case 'Mobile':
+		setAttributes({ fullcontentWidthMobile: value });
+		break;
+	  default:
+		break;
+	}
+  };
+  
+  // Set the default value to 100 for boxedcontentWidthMobile
+  if (getView === 'Mobile' && attributes.fullcontentWidthMobile === undefined) {
+	setAttributes({ fullcontentWidthMobile: 100 });
+  }
+
+  const getfullcontentWidthUnitValue = () => {
+	switch (getView) {
+	  case 'Desktop':
+		return attributes.fullcontentWidthUnit;
+	  case 'Tablet':
+		return attributes.fullcontentWidthUnitTablet;
+	  case 'Mobile':
+		return attributes.fullcontentWidthUnitMobile;
 		default:
-			return undefined;
-		}
-	};
+			break;
+	}
+  };
+  
+  const handlefullcontentWidthChange = (fullcontentWidthUnit) => {
+	switch (getView) {
+	  case 'Desktop':
+		setAttributes({ ...attributes, fullcontentWidthUnit: fullcontentWidthUnit });
+		break;
+	  case 'Tablet':
+		setAttributes({ ...attributes, fullcontentWidthUnitTablet: fullcontentWidthUnit });
+		break;
+	  case 'Mobile':
+		setAttributes({ ...attributes, fullcontentWidthUnitMobile: fullcontentWidthUnit });
+		break;
+	  default:
+		break;
+	}
+  };
 
-	const changeFullcontentWidth = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ fullcontentWidth: value, fullcontentWidthTablet: value, fullcontentWidthMobile: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ fullcontentWidthTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ fullcontentWidthMobile: value });
-		}
-	};
 
-    const customTooltipFullcontentWidth = value => `${value}${attributes.fullcontentWidthUnit}`;
-    // MIN HEIGHT
+  let maxfullcontentWidth;
+  
+  if (getView === 'Desktop') {
+  if (attributes.fullcontentWidthUnit === 'px') {
+	  maxfullcontentWidth = 2500;
+  } else if (attributes.fullcontentWidthUnit === 'em') {
+	  maxfullcontentWidth = 50;
+  } else if (attributes.fullcontentWidthUnit === '%') {
+	  maxfullcontentWidth = 100;
+  }
+  } else if (getView === 'Tablet') {
+  // Set maxBoxedcontentWidth for Tablet
+
+  if (attributes.fullcontentWidthUnitTablet === 'px') {
+	  maxfullcontentWidth = 2500;
+  } else if (attributes.fullcontentWidthUnitTablet === 'em') {
+	  maxfullcontentWidth = 50;
+  } else if (attributes.fullcontentWidthUnitTablet === '%') {
+	  maxfullcontentWidth = 100;
+  }
+  } else if (getView === 'Mobile') {
+  // Set maxBoxedcontentWidth for Mobile
+
+  if (attributes.fullcontentWidthUnitMobile === 'px') {
+	  maxfullcontentWidth = 2500;
+  } else if (attributes.fullcontentWidthUnitMobile === 'em') {
+	  maxfullcontentWidth = 50;
+  } else if (attributes.fullcontentWidthMobile === '%') {
+	  maxfullcontentWidth = 100;
+  }
+}
+
+const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontentWidthUnit}`;	
+	
+	
+	// MIN HEIGHT
     const getContentMinHgt = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -156,7 +304,7 @@ const InsSettings = ({
 	};
     const changeDirection = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ direction: value, directionTablet: value, directionMobile: value });
+			setAttributes({ direction: value, directionTablet: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ directionTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -193,7 +341,7 @@ const InsSettings = ({
 		case 'Desktop':
 			return attributes.AlignItem;
 		case 'Tablet':
-			return attributes.AlignItemyTablet;
+			return attributes.AlignItemTablet;
 		case 'Mobile':
 			return attributes.AlignItemMobile;
 		default:
@@ -1328,10 +1476,6 @@ const InsSettings = ({
 
 
     // unit switch max value
-	const [boxedcontentWidthUnit, setBoxedcontentWidthUnit] = useState('px');
-	const maxBoxedcontentWidth = boxedcontentWidthUnit === 'px' ? 1500 : boxedcontentWidthUnit === 'em' ? 50 : boxedcontentWidthUnit === '%' ? 100:'';
-    const [fullcontentWidthUnit, setfullcontentWidthUnit] = useState('px');
-	const maxfullcontentWidthUnit = fullcontentWidthUnit === 'px' ? 1500 : fullcontentWidthUnit === 'em' ? 50 : fullcontentWidthUnit === '%' ? 100:'';
 	const [contentMinHgtUnit, setcontentMinHgtUnit] = useState('px');
 	const maxcontentMinHgtUnit = contentMinHgtUnit === 'px' ? 1500 : contentMinHgtUnit === 'em' ? 50 : contentMinHgtUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
@@ -1415,21 +1559,22 @@ const InsSettings = ({
                         label={ __( 'Width', 'vayu-blocks' ) }
                         >	
                         <UnitChooser
-                        value={ attributes.boxedcontentWidthUnit }
-						onClick={boxedcontentWidthUnit => {
-							setAttributes({ boxedcontentWidthUnit });
-							setBoxedcontentWidthUnit(boxedcontentWidthUnit);
-						  }}
-                        units={ [ 'px', 'em', '%' ] }
-                        />
+						value={getBoxedcontentWidthUnitValue()}
+						onClick={(boxedcontentWidthUnit) => {
+							handleBoxedcontentWidthUnitChange(boxedcontentWidthUnit);
+						}}
+						units={['px', 'em', '%']}
+						/>
+						
                         <RangeControl
-                            renderTooltipContent={ customTooltipBoxedcontentWidth }
-                            value={ getBoxedcontentWidth() || '' }
-                            onChange={ changeBoxedcontentWidth }
-                            step={ 1 }
-                            min={ 1 }
-                            max={maxBoxedcontentWidth}
-                            allowReset={ true }
+								renderTooltipContent={customTooltipBoxedcontentWidth}
+								initialPosition={getBoxedcontentWidth()}
+								value={getBoxedcontentWidth() || ''}
+								onChange={changeBoxedcontentWidth}
+								step={1}
+								min={1}
+								max={maxBoxedcontentWidth}
+                                allowReset={ true }
                         />
                         </ResponsiveControl>
                    )}
@@ -1438,22 +1583,22 @@ const InsSettings = ({
                         <ResponsiveControl
                         label={ __( 'Width', 'vayu-blocks' ) }
                         >	
+
                         <UnitChooser
-                        value={ attributes.fullcontentWidthUnit }
-						onClick={fullcontentWidthUnit => {
-							setAttributes({ fullcontentWidthUnit });
-							setfullcontentWidthUnit(fullcontentWidthUnit);
-						  }}
-                       
-                        units={ [ 'px', 'em', '%' ] }
-                        />
+						value={getfullcontentWidthUnitValue()}
+						onClick={(fullcontentWidthUnit) => {
+							handlefullcontentWidthChange(fullcontentWidthUnit);
+						}}
+						units={['px', 'em', '%']}
+						/>
                         <RangeControl
-                            renderTooltipContent={ customTooltipFullcontentWidth }
-                            value={ getFullcontentWidth() || '' }
-                            onChange={ changeFullcontentWidth }
+                            renderTooltipContent={ customTooltipfullcontentWidth }
+							initialPosition={getfullcontentWidth()}
+                            value={ getfullcontentWidth() || '' }
+                            onChange={ changefullcontentWidth }
                             step={ 1 }
                             min={ 1 }
-                            max={maxfullcontentWidthUnit}
+                            max={maxfullcontentWidth}
                             allowReset={ true }
                         />
                         </ResponsiveControl>

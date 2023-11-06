@@ -28,13 +28,8 @@ const { name } = metadata;
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Button', 'vayu-blocks' ),
-	description: __( 'AdvancedButton gives a spin to editor\'s Button block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
+	description: __( 'Easily design attractive buttons with Vayu Blocks’ advanced customizations.', 'vayu-blocks' ),
 	icon,
-	keywords: [
-		'heading',
-		'title',
-		'advance button'
-	],
 	edit,
 	save,
 	example: {

@@ -40,7 +40,15 @@
     },
     "boxedcontentWidthUnit": {
       "type": "string",
-      "default": "px"
+      "default": "%"
+    },
+    "boxedcontentWidthUnitTablet": {
+      "type": "string",
+      "default": "%"
+    },
+    "boxedcontentWidthUnitMobile": {
+      "type": "string",
+      "default": "%"
     },
     "fullcontentWidth": {
       "type": "number"
@@ -53,7 +61,15 @@
     },
     "fullcontentWidthUnit": {
       "type": "string",
-      "default": "px"
+      "default": "%"
+    },
+    "fullcontentWidthUnitTablet": {
+      "type": "string",
+      "default": "%"
+    },
+    "fullcontentWidthUnitMobile": {
+      "type": "string",
+      "default": "%"
     },
     "contentMinHgt": {
       "type": "number"
@@ -75,7 +91,8 @@
       "type": "string"
     },
     "directionMobile": {
-      "type": "string"
+      "type": "string",
+      "default": "column"
     },
     "Justify": {
       "type": "string"

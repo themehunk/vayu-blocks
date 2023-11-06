@@ -17,7 +17,7 @@ const { name } = metadata;
 registerBlockType( name, {
 	...metadata,
 	title: __( 'Container', 'vayu-blocks' ),
-	description: __( 'Advanced Heading gives a spin to editor\'s Heading block with much needed customization options. Powered by vayu.', 'vayu-blocks' ),
+	description: __( 'Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks' ),
 	icon,
 	keywords: [
 		__( 'section' ),

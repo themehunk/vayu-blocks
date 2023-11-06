@@ -10,7 +10,7 @@ function advance_container_style($attr){
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
 		if (isset($attr['boxedcontentWidth'])) {
-			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : '%';
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
@@ -21,12 +21,14 @@ function advance_container_style($attr){
         $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
             // full-width
             if (isset($attr['fullcontentWidth'])) {
-                $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
+                $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : '%';
                 $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
-				 margin-left: auto;
+				width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
+				margin-left: auto;
 				margin-right: auto; ";
             }else{
-                $css .= "max-width:100%;  
+                $css .= "max-width:100%;
+				width:100%;  
 				margin-left: auto;
 				margin-right: auto;";
             }
@@ -211,7 +213,7 @@ function advance_container_style($attr){
 		}else{
 			$css .= isset( $attr['overlaybackgroundColor'] ) ? "background-color:{$attr['overlaybackgroundColor']};" : '';
 		}
-
+        $css .= "border-radius:inherit";
         $css .= "}";
 
         // overlay hover
@@ -227,7 +229,7 @@ function advance_container_style($attr){
             }else{
                 $css .= isset( $attr['overlaybackgroundColorHvr'] ) ? "background-color:{$attr['overlaybackgroundColorHvr']};" : '';
             }
-    
+            $css .= "border-radius:inherit";
             $css .= "}";
 
         //inside wrap
@@ -305,7 +307,7 @@ function advance_container_style($attr){
 				 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
 				";
 			} else {
-				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 0;
+				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 'inherit';
 				$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
 				$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
 			}
@@ -344,10 +346,10 @@ function advance_container_style($attr){
       $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
             // boxed-width
             if (isset($attr['boxedcontentWidthTablet'])) {
-                $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+                $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnitTablet']) ? $attr['boxedcontentWidthUnitTablet'] : '%';
                 $css .= "max-width: {$attr['boxedcontentWidthTablet']}{$boxedcontentWidthUnit}; ";
             }else{
-                $css .= "max-width: {100%};";
+                $css .= "max-width:100%;";
             }
 			
             $css .= "}";
@@ -355,12 +357,14 @@ function advance_container_style($attr){
             $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
               
                 if (isset($attr['fullcontentWidthTablet'])){
-                    $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnit}; 
+                    $fullcontentWidthUnitTablet = isset($attr['fullcontentWidthUnitTablet']) ? $attr['fullcontentWidthUnitTablet'] : '%';
+                    $css .= "max-width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnitTablet}; 
+					width: {$attr['fullcontentWidthTablet']}{$fullcontentWidthUnitTablet};
 					margin-left: auto;
 					margin-right: auto;";
                 }else{
                     $css .= "
+					width:100%;
 					max-width: {100%};
 					margin-left: auto;
 					margin-right: auto;";
@@ -573,22 +577,25 @@ function advance_container_style($attr){
         $css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
               // boxed-width
               if (isset($attr['boxedcontentWidthMobile'])){
-                  $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
+                  $boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnitMobile']) ? $attr['boxedcontentWidthUnitMobile'] : '%';
                   $css .= "max-width: {$attr['boxedcontentWidthMobile']}{$boxedcontentWidthUnit}; ";
               }else{
-                  $css .= "max-width: {100%};";
+                  $css .= "max-width:100%;";
               }
               $css .= "}";
       
               $css .= ".th-c{$attr['uniqueID']}.fullwidth-content{";
                   // boxed-width
                   if (isset($attr['fullcontentWidthMobile'])){
-                      $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : 'px';
-                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnit}; 
+                      $fullcontentWidthUnitMobile = isset($attr['fullcontentWidthUnitMobile']) ? $attr['fullcontentWidthUnitMobile'] : '%';
+                      $css .= "max-width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnitMobile};
+					  width: {$attr['fullcontentWidthMobile']}{$fullcontentWidthUnitMobile}; 
 					  margin-left: auto;
 					  margin-right: auto;";
                   }else{
-                      $css .= "max-width:100%;
+                      $css .= "
+					  width:100%;
+					  max-width:100%;
 					  margin-left: auto;
 					  margin-right: auto;";
                   }
@@ -754,7 +761,7 @@ function advance_container_style($attr){
             //inside wrap
             $css .= ".th-c{$attr['uniqueID']} > .th-inside-content-wrap{";
                 //flex-direction
-                $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : '';
+                $css .= isset($attr['directionMobile']) ? "flex-direction: {$attr['directionMobile']}; " : 'flex-direction:column;';
                 //justifiy-content
                 $css .= isset($attr['JustifyMobile']) ? "justify-content: {$attr['JustifyMobile']}; " : '';
                 //align-Items
