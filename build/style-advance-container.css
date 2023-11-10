@@ -1,1 +1,87 @@
-.wp-block-create-block-vayu-blocks{background-color:#21759b;color:#fff;padding:2px}.wp-block-vayu-blocks-advance-container{box-sizing:border-box;display:flex;flex-grow:1;justify-content:center;position:relative}.th-con{border-radius:0;display:flex;flex-basis:auto;flex-direction:column;flex-grow:1;flex-shrink:1;position:relative}.wp-block-th-blocks-container-overlay{height:100%;left:0;padding:0!important;position:absolute;top:0;width:100%}.block-editor-block-icon.has-colors svg.th-block-icon{fill:#000;max-height:40px;max-width:40px;min-height:40px;min-width:40px}.th-shape{direction:ltr;left:0;line-height:0;overflow:hidden;position:absolute;top:-1px;width:100%;z-index:-1}.th-shape svg{display:block;left:50%;position:relative;transform:translateX(-50%);width:100%}.th-shape.flip-bottom svg,.th-shape.flip-top svg{left:50%;transform:translateX(-50%) rotateY(180deg)}.th-shape-top{top:-1px}.th-shape-bottom{bottom:-1px;transform:rotate(180deg)}
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/block/advance-container/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-vayu-blocks {
+  background-color: #21759b;
+  color: #fff;
+  padding: 2px;
+}
+
+.wp-block-vayu-blocks-advance-container {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.th-con {
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+}
+
+.wp-block-th-blocks-container-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 0 !important;
+}
+
+.block-editor-block-icon.has-colors svg.th-block-icon {
+  max-height: 40px;
+  max-width: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  fill: #000;
+}
+
+.th-shape {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+  top: -1px;
+  z-index: -1;
+}
+
+.th-shape svg {
+  display: block;
+  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.th-shape.flip-top svg, .th-shape.flip-bottom svg {
+  left: 50%;
+  transform: translateX(-50%) rotateY(180deg);
+}
+
+.th-shape-top {
+  top: -1px;
+}
+
+.th-shape-bottom {
+  bottom: -1px;
+}
+
+.th-shape-bottom {
+  transform: rotate(180deg);
+}
+
+/*# sourceMappingURL=style-advance-container.css.map*/
