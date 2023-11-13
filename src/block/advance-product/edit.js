@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
-import { omitBy } from 'lodash';
+
 import hexToRgba from 'hex-rgba';
 import {Fragment,useState,Suspense,useEffect} from '@wordpress/element';
 
@@ -36,7 +36,7 @@ import googleFontsLoader from '../../helpers/google-fonts.js';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
-import { Button } from '@wordpress/components';
+
 
 /**
  * Internal dependencies
@@ -59,7 +59,11 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
   if ( ! id ) {
 		setAttributes( { id: clientId } );
 	}
-
+  const omitBy = (object, condition) => (
+		Object.fromEntries(
+		  Object.entries(object).filter(([key, value]) => !condition(value))
+		)
+	  );
   useEffect( () => {
 		googleFontsLoader.attach();
 	}, [ attributes.id ]);

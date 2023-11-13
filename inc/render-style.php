@@ -30,7 +30,8 @@ function render_server_side_css() {
 	}
 
 	$templates_parts = get_block_templates( array( 'slugs__in' => $slugs ), 'wp_template_part' );
-
+    
+	
 	foreach ( $templates_parts as $templates_part ) {
 		if ( isset( $templates_part->content ) && isset( $templates_part->slug ) && in_array( $templates_part->slug, $slugs ) ) {
 			$content .= $templates_part->content;
@@ -39,7 +40,7 @@ function render_server_side_css() {
 
 	$content .= $_wp_current_template_content; 
 
-	if ( function_exists( 'has_blocks' ) && has_blocks( get_the_ID() ) ) {
+   if ( function_exists( 'has_blocks' ) ) {
 
 		global $post;
 

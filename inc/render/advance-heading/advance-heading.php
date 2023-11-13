@@ -50,6 +50,11 @@ function advance_heading_style($attr){
 			$css .= "font-family: '{$attr['fontFamily']}', sans-serif; ";
 		}
 
+		if (isset($attr['fontVariant'])) {
+			$fontVariant = isset($attr['fontVariant']) ? $attr['fontVariant'] : 'normal';
+			$css .= "font-weight:{$fontVariant}; ";
+		}
+
 		// Width
 		if (isset($attr['widthType'])) {
 			if ($attr['widthType'] == 'fullwidth') {

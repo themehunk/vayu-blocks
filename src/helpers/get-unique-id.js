@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash';
+let counter = 0;
 /**
  * Import WordPress Internals
  */
@@ -8,7 +8,7 @@ export default function getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlo
     if ( ! uniqueID ) {
         //new block
         if ( ! isUniqueID( smallID ) ) {
-            smallID = uniqueId( smallID );
+            smallID = generateUniqueId(smallID);
         }
         return smallID;
     } else if ( ! isUniqueID( uniqueID ) ) {
@@ -19,4 +19,9 @@ export default function getUniqueId( uniqueID, clientId, isUniqueID, isUniqueBlo
     }
     //normal block loading 
     return uniqueID;
+}
+
+function generateUniqueId(smallID) {
+  counter += 1;
+  return `${smallID}${counter}`;
 }

@@ -20,8 +20,6 @@ import { useSelect } from '@wordpress/data';
 
 import {Fragment,useState,Suspense,useEffect} from '@wordpress/element';
 
-
-import { pick } from 'lodash';
 /**
 * Internal dependencies
 */
@@ -57,9 +55,23 @@ const InsSettings = ({
     const [ tab, setTab ] = useState( 'setting' );
    
     const homeUrl = ThBlockData.homeUrl;
+	const pick = (object, keys) => {
+		if (!object || typeof object !== 'object') {
+		  throw new Error('Input must be an object');
+		}
+	  
+		return keys.reduce((acc, key) => {
+		  if (object.hasOwnProperty(key)) {
+			acc[key] = object[key];
+		  }
+		  return acc;
+		}, {});
+	  };
     
     const [SelectCategories, setSelectCategories] = useState([]);
     const [SelectProduct, setSelectProduct] = useState([]);
+
+	
     
     // fetch category
     useEffect(() => {
