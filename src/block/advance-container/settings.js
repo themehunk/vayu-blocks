@@ -291,9 +291,14 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 
 	const changeContentMinHgt = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ contentMinHgt: value, contentMinHgtTablet: value, contentMinHgtMobile: value });
+			setAttributes({ 
+				contentMinHgt: value, 
+				contentMinHgtTablet: value, 
+				contentMinHgtMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ contentMinHgtTablet: value });
+			setAttributes({ 
+				contentMinHgtTablet: value,
+				contentMinHgtMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ contentMinHgtMobile: value });
 		}
@@ -318,7 +323,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ direction: value, directionTablet: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ directionTablet: value });
+			setAttributes({ directionTablet: value,directionMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ directionMobile: value });
 		}
@@ -342,7 +347,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ Justify: value, JustifyTablet: value, JustifyMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ JustifyTablet: value });
+			setAttributes({ JustifyTablet: value,JustifyMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ JustifyMobile: value });
 		}
@@ -365,7 +370,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ AlignItem: value, AlignItemTablet: value, AlignItemMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ AlignItemTablet: value });
+			setAttributes({ AlignItemTablet: value, AlignItemMobile: value});
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ AlignItemMobile: value });
 		}
@@ -388,7 +393,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ Wrap: value, WrapTablet: value, WrapMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ WrapTablet: value });
+			setAttributes({ WrapTablet: value, WrapMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ WrapMobile: value });
 		}
@@ -412,7 +417,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({AlignContent: value, AlignContentTablet: value, AlignContentMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ AlignContentTablet: value });
+			setAttributes({ AlignContentTablet: value, AlignContentMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ AlignContentMobile: value });
 		}
@@ -436,7 +441,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ paddingType: value,paddingTypeTablet: value, paddingTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ paddingTypeTablet: value });
+			setAttributes({ paddingTypeTablet: value,paddingTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ paddingTypeMobile: value });
 		}
@@ -471,9 +476,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.paddingTypeTablet ) {
-				setAttributes({ paddingTablet: value });
+				setAttributes({ paddingTablet: value, paddingMobile: value});
 			} else {
-				setAttributes({ [tabletPaddingType[type]]: value });
+				setAttributes({ [tabletPaddingType[type]]: value, [mobilePaddingType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -545,7 +550,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ marginType: value,marginTypeTablet: value, marginTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ marginTypeTablet: value });
+			setAttributes({ marginTypeTablet: value, marginTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ marginTypeMobile: value });
 		}
@@ -579,9 +584,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.marginTypeTablet ) {
-				setAttributes({ marginTablet: value });
+				setAttributes({ marginTablet: value, marginMobile: value });
 			} else {
-				setAttributes({ [tabletMarginType[type]]: value });
+				setAttributes({ [tabletMarginType[type]]: value,[mobileMarginType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -657,7 +662,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ horizontalOrientationOffset: value, horizontalOrientationOffsetTablet: value, horizontalOrientationOffsetMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ horizontalOrientationOffsetTablet: value });
+			setAttributes({ horizontalOrientationOffsetTablet: value,horizontalOrientationOffsetMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ horizontalOrientationOffsetMobile: value });
 		}
@@ -681,7 +686,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ horizontalOrientationOffsetRight: value, horizontalOrientationOffsetRightTablet: value, horizontalOrientationOffsetRightMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ horizontalOrientationOffsetRightTablet: value });
+			setAttributes({ horizontalOrientationOffsetRightTablet: value, horizontalOrientationOffsetRightMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ horizontalOrientationOffsetRightMobile: value });
 		}
@@ -710,7 +715,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ verticalOrientationOffsetTop: value, verticalOrientationOffsetTopTablet: value, verticalOrientationOffsetTopMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ verticalOrientationOffsetTopTablet: value });
+			setAttributes({ verticalOrientationOffsetTopTablet: value, verticalOrientationOffsetTopMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ verticalOrientationOffsetTopMobile: value });
 		}
@@ -734,7 +739,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ verticalOrientationOffsetBottom: value, verticalOrientationOffsetBottomTablet: value, verticalOrientationOffsetBottomMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ verticalOrientationOffsetBottomTablet: value });
+			setAttributes({ verticalOrientationOffsetBottomTablet: value,verticalOrientationnOffsetBottomMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ verticalOrientationnOffsetBottomMobile: value });
 		}
@@ -759,7 +764,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ zindexTablet: value });
+			setAttributes({ zindexTablet: value, zindexMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ zindexMobile: value });
 		}
@@ -782,7 +787,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ alignSelf: value, alignSelfTablet: value, alignSelfMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ alignSelfTablet: value });
+			setAttributes({ alignSelfTablet: value, alignSelfMobile: value});
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ alignSelfMobile: value });
 		}
@@ -809,7 +814,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ order: value, orderTablet: value, orderMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ orderTablet: value });
+			setAttributes({ orderTablet: value, orderMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ orderMobile: value });
 		}
@@ -833,7 +838,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ customOrder: value, customOrderTablet: value, customOrderMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ customOrderTablet: value });
+			setAttributes({ customOrderTablet: value,customOrderMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ customOrderMobile: value });
 		}
@@ -857,7 +862,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ flexSize: value, flexSizeTablet: value, flexSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ flexSizeTablet: value });
+			setAttributes({ flexSizeTablet: value,flexSizeMobile: value});
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ flexSizeMobile: value });
 		}
@@ -882,7 +887,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ FlexGrowSize: value, FlexGrowSizeTablet: value, FlexGrowSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ FlexGrowSizeTablet: value });
+			setAttributes({ FlexGrowSizeTablet: value,FlexGrowSizeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ FlexGrowSizeMobile: value });
 		}
@@ -907,7 +912,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ FlexShrinkSize: value, FlexShrinkSizeTablet: value, FlexShrinkSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ FlexShrinkSizeTablet: value });
+			setAttributes({ FlexShrinkSizeTablet: value,FlexShrinkSizeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ FlexShrinkSizeMobile: value });
 		}
@@ -973,7 +978,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ borderWidthType: value, borderWidthTypeTablet: value, borderWidthTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ borderWidthTypeTablet: value });
+			setAttributes({ borderWidthTypeTablet: value,borderWidthTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ borderWidthTypeMobile: value });
 		}
@@ -983,7 +988,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ borderWidthHvrType: value, borderWidthHvrTypeTablet: value, borderWidthHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ borderWidthHvrTypeTablet: value });
+			setAttributes({ borderWidthHvrTypeTablet: value,borderWidthHvrTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ borderWidthHvrTypeMobile: value });
 		}
@@ -992,7 +997,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ borderRadiusType: value, borderRadiusTypeTablet: value, borderRadiusTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ borderRadiusTypeTablet: value });
+			setAttributes({ borderRadiusTypeTablet: value,borderRadiusTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ borderRadiusTypeMobile: value });
 		}
@@ -1002,7 +1007,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ borderRadiusHvrType: value, borderRadiusHvrTypeTablet: value, borderRadiusHvrTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ borderRadiusHvrTypeTablet: value });
+			setAttributes({ borderRadiusHvrTypeTablet: value,borderRadiusHvrTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ borderRadiusHvrTypeMobile: value });
 		}
@@ -1091,9 +1096,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.borderWidthTypeTablet ) {
-				setAttributes({ borderWidthTablet: value });
+				setAttributes({ borderWidthTablet: value ,borderWidthMobile: value});
 			} else {
-				setAttributes({ [tabletBorderWidthType[type]]: value });
+				setAttributes({ [tabletBorderWidthType[type]]: value, [mobileBorderWidthType[type]]: value});
 			}
 			break;
 		case 'Mobile':
@@ -1117,9 +1122,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.borderWidthHvrTypeTablet ) {
-				setAttributes({ borderWidthHvrTablet: value });
+				setAttributes({ borderWidthHvrTablet: value,borderWidthHvrMobile: value  });
 			} else {
-				setAttributes({ [tabletBorderWidthHvrType[type]]: value });
+				setAttributes({ [tabletBorderWidthHvrType[type]]: value,[mobileBorderWidthHvrType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -1143,9 +1148,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.borderRadiusTypeTablet ) {
-				setAttributes({ borderRadiusTablet: value });
+				setAttributes({ borderRadiusTablet: value, borderRadiusMobile: value  });
 			} else {
-				setAttributes({ [tabletBorderRadiusType[type]]: value });
+				setAttributes({ [tabletBorderRadiusType[type]]: value,[mobileBorderRadiusType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -1169,9 +1174,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.borderRadiusHvrTypeTablet ) {
-				setAttributes({ borderRadiusHvrTablet: value });
+				setAttributes({ borderRadiusHvrTablet: value,borderRadiusHvrMobile: value });
 			} else {
-				setAttributes({ [tabletBorderRadiusHvrType[type]]: value });
+				setAttributes({ [tabletBorderRadiusHvrType[type]]: value,[mobileBorderRadiusHvrType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -1377,7 +1382,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ shapeTopWidth: value, shapeTopWidthTablet: value, shapeTopWidthMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ shapeTopWidthTablet: value });
+			setAttributes({ shapeTopWidthTablet: value, shapeTopWidthMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ shapeTopWidthMobile: value });
 		}
@@ -1403,7 +1408,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ shapeTopHeight: value, shapeTopHeightTablet: value, shapeTopHeightMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ shapeTopHeightTablet: value });
+			setAttributes({ shapeTopHeightTablet: value, shapeTopHeightMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ shapeTopHeightMobile: value });
 		}
@@ -1429,7 +1434,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ shapeBottomWidth: value, shapeBottomWidthTablet: value, shapeBottomWidthMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ shapeBottomWidthTablet: value });
+			setAttributes({ shapeBottomWidthTablet: value, shapeBottomWidthMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ shapeBottomWidthMobile: value });
 		}
@@ -1455,7 +1460,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ shapeBottomHeight: value, shapeBottomHeightTablet: value, shapeBottomHeightMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ shapeBottomHeightTablet: value });
+			setAttributes({ shapeBottomHeightTablet: value, shapeBottomHeightMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ shapeBottomHeightMobile: value });
 		}
@@ -1480,7 +1485,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 		if ( 'Desktop' === getView ) {
 			setAttributes({ elementGap: value, elementGapTablet: value, elementGapMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ elementGapTablet: value });
+			setAttributes({ elementGapTablet: value,elementGapMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ elementGapMobile: value });
 		}

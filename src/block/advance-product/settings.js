@@ -127,7 +127,7 @@ const InsSettings = ({
       if ( 'Desktop' === getView ) {
         setAttributes({ productShow: value, productShowTablet: value, productShowMobile: value });
       } else if ( 'Tablet' === getView ) {
-        setAttributes({ productShowTablet: value });
+        setAttributes({ productShowTablet: value, productShowMobile: value });
       } else if ( 'Mobile' === getView ) {
         setAttributes({ productShowMobile: value });
       }
@@ -149,7 +149,7 @@ const InsSettings = ({
       if ( 'Desktop' === getView ) {
         setAttributes({ productCol: value, productColTablet: value, productColMobile: value });
       } else if ( 'Tablet' === getView ) {
-        setAttributes({ productColTablet: value });
+        setAttributes({ productColTablet: value, productColMobile: value });
       } else if ( 'Mobile' === getView ) {
         setAttributes({ productColMobile: value });
       }
@@ -182,7 +182,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ productPaddingType: value, productPaddingTypeTablet: value, productPaddingTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ productPaddingTypeTablet: value });
+			setAttributes({ productPaddingTypeTablet: value, productPaddingTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ productPaddingTypeMobile: value });
 		}
@@ -216,9 +216,9 @@ const InsSettings = ({
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.productPaddingTypeTablet ) {
-				setAttributes({ productPaddingTablet: value });
+				setAttributes({ productPaddingTablet: value,productPaddingMobile: value });
 			} else {
-				setAttributes({ [tabletproductPaddingType[type]]: value });
+				setAttributes({ [tabletproductPaddingType[type]]: value, [mobileproductPaddingType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -294,7 +294,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ elementGap: value, elementGapTablet: value, elementGapMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ elementGapTablet: value });
+			setAttributes({ elementGapTablet: value, elementGapMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ elementGapMobile: value });
 		}
@@ -323,7 +323,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ productBrdrRadiusType: value, productBrdrRadiusTypeTablet: value, productBrdrRadiusTypeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ productBrdrRadiusTypeTablet: value });
+			setAttributes({ productBrdrRadiusTypeTablet: value, productBrdrRadiusTypeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ productBrdrRadiusTypeMobile: value });
 		}
@@ -357,9 +357,9 @@ const InsSettings = ({
 			break;
 		case 'Tablet':
 			if ( 'linked' === attributes.productBrdrRadiusTypeTablet ) {
-				setAttributes({ productBrdrRadiusTablet: value });
+				setAttributes({ productBrdrRadiusTablet: value, productBrdrRadiusMobile: value });
 			} else {
-				setAttributes({ [tabletproductBrdrRadiusType[type]]: value });
+				setAttributes({ [tabletproductBrdrRadiusType[type]]: value, [mobileproductBrdrRadiusType[type]]: value });
 			}
 			break;
 		case 'Mobile':
@@ -451,7 +451,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ tablineHeight: value, tablineHeightTablet: value, tablineHeightMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ tablineHeightTablet: value });
+			setAttributes({ tablineHeightTablet: value, tablineHeightMobile: value});
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ tablineHeightMobile: value });
 		}
@@ -478,7 +478,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ tabfontSize: value, tabfontSizeTablet: value, tabfontSizeMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ tabfontSizeTablet: value });
+			setAttributes({ tabfontSizeTablet: value, tabfontSizeMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ tabfontSizeMobile: value });
 		}
@@ -506,7 +506,7 @@ const InsSettings = ({
 		if ( 'Desktop' === getView ) {
 			setAttributes({ tabletterSpacing: value, tabletterSpacingTablet: value, tabletterSpacingMobile: value });
 		} else if ( 'Tablet' === getView ) {
-			setAttributes({ tabletterSpacingTablet: value });
+			setAttributes({ tabletterSpacingTablet: value, tabletterSpacingMobile: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ tabletterSpacingMobile: value });
 		}
@@ -533,7 +533,7 @@ const changetabPaddingType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ tabPaddingType: value, tabPaddingTypeTablet: value, tabPaddingTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ tabPaddingTypeTablet: value });
+		setAttributes({ tabPaddingTypeTablet: value, tabPaddingTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ tabPaddingTypeMobile: value });
 	}
@@ -567,9 +567,9 @@ const changetabPadding = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.tabPaddingTypeTablet ) {
-			setAttributes({ tabPaddingTablet: value });
+			setAttributes({ tabPaddingTablet: value, tabPaddingMobile: value });
 		} else {
-			setAttributes({ [tablettabPaddingType[type]]: value });
+			setAttributes({ [tablettabPaddingType[type]]: value, [mobiletabPaddingType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -640,7 +640,7 @@ const changetabMarginType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ tabMarginType: value,tabMarginTypeTablet: value, tabMarginTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ tabMarginTypeTablet: value });
+		setAttributes({ tabMarginTypeTablet: value, tabMarginTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ tabMarginTypeMobile: value });
 	}
@@ -674,9 +674,9 @@ const changetabMargin = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.tabMarginTypeTablet ) {
-			setAttributes({ tabMarginTablet: value });
+			setAttributes({ tabMarginTablet: value, tabMarginMobile: value });
 		} else {
-			setAttributes({ [tablettabMarginType[type]]: value });
+			setAttributes({ [tablettabMarginType[type]]: value, [mobiletabMarginType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -752,7 +752,7 @@ const changetabBorderWidthType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ tabBorderWidthType: value, tabBorderWidthTypeTablet: value, tabBorderWidthTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ tabBorderWidthTypeTablet: value });
+		setAttributes({ tabBorderWidthTypeTablet: value, tabBorderWidthTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ tabBorderWidthTypeMobile: value });
 	}
@@ -786,9 +786,9 @@ const changetabBorderWidth = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.tabBorderWidthTypeTablet ) {
-			setAttributes({ tabBorderWidthTablet: value });
+			setAttributes({ tabBorderWidthTablet: value, tabBorderWidthMobile: value });
 		} else {
-			setAttributes({ [tablettabBorderWidthType[type]]: value });
+			setAttributes({ [tablettabBorderWidthType[type]]: value, [mobiletabBorderWidthType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -863,7 +863,7 @@ const changetabBorderRadiusType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ tabBorderRadiusType: value, tabBorderRadiusTypeTablet: value, tabBorderRadiusTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ tabBorderRadiusTypeTablet: value });
+		setAttributes({ tabBorderRadiusTypeTablet: value, tabBorderRadiusTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ tabBorderRadiusTypeMobile: value });
 	}
@@ -897,9 +897,9 @@ const changetabBorderRadius = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.tabBorderRadiusTypeTablet ) {
-			setAttributes({ tabBorderRadiusTablet: value });
+			setAttributes({ tabBorderRadiusTablet: value, tabBorderRadiusMobile: value });
 		} else {
-			setAttributes({ [tablettabBorderRadiusType[type]]: value });
+			setAttributes({ [tablettabBorderRadiusType[type]]: value, [mobiletabBorderRadiusType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -972,7 +972,7 @@ const changePaddingType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ paddingType: value,paddingTypeTablet: value, paddingTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ paddingTypeTablet: value });
+		setAttributes({ paddingTypeTablet: value, paddingTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ paddingTypeMobile: value });
 	}
@@ -1007,9 +1007,9 @@ const changePadding = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.paddingTypeTablet ) {
-			setAttributes({ paddingTablet: value });
+			setAttributes({ paddingTablet: value, paddingMobile: value });
 		} else {
-			setAttributes({ [tabletPaddingType[type]]: value });
+			setAttributes({ [tabletPaddingType[type]]: value, [mobilePaddingType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -1082,7 +1082,7 @@ const changeMarginType = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ marginType: value,marginTypeTablet: value, marginTypeMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ marginTypeTablet: value });
+		setAttributes({ marginTypeTablet: value, marginTypeMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ marginTypeMobile: value });
 	}
@@ -1116,9 +1116,9 @@ const changeMargin = ( type, value ) => {
 		break;
 	case 'Tablet':
 		if ( 'linked' === attributes.marginTypeTablet ) {
-			setAttributes({ marginTablet: value });
+			setAttributes({ marginTablet: value, marginMobile: value });
 		} else {
-			setAttributes({ [tabletMarginType[type]]: value });
+			setAttributes({ [tabletMarginType[type]]: value,[mobileMarginType[type]]: value });
 		}
 		break;
 	case 'Mobile':
@@ -1191,7 +1191,7 @@ const changeCustomWidth = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ customWidthTablet: value });
+		setAttributes({ customWidthTablet: value, customWidthMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ customWidthMobile: value });
 	}
@@ -1218,7 +1218,7 @@ const changeZindex = value => {
 	if ( 'Desktop' === getView ) {
 		setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
 	} else if ( 'Tablet' === getView ) {
-		setAttributes({ zindexTablet: value });
+		setAttributes({ zindexTablet: value, zindexMobile: value });
 	} else if ( 'Mobile' === getView ) {
 		setAttributes({ zindexMobile: value });
 	}
@@ -1247,7 +1247,7 @@ const changeTabAlign = value => {
 			tabAlignMobile: value 
 		});
 	} else if ('Tablet' === getView) {
-		setAttributes({ tabAlignTablet: value });
+		setAttributes({ tabAlignTablet: value, tabAlignMobile: value });
 	} else if ('Mobile' === getView) {
 		setAttributes({ tabAlignMobile: value });
 	}

@@ -8,8 +8,6 @@ function render_init(){
 
 add_action( 'init', 'render_init', 99);
 
-
-
 function render_server_side_css() {
 
 	if ( ! ( function_exists( 'get_block_templates' ) && current_theme_supports( 'block-templates' ) ) ) {

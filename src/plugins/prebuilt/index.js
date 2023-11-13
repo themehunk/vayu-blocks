@@ -236,13 +236,6 @@ function ToolbarLibrary() {
             
         </div>
     );
-
-    // const renderButton = (selector) => {
-    //     const patternButton = document.createElement('div');
-    //     patternButton.classList.add('themehunk-toolbar-design-library');
-    //     selector.appendChild(patternButton);
-    //     render(<LibraryButton />, patternButton);
-    // };
     
     const renderButton = (selector) => {
         const patternButton = document.createElement('div');
@@ -253,9 +246,10 @@ function ToolbarLibrary() {
         const root = createRoot(patternButton);
         root.render(<LibraryButton />);
       };
+
     // Watch for the toolbar to be visible and the design library button to be missing.
     let unsubscribe = subscribe(() => {
-        const editToolbar = document.querySelector('.edit-post-header-toolbar');
+        const editToolbar = document.querySelector('.edit-post-header__center');
         if (!editToolbar) {
             return;
         }
