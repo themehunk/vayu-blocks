@@ -10,7 +10,7 @@ import { __ } from '@wordpress/i18n';
 import classnames from 'classnames';
 import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
-import { omitBy } from 'lodash';
+
 import hexToRgba from 'hex-rgba';
 import {
 	useEffect
@@ -56,6 +56,12 @@ function sanitizeSVG( svg ) {
  */
 export default function Edit({ attributes, setAttributes, clientId,
 	uniqueID }) {
+
+		const omitBy = (object, condition) => (
+			Object.fromEntries(
+			  Object.entries(object).filter(([key, value]) => !condition(value))
+			)
+		  );
 
 	useEffect( () => {
 			googleFontsLoader.attach();

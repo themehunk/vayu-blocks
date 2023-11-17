@@ -8,7 +8,7 @@ import {
 	SortableElement,
 	SortableHandle
 } from 'react-sortable-hoc';
-import { debounce } from 'lodash';
+
 /**
  * WordPress dependencies
  */
@@ -18,10 +18,6 @@ import {
 	sprintf
 } from '@wordpress/i18n';
 
-import {
-	startCase,
-	toLower
-} from 'lodash';
 
 import {
 	Button,
@@ -116,6 +112,23 @@ export const SortableItem = ({
 			})
 		});
 	};
+
+	const startCase = (str) => {
+		if (typeof str !== 'string') {
+		  throw new Error('Input must be a string');
+		}
+	  
+		return str
+		  .replace(/_/g, ' ') // Replace underscores with spaces
+		  .replace(/(?:^|\s)\S/g, (match) => match.toUpperCase()); // Capitalize first letter of each word
+	  };
+	const toLower = (str) => {
+		if (typeof str !== 'string') {
+		  throw new Error('Input must be a string');
+		}
+	  
+		return str.toLowerCase();
+	  };  
 
 	const label = ! isCustomMeta ? startCase( toLower( template ) ) : customMeta;
 	const canEdit = templateLookUp[ template ] || customMeta?.display;
