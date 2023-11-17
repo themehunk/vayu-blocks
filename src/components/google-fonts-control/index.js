@@ -6,10 +6,6 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-import {
-	startCase,
-	toLower
-} from 'lodash';
 
 import { __ } from '@wordpress/i18n';
 
@@ -65,6 +61,24 @@ const GoogleFontsControl = ({
 	const [ search, setSearch ] = useState( '' );
 
 	const id = `inspector-google-fonts-control-${ instanceId }`;
+
+	const toLower = (str) => {
+		if (typeof str !== 'string') {
+		  throw new Error('Input must be a string');
+		}
+	  
+		return str.toLowerCase();
+	  };
+	
+	const startCase = (str) => {
+		if (typeof str !== 'string') {
+		  throw new Error('Input must be a string');
+		}
+	  
+		return str
+		  .replace(/_/g, ' ') // Replace underscores with spaces
+		  .replace(/(?:^|\s)\S/g, (match) => match.toUpperCase()); // Capitalize first letter of each word
+	  };
 
 	return (
 		<div className="th-gfont-control">

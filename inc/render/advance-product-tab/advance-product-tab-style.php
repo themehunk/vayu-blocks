@@ -350,7 +350,7 @@ function advance_product_tab_style($attr){
                 margin-left: {$marginLeft}{$marginUnit}; 
                 ";
             } else {
-                $margin = isset($attr['margin']) ? $attr['margin'] : 10;
+                $margin = isset($attr['margin']) ? $attr['margin'] : 0;
                 $marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
                 $css .= "margin: {$margin}{$marginUnit};";
             }
@@ -781,7 +781,7 @@ function advance_product_tab_style($attr){
                 margin-left: {$marginLeftTablet}{$marginUnit}; 
                 ";
             } else {
-                $marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : 10;
+                $marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : 0;
                 $marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
                 $css .= "margin: {$marginTablet}{$marginUnit};";
             }
@@ -993,7 +993,7 @@ function advance_product_tab_style($attr){
                 margin-left: {$marginLeftMobile}{$marginUnit}; 
                 ";
             } else {
-                $marginMobile = isset($attr['marginMobile']) ? $attr['marginMobile'] : 10;
+                $marginMobile = isset($attr['marginMobile']) ? $attr['marginMobile'] : 0;
                 $marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
                 $css .= "margin: {$marginMobile}{$marginUnit};";
             }

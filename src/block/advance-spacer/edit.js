@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import { ResizableBox } from '@wordpress/components';
 import { useViewportMatch, useMediaQuery} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
-import { omitBy } from 'lodash';
+
 import hexToRgba from 'hex-rgba';
 import {
 	useEffect
@@ -52,6 +52,12 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 	uniqueID }) {
 
 	const { id } = attributes;
+
+	const omitBy = (object, condition) => (
+		Object.fromEntries(
+		  Object.entries(object).filter(([key, value]) => !condition(value))
+		)
+	  );
 
 	const { addUniqueID } = useDispatch( 'vayu-blocks/data' );
 			const { isUniqueID, isUniqueBlock} = useSelect(

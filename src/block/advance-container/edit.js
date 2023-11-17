@@ -12,7 +12,6 @@ import hexToRgba from 'hex-rgba';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import { useViewportMatch } from '@wordpress/compose';
 import { useBlockProps , useInnerBlocksProps , store as blockEditorStore} from '@wordpress/block-editor';
-import { omitBy } from 'lodash';
 import BlockAppender from './BlockAppender';
 
 /**
@@ -93,6 +92,12 @@ export default function Edit({
 					isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
 				};
 			}, []);
+
+			const omitBy = (object, condition) => (
+				Object.fromEntries(
+				  Object.entries(object).filter(([key, value]) => !condition(value))
+				)
+			  );
 		
 			const isLarger = useViewportMatch( 'large', '>=' );
 		

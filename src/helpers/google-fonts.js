@@ -1,8 +1,3 @@
-import {
-	startCase,
-	toLower
-} from 'lodash';
-
 /**
  * Get the iframe of the editor. Use in FSE or Mobile/Tablet Preview for Page/Post.
  */
@@ -58,6 +53,25 @@ class GoogleFontsLoader {
 	 * @returns {{label: string, value: string}[]}
 	 */
 	getVariants( fontName ) {
+
+		const toLower = (str) => {
+			if (typeof str !== 'string') {
+			  throw new Error('Input must be a string');
+			}
+		  
+			return str.toLowerCase();
+		  };
+		
+		const startCase = (str) => {
+			if (typeof str !== 'string') {
+			  throw new Error('Input must be a string');
+			}
+		  
+			return str
+			  .replace(/_/g, ' ') // Replace underscores with spaces
+			  .replace(/(?:^|\s)\S/g, (match) => match.toUpperCase()); // Capitalize first letter of each word
+		  };
+		  
 		const font = this.getFont( fontName );
 		if ( font ) {
 			return ( font.variants )

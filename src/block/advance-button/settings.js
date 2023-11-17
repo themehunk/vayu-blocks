@@ -18,7 +18,6 @@ import {
     Suspense
 } from '@wordpress/element';
 
-import { pick } from 'lodash';
 
 /**
  * Internal dependencies
@@ -50,6 +49,19 @@ const InsSettings = ({
 
 		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
 	}, []);
+
+	const pick = (object, keys) => {
+		if (!object || typeof object !== 'object') {
+		  throw new Error('Input must be an object');
+		}
+	  
+		return keys.reduce((acc, key) => {
+		  if (object.hasOwnProperty(key)) {
+			acc[key] = object[key];
+		  }
+		  return acc;
+		}, {});
+	  };
     
     const [ tab, setTab ] = useState( 'setting' );
 	const [ hover, setHover ] = useState( 'normal' );
