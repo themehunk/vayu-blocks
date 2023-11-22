@@ -24,7 +24,8 @@ function advance_spacer_style($attr){
         //Height
         $heightUnit = isset($attr['heightUnit']) ? $attr['heightUnit'] : 'px';
         $css .= isset($attr['height']) ? "height: {$attr['height']}{$heightUnit};" : '';
-
+		$css .= isset($attr['height']) ? "height: {$attr['height']}{$heightUnit};" : "height: 50px;";
+		
         //background
         if ( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'image' ) {
           $css .= isset( $attr['backgroundImage']['url'] ) ? "background-image: url({$attr['backgroundImage']['url']});" : '';

@@ -130,6 +130,9 @@ const isLarger = useViewportMatch( 'large', '>=' );
   let stylesheet;
   let PositionProperties;
   let flexProperties;
+  PositionProperties = { 
+	'--position': attributes.position,
+ };
 
   if( attributes.widthType=='customwidth' ) {
   
@@ -208,9 +211,7 @@ const isLarger = useViewportMatch( 'large', '>=' );
     /********************* */
       // position properies 
 		/********************* */
-		PositionProperties = { 
-			'--position': attributes.position,
-		 };
+		
 
 		 	if(attributes.position == 'absolute' || attributes.position == 'fixed'){
 

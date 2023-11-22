@@ -265,6 +265,9 @@ function Edit({
   let stylesheet;
   let PositionProperties;
   let flexProperties;
+  PositionProperties = {
+    '--position': attributes.position
+  };
   if (attributes.widthType == 'customwidth') {
     if (isDesktop) {
       customwidth = {
@@ -318,9 +321,7 @@ function Edit({
     /********************* */
     // position properies 
     /********************* */
-    PositionProperties = {
-      '--position': attributes.position
-    };
+
     if (attributes.position == 'absolute' || attributes.position == 'fixed') {
       if (attributes.horizontalOrientation === 'left' && attributes.position !== 'inherit') {
         PositionProperties = {
