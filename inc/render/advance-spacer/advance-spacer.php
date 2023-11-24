@@ -24,7 +24,8 @@ function advance_spacer_style($attr){
         //Height
         $heightUnit = isset($attr['heightUnit']) ? $attr['heightUnit'] : 'px';
         $css .= isset($attr['height']) ? "height: {$attr['height']}{$heightUnit};" : '';
-
+		$css .= isset($attr['height']) ? "height: {$attr['height']}{$heightUnit};" : "height: 50px;";
+		
         //background
         if ( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'image' ) {
           $css .= isset( $attr['backgroundImage']['url'] ) ? "background-image: url({$attr['backgroundImage']['url']});" : '';
@@ -311,7 +312,7 @@ if(isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop']
         ";
       }
     
-      $css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};}" : '');
+      $css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};" : '');
      
       //for border-width tablet
 			if (isset($attr['borderWidthTypeTablet']) && 'unlinked' === $attr['borderWidthTypeTablet']) {
@@ -498,7 +499,7 @@ if(isset($attr['responsiveTogHideDesktop']) && $attr['responsiveTogHideDesktop']
         ";
       }
     
-      $css .= (isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']};}" : '');
+      $css .= (isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']};" : '');
      
       //for border-width Mobile
 			if (isset($attr['borderWidthTypeMobile']) && 'unlinked' === $attr['borderWidthTypeMobile']) {
