@@ -1,31 +1,83 @@
 [
     {
+        "id": "th_cosematic",
         "type": "page",
-        "title": "Non-Profit Organization",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/07/charity-org-07-600x2396.jpg",
-        "badge": "Premium",
-        "subTitle": "5 Templates"
+        "title": "Cosematic",
+        "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+        "badge": "Non Premium",
+        "activate":true,
+        "total_temp": "5",
+        "templates": [
+            {
+                "title": "Home",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": "<!-- wp:columns {\"align\":\"full\"} --><div class=\"wp-block-columns alignfull\"><!-- wp:column {\"width\":\"50%\"} --><div class=\"wp-block-column\" style=\"flex-basis:50%\"><!-- wp:cover {\"customOverlayColor\":\"#f6f6f6\",\"minHeight\":600,\"isDark\":false} --><div class=\"wp-block-cover is-light\" style=\"min-height:600px\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-100 has-background-dim\" style=\"background-color:#f6f6f6\"></span><div class=\"wp-block-cover__inner-container\"><!-- wp:image {\"align\":\"center\",\"id\":571,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} --><figure class=\"wp-block-image aligncenter size-medium\"><img src=\"https://s.w.org/patterns/files/2021/06/wire-sculpture-263x300.jpg\" alt=\"\" class=\"wp-image-571\"/></figure><!-- /wp:image --></div></div><!-- /wp:cover --></div><!-- /wp:column --><!-- wp:column {\"verticalAlignment\":\"center\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"1em\",\"right\":\"1em\",\"bottom\":\"1em\",\"left\":\"1em\"}}}} --><div class=\"wp-block-column is-vertically-aligned-center\" style=\"padding-top:1em;padding-right:1em;padding-bottom:1em;padding-left:1em\"><!-- wp:columns --><div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"320px\"} --><div class=\"wp-block-column\" style=\"flex-basis:320px\"><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\"><strong>Airplane</strong></p><!-- /wp:paragraph --><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\">Copper wire, wood base. I created this piece in late 2008. For this work, I aimed to convey both the industrial heaviness of an airplane, but also the cloudlike floating quality you feel when you’re in one.</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:column --></div><!-- /wp:columns -->"
+                
+            },
+            {
+                
+                "title": "Shop",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": ""
+                
+            },
+            {
+                
+                "title": "AboutUs",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": ""
+                
+            },
+            {
+                
+                "title": "Contact",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": ""
+            }
+        ]
     },
     {
+        "id": "th_fashion",
         "type": "page",
-        "title": "Non-Profit Organization",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/07/charity-org-07-600x2396.jpg",
-        "badge": "Premium",
-        "subTitle": "5 Templates"
-    },
-    {
-        "type": "page",
-        "title": "Non-Profit Organization",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/07/charity-org-07-600x2396.jpg",
-        "badge": "Premium",
-        "subTitle": "5 Templates"
-    },
-    {
-        "type": "page",
-        "title": "Non-Profit Organization",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/07/charity-org-07-600x2396.jpg",
-        "badge": "Premium",
-        "subTitle": "5 Templates"
+        "title": "Fashion",
+        "image": "https://websitedemos.net/wp-content/uploads/2023/08/plants-stores-08-600x2204.jpg",
+        "badge": "Non Premium",
+        "activate":true,
+        "total_temp": "5",
+        "templates": [
+            {
+                "title": "Home",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/08/cosmetic-store-08-testimonials-600x1191.jpg",
+                "content": "<!-- wp:columns {\"align\":\"full\"} --><div class=\"wp-block-columns alignfull\"><!-- wp:column {\"width\":\"50%\"} --><div class=\"wp-block-column\" style=\"flex-basis:50%\"><!-- wp:cover {\"customOverlayColor\":\"#f6f6f6\",\"minHeight\":600,\"isDark\":false} --><div class=\"wp-block-cover is-light\" style=\"min-height:600px\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-100 has-background-dim\" style=\"background-color:#f6f6f6\"></span><div class=\"wp-block-cover__inner-container\"><!-- wp:image {\"align\":\"center\",\"id\":571,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} --><figure class=\"wp-block-image aligncenter size-medium\"><img src=\"https://s.w.org/patterns/files/2021/06/wire-sculpture-263x300.jpg\" alt=\"\" class=\"wp-image-571\"/></figure><!-- /wp:image --></div></div><!-- /wp:cover --></div><!-- /wp:column --><!-- wp:column {\"verticalAlignment\":\"center\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"1em\",\"right\":\"1em\",\"bottom\":\"1em\",\"left\":\"1em\"}}}} --><div class=\"wp-block-column is-vertically-aligned-center\" style=\"padding-top:1em;padding-right:1em;padding-bottom:1em;padding-left:1em\"><!-- wp:columns --><div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"320px\"} --><div class=\"wp-block-column\" style=\"flex-basis:320px\"><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\"><strong>Airplane</strong></p><!-- /wp:paragraph --><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\">Copper wire, wood base. I created this piece in late 2008. For this work, I aimed to convey both the industrial heaviness of an airplane, but also the cloudlike floating quality you feel when you’re in one.</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:column --></div><!-- /wp:columns -->"
+            },
+            {
+                
+                "title": "Sample",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": ""
+                
+            },
+            {
+                
+                "title": "AboutUs",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/08/cosmetic-store-08-testimonials-600x1191.jpg",
+                "content": ""
+                
+            },
+            {
+                
+                "title": "Contact",
+                "plink": "https://themehunk.com",
+                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "content": ""
+            }
+        ]
     }
-    
 ]

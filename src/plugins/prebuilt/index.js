@@ -1,6 +1,6 @@
 import { registerPlugin } from '@wordpress/plugins';
 import { createRoot } from '@wordpress/element';
-import { useState, useEffect } from '@wordpress/element'; // Import useState here
+import { useState, useEffect, useRef } from '@wordpress/element'; // Import useState here
 import { useDispatch, subscribe } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -87,35 +87,138 @@ function ToolbarLibrary() {
                 </button>
             );
         };
-        
-       
 
+
+        // import page template
+        const ImportPage = ({ templateCode,templateName }) => {
+
+            const [importLoadingP, setImportLoadingP] = useState(false);
+        
+            const importPage = async () => {
+                try {
+                    console.log('Setting import template to true');
+                    setImportLoadingP(true);
+                    const { insertBlocks } = wp.data.dispatch('core/block-editor');
+                    const parsedBlocks = wp.blocks.parse(templateCode);
+                    insertBlocks(parsedBlocks);
+                } catch (error) {
+                    console.error('Error importing template:', error);
+                } finally {
+                    console.log('Setting importLoading to false');
+                    setImportLoadingP(false);
+                    setModalOpen(false);
+                }
+            };
+        
+            return (
+                <div className="th-button th-import" onClick={importPage}>
+                {importLoadingP ? 'Importing...' : 'Import'} "{templateName}" {__('Template', 'themehunk-blocks')}
+                </div>
+            );
+        };
+        
+
+        const ContentPage = ({ template, onBack }) => {
+            const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+            const screenshotRef = useRef(null);
+
+            const handleItemClick = (index) => {
+              setSelectedItemIndex(index);
+              screenshotRef.current.scrollTo(0, 0); // Scroll to top of element
+            };
+            
+
+            return (
+              <div className="th-single-site-content">
+                <div className="th-single-site-content-wrap">
+                  <div className="th-single-site-content-preview" >
+                    <h3>{template.title}</h3>
+                    <div className="screenshot" ref={screenshotRef}>
+                      <img
+                        src={template.templates[selectedItemIndex].image}
+                        alt={template.templates[selectedItemIndex].title}
+                      />
+                    </div>
+                    <div className="th-single-site-content-footer-wrap">
+                      <div className="th-single-site-content-footer-left">
+                        <div className="th-button th-go-back" onClick={onBack}>
+                          {__('Go Back','themehunk-blocks')}
+                        </div>
+                        <div className="th-button th-preview">
+                         <a href={template.templates[selectedItemIndex].plink} target="_blank"> {__('Preview','themehunk-blocks')}</a>
+                        </div>
+                      </div>
+                      <div className="th-single-site-content-footer-right">
+                      <ImportPage templateCode={template.templates[selectedItemIndex].content} templateName={template.templates[selectedItemIndex].title} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="th-single-site-content-page-template">
+                    <p>{__('Page Templates', 'themehunk-blocks')}</p>
+                    <div className="th-single-site-content-page-grid">
+                      {template.templates.map((pageTemplate, index) => (
+                        <div
+                          className={`item single-site ${index === selectedItemIndex ? 'selected' : ''}`}
+                          onClick={() => handleItemClick(index)}
+                          key={index}
+                        >
+                          <div className="inner">
+                            <div
+                              className="screenshot"
+                              style={{
+                                backgroundImage: `url("${pageTemplate.image}")`,
+                              }}
+                            ></div>
+                            <div className="heading-wrap">
+                              <h3 className="title">{pageTemplate.title} </h3>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          };
+          
+
+          const [selectedItem, setSelectedItem] = useState(null);
+
+          const handleItemClick = (index) => {
+            setSelectedItem(templates[index]);
+          };
+        
+          const handleBack = () => {
+            setSelectedItem(null);
+          };
+        
         switch (tab) {
             case 'page':
                 return (
                     <div className="th-block-templates-sites">
-                         
-                    {isLoading ? (
-                        <div className="loading-wrap">
-                        <div className="loading-icon"></div>
-                        </div>
+                    { selectedItem ? (
+                        <ContentPage template={selectedItem} onBack={handleBack} />
                     ) : (
                         templates.map((template, index) => (
-                        <div className="item single-site" key={index}>
+                        <div
+                            className="item single-site"
+                            onClick={() => handleItemClick(index)}
+                            key={index}
+                        >
                             <div className="inner">
                             <span className="grid-item-badge">{template.badge}</span>
                             <div
                                 className="screenshot"
                                 style={{
-                                backgroundImage: `url("${template.image}")`
+                                backgroundImage: `url("${template.image}")`,
                                 }}
                             ></div>
                             <div className="heading-wrap">
                                 <h3 className="title">{template.title}</h3>
+                                <p className="total_temp">{template.total_temp} {__('Templates', 'themehunk-blocks')}</p>
                             </div>
-                            <button className="import import-template button-primary">
-                                {__('Import', 'themehunk-blocks')}<RxArrowDown></RxArrowDown>
-                            </button>
+                            
                             </div>
                         </div>
                         ))
@@ -131,12 +234,6 @@ function ToolbarLibrary() {
     
                 return (
                     <div className="th-block-templates-pattern">
-                        
-                        {isLoading ? (
-                         <div className="loading-wrap">
-                         <div className="loading-icon"></div>
-                         </div>
-                       ) : (
                         <>
                         <div className="pattern-tabs-filter">
                             <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
@@ -188,7 +285,7 @@ function ToolbarLibrary() {
                             </div>
                         </div>
                         </>
-                       )}
+                       
                     </div>
                 );
             default:
