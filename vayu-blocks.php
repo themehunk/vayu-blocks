@@ -46,13 +46,13 @@ class Vayu_Block_Plugin {
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
 
-        add_action( 'init', array( $this, 'register_blocks' ) );
+        add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
 
     }
 
-    public function register_blocks() {
+    public function vayu_register_blocks() {
         $blocks = array(
             array(
                 'name'           => 'vayu-blocks/advance-container',
