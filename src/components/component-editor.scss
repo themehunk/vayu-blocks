@@ -1055,10 +1055,12 @@ button.components-icon-picker-item {
 .th-logo-wrap{
     align-self: center;
     display:flex;
+    align-items: center;
 }
 
 .th-logo-wrap img{
-max-width:58px;
+    max-width: 32px;
+    height: fit-content;
 }
 
 .th-menu-wrap {
@@ -1145,8 +1147,8 @@ color: #818080;
     color: #fff;
     padding: 4px 12px;
     font-size: 11px;
-    top: 0;
-    right: 0;
+    bottom: 15px;
+    right: -1px;
     text-transform: uppercase;
     position: absolute;
     z-index: 999;
@@ -1314,9 +1316,11 @@ color: #818080;
   .th-logo-wrap h2{line-height: initial;
     color: #6C1BC3;
 }
-
+.themehunk-toolbar-design-library{
+width:135px;
+}
 .themehunk-toolbar-design-library button.th-toolbar-design-button img{
-    width:30px;
+    width:20px;
     }
 
 .edit-post-header__center {

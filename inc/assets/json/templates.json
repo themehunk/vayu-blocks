@@ -1,81 +1,80 @@
 [
     {
-        "id": "th_cosematic",
+        "id": "vayu_electro",
         "type": "page",
-        "title": "Cosematic",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+        "title": "Vayu Electro",
+        "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-electro.png",
         "badge": "Non Premium",
         "activate":true,
         "total_temp": "5",
         "templates": [
             {
                 "title": "Home",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "plink": "https://wpthemes.themehunk.com/vayu-electro/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-electro-home.png",
                 "content": "<!-- wp:columns {\"align\":\"full\"} --><div class=\"wp-block-columns alignfull\"><!-- wp:column {\"width\":\"50%\"} --><div class=\"wp-block-column\" style=\"flex-basis:50%\"><!-- wp:cover {\"customOverlayColor\":\"#f6f6f6\",\"minHeight\":600,\"isDark\":false} --><div class=\"wp-block-cover is-light\" style=\"min-height:600px\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-100 has-background-dim\" style=\"background-color:#f6f6f6\"></span><div class=\"wp-block-cover__inner-container\"><!-- wp:image {\"align\":\"center\",\"id\":571,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} --><figure class=\"wp-block-image aligncenter size-medium\"><img src=\"https://s.w.org/patterns/files/2021/06/wire-sculpture-263x300.jpg\" alt=\"\" class=\"wp-image-571\"/></figure><!-- /wp:image --></div></div><!-- /wp:cover --></div><!-- /wp:column --><!-- wp:column {\"verticalAlignment\":\"center\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"1em\",\"right\":\"1em\",\"bottom\":\"1em\",\"left\":\"1em\"}}}} --><div class=\"wp-block-column is-vertically-aligned-center\" style=\"padding-top:1em;padding-right:1em;padding-bottom:1em;padding-left:1em\"><!-- wp:columns --><div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"320px\"} --><div class=\"wp-block-column\" style=\"flex-basis:320px\"><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\"><strong>Airplane</strong></p><!-- /wp:paragraph --><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\">Copper wire, wood base. I created this piece in late 2008. For this work, I aimed to convey both the industrial heaviness of an airplane, but also the cloudlike floating quality you feel when you’re in one.</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:column --></div><!-- /wp:columns -->"
                 
             },
             {
-                
                 "title": "Shop",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
-                "content": ""
-                
+                "plink": "https://wpthemes.themehunk.com/vayu-electro/shop/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-electro-shop.png",
+                "content": "<!-- wp:vayu-blocks/advance-container {\"id\":\"1b689e85-2f36-40fa-84bc-4ce97f0fd316\",\"uniqueID\":\"_293434-e4\",\"boxedcontentWidth\":1250,\"boxedcontentWidthTablet\":1250,\"boxedcontentWidthMobile\":1250,\"boxedcontentWidthUnit\":\"px\",\"fullcontentWidthMobile\":100,\"direction\":\"row\",\"directionTablet\":\"row\",\"directionMobile\":\"row\",\"Justify\":\"flex-start\",\"JustifyTablet\":\"flex-start\",\"JustifyMobile\":\"flex-start\",\"AlignItem\":\"center\",\"AlignItemTablet\":\"center\",\"AlignItemMobile\":\"center\",\"backgroundColor\":\"#FFFFFF\",\"backgroundImage\":{\"id\":52,\"url\":\"https://wpthemes.themehunk.com/vayu-electro/wp-content/uploads/sites/279/2023/10/one-1.jpg\"},\"backgroundPosition\":{\"x\":0.67,\"y\":0.34},\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"cover\",\"paddingTablet\":10,\"borderWidthHvr\":0,\"borderWidthHvrTablet\":0,\"borderWidthHvrMobile\":0,\"borderRadiusTablet\":0,\"borderRadiusMobile\":0,\"align\":\"full\"} -->\n<div id=\"\" class=\"wp-block-vayu-blocks-advance-container alignfull th-container-outside-wrapper th-c_293434-e4 boxed-content\"><div class=\"th-inside-content-wrap th-con\"><!-- wp:vayu-blocks/advance-container {\"id\":\"d1624ad8-8b24-4b5a-9005-86b7ed71149b\",\"uniqueID\":\"_01a4b3-da\",\"boxedcontentWidthMobile\":100,\"fullcontentWidthMobile\":100,\"contentMinHgt\":513,\"contentMinHgtTablet\":400,\"contentMinHgtMobile\":380,\"direction\":\"row\",\"directionTablet\":\"row\",\"directionMobile\":\"row\",\"backgroundType\":\"image\",\"backgroundImage\":{\"id\":52,\"url\":\"https://wpthemes.themehunk.com/vayu-electro/wp-content/uploads/sites/279/2023/10/one-1.jpg\"},\"backgroundAttachment\":\"local\",\"backgroundRepeat\":\"no-repeat\",\"backgroundSize\":\"cover\",\"marginMobile\":10,\"borderHvrType\":\"none\",\"borderWidthHvr\":30,\"borderWidthHvrTablet\":30,\"borderWidthHvrMobile\":30,\"borderRadius\":30,\"borderRadiusTablet\":30,\"borderRadiusMobile\":30,\"borderRadiusHvr\":30,\"borderRadiusHvrTablet\":30,\"borderRadiusHvrMobile\":30} -->\n<div id=\"\" class=\"wp-block-vayu-blocks-advance-container th-container-outside-wrapper th-c_01a4b3-da boxed-content\"><div class=\"th-inside-content-wrap th-con\"><!-- wp:vayu-blocks/advance-container {\"id\":\"4256e41c-9fec-42f2-bdd8-eb1a1522c95e\",\"uniqueID\":\"_7aac35-21\",\"contentWidthType\":\"fullwidth\",\"boxedcontentWidthMobile\":100,\"fullcontentWidth\":25,\"fullcontentWidthMobile\":100} -->\n<div id=\"\" class=\"wp-block-vayu-blocks-advance-container th-container-outside-wrapper th-c_7aac35-21 fullwidth-content\"><div class=\"th-inside-content-wrap th-con\"></div></div>\n<!-- /wp:vayu-blocks/advance-container -->"
             },
+            
             {
                 
                 "title": "AboutUs",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "plink": "https://wpthemes.themehunk.com/vayu-electro/about-us/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-electro-about-us.png",
                 "content": ""
                 
             },
             {
                 
-                "title": "Contact",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "title": "ContactUs",
+                "plink": "https://wpthemes.themehunk.com/vayu-electro/contact-us/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-electro-contact-us.png",
                 "content": ""
             }
         ]
     },
     {
-        "id": "th_fashion",
+        "id": "vayu_bag_store",
         "type": "page",
-        "title": "Fashion",
-        "image": "https://websitedemos.net/wp-content/uploads/2023/08/plants-stores-08-600x2204.jpg",
+        "title": "Vayu Bag Store",
+        "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-bag-store.png",
         "badge": "Non Premium",
         "activate":true,
         "total_temp": "5",
         "templates": [
             {
                 "title": "Home",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/08/cosmetic-store-08-testimonials-600x1191.jpg",
+                "plink": "https://wpthemes.themehunk.com/vayu-bag/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-bag-home.png",
                 "content": "<!-- wp:columns {\"align\":\"full\"} --><div class=\"wp-block-columns alignfull\"><!-- wp:column {\"width\":\"50%\"} --><div class=\"wp-block-column\" style=\"flex-basis:50%\"><!-- wp:cover {\"customOverlayColor\":\"#f6f6f6\",\"minHeight\":600,\"isDark\":false} --><div class=\"wp-block-cover is-light\" style=\"min-height:600px\"><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim-100 has-background-dim\" style=\"background-color:#f6f6f6\"></span><div class=\"wp-block-cover__inner-container\"><!-- wp:image {\"align\":\"center\",\"id\":571,\"sizeSlug\":\"medium\",\"linkDestination\":\"none\"} --><figure class=\"wp-block-image aligncenter size-medium\"><img src=\"https://s.w.org/patterns/files/2021/06/wire-sculpture-263x300.jpg\" alt=\"\" class=\"wp-image-571\"/></figure><!-- /wp:image --></div></div><!-- /wp:cover --></div><!-- /wp:column --><!-- wp:column {\"verticalAlignment\":\"center\",\"style\":{\"spacing\":{\"padding\":{\"top\":\"1em\",\"right\":\"1em\",\"bottom\":\"1em\",\"left\":\"1em\"}}}} --><div class=\"wp-block-column is-vertically-aligned-center\" style=\"padding-top:1em;padding-right:1em;padding-bottom:1em;padding-left:1em\"><!-- wp:columns --><div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"320px\"} --><div class=\"wp-block-column\" style=\"flex-basis:320px\"><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\"><strong>Airplane</strong></p><!-- /wp:paragraph --><!-- wp:paragraph {\"style\":{\"typography\":{\"lineHeight\":\"1.6\"}},\"fontSize\":\"small\"} --><p class=\"has-small-font-size\" style=\"line-height:1.6\">Copper wire, wood base. I created this piece in late 2008. For this work, I aimed to convey both the industrial heaviness of an airplane, but also the cloudlike floating quality you feel when you’re in one.</p><!-- /wp:paragraph --></div><!-- /wp:column --></div><!-- /wp:columns --></div><!-- /wp:column --></div><!-- /wp:columns -->"
             },
             {
                 
-                "title": "Sample",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "title": "Shop",
+                "plink": "https://wpthemes.themehunk.com/vayu-bag/shop/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-bag-shop.png",
                 "content": ""
                 
             },
             {
                 
                 "title": "AboutUs",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/08/cosmetic-store-08-testimonials-600x1191.jpg",
+                "plink": "https://wpthemes.themehunk.com/vayu-bag/about-us/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-bag-about-us.png",
                 "content": ""
                 
             },
             {
                 
                 "title": "Contact",
-                "plink": "https://themehunk.com",
-                "image": "https://websitedemos.net/wp-content/uploads/2023/12/black-friday-07-about.jpg",
+                "plink": "https://wpthemes.themehunk.com/vayu-bag/contact-us/",
+                "image": "http://localhost:8888/wordpress/wp-content/plugins/vayu-blocks/inc/assets/json/vayu-bag-contact-us.png",
                 "content": ""
             }
         ]

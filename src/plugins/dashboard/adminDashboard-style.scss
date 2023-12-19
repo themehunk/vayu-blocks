@@ -30,10 +30,12 @@
     
     #vayu-blocks-container .th-logo-wrap {
         align-self: center;
-        display: flex;
+    display:flex;
+    align-items: center;
     }
     #vayu-blocks-container .th-logo-wrap img{
-        max-width: 58px;
+        max-width: 32px;
+    height: fit-content;
         }
         
         #vayu-blocks-container .th-logo-wrap h2{
