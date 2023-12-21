@@ -1141,9 +1141,11 @@ color: #818080;
     transition: all .4s;
     display: flow-root;
 }
-
+.th-block-templates-sites .item.single-site:hover .inner{
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 26%);
+}
 .th-block-templates-sites .single-site .grid-item-badge {
-    background: #74b956;
+    background: #6c1bc3d4;
     color: #fff;
     padding: 4px 12px;
     font-size: 11px;
@@ -1335,16 +1337,16 @@ width:135px;
     margin: 0 auto;
     left:0;
     right:0;
-    max-width:880px;
+    max-width: 1050px;
 }
 .th-single-site-content-wrap .th-single-site-content-preview{
-    width:76%;
+    width:73%;
     flex: 1;
     margin-bottom: 3em;
 }
 
 .th-single-site-content-wrap .th-single-site-content-page-template{
-    width:14%;
+    width:17%;
 }
 
 .th-single-site-content-wrap .th-single-site-content-preview .screenshot {
@@ -1353,6 +1355,7 @@ width:135px;
     overflow-y: auto;
     height: 100vh;
     border-radius:4px;
+    border: 1px solid #eee;
 }
 
 .th-single-site-content-wrap img {
@@ -1365,10 +1368,12 @@ width:100%;
 padding: 0;
 margin-right:2%;
 margin-bottom:1rem;
+border: 1px solid #eee;
 }
 
-.th-single-site-content-page-grid .item:nth-child(even) {
-    margin-right: 0;
+.th-single-site-content-page-grid .item:last-child {
+    margin-bottom: 0;
+  
 }
 
 .th-single-site-content-page-grid .item .heading-wrap {
@@ -1399,15 +1404,15 @@ font-weight: 600;
 }
 .th-single-site-content-footer-wrap{
     display:flex;
-    margin:1.5rem 0;
+    margin: 1rem 0;
     margin-right: 2em;
     justify-content: space-between;
     }
     .th-single-site-content-footer-wrap .th-button{
-    padding:0.6rem 2rem;
-    font-size:0.89rem;
-    background:#6C1BC3;
-    border:1px solid #6C1BC3;
+        padding: 0.4rem 2rem;
+        font-size: 0.7rem;
+        background: #6C1BC3;
+        border: 1px solid #6C1BC3;
     color:#fff;
     border-radius:3px;
     cursor: pointer;
@@ -1422,7 +1427,7 @@ font-weight: 600;
         display:flex;
         }
         .th-single-site-content-footer-left a{
-        font-size: 0.89rem;
+            font-size: 0.7rem;
         
             color: #fff;
         text-decoration:none;

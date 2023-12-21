@@ -35,6 +35,56 @@ function ToolbarLibrary() {
             {__('Design Library', 'themehunk-blocks')}
         </Button>
     );
+    
+    const [importLoadingP, setImportLoadingP] = useState(false);
+    const [importLoading, setImportLoading] = useState(false);
+
+    const ImportButton = ({ patternCode }) => {
+        const importPattern = async () => {
+            try {
+                console.log('Setting importLoading to true');
+                setImportLoading(true);
+                const { insertBlocks } = wp.data.dispatch('core/block-editor');
+                const parsedBlocks = wp.blocks.parse(patternCode);
+                insertBlocks(parsedBlocks);
+            } catch (error) {
+                console.error('Error importing pattern:', error);
+            } finally {
+                console.log('Setting importLoading to false');
+                setImportLoading(false);
+                setModalOpen(false);
+            }
+        };
+    
+        return (
+            <button className="import button-primary" onClick={importPattern}>
+                {importLoading ? 'Importing...' : 'Import'}<RxArrowDown></RxArrowDown>
+            </button>
+        );
+    };
+
+
+    // import page template
+    const ImportPage = ({ templateCode, templateName }) => {
+        const importPage = async () => {
+          try {
+            setImportLoadingP(true);
+            const { insertBlocks } = wp.data.dispatch('core/block-editor');
+            const parsedBlocks = wp.blocks.parse(templateCode);
+            await insertBlocks(parsedBlocks);
+          } catch (error) {
+            console.error('Error importing template:', error);
+          } finally {
+            setImportLoadingP(false);
+            setModalOpen(false);
+          }
+        };
+        return (
+          <div className="th-button th-import" onClick={importPage}>
+            {importLoadingP === true ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Import', 'themehunk-blocks')}
+          </div>
+        );
+      };
 
     const TabContent = ({ tab }) => {
 
@@ -44,85 +94,25 @@ function ToolbarLibrary() {
         const handlePatternCategoryChange = (category) => {
           setActivePatternCategory(category);
         };
+
         const breakpointColumnsObj = {
             default:3,
             1100: 3,
             700: 2,
             500: 2
           };
-        const [isLoading, setIsLoading] = useState(true);
-    
+   
         useEffect(() => {
-            // Simulating a brief loading period using setTimeout
-            setTimeout(() => {
               setTemplates(templatesData);
               setPattern(patternData);
-              setIsLoading(false);
-            }, 1000); // Simulating 1 second loading time
           }, []);
 
-        const ImportButton = ({ patternCode }) => {
-
-            const [importLoading, setImportLoading] = useState(false);
-        
-            const importPattern = async () => {
-                try {
-                    console.log('Setting importLoading to true');
-                    setImportLoading(true);
-                    const { insertBlocks } = wp.data.dispatch('core/block-editor');
-                    const parsedBlocks = wp.blocks.parse(patternCode);
-                    insertBlocks(parsedBlocks);
-                } catch (error) {
-                    console.error('Error importing pattern:', error);
-                } finally {
-                    console.log('Setting importLoading to false');
-                    setImportLoading(false);
-                    setModalOpen(false);
-                }
-            };
-        
-            return (
-                <button className="import button-primary" onClick={importPattern}>
-                    {importLoading ? 'Importing...' : 'Import'}<RxArrowDown></RxArrowDown>
-                </button>
-            );
-        };
-
-
-        // import page template
-        const ImportPage = ({ templateCode,templateName }) => {
-
-            const [importLoadingP, setImportLoadingP] = useState(false);
-        
-            const importPage = async () => {
-                try {
-                    console.log('Setting import template to true');
-                    setImportLoadingP(true);
-                    const { insertBlocks } = wp.data.dispatch('core/block-editor');
-                    const parsedBlocks = wp.blocks.parse(templateCode);
-                    insertBlocks(parsedBlocks);
-                } catch (error) {
-                    console.error('Error importing template:', error);
-                } finally {
-                    console.log('Setting importLoading to false');
-                    setImportLoadingP(false);
-                    setModalOpen(false);
-                }
-            };
-        
-            return (
-                <div className="th-button th-import" onClick={importPage}>
-                {importLoadingP ? 'Importing...' : 'Import'} "{templateName}" {__('Template', 'themehunk-blocks')}
-                </div>
-            );
-        };
-        
-
         const ContentPage = ({ template, onBack }) => {
+
             const [selectedItemIndex, setSelectedItemIndex] = useState(0);
             const screenshotRef = useRef(null);
 
-            const handleItemClick = (index) => {
+            const handleItemClickPre = (index) => {
               setSelectedItemIndex(index);
               screenshotRef.current.scrollTo(0, 0); // Scroll to top of element
             };
@@ -159,7 +149,7 @@ function ToolbarLibrary() {
                       {template.templates.map((pageTemplate, index) => (
                         <div
                           className={`item single-site ${index === selectedItemIndex ? 'selected' : ''}`}
-                          onClick={() => handleItemClick(index)}
+                          onClick={() => handleItemClickPre(index)}
                           key={index}
                         >
                           <div className="inner">
