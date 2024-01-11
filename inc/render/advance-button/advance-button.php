@@ -615,7 +615,12 @@ function advance_button_style($attr){
     //************************************************** */
   $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside{";
     //padding
-    if (isset($attr['buttonpaddingTypeTablet']) && 'unlinked' === $attr['buttonpaddingTypeTablet']) {
+    if (isset($attr['buttonpaddingTypeTablet']) && 'linked' === $attr['buttonpaddingTypeTablet']) {
+      $paddingTablet = isset($attr['buttonpaddingTablet']) ? $attr['buttonpaddingTablet'] : 0;
+      $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
+      $css .= "padding: {$paddingTablet}{$paddingUnit};";
+      
+    } else {
       $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
       $paddingTop = isset($attr['buttonpaddingTopTablet']) ? $attr['buttonpaddingTopTablet'] : 0;
       $paddingBottom = isset($attr['buttonpaddingBottomTablet']) ? $attr['buttonpaddingBottomTablet'] : 0;
@@ -627,10 +632,6 @@ function advance_button_style($attr){
             padding-left: {$paddingLeft}{$paddingUnit}; 
             padding-right: {$paddingRight}{$paddingUnit}; 
         ";
-    } else {
-      $paddingTablet = isset($attr['buttonpaddingTablet']) ? $attr['buttonpaddingTablet'] : 0;
-      $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
-      $css .= "padding: {$paddingTablet}{$paddingUnit};";
     }
 
     //buttonborder-width
@@ -873,7 +874,11 @@ function advance_button_style($attr){
     //************************************************** */
   $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside{";
     //padding
-    if (isset($attr['buttonpaddingTypeMobile']) && 'unlinked' === $attr['buttonpaddingTypeMobile']) {
+    if (isset($attr['buttonpaddingTypeMobile']) && 'linked' === $attr['buttonpaddingTypeMobile']) {
+      $paddingMobile = isset($attr['buttonpaddingMobile']) ? $attr['buttonpaddingMobile'] : 0;
+      $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
+      $css .= "padding: {$paddingMobile}{$paddingUnit};";
+    } else {
       $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
       $paddingTop = isset($attr['buttonpaddingTopMobile']) ? $attr['buttonpaddingTopMobile'] : 0;
       $paddingBottom = isset($attr['buttonpaddingBottomMobile']) ? $attr['buttonpaddingBottomMobile'] : 0;
@@ -885,10 +890,6 @@ function advance_button_style($attr){
             padding-left: {$paddingLeft}{$paddingUnit}; 
             padding-right: {$paddingRight}{$paddingUnit}; 
         ";
-    } else {
-      $paddingMobile = isset($attr['buttonpaddingMobile']) ? $attr['buttonpaddingMobile'] : 0;
-      $paddingUnit = isset($attr['buttonpaddingUnit']) ? $attr['buttonpaddingUnit'] : 'px';
-      $css .= "padding: {$paddingMobile}{$paddingUnit};";
     }
 
     //buttonborder-width
