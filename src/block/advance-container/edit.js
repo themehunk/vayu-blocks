@@ -374,7 +374,7 @@ export default function Edit({
 
 					if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 						PositionProperties = {...PositionProperties,
-							top:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
+							bottom:attributes.verticalOrientationOffsetBottom + attributes.verticalOrientationOffsetBottomUnit,
 						}
 
 					}
@@ -529,7 +529,7 @@ export default function Edit({
 			
 					 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 						PositionProperties = {...PositionProperties,
-							top:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
+							bottom:attributes.verticalOrientationOffsetBottomTablet + attributes.verticalOrientationOffsetBottomUnit,
 						}
 			
 					 }
@@ -627,7 +627,7 @@ export default function Edit({
 		
 				 if(attributes.verticalOrientation === 'bottom' && attributes.position !== 'inherit'){
 					PositionProperties = {...PositionProperties,
-						top:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
+						bottom:attributes.verticalOrientationOffsetBottomMobile + attributes.verticalOrientationOffsetBottomUnit,
 					}
 		
 				 }

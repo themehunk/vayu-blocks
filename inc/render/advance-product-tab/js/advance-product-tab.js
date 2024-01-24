@@ -21,7 +21,8 @@ jQuery(document).ready(function($) {
                 data: {
                     action: 'load_category_products',
                     category_id: cat_id,
-                    attr: $data_attr 
+                    attr: $data_attr,
+                    th_nonce: advance_product_tab_ajax.th_nonce
                 },
                 success: function(response) {
                     $productContent.html(response);
@@ -60,6 +61,7 @@ jQuery(document).ready(function($) {
                     category_id: $tabs.filter('.active').attr('cat_slug'),
                     attr: $data_attr,
                     page: page,
+                    th_nonce: advance_product_tab_ajax.th_nonce,
                 },
                 success: function(response) {
                     $productContent.html(response);

@@ -4,8 +4,8 @@ Contributors: ThemeHunk
 Author URI: http://www.themehunk.com/
 Tags: block, blocks, editor, gutenberg, gutenberg blocks, container
 Requires PHP: 5.6
-Tested up to: 6.3
-Stable tag: 1.0.0
+Tested up to: 6.4.2
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Vayu Blocks: These Gutenberg Blocks are the FSE blocks that are used to create content layouts that you can insert anywhere on your WordPress post or pages.
@@ -47,18 +47,13 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 == Screenshots ==
 
 == Changelog ==
+
+=1.0.1 =
+* Security Issue Fixed.
+
 =1.0.0 =
 Initial Release 
 
 == Upgrade Notice ==
 =1.0.0 =
 Initial Release 
-
-
-
-
-
-
-
-
-

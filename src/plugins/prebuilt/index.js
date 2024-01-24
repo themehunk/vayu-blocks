@@ -10,7 +10,7 @@ import Masonry from 'react-masonry-css';
 import { RxFile,RxStack, RxCross1, RxArrowDown} from "react-icons/rx";
 
 import templatesData from '../../../inc/assets/json/templates.json';
-import patternData from '../../../inc/assets/json/pattern.json'; 
+//import patternData from '../../../inc/assets/json/pattern.json'; 
 
 Modal.setAppElement('#wpwrap');
 
@@ -104,7 +104,7 @@ function ToolbarLibrary() {
    
         useEffect(() => {
               setTemplates(templatesData);
-              setPattern(patternData);
+              //setPattern(patternData);
           }, []);
 
         const ContentPage = ({ template, onBack }) => {
@@ -216,68 +216,68 @@ function ToolbarLibrary() {
                     </div>
 
                 );
-            case 'pattern':
-                const filteredPatternData =
-                    activePatternCategory === 'all'
-                    ? pattern
-                    : pattern.filter((item) => item.cat === activePatternCategory);
+            // case 'pattern':
+            //     const filteredPatternData =
+            //         activePatternCategory === 'all'
+            //         ? pattern
+            //         : pattern.filter((item) => item.cat === activePatternCategory);
     
-                return (
-                    <div className="th-block-templates-pattern">
-                        <>
-                        <div className="pattern-tabs-filter">
-                            <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
-                           <div className="pattern-tabs-filter-wrap">
-                            <button
-                                className={`pattern-tab-button ${activePatternCategory === 'all' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('all')}
-                            >
-                                {__('All', 'themehunk-blocks')}
-                            </button>
-                            <button
-                                className={`pattern-tab-button ${activePatternCategory === 'header' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('header')}
-                            >
-                                {__('header', 'themehunk-blocks')}
-                            </button>
-                            <button
-                                className={`pattern-tab-button ${activePatternCategory === 'featured' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('featured')}
-                            >
-                                {__('featured', 'themehunk-blocks')}
-                            </button>
-                            <button
-                                className={`pattern-tab-button ${activePatternCategory === 'call-to-action' ? 'active' : ''}`}
-                                onClick={() => handlePatternCategoryChange('call-to-action')}
-                            >
-                                {__('call-to-action', 'themehunk-blocks')}
-                            </button>
+            //     return (
+            //         <div className="th-block-templates-pattern">
+            //             <>
+            //             <div className="pattern-tabs-filter">
+            //                 <h3 className="filter-name">{__('Category', 'themehunk-blocks')}</h3>
+            //                <div className="pattern-tabs-filter-wrap">
+            //                 <button
+            //                     className={`pattern-tab-button ${activePatternCategory === 'all' ? 'active' : ''}`}
+            //                     onClick={() => handlePatternCategoryChange('all')}
+            //                 >
+            //                     {__('All', 'themehunk-blocks')}
+            //                 </button>
+            //                 <button
+            //                     className={`pattern-tab-button ${activePatternCategory === 'header' ? 'active' : ''}`}
+            //                     onClick={() => handlePatternCategoryChange('header')}
+            //                 >
+            //                     {__('header', 'themehunk-blocks')}
+            //                 </button>
+            //                 <button
+            //                     className={`pattern-tab-button ${activePatternCategory === 'featured' ? 'active' : ''}`}
+            //                     onClick={() => handlePatternCategoryChange('featured')}
+            //                 >
+            //                     {__('featured', 'themehunk-blocks')}
+            //                 </button>
+            //                 <button
+            //                     className={`pattern-tab-button ${activePatternCategory === 'call-to-action' ? 'active' : ''}`}
+            //                     onClick={() => handlePatternCategoryChange('call-to-action')}
+            //                 >
+            //                     {__('call-to-action', 'themehunk-blocks')}
+            //                 </button>
                             
-                            </div>
-                        </div>
-                        <div className="pattern-tab-content">
-                            <div className="th-block-templates-sites">
+            //                 </div>
+            //             </div>
+            //             <div className="pattern-tab-content">
+            //                 <div className="th-block-templates-sites">
                             
-                            <Masonry breakpointCols={breakpointColumnsObj}
-                            className="masonry-grid"
-                            columnClassName="masonry-grid_column">
-                                {filteredPatternData.map((patternItem, index) => (
-                                    <div className="item single-site" key={index}>
-                                        <div className="inner">
-                                        <div className="thumbnail">
-                                            <img src={patternItem.image}></img>
-                                        </div>
-                                            <ImportButton patternCode={patternItem.content} />
-                                        </div>
-                                    </div>
-                                ))}
-                            </Masonry>
-                            </div>
-                        </div>
-                        </>
+            //                 <Masonry breakpointCols={breakpointColumnsObj}
+            //                 className="masonry-grid"
+            //                 columnClassName="masonry-grid_column">
+            //                     {filteredPatternData.map((patternItem, index) => (
+            //                         <div className="item single-site" key={index}>
+            //                             <div className="inner">
+            //                             <div className="thumbnail">
+            //                                 <img src={patternItem.image}></img>
+            //                             </div>
+            //                                 <ImportButton patternCode={patternItem.content} />
+            //                             </div>
+            //                         </div>
+            //                     ))}
+            //                 </Masonry>
+            //                 </div>
+            //             </div>
+            //             </>
                        
-                    </div>
-                );
+            //         </div>
+            //     );
             default:
                 return null;
         }
@@ -303,12 +303,12 @@ function ToolbarLibrary() {
                 >
                     <RxFile></RxFile>{__('Page', 'themehunk-blocks')}
                 </div>
-                <div
+                {/* <div
                     className={`th-menu-item ${activeTab === 'pattern' ? 'active' : ''}`}
                     onClick={() => setActiveTab('pattern')}
                 >
                     <RxStack></RxStack>{__('Pattern', 'themehunk-blocks')}
-                </div>
+                </div> */}
                  </div>
                  <div className="th-close-wrap">
                  <Button onClick={closeModal}><RxCross1></RxCross1></Button>
