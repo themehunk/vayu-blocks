@@ -2692,7 +2692,9 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 										hasIcon
 									/>
 								</ResponsiveControl>
-								{ 'custom' == attributes.order && (
+
+
+								{ ('custom' == attributes.order || 'custom' == attributes.orderTablet || 'custom' == attributes.orderMobile) && (
 								<ResponsiveControl
 								label={ __( 'Custom Order', 'vayu-blocks' ) }
 							    >    
@@ -2705,8 +2707,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 									max={ 9999 }
 									allowReset={ true }
 								/>		
-						      </ResponsiveControl>
-
+						        </ResponsiveControl>
 								)}
 
                               <ResponsiveControl
@@ -2743,7 +2744,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 									/>
 								</ResponsiveControl>
 
-								{ 'custom' == attributes.flexSize && (
+								{ ('custom' == attributes.flexSize || 'custom' == attributes.flexSizeTablet || 'custom' == attributes.flexSizeMobile) && (
                                 <>
 								<ResponsiveControl
 								label={ __( 'Flex Grow', 'vayu-blocks' ) }

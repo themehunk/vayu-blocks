@@ -44,6 +44,7 @@ class Advance_Product_Tab {
                 'advance_product_tab_ajax',
                 array(
                     'ajax_url' => admin_url( 'admin-ajax.php' ),
+                    'th_nonce'=> wp_create_nonce( 'th_advance_product_block' ),
                   
                 )
             );
@@ -96,11 +97,8 @@ class Advance_Product_Tab {
         'status' => 'publish',
         'visibility' => 'catalog',
     );
-    
-    if(isset($_POST['attr'])){
 
-        $attr=$_POST['attr'];
-    }
+    
     //product per page
 
     $device_type = $this->device_check();
@@ -122,12 +120,14 @@ class Advance_Product_Tab {
     $args['posts_per_page'] = $perpageproduct;
 
     // Selected category
-    if(isset($_POST['category_id'])){
+    $categoryid = isset($_POST['category_id']) ? sanitize_text_field($_POST['category_id']) : '';
+
+    if($categoryid !==''){
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'product_cat',
                 'field' => 'slug',
-                'terms' => $_POST['category_id'],
+                'terms' => $categoryid,
             ),
         );
     }else{
@@ -498,6 +498,7 @@ function handle_sale_products_query_var( $query) {
 
 
 public function device_check() {
+
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
     $mobile_agents = array(
@@ -546,7 +547,16 @@ public function device_check() {
 
 public function load_category_products(){
 
+    if ( ! current_user_can( 'administrator' ) ) {
+
+            wp_die( - 1, 403 );
+            
+    } 
+
+    check_ajax_referer( 'th_advance_product_block','th_nonce');
+
     $category_id = isset($_POST['category_id']) ? sanitize_text_field($_POST['category_id']) : '';
+   
     $page = isset($_POST['page']) ? sanitize_text_field($_POST['page']) : '';
 
     $attrr = isset($_POST['attr']) ? sanitize_text_field($_POST['attr']) : array();
