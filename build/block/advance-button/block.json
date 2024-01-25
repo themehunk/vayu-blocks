@@ -55,6 +55,9 @@
       "type": "number",
       "default": 2
     },
+    "icon": {
+      "type": "string"
+    },
     "widthType": {
       "type": "string",
       "default": "none"
