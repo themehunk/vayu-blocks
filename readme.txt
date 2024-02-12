@@ -5,7 +5,7 @@ Author URI: http://www.themehunk.com/
 Tags: block, blocks, editor, gutenberg, gutenberg blocks, container
 Requires PHP: 5.6
 Requires at least: 4.7
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
