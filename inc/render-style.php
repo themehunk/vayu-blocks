@@ -1,14 +1,18 @@
 <?php
 
-function render_init(){
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
 
-	add_action( 'wp_head', 'render_server_side_css',999 );
+function vayu_render_init(){
+
+	add_action( 'wp_head', 'vayu_render_server_side_css',999 );
 	
 }
 
-add_action( 'init', 'render_init', 99);
+add_action( 'init', 'vayu_render_init', 99);
 
-function render_server_side_css() {
+function vayu_render_server_side_css() {
 
 	if ( ! ( function_exists( 'get_block_templates' ) && current_theme_supports( 'block-templates' ) ) ) {
 		return;
@@ -54,7 +58,7 @@ function render_server_side_css() {
 			return;
 		}
 
-		$css = cycle_through_blocks( $blocks, $post->ID );
+		$css = vayu_cycle_through_blocks( $blocks, $post->ID );
 
 		if ( empty( $css ) ) {
 			return;
@@ -64,19 +68,26 @@ function render_server_side_css() {
 		$style .= $css;
 		$style .= "\n" . '</style>' . "\n";
 
-		echo $style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	}
+		echo wp_kses( $style, array(
+			'style' => true,
+			'div' => array(
+				'id' => true,
+				'class' => true
+			 ),
+		  ));
+	   }
+
 }
 
 
-function enqueue_google_fonts($font_family_string)
+function vayu_enqueue_google_fonts($font_family_string)
 {
     $font_families = explode(',', $font_family_string);
     $font_family_string = str_replace(' ', '+', implode('|', $font_families));
     wp_enqueue_style('th-blocks-google-fonts-' . $font_family_string, "https://fonts.googleapis.com/css?family=$font_family_string&display=swap", array(), null);
 }
 
-function cycle_through_blocks( $blocks, $post_id ) {
+function vayu_cycle_through_blocks( $blocks, $post_id ) {
 
 	$css = '';
 
@@ -84,55 +95,55 @@ function cycle_through_blocks( $blocks, $post_id ) {
 		
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
-				  enqueue_google_fonts($block['attrs']['fontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
 			    }
-                $css .=advance_heading_style($block['attrs']);
+                $css .= vayu_advance_heading_style($block['attrs']);
 		} 
 
 		if ( $block['blockName'] === 'vayu-blocks/advance-container' ) {
-			 $css .=advance_container_style($block['attrs']);
+			 $css .= vayu_advance_container_style($block['attrs']);
 	    } 
 
 		if ( $block['blockName'] === 'vayu-blocks/advance-product' ){
 
 			if ( isset($block['attrs']['tabfontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['tabfontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['tabfontFamily']);
 			  }
 
 			if ( isset($block['attrs']['catfontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['catfontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['catfontFamily']);
 			  } 
 			
 			if ( isset($block['attrs']['titlefontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['titlefontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['titlefontFamily']);
 			  }
 			
 			if ( isset($block['attrs']['pricefontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['pricefontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['pricefontFamily']);
 			  }
 			
 			if ( isset($block['attrs']['buttonfontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['buttonfontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['buttonfontFamily']);
 			  }
 
-			$css .=advance_product_tab_style($block['attrs']);
+			$css .= vayu_advance_product_tab_style($block['attrs']);
 	     } 
 
 		if ( $block['blockName'] === 'vayu-blocks/advance-spacer' ) {
-			 $css .=advance_spacer_style($block['attrs']);
+			 $css .= vayu_advance_spacer_style($block['attrs']);
 	 	} 
 
 		 if ( $block['blockName'] === 'vayu-blocks/advance-button' ) {
 
 			if ( isset($block['attrs']['fontFamily'] ) ){
-				enqueue_google_fonts($block['attrs']['fontFamily']);
+				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
 			  }
 
-			 $css .=advance_button_style($block['attrs']);
+			 $css .= advance_button_style($block['attrs']);
 		} 
 
 		if ( ! empty( $block['innerBlocks'] ) ) {
-			$inner_css = cycle_through_blocks( $block['innerBlocks'], $post_id );
+			$inner_css = vayu_cycle_through_blocks( $block['innerBlocks'], $post_id );
 			if ( $inner_css ) {
 				$css .= $inner_css;
 			}
@@ -149,7 +160,7 @@ function cycle_through_blocks( $blocks, $post_id ) {
 			}
 
 			$blocks = parse_blocks( $reusable_block->post_content );
-			$inner_css = cycle_through_blocks( $blocks, $reusable_block->ID );
+			$inner_css = vayu_cycle_through_blocks( $blocks, $reusable_block->ID );
 			if ( $inner_css ) {
 				$css .= $inner_css;
 			}
@@ -159,7 +170,7 @@ function cycle_through_blocks( $blocks, $post_id ) {
 	return $css;
 }
 
-function hex2rgba( $color, $opacity = false ) {
+function vayu_hex2rgba( $color, $opacity = false ) {
 
 	$default = 'rgb(0,0,0)';
 
