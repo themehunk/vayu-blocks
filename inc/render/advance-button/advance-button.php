@@ -1,5 +1,10 @@
 <?php
-function advance_button_style($attr){
+
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+function vayu_advance_button_style($attr){
     $css = '';
 	
     if(isset( $attr['uniqueID'] )){

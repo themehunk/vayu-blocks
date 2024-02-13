@@ -17,7 +17,7 @@ jQuery(document).ready(function($) {
             $.ajax({
                 url: advance_product_tab_ajax.ajax_url,
                 type: 'POST',
-                dataType: 'html',
+                dataType: 'json',
                 data: {
                     action: 'load_category_products',
                     category_id: cat_id,
@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
             $.ajax({
                 url: advance_product_tab_ajax.ajax_url,
                 type: 'POST',
-                dataType: 'html',
+                dataType: 'json',
                 data: {
                     action: 'load_category_products',
                     category_id: $tabs.filter('.active').attr('cat_slug'),

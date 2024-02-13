@@ -4,10 +4,11 @@ Contributors: ThemeHunk
 Author URI: http://www.themehunk.com/
 Tags: block, blocks, editor, gutenberg, gutenberg blocks, container
 Requires PHP: 5.6
-Tested up to: 6.4.2
-Stable tag: 1.0.1
+Requires at least: 4.7
+Tested up to: 6.4.3
+Stable tag: 1.0.2
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 Vayu Blocks: These Gutenberg Blocks are the FSE blocks that are used to create content layouts that you can insert anywhere on your WordPress post or pages.
 
 == Description ==
@@ -28,25 +29,28 @@ Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor wi
 1. Upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
-== Frequently Asked Questions ==
-
-= How can I get support if my AI Site Builder is not Working? =
-If you're facing any problems while using our AI Site Builder plugin, Please first follow the below steps :
-1. Deactivate all plugins you are using and check if the problem is still occurring with our AI Site Builder.
-2. Check the theme and plugin version, if it is the latest or not.
-3. Check the plugin with the default theme, to make sure the error is not due to the theme you're using.
-You're free to contact us through mail, via our Contact form and Live chat support. We have also given full documentation of our Plugin, you can go with it and learn how to use our plugin.
-
-
-= How to Install Plugin =
-Just upload the `ai-site-builder.zip` to the `/wp-content/plugins/` directory, and then activate it from the 'Plugins' menu in WordPress.
-
 = How to Install Plugin =
 Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and then activate it from the 'Plugins' menu in WordPress.
 
 == Screenshots ==
 
+== Plugin License & Copyright ==
+Vayu Blocks is distributed under the terms of the GNU GPL
+Vayu-Blocks-Copyright 2024, themehunk.com
+License : GPLv3 or later
+License URL: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+== Dependencies == 
+Themehunk is the author of the Vayu block plugin. All the images fetched from themehunk server are free to use with Vayu plugin. No account access or registration is required.
+
+== Google Web Font ==
+License: Open Font License, Version 3.7.
+License URL: https://openfontlicense.org/
+
 == Changelog ==
+
+=1.0.2 =
+* Security, Credit & License Issue Fixed.
 
 =1.0.1 =
 * Security Issue Fixed.
@@ -55,5 +59,5 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 Initial Release 
 
 == Upgrade Notice ==
-=1.0.0 =
+=1.0.2 =
 Initial Release 

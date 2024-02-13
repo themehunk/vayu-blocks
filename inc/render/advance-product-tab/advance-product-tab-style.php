@@ -1,6 +1,10 @@
 <?php 
 
-function advance_product_tab_style($attr){ 
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+function vayu_advance_product_tab_style($attr){ 
 
 	$css = '';
 

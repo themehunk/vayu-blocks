@@ -1,5 +1,10 @@
 <?php 
-function advance_spacer_style($attr){
+
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+function vayu_advance_spacer_style($attr){
     
   $css = '';
 	
