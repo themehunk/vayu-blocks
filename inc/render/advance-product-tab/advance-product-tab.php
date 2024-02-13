@@ -64,7 +64,7 @@ class Vayu_Advance_Product_Tab {
                             foreach ($attr['productCategories'] as $category) {
 
                                 $block_content .= '
-                                    <li class="tab-link" cat_id="' . (isset($category['value']) ? esc_html($category['value']) : '') . '" cat_slug="' . (isset($category['slug']) ? esc_html($category['slug']) : '') . '">
+                                    <li class="tab-link" cat_id="' . (isset($category['value']) ? esc_attr($category['value']) : '') . '" cat_slug="' . (isset($category['slug']) ? esc_html($category['slug']) : '') . '">
                                         ' . (isset($category['label']) ? esc_html($category['label']) : '') . '
                                     </li>';
                             }
@@ -368,7 +368,7 @@ class Vayu_Advance_Product_Tab {
                     // Title
                     $displayTitle = isset($attr['displayTitle']) ? $attr['displayTitle'] : true;
                     if($displayTitle):
-                    $product_content .= '<' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . ' class="th-product-title">
+                    $product_content .= '<' . (isset($attr['prouctTitleTag']) ? esc_attr($attr['prouctTitleTag']) : 'h3') . ' class="th-product-title">
                         <a href="' . esc_url($product->get_permalink()) . '">' . esc_html($product->get_name()) . '</a>   
                     </' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . '>';
                     endif;
@@ -836,7 +836,7 @@ public function load_category_products(){
                     // Title
                     $displayTitle = isset($attr['displayTitle']) ? $attr['displayTitle'] : true;
                     if($displayTitle):
-                    $product_content .= '<' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . ' class="th-product-title">
+                    $product_content .= '<' . (isset($attr['prouctTitleTag']) ? esc_attr($attr['prouctTitleTag']) : 'h3') . ' class="th-product-title">
                         <a href="' . esc_url($product->get_permalink()) . '">' . esc_html($product->get_name()) . '</a>   
                     </' . (isset($attr['prouctTitleTag']) ? esc_html($attr['prouctTitleTag']) : 'h3') . '>';
                     endif;

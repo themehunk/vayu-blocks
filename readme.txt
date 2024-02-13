@@ -34,7 +34,7 @@ Just upload the `vayu-blocks.zip` to the `/wp-content/plugins/` directory, and t
 
 == Screenshots ==
 
-== Theme License & Copyright ==
+== Plugin License & Copyright ==
 Vayu Blocks is distributed under the terms of the GNU GPL
 Vayu-Blocks-Copyright 2024, themehunk.com
 License : GPLv3 or later
@@ -59,5 +59,5 @@ License URL: https://openfontlicense.org/
 Initial Release 
 
 == Upgrade Notice ==
-=1.0.0 =
+=1.0.2 =
 Initial Release 
