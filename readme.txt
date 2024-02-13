@@ -40,6 +40,9 @@ Vayu-Blocks-Copyright 2024, themehunk.com
 License : GPLv3 or later
 License URL: https://www.gnu.org/licenses/gpl-3.0.en.html
 
+== Dependencies == 
+Themehunk is the author of the Vayu block plugin. All the images fetched from themehunk server are free to use with Vayu plugin. No account access or registration is required.
+
 == Google Web Font ==
 License: Open Font License, Version 3.7.
 License URL: https://openfontlicense.org/
