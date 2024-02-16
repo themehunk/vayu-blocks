@@ -1,6 +1,10 @@
-<?php 
+<?php
 
-function advance_container_style($attr){
+ if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
+
+function vayu_advance_container_style($attr){
 
     $css = '';
 	

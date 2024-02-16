@@ -6,16 +6,15 @@
  */
 
 namespace Vayu\GutenbergBlocks;
-
 /**
- * Class Blocks_Animation
+ * Class Vayu_Blocks_Animation
  */
-class Blocks_Animation {
+class Vayu_Blocks_Animation {
 
 	/**
 	 * The main instance var.
 	 *
-	 * @var Blocks_Animation|null
+	 * @var Vayu_Blocks_Animation|null
 	 */
 	public static $instance = null;
 
@@ -222,7 +221,7 @@ class Blocks_Animation {
 	 * @static
 	 * @since 1.0.0
 	 * @access public
-	 * @return Blocks_Animation
+	 * @return Vayu_Blocks_Animation
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -261,4 +260,4 @@ class Blocks_Animation {
 	}
 }
 
-	Blocks_Animation::instance();
+Vayu_Blocks_Animation::instance();

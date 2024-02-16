@@ -53,7 +53,7 @@ function vayu_blocks_editor_assets(){
 add_action( 'enqueue_block_editor_assets', 'vayu_blocks_editor_assets' );
 
 
-function admin_react_script() {
+function vayu_admin_react_script() {
 
     $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/adminDashboard.asset.php';
 
@@ -87,5 +87,4 @@ function admin_react_script() {
     
     
 }
-add_action('admin_enqueue_scripts',  'admin_react_script');
-
+add_action('admin_enqueue_scripts',  'vayu_admin_react_script');
