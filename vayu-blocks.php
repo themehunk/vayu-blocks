@@ -45,6 +45,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/advance-button/advance-button.php';
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
+        include_once 'src/plugins/dashboard/toggle-switch.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -59,6 +60,7 @@ class Vayu_Block_Plugin {
                 'script_handle'  => 'advance-container',
                 'editor_style'   => 'advance-container-editor-style',
                 'frontend_style' => 'advance-container-frontend-style',
+                'status'         => get_option('container_value'),
                 'localize_data'  => array(
                     'homeUrl' => get_home_url(),
                 ),
@@ -68,18 +70,21 @@ class Vayu_Block_Plugin {
                 'script_handle'  => 'advance-heading',
                 'editor_style'   => 'advance-heading-editor-style',
                 'frontend_style' => 'advance-heading-frontend-style',
+                'status'         => get_option('heading_value'),
             ),
             array(
                 'name'           => 'vayu-blocks/advance-spacer',
                 'script_handle'  => 'advance-spacer',
                 'editor_style'   => 'advance-spacer-editor-style',
                 'frontend_style' => 'advance-spacer-frontend-style',
+                'status'         => get_option('spacer_value'),
             ),
             array(
                 'name'           => 'vayu-blocks/advance-button',
                 'script_handle'  => 'advance-button',
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
+                'status'         => get_option('button_value'),
             )
         );
 
@@ -91,6 +96,7 @@ class Vayu_Block_Plugin {
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
+                'status'         => get_option('wooproduct_value'),
                 'render_callback' => array( 
                     new Advance_Product_Tab(),
                     'render_callback' 
@@ -98,9 +104,9 @@ class Vayu_Block_Plugin {
             );
         }
 
-        foreach ( $blocks as $block ) {
+        foreach (  $blocks as $key => $block ) { 
 
-            
+    if ( isset( $block['status'] ) && ( $block['status'] == 1 ) ) {
             // Register JavaScript file
             wp_register_script(
                 $block['script_handle'],
@@ -150,6 +156,8 @@ class Vayu_Block_Plugin {
             // Register each block
             register_block_type( $block['name'], $block_args );
         }
+
+        }
     }
     
     // plugin menu option add
@@ -193,5 +201,3 @@ class Vayu_Block_Plugin {
 
 }
 new Vayu_Block_Plugin();
-
-

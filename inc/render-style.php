@@ -42,7 +42,7 @@ function render_server_side_css() {
 
 		global $post;
 
-		if ( ! is_object( $post ) ) {
+		if ( ! is_object( $post ) && ( !is_404() ) ) {
 			return;
 		}
 
@@ -54,7 +54,14 @@ function render_server_side_css() {
 			return;
 		}
 
-		$css = cycle_through_blocks( $blocks, $post->ID );
+		if ( ( is_404() ) ) {
+			
+			$css = cycle_through_blocks( $blocks, ' ' );
+		
+		}
+		else{
+			$css = cycle_through_blocks( $blocks, $post->ID );	
+		}
 
 		if ( empty( $css ) ) {
 			return;
