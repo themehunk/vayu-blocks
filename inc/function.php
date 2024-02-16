@@ -72,6 +72,8 @@ function vayu_admin_react_script() {
         'vayublock',
         array(
             'homeUrl' => plugins_url( '/', __FILE__ ),
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'homeUrl2' => get_home_url(),
         )
     );
 

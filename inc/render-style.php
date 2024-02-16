@@ -46,7 +46,7 @@ function vayu_render_server_side_css() {
 
 		global $post;
 
-		if ( ! is_object( $post ) ) {
+		if ( ! is_object( $post ) && ( !is_404() ) ) {
 			return;
 		}
 
@@ -58,7 +58,17 @@ function vayu_render_server_side_css() {
 			return;
 		}
 
-		$css = vayu_cycle_through_blocks( $blocks, $post->ID );
+
+		if ( ( is_404() ) ) {
+			
+			$css = vayu_cycle_through_blocks( $blocks, ' ' );
+		
+		}
+		else{
+			$css = vayu_cycle_through_blocks( $blocks, $post->ID );	
+		}
+
+
 
 		if ( empty( $css ) ) {
 			return;
@@ -139,7 +149,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
 			  }
 
-			 $css .= advance_button_style($block['attrs']);
+			 $css .= vayu_advance_button_style($block['attrs']);
 		} 
 
 		if ( ! empty( $block['innerBlocks'] ) ) {
