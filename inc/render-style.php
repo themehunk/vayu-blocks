@@ -68,13 +68,8 @@ function vayu_render_server_side_css() {
 		$style .= $css;
 		$style .= "\n" . '</style>' . "\n";
 
-		echo wp_kses( $style, array(
-			'style' => true,
-			'div' => array(
-				'id' => true,
-				'class' => true
-			 ),
-		  ));
+		echo $style;
+		
 	   }
 
 }
@@ -139,7 +134,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
 			  }
 
-			 $css .= advance_button_style($block['attrs']);
+			 $css .= vayu_advance_button_style($block['attrs']);
 		} 
 
 		if ( ! empty( $block['innerBlocks'] ) ) {
