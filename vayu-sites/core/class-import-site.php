@@ -94,18 +94,18 @@ if ( ! class_exists( 'VAYU_BLOCKS_SITES_IMPORT' ) ) {
 				if ( $xml_path['success'] ) {
 
 					if ( isset( $xml_path['data']['file'] ) ) {
-						$data        = AI_Site_Builder_Library_WXR_Importer::instance()->get_xml_data( $xml_path['data']['file'] );
+						$data        = Vayu_Blocks_Sites_Library_WXR_Importer::instance()->get_xml_data( $xml_path['data']['file'] );
 						$data['xml'] = $xml_path['data'];
-						$data['update'] = __( 'xml file download completed.', 'ai-site-builder' ) ;
+						$data['update'] = __( 'xml file download completed.', 'vayu-blocks' ) ;
 						wp_send_json_success( $data );
 					} else {
-						wp_send_json_error( __( 'There was an error downloading the XML file.', 'ai-site-builder' ) );
+						wp_send_json_error( __( 'There was an error downloading the XML file.', 'vayu-blocks' ) );
 					}
 				} else {
 					wp_send_json_error( $xml_path['data'] );
 				}
 			} else {
-				wp_send_json_error( __( 'Invalid site XML file!', 'ai-site-builder' ) );
+				wp_send_json_error( __( 'Invalid site XML file!', 'vayu-blocks' ) );
 			}
 		}
 
@@ -124,7 +124,7 @@ if ( ! class_exists( 'VAYU_BLOCKS_SITES_IMPORT' ) ) {
 				wp_send_json_success( array('success'=>$return) );
 
 			} else {
-				wp_send_json_error( __( 'Customizer data is empty!', 'ai-site-builder' ) );
+				wp_send_json_error( __( 'Customizer data is empty!', 'vayu-blocks' ) );
 			}
 
 		}
@@ -135,11 +135,11 @@ if ( ! class_exists( 'VAYU_BLOCKS_SITES_IMPORT' ) ) {
 			$options_data =  (array)$options_data;
 			 if ( isset( $options_data ) ) {
 			 //	Themehunk_Importer_Log::add( 'Imported - Site Options ' . json_encode( $options_data ) );
-				$options_importer = AI_Site_Builder_Options_Import::instance();
+				$options_importer = Vayu_Blocks_Sites_Options_Import::instance();
 				$options_importer->import_options_data( $options_data );
-				wp_send_json_success( __( 'Site options data is update successfully.', 'ai-site-builder' ) );
+				wp_send_json_success( __( 'Site options data is update successfully.', 'vayu-blocks' ) );
 			 } else {
-			 	wp_send_json_error( __( 'Site options are empty!', 'ai-site-builder' ) );
+			 	wp_send_json_error( __( 'Site options are empty!', 'vayu-blocks' ) );
 			 }
 
 
@@ -156,13 +156,13 @@ if ( ! class_exists( 'VAYU_BLOCKS_SITES_IMPORT' ) ) {
 			$widgets_data =  (object)$widgets_data;
 
 			if ( isset( $widgets_data ) ) {
-				$widgets_importer = AI_Site_Builder_Widget_Importer::instance();
+				$widgets_importer = Vayu_Blocks_Sites_Widget_Importer::instance();
 
 				$status  = $widgets_importer->import_widgets_data( $widgets_data );
 
-				wp_send_json_success( __( 'Widget data is update successfully.', 'ai-site-builder' ) );
+				wp_send_json_success( __( 'Widget data is update successfully.', 'vayu-blocks' ) );
 			} else {
-				wp_send_json_error( __( 'Widget data is empty!', 'ai-site-builder' ) );
+				wp_send_json_error( __( 'Widget data is empty!', 'vayu-blocks' ) );
 			}
 
 		}

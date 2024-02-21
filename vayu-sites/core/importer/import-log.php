@@ -67,7 +67,7 @@ if ( ! class_exists( 'Vayu_Blocks_Sites_Importer_Log' ) ) :
 		function has_file_read_write() {
 
 			// Get user credentials for WP file-system API.
-			$themehunk_import = wp_nonce_url( admin_url( 'themes.php?page=ai-site-builder' ), 'themehunk' );
+			$themehunk_import = wp_nonce_url( admin_url( 'themes.php?page=vayu-sites' ), 'themehunk' );
 			$creds              = request_filesystem_credentials( $themehunk_import, '', false, false, null );
 			if ( false === $creds ) {
 				return;
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Vayu_Blocks_Sites_Importer_Log' ) ) :
 		 * @param  string $dir_name Directory Name.
 		 * @return array    Uploads directory array.
 		 */
-		public static function log_dir( $dir_name = 'ai-site-builder' ) {
+		public static function log_dir( $dir_name = 'vayu-blocks' ) {
 
 			$upload_dir = wp_upload_dir();
 

@@ -20981,7 +20981,7 @@ function Upgrade(props) {
 }
 function HomeLink() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: '?page=ai-site-builder',
+    href: '?page=vayu-sites',
     title: "Dashboard"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"], {
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {

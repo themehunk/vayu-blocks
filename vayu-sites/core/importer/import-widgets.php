@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) or exit;
  *
  * @see - https://wordpress.org/plugins/widget-importer-exporter/
  */
-class AI_Site_Builder_Widget_Importer {
+class Vayu_Blocks_Sites_Widget_Importer {
 
 	private static $_instance = null;
 

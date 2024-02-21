@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) or exit;
  *
  * @since  1.0.0
  */
-class AI_Site_Builder_Options_Import {
+class Vayu_Blocks_Sites_Options_Import {
 
 	/**
 	 * Instance of Themehunk_Options_Importer
