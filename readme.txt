@@ -6,7 +6,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks, container
 Requires PHP: 5.6
 Requires at least: 4.7
 Tested up to: 6.4.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 Vayu Blocks: These Gutenberg Blocks are the FSE blocks that are used to create content layouts that you can insert anywhere on your WordPress post or pages.
@@ -48,6 +48,10 @@ License: Open Font License, Version 3.7.
 License URL: https://openfontlicense.org/
 
 == Changelog ==
+
+=1.0.3 =
+* Toggle Switch removed from src folder.
+* Toggle Switch by default on settings added.
 
 =1.0.2 =
 * Security, Credit & License Issue Fixed.

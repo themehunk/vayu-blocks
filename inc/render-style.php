@@ -79,7 +79,6 @@ function vayu_render_server_side_css() {
 		$style .= "\n" . '</style>' . "\n";
 
 		echo $style;
-		
 	   }
 
 }
