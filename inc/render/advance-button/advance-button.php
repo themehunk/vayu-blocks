@@ -120,7 +120,7 @@ function vayu_advance_button_style($attr){
 
     //box shadow
     if (isset($attr['boxShadow'])){
-			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) .";";
+			$css .= "box-shadow: ". (isset($attr['boxShadowHorizontal']) ? $attr['boxShadowHorizontal'] : '0') ."px  ". (isset($attr['boxShadowVertical']) ? $attr['boxShadowVertical'] : '0') ."px ". (isset($attr['boxShadowBlur']) ? $attr['boxShadowBlur'] : '5') ."px ". (isset($attr['boxShadowSpread']) ? $attr['boxShadowSpread'] : '1') ."px  ". vayu_hex2rgba((isset($attr['boxShadowColor']) ? $attr['boxShadowColor'] : '#fff'), (isset($attr['boxShadowColorOpacity']) ? $attr['boxShadowColorOpacity'] : '50') ) .";";
 		}
 
     
@@ -262,7 +262,7 @@ function vayu_advance_button_style($attr){
 
 			//box hvr shadow
 			if (isset($attr['boxShadowHvr'])){
-				$css .= "box-shadow: ". (isset($attr['boxShadowHorizontalHvr']) ? $attr['boxShadowHorizontalHvr'] : '0') ."px  ". (isset($attr['boxShadowVerticalHvr']) ? $attr['boxShadowVerticalHvr'] : '0') ."px ". (isset($attr['boxShadowBlurHvr']) ? $attr['boxShadowBlurHvr'] : '5') ."px ". (isset($attr['boxShadowSpreadHvr']) ? $attr['boxShadowSpreadHvr'] : '1') ."px  ". hex2rgba((isset($attr['boxShadowColorHvr']) ? $attr['boxShadowColorHvr'] : '#fff'), (isset($attr['boxShadowColorOpacityHvr']) ? $attr['boxShadowColorOpacityHvr'] : '50') ) ." ;";
+				$css .= "box-shadow: ". (isset($attr['boxShadowHorizontalHvr']) ? $attr['boxShadowHorizontalHvr'] : '0') ."px  ". (isset($attr['boxShadowVerticalHvr']) ? $attr['boxShadowVerticalHvr'] : '0') ."px ". (isset($attr['boxShadowBlurHvr']) ? $attr['boxShadowBlurHvr'] : '5') ."px ". (isset($attr['boxShadowSpreadHvr']) ? $attr['boxShadowSpreadHvr'] : '1') ."px  ". vayu_hex2rgba((isset($attr['boxShadowColorHvr']) ? $attr['boxShadowColorHvr'] : '#fff'), (isset($attr['boxShadowColorOpacityHvr']) ? $attr['boxShadowColorOpacityHvr'] : '50') ) ." ;";
 			}
 
 			$css .= "transition: all ". (isset($attr['transitionAll']) ? $attr['transitionAll'] : '0.2' ). "s ease;";
@@ -351,7 +351,7 @@ function vayu_advance_button_style($attr){
  
      //buttonbox shadow
      if (isset($attr['buttonboxShadow'])){
-       $css .= "box-shadow: ". (isset($attr['buttonboxShadowHorizontal']) ? $attr['buttonboxShadowHorizontal'] : '0') ."px  ". (isset($attr['buttonboxShadowVertical']) ? $attr['buttonboxShadowVertical'] : '0') ."px ". (isset($attr['buttonboxShadowBlur']) ? $attr['buttonboxShadowBlur'] : '5') ."px ". (isset($attr['buttonboxShadowSpread']) ? $attr['buttonboxShadowSpread'] : '1') ."px  ". hex2rgba((isset($attr['buttonboxShadowColor']) ? $attr['buttonboxShadowColor'] : '#fff'), (isset($attr['buttonboxShadowColorOpacity']) ? $attr['buttonboxShadowColorOpacity'] : '50') ) .";";
+       $css .= "box-shadow: ". (isset($attr['buttonboxShadowHorizontal']) ? $attr['buttonboxShadowHorizontal'] : '0') ."px  ". (isset($attr['buttonboxShadowVertical']) ? $attr['buttonboxShadowVertical'] : '0') ."px ". (isset($attr['buttonboxShadowBlur']) ? $attr['buttonboxShadowBlur'] : '5') ."px ". (isset($attr['buttonboxShadowSpread']) ? $attr['buttonboxShadowSpread'] : '1') ."px  ". vayu_hex2rgba((isset($attr['buttonboxShadowColor']) ? $attr['buttonboxShadowColor'] : '#fff'), (isset($attr['buttonboxShadowColorOpacity']) ? $attr['buttonboxShadowColorOpacity'] : '50') ) .";";
      }
 
      //Typography Font Family
