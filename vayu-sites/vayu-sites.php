@@ -1,0 +1,35 @@
+<?php
+/**
+ * Type:  Site Import Builder
+ *
+ */
+
+//  Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if (defined( 'AI_SITE_BUILDER_PLUGIN_PRO' ) ) return;
+
+
+define('AI_SITE_BUILDER_PLUGIN', 'ai-site-builder');
+
+define('VAYU_BLOCKS_SITES_URL', plugin_dir_url(__FILE__));  //AI_SITE_BUILDER_PLUGIN_URL
+
+// if ( ! defined( 'AI_SITE_BUILDER_BASE_URL' ) ) {
+// 	define( 'AI_SITE_BUILDER_DIR_PATH', plugin_dir_path(__FILE__ ) ); //VAYU_BLOCKS_DIR_PATH
+// }
+
+if ( ! defined( 'VAYU_BLOCKS_DIR_SITES' ) ) {
+	define( 'VAYU_BLOCKS_DIR_SITES', VAYU_BLOCKS_DIR_PATH.'vayu-sites/' ); 
+}
+
+require_once(VAYU_BLOCKS_DIR_SITES . 'admin/init.php');
+require_once(VAYU_BLOCKS_DIR_SITES . 'core/inc.php');
+require_once(VAYU_BLOCKS_DIR_SITES . 'app/app.php');
+require_once VAYU_BLOCKS_DIR_SITES . 'core/class-core.php';
+
+register_activation_hook( __FILE__, 'ai_site_builder_active_plugin');
+register_deactivation_hook( __FILE__, 'ai_site_builder_dactive_plugin');
+
+
