@@ -78,13 +78,7 @@ function vayu_render_server_side_css() {
 		$style .= $css;
 		$style .= "\n" . '</style>' . "\n";
 
-		echo wp_kses( $style, array(
-			'style' => true,
-			'div' => array(
-				'id' => true,
-				'class' => true
-			 ),
-		  ));
+		echo $style;
 	   }
 
 }
