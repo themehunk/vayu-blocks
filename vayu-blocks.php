@@ -4,7 +4,7 @@
  * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
  * Requires at least: 5.9
  * Requires PHP:      7.0
- * Version:           1.0.4
+ * Version:           1.0.3
  * Author:            ThemeHunk
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ class Vayu_Block_Plugin {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.2';
+	const VERSION = '1.0.3';
 
 	/**
 	 * Initialize the plugin.
@@ -49,11 +49,17 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/advance-button/advance-button.php';
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
-        include_once 'src/plugins/dashboard/toggle-switch.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
+
+        // Set default values for toggle switch options
+        add_option( 'container_value', 1 ); // Turn on by default
+        add_option( 'button_value', 1 ); // Turn on by default
+        add_option( 'wooproduct_value', 1 ); // Turn on by default
+        add_option( 'heading_value', 1 ); // Turn on by default
+        add_option( 'spacer_value', 1 ); // Turn on by default
 
     }
 
