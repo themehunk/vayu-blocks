@@ -49,6 +49,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/advance-button/advance-button.php';
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
+        require_once 'vayu-sites/vayu-sites.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -191,7 +192,28 @@ class Vayu_Block_Plugin {
             'vayu-blocks&path=blocks',
             array( $this, 'vayu_plugin_page_callback' )
         );
+
+
+        add_submenu_page(
+            'vayu-blocks',
+            'Vayu Sites',
+            'Vayu Sites',
+            'manage_options',
+            'vayu-sites',
+            array( $this, 'vayu_blocks_sites_callback' )
+        );
+
     }
+
+
+    public function vayu_blocks_sites_callback() {
+        ?>
+        <div class="themehunk-sites-menu-page-wrapper">
+        <div id="root">hello</div>
+        </div>
+        <?php
+    }
+    
     
     
     public function vayu_plugin_page_callback() {
