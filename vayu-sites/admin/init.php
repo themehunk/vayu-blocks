@@ -116,10 +116,10 @@ if ( ! class_exists( 'VAYU_BLOCK_SITES_BUILDER_MENU' ) ) {
 				return;
 			}
 
-			wp_enqueue_style( 'ai-site-builder-admin', VAYU_BLOCKS_SITES_URL . 'admin/assets/css/admin.css', 1.0, 'true' );
-            wp_enqueue_script( 'ai-site-builder-block-admin', VAYU_BLOCKS_SITES_URL . 'app/build/index.js', array( 'wp-element','wp-components', 'wp-i18n','wp-api-fetch','wp-url' ), '1.0', true );
+			wp_enqueue_style( 'vayu-blocks-sites-admin', VAYU_BLOCKS_SITES_URL . 'admin/assets/css/admin.css', 1.0, 'true' );
+            wp_enqueue_script( 'vayu-blocks-sites-block-admin', VAYU_BLOCKS_SITES_URL . 'app/build/index.js', array( 'wp-element','wp-components', 'wp-i18n','wp-api-fetch','wp-url' ), '1.0', true );
            
-            wp_localize_script( 'ai-site-builder-block-admin', 'AISB',
+            wp_localize_script( 'vayu-blocks-sites-block-admin', 'AISB',
             array( 
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
                 'baseurl' => site_url( '/' ),
@@ -134,31 +134,3 @@ if ( ! class_exists( 'VAYU_BLOCK_SITES_BUILDER_MENU' ) ) {
 
     new VAYU_BLOCK_SITES_BUILDER_MENU;
 }
-
-
-function ai_site_builder_active_plugin(){
-    $url =  'https://wpzita.com/wp-json/wp/v2/shop-site';
-    $args_for_get = array(
-        'stream' => true,
-        'website'=>home_url().'/?aisb_active',
-        'active'=>date('Y-m-d g:i:s'),
-        'deactive'=>'',
-    );
-    $url = add_query_arg( $args_for_get, esc_url_raw( $url ) );
-     $response = wp_remote_get( esc_url_raw( $url ),array( 'timeout' => 120) );
-
-    }
-
-    function ai_site_builder_dactive_plugin(){
-        $url =  'https://wpzita.com/wp-json/wp/v2/shop-site';
-        $args_for_get = array(
-            'stream' => false,
-            'website'=>home_url().'/?aisb_deactive',
-            'active'=>date('Y-m-d g:i:s'),
-            'deactive'=>'',
-        );
-        $url = add_query_arg( $args_for_get, esc_url_raw( $url ) );
-         $response = wp_remote_get( esc_url_raw( $url ),array( 'timeout' => 120) );
-    
-        }
-    

@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) or exit;
  *
  * @since  1.0.0
  */
-class AI_Site_Builder_Options_Import {
+class Vayu_Blocks_Sites_Options_Import {
 
 	/**
 	 * Instance of Themehunk_Options_Importer
@@ -233,7 +233,7 @@ class AI_Site_Builder_Options_Import {
 
 				if ( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
 
-					$image = (object) AI_Site_Builder_Helper::_sideload_image( $cat['thumbnail_src'] );
+					$image = (object) VAYU_BLOCKS_SITES_HELPER::_sideload_image( $cat['thumbnail_src'] );
 
 					if ( ! is_wp_error( $image ) ) {
 
@@ -260,7 +260,7 @@ class AI_Site_Builder_Options_Import {
 	 */
 	private function insert_logo( $image_url = '' ) {
 
-		$data = (object) AI_Site_Builder_Helper::_sideload_image( $image_url );
+		$data = (object) VAYU_BLOCKS_SITES_HELPER::_sideload_image( $image_url );
 
 		if ( ! is_wp_error( $data ) ) {
 

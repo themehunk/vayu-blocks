@@ -7,21 +7,21 @@
 
 defined( 'ABSPATH' ) or exit;
 
-class AI_Site_Builder_Library_WXR_Importer {
+class Vayu_Blocks_Sites_Library_WXR_Importer {
 
 	/**
-	 * Instance of AI_Site_Builder_Library_WXR_Importer
+	 * Instance of Vayu_Blocks_Sites_Library_WXR_Importer
 	 *
 	 * @since  1.0.0
-	 * @var AI_Site_Builder_Library_WXR_Importer
+	 * @var Vayu_Blocks_Sites_Library_WXR_Importer
 	 */
 	private static $_instance = null;
 
 	/**
-	 * Instantiate AI_Site_Builder_Library_WXR_Importer
+	 * Instantiate Vayu_Blocks_Sites_Library_WXR_Importer
 	 *
 	 * @since  1.0.0
-	 * @return (Object) AI_Site_Builder_Library_WXR_Importer.
+	 * @return (Object) Vayu_Blocks_Sites_Library_WXR_Importer.
 	 */
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
@@ -61,7 +61,7 @@ class AI_Site_Builder_Library_WXR_Importer {
 		}
 
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
-		add_action( 'wp_ajax_ai-site-builder-wxr-import', array( $this, 'xml_data_import' ) );
+		add_action( 'wp_ajax_vayu-blocks-sites-wxr-import', array( $this, 'xml_data_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
 	}
 
@@ -75,7 +75,7 @@ class AI_Site_Builder_Library_WXR_Importer {
 		if ( wp_doing_ajax() ) {
 
 			// Verify Nonce.
-			check_ajax_referer( 'ai-site-builder', '_ajax_nonce' );
+			check_ajax_referer( 'vayu-blocks-sites', '_ajax_nonce' );
 
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_send_json_error();
@@ -191,8 +191,8 @@ class AI_Site_Builder_Library_WXR_Importer {
 	public function get_xml_data( $path ) {
 
 		$args = array(
-			'action'  => 'ai-site-builder-wxr-import',
-			'_ajax_nonce' => wp_create_nonce( 'ai-site-builder' ),
+			'action'  => 'vayu-blocks-sites-wxr-import',
+			'_ajax_nonce' => wp_create_nonce( 'vayu-blocks-sites' ),
 			'id'      => '1',
 			'xml_url' => $path,
 		);
@@ -273,7 +273,7 @@ class AI_Site_Builder_Library_WXR_Importer {
 	 */
 	public function get_importer() {
 		$options  = apply_filters(
-			'ai_site_builder_xml_import_options', array(
+			'vayu_blocks_sites_xml_import_options', array(
 				'fetch_attachments' => true,
 				'default_author'    => get_current_user_id(),
 			)
@@ -437,4 +437,4 @@ public function elementor_competibilty() {
 }
 
 
-AI_Site_Builder_Library_WXR_Importer::instance();
+Vayu_Blocks_Sites_Library_WXR_Importer::instance();

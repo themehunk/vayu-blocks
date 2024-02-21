@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class AISB_APP{
+class VAYU_BLOCKS_SITES_APP{
 
 	/**
 	 * Constructor
@@ -14,12 +14,12 @@ class AISB_APP{
 	public function __construct() {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 
-    add_action( 'wp_ajax_ai_site_builder_ajax_handler_data', array( $this, 'import_data') );
-    add_action( 'wp_ajax_ai_site_builder_ajax_import_xml', array( $this, 'import_xml') );	
-    add_action( 'wp_ajax_ai_site_builder_ajax_cutomizer', array( $this, 'init_cutomizer') );
-    add_action( 'wp_ajax_ai_site_builder_aimport_options', array( $this, 'init_options') );
-    add_action( 'wp_ajax_ai_site_builder_import_widgets', array( $this, 'init_widgets' ) );
-    add_action( 'wp_ajax_ai_site_builder_core', array( $this, 'init_site_url' ) );
+    add_action( 'wp_ajax_vayu_blocks_sites_ajax_handler_data', array( $this, 'import_data') );
+    add_action( 'wp_ajax_vayu_blocks_sites_ajax_import_xml', array( $this, 'import_xml') );	
+    add_action( 'wp_ajax_vayu_blocks_sites_ajax_cutomizer', array( $this, 'init_cutomizer') );
+    add_action( 'wp_ajax_vayu_blocks_sites_aimport_options', array( $this, 'init_options') );
+    add_action( 'wp_ajax_vayu_blocks_sites_import_widgets', array( $this, 'init_widgets' ) );
+    add_action( 'wp_ajax_vayu_blocks_sites_core', array( $this, 'init_site_url' ) );
 
   }
 
@@ -58,7 +58,7 @@ class AISB_APP{
         $request = $request->get_params();
         $params  = $request['params'];
          
-        new AI_SITE_BUILDER_IMPORT($params,$atrs['login_user_id']);
+        new VAYU_BLOCKS_SITES_IMPORT($params,$atrs['login_user_id']);
       
         return json_encode(site_url());
   }
@@ -70,7 +70,7 @@ class AISB_APP{
           if(isset( $_POST['data'] )){
 
             $return = sanitize_url(  json_decode( wp_unslash( $_POST['data'] ))->data );
-            AI_SITE_BUILDER_IMPORT::instance()->get_import_data($return);
+            VAYU_BLOCKS_SITES_IMPORT::instance()->get_import_data($return);
             wp_send_json_success( $return );
           } else{
             wp_send_json_success( array('status'=>false) );
@@ -84,7 +84,7 @@ class AISB_APP{
 
           $return = sanitize_url(  json_decode( wp_unslash( $_POST['data'] ))->data );
 
-        AI_SITE_BUILDER_IMPORT::instance()->import_xml_data($return);
+        VAYU_BLOCKS_SITES_IMPORT::instance()->import_xml_data($return);
         wp_send_json_success( $return );
       } else{
         wp_send_json_success( array('status'=>false) );
@@ -98,7 +98,7 @@ class AISB_APP{
 
             $data = wp_unslash( $_POST['data']);
             $data = json_decode($data)->data;
-          AI_SITE_BUILDER_IMPORT::instance()->import_customizer($data);
+          VAYU_BLOCKS_SITES_IMPORT::instance()->import_customizer($data);
       }
 
  }
@@ -108,7 +108,7 @@ class AISB_APP{
     if(isset( $_POST['data'] )){
           $data = wp_unslash( $_POST['data']);
           $data = json_decode($data)->data;
-        AI_SITE_BUILDER_IMPORT::instance()->import_options($data);
+        VAYU_BLOCKS_SITES_IMPORT::instance()->import_options($data);
         exit();
     }
   }
@@ -119,7 +119,7 @@ class AISB_APP{
 
             $data = stripslashes( $_POST['data']);
               $data = json_decode($data)->data;
-          AI_SITE_BUILDER_IMPORT::instance()->import_widgets($data);
+          VAYU_BLOCKS_SITES_IMPORT::instance()->import_widgets($data);
           exit();
       }
  }
@@ -130,7 +130,7 @@ class AISB_APP{
             $data = stripslashes( $_POST['data']);
 
             $data = json_decode($data)->data;
-            $core = new AI_SITE_BUILDER_CORE();
+            $core = new VAYU_BLOCKS_SITES_BUILDER_CORE();
             $core->core_data($data);
           }
 
@@ -138,4 +138,4 @@ class AISB_APP{
 
 }
 
-$obj = New AISB_APP();
+$obj = New VAYU_BLOCKS_SITES_APP();
