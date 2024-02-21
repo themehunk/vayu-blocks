@@ -37,7 +37,7 @@ const getEditUrl = async () =>{
     const response = await fetch(AISB.ajaxurl, {
       method: 'POST',
       body: new URLSearchParams({
-          action: 'ai_site_builder_core', // Specify the WordPress AJAX action
+          action: 'vayu_blocks_sites_core', // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
       }),
   })

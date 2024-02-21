@@ -4,12 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 	
 // Exit if accessed directly.
-if ( ! class_exists( 'AI_SITE_BUILDER_CORE' ) ) {
+if ( ! class_exists( 'VAYU_BLOCKS_SITES_BUILDER_CORE' ) ) {
 
     /**
 	 * AI SITE builder CORE Menu Settings
 	 */
-    class AI_SITE_BUILDER_CORE {
+    class VAYU_BLOCKS_SITES_BUILDER_CORE {
 
         public function core_data($data){
                         $url = '';

@@ -1,9 +1,9 @@
 <?php defined( 'ABSPATH' ) or exit;
 
 
-if ( ! class_exists( 'AI_Site_Builder_Helper' ) ) :
+if ( ! class_exists( 'VAYU_BLOCKS_SITES_HELPER' ) ) :
 
-	class AI_Site_Builder_Helper {
+	class VAYU_BLOCKS_SITES_HELPER {
 		/**
 		 * Instance of themehunk_site_library
 		 *
@@ -261,6 +261,6 @@ static public function _import_settings( $options = array() ) {
 	}
 }
 
-		AI_Site_Builder_Helper::get_instance();
+		VAYU_BLOCKS_SITES_HELPER::get_instance();
 
 endif;

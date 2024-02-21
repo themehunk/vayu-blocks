@@ -1,10 +1,10 @@
 <?php defined( 'ABSPATH' ) or exit;
 
 // Exit if accessed directly.
-if ( ! class_exists( 'AI_SITE_BUILDER_ADMIN_LOAD' ) ) {
+if ( ! class_exists( 'VAYU_BLOCKS_SITES_ADMIN_LOAD' ) ) {
 
 
-    class AI_SITE_BUILDER_ADMIN_LOAD {
+    class VAYU_BLOCKS_SITES_ADMIN_LOAD {
 
 		private static $_instance = null;
 			/**
@@ -38,7 +38,7 @@ if ( ! class_exists( 'AI_SITE_BUILDER_ADMIN_LOAD' ) ) {
 
     }
 
-	AI_SITE_BUILDER_ADMIN_LOAD::get_instance();
+	VAYU_BLOCKS_SITES_ADMIN_LOAD::get_instance();
 
 }
 

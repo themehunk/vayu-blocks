@@ -1,10 +1,10 @@
 <?php defined( 'ABSPATH' ) or exit;
  // Exit if accessed directly.
 
-if ( ! class_exists( 'AI_SITE_BUILDER_IMPORT' ) ) {
+if ( ! class_exists( 'VAYU_BLOCKS_SITES_IMPORT' ) ) {
 
 
-    class AI_SITE_BUILDER_IMPORT {
+    class VAYU_BLOCKS_SITES_IMPORT {
 
 
 		private static $_instance = null;
@@ -90,7 +90,7 @@ if ( ! class_exists( 'AI_SITE_BUILDER_IMPORT' ) ) {
 			//	Themehunk_Importer_Log::add( 'Importing from XML ' . $xml_url );
 
 				// Download XML file.
-				$xml_path = AI_Site_Builder_Helper::download_file( $xml_url );
+				$xml_path = VAYU_BLOCKS_SITES_HELPER::download_file( $xml_url );
 				if ( $xml_path['success'] ) {
 
 					if ( isset( $xml_path['data']['file'] ) ) {
@@ -120,7 +120,7 @@ if ( ! class_exists( 'AI_SITE_BUILDER_IMPORT' ) ) {
 			if ( isset( $customizer_data ) ) {
 				//Themehunk_Importer_Log::add( 'Imported Customizer Settings ' . json_encode( $customizer_data ) );
 
-				$return = AI_Site_Builder_Helper::import( $customizer_data );
+				$return = VAYU_BLOCKS_SITES_HELPER::import( $customizer_data );
 				wp_send_json_success( array('success'=>$return) );
 
 			} else {

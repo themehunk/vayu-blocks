@@ -21939,7 +21939,7 @@ function ImportAPI(props) {
     const response = await fetch(ajaxUrl, {
       method: 'POST',
       body: new URLSearchParams({
-        action: 'ai_site_builder_ajax_handler_data',
+        action: 'vayu_blocks_sites_ajax_handler_data',
         // Specify the WordPress AJAX action
         data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
       })
@@ -21989,7 +21989,7 @@ function ImportAPI(props) {
       const response = await fetch(ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
-          action: 'ai_site_builder_ajax_import_xml',
+          action: 'vayu_blocks_sites_ajax_import_xml',
           // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
         })
@@ -22017,7 +22017,7 @@ function ImportAPI(props) {
       const response = await fetch(ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
-          action: 'ai_site_builder_ajax_cutomizer',
+          action: 'vayu_blocks_sites_ajax_cutomizer',
           // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
         })
@@ -22048,7 +22048,7 @@ function ImportAPI(props) {
       await fetch(ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
-          action: 'ai_site_builder_aimport_options',
+          action: 'vayu_blocks_sites_aimport_options',
           // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
         })
@@ -22083,7 +22083,7 @@ function ImportAPI(props) {
       await fetch(ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
-          action: 'ai_site_builder_import_widgets',
+          action: 'vayu_blocks_sites_import_widgets',
           // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
         })
@@ -22732,7 +22732,7 @@ function success() {
       const response = await fetch(AISB.ajaxurl, {
         method: 'POST',
         body: new URLSearchParams({
-          action: 'ai_site_builder_core',
+          action: 'vayu_blocks_sites_core',
           // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend) // Convert the data to JSON and send it
         })
@@ -57968,7 +57968,7 @@ module.exports = /*#__PURE__*/JSON.parse('[{"woocommerce":"woocommerce/woocommer
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('[{"id":"273","title":"Vayu Fashion","free_paid":"free","slug":"vayu-fashion","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-fashion-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-fashion/","api_url":"https://wpthemes.themehunk.com/vayu-fashion/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]}]');
+module.exports = /*#__PURE__*/JSON.parse('[{"id":"273","title":"Vayu Fashion","free_paid":"free","slug":"vayu-fashion","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-fashion-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-fashion/","api_url":"https://wpthemes.themehunk.com/vayu-fashion/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]}]');
 
 /***/ }),
 

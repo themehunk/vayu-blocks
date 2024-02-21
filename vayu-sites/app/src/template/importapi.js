@@ -75,7 +75,7 @@ export default function ImportAPI(props) {
            const response = await fetch(ajaxUrl, {
             method: 'POST',
             body: new URLSearchParams({
-                action: 'ai_site_builder_ajax_handler_data', // Specify the WordPress AJAX action
+                action: 'vayu_blocks_sites_ajax_handler_data', // Specify the WordPress AJAX action
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         });
@@ -134,7 +134,7 @@ const importXml = async (xml_url) =>{
           const response = await fetch(ajaxUrl, {
             method: 'POST',
             body: new URLSearchParams({
-                action: 'ai_site_builder_ajax_import_xml', // Specify the WordPress AJAX action
+                action: 'vayu_blocks_sites_ajax_import_xml', // Specify the WordPress AJAX action
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         }).then(response => response.json())
@@ -165,7 +165,7 @@ const importCustomizer = async () =>{
       const response = await fetch(ajaxUrl, {
         method: 'POST',
         body: new URLSearchParams({
-            action: 'ai_site_builder_ajax_cutomizer', // Specify the WordPress AJAX action
+            action: 'vayu_blocks_sites_ajax_cutomizer', // Specify the WordPress AJAX action
             data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
         }),
     })
@@ -202,7 +202,7 @@ const importOptions = async () =>{
    await fetch(ajaxUrl, {
       method: 'POST',
       body: new URLSearchParams({
-          action: 'ai_site_builder_aimport_options', // Specify the WordPress AJAX action
+          action: 'vayu_blocks_sites_aimport_options', // Specify the WordPress AJAX action
           data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
       }),
   }).then(response => response.json())
@@ -240,7 +240,7 @@ const importOptions = async () =>{
          await fetch(ajaxUrl, {
             method: 'POST',
             body: new URLSearchParams({
-                action: 'ai_site_builder_import_widgets', // Specify the WordPress AJAX action
+                action: 'vayu_blocks_sites_import_widgets', // Specify the WordPress AJAX action
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         }).then(response => response.json())

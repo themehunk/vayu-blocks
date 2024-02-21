@@ -16,9 +16,6 @@ define('AI_SITE_BUILDER_PLUGIN', 'ai-site-builder');
 
 define('VAYU_BLOCKS_SITES_URL', plugin_dir_url(__FILE__));  //AI_SITE_BUILDER_PLUGIN_URL
 
-// if ( ! defined( 'AI_SITE_BUILDER_BASE_URL' ) ) {
-// 	define( 'AI_SITE_BUILDER_DIR_PATH', plugin_dir_path(__FILE__ ) ); //VAYU_BLOCKS_DIR_PATH
-// }
 
 if ( ! defined( 'VAYU_BLOCKS_DIR_SITES' ) ) {
 	define( 'VAYU_BLOCKS_DIR_SITES', VAYU_BLOCKS_DIR_PATH.'vayu-sites/' ); 

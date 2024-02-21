@@ -8,12 +8,12 @@
 
 defined( 'ABSPATH' ) or exit;
 
-if ( ! class_exists( 'AI_Site_Builder_Importer_Log' ) ) :
+if ( ! class_exists( 'Vayu_Blocks_Sites_Importer_Log' ) ) :
 
 	/**
 	 * Themehunk Importer
 	 */
-	class AI_Site_Builder_Importer_Log {
+	class Vayu_Blocks_Sites_Importer_Log {
 
 		/**
 		 * Instance
@@ -118,29 +118,29 @@ if ( ! class_exists( 'AI_Site_Builder_Importer_Log' ) ) :
 		 */
 		function start( $data = array(), $demo_api_uri = '' ) {
 
-			AI_Site_Builder_Importer_Log::add( 'Started Import Process' );
+			Vayu_Blocks_Sites_Importer_Log::add( 'Started Import Process' );
 
-			AI_Site_Builder_Importer_Log::add( '# System Details: ' );
-			AI_Site_Builder_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
-			AI_Site_Builder_Importer_Log::add( "Operating System \t: " . self::get_os() );
-			AI_Site_Builder_Importer_Log::add( "Software \t\t: " . self::get_software() );
-			AI_Site_Builder_Importer_Log::add( "MySQL version \t\t: " . self::get_mysql_version() );
-			AI_Site_Builder_Importer_Log::add( "XML Reader \t\t: " . self::get_xmlreader_status() );
-			AI_Site_Builder_Importer_Log::add( "PHP Version \t\t: " . self::get_php_version() );
-			AI_Site_Builder_Importer_Log::add( "PHP Max Input Vars \t: " . self::get_php_max_input_vars() );
-			AI_Site_Builder_Importer_Log::add( "PHP Max Post Size \t: " . self::get_php_max_post_size() );
-			AI_Site_Builder_Importer_Log::add( "PHP Extension GD \t: " . self::get_php_extension_gd() );
-			AI_Site_Builder_Importer_Log::add( "PHP Max Execution Time \t: " . self::get_max_execution_time() );
-			AI_Site_Builder_Importer_Log::add( "Max Upload Size \t: " . size_format( wp_max_upload_size() ) );
-			AI_Site_Builder_Importer_Log::add( "Memory Limit \t\t: " . self::get_memory_limit() );
-			AI_Site_Builder_Importer_Log::add( "Timezone \t\t: " . self::get_timezone() );
-			AI_Site_Builder_Importer_Log::add( PHP_EOL . '-----' . PHP_EOL );
-			AI_Site_Builder_Importer_Log::add( 'Importing Started! - ' . self::current_time() );
+			Vayu_Blocks_Sites_Importer_Log::add( '# System Details: ' );
+			Vayu_Blocks_Sites_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
+			Vayu_Blocks_Sites_Importer_Log::add( "Operating System \t: " . self::get_os() );
+			Vayu_Blocks_Sites_Importer_Log::add( "Software \t\t: " . self::get_software() );
+			Vayu_Blocks_Sites_Importer_Log::add( "MySQL version \t\t: " . self::get_mysql_version() );
+			Vayu_Blocks_Sites_Importer_Log::add( "XML Reader \t\t: " . self::get_xmlreader_status() );
+			Vayu_Blocks_Sites_Importer_Log::add( "PHP Version \t\t: " . self::get_php_version() );
+			Vayu_Blocks_Sites_Importer_Log::add( "PHP Max Input Vars \t: " . self::get_php_max_input_vars() );
+			Vayu_Blocks_Sites_Importer_Log::add( "PHP Max Post Size \t: " . self::get_php_max_post_size() );
+			Vayu_Blocks_Sites_Importer_Log::add( "PHP Extension GD \t: " . self::get_php_extension_gd() );
+			Vayu_Blocks_Sites_Importer_Log::add( "PHP Max Execution Time \t: " . self::get_max_execution_time() );
+			Vayu_Blocks_Sites_Importer_Log::add( "Max Upload Size \t: " . size_format( wp_max_upload_size() ) );
+			Vayu_Blocks_Sites_Importer_Log::add( "Memory Limit \t\t: " . self::get_memory_limit() );
+			Vayu_Blocks_Sites_Importer_Log::add( "Timezone \t\t: " . self::get_timezone() );
+			Vayu_Blocks_Sites_Importer_Log::add( PHP_EOL . '-----' . PHP_EOL );
+			Vayu_Blocks_Sites_Importer_Log::add( 'Importing Started! - ' . self::current_time() );
 
-			AI_Site_Builder_Importer_Log::add( '---' . PHP_EOL );
-			AI_Site_Builder_Importer_Log::add( 'WHY IMPORT PROCESS CAN FAIL? READ THIS - ' );
-			AI_Site_Builder_Importer_Log::add( 'https://themehunk.com/' . PHP_EOL );
-			AI_Site_Builder_Importer_Log::add( '---' . PHP_EOL );
+			Vayu_Blocks_Sites_Importer_Log::add( '---' . PHP_EOL );
+			Vayu_Blocks_Sites_Importer_Log::add( 'WHY IMPORT PROCESS CAN FAIL? READ THIS - ' );
+			Vayu_Blocks_Sites_Importer_Log::add( 'https://themehunk.com/' . PHP_EOL );
+			Vayu_Blocks_Sites_Importer_Log::add( '---' . PHP_EOL );
 
 		}
 
@@ -408,6 +408,6 @@ if ( ! class_exists( 'AI_Site_Builder_Importer_Log' ) ) :
 	/**
 	 * Kicking this off by calling 'get_instance()' method
 	 */
-	AI_Site_Builder_Importer_Log::get_instance();
+	Vayu_Blocks_Sites_Importer_Log::get_instance();
 
 endif;
