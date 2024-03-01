@@ -49,7 +49,8 @@ import { Start, Center , End, Strech,
 
 const InsSettings = ({
     attributes,
-    setAttributes
+    setAttributes,
+	globalcontainerWidth
 }) => {
          const getView = useSelect( select => {
 
@@ -86,7 +87,7 @@ const getBoxedcontentWidth = () => {
 	  case 'Mobile':
 		return attributes.boxedcontentWidthMobile !== undefined ? attributes.boxedcontentWidthMobile : 100; // Default value for mobile view
 	  default:
-		return undefined;
+		return globalcontainerWidth;
 	}
   };
   
@@ -1530,7 +1531,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 	
 	const [elementGapUnit, setelementGapUnit] = useState('px');
 	const maxelementGapUnit = elementGapUnit === 'px' ? 1500 : elementGapUnit === 'em' ? 50 : elementGapUnit === '%' ? 100:'';
-	
+
 	return (
         <Fragment>
         <InspectorControls>
