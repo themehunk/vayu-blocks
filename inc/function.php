@@ -145,3 +145,61 @@ function vayu_blocks_save_toggle_switch_callback($request) {
         'message' => __('Toggle switch value saved successfully','vayu-blocks'),
     ));
 }
+
+// ************* Rest API of Block Settings ************* //
+
+add_action('rest_api_init', function () {
+    
+    // Endpoint to save input values
+    register_rest_route('vayu-blocks-sett/v1', '/save-input-values', array(
+        'methods' => 'POST',
+        'callback' => 'save_input_values_callback',
+    ));
+
+    // Endpoint to retrieve input values
+    register_rest_route('vayu-blocks-sett/v1', '/get-input-values', array(
+        'methods' => 'GET',
+        'callback' => 'get_input_values_callback',
+    ));
+});
+
+// Callback function to save input values
+function save_input_values_callback($request) {
+    $data = $request->get_json_params(); // Get JSON data sent in the request
+
+    // Process and save data to the database
+    // Example:
+    $container_width = isset($data['containerWidth']) ? absint($data['containerWidth']) : 0;
+    $container_gap = isset($data['containerGap']) ? absint($data['containerGap']) : 0;
+    $padding = isset($data['padding']) ? absint($data['padding']) : 0;
+    $button_color = isset($data['buttonColor']) ? sanitize_text_field($data['buttonColor']) : '';
+
+    update_option('container_width', $container_width);
+    update_option('container_gap', $container_gap);
+    update_option('padding', $padding);
+    update_option('button_color', $button_color);
+
+    return rest_ensure_response(array(
+        'success' => true,
+        'message' => 'Input values saved successfully',
+    ));
+}
+
+// Callback function to retrieve input values
+function get_input_values_callback($request) {
+    // Retrieve data from the database
+    // Example:
+    $container_width = absint(get_option('container_width'));
+    $container_gap = absint(get_option('container_gap'));
+    $padding = absint(get_option('padding'));
+    $button_color = sanitize_text_field(get_option('button_color'));
+
+    // Prepare and return data
+    return rest_ensure_response(array(
+        'containerWidth' => $container_width,
+        'containerGap' => $container_gap,
+        'padding' => $padding,
+        'buttonColor' => $button_color,
+    ));
+}
+

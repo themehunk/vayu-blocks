@@ -5,6 +5,8 @@ import { SiWoo } from "react-icons/si";
 import { __ } from '@wordpress/i18n';
 import { IoPeopleSharp,IoSparklesSharp,IoNewspaperSharp } from "react-icons/io5";
 import { applyFilters } from '@wordpress/hooks';
+import { BiCertification, BiCoinStack } from "react-icons/bi";
+import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
 
 
 function ChildComponent(props) {
@@ -32,6 +34,13 @@ const ToggleSwitch = ({ initialValue, onChange }) => {
 };
 
 function MyPluginContent(){
+
+    const [navTab, setNavTab] = useState(1);
+
+    const NavTabClick = (tabNumber) => {
+        setNavTab(tabNumber);
+  };
+
 
     const [activeTab, setActiveTab] = useState('welcome');
     const handleTabClick = (tab) => {
@@ -109,6 +118,125 @@ function MyPluginContent(){
             }));
             saveToggleSwitchValue(key, newValue);
         };
+    
+        function getDescription(key) {
+            switch (key) {
+                case 'container':
+                    return {
+                        icon: <RxGroup />,
+                        description: __('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+                case 'button':
+                    return {
+                        icon: <RxButton />,
+                        description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+                case 'wooproduct':
+                    return {
+                        icon: <RxButton />,
+                        description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+                case 'heading':
+                    return {
+                        icon: <RxButton />,
+                        description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+                case 'spacer':
+                    return {
+                        icon: <RxButton />,
+                        description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+
+                    case 'pointer':
+                    return {
+                        icon: <RxButton />,
+                        description: __('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+
+                    case 'productfilter':
+                    return {
+                        icon: <RxButton />,
+                        description: __('Productfilter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#link1',
+                        link2: '#link2'
+                    };
+                default:
+                    return '';
+            }
+        }
+
+    const [containerWidth, setContainerWidth] = useState('');
+    const [containerGap, setContainerGap] = useState('');
+    const [padding, setPadding] = useState('');
+    const [buttonColor, setButtonColor] = useState(false); // Default value for checkbox
+
+    // Function to save input values
+    const saveInputValues = async () => {
+        const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
+        try {
+            const response = await fetch(`${Url}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    containerWidth: containerWidth,
+                    containerGap: containerGap,
+                    padding: padding,
+                    buttonColor: buttonColor,
+                }),
+            });
+            if (!response.ok) {
+                throw new Error('Failed to save input values');
+            }
+            console.log('Input values saved successfully');
+        } catch (error) {
+            console.error('Error saving input values:', error);
+        }
+    };
+
+    // Function to retrieve input values
+    const getInputValues = async () => {
+        const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/get-input-values`;
+        try {
+            const response = await fetch(`${Url}`);
+            if (!response.ok) {
+                throw new Error('Failed to retrieve input values');
+            }
+            const data = await response.json();
+            // Update state with retrieved input values
+            setContainerWidth(data.containerWidth);
+            setContainerGap(data.containerGap);
+            setPadding(data.padding);
+            setButtonColor(data.buttonColor);
+        } catch (error) {
+            console.error('Error retrieving input values:', error);
+        }
+    };
+
+    // Fetch initial input values when component mounts
+    useEffect(() => {
+        getInputValues();
+    }, []);
+
+    // Function to handle checkbox change
+    const handleCheckboxChange = (e) => {
+        setButtonColor(e.target.checked);
+    };
+
+        
 
 
     return (
@@ -132,7 +260,7 @@ function MyPluginContent(){
                     className={`th-menu-item ${activeTab === 'blocks' ? 'active' : ''}`}
                     onClick={() => handleTabClick('blocks')}
                 >
-                   {__('Blocks', 'vayu-blocks')} 
+                   {__('Settings', 'vayu-blocks')} 
                 </div>
                 </div>
                 <div className="th-last-wrap"><span>{__('version 1.0', 'vayu-blocks')}</span></div>
@@ -154,9 +282,14 @@ function MyPluginContent(){
                <div className={`sw-box ${key}`}>
                     <div className='th-sw-right'>
                         <div key={key}>
-                        <label className='block-label'>{key}</label>
+                        <label className='block-label'>{getDescription(key).icon}{key}</label>
                         <ToggleSwitch initialValue={value} onChange={newValue => handleToggleSwitchChange(key, newValue)} />
                         </div>
+                    </div>
+                    <div className='th-sw-bottom'>
+                        <p>{getDescription(key).description}</p>
+                        <a href={getDescription(key).link1}>{__( 'View', 'vayu-blocks' )}</a>
+                        <a href={getDescription(key).link2}>{__( 'Doc', 'vayu-blocks' )}</a>
                     </div>
 
                </div>
@@ -210,68 +343,86 @@ function MyPluginContent(){
                 </div>
             )}
             {activeTab === 'blocks' && (
-                                <div className="th-content-wrap th-block">
-                                <div className="th-main">
-                                    <div className="th-main-wrap">
-                                        <div className="th-block-wrap">
-                                            <div className="th-block-item">
-                                                <div className="th-block-item-content">
-                                                    <div className="th-block-icon"><RxGroup></RxGroup></div>
-                                                    <div className="th-block-desc">
-                                                    <h3> {__('Container', 'vayu-blocks')} </h3>
-                                                    <p>{__('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks')}</p>
-                                                    <a className="th-block-view" href="#" target='_blank'>{__('View', 'vayu-blocks')}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="th-block-item">
-                                                <div className="th-block-item-content">
-                                                    <div className="th-block-icon"><RxHeading></RxHeading></div>
-                            
-                                                    <div className="th-block-desc">
-                                                    <h3> {__('Heading', 'vayu-blocks')} </h3>
-                                                    <p>{__('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks')}</p>
-                                                    <a className="th-block-view" href="#" target='_blank'>{__('View', 'vayu-blocks')}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="th-block-item">
-                                                <div className="th-block-item-content">
-                                                    <div className="th-block-icon"><AiOutlineArrowsAlt></AiOutlineArrowsAlt></div>
-                                                    
-                                                    <div className="th-block-desc">
-                                                    <h3> {__('Spacer', 'vayu-blocks')} </h3>
-                                                    <p>{__('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks')}</p>
-                                                    <a className="th-block-view" href="#" target='_blank'>{__('View', 'vayu-blocks')}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="th-block-item">
-                                                <div className="th-block-item-content">
-                                                    <div className="th-block-icon"><RxButton></RxButton></div>
-                                                    
-                                                    <div className="th-block-desc">
-                                                    <h3> {__('Button', 'vayu-blocks')} </h3>
-                                                    <p>{__('Easily design attractive buttons with Vayu Blocks’ advanced customizations.', 'vayu-blocks')}</p>
-                                                    <a className="th-block-view" href="#" target='_blank'>{__('View', 'vayu-blocks')}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="th-block-item">
-                                                <div className="th-block-item-content">
-                                                    <div className="th-block-icon"><SiWoo></SiWoo></div>
-                                                    <div className="th-block-desc">
-                                                    <h3> {__('Product', 'vayu-blocks')} </h3>
-                                                    <p>{__('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks')}</p>
-                                                    <a className="th-block-view" href="#" target='_blank'>{__('View', 'vayu-blocks')}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                <div className="th-content-wrap th-block th-settings">
+                                 <div className="th-main">
+      <aside>
+        <nav>
+        <a href="#" className={navTab === 1 ? 'selected' : ''} onClick={() => NavTabClick(1)}><BiCertification />{__('Editor Options','vayu-blocks')}</a>
+        <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a>
+        </nav>
+      </aside>
+      <div className="content-wrapper">
+        {navTab === 1 && (
+           <div>
+            {/* Content for Tab 1 */}
+            <h2 className='wrapper-title'>{__('Editor Options','vayu-blocks')}</h2>
+            <div className='option-wrapper'>
+                <RxWidth /><p>{__('Container Width', 'vayu-blocks')} </p>
+                <input
+                    type='number'
+                    id="maxwidth"
+                    name="maxwidth"
+                    min="1"
+                    max="2100"
+                    value={containerWidth}
+                    onChange={(e) => setContainerWidth(e.target.value)}
+                />
+               <span className='unit'>{__('px','vayu-blocks')}</span>
+            </div>
 
-                                            <ChildComponent />
-                                        </div>
-                                    </div>
-                                </div>
+            <div className='option-wrapper'>
+            <RxPadding /><p>{__('Padding', 'vayu-blocks')}</p>
+                <input
+                    type='number'
+                    id="padding"
+                    name="padding"
+                    min="1"
+                    max="1600"
+                    value={padding}
+                    onChange={(e) => setPadding(e.target.value)}
+                />
+                <span className='unit'>{__('px','vayu-blocks')}</span>
+            </div>
+
+            <div className='option-wrapper'>
+            <RxSpaceBetweenHorizontally /><p>{__('Container Gap', 'vayu-blocks')} </p>
+                <input
+                    type='number'
+                    id="maxwidth"
+                    name="maxwidth"
+                    min="1"
+                    max="2100"
+                    value={containerGap}
+                    onChange={(e) => setContainerGap(e.target.value)}
+                />
+                 <span className='unit'>{__('px','vayu-blocks')}</span>
+            </div>
+
+            <div className='option-wrapper'>
+            <RxButton /><p>{__('Button Color', 'vayu-blocks')}</p>
+                    <input
+                        type="checkbox"
+                        name="buttoncolor"
+                        checked={buttonColor}
+                        onChange={handleCheckboxChange}
+                    />
+            </div>
+    
+        </div>
+        )}
+        {navTab === 2 && (
+          <div>
+            {/* Content for Tab 2 */}
+            <h2>Content for Tab 2</h2>
+            <p>This is the content for Tab 2.</p>
+          </div>
+        )}
+      </div>
+
+      <div className='option-submit'>
+            <button onClick={saveInputValues}>{__('Save', 'vayu-blocks')}</button>
+      </div>
+    </div>
                                
                </div> 
             )}

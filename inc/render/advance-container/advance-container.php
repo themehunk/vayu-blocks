@@ -14,11 +14,12 @@ function vayu_advance_container_style($attr){
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
 		if (isset($attr['boxedcontentWidth'])) {
-			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : '%';
+			$boxedcontentWidthUnit = isset($attr['boxedcontentWidthUnit']) ? $attr['boxedcontentWidthUnit'] : 'px';
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
-            $css .= "max-width:100%;";
+			$container_width = get_option('container_width');
+            $css .= "max-width:{$container_width}px";
         }
         $css .= "}";
 
@@ -74,7 +75,8 @@ function vayu_advance_container_style($attr){
 			padding-left: {$paddingLeft}{$paddingUnit}; 
 		    ";
 		} else {
-			$padding = isset($attr['padding']) ? $attr['padding'] : 10;
+			$globalpadding = get_option('padding'); 
+			$padding = isset($attr['padding']) ? $attr['padding'] : $globalpadding;
 			$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
 			$css .= "padding: {$padding}{$paddingUnit};";
 		}
@@ -253,8 +255,8 @@ function vayu_advance_container_style($attr){
              }
 
 			 //gap
-			
-			 $elementGap = isset($attr['elementGap']) ? $attr['elementGap'] : '10';	
+			 $container_gap = esc_attr(get_option('container_gap'));
+			 $elementGap = isset($attr['elementGap']) ? $attr['elementGap'] : $container_gap;	
 			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
              $css .= "gap: {$elementGap}{$elementGapUnit};";
 		
