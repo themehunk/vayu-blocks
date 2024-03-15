@@ -169,9 +169,9 @@ function save_input_values_callback($request) {
 
     // Process and save data to the database
     // Example:
-    $container_width = isset($data['containerWidth']) ? absint($data['containerWidth']) : 0;
-    $container_gap = isset($data['containerGap']) ? absint($data['containerGap']) : 0;
-    $padding = isset($data['padding']) ? absint($data['padding']) : 0;
+    $container_width = isset($data['containerWidth']) ? absint($data['containerWidth']) : 1250;
+    $container_gap = isset($data['containerGap']) ? absint($data['containerGap']) : 18;
+    $padding = isset($data['padding']) ? absint($data['padding']) : 20;
     $button_color = isset($data['buttonColor']) ? sanitize_text_field($data['buttonColor']) : '';
 
     update_option('container_width', $container_width);
@@ -189,9 +189,9 @@ function save_input_values_callback($request) {
 function get_input_values_callback($request) {
     // Retrieve data from the database
     // Example:
-    $container_width = absint(get_option('container_width'));
-    $container_gap = absint(get_option('container_gap'));
-    $padding = absint(get_option('padding'));
+    $container_width = absint(get_option('container_width',1250));
+    $container_gap = absint(get_option('container_gap',20));
+    $padding = absint(get_option('padding',18));
     $button_color = sanitize_text_field(get_option('button_color'));
 
     // Prepare and return data

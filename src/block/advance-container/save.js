@@ -21,7 +21,7 @@ export default function Save({attributes}){
 	  
 	const blockProps = useBlockProps.save({ 
 		id:attributes.anchor,
-		className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`,
+		className: `th-container-outside-wrapper alignfull th-c${attributes.uniqueID} ${containerClasses}`,
 	});
      
 	const Tag = attributes.containerHTMLTag;

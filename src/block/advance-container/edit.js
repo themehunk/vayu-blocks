@@ -867,7 +867,7 @@ export default function Edit({
 
 			let rootContainerClassName = "";
 			rootContainerClassName = supportsLayout
-				? `th-root-block-container align${attributes.align} th-block-container-${attributes.uniqueID}`
+				? `th-root-block-container alignfull th-block-container-${attributes.uniqueID}`
 				: 'wp-block';
 
 			return (

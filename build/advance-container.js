@@ -1122,7 +1122,7 @@ function Edit({
     return getSettings().supportsLayout || false;
   }, []);
   let rootContainerClassName = "";
-  rootContainerClassName = supportsLayout ? `th-root-block-container align${attributes.align} th-block-container-${attributes.uniqueID}` : 'wp-block';
+  rootContainerClassName = supportsLayout ? `th-root-block-container alignfull th-block-container-${attributes.uniqueID}` : 'wp-block';
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_controls_js__WEBPACK_IMPORTED_MODULE_8__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
@@ -1234,7 +1234,7 @@ function Save({
   });
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
     id: attributes.anchor,
-    className: `th-container-outside-wrapper th-c${attributes.uniqueID} ${containerClasses}`
+    className: `th-container-outside-wrapper alignfull th-c${attributes.uniqueID} ${containerClasses}`
   });
   const Tag = attributes.containerHTMLTag;
   const showShouldOverlay = 'color' === attributes.overlaybackgroundType && attributes.overlaybackgroundColor || 'gradient' === attributes.overlaybackgroundType && attributes.overlaybackgroundGradient || 'color' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundColorHvr || 'gradien' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundGradientHvr || 'image' === attributes.overlaybackgroundType && attributes.overlaybackgroundImage || 'image' === attributes.overlaybackgroundTypeHvr && attributes.overlaybackgroundImageHvr;

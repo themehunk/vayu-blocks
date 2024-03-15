@@ -215,7 +215,6 @@
 
 .toplevel_page_vayu-blocks a.toplevel_page_vayu-blocks img {
   width: 24px;
-  height: 24px;
   padding: 4px 0 !important;
 }
 
@@ -481,12 +480,19 @@ input:checked + .slider:before {
   border: 1px solid #8c8f94;
   padding: 0 9px;
   border-radius: 4px;
+  min-height: 30px;
 }
 
 .option-submit {
   width: 100%;
   text-align: right;
   padding: 0 20px;
+}
+
+.menu-top.toplevel_page_vayu-blocks .wp-menu-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 767px) {
