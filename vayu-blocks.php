@@ -181,7 +181,7 @@ class Vayu_Block_Plugin {
             'vayu-blocks',
             array( $this, 'vayu_plugin_page_callback' ),
             plugins_url( 'vayu-blocks/inc/assets/img/menu-logo.png' ),
-            10 
+            59
         );
     
         add_submenu_page(
