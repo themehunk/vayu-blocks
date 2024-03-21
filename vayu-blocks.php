@@ -121,25 +121,25 @@ class Vayu_Block_Plugin {
             // Register JavaScript file
             wp_register_script(
                 $block['script_handle'],
-                VAYU_BLOCKS_URL . 'build/' . $block['script_handle'] . '.js',
+                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.js',
                 array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                filemtime( VAYU_BLOCKS_PATH . '/build/' . $block['script_handle'] . '.js' )
+                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
             );
 
             // Register editor style
             wp_register_style(
                 $block['editor_style'],
-                VAYU_BLOCKS_URL . 'build/' . $block['script_handle'] . '.css',
+                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
                 array( 'wp-edit-blocks' ),
-                filemtime( VAYU_BLOCKS_PATH . '/build/' . $block['script_handle'] . '.css' )
+                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
             );
 
             // Register front end block style
             wp_register_style(
                 $block['frontend_style'],
-                VAYU_BLOCKS_URL . 'build/style-' . $block['script_handle'] . '.css',
+                VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
                 array(),
-                filemtime( VAYU_BLOCKS_PATH . '/build/style-' . $block['script_handle'] . '.css' )
+                filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
             );
 
             // Localize the script with data

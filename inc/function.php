@@ -17,12 +17,12 @@ add_filter( 'block_categories_all', 'vayu_blocks_categories', 11, 2);
 
 function vayu_blocks_editor_assets(){
 
-    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/registerPlugin.asset.php';
-    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/component-editor.asset.php';
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'public/build/registerPlugin.asset.php';
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'public/build/component-editor.asset.php';
 
 	wp_enqueue_script(
 		'registerPlugin-block',
-		VAYU_BLOCKS_URL . 'build/registerPlugin.js',
+		VAYU_BLOCKS_URL . 'public/build/registerPlugin.js',
 		array_merge(
 			$asset_file['dependencies']
 		),
@@ -40,7 +40,7 @@ function vayu_blocks_editor_assets(){
 
     wp_enqueue_style(
         'component-editor-css',
-        VAYU_BLOCKS_URL . 'build/component-editor.css',
+        VAYU_BLOCKS_URL . 'public/build/component-editor.css',
         array_merge(
 			$asset_file['dependencies']
 		),	'1.0.0'
@@ -55,11 +55,11 @@ add_action( 'enqueue_block_editor_assets', 'vayu_blocks_editor_assets' );
 
 function vayu_admin_react_script() {
 
-    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'build/adminDashboard.asset.php';
+    $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'public/build/adminDashboard.asset.php';
 
     wp_enqueue_script(
 		'adminDashboard-block',
-		VAYU_BLOCKS_URL . 'build/adminDashboard.js',
+		VAYU_BLOCKS_URL . 'public/build/adminDashboard.js',
 		array_merge(
 			$asset_file['dependencies']
 		),
@@ -80,7 +80,7 @@ function vayu_admin_react_script() {
 
     wp_enqueue_style(
         'adminDashboard-style',
-        VAYU_BLOCKS_URL . 'build/adminDashboard-style.css',
+        VAYU_BLOCKS_URL . 'public/build/adminDashboard-style.css',
         '1.0.0'
     );
 
@@ -154,12 +154,14 @@ add_action('rest_api_init', function () {
     register_rest_route('vayu-blocks-sett/v1', '/save-input-values', array(
         'methods' => 'POST',
         'callback' => 'save_input_values_callback',
+        'permission_callback' => '__return_true', // Set your permission callback here
     ));
 
     // Endpoint to retrieve input values
     register_rest_route('vayu-blocks-sett/v1', '/get-input-values', array(
         'methods' => 'GET',
         'callback' => 'get_input_values_callback',
+        'permission_callback' => '__return_true', // Set your permission callback here
     ));
 });
 
