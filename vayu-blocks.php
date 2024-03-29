@@ -210,7 +210,7 @@ class Vayu_Block_Plugin {
     public function vayu_blocks_sites_callback() {
         ?>
         <div class="themehunk-sites-menu-page-wrapper">
-        <div id="root">hello</div>
+        <div id="root"></div>
         </div>
         <?php
     }
@@ -234,7 +234,9 @@ class Vayu_Block_Plugin {
 
 }
 
+
 function vayu_block_plugin_init( ) {
     new Vayu_Block_Plugin();
 }
 add_action( 'init', 'vayu_block_plugin_init', 1 );
+
