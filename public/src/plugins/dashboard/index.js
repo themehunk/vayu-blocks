@@ -16,7 +16,7 @@ function ChildComponent(props) {
     );
 }
 
-const ToggleSwitch = ({ initialValue, onChange }) => {
+const ToggleSwitch = ({ initialValue, onChange}) => {
     const [isChecked, setIsChecked] = useState(initialValue);
 
     const handleChange = () => {
@@ -36,7 +36,14 @@ const ToggleSwitch = ({ initialValue, onChange }) => {
 function MyPluginContent(){
 
     const [navTab, setNavTab] = useState(1);
-
+    let vayuProStatus = '';
+    if(vayublock.vayuProStatus == 'activated'){
+        vayuProStatus = 'vayu-pro-active';
+    }
+    else{
+        vayuProStatus = ''; 
+    }
+    
     const NavTabClick = (tabNumber) => {
         setNavTab(tabNumber);
   };
@@ -277,7 +284,7 @@ function MyPluginContent(){
                         <p>{__('Enhance your Block Editor with custom Vayu Blocks, crafting dynamic, visually appealing content layouts for a seamless and beautiful user experience.', 'vayu-blocks')}</p>
                     </div>
 
-        <div className='sw-wrapprer'>
+        <div className={`sw-wrapprer ${vayuProStatus}`}>
             {Object.entries(toggleSwitches).map(([key, value]) => (
                <div className={`sw-box ${key}`}>
                     <div className='th-sw-right'>
@@ -348,7 +355,7 @@ function MyPluginContent(){
       <aside>
         <nav>
         <a href="#" className={navTab === 1 ? 'selected' : ''} onClick={() => NavTabClick(1)}><BiCertification />{__('Editor Options','vayu-blocks')}</a>
-        <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a>
+        {/* <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a> */}
         </nav>
       </aside>
       <div className="content-wrapper">

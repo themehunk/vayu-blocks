@@ -30,7 +30,7 @@ display: none !important;
   }
 
   #vayu-blocks-container .th-header .th-conatiner{    
-    max-width: 95%;
+        max-width: 95%;
         width: 100%;
         margin-left: auto;
         margin-right: auto;
@@ -45,17 +45,16 @@ display: none !important;
   
   #vayu-blocks-container .th-logo-wrap {
       align-self: center;
-  display:flex;
-  align-items: center;
+      display:flex;
+      align-items: center;
   }
   #vayu-blocks-container .th-logo-wrap img{
       max-width: 32px;
-  height: fit-content;
-      }
-      
-      #vayu-blocks-container .th-logo-wrap h2{
+      height: fit-content;
+  }   
+  #vayu-blocks-container .th-logo-wrap h2{
       color:#6C1BC3;
-      }
+  }
   #vayu-blocks-container .th-menu-wrap {
       display: flex;
       flex: 1;
@@ -72,11 +71,9 @@ display: none !important;
       line-height: 1.5;
       margin: 1em 0;
   }
-  
   #vayu-blocks-container a{
   display:block;
   }
-  
   #vayu-blocks-container .th-menu-item.active {
       border-color: #6C1BC3;
       color: #6C1BC3;
@@ -99,7 +96,8 @@ display: none !important;
   #vayu-blocks-container .th-content-wrap{
       width: 100%;
       display: flex;
-  justify-content: space-between;
+      justify-content: space-between;
+      background: #FFF;
   }
   
   #vayu-blocks-container .th-main{
@@ -170,6 +168,7 @@ display: none !important;
       font-weight: 700;
       letter-spacing: 0.4px;
       text-decoration: none;
+      text-transform: capitalize;
       }
       
       #vayu-blocks-container .th-block-item .th-block-view:hover,#vayu-blocks-container .sidebar-section .sidebar-link:hover{
@@ -282,6 +281,20 @@ input:checked + .slider:before {
   background: #f3edf9;
   padding: 18px;
   border-radius: 9px;
+  pointer-events: none;
+  opacity: .7;
+}
+.sw-wrapprer.vayu-pro-active .sw-box{
+  pointer-events: initial;
+  opacity: 1;
+}
+.sw-box:nth-of-type(1),
+.sw-box:nth-of-type(2),
+.sw-box:nth-of-type(3),
+.sw-box:nth-of-type(4),
+.sw-box:nth-of-type(5){
+  pointer-events: initial;
+  opacity: 1;
 }
 .sw-box h5{
   margin: 0;
@@ -457,6 +470,7 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: center;
 }
+
 @media screen and (max-width: 767px){
   .th-settings aside,
   .th-settings .content-wrapper{
