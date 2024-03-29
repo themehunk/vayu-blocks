@@ -13706,6 +13706,12 @@ const ToggleSwitch = ({
 };
 function MyPluginContent() {
   const [navTab, setNavTab] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(1);
+  let vayuProStatus = '';
+  if (vayublock.vayuProStatus == 'activated') {
+    vayuProStatus = 'vayu-pro-active';
+  } else {
+    vayuProStatus = '';
+  }
   const NavTabClick = tabNumber => {
     setNavTab(tabNumber);
   };
@@ -13929,7 +13935,7 @@ function MyPluginContent() {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-main-wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome to Vayu Blocks', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enhance your Block Editor with custom Vayu Blocks, crafting dynamic, visually appealing content layouts for a seamless and beautiful user experience.', 'vayu-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "sw-wrapprer"
+    className: `sw-wrapprer ${vayuProStatus}`
   }, Object.entries(toggleSwitches).map(([key, value]) => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `sw-box ${key}`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -13983,11 +13989,7 @@ function MyPluginContent() {
     href: "#",
     className: navTab === 1 ? 'selected' : '',
     onClick: () => NavTabClick(1)
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_bi__WEBPACK_IMPORTED_MODULE_5__.BiCertification, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Editor Options', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "#",
-    className: navTab === 2 ? 'selected' : '',
-    onClick: () => NavTabClick(2)
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_bi__WEBPACK_IMPORTED_MODULE_5__.BiCoinStack, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Assets', 'vayu-blocks')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_bi__WEBPACK_IMPORTED_MODULE_5__.BiCertification, null), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Editor Options', 'vayu-blocks')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "content-wrapper"
   }, navTab === 1 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "wrapper-title"

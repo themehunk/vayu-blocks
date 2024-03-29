@@ -57,6 +57,16 @@ function vayu_admin_react_script() {
 
     $asset_file = require_once VAYU_BLOCKS_DIR_PATH .'public/build/adminDashboard.asset.php';
 
+    $localizeItems = array(
+        'homeUrl' => plugins_url( '/', __FILE__ ),
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'homeUrl2' => get_home_url(),
+    );
+    
+    if( class_exists('Vayu_Block_Plugin_Pro') ){
+        $localizeItems['vayuProStatus'] = 'activated';
+    }
+
     wp_enqueue_script(
 		'adminDashboard-block',
 		VAYU_BLOCKS_URL . 'public/build/adminDashboard.js',
@@ -70,11 +80,7 @@ function vayu_admin_react_script() {
     wp_localize_script(
         'adminDashboard-block',
         'vayublock',
-        array(
-            'homeUrl' => plugins_url( '/', __FILE__ ),
-            'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'homeUrl2' => get_home_url(),
-        )
+        $localizeItems
     );
 
 
@@ -119,6 +125,7 @@ function vayu_blocks_get_toggle_switch_values_callback($request) {
         'wooproduct' => sanitize_text_field(get_option('wooproduct_value')),
         'heading' => sanitize_text_field(get_option('heading_value')),
         'spacer' => sanitize_text_field(get_option('spacer_value')),
+        'productfilter' => sanitize_text_field(get_option('productfilter_value')),
     );
 
     // Apply filter hook to allow other plugins to modify the toggle switch values
