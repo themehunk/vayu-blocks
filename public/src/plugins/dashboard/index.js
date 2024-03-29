@@ -132,52 +132,52 @@ function MyPluginContent(){
                     return {
                         icon: <RxGroup />,
                         description: __('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#container'
                     };
                 case 'button':
                     return {
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
                 case 'wooproduct':
                     return {
                         icon: <RxButton />,
                         description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#WooCommerce-product'
                     };
                 case 'heading':
                     return {
                         icon: <RxButton />,
                         description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#Advance-headings'
                     };
                 case 'spacer':
                     return {
                         icon: <RxButton />,
                         description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#spacer'
                     };
 
                     case 'pointer':
                     return {
                         icon: <RxButton />,
                         description: __('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: '#'
                     };
 
                     case 'productfilter':
                     return {
                         icon: <RxButton />,
                         description: __('Productfilter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-                        link1: '#link1',
-                        link2: '#link2'
+                        link1: '#',
+                        link2: '#'
                     };
                 default:
                     return '';
@@ -295,8 +295,8 @@ function MyPluginContent(){
                     </div>
                     <div className='th-sw-bottom'>
                         <p>{getDescription(key).description}</p>
-                        <a href={getDescription(key).link1}>{__( 'View', 'vayu-blocks' )}</a>
-                        <a href={getDescription(key).link2}>{__( 'Doc', 'vayu-blocks' )}</a>
+                        {/* <a href={getDescription(key).link1} target="_blank">{__( 'View', 'vayu-blocks' )}</a> */}
+                        <a href={getDescription(key).link2} target="_blank">{__( 'Doc', 'vayu-blocks' )}</a>
                     </div>
 
                </div>

@@ -13795,50 +13795,50 @@ function MyPluginContent() {
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxGroup, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: 'https://themehunk.com/docs/vayu-blocks/#container'
         };
       case 'button':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: 'https://themehunk.com/docs/vayu-blocks/#button'
         };
       case 'wooproduct':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: 'https://themehunk.com/docs/vayu-blocks/#WooCommerce-product'
         };
       case 'heading':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: 'https://themehunk.com/docs/vayu-blocks/#Advance-headings'
         };
       case 'spacer':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: 'https://themehunk.com/docs/vayu-blocks/#spacer'
         };
       case 'pointer':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: '#'
         };
       case 'productfilter':
         return {
           icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_icons_rx__WEBPACK_IMPORTED_MODULE_3__.RxButton, null),
           description: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Productfilter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
-          link1: '#link1',
-          link2: '#link2'
+          link1: '#',
+          link2: '#'
         };
       default:
         return '';
@@ -13950,9 +13950,8 @@ function MyPluginContent() {
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-sw-bottom"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, getDescription(key).description), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: getDescription(key).link1
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: getDescription(key).link2
+    href: getDescription(key).link2,
+    target: "_blank"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Doc', 'vayu-blocks'))))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-sidebar"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
