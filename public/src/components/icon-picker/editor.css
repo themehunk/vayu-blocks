@@ -1,0 +1,130 @@
+.th-blocks-icon-chooser {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 0;
+  margin-left: -3px;
+}
+.th-blocks-icon-chooser li {
+  display: block;
+  margin: 0 0 3px 3px;
+  padding: 0;
+}
+.th-blocks-icon-chooser li button.components-button {
+  background: #fafafa;
+  color: #000;
+  height: 30px;
+  width: 30px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 8px;
+  line-height: normal;
+  font-size: 15px;
+  justify-content: center;
+}
+.th-blocks-icon-chooser li button.components-button span {
+  line-height: 0;
+}
+.th-blocks-icon-chooser li button.components-button:hover {
+  background: #fff;
+  box-shadow: none;
+}
+.th-blocks-icon-chooser li button.components-button svg {
+  width: 1em;
+  height: 1em;
+}
+
+.th-icon {
+  line-height: 0;
+}
+
+.th-icon svg {
+  height: 1em;
+  width: 1em;
+  fill: currentColor;
+}
+
+button.components-icon-picker-item {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  line-height: 50px;
+  background: #efefef;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+button.components-icon-picker-item svg {
+  height: 1em;
+  width: 1em;
+}
+
+.components-icon-picker-item > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.components-icon-picker-item:hover, .components-icon-picker-item:focus {
+  background: #fafafa;
+}
+
+.th-svg-html .components-base-control {
+  margin-bottom: 0;
+}
+
+.th-icon-preview {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+}
+.th-icon-preview svg {
+  margin-right: 10px;
+  width: 1em;
+  height: 1em;
+}
+
+.th-blocks-icon-panel:not(:first-child) {
+  border-top: 1px solid #eee !important;
+}
+
+.th-blocks-icon-panel h2 {
+  position: absolute;
+  top: -52px;
+  right: 9px;
+  background: transparent !important;
+  outline: 1px solid rgb(117, 117, 117);
+}
+
+.th-blocks-icon-panel .components-panel__body-toggle.components-button .components-panel__arrow {
+  right: -4px;
+}
+
+.th-blocks-icon-panel h2 button.components-panel__body-toggle.components-button {
+  padding: 5px 21px 5px 5px;
+  color: #111;
+  height: 29px;
+  position: relative;
+}
+
+.th-icon-label {
+  display: inline-flex;
+  float: left;
+}
+
+.th-icon-preview {
+  padding-left: 34px;
+}
+
+.th-icon-preview button {
+  height: 29px !important;
+}
+
+.th-blocks-icon-panel.is-opened {
+  margin-top: 40px !important;
+}
+
+.th-icon-chooser {
+  position: relative;
+}/*# sourceMappingURL=editor.css.map */

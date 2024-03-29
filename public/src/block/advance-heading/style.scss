@@ -1,0 +1,22 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-vayu-blocks {
+	background-color: #21759b;
+	color: #fff;
+	padding: 2px;
+}
+.block-editor-block-icon.has-colors svg.th-block-icon{
+	max-height: 40px;
+		max-width: 40px;
+		min-height:  40px;
+		min-width: 40px;
+	   fill:"#000"
+	}
+.wp-block-vayu-blocks-advance-heading{
+	font-size:34px;
+}	
