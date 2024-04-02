@@ -11,6 +11,7 @@ module.exports = {
      'adminDashboard':'./src/plugins/dashboard/index.js',
      'component-editor': './src/components/component-editor.scss',
      'animation-index': './src/block/animation',
+     'vayu-sites': './src/vayu-sites',
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',
 		 'anim-typing': './src/block/animation/frontend/typing/index.js',

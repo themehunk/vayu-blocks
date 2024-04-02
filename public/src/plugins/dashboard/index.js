@@ -254,7 +254,7 @@ function MyPluginContent(){
                 <div className="th-header-wrap">   
                 <div className="th-logo-wrap">
                 <img src={`${homeUrl}assets/img/logo-vayu.png`} />
-                <h2> {__('Blocks', 'vayu-blocks')} </h2>
+                <h2> {__('VAYU BLOCKS', 'vayu-blocks')} </h2>
                 </div>
                 <div className="th-menu-wrap">
                      <div
@@ -269,6 +269,13 @@ function MyPluginContent(){
                 >
                    {__('Settings', 'vayu-blocks')} 
                 </div>
+                <div
+                    className={`th-menu-item ${activeTab === 'sites' ? 'active' : ''}`}
+                    onClick={() => handleTabClick('sites')}
+                >
+                   {__('Vayu Sites', 'vayu-blocks')} 
+                </div>
+
                 </div>
                 <div className="th-last-wrap"><span>{__('version 1.0', 'vayu-blocks')}</span></div>
                 </div> 
@@ -430,9 +437,10 @@ function MyPluginContent(){
             <button onClick={saveInputValues}>{__('Save', 'vayu-blocks')}</button>
       </div>
     </div>
-                               
                </div> 
             )}
+
+        {activeTab === 'sites' && window.location.assign( window.location.pathname+"?page=vayu-sites&template=step") }
             </div>    
             </div>
             </div>
