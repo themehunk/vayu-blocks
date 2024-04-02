@@ -13914,7 +13914,7 @@ function MyPluginContent() {
     className: "th-logo-wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: `${homeUrl}assets/img/logo-vayu.png`
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blocks', 'vayu-blocks'), " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('VAYU BLOCKS', 'vayu-blocks'), " ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-menu-wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `th-menu-item ${activeTab === 'welcome' ? 'active' : ''}`,
@@ -13922,7 +13922,10 @@ function MyPluginContent() {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Welcome', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `th-menu-item ${activeTab === 'blocks' ? 'active' : ''}`,
     onClick: () => handleTabClick('blocks')
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Settings', 'vayu-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Settings', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `th-menu-item ${activeTab === 'sites' ? 'active' : ''}`,
+    onClick: () => handleTabClick('sites')
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Vayu Sites', 'vayu-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-last-wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('version 1.0', 'vayu-blocks')))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "th-content"
@@ -14039,7 +14042,7 @@ function MyPluginContent() {
     className: "option-submit"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     onClick: saveInputValues
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save', 'vayu-blocks'))))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Save', 'vayu-blocks'))))), activeTab === 'sites' && window.location.assign(window.location.pathname + "?page=vayu-sites&template=step"))));
 }
 const container = document.getElementById('vayu-blocks-container');
 if (container) {

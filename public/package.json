@@ -50,13 +50,16 @@
 		"lodash": "^4.17.21",
 		"npm-run-all": "^4.1.5",
 		"puppeteer-screen-recorder": "^2.1.2",
+		"react-lottie": "^1.2.4",
 		"replace-in-file": "^6.3.1",
 		"semantic-release": "^19.0.5",
 		"semantic-release-slack-bot": "^3.5.2",
 		"simple-statistics": "^7.8.3",
-		"typescript": "^4.9.5"
+		"typescript": "^4.9.5",
+		"wp-scripts": "^0.0.1-security"
 	},
 	"dependencies": {
+		"@mui/material": "^5.15.14",
 		"@wordpress/hooks": "^3.50.0",
 		"@wordpress/icons": "^9.23.0",
 		"array-move": "^3.0.1",
@@ -73,6 +76,7 @@
 		"react-modal": "^3.16.1",
 		"react-native": "0.71.11",
 		"react-native-url-polyfill": "1.1.2",
+		"react-redux": "^9.1.0",
 		"react-refresh": "0.14.0",
 		"react-router-dom": "^6.21.0",
 		"react-select": "^5.7.5",
