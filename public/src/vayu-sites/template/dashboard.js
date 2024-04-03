@@ -1,11 +1,8 @@
-import { createRoot, render, createElement,useState,useEffect } from '@wordpress/element';
-import { Flex, FlexBlock, FlexItem,Button } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { Flex, FlexBlock, FlexItem } from '@wordpress/components';
 import { Icon, arrowRight,chevronLeftSmall, color } from '@wordpress/icons';
 import { Logo, Upgrade } from '../aisb';
 import { __ } from '@wordpress/i18n';
-import Header from './header';
-import BuilderIcon from './buildericon';
-import AiBuilder from './aibuilder';
 
 export default function dashboard(props){
 
@@ -58,12 +55,13 @@ return(<div className='aisb-dashboard'>
 
 
   <div className='aisb-left-content'>
-  <h3>    Build Your Website</h3>
+  <h3>      {__('Build Your Website', 'vayu-blocks') } </h3>
 
   <a href={window.location.href+'&template=step'}>
   <h2 className='create-website'>
   <img src={AISB.pluginpath+'admin/assets/svg/create-site.svg'} />
-    Create My Website
+  {__('Create My Website', 'vayu-blocks') }
+   
   </h2></a>
   </div>
   <div className='aisb-left-content'>

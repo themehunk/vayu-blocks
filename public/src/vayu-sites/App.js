@@ -5,6 +5,7 @@ import BuilderIcon from './template/buildericon';
 import AiBuilder from './template/aibuilder';
 import { getQueryArg } from '@wordpress/url';
 import Dashboard from './template/dashboard';
+import { __ } from '@wordpress/i18n';
 
 export default function App() {
 
@@ -37,7 +38,7 @@ export default function App() {
     
             <Header/>
         <div className='heading'>
-        <h1 >Select Gutenberg Template to Build Your Website ! </h1>
+        <h1>{__('Select Gutenberg Template to Build Your Website ! ', 'vayu-blocks') }</h1>
         </div>
         <BuilderIcon builderclick = {(builder_rs)=>builderHide(builder_rs)}/>
 

@@ -3,6 +3,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { __ } from '@wordpress/i18n';
 
 export default function SidebarCategory(props) {
 
@@ -16,7 +17,7 @@ export default function SidebarCategory(props) {
         <div class="left-column">
         <div class="category-list">
         <FormControl>
-      <FormLabel id="demo-radio-buttons-group-label">Template Category</FormLabel>
+      <FormLabel id="demo-radio-buttons-group-label">{__('Template Category', 'vayu-blocks') }</FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue="all"

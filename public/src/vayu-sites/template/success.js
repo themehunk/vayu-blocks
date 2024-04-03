@@ -6,7 +6,7 @@ import { getQueryArg } from '@wordpress/url';
 import { Icon, arrowRight,chevronLeftSmall } from '@wordpress/icons';
 import Lottie from 'react-lottie';
 import { HomeLink, Logo, Upgrade } from '../aisb';
-
+import { __ } from '@wordpress/i18n';
 
 
 
@@ -92,11 +92,11 @@ return(<div className='aisb-site-build-wrap'>
 
           <div className='aisb-site-main'>
               <div className='aisb-site-form'>
-              <h1> Congratulation</h1>
+              <h1> {__('Congratulation', 'vayu-blocks') }</h1>
 
             <Lottie className='lottie-success' options={defaultOptions} width={230} />
 
-            <h2>Your webiste is now ready. </h2>
+            <h2>{__('Your webiste is now ready.', 'vayu-blocks') } </h2>
             <Flex className='success-btn'>
                   <FlexItem>
                   <div className='btn-center'> <span className='aisb-install-btn' onClick={ handleCustomize }> <b><Icon
@@ -116,7 +116,7 @@ return(<div className='aisb-site-build-wrap'>
 <path d="M0 16q0.064 0.128 0.16 0.352t0.48 0.928 0.832 1.344 1.248 1.536 1.664 1.696 2.144 1.568 2.624 1.344 3.136 0.896 3.712 0.352 3.712-0.352 3.168-0.928 2.592-1.312 2.144-1.6 1.664-1.632 1.248-1.6 0.832-1.312 0.48-0.928l0.16-0.352q-0.032-0.128-0.16-0.352t-0.48-0.896-0.832-1.344-1.248-1.568-1.664-1.664-2.144-1.568-2.624-1.344-3.136-0.896-3.712-0.352-3.712 0.352-3.168 0.896-2.592 1.344-2.144 1.568-1.664 1.664-1.248 1.568-0.832 1.344-0.48 0.928zM10.016 16q0-2.464 1.728-4.224t4.256-1.76 4.256 1.76 1.76 4.224-1.76 4.256-4.256 1.76-4.256-1.76-1.728-4.256zM12 16q0 1.664 1.184 2.848t2.816 1.152 2.816-1.152 1.184-2.848-1.184-2.816-2.816-1.184-2.816 1.184l2.816 2.816h-4z"></path>
 </svg>
         }
-   /></b>View Webiste</span></div>
+   /></b>{__('View Webiste', 'vayu-blocks') }</span></div>
                   </FlexItem>
               </Flex>
               </div>

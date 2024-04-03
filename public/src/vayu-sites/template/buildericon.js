@@ -92,7 +92,7 @@ const MenuProps = {
 //'multipurpose','business','portfolio','music','landing-page','sports'
 
     return (<div className="aisb-builder-icon">
-      <FormControl sx={{ m: 1, minWidth: 260 }} variant="standard" >
+      <FormControl sx={{ m: 1, minWidth: 260 }} variant="standard" className='builderType'>
         <Select
           labelId="demo-select-small-labe"
           id="demo-simple-select-helper"
