@@ -18,8 +18,6 @@ export default function App() {
     setBuilder(builder_rs);
   }
 
-
-
   useEffect(() => {
     if(getQueryArg( currentUrl,'template' ) ==='step'){
       setpageChange(true);

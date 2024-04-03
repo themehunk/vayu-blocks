@@ -1,7 +1,7 @@
 === Vayu Blocks ===
 Contributors: ThemeHunk
 Requires at least: 6.2
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 7.0
 Stable tag: 1.0.3
 License: GPLv3
@@ -80,6 +80,13 @@ If you encounter any difficulties or if you have questions about Vayu Blocks, yo
 create a new thread on the [Support](https://themehunk.com/contact-us/) And also you can connect in [live chat](https://themehunk.com).
 
 == Changelog ==
+
+=1.0.4 =
+* Update : React code wrapped in a single folder.
+* Update : Readme updtaed.
+* Update: Pro Blocks Showcase added.
+* New : Links Added.
+* New : Template import feature added.
 
 =1.0.3 =
 * Readme.txt Issue Fixed.
