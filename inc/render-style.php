@@ -46,7 +46,7 @@ function vayu_render_server_side_css() {
 
 		global $post;
 
-		if ( ! is_object( $post ) && ( !is_404() ) ) {
+		if ( ! is_object( $post ) ) {
 			return;
 		}
 
@@ -58,17 +58,7 @@ function vayu_render_server_side_css() {
 			return;
 		}
 
-
-		if ( ( is_404() ) ) {
-			
-			$css = vayu_cycle_through_blocks( $blocks, ' ' );
-		
-		}
-		else{
-			$css = vayu_cycle_through_blocks( $blocks, $post->ID );	
-		}
-
-
+		$css = vayu_cycle_through_blocks( $blocks, $post->ID );
 
 		if ( empty( $css ) ) {
 			return;
@@ -78,7 +68,13 @@ function vayu_render_server_side_css() {
 		$style .= $css;
 		$style .= "\n" . '</style>' . "\n";
 
-		echo $style;
+		echo wp_kses( $style, array(
+			'style' => true,
+			'div' => array(
+				'id' => true,
+				'class' => true
+			 ),
+		  ));
 	   }
 
 }

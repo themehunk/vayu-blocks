@@ -24034,6 +24034,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _template_dashboard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./template/dashboard */ "./src/vayu-sites/template/dashboard.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -24060,7 +24063,7 @@ function App() {
     className: "aisb-app-wrap"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "heading"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Select Gutenberg Template to Build Your Website ! ")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_template_buildericon__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Select Gutenberg Template to Build Your Website ! ', 'vayu-blocks'))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_template_buildericon__WEBPACK_IMPORTED_MODULE_2__["default"], {
     builderclick: builder_rs => builderHide(builder_rs)
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_template_aibuilder__WEBPACK_IMPORTED_MODULE_3__["default"], {
     builder: builder
@@ -24166,9 +24169,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -24181,7 +24187,7 @@ function Upgrade(props) {
     variant: "primary",
     className: "aisb-upgrade-btn",
     style: props.styles
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 1024 1024",
       class: "icon",
@@ -24217,13 +24223,13 @@ function Upgrade(props) {
       d: "M61.384 354.176A55.216 55.216 0 0 0 6.144 409.44a55.2 55.2 0 0 0 55.24 55.208V354.176z",
       fill: "#0092D2"
     }))
-  }), "UPGRADE TO PRO")), " ", props.version && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, version));
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('UPGRADE TO PRO', 'vayu-blocks'))), " ", props.version && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, version));
 }
 function HomeLink() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: '?page=vayu-sites',
     title: "Dashboard"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       className: "dashboard-link",
       fill: "#fff",
@@ -24242,7 +24248,7 @@ function Logo() {
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "logo aisb-logo"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: window.location.href
+    href: `${AISB.baseurl}wp-admin/admin.php?page=vayu-sites`
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: AISB.rootPath + "inc/assets/img/logo-vayu.png",
     alt: "Vayu Logo"
@@ -24766,7 +24772,8 @@ function BuilderIcon(props) {
       m: 1,
       minWidth: 260
     },
-    variant: "standard"
+    variant: "standard",
+    className: "builderType"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Select__WEBPACK_IMPORTED_MODULE_6__["default"], {
     labelId: "demo-select-small-labe",
     id: "demo-simple-select-helper",
@@ -24825,11 +24832,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/arrow-right.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/arrow-right.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./src/vayu-sites/actions/index.js");
 /* harmony import */ var _aisb__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../aisb */ "./src/vayu-sites/aisb.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -24839,8 +24849,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function buildWibsite(props) {
-  const pageStep = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(state => state.stepLoad);
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
+  const pageStep = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useSelector)(state => state.stepLoad);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_5__.useDispatch)();
   const [checkboxes, setCheckboxes] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
     delete: true,
     themes: true,
@@ -24867,7 +24877,7 @@ function buildWibsite(props) {
     onClick: () => dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_2__.stepOne)(true)),
     variant: "primary",
     className: "close"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
     size: 10,
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       fill: "#000000",
@@ -24882,9 +24892,9 @@ function buildWibsite(props) {
     className: "aisb-site-main"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-site-form"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, " Lets Build Your AI Website"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "   ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Lets Build Your AI Website', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
     className: "aisb-site-sub-heading"
-  }, "Before be Continue Pease Confirm These Options - "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Before be Continue Pease Confirm These Options -', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-site-options"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "group"
@@ -24925,9 +24935,9 @@ function buildWibsite(props) {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "aisb-install-btn",
     onClick: () => dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_2__.stepThree)(true))
-  }, "Build My Website", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, "Build My Website", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
     size: 22,
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"]
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"]
   })))))));
 }
 
@@ -24948,15 +24958,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 /* harmony import */ var _aisb__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../aisb */ "./src/vayu-sites/aisb.js");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./header */ "./src/vayu-sites/template/header.js");
-/* harmony import */ var _buildericon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./buildericon */ "./src/vayu-sites/template/buildericon.js");
-/* harmony import */ var _aibuilder__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./aibuilder */ "./src/vayu-sites/template/aibuilder.js");
-
-
 
 
 
@@ -25000,7 +25005,7 @@ function dashboard(props) {
     className: "header-text"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_aisb__WEBPACK_IMPORTED_MODULE_2__.Upgrade, {
     styles: btnStyle
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       className: "dashboard-link",
       fill: "#fff",
@@ -25019,13 +25024,13 @@ function dashboard(props) {
     class: "th-conatiner"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-left-content"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "    Build Your Website"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", null, "      ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Build Your Website', 'vayu-blocks'), " "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: window.location.href + '&template=step'
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
     className: "create-website"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: AISB.pluginpath + 'admin/assets/svg/create-site.svg'
-  }), "Create My Website"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Create My Website', 'vayu-blocks')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-left-content"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("iframe", {
     width: "560",
@@ -25532,11 +25537,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mui_material_Radio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Radio */ "./node_modules/@mui/material/Radio/Radio.js");
-/* harmony import */ var _mui_material_RadioGroup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/RadioGroup */ "./node_modules/@mui/material/RadioGroup/RadioGroup.js");
-/* harmony import */ var _mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/FormControlLabel */ "./node_modules/@mui/material/FormControlLabel/FormControlLabel.js");
-/* harmony import */ var _mui_material_FormControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/material/FormControl */ "./node_modules/@mui/material/FormControl/FormControl.js");
-/* harmony import */ var _mui_material_FormLabel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/FormLabel */ "./node_modules/@mui/material/FormLabel/FormLabel.js");
+/* harmony import */ var _mui_material_Radio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Radio */ "./node_modules/@mui/material/Radio/Radio.js");
+/* harmony import */ var _mui_material_RadioGroup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/RadioGroup */ "./node_modules/@mui/material/RadioGroup/RadioGroup.js");
+/* harmony import */ var _mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/FormControlLabel */ "./node_modules/@mui/material/FormControlLabel/FormControlLabel.js");
+/* harmony import */ var _mui_material_FormControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/FormControl */ "./node_modules/@mui/material/FormControl/FormControl.js");
+/* harmony import */ var _mui_material_FormLabel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/FormLabel */ "./node_modules/@mui/material/FormLabel/FormLabel.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+
 
 
 
@@ -25552,16 +25560,16 @@ function SidebarCategory(props) {
     class: "left-column"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "category-list"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormControl__WEBPACK_IMPORTED_MODULE_1__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormLabel__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormControl__WEBPACK_IMPORTED_MODULE_2__["default"], null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormLabel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: "demo-radio-buttons-group-label"
-  }, "Template Category"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_RadioGroup__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Template Category', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_RadioGroup__WEBPACK_IMPORTED_MODULE_4__["default"], {
     "aria-labelledby": "demo-radio-buttons-group-label",
     defaultValue: "all",
     name: "radio-buttons-group"
-  }, category.map(cate => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, category.map(cate => (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
     onChange: handelCategory,
     value: cate,
-    control: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Radio__WEBPACK_IMPORTED_MODULE_5__["default"], null),
+    control: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_mui_material_Radio__WEBPACK_IMPORTED_MODULE_6__["default"], null),
     label: cate
   }))))));
 }
@@ -25894,15 +25902,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _assets_lottie_success__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/lottie/success */ "./src/vayu-sites/assets/lottie/success.json");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
 /* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 /* harmony import */ var react_lottie__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-lottie */ "./node_modules/react-lottie/dist/index.js");
 /* harmony import */ var _aisb__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../aisb */ "./src/vayu-sites/aisb.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -25913,7 +25924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function success() {
-  const templType = (0,react_redux__WEBPACK_IMPORTED_MODULE_6__.useSelector)(state => state.templateSelect);
+  const templType = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useSelector)(state => state.templateSelect);
   const [customizeUrl, setCustomizeUrl] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)();
   const defaultOptions = {
     loop: false,
@@ -25972,18 +25983,18 @@ function success() {
     className: "aisb-site-main"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-site-form"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, " Congratulation"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_lottie__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, " ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Congratulation', 'vayu-blocks')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_lottie__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "lottie-success",
     options: defaultOptions,
     width: 230
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "Your webiste is now ready. "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('Your webiste is now ready.', 'vayu-blocks'), " "), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Flex, {
     className: "success-btn"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.FlexItem, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "btn-center"
   }, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "aisb-install-btn",
     onClick: handleCustomize
-  }, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       width: "20px",
       height: "20px",
@@ -26002,7 +26013,7 @@ function success() {
   }, " ", (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "aisb-border-btn",
     onClick: handleClick
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"], {
     icon: (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       width: "24px",
       height: "24px",
@@ -26012,7 +26023,7 @@ function success() {
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("title", null, "eye"), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
       d: "M0 16q0.064 0.128 0.16 0.352t0.48 0.928 0.832 1.344 1.248 1.536 1.664 1.696 2.144 1.568 2.624 1.344 3.136 0.896 3.712 0.352 3.712-0.352 3.168-0.928 2.592-1.312 2.144-1.6 1.664-1.632 1.248-1.6 0.832-1.312 0.48-0.928l0.16-0.352q-0.032-0.128-0.16-0.352t-0.48-0.896-0.832-1.344-1.248-1.568-1.664-1.664-2.144-1.568-2.624-1.344-3.136-0.896-3.712-0.352-3.712 0.352-3.168 0.896-2.592 1.344-2.144 1.568-1.664 1.664-1.248 1.568-0.832 1.344-0.48 0.928zM10.016 16q0-2.464 1.728-4.224t4.256-1.76 4.256 1.76 1.76 4.224-1.76 4.256-4.256 1.76-4.256-1.76-1.728-4.256zM12 16q0 1.664 1.184 2.848t2.816 1.152 2.816-1.152 1.184-2.848-1.184-2.816-2.816-1.184-2.816 1.184l2.816 2.816h-4z"
     }))
-  })), "View Webiste")))))));
+  })), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__.__)('View Webiste', 'vayu-blocks'))))))));
 }
 
 /***/ }),
@@ -55950,7 +55961,7 @@ module.exports = JSON.parse('[{"woocommerce":"woocommerce/woocommerce.php","unli
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('[{"id":"273","title":"Vayu Fashion","free_paid":"free","slug":"vayu-fashion","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-fashion-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-fashion/","api_url":"https://wpthemes.themehunk.com/vayu-fashion/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]}]');
+module.exports = JSON.parse('[{"id":"273","title":"Vayu Fashion","free_paid":"free","slug":"vayu-fashion","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-fashion-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-fashion/","api_url":"https://wpthemes.themehunk.com/vayu-fashion/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","free","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]},{"id":"274","title":"Vayu Electro","free_paid":"free","slug":"vayu-electro","thumb":"https://themehunk.com/wp-content/uploads/2023/12/vayu-elector-34.png","demo_url":"https://wpthemes.themehunk.com/vayu-electro","api_url":"https://wpthemes.themehunk.com/vayu-electro/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","free","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]},{"id":"275","title":"Vayu Pet","free_paid":"free","slug":"vayu-pet","thumb":"https://themehunk.com/wp-content/uploads/2023/12/vayu-pet-31.png","demo_url":"https://wpthemes.themehunk.com/vayu-pet","api_url":"https://wpthemes.themehunk.com/vayu-pet/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","free","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]},{"id":"276","title":"Vayu Bag","free_paid":"free","slug":"vayu-bag","thumb":"https://themehunk.com/wp-content/uploads/2023/12/vayu-bag-9-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-bag","api_url":"https://wpthemes.themehunk.com/vayu-bag/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]},{"id":"277","title":"Vayu Grocery","free_paid":"free","slug":"vayu-grocery","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-fashion-314.webp","demo_url":"https://wpthemes.themehunk.com/vayu-grocery","api_url":"https://wpthemes.themehunk.com/vayu-grocery/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]},{"id":"278","title":"Vayu Toys","free_paid":"free","slug":"vayu-toys","thumb":"https://themehunk.com/wp-content/uploads/2024/02/vayu-toys-70213.webp","demo_url":"https://wpthemes.themehunk.com/vayu-toys","api_url":"https://wpthemes.themehunk.com/vayu-toys/wp-json/wp/v2/themehunk-site/3245?theme=vayu-x","builder_theme":"vayu-x","category":["all","pro","woocommmerce","ecommerce"],"plugin":{"woocommerce":"Woocommerce","th-advance-product-search":"TH Product Search","th-all-in-one-woo-cart":"TH Woo Cart","th-product-compare":"TH Product Compare","lead-form-builder":"Lead Form Builder","yith-woocommerce-wishlist":"YITH WooCommerce Wishlist","vayu-blocks":"Vayu Blocks"},"tags":["store","shop","fashion","clothing","multivendor","electronics","furniture","jewelry","shopping","cosmetics","accessories","shoes","glasses","food","grocery","cake","watch","gift"]}]');
 
 /***/ }),
 

@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import {stepOne,stepThree} from '../actions';
 import { Upgrade } from '../aisb';
+import { __ } from '@wordpress/i18n';
 
 export default function buildWibsite(props){
     const pageStep = useSelector((state)=>state.stepLoad);
@@ -43,8 +44,8 @@ return( <div className='aisb-site-build-wrap'>
             </div>
             <div className='aisb-site-main'>
                 <div className='aisb-site-form'>
-                    <h2> Lets Build Your AI Website</h2>
-                    <h4 className='aisb-site-sub-heading'>Before be Continue Pease Confirm These Options - </h4>
+                    <h2>   {__('Lets Build Your AI Website', 'vayu-blocks') }</h2>
+                    <h4 className='aisb-site-sub-heading'>{__('Before be Continue Pease Confirm These Options -', 'vayu-blocks') }</h4>
                     <div className='aisb-site-options'>
                     
 

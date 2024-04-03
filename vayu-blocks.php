@@ -4,7 +4,7 @@
  * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
  * Requires at least: 6.2
  * Requires PHP:      7.0
- * Version:           1.0.4
+ * Version:           1.0.3
  * Author:            ThemeHunk
  * License:           GPLv3
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -24,7 +24,7 @@ class Vayu_Block_Plugin {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.3';
+	const VERSION = '1.0.2';
 
 	/**
 	 * Initialize the plugin.
@@ -49,19 +49,10 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/advance-button/advance-button.php';
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
-        require_once 'inc/vayu-sites/vayu-sites.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
-
-        // Set default values for toggle switch options
-        add_option( 'container_value', 1 ); // Turn on by default
-        add_option( 'button_value', 1 ); // Turn on by default
-        add_option( 'wooproduct_value', 1 ); // Turn on by default
-        add_option( 'heading_value', 1 ); // Turn on by default
-        add_option( 'spacer_value', 1 ); // Turn on by default
-        add_option( 'productfilter_value', 1 ); // Turn on by default
 
     }
 
@@ -72,7 +63,6 @@ class Vayu_Block_Plugin {
                 'script_handle'  => 'advance-container',
                 'editor_style'   => 'advance-container-editor-style',
                 'frontend_style' => 'advance-container-frontend-style',
-                'status'         => get_option('container_value'),
                 'localize_data'  => array(
                     'homeUrl' => get_home_url(),
                 ),
@@ -82,21 +72,18 @@ class Vayu_Block_Plugin {
                 'script_handle'  => 'advance-heading',
                 'editor_style'   => 'advance-heading-editor-style',
                 'frontend_style' => 'advance-heading-frontend-style',
-                'status'         => get_option('heading_value'),
             ),
             array(
                 'name'           => 'vayu-blocks/advance-spacer',
                 'script_handle'  => 'advance-spacer',
                 'editor_style'   => 'advance-spacer-editor-style',
                 'frontend_style' => 'advance-spacer-frontend-style',
-                'status'         => get_option('spacer_value'),
             ),
             array(
                 'name'           => 'vayu-blocks/advance-button',
                 'script_handle'  => 'advance-button',
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
-                'status'         => get_option('button_value'),
             )
         );
 
@@ -108,7 +95,6 @@ class Vayu_Block_Plugin {
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
-                'status'         => get_option('wooproduct_value'),
                 'render_callback' => array( 
                     new Vayu_Advance_Product_Tab(),
                     'render_callback' 
@@ -116,31 +102,31 @@ class Vayu_Block_Plugin {
             );
         }
 
-        foreach (  $blocks as $key => $block ) { 
+        foreach ( $blocks as $block ) {
 
-    if ( isset( $block['status'] ) && ( $block['status'] == 1 ) ) {
+            
             // Register JavaScript file
             wp_register_script(
                 $block['script_handle'],
-                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.js',
+                VAYU_BLOCKS_URL . 'build/' . $block['script_handle'] . '.js',
                 array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
+                filemtime( VAYU_BLOCKS_PATH . '/build/' . $block['script_handle'] . '.js' )
             );
 
             // Register editor style
             wp_register_style(
                 $block['editor_style'],
-                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
+                VAYU_BLOCKS_URL . 'build/' . $block['script_handle'] . '.css',
                 array( 'wp-edit-blocks' ),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
+                filemtime( VAYU_BLOCKS_PATH . '/build/' . $block['script_handle'] . '.css' )
             );
 
             // Register front end block style
             wp_register_style(
                 $block['frontend_style'],
-                VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
+                VAYU_BLOCKS_URL . 'build/style-' . $block['script_handle'] . '.css',
                 array(),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
+                filemtime( VAYU_BLOCKS_PATH . '/build/style-' . $block['script_handle'] . '.css' )
             );
 
             // Localize the script with data
@@ -168,8 +154,6 @@ class Vayu_Block_Plugin {
             // Register each block
             register_block_type( $block['name'], $block_args );
         }
-
-        }
     }
     
     // plugin menu option add
@@ -182,39 +166,18 @@ class Vayu_Block_Plugin {
             'vayu-blocks',
             array( $this, 'vayu_plugin_page_callback' ),
             plugins_url( 'vayu-blocks/inc/assets/img/menu-logo.png' ),
-            59
+            10 
         );
     
-        // add_submenu_page(
-        //     'vayu-blocks',
-        //     'Blocks',
-        //     'Blocks',
-        //     'manage_options',
-        //     'vayu-blocks&path=blocks',
-        //     array( $this, 'vayu_plugin_page_callback' )
-        // );
-
-
         add_submenu_page(
             'vayu-blocks',
-            'Vayu Sites',
-            'Vayu Sites',
+            'Blocks',
+            'Blocks',
             'manage_options',
-            'vayu-sites',
-            array( $this, 'vayu_blocks_sites_callback' )
+            'vayu-blocks&path=blocks',
+            array( $this, 'vayu_plugin_page_callback' )
         );
-
     }
-
-
-    public function vayu_blocks_sites_callback() {
-        ?>
-        <div class="themehunk-sites-menu-page-wrapper">
-            <div id="root"></div>
-        </div>
-        <?php
-    }
-    
     
     
     public function vayu_plugin_page_callback() {
@@ -228,11 +191,9 @@ class Vayu_Block_Plugin {
         </div>
 
     <?php }
+
+
+
+
 }
-
-
-function vayu_block_plugin_init( ) {
-    new Vayu_Block_Plugin();
-}
-add_action( 'init', 'vayu_block_plugin_init', 1 );
-
+new Vayu_Block_Plugin();

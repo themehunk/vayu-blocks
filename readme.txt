@@ -3,7 +3,7 @@ Contributors: ThemeHunk
 Requires at least: 6.2
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 1.0.4
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -81,27 +81,18 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 
 == Changelog ==
 
-=1.0.4 =
-* Update : React code wrapped in a single folder.
-* Update : Readme updtaed.
-* Update: Pro Blocks Showcase added.
-* New : Links Added.
-
 =1.0.3 =
-* Fix Readme.txt Issue Fixed.
+* Readme.txt Issue Fixed.
 
 =1.0.2 =
-* Update : Security, Credit & License Issue Fixed.
+* Security, Credit & License Issue Fixed.
 
 =1.0.1 =
-* Update : Security Issue Fixed.
+* Security Issue Fixed.
 
 =1.0.0 =
 Initial Release 
 
 == Upgrade Notice ==
-=1.0.4 =
-* Update : React code wrapped in a single folder.
-* Update : Readme updtaed.
-* Update: Pro Blocks Showcase added.
-* New : Links Added.
+=1.0.3 =
+Initial Release 
