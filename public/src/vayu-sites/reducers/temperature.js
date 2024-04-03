@@ -2,7 +2,7 @@ import gutenberg from '../assets/json/gutenberg.json';
 import vayu from '../assets/json/vayu-x.json';
 const jsonData = vayu.concat(gutenberg);
 
-const gutenbergtmpl = ['vayu-x','th-shop-mania','blockline','blockline-pro','blur','blur-pro','gutenberg'];
+const gutenbergtmpl = ['vayu-x'];
 const customizer = ['topstore','royal-shop','top-store-pro','big-store','openshop-pro','jotshop','open-mart','m-shop','shopline-pro','amaz-store','almaira','gogo','novelpro','oneline','portfolioline','featured'];
 const elementor = ['th-shop-mania','elementor'];
 

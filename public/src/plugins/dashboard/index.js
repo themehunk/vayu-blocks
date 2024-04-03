@@ -322,7 +322,7 @@ function MyPluginContent(){
         <h3>{__('Leave us a review', 'vayu-blocks')}</h3>
         </div>
         <p>{__('Show some love for Vayu Blocks by rating us and helping us grow more and do improvements.', 'vayu-blocks')}</p>
-        <a href="https://www.trustpilot.com/review/themehunk.com" target="_blank" className="sidebar-link">
+        <a href="https://wordpress.org/support/plugin/vayu-blocks/reviews/#new-post" target="_blank" className="sidebar-link">
         {__('Submit review', 'vayu-blocks')} 
         </a>
     </div>
@@ -335,7 +335,7 @@ function MyPluginContent(){
         </div>
         
         <p>{__('Go through the easy documentation to get familiar with Vayu Blocks and its Features.', 'vayu-blocks')}</p>
-        <a href="https://www.youtube.com/c/ThemeHunk" target="_blank" className="sidebar-link">
+        <a href="https://themehunk.com/docs/vayu-blocks/" target="_blank" className="sidebar-link">
         {__('View Doc', 'vayu-blocks')} 
         </a>
     </div>
