@@ -951,12 +951,5 @@
       "type": "string",
       "default": "px"
     }
-  },
-  "supports": {
-    "align": [
-      "wide",
-      "full"
-    ],
-    "html": false
   }
 }

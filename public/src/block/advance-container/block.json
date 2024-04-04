@@ -954,9 +954,5 @@
 			"default": "px"
 		}
 
-	},
-	"supports": {
-		"align": [ "wide", "full" ],
-		"html": false
 	}
 }

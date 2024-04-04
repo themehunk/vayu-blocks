@@ -412,7 +412,7 @@ function MyPluginContent(){
                  <span className='unit'>{__('px','vayu-blocks')}</span>
             </div>
 
-            <div className='option-wrapper'>
+            {/* <div className='option-wrapper'>
             <RxButton /><p>{__('Button Color', 'vayu-blocks')}</p>
                     <input
                         type="checkbox"
@@ -420,7 +420,7 @@ function MyPluginContent(){
                         checked={buttonColor}
                         onChange={handleCheckboxChange}
                     />
-            </div>
+            </div> */}
     
         </div>
         )}
