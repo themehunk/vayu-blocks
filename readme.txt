@@ -3,7 +3,7 @@ Contributors: ThemeHunk
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.0.4
+Stable tag: 1.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -81,6 +81,12 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 
 == Changelog ==
 
+=1.0.6 =
+* Fix : Container global width issue resolved.
+
+=1.0.5 =
+* Update : New code added.
+
 =1.0.4 =
 * Update : React code wrapped in a single folder.
 * Update : Readme updtaed.
@@ -101,8 +107,5 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 Initial Release 
 
 == Upgrade Notice ==
-=1.0.4 =
-* Update : React code wrapped in a single folder.
-* Update : Readme updtaed.
-* Update: Pro Blocks Showcase added.
-* New : Links Added.
+=1.0.6 =
+* Fix : Container global width issue resolved.

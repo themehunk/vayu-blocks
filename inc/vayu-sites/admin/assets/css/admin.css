@@ -340,9 +340,7 @@ header {
   /* builder icon css */
 
 
-  .aisb-builder-icon .MuiFormControl-root.builderType{
-    display:none;
-    }
+
   .heading{
     text-align: center;
     padding-top: 1rem;

@@ -241,28 +241,9 @@ export default function Edit({
 
 
 	// Global Settings Vayu Blocks
-	const [globalcontainerWidth, setGlobalContainerWidth] = useState(null);
-	const [globalcontainerGap, setGlobalContainerGap] = useState(null);
-	const [globalpadding, setGlobalPadding] = useState(null);
-	const [globalbuttonColor, setGlobalButtonColor] = useState(null);
-
-	const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/get-input-values`;
-
-	useEffect(() => {
-		fetch(`${Url}`)
-		  .then(response => response.json())
-		  .then(data => {
-			setGlobalContainerWidth(data.containerWidth);
-			setGlobalContainerGap(data.containerGap);
-			setGlobalPadding(data.padding);
-			setGlobalButtonColor(data.buttonColor);
-		  })
-		  .catch(error => console.error('Error fetching data:', error));
-	  }, []);
-
-	//   console.log("Global Width ",globalcontainerWidth);
-	//   console.log("Global Gaps ",globalcontainerGap);
-	//   console.log("Global Padding ",globalpadding);
+	const globalcontainerWidth = ThBlockData.container_width;
+	const globalcontainerGap = ThBlockData.container_gap;
+	const globalpadding = ThBlockData.container_padding;
 
 	let paddingValues;
 	if(attributes.padding || 'linked' != attributes.paddingType){
@@ -275,10 +256,10 @@ export default function Edit({
 	}
 	else{
 		paddingValues = {
-			'--padding-top': `${ globalpadding }`,
-			'--padding-right': `${ globalpadding }`,
-			'--padding-bottom': `${ globalpadding }`,
-			'--padding-left': `${ globalpadding }`,
+			'--padding-top': `${ globalpadding }px`,
+			'--padding-right': `${ globalpadding }px`,
+			'--padding-bottom': `${ globalpadding }px`,
+			'--padding-left': `${ globalpadding }px`,
 		};
 	}
 
