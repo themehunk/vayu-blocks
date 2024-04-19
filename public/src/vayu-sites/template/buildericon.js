@@ -4,6 +4,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import FormHelperText from '@mui/material/FormHelperText';
+
 import { useSelector, useDispatch } from 'react-redux';
 import {addCateBuilder,templateData} from '../actions';
 
@@ -138,6 +140,8 @@ const MenuProps = {
 
           )}
         </Select>
+        <FormHelperText>Templates category</FormHelperText>
+
       </FormControl>
       
       </div>

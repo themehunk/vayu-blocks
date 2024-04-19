@@ -98,10 +98,21 @@ case "STEP4" : return {
 }
 
 
+const licenseActivate = ( state = {apikey: null,status:null}, action) =>{
+    switch(action.type){
+        case "LICENSE_KEY" : return action.payload;
+        default: return state;
+    }
 
-// case "ADD" : return state.concat(action.payload);
+}
 
-// case "REMOVE" : return state.filter(function(initialState) { return initialState !== action.payload });
+const licenseKeyRandom = ( state = 'abshudioapldidjanddidjaha1827282917191ABHCHKIL', action) =>{
+    switch(action.type){
+        case "RANDOM_KEY" : return action.payload;
+        default: return state;
+    }
 
-export {templateData, templateSelect, trueFalse,tmplInstall,stepLoad};
+}
+
+export {templateData, templateSelect, trueFalse,tmplInstall,stepLoad,licenseActivate,licenseKeyRandom};
 

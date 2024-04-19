@@ -38,7 +38,7 @@ export default function App() {
     
             <Header/>
         <div className='heading'>
-        <h1>{__('Select Gutenberg Template to Build Your Website ! ', 'vayu-blocks') }</h1>
+        <h1>{__('Select a Block Template to Build Your Website ! ', 'vayu-blocks') }</h1>
         </div>
         <BuilderIcon builderclick = {(builder_rs)=>builderHide(builder_rs)}/>
 

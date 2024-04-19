@@ -5,10 +5,12 @@ import { Icon, arrowRight } from '@wordpress/icons';
 import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import {stepOne,stepThree} from '../actions';
-import { Upgrade } from '../aisb';
+import { Upgrade,Version } from '../aisb';
 import { __ } from '@wordpress/i18n';
 
 export default function buildWibsite(props){
+    const license = useSelector((state)=>state.licenseActivate);
+
     const pageStep = useSelector((state)=>state.stepLoad);
     const dispatch = useDispatch();
     const [checkboxes, setCheckboxes] = useState({
@@ -38,7 +40,14 @@ return( <div className='aisb-site-build-wrap'>
                     </FlexItem>
 
                     <FlexItem>  
-                        <div className="header-text"><Upgrade/></div>
+                        <div className="header-text">
+                            
+                       { license.status ===false && <Upgrade/>}
+                       {license.status && Version()}
+
+                            
+                            
+                            </div>
                  </FlexItem>
                 </Flex>
             </div>
@@ -48,11 +57,11 @@ return( <div className='aisb-site-build-wrap'>
                     <h4 className='aisb-site-sub-heading'>{__('Before be Continue Pease Confirm These Options -', 'vayu-blocks') }</h4>
                     <div className='aisb-site-options'>
                     
-
-                        <div class="group"><input type="checkbox" id="delete" checked={checkboxes.delete} onChange={() => handleCheckboxChange('delete')}/> <label for="delete">Delete Pervious Import Demo </label></div>
+                    {/* onChange={() => handleCheckboxChange('content')} */}
+                        <div class="group"><input type="checkbox" id="delete" checked={checkboxes.delete} /> <label for="delete">Import Demo </label></div>
                         <div class="group"><input type="checkbox" id="themes" checked={checkboxes.themes} /> <label for="themes">Install & Activate Theme </label></div>
                         <div class="group"><input type="checkbox" id="plugins" checked={checkboxes.plugins} /> <label for="plugins">Install Required Plugins </label></div>
-                        <div class="group"><input type="checkbox" id="content" checked={checkboxes.content} onChange={() => handleCheckboxChange('content')}/> <label for="content">Install Demo content </label></div>
+                        <div class="group"><input type="checkbox" id="content" checked={checkboxes.content} /> <label for="content">Install Demo content </label></div>
 
                 
                     </div>

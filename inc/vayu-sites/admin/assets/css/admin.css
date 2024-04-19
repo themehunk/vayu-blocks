@@ -256,6 +256,9 @@ border-bottom-right-radius: 60px 60px;
   margin: 0px 8%;
 }
 
+span.aisb-install-btn.free-upgrade {
+  margin-left: 12%;
+}
 
 /* .iframe-footer {
   text-align: center;
@@ -312,6 +315,11 @@ header {
     text-align: right;
   }
   
+  .header-text .header-right{
+     display: inline-flex; 
+     align-items: center;
+}
+
   .header-text h1 {
     font-size: 24px; /* Adjust the font size as needed */
     margin: 0;
@@ -351,6 +359,10 @@ header {
     margin-top: 4rem;
     margin-bottom: 4rem;
     
+  }
+
+  .MuiFormControl-root.builderType , .MuiFormControl-root.aisb-catelist  {
+    display: none;
   }
 
   .aisb-builder-icon .aisb-catelist,.MuiMenu-list {
@@ -610,7 +622,7 @@ padding: 8px 10px;
     transition: all 0.5s ease-in-out;
 }
 #sidebarModel .footer-tip{
-  margin-left: 45%;
+  margin-left: 48.5%;
   display: block;
   position: absolute;
   bottom: 86%;
@@ -657,12 +669,11 @@ fill: #ffff;
   color: #fff;
   border: 2px solid white;
   cursor: pointer;
-  margin-left: 2%;
 }
 
 .aisb-back .close svg{
   fill: #8535c6;
-  padding-top: 5px;
+  margin-top: 5px;
 }
 
 .aisb-back .close {
@@ -918,7 +929,7 @@ iframe{
 
 .aisb-site-build-wrap .aisb-site-main {
     width: 30%;
-    margin-left: 30%;
+    margin-left: 35%;
     background: #ffffff;
     padding: 20px 50px;
     margin-top: 5%;

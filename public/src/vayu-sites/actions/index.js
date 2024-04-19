@@ -5,6 +5,20 @@ export const templateData = (builder,cate) =>{
     cate:cate,
      }
 }
+export const licenseKey = (payload) =>{
+  return { 
+    type: "LICENSE_KEY",
+    payload:payload
+     }
+}
+
+export const randomKey = (payload) =>{
+  return { 
+    type: "RANDOM_KEY",
+    payload:payload
+     }
+}
+
 
 export const addCateBuilder = (cate,builder) =>{
       return { 
