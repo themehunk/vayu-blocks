@@ -34325,13 +34325,15 @@ function AddApiKey(props) {
     // });
     // Make a request for a user with a given ID
     //AISB.baseurl+'wp-json/ai/v1/apikey/ai-site-builder' local
+    //https://themehunk.com/wp-json/ai/v1/apikey/ai-site-builder
     //http://localhost/wp63/wp-json/ai/v1/apikey/ai-site-builder
     await axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://themehunk.com/wp-json/ai/v1/apikey/ai-site-builder', {
       params: {
         apikey: apikey,
         ipAddress: ipAddress,
         siteURL: AISB.baseurl,
-        userAgent: userAgent
+        userAgent: userAgent,
+        slug: 'vayu'
       }
     }).then(function (response) {
       //return;
