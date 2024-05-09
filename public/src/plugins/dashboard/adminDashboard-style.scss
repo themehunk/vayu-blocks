@@ -53,7 +53,7 @@ display: none !important;
       height: fit-content;
   }   
   #vayu-blocks-container .th-logo-wrap h2{
-      color:#6C1BC3;
+      color: #000000;
   }
   #vayu-blocks-container .th-menu-wrap {
       display: flex;
@@ -75,9 +75,7 @@ display: none !important;
   display:block;
   }
   #vayu-blocks-container .th-menu-item.active {
-      border-color: #6C1BC3;
-      color: #6C1BC3;
-      border: 2px dashed;
+    border: none;
   }
   #vayu-blocks-container .th-menu-item {
       line-height: 1em;
@@ -159,12 +157,12 @@ display: none !important;
 
   #vayu-blocks-container .th-block-item .th-block-view,
   #vayu-blocks-container .sidebar-section .sidebar-link {
-      color: #6c1bc3;
+      color: #403F40;
       display: inline-flex;
       padding: 0.3rem 0.7rem;
       margin: 0;
       font-size: 11px;
-      border: 1px solid #6c1bc3;
+      border: 1px solid #403F40;
       font-weight: 700;
       letter-spacing: 0.4px;
       text-decoration: none;
@@ -209,7 +207,7 @@ display: none !important;
   position: relative;
   display: inline-block;
   width: 48px;
-  height: 18px;
+  height: 20px;
 }
 
 .toggle-switch input {
@@ -245,7 +243,7 @@ display: none !important;
 }
 
 input:checked + .slider {
-  background-color: #6C1BC3;
+  background-color: #028925;
 }
 
 input:focus + .slider {
@@ -278,7 +276,7 @@ input:checked + .slider:before {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #f3edf9;
+  background: #Eee;
   padding: 18px;
   border-radius: 9px;
   pointer-events: none;
@@ -301,7 +299,7 @@ input:checked + .slider:before {
 }
 .sw-box.button{
   margin-bottom: 2%!important;
-  background: #f3edf9;
+  background: #Eee;
   // display: flex!important;
   // line-height: initial;
   // height: initial;
@@ -310,9 +308,6 @@ input:checked + .slider:before {
   border-radius: 9px;
   white-space: initial;
   color: #525151;
-}
-.sw-box.button:hover{
-  background: #f3edf9;
 }
 .th-sw-right div{
   display: flex;

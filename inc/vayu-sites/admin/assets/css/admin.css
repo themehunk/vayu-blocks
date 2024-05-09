@@ -240,14 +240,9 @@ max-width: 1230px;
 }
 
 .aisb-app-wrap {
-  height: 500px;
-  background-image: -moz-linear-gradient( 0deg, rgb(74,0,224) 0%, rgb(142,45,226) 100%);
-  background-image: var(--aisb-bg-color);
-  background-image: -ms-linear-gradient( 0deg, rgb(74,0,224) 0%, rgb(142,45,226) 100%);
-  box-shadow: -0.035px 2px 6px 0px rgba(0, 0, 0, 0.08);
-  z-index: 3;
-border-bottom-left-radius: 60px 60px;
-border-bottom-right-radius: 60px 60px;
+  background-image: -webkit-linear-gradient( 0deg, #DBDBDB 0%, #ADA996 100%);
+  border-radius:0!important;
+  height: 650px;
 }
 
 .aisb-app-wrap .header{
@@ -273,13 +268,22 @@ header {
   }
 
   .heading h1{
-    color: #ffffff;
+    color: #000;
+    font-size: 60px;
+    font-weight: bold;
+    line-height:69px;
   }
-  
+  .heading p{
+    font-size: 18px;
+    line-height: 25px;
+    color: #4c4e46;
+    font-weight: 500;
+  }
   .aisb-logo {
     background: #fff;
     padding: 4px 4px 0px 5px;
-    border-radius: 4px;
+    border-radius: 50%;
+    border: 5px solid #fff;
   }
   
   .logo.aisb-logo:hover {
@@ -292,17 +296,19 @@ header {
   }
 
   button.components-button.aisb-upgrade-btn.is-primary {
-    background: #fbd15b;
-    border-radius: 15px;
-    padding: 6px 15px;
     border: 0;
     font-weight: 600;
     margin-right: 0%;
     cursor: pointer;
+    background: #000!important;
+    color:#fff!important;
+    padding:10px 20px;
+    border-radius:5px;
 }
 
 .header-text b{
   color: #fff;
+  margin-left: 10px;
 }
 
 .header-text.center {
@@ -351,7 +357,7 @@ header {
 
   .heading{
     text-align: center;
-    padding-top: 1rem;
+    padding-top: 3rem;
   }
   .aisb-builder-icon {
     display: flex;
@@ -473,12 +479,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
   border-top: 1px solid #e4f0fb;
   position: relative;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: .02em;
+  padding: 6px 15px;
   }
   
   .aisb-container-main-tmpl .left-column {
@@ -491,12 +497,14 @@ header {
   }
   
   .aisb-container-main-tmpl  .asib-main-tmpl {
-    width: 84%;
+    width: 100%;
+    max-width:1200px;
     background-color: #fff;
-    padding: 2.5rem 1rem;
-    margin: 0 8% 5% 8%;
+    padding: 1.8rem 2.5rem;
+    margin: 0 auto;
     justify-content: space-between;
-    border-radius: 25px;
+    border-radius: 5px;
+    border:1px solid #eee;
   }
   
   .aisb-container-main-tmpl  .category-list {
@@ -540,10 +548,10 @@ header {
     justify-content: center;
 }
   
-.aisb-container-main-tmpl  .column {
-    width: 23%;
-    text-align: center;
-    margin: 0px 1% 20px 10px;
+.aisb-container-main-tmpl .column {
+  width: 25%;
+  margin:0;
+  padding:10px;
 }
   
 .aisb-container-main-tmpl  .column img {
@@ -1104,8 +1112,51 @@ input[type=text]:focus{
   .aisb-site-form .aisb-border-btn {
     padding: 0 !important;
 }
-
 .success-btn {
     display: block !important;
+}
+.heading h1{
+  font-size: 45px;
+  line-height: 52px;
+}
+}
+@media only screen and (max-width: 1024px) {
+  .heading h1{
+    font-size: 36px;
+    line-height: 43px;
+  }
+  .heading p{
+    font-size: 15px;
+    line-height: 21px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .heading h1{
+    font-size: 21px;
+    line-height: 28px;
+  }
+  .heading p{
+    font-size: 12px;
+    line-height: 19px;
+  }
+  .aisb-container-main-tmpl .column{
+    width: 50%;
+  }
+  .aisb-container-main-tmpl .asib-main-tmpl{
+    padding: .1rem .5rem;
+  }
+  .aisb-container-main-tmpl .column {
+  padding: 5px;
+}
+.heading{
+  padding-top: 0;
+}
+.aisb-builder-icon{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.aisb-app-wrap .header{
+  width: 100%;
+  margin: 0;
 }
 }
