@@ -78,16 +78,18 @@ return(<div className='aisb-dashboard'>
 
 
   <div className='aisb-left-content'>
-  <h3>      {__('Build Your Website', 'vayu-blocks') } </h3>
+  <h3>      {__('Ready To Import Websites', 'vayu-blocks') } </h3>
+
+  <p>      {__('Vayu comes with unlimited possibilities. Check Vayu starter websites for all kinds of niches. Starter templates cover a verity of categories like Fashion, furniture, toys, electronics, Pets, and many more. You can customize templates using WordPress full site editor. So what are you waiting for, Click the button and check the available templates.', 'vayu-blocks') } </p>
 
   <a href={window.location.href+'&template=step'}>
   <h2 className='create-website'>
   <img src={AISB.pluginpath+'admin/assets/svg/create-site.svg'} />
-  {__('Create My Website', 'vayu-blocks') }
+  {__('View All Starter Sites', 'vayu-blocks') }
    
   </h2></a>
   </div>
-  <div className='aisb-left-content'>
+  <div className='aisb-left-content unsused'>
 {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/buuvC61uD9s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
 </div>
 </div>
