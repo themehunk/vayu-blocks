@@ -440,7 +440,7 @@ function MyPluginContent(){
                </div> 
             )}
 
-        {activeTab === 'sites' && window.location.assign( window.location.pathname+"?page=vayu-sites&template=step") }
+        {activeTab === 'sites' && window.location.assign( window.location.pathname+"?page=vayu-sites") }
             </div>    
             </div>
             </div>
