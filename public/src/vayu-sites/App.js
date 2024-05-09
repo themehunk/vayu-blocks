@@ -38,7 +38,8 @@ export default function App() {
     
             <Header/>
         <div className='heading'>
-        <h1>{__('Select a Block Template to Build Your Website ! ', 'vayu-blocks') }</h1>
+        <h1>{__('Ready To Import Website Templates', 'vayu-blocks') }</h1>
+        <p>{__('Create a website using starter templates, created using WordPress default page editor. You can import it in just a single click and modify it as per your website need.', 'vayu-blocks') }</p>
         </div>
         <BuilderIcon builderclick = {(builder_rs)=>builderHide(builder_rs)}/>
 
