@@ -66,6 +66,9 @@ display: none !important;
       font-size: 1.2em;
       margin: 1em 0;
   }
+  #vayu-blocks-container .th-main-wrap h2{
+   font-size: 1.6rem; 
+  }
   #vayu-blocks-container p , #vayu-blocks-container a{
       font-size:0.89rem;
       line-height: 1.5;
@@ -76,6 +79,7 @@ display: none !important;
   }
   #vayu-blocks-container .th-menu-item.active {
     border: none;
+    color: #6C1BC3;
   }
   #vayu-blocks-container .th-menu-item {
       line-height: 1em;
@@ -425,23 +429,37 @@ input:checked + .slider:before {
   font-weight: 500;
   color: #444;
 }
-.th-settings button{
+.th-settings button {
   margin-top: 18px;
   padding: 9px 29px;
   margin-left: auto;
   margin-right: auto;
-  background: #6C1BC3;
+  background: #111;
   color: #FFF;
   border-radius: 4px;
   cursor: pointer;
   opacity: .9;
+  transition: all 0.2s ease; /* Add transition for smooth animation */
 }
-.th-settings button:hover{
+
+.th-settings button:hover {
   opacity: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
 }
-.th-settings button:active{
-  background: #881bff;
+
+.th-settings button:focus,
+.th-settings button:active {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow on focus/active */
+  transform: scale(1.02); /* Scale the button slightly on focus/active */
 }
+
+.th-settings button:active {
+  transform: scale(0.98); /* Scale down the button when clicked */
+  opacity: 0.8; /* Lower opacity when clicked */
+}
+
+
 .th-settings a{
   text-decoration: none;
 }
