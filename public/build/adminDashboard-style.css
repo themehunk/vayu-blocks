@@ -330,6 +330,10 @@ input:checked + .slider:before {
   color: #525151;
 }
 
+.wp-core-ui .sw-box.button:hover {
+  color: #525151;
+}
+
 .th-sw-right div {
   display: flex;
   justify-content: space-between;
