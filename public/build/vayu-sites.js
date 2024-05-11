@@ -22906,9 +22906,9 @@ function buildWibsite(props) {
     className: "aisb-site-main"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-site-form"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "   ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lets Build Your AI Website', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "   ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Lets Build Your Website', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h4", {
     className: "aisb-site-sub-heading"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Before be Continue Pease Confirm These Options -', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Before be Continue Please Confirm These Options -', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "aisb-site-options"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "group"
@@ -23512,7 +23512,7 @@ function installStart(props) {
       tmplFreePro: getPluginName()
     };
     try {
-      await axios__WEBPACK_IMPORTED_MODULE_12__["default"].post(AISB.baseurl + 'wp-json/ai/v1/ai-site-builder', {
+      await axios__WEBPACK_IMPORTED_MODULE_12__["default"].post(AISB.baseurl + 'wp-json/ai/v1/vayu-site-builder', {
         params: {
           templateType: props.templateData.free_paid,
           plugin: props.templateData.plugin,
@@ -23524,7 +23524,7 @@ function installStart(props) {
         }
       }).then(function (response) {
         dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_8__.tmplLodaing)('Importing Server Data..'));
-        // console.log(response.data);
+        console.log('Theme Plugin Install ...');
         setApiUrl(props.templateData.api_url);
       }).catch(function (error) {
         console.log(error);

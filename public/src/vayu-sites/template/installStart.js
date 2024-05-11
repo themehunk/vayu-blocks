@@ -81,7 +81,7 @@ export default function installStart(props){
             tmplFreePro:getPluginName()
           }      
             try {
-                await axios.post(AISB.baseurl+'wp-json/ai/v1/ai-site-builder', {
+                await axios.post(AISB.baseurl+'wp-json/ai/v1/vayu-site-builder', {
                     params: {
                       templateType: props.templateData.free_paid,
                       plugin: props.templateData.plugin,
@@ -94,7 +94,7 @@ export default function installStart(props){
                   })
                   .then(function (response) {
                     dispatch(tmplLodaing('Importing Server Data..'));
-                    // console.log(response.data);
+                     console.log('Theme Plugin Install ...');
                     setApiUrl(props.templateData.api_url);
                   })
                   .catch(function (error) {

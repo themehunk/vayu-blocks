@@ -25,7 +25,7 @@ class VAYU_BLOCKS_SITES_APP{
 
     public function register_routes() {
 
-        register_rest_route( 'ai/v1', 'ai-site-builder', array(
+        register_rest_route( 'ai/v1', 'vayu-site-builder', array(
           'methods' => 'POST',
           'callback' => array( $this, 'tp_install' ),
           'permission_callback' => '__return_true',
@@ -46,7 +46,7 @@ class VAYU_BLOCKS_SITES_APP{
   public function tp_install(WP_REST_Request $request){
       $request = $request->get_params();
       $params  = $request['params'];
-    
+    //  wp_send_json_success($params);
       new VAYU_BLOCKS_SITES_BUILDER_SETUP($params);
     
       return json_encode( site_url());

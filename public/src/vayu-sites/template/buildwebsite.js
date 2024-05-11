@@ -53,8 +53,8 @@ return( <div className='aisb-site-build-wrap'>
             </div>
             <div className='aisb-site-main'>
                 <div className='aisb-site-form'>
-                    <h2>   {__('Lets Build Your AI Website', 'vayu-blocks') }</h2>
-                    <h4 className='aisb-site-sub-heading'>{__('Before be Continue Pease Confirm These Options -', 'vayu-blocks') }</h4>
+                    <h2>   {__('Lets Build Your Website', 'vayu-blocks') }</h2>
+                    <h4 className='aisb-site-sub-heading'>{__('Before be Continue Please Confirm These Options -', 'vayu-blocks') }</h4>
                     <div className='aisb-site-options'>
                     
                     {/* onChange={() => handleCheckboxChange('content')} */}

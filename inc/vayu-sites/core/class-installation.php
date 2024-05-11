@@ -156,7 +156,7 @@ if ( ! function_exists( 'get_plugins' ) || ! function_exists( 'is_plugin_active'
                 WP_Filesystem();                
              //   $downloadUrl = 'https://downloads.wordpress.org/theme/'.$theme_slug.'.zip';
 
-               $downloadUrl = ' https://themehunk.com/wp-content/uploads/2024/01/'.$theme_slug.'.zip';
+               $downloadUrl = 'https://themehunk.com/wp-content/uploads/2024/01/'.$theme_slug.'.zip';
 
 
                 $temp_file = download_url($downloadUrl); 
