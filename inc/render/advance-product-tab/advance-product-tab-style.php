@@ -892,7 +892,7 @@ function vayu_advance_product_tab_style($attr){
                         padding-left: {$tabPaddingLeftMobile}{$tabPaddingUnit}; 
                         ";
                     } else {
-                        $tabPaddingMobile = isset($attr['tabPaddingMobile']) ? $attr['tabPadding'] : 10;
+                        $tabPaddingMobile = isset($attr['tabPaddingMobile']) ? $attr['tabPaddingMobile'] : 10;
                         $tabPaddingUnit = isset($attr['tabPaddingUnit']) ? $attr['tabPaddingUnit'] : 'px';
                         $css .= "padding: {$tabPaddingMobile}{$tabPaddingUnit};";
                     }
