@@ -7,6 +7,7 @@ import { IoPeopleSharp,IoSparklesSharp,IoNewspaperSharp } from "react-icons/io5"
 import { applyFilters } from '@wordpress/hooks';
 import { BiCertification, BiCoinStack } from "react-icons/bi";
 import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
+import { FaSpinner } from 'react-icons/fa';
 // import { Upgrade,Version } from '../../vayu-sites/aisb';
 
 
@@ -37,6 +38,8 @@ const ToggleSwitch = ({ initialValue, onChange}) => {
 function MyPluginContent(){
 
     const [navTab, setNavTab] = useState(1);
+    const [isLoading, setLoading] = useState(false);
+
     let vayuProStatus = '';
     if(vayublock.vayuProStatus == 'activated'){
         vayuProStatus = 'vayu-pro-active';
@@ -192,6 +195,7 @@ function MyPluginContent(){
 
     // Function to save input values
     const saveInputValues = async () => {
+        setLoading(true); // Set loading state to true
         const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
         try {
             const response = await fetch(`${Url}`, {
@@ -209,6 +213,7 @@ function MyPluginContent(){
             if (!response.ok) {
                 throw new Error('Failed to save input values');
             }
+            setLoading(false); // Set loading state to true
             console.log('Input values saved successfully');
         } catch (error) {
             console.error('Error saving input values:', error);
@@ -435,7 +440,9 @@ function MyPluginContent(){
       </div>
 
       <div className='option-submit'>
-            <button onClick={saveInputValues}>{__('Save', 'vayu-blocks')}</button>
+            <button onClick={saveInputValues}>
+            {isLoading ? <><FaSpinner className="icon-spin loader" /></> : __('Save', 'vayu-blocks')}
+            </button>
       </div>
     </div>
                </div> 

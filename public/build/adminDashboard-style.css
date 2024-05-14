@@ -526,6 +526,11 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
+.option-submit .loader {
+  animation: rotating 2s linear infinite;
+  margin-left: 12px;
+}
+
 @media screen and (max-width: 767px) {
   .th-settings aside,
   .th-settings .content-wrapper {

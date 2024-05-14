@@ -486,7 +486,14 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: center;
 }
-
+.option-submit .loader {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+  margin-left: 12px;
+}
 @media screen and (max-width: 767px){
   .th-settings aside,
   .th-settings .content-wrapper{

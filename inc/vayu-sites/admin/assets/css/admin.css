@@ -61,7 +61,6 @@
 
 .aisb-dashboard .aisb-header-wrap{
   background: #fff;
-  height: 60px;
 }
 .aisb-dashboard .aisb-dashboard-header {
   max-width: 95%;
@@ -301,8 +300,10 @@ header {
     cursor: pointer;
     background: #000!important;
     color:#fff!important;
-    padding:10px 20px;
+    padding:9px 20px;
     border-radius:5px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .header-text b{
@@ -318,6 +319,8 @@ header {
   .header-text {
     flex-grow: 1;
     text-align: right;
+    display: flex;
+    align-items: center;
   }
   
   .header-text .header-right{
@@ -342,12 +345,10 @@ header {
   }
 
   .header-text .dashboard-link{
-    margin-right: 5px;
     font-weight: bold;
-    padding-left: 11px;
-    padding: 2px;
     border-radius: 4px;
     margin-left: 10px;
+    fill: #666060;
 }
 
   /* builder icon css */
@@ -1083,10 +1084,14 @@ input[type=text]:focus{
 .themehunk-sites-menu-page-wrapper .aisb-left-content h3{
   font-size: 39px;
   line-height: 48px;
+  margin: 0;
+}
+.themehunk-sites-menu-page-wrapper .aisb-left-content .create-website{
+  margin: 0;
 }
 .themehunk-sites-menu-page-wrapper .aisb-left-content p{
     max-width: 650px;
-    margin: 0 auto;
+    margin: 35px auto;
     font-size: 16px;
     line-height: 25px;
 }
