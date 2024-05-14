@@ -1,9 +1,10 @@
-import { createRoot, render, createElement } from '@wordpress/element';
+import { createRoot } from '@wordpress/element';
 import App from './App';
-const el = document.getElementById( 'root' );
-const root = createRoot( el );
-
 import { Provider } from 'react-redux';
  import store from './store';
+const el = document.getElementById( 'vayuroot' );
 
+if (el) {
+  const root = createRoot(el);
 root.render(<Provider store={store}> <App /></Provider>);
+}

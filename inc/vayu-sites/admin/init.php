@@ -111,10 +111,8 @@ if ( ! class_exists( 'VAYU_BLOCK_SITES_BUILDER_MENU' ) ) {
 
 
         public function admin_enqueue( $hook = '' ) {
-
-
-// && 'toplevel_page_'.self::$plugin_slug !== $hook 
-            if ( self::$plugin_slug.'_page_vayu-sites'!== $hook) {
+            // && 'toplevel_page_'.self::$plugin_slug !== $hook 
+            if ( self::$plugin_slug.'_page_vayu-sites'!== $hook && 'post.php'!==$hook && 'post-new.php'!==$hook && 'toplevel_page_vayu-blocks' !==$hook) {
 				return;
 			}
 

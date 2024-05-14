@@ -10,9 +10,11 @@ import Masonry from 'react-masonry-css';
 import { RxFile,RxCross1, RxArrowDown} from "react-icons/rx";
 import templatesData from './json/templates.json';
 //import patternData from '.json/pattern.json'; 
+import { Provider } from 'react-redux';
+import store from "../../vayu-sites/store";
+import { useSelector} from 'react-redux';
 import { Logo, Upgrade,Version } from '../../vayu-sites/aisb';
 import { VerifyKey } from '../../vayu-sites/template/verifykey';
-import { useSelector} from 'react-redux';
 
 Modal.setAppElement('#wpwrap');
 
@@ -359,14 +361,14 @@ function ToolbarLibrary() {
 
     return (
         <>
-            <Modal
+           <Provider store={store}> <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 overlayClassName="th-design-template-modal-overlay"
                 className="th-design-template-modal-popover"
             >
                 {modalContent}
-            </Modal>
+            </Modal></Provider>
         </>
     );
 }
