@@ -353,7 +353,7 @@ function ToolbarLibrary() {
     return templateStatus ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "th-button th-import",
       onClick: importPage
-    }, importLoadingP ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Importing..', 'themehunk-blocks') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Import', 'themehunk-blocks'), " \"", templateName, "\" ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Import', 'themehunk-blocks')) : license.status === false && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_vayu_sites_aisb__WEBPACK_IMPORTED_MODULE_11__.Upgrade, {
+    }, importLoadingP ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Importing..', 'themehunk-blocks') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Import', 'themehunk-blocks'), " \"", templateName, "\" ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Template', 'themehunk-blocks')) : license.status === false && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_vayu_sites_aisb__WEBPACK_IMPORTED_MODULE_11__.Upgrade, {
       styles: btnStyle,
       version: false
     });
