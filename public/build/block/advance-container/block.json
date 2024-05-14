@@ -478,13 +478,13 @@
       "type": "string"
     },
     "customOrder": {
-      "type": "string"
+      "type": "number"
     },
     "customOrderTablet": {
-      "type": "string"
+      "type": "number"
     },
     "customOrderMobile": {
-      "type": "string"
+      "type": "number"
     },
     "flexSize": {
       "type": "string"
