@@ -1047,6 +1047,10 @@ span.components-base-control__label,
   letter-spacing: 0.3px;
 }
 
+.th-block-templates-sites .single-site .grid-item-badge.pro {
+  background: rgba(27, 195, 111, 0.831372549);
+}
+
 .th-block-templates-sites .item .screenshot {
   background-position: center top;
   background-size: 100%;

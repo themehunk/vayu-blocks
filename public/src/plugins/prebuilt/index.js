@@ -7,10 +7,12 @@ import { __ } from '@wordpress/i18n';
 import { Button, Popover } from '@wordpress/components';
 import Modal from 'react-modal';
 import Masonry from 'react-masonry-css';
-import { RxFile,RxStack, RxCross1, RxArrowDown} from "react-icons/rx";
-
-import templatesData from '../../../../inc/assets/json/templates.json';
-//import patternData from '../../../inc/assets/json/pattern.json'; 
+import { RxFile,RxCross1, RxArrowDown} from "react-icons/rx";
+import templatesData from './json/templates.json';
+//import patternData from '.json/pattern.json'; 
+import { Logo, Upgrade,Version } from '../../vayu-sites/aisb';
+import { VerifyKey } from '../../vayu-sites/template/verifykey';
+import { useSelector} from 'react-redux';
 
 Modal.setAppElement('#wpwrap');
 
@@ -65,7 +67,8 @@ function ToolbarLibrary() {
 
 
     // import page template
-    const ImportPage = ({ templateCode, templateName }) => {
+
+    const ImportPage = ({ templateCode, templateName, templateStatus }) => {
         const importPage = async () => {
           try {
             setImportLoadingP(true);
@@ -79,15 +82,26 @@ function ToolbarLibrary() {
             setModalOpen(false);
           }
         };
+        
+        const license = useSelector((state)=>state.licenseActivate);
+        const verifyKeyCheck = VerifyKey();
+        console.log(verifyKeyCheck);
+        const btnStyle= { color:"#fff", 
+          background:"var(--aisb-bg-color)" 
+        }
+
         return (
-          <div className="th-button th-import" onClick={importPage}>
-            {importLoadingP === true ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Import', 'themehunk-blocks')}
-          </div>
+          templateStatus ? (
+            <div className="th-button th-import" onClick={importPage}>
+              {importLoadingP ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Import', 'themehunk-blocks')}
+            </div>
+          ) : (
+            license.status === false && <Upgrade styles={btnStyle} />
+          )
         );
       };
 
     const TabContent = ({ tab }) => {
-
         const [templates, setTemplates] = useState([]);
         const [pattern, setPattern] = useState([]);
         const [activePatternCategory, setActivePatternCategory] = useState('all');
@@ -111,13 +125,11 @@ function ToolbarLibrary() {
 
             const [selectedItemIndex, setSelectedItemIndex] = useState(0);
             const screenshotRef = useRef(null);
-
             const handleItemClickPre = (index) => {
               setSelectedItemIndex(index);
               screenshotRef.current.scrollTo(0, 0); // Scroll to top of element
             };
             
-
             return (
               <div className="th-single-site-content">
                 <div className="th-single-site-content-wrap">
@@ -139,7 +151,7 @@ function ToolbarLibrary() {
                         </div>
                       </div>
                       <div className="th-single-site-content-footer-right">
-                      <ImportPage templateCode={template.templates[selectedItemIndex].content} templateName={template.templates[selectedItemIndex].title} />
+                      <ImportPage templateCode={template.templates[selectedItemIndex].content} templateName={template.templates[selectedItemIndex].title} templateStatus={template.templates[selectedItemIndex].activate} />
                       </div>
                     </div>
                   </div>
@@ -197,7 +209,7 @@ function ToolbarLibrary() {
                             key={index}
                         >
                             <div className="inner">
-                            <span className="grid-item-badge">{template.badge}</span>
+                            <span className={`grid-item-badge ${template.badge}`}>{template.badge}</span>
                             <div
                                 className="screenshot"
                                 style={{
