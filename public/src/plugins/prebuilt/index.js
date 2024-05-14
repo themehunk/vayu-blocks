@@ -87,20 +87,21 @@ function ToolbarLibrary() {
         
         const license = useSelector((state)=>state.licenseActivate);
         const verifyKeyCheck = VerifyKey();
-        console.log(verifyKeyCheck);
         const btnStyle= { color:"#fff", 
           background:"var(--aisb-bg-color)" 
         }
-
+        if (license.status) {
+          templateStatus = true;
+        }
         return (
           templateStatus ? (
             <div className="th-button th-import" onClick={importPage}>
               {importLoadingP ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Import', 'themehunk-blocks')}
             </div>
-          ) : (
-            license.status === false && <Upgrade styles={btnStyle} />
-          )
-        );
+            ) : (
+            license.status === false && <Upgrade styles={btnStyle} version={false} />
+            )
+          );
       };
 
     const TabContent = ({ tab }) => {
@@ -153,7 +154,7 @@ function ToolbarLibrary() {
                         </div>
                       </div>
                       <div className="th-single-site-content-footer-right">
-                      <ImportPage templateCode={template.templates[selectedItemIndex].content} templateName={template.templates[selectedItemIndex].title} templateStatus={template.templates[selectedItemIndex].activate} />
+                      <ImportPage templateCode={template.templates[selectedItemIndex].content} templateName={template.templates[selectedItemIndex].title} templateStatus={template.activate} />
                       </div>
                     </div>
                   </div>

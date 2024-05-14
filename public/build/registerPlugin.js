@@ -343,16 +343,19 @@ function ToolbarLibrary() {
     };
     const license = (0,react_redux__WEBPACK_IMPORTED_MODULE_14__.useSelector)(state => state.licenseActivate);
     const verifyKeyCheck = (0,_vayu_sites_template_verifykey__WEBPACK_IMPORTED_MODULE_12__.VerifyKey)();
-    console.log(verifyKeyCheck);
     const btnStyle = {
       color: "#fff",
       background: "var(--aisb-bg-color)"
     };
+    if (license.status) {
+      templateStatus = true;
+    }
     return templateStatus ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "th-button th-import",
       onClick: importPage
     }, importLoadingP ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Importing..', 'themehunk-blocks') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Import', 'themehunk-blocks'), " \"", templateName, "\" ", (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Import', 'themehunk-blocks')) : license.status === false && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_vayu_sites_aisb__WEBPACK_IMPORTED_MODULE_11__.Upgrade, {
-      styles: btnStyle
+      styles: btnStyle,
+      version: false
     });
   };
   const TabContent = ({
@@ -413,7 +416,7 @@ function ToolbarLibrary() {
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ImportPage, {
         templateCode: template.templates[selectedItemIndex].content,
         templateName: template.templates[selectedItemIndex].title,
-        templateStatus: template.templates[selectedItemIndex].activate
+        templateStatus: template.activate
       })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
         className: "th-single-site-content-page-template"
       }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Page Templates', 'themehunk-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
