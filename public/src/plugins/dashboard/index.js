@@ -7,7 +7,13 @@ import { IoPeopleSharp,IoSparklesSharp,IoNewspaperSharp } from "react-icons/io5"
 import { applyFilters } from '@wordpress/hooks';
 import { BiCertification, BiCoinStack } from "react-icons/bi";
 import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
-// import { Upgrade,Version } from '../../vayu-sites/aisb';
+import { FaSpinner } from 'react-icons/fa';
+
+import { Provider } from 'react-redux';
+import store from "../../vayu-sites/store";
+import { useSelector} from 'react-redux';
+import { Logo, Upgrade,Version } from '../../vayu-sites/aisb';
+import { VerifyKey } from '../../vayu-sites/template/verifykey';
 
 
 function ChildComponent(props) {
@@ -37,6 +43,8 @@ const ToggleSwitch = ({ initialValue, onChange}) => {
 function MyPluginContent(){
 
     const [navTab, setNavTab] = useState(1);
+    const [isLoading, setLoading] = useState(false);
+
     let vayuProStatus = '';
     if(vayublock.vayuProStatus == 'activated'){
         vayuProStatus = 'vayu-pro-active';
@@ -192,6 +200,7 @@ function MyPluginContent(){
 
     // Function to save input values
     const saveInputValues = async () => {
+        setLoading(true); // Set loading state to true
         const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
         try {
             const response = await fetch(`${Url}`, {
@@ -209,6 +218,7 @@ function MyPluginContent(){
             if (!response.ok) {
                 throw new Error('Failed to save input values');
             }
+            setLoading(false); // Set loading state to true
             console.log('Input values saved successfully');
         } catch (error) {
             console.error('Error saving input values:', error);
@@ -244,10 +254,16 @@ function MyPluginContent(){
         setButtonColor(e.target.checked);
     };
 
-        
-
+       // Upgrade 
+       const license = useSelector((state)=>state.licenseActivate);
+       const verifyKeyCheck = VerifyKey();
+       const btnStyle= { color:"#fff", 
+         background:"var(--aisb-bg-color)" 
+       }
 
     return (
+        <>
+      
         <div className="th-inner-wrap">
             
             <div className="th-header">
@@ -278,7 +294,12 @@ function MyPluginContent(){
                 </div>
 
                 </div>
-                <div className="th-last-wrap"><span>{__('version 1.0', 'vayu-blocks')}</span></div>
+               <div className='header-text'>
+                {license.status === false && <Upgrade styles={btnStyle} />}
+                </div>
+                
+                
+
                 </div> 
                 </div>
             </div>
@@ -435,7 +456,9 @@ function MyPluginContent(){
       </div>
 
       <div className='option-submit'>
-            <button onClick={saveInputValues}>{__('Save', 'vayu-blocks')}</button>
+            <button onClick={saveInputValues}>
+            {isLoading ? <><FaSpinner className="icon-spin loader" /></> : __('Save', 'vayu-blocks')}
+            </button>
       </div>
     </div>
                </div> 
@@ -445,6 +468,8 @@ function MyPluginContent(){
             </div>    
             </div>
             </div>
+           
+            </>
        
     );
 }
@@ -454,5 +479,9 @@ const container = document.getElementById('vayu-blocks-container');
 if (container) {
   // Use createRoot to create a root instance and then render the component
   const root = createRoot(container);
-  root.render(<MyPluginContent />);
+  root.render(
+    <Provider store={store}>
+  <MyPluginContent />
+  </Provider>
+);
 }
