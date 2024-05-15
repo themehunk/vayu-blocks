@@ -1167,3 +1167,31 @@ input[type=text]:focus{
   margin: .4rem 0;
 }
 }
+
+/*  Modified Button reponsive css    */
+.aisb-site-form .success-btn .aisb-border-btn,
+.aisb-site-form .success-btn .aisb-install-btn {
+  border-radius: 5px;
+    padding: 9px;
+    display: inline-flex;
+    align-items: center;
+}
+.aisb-site-form .success-btn{
+  justify-content: center;
+}
+@media only screen and (max-width: 1024px) {
+.aisb-site-build-wrap .aisb-site-main{
+    width: 98%;
+    margin: 0 auto;
+}
+.aisb-site-form .success-btn .aisb-border-btn,
+.aisb-site-form .success-btn .aisb-install-btn{
+    padding: 5px!important;
+}
+.components-flex{
+    justify-content: space-between;
+}
+.aisb-site-build-wrap .aisb-site-form h1{
+    font-size: 1.8rem;
+}
+}

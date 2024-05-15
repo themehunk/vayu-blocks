@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 
 
 function Version(){
-    const version = 'Version 1.0';
+    const version = 'Version 1.0.6';
     return <b>{version}</b>;
 }
 

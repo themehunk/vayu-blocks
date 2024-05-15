@@ -112,6 +112,8 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 Initial Release 
 
 == Upgrade Notice ==
-=1.0.5 =
-* Fix : Container global width issue resolved.
-* Fix : Json issue resolved. 
+=1.0.6 =
+* New : Free and Paid demo import.
+* Update : Upgrade feature updated.
+* Update : Admin style modified.
+* Fix : Blocks issue fixe
