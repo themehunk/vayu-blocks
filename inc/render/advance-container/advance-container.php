@@ -385,7 +385,7 @@ function vayu_advance_container_style($attr){
                 $contentMinHgtUnit = isset($attr['contentMinHgtUnit']) ? $attr['contentMinHgtUnit'] : 'px';
                 $css .= "min-height: {$attr['contentMinHgtTablet']}{$contentMinHgtUnit}; ";
             }else{
-                $css .= "min-height: auto";
+                $css .= "min-height: auto;";
             }
     
     
@@ -615,7 +615,7 @@ function vayu_advance_container_style($attr){
                   $contentMinHgtUnit = isset($attr['contentMinHgtUnit']) ? $attr['contentMinHgtUnit'] : 'px';
                   $css .= "min-height: {$attr['contentMinHgtMobile']}{$contentMinHgtUnit}; ";
               }else{
-                  $css .= "min-height: auto";
+                  $css .= "min-height: auto;";
               }
       
       

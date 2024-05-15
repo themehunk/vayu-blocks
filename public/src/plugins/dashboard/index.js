@@ -8,7 +8,12 @@ import { applyFilters } from '@wordpress/hooks';
 import { BiCertification, BiCoinStack } from "react-icons/bi";
 import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
 import { FaSpinner } from 'react-icons/fa';
-// import { Upgrade,Version } from '../../vayu-sites/aisb';
+
+import { Provider } from 'react-redux';
+import store from "../../vayu-sites/store";
+import { useSelector} from 'react-redux';
+import { Logo, Upgrade,Version } from '../../vayu-sites/aisb';
+import { VerifyKey } from '../../vayu-sites/template/verifykey';
 
 
 function ChildComponent(props) {
@@ -249,7 +254,10 @@ function MyPluginContent(){
         setButtonColor(e.target.checked);
     };
 
-        
+       // Upgrade to Pro button
+       const license = useSelector((state)=>state.licenseActivate);
+       const verifyKeyCheck = VerifyKey();
+    //    const licenseURL = addQueryArgs( window.location.href, { page: 'aisb-license-key' } ); 
 
 
     return (
@@ -284,6 +292,13 @@ function MyPluginContent(){
 
                 </div>
                 <div className="th-last-wrap"><span>{__('version 1.0', 'vayu-blocks')}</span></div>
+                
+                <div className="header-text">
+
+                {(license.status === false) && <Upgrade styles={btnStyle} version={true} />}
+                
+                </div>
+
                 </div> 
                 </div>
             </div>
