@@ -193,16 +193,6 @@ class Vayu_Block_Plugin {
             plugins_url( 'vayu-blocks/inc/assets/img/menu-logo.png' ),
             59
         );
-    
-        // add_submenu_page(
-        //     'vayu-blocks',
-        //     'Blocks',
-        //     'Blocks',
-        //     'manage_options',
-        //     'vayu-blocks&path=blocks',
-        //     array( $this, 'vayu_plugin_page_callback' )
-        // );
-
 
         add_submenu_page(
             'vayu-blocks',
