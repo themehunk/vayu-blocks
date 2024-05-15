@@ -109,7 +109,7 @@ max-width: 1230px;
 .th-menu-wrap .th-menu-item {
   line-height: 1em;
   padding: 10px 12px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-align: center;
   font-weight: 600;
@@ -676,19 +676,19 @@ fill: #ffff;
 .aisb-install-btn {
   display: inline-flex;
   background: #ff331f00;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 6px 15px;
   border: 0;
   font-weight: 600;
   font-size: 20px;
   color: #fff;
-  border: 2px solid white;
+  border: 1px solid white;
   cursor: pointer;
 }
 
 .aisb-back .close svg{
   fill: #111;
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .aisb-back .close {
@@ -697,6 +697,7 @@ fill: #ffff;
     border-radius: 5px;
     margin-left: 28%;
     display: inline-flex;
+    align-items: center;
     font-weight: 500;
     padding: 9px 20px;
     border: 0;
@@ -918,10 +919,7 @@ iframe{
 
   .aisb-site-build-wrap .aisb-site-build {
     padding: 15px;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    background-image: var(--aisb-bg-color);
-    background-image: -ms-linear-gradient( 0deg, rgb(74,0,224) 0%, rgb(142,45,226) 100%);
+    background-image: -webkit-linear-gradient(0deg, #DBDBDB 0%, #ADA996 100%);
     box-shadow: -0.035px 2px 6px 0px rgba(0, 0, 0, 0.08);
 }
 
@@ -1004,8 +1002,8 @@ input[type=text]:focus{
 
 .aisb-site-form .aisb-install-btn {
     font-size: 16px;
-    background: var(--aisb-bg-color);
-    border-radius: 25px;
+    background: #000!important;
+    border-radius: 5px;
     padding: 12px 50px 5px 50px;
     cursor: pointer;
   }
