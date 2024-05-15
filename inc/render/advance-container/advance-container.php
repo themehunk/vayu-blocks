@@ -10,6 +10,8 @@ function vayu_advance_container_style($attr){
 	
 
     if(isset( $attr['uniqueID'] )){
+
+		$globalpadding = get_option('padding',18); 
         
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
@@ -75,7 +77,6 @@ function vayu_advance_container_style($attr){
 			padding-left: {$paddingLeft}{$paddingUnit}; 
 		    ";
 		} else {
-			$globalpadding = get_option('padding',18); 
 			$padding = isset($attr['padding']) ? $attr['padding'] : $globalpadding;
 			$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
 			$css .= "padding: {$padding}{$paddingUnit};";
@@ -422,7 +423,7 @@ function vayu_advance_container_style($attr){
 				margin-right: {$marginRightTablet}{$marginUnit};
 				";
 			} else {
-				$marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : 0;
+				$marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : $globalpadding;
 				$marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
 				$css .= "margin: {$marginTablet}{$marginUnit}; 
 				";
@@ -524,7 +525,7 @@ function vayu_advance_container_style($attr){
                 }
 				//gap
 			
-			 $elementGapTablet = isset($attr['elementGapTablet']) ? $attr['elementGapTablet'] : '10';	
+			 $elementGapTablet = isset($attr['elementGapTablet']) ? $attr['elementGapTablet'] : $container_gap;	
 			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
              $css .= "gap: {$elementGapTablet}{$elementGapUnit};";
 
@@ -631,7 +632,7 @@ function vayu_advance_container_style($attr){
                 $paddingLeftMobile = isset($attr['paddingLeftMobile']) ? $attr['paddingLeftMobile'] : 0;
                 $css .= "padding-top: {$paddingTopMobile}{$paddingUnit}; padding-right: {$paddingRightMobile}{$paddingUnit}; padding-bottom: {$paddingBottomMobile}{$paddingUnit}; padding-left: {$paddingLeftMobile}{$paddingUnit};";
             } else {
-                $paddingMobile = isset($attr['paddingMobile']) ? $attr['paddingMobile'] : 0;
+                $paddingMobile = isset($attr['paddingMobile']) ? $attr['paddingMobile'] : $globalpadding;
                 $paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
                 $css .= "padding: {$paddingMobile}{$paddingUnit};";
             }	
@@ -782,7 +783,7 @@ function vayu_advance_container_style($attr){
                 $css .= isset($attr['AlignContentMobile']) ? "align-content: {$attr['AlignContentMobile']}; " : '';
                 }
 				//gap
-				$elementGapMobile = isset($attr['elementGapMobile']) ? $attr['elementGapMobile'] : '10';	
+				$elementGapMobile = isset($attr['elementGapMobile']) ? $attr['elementGapMobile'] : $container_gap;	
 			    $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
                 $css .= "gap: {$elementGapMobile}{$elementGapUnit};";
                 $css .= "}";

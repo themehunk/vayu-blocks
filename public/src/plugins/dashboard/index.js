@@ -254,13 +254,16 @@ function MyPluginContent(){
         setButtonColor(e.target.checked);
     };
 
-       // Upgrade to Pro button
+       // Upgrade 
        const license = useSelector((state)=>state.licenseActivate);
        const verifyKeyCheck = VerifyKey();
-    //    const licenseURL = addQueryArgs( window.location.href, { page: 'aisb-license-key' } ); 
-
+       const btnStyle= { color:"#fff", 
+         background:"var(--aisb-bg-color)" 
+       }
 
     return (
+        <>
+      
         <div className="th-inner-wrap">
             
             <div className="th-header">
@@ -291,13 +294,11 @@ function MyPluginContent(){
                 </div>
 
                 </div>
-                <div className="th-last-wrap"><span>{__('version 1.0', 'vayu-blocks')}</span></div>
-                
-                <div className="header-text">
-
-                {(license.status === false) && <Upgrade styles={btnStyle} version={true} />}
-                
+               <div className='header-text'>
+                {license.status === false && <Upgrade styles={btnStyle} />}
                 </div>
+                
+                
 
                 </div> 
                 </div>
@@ -467,6 +468,8 @@ function MyPluginContent(){
             </div>    
             </div>
             </div>
+           
+            </>
        
     );
 }
@@ -476,5 +479,9 @@ const container = document.getElementById('vayu-blocks-container');
 if (container) {
   // Use createRoot to create a root instance and then render the component
   const root = createRoot(container);
-  root.render(<MyPluginContent />);
+  root.render(
+    <Provider store={store}>
+  <MyPluginContent />
+  </Provider>
+);
 }

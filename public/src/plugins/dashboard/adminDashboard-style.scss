@@ -27,8 +27,14 @@ display: none !important;
       width: -webkit-fill-available;
       height: 60px;
       align-items: center;
+      justify-content: space-between;
   }
-
+  #vayu-blocks-container .header-text{
+    flex-grow: initial;
+  }
+  .header-text b{
+  color: #666060;
+}
   #vayu-blocks-container .th-header .th-conatiner{    
         max-width: 95%;
         width: 100%;
@@ -285,6 +291,7 @@ input:checked + .slider:before {
   border-radius: 9px;
   pointer-events: none;
   opacity: .7;
+  text-align: left;
 }
 .sw-wrapprer.vayu-pro-active .sw-box{
   pointer-events: initial;
@@ -351,7 +358,9 @@ input:checked + .slider:before {
 .th-sw-bottom a{
   margin: 0!important;
 }
-
+.sw-wrapprer .heading p{
+  font-weight: initial;
+}
 /*  Admin panel Block Settings Styles  */
 .wrapper-title{
   margin-bottom: 0;

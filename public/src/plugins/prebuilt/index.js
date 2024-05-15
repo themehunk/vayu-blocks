@@ -96,7 +96,7 @@ function ToolbarLibrary() {
         return (
           templateStatus ? (
             <div className="th-button th-import" onClick={importPage}>
-              {importLoadingP ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Import', 'themehunk-blocks')}
+              {importLoadingP ? __('Importing..', 'themehunk-blocks') : __('Import', 'themehunk-blocks')} "{templateName}" {__('Template', 'themehunk-blocks')}
             </div>
             ) : (
             license.status === false && <Upgrade styles={btnStyle} version={false} />
