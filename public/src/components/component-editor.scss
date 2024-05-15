@@ -1086,7 +1086,7 @@ color: #818080;
 }
 
 .th-menu-item {
-    padding: 8px 12px;
+
     display: flex;
     align-items: center;
     text-align: center;
@@ -1095,8 +1095,7 @@ color: #818080;
     font-size: 13px;
     cursor: pointer;
     margin: 0 0.3rem;
-    border: 2px dashed;
-    border-color: transparent;
+    border:0
 }
 .th-menu-item svg,.th-close-wrap svg{
     font-size: 1.2rem;
@@ -1108,9 +1107,9 @@ color: #818080;
     }
 
 .th-menu-item.active {
-    border-color: #6C1BC3;
+    
     color: #6C1BC3;
-    border: 2px dashed;
+   
 }
 
 .th-template-block-wrap {
@@ -1154,7 +1153,7 @@ color: #818080;
     right: -1px;
     text-transform: uppercase;
     position: absolute;
-    z-index: 999;
+    z-index:1;
     font-weight: 600;
     letter-spacing: 0.3px;
 }
@@ -1413,19 +1412,39 @@ font-weight: 600;
     margin-right: 2em;
     justify-content: space-between;
     }
+
     .th-single-site-content-footer-wrap .th-button{
-        padding: 0.4rem 2rem;
-        font-size: 0.7rem;
+        font-size: 13px;
+        font-weight: 600;
         background: #6C1BC3;
         border: 1px solid #6C1BC3;
     color:#fff;
-    border-radius:3px;
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
     }
     
     .th-single-site-content-footer-wrap .th-button.th-import{
     background:#111;
     border:1px solid #111;
+    }
+
+    .th-single-site-content-footer-wrap svg {
+        margin-right: 5px;
+        height: 16px;
+        width: 16px;
+    }
+    
+    .th-single-site-content-footer-wrap button.components-button.aisb-upgrade-btn.is-primary {
+        border: 0;
+        font-weight: 600;
+        margin-right: 0%;
+        cursor: pointer;
+        background: #000 !important;
+        color: #fff !important;
+        padding: 10px 20px;
+        border-radius: 5px;
     }
 
     .th-single-site-content-footer-left{

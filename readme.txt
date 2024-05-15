@@ -87,10 +87,8 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 * Update : Admin style modified.
 * Fix : Blocks issue fixed.
 
-
 =1.0.5 =
 * Fix : Container global width issue resolved.
-* Fix : Json issue resolved. 
 
 =1.0.4 =
 * Update : React code wrapped in a single folder.
@@ -112,8 +110,13 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 Initial Release 
 
 == Upgrade Notice ==
+<<<<<<< HEAD
 =1.0.6 =
 * New : Free and Paid demo import.
 * Update : Upgrade feature updated.
 * Update : Admin style modified.
 * Fix : Blocks issue fixe
+=======
+=1.0.5 =
+* Fix : Container global width issue resolved.
+>>>>>>> a3f2f293705e366ba8e1f1a0767f0f8f56487a2c

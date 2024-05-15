@@ -197,7 +197,17 @@ function ToolbarLibrary() {
           const handleBack = () => {
             setSelectedItem(null);
           };
-        
+          // templates.map((template, index) => { 
+          //   const license = useSelector((state)=>state.licenseActivate);
+          //   const verifyKeyCheck = VerifyKey();
+          //   let proactive;
+          //   if (license.status) { 
+          //     proactive = "Active"; 
+          //   } else { 
+          //     proactive = template.badge; 
+          //   } 
+          // });
+
         switch (tab) {
             case 'page':
                 return (
