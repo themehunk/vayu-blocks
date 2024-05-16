@@ -403,7 +403,7 @@ function vayu_advance_container_style($attr){
 				$paddingTablet = "{$paddingTopTablet}{$paddingUnit} {$paddingRightTablet}{$paddingUnit} {$paddingBottomTablet}{$paddingUnit} {$paddingLeftTablet}{$paddingUnit}";
 			    $css .= "padding: {$paddingTablet};";
 			} else {
-				$paddingTablet = isset($attr['paddingTablet']) ? $attr['paddingTablet'] : 0;
+				$paddingTablet = isset($attr['paddingTablet']) ? $attr['paddingTablet'] : $globalpadding;
 				$paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
 				$paddingTablet = "{$paddingTablet}{$paddingUnit}";
 				$css .= "padding: {$paddingTablet};";
@@ -423,7 +423,7 @@ function vayu_advance_container_style($attr){
 				margin-right: {$marginRightTablet}{$marginUnit};
 				";
 			} else {
-				$marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : $globalpadding;
+				$marginTablet = isset($attr['marginTablet']) ? $attr['marginTablet'] : 0;
 				$marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
 				$css .= "margin: {$marginTablet}{$marginUnit}; 
 				";
