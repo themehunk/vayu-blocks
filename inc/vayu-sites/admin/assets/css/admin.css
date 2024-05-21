@@ -251,6 +251,18 @@ max-width: 1230px;
 
 span.aisb-install-btn.free-upgrade {
   margin-left: 12%;
+  padding: 9px 20px;
+  height: 35px;
+  font-size: 12px;
+  line-height: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+span.aisb-install-btn.free-upgrade b{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
 }
 
 /* .iframe-footer {
@@ -306,6 +318,7 @@ header {
     border-radius:5px;
     display: inline-flex;
     align-items: center;
+    height: 35px;
 }
 
 .header-text b{
@@ -626,10 +639,9 @@ padding: 8px 10px;
 /*** iframe fotter tip style **/
 
 #sidebarModel.tiphide{
-  top: 100%;
-  -webkit-transform:translateY(0px);
-    -moz-transform:translateY(0px);
-    transform:translateY(0px);
+  -webkit-transform:translateY(76px);
+    -moz-transform:translateY(76px);
+    transform:translateY(76px);
      -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     transition: all 0.5s ease-in-out;
@@ -682,13 +694,14 @@ fill: #ffff;
   font-weight: 600;
   font-size: 20px;
   color: #fff;
-  border: 1px solid white;
+  border: .7px solid white;
   cursor: pointer;
 }
 
 .aisb-back .close svg{
   fill: #111;
   margin-top: 3px;
+  margin-right: 5px;
 }
 
 .aisb-back .close {
@@ -702,6 +715,7 @@ fill: #ffff;
     padding: 9px 20px;
     border: 0;
     font-size: 13px;
+    text-transform: uppercase;
 }
 
 .aisb-back .close:hover,
@@ -938,7 +952,8 @@ iframe{
 }
 
 .aisb-site-build-wrap .aisb-site-main {
-    width: 30%;
+    width: 100%;
+    max-width: 575px;
     margin-left: 35%;
     background: #ffffff;
     padding: 20px 50px;
@@ -1169,15 +1184,46 @@ input[type=text]:focus{
 }
 
 /*  Modified Button reponsive css    */
+.aisb-site-form .success-btn .aisb-install-btn b, 
+.aisb-site-form .success-btn .aisb-border-btn b {
+    margin-right: 5px;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+}
 .aisb-site-form .success-btn .aisb-border-btn,
 .aisb-site-form .success-btn .aisb-install-btn {
   border-radius: 5px;
-    padding: 9px;
+    padding: 9px!important;
     display: inline-flex;
     align-items: center;
+    width: 175px;
+    text-align: center;
+    justify-content: center;
+    height: 54px;
+}
+.aisb-site-form .success-btn .btn-center{
+  margin: 25px 0;
 }
 .aisb-site-form .success-btn{
   justify-content: center;
+}
+/*  Build MY Website Button  */
+.aisb-site-options + .btn-center .aisb-install-btn{
+  font-size: 16px;
+    line-height: 25px;
+    background: #000 !important;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 9px 45px;
+    display: inline-flex;
+    justify-content: center;
+}
+.aisb-site-options + .btn-center .aisb-install-btn b{
+  margin-right: 0;
+}
+.aisb-site-options + .btn-center .aisb-install-btn b svg{
+  height: 100%;
 }
 @media only screen and (max-width: 1024px) {
 .aisb-site-build-wrap .aisb-site-main{

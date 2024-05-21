@@ -2,6 +2,7 @@ import { createRoot, useState,useEffect } from '@wordpress/element';
 import { RxGroup , RxHeading, RxButton} from "react-icons/rx";
 import { AiOutlineArrowsAlt } from "react-icons/ai";
 import { SiWoo } from "react-icons/si";
+import { MdLockOutline } from "react-icons/md";
 import { __ } from '@wordpress/i18n';
 import { IoPeopleSharp,IoSparklesSharp,IoNewspaperSharp } from "react-icons/io5";
 import { applyFilters } from '@wordpress/hooks';
@@ -23,7 +24,7 @@ function ChildComponent(props) {
     );
 }
 
-const ToggleSwitch = ({ initialValue, onChange}) => {
+const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense}) => {
     const [isChecked, setIsChecked] = useState(initialValue);
 
     const handleChange = () => {
@@ -31,13 +32,25 @@ const ToggleSwitch = ({ initialValue, onChange}) => {
         setIsChecked(newValue);
         onChange(newValue); // Callback to parent component
     };
-
-    return (
-        <label className="toggle-switch">
-            <input type="checkbox" checked={isChecked} onChange={handleChange} />
-            <span className="slider round"></span>
-        </label>
-    );
+    if( !proStatus || proStatus && verifyLicense ){
+        return (
+            <label className="toggle-switch">
+                <input type="checkbox" checked={isChecked} onChange={handleChange} />
+                <span className="slider round"></span>
+            </label>
+        );
+    }
+    else{
+        return (
+            <label className="toggle-switch">
+                <MdLockOutline />
+                 <span className="pro">
+                    {'pro'}
+                </span>
+            </label>
+        );  
+    }
+    
 };
 
 function MyPluginContent(){
@@ -151,23 +164,23 @@ function MyPluginContent(){
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
-                case 'wooproduct':
+                case 'woo Product':
                     return {
-                        icon: <RxButton />,
+                        icon: <SiWoo />,
                         description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#WooCommerce-product'
                     };
                 case 'heading':
                     return {
-                        icon: <RxButton />,
+                        icon: <RxHeading />,
                         description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#Advance-headings'
                     };
                 case 'spacer':
                     return {
-                        icon: <RxButton />,
+                        icon: <AiOutlineArrowsAlt />,
                         description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#spacer'
@@ -181,10 +194,10 @@ function MyPluginContent(){
                         link2: '#'
                     };
 
-                    case 'productfilter':
+                    case 'product Filter':
                     return {
-                        icon: <RxButton />,
-                        description: __('Productfilter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        icon: <SiWoo />,
+                        description: __('Product filter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
                         link2: '#'
                     };
@@ -260,7 +273,7 @@ function MyPluginContent(){
        const btnStyle= { color:"#fff", 
          background:"var(--aisb-bg-color)" 
        }
-
+     
     return (
         <>
       
@@ -319,7 +332,7 @@ function MyPluginContent(){
                     <div className='th-sw-right'>
                         <div key={key}>
                         <label className='block-label'>{getDescription(key).icon}{key}</label>
-                        <ToggleSwitch initialValue={value} onChange={newValue => handleToggleSwitchChange(key, newValue)} />
+                        <ToggleSwitch initialValue={value} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
                         </div>
                     </div>
                     <div className='th-sw-bottom'>
