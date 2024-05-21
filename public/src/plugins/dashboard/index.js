@@ -397,7 +397,7 @@ function MyPluginContent(){
       <aside>
         <nav>
         <a href="#" className={navTab === 1 ? 'selected' : ''} onClick={() => NavTabClick(1)}><BiCertification />{__('Editor Options','vayu-blocks')}</a>
-        {/* <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a> */}
+        <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a>
         </nav>
       </aside>
       <div className="content-wrapper">
@@ -447,7 +447,7 @@ function MyPluginContent(){
                  <span className='unit'>{__('px','vayu-blocks')}</span>
             </div>
 
-            {/* <div className='option-wrapper'>
+            <div className='option-wrapper'>
             <RxButton /><p>{__('Button Color', 'vayu-blocks')}</p>
                     <input
                         type="checkbox"
@@ -455,7 +455,7 @@ function MyPluginContent(){
                         checked={buttonColor}
                         onChange={handleCheckboxChange}
                     />
-            </div> */}
+            </div>
     
         </div>
         )}
