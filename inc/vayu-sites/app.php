@@ -66,8 +66,13 @@ class VAYU_BLOCKS_SITES_APP{
 
 
   public function import_data() {
+        if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+          wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+          wp_die();
+      }
 
-          if(isset( $_POST['data'] )){
+
+      if(isset( $_POST['data'] ) && current_user_can('manage_options')){
 
             $return = sanitize_url(  json_decode( wp_unslash( $_POST['data'] ))->data );
             VAYU_BLOCKS_SITES_IMPORT::instance()->get_import_data($return);
@@ -80,7 +85,12 @@ class VAYU_BLOCKS_SITES_APP{
 
 
   public function import_xml() {
-        if(isset( $_POST['data'] )){
+    if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+      wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+      wp_die();
+  }
+
+  if(isset( $_POST['data'] ) && current_user_can('manage_options')){
 
           $return = sanitize_url(  json_decode( wp_unslash( $_POST['data'] ))->data );
 
@@ -93,8 +103,13 @@ class VAYU_BLOCKS_SITES_APP{
   }
 
   public  function init_cutomizer() {
+
+    if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+      wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+      wp_die();
+  }
     
-        if(isset( $_POST['data'] )){
+  if(isset( $_POST['data'] ) && current_user_can('manage_options')){
 
             $data = wp_unslash( $_POST['data']);
             $data = json_decode($data)->data;
@@ -105,8 +120,13 @@ class VAYU_BLOCKS_SITES_APP{
 
   public function init_options() {
 
-    if(isset( $_POST['data'] )){
-          $data = wp_unslash( $_POST['data']);
+    if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+      wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+      wp_die();
+  }
+
+    if(isset( $_POST['data'] ) && current_user_can('manage_options')){
+      $data = wp_unslash( $_POST['data']);
           $data = json_decode($data)->data;
         VAYU_BLOCKS_SITES_IMPORT::instance()->import_options($data);
         exit();
@@ -115,7 +135,14 @@ class VAYU_BLOCKS_SITES_APP{
 
   public function init_widgets() {
 
-      if(isset( $_POST['data'] )){
+
+    if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+      wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+      wp_die();
+  }
+
+
+    if(isset( $_POST['data'] ) && current_user_can('manage_options')){
 
             $data = stripslashes( $_POST['data']);
               $data = json_decode($data)->data;
@@ -125,7 +152,14 @@ class VAYU_BLOCKS_SITES_APP{
  }
 
   public function init_site_url(){
-        if(isset( $_POST['data'] )){
+
+    if ( ! isset( $_POST['vsecurity'] ) || ! wp_verify_nonce( $_POST['vsecurity'], 'vayu_nonce' ) ) {
+      wp_send_json_error( array( 'message' => 'Invalid nonce.' ) );
+      wp_die();
+  }
+
+
+    if(isset( $_POST['data'] ) && current_user_can('manage_options')){
 
             $data = stripslashes( $_POST['data']);
 

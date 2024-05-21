@@ -5,8 +5,8 @@ import { Icon, arrowRight } from '@wordpress/icons';
 import TextField from '@mui/material/TextField';
 import { useSelector, useDispatch } from 'react-redux';
 import {stepOne,stepThree} from '../actions';
-import { Upgrade,Version } from '../aisb';
 import { __ } from '@wordpress/i18n';
+import UpgradeButton from './UpgradeButton';
 
 export default function buildWibsite(props){
     const license = useSelector((state)=>state.licenseActivate);
@@ -41,13 +41,8 @@ return( <div className='aisb-site-build-wrap'>
 
                     <FlexItem>  
                         <div className="header-text">
-                            
-                       { license.status ===false && <Upgrade/>}
-                       {license.status && Version()}
-
-                            
-                            
-                            </div>
+                        <UpgradeButton/>       
+                        </div>
                  </FlexItem>
                 </Flex>
             </div>

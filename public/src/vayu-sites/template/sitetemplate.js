@@ -94,7 +94,7 @@ return (
 
   <div className='asib-tmpl-footer'>
     <h3>{template.title}</h3>
-    {template.free_paid =="paid" && <a className='aisb-pro' data-pro='Premium' ><img src={`${AISB.pluginpath}admin/assets/images/pro.png`}  alt="Premium" /></a>}
+    {template.free_paid =="paid" && <a className='aisb-pro' data-pro='Premium' ><img src={`${VAYUB.pluginpath}admin/assets/images/pro.png`}  alt="Premium" /></a>}
   </div>
 </div>
 </div>);

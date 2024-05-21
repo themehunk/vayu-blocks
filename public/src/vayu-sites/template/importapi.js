@@ -64,18 +64,23 @@ export default function ImportAPI(props) {
   const [apiUrl, setApiUrl] = useState(props.apiurl);
   const [apiData, setApiData] = useState(null);
   const [updateStart, setupdateStart] = useState(false);
-  const [ajaxUrl, setAjaxUrl] = useState(AISB.ajaxurl);
+  const [ajaxUrl, setAjaxUrl] = useState(VAYUB.ajaxurl);
 
 
     /*** All Import data
      *  customizer,option,xml
      */
     const getImportData = async () =>{
+
           const dataToSend = { data: apiUrl }; // Customize the data to send
            const response = await fetch(ajaxUrl, {
             method: 'POST',
+            headers: {
+              'X-WP-Nonce': VAYUB.vsecurity,
+          },
             body: new URLSearchParams({
                 action: 'vayu_blocks_sites_ajax_handler_data', // Specify the WordPress AJAX action
+                vsecurity: VAYUB.vsecurity,
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         });
@@ -133,8 +138,12 @@ const importXml = async (xml_url) =>{
           const dataToSend = { data: xml_url }; // Customize the data to send
           const response = await fetch(ajaxUrl, {
             method: 'POST',
+            headers: {
+              'X-WP-Nonce': VAYUB.vsecurity,
+          },
             body: new URLSearchParams({
                 action: 'vayu_blocks_sites_ajax_import_xml', // Specify the WordPress AJAX action
+                vsecurity: VAYUB.vsecurity,
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         }).then(response => response.json())
@@ -164,8 +173,12 @@ const importCustomizer = async () =>{
       const dataToSend = { data: apiData.customizer }; // Customize the data to send
       const response = await fetch(ajaxUrl, {
         method: 'POST',
+        headers: {
+          'X-WP-Nonce': VAYUB.vsecurity,
+      },
         body: new URLSearchParams({
             action: 'vayu_blocks_sites_ajax_cutomizer', // Specify the WordPress AJAX action
+            vsecurity: VAYUB.vsecurity,
             data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
         }),
     })
@@ -201,8 +214,12 @@ const importOptions = async () =>{
     const dataToSend = { data: apiData.option }; // Customize the data to send
    await fetch(ajaxUrl, {
       method: 'POST',
+      headers: {
+        'X-WP-Nonce': VAYUB.vsecurity,
+    },
       body: new URLSearchParams({
           action: 'vayu_blocks_sites_aimport_options', // Specify the WordPress AJAX action
+          vsecurity: VAYUB.vsecurity,
           data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
       }),
   }).then(response => response.json())
@@ -239,8 +256,12 @@ const importOptions = async () =>{
           const dataToSend = { data: apiData.widgets }; // Customize the data to send
          await fetch(ajaxUrl, {
             method: 'POST',
+            headers: {
+              'X-WP-Nonce': VAYUB.vsecurity,
+          },
             body: new URLSearchParams({
                 action: 'vayu_blocks_sites_import_widgets', // Specify the WordPress AJAX action
+                vsecurity: VAYUB.vsecurity,
                 data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
             }),
         }).then(response => response.json())

@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import {addTrueFalse} from '../actions';
-import { Upgrade,Version } from '../aisb';
+import UpgradeButton from './UpgradeButton';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -55,17 +55,18 @@ const nextInstall = ()=>{
               {(props.templateData.free_paid==='free' || license.status) &&  <div><span onClick={()=>nextInstall()} className={`aisb-install-btn ${license.status ===false && 'free-upgrade'}`}>Continue<b><Icon size ={22} icon={ arrowRight } /></b></span></div> }
               
               {props.templateData.free_paid==='paid' && <div className="header-text center" >
-              {license.status===false && <Upgrade version={false}/>}
+              {/* {license.status===false && <Upgrade version={false}/>} */}
               </div>}
               
               </FlexBlock>
               <FlexItem>
               <div className="header-text">
-              {(props.templateData.free_paid==='free' && license.status ===false) && <Upgrade />}
+             
+              {(props.templateData.free_paid==='free' && license.status ===false) &&  <UpgradeButton/>}
 
-              {(props.templateData.free_paid==='free' && license.status) && Version()}
+              {/* {(props.templateData.free_paid==='free' && license.status) && Version()} */}
 
-              {props.templateData.free_paid==='paid' && <Upgrade  btn={false}/>}
+              {props.templateData.free_paid==='paid' &&  <UpgradeButton/>}
             </div>
               </FlexItem>
             </Flex>
