@@ -1,6 +1,7 @@
 import { Upgrade,HomeLink, Logo,Version } from '../aisb';
 import { useSelector} from 'react-redux';
 import { VerifyKey } from './verifykey';
+import UpgradeButton from './UpgradeButton';
 
 
 export default function Header() {
@@ -29,10 +30,11 @@ export default function Header() {
             
             <div className="header-text">
                 <div className='header-right'>
-              {license.status && <div className='aisb-verifybtn'>{ verifyKeyCheck && verifyBtn()} {Version()}</div>}
+              {/* {license.status && <div className='aisb-verifybtn'>{ verifyKeyCheck && verifyBtn()} {Version()}</div>}
 
               {license.status=== false && <Upgrade/> }
-              <HomeLink/>
+              <HomeLink/> */}
+            <UpgradeButton/>
                </div>
             </div>
         </header>
