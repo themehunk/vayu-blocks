@@ -723,21 +723,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/react-redux.mjs");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _vayu_sites_template_PluginStatusChecker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../vayu-sites/template/PluginStatusChecker */ "./src/vayu-sites/template/PluginStatusChecker.js");
-
-
-
-
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -748,13 +738,13 @@ function Version() {
 }
 function Upgrade(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, props.btn && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: AISB.upgrade,
+    href: VAYUB.upgrade,
     target: "_blank"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     variant: "primary",
     className: "aisb-upgrade-btn",
     style: props.styles
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       viewBox: "0 0 1024 1024",
       class: "icon",
@@ -790,85 +780,13 @@ function Upgrade(props) {
       d: "M61.384 354.176A55.216 55.216 0 0 0 6.144 409.44a55.2 55.2 0 0 0 55.24 55.208V354.176z",
       fill: "#0092D2"
     }))
-  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('UPGRADE TO PRO', 'vayu-blocks'))), " ", props.version && Version());
-}
-function UpgradeButton1(props) {
-  const license = (0,react_redux__WEBPACK_IMPORTED_MODULE_7__.useSelector)(state => state.licenseActivate);
-  const pluginStatus = (0,_vayu_sites_template_PluginStatusChecker__WEBPACK_IMPORTED_MODULE_5__.PluginStatusChecker)('vayu-blocks-pro/vayu-blocks-pro');
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
-    console.log(pluginStatus, 'status');
-    if (pluginStatus.isActive) {
-      return verifyBtn(license);
-    } else if (pluginStatus.isActive === false) {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, props.btn && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-        href: AISB.upgrade,
-        target: "_blank"
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        variant: "primary",
-        className: "aisb-upgrade-btn",
-        style: props.styles
-      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
-          viewBox: "0 0 1024 1024",
-          class: "icon",
-          version: Version
-        }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M57 438.312l109.536 488.72h697.336l109.536-488.72-259.176 156.816-187.856-333.088-205.352 333.088z",
-          fill: "#EC9312"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M629.048 211.888c0 58.912-47.752 106.656-106.672 106.656-58.92 0-106.664-47.744-106.664-106.656 0-58.976 47.744-106.656 106.664-106.656s106.672 47.688 106.672 106.656z",
-          fill: "#CB1B5B"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M522.376 105.232c-58.92 0-106.664 47.68-106.664 106.656 0 58.912 47.744 106.656 106.664 106.656V105.232z",
-          fill: "#E5226B"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M57 438.312l109.536 488.72h697.336z",
-          fill: "#F4A832"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M973.408 438.312l-109.536 488.72H166.536z",
-          fill: "#F4A832"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M166.536 927.032h697.336L515.2 715.832z",
-          fill: "#F5B617"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M1017.856 409.44a55.2 55.2 0 0 1-55.264 55.208 55.184 55.184 0 0 1-55.216-55.208 55.2 55.2 0 0 1 55.216-55.264 55.2 55.2 0 0 1 55.264 55.264z",
-          fill: "#0472AF"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M962.592 354.176a55.2 55.2 0 0 0-55.216 55.264 55.184 55.184 0 0 0 55.216 55.208V354.176z",
-          fill: "#1A8DCC"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M116.656 409.44a55.216 55.216 0 0 1-55.272 55.208A55.208 55.208 0 0 1 6.144 409.44a55.208 55.208 0 0 1 55.24-55.264 55.224 55.224 0 0 1 55.272 55.264z",
-          fill: "#0472AF"
-        }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("path", {
-          d: "M61.384 354.176A55.216 55.216 0 0 0 6.144 409.44a55.2 55.2 0 0 0 55.24 55.208V354.176z",
-          fill: "#0092D2"
-        }))
-      }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('UPGRADE TO PRO', 'vayu-blocks'))), " ", props.version && Version());
-    }
-  }, [pluginStatus]);
-}
-function verifyBtn(license) {
-  const licenseURL = (0,_wordpress_url__WEBPACK_IMPORTED_MODULE_4__.addQueryArgs)(window.location.href, {
-    page: 'aisb-license-key'
-  });
-  if (license.status) {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "active"
-    }, "\u25C9 PRO");
-  } else {
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-      className: "inactive"
-    }, "\u25C9 INACTIVE"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-      href: licenseURL,
-      className: "activate-now"
-    }, "Activate now"));
-  }
+  }), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('UPGRADE TO PRO', 'vayu-blocks'))), " ", props.version && Version());
 }
 function HomeLink() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: '?page=vayu-sites',
     title: "Dashboard"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"], {
     icon: (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
       className: "dashboard-link",
       fill: "#fff",
@@ -887,9 +805,9 @@ function Logo() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "logo aisb-logo"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: `${AISB.baseurl}wp-admin/admin.php?page=vayu-sites`
+    href: `${VAYUB.baseurl}wp-admin/admin.php?page=vayu-sites`
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: AISB.rootPath + "inc/assets/img/logo-vayu.png",
+    src: VAYUB.rootPath + "inc/assets/img/logo-vayu.png",
     alt: "Vayu Logo"
   })));
 }
@@ -13847,17 +13765,6 @@ module.exports = window["wp"]["i18n"];
 
 "use strict";
 module.exports = window["wp"]["plugins"];
-
-/***/ }),
-
-/***/ "@wordpress/url":
-/*!*****************************!*\
-  !*** external ["wp","url"] ***!
-  \*****************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["wp"]["url"];
 
 /***/ }),
 

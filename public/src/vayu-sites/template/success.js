@@ -1,12 +1,12 @@
 import { useState,useEffect } from '@wordpress/element';
 import { useSelector} from 'react-redux';
-import { Button, Flex, FlexBlock, FlexItem } from '@wordpress/components';
+import {  Flex, FlexItem } from '@wordpress/components';
 import animationSuccess  from '../assets/lottie/success';
-import { getQueryArg } from '@wordpress/url';
 import { Icon, arrowRight,chevronLeftSmall } from '@wordpress/icons';
 import Lottie from 'react-lottie';
-import { HomeLink, Logo, Upgrade } from '../aisb';
+import { Logo } from '../aisb';
 import { __ } from '@wordpress/i18n';
+import UpgradeButton from './UpgradeButton';
 
 
 
@@ -34,10 +34,14 @@ export default function success(){
 const getEditUrl = async () =>{
   try {
     const dataToSend = { data: templType,type:'edit' }; // Customize the data to send
-    const response = await fetch(AISB.ajaxurl, {
+    const response = await fetch(VAYUB.ajaxurl, {
       method: 'POST',
+      headers: {
+        'X-WP-Nonce': VAYUB.vsecurity,
+    },
       body: new URLSearchParams({
           action: 'vayu_blocks_sites_core', // Specify the WordPress AJAX action
+          vsecurity: VAYUB.vsecurity,
           data: JSON.stringify(dataToSend), // Convert the data to JSON and send it
       }),
   })
@@ -61,14 +65,14 @@ const getEditUrl = async () =>{
       
 
       const handleClick= () =>{
-        // window.location.replace(AISB.baseurl);
+        // window.location.replace(VAYUB.baseurl);
    
-         window.open(AISB.baseurl, '_blank');
+         window.open(VAYUB.baseurl, '_blank');
    
        }
 
        const handleCustomize= () =>{
-        // window.location.replace(AISB.baseurl);
+        // window.location.replace(VAYUB.baseurl);
    
          window.open(customizeUrl, '_blank');
    
@@ -78,14 +82,13 @@ const getEditUrl = async () =>{
 return(<div className='aisb-site-build-wrap'>
   
             <div className='aisb-site-build'>
-              <Flex>
+              <Flex className="header">
                   <FlexItem>
                   <Logo/>
                   </FlexItem>
                   <FlexItem>
                   <div className="header-text">
-            <Upgrade/>
-            <HomeLink/>
+                  <UpgradeButton />       
             </div></FlexItem>
               </Flex>
           </div>

@@ -106,18 +106,18 @@ const MenuProps = {
           {/* <MenuItem value='elementor' onClick={()=>handelIconClick('elementor')}>
           
           <div className={`column-icon ${bulderType=='elementor'?'active':'icon'}`} id="elementor" >
-        <img src={`${AISB.pluginpath}app/assets/svg/elementor.svg`} alt="Elementor Template" />
+        <img src={`${VAYUB.pluginpath}app/assets/svg/elementor.svg`} alt="Elementor Template" />
         <div className="image-text-builder-icon">Elementor</div>
         </div>
           </MenuItem> */}
           <MenuItem value={'gutenberg'} onClick={()=>handelIconClick('gutenberg')}>
           <div className={`column-icon ${bulderType=='gutenberg'?'active':'icon'}`} id="gutenberg" >
-        <img src={`${AISB.pluginpath}admin/assets/svg/block.svg`}  alt="Block Templates" />
+        <img src={`${VAYUB.pluginpath}admin/assets/svg/block.svg`}  alt="Block Templates" />
         <div className="image-text-builder-icon" >Vayu Blocks</div>
         </div>
           </MenuItem>
           {/* <MenuItem value={'customizer'} onClick={()=>handelIconClick('customizer')}><div className={`column-icon ${bulderType=='customizer'?'active':'icon'}`} id="customizer" >
-        <img src={`${AISB.pluginpath}app/assets/svg/customizer.svg`} alt="Customizer Template" />
+        <img src={`${VAYUB.pluginpath}app/assets/svg/customizer.svg`} alt="Customizer Template" />
         <div className="image-text-builder-icon">Customizer</div>
         </div></MenuItem> */}
         </Select>

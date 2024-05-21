@@ -1,5 +1,5 @@
 import { useState,useEffect } from '@wordpress/element';
-import { Button, Flex, FlexBlock, FlexItem } from '@wordpress/components';
+import { Flex, FlexItem } from '@wordpress/components';
 import axios from 'axios';
 import wpPlugins from '../assets/json/plugins.json';
 import animationLoading  from '../assets/lottie/loading';
@@ -9,7 +9,8 @@ import { getQueryArg } from '@wordpress/url';
 import { useSelector, useDispatch } from 'react-redux';
 import {tmplLodaing} from '../actions';
 import Lottie from 'react-lottie';
-import { Logo, Upgrade } from '../aisb';
+import { Logo } from '../aisb';
+import UpgradeButton from './UpgradeButton';
 
 function getThemeData(type){
 
@@ -81,7 +82,7 @@ export default function installStart(props){
             tmplFreePro:getPluginName()
           }      
             try {
-                await axios.post(AISB.baseurl+'wp-json/ai/v1/vayu-site-builder', {
+                await axios.post(VAYUB.baseurl+'wp-json/ai/v1/vayu-site-builder', {
                     params: {
                       templateType: props.templateData.free_paid,
                       plugin: props.templateData.plugin,
@@ -140,9 +141,8 @@ return(<div className='aisb-site-build-wrap'>
                     <FlexItem>
                     <Logo/>
                     </FlexItem>
-
                     <FlexItem> <div className="header-text">
-            <Upgrade/>
+                    <UpgradeButton link={false}/>
             </div></FlexItem>
                 </Flex>
             </div>

@@ -12,9 +12,8 @@ import { FaSpinner } from 'react-icons/fa';
 
 import { Provider } from 'react-redux';
 import store from "../../vayu-sites/store";
-import { useSelector} from 'react-redux';
-import { Logo, Upgrade,Version } from '../../vayu-sites/aisb';
 import { VerifyKey } from '../../vayu-sites/template/verifykey';
+import UpgradeButton from '../../vayu-sites/template/UpgradeButton';
 
 
 function ChildComponent(props) {
@@ -268,11 +267,7 @@ function MyPluginContent(){
     };
 
        // Upgrade 
-       const license = useSelector((state)=>state.licenseActivate);
        const verifyKeyCheck = VerifyKey();
-       const btnStyle= { color:"#fff", 
-         background:"var(--aisb-bg-color)" 
-       }
      
     return (
         <>
@@ -308,7 +303,8 @@ function MyPluginContent(){
 
                 </div>
                <div className='header-text'>
-                {license.status === false && <Upgrade styles={btnStyle} />}
+               <UpgradeButton/>
+                {/* {license.status === false && <Upgrade styles={btnStyle} />} */}
                 </div>
                 
                 

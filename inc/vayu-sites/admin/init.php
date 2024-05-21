@@ -110,6 +110,23 @@ if ( ! class_exists( 'VAYU_BLOCK_SITES_BUILDER_MENU' ) ) {
         }
 
 
+        // Add this code to your theme's functions.php or a custom plugin
+            function get_plugin_activation_link( $plugin_file ) {
+                // Ensure the current user can activate plugins
+                if ( ! current_user_can( 'activate_plugins' ) ) {
+                    return '';
+                }
+
+                // Generate the nonce
+                $nonce = wp_create_nonce( 'activate-plugin_' . $plugin_file );
+
+                // Construct the activation URL
+                $activation_url = admin_url( 'plugins.php?action=activate&plugin=' . $plugin_file . '&_wpnonce=' . $nonce );
+
+                return $activation_url;
+            }
+
+
         public function admin_enqueue( $hook = '' ) {
             // && 'toplevel_page_'.self::$plugin_slug !== $hook 
             if ( self::$plugin_slug.'_page_vayu-sites'!== $hook && 'post.php'!==$hook && 'post-new.php'!==$hook && 'toplevel_page_vayu-blocks' !==$hook) {
@@ -140,13 +157,15 @@ if ( ! class_exists( 'VAYU_BLOCK_SITES_BUILDER_MENU' ) ) {
 			wp_enqueue_style( 'vayu-blocks-sites-admin', VAYU_BLOCKS_SITES_URL . 'admin/assets/css/admin.css', 1.0, 'true' );
             wp_enqueue_script( 'vayu-blocks-sites-block-admin', VAYU_BLOCKS_URL . '/public/build/vayu-sites.js', array( 'wp-element','wp-components', 'wp-i18n','wp-api-fetch','wp-url' ), '1.0', true );
            
-            wp_localize_script( 'vayu-blocks-sites-block-admin', 'AISB',
+            wp_localize_script( 'vayu-blocks-sites-block-admin', 'VAYUB',
             array( 
                 'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'vsecurity' =>wp_create_nonce( 'vayu_nonce' ),
                 'baseurl' => site_url( '/' ),
                 'pluginpath'=>VAYU_BLOCKS_SITES_URL,
                 'rootPath' => VAYU_BLOCKS_URL,
-                'upgrade'=> esc_url('https://themehunk.com/vayu-blocks')           
+                'upgrade'=> esc_url('https://themehunk.com/vayu-blocks'),
+                'activate' => $this->get_plugin_activation_link( 'vayu-blocks-pro/vayu-blocks-pro.php' )          
                  )
         );
 
