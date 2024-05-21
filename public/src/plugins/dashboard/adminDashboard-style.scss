@@ -73,8 +73,13 @@ display: none !important;
       margin: 1em 0;
   }
   #vayu-blocks-container .th-main-wrap h2{
-   font-size: 1.6rem; 
+   font-size: 1.8rem; 
+   line-height: 1.9rem;
+   margin: 0;
   }
+  #vayu-blocks-container .th-main-wrap h2 + p{
+    margin: 30px 0;
+   }
   #vayu-blocks-container p , #vayu-blocks-container a{
       font-size:0.89rem;
       line-height: 1.5;
@@ -123,6 +128,7 @@ display: none !important;
   #vayu-blocks-container .th-main{
       background: #fff;
       padding: 30px;
+      padding-bottom: 20px;
       box-sizing: border-box;
       color: #525151;
   }
@@ -163,8 +169,6 @@ display: none !important;
   #vayu-blocks-container .th-block-desc h3{
   margin:0;
   }
-
-
   #vayu-blocks-container .th-block-item .th-block-view,
   #vayu-blocks-container .sidebar-section .sidebar-link {
       color: #403F40;
@@ -213,6 +217,21 @@ display: none !important;
           }
 
 /* Custom styles for toggle switches */
+.toggle-switch .pro{
+  width: 28px;
+  height: 21px;
+  background: #000000;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 11px;
+  margin-left: auto;
+}
+.toggle-switch svg{
+  margin-right: 0!important;
+}
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -290,7 +309,6 @@ input:checked + .slider:before {
   padding: 18px;
   border-radius: 9px;
   pointer-events: none;
-  opacity: .7;
   text-align: left;
 }
 .sw-wrapprer.vayu-pro-active .sw-box{
@@ -503,6 +521,14 @@ input:checked + .slider:before {
   animation: rotating 2s linear infinite;
   margin-left: 12px;
 }
+@media screen and (max-width: 1024px){
+  .sw-box{
+    width: 49%;
+  }
+  #vayu-blocks-container .sidebar-section{
+    padding-left: 0;
+  }
+}
 @media screen and (max-width: 767px){
   .th-settings aside,
   .th-settings .content-wrapper{
@@ -511,5 +537,22 @@ input:checked + .slider:before {
   }
   .th-settings .content-wrapper{
     margin-top: 21px;
+  }
+  #vayu-blocks-container .th-content-wrap{
+    flex-wrap: wrap;
+  }
+  #vayu-blocks-container .th-main,
+  #vayu-blocks-container .th-sidebar{
+    width: 100%;
+  }
+  #vayu-blocks-container .th-main,
+  #vayu-blocks-container .sidebar-section{
+    padding: 12px;
+  }
+  .th-sw-right label{
+    font-size: 9px;
+  }
+  #vayu-blocks-container p, #vayu-blocks-container a{
+    font-size: .59rem;
   }
 }

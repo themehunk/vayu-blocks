@@ -96,7 +96,7 @@ return(<div className='aisb-site-build-wrap'>
 
             <Lottie className='lottie-success' options={defaultOptions} width={230} />
 
-            <h2>{__('Your webiste is now ready.', 'vayu-blocks') } </h2>
+            <h2>{__('Your website is now ready.', 'vayu-blocks') } </h2>
             <Flex className='success-btn'>
                   <FlexItem>
                   <div className='btn-center'> <span className='aisb-install-btn' onClick={ handleCustomize }> <b><Icon

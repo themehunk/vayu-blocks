@@ -120,12 +120,36 @@ function vayu_blocks_get_toggle_switch_values_callback($request) {
     // Your logic to fetch toggle switch values from the database or any other source
     // Example:
     $toggle_switch_values = array(
-        'container' => sanitize_text_field(get_option('container_value')),
-        'button' => sanitize_text_field(get_option('button_value')),
-        'wooproduct' => sanitize_text_field(get_option('wooproduct_value')),
-        'heading' => sanitize_text_field(get_option('heading_value')),
-        'spacer' => sanitize_text_field(get_option('spacer_value')),
-        'productfilter' => sanitize_text_field(get_option('productfilter_value')),
+        'container' => array(
+            'value' => sanitize_text_field(get_option('container_value')),
+            'pro' => false,
+            // Add more properties as needed
+        ),
+        'button' => array(
+            'value' => sanitize_text_field(get_option('button_value')),
+            'pro' => false,
+            // Add more properties as needed
+        ),
+        'woo Product' => array(
+            'value' => sanitize_text_field(get_option('wooproduct_value')),
+            'pro' => false,
+            // Add more properties as needed
+        ),
+        'heading' => array(
+            'value' => sanitize_text_field(get_option('heading_value')),
+            'pro' => false,
+            // Add more properties as needed
+        ),
+        'spacer' => array(
+            'value' => sanitize_text_field(get_option('spacer_value')),
+            'pro' => false,
+            // Add more properties as needed
+        ),
+        'product Filter' => array(
+            'value' => sanitize_text_field(get_option('productfilter_value')),
+            'pro' => true,
+            // Add more properties as needed
+        ),
     );
 
     // Apply filter hook to allow other plugins to modify the toggle switch values

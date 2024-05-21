@@ -3,7 +3,7 @@ Contributors: ThemeHunk
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -81,6 +81,10 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 
 == Changelog ==
 
+=1.0.7 =
+* New : Pro button added in blocks toggle.
+* Update : Icon added in admin block panel.
+
 =1.0.6 =
 * New : Free and Paid demo import.
 * Update : Upgrade feature updated.
@@ -110,13 +114,8 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 Initial Release 
 
 == Upgrade Notice ==
-<<<<<<< HEAD
-=1.0.6 =
-* New : Free and Paid demo import.
-* Update : Upgrade feature updated.
-* Update : Admin style modified.
-* Fix : Blocks issue fixe
-=======
-=1.0.5 =
-* Fix : Container global width issue resolved.
->>>>>>> a3f2f293705e366ba8e1f1a0767f0f8f56487a2c
+
+=1.0.7 =
+* New : Pro button added in blocks toggle.
+* Update : Icon added in admin block panel.
+
