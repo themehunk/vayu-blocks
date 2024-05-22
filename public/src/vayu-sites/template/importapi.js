@@ -296,7 +296,7 @@ const importOptions = async () =>{
           await importOptions();
           dispatch(tmplLodaing('Getting Things Done...'));
           interval();
-          await importWidgets();         
+       //   await importWidgets();         
           setApiData(null);
           dispatch(stepFour(true));
           console.log('Completed.');

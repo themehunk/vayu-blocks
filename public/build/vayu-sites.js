@@ -23545,7 +23545,7 @@ function ImportAPI(props) {
       await importOptions();
       dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_2__.tmplLodaing)('Getting Things Done...'));
       interval();
-      await importWidgets();
+      //   await importWidgets();         
       setApiData(null);
       dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_2__.stepFour)(true));
       console.log('Completed.');

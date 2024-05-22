@@ -13,7 +13,6 @@ import { Logo } from '../aisb';
 import UpgradeButton from './UpgradeButton';
 
 function getThemeData(type){
-
   let hunkCompanion = 'hunk-companion';
   let vayBlocks = '';
 
