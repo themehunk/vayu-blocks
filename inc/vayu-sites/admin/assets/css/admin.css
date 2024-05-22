@@ -1025,18 +1025,17 @@ input[type=text]:focus{
 
   .aisb-site-form .aisb-border-btn {
     font-size: 16px;
-    color: #8929e2;
+    color: #000;
     border-radius: 25px;
     padding: 12px 50px 5px 50px;
-    border: 1px solid #8929e2;
+    border: 1px solid #000;
     cursor: pointer;
     display: flex;
-    fill:  #8929e2;
+    fill:  #000;
     font-weight: 500;
     background: var(--aisb-bg-color);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
   .aisb-site-form .aisb-install-btn b,
   .aisb-site-form .aisb-border-btn b{
