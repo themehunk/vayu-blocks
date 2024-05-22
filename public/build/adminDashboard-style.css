@@ -41,6 +41,28 @@
   color: #666060;
 }
 
+.header-text .aisb-verifybtn {
+  display: flex;
+  align-items: center;
+}
+
+.header-text .aisb-verifybtn > span {
+  margin-top: 0;
+}
+
+#vayu-blocks-container .header-text .aisb-verifybtn > a:not(.activate-now) {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+#vayu-blocks-container .header-text .inactive + a.activate-now {
+  margin-left: 18px;
+  font-size: 11px;
+}
+
 #vayu-blocks-container .th-header .th-conatiner {
   max-width: 95%;
   width: 100%;
