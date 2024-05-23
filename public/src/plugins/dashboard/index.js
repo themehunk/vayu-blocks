@@ -56,6 +56,7 @@ function MyPluginContent(){
 
     const [navTab, setNavTab] = useState(1);
     const [isLoading, setLoading] = useState(false);
+    const [blockload, setblockload] = useState('');
 
     let vayuProStatus = '';
     if(vayublock.vayuProStatus == 'activated'){
@@ -103,14 +104,19 @@ function MyPluginContent(){
     
         // Function to fetch toggle switch values
         const fetchToggleSwitchValues = async () => {
+            setLoading(true);
+            setblockload('loading');
             const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks/v1/get-toggle-switch-values`;
             try {
                 const response = await fetch(`${Url}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch toggle switch values');
                 }
+                setLoading(false);
+                setblockload('');
                 const data = await response.json();
                 setToggleSwitches(data);
+               
             } catch (error) {
                 console.error('Error fetching toggle switch values:', error);
             }
@@ -322,8 +328,8 @@ function MyPluginContent(){
                         <p>{__('Enhance your Block Editor with custom Vayu Blocks, crafting dynamic, visually appealing content layouts for a seamless and beautiful user experience.', 'vayu-blocks')}</p>
                     </div>
 
-        <div className={`sw-wrapprer ${vayuProStatus}`}>
-            {Object.entries(toggleSwitches).map(([key, value]) => (
+        <div className={`sw-wrapprer ${vayuProStatus} ${blockload}`}>
+        {isLoading ? (<div class="vayu-loader"></div>) : (<> {Object.entries(toggleSwitches).map(([key, value]) => (
                <div className={`sw-box ${key}`}>
                     <div className='th-sw-right'>
                         <div key={key}>
@@ -340,6 +346,10 @@ function MyPluginContent(){
                </div>
                
             ))}
+            </>
+        )
+        }
+           
         </div>
 
         
