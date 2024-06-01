@@ -83,6 +83,7 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 
 =1.0.8 =
 * Update : Product Block Add to cart loader add.
+* New : Added new pro templates.
 
 =1.0.7 =
 * New : Pro button added in blocks toggle.
