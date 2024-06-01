@@ -145,11 +145,11 @@ function vayu_blocks_get_toggle_switch_values_callback($request) {
             'pro' => false,
             // Add more properties as needed
         ),
-        'product Filter' => array(
-            'value' => sanitize_text_field(get_option('productfilter_value')),
-            'pro' => true,
-            // Add more properties as needed
-        ),
+        // 'product Filter' => array(
+        //     'value' => sanitize_text_field(get_option('productfilter_value')),
+        //     'pro' => true,
+        //     // Add more properties as needed
+        // ),
     );
 
     // Apply filter hook to allow other plugins to modify the toggle switch values
@@ -184,20 +184,20 @@ add_action('rest_api_init', function () {
     // Endpoint to save input values
     register_rest_route('vayu-blocks-sett/v1', '/save-input-values', array(
         'methods' => 'POST',
-        'callback' => 'save_input_values_callback',
+        'callback' => 'vayu_blocks_save_input_values_callback',
         'permission_callback' => '__return_true', // Set your permission callback here
     ));
 
     // Endpoint to retrieve input values
     register_rest_route('vayu-blocks-sett/v1', '/get-input-values', array(
         'methods' => 'GET',
-        'callback' => 'get_input_values_callback',
+        'callback' => 'vayu_blocks_get_input_values_callback',
         'permission_callback' => '__return_true', // Set your permission callback here
     ));
 });
 
 // Callback function to save input values
-function save_input_values_callback($request) {
+function vayu_blocks_save_input_values_callback($request) {
     $data = $request->get_json_params(); // Get JSON data sent in the request
 
     // Process and save data to the database
@@ -219,7 +219,7 @@ function save_input_values_callback($request) {
 }
 
 // Callback function to retrieve input values
-function get_input_values_callback($request) {
+function vayu_blocks_get_input_values_callback($request) {
     // Retrieve data from the database
     // Example:
     $container_width = absint(get_option('container_width',1250));
