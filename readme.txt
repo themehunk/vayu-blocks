@@ -3,7 +3,7 @@ Contributors: ThemeHunk
 Requires at least: 6.2
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -80,6 +80,9 @@ If you encounter any difficulties or if you have questions about Vayu Blocks, yo
 create a new thread on the [Support](https://themehunk.com/contact-us/) And also you can connect in [live chat](https://themehunk.com).
 
 == Changelog ==
+
+=1.0.8 =
+* Update : Product Block Add to cart loader add.
 
 =1.0.7 =
 * New : Pro button added in blocks toggle.
