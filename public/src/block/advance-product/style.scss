@@ -125,6 +125,26 @@
        cursor:pointer;
        margin:0.4rem 0;
    }
+   .th-product-add-btn a{
+    position:relative;
+    }
+
+    .th-product-add-btn .loading::after {
+            font-family: WooCommerce;
+            content: "\e01c";
+            margin-left: 0.5em;
+            vertical-align: bottom;
+            animation: spin 2s linear infinite;
+            font-size:0.79rem;
+ 
+        }
+    .th-product-add-btn a.added::after {
+                font-family: WooCommerce;
+                content: "\e017";
+                margin-left: 0.5em;
+                
+                font-size:0.79rem;
+            }
    
    .th-product-item{
    line-height:normal;
