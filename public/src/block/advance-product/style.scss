@@ -124,14 +124,18 @@
        padding: 0.6rem 1rem;
        cursor:pointer;
        margin:0.4rem 0;
+       text-decoration: none;
    }
+   
    .th-product-add-btn a{
     position:relative;
     }
 
     .th-product-add-btn .loading::after {
-            font-family: WooCommerce;
-            content: "\e01c";
+        animation: spin 2s linear infinite;
+        content:"";
+        font-family: WooCommerce;
+        display: inline-block;
             margin-left: 0.5em;
             vertical-align: bottom;
             animation: spin 2s linear infinite;

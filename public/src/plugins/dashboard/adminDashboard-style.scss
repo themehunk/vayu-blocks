@@ -314,7 +314,8 @@ input:checked + .slider:before {
 .sw-wrapprer{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
+  gap: 2%;
 }
 .sw-box{
   width: 32%;
