@@ -154,6 +154,10 @@
       "type": "string",
       "default": "saleright"
     },
+    "imageStyle": {
+      "type": "string",
+      "default": "default"
+    },
     "prouctTitleTag": {
       "type": "number",
       "default": "h3"

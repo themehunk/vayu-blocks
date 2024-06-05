@@ -252,7 +252,6 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
         });
     }
   }, [selectedCategory, currentPage, productsPerPage, attributes.productCategories, prdType, prdOrderBy, prdOrder, excludeProductParam, stockParam]);
-  
   // Event handler for tab click
   const handleTabClick = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -1007,7 +1006,8 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
 
             
-                {products.map((product) => (
+               {products.map((product) => (
+                  
                 <div className="th-product-item" key={product.id}>
                   <div className="th-product-block-content-wrap">
                   {attributes.template.map((element) => {
@@ -1015,7 +1015,8 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                         case 'image':
                           return (
                             attributes.displayFeaturedImage && (
-                            <div className="th-product-image">
+                              
+                            <div className={`th-product-image ${attributes.imageStyle}`}>
                               {product.on_sale && attributes.showSale == true &&
                               <div className={`th-product-sale ${attributes.saleStyle} ${attributes.saleDesign} ${attributes.salePosition}`}>
                                {attributes.saleDesign =='saletext' &&
@@ -1034,8 +1035,16 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
                               )}
                               </div>
                               }
-                              <img src={product.images[0].thumbnail} alt={product.name} />
-                              <div className="th-product-meta">
+                              
+                              {attributes.imageStyle =='swapin' && product.images[1] && product.images[1].thumbnail ? (
+                                <>
+                                  <img src={product.images[0].thumbnail} alt={product.name} />
+                                  <img src={product.images[1].thumbnail} className="th-swap" alt={product.name} />
+                                </>
+                               ) : (
+                                <img src={product.images[0].thumbnail} alt={product.name} />
+                                )}
+                                <div className="th-product-meta">
                                 {attributes.showWishlist == true &&
                                   <div className="th-icons th-wishlist-button">
                                  <IoIosHeartEmpty></IoIosHeartEmpty>

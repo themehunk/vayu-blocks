@@ -292,9 +292,10 @@ class Vayu_Advance_Product_Tab {
                 case 'image':
                     // Image
                     $displayFeaturedImage = isset($attr['displayFeaturedImage']) ? $attr['displayFeaturedImage'] : true;
+                    $imageStyle = isset($attr['imageStyle']) ? $attr['imageStyle'] : 'default';
                     if($displayFeaturedImage):
 
-                    $product_content .= '<div class="th-product-image">';
+                    $product_content .= '<div class="th-product-image '.esc_attr($imageStyle).'">';
 
                     //post meta
                     $product_content .= '<div class="th-product-meta">';
@@ -341,10 +342,16 @@ class Vayu_Advance_Product_Tab {
 
                         $product_content .= '</div>';
                     }
-
+                    $attachment_ids = $product->get_gallery_image_ids($product->get_id());
                     $product_content .= '<a href="' . esc_url($product->get_permalink()) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                        ' . get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail') . '
-                    </a>';
+                                            ' . get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail');
+
+                    if ($imageStyle == 'swapin' && $attachment_ids && count($attachment_ids)) {
+                        $glr = wp_get_attachment_image($attachment_ids[0], 'shop_catalog', false, array('class' => 'th-swap'));
+                        $product_content .= wp_kses_post($glr);
+                    }
+
+                    $product_content .= '</a>';
 
                     $product_content .= '</div>';
 

@@ -24,6 +24,7 @@
        padding: 0.2rem 0.8rem;
        font-size: 0.8rem;
        font-weight: 500;
+       z-index:1;
    }
 
   
@@ -291,4 +292,38 @@ border: 1px solid #dcdcdc;
         }
         .thunk-wishlist-inner i.yith-wcwl-icon{
         font-size: 16px;
+        }
+        .th-product-item .th-product-image.zoomin{
+        overflow: hidden;
+        display: flex;
+        }
+        .th-product-item .th-product-image img {
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .th-product-item:hover .th-product-image.zoomin img {
+            transform: scale(1.2);
+        }
+         
+        .th-product-item:hover .th-product-image.fadein img{
+            opacity: 0.6;
+         }
+
+         .th-product-image.swapin .th-swap{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            filter: blur(0);
+            transition: all .2s linear;
+        }
+        
+        .th-product-item:hover .th-product-image.swapin .th-swap {
+            opacity: 1;
+            transform: scale(1) translateZ(0) translateY(0);
+            pointer-events: inherit;
         }
