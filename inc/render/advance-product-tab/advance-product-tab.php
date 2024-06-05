@@ -33,16 +33,14 @@ class Vayu_Advance_Product_Tab {
 
             add_action('wp_ajax_load_category_products', array( $this,'load_category_products'));
             add_action('wp_ajax_nopriv_load_category_products',array( $this,'load_category_products'));
-            
-            add_action('wp_ajax_load_pagi', array( $this,'load_pagi'));
-            add_action('wp_ajax_nopriv_load_pagi',array( $this,'load_pagi'));
+
 
         }
 
         public function render_callback( $attr ) {
 
         wp_enqueue_style( 'th-icon', VAYU_BLOCKS_URL . '/inc/th-icon/style.css', '', '1.0.0' );
-        wp_enqueue_script( 'advance-product-tab-script', VAYU_BLOCKS_URL .'/inc/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'advance-product-tab-script', VAYU_BLOCKS_URL .'/inc/render/advance-product-tab/js/advance-product-tab.js', array( 'jquery' ), '', true );
         wp_localize_script(
                 'advance-product-tab-script',
                 'advance_product_tab_ajax',
@@ -555,18 +553,15 @@ public function load_category_products(){
     } 
 
     check_ajax_referer( 'th_advance_product_block','th_nonce');
-
-    $category_id = isset($_POST['category_id']) ? sanitize_text_field($_POST['category_id']) : '';
    
     $page = isset($_POST['page']) ? sanitize_text_field($_POST['page']) : '';
 
-    $attr = isset($_POST['attr']) ? sanitize_text_field($_POST['attr']) : array(); 
-
+    $attr = isset($_POST['attr']) ? json_decode(stripslashes($_POST['attr']), true) : array();  // Decode the JSON string 
+   
     $args = array(
         'status' => 'publish',
         'visibility' => 'catalog',
     );
-
     
     //product per page
 
@@ -753,7 +748,7 @@ public function load_category_products(){
 
     // Get the 'template' attribute from $attr or use the default template
     $template = isset($attr['template']) && is_array($attr['template']) ? $attr['template'] : $default_template;
-    
+   
     $product_content .= '<div class="th-product-block-product-item-wrap" total-page="'.esc_attr($total_pages).'">';
 
     foreach ($products as $product) {
@@ -767,9 +762,10 @@ public function load_category_products(){
                 case 'image':
                     // Image
                     $displayFeaturedImage = isset($attr['displayFeaturedImage']) ? $attr['displayFeaturedImage'] : true;
+                    $imageStyle = isset($attr['imageStyle']) ? $attr['imageStyle'] : 'default';
                     if($displayFeaturedImage):
 
-                    $product_content .= '<div class="th-product-image">';
+                    $product_content .= '<div class="th-product-image '.esc_attr($imageStyle).'">';
 
                     //post meta
                     $product_content .= '<div class="th-product-meta">';
@@ -817,9 +813,14 @@ public function load_category_products(){
                         $product_content .= '</div>';
                     }
 
+                    $attachment_ids = $product->get_gallery_image_ids($product->get_id());
                     $product_content .= '<a href="' . esc_url($product->get_permalink()) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                        ' . get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail') . '
-                    </a>';
+                                            ' . get_the_post_thumbnail($product->get_id(), 'woocommerce_thumbnail');
+
+                    if ($imageStyle == 'swapin' && $attachment_ids && count($attachment_ids)) {
+                        $glr = wp_get_attachment_image($attachment_ids[0], 'shop_catalog', false, array('class' => 'th-swap'));
+                        $product_content .= wp_kses_post($glr);
+                    }
 
                     $product_content .= '</div>';
 
@@ -875,7 +876,7 @@ public function load_category_products(){
                     $displayButton = isset($attr['displayButton']) ? $attr['displayButton'] : true;
                     if($displayButton):
                     $product_content .= '<div class="th-product-add-btn">
-                        ' . wp_kses_post($this->add_to_cart_url($product)) . '
+                    ' . wp_kses_post($this->add_to_cart_url($product)) . '
                     </div>';
                     endif;
                     break;
