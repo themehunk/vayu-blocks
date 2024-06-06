@@ -1040,6 +1040,7 @@ export const SortableItem = ({
 								] }
 								onChange={ e => setAttributes({ saleStyle: e }) }
 							  />
+							  
 							  <div className='th-component-group-label'>
 									<label className='th-label'>{ __( 'Position', 'vayu-blocks' )}</label>
 									<ToogleGroupControl
@@ -1104,6 +1105,19 @@ export const SortableItem = ({
 								/>
 								</>
 							  )}
+
+                                <SelectControl 
+								label={ __( 'Image Hover Effect', 'vayu-blocks' ) }
+								value={ attributes.imageStyle }
+								options={ [
+									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
+									{ label: __( 'ZoomIn', 'vayu-blocks' ), value: 'zoomin' },
+									{ label: __( 'SwapIn', 'vayu-blocks' ), value: 'swapin' },
+									{ label: __( 'FadeIn', 'vayu-blocks' ), value: 'fadein' },
+								    
+								] }
+								onChange={ e => setAttributes({ imageStyle: e }) }
+							  />
 
 							  <ToggleControl
 								label={ __( 'Wishlist', 'vayu-blocks' ) }

@@ -10,6 +10,28 @@ function vayu_advance_heading_style($attr){
 
 	if(isset( $attr['uniqueID'] )){
 
+		$css .= ".th-h{$attr['uniqueID']} a{";
+
+			
+			//heading color
+		    $css .= isset( $attr['headingColor'] ) ? "color:{$attr['headingColor']};" : '';
+			// Font family
+			if (isset($attr['fontFamily'])) {
+				$css .= "font-family: '{$attr['fontFamily']}', sans-serif; ";
+			}
+
+			if (isset($attr['fontVariant'])) {
+				$fontVariant = isset($attr['fontVariant']) ? $attr['fontVariant'] : 'normal';
+				$css .= "font-weight:{$fontVariant}; ";
+			}
+		$css .= "}";
+
+		$css .= ".th-h{$attr['uniqueID']} a:hover{";
+			//heading color
+			$css .= isset( $attr['headingHvrColor'] ) ? "color:{$attr['headingHvrColor']};" : '';
+			
+		$css .= "}";
+
 		$css .= ".th-h{$attr['uniqueID']} {";
 	
 		//heading color
