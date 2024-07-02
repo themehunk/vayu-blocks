@@ -4713,6 +4713,7 @@ const BackgroundSelectorControl = ({
   changeBackgroundSize,
   changeFocalPoint
 }) => {
+  console.log(gradient, 'gradient');
   const instanceId = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.useInstanceId)(BackgroundSelectorControl);
   const id = `inspector-background-selector-control-${instanceId}`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -4817,11 +4818,24 @@ const BackgroundSelectorControl = ({
     onSelect: changeImage,
     accept: "image/*",
     allowedTypes: ['image']
-  })), 'gradient' === backgroundType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.__experimentalColorGradientControl, {
+  })), 'gradient' === backgroundType && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.GradientPicker, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Background Gradient', 'vayu-blocks'),
-    gradientValue: gradient,
+    value: gradient,
     disableCustomColors: true,
-    onGradientChange: changeGradient,
+    onChange: changeGradient,
+    gradients: [{
+      name: 'JShine',
+      gradient: 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)',
+      slug: 'jshine'
+    }, {
+      name: 'Moonlit Asteroid',
+      gradient: 'linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)',
+      slug: 'moonlit-asteroid'
+    }, {
+      name: 'Rastafarie',
+      gradient: 'linear-gradient(135deg,#1E9600 0%, #FFF200 0%, #FF0000 100%)',
+      slug: 'rastafari'
+    }],
     clearable: false
   }));
 };

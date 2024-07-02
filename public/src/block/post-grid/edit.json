@@ -1,0 +1,374 @@
+{
+    "pg_authorImageScale": {
+        "type": "number",
+        "default": 0.7
+      },
+      "pg_authorTextColor": {
+        "type": "string",
+        "default": "gray"
+      },
+      "pg_authorTextSize": {
+        "type": "number",
+        "default": 14
+      },
+      "pg_backgroundColor": {
+        "type": "string",
+        "default": "#F4F3F3"
+      },
+      "pg_backgroundType": {
+        "type": "string",
+        "default": "solid"
+      },
+      "pg_blockTitleColor": {
+        "type": "string",
+        "default": "#333"
+      },
+      "pg_blockTitleSize": {
+        "type": "number",
+        "default": 24
+      },
+      "pg_blockTitleTag": {
+        "type": "string",
+        "default": "h2"
+      },
+      "pg_categoryBackgroundColor": {
+        "type": "string",
+        "default": "#808080"
+      },
+      "pg_categoryPaddingTop": {
+        "type": "number",
+        "default": 8
+      },
+      "pg_categoryPaddingRight": {
+        "type": "number",
+        "default": 10
+      },
+      "pg_categoryPaddingBottom": {
+        "type": "number",
+        "default": 8
+      },
+      "pg_categoryPaddingLeft": {
+        "type": "number",
+        "default": 10
+      },
+      "catgeorypaddingUnit": {
+        "type": "string",
+        "default": "px"
+    },
+
+      "pg_categoryTextColor": {
+        "type": "string",
+        "default": "#333"
+      },
+      "pg_categoryTextSize": {
+        "type": "number",
+        "default": 12
+      },
+      "pg_categoryBorderRadius":{
+        "type" : "number",
+        "default": 2
+      },
+      "pg_categoryBorderColor":{
+        "type": "string",
+        "default" : "white"
+      },
+      "pg_categoryBorder":{
+        "type" : "number",
+        "default" : 1
+      },
+      "pg_dateTextSize":{
+        "type":"number",
+        "default":14
+      },
+      "pg_dateColor":{
+        "type":"string",
+        "default": "gray"
+      },
+      "pg_showDateMenu":{
+        "type":"boolean",
+        "default":false
+      },
+      "pg_excerptSelector": {
+        "type": "string",
+        "default": "[...]"
+      },
+      "pg_excerptWords": {
+        "type": "number",
+        "default": 15
+      },
+      "pg_gap": {
+        "type": "number",
+        "default": 20
+      },
+      "pg_gapup": {
+        "type": "number",
+        "default": 37
+      },
+      "pg_imageBorderRadius": {
+        "type": "number",
+        "default": 4
+      },
+      "pg_layoutBorder": {
+        "type": "number",
+        "default": 1
+      },
+      "pg_layoutBorderColor": {
+        "type": "string",
+        "default": "#D3D3D3"
+      },
+      "pg_layoutPaddingTop": {
+        "type": "number",
+        "default": 2
+      },
+      "pg_layoutPaddingRight": {
+        "type": "number",
+        "default": 2
+      },
+      "pg_layoutPaddingBottom": {
+        "type": "number",
+        "default": 2
+      },
+      "pg_layoutPaddingLeft": {
+        "type": "number",
+        "default": 2
+      },      
+      "pg_lineHeight": {
+        "type": "number",
+        "default": 1.4
+      },
+      "pg_numberOfRow": {
+        "type": "number",
+        "default": 2
+      },
+      "pg_postBorderRadius": {
+        "type": "number",
+        "default": 5
+      },
+      "pg_postLayoutColumns": {
+        "type": "number",
+        "default": 3
+      },
+      "pg_posts": {
+        "type": "array",
+        "default": []
+      },
+      "pg_selectedCategory": {
+        "type": "number",
+        "default": 0
+      },
+      "pg_selectedTag": {
+        "type": "string",
+        "default": ""
+      },
+      "pg_showAuthor": {
+        "type": "boolean",
+        "default": true
+      },
+      "pg_showCategories": {
+        "type": "boolean",
+        "default": true
+      },
+      "pg_showCategoriesOnImage": {
+        "type": "boolean",
+        "default": true
+      },
+      "pg_showDate": {
+        "type": "boolean",
+        "default": true
+      },
+      "pg_showExcerpt": {
+        "type": "boolean",
+        "default": false
+      },
+      "pg_showFeaturedImage": {
+        "type": "boolean",
+        "default": true
+      },
+      "pg_showFullContent": {
+        "type": "boolean",
+        "default": false
+      },
+      "pg_showTags": {
+        "type": "boolean",
+        "default": false
+      },
+      "pg_showcategoriesMenu":{
+        "type":"boolean",
+        "default": false
+      },
+      "pg_showTagsMenu":{
+        "type":"boolean",
+        "default": false
+      },
+      "pg_showAuthorMenu":{
+        "type":"boolean",
+        "default": false
+      },
+      "pg_tagBackgroundColor": {
+        "type": "string",
+        "default": "#808080"
+      },
+      "pg_tagPaddingTop": {
+        "type": "number",
+        "default": 8
+      },
+      "pg_tagPaddingRight": {
+        "type": "number",
+        "default": 10
+      },
+      "pg_tagPaddingBottom": {
+        "type": "number",
+        "default": 8
+      },
+      "pg_tagPaddingLeft": {
+        "type": "number",
+        "default": 10
+      },
+      "tagpaddingUnit": {
+        "type": "string",
+        "default": "px"
+    },      
+      "pg_tagTextColor": {
+        "type": "string",
+        "default": "#D3D3D3"
+      },
+      "pg_tagTextSize": {
+        "type": "number",
+        "default": 12
+      },
+      "pg_textColor": {
+        "type": "string",
+        "default": "#808080"
+      },
+      "pg_textSize": {
+        "type": "number",
+        "default": 16
+      },
+      "pg_tagBorderRadius":{
+        "type" : "number",
+        "default": 2
+      },
+      "pg_tagBorderColor":{
+        "type": "string",
+        "default" : "white"
+      },
+      "pg_tagBorder":{
+        "type" : "number",
+        "default" : 1
+      },
+      "buttonpaddingUnit": {
+        "type": "string",
+        "default": "px"
+    },
+    "layoutborderType":{
+      "type":"string",
+      "default": "solid"
+    },
+    "categoryborderType":{
+      "type":"string",
+      "default": "solid"
+    },
+    "tagborderType":{
+      "type":"string",
+      "default": "solid"
+    },
+
+  "layout_backgroundType": {
+      "type": "string",
+      "default": "solid"
+  },
+  "layout_backgroundColor": {
+      "type": "string",
+      "default": ""
+  },
+  "layout_backgroundImage": {
+      "type": "object",
+      "default": null
+  },
+  "layout_backgroundGradient": {
+      "type": "string",
+      "default": ""
+  },
+  "layout_backgroundPosition": {
+      "type": "object",
+      "default": null
+  },
+  "layout_backgroundAttachment": {
+      "type": "string",
+      "default": "scroll"
+  },
+  "layout_backgroundRepeat": {
+      "type": "string",
+      "default": "no-repeat"
+  },
+  "layout_backgroundSize": {
+      "type": "string",
+      "default": "cover"
+  },
+
+  "category_backgroundType": {
+    "type": "string",
+    "default": "solid"
+},
+"category_backgroundColor": {
+    "type": "string",
+    "default": ""
+},
+"category_backgroundImage": {
+    "type": "object",
+    "default": null
+},
+"category_backgroundGradient": {
+    "type": "string",
+    "default": ""
+},
+"category_backgroundPosition": {
+    "type": "object",
+    "default": null
+},
+"category_backgroundAttachment": {
+    "type": "string",
+    "default": "scroll"
+},
+"category_backgroundRepeat": {
+    "type": "string",
+    "default": "no-repeat"
+},
+"category_backgroundSize": {
+    "type": "string",
+    "default": "cover"
+},
+
+"tag_backgroundType": {
+  "type": "string",
+  "default": "solid"
+},
+"tag_backgroundColor": {
+  "type": "string",
+  "default": ""
+},
+"tag_backgroundImage": {
+  "type": "object",
+  "default": null
+},
+"tag_backgroundGradient": {
+  "type": "string",
+  "default": ""
+},
+"tag_backgroundPosition": {
+  "type": "object",
+  "default": null
+},
+"tag_backgroundAttachment": {
+  "type": "string",
+  "default": "scroll"
+},
+"tag_backgroundRepeat": {
+  "type": "string",
+  "default": "no-repeat"
+},
+"tag_backgroundSize": {
+  "type": "string",
+  "default": "cover"
+}
+}
