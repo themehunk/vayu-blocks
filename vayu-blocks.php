@@ -51,6 +51,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
         require_once 'inc/vayu-sites/vayu-sites.php';
         require_once 'inc/render/post-grid/post-grid.php';
+        require_once 'inc/render/post-grid/post-grid-style.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -114,7 +115,7 @@ class Vayu_Block_Plugin {
                  'editor_style'   => 'post-grid-editor-style',
                  'frontend_style' => 'post-grid-frontend-style',
                 'status'         => get_option('button_value'),
-                'render_callback' => 'vayu_blocks_post_grid_render_callback'
+                'render_callback' => 'post_grid_render'
             )
         );
 
