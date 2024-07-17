@@ -5,7 +5,7 @@
  * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
  * Requires at least: 6.5
  * Requires PHP:      7.0
- * Version:           1.0.9
+ * Version:           1.1.0
  * Author:            ThemeHunk
  * Author URI:        https://themehunk.com
  * License:           GPLv3
@@ -26,7 +26,7 @@ class Vayu_Block_Plugin {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.8';
+	const VERSION = '1.1.0';
 
 	/**
 	 * Initialize the plugin.
@@ -38,7 +38,7 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_URL', plugins_url( '/', __FILE__ ) );
         define( 'VAYU_BLOCKS_PATH', dirname( __FILE__ ) );
         define( 'VAYU_BLOCKS_DIR_PATH', plugin_dir_path( __FILE__ ) );
-        define( 'VAYU_BLOCKS_VERSION', '2.1.0' );
+        define( 'VAYU_BLOCKS_VERSION', '1.1.0' );
         define( 'VAYU_BLOCKS_PRO_SUPPORT', true );
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
@@ -52,6 +52,8 @@ class Vayu_Block_Plugin {
 		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
         require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
         require_once 'inc/vayu-sites/vayu-sites.php';
+        require_once 'inc/render/post-grid/post-grid.php';
+        require_once 'inc/render/post-grid/post-grid-style.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -108,6 +110,14 @@ class Vayu_Block_Plugin {
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
                 'status'         => get_option('button_value'),
+            ),
+            array(
+                'name'           => 'vayu-blocks/post-grid',
+                'script_handle'  => 'post-grid',
+                 'editor_style'   => 'post-grid-editor-style',
+                 'frontend_style' => 'post-grid-frontend-style',
+                'status'         => get_option('button_value'),
+                'render_callback' => 'post_grid_render'
             )
         );
 
@@ -122,7 +132,7 @@ class Vayu_Block_Plugin {
                 'status'         => get_option('wooproduct_value'),
                 'render_callback' => array( 
                     new Vayu_Advance_Product_Tab(),
-                    'render_callback' 
+                    'render_callback'
                 )
             );
         }

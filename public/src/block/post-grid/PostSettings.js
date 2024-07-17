@@ -1,0 +1,1211 @@
+import { __ } from '@wordpress/i18n';
+import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl  } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { more, arrowUp, arrowDown, trash ,moreVertical} from '@wordpress/icons';
+import {
+	ResponsiveControl,	
+    BackgroundSelectorControl,
+	UnitChooser,
+    SizingControl,
+} from '../../components/index.js';
+import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
+
+
+
+const PostSettings = ({ attributes, setAttributes }) => {
+    const {
+        pg_postLayoutColumns,
+        pg_numberOfRow,
+        pg_gap,
+        pg_gapup,
+        pg_showExcerpt,
+        pg_excerptWords,
+        pg_excerptSelector,
+        pg_showFullContent,
+        pg_showFeaturedImage,
+        pg_showCategories,
+        pg_showCategoriesOnImage,
+        pg_showAuthor,
+        pg_showDate,
+        pg_showTags,
+        showpagination,
+        pg_numberOfCategories,
+        pg_numberOfTags,
+
+        pg_PaginationpaddingUnit,
+        pg_PaginationpaddingType,
+        pg_PaginationpaddingTypeTablet,
+        pg_PaginationpaddingTypeMobile,
+        pg_Paginationpadding,
+        pg_PaginationpaddingTop,
+        pg_PaginationpaddingRight,
+        pg_PaginationpaddingBottom,
+        pg_PaginationpaddingLeft,
+        pg_PaginationpaddingTablet,
+        pg_PaginationpaddingTopTablet,
+        pg_PaginationpaddingRightTablet,
+        pg_PaginationpaddingBottomTablet,
+        pg_PaginationpaddingLeftTablet,
+        pg_PaginationpaddingMobile,
+        pg_PaginationpaddingTopMobile,
+        pg_PaginationpaddingRightMobile,
+        pg_PaginationpaddingBottomMobile,
+        pg_PaginationpaddingLeftMobile,
+        pg_showPaginationBorderColorMenu,
+        pg_showPaginationBorderSizeMenu,
+        pg_showPaginationBorderTypeMenu,
+        pg_showPaginationBorderRadiusMenu,
+        pg_PaginationBorder,
+        pg_PaginationBorderColor,
+        pg_PaginationBorderRadius,
+        PaginationborderType,
+        pg_PaginationbackgroundType,
+        pg_PaginationbackgroundColor,
+        pg_PaginationbackgroundGradient,
+        pg_paginationBorderRadius,
+        pg_PaginationColor,
+        pg_PaginationSize,
+
+        pg_paginationTopBorderRadius,
+		pg_paginationBottomBorderRadius,
+		pg_paginationLeftBorderRadius,
+		pg_paginationRightBorderRadius,
+
+		paginationTopborderType,
+        paginationBottomborderType,
+        paginationLeftborderType,
+        paginationRightborderType,
+		pg_paginationTopBorder,
+        pg_paginationBottomBorder,
+        pg_paginationLeftBorder,
+        pg_paginationRightBorder,
+        pg_paginationTopBorderColor,
+        pg_paginationBottomBorderColor,
+        pg_paginationLeftBorderColor,
+        pg_paginationRightBorderColor,
+    } = attributes;
+
+    const getView = useSelect( select => {
+		const { getView } = select( 'vayu-blocks/data' );
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView;
+	}, []);
+
+    //Layout
+    const getLayoutColumnsType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.layoutColumnsType;
+            case 'Tablet':
+                return attributes.layoutColumnsTypeTablet;
+            case 'Mobile':
+                return attributes.layoutColumnsTypeMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeLayoutColumnsType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ layoutColumnsType: type, layoutColumnsTypeTablet: type, layoutColumnsTypeMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ layoutColumnsTypeTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ layoutColumnsTypeMobile: type });
+        }
+    };
+    
+    const getLayoutColumns = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_postLayoutColumns;
+            case 'Tablet':
+                return attributes.pg_postLayoutColumnsTablet;
+            case 'Mobile':
+                return attributes.pg_postLayoutColumnsMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeLayoutColumns = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_postLayoutColumns: value });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_postLayoutColumnsTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_postLayoutColumnsMobile: value });
+                break;
+        }
+    };
+
+    //Rows
+    const getRowsType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.RowsType;
+            case 'Tablet':
+                return attributes.RowsTypeTablet;
+            case 'Mobile':
+                return attributes.RowsTypeMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeRowsType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ RowsType: type, RowsTypeTablet: type, RowsTypeMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ RowsTypeTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ RowsTypeMobile: type });
+        }
+    };
+    
+    const getRows = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_numberOfRow;
+            case 'Tablet':
+                return attributes.pg_numberOfRowTablet;
+            case 'Mobile':
+                return attributes.pg_numberOfRowMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeRows = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_numberOfRow: value, postsPerPage: value * attributes.pg_postLayoutColumns });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_numberOfRowTablet: value, postsPerPage: value * attributes.pg_postLayoutColumnsTablet });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_numberOfRowMobile: value, postsPerPage: value * attributes.pg_postLayoutColumnsMobile });
+                break;
+        }
+    };
+
+    //Excerpt
+    const getExcerptview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showExcerpt;
+            case 'Tablet':
+                return attributes.pg_showExcerptTablet;
+            case 'Mobile':
+                return attributes.pg_showExcerptMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getLayoutType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.Excerpt;
+            case 'Tablet':
+                return attributes.ExcerptTablet;
+            case 'Mobile':
+                return attributes.ExcerptMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeLayoutType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ Excerpt: type, ExcerptTablet: type, ExcerptMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ ExcerptTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ ExcerptMobile: type });
+        }
+    };
+    
+    const changeExcerpt = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showExcerpt: value, pg_showFullContent: false });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_showExcerptTablet: value, pg_showFullContentTablet: false });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showExcerptMobile: value, pg_showFullContentMobile: false });
+                break;
+        }
+    };
+
+    //Full Content
+    const getFullContentview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showFullContent;
+            case 'Tablet':
+                return attributes.pg_showFullContentTablet;
+            case 'Mobile':
+                return attributes.pg_showFullContentMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getFullContentType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_FullContent;
+            case 'Tablet':
+                return attributes.pg_FullContentTablet;
+            case 'Mobile':
+                return attributes.pg_FullContentMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeFullContentType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_FullContent: type, pg_FullContentTablet: type, pg_FullContentMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_FullContentTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_FullContentMobile: type });
+        }
+    };
+    
+    const changeFullContent= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showFullContent: value, pg_showExcerpt: false });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_showExcerptTablet: false, pg_showFullContentTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showExcerptMobile: false, pg_showFullContentMobile: value });
+                break;
+        }
+    };
+
+
+    //Featured Image
+    const getFeaturedImageview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showFeaturedImage;
+            case 'Tablet':
+                return attributes.pg_showFeaturedImageTablet;
+            case 'Mobile':
+                return attributes.pg_showFeaturedImageMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getFeaturedImageType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_FeaturedImage;
+            case 'Tablet':
+                return attributes.pg_FeaturedImageTablet;
+            case 'Mobile':
+                return attributes.pg_FeaturedImageMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeFeaturedImageType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_FeaturedImage: type, pg_FeaturedImageTablet: type, pg_FeaturedImageMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_FeaturedImageTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_FeaturedImageMobile: type });
+        }
+    };
+    
+    const changeFeaturedImage= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showFeaturedImage: value});
+                break;
+            case 'Tablet':
+                setAttributes({pg_showFeaturedImageTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showFeaturedImageMobile: value });
+                break;
+        }
+    };
+
+    //Show Categories
+    const getShowCategoriesview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showCategories;
+            case 'Tablet':
+                return attributes.pg_showCategoriesTablet;
+            case 'Mobile':
+                return attributes.pg_showCategoriesMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getShowCategoriesType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_Categories;
+            case 'Tablet':
+                return attributes.pg_CategoriesTablet;
+            case 'Mobile':
+                return attributes.pg_CategoriesMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeShowCategoriesType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_Categories: type, pg_CategoriesTablet: type, pg_CategoriesMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_CategoriesTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_CategoriesMobile: type });
+        }
+    };
+    
+    const changeShowCategories= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showCategories: value});
+                break;
+            case 'Tablet':
+                setAttributes({pg_showCategoriesTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showCategoriesMobile: value });
+                break;
+        }
+    };
+
+    //Author
+    const getShowAuthorview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showAuthor;
+            case 'Tablet':
+                return attributes.pg_showAuthorTablet;
+            case 'Mobile':
+                return attributes.pg_showAuthorMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getShowAuthorType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_Author;
+            case 'Tablet':
+                return attributes.pg_AuthorTablet;
+            case 'Mobile':
+                return attributes.pg_AuthorMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeShowAuthorType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_Author: type, pg_AuthorTablet: type, pg_AuthorMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_AuthorTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_AuthorMobile: type });
+        }
+    };
+    
+    const changeShowAuthor= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showAuthor: value});
+                break;
+            case 'Tablet':
+                setAttributes({pg_showAuthorTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showAuthorMobile: value });
+                break;
+        }
+    };
+
+    //Date
+    const getShowDateview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showDate;
+            case 'Tablet':
+                return attributes.pg_showDateTablet;
+            case 'Mobile':
+                return attributes.pg_showDateMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getShowDateType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_Date;
+            case 'Tablet':
+                return attributes.pg_DateTablet;
+            case 'Mobile':
+                return attributes.pg_DateMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeShowDateType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_Date: type, pg_DateTablet: type, pg_DateMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_DateTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_DateMobile: type });
+        }
+    };
+    
+    const changeShowDate= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showDate: value});
+                break;
+            case 'Tablet':
+                setAttributes({pg_showDateTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showDateMobile: value });
+                break;
+        }
+    };
+    
+    //Tag
+    const getShowTagview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_showTags;
+            case 'Tablet':
+                return attributes.pg_showTagTablet;
+            case 'Mobile':
+                return attributes.pg_showTagMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getShowTagType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_Tag;
+            case 'Tablet':
+                return attributes.pg_TagTablet;
+            case 'Mobile':
+                return attributes.pg_TagMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeShowTagType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ pg_Tag: type, pg_TagTablet: type, pg_TagMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ pg_TagTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ pg_TagMobile: type });
+        }
+    };
+    
+    const changeShowTag= (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_showTags: value});
+                break;
+            case 'Tablet':
+                setAttributes({pg_showTagTablet: value });
+                break;
+            case 'Mobile':
+                setAttributes({ pg_showTagMobile: value });
+                break;
+        }
+    };
+
+    //Expert number of words
+    const getExcerptnumberview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_excerptWords;
+            case 'Tablet':
+                return attributes.pg_excerptWordsTablet;
+            case 'Mobile':
+                return attributes.pg_excerptWordsMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getExcerptnumberType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.Excerptnumber;
+            case 'Tablet':
+                return attributes.ExcerptnumberTablet;
+            case 'Mobile':
+                return attributes.ExcerptnumberMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeExcerptnumberType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ Excerpt: type, ExcerptTablet: type, ExcerptMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ ExcerptTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ ExcerptMobile: type });
+        }
+    };
+    
+    const changeExcerptnumber = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_excerptWords: value });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_excerptWordsTablet: value});
+                break;
+            case 'Mobile':
+                setAttributes({pg_excerptWordsMobile: value });
+                break;
+        }
+    };
+
+    //Excerpt Selector
+    const getExcerptSelectorview = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_excerptSelector;
+            case 'Tablet':
+                return attributes.pg_excerptSelectorTablet;
+            case 'Mobile':
+                return attributes.pg_excerptSelectorMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const getExcerptSelectorType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.ExcerptSelector;
+            case 'Tablet':
+                return attributes.ExcerptSelectorTablet;
+            case 'Mobile':
+                return attributes.ExcerptSelectorMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changeExcerptSelectorType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ ExcerptSelector: type, ExcerptSelectorTablet: type, ExcerptSelectorMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ ExcerptSelectorTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ ExcerptSelectorMobile: type });
+        }
+    };
+    
+    const changeExcerptSelector = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_excerptSelector: value });
+                break;
+            case 'Tablet':
+                setAttributes({ pg_excerptSelectorTablet: value});
+                break;
+            case 'Mobile':
+                setAttributes({pg_excerptSelectorMobile: value });
+                break;
+        }
+    };
+
+    //gap
+    const getgapType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.gap;
+            case 'Tablet':
+                return attributes.gapTablet;
+            case 'Mobile':
+                return attributes.gapMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changegapType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ gap: type, gapTablet: type, gapMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ gapTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ gapMobile: type });
+        }
+    };
+    
+    const getgap = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_gap;
+            case 'Tablet':
+                return attributes.pg_gapTablet;
+            case 'Mobile':
+                return attributes.pg_gapMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changegap = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_gap: value});
+                break;
+            case 'Tablet':
+                setAttributes({ pg_gapTablet: value});
+                break;
+            case 'Mobile':
+                setAttributes({ pg_gapMobile: value});
+                break;
+        }
+    };
+
+    //gapup
+    const getgapupType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.gapup;
+            case 'Tablet':
+                return attributes.gapupTablet;
+            case 'Mobile':
+                return attributes.gapupMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changegapupType = (type) => {
+        if ('Desktop' === getView) {
+            setAttributes({ gapup: type, gapupTablet: type, gapupMobile: type });
+        } else if ('Tablet' === getView) {
+            setAttributes({ gapupTablet: type });
+        } else if ('Mobile' === getView) {
+            setAttributes({ gapupMobile: type });
+        }
+    };
+    
+    const getgapup = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.pg_gapup;
+            case 'Tablet':
+                return attributes.pg_gapupTablet;
+            case 'Mobile':
+                return attributes.pg_gapupMobile;
+            default:
+                return undefined;
+        }
+    };
+    
+    const changegapup = (value) => {
+        switch (getView) {
+            case 'Desktop':
+                setAttributes({ pg_gapup: value});
+                break;
+            case 'Tablet':
+                setAttributes({ pg_gapupTablet: value});
+                break;
+            case 'Mobile':
+                setAttributes({ pg_gapupMobile: value});
+                break;
+        }
+    };
+
+    // Pagination Padding
+	const desktopPaginationPaddingType = {
+		top: 'pg_PaginationpaddingTop',
+		right: 'pg_PaginationpaddingRight',
+		bottom: 'pg_PaginationpaddingBottom',
+		left: 'pg_PaginationpaddingLeft'
+	};
+	
+	const tabletPaginationPaddingType = {
+		top: 'pg_PaginationpaddingTopTablet',
+		right: 'pg_PaginationpaddingRightTablet',
+		bottom: 'pg_PaginationpaddingBottomTablet',
+		left: 'pg_PaginationpaddingLeftTablet'
+	};
+	
+	const mobilePaginationPaddingType = {
+		top: 'pg_PaginationpaddingTopMobile',
+		right: 'pg_PaginationpaddingRightMobile',
+		bottom: 'pg_PaginationpaddingBottomMobile',
+		left: 'pg_PaginationpaddingLeftMobile'
+	};
+	
+	const getPaginationPaddingType = () => {
+		switch (getView) {
+		case 'Desktop':
+			return attributes.pg_PaginationpaddingType;
+		case 'Tablet':
+			return attributes.pg_PaginationpaddingTypeTablet;
+		case 'Mobile':
+			return attributes.pg_PaginationpaddingTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	
+	const changePaginationPaddingType = (value) => {
+		if ('Desktop' === getView) {
+		setAttributes({ pg_PaginationpaddingType: value });
+		} else if ('Tablet' === getView) {
+		setAttributes({ pg_PaginationpaddingTypeTablet: value });
+		} else if ('Mobile' === getView) {
+		setAttributes({ pg_PaginationpaddingTypeMobile: value });
+		}
+	};
+	
+	const changePaginationPadding = (type, value) => {
+		switch (getView) {
+		case 'Desktop':
+			if ('linked' === attributes.pg_PaginationpaddingType) {
+			setAttributes({
+				pg_Paginationpadding: value,
+				pg_PaginationpaddingTop: value,
+				pg_PaginationpaddingBottom: value,
+				pg_PaginationpaddingLeft: value,
+				pg_PaginationpaddingRight: value
+			});
+			} else {
+			setAttributes({ [desktopPaginationPaddingType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ('linked' === attributes.pg_PaginationpaddingTypeTablet) {
+			setAttributes({
+				pg_PaginationpaddingTablet: value,
+				pg_PaginationpaddingTopTablet: value,
+				pg_PaginationpaddingBottomTablet: value,
+				pg_PaginationpaddingLeftTablet: value,
+				pg_PaginationpaddingRightTablet: value
+			});
+			} else {
+			setAttributes({ [tabletPaginationPaddingType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ('linked' === attributes.pg_PaginationpaddingTypeMobile) {
+			setAttributes({
+				pg_PaginationpaddingMobile: value,
+				pg_PaginationpaddingTopMobile: value,
+				pg_PaginationpaddingBottomMobile: value,
+				pg_PaginationpaddingLeftMobile: value,
+				pg_PaginationpaddingRightMobile: value
+			});
+			} else {
+			setAttributes({ [mobilePaginationPaddingType[type]]: value });
+			}
+			break;
+		}
+	};
+	
+	const getPaginationPadding = (type) => {
+		switch (getView) {
+		case 'Desktop':
+			return 'linked' === attributes.pg_PaginationpaddingType
+			? attributes.pg_Paginationpadding
+			: attributes[desktopPaginationPaddingType[type]];
+		case 'Tablet':
+			return 'linked' === attributes.pg_PaginationpaddingTypeTablet
+			? attributes.pg_PaginationpaddingTablet
+			: attributes[tabletPaginationPaddingType[type]];
+		case 'Mobile':
+			return 'linked' === attributes.pg_PaginationpaddingTypeMobile
+			? attributes.pg_PaginationpaddingMobile
+			: attributes[mobilePaginationPaddingType[type]];
+		}
+		return undefined;
+	};
+    
+    //pagination border
+    const handlepaginationBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        if (newBorders.borders.top) {
+            if (newBorders.borders.top) {
+                updatedAttributes.pg_paginationTopBorderColor = newBorders.borders.top.color;
+                updatedAttributes.pg_paginationTopBorder = newBorders.borders.top.width;
+                updatedAttributes.paginationTopborderType = newBorders.borders.top.style;
+            }
+            if (newBorders.borders.bottom) {
+                updatedAttributes.pg_paginationBottomBorderColor = newBorders.borders.bottom.color;
+                updatedAttributes.pg_paginationBottomBorder = newBorders.borders.bottom.width;
+                updatedAttributes.paginationBottomborderType = newBorders.borders.bottom.style;
+            }
+            if (newBorders.borders.left) {
+                updatedAttributes.pg_paginationLeftBorderColor = newBorders.borders.left.color;
+                updatedAttributes.pg_paginationLeftBorder = newBorders.borders.left.width;
+                updatedAttributes.paginationLeftborderType = newBorders.borders.left.style;
+            }
+            if (newBorders.borders.right) {
+                updatedAttributes.pg_paginationRightBorderColor = newBorders.borders.right.color;
+                updatedAttributes.pg_paginationRightBorder = newBorders.borders.right.width;
+                updatedAttributes.paginationRightborderType = newBorders.borders.right.style;
+            }
+        } else {
+            updatedAttributes.pg_paginationBorderColor = newBorders.borders.color;
+            updatedAttributes.pg_paginationBorder = newBorders.borders.width;
+            updatedAttributes.paginationborderType = newBorders.borders.style;
+
+            updatedAttributes.pg_paginationRightBorderColor = newBorders.borders.color;
+            updatedAttributes.pg_paginationRightBorder = newBorders.borders.width;
+            updatedAttributes.paginationRightborderType = newBorders.borders.style;
+
+            updatedAttributes.pg_paginationLeftBorderColor = newBorders.borders.color;
+            updatedAttributes.pg_paginationLeftBorder = newBorders.borders.width;
+            updatedAttributes.paginationLeftborderType = newBorders.borders.style;
+
+            updatedAttributes.pg_paginationBottomBorderColor = newBorders.borders.color;
+            updatedAttributes.pg_paginationBottomBorder = newBorders.borders.width;
+            updatedAttributes.paginationBottomborderType = newBorders.borders.style;
+
+            updatedAttributes.pg_paginationTopBorderColor = newBorders.borders.color;
+            updatedAttributes.pg_paginationTopBorder = newBorders.borders.width;
+            updatedAttributes.paginationTopborderType = newBorders.borders.style;
+        }
+        setAttributes(updatedAttributes);
+    };
+    
+    //pagination border-radius
+    const handlepaginationBorderRadiusChange = (newValues) => {
+        setAttributes({
+            pg_paginationTopBorderRadius: newValues.borderRadius.top,
+            pg_paginationLeftBorderRadius: newValues.borderRadius.left,
+            pg_paginationRightBorderRadius: newValues.borderRadius.right,
+            pg_paginationBottomBorderRadius: newValues.borderRadius.bottom,
+        });
+    };
+
+    const colors = [
+		{ name: 'Gray', color: '#808080' },         // Dark Gray
+		{ name: 'Light Gray', color: '#D3D3D3' },   // Light Gray
+		{ name: 'Black', color: '#000' },           // Black
+		{ name: 'Light Black', color: '#333' },     // Light Black
+		{ name: 'Blue', color: '#00f' },            // Blue
+		{ name: 'Light Blue', color: '#add8e6' },   // Light Blue
+		{ name: 'Green', color: '#008000' },        // Green
+		{ name: 'Dark Blue', color: '#00008B' },    // Dark Blue
+		{ name: 'Red', color: '#f00' },             // Red
+		{ name: 'Light Red', color: '#FF6347' },    // Light Red
+		{ name: 'Purple', color: '#800080' },       // Purple
+	];
+
+    const fontSizes = [
+		{ name: __('Small', 'post-grid'), slug: 'small', size: 15 },
+		{ name: __('Medium', 'post-grid'), slug: 'medium', size: 20 },
+		{ name: __('Large', 'post-grid'), slug: 'large', size: 24 },
+		{ name: __('Larger', 'post-grid'), slug: 'larger', size: 28 },
+	];
+
+    return (
+        <>
+            <PanelBody title={__('Layout', 'post-grid')} initialOpen={false}>
+                <ResponsiveControl label={__('Number of Columns', 'post-grid')}>
+                    <RangeControl
+                        type={getLayoutColumnsType()}
+                        changeType={changeLayoutColumnsType}
+                        value={getLayoutColumns()}
+                        onChange={(value) => changeLayoutColumns(value)}
+                        min={1}
+                        max={6}
+                        label={__(getView, 'post-grid')}
+                    />
+                </ResponsiveControl>
+
+                <ResponsiveControl label={__('Number of Rows', 'post-grid')}>
+                        <RangeControl
+                            type={getRowsType()}
+                            changeType={changeRowsType}
+                            value={getRows()}
+                            onChange={(value) => changeRows(value)}
+                            min={1}
+                            max={6}
+                            label={getView}
+                        />
+                </ResponsiveControl>
+
+            </PanelBody>
+ 
+            <PanelBody title={__('Filter', 'post-grid')} initialOpen={false}>
+                <ResponsiveControl label={__('Gap Between Items Vertical', 'post-grid')}>
+                    <RangeControl
+                        value={getgap()}
+                        type={getgapType()}
+                        changeType={changegapType}
+                        onChange={(value) => changegap(value)}
+                        min={0}
+                        label={getView}
+                        max={100}
+                    />
+                </ResponsiveControl>
+                <ResponsiveControl label={__('Gap Between Items Horizantal', 'post-grid')}>
+                    <RangeControl
+                        value={getgapup()}
+                        type={getgapupType()}
+                        changeType={changegapupType}
+                        onChange={(value) => changegapup(value)}
+                        min={0}
+                        max={100}
+                        label={getView}
+                    />
+                </ResponsiveControl>
+            </PanelBody>
+
+            <PanelBody title={__('Layout Controls', 'post-grid')} initialOpen={false}>
+            <ResponsiveControl label={__(getView, 'post-grid')}>
+                <ToggleControl
+                    label={__('Show Excerpt', 'post-grid')}
+                    checked={getExcerptview()}
+                    type={getLayoutType()}
+                    changeType={changeLayoutType}
+                    onChange={(value) => changeExcerpt(value)}
+                />
+
+                {getExcerptview() && (
+                    <>
+                        <RangeControl
+                            label={__('Number of words in excerpt', 'post-grid')}
+                            value={getExcerptnumberview()}
+                            type={getExcerptnumberType()}
+                            changeType={changeExcerptnumberType}
+                            onChange={(value) =>changeExcerptnumber(value)}
+                            min={1}
+                            max={100}
+                        />
+                        <TextControl
+                            label={__('Last Word', 'post-grid')}
+                            value={getExcerptSelectorview()}
+                            type={getExcerptSelectorType()}
+                            changeType={changeExcerptSelectorType}
+                            onChange={(value) =>changeExcerptSelector(value)}
+                          
+                        />
+                        <br />
+                    </>
+                )}
+
+                <ToggleControl
+                    label={__('Show Full Content', 'post-grid')}
+                    checked={getFullContentview()}
+                    type={getFullContentType()}
+                    changeType={changeFullContentType}
+                    onChange={(value) => changeFullContent(value)}
+                />
+
+
+                <ToggleControl
+                    label={__('Show Featured Image', 'post-grid')}
+                    checked={getFeaturedImageview()}
+                    type={getFeaturedImageType()}
+                    changeType={changeFeaturedImageType}
+                    onChange={(value) => changeFeaturedImage(value)}
+                />
+
+
+                <ToggleControl
+                    label={__('Show Categories', 'post-grid')}
+                    checked={getShowCategoriesview()}
+                    type={getShowCategoriesType()}
+                    changeType={changeShowCategoriesType}
+                    onChange={(value) => changeShowCategories(value)}
+                />
+                    {getShowCategoriesview() && (
+                        <RangeControl
+                            label={__('Number of Categories', 'post-grid')}
+                            value={pg_numberOfCategories}
+                            onChange={(value) => setAttributes({pg_numberOfCategories:value})}
+                            min={1}
+                            max={5}
+                        />
+                    )}
+
+                <ToggleControl
+                    label={__('Show Author', 'post-grid')}
+                    checked={getShowAuthorview()}
+                    type={getShowAuthorType()}
+                    changeType={changeShowAuthorType}
+                    onChange={(value) => changeShowAuthor(value)}
+                />
+                <ToggleControl
+                    label={__('Show Date', 'post-grid')}
+                    checked={getShowDateview()}
+                    type={getShowDateType()}
+                    changeType={changeShowDateType}
+                    onChange={(value) => changeShowDate(value)}
+                />
+                <ToggleControl
+                    label={__('Show Tags', 'post-grid')}
+                    checked={getShowTagview()}
+                    type={getShowTagType()}
+                    changeType={changeShowTagType}
+                    onChange={(value) => changeShowTag(value)}
+                />
+                 {getShowTagview() && (
+                        <RangeControl
+                            label={__('Number of Tags', 'post-grid')}
+                            value={pg_numberOfTags}
+                            onChange={(value) => setAttributes({pg_numberOfTags:value})}
+                            min={1}
+                            max={5}
+                        />
+                    )}
+
+            </ResponsiveControl>
+            </PanelBody>
+
+            <PanelBody title={__('Pagination', 'post-grid')} initialOpen={false}>
+                <ToggleControl
+                    label={__('Show Pagination', 'post-grid')}
+                    checked={showpagination}
+                    onChange={(value) => setAttributes({
+                        showpagination:value
+                    })}
+                />
+                {showpagination && (
+                    <>
+                   
+                    <h4>Text Color</h4>
+                    <ColorPalette
+                        label={__('Color', 'post-grid')}
+                        colors={colors}
+                        value={pg_PaginationColor}
+                        onChange={(color) => setAttributes({ pg_PaginationColor: color })}
+                    />
+                    <FontSizePicker
+                        label={__('Font Size', 'Post_blockk')}
+                        fontSizes={fontSizes}
+                        value={pg_PaginationSize}
+                        onChange={(value) => setAttributes({ pg_PaginationSize: value })}
+                    />
+
+                    <h4>{__('Background Color', 'post-grid')}</h4>
+                    <BackgroundSelectorControl
+                        backgroundType={pg_PaginationbackgroundType}
+                        backgroundColor={pg_PaginationbackgroundColor}
+                        gradient={pg_PaginationbackgroundGradient}
+                        changeBackgroundType={(value) => setAttributes({ pg_PaginationbackgroundType: value })}
+                        changeColor={(value) => setAttributes({ pg_PaginationbackgroundColor: value })}
+                        changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
+                     />
+
+                            <h4>Border</h4>
+									<BorderBoxControlComponent
+										label={__('Border','post-grid')}
+										value={{
+											all: {
+												color: attributes.pg_paginationBorderColor,
+												width: attributes.pg_paginationBorder,
+												style: attributes.paginationborderType,
+											},
+											top: {
+												color: attributes.pg_paginationTopBorderColor,
+												width: attributes.pg_paginationTopBorder,
+												style: attributes.paginationTopborderType,
+											},
+											bottom: {
+												color: attributes.pg_paginationBottomBorderColor,
+												width: attributes.pg_paginationBottomBorder,
+												style: attributes.paginationBottomborderType,
+											},
+											left: {
+												color: attributes.pg_paginationLeftBorderColor,
+												width: attributes.pg_paginationLeftBorder,
+												style: attributes.paginationLeftborderType,
+											},
+											right: {
+												color: attributes.pg_paginationRightBorderColor,
+												width: attributes.pg_paginationRightBorder,
+												style: attributes.paginationRightborderType,
+											},
+										}}
+										onChange={handlepaginationBorderChange}
+										type="border"
+									/>
+									<h4>Border Radius</h4>
+									<BorderBoxControlComponent
+												label={__('Border Radius', 'post-grid')}
+												value={{
+												top: attributes.pg_paginationTopBorderRadius,
+												right: attributes.pg_paginationRightBorderRadius,
+												left: attributes.pg_paginationLeftBorderRadius,
+												bottom: attributes.pg_paginationBottomBorderRadius,
+												}}
+												onChange={handlepaginationBorderRadiusChange}
+												type="borderRadius"
+									/>
+                     <ResponsiveControl label={__('Padding', 'post-grid')}>
+                            <UnitChooser
+                                value={attributes.pg_PaginationpaddingUnit}
+                                onClick={(unit) => {
+                                setAttributes({ pg_PaginationpaddingUnit: unit });
+                                }}
+                                units={['px', 'em', '%']}
+                            />
+                            <SizingControl
+                                min={0}
+                                type={getPaginationPaddingType()}
+                                changeType={changePaginationPaddingType}
+                                max={100} // Adjust as needed
+                                onChange={changePaginationPadding}
+                                options={[
+                                { label: __('Top', 'post-grid'), type: 'top', value: getPaginationPadding('top') },
+                                { label: __('Right', 'post-grid'), type: 'right', value: getPaginationPadding('right') },
+                                { label: __('Bottom', 'post-grid'), type: 'bottom', value: getPaginationPadding('bottom') },
+                                { label: __('Left', 'post-grid'), type: 'left', value: getPaginationPadding('left') }
+                                ]}
+                            />
+                    </ResponsiveControl>
+                    </>
+                )}
+
+            </PanelBody>
+        </>
+    );
+};
+
+export default PostSettings;

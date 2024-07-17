@@ -2,9 +2,9 @@
 Contributors: ThemeHunk, satyendra61
 Tags: block, blocks editor, gutenberg, page builder, gutenberg templates
 Requires at least: 6.2
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -87,6 +87,10 @@ If you encounter any difficulties or if you have questions about Vayu Blocks, yo
 create a new thread on the [Support](https://themehunk.com/contact-us/) And also you can connect in [live chat](https://themehunk.com).
 
 == Changelog ==
+
+=1.1.0 =
+* New : Post Grid Block Added
+* Update : Other theme block style not worinkg issue fixed.
 
 =1.0.9 =
 * Update : Plugin images added.

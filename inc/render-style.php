@@ -14,10 +14,6 @@ add_action( 'init', 'vayu_render_init', 99);
 
 function vayu_render_server_side_css() {
 
-	if ( ! ( function_exists( 'get_block_templates' ) && current_theme_supports( 'block-templates' ) ) ) {
-		return;
-	}
-
 	global $_wp_current_template_content;
 
 	$content         = '';
@@ -96,6 +92,10 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 	$css = '';
 
 	foreach ( $blocks as $block ) {
+
+		if ( $block['blockName'] === 'vayu-blocks/post-grid' ) {
+			$css .= generate_inline_styles($block['attrs']);
+	} 
 		
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
