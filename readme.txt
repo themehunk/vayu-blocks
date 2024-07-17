@@ -1,9 +1,10 @@
-=== Vayu Blocks ===
-Contributors: ThemeHunk
+=== Vayu Blocks - Gutenberg Blocks for WordPress & WooCommerce ===
+Contributors: ThemeHunk, satyendra61
+Tags: block, blocks editor, gutenberg, page builder, gutenberg templates
 Requires at least: 6.2
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 1.0.8
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -30,14 +31,14 @@ Easily design attractive buttons with Vayu Blocks advanced customizations.
 #### Advance Product [FREE]
 This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.
 
+### Vayu Addons 
+Vayu block addons & Website Templates [View More](https://themehunk.com/vayu-blocks).
+
 ### Support 
 We're here to help. Feel free to open a new thread on the [Support](https://themehunk.com/contact-us/).
 
 ### Documentation
 Discover how to make the most of Vayu Blocks with our detailed and user-friendly[Documentation](https://themehunk.com/docs/vayu-blocks/)
-
-### Become a Contributor 
-Vayu Blocks is an open-source project, and we welcome contributors to be part of our vibrant community! Help us improve the plugin and make it even better - [GitHub Link](https://github.com/themehunk/vayu-blocks)
 
 ### Useful Resources
 The plugin is relying on the service behind www.themehunk.com and wpthemes.themehunk.com for accessing the page Template content like template images. No account is required to access the service template collection and the privacy policy can be found [here](https://themehunk.com/privacy-policy/).
@@ -66,6 +67,12 @@ To download and install the Vayu blocks plugin, make sure you follow the steps b
 - Click on the Activate button under the "Plugin installed successfully" message.
 
 == Screenshots ==
+1. Vayu Block Dashboard
+2. Global Settings
+3. Vayu Sites
+4. Website Templates
+5. Import Templates
+6. Vayu Blocks Addons
 
 == Frequently Asked Questions ==
 
@@ -80,6 +87,14 @@ If you encounter any difficulties or if you have questions about Vayu Blocks, yo
 create a new thread on the [Support](https://themehunk.com/contact-us/) And also you can connect in [live chat](https://themehunk.com).
 
 == Changelog ==
+
+=1.1.0 =
+* New : Post Grid Block Added
+* Update : Other theme block style not worinkg issue fixed.
+
+=1.0.9 =
+* Update : Plugin images added.
+* Update : Readme file update.
 
 =1.0.8 =
 * Update : Product Block Add to cart loader add.

@@ -630,6 +630,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   stepThree: () => (/* binding */ stepThree),
 /* harmony export */   stepTwo: () => (/* binding */ stepTwo),
 /* harmony export */   templateData: () => (/* binding */ templateData),
+/* harmony export */   templateDataMerge: () => (/* binding */ templateDataMerge),
 /* harmony export */   tmplLodaing: () => (/* binding */ tmplLodaing)
 /* harmony export */ });
 const templateData = (builder, cate) => {
@@ -637,6 +638,12 @@ const templateData = (builder, cate) => {
     type: "TEMPLATE_DATA",
     payload: builder,
     cate: cate
+  };
+};
+const templateDataMerge = payload => {
+  return {
+    type: "TEMPLATE_DATA_MERGE",
+    payload: payload
   };
 };
 const licenseKey = payload => {
@@ -892,6 +899,8 @@ const templateData = (state = defaultJsonData, action) => {
   switch (action.type) {
     case "TEMPLATE_DATA":
       return jsonData.filter(template => builderHandel(template.builder_theme) === action.payload && template.category.includes(action.cate));
+    case "TEMPLATE_DATA_MERGE":
+      return action.payload;
     default:
       return state;
   }

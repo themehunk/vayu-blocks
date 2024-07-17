@@ -5,6 +5,13 @@ export const templateData = (builder,cate) =>{
     cate:cate,
      }
 }
+
+export const templateDataMerge = (payload) =>{
+  return { 
+    type: "TEMPLATE_DATA_MERGE",
+    payload:payload,
+     }
+}
 export const licenseKey = (payload) =>{
   return { 
     type: "LICENSE_KEY",

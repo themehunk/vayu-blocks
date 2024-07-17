@@ -75,8 +75,13 @@ class VayuBlocksPostGrid {
                     'current' => $paged,
                     'prev_next' => true,
                     'type' => '', // Use 'list' type to generate <ul> instead of <span>
+<<<<<<< HEAD
                     'prev_text' => '',
                     'next_text' => '',
+=======
+                    'prev_text' => '<span>&laquo; Previous</span>',
+                    'next_text' => '<span>Next &raquo;</span>',
+>>>>>>> origin/kuber
                     'before_page_number' => '<span class="page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
                     'after_page_number' => '</span>',
                 ));

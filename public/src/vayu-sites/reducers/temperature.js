@@ -23,6 +23,8 @@ const templateData = ( state = defaultJsonData, action) =>{
     switch(action.type){
         case "TEMPLATE_DATA" : return  jsonData.filter(template => builderHandel(template.builder_theme) === action.payload && template.category.includes(action.cate));
 
+        case "TEMPLATE_DATA_MERGE" : return action.payload;
+
         default: return state;
     }
 

@@ -488,8 +488,12 @@ function generate_inline_styles($attr) {
         }
         
         // Margin
+<<<<<<< HEAD
         $css .= "margin: 20px 5px;";
         $css .="text-decoration: none;";
+=======
+        $css .= "margin: 0 5px;";
+>>>>>>> origin/kuber
         
         // Border radius
         $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . ";" : '';

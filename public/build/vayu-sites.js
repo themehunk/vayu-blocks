@@ -21989,6 +21989,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   stepThree: () => (/* binding */ stepThree),
 /* harmony export */   stepTwo: () => (/* binding */ stepTwo),
 /* harmony export */   templateData: () => (/* binding */ templateData),
+/* harmony export */   templateDataMerge: () => (/* binding */ templateDataMerge),
 /* harmony export */   tmplLodaing: () => (/* binding */ tmplLodaing)
 /* harmony export */ });
 const templateData = (builder, cate) => {
@@ -21996,6 +21997,12 @@ const templateData = (builder, cate) => {
     type: "TEMPLATE_DATA",
     payload: builder,
     cate: cate
+  };
+};
+const templateDataMerge = payload => {
+  return {
+    type: "TEMPLATE_DATA_MERGE",
+    payload: payload
   };
 };
 const licenseKey = payload => {
@@ -22251,6 +22258,8 @@ const templateData = (state = defaultJsonData, action) => {
   switch (action.type) {
     case "TEMPLATE_DATA":
       return jsonData.filter(template => builderHandel(template.builder_theme) === action.payload && template.category.includes(action.cate));
+    case "TEMPLATE_DATA_MERGE":
+      return action.payload;
     default:
       return state;
   }
@@ -23881,11 +23890,40 @@ function SiteTemplate(props) {
       });
     }
   };
+  const fetchServerData = async () => {
+    const serverUrl = 'https://www.themehunk.com/wp-json/wp/v2/themehunk/api';
+    const dataToSend = {
+      theme: 'vayu',
+      type: 'free'
+    };
+    try {
+      const response = await fetch(serverUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToSend)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      try {
+        const data = await response.json();
+        dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_3__.templateDataMerge)(jsonData.concat(JSON.parse(data.data))));
+      } catch (e) {
+        throw new Error();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {}
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    fetchServerData();
     setTimeout(() => {
       dispatch((0,_actions__WEBPACK_IMPORTED_MODULE_3__.addTrueFalse)(true));
     }, 500); // 10000 milliseconds = 10 seconds
   }, []);
+  console.log(jsonData);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     class: "asib-main-tmpl"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {

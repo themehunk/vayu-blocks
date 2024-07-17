@@ -1,7 +1,7 @@
 import { useState,useEffect  } from '@wordpress/element';
 import {SkeletonSingle, SkeletonTemplate} from './skeleton-loader';
 import { useSelector, useDispatch } from 'react-redux';
-import {addTrueFalse} from '../actions';
+import {addTrueFalse,templateDataMerge} from '../actions';
 
 export default function SiteTemplate(props) {
   const [loaded, setLoaded] = useState(false);
@@ -16,8 +16,6 @@ const imageHandel = (template)=> {
   // Get the modal
   var parsedData = JSON.parse(template);
   props.datatemp(parsedData);
-
-
   
  // var captionText = document.getElementById("sidebarModel");
   var captionIframe = document.getElementById("iframeModel");
@@ -71,13 +69,53 @@ const imgload = () =>{
 
 }
 
+const fetchServerData = async () => {
+  const serverUrl = 'https://www.themehunk.com/wp-json/wp/v2/themehunk/api';
+  const dataToSend = {
+    theme: 'vayu',
+    type: 'free'
+  };
+
+  try {
+    const response = await fetch(serverUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok ' + response.statusText);
+    }
+
+    try {
+    const data = await response.json();
+
+    dispatch(templateDataMerge(jsonData.concat(JSON.parse(data.data))));
+
+  } catch (e) {
+    throw new Error();
+  }
+  
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+};
+
 
 useEffect(() => {
+  fetchServerData();
   setTimeout(() => {
     dispatch(addTrueFalse(true));
   }, 500); // 10000 milliseconds = 10 seconds
   
 }, []);
+
+
+console.log(jsonData);
 
 return (
         <div class="asib-main-tmpl">
