@@ -5929,9 +5929,404 @@ const PostSettings = ({
 /*!*******************************************!*\
   !*** ./src/block/post-grid/edit-style.js ***!
   \*******************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\src\\block\\post-grid\\edit-style.js: Unexpected token (365:0)\n\n\u001b[0m \u001b[90m 363 |\u001b[39m         color\u001b[33m:\u001b[39m \u001b[32m`${attributes.pg_PaginationColor}`\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 364 |\u001b[39m         background\u001b[33m:\u001b[39m attributes\u001b[33m.\u001b[39mpg_PaginationbackgroundType \u001b[33m===\u001b[39m \u001b[32m'color'\u001b[39m \u001b[33m?\u001b[39m attributes\u001b[33m.\u001b[39mpg_PaginationbackgroundColor \u001b[33m:\u001b[39m attributes\u001b[33m.\u001b[39mpg_PaginationbackgroundType \u001b[33m===\u001b[39m \u001b[32m'gradient'\u001b[39m \u001b[33m?\u001b[39m \u001b[32m`${attributes.pg_PaginationbackgroundGradient}`\u001b[39m \u001b[33m:\u001b[39m \u001b[32m'none'\u001b[39m\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 365 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m     |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 366 |\u001b[39m         margin\u001b[33m:\u001b[39m \u001b[32m'20px 5px'\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 367 |\u001b[39m \u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 368 |\u001b[39m         margin\u001b[33m:\u001b[39m \u001b[32m'0 5px'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n    at constructor (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:353:19)\n    at JSXParserMixin.raise (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:3277:19)\n    at JSXParserMixin.unexpected (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:3297:16)\n    at JSXParserMixin.parsePropertyName (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11539:18)\n    at JSXParserMixin.parsePropertyDefinition (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11411:22)\n    at JSXParserMixin.parseObjectLike (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11354:21)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10875:23)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:6821:20)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10590:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10573:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10551:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10405:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10410:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10387:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10348:21)\n    at JSXParserMixin.parseExpressionBase (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10302:23)\n    at C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10298:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11931:16)\n    at JSXParserMixin.parseExpression (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10298:17)\n    at JSXParserMixin.parseReturnStatement (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12619:28)\n    at JSXParserMixin.parseStatementContent (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12270:21)\n    at JSXParserMixin.parseStatementLike (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12239:17)\n    at JSXParserMixin.parseStatementListItem (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12219:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12796:61)\n    at JSXParserMixin.parseBlockBody (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12789:10)\n    at JSXParserMixin.parseBlock (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12777:10)\n    at JSXParserMixin.parseFunctionBody (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11616:24)\n    at JSXParserMixin.parseArrowExpression (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11591:10)\n    at JSXParserMixin.parseParenAndDistinguishExpression (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11211:12)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10857:23)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:6821:20)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10590:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10573:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10551:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10405:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10410:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10387:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10348:21)\n    at C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10318:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:11931:16)\n    at JSXParserMixin.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:10318:17)\n    at JSXParserMixin.parseVar (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12864:91)\n    at JSXParserMixin.parseVarStatement (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12710:10)\n    at JSXParserMixin.parseStatementContent (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12322:23)\n    at JSXParserMixin.parseStatementLike (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12239:17)\n    at JSXParserMixin.parseModuleItem (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12216:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12796:36)\n    at JSXParserMixin.parseBlockBody (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12789:10)\n    at JSXParserMixin.parseProgram (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12116:10)\n    at JSXParserMixin.parseTopLevel (C:\\xampp\\htdocs\\wordpress\\wp-content\\plugins\\vayu-blocks\\public\\node_modules\\@babel\\parser\\lib\\index.js:12106:25)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   PaginationStyles: () => (/* binding */ PaginationStyles),
+/* harmony export */   authorAndDateContainerStyles: () => (/* binding */ authorAndDateContainerStyles),
+/* harmony export */   authorImageStyles: () => (/* binding */ authorImageStyles),
+/* harmony export */   authorLinkStyles: () => (/* binding */ authorLinkStyles),
+/* harmony export */   blockStyles: () => (/* binding */ blockStyles),
+/* harmony export */   categoryButtonStyles: () => (/* binding */ categoryButtonStyles),
+/* harmony export */   dateImageStyles: () => (/* binding */ dateImageStyles),
+/* harmony export */   featuredImageStyles: () => (/* binding */ featuredImageStyles),
+/* harmony export */   fullContentStyle: () => (/* binding */ fullContentStyle),
+/* harmony export */   gridContainerStyles: () => (/* binding */ gridContainerStyles),
+/* harmony export */   postStyles: () => (/* binding */ postStyles),
+/* harmony export */   showOnlyDateStyles: () => (/* binding */ showOnlyDateStyles),
+/* harmony export */   tagButtonStyles: () => (/* binding */ tagButtonStyles),
+/* harmony export */   titleTagStyles: () => (/* binding */ titleTagStyles)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const blockStyles = (pg_textColor, pg_lineHeight) => ({
+  maxWidth: "100%"
+});
+const gridContainerStyles = attributes => {
+  const view = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  const getLayoutColumnStyle = (attributes, view) => {
+    return {
+      gridTemplateColumns: `repeat(${view === 'Desktop' ? attributes.pg_postLayoutColumns : attributes[`pg_postLayoutColumns${view}`]}, 1fr)`
+    };
+  };
+  const getLayoutRowStyle = (attributes, view) => {
+    const numberOfRows = view === 'Desktop' ? attributes.pg_numberOfRow : attributes[`pg_numberOfRow${view}`];
+    return {
+      gridTemplateRows: `repeat(${numberOfRows}, minmax(100px, 1fr))`
+    };
+  };
+  const getGapStyle = (attributes, view) => {
+    return {
+      gridGap: `${view === 'Desktop' ? attributes.pg_gapup + 'px ' + attributes.pg_gap + 'px' : attributes[`pg_gapup${view}`] + 'px ' + attributes[`pg_gap${view}`] + 'px'}`
+    };
+  };
+  const layoutColumnsStyle = getLayoutColumnStyle(attributes, view);
+  const layoutRowsStyle = getLayoutRowStyle(attributes, view);
+  const gapStyle = getGapStyle(attributes, view);
+  return {
+    display: 'grid',
+    ...layoutColumnsStyle,
+    ...layoutRowsStyle,
+    ...gapStyle,
+    maxWidth: '100%'
+  };
+};
+//post
+const getPaddingStyle = (attributes, view) => {
+  switch (view) {
+    case 'Desktop':
+      return {
+        paddingTop: attributes.pg_layoutpaddingTop ? `${attributes.pg_layoutpaddingTop}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_layoutpaddingBottom ? `${attributes.pg_layoutpaddingBottom}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_layoutpaddingLeft ? `${attributes.pg_layoutpaddingLeft}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_layoutpaddingRight ? `${attributes.pg_layoutpaddingRight}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined
+      };
+    case 'Tablet':
+      return {
+        paddingTop: attributes.pg_layoutpaddingTopTablet ? `${attributes.pg_layoutpaddingTopTablet}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_layoutpaddingBottomTablet ? `${attributes.pg_layoutpaddingBottomTablet}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_layoutpaddingLeftTablet ? `${attributes.pg_layoutpaddingLeftTablet}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_layoutpaddingRightTablet ? `${attributes.pg_layoutpaddingRightTablet}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined
+      };
+    case 'Mobile':
+      return {
+        paddingTop: attributes.pg_layoutpaddingTopMobile ? `${attributes.pg_layoutpaddingTopMobile}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_layoutpaddingBottomMobile ? `${attributes.pg_layoutpaddingBottomMobile}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_layoutpaddingLeftMobile ? `${attributes.pg_layoutpaddingLeftMobile}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_layoutpaddingRightMobile ? `${attributes.pg_layoutpaddingRightMobile}${attributes.pg_layoutpaddingUnit || 'px'}` : undefined
+      };
+    default:
+      return {};
+  }
+};
+const backgroundStyle = attributes => {
+  if (attributes.layout_backgroundType === 'color') {
+    return {
+      background: attributes.layout_backgroundColor
+    };
+  } else if (attributes.layout_backgroundType === 'gradient') {
+    return {
+      background: attributes.layout_backgroundGradient
+    };
+  } else if (attributes.layout_backgroundType === 'image') {
+    return {
+      backgroundImage: `url(${attributes.layout_backgroundImage.url})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    };
+  } else {
+    return {};
+  }
+};
+const postStyles = attributes => {
+  const view = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  const paddingStyles = getPaddingStyle(attributes, view);
+  return {
+    ...paddingStyles,
+    ...backgroundStyle(attributes),
+    lineHeight: `${attributes.pg_spacing}`,
+    borderTopLeftRadius: `${attributes.pg_postTopBorderRadius}`,
+    borderBottomLeftRadius: `${attributes.pg_postBottomBorderRadius}`,
+    borderBottomRightRadius: `${attributes.pg_postLeftBorderRadius}`,
+    borderTopRightRadius: `${attributes.pg_postRightBorderRadius}`,
+    border: `${attributes.layoutborderType} ${attributes.pg_layoutBorder} ${attributes.pg_layoutBorderColor}`,
+    borderTop: `${attributes.layoutTopborderType} ${attributes.pg_layoutTopBorder} ${attributes.pg_layoutTopBorderColor}`,
+    borderBottom: `${attributes.layoutBottomborderType} ${attributes.pg_layoutBottomBorder} ${attributes.pg_layoutBottomBorderColor}`,
+    borderLeft: `${attributes.layoutLeftborderType} ${attributes.pg_layoutLeftBorder} ${attributes.pg_layoutLeftBorderColor}`,
+    borderRight: `${attributes.layoutRightborderType} ${attributes.pg_layoutRightBorder} ${attributes.pg_layoutRightBorderColor}`,
+    position: 'relative',
+    backgroundAttachment: attributes.layout_backgroundAttachment,
+    backgroundRepeat: attributes.layout_backgroundRepeat,
+    backgroundSize: attributes.layout_backgroundSize
+  };
+};
+//featured Image
+const featuredImageStyles = attributes => ({
+  display: 'block',
+  width: '100%',
+  height: 'auto',
+  borderRadius: `${attributes.pg_imageBorderRadius}px`
+});
+
+//Category
+const getCategoryPaddingStyle = (attributes, view) => {
+  const getView = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  switch (view) {
+    case 'Desktop':
+      return {
+        paddingTop: attributes.pg_CategorypaddingTop ? `${attributes.pg_CategorypaddingTop}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_CategorypaddingBottom ? `${attributes.pg_CategorypaddingBottom}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_CategorypaddingLeft ? `${attributes.pg_CategorypaddingLeft}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_CategorypaddingRight ? `${attributes.pg_CategorypaddingRight}${attributes.categorypaddingUnit || 'px'}` : undefined
+      };
+    case 'Tablet':
+      return {
+        paddingTop: attributes.pg_CategorypaddingTopTablet ? `${attributes.pg_CategorypaddingTopTablet}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_CategorypaddingBottomTablet ? `${attributes.pg_CategorypaddingBottomTablet}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_CategorypaddingLeftTablet ? `${attributes.pg_CategorypaddingLeftTablet}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_CategorypaddingRightTablet ? `${attributes.pg_CategorypaddingRightTablet}${attributes.categorypaddingUnit || 'px'}` : undefined
+      };
+    case 'Mobile':
+      return {
+        paddingTop: attributes.pg_CategorypaddingTopMobile ? `${attributes.pg_CategorypaddingTopMobile}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_CategorypaddingBottomMobile ? `${attributes.pg_CategorypaddingBottomMobile}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_CategorypaddingLeftMobile ? `${attributes.pg_CategorypaddingLeftMobile}${attributes.categorypaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_CategorypaddingRightMobile ? `${attributes.pg_CategorypaddingRightMobile}${attributes.categorypaddingUnit || 'px'}` : undefined
+      };
+    default:
+      return {};
+  }
+};
+const categoryButtonStyles = attributes => {
+  const view = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  const categoryStyles = getCategoryPaddingStyle(attributes, view);
+  return {
+    ...categoryStyles,
+    color: `${attributes.pg_categoryTextColor}`,
+    background: attributes.category_backgroundType === 'color' ? attributes.category_backgroundColor : attributes.category_backgroundType === 'gradient' ? `${attributes.category_backgroundGradient}` : 'none',
+    backgroundImage: attributes.category_backgroundImage ? `url(${attributes.category_backgroundImage.url})` : 'none',
+    backgroundAttachment: attributes.category_backgroundAttachment,
+    backgroundRepeat: attributes.category_backgroundRepeat,
+    backgroundSize: attributes.category_backgroundSize,
+    fontSize: `${attributes.pg_categoryTextSize}px`,
+    marginLeft: '5px',
+    fontWeight: '600',
+    marginTop: "3%",
+    borderTopLeftRadius: `${attributes.pg_categoryTopBorderRadius}`,
+    borderBottomLeftRadius: `${attributes.pg_categoryBottomBorderRadius}`,
+    borderBottomRightRadius: `${attributes.pg_categoryLeftBorderRadius}`,
+    borderTopRightRadius: `${attributes.pg_categoryRightBorderRadius}`,
+    border: `${attributes.categoryborderType} ${attributes.pg_categoryBorder} ${attributes.pg_categoryBorderColor}`,
+    borderTop: `${attributes.categoryTopborderType} ${attributes.pg_categoryTopBorder} ${attributes.pg_categoryTopBorderColor}`,
+    borderBottom: `${attributes.categoryBottomborderType} ${attributes.pg_categoryBottomBorder} ${attributes.pg_categoryBottomBorderColor}`,
+    borderLeft: `${attributes.categoryLeftborderType} ${attributes.pg_categoryLeftBorder} ${attributes.pg_categoryLeftBorderColor}`,
+    borderRight: `${attributes.categoryRightborderType} ${attributes.pg_categoryRightBorder} ${attributes.pg_categoryRightBorderColor}`
+  };
+};
+const titleTagStyles = attributes => ({
+  color: `${attributes.pg_TitleColor}`,
+  fontSize: `${attributes.pg_TitleSize}px`,
+  marginBlockStart: '0.07em',
+  lineHeight: `${attributes.pg_TitlelineHeight}`,
+  marginBlockEnd: '0.05em',
+  fontWeight: '600',
+  marginLeft: '5px'
+});
+
+//Author
+const authorAndDateContainerStyles = {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '3px',
+  flexWrap: 'wrap',
+  marginLeft: "2px"
+};
+const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImageScale) => ({
+  width: '20px',
+  borderRadius: "50%",
+  transform: `scale(${pg_authorImageScale})`
+});
+const authorLinkStyles = (pg_authorTextSize, pg_authorTextColor) => ({
+  textDecoration: 'none',
+  fontSize: `${pg_authorTextSize}px`,
+  color: `${pg_authorTextColor}`,
+  marginRight: '10px'
+});
+
+//Date
+const dateImageStyles = attributes => ({
+  transform: `scale(${attributes.pg_dateImageScale})`,
+  width: '20px'
+});
+const showOnlyDateStyles = attributes => ({
+  fontSize: `${attributes.pg_dateTextSize}px`,
+  color: `${attributes.pg_dateColor}`
+});
+
+//Tag
+const getTagPaddingStyle = (attributes, view) => {
+  switch (view) {
+    case 'Desktop':
+      return {
+        paddingTop: attributes.pg_TagpaddingTop ? `${attributes.pg_TagpaddingTop}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_TagpaddingBottom ? `${attributes.pg_TagpaddingBottom}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_TagpaddingLeft ? `${attributes.pg_TagpaddingLeft}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_TagpaddingRight ? `${attributes.pg_TagpaddingRight}${attributes.tagpaddingUnit || 'px'}` : undefined
+      };
+    case 'Tablet':
+      return {
+        paddingTop: attributes.pg_TagpaddingTopTablet ? `${attributes.pg_TagpaddingTopTablet}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_TagpaddingBottomTablet ? `${attributes.pg_TagpaddingBottomTablet}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_TagpaddingLeftTablet ? `${attributes.pg_TagpaddingLeftTablet}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_TagpaddingRightTablet ? `${attributes.pg_TagpaddingRightTablet}${attributes.tagpaddingUnit || 'px'}` : undefined
+      };
+    case 'Mobile':
+      return {
+        paddingTop: attributes.pg_TagpaddingTopMobile ? `${attributes.pg_TagpaddingTopMobile}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_TagpaddingBottomMobile ? `${attributes.pg_TagpaddingBottomMobile}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_TagpaddingLeftMobile ? `${attributes.pg_TagpaddingLeftMobile}${attributes.tagpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_TagpaddingRightMobile ? `${attributes.pg_TagpaddingRightMobile}${attributes.tagpaddingUnit || 'px'}` : undefined
+      };
+    default:
+      return {};
+  }
+};
+const tagButtonStyles = attributes => {
+  const view = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  const tagPaddingStyle = getTagPaddingStyle(attributes, view);
+  return {
+    ...tagPaddingStyle,
+    marginLeft: '5px',
+    color: `${attributes.pg_tagTextColor}`,
+    background: attributes.tag_backgroundType === 'color' ? attributes.tag_backgroundColor : attributes.tag_backgroundType === 'gradient' ? `${attributes.tag_backgroundGradient}` : 'none',
+    backgroundAttachment: attributes.tag_backgroundAttachment,
+    backgroundRepeat: attributes.tag_backgroundRepeat,
+    backgroundSize: attributes.tag_backgroundSize,
+    fontSize: `${attributes.pg_tagTextSize}px`,
+    fontWeight: '600',
+    boxSizing: 'border-box',
+    // Ensure padding and border are included in width/height
+
+    borderTopLeftRadius: `${attributes.pg_tagTopBorderRadius}`,
+    borderBottomLeftRadius: `${attributes.pg_tagBottomBorderRadius}`,
+    borderBottomRightRadius: `${attributes.pg_tagLeftBorderRadius}`,
+    borderTopRightRadius: `${attributes.pg_tagRightBorderRadius}`,
+    border: `${attributes.tagborderType} ${attributes.pg_tagBorder} ${attributes.pg_tagBorderColor}`,
+    borderTop: `${attributes.tagTopborderType} ${attributes.pg_tagTopBorder} ${attributes.pg_tagTopBorderColor}`,
+    borderBottom: `${attributes.tagBottomborderType} ${attributes.pg_tagBottomBorder} ${attributes.pg_tagBottomBorderColor}`,
+    borderLeft: `${attributes.tagLeftborderType} ${attributes.pg_tagLeftBorder} ${attributes.pg_tagLeftBorderColor}`,
+    borderRight: `${attributes.tagRightborderType} ${attributes.pg_tagRightBorder} ${attributes.pg_tagRightBorderColor}`
+  };
+};
+
+//Content
+const fullContentStyle = attributes => ({
+  color: `${attributes.pg_textColor}`,
+  fontSize: `${attributes.pg_textSize}px`,
+  lineHeight: `${attributes.pg_lineHeight}`,
+  marginLeft: '5px'
+});
+
+//pagination
+const getPaginationPaddingStyle = (attributes, view) => {
+  switch (view) {
+    case 'Desktop':
+      return {
+        paddingTop: attributes.pg_PaginationpaddingTop ? `${attributes.pg_PaginationpaddingTop}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_PaginationpaddingBottom ? `${attributes.pg_PaginationpaddingBottom}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_PaginationpaddingLeft ? `${attributes.pg_PaginationpaddingLeft}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_PaginationpaddingRight ? `${attributes.pg_PaginationpaddingRight}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined
+      };
+    case 'Tablet':
+      return {
+        paddingTop: attributes.pg_PaginationpaddingTopTablet ? `${attributes.pg_PaginationpaddingTopTablet}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_PaginationpaddingBottomTablet ? `${attributes.pg_PaginationpaddingBottomTablet}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_PaginationpaddingLeftTablet ? `${attributes.pg_PaginationpaddingLeftTablet}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_PaginationpaddingRightTablet ? `${attributes.pg_PaginationpaddingRightTablet}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined
+      };
+    case 'Mobile':
+      return {
+        paddingTop: attributes.pg_PaginationpaddingTopMobile ? `${attributes.pg_PaginationpaddingTopMobile}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingBottom: attributes.pg_PaginationpaddingBottomMobile ? `${attributes.pg_PaginationpaddingBottomMobile}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingLeft: attributes.pg_PaginationpaddingLeftMobile ? `${attributes.pg_PaginationpaddingLeftMobile}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined,
+        paddingRight: attributes.pg_PaginationpaddingRightMobile ? `${attributes.pg_PaginationpaddingRightMobile}${attributes.pg_PaginationpaddingUnit || 'px'}` : undefined
+      };
+    default:
+      return {};
+  }
+};
+const PaginationStyles = attributes => {
+  const view = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
+    const {
+      getView
+    } = select('vayu-blocks/data');
+    const {
+      __experimentalGetPreviewDeviceType
+    } = select('core/edit-post') ? select('core/edit-post') : false;
+    return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+  }, []);
+  const paddingStyles = getPaginationPaddingStyle(attributes, view);
+  return {
+    ...paddingStyles,
+    cursor: 'pointer',
+    fontSize: `${attributes.pg_PaginationSize}px`,
+    color: `${attributes.pg_PaginationColor}`,
+    background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
+    margin: '20px 5px',
+    borderTopLeftRadius: `${attributes.pg_paginationTopBorderRadius}`,
+    borderBottomLeftRadius: `${attributes.pg_paginationBottomBorderRadius}`,
+    borderBottomRightRadius: `${attributes.pg_paginationLeftBorderRadius}`,
+    borderTopRightRadius: `${attributes.pg_paginationRightBorderRadius}`,
+    border: `${attributes.paginationborderType} ${attributes.pg_paginationBorder} ${attributes.pg_paginationBorderColor}`,
+    borderTop: `${attributes.paginationTopborderType} ${attributes.pg_paginationTopBorder} ${attributes.pg_paginationTopBorderColor}`,
+    borderBottom: `${attributes.paginationBottomborderType} ${attributes.pg_paginationBottomBorder} ${attributes.pg_paginationBottomBorderColor}`,
+    borderLeft: `${attributes.paginationLeftborderType} ${attributes.pg_paginationLeftBorder} ${attributes.pg_paginationLeftBorderColor}`,
+    borderRight: `${attributes.paginationRightborderType} ${attributes.pg_paginationRightBorder} ${attributes.pg_paginationRightBorderColor}`
+  };
+};
+
 
 /***/ }),
 

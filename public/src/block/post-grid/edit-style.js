@@ -362,19 +362,11 @@ const PaginationStyles = (attributes) => {
         fontSize: `${attributes.pg_PaginationSize}px`,
         color: `${attributes.pg_PaginationColor}`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
-<<<<<<< HEAD
         margin: '20px 5px',
-=======
-        margin: '0 5px',
->>>>>>> origin/kuber
         borderTopLeftRadius: `${attributes.pg_paginationTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_paginationBottomBorderRadius}`,
         borderBottomRightRadius: `${attributes.pg_paginationLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_paginationRightBorderRadius}`,
-<<<<<<< HEAD
-=======
-        
->>>>>>> origin/kuber
         border: `${attributes.paginationborderType} ${attributes.pg_paginationBorder} ${attributes.pg_paginationBorderColor}`,
         borderTop: `${attributes.paginationTopborderType} ${attributes.pg_paginationTopBorder} ${attributes.pg_paginationTopBorderColor}`,
         borderBottom: `${attributes.paginationBottomborderType} ${attributes.pg_paginationBottomBorder} ${attributes.pg_paginationBottomBorderColor}`,
