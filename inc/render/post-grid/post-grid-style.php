@@ -5,12 +5,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function generate_inline_styles($attr) {
+
     $css = '';
     // Generate unique ID
     $uniqueId = $attr['pg_posts'][0]['uniqueID'];
+   
+    //attributes-merge
+    $default_attributes = include('defaultattributes.php');
+    $attr = array_merge($default_attributes, $attr);  
+
+
     //Main div
     $css .= ".th-post-grid-wrapper-{$uniqueId} {";
-
         if (isset($attr['widthType'])) {
             if ($attr['widthType'] === 'fullwidth') {
                 $css .= "width: 100%; max-width: 100%!important; display: flex;";
@@ -21,30 +27,26 @@ function generate_inline_styles($attr) {
                 $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
                 $css .= "display: flex;";
             } else {
-                // Default case when $attr['widthType'] does not match any expected value
                 $css .= "width: 100%;"; // Adjust default styles as needed
             }
         } else {
-            // Default case when $attr['widthType'] is not set
-            $css .= "width: 100%;"; // Adjust default styles as needed
+            $css .= "width: 100%;"; 
         }
         
+        // Desktop Padding
+        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
+        $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['buttonpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['buttonpaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['buttonpaddingLeft']) ? "padding-left: " . esc_attr($attr['buttonpaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['buttonpaddingRight']) ? "padding-right: " . esc_attr($attr['buttonpaddingRight']) . $paddingUnit . ";" : '';
 
-        // Padding
-        $paddingUnit = isset($attr['paddingUnit']) ? $attr['paddingUnit'] : 'px';
-        $css .= isset($attr['paddingTop']) ? "padding-top: " . esc_attr($attr['paddingTop']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['paddingBottom']) ? "padding-bottom: " . esc_attr($attr['paddingBottom']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['paddingLeft']) ? "padding-left: " . esc_attr($attr['paddingLeft']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['paddingRight']) ? "padding-right: " . esc_attr($attr['paddingRight']) . $paddingUnit . ";" : '';
-        
-
-        // Margin
-        $marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';
+        // Desktop Padding
+        $marginUnit = isset($attr['marginUnit']) ? esc_attr($attr['marginUnit']) : 'px';
         $css .= isset($attr['marginTop']) ? "margin-top: " . esc_attr($attr['marginTop']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginBottom']) ? "margin-bottom: " . esc_attr($attr['marginBottom']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
-
+   
         // Position and Z-index
         $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
         $css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
@@ -76,7 +78,7 @@ function generate_inline_styles($attr) {
 
         $css .= "border-radius: {$borderRadiusTop}{$borderRadiusUnit} {$borderRadiusRight}{$borderRadiusUnit} {$borderRadiusBottom}{$borderRadiusUnit} {$borderRadiusLeft}{$borderRadiusUnit};";
 
-            // Box-shadow
+        // Box-shadow
         if (isset($attr['boxShadow']) && $attr['boxShadow']) {
             $boxShadowColor = 'rgba(' . implode(', ', [
                 hexdec(substr($attr['boxShadowColor'], 1, 2)), // Red
@@ -128,31 +130,56 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     //Post
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} {";
+    $css .= ".th-post-grid-inline-{$uniqueId} {";
 
-        // Padding
-        $paddingUnit = isset($attr['buttonpaddingUnit']) ? esc_attr($attr['buttonpaddingUnit']) : 'px';
-        $css .= isset($attr['pg_layoutPaddingTop']) ? "padding-top: " . esc_attr($attr['pg_layoutPaddingTop']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_layoutPaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_layoutPaddingBottom']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_layoutPaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_layoutPaddingLeft']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_layoutPaddingRight']) ? "padding-right: " . esc_attr($attr['pg_layoutPaddingRight']) . $paddingUnit . ";" : '';
+        // Line height
+        $css .= isset($attr['pg_spacing']) ? "line-height: " . esc_attr($attr['pg_spacing']) . ";" : '';
+
+        // Desktop Padding
+        $paddingUnit = isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px';
+        $css .= isset($attr['pg_layoutpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_layoutpaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_layoutpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_layoutpaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_layoutpaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_layoutpaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_layoutpaddingRight']) ? "padding-right: " . esc_attr($attr['pg_layoutpaddingRight']) . $paddingUnit . ";" : '';
+ 
         
-        // Display
-        $css .= "display: grid;";
-        
-        // Background
-        $css .= isset($attr['layout_backgroundColor']) ? "background: " . esc_attr($attr['layout_backgroundColor']) . ";" : '';
-        
+        if (isset($attr['layout_backgroundType'])) {
+            if ($attr['layout_backgroundType'] === 'color' && isset($attr['layout_backgroundColor'])) {
+                $css .= "background: " . esc_attr($attr['layout_backgroundColor']) . ";";
+            } elseif ($attr['layout_backgroundType'] === 'gradient') {
+                $css .= "background: " . (isset($attr['layout_backgroundGradient']) ? esc_attr($attr['layout_backgroundGradient']) : 'linear-gradient(135deg,#12c2e9 0%,#c471ed 50%,#f64f59 100%)') . ";";
+            } elseif ($attr['layout_backgroundType'] === 'image'){
+                $css .= "background: url(" . esc_url($attr['layout_backgroundImage']['url']) . ");";
+
+            }
+        } elseif (isset($attr['layout_backgroundColor'])) {
+            $css .= "background: " . esc_attr($attr['layout_backgroundColor']) . ";";
+        } else {
+            $css .= "background: none;";
+        }
+    
         // Border radius
-        $css .= isset($attr['pg_postBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_postBorderRadius']) . "px;" : '';
-        
+        $css .= isset($attr['pg_postTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_postTopBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_postBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_postBottomBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_postLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_postLeftBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_postRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_postRightBorderRadius']) . ";" : '';
+                
         // Font size
         $css .= isset($attr['pg_textSize']) ? "font-size: " . esc_attr($attr['pg_textSize']) . "px;" : '';
         
         // Border
-        if (isset($attr['layoutborderType']) && isset($attr['pg_layoutBorder']) && isset($attr['pg_layoutBorderColor'])) {
-            $css .= "border: " . esc_attr($attr['layoutborderType']) . ' ' . esc_attr($attr['pg_layoutBorder']) . "px " . esc_attr($attr['pg_layoutBorderColor']) . ";";
+        if (isset($attr['layoutTopborderType']) && isset($attr['pg_layoutTopBorder']) && isset($attr['pg_layoutTopBorderColor'])) {
+            $css .= "border-top: " . esc_attr($attr['layoutTopborderType']) . ' ' . esc_attr($attr['pg_layoutTopBorder']) . " " . esc_attr($attr['pg_layoutTopBorderColor']) . ";";
         }
+        if (isset($attr['layoutBottomborderType']) && isset($attr['pg_layoutBottomBorder']) && isset($attr['pg_layoutBottomBorderColor'])) {
+            $css .= "border-bottom: " . esc_attr($attr['layoutBottomborderType']) . ' ' . esc_attr($attr['pg_layoutBottomBorder']) . " " . esc_attr($attr['pg_layoutBottomBorderColor']) . ";";
+        }
+        if (isset($attr['layoutLeftborderType']) && isset($attr['pg_layoutLeftBorder']) && isset($attr['pg_layoutLeftBorderColor'])) {
+            $css .= "border-left: " . esc_attr($attr['layoutLeftborderType']) . ' ' . esc_attr($attr['pg_layoutLeftBorder']) . " " . esc_attr($attr['pg_layoutLeftBorderColor']) . ";";
+        }
+        if (isset($attr['layoutRightborderType']) && isset($attr['pg_layoutRightBorder']) && isset($attr['pg_layoutRightBorderColor'])) {
+            $css .= "border-right: " . esc_attr($attr['layoutRightborderType']) . ' ' . esc_attr($attr['pg_layoutRightBorder']) . " " . esc_attr($attr['pg_layoutRightBorderColor']) . ";";
+        }        
         
         // Text color
         $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
@@ -160,77 +187,52 @@ function generate_inline_styles($attr) {
         // Position
         $css .= "position: relative;";
         
-        // Background image
-        if (isset($attr['layout_backgroundImage']) && !empty($attr['layout_backgroundImage']['url'])) {
-            $css .= "background-image: url(" . esc_url($attr['layout_backgroundImage']['url']) . ");";
-        }
-        
         // Background attachment, repeat, size
         $css .= isset($attr['layout_backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['layout_backgroundAttachment']) . ";" : '';
         $css .= isset($attr['layout_backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['layout_backgroundRepeat']) . ";" : '';
         $css .= isset($attr['layout_backgroundSize']) ? "background-size: " . esc_attr($attr['layout_backgroundSize']) . ";" : '';
         
     $css .= "}";
-       
-    //Category
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-category-styles-{$uniqueId} {";
-
-       // Padding
-        $categoryPaddingUnit = isset($attr['categorypaddingUnit']) ? esc_attr($attr['categorypaddingUnit']) : 'px';
-        $css .= isset($attr['pg_categoryPaddingTop']) ? "padding-top: " . esc_attr($attr['pg_categoryPaddingTop']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_categoryPaddingBottom']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_categoryPaddingLeft']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingRight']) ? "padding-right: " . esc_attr($attr['pg_categoryPaddingRight']) . $categoryPaddingUnit . ";" : '';
-
-        // Text color
-        $css .= isset($attr['pg_categoryTextColor']) ? "color: " . esc_attr($attr['pg_categoryTextColor']) . ";" : '';
-
-        // Background
-        $css .= isset($attr['category_backgroundColor']) ? "background: " . esc_attr($attr['category_backgroundColor']) . ";" : '';
-        $css .= isset($attr['category_backgroundImage']) && !empty($attr['category_backgroundImage']['url']) ? "background-image: url(" . esc_url($attr['category_backgroundImage']['url']) . ");" : '';
-        $css .= isset($attr['category_backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['category_backgroundAttachment']) . ";" : '';
-        $css .= isset($attr['category_backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['category_backgroundRepeat']) . ";" : '';
-        $css .= isset($attr['category_backgroundSize']) ? "background-size: " . esc_attr($attr['category_backgroundSize']) . ";" : '';
-
-        // Font size
-        $css .= isset($attr['pg_categoryTextSize']) ? "font-size: " . esc_attr($attr['pg_categoryTextSize']) . "px;" : '';
-
-        // Border radius
-        $css .= isset($attr['pg_categoryBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_categoryBorderRadius']) . "px;" : '';
-
-        // Border
-        if (isset($attr['categoryborderType']) && isset($attr['pg_categoryBorder']) && isset($attr['pg_categoryBorderColor'])) {
-            $css .= "border: " . esc_attr($attr['categoryborderType']) . ' ' . esc_attr($attr['pg_categoryBorder']) . "px " . esc_attr($attr['pg_categoryBorderColor']) . ";";
-        }
-
-    $css .= "}";
 
     //Category
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-category-style-new-{$uniqueId} {";
+    $css .= ".post-grid-category-style-new-{$uniqueId} {";
+        // Cursor
+        $css .= "cursor: pointer;";
+
         // Padding
-        $categoryPaddingUnit = isset($attr['categorypaddingUnit']) ? esc_attr($attr['categorypaddingUnit']) : 'px';
-        $css .= isset($attr['pg_categoryPaddingTop']) ? "padding-top: " . esc_attr($attr['pg_categoryPaddingTop']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_categoryPaddingBottom']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_categoryPaddingLeft']) . $categoryPaddingUnit . ";" : '';
-        $css .= isset($attr['pg_categoryPaddingRight']) ? "padding-right: " . esc_attr($attr['pg_categoryPaddingRight']) . $categoryPaddingUnit . ";" : '';
+        $paddingUnit = isset($attr['categorypaddingUnit']) ? esc_attr($attr['categorypaddingUnit']) : 'px';
+        $css .= isset($attr['pg_CategorypaddingTop']) ? "padding-top: " . esc_attr($attr['pg_CategorypaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_CategorypaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_CategorypaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_CategorypaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_CategorypaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_CategorypaddingRight']) ? "padding-right: " . esc_attr($attr['pg_CategorypaddingRight']) . $paddingUnit . ";" : '';
 
         // Border radius
-        $css .= isset($attr['pg_categoryBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_categoryBorderRadius']) . "px;" : '';
+        $css .= isset($attr['pg_categoryBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_categoryBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_categoryTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_categoryTopBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_categoryBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_categoryBottomBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_categoryLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_categoryLeftBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_categoryRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_categoryRightBorderRadius']) . ";" : '';
 
         // Border
-        if (isset($attr['categoryborderType']) && isset($attr['pg_categoryBorder']) && isset($attr['pg_categoryBorderColor'])) {
-            $css .= "border: " . esc_attr($attr['categoryborderType']) . ' ' . esc_attr($attr['pg_categoryBorder']) . "px " . esc_attr($attr['pg_categoryBorderColor']) . ";";
-        }
+        $css .= isset($attr['categoryTopborderType']) && isset($attr['pg_categoryTopBorder']) && isset($attr['pg_categoryTopBorderColor']) ? 
+        "border-top: " . esc_attr($attr['categoryTopborderType']) . ' ' . esc_attr($attr['pg_categoryTopBorder']) . " " . esc_attr($attr['pg_categoryTopBorderColor']) . ";" : '';
+        $css .= isset($attr['categoryBottomborderType']) && isset($attr['pg_categoryBottomBorder']) && isset($attr['pg_categoryBottomBorderColor']) ? 
+        "border-bottom: " . esc_attr($attr['categoryBottomborderType']) . ' ' . esc_attr($attr['pg_categoryBottomBorder']) . " " . esc_attr($attr['pg_categoryBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['categoryLeftborderType']) && isset($attr['pg_categoryLeftBorder']) && isset($attr['pg_categoryLeftBorderColor']) ? 
+        "border-left: " . esc_attr($attr['categoryLeftborderType']) . ' ' . esc_attr($attr['pg_categoryLeftBorder']) . " " . esc_attr($attr['pg_categoryLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['categoryRightborderType']) && isset($attr['pg_categoryRightBorder']) && isset($attr['pg_categoryRightBorderColor']) ? 
+        "border-right: " . esc_attr($attr['categoryRightborderType']) . ' ' . esc_attr($attr['pg_categoryRightBorder']) . " " . esc_attr($attr['pg_categoryRightBorderColor']) . ";" : '';
+
+        $css .= "text-decoration: none;";
+        $css .= "margin-left: 5px;";
+        $css .= "font-weight: 600;";
+        $css .= "margin-top: 3%;";
 
         // Text color
         $css .= isset($attr['pg_categoryTextColor']) ? "color: " . esc_attr($attr['pg_categoryTextColor']) . ";" : '';
 
         // Background
         $css .= isset($attr['category_backgroundColor']) ? "background: " . esc_attr($attr['category_backgroundColor']) . ";" : '';
-        $css .= isset($attr['category_backgroundImage']) && !empty($attr['category_backgroundImage']['url']) ? "background-image: url(" . esc_url($attr['category_backgroundImage']['url']) . ");" : '';
-        $css .= isset($attr['category_backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['category_backgroundAttachment']) . ";" : '';
-        $css .= isset($attr['category_backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['category_backgroundRepeat']) . ";" : '';
-        $css .= isset($attr['category_backgroundSize']) ? "background-size: " . esc_attr($attr['category_backgroundSize']) . ";" : '';
 
         // Font size
         $css .= isset($attr['pg_categoryTextSize']) ? "font-size: " . esc_attr($attr['pg_categoryTextSize']) . "px;" : '';
@@ -238,38 +240,64 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     //Tag
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-tag-style-new-{$uniqueId} {";
+    $css .= ".post-grid-tag-style-new-{$uniqueId} {";
+        // Cursor
+        $css .= "cursor: pointer;";
+        // Display
         $css .= "display: inline-block;";
-
-        // Padding
-        $css .= isset($attr['pg_tagPaddingTop']) ? "padding-top: " . esc_attr($attr['pg_tagPaddingTop']) . (isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px') . ";" : '';
-        $css .= isset($attr['pg_tagPaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_tagPaddingBottom']) . (isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px') . ";" : '';
-        $css .= isset($attr['pg_tagPaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_tagPaddingLeft']) . (isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px') . ";" : '';
-        $css .= isset($attr['pg_tagPaddingRight']) ? "padding-right: " . esc_attr($attr['pg_tagPaddingRight']) . (isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px') . ";" : '';
+        $css .= "text-decoration: none;";
+        $css .= "margin-left: 2px;";
+        // Desktop Padding
+        $paddingUnit = isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px';
+        $css .= isset($attr['pg_TagpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_TagpaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_TagpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_TagpaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_TagpaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_TagpaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_TagpaddingRight']) ? "padding-right: " . esc_attr($attr['pg_TagpaddingRight']) . $paddingUnit . ";" : '';
         
-        // Border radius
-        $css .= isset($attr['pg_tagBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_tagBorderRadius']) . "px;" : '';
-    
-        // Text color
+        // Font Weight and Box Sizing
+        $css .= "font-weight: 600;";
+        $css .= "box-sizing: border-box;";
+        
+        // Text Color
         $css .= isset($attr['pg_tagTextColor']) ? "color: " . esc_attr($attr['pg_tagTextColor']) . ";" : '';
-    
+        
         // Background
-        $css .= isset($attr['tag_backgroundColor']) ? "background: " . esc_attr($attr['tag_backgroundColor']) . ";" : '';
-        $css .= isset($attr['tag_backgroundImage']) && $attr['tag_backgroundImage'] ? "background-image: url(" . esc_url($attr['tag_backgroundImage']['url']) . ");" : '';
-        $css .= isset($attr['tag_backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['tag_backgroundAttachment']) . ";" : '';
-        $css .= isset($attr['tag_backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['tag_backgroundRepeat']) . ";" : '';
-        $css .= isset($attr['tag_backgroundSize']) ? "background-size: " . esc_attr($attr['tag_backgroundSize']) . ";" : '';
-    
-        // Font size
+        if (isset($attr['tag_backgroundType'])) {
+            if ($attr['tag_backgroundType'] === 'color' && isset($attr['tag_backgroundColor'])) {
+                $css .= "background: " . esc_attr($attr['tag_backgroundColor']) . ";";
+            } elseif ($attr['tag_backgroundType'] === 'gradient' && isset($attr['tag_backgroundGradient'])) {
+                $css .= "background: " . esc_attr($attr['tag_backgroundGradient']) . ";";
+            } elseif (isset($attr['tag_backgroundImage']) && isset($attr['tag_backgroundImage']['url'])) {
+                $css .= "background: url(" . esc_url($attr['tag_backgroundImage']['url']) . ");";
+            } else {
+                $css .= "background: none;";
+            }
+        } elseif (isset($attr['tag_backgroundColor'])) {
+            $css .= "background: " . esc_attr($attr['tag_backgroundColor']) . ";";
+        }
+        
+        // Font Size
         $css .= isset($attr['pg_tagTextSize']) ? "font-size: " . esc_attr($attr['pg_tagTextSize']) . "px;" : '';
-    
+        
+        // Border Radius
+        $css .= isset($attr['pg_tagTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_tagTopBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_tagBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_tagBottomBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_tagLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_tagLeftBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_tagRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_tagRightBorderRadius']) . ";" : '';
+        
         // Border
-        $css .= isset($attr['tagborderType']) && isset($attr['pg_tagBorder']) && isset($attr['pg_tagBorderColor']) ? 
-            "border: " . esc_attr($attr['tagborderType']) . ' ' . esc_attr($attr['pg_tagBorder']) . "px " . esc_attr($attr['pg_tagBorderColor']) . ";" : '';
-    
+        $css .= isset($attr['tagTopborderType']) && isset($attr['pg_tagTopBorder']) && isset($attr['pg_tagTopBorderColor']) ? 
+            "border-top: " . esc_attr($attr['tagTopborderType']) . ' ' . esc_attr($attr['pg_tagTopBorder']) . " " . esc_attr($attr['pg_tagTopBorderColor']) . ";" : '';
+        $css .= isset($attr['tagBottomborderType']) && isset($attr['pg_tagBottomBorder']) && isset($attr['pg_tagBottomBorderColor']) ? 
+            "border-bottom: " . esc_attr($attr['tagBottomborderType']) . ' ' . esc_attr($attr['pg_tagBottomBorder']) . " " . esc_attr($attr['pg_tagBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['tagLeftborderType']) && isset($attr['pg_tagLeftBorder']) && isset($attr['pg_tagLeftBorderColor']) ? 
+            "border-left: " . esc_attr($attr['tagLeftborderType']) . ' ' . esc_attr($attr['pg_tagLeftBorder']) . " " . esc_attr($attr['pg_tagLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['tagRightborderType']) && isset($attr['pg_tagRightBorder']) && isset($attr['pg_tagRightBorderColor']) ? 
+            "border-right: " . esc_attr($attr['tagRightborderType']) . ' ' . esc_attr($attr['pg_tagRightBorder']) . " " . esc_attr($attr['pg_tagRightBorderColor']) . ";" : '';
+        
     $css .= "}";
-         
-    //Hover
+        
+    //Hover 
     $css .= ".th-post-grid-wrapper-{$uniqueId}:hover {";
 
         // Border styles
@@ -341,99 +369,237 @@ function generate_inline_styles($attr) {
     $css .= "}";
        
     //Featured Image
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-image-{$uniqueId} {";
-
-        // Check if pg_imageBorderRadius is set, otherwise use default value 5px
+    $css .= ".post-grid-image-{$uniqueId} {";
+        $css .= "display: block;";
+        $css .= "width: 100%;";
+        $css .= "height: auto;";
         $border_radius = isset($attr['pg_imageBorderRadius']) ? esc_attr($attr['pg_imageBorderRadius']) . 'px' : '5px';
         $css .= "border-radius: {$border_radius};";
     $css .= "}";
-        
-    //category not for featured image
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} . post-grid-only-category-not-image-{$uniqueId} {";
-        $css .= "color: " . esc_attr(isset($attr['pg_categoryTextColor']) ? $attr['pg_categoryTextColor'] : '#000000') . ";";
-    $css .= "}";
+     
+    //Title Tag
+    $css .= ".post-grid-titletag-{$uniqueId} {";
+        $css .= isset($attr['pg_TitleColor']) ? "color: " . esc_attr($attr['pg_TitleColor']) . ";" : '';
+        $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
        
-    //title tag
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-titletag-{$uniqueId} {";
-        $css .= isset($attr['pg_blockTitleColor']) ? "color: " . esc_attr($attr['pg_blockTitleColor']) . ";" : '';
-        $css .= isset($attr['pg_blockTitleSize']) ? "font-size: " . esc_attr($attr['pg_blockTitleSize']) . "px;" : '';
+        $css .= "text-overflow: ellipsis;";
+        $css .= "margin-block-start: 0.07em;";
+        $css .= "margin-left: 5px;";
+        $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
+        $css .= "margin-block-end: 0.07em;";
+        $css .= "font-weight: 600;";
+    $css .= "}";
+    
+    //title
+    $css .= ".post-grid-title-size-{$uniqueId} {";
+        $css .= "display: block;";
+        $css .= "margin-block-start: 0.07em;";
+        $css .= "line-height: 20%;";
+        $css .= "margin-block-end: 0.08em;";
+        // Cursor
+        $css .= "cursor: pointer;";
+    $css .= "}";
+     
+    //author-date-container
+    $css .= ".post-grid-author-date-container-{$uniqueId} {";
+        $css .= "    display: flex;";
+        $css .= "    align-items: center;";
+        $css .= "    gap: 3px;";
+        $css .= "    flex-wrap: wrap;";
+        $css .= "    margin-left: 2px;";
+    $css .= "}";
+      
+    //author-image
+    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-author-image-{$uniqueId} {";
+        $css .= "    width: 20px;";
+        $css .= "    border-radius: 50%;";
+        $css .= "transform: scale(" . esc_attr($attr['pg_authorImageScale']) . ");";
+    $css .= "}";
+      
+    //author-span
+    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-author-span-{$uniqueId} {";
+        $css .= "    text-decoration: none;";
+        $css .= "font-size: " . esc_attr($attr['pg_authorTextSize']) . "px;";
+        $css .= "color: " . esc_attr($attr['pg_authorTextColor']) . ";";
+        // Cursor
+        $css .= "cursor: pointer;";
+        $css .= "    margin-right: 10px;";
+     $css .= "}";
+        
+    
+     //date-image
+    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-image-{$uniqueId} {";
+        $css .= "transform: scale(" . esc_attr($attr['pg_dateImageScale']) . ");";
+        $css .= "width: 20px;";
+      
     $css .= "}";
         
-    //author
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-author-span-{$uniqueId} {";
-
-        // Check if pg_dateTextSize is set
-        if (isset($attr['pg_dateTextSize'])) {
-            $css .= "font-size: " . esc_attr($attr['pg_dateTextSize']) . "px;";
-        } else {
-            $css .= "font-size: 14px;"; // Default font-size if not set
-        }
-        
-        // Check if pg_dateColor is set
-        if (isset($attr['pg_dateColor'])) {
-            $css .= "color: " . esc_attr($attr['pg_dateColor']) . ";";
-        } else {
-            $css .= "color: #333;"; // Default color if not set
-        }
-        
+    //date-span
+    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-span-{$uniqueId} {";
+        $css .= "font-size: " . esc_attr($attr['pg_dateTextSize']) . "px;";
+        $css .= "color: " . esc_attr($attr['pg_dateColor']) . ";";
     $css .= "}";
+        
+    //content
+    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-excerpt-view-{$uniqueId} {";
 
-    //author
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-only-show-author-div-new-{$uniqueId} {";
-
+        // Font Weight
+        $css .= "font-weight: 300;";
+        
+        // Text Color
+        $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
+        
         // Font Size
-        if (isset($attr['pg_authorTextSize'])) {
-            $css .= "font-size: " . esc_attr($attr['pg_authorTextSize']) . "px;";
-        } else {
-            $css .= "font-size: 16px;"; // Default font size
-        }
+        $css .= isset($attr['pg_textSize']) ? "font-size: " . esc_attr($attr['pg_textSize']) . "px;" : '';
+        
+        // Line Height
+        $css .= isset($attr['pg_lineHeight']) ? "line-height: " . esc_attr($attr['pg_lineHeight']) . ";" : '';
+        
+        // Margin Left
+        $css .= "margin-left: 5px;";
+        
+    $css .= "}";
+        
+    //pagination
+    $css .= ".page-numbers-{$uniqueId} {";
+
+        // Padding
+        $paddingUnit = isset($attr['paginationpaddingUnit']) ? esc_attr($attr['paginationpaddingUnit']) : 'px';
+        $css .= isset($attr['pg_PaginationpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_PaginationpaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_PaginationpaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_PaginationpaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingRight']) ? "padding-right: " . esc_attr($attr['pg_PaginationpaddingRight']) . $paddingUnit . ";" : '';
+        
+        // Cursor
+        $css .= "cursor: pointer;";
+        
+        // Font size
+        $css .= isset($attr['pg_PaginationSize']) ? "font-size: " . esc_attr($attr['pg_PaginationSize']) . "px;" : '';
         
         // Color
-        if (isset($attr['pg_authorTextColor'])) {
-            $css .= "color: " . esc_attr($attr['pg_authorTextColor']) . ";";
-        } else {
-            $css .= "color: #333;"; // Default color
+        $css .= isset($attr['pg_PaginationColor']) ? "color: " . esc_attr($attr['pg_PaginationColor']) . ";" : '';
+        // Background
+        if (isset($attr['pg_PaginationbackgroundType'])) {
+            if ($attr['pg_PaginationbackgroundType'] === 'color') {
+                $css .= isset($attr['pg_PaginationbackgroundColor']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundColor']) . ";" : '';
+            } elseif ($attr['pg_PaginationbackgroundType'] === 'gradient') {
+                $css .= isset($attr['pg_PaginationbackgroundGradient']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundGradient']) . ";" : '';
+            }
         }
         
-        // Scale (assuming this is for transform scale)
-        if (isset($attr['pg_authorImageScale'])) {
-            $css .= "transform: scale(" . esc_attr($attr['pg_authorImageScale']) . ");";
-        } else {
-            $css .= "transform: scale(1);"; // Default scale
-        }
+        // Margin
+        $css .= "margin: 20px 5px;";
+        $css .="text-decoration: none;";
         
-    $css .= "}";
+        // Border radius
+        $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_paginationBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_paginationBottomBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_paginationLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_paginationLeftBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_paginationRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_paginationRightBorderRadius']) . ";" : '';
+        
+        // Border
+        $css .= isset($attr['PaginationTopborderType']) && isset($attr['pg_paginationTopBorder']) && isset($attr['pg_paginationTopBorderColor']) ? 
+        "border-top: " . esc_attr($attr['PaginationTopborderType']) . ' ' . esc_attr($attr['pg_paginationTopBorder']) . " " . esc_attr($attr['pg_paginationTopBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationBottomborderType']) && isset($attr['pg_paginationBottomBorder']) && isset($attr['pg_paginationBottomBorderColor']) ? 
+        "border-bottom: " . esc_attr($attr['PaginationBottomborderType']) . ' ' . esc_attr($attr['pg_paginationBottomBorder']) . " " . esc_attr($attr['pg_paginationBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationLeftborderType']) && isset($attr['pg_paginationLeftBorder']) && isset($attr['pg_paginationLeftBorderColor']) ? 
+        "border-left: " . esc_attr($attr['PaginationLeftborderType']) . ' ' . esc_attr($attr['pg_paginationLeftBorder']) . " " . esc_attr($attr['pg_paginationLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationRightborderType']) && isset($attr['pg_paginationRightBorder']) && isset($attr['pg_paginationRightBorderColor']) ? 
+        "border-right: " . esc_attr($attr['PaginationRightborderType']) . ' ' . esc_attr($attr['pg_paginationRightBorder']) . " " . esc_attr($attr['pg_paginationRightBorderColor']) . ";" : '';
+
+    $css .= "}"; 
+        
+    //for tablet
+    $css .= "@media (max-width: 768px) {
+        .th-post-grid-wrapper-{$uniqueId} {
+            grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsTablet']) ? $attr['pg_postLayoutColumnsTablet'] : 2) . ", 1fr);
+            padding-top: " . (isset($attr['buttonpaddingTopTablet']) ? esc_attr($attr['buttonpaddingTopTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['buttonpaddingBottomTablet']) ? esc_attr($attr['buttonpaddingBottomTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['buttonpaddingLeftTablet']) ? esc_attr($attr['buttonpaddingLeftTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['buttonpaddingRightTablet']) ? esc_attr($attr['buttonpaddingRightTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
+    
+            margin-top: " . (isset($attr['marginTopTablet']) ? esc_attr($attr['marginTopTablet']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-bottom: " . (isset($attr['marginBottomTablet']) ? esc_attr($attr['marginBottomTablet']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-left: " . (isset($attr['marginLeftTablet']) ? esc_attr($attr['marginLeftTablet']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-right: " . (isset($attr['marginRightTablet']) ? esc_attr($attr['marginRightTablet']) . esc_attr($attr['marginUnit']) : '') . ";   
+            
+           grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
+        }
+    
+        .th-post-grid-inline-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_layoutpaddingTopTablet']) ? esc_attr($attr['pg_layoutpaddingTopTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_layoutpaddingBottomTablet']) ? esc_attr($attr['pg_layoutpaddingBottomTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_layoutpaddingLeftTablet']) ? esc_attr($attr['pg_layoutpaddingLeftTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_layoutpaddingRightTablet']) ? esc_attr($attr['pg_layoutpaddingRightTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
+        }   
+
+        .post-grid-category-styles-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomTablet']) ? esc_attr($attr['pg_CategorypaddingBottomTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_CategorypaddingLeftTablet']) ? esc_attr($attr['pg_CategorypaddingLeftTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_CategorypaddingRightTablet']) ? esc_attr($attr['pg_CategorypaddingRightTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+        }
+
+        .post-grid-category-style-new-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomTablet']) ? esc_attr($attr['pg_CategorypaddingBottomTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_CategorypaddingLeftTablet']) ? esc_attr($attr['pg_CategorypaddingLeftTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_CategorypaddingRightTablet']) ? esc_attr($attr['pg_CategorypaddingRightTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
        
-    //author name
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-author-name-{$uniqueId} {";
+        }
 
-        // Font Size
-        if (isset($attr['pg_authorTextSize'])) {
-            $css .= "font-size: " . esc_attr($attr['pg_authorTextSize']) . "px;";
+        .post-grid-tag-style-new-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_TagpaddingTopTablet']) ? esc_attr($attr['pg_TagpaddingTopTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_TagpaddingBottomTablet']) ? esc_attr($attr['pg_TagpaddingBottomTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_TagpaddingLeftTablet']) ? esc_attr($attr['pg_TagpaddingLeftTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_TagpaddingRightTablet']) ? esc_attr($attr['pg_TagpaddingRightTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
         }
-        
-        // Color
-        if (isset($attr['pg_authorTextColor'])) {
-            $css .= "color: " . esc_attr($attr['pg_authorTextColor']) . ";";
+    }";
+    
+    //for mobile
+    $css .= "@media (max-width: 400px) {
+        .th-post-grid-wrapper-{$uniqueId} {
+            grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsMobile']) ? $attr['pg_postLayoutColumnsMobile'] : 1) . ", 1fr);
+            padding-top: " . (isset($attr['buttonpaddingTopMobile']) ? esc_attr($attr['buttonpaddingTopMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['buttonpaddingBottomMobile']) ? esc_attr($attr['buttonpaddingBottomMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['buttonpaddingLeftMobile']) ? esc_attr($attr['buttonpaddingLeftMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['buttonpaddingRightMobile']) ? esc_attr($attr['buttonpaddingRightMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
+            margin-top: " . (isset($attr['marginTopMobile']) ? esc_attr($attr['marginTopMobile']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-bottom: " . (isset($attr['marginBottomMobile']) ? esc_attr($attr['marginBottomMobile']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-left: " . (isset($attr['marginLeftMobile']) ? esc_attr($attr['marginLeftMobile']) . esc_attr($attr['marginUnit']) : '') . ";
+            margin-right: " . (isset($attr['marginRightMobile']) ? esc_attr($attr['marginRightMobile']) . esc_attr($attr['marginUnit']) : '') . ";
+            grid-template-rows: repeat(" . (isset($attr['pg_numberOfRowMobile']) ? $attr['pg_numberOfRowMobile'] : 2) . ", minmax(100px, 1fr));
+            grid-gap: " . (isset($attr['pg_gapupMobile']) ? esc_attr($attr['pg_gapupMobile']) . 'px ' . esc_attr($attr['pg_gapMobile']) . 'px' : '') . ";
         }
-        
-    $css .= "}";
-        
-    //date
-    $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-main-{$uniqueId} {";
-
-        // Font Size
-        if (isset($attr['pg_dateTextSize'])) {
-            $css .= "font-size: " . esc_attr($attr['pg_dateTextSize']) . "px;";
+    
+        .th-post-grid-inline-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_layoutpaddingTopMobile']) ? esc_attr($attr['pg_layoutpaddingTopMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
+            padding-bottom: " . (isset($attr['pg_layoutpaddingBottomMobile']) ? esc_attr($attr['pg_layoutpaddingBottomMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
+            padding-left: " . (isset($attr['pg_layoutpaddingLeftMobile']) ? esc_attr($attr['pg_layoutpaddingLeftMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
+            padding-right: " . (isset($attr['pg_layoutpaddingRightMobile']) ? esc_attr($attr['pg_layoutpaddingRightMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
         }
-        
-        // Color
-        if (isset($attr['pg_dateColor'])) {
-            $css .= "color: " . esc_attr($attr['pg_dateColor']) . ";";
+    
+        .post-grid-category-styles-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_CategorypaddingTopMobile']) ? esc_attr($attr['pg_CategorypaddingTopMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomMobile']) ? esc_attr($attr['pg_CategorypaddingBottomMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_CategorypaddingLeftMobile']) ? esc_attr($attr['pg_CategorypaddingLeftMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_CategorypaddingRightMobile']) ? esc_attr($attr['pg_CategorypaddingRightMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
         }
+    
+        .post-grid-category-style-new-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_CategorypaddingTopMobile']) ? esc_attr($attr['pg_CategorypaddingTopMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomMobile']) ? esc_attr($attr['pg_CategorypaddingBottomMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_CategorypaddingLeftMobile']) ? esc_attr($attr['pg_CategorypaddingLeftMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_CategorypaddingRightMobile']) ? esc_attr($attr['pg_CategorypaddingRightMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+        }
+    
+        .post-grid-tag-style-new-{$uniqueId} {
+            padding-top: " . (isset($attr['pg_TagpaddingTopMobile']) ? esc_attr($attr['pg_TagpaddingTopMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_TagpaddingBottomMobile']) ? esc_attr($attr['pg_TagpaddingBottomMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_TagpaddingLeftMobile']) ? esc_attr($attr['pg_TagpaddingLeftMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_TagpaddingRightMobile']) ? esc_attr($attr['pg_TagpaddingRightMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+        }
+    }";
         
-    $css .= "}";
-        
-         
     return $css;
 }

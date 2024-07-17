@@ -271,17 +271,19 @@
   },
   "borderRadiusHvrTop": {
     "type": "number",
-    "default": 0
+    "default": 2
   },
   "borderRadiusHvrBottom": {
     "type": "number",
-    "default": 0
-  },"borderRadiusHvrLeft": {
+    "default": 2
+  },
+  "borderRadiusHvrLeft": {
     "type": "number",
-    "default": 0
-  },"borderRadiusHvrRight": {
+    "default": 2
+  },
+  "borderRadiusHvrRight": {
     "type": "number",
-    "default": 0
+    "default": 2
   },
   "boxShadowHvr": {
     "type": "boolean",
@@ -388,6 +390,138 @@
 "borderRadiusUnit":{
   "type":"string",
   "default":"px"
+},
+
+
+"paddingType": {
+  "type": "string",
+  "default": "linked"
+},
+"paddingTypeTablet": {
+  "type": "string",
+  "default": "linked"
+},
+"paddingTypeMobile": {
+  "type": "string",
+  "default": "linked"
+},
+"buttonpadding": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingTop": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingRight": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingBottom": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingLeft": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingTablet": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingTopTablet": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingRightTablet": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingBottomTablet": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingLeftTablet": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingMobile": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingTopMobile": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingRightMobile": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingBottomMobile": {
+  "type": "number",
+  "default": 0
+},
+"buttonpaddingLeftMobile": {
+  "type": "number",
+  "default": 0
+},
+
+"buttonpaddingType": {
+  "type": "string",
+  "default": "linked"
+},
+"buttonpaddingTypeTablet": {
+  "type": "string",
+  "default": "linked"
+},
+"buttonpaddingTypeMobile": {
+  "type": "string",
+  "default": "linked"
+},
+
+"marginType": {
+  "type": "string",
+  "default": "linked"
+},
+"marginTypeTablet": {
+  "type": "string",
+  "default": "linked"
+},
+"marginTypeMobile": {
+  "type": "string",
+  "default": "linked"
+},
+"marginTopTablet": {
+  "type": "number",
+  "default": 20
+},
+"marginRightTablet": {
+  "type": "number",
+  "default": 20
+},
+"marginBottomTablet": {
+  "type": "number",
+  "default": 20
+},
+"marginLeftTablet": {
+  "type": "number",
+  "default": 20
+},
+"marginTopMobile": {
+  "type": "number",
+  "default": 20
+},
+"marginRightMobile": {
+  "type": "number",
+  "default": 20
+},
+"marginBottomMobile": {
+  "type": "number",
+  "default": 20
+},
+"marginLeftMobile": {
+  "type": "number",
+  "default": 20
 }
 
   }

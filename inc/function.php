@@ -236,3 +236,15 @@ function vayu_blocks_get_input_values_callback($request) {
     ));
 }
 
+
+// add_action('wp_ajax_load_posts', 'load_posts');
+// add_action('wp_ajax_nopriv_load_posts', 'load_posts');
+
+// function load_posts() {
+//     $attr = $_POST['attr'];
+//     $paged = $_POST['page'];
+    
+//     $renderer = new VayuBlocksPostGrid($attr);
+//     echo $renderer->get_posts($paged)->render();
+//     wp_die();
+// }

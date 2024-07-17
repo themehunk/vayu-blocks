@@ -13,6 +13,7 @@ module.exports = {
      'animation-index': './src/block/animation',
      'vayu-sites': './src/vayu-sites',
      'post-grid': './src/block/post-grid',
+     'view-grid': './src/block/post-grid/view.js',
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',
 		 'anim-typing': './src/block/animation/frontend/typing/index.js',

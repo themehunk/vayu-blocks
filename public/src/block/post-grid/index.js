@@ -20,24 +20,16 @@ import save from './save';
 import metadata from './block.json';
 import indexJson from './edit.json';
 import advanceJson from './AdvanceSettings/Advance.json';
+import { IoGridOutline } from "react-icons/io5";
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
+
+
 registerBlockType( metadata.name, {
 
 	...metadata,
 	attributes: { ...indexJson, ...advanceJson },
-	/**
-	 * @see ./edit.js
-	 */
 	edit: Edit,
-
-	/**
-	 * @see ./save.js
-	 */
+	icon: <IoGridOutline style={{color:'#6c1bc3'}} />,
 	save,
 } );
 

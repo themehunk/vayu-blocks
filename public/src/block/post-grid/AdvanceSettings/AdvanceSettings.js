@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useState } from 'react';
+import { useSelect } from '@wordpress/data';
 
 // Utility function to filter out undefined or null values
 const omitBy = (object, condition) => (
@@ -111,28 +112,105 @@ export default function AdvanceSettings({ children, attributes }) {
         backgroundRepeatHvr,
         backgroundSizeHvr,
 
-        transitionAll
+        transitionAll,
+
+
+     buttonpaddingTop, buttonpaddingRight, buttonpaddingBottom, buttonpaddingLeft, buttonpaddingTopTablet, buttonpaddingRightTablet, buttonpaddingBottomTablet, buttonpaddingLeftTablet, buttonpaddingTopMobile, buttonpaddingRightMobile, buttonpaddingBottomMobile, buttonpaddingLeftMobile,buttonpadding,buttonpaddingMobile,buttonpaddingTablet,
+
+     marginTopTablet,
+     marginRightTablet,
+     marginBottomTablet,
+     marginLeftTablet,
+     marginTopMobile,
+     marginRightMobile,
+     marginBottomMobile,
+     marginLeftMobile,
+
+
     } = attributes;
 
         // console.log(attributes);
-        const formatBackgroundPosition = (pos) => {
-            return pos && pos.x !== undefined && pos.y !== undefined ? `${pos.x * 100}% ${pos.y * 100}%` : undefined;
-          };
+    const formatBackgroundPosition = (pos) => {
+        return pos && pos.x !== undefined && pos.y !== undefined ? `${pos.x * 100}% ${pos.y * 100}%` : undefined;
+    };
+
+    const getView = useSelect( select => {
+		const { getView } = select( 'vayu-blocks/data' );
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+	}, []);
+
+    const getPaddingStyle = () => {
+        switch (getView) {
+            case 'Desktop':
+                return {
+                    
+                    paddingTop: buttonpaddingTop ? `${buttonpaddingTop}${paddingUnit || 'px'}` : undefined,
+                    paddingBottom: buttonpaddingBottom ? `${buttonpaddingBottom}${paddingUnit || 'px'}` : undefined,
+                    paddingLeft: buttonpaddingLeft ? `${buttonpaddingLeft}${paddingUnit || 'px'}` : undefined,
+                    paddingRight: buttonpaddingRight ? `${buttonpaddingRight}${paddingUnit || 'px'}` : undefined
+                };
+            case 'Tablet':
+                return {
+                    paddingTop: buttonpaddingTopTablet ? `${buttonpaddingTopTablet}${paddingUnit || 'px'}` : undefined,
+                    paddingBottom: buttonpaddingBottomTablet ? `${buttonpaddingBottomTablet}${paddingUnit || 'px'}` : undefined,
+                    paddingLeft: buttonpaddingLeftTablet ? `${buttonpaddingLeftTablet}${paddingUnit || 'px'}` : undefined,
+                    paddingRight: buttonpaddingRightTablet ? `${buttonpaddingRightTablet}${paddingUnit || 'px'}` : undefined
+                };
+            case 'Mobile':
+                return {
+                    paddingTop: buttonpaddingTopMobile ? `${buttonpaddingTopMobile}${paddingUnit || 'px'}` : undefined,
+                    paddingBottom: buttonpaddingBottomMobile ? `${buttonpaddingBottomMobile}${paddingUnit || 'px'}` : undefined,
+                    paddingLeft: buttonpaddingLeftMobile ? `${buttonpaddingLeftMobile}${paddingUnit || 'px'}` : undefined,
+                    paddingRight: buttonpaddingRightMobile ? `${buttonpaddingRightMobile}${paddingUnit || 'px'}` : undefined
+                };
+            default:
+                return {};
+        }
+    };
+
+    const paddingStyles = getPaddingStyle();
+   
+
+    const getMarginStyle = () => {
+        switch (getView) {
+            case 'Desktop':
+                return {
+                    marginTop: marginTop ? `${marginTop}${marginUnit || 'px'}` : undefined,
+                    marginBottom: marginBottom ? `${marginBottom}${marginUnit || 'px'}` : undefined,
+                    marginLeft: marginLeft ? `${marginLeft}${marginUnit || 'px'}` : undefined,
+                    marginRight: marginRight ? `${marginRight}${marginUnit || 'px'}` : undefined
+                };
+            case 'Tablet':
+                return {
+                    marginTop: marginTopTablet ? `${marginTopTablet}${marginUnit || 'px'}` : undefined,
+                    marginBottom: marginBottomTablet ? `${marginBottomTablet}${marginUnit || 'px'}` : undefined,
+                    marginLeft: marginLeftTablet ? `${marginLeftTablet}${marginUnit || 'px'}` : undefined,
+                    marginRight: marginRightTablet ? `${marginRightTablet}${marginUnit || 'px'}` : undefined
+                };
+            case 'Mobile':
+                return {
+                    marginTop: marginTopMobile ? `${marginTopMobile}${marginUnit || 'px'}` : undefined,
+                    marginBottom: marginBottomMobile ? `${marginBottomMobile}${marginUnit || 'px'}` : undefined,
+                    marginLeft: marginLeftMobile ? `${marginLeftMobile}${marginUnit || 'px'}` : undefined,
+                    marginRight: marginRightMobile ? `${marginRightMobile}${marginUnit || 'px'}` : undefined
+                };
+            default:
+                return {};
+        }
+    };
+
+    const marginStyles = getMarginStyle();
+
     // Prepare the style object
     const styles = {
         width: widthType === 'fullwidth' ? '100%' :
           widthType === 'inlinewidth' ? 'auto' :
           widthType === 'customwidth' ? `${customWidth}${customWidthUnit || 'px'}` : '100%',
       
-        paddingTop: paddingTop ? `${paddingTop}${paddingUnit || 'px'}` : undefined,
-        paddingBottom: paddingBottom ? `${paddingBottom}${paddingUnit || 'px'}` : undefined,
-        paddingLeft: paddingLeft ? `${paddingLeft}${paddingUnit || 'px'}` : undefined,
-        paddingRight: paddingRight ? `${paddingRight}${paddingUnit || 'px'}` : undefined,
-      
-        marginTop: marginTop ? `${marginTop}${marginUnit || 'px'}` : undefined,
-        marginBottom: marginBottom ? `${marginBottom}${marginUnit || 'px'}` : undefined,
-        marginLeft: marginLeft ? `${marginLeft}${marginUnit || 'px'}` : undefined,
-        marginRight: marginRight ? `${marginRight}${marginUnit || 'px'}` : undefined,
+          ...paddingStyles,
+          ...marginStyles,  
       
         position: position || undefined,
         zIndex: zIndex || undefined,
@@ -149,10 +227,10 @@ export default function AdvanceSettings({ children, attributes }) {
         borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : undefined,
         borderColor: borderColor || undefined,
       
-        borderTopLeftRadius: borderRadiusTop ? `${borderRadiusTop}${borderRadiusUnit}` : undefined,
-        borderTopRightRadius: borderRadiusLeft ? `${borderRadiusLeft}${borderRadiusUnit}` : undefined,
+        borderTopRightRadius: borderRadiusTop ? `${borderRadiusTop}${borderRadiusUnit}` : undefined,
+        borderBottomLeftRadius: borderRadiusLeft ? `${borderRadiusLeft}${borderRadiusUnit}` : undefined,
         borderBottomRightRadius: borderRadiusBottom ? `${borderRadiusBottom}${borderRadiusUnit}` : undefined,
-        borderBottomLeftRadius: borderRadiusRight ? `${borderRadiusRight}${borderRadiusUnit}` : undefined,
+        borderTopLeftRadius: borderRadiusRight ? `${borderRadiusRight}${borderRadiusUnit}` : undefined,
        
         boxShadow: boxShadow ?
         `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
@@ -171,8 +249,8 @@ export default function AdvanceSettings({ children, attributes }) {
         // Hover state styles
         
         
-      };
-
+    };
+    
     const hoverStyles = {
         borderStyle: borderHvrType || undefined,
         borderTopWidth: borderWidthHvrTop ? `${borderWidthHvrTop}${borderWidthHvrUnit}` : undefined,
@@ -181,10 +259,10 @@ export default function AdvanceSettings({ children, attributes }) {
         borderRightWidth: borderWidthHvrRight ? `${borderWidthHvrRight}${borderWidthHvrUnit}` : undefined,
         borderColor: borderColorHvr || undefined,
 
-        borderTopLeftRadius: borderRadiusHvrTop ? `${borderRadiusHvrTop}${borderRadiusHvrUnit}` : undefined,
-        borderTopRightRadius: borderRadiusHvrLeft ? `${borderRadiusHvrLeft}${borderRadiusHvrUnit}` : undefined,
-        borderBottomRightRadius: borderRadiusHvrBottom ? `${borderRadiusHvrBottom}${borderRadiusHvrUnit}` : undefined,
-        borderBottomLeftRadius: borderRadiusHvrRight ? `${borderRadiusHvrRight}${borderRadiusHvrUnit}` : undefined,
+        borderTopRightRadius: borderRadiusHvrTop ? `${borderRadiusHvrTop}${attributes.borderRadiusHvrUnit}` : undefined,
+        borderBottomLeftRadius: borderRadiusHvrLeft ? `${borderRadiusHvrLeft}${attributes.borderRadiusHvrUnit}` : undefined,
+        borderBottomRightRadius: borderRadiusHvrBottom ? `${borderRadiusHvrBottom}${attributes.borderRadiusHvrUnit}` : undefined,
+        borderTopLeftRadius: borderRadiusHvrRight ? `${borderRadiusHvrRight}${attributes.borderRadiusHvrUnit}` : undefined,
 
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
@@ -200,6 +278,7 @@ export default function AdvanceSettings({ children, attributes }) {
         backgroundSize: backgroundSizeHvr || undefined,
     };
 
+   
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {

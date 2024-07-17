@@ -48,7 +48,7 @@ const BackgroundSelectorControl = ({
 	changeFocalPoint
 }) => {
 
-	console.log(gradient,'gradient');
+	// console.log(gradient,'gradient');
 	const instanceId = useInstanceId( BackgroundSelectorControl );
 
 	const id = `inspector-background-selector-control-${ instanceId }`;

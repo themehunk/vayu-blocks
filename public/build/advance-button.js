@@ -4304,7 +4304,7 @@ const BackgroundSelectorControl = ({
   changeBackgroundSize,
   changeFocalPoint
 }) => {
-  console.log(gradient, 'gradient');
+  // console.log(gradient,'gradient');
   const instanceId = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_4__.useInstanceId)(BackgroundSelectorControl);
   const id = `inspector-background-selector-control-${instanceId}`;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
