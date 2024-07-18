@@ -14,7 +14,7 @@
     "type": "string",
     "default": "px"
   },
-  "customWIdth": {
+  "customWidth": {
     "type": "number",
     "default" : 0
   },
@@ -42,22 +42,7 @@
     "type": "string",
     "default": "px"
   },
-  "marginTop": {
-    "type": "number",
-    "default": 0
-  },
-  "marginBottom": {
-    "type": "number",
-    "default": 0
-  },
-  "marginLeft": {
-    "type": "number",
-    "default": 0
-  },
-  "marginRight": {
-    "type": "number",
-    "default": 0
-  },
+
   "position": {
     "type": "string",
     "default": "relative"
@@ -130,27 +115,7 @@
     "type": "number",
     "default": 1
   },
-
-   "borderRadiusType": {
-    "type": "string",
-    "default": "none" 
-  },
-  "borderRadiusTop": { 
-    "type": "number",
-    "default": 4 
-  },
-  "borderRadiusBottom": { 
-    "type": "number",
-    "default": 4 
-  },
-  "borderRadiusLeft": { 
-    "type": "number",
-    "default": 4 
-  },
-  "borderRadiusRight": { 
-    "type": "number",
-    "default": 4 
-  },
+  
   "borderRadiusDesktop": { 
     "type": "object",
     "default": {
@@ -478,7 +443,22 @@
   "type": "string",
   "default": "linked"
 },
-
+"marginTop": {
+  "type": "number",
+  "default": 0
+},
+"marginBottom": {
+  "type": "number",
+  "default": 0
+},
+"marginLeft": {
+  "type": "number",
+  "default": 0
+},
+"marginRight": {
+  "type": "number",
+  "default": 0
+},
 "marginType": {
   "type": "string",
   "default": "linked"
@@ -522,6 +502,129 @@
 "marginLeftMobile": {
   "type": "number",
   "default": 20
-}
+},
 
+"borderradiusTop": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusBottom": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusLeft": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusRight": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusType": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusTypeTablet": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusTypeMobile": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusTopTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusRightTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusBottomTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusLeftTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusTopMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusRightMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusBottomMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusLeftMobile": {
+  "type": "number",
+  "default": 20
+},
+
+
+
+"borderradiusHvrTop": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusHvrBottom": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusHvrLeft": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusHvrRight": {
+  "type": "number",
+  "default": 0
+},
+"borderradiusHvrType": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusHvrTypeTablet": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusHvrTypeMobile": {
+  "type": "string",
+  "default": "linked"
+},
+"borderradiusHvrTopTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrRightTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrBottomTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrLeftTablet": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrTopMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrRightMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrBottomMobile": {
+  "type": "number",
+  "default": 20
+},
+"borderradiusHvrLeftMobile": {
+  "type": "number",
+  "default": 20
+}
   }

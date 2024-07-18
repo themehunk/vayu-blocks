@@ -63,12 +63,6 @@ export default function AdvanceSettings({ children, attributes }) {
         borderColor,
         borderWidthUnit,
 
-        borderRadiusTop,
-        borderRadiusBottom,
-        borderRadiusLeft,
-        borderRadiusRight,
-        borderRadiusUnit,
-        
         boxShadow,
         boxShadowColor,
         boxShadowColorOpacity,
@@ -115,7 +109,21 @@ export default function AdvanceSettings({ children, attributes }) {
         transitionAll,
 
 
-     buttonpaddingTop, buttonpaddingRight, buttonpaddingBottom, buttonpaddingLeft, buttonpaddingTopTablet, buttonpaddingRightTablet, buttonpaddingBottomTablet, buttonpaddingLeftTablet, buttonpaddingTopMobile, buttonpaddingRightMobile, buttonpaddingBottomMobile, buttonpaddingLeftMobile,buttonpadding,buttonpaddingMobile,buttonpaddingTablet,
+     buttonpaddingTop, 
+     buttonpaddingRight, 
+     buttonpaddingBottom, 
+     buttonpaddingLeft, 
+     buttonpaddingTopTablet,
+    buttonpaddingRightTablet,
+    buttonpaddingBottomTablet,
+    buttonpaddingLeftTablet,
+    buttonpaddingTopMobile, 
+    buttonpaddingRightMobile,
+    buttonpaddingBottomMobile,
+    buttonpaddingLeftMobile,
+    buttonpadding,
+    buttonpaddingMobile,
+    buttonpaddingTablet,
 
      marginTopTablet,
      marginRightTablet,
@@ -126,6 +134,39 @@ export default function AdvanceSettings({ children, attributes }) {
      marginBottomMobile,
      marginLeftMobile,
 
+     borderradiusTop,
+     borderradiusBottom,
+     borderradiusLeft,
+     borderradiusRight,
+     borderradiusType,
+     borderradiusTypeTablet,
+     borderradiusTypeMobile,
+     borderradiusTopTablet,
+     borderradiusRightTablet,
+     borderradiusBottomTablet,
+     borderradiusLeftTablet,
+     borderradiusTopMobile,
+     borderradiusRightMobile,
+     borderradiusBottomMobile,
+     borderradiusLeftMobile,
+     borderRadiusUnit,
+
+     borderradiusHvrTop,
+     borderradiusHvrBottom,
+     borderradiusHvrLeft,
+     borderradiusHvrRight,
+     borderradiusHvrType,
+     borderradiusHvrTypeTablet,
+     borderradiusHvrTypeMobile,
+     borderradiusHvrTopTablet,
+     borderradiusHvrRightTablet,
+     borderradiusHvrBottomTablet,
+     borderradiusHvrLeftTablet,
+     borderradiusHvrTopMobile,
+     borderradiusHvrRightMobile,
+     borderradiusHvrBottomMobile,
+     borderradiusHvrLeftMobile,
+     borderRadiusHvrUnit,
 
     } = attributes;
 
@@ -170,9 +211,6 @@ export default function AdvanceSettings({ children, attributes }) {
         }
     };
 
-    const paddingStyles = getPaddingStyle();
-   
-
     const getMarginStyle = () => {
         switch (getView) {
             case 'Desktop':
@@ -201,7 +239,66 @@ export default function AdvanceSettings({ children, attributes }) {
         }
     };
 
+    const getborderradiusStyle = () => {
+        switch (getView) {
+            case 'Desktop':
+                return {
+                    borderTopLeftRadius: borderradiusTop ? `${borderradiusTop}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusBottom ? `${borderradiusBottom}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomLeftRadius: borderradiusLeft ? `${borderradiusLeft}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusRight ? `${borderradiusRight}${borderRadiusUnit || 'px'}` : undefined
+                };
+            case 'Tablet':
+                return {
+                    borderTopLeftRadius: borderradiusTopTablet ? `${borderradiusTopTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusBottomTablet ? `${borderradiusBottomTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomLeftRadius: borderradiusLeftTablet ? `${borderradiusLeftTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusRightTablet ? `${borderradiusRightTablet}${borderRadiusUnit || 'px'}` : undefined
+                };
+            case 'Mobile':
+                return {
+                    borderTopLeftRadius: borderradiusTopMobile ? `${borderradiusTopMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusBottomMobile ? `${borderradiusBottomMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopLeftRadius: borderradiusLeftMobile ? `${borderradiusLeftMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusRightMobile ? `${borderradiusRightMobile}${borderRadiusUnit || 'px'}` : undefined
+                };
+            default:
+                return {};
+        }
+    };
+
+    const getborderradiusHvrStyle = () => {
+        switch (getView) {
+            case 'Desktop':
+                return {
+                    borderTopLeftRadius: borderradiusHvrTop ? `${borderradiusHvrTop}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusHvrBottom ? `${borderradiusHvrBottom}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomLeftRadius: borderradiusHvrLeft ? `${borderradiusHvrLeft}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusHvrRight ? `${borderradiusHvrRight}${borderRadiusUnit || 'px'}` : undefined
+                };
+            case 'Tablet':
+                return {
+                    borderTopLeftRadius: borderradiusHvrTopTablet ? `${borderradiusHvrTopTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusHvrBottomTablet ? `${borderradiusHvrBottomTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomLeftRadius: borderradiusHvrLeftTablet ? `${borderradiusHvrLeftTablet}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusHvrRightTablet ? `${borderradiusHvrRightTablet}${borderRadiusUnit || 'px'}` : undefined
+                };
+            case 'Mobile':
+                return {
+                    borderTopLeftRadius: borderradiusHvrTopMobile ? `${borderradiusHvrTopMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderBottomRightRadius: borderradiusHvrBottomMobile ? `${borderradiusHvrBottomMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopLeftRadius: borderradiusHvrLeftMobile ? `${borderradiusHvrLeftMobile}${borderRadiusUnit || 'px'}` : undefined,
+                    borderTopRightRadius: borderradiusHvrRightMobile ? `${borderradiusHvrRightMobile}${borderRadiusUnit || 'px'}` : undefined
+                };
+            default:
+                return {};
+        }
+    };
+
+    const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
+    const borderradiusstyles = getborderradiusStyle();
+    const borderradiusHvrstyles = getborderradiusHvrStyle();
 
     // Prepare the style object
     const styles = {
@@ -211,27 +308,21 @@ export default function AdvanceSettings({ children, attributes }) {
       
           ...paddingStyles,
           ...marginStyles,  
+          ...borderradiusstyles,
       
         position: position || undefined,
         zIndex: zIndex || undefined,
         alignSelf: selfAlign || undefined,
         order: order === 'custom' ? customOrder : 'undefined',
-        flexBasis: flexSize || undefined,
-        flexGrow: flexGrow || undefined,
-        flexShrink: flexShrink || undefined,
       
         borderStyle: borderType || undefined,
-        borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : undefined,
-        borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : undefined,
-        borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : undefined,
-        borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : undefined,
+        borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : 0,
+        borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : 0,
+        borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : 0,
+        borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : 0,
         borderColor: borderColor || undefined,
       
-        borderTopRightRadius: borderRadiusTop ? `${borderRadiusTop}${borderRadiusUnit}` : undefined,
-        borderBottomLeftRadius: borderRadiusLeft ? `${borderRadiusLeft}${borderRadiusUnit}` : undefined,
-        borderBottomRightRadius: borderRadiusBottom ? `${borderRadiusBottom}${borderRadiusUnit}` : undefined,
-        borderTopLeftRadius: borderRadiusRight ? `${borderRadiusRight}${borderRadiusUnit}` : undefined,
-       
+        
         boxShadow: boxShadow ?
         `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
         : 'none',
@@ -245,9 +336,6 @@ export default function AdvanceSettings({ children, attributes }) {
         backgroundSize: backgroundSize || undefined,
       
         transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
-      
-        // Hover state styles
-        
         
     };
     
@@ -259,10 +347,7 @@ export default function AdvanceSettings({ children, attributes }) {
         borderRightWidth: borderWidthHvrRight ? `${borderWidthHvrRight}${borderWidthHvrUnit}` : undefined,
         borderColor: borderColorHvr || undefined,
 
-        borderTopRightRadius: borderRadiusHvrTop ? `${borderRadiusHvrTop}${attributes.borderRadiusHvrUnit}` : undefined,
-        borderBottomLeftRadius: borderRadiusHvrLeft ? `${borderRadiusHvrLeft}${attributes.borderRadiusHvrUnit}` : undefined,
-        borderBottomRightRadius: borderRadiusHvrBottom ? `${borderRadiusHvrBottom}${attributes.borderRadiusHvrUnit}` : undefined,
-        borderTopLeftRadius: borderRadiusHvrRight ? `${borderRadiusHvrRight}${attributes.borderRadiusHvrUnit}` : undefined,
+        ...borderradiusHvrstyles,
 
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
@@ -278,7 +363,6 @@ export default function AdvanceSettings({ children, attributes }) {
         backgroundSize: backgroundSizeHvr || undefined,
     };
 
-   
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {

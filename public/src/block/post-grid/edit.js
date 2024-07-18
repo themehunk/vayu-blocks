@@ -5,6 +5,7 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import { Spinner } from '@wordpress/components';
+import { InnerBlocks} from '@wordpress/block-editor';
 
 import {
     blockStyles,
@@ -617,6 +618,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                     </div>
                                 )}
                                 
+
                                 <div >
                                     <a href={post.link} style={{textDecoration:"none"}}>
                                         <TitleTag style={titleTagStyle}>
@@ -659,16 +661,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                         </div>
                                 )}
 
-                                {Tags() && (
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                                        {post.tags.slice(0, pg_numberOfTags).map((tag) => (
-                                            <button key={tag} style={tagButtonStyle}>
-                                                {getTagNames([tag])}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-                            
+                                
                             </div>
                         ))}
                     </div>

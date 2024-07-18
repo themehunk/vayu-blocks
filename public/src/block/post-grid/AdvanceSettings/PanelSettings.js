@@ -498,18 +498,237 @@ const PanelSettings = ({
 		}
 	};
 
-	const getBorderRadiusType = () => {
-		switch ( getView ) {
+
+//border radius
+const desktopborderradiusType = {
+	top: 'borderradiusTop',
+	right: 'borderradiusRight',
+	bottom: 'borderradiusBottom',
+	left: 'borderradiusLeft'
+};
+
+const tabletborderradiusType = {
+	top: 'borderradiusTopTablet',
+	right: 'borderradiusRightTablet',
+	bottom: 'borderradiusBottomTablet',
+	left: 'borderradiusLeftTablet'
+};
+
+const mobileborderradiusType = {
+	top: 'borderradiusTopMobile',
+	right: 'borderradiusRightMobile',
+	bottom: 'borderradiusBottomMobile',
+	left: 'borderradiusLeftMobile'
+};
+
+const getborderradiusType = () => {
+	switch (getView) {
 		case 'Desktop':
-			return attributes.borderRadiusType;
+			return attributes.borderradiusType;
 		case 'Tablet':
-			return attributes.borderRadiusTypeTablet;
+			return attributes.borderradiusTypeTablet;
 		case 'Mobile':
-			return attributes.borderRadiusTypeMobile;
+			return attributes.borderradiusTypeMobile;
 		default:
 			return undefined;
-		}
-	};
+	}
+};
+
+const changeborderradiusType = value => {
+	if ('Desktop' === getView) {
+		setAttributes({ borderradiusType: value, borderradiusTypeTablet: value, borderradiusTypeMobile: value });
+	} else if ('Tablet' === getView) {
+		setAttributes({ borderradiusTypeTablet: value });
+	} else if ('Mobile' === getView) {
+		setAttributes({ borderradiusTypeMobile: value });
+	}
+};
+
+const changeborderradius = (type, value) => {
+	switch (getView) {
+		case 'Desktop':
+			if ('linked' === attributes.borderradiusType) {
+				setAttributes({ borderradius: value, borderradiusTop: value, borderradiusRight: value, borderradiusBottom: value, borderradiusLeft: value });
+			} else {
+				setAttributes({ [desktopborderradiusType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ('linked' === attributes.borderradiusTypeTablet) {
+				setAttributes({ borderradiusTopTablet: value, borderradiusRightTablet: value, borderradiusBottomTablet: value, borderradiusLeftTablet: value });
+			} else {
+				setAttributes({ [tabletborderradiusType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ('linked' === attributes.borderradiusTypeMobile) {
+				setAttributes({ borderradiusTopMobile: value, borderradiusRightMobile: value, borderradiusBottomMobile: value, borderradiusLeftMobile: value });
+			} else {
+				setAttributes({ [mobileborderradiusType[type]]: value });
+			}
+			break;
+	}
+};
+
+const getborderradius = type => {
+	switch (type) {
+		case 'top':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusType ? attributes.borderradiusTop : attributes.borderradiusTop;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusTopTablet : attributes.borderradiusTopTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusTopMobile : attributes.borderradiusTopMobile;
+			}
+		case 'right':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusType ? attributes.borderradiusRight : attributes.borderradiusRight;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusRightTablet : attributes.borderradiusRightTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusRightMobile : attributes.borderradiusRightMobile;
+			}
+		case 'bottom':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusType ? attributes.borderradiusBottom : attributes.borderradiusBottom;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusBottomTablet : attributes.borderradiusBottomTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusBottomMobile : attributes.borderradiusBottomMobile;
+			}
+		case 'left':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusType ? attributes.borderradiusLeft : attributes.borderradiusLeft;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusLeftTablet : attributes.borderradiusLeftTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusLeftMobile : attributes.borderradiusLeftMobile;
+			}
+	}
+
+	return undefined;
+};
+
+//border radius Hvr
+const desktopborderradiusHvrType = {
+	top: 'borderradiusHvrTop',
+	right: 'borderradiusHvrRight',
+	bottom: 'borderradiusHvrBottom',
+	left: 'borderradiusHvrLeft'
+};
+
+const tabletborderradiusHvrType = {
+	top: 'borderradiusHvrTopTablet',
+	right: 'borderradiusHvrRightTablet',
+	bottom: 'borderradiusHvrBottomTablet',
+	left: 'borderradiusHvrLeftTablet'
+};
+
+const mobileborderradiusHvrType = {
+	top: 'borderradiusHvrTopMobile',
+	right: 'borderradiusHvrRightMobile',
+	bottom: 'borderradiusHvrBottomMobile',
+	left: 'borderradiusHvrLeftMobile'
+};
+
+const getborderradiusHvrType = () => {
+	switch (getView) {
+		case 'Desktop':
+			return attributes.borderradiusHvrType;
+		case 'Tablet':
+			return attributes.borderradiusHvrTypeTablet;
+		case 'Mobile':
+			return attributes.borderradiusHvrTypeMobile;
+		default:
+			return undefined;
+	}
+};
+
+const changeborderradiusHvrType = value => {
+	if ('Desktop' === getView) {
+		setAttributes({ borderradiusHvrType: value, borderradiusHvrTypeTablet: value, borderradiusHvrTypeMobile: value });
+	} else if ('Tablet' === getView) {
+		setAttributes({ borderradiusHvrTypeTablet: value });
+	} else if ('Mobile' === getView) {
+		setAttributes({ borderradiusHvrTypeMobile: value });
+	}
+};
+
+const changeborderradiusHvr = (type, value) => {
+	switch (getView) {
+		case 'Desktop':
+			if ('linked' === attributes.borderradiusHvrType) {
+				setAttributes({ borderradiusHvr: value, borderradiusHvrTop: value, borderradiusHvrRight: value, borderradiusHvrBottom: value, borderradiusHvrLeft: value });
+			} else {
+				setAttributes({ [desktopborderradiusHvrType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ('linked' === attributes.borderradiusHvrTypeTablet) {
+				setAttributes({ borderradiusHvrTopTablet: value, borderradiusHvrRightTablet: value, borderradiusHvrBottomTablet: value, borderradiusHvrLeftTablet: value });
+			} else {
+				setAttributes({ [tabletborderradiusHvrType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ('linked' === attributes.borderradiusHvrTypeMobile) {
+				setAttributes({ borderradiusHvrTopMobile: value, borderradiusHvrRightMobile: value, borderradiusHvrBottomMobile: value, borderradiusHvrLeftMobile: value });
+			} else {
+				setAttributes({ [mobileborderradiusHvrType[type]]: value });
+			}
+			break;
+	}
+};
+
+const getborderradiusHvr = type => {
+	switch (type) {
+		case 'top':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrTop : attributes.borderradiusHvrTop;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrTopTablet : attributes.borderradiusHvrTopTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrTopMobile : attributes.borderradiusHvrTopMobile;
+			}
+		case 'right':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrRight : attributes.borderradiusHvrRight;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrRightTablet : attributes.borderradiusHvrRightTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrRightMobile : attributes.borderradiusHvrRightMobile;
+			}
+		case 'bottom':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrBottom : attributes.borderradiusHvrBottom;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrBottomTablet : attributes.borderradiusHvrBottomTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrBottomMobile : attributes.borderradiusHvrBottomMobile;
+			}
+		case 'left':
+			switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrLeft : attributes.borderradiusHvrLeft;
+				case 'Tablet':
+					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrLeftTablet : attributes.borderradiusHvrLeftTablet;
+				case 'Mobile':
+					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrLeftMobile : attributes.borderradiusHvrLeftMobile;
+			}
+	}
+
+	return undefined;
+};
+
+
+
 
 	const getBorderRadius = type => {
 		if ( 'top' == type ) {
@@ -679,26 +898,7 @@ const PanelSettings = ({
 		left: 'borderWidthLeftMobile'
 	};
 
-	const desktopBorderRadiusType = {
-		top: 'borderRadiusTop',
-		left: 'borderRadiusLeft',
-		right: 'borderRadiusRight',
-		bottom: 'borderRadiusBottom'
-	};
-
-	const tabletBorderRadiusType = {
-		top: 'borderRadiusTopTablet',
-		left: 'borderRadiusLeftTablet',
-		right: 'borderRadiusRightTablet',
-		bottom: 'borderRadiusBottomTablet'
-	};
-
-	const mobileBorderRadiusType = {
-		top: 'borderRadiusTopMobile',
-		left: 'borderRadiusLeftMobile',
-		right: 'borderRadiusRightMobile',
-		bottom: 'borderRadiusBottomMobile'
-	};
+	
 
 	const desktopBorderWidthTypeButton = {
 		top: 'buttonborderWidthTop',
@@ -778,41 +978,8 @@ const PanelSettings = ({
 		}
 	};
 
-	const changeBorderRadiusType = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ borderRadiusType: value, borderRadiusTypeTablet: value, borderRadiusTypeMobile: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ borderRadiusTypeTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ borderRadiusTypeMobile: value });
-		}
-	};
 
-	const changeBorderRadius = ( type, value ) => {
-		switch ( getView ) {
-		case 'Desktop':
-			if ( 'linked' === attributes.borderRadiusType ) {
-				setAttributes({ borderRadius: value , borderRadiusTablet: value , borderRadiusMobile: value });
-			} else {
-				setAttributes({ [desktopBorderRadiusType[type]]: value , [tabletBorderRadiusType[type]]: value , [mobileBorderRadiusType[type]]: value });
-			}
-			break;
-		case 'Tablet':
-			if ( 'linked' === attributes.borderRadiusTypeTablet ) {
-				setAttributes({ borderRadiusTablet: value });
-			} else {
-				setAttributes({ [tabletBorderRadiusType[type]]: value });
-			}
-			break;
-		case 'Mobile':
-			if ( 'linked' === attributes.borderRadiusTypeMobile ) {
-				setAttributes({ borderRadiusMobile: value });
-			} else {
-				setAttributes({ [mobileBorderRadiusType[type]]: value });
-			}
-			break;
-		}
-	};
+
 
 	const getBorderWidthHvrType = () => {
 		switch ( getView ) {
@@ -1479,7 +1646,6 @@ const PanelSettings = ({
 	
     return (
 		<Fragment>
-
 			<InspectorControls>
 				<div className='th-block-ins th-button-panel'>
 			<InsSettingHeader value={ tab }
@@ -1502,7 +1668,6 @@ const PanelSettings = ({
 						]}
 						onChange={ setTab }
 				/>
-
 				{'setting' === tab && (
 									<Fragment>
 										<PostSettings attributes={attributes} setAttributes={setAttributes} />
@@ -1617,150 +1782,6 @@ const PanelSettings = ({
 										] }
 										onChange={ e => setAttributes({ position: e }) }
 									/>
-
-									{ ('absolute'== attributes.position || 'fixed'== attributes.position) && (
-									<>
-									<div className='th-component-group-label'>
-									<label className='th-label'>{ __( 'Horizontal Orientation', 'vayu-blocks' )}</label>
-									<ToogleGroupControl
-
-												value={ attributes.horizontalOrientation }
-												onChange={ horizontalOrientation => setAttributes({ horizontalOrientation }) }
-												options={[
-													{
-														icon: HorizontalLeft,
-														label: __( 'left', 'vayu-blocks' ),
-														value: 'left'
-													},
-													{
-														icon: HorizontalRight,
-														label: __( 'right', 'vayu-blocks' ),
-														value: 'right'
-													}
-												]}
-												
-												hasIcon
-											/>
-									</div>
-								{ 'left' == attributes.horizontalOrientation && (
-									<ResponsiveControl
-										label={ __( 'Offset', 'vayu-blocks' ) }
-										>	
-										<UnitChooser
-										value={ attributes.horizontalOrientationOffsetUnit }
-										onClick={horizontalOrientationOffsetUnit => {
-											setAttributes({ horizontalOrientationOffsetUnit });
-											sethorizontalOrientationOffsetUnit(horizontalOrientationOffsetUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-										/>
-										<RangeControl
-											renderTooltipContent={ customTooltiphorizontalOrientationOffset }
-											value={ gethorizontalOrientationOffset() || '' }
-											onChange={ changehorizontalOrientationOffset }
-											step={ 1 }
-											min={ -999 }
-											max={ maxhorizontalOrientationOffsetUnit }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
-								)}
-								{ 'right' == attributes.horizontalOrientation && (
-									<ResponsiveControl
-										label={ __( 'Offset', 'vayu-blocks' ) }
-										>	
-										<UnitChooser
-										value={ attributes.horizontalOrientationOffsetRightUnit }
-										onClick={horizontalOrientationOffsetRightUnit => {
-											setAttributes({ horizontalOrientationOffsetRightUnit });
-											sethorizontalOrientationOffsetRightUnit(horizontalOrientationOffsetRightUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-										/>
-										<RangeControl
-											renderTooltipContent={ customTooltiphorizontalOrientationOffsetRight }
-											value={ gethorizontalOrientationOffsetRight() || '' }
-											onChange={ changehorizontalOrientationOffsetRight }
-											step={ 1 }
-											min={ -999 }
-											max={ maxhorizontalOrientationOffsetRightUnit }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
-								)}	
-
-								<div className='th-component-group-label'>
-									<label className='th-label'>{ __( 'Vertical Orientation', 'vayu-blocks' )}</label>
-									<ToogleGroupControl
-
-												value={ attributes.verticalOrientation }
-												onChange={ verticalOrientation => setAttributes({ verticalOrientation }) }
-												options={[
-													{
-														icon: VerticalTop,
-														label: __( 'top', 'vayu-blocks' ),
-														value: 'top'
-													},
-													{
-														icon: VerticalBottom,
-														label: __( 'bottom', 'vayu-blocks' ),
-														value: 'bottom'
-													}
-												]}
-												
-												hasIcon
-											/>
-											</div>
-										{ 'top' == attributes.verticalOrientation && (
-									<ResponsiveControl
-										label={ __( 'Offset', 'vayu-blocks' ) }
-										>	
-										<UnitChooser
-										value={ attributes.verticalOrientationOffsetTopUnit }
-										onClick={verticalOrientationOffsetTopUnit => {
-											setAttributes({ verticalOrientationOffsetTopUnit });
-											setverticalOrientationOffsetTopUnit(verticalOrientationOffsetTopUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-										/>
-										<RangeControl
-											renderTooltipContent={ customTooltipverticalOrientationOffsetTop }
-											value={ getverticalOrientationOffsetTop() || '' }
-											onChange={ changeverticalOrientationOffsetTop }
-											step={ 1 }
-											min={ -999 }
-											max={ maxverticalOrientationOffsetTopUnit }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
-								)}
-
-								{ 'bottom' == attributes.verticalOrientation && (
-									<ResponsiveControl
-										label={ __( 'Offset', 'vayu-blocks' ) }
-										>	
-										<UnitChooser
-										value={ attributes.verticalOrientationOffsetBottomUnit }
-										onClick={verticalOrientationOffsetBottomUnit => {
-											setAttributes({ verticalOrientationOffsetBottomUnit });
-											setverticalOrientationOffsetBottomUnit(verticalOrientationOffsetBottomUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-										/>
-										<RangeControl
-											renderTooltipContent={ customTooltipverticalOrientationOffsetBottom }
-											value={ getverticalOrientationOffsetBottom() || '' }
-											onChange={ changeverticalOrientationOffsetBottom }
-											step={ 1 }
-											min={ -999 }
-											max={ maxverticalOrientationOffsetBottomUnit }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
-								)}  
-								</>
-							)}
-
 									<ResponsiveControl
 										label={ __( 'Z-index', 'vayu-blocks' ) }
 										>	
@@ -1773,154 +1794,7 @@ const PanelSettings = ({
 											max={ 999999 }
 											allowReset={ true }
 										/>
-									</ResponsiveControl> 
-
-									<ResponsiveControl
-											label={ __( 'Align Self', 'vayu-blocks' ) }
-											className="th-alig-self-control th-component-group"
-										>
-											<ToogleGroupControl
-												value={ getSelfAlign() }
-												onChange={ changeSelfAlign }
-												options={[
-													{
-														icon: Start,
-														label: __( 'Start', 'vayu-blocks' ),
-														value: 'start'
-													},
-													{
-														icon: Center,
-														label: __( 'Center', 'vayu-blocks' ),
-														value: 'center'
-													},
-													{
-														icon: End,
-														label: __( 'End', 'vayu-blocks' ),
-														value: 'end'
-													},
-													{
-														icon: Strech,
-														label: __( 'Stretch', 'vayu-blocks' ),
-														value: 'stretch'
-													}
-												]}
-												
-												hasIcon
-											/>
-										</ResponsiveControl>
-
-										<ResponsiveControl
-											label={ __( 'Order', 'vayu-blocks' ) }
-											className="th-order-control th-component-group"
-										>
-											<ToogleGroupControl
-												value={ getorder() }
-												onChange={ changeorder }
-												options={[
-													{
-														icon: OrderStart,
-														label: __( 'Start', 'vayu-blocks' ),
-														value: 'start'
-													},
-													{
-														icon: OrderEnd,
-														label: __( 'End', 'vayu-blocks' ),
-														value: 'end'
-													},
-													{
-														icon: Custom,
-														label: __( 'Cutsom', 'vayu-blocks' ),
-														value: 'custom'
-													}
-												]}
-												
-												hasIcon
-											/>
-										</ResponsiveControl>
-										{ 'custom' == attributes.order && (
-										<ResponsiveControl
-										label={ __( 'Custom Order', 'vayu-blocks' ) }
-										>    
-										<RangeControl
-											renderTooltipContent={ customTooltipCustomOrder }
-											value={ getcustomOrder() || '' }
-											onChange={ changecustomOrder }
-											step={ 1 }
-											min={ -9999 }
-											max={ 9999 }
-											allowReset={ true }
-										/>		
 									</ResponsiveControl>
-
-										)}
-
-									<ResponsiveControl
-											label={ __( 'Size', 'vayu-blocks' ) }
-											className="th-size-control th-component-group"
-										>
-											<ToogleGroupControl
-												value={ getflexSize() }
-												onChange={ changeflexSize }
-												options={[
-													{
-														icon: None,
-														label: __( 'None', 'vayu-blocks' ),
-														value: 'none'
-													},
-													{
-														icon: Grow,
-														label: __( 'Grow', 'vayu-blocks' ),
-														value: 'grow'
-													},
-													{
-														icon: Shrink,
-														label: __( 'Shrink', 'vayu-blocks' ),
-														value: 'shrink'
-													},
-													{
-														icon: Custom,
-														label: __( 'Custom', 'vayu-blocks' ),
-														value: 'custom'
-													}
-												]}
-												
-												hasIcon
-											/>
-										</ResponsiveControl>
-										{ 'custom' == attributes.flexSize && (
-										<>
-										<ResponsiveControl
-										label={ __( 'Flex Grow', 'vayu-blocks' ) }
-										>    
-										<RangeControl
-											renderTooltipContent={ customTooltipFlexGrow }
-											value={ getFlexGrowSize() || '' }
-											onChange={ changeFlexGrowSize }
-											step={ 1 }
-											min={ 1 }
-											max={ 500 }
-											allowReset={ true }
-										/>		
-									</ResponsiveControl>
-
-									<ResponsiveControl
-										label={ __( 'Flex Shrink', 'vayu-blocks' ) }
-										>    
-										<RangeControl
-											renderTooltipContent={ customTooltipFlexShrink }
-											value={ getFlexShrinkSize() || '' }
-											onChange={ changeFlexShrinkSize }
-											step={ 1 }
-											min={ 1 }
-											max={ 500 }
-											allowReset={ true }
-										/>		
-										</ResponsiveControl>
-										</>
-									
-
-										)}
-
 
 						</PanelBody>
 
@@ -2025,31 +1899,31 @@ const PanelSettings = ({
 										units={ [ 'px', 'em', '%' ] }
 									/>
 									<SizingControl
-											type={ getBorderRadiusType() }
+											type={ getborderradiusType() }
 											min={ 0 }
 											max={ maxborderRadiusUnit }
-											changeType={ changeBorderRadiusType }
-											onChange={ changeBorderRadius }
+											changeType={ changeborderradiusType }
+											onChange={ changeborderradius }
 											options={ [
 												{
 													label: __( 'T-R', 'vayu-blocks' ),
 													type: 'top',
-													value: getBorderRadius( 'top' )
+													value: getborderradius( 'top' )
 												},
 												{
 													label: __( 'T-L', 'vayu-blocks' ),
 													type: 'right',
-													value: getBorderRadius( 'right' )
+													value: getborderradius( 'right' )
 												},
 												{
 													label: __( 'B-R', 'vayu-blocks' ),
 													type: 'left',
-													value: getBorderRadius( 'left' )
+													value: getborderradius( 'left' )
 												},
 												{
 													label: __( 'B-L', 'vayu-blocks' ),
 													type: 'bottom',
-													value: getBorderRadius( 'bottom' )
+													value: getborderradius( 'bottom' )
 												}
 											] }
 										/>
@@ -2206,31 +2080,31 @@ const PanelSettings = ({
 										units={ [ 'px', 'em', '%' ] }
 									/>
 									<SizingControl
-											type={ getBorderRadiusHvrType() }
+											type={ getborderradiusHvrType() }
 											min={ 0 }
 											max={ maxborderRadiusUnit }
-											changeType={ changeBorderRadiusHvrType }
-											onChange={ changeBorderRadiusHvr }
+											changeType={ changeborderradiusHvrType }
+											onChange={ changeborderradiusHvr }
 											options={ [
 												{
 													label: __( 'T-R', 'vayu-blocks' ),
 													type: 'top',
-													value: getBorderRadiusHvr( 'top' )
+													value: getborderradiusHvr( 'top' )
 												},
 												{
 													label: __( 'T-L', 'vayu-blocks' ),
 													type: 'right',
-													value: getBorderRadiusHvr( 'right' )
+													value: getborderradiusHvr( 'right' )
 												},
 												{
 													label: __( 'B-R', 'vayu-blocks' ),
 													type: 'left',
-													value: getBorderRadiusHvr( 'left' )
+													value: getborderradiusHvr( 'left' )
 												},
 												{
 													label: __( 'B-L', 'vayu-blocks' ),
 													type: 'bottom',
-													value: getBorderRadiusHvr( 'bottom' )
+													value: getborderradiusHvr( 'bottom' )
 												}
 											] }
 										/>
@@ -2503,10 +2377,8 @@ const PanelSettings = ({
 					</PanelBody> */}
 
 					</Fragment>
-				)
-				
+				)	
 			}
-
 			</div>
 			</InspectorControls>  
 

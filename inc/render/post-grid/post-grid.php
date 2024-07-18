@@ -12,6 +12,8 @@ class VayuBlocksPostGrid {
         $default_attributes = include('defaultattributes.php');
         $this->attr = array_merge($default_attributes, $attr);  
 
+        // add_action('wp_ajax_nopriv_load_posts', array($this, 'load_posts'));
+        // add_action('wp_ajax_load_posts', array($this, 'load_posts'));
     }
 
     private function get_posts($paged = 1) {
@@ -70,6 +72,7 @@ class VayuBlocksPostGrid {
 
             if (!isset($this->attr['showPagination']) || $this->attr['showPagination']) {
                 echo '<div class="pagination" style="margin-top: 20px; text-align: center;">';
+              
                 echo paginate_links(array(
                     'total' => $query->max_num_pages,
                     'current' => $paged,
@@ -81,6 +84,9 @@ class VayuBlocksPostGrid {
                     'after_page_number' => '</span>',
                 ));
                 echo '</div>';
+
+                  // Add a hidden input field to store the total pages
+                echo '<input type="hidden" id="max-pages" value="' . $query->max_num_pages . '">';
             }
             
 
@@ -112,6 +118,7 @@ class VayuBlocksPostGrid {
         $this->render_excerpt();
         $this->render_full_content();
         $this->render_tags($tag_names);
+       
 
         echo '</div>';
     }
@@ -347,3 +354,10 @@ function post_grid_render($attr) {
     $renderer = new VayuBlocksPostGrid($attr);
     return $renderer->render();
 } 
+
+
+// function enqueue_my_scripts() {
+//     wp_enqueue_script('my-script', plugins_url('./pagination.js', __FILE__), array('jquery'), '1.0', true);
+// }
+
+// add_action('wp_enqueue_scripts', 'enqueue_my_scripts');

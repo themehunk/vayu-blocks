@@ -219,11 +219,6 @@ function AdvanceSettings({
     borderWidthRight,
     borderColor,
     borderWidthUnit,
-    borderRadiusTop,
-    borderRadiusBottom,
-    borderRadiusLeft,
-    borderRadiusRight,
-    borderRadiusUnit,
     boxShadow,
     boxShadowColor,
     boxShadowColorOpacity,
@@ -288,7 +283,39 @@ function AdvanceSettings({
     marginTopMobile,
     marginRightMobile,
     marginBottomMobile,
-    marginLeftMobile
+    marginLeftMobile,
+    borderradiusTop,
+    borderradiusBottom,
+    borderradiusLeft,
+    borderradiusRight,
+    borderradiusType,
+    borderradiusTypeTablet,
+    borderradiusTypeMobile,
+    borderradiusTopTablet,
+    borderradiusRightTablet,
+    borderradiusBottomTablet,
+    borderradiusLeftTablet,
+    borderradiusTopMobile,
+    borderradiusRightMobile,
+    borderradiusBottomMobile,
+    borderradiusLeftMobile,
+    borderRadiusUnit,
+    borderradiusHvrTop,
+    borderradiusHvrBottom,
+    borderradiusHvrLeft,
+    borderradiusHvrRight,
+    borderradiusHvrType,
+    borderradiusHvrTypeTablet,
+    borderradiusHvrTypeMobile,
+    borderradiusHvrTopTablet,
+    borderradiusHvrRightTablet,
+    borderradiusHvrBottomTablet,
+    borderradiusHvrLeftTablet,
+    borderradiusHvrTopMobile,
+    borderradiusHvrRightMobile,
+    borderradiusHvrBottomMobile,
+    borderradiusHvrLeftMobile,
+    borderRadiusHvrUnit
   } = attributes;
 
   // console.log(attributes);
@@ -331,7 +358,6 @@ function AdvanceSettings({
         return {};
     }
   };
-  const paddingStyles = getPaddingStyle();
   const getMarginStyle = () => {
     switch (getView) {
       case 'Desktop':
@@ -359,30 +385,81 @@ function AdvanceSettings({
         return {};
     }
   };
+  const getborderradiusStyle = () => {
+    switch (getView) {
+      case 'Desktop':
+        return {
+          borderTopLeftRadius: borderradiusTop ? `${borderradiusTop}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusBottom ? `${borderradiusBottom}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomLeftRadius: borderradiusLeft ? `${borderradiusLeft}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusRight ? `${borderradiusRight}${borderRadiusUnit || 'px'}` : undefined
+        };
+      case 'Tablet':
+        return {
+          borderTopLeftRadius: borderradiusTopTablet ? `${borderradiusTopTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusBottomTablet ? `${borderradiusBottomTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomLeftRadius: borderradiusLeftTablet ? `${borderradiusLeftTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusRightTablet ? `${borderradiusRightTablet}${borderRadiusUnit || 'px'}` : undefined
+        };
+      case 'Mobile':
+        return {
+          borderTopLeftRadius: borderradiusTopMobile ? `${borderradiusTopMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusBottomMobile ? `${borderradiusBottomMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopLeftRadius: borderradiusLeftMobile ? `${borderradiusLeftMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusRightMobile ? `${borderradiusRightMobile}${borderRadiusUnit || 'px'}` : undefined
+        };
+      default:
+        return {};
+    }
+  };
+  const getborderradiusHvrStyle = () => {
+    switch (getView) {
+      case 'Desktop':
+        return {
+          borderTopLeftRadius: borderradiusHvrTop ? `${borderradiusHvrTop}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusHvrBottom ? `${borderradiusHvrBottom}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomLeftRadius: borderradiusHvrLeft ? `${borderradiusHvrLeft}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusHvrRight ? `${borderradiusHvrRight}${borderRadiusUnit || 'px'}` : undefined
+        };
+      case 'Tablet':
+        return {
+          borderTopLeftRadius: borderradiusHvrTopTablet ? `${borderradiusHvrTopTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusHvrBottomTablet ? `${borderradiusHvrBottomTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomLeftRadius: borderradiusHvrLeftTablet ? `${borderradiusHvrLeftTablet}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusHvrRightTablet ? `${borderradiusHvrRightTablet}${borderRadiusUnit || 'px'}` : undefined
+        };
+      case 'Mobile':
+        return {
+          borderTopLeftRadius: borderradiusHvrTopMobile ? `${borderradiusHvrTopMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderBottomRightRadius: borderradiusHvrBottomMobile ? `${borderradiusHvrBottomMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopLeftRadius: borderradiusHvrLeftMobile ? `${borderradiusHvrLeftMobile}${borderRadiusUnit || 'px'}` : undefined,
+          borderTopRightRadius: borderradiusHvrRightMobile ? `${borderradiusHvrRightMobile}${borderRadiusUnit || 'px'}` : undefined
+        };
+      default:
+        return {};
+    }
+  };
+  const paddingStyles = getPaddingStyle();
   const marginStyles = getMarginStyle();
+  const borderradiusstyles = getborderradiusStyle();
+  const borderradiusHvrstyles = getborderradiusHvrStyle();
 
   // Prepare the style object
   const styles = {
     width: widthType === 'fullwidth' ? '100%' : widthType === 'inlinewidth' ? 'auto' : widthType === 'customwidth' ? `${customWidth}${customWidthUnit || 'px'}` : '100%',
     ...paddingStyles,
     ...marginStyles,
+    ...borderradiusstyles,
     position: position || undefined,
     zIndex: zIndex || undefined,
     alignSelf: selfAlign || undefined,
     order: order === 'custom' ? customOrder : 'undefined',
-    flexBasis: flexSize || undefined,
-    flexGrow: flexGrow || undefined,
-    flexShrink: flexShrink || undefined,
     borderStyle: borderType || undefined,
-    borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : undefined,
-    borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : undefined,
-    borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : undefined,
-    borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : undefined,
+    borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : 0,
+    borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : 0,
+    borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : 0,
+    borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : 0,
     borderColor: borderColor || undefined,
-    borderTopRightRadius: borderRadiusTop ? `${borderRadiusTop}${borderRadiusUnit}` : undefined,
-    borderBottomLeftRadius: borderRadiusLeft ? `${borderRadiusLeft}${borderRadiusUnit}` : undefined,
-    borderBottomRightRadius: borderRadiusBottom ? `${borderRadiusBottom}${borderRadiusUnit}` : undefined,
-    borderTopLeftRadius: borderRadiusRight ? `${borderRadiusRight}${borderRadiusUnit}` : undefined,
     boxShadow: boxShadow ? `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})` : 'none',
     background: backgroundType === 'color' ? backgroundColor : backgroundType === 'gradient' ? backgroundGradient || undefined : backgroundImage ? `url(${backgroundImage.url})` : 'none',
     backgroundPosition: formatBackgroundPosition(backgroundPosition),
@@ -390,8 +467,6 @@ function AdvanceSettings({
     backgroundRepeat: backgroundRepeat || undefined,
     backgroundSize: backgroundSize || undefined,
     transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined
-
-    // Hover state styles
   };
   const hoverStyles = {
     borderStyle: borderHvrType || undefined,
@@ -400,10 +475,7 @@ function AdvanceSettings({
     borderLeftWidth: borderWidthHvrLeft ? `${borderWidthHvrLeft}${borderWidthHvrUnit}` : undefined,
     borderRightWidth: borderWidthHvrRight ? `${borderWidthHvrRight}${borderWidthHvrUnit}` : undefined,
     borderColor: borderColorHvr || undefined,
-    borderTopRightRadius: borderRadiusHvrTop ? `${borderRadiusHvrTop}${attributes.borderRadiusHvrUnit}` : undefined,
-    borderBottomLeftRadius: borderRadiusHvrLeft ? `${borderRadiusHvrLeft}${attributes.borderRadiusHvrUnit}` : undefined,
-    borderBottomRightRadius: borderRadiusHvrBottom ? `${borderRadiusHvrBottom}${attributes.borderRadiusHvrUnit}` : undefined,
-    borderTopLeftRadius: borderRadiusHvrRight ? `${borderRadiusHvrRight}${attributes.borderRadiusHvrUnit}` : undefined,
+    ...borderradiusHvrstyles,
     boxShadow: boxShadowHvr ? `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})` : 'none',
     background: backgroundTypeHvr === 'color' ? backgroundColorHvr : backgroundTypeHvr === 'gradient' ? backgroundGradientHvr || undefined : backgroundImageHvr ? `url(${backgroundImageHvr.url})` : 'none',
     backgroundPosition: formatBackgroundPosition(backgroundPositionHvr),
@@ -1021,17 +1093,279 @@ const PanelSettings = ({
         return undefined;
     }
   };
-  const getBorderRadiusType = () => {
+
+  //border radius
+  const desktopborderradiusType = {
+    top: 'borderradiusTop',
+    right: 'borderradiusRight',
+    bottom: 'borderradiusBottom',
+    left: 'borderradiusLeft'
+  };
+  const tabletborderradiusType = {
+    top: 'borderradiusTopTablet',
+    right: 'borderradiusRightTablet',
+    bottom: 'borderradiusBottomTablet',
+    left: 'borderradiusLeftTablet'
+  };
+  const mobileborderradiusType = {
+    top: 'borderradiusTopMobile',
+    right: 'borderradiusRightMobile',
+    bottom: 'borderradiusBottomMobile',
+    left: 'borderradiusLeftMobile'
+  };
+  const getborderradiusType = () => {
     switch (getView) {
       case 'Desktop':
-        return attributes.borderRadiusType;
+        return attributes.borderradiusType;
       case 'Tablet':
-        return attributes.borderRadiusTypeTablet;
+        return attributes.borderradiusTypeTablet;
       case 'Mobile':
-        return attributes.borderRadiusTypeMobile;
+        return attributes.borderradiusTypeMobile;
       default:
         return undefined;
     }
+  };
+  const changeborderradiusType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderradiusType: value,
+        borderradiusTypeTablet: value,
+        borderradiusTypeMobile: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderradiusTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderradiusTypeMobile: value
+      });
+    }
+  };
+  const changeborderradius = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderradiusType) {
+          setAttributes({
+            borderradius: value,
+            borderradiusTop: value,
+            borderradiusRight: value,
+            borderradiusBottom: value,
+            borderradiusLeft: value
+          });
+        } else {
+          setAttributes({
+            [desktopborderradiusType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderradiusTypeTablet) {
+          setAttributes({
+            borderradiusTopTablet: value,
+            borderradiusRightTablet: value,
+            borderradiusBottomTablet: value,
+            borderradiusLeftTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletborderradiusType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderradiusTypeMobile) {
+          setAttributes({
+            borderradiusTopMobile: value,
+            borderradiusRightMobile: value,
+            borderradiusBottomMobile: value,
+            borderradiusLeftMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileborderradiusType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const getborderradius = type => {
+    switch (type) {
+      case 'top':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusType ? attributes.borderradiusTop : attributes.borderradiusTop;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusTopTablet : attributes.borderradiusTopTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusTopMobile : attributes.borderradiusTopMobile;
+        }
+      case 'right':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusType ? attributes.borderradiusRight : attributes.borderradiusRight;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusRightTablet : attributes.borderradiusRightTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusRightMobile : attributes.borderradiusRightMobile;
+        }
+      case 'bottom':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusType ? attributes.borderradiusBottom : attributes.borderradiusBottom;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusBottomTablet : attributes.borderradiusBottomTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusBottomMobile : attributes.borderradiusBottomMobile;
+        }
+      case 'left':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusType ? attributes.borderradiusLeft : attributes.borderradiusLeft;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusLeftTablet : attributes.borderradiusLeftTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusLeftMobile : attributes.borderradiusLeftMobile;
+        }
+    }
+    return undefined;
+  };
+
+  //border radius Hvr
+  const desktopborderradiusHvrType = {
+    top: 'borderradiusHvrTop',
+    right: 'borderradiusHvrRight',
+    bottom: 'borderradiusHvrBottom',
+    left: 'borderradiusHvrLeft'
+  };
+  const tabletborderradiusHvrType = {
+    top: 'borderradiusHvrTopTablet',
+    right: 'borderradiusHvrRightTablet',
+    bottom: 'borderradiusHvrBottomTablet',
+    left: 'borderradiusHvrLeftTablet'
+  };
+  const mobileborderradiusHvrType = {
+    top: 'borderradiusHvrTopMobile',
+    right: 'borderradiusHvrRightMobile',
+    bottom: 'borderradiusHvrBottomMobile',
+    left: 'borderradiusHvrLeftMobile'
+  };
+  const getborderradiusHvrType = () => {
+    switch (getView) {
+      case 'Desktop':
+        return attributes.borderradiusHvrType;
+      case 'Tablet':
+        return attributes.borderradiusHvrTypeTablet;
+      case 'Mobile':
+        return attributes.borderradiusHvrTypeMobile;
+      default:
+        return undefined;
+    }
+  };
+  const changeborderradiusHvrType = value => {
+    if ('Desktop' === getView) {
+      setAttributes({
+        borderradiusHvrType: value,
+        borderradiusHvrTypeTablet: value,
+        borderradiusHvrTypeMobile: value
+      });
+    } else if ('Tablet' === getView) {
+      setAttributes({
+        borderradiusHvrTypeTablet: value
+      });
+    } else if ('Mobile' === getView) {
+      setAttributes({
+        borderradiusHvrTypeMobile: value
+      });
+    }
+  };
+  const changeborderradiusHvr = (type, value) => {
+    switch (getView) {
+      case 'Desktop':
+        if ('linked' === attributes.borderradiusHvrType) {
+          setAttributes({
+            borderradiusHvr: value,
+            borderradiusHvrTop: value,
+            borderradiusHvrRight: value,
+            borderradiusHvrBottom: value,
+            borderradiusHvrLeft: value
+          });
+        } else {
+          setAttributes({
+            [desktopborderradiusHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Tablet':
+        if ('linked' === attributes.borderradiusHvrTypeTablet) {
+          setAttributes({
+            borderradiusHvrTopTablet: value,
+            borderradiusHvrRightTablet: value,
+            borderradiusHvrBottomTablet: value,
+            borderradiusHvrLeftTablet: value
+          });
+        } else {
+          setAttributes({
+            [tabletborderradiusHvrType[type]]: value
+          });
+        }
+        break;
+      case 'Mobile':
+        if ('linked' === attributes.borderradiusHvrTypeMobile) {
+          setAttributes({
+            borderradiusHvrTopMobile: value,
+            borderradiusHvrRightMobile: value,
+            borderradiusHvrBottomMobile: value,
+            borderradiusHvrLeftMobile: value
+          });
+        } else {
+          setAttributes({
+            [mobileborderradiusHvrType[type]]: value
+          });
+        }
+        break;
+    }
+  };
+  const getborderradiusHvr = type => {
+    switch (type) {
+      case 'top':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrTop : attributes.borderradiusHvrTop;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrTopTablet : attributes.borderradiusHvrTopTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrTopMobile : attributes.borderradiusHvrTopMobile;
+        }
+      case 'right':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrRight : attributes.borderradiusHvrRight;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrRightTablet : attributes.borderradiusHvrRightTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrRightMobile : attributes.borderradiusHvrRightMobile;
+        }
+      case 'bottom':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrBottom : attributes.borderradiusHvrBottom;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrBottomTablet : attributes.borderradiusHvrBottomTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrBottomMobile : attributes.borderradiusHvrBottomMobile;
+        }
+      case 'left':
+        switch (getView) {
+          case 'Desktop':
+            return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrLeft : attributes.borderradiusHvrLeft;
+          case 'Tablet':
+            return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrLeftTablet : attributes.borderradiusHvrLeftTablet;
+          case 'Mobile':
+            return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrLeftMobile : attributes.borderradiusHvrLeftMobile;
+        }
+    }
+    return undefined;
   };
   const getBorderRadius = type => {
     if ('top' == type) {
@@ -1189,24 +1523,6 @@ const PanelSettings = ({
     bottom: 'borderWidthBottomMobile',
     left: 'borderWidthLeftMobile'
   };
-  const desktopBorderRadiusType = {
-    top: 'borderRadiusTop',
-    left: 'borderRadiusLeft',
-    right: 'borderRadiusRight',
-    bottom: 'borderRadiusBottom'
-  };
-  const tabletBorderRadiusType = {
-    top: 'borderRadiusTopTablet',
-    left: 'borderRadiusLeftTablet',
-    right: 'borderRadiusRightTablet',
-    bottom: 'borderRadiusBottomTablet'
-  };
-  const mobileBorderRadiusType = {
-    top: 'borderRadiusTopMobile',
-    left: 'borderRadiusLeftMobile',
-    right: 'borderRadiusRightMobile',
-    bottom: 'borderRadiusBottomMobile'
-  };
   const desktopBorderWidthTypeButton = {
     top: 'buttonborderWidthTop',
     right: 'buttonborderWidthRight',
@@ -1296,64 +1612,6 @@ const PanelSettings = ({
         } else {
           setAttributes({
             [mobileBorderWidthType[type]]: value
-          });
-        }
-        break;
-    }
-  };
-  const changeBorderRadiusType = value => {
-    if ('Desktop' === getView) {
-      setAttributes({
-        borderRadiusType: value,
-        borderRadiusTypeTablet: value,
-        borderRadiusTypeMobile: value
-      });
-    } else if ('Tablet' === getView) {
-      setAttributes({
-        borderRadiusTypeTablet: value
-      });
-    } else if ('Mobile' === getView) {
-      setAttributes({
-        borderRadiusTypeMobile: value
-      });
-    }
-  };
-  const changeBorderRadius = (type, value) => {
-    switch (getView) {
-      case 'Desktop':
-        if ('linked' === attributes.borderRadiusType) {
-          setAttributes({
-            borderRadius: value,
-            borderRadiusTablet: value,
-            borderRadiusMobile: value
-          });
-        } else {
-          setAttributes({
-            [desktopBorderRadiusType[type]]: value,
-            [tabletBorderRadiusType[type]]: value,
-            [mobileBorderRadiusType[type]]: value
-          });
-        }
-        break;
-      case 'Tablet':
-        if ('linked' === attributes.borderRadiusTypeTablet) {
-          setAttributes({
-            borderRadiusTablet: value
-          });
-        } else {
-          setAttributes({
-            [tabletBorderRadiusType[type]]: value
-          });
-        }
-        break;
-      case 'Mobile':
-        if ('linked' === attributes.borderRadiusTypeMobile) {
-          setAttributes({
-            borderRadiusMobile: value
-          });
-        } else {
-          setAttributes({
-            [mobileBorderRadiusType[type]]: value
           });
         }
         break;
@@ -2306,121 +2564,7 @@ const PanelSettings = ({
     onChange: e => setAttributes({
       position: e
     })
-  }), ('absolute' == attributes.position || 'fixed' == attributes.position) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "th-component-group-label"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "th-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Horizontal Orientation', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ToogleGroupControl, {
-    value: attributes.horizontalOrientation,
-    onChange: horizontalOrientation => setAttributes({
-      horizontalOrientation
-    }),
-    options: [{
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.HorizontalLeft,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('left', 'vayu-blocks'),
-      value: 'left'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.HorizontalRight,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('right', 'vayu-blocks'),
-      value: 'right'
-    }],
-    hasIcon: true
-  })), 'left' == attributes.horizontalOrientation && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.UnitChooser, {
-    value: attributes.horizontalOrientationOffsetUnit,
-    onClick: horizontalOrientationOffsetUnit => {
-      setAttributes({
-        horizontalOrientationOffsetUnit
-      });
-      sethorizontalOrientationOffsetUnit(horizontalOrientationOffsetUnit);
-    },
-    units: ['px', 'em', '%']
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltiphorizontalOrientationOffset,
-    value: gethorizontalOrientationOffset() || '',
-    onChange: changehorizontalOrientationOffset,
-    step: 1,
-    min: -999,
-    max: maxhorizontalOrientationOffsetUnit,
-    allowReset: true
-  })), 'right' == attributes.horizontalOrientation && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.UnitChooser, {
-    value: attributes.horizontalOrientationOffsetRightUnit,
-    onClick: horizontalOrientationOffsetRightUnit => {
-      setAttributes({
-        horizontalOrientationOffsetRightUnit
-      });
-      sethorizontalOrientationOffsetRightUnit(horizontalOrientationOffsetRightUnit);
-    },
-    units: ['px', 'em', '%']
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltiphorizontalOrientationOffsetRight,
-    value: gethorizontalOrientationOffsetRight() || '',
-    onChange: changehorizontalOrientationOffsetRight,
-    step: 1,
-    min: -999,
-    max: maxhorizontalOrientationOffsetRightUnit,
-    allowReset: true
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "th-component-group-label"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    className: "th-label"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Vertical Orientation', 'vayu-blocks')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ToogleGroupControl, {
-    value: attributes.verticalOrientation,
-    onChange: verticalOrientation => setAttributes({
-      verticalOrientation
-    }),
-    options: [{
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.VerticalTop,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('top', 'vayu-blocks'),
-      value: 'top'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.VerticalBottom,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('bottom', 'vayu-blocks'),
-      value: 'bottom'
-    }],
-    hasIcon: true
-  })), 'top' == attributes.verticalOrientation && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.UnitChooser, {
-    value: attributes.verticalOrientationOffsetTopUnit,
-    onClick: verticalOrientationOffsetTopUnit => {
-      setAttributes({
-        verticalOrientationOffsetTopUnit
-      });
-      setverticalOrientationOffsetTopUnit(verticalOrientationOffsetTopUnit);
-    },
-    units: ['px', 'em', '%']
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltipverticalOrientationOffsetTop,
-    value: getverticalOrientationOffsetTop() || '',
-    onChange: changeverticalOrientationOffsetTop,
-    step: 1,
-    min: -999,
-    max: maxverticalOrientationOffsetTopUnit,
-    allowReset: true
-  })), 'bottom' == attributes.verticalOrientation && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Offset', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.UnitChooser, {
-    value: attributes.verticalOrientationOffsetBottomUnit,
-    onClick: verticalOrientationOffsetBottomUnit => {
-      setAttributes({
-        verticalOrientationOffsetBottomUnit
-      });
-      setverticalOrientationOffsetBottomUnit(verticalOrientationOffsetBottomUnit);
-    },
-    units: ['px', 'em', '%']
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltipverticalOrientationOffsetBottom,
-    value: getverticalOrientationOffsetBottom() || '',
-    onChange: changeverticalOrientationOffsetBottom,
-    step: 1,
-    min: -999,
-    max: maxverticalOrientationOffsetBottomUnit,
-    allowReset: true
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Z-index', 'vayu-blocks')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     renderTooltipContent: customTooltipZindex,
@@ -2430,105 +2574,7 @@ const PanelSettings = ({
     min: -999999,
     max: 999999,
     allowReset: true
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Align Self', 'vayu-blocks'),
-    className: "th-alig-self-control th-component-group"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ToogleGroupControl, {
-    value: getSelfAlign(),
-    onChange: changeSelfAlign,
-    options: [{
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Start,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Start', 'vayu-blocks'),
-      value: 'start'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Center,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Center', 'vayu-blocks'),
-      value: 'center'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.End,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('End', 'vayu-blocks'),
-      value: 'end'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Strech,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Stretch', 'vayu-blocks'),
-      value: 'stretch'
-    }],
-    hasIcon: true
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Order', 'vayu-blocks'),
-    className: "th-order-control th-component-group"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ToogleGroupControl, {
-    value: getorder(),
-    onChange: changeorder,
-    options: [{
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.OrderStart,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Start', 'vayu-blocks'),
-      value: 'start'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.OrderEnd,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('End', 'vayu-blocks'),
-      value: 'end'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Custom,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cutsom', 'vayu-blocks'),
-      value: 'custom'
-    }],
-    hasIcon: true
-  })), 'custom' == attributes.order && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom Order', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltipCustomOrder,
-    value: getcustomOrder() || '',
-    onChange: changecustomOrder,
-    step: 1,
-    min: -9999,
-    max: 9999,
-    allowReset: true
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Size', 'vayu-blocks'),
-    className: "th-size-control th-component-group"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ToogleGroupControl, {
-    value: getflexSize(),
-    onChange: changeflexSize,
-    options: [{
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.None,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('None', 'vayu-blocks'),
-      value: 'none'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Grow,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Grow', 'vayu-blocks'),
-      value: 'grow'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Shrink,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shrink', 'vayu-blocks'),
-      value: 'shrink'
-    }, {
-      icon: _helpers_icon_js__WEBPACK_IMPORTED_MODULE_9__.Custom,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Custom', 'vayu-blocks'),
-      value: 'custom'
-    }],
-    hasIcon: true
-  })), 'custom' == attributes.flexSize && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Flex Grow', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltipFlexGrow,
-    value: getFlexGrowSize() || '',
-    onChange: changeFlexGrowSize,
-    step: 1,
-    min: 1,
-    max: 500,
-    allowReset: true
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ResponsiveControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Flex Shrink', 'vayu-blocks')
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    renderTooltipContent: customTooltipFlexShrink,
-    value: getFlexShrinkSize() || '',
-    onChange: changeFlexShrinkSize,
-    step: 1,
-    min: 1,
-    max: 500,
-    allowReset: true
-  })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Border & Box Shadow', 'vayu-blocks'),
     initialOpen: false,
     className: "th-button-panel"
@@ -2622,27 +2668,27 @@ const PanelSettings = ({
     },
     units: ['px', 'em', '%']
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.SizingControl, {
-    type: getBorderRadiusType(),
+    type: getborderradiusType(),
     min: 0,
     max: maxborderRadiusUnit,
-    changeType: changeBorderRadiusType,
-    onChange: changeBorderRadius,
+    changeType: changeborderradiusType,
+    onChange: changeborderradius,
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-R', 'vayu-blocks'),
       type: 'top',
-      value: getBorderRadius('top')
+      value: getborderradius('top')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-L', 'vayu-blocks'),
       type: 'right',
-      value: getBorderRadius('right')
+      value: getborderradius('right')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-R', 'vayu-blocks'),
       type: 'left',
-      value: getBorderRadius('left')
+      value: getborderradius('left')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-L', 'vayu-blocks'),
       type: 'bottom',
-      value: getBorderRadius('bottom')
+      value: getborderradius('bottom')
     }]
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ControlPanelControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow', 'vayu-blocks'),
@@ -2786,27 +2832,27 @@ const PanelSettings = ({
     },
     units: ['px', 'em', '%']
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.SizingControl, {
-    type: getBorderRadiusHvrType(),
+    type: getborderradiusHvrType(),
     min: 0,
     max: maxborderRadiusUnit,
-    changeType: changeBorderRadiusHvrType,
-    onChange: changeBorderRadiusHvr,
+    changeType: changeborderradiusHvrType,
+    onChange: changeborderradiusHvr,
     options: [{
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-R', 'vayu-blocks'),
       type: 'top',
-      value: getBorderRadiusHvr('top')
+      value: getborderradiusHvr('top')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('T-L', 'vayu-blocks'),
       type: 'right',
-      value: getBorderRadiusHvr('right')
+      value: getborderradiusHvr('right')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-R', 'vayu-blocks'),
       type: 'left',
-      value: getBorderRadiusHvr('left')
+      value: getborderradiusHvr('left')
     }, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('B-L', 'vayu-blocks'),
       type: 'bottom',
-      value: getBorderRadiusHvr('bottom')
+      value: getborderradiusHvr('bottom')
     }]
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_index_js__WEBPACK_IMPORTED_MODULE_8__.ControlPanelControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Box Shadow', 'vayu-blocks'),
@@ -6354,9 +6400,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdvanceSettings_AdvanceSettings__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AdvanceSettings/AdvanceSettings */ "./src/block/post-grid/AdvanceSettings/AdvanceSettings.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _edit_style__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./edit-style */ "./src/block/post-grid/edit-style.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _edit_style__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./edit-style */ "./src/block/post-grid/edit-style.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 
@@ -6656,21 +6705,21 @@ const Edit = ({
   const TitleTag = pg_blockTitleTag || 'h2';
 
   //style
-  const blockStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.blockStyles)(pg_textColor, pg_lineHeight);
-  const gridContainerStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.gridContainerStyles)(attributes);
-  const featuredImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.featuredImageStyles)(attributes);
-  const categoryButtonStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.categoryButtonStyles)(attributes);
-  const titleTagStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.titleTagStyles)(attributes);
-  const dateImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.dateImageStyles)(attributes);
-  const authorImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.authorImageStyles)(pg_authorTextSize, pg_authorTextColor, pg_authorImageScale);
-  const authorLinkStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.authorLinkStyles)(pg_authorTextSize, pg_authorTextColor);
-  const tagButtonStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.tagButtonStyles)(attributes);
-  const postStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.postStyles)(attributes);
-  const authorAndDateContainerStyle = _edit_style__WEBPACK_IMPORTED_MODULE_8__.authorAndDateContainerStyles;
-  const PaginationStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.PaginationStyles)(attributes);
-  const showOnlyDateStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.showOnlyDateStyles)(attributes);
-  const fullContentStyles = (0,_edit_style__WEBPACK_IMPORTED_MODULE_8__.fullContentStyle)(attributes);
-  const getView = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_9__.useSelect)(select => {
+  const blockStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.blockStyles)(pg_textColor, pg_lineHeight);
+  const gridContainerStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.gridContainerStyles)(attributes);
+  const featuredImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.featuredImageStyles)(attributes);
+  const categoryButtonStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.categoryButtonStyles)(attributes);
+  const titleTagStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.titleTagStyles)(attributes);
+  const dateImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.dateImageStyles)(attributes);
+  const authorImageStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.authorImageStyles)(pg_authorTextSize, pg_authorTextColor, pg_authorImageScale);
+  const authorLinkStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.authorLinkStyles)(pg_authorTextSize, pg_authorTextColor);
+  const tagButtonStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.tagButtonStyles)(attributes);
+  const postStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.postStyles)(attributes);
+  const authorAndDateContainerStyle = _edit_style__WEBPACK_IMPORTED_MODULE_9__.authorAndDateContainerStyles;
+  const PaginationStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.PaginationStyles)(attributes);
+  const showOnlyDateStyle = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.showOnlyDateStyles)(attributes);
+  const fullContentStyles = (0,_edit_style__WEBPACK_IMPORTED_MODULE_9__.fullContentStyle)(attributes);
+  const getView = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_10__.useSelect)(select => {
     const {
       getView
     } = select('vayu-blocks/data');
@@ -6935,7 +6984,7 @@ const Edit = ({
     style: titleTagStyle
   }, post.title.rendered))), (Author() || ShowDate()) && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: {
-      ..._edit_style__WEBPACK_IMPORTED_MODULE_8__.authorAndDateContainerStyles
+      ..._edit_style__WEBPACK_IMPORTED_MODULE_9__.authorAndDateContainerStyles
     }
   }, Author() && authors[post.author] && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
     src: "https://cdn-icons-png.flaticon.com/512/1144/1144760.png",
@@ -6958,16 +7007,7 @@ const Edit = ({
     style: fullContentStyles
   }, limitExcerpt(post.excerpt.rendered, ExcerptWords()), " ", ExcerptSelector()), FullContent() && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: fullContentStyles
-  }, parseHTML(post.content.rendered)), Tags() && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '5px'
-    }
-  }, post.tags.slice(0, pg_numberOfTags).map(tag => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-    key: tag,
-    style: tagButtonStyle
-  }, getTagNames([tag]))))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('No post to display', 'pg-block')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), showpagination && totalPages > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, parseHTML(post.content.rendered))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('No post to display', 'pg-block')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), showpagination && totalPages > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pg-pagination",
     style: {
       marginLeft: "45%"
@@ -29104,7 +29144,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"id":{"type":"string"},"uniqueID":{"type":"string"},"widthType":{"type":"string","default":"default"},"customWidthUnit":{"type":"string","default":"px"},"customWIdth":{"type":"number","default":0},"paddingUnit":{"type":"string","default":"px"},"paddingTop":{"type":"number","default":0},"paddingBottom":{"type":"number","default":0},"paddingLeft":{"type":"number","default":0},"paddingRight":{"type":"number","default":0},"marginUnit":{"type":"string","default":"px"},"marginTop":{"type":"number","default":0},"marginBottom":{"type":"number","default":0},"marginLeft":{"type":"number","default":0},"marginRight":{"type":"number","default":0},"position":{"type":"string","default":"relative"},"horizontalOrientation":{"type":"string","default":"left"},"horizontalOrientationOffsetUnit":{"type":"string","default":"px"},"horizontalOrientationOffsetRightUnit":{"type":"string","default":"px"},"horizontalOrientationOffset":{"type":"number","default":0},"horizontalOrientationOffsetRight":{"type":"number","default":0},"verticalOrientation":{"type":"string","default":"top"},"verticalOrientationOffsetTopUnit":{"type":"string","default":"px"},"verticalOrientationOffsetBottomUnit":{"type":"string","default":"px"},"verticalOrientationOffsetTop":{"type":"number","default":0},"verticalOrientationOffsetBottom":{"type":"number","default":0},"zIndex":{"type":"number","default":0},"selfAlign":{"type":"string","default":"start"},"order":{"type":"string","default":"start"},"customOrder":{"type":"number","default":0},"flexSize":{"type":"string","default":"none"},"flexGrow":{"type":"number","default":1},"flexShrink":{"type":"number","default":1},"borderRadiusType":{"type":"string","default":"none"},"borderRadiusTop":{"type":"number","default":4},"borderRadiusBottom":{"type":"number","default":4},"borderRadiusLeft":{"type":"number","default":4},"borderRadiusRight":{"type":"number","default":4},"borderRadiusDesktop":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderRadiusTablet":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderRadiusMobile":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderType":{"type":"string","default":"none"},"borderWidthUnit":{"type":"string","default":"px"},"borderWidthTop":{"type":"number","default":0},"borderWidthBottom":{"type":"number","default":0},"borderWidthLeft":{"type":"number","default":0},"borderWidthRight":{"type":"number","default":0},"borderColor":{"type":"string","default":""},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string","default":""},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"borderHvrType":{"type":"string","default":"none"},"borderWidthHvrUnit":{"type":"string","default":"px"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrRight":{"type":"number","default":0},"borderColorHvr":{"type":"string","default":""},"borderRadiusHvrUnit":{"type":"string","default":"px"},"borderRadiusHvrTop":{"type":"number","default":2},"borderRadiusHvrBottom":{"type":"number","default":2},"borderRadiusHvrLeft":{"type":"number","default":2},"borderRadiusHvrRight":{"type":"number","default":2},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string","default":""},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string","default":""},"backgroundImage":{"type":"object","default":null},"backgroundGradient":{"type":"string","default":"linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)"},"backgroundPosition":{"type":"object","default":{"x":0.5,"y":0.5}},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundRepeat":{"type":"string","default":"no-repeat"},"backgroundSize":{"type":"string","default":"cover"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string","default":""},"backgroundImageHvr":{"type":"object","default":null},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)"},"backgroundPositionHvr":{"type":"object","default":{"x":0.5,"y":0.5}},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundRepeatHvr":{"type":"string","default":"no-repeat"},"backgroundSizeHvr":{"type":"string","default":"cover"},"transitionAll":{"type":"number","default":0},"desktopBorderRadiusHvrType":{"type":"string","default":""},"borderRadiusUnit":{"type":"string","default":"px"},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"buttonpadding":{"type":"number","default":0},"buttonpaddingTop":{"type":"number","default":0},"buttonpaddingRight":{"type":"number","default":0},"buttonpaddingBottom":{"type":"number","default":0},"buttonpaddingLeft":{"type":"number","default":0},"buttonpaddingTablet":{"type":"number","default":0},"buttonpaddingTopTablet":{"type":"number","default":0},"buttonpaddingRightTablet":{"type":"number","default":0},"buttonpaddingBottomTablet":{"type":"number","default":0},"buttonpaddingLeftTablet":{"type":"number","default":0},"buttonpaddingMobile":{"type":"number","default":0},"buttonpaddingTopMobile":{"type":"number","default":0},"buttonpaddingRightMobile":{"type":"number","default":0},"buttonpaddingBottomMobile":{"type":"number","default":0},"buttonpaddingLeftMobile":{"type":"number","default":0},"buttonpaddingType":{"type":"string","default":"linked"},"buttonpaddingTypeTablet":{"type":"string","default":"linked"},"buttonpaddingTypeMobile":{"type":"string","default":"linked"},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"marginTopTablet":{"type":"number","default":20},"marginRightTablet":{"type":"number","default":20},"marginBottomTablet":{"type":"number","default":20},"marginLeftTablet":{"type":"number","default":20},"marginTopMobile":{"type":"number","default":20},"marginRightMobile":{"type":"number","default":20},"marginBottomMobile":{"type":"number","default":20},"marginLeftMobile":{"type":"number","default":20}}');
+module.exports = /*#__PURE__*/JSON.parse('{"id":{"type":"string"},"uniqueID":{"type":"string"},"widthType":{"type":"string","default":"default"},"customWidthUnit":{"type":"string","default":"px"},"customWidth":{"type":"number","default":0},"paddingUnit":{"type":"string","default":"px"},"paddingTop":{"type":"number","default":0},"paddingBottom":{"type":"number","default":0},"paddingLeft":{"type":"number","default":0},"paddingRight":{"type":"number","default":0},"marginUnit":{"type":"string","default":"px"},"position":{"type":"string","default":"relative"},"horizontalOrientation":{"type":"string","default":"left"},"horizontalOrientationOffsetUnit":{"type":"string","default":"px"},"horizontalOrientationOffsetRightUnit":{"type":"string","default":"px"},"horizontalOrientationOffset":{"type":"number","default":0},"horizontalOrientationOffsetRight":{"type":"number","default":0},"verticalOrientation":{"type":"string","default":"top"},"verticalOrientationOffsetTopUnit":{"type":"string","default":"px"},"verticalOrientationOffsetBottomUnit":{"type":"string","default":"px"},"verticalOrientationOffsetTop":{"type":"number","default":0},"verticalOrientationOffsetBottom":{"type":"number","default":0},"zIndex":{"type":"number","default":0},"selfAlign":{"type":"string","default":"start"},"order":{"type":"string","default":"start"},"customOrder":{"type":"number","default":0},"flexSize":{"type":"string","default":"none"},"flexGrow":{"type":"number","default":1},"flexShrink":{"type":"number","default":1},"borderRadiusDesktop":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderRadiusTablet":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderRadiusMobile":{"type":"object","default":{"topLeft":0,"topRight":0,"bottomRight":0,"bottomLeft":0}},"borderType":{"type":"string","default":"none"},"borderWidthUnit":{"type":"string","default":"px"},"borderWidthTop":{"type":"number","default":0},"borderWidthBottom":{"type":"number","default":0},"borderWidthLeft":{"type":"number","default":0},"borderWidthRight":{"type":"number","default":0},"borderColor":{"type":"string","default":""},"boxShadow":{"type":"boolean","default":false},"boxShadowColor":{"type":"string","default":""},"boxShadowColorOpacity":{"type":"number","default":50},"boxShadowBlur":{"type":"number","default":5},"boxShadowSpread":{"type":"number","default":1},"boxShadowHorizontal":{"type":"number","default":0},"boxShadowVertical":{"type":"number","default":0},"borderHvrType":{"type":"string","default":"none"},"borderWidthHvrUnit":{"type":"string","default":"px"},"borderWidthHvrTop":{"type":"number","default":0},"borderWidthHvrBottom":{"type":"number","default":0},"borderWidthHvrLeft":{"type":"number","default":0},"borderWidthHvrRight":{"type":"number","default":0},"borderColorHvr":{"type":"string","default":""},"borderRadiusHvrUnit":{"type":"string","default":"px"},"borderRadiusHvrTop":{"type":"number","default":2},"borderRadiusHvrBottom":{"type":"number","default":2},"borderRadiusHvrLeft":{"type":"number","default":2},"borderRadiusHvrRight":{"type":"number","default":2},"boxShadowHvr":{"type":"boolean","default":false},"boxShadowColorHvr":{"type":"string","default":""},"boxShadowColorOpacityHvr":{"type":"number","default":50},"boxShadowBlurHvr":{"type":"number","default":5},"boxShadowSpreadHvr":{"type":"number","default":1},"boxShadowHorizontalHvr":{"type":"number","default":0},"boxShadowVerticalHvr":{"type":"number","default":0},"backgroundType":{"type":"string","default":"color"},"backgroundColor":{"type":"string","default":""},"backgroundImage":{"type":"object","default":null},"backgroundGradient":{"type":"string","default":"linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)"},"backgroundPosition":{"type":"object","default":{"x":0.5,"y":0.5}},"backgroundAttachment":{"type":"string","default":"scroll"},"backgroundRepeat":{"type":"string","default":"no-repeat"},"backgroundSize":{"type":"string","default":"cover"},"backgroundTypeHvr":{"type":"string","default":"color"},"backgroundColorHvr":{"type":"string","default":""},"backgroundImageHvr":{"type":"object","default":null},"backgroundGradientHvr":{"type":"string","default":"linear-gradient(135deg,#0F2027 0%, #203A43 0%, #2c5364 100%)"},"backgroundPositionHvr":{"type":"object","default":{"x":0.5,"y":0.5}},"backgroundAttachmentHvr":{"type":"string","default":"scroll"},"backgroundRepeatHvr":{"type":"string","default":"no-repeat"},"backgroundSizeHvr":{"type":"string","default":"cover"},"transitionAll":{"type":"number","default":0},"desktopBorderRadiusHvrType":{"type":"string","default":""},"borderRadiusUnit":{"type":"string","default":"px"},"paddingType":{"type":"string","default":"linked"},"paddingTypeTablet":{"type":"string","default":"linked"},"paddingTypeMobile":{"type":"string","default":"linked"},"buttonpadding":{"type":"number","default":0},"buttonpaddingTop":{"type":"number","default":0},"buttonpaddingRight":{"type":"number","default":0},"buttonpaddingBottom":{"type":"number","default":0},"buttonpaddingLeft":{"type":"number","default":0},"buttonpaddingTablet":{"type":"number","default":0},"buttonpaddingTopTablet":{"type":"number","default":0},"buttonpaddingRightTablet":{"type":"number","default":0},"buttonpaddingBottomTablet":{"type":"number","default":0},"buttonpaddingLeftTablet":{"type":"number","default":0},"buttonpaddingMobile":{"type":"number","default":0},"buttonpaddingTopMobile":{"type":"number","default":0},"buttonpaddingRightMobile":{"type":"number","default":0},"buttonpaddingBottomMobile":{"type":"number","default":0},"buttonpaddingLeftMobile":{"type":"number","default":0},"buttonpaddingType":{"type":"string","default":"linked"},"buttonpaddingTypeTablet":{"type":"string","default":"linked"},"buttonpaddingTypeMobile":{"type":"string","default":"linked"},"marginTop":{"type":"number","default":0},"marginBottom":{"type":"number","default":0},"marginLeft":{"type":"number","default":0},"marginRight":{"type":"number","default":0},"marginType":{"type":"string","default":"linked"},"marginTypeTablet":{"type":"string","default":"linked"},"marginTypeMobile":{"type":"string","default":"linked"},"marginTopTablet":{"type":"number","default":20},"marginRightTablet":{"type":"number","default":20},"marginBottomTablet":{"type":"number","default":20},"marginLeftTablet":{"type":"number","default":20},"marginTopMobile":{"type":"number","default":20},"marginRightMobile":{"type":"number","default":20},"marginBottomMobile":{"type":"number","default":20},"marginLeftMobile":{"type":"number","default":20},"borderradiusTop":{"type":"number","default":0},"borderradiusBottom":{"type":"number","default":0},"borderradiusLeft":{"type":"number","default":0},"borderradiusRight":{"type":"number","default":0},"borderradiusType":{"type":"string","default":"linked"},"borderradiusTypeTablet":{"type":"string","default":"linked"},"borderradiusTypeMobile":{"type":"string","default":"linked"},"borderradiusTopTablet":{"type":"number","default":20},"borderradiusRightTablet":{"type":"number","default":20},"borderradiusBottomTablet":{"type":"number","default":20},"borderradiusLeftTablet":{"type":"number","default":20},"borderradiusTopMobile":{"type":"number","default":20},"borderradiusRightMobile":{"type":"number","default":20},"borderradiusBottomMobile":{"type":"number","default":20},"borderradiusLeftMobile":{"type":"number","default":20},"borderradiusHvrTop":{"type":"number","default":0},"borderradiusHvrBottom":{"type":"number","default":0},"borderradiusHvrLeft":{"type":"number","default":0},"borderradiusHvrRight":{"type":"number","default":0},"borderradiusHvrType":{"type":"string","default":"linked"},"borderradiusHvrTypeTablet":{"type":"string","default":"linked"},"borderradiusHvrTypeMobile":{"type":"string","default":"linked"},"borderradiusHvrTopTablet":{"type":"number","default":20},"borderradiusHvrRightTablet":{"type":"number","default":20},"borderradiusHvrBottomTablet":{"type":"number","default":20},"borderradiusHvrLeftTablet":{"type":"number","default":20},"borderradiusHvrTopMobile":{"type":"number","default":20},"borderradiusHvrRightMobile":{"type":"number","default":20},"borderradiusHvrBottomMobile":{"type":"number","default":20},"borderradiusHvrLeftMobile":{"type":"number","default":20}}');
 
 /***/ }),
 
