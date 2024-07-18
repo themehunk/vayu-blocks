@@ -618,7 +618,6 @@ const Edit = ({ attributes, setAttributes }) => {
                                     </div>
                                 )}
                                 
-
                                 <div >
                                     <a href={post.link} style={{textDecoration:"none"}}>
                                         <TitleTag style={titleTagStyle}>
@@ -659,6 +658,17 @@ const Edit = ({ attributes, setAttributes }) => {
                                         <div style={fullContentStyles} >
                                             {parseHTML(post.content.rendered)}
                                         </div>
+                                )}
+
+                                
+                                {Tags() && (
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                                        {post.tags.slice(0, pg_numberOfTags).map((tag) => (
+                                            <button key={tag} style={tagButtonStyle}>
+                                                {getTagNames([tag])}
+                                            </button>
+                                        ))}
+                                    </div>
                                 )}
 
                                 

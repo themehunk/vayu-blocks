@@ -7007,7 +7007,16 @@ const Edit = ({
     style: fullContentStyles
   }, limitExcerpt(post.excerpt.rendered, ExcerptWords()), " ", ExcerptSelector()), FullContent() && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     style: fullContentStyles
-  }, parseHTML(post.content.rendered))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('No post to display', 'pg-block')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), showpagination && totalPages > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, parseHTML(post.content.rendered)), Tags() && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '5px'
+    }
+  }, post.tags.slice(0, pg_numberOfTags).map(tag => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+    key: tag,
+    style: tagButtonStyle
+  }, getTagNames([tag]))))))) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('No post to display', 'pg-block')), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_7__.Spinner, null)), showpagination && totalPages > 1 && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pg-pagination",
     style: {
       marginLeft: "45%"

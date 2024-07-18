@@ -24,3 +24,39 @@ console.log("view");
 //         });
 //     });
 // });
+
+
+
+
+
+
+jQuery(document).ready(function($) {
+    var page = 2; // Initial page number
+    var maxPages = $('#max-pages').val(); // Total number of pages
+
+    $('#load-more-btn').on('click', function(e) {
+        e.preventDefault();
+        var $btn = $(this);
+        $btn.text('Loading...');
+
+        var data = {
+            action: 'vayu_blocks_load_posts',
+            nonce: vayu_blocks_load_posts.nonce,
+            page: page,
+        };
+
+        $.post(vayu_blocks_load_posts.ajax_url, data, function(response) {
+            if (response.success) {
+                $('#max-pages').val(response.data.max_pages); // Update max pages
+
+                $('.th-post-grid-wrapper').append(response.data.content); // Append new posts
+                $btn.text('Load More');
+
+                page++;
+                if (page > maxPages) {
+                    $btn.hide(); // Hide button when no more posts to load
+                }
+            }
+        });
+    });
+});
