@@ -2,6 +2,7 @@
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
+global $post_grid_attributes;
 
 class VayuBlocksPostGrid {
     private $attr;
@@ -12,9 +13,11 @@ class VayuBlocksPostGrid {
         $default_attributes = include('defaultattributes.php');
         $this->attr = array_merge($default_attributes, $attr);  
 
+        global $post_grid_attributes;
+        $post_grid_attributes = $this->attr;
     }
 
-    private function get_posts($paged = 1) {
+    public function get_posts($paged = 1) {
         $device_type = $this->get_device_type();
         $columns = $this->attr['pg_postLayoutColumns']; // Default value
         $rows = $this->attr['pg_numberOfRow']; // Default value
@@ -37,6 +40,7 @@ class VayuBlocksPostGrid {
             'posts_per_page' => $columns * $rows,
             'paged' => $paged,
             'post_status' => 'publish',
+            'offset' => ($paged - 1) * ($columns * $rows), // Calculate offset
         );
       
 
@@ -47,49 +51,48 @@ class VayuBlocksPostGrid {
         if (!empty($this->attr['pg_selectedTag'])) {
             $args['tag_id'] = $this->attr['pg_selectedTag'];
         }
-
         return new WP_Query($args);
     }
 
-    public function render() {
-        ob_start();   
-        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-        $query = $this->get_posts($paged);
-
-        if ($query->have_posts()) {
-            $animated = isset($this->attr['className']) ? $this->attr['className'] : '';
-
-            echo '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
-            
+    public function render($query) {
+        ob_start();
             while ($query->have_posts()) {
                 $query->the_post();
                 $this->render_post();
             }
-
-            echo '</div>';
-
-            if (!isset($this->attr['showPagination']) || $this->attr['showPagination']) {
-                echo '<div class="pagination" style="margin-top: 20px; text-align: center;">';
-                echo paginate_links(array(
-                    'total' => $query->max_num_pages,
-                    'current' => $paged,
-                    'prev_next' => true,
-                    'type' => '', // Use 'list' type to generate <ul> instead of <span>
-                    'prev_text' => '<span>&laquo; Previous</span>',
-                    'next_text' => '<span>Next &raquo;</span>',
-                    'before_page_number' => '<span class="page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
-                    'after_page_number' => '</span>',
-                ));
-                echo '</div>';
-            }
-            
-
-            wp_reset_postdata();
-        } else {
-            echo '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';
-        }
-
         return ob_get_clean();
+    }
+
+    public function render_pagination($query, $paged) {
+        if (!isset($this->attr['showpagination']) || !$this->attr['showpagination']) {
+            return ''; // Return an empty string if pagination should not be shown
+        }
+        // Pagination settings
+        $pagination_args = array(
+            'total'         => $query->max_num_pages,
+            'current'       => 0,
+            'prev_next'     => true,
+            'prev_text'     => '',
+            'next_text'     => '',
+            'end_size'      => 100,  // Number of page numbers to show at the beginning and end
+            'mid_size'      => 0,  // Number of page numbers to show around the current page
+            'type'          => 'plain',
+            'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
+            'after_page_number' => '</span>',
+        );
+    
+        // Generate pagination links
+        $pagination_links = paginate_links($pagination_args);
+    
+        // Wrap pagination links in a div
+        $pagination = '<div class="pagination" style="margin-top: 20px; text-align: center;">';
+        $pagination .= $pagination_links;
+        $pagination .= '</div>';
+    
+        // Add a hidden input for max pages
+        $pagination .= '<input type="hidden" id="max-pages" value="' . $query->max_num_pages . '">';
+    
+        return $pagination;
     }
     
     private function render_post() {
@@ -103,7 +106,7 @@ class VayuBlocksPostGrid {
         $category_names = !empty($categories) ? wp_list_pluck($categories, 'name') : array();
         $tags = get_the_tags();
         $tag_names = !empty($tags) ? wp_list_pluck($tags, 'name') : array();
-
+        
         echo '<div class="th-post-grid-inline th-post-grid-inline-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
         $this->render_featured_image($post_id, $category_names);
         $this ->render_category($category_names);
@@ -112,6 +115,7 @@ class VayuBlocksPostGrid {
         $this->render_excerpt();
         $this->render_full_content();
         $this->render_tags($tag_names);
+       
 
         echo '</div>';
     }
@@ -225,9 +229,6 @@ class VayuBlocksPostGrid {
     
     private function render_excerpt() {
         $device_type = $this->get_device_type();
-        $excerpt = false; // Default value
-        $excerpt_length = 15; // Default value
-        $excerpt_selector = '...'; // Default value
         if ($device_type === 'Desktop') {
             $excerpt = isset($this->attr['pg_showExcerpt']) ? $this->attr['pg_showExcerpt'] : false;
             $excerpt_length = isset($this->attr['pg_excerptWords']) ? $this->attr['pg_excerptWords'] : $excerpt_length;
@@ -280,8 +281,7 @@ class VayuBlocksPostGrid {
         } else if ($device_type === 'Mobile') {
            $Tags = isset($this->attr['pg_showTagMobile']) ? $this->attr['pg_showTagMobile'] : false;
         }
-        $numberOftags = isset($this->attr['pg_numberOftags']) ? intval($this->attr['pg_numberOftags']) : 1;
-
+        $numberOftags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
         if ($Tags) {
             echo '<div >';
             foreach (array_slice($tag_names, 0, $numberOftags) as $tag_name) {
@@ -343,7 +343,66 @@ class VayuBlocksPostGrid {
     
 }
 
+
 function post_grid_render($attr) {
+    $animated = isset($attr['className']) ? $attr['className'] : '';
+    
     $renderer = new VayuBlocksPostGrid($attr);
-    return $renderer->render();
+
+    $query = $renderer->get_posts(1);
+
+    if ($query->have_posts()) {
+    
+        $return =  '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
+
+        $return .= $renderer->render($query);
+
+
+        $return .= '</div>';
+
+        // Render pagination controls
+        $return .= $renderer->render_pagination($query, 1);
+
+        wp_reset_postdata();
+    } else {
+        echo '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';
+    }
+
+    return $return;
+
 } 
+
+function enqueue_my_scripts() {
+    wp_enqueue_script('my-script', plugins_url('../../../public/src//block/post-grid/view.js', __FILE__), array('jquery'), '1.0', true);
+
+    global $post_grid_attributes; // Make sure this is set
+    wp_localize_script('my-script', 'postGridAttributes', $post_grid_attributes);
+
+    wp_localize_script('my-script', 'postGridAjax', array(
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ));
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
+
+
+function load_posts() {
+    if (!isset($_POST['page'])) {
+        wp_die();
+    }
+    $paged = intval($_POST['page']);
+    global $post_grid_attributes;
+
+    if (isset($_POST['attr'])) {
+        $post_grid_attributes = $_POST['attr'];
+    }
+    $renderer = new VayuBlocksPostGrid($post_grid_attributes);
+    $query = $renderer->get_posts($paged);
+
+    echo $renderer->render($query);
+
+    wp_die();
+}
+
+add_action('wp_ajax_load_posts', 'load_posts');
+add_action('wp_ajax_nopriv_load_posts', 'load_posts');

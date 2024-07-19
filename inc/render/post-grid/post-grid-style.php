@@ -14,20 +14,20 @@ function generate_inline_styles($attr) {
     $default_attributes = include('defaultattributes.php');
     $attr = array_merge($default_attributes, $attr);  
 
-
     //Main div
     $css .= ".th-post-grid-wrapper-{$uniqueId} {";
+        //        transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
+
         if (isset($attr['widthType'])) {
             if ($attr['widthType'] === 'fullwidth') {
-                $css .= "width: 100%; max-width: 100%!important; display: flex;";
+                $css .= "width: 100%; max-width: 100%!important;";
             } elseif ($attr['widthType'] === 'inlinewidth') {
-                $css .= "width: auto; display: inline-flex;";
+                $css .= "width: auto;";
             } elseif ($attr['widthType'] === 'customwidth') {
                 $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
                 $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-                $css .= "display: flex;";
             } else {
-                $css .= "width: 100%;"; // Adjust default styles as needed
+                $css .= "width: 100%;";
             }
         } else {
             $css .= "width: 100%;"; 
@@ -55,10 +55,6 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['selfAlign']) ? "align-self: " . esc_attr($attr['selfAlign']) . ";" : '';
         $css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
 
-        // Flex properties
-        $css .= isset($attr['flexSize']) ? "flex-basis: " . esc_attr($attr['flexSize']) . ";" : '';
-        $css .= isset($attr['flexGrow']) ? "flex-grow: " . esc_attr($attr['flexGrow']) . ";" : '';
-        $css .= isset($attr['flexShrink']) ? "flex-shrink: " . esc_attr($attr['flexShrink']) . ";" : '';
 
         // Border
         $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
@@ -69,14 +65,17 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['borderWidthRight']) ? "border-right-width: " . esc_attr($attr['borderWidthRight']) . $borderWidthUnit . ";" : '';
         $css .= isset($attr['borderColor']) ? "border-color: " . esc_attr($attr['borderColor']) . ";" : '';
 
-        // Border-radius
+        // Border Radius
         $borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
-        $borderRadiusTop = isset($attr['borderRadiusTop']) ? esc_attr($attr['borderRadiusTop']) : '0';
-        $borderRadiusRight = isset($attr['borderRadiusRight']) ? esc_attr($attr['borderRadiusRight']) : '0';
-        $borderRadiusBottom = isset($attr['borderRadiusBottom']) ? esc_attr($attr['borderRadiusBottom']) : '0';
-        $borderRadiusLeft = isset($attr['borderRadiusLeft']) ? esc_attr($attr['borderRadiusLeft']) : '0';
+        $borderTopLeftRadius = isset($attr['borderradiusTop']) ? esc_attr($attr['borderradiusTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+        $borderBottomRightRadius = isset($attr['borderradiusBottom']) ? esc_attr($attr['borderradiusBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+        $borderBottomLeftRadius = isset($attr['borderradiusLeft']) ? esc_attr($attr['borderradiusLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+        $borderTopRightRadius = isset($attr['borderradiusRight']) ? esc_attr($attr['borderradiusRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
 
-        $css .= "border-radius: {$borderRadiusTop}{$borderRadiusUnit} {$borderRadiusRight}{$borderRadiusUnit} {$borderRadiusBottom}{$borderRadiusUnit} {$borderRadiusLeft}{$borderRadiusUnit};";
+        $css .= "border-top-left-radius: {$borderTopLeftRadius};";
+        $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
+        $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
+        $css .= "border-top-right-radius: {$borderTopRightRadius};";
 
         // Box-shadow
         if (isset($attr['boxShadow']) && $attr['boxShadow']) {
@@ -246,7 +245,7 @@ function generate_inline_styles($attr) {
         // Display
         $css .= "display: inline-block;";
         $css .= "text-decoration: none;";
-        $css .= "margin-left: 2px;";
+        $css .= "margin-left: 5px;";
         // Desktop Padding
         $paddingUnit = isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px';
         $css .= isset($attr['pg_TagpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_TagpaddingTop']) . $paddingUnit . ";" : '';
@@ -309,11 +308,17 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['borderColorHvr']) ? "border-color: " . esc_attr($attr['borderColorHvr']) . ";" : '';
 
         // Border radius
-        $css .= isset($attr['borderRadiusHvrTop']) && isset($attr['borderRadiusHvrUnit']) ? "border-top-left-radius: " . esc_attr($attr['borderRadiusHvrTop']) . esc_attr($attr['borderRadiusHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderRadiusHvrLeft']) && isset($attr['borderRadiusHvrUnit']) ? "border-top-right-radius: " . esc_attr($attr['borderRadiusHvrLeft']) . esc_attr($attr['borderRadiusHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderRadiusHvrBottom']) && isset($attr['borderRadiusHvrUnit']) ? "border-bottom-right-radius: " . esc_attr($attr['borderRadiusHvrBottom']) . esc_attr($attr['borderRadiusHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderRadiusHvrRight']) && isset($attr['borderRadiusHvrUnit']) ? "border-bottom-left-radius: " . esc_attr($attr['borderRadiusHvrRight']) . esc_attr($attr['borderRadiusHvrUnit']) . ";" : '';
-
+           $borderRadiusUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+           $borderTopLeftRadius = isset($attr['borderradiusHvrTop']) ? esc_attr($attr['borderradiusHvrTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderBottomRightRadius = isset($attr['borderradiusHvrBottom']) ? esc_attr($attr['borderradiusHvrBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderBottomLeftRadius = isset($attr['borderradiusHvrLeft']) ? esc_attr($attr['borderradiusHvrLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderTopRightRadius = isset($attr['borderradiusHvrRight']) ? esc_attr($attr['borderradiusHvrRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+   
+           $css .= "border-top-left-radius: {$borderTopLeftRadius};";
+           $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
+           $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
+           $css .= "border-top-right-radius: {$borderTopRightRadius};";
+   
         // Box-shadow
         if (isset($attr['boxShadowHvr']) && $attr['boxShadowHvr']) {
             // Ensure the boxShadowColorHvr and boxShadowColorOpacityHvr keys are set
@@ -424,10 +429,9 @@ function generate_inline_styles($attr) {
         // Cursor
         $css .= "cursor: pointer;";
         $css .= "    margin-right: 10px;";
-     $css .= "}";
-        
-    
-     //date-image
+    $css .= "}";
+
+    //date-image
     $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-image-{$uniqueId} {";
         $css .= "transform: scale(" . esc_attr($attr['pg_dateImageScale']) . ");";
         $css .= "width: 20px;";
@@ -488,7 +492,8 @@ function generate_inline_styles($attr) {
         }
         
         // Margin
-        $css .= "margin: 0 5px;";
+        $css .= "margin: 20px 5px;";
+        $css .="text-decoration: none;";
         
         // Border radius
         $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . ";" : '';
@@ -510,7 +515,9 @@ function generate_inline_styles($attr) {
         
     //for tablet
     $css .= "@media (max-width: 768px) {
+
         .th-post-grid-wrapper-{$uniqueId} {
+
             grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsTablet']) ? $attr['pg_postLayoutColumnsTablet'] : 2) . ", 1fr);
             padding-top: " . (isset($attr['buttonpaddingTopTablet']) ? esc_attr($attr['buttonpaddingTopTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['buttonpaddingBottomTablet']) ? esc_attr($attr['buttonpaddingBottomTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
@@ -523,6 +530,8 @@ function generate_inline_styles($attr) {
             margin-right: " . (isset($attr['marginRightTablet']) ? esc_attr($attr['marginRightTablet']) . esc_attr($attr['marginUnit']) : '') . ";   
             
            grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
+
+            //    borderradius for tablet
         }
     
         .th-post-grid-inline-{$uniqueId} {
@@ -557,6 +566,7 @@ function generate_inline_styles($attr) {
     
     //for mobile
     $css .= "@media (max-width: 400px) {
+
         .th-post-grid-wrapper-{$uniqueId} {
             grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsMobile']) ? $attr['pg_postLayoutColumnsMobile'] : 1) . ", 1fr);
             padding-top: " . (isset($attr['buttonpaddingTopMobile']) ? esc_attr($attr['buttonpaddingTopMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
@@ -569,6 +579,10 @@ function generate_inline_styles($attr) {
             margin-right: " . (isset($attr['marginRightMobile']) ? esc_attr($attr['marginRightMobile']) . esc_attr($attr['marginUnit']) : '') . ";
             grid-template-rows: repeat(" . (isset($attr['pg_numberOfRowMobile']) ? $attr['pg_numberOfRowMobile'] : 2) . ", minmax(100px, 1fr));
             grid-gap: " . (isset($attr['pg_gapupMobile']) ? esc_attr($attr['pg_gapupMobile']) . 'px ' . esc_attr($attr['pg_gapMobile']) . 'px' : '') . ";
+
+           
+            //borderradius for mobile
+            
         }
     
         .th-post-grid-inline-{$uniqueId} {

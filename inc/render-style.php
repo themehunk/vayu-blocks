@@ -88,15 +88,11 @@ function vayu_enqueue_google_fonts($font_family_string)
 }
 
 function vayu_cycle_through_blocks( $blocks, $post_id ) {
-
 	$css = '';
-
 	foreach ( $blocks as $block ) {
-
 		if ( $block['blockName'] === 'vayu-blocks/post-grid' ) {
-			$css .= generate_inline_styles($block['attrs']);
-	} 
-		
+			 $css .= generate_inline_styles($block['attrs']);
+	 } 		
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
 				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
@@ -105,6 +101,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 		} 
 
 		if ( $block['blockName'] === 'vayu-blocks/advance-container' ) {
+			
 			 $css .= vayu_advance_container_style($block['attrs']);
 	    } 
 

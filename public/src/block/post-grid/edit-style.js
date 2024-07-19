@@ -316,6 +316,7 @@ const fullContentStyle= (attributes) =>({
     fontSize: `${attributes.pg_textSize}px`,
     lineHeight: `${attributes.pg_lineHeight}`,
     marginLeft:'5px',
+    marginBottom: '10px',
 });
 
 //pagination
@@ -362,12 +363,11 @@ const PaginationStyles = (attributes) => {
         fontSize: `${attributes.pg_PaginationSize}px`,
         color: `${attributes.pg_PaginationColor}`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
-        margin: '0 5px',
+        margin: '20px 5px',
         borderTopLeftRadius: `${attributes.pg_paginationTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_paginationBottomBorderRadius}`,
         borderBottomRightRadius: `${attributes.pg_paginationLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_paginationRightBorderRadius}`,
-        
         border: `${attributes.paginationborderType} ${attributes.pg_paginationBorder} ${attributes.pg_paginationBorderColor}`,
         borderTop: `${attributes.paginationTopborderType} ${attributes.pg_paginationTopBorder} ${attributes.pg_paginationTopBorderColor}`,
         borderBottom: `${attributes.paginationBottomborderType} ${attributes.pg_paginationBottomBorder} ${attributes.pg_paginationBottomBorderColor}`,

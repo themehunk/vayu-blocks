@@ -5,6 +5,7 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import { Spinner } from '@wordpress/components';
+import { InnerBlocks} from '@wordpress/block-editor';
 
 import {
     blockStyles,
@@ -668,7 +669,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                         ))}
                                     </div>
                                 )}
-                            
+
                             </div>
                         ))}
                     </div>

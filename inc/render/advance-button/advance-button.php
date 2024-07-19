@@ -964,6 +964,4 @@ function vayu_advance_button_style($attr){
     }
 
     return $css;
-
-
 }
