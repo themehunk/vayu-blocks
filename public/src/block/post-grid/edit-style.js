@@ -316,6 +316,7 @@ const fullContentStyle= (attributes) =>({
     fontSize: `${attributes.pg_textSize}px`,
     lineHeight: `${attributes.pg_lineHeight}`,
     marginLeft:'5px',
+    marginBottom: '10px',
 });
 
 //pagination

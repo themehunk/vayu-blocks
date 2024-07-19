@@ -13,6 +13,7 @@ function generate_inline_styles($attr) {
     //attributes-merge
     $default_attributes = include('defaultattributes.php');
     $attr = array_merge($default_attributes, $attr);  
+
     //Main div
     $css .= ".th-post-grid-wrapper-{$uniqueId} {";
         //        transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
@@ -244,7 +245,7 @@ function generate_inline_styles($attr) {
         // Display
         $css .= "display: inline-block;";
         $css .= "text-decoration: none;";
-        $css .= "margin-left: 2px;";
+        $css .= "margin-left: 5px;";
         // Desktop Padding
         $paddingUnit = isset($attr['tagpaddingUnit']) ? esc_attr($attr['tagpaddingUnit']) : 'px';
         $css .= isset($attr['pg_TagpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_TagpaddingTop']) . $paddingUnit . ";" : '';
@@ -428,10 +429,9 @@ function generate_inline_styles($attr) {
         // Cursor
         $css .= "cursor: pointer;";
         $css .= "    margin-right: 10px;";
-     $css .= "}";
-        
-    
-     //date-image
+    $css .= "}";
+
+    //date-image
     $css .= ".th-post-grid-wrapper-{$uniqueId} .th-post-grid-inline-{$uniqueId} .post-grid-date-image-{$uniqueId} {";
         $css .= "transform: scale(" . esc_attr($attr['pg_dateImageScale']) . ");";
         $css .= "width: 20px;";

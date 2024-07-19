@@ -6312,7 +6312,8 @@ const fullContentStyle = attributes => ({
   color: `${attributes.pg_textColor}`,
   fontSize: `${attributes.pg_textSize}px`,
   lineHeight: `${attributes.pg_lineHeight}`,
-  marginLeft: '5px'
+  marginLeft: '5px',
+  marginBottom: '10px'
 });
 
 //pagination

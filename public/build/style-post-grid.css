@@ -13,6 +13,10 @@
   margin-right: 2px;
 }
 
+.pagination a {
+  text-decoration: none;
+}
+
 @media (max-width: 768px) {
   .th-post-grid-wrapper .th-post-grid-inline .post-grid-titletag .post-grid-titletag-anchor {
     font-size: 20px;

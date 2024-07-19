@@ -660,7 +660,6 @@ const Edit = ({ attributes, setAttributes }) => {
                                         </div>
                                 )}
 
-                                
                                 {Tags() && (
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
                                         {post.tags.slice(0, pg_numberOfTags).map((tag) => (
@@ -671,7 +670,6 @@ const Edit = ({ attributes, setAttributes }) => {
                                     </div>
                                 )}
 
-                                
                             </div>
                         ))}
                     </div>
