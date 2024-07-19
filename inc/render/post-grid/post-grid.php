@@ -70,11 +70,11 @@ class VayuBlocksPostGrid {
         // Pagination settings
         $pagination_args = array(
             'total'         => $query->max_num_pages,
-            'current'       => 0,
+            'current'       => max(1,$paged),
             'prev_next'     => true,
-            'prev_text'     => '',
-            'next_text'     => '',
-            'end_size'      => 100,  // Number of page numbers to show at the beginning and end
+            'prev_text'     => 'Prev',
+            'next_text'     => 'Next',
+            'end_size'      => 2,  // Number of page numbers to show at the beginning and end
             'mid_size'      => 0,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
@@ -357,11 +357,10 @@ function post_grid_render($attr) {
 
         $return .= $renderer->render($query);
 
-
         $return .= '</div>';
 
-        // Render pagination controls
-        $return .= $renderer->render_pagination($query, 1);
+        // Add pagination outside the wrapper div
+        $return .= '<div class="pagination">' . $renderer->render_pagination($query, 1) . '</div>';        // Render pagination controls
 
         wp_reset_postdata();
     } else {
@@ -396,11 +395,12 @@ function load_posts() {
     if (isset($_POST['attr'])) {
         $post_grid_attributes = $_POST['attr'];
     }
+
     $renderer = new VayuBlocksPostGrid($post_grid_attributes);
     $query = $renderer->get_posts($paged);
-
+   echo $renderer->render_pagination($query, $paged);
     echo $renderer->render($query);
-
+   
     wp_die();
 }
 

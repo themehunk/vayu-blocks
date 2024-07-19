@@ -115,8 +115,8 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['backgroundSize']) ? "background-size: " . esc_attr($attr['backgroundSize']) . ";" : '';
 
         // Transition
-        $css .= isset($attr['transitionAll']) ? "transition: all " . esc_attr($attr['transitionAll']) . "s ease-in-out;" : '';
-
+        $css .= "transition-duration: " . (isset($attr['transitionAll']) ? esc_attr($attr['transitionAll']) : '0') . "s;";
+        
         // Grid properties
         $css .= "display: grid;";
         $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
@@ -126,6 +126,7 @@ function generate_inline_styles($attr) {
         $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
         $css .= "grid-gap: {$gridGapUp} {$gridGap};";
         $css .= "grid-auto-rows: minmax(100px, auto);";
+        
     $css .= "}";
 
     //Post
