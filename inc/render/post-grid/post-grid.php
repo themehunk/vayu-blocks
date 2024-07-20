@@ -305,7 +305,7 @@ class VayuBlocksPostGrid {
         $numberOfTags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
     
         if ($showTags) {
-            echo '<div>';
+            echo '<div style="display: flex; flex-wrap: wrap; gap: 5px;">';
             foreach (array_slice($tags, 0, $numberOfTags) as $tag) {
                 echo '<a href="' . esc_url($tag['link']) . '" class="post-grid-tag-style-new">' . esc_html($tag['name']) . '</a>';
             }

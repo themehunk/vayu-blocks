@@ -1133,7 +1133,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
                      />
 
-                            <h4>Border</h4>
+                                                <h4>Border</h4>
+                                
 									<BorderBoxControlComponent
 										label={__('Border','post-grid')}
 										value={{

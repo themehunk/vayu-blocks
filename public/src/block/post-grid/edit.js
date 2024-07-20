@@ -350,12 +350,12 @@ const Edit = ({ attributes, setAttributes }) => {
     const tagButtonStyle = tagButtonStyles(attributes);
 
     const postStyle = postStyles(attributes);
+    console.log(postStyle,"edit");
 
     const authorAndDateContainerStyle = authorAndDateContainerStyles;
 
     const PaginationStyle = PaginationStyles(attributes);
     
-
     const showOnlyDateStyle = showOnlyDateStyles(attributes);
 
     const fullContentStyles = fullContentStyle(attributes);
@@ -586,7 +586,7 @@ const Edit = ({ attributes, setAttributes }) => {
     const FullContent = () => getView === 'Desktop' ? pg_showFullContent : getView === 'Tablet' ? pg_showFullContentTablet : pg_showFullContentMobile;
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
-    console.log(pg_posts); 
+    
        return (
         <>
             <PanelSettings
