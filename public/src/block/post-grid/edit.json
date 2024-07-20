@@ -295,7 +295,7 @@
       },
       "pg_TagPaddingTop": {
         "type": "number",
-        "default": 5
+        "default": 0
       },
       "pg_TagPaddingRight": {
         "type": "number",
@@ -303,7 +303,7 @@
       },
       "pg_TagPaddingBottom": {
         "type": "number",
-        "default": 6
+        "default": 0
       },
       "pg_TagPaddingLeft": {
         "type": "number",
@@ -658,7 +658,7 @@
 },
 "pg_TagpaddingTop": {
   "type": "number",
-  "default": 5
+  "default": 0
 },
 "pg_TagpaddingRight": {
   "type": "number",
@@ -666,7 +666,7 @@
 },
 "pg_TagpaddingBottom": {
   "type": "number",
-  "default": 6
+  "default": 0
 },
 "pg_TagpaddingLeft": {
   "type": "number",

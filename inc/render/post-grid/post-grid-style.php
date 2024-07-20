@@ -245,7 +245,6 @@ function generate_inline_styles($attr) {
         // Cursor
         $css .= "cursor: pointer;";
         // Display
-        $css .= "display: inline-block;";
         $css .= "text-decoration: none;";
         $css .= "margin-left: 5px;";
         // Desktop Padding

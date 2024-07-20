@@ -57,6 +57,7 @@ const BorderBoxControlComponent = ({
     <>
     {type === 'border' ? (
       <BorderBoxControl
+        label={__('Border', 'text-domain')}
         colors={colors}
         onChange={handleChange}
         value={borders}

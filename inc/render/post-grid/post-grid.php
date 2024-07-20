@@ -106,15 +106,36 @@ class VayuBlocksPostGrid {
         $category_names = !empty($categories) ? wp_list_pluck($categories, 'name') : array();
         $tags = get_the_tags();
         $tag_names = !empty($tags) ? wp_list_pluck($tags, 'name') : array();
+
+        $category_links = array();
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                $category_links[] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+        }
+
+        $tag_links = array();
+
+        if (!empty($tags)) {
+            foreach ($tags as $tag) {
+                $tag_links[] = array(
+                    'name' => $tag->name,
+                    'link' => get_tag_link($tag->term_id)
+                );
+            }
+        }
         
         echo '<div class="th-post-grid-inline th-post-grid-inline-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
         $this->render_featured_image($post_id, $category_names);
-        $this ->render_category($category_names);
+        $this ->render_category($category_links);
         $this->render_title($post_title, $post_permalink);
         $this->render_author_and_date($post_author_id, $post_author_name, $post_date);
         $this->render_excerpt();
         $this->render_full_content();
-        $this->render_tags($tag_names);
+        $this->render_tags($tag_links);
        
 
         echo '</div>';
@@ -139,28 +160,29 @@ class VayuBlocksPostGrid {
         }
     }
 
-    private function render_category( $category_names){
-
+    private function render_category($categories) {
         $device_type = $this->get_device_type();
         if ($device_type === 'Desktop') {
-            $Category = isset($this->attr['pg_showCategories']) ? $this->attr['pg_showCategories'] : true;
+            $showCategories = isset($this->attr['pg_showCategories']) ? $this->attr['pg_showCategories'] : true;
         } else if ($device_type === 'Tablet') {
-           $Category = isset($this->attr['pg_showCategoriesTablet']) ? $this->attr['pg_showCategoriesTablet'] : true;
+            $showCategories = isset($this->attr['pg_showCategoriesTablet']) ? $this->attr['pg_showCategoriesTablet'] : true;
         } else if ($device_type === 'Mobile') {
-           $Category = isset($this->attr['pg_showCategoriesMobile']) ? $this->attr['pg_showCategoriesMobile'] : true;
+            $showCategories = isset($this->attr['pg_showCategoriesMobile']) ? $this->attr['pg_showCategoriesMobile'] : true;
         }
-
+    
         // Check pg_numberOfCategories attribute to limit displayed categories
         $numberOfCategories = isset($this->attr['pg_numberOfCategories']) ? intval($this->attr['pg_numberOfCategories']) : 1;
-
-        if ($Category) {
+    
+        if ($showCategories) {
             echo '<div>';
-           foreach (array_slice($category_names, 0, $numberOfCategories) as $category_name) {
-            echo '<button class="post-grid-category-style-new">' . esc_html($category_name) . '</button>';
-        }
+            foreach (array_slice($categories, 0, $numberOfCategories) as $category) {
+                // Expect $category to be an associative array with 'name' and 'link'
+                echo '<a href="' . esc_url($category['link']) . '" class="post-grid-category-style-new">' . esc_html($category['name']) . '</a>';
+            }
             echo '</div>';
         }
     }
+    
 
     private function render_title($post_title, $post_permalink) {
         echo '<div >';
@@ -270,24 +292,27 @@ class VayuBlocksPostGrid {
         }
     }
     
-    private function render_tags($tag_names) {
+    private function render_tags($tags) {
         $device_type = $this->get_device_type();
         if ($device_type === 'Desktop') {
-            $Tags = isset($this->attr['pg_showTags']) ? $this->attr['pg_showTags'] : false;
+            $showTags = isset($this->attr['pg_showTags']) ? $this->attr['pg_showTags'] : false;
         } else if ($device_type === 'Tablet') {
-           $Tags = isset($this->attr['pg_showTagTablet']) ? $this->attr['pg_showTagTablet'] : false;
+            $showTags = isset($this->attr['pg_showTagTablet']) ? $this->attr['pg_showTagTablet'] : false;
         } else if ($device_type === 'Mobile') {
-           $Tags = isset($this->attr['pg_showTagMobile']) ? $this->attr['pg_showTagMobile'] : false;
+            $showTags = isset($this->attr['pg_showTagMobile']) ? $this->attr['pg_showTagMobile'] : false;
         }
-        $numberOftags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
-        if ($Tags) {
-            echo '<div >';
-            foreach (array_slice($tag_names, 0, $numberOftags) as $tag_name) {
-                echo '<button class="post-grid-tag-style-new">' . esc_html($tag_name) . '</button>';
+    
+        $numberOfTags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
+    
+        if ($showTags) {
+            echo '<div>';
+            foreach (array_slice($tags, 0, $numberOfTags) as $tag) {
+                echo '<a href="' . esc_url($tag['link']) . '" class="post-grid-tag-style-new">' . esc_html($tag['name']) . '</a>';
             }
             echo '</div>';
         }
     }
+    
 
     private function get_device_type() {
         $tablet_browser = 0;
