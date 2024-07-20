@@ -133,7 +133,7 @@ class VayuBlocksPostGrid {
         if ($FeaturedImage) {
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
             echo '<div class="post-grid-featured-image">
-                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image post-grid-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">
+                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image">
                   </div>';
 
         }
@@ -156,22 +156,20 @@ class VayuBlocksPostGrid {
         if ($Category) {
             echo '<div>';
            foreach (array_slice($category_names, 0, $numberOfCategories) as $category_name) {
-            echo '<button class="post-grid-category-style-new post-grid-category-style-new-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($category_name) . '</button>';
+            echo '<button class="post-grid-category-style-new">' . esc_html($category_name) . '</button>';
         }
             echo '</div>';
         }
     }
 
     private function render_title($post_title, $post_permalink) {
-        $unique_id = esc_attr($this->attr['pg_posts'][0]['uniqueID']);
-        
         echo '<div >';
         echo '<a href="' . esc_url($post_permalink) . '"style="text-decoration: none;">';
         
         if (isset($this->attr['pg_blockTitleTag'])) {
-            echo '<' . esc_attr($this->attr['pg_blockTitleTag']) . ' class="post-grid-titletag post-grid-titletag-' . $unique_id . '">';
+            echo '<' . esc_attr($this->attr['pg_blockTitleTag']) . '>';
         } else {
-            echo '<h4 class="post-grid-titletag post-grid-titletag-' . $unique_id . '">';
+            echo '<h4>';
         }
         
         echo esc_html($post_title);
@@ -209,18 +207,18 @@ class VayuBlocksPostGrid {
         }
     
         if ($showAuthor || $showDate) {
-            echo '<div class="post-grid-author-date-container-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
+            echo '<div class="post-grid-author-date-container">';
     
             if ($showAuthor) {
-                echo '<img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" class="post-grid-author-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
-                echo '<a class="post-grid-author-span-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '" href="' . esc_url(get_author_posts_url($post_author_id)) . '">';
+                echo '<img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" class="post-grid-author-image">';
+                echo '<a class="post-grid-author-span" href="' . esc_url(get_author_posts_url($post_author_id)) . '">';
                 echo esc_html($post_author_name);
                 echo '</a>';
             }
     
             if ($showDate) {
-                echo '<img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" alt="Date Image" class="post-grid-date-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
-                echo '<span class="post-grid-date-span-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($post_date) . '</span>';
+                echo '<img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" alt="Date Image" class="post-grid-date-image">';
+                echo '<span class="post-grid-date-span">' . esc_html($post_date) . '</span>';
             }
     
             echo '</div>';
@@ -244,7 +242,7 @@ class VayuBlocksPostGrid {
         }
        
         if ($excerpt) {
-            echo '<div class=" post-grid-excerpt-view-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . wp_trim_words(get_the_excerpt(), $excerpt_length, $excerpt_selector) . '</div>';
+            echo '<div class=" post-grid-excerpt-view">' . wp_trim_words(get_the_excerpt(), $excerpt_length, $excerpt_selector) . '</div>';
         }
     }
     
@@ -265,7 +263,7 @@ class VayuBlocksPostGrid {
             $stripped_content = wp_strip_all_tags($content);
     
             // Wrap the stripped content in <p> tags
-            $wrapped_content = '<p class="post-grid-excerpt-view-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . $stripped_content . '</p>';
+            $wrapped_content = '<p class="post-grid-excerpt-view">' . $stripped_content . '</p>';
     
             // Output the wrapped content
             echo $wrapped_content;
@@ -285,7 +283,7 @@ class VayuBlocksPostGrid {
         if ($Tags) {
             echo '<div >';
             foreach (array_slice($tag_names, 0, $numberOftags) as $tag_name) {
-                echo '<button class="post-grid-tag-style-new post-grid-tag-style-new-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($tag_name) . '</button>';
+                echo '<button class="post-grid-tag-style-new">' . esc_html($tag_name) . '</button>';
             }
             echo '</div>';
         }

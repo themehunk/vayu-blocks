@@ -1166,7 +1166,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 										onChange={handlepaginationBorderChange}
 										type="border"
 									/>
-									<h4>Border Radius</h4>
+								
 									<BorderBoxControlComponent
 												label={__('Border Radius', 'post-grid')}
 												value={{

@@ -651,6 +651,7 @@ const handleBorderChange = (newBorders) => {
         }
         setAttributes(updatedAttributes);
 };
+console.log(pg_layoutTopBorder);
 
 //post border-radius
 const handleBorderRadiusChange = (newValues) => {
@@ -839,7 +840,6 @@ const handletagBorderRadiusChange = (newValues) => {
 							onChange={handleBorderChange}
 							type="border"
 						/>
-						<h4>Border Radius</h4>
 							<BorderBoxControlComponent
 									label={__('Border Radius', 'post-grid')}
 									value={{
@@ -1092,7 +1092,7 @@ const handletagBorderRadiusChange = (newValues) => {
 										onChange={handlecategoryBorderChange}
 										type="border"
 									/>
-									<h4>Border Radius</h4>
+									
 										<BorderBoxControlComponent
 												label={__('Border Radius', 'post-grid')}
 												value={{
@@ -1219,7 +1219,7 @@ const handletagBorderRadiusChange = (newValues) => {
 										onChange={handletagBorderChange}
 										type="border"
 									/>
-									<h4>Border Radius</h4>
+						
 										<BorderBoxControlComponent
 												label={__('Border Radius', 'post-grid')}
 												value={{

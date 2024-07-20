@@ -74,7 +74,7 @@
       },
       "pg_categoryBorder":{
         "type" : "string",
-        "default" : "1px"
+        "default" : "0px"
       },
       "pg_dateTextSize":{
         "type":"number",
@@ -110,23 +110,23 @@
       },
       "pg_layoutTopBorder": {
         "type": "string",
-        "default": "1px"
+        "default": "0px"
       },
       "pg_layoutBottomBorder": {
         "type": "string",
-        "default": "1px"
+        "default": "0px"
       },
       "pg_layoutLeftBorder": {
         "type": "string",
-        "default": "1px"
+        "default": "0px"
       },
       "pg_layoutRightBorder": {
         "type": "string",
-        "default": "1px"
+        "default": "0px"
       },
       "pg_layoutBorder": {
         "type": "string",
-        "default": "1px"
+        "default": "0px"
       },
       "pg_layoutBorderColor": {
         "type": "string",
@@ -339,7 +339,7 @@
       },
       "pg_tagBorder":{
         "type" : "string",
-        "default" : "1px"
+        "default" : "0px"
       },
       "buttonpaddingUnit": {
         "type": "string",
@@ -1047,7 +1047,7 @@
 },
 "pg_paginationBorderRadius":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_showPaginationBorderColorMenu":{
   "type":"boolean",
@@ -1067,7 +1067,7 @@
 },
 "pg_PaginationBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "PaginationborderType":{
   "type":"string",
@@ -1095,35 +1095,35 @@
 },
 "pg_postTopBorderRadius":{
   "type": "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_postBottomBorderRadius":{
   "type" : "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_postLeftBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "pg_postRightBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "pg_categoryTopBorderRadius":{
   "type": "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_categoryBottomBorderRadius":{
   "type" : "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_categoryLeftBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "pg_categoryRightBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "categoryTopborderType":{
   "type":"string",
@@ -1143,19 +1143,19 @@
 },
 "pg_categoryTopBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_categoryBottomBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_categoryLeftBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_categoryRightBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_categoryTopBorderColor":{
   "type":"string",
@@ -1176,19 +1176,19 @@
 
 "pg_tagTopBorderRadius":{
   "type": "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_tagBottomBorderRadius":{
   "type" : "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_tagLeftBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "pg_tagRightBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "tagTopborderType":{
   "type":"string",
@@ -1208,19 +1208,19 @@
 },
 "pg_tagTopBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_tagBottomBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_tagLeftBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_tagRightBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_tagTopBorderColor":{
   "type":"string",
@@ -1242,19 +1242,19 @@
 
 "pg_paginationTopBorderRadius":{
   "type": "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_paginationBottomBorderRadius":{
   "type" : "string",
-  "default": "1px"
+  "default": "0px"
 },
 "pg_paginationLeftBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 "pg_paginationRightBorderRadius":{
   "type": "string",
-  "default" : "1px"
+  "default" : "0px"
 },
 
 "paginationTopborderType":{
@@ -1275,19 +1275,19 @@
 },
 "pg_paginationTopBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationBottomBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationLeftBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationRightBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationTopBorderColor":{
   "type":"string",
