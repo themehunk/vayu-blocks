@@ -70,11 +70,11 @@ class VayuBlocksPostGrid {
         // Pagination settings
         $pagination_args = array(
             'total'         => $query->max_num_pages,
-            'current'       => 0,
+            'current'       => max(1,$paged),
             'prev_next'     => true,
-            'prev_text'     => '',
-            'next_text'     => '',
-            'end_size'      => 100,  // Number of page numbers to show at the beginning and end
+            'prev_text'     => 'Prev',
+            'next_text'     => 'Next',
+            'end_size'      => 2,  // Number of page numbers to show at the beginning and end
             'mid_size'      => 0,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
@@ -106,15 +106,36 @@ class VayuBlocksPostGrid {
         $category_names = !empty($categories) ? wp_list_pluck($categories, 'name') : array();
         $tags = get_the_tags();
         $tag_names = !empty($tags) ? wp_list_pluck($tags, 'name') : array();
+
+        $category_links = array();
+        if (!empty($categories)) {
+            foreach ($categories as $category) {
+                $category_links[] = array(
+                    'name' => $category->name,
+                    'link' => get_category_link($category->term_id)
+                );
+            }
+        }
+
+        $tag_links = array();
+
+        if (!empty($tags)) {
+            foreach ($tags as $tag) {
+                $tag_links[] = array(
+                    'name' => $tag->name,
+                    'link' => get_tag_link($tag->term_id)
+                );
+            }
+        }
         
         echo '<div class="th-post-grid-inline th-post-grid-inline-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
         $this->render_featured_image($post_id, $category_names);
-        $this ->render_category($category_names);
+        $this ->render_category($category_links);
         $this->render_title($post_title, $post_permalink);
         $this->render_author_and_date($post_author_id, $post_author_name, $post_date);
         $this->render_excerpt();
         $this->render_full_content();
-        $this->render_tags($tag_names);
+        $this->render_tags($tag_links);
        
 
         echo '</div>';
@@ -133,45 +154,44 @@ class VayuBlocksPostGrid {
         if ($FeaturedImage) {
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
             echo '<div class="post-grid-featured-image">
-                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image post-grid-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">
+                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image">
                   </div>';
 
         }
     }
 
-    private function render_category( $category_names){
-
+    private function render_category($categories) {
         $device_type = $this->get_device_type();
         if ($device_type === 'Desktop') {
-            $Category = isset($this->attr['pg_showCategories']) ? $this->attr['pg_showCategories'] : true;
+            $showCategories = isset($this->attr['pg_showCategories']) ? $this->attr['pg_showCategories'] : true;
         } else if ($device_type === 'Tablet') {
-           $Category = isset($this->attr['pg_showCategoriesTablet']) ? $this->attr['pg_showCategoriesTablet'] : true;
+            $showCategories = isset($this->attr['pg_showCategoriesTablet']) ? $this->attr['pg_showCategoriesTablet'] : true;
         } else if ($device_type === 'Mobile') {
-           $Category = isset($this->attr['pg_showCategoriesMobile']) ? $this->attr['pg_showCategoriesMobile'] : true;
+            $showCategories = isset($this->attr['pg_showCategoriesMobile']) ? $this->attr['pg_showCategoriesMobile'] : true;
         }
-
+    
         // Check pg_numberOfCategories attribute to limit displayed categories
         $numberOfCategories = isset($this->attr['pg_numberOfCategories']) ? intval($this->attr['pg_numberOfCategories']) : 1;
-
-        if ($Category) {
+    
+        if ($showCategories) {
             echo '<div>';
-           foreach (array_slice($category_names, 0, $numberOfCategories) as $category_name) {
-            echo '<button class="post-grid-category-style-new post-grid-category-style-new-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($category_name) . '</button>';
-        }
+            foreach (array_slice($categories, 0, $numberOfCategories) as $category) {
+                // Expect $category to be an associative array with 'name' and 'link'
+                echo '<a href="' . esc_url($category['link']) . '" class="post-grid-category-style-new">' . esc_html($category['name']) . '</a>';
+            }
             echo '</div>';
         }
     }
+    
 
     private function render_title($post_title, $post_permalink) {
-        $unique_id = esc_attr($this->attr['pg_posts'][0]['uniqueID']);
-        
         echo '<div >';
         echo '<a href="' . esc_url($post_permalink) . '"style="text-decoration: none;">';
         
         if (isset($this->attr['pg_blockTitleTag'])) {
-            echo '<' . esc_attr($this->attr['pg_blockTitleTag']) . ' class="post-grid-titletag post-grid-titletag-' . $unique_id . '">';
+            echo '<' . esc_attr($this->attr['pg_blockTitleTag']) . '>';
         } else {
-            echo '<h4 class="post-grid-titletag post-grid-titletag-' . $unique_id . '">';
+            echo '<h4>';
         }
         
         echo esc_html($post_title);
@@ -209,18 +229,18 @@ class VayuBlocksPostGrid {
         }
     
         if ($showAuthor || $showDate) {
-            echo '<div class="post-grid-author-date-container-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
+            echo '<div class="post-grid-author-date-container">';
     
             if ($showAuthor) {
-                echo '<img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" class="post-grid-author-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
-                echo '<a class="post-grid-author-span-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '" href="' . esc_url(get_author_posts_url($post_author_id)) . '">';
+                echo '<img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" class="post-grid-author-image">';
+                echo '<a class="post-grid-author-span" href="' . esc_url(get_author_posts_url($post_author_id)) . '">';
                 echo esc_html($post_author_name);
                 echo '</a>';
             }
     
             if ($showDate) {
-                echo '<img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" alt="Date Image" class="post-grid-date-image-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
-                echo '<span class="post-grid-date-span-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($post_date) . '</span>';
+                echo '<img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" alt="Date Image" class="post-grid-date-image">';
+                echo '<span class="post-grid-date-span">' . esc_html($post_date) . '</span>';
             }
     
             echo '</div>';
@@ -244,7 +264,7 @@ class VayuBlocksPostGrid {
         }
        
         if ($excerpt) {
-            echo '<div class=" post-grid-excerpt-view-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . wp_trim_words(get_the_excerpt(), $excerpt_length, $excerpt_selector) . '</div>';
+            echo '<div class=" post-grid-excerpt-view">' . wp_trim_words(get_the_excerpt(), $excerpt_length, $excerpt_selector) . '</div>';
         }
     }
     
@@ -265,31 +285,34 @@ class VayuBlocksPostGrid {
             $stripped_content = wp_strip_all_tags($content);
     
             // Wrap the stripped content in <p> tags
-            $wrapped_content = '<p class="post-grid-excerpt-view-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . $stripped_content . '</p>';
+            $wrapped_content = '<p class="post-grid-excerpt-view">' . $stripped_content . '</p>';
     
             // Output the wrapped content
             echo $wrapped_content;
         }
     }
     
-    private function render_tags($tag_names) {
+    private function render_tags($tags) {
         $device_type = $this->get_device_type();
         if ($device_type === 'Desktop') {
-            $Tags = isset($this->attr['pg_showTags']) ? $this->attr['pg_showTags'] : false;
+            $showTags = isset($this->attr['pg_showTags']) ? $this->attr['pg_showTags'] : false;
         } else if ($device_type === 'Tablet') {
-           $Tags = isset($this->attr['pg_showTagTablet']) ? $this->attr['pg_showTagTablet'] : false;
+            $showTags = isset($this->attr['pg_showTagTablet']) ? $this->attr['pg_showTagTablet'] : false;
         } else if ($device_type === 'Mobile') {
-           $Tags = isset($this->attr['pg_showTagMobile']) ? $this->attr['pg_showTagMobile'] : false;
+            $showTags = isset($this->attr['pg_showTagMobile']) ? $this->attr['pg_showTagMobile'] : false;
         }
-        $numberOftags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
-        if ($Tags) {
-            echo '<div >';
-            foreach (array_slice($tag_names, 0, $numberOftags) as $tag_name) {
-                echo '<button class="post-grid-tag-style-new post-grid-tag-style-new-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">' . esc_html($tag_name) . '</button>';
+    
+        $numberOfTags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
+    
+        if ($showTags) {
+            echo '<div>';
+            foreach (array_slice($tags, 0, $numberOfTags) as $tag) {
+                echo '<a href="' . esc_url($tag['link']) . '" class="post-grid-tag-style-new">' . esc_html($tag['name']) . '</a>';
             }
             echo '</div>';
         }
     }
+    
 
     private function get_device_type() {
         $tablet_browser = 0;
@@ -357,11 +380,10 @@ function post_grid_render($attr) {
 
         $return .= $renderer->render($query);
 
-
         $return .= '</div>';
 
-        // Render pagination controls
-        $return .= $renderer->render_pagination($query, 1);
+        // Add pagination outside the wrapper div
+        $return .= '<div class="pagination">' . $renderer->render_pagination($query, 1) . '</div>';        // Render pagination controls
 
         wp_reset_postdata();
     } else {
@@ -396,11 +418,12 @@ function load_posts() {
     if (isset($_POST['attr'])) {
         $post_grid_attributes = $_POST['attr'];
     }
+
     $renderer = new VayuBlocksPostGrid($post_grid_attributes);
     $query = $renderer->get_posts($paged);
-
+   echo $renderer->render_pagination($query, $paged);
     echo $renderer->render($query);
-
+   
     wp_die();
 }
 

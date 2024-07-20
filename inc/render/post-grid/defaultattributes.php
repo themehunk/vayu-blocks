@@ -177,7 +177,7 @@ return array(
     'pg_Tagpadding' => 0,
     'pg_TagpaddingTop' => 5,
     'pg_TagpaddingRight' => 10,
-    'pg_TagpaddingBottom' => 6,
+    'pg_TagpaddingBottom' => 5,
     'pg_TagpaddingLeft' => 10,
     'pg_TagpaddingTablet' => 0,
     'pg_TagpaddingTopTablet' => 0,

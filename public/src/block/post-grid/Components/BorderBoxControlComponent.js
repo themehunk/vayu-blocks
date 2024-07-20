@@ -19,15 +19,15 @@ const BorderBoxControlComponent = ({
 }) => {
   const defaultBorder = {
     color: '#72aee6',
-    style: 'dashed',
-    width: '1px',
+    style: 'solid',
+    width: '0px',
   };
 
   const defaultBorderRadius = {
-    top: '5px',
-    right: '5px',
-    left: '5px',
-    bottom: '5px'
+    top: '0px',
+    right: '0px',
+    left: '0px',
+    bottom: '0px'
   };
 
   const [borders, setBorders] = useState(value || {
@@ -55,21 +55,21 @@ const BorderBoxControlComponent = ({
 
   return (
     <>
-      {type === 'border' ? (
-        <BorderBoxControl
-          colors={colors}
-          //label={label}
-          onChange={handleChange}
-          value={borders}
-        />
-      ) : (
-        <BoxControl
-         // label={__('Border Radius', 'text-domain')}
-          values={borderRadius}
-          onChange={handleChange}
-        />
-      )}
-    </>
+    {type === 'border' ? (
+      <BorderBoxControl
+        label={__('Border', 'text-domain')}
+        colors={colors}
+        onChange={handleChange}
+        value={borders}
+      />
+    ) : (
+      <BoxControl
+        label={__('Border Radius', 'text-domain')}
+        values={borderRadius}
+        onChange={handleChange}
+      />
+    )}
+  </>
   );
 };
 

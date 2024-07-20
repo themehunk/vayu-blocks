@@ -323,6 +323,7 @@ const Edit = ({ attributes, setAttributes }) => {
     const [authors, setAuthors] = useState({});
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [tags, settags] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState('');
     const [isSolid, setIsSolid] = useState(true);
     const [totalPages, setTotalPages] = useState(1); // Initialize totalPages state
@@ -429,9 +430,14 @@ const Edit = ({ attributes, setAttributes }) => {
                 });
 
                 setAuthors(authorMap);
-
+                
                 const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
                 setCategories(fetchedCategories);
+
+                const fetchedTags = await apiFetch({path: 'wp/v2/tags' });
+                settags(fetchedTags);
+
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -580,8 +586,8 @@ const Edit = ({ attributes, setAttributes }) => {
     const FullContent = () => getView === 'Desktop' ? pg_showFullContent : getView === 'Tablet' ? pg_showFullContentTablet : pg_showFullContentMobile;
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
-    
-    return (
+    console.log(pg_posts); 
+       return (
         <>
             <PanelSettings
 			    attributes={attributes}
@@ -610,11 +616,17 @@ const Edit = ({ attributes, setAttributes }) => {
 
                                 {Category() && (
                                     <div>
-                                        {post.categories.slice(0, pg_numberOfCategories).map((category) => (
-                                            <button key={category.id} style={categoryButtonStyle}>
-                                                {getCategoryNames([category])}
-                                            </button>
-                                        ))}
+                                       {post.categories.slice(0, pg_numberOfCategories).map((categoryId) => {
+                                            const category = categories.find(cat => cat.id === categoryId);
+                                            if (!category) return null;
+
+                                            return (
+                                                <a key={categoryId} href={category.link} style={categoryButtonStyle}>
+                                                    {category.name}
+                                                </a>
+                                            );
+                                        })}
+
                                     </div>
                                 )}
                                 
@@ -662,11 +674,17 @@ const Edit = ({ attributes, setAttributes }) => {
 
                                 {Tags() && (
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                                        {post.tags.slice(0, pg_numberOfTags).map((tag) => (
-                                            <button key={tag} style={tagButtonStyle}>
-                                                {getTagNames([tag])}
-                                            </button>
-                                        ))}
+                                        {post.tags.slice(0, pg_numberOfTags).map((tagId) => {
+                                            const tag = tags.find(t => t.id === tagId);
+                                            if (!tag) return null;
+                                        
+                                            return (
+                                                <a key={tagId} href={tag.link} style={tagButtonStyle}>
+                                                    {tag.name}
+                                                </a>
+                                            );
+                                        })}
+                                        
                                     </div>
                                 )}
 

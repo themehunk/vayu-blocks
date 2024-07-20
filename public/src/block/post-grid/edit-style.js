@@ -177,10 +177,6 @@ const categoryButtonStyles = (attributes) => {
         ...categoryStyles,
         color: `${attributes.pg_categoryTextColor}`,
         background: attributes.category_backgroundType === 'color' ? attributes.category_backgroundColor : attributes.category_backgroundType === 'gradient' ? `${attributes.category_backgroundGradient}` : 'none',
-        backgroundImage: attributes.category_backgroundImage ? `url(${attributes.category_backgroundImage.url})` : 'none',
-        backgroundAttachment: attributes.category_backgroundAttachment,
-        backgroundRepeat: attributes.category_backgroundRepeat,
-        backgroundSize: attributes.category_backgroundSize,
         fontSize: `${attributes.pg_categoryTextSize}px`,
         marginLeft:'5px',
         fontWeight:'600',
@@ -190,6 +186,8 @@ const categoryButtonStyles = (attributes) => {
         borderBottomLeftRadius: `${attributes.pg_categoryBottomBorderRadius}`,
         borderBottomRightRadius: `${attributes.pg_categoryLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_categoryRightBorderRadius}`,
+
+        textDecoration: "none",
 
         border: `${attributes.categoryborderType} ${attributes.pg_categoryBorder} ${attributes.pg_categoryBorderColor}`,
         borderTop: `${attributes.categoryTopborderType} ${attributes.pg_categoryTopBorder} ${attributes.pg_categoryTopBorderColor}`,
@@ -289,13 +287,11 @@ const tagButtonStyles = (attributes ) => {
         marginLeft:'5px',
         color: `${attributes.pg_tagTextColor}`,
         background: attributes.tag_backgroundType === 'color' ? attributes.tag_backgroundColor : attributes.tag_backgroundType === 'gradient' ? `${attributes.tag_backgroundGradient}` : 'none',
-        backgroundAttachment: attributes.tag_backgroundAttachment,
-        backgroundRepeat: attributes.tag_backgroundRepeat,
-        backgroundSize: attributes.tag_backgroundSize,
         fontSize: `${attributes.pg_tagTextSize}px`,
         fontWeight:'600',
         boxSizing: 'border-box', // Ensure padding and border are included in width/height
-        
+        textDecoration: 'none',
+
         borderTopLeftRadius: `${attributes.pg_tagTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_tagBottomBorderRadius}`,
         borderBottomRightRadius: `${attributes.pg_tagLeftBorderRadius}`,
