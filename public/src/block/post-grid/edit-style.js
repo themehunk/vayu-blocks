@@ -109,12 +109,12 @@ const postStyles = (attributes) => {
         borderBottomRightRadius: `${attributes.pg_postLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_postRightBorderRadius}`,
 
-        border: `${attributes.layoutborderType} ${attributes.pg_layoutBorder} ${attributes.pg_layoutBorderColor}`,
-        borderTop: `${attributes.layoutTopborderType} ${attributes.pg_layoutTopBorder} ${attributes.pg_layoutTopBorderColor}`,
-        borderBottom: `${attributes.layoutBottomborderType} ${attributes.pg_layoutBottomBorder} ${attributes.pg_layoutBottomBorderColor}`,
-        borderLeft: `${attributes.layoutLeftborderType} ${attributes.pg_layoutLeftBorder} ${attributes.pg_layoutLeftBorderColor}`,
-        borderRight: `${attributes.layoutRightborderType} ${attributes.pg_layoutRightBorder} ${attributes.pg_layoutRightBorderColor}`,
-       
+        border: `${attributes.layoutborderType || 'solid'} ${attributes.pg_layoutBorder || '0px'} ${attributes.pg_layoutBorderColor || 'black'}`,
+        borderTop: `${attributes.layoutTopborderType || 'solid'} ${attributes.pg_layoutTopBorder || '0px'} ${attributes.pg_layoutTopBorderColor || 'black'}`,
+        borderBottom: `${attributes.layoutBottomborderType || 'solid'} ${attributes.pg_layoutBottomBorder || '0px'} ${attributes.pg_layoutBottomBorderColor || 'black'}`,
+        borderLeft: `${attributes.layoutLeftborderType || 'solid'} ${attributes.pg_layoutLeftBorder || '0px'} ${attributes.pg_layoutLeftBorderColor || 'black'}`,
+        borderRight: `${attributes.layoutRightborderType || 'solid'} ${attributes.pg_layoutRightBorder || '0px'} ${attributes.pg_layoutRightBorderColor || 'black'}`,
+        
         position: 'relative',
         backgroundAttachment: attributes.layout_backgroundAttachment,
         backgroundRepeat: attributes.layout_backgroundRepeat,
@@ -189,12 +189,12 @@ const categoryButtonStyles = (attributes) => {
 
         textDecoration: "none",
 
-        border: `${attributes.categoryborderType} ${attributes.pg_categoryBorder} ${attributes.pg_categoryBorderColor}`,
-        borderTop: `${attributes.categoryTopborderType} ${attributes.pg_categoryTopBorder} ${attributes.pg_categoryTopBorderColor}`,
-        borderBottom: `${attributes.categoryBottomborderType} ${attributes.pg_categoryBottomBorder} ${attributes.pg_categoryBottomBorderColor}`,
-        borderLeft: `${attributes.categoryLeftborderType} ${attributes.pg_categoryLeftBorder} ${attributes.pg_categoryLeftBorderColor}`,
-        borderRight: `${attributes.categoryRightborderType} ${attributes.pg_categoryRightBorder} ${attributes.pg_categoryRightBorderColor}`,
-       
+        border: `${attributes.categoryborderType || 'solid'} ${attributes.pg_categoryBorder || '0px'} ${attributes.pg_categoryBorderColor || 'black'}`,
+        borderTop: `${attributes.categoryTopborderType || 'solid'} ${attributes.pg_categoryTopBorder || '0px'} ${attributes.pg_categoryTopBorderColor || 'black'}`,
+        borderBottom: `${attributes.categoryBottomborderType || 'solid'} ${attributes.pg_categoryBottomBorder || '0px'} ${attributes.pg_categoryBottomBorderColor || 'black'}`,
+        borderLeft: `${attributes.categoryLeftborderType || 'solid'} ${attributes.pg_categoryLeftBorder || '0px'} ${attributes.pg_categoryLeftBorderColor || 'black'}`,
+        borderRight: `${attributes.categoryRightborderType || 'solid'} ${attributes.pg_categoryRightBorder || '0px'} ${attributes.pg_categoryRightBorderColor || 'black'}`,
+
     };
 };
   
@@ -297,11 +297,11 @@ const tagButtonStyles = (attributes ) => {
         borderBottomRightRadius: `${attributes.pg_tagLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_tagRightBorderRadius}`,
 
-        border: `${attributes.tagborderType} ${attributes.pg_tagBorder} ${attributes.pg_tagBorderColor}`,
-        borderTop: `${attributes.tagTopborderType} ${attributes.pg_tagTopBorder} ${attributes.pg_tagTopBorderColor}`,
-        borderBottom: `${attributes.tagBottomborderType} ${attributes.pg_tagBottomBorder} ${attributes.pg_tagBottomBorderColor}`,
-        borderLeft: `${attributes.tagLeftborderType} ${attributes.pg_tagLeftBorder} ${attributes.pg_tagLeftBorderColor}`,
-        borderRight: `${attributes.tagRightborderType} ${attributes.pg_tagRightBorder} ${attributes.pg_tagRightBorderColor}`,
+        border: `${attributes.tagborderType || 'solid'} ${attributes.pg_tagBorder || '0px'} ${attributes.pg_tagBorderColor || 'black'}`,
+        borderTop: `${attributes.tagTopborderType || 'solid'} ${attributes.pg_tagTopBorder || '0px'} ${attributes.pg_tagTopBorderColor || 'black'}`,
+        borderBottom: `${attributes.tagBottomborderType || 'solid'} ${attributes.pg_tagBottomBorder || '0px'} ${attributes.pg_tagBottomBorderColor || 'black'}`,
+        borderLeft: `${attributes.tagLeftborderType || 'solid'} ${attributes.pg_tagLeftBorder || '0px'} ${attributes.pg_tagLeftBorderColor || 'black'}`,
+        borderRight: `${attributes.tagRightborderType || 'solid'} ${attributes.pg_tagRightBorder || '0px'} ${attributes.pg_tagRightBorderColor || 'black'}`,
         
     };
 };
@@ -360,16 +360,18 @@ const PaginationStyles = (attributes) => {
         color: `${attributes.pg_PaginationColor}`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
         margin: '20px 5px',
+
         borderTopLeftRadius: `${attributes.pg_paginationTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_paginationBottomBorderRadius}`,
         borderBottomRightRadius: `${attributes.pg_paginationLeftBorderRadius}`,
         borderTopRightRadius: `${attributes.pg_paginationRightBorderRadius}`,
-        border: `${attributes.paginationborderType} ${attributes.pg_paginationBorder} ${attributes.pg_paginationBorderColor}`,
-        borderTop: `${attributes.paginationTopborderType} ${attributes.pg_paginationTopBorder} ${attributes.pg_paginationTopBorderColor}`,
-        borderBottom: `${attributes.paginationBottomborderType} ${attributes.pg_paginationBottomBorder} ${attributes.pg_paginationBottomBorderColor}`,
-        borderLeft: `${attributes.paginationLeftborderType} ${attributes.pg_paginationLeftBorder} ${attributes.pg_paginationLeftBorderColor}`,
-        borderRight: `${attributes.paginationRightborderType} ${attributes.pg_paginationRightBorder} ${attributes.pg_paginationRightBorderColor}`,
-        
+
+        border: `${attributes.paginationborderType || 'solid'} ${attributes.pg_paginationBorder || '0px'} ${attributes.pg_paginationBorderColor || 'black'}`,
+        borderTop: `${attributes.paginationTopborderType || 'solid'} ${attributes.pg_paginationTopBorder || '0px'} ${attributes.pg_paginationTopBorderColor || 'black'}`,
+        borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'black'}`,
+        borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'black'}`,
+        borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'black'}`,
+
     };
 };
 

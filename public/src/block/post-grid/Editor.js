@@ -605,12 +605,12 @@ const toggleVisible = () => {
 //post border
 const handleBorderChange = (newBorders) => {
         const updatedAttributes = {};
-		
         if (newBorders.borders.top) {
             if (newBorders.borders.top) {
-                updatedAttributes.pg_layoutTopBorderColor = newBorders.borders.top.color;
-                updatedAttributes.pg_layoutTopBorder = newBorders.borders.top.width;
-                updatedAttributes.layoutTopborderType = newBorders.borders.top.style;
+				updatedAttributes.pg_layoutTopBorderColor = newBorders.borders.top.color !== undefined ? newBorders.borders.top.color : 'black';
+				updatedAttributes.pg_layoutTopBorder = newBorders.borders.top.width || '0px'; // Providing a default width if undefined
+				updatedAttributes.layoutTopborderType = newBorders.borders.top.style !== 'none' ? newBorders.borders.top.style : 'solid';
+				
             }
             if (newBorders.borders.bottom) {
                 updatedAttributes.pg_layoutBottomBorderColor = newBorders.borders.bottom.color;
@@ -651,7 +651,6 @@ const handleBorderChange = (newBorders) => {
         }
         setAttributes(updatedAttributes);
 };
-console.log(pg_layoutTopBorder);
 
 //post border-radius
 const handleBorderRadiusChange = (newValues) => {
@@ -840,6 +839,7 @@ const handletagBorderRadiusChange = (newValues) => {
 							onChange={handleBorderChange}
 							type="border"
 						/>
+						
 							<BorderBoxControlComponent
 									label={__('Border Radius', 'post-grid')}
 									value={{
