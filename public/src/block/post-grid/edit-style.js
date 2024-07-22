@@ -291,6 +291,7 @@ const tagButtonStyles = (attributes ) => {
         fontWeight:'600',
         boxSizing: 'border-box', // Ensure padding and border are included in width/height
         textDecoration: 'none',
+        lineHeight: 1,
 
         borderTopLeftRadius: `${attributes.pg_tagTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_tagBottomBorderRadius}`,
@@ -313,6 +314,7 @@ const fullContentStyle= (attributes) =>({
     lineHeight: `${attributes.pg_lineHeight}`,
     marginLeft:'5px',
     marginBottom: '10px',
+    fontWeight : `${attributes.pg_ContentWeight}`,
 });
 
 //pagination
@@ -371,7 +373,11 @@ const PaginationStyles = (attributes) => {
         borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'black'}`,
         borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'black'}`,
         borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'black'}`,
-
+        ':hover': {
+            background: `red`, // Change background color on hover
+            color: `white`, // Change text color on hover
+            // Add other hover styles like border changes, text shadow, etc.
+          },
     };
 };
 

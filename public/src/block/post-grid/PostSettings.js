@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl  } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { more, arrowUp, arrowDown, trash ,moreVertical} from '@wordpress/icons';
 import {
@@ -14,6 +14,10 @@ import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
+        sortByOrder,
+        sortByField,
+        pg_featuredImageOnly,
+        selectedCategories,
         pg_postLayoutColumns,
         pg_numberOfRow,
         pg_gap,
@@ -936,16 +940,17 @@ const PostSettings = ({ attributes, setAttributes }) => {
 	];
 
     const fontSizes = [
-		{ name: __('Small', 'post-grid'), slug: 'small', size: 15 },
-		{ name: __('Medium', 'post-grid'), slug: 'medium', size: 20 },
-		{ name: __('Large', 'post-grid'), slug: 'large', size: 24 },
-		{ name: __('Larger', 'post-grid'), slug: 'larger', size: 28 },
+		{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 15 },
+		{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 20 },
+		{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
+		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
 	];
 
     return (
         <>
-            <PanelBody title={__('Layout', 'post-grid')} initialOpen={false}>
-                <ResponsiveControl label={__('Number of Columns', 'post-grid')}>
+            <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
+                
+                <ResponsiveControl label={__('Number of Columns', 'vayu-blocks')}>
                     <RangeControl
                         type={getLayoutColumnsType()}
                         changeType={changeLayoutColumnsType}
@@ -953,11 +958,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => changeLayoutColumns(value)}
                         min={1}
                         max={6}
-                        label={__(getView, 'post-grid')}
+                        label={__(getView, 'vayu-blocks')}
                     />
                 </ResponsiveControl>
 
-                <ResponsiveControl label={__('Number of Rows', 'post-grid')}>
+                <ResponsiveControl label={__('Number of Rows', 'vayu-blocks')}>
                         <RangeControl
                             type={getRowsType()}
                             changeType={changeRowsType}
@@ -969,10 +974,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         />
                 </ResponsiveControl>
 
-            </PanelBody>
- 
-            <PanelBody title={__('Filter', 'post-grid')} initialOpen={false}>
-                <ResponsiveControl label={__('Gap Between Items Vertical', 'post-grid')}>
+                <ResponsiveControl label={__('Gap Between Items Vertical', 'vayu-blocks')}>
                     <RangeControl
                         value={getgap()}
                         type={getgapType()}
@@ -983,7 +985,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         max={100}
                     />
                 </ResponsiveControl>
-                <ResponsiveControl label={__('Gap Between Items Horizantal', 'post-grid')}>
+                <ResponsiveControl label={__('Gap Between Items Horizantal', 'vayu-blocks')}>
                     <RangeControl
                         value={getgapup()}
                         type={getgapupType()}
@@ -994,12 +996,65 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         label={getView}
                     />
                 </ResponsiveControl>
+
+            </PanelBody>
+ 
+            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
+                <FormTokenField
+                    __nextHasNoMarginBottom
+                    label="By Category"
+                    onChange={(value)=>setAttributes({selectedCategories:value}) }
+                    suggestions={[
+                        'cat1',
+                        'cat2',
+                        'uncategorised',
+                        'cat3',
+                        'cat4',
+                        'cat5'
+                    ]}
+                    value={selectedCategories}                     
+                />
+                <br />
+                <br />
+
+                <ToggleControl
+                    label={__('Featured Image Post Only', 'vayu-blocks')}
+                    checked={pg_featuredImageOnly}
+                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
+                />
+
+            <h4>Order</h4>
+            <SelectControl
+                label="Sort Order"
+                value={sortByOrder}  // Corrected typo here
+                options={[
+                    { value: 'desc', label: 'Descending' },  // Corrected typo here
+                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
+                ]}
+                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
+            />
+
+            <SelectControl
+                label="Sort By Field"
+                value={sortByField}
+                options={[
+                    { value: 'date', label: 'Date' },
+                    { value: 'modified', label: 'Last Modified' },
+                    { value: 'title', label: 'Title' },
+                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
+                ]}
+                onChange={(value) => setAttributes({ sortByField: value })}
+            />
+
+
+
             </PanelBody>
 
-            <PanelBody title={__('Layout Controls', 'post-grid')} initialOpen={false}>
-            <ResponsiveControl label={__(getView, 'post-grid')}>
+            <PanelBody title={__('Layout Controls', 'vayu-blocks')} initialOpen={false}>
+                <ResponsiveControl label={__(getView, 'vayu-blocks')}>
+                <br />
                 <ToggleControl
-                    label={__('Show Excerpt', 'post-grid')}
+                    label={__('Show Excerpt', 'vayu-blocks')}
                     checked={getExcerptview()}
                     type={getLayoutType()}
                     changeType={changeLayoutType}
@@ -1009,7 +1064,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 {getExcerptview() && (
                     <>
                         <RangeControl
-                            label={__('Number of words in excerpt', 'post-grid')}
+                            label={__('Number of words in excerpt', 'vayu-blocks')}
                             value={getExcerptnumberview()}
                             type={getExcerptnumberType()}
                             changeType={changeExcerptnumberType}
@@ -1018,7 +1073,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             max={100}
                         />
                         <TextControl
-                            label={__('Last Word', 'post-grid')}
+                            label={__('Last Word', 'vayu-blocks')}
                             value={getExcerptSelectorview()}
                             type={getExcerptSelectorType()}
                             changeType={changeExcerptSelectorType}
@@ -1030,7 +1085,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 )}
 
                 <ToggleControl
-                    label={__('Show Full Content', 'post-grid')}
+                    label={__('Show Full Content', 'vayu-blocks')}
                     checked={getFullContentview()}
                     type={getFullContentType()}
                     changeType={changeFullContentType}
@@ -1039,7 +1094,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                 <ToggleControl
-                    label={__('Show Featured Image', 'post-grid')}
+                    label={__('Show Featured Image', 'vayu-blocks')}
                     checked={getFeaturedImageview()}
                     type={getFeaturedImageType()}
                     changeType={changeFeaturedImageType}
@@ -1048,7 +1103,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                 <ToggleControl
-                    label={__('Show Categories', 'post-grid')}
+                    label={__('Show Categories', 'vayu-blocks')}
                     checked={getShowCategoriesview()}
                     type={getShowCategoriesType()}
                     changeType={changeShowCategoriesType}
@@ -1056,7 +1111,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                     {getShowCategoriesview() && (
                         <RangeControl
-                            label={__('Number of Categories', 'post-grid')}
+                            label={__('Number of Categories', 'vayu-blocks')}
                             value={pg_numberOfCategories}
                             onChange={(value) => setAttributes({pg_numberOfCategories:value})}
                             min={1}
@@ -1065,21 +1120,21 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     )}
 
                 <ToggleControl
-                    label={__('Show Author', 'post-grid')}
+                    label={__('Show Author', 'vayu-blocks')}
                     checked={getShowAuthorview()}
                     type={getShowAuthorType()}
                     changeType={changeShowAuthorType}
                     onChange={(value) => changeShowAuthor(value)}
                 />
                 <ToggleControl
-                    label={__('Show Date', 'post-grid')}
+                    label={__('Show Date', 'vayu-blocks')}
                     checked={getShowDateview()}
                     type={getShowDateType()}
                     changeType={changeShowDateType}
                     onChange={(value) => changeShowDate(value)}
                 />
                 <ToggleControl
-                    label={__('Show Tags', 'post-grid')}
+                    label={__('Show Tags', 'vayu-blocks')}
                     checked={getShowTagview()}
                     type={getShowTagType()}
                     changeType={changeShowTagType}
@@ -1087,7 +1142,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                  {getShowTagview() && (
                         <RangeControl
-                            label={__('Number of Tags', 'post-grid')}
+                            label={__('Number of Tags', 'vayu-blocks')}
                             value={pg_numberOfTags}
                             onChange={(value) => setAttributes({pg_numberOfTags:value})}
                             min={1}
@@ -1098,9 +1153,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
             </ResponsiveControl>
             </PanelBody>
 
-            <PanelBody title={__('Pagination', 'post-grid')} initialOpen={false}>
+            <PanelBody title={__('Pagination', 'vayu-blocks')} initialOpen={false}>
                 <ToggleControl
-                    label={__('Show Pagination', 'post-grid')}
+                    label={__('Show Pagination', 'vayu-blocks')}
                     checked={showpagination}
                     onChange={(value) => setAttributes({
                         showpagination:value
@@ -1111,7 +1166,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                    
                     <h4>Text Color</h4>
                     <ColorPalette
-                        label={__('Color', 'post-grid')}
+                        label={__('Color', 'vayu-blocks')}
                         colors={colors}
                         value={pg_PaginationColor}
                         onChange={(color) => setAttributes({ pg_PaginationColor: color })}
@@ -1123,7 +1178,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({ pg_PaginationSize: value })}
                     />
 
-                    <h4>{__('Background Color', 'post-grid')}</h4>
+                    <h4>{__('Background Color', 'vayu-blocks')}</h4>
                     <BackgroundSelectorControl
                         backgroundType={pg_PaginationbackgroundType}
                         backgroundColor={pg_PaginationbackgroundColor}
@@ -1133,10 +1188,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
                      />
 
-                                                <h4>Border</h4>
-                                
 									<BorderBoxControlComponent
-										label={__('Border','post-grid')}
+										label={__('Border','vayu-blocks')}
 										value={{
 											all: {
 												color: attributes.pg_paginationBorderColor,
@@ -1169,7 +1222,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 									/>
 								
 									<BorderBoxControlComponent
-												label={__('Border Radius', 'post-grid')}
+												label={__('Border Radius', 'vayu-blocks')}
 												value={{
 												top: attributes.pg_paginationTopBorderRadius,
 												right: attributes.pg_paginationRightBorderRadius,
@@ -1179,7 +1232,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 												onChange={handlepaginationBorderRadiusChange}
 												type="borderRadius"
 									/>
-                     <ResponsiveControl label={__('Padding', 'post-grid')}>
+                     <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
                             <UnitChooser
                                 value={attributes.pg_PaginationpaddingUnit}
                                 onClick={(unit) => {
@@ -1194,10 +1247,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 max={100} // Adjust as needed
                                 onChange={changePaginationPadding}
                                 options={[
-                                { label: __('Top', 'post-grid'), type: 'top', value: getPaginationPadding('top') },
-                                { label: __('Right', 'post-grid'), type: 'right', value: getPaginationPadding('right') },
-                                { label: __('Bottom', 'post-grid'), type: 'bottom', value: getPaginationPadding('bottom') },
-                                { label: __('Left', 'post-grid'), type: 'left', value: getPaginationPadding('left') }
+                                { label: __('Top', 'vayu-blocks'), type: 'top', value: getPaginationPadding('top') },
+                                { label: __('Right', 'vayu-blocks'), type: 'right', value: getPaginationPadding('right') },
+                                { label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getPaginationPadding('bottom') },
+                                { label: __('Left', 'vayu-blocks'), type: 'left', value: getPaginationPadding('left') }
                                 ]}
                             />
                     </ResponsiveControl>

@@ -3,7 +3,7 @@ jQuery(function($) {
         e.preventDefault();
           // Remove old pagination controls
         $('.pagination').remove();
-
+    
         var href = $(this).attr('href');
         var pageMatch = href.match(/page\/(\d+)/);
         var page = pageMatch ? parseInt(pageMatch[1]) : 1;
@@ -30,10 +30,10 @@ jQuery(function($) {
                 $newPagination.each(function() {
                    $(this).insertAfter('.th-post-grid-wrapper');
                });
-
-
+               
             },
             error: function(xhr, status, error) {
+              
                 console.error('AJAX Error:', error);
             }
         });

@@ -1,6 +1,7 @@
 import { useState } from '@wordpress/element';
 import { __experimentalBorderBoxControl as BorderBoxControl, __experimentalBoxControl as BoxControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import flex from '@wordpress/components/build-types/flex/flex';
 
 const colors = [
   { color: '#72aee6', name: 'Blue 20' },
@@ -56,14 +57,16 @@ const BorderBoxControlComponent = ({
     <>
     {type === 'border' ? (
       <BorderBoxControl
-       // label={__('Border', 'post-grid')}
+      style={{gap:'30px',display: 'flex',
+      flexDirection: 'column', marginBottom:'25px'}}
+       label={__('Border', 'vayu-blocks')}
         colors={colors}
         onChange={handleChange}
         value={borders}
       />
     ) : (
       <BoxControl
-        label={__('Border Radius', 'text-domain')}
+        label={__('Border Radius', 'vayu-blocks')}
         values={borderRadius}
         onChange={handleChange}
       />

@@ -24,6 +24,7 @@ import { useSelect } from '@wordpress/data';
 const Editor = ({ attributes, setAttributes }) => {
 
 const {
+	pg_ContentWeight,
 	pg_spacing,
 	pg_numberOfTags,
 	pg_numberOfCategories,
@@ -231,28 +232,28 @@ const pick = (object, keys) => {
 	};
 
 const fontSizes = [
-	{ name: __('Small', 'post-grid'), slug: 'small', size: 10 },
-	{ name: __('Medium', 'post-grid'), slug: 'medium', size: 14 },
-	{ name: __('Large', 'post-grid'), slug: 'large', size: 16 },
-	{ name: __('Larger', 'post-grid'), slug: 'larger', size: 18 },
+	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 10 },
+	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 14 },
+	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 16 },
+	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 18 },
 ];
 const fontSizesmeta =   [
-	{ name: __('Small', 'post-grid'), slug: 'small', size: 8 },
-	{ name: __('Medium', 'post-grid'), slug: 'medium', size: 12 },
-	{ name: __('Large', 'post-grid'), slug: 'large', size: 16 },
-	{ name: __('Larger', 'post-grid'), slug: 'larger', size: 18},
+	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 8 },
+	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 12 },
+	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 16 },
+	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 18},
 ];
 const fontSizeextra =   [
-	{ name: __('Small', 'post-grid'), slug: 'small', size: 18 },
-	{ name: __('Medium', 'post-grid'), slug: 'medium', size: 22 },
-	{ name: __('Large', 'post-grid'), slug: 'large', size: 25 },
-	{ name: __('Larger', 'post-grid'), slug: 'larger', size: 28},
+	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 18 },
+	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 22 },
+	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 25 },
+	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28},
 ];
 const fontSizesauthor= [
-	{ name: __('Small', 'post-grid'), slug: 'small', size: 10 },
-	{ name: __('Medium', 'post-grid'), slug: 'medium', size: 14},
-	{ name: __('Large', 'post-grid'), slug: 'large', size: 18 },
-	{ name: __('Larger', 'post-grid'), slug: 'larger', size: 24},
+	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 10 },
+	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 14},
+	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 18 },
+	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 24},
 ];
 const colors = [
 	{ name: 'Gray', color: '#808080' },         // Dark Gray
@@ -781,7 +782,7 @@ const handletagBorderRadiusChange = (newValues) => {
 
     return (
         <>
-          <PanelBody title={__('Layout', 'post-grid')} initialOpen={false}>
+          <PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
 						<h4>Background Color</h4>
 							<BackgroundSelectorControl
 								backgroundType={layout_backgroundType}
@@ -806,9 +807,9 @@ const handletagBorderRadiusChange = (newValues) => {
 								changeFocalPoint={(value) => setAttributes({ layout_backgroundPosition: value })}
 								changeBackgroundSize={(value) => setAttributes({ layout_backgroundSize: value })}
 						/>
-						<h4>Border</h4>
+					
 						<BorderBoxControlComponent
-							label={__('Border','post-grid')}
+							label={__('Border','vayu-blocks')}
 							value={{
 								all: {
 									color: attributes.pg_layoutBorderColor,
@@ -841,7 +842,7 @@ const handletagBorderRadiusChange = (newValues) => {
 						/>
 						
 							<BorderBoxControlComponent
-									label={__('Border Radius', 'post-grid')}
+									label={__('Border Radius', 'vayu-blocks')}
 									value={{
 									top: attributes.pg_postTopBorderRadius,
 									right: attributes.pg_postRightBorderRadius,
@@ -853,7 +854,7 @@ const handletagBorderRadiusChange = (newValues) => {
 								/>
 
 						<RangeControl
-							label={__('Spacing', 'post-grid')}
+							label={__('Spacing', 'vayu-blocks')}
 							value={pg_spacing}
 							onChange={(value) => setAttributes({ pg_spacing: value })}
 							min={1}
@@ -861,7 +862,7 @@ const handletagBorderRadiusChange = (newValues) => {
 							step={1}
 						/>
 
-					<ResponsiveControl label={__('Padding', 'post-grid')}>
+					<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
 						<UnitChooser
 							value={attributes.pg_layoutpaddingUnit}
 							onClick={(unit) => {
@@ -876,19 +877,33 @@ const handletagBorderRadiusChange = (newValues) => {
 							max={100} // Adjust as needed
 							onChange={changeLayoutPadding}
 							options={[
-							{ label: __('Top', 'post-grid'), type: 'top', value: getLayoutPadding('top') },
-							{ label: __('Right', 'post-grid'), type: 'right', value: getLayoutPadding('right') },
-							{ label: __('Bottom', 'post-grid'), type: 'bottom', value: getLayoutPadding('bottom') },
-							{ label: __('Left', 'post-grid'), type: 'left', value: getLayoutPadding('left') }
+							{ label: __('Top', 'vayu-blocks'), type: 'top', value: getLayoutPadding('top') },
+							{ label: __('Right', 'vayu-blocks'), type: 'right', value: getLayoutPadding('right') },
+							{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getLayoutPadding('bottom') },
+							{ label: __('Left', 'vayu-blocks'), type: 'left', value: getLayoutPadding('left') }
 							]}
 						/>
 					</ResponsiveControl>
 			</PanelBody>
 
-			<PanelBody title={__('Title', 'post-grid')} initialOpen={false}>
-			<h4>Color</h4>
+			<PanelBody title={__('Title', 'vayu-blocks')} initialOpen={false}>
+				<h4>Title</h4>
+
+				<SelectControl
+					label={__('Title Tag', 'text-domain')}
+					value={attributes.pg_blockTitleTag}
+					options={[
+						{ label: __('Heading 1', 'text-domain'), value: 'h1' },
+						{ label: __('Heading 2', 'text-domain'), value: 'h2' },
+						{ label: __('Heading 3', 'text-domain'), value: 'h3' },
+						{ label: __('Heading 4', 'text-domain'), value: 'h4' },
+					]}
+					onChange={(value) => setAttributes({ pg_blockTitleTag: value })}
+				/>
+
+				<h4>Color</h4>
 				<ColorPalette
-					label={__(' Color', 'post-grid')}
+					label={__(' Color', 'vayu-blocks')}
 					colors={colors}
 					value={pg_TitleColor}
 					onChange={(color) => setAttributes({ pg_TitleColor: color })}
@@ -902,7 +917,7 @@ const handletagBorderRadiusChange = (newValues) => {
 				/>
 				<br />
 				<RangeControl
-					label={__('Line Height', 'post-grid')}
+					label={__('Line Height', 'vayu-blocks')}
 					value={pg_TitlelineHeight}
 					onChange={(value) => setAttributes({ pg_TitlelineHeight: value })}
 					min={1}
@@ -912,14 +927,8 @@ const handletagBorderRadiusChange = (newValues) => {
 
 			</PanelBody>
 			
-			<PanelBody title={__('Content', 'post-grid')} initialOpen={false}>
-				<h4>Color</h4>
-				<ColorPalette
-					label={__(' Color', 'post-grid')}
-					colors={colors}
-					value={pg_textColor}
-					onChange={(color) => setAttributes({ pg_textColor: color })}
-				/>
+			<PanelBody title={__('Content', 'vayu-blocks')} initialOpen={false}>
+				<h4>Content</h4>
 				<h4> Font Size</h4>
 				<FontSizePicker
 					label={__(' Font Size', 'Post_blockk')}
@@ -927,20 +936,44 @@ const handletagBorderRadiusChange = (newValues) => {
 					value={pg_textSize}
 					onChange={(value) => setAttributes({ pg_textSize: value })}
 				/>
-				<br />
+						<br />
+				<SelectControl
+					label={__('Font Weight', 'text-domain')}
+					value={attributes.pg_ContentWeight}
+					options={[
+						{ label: __('Normal', 'text-domain'), value: 'normal' },
+						{ label: __('Bold', 'text-domain'), value: 'bold' },
+						{ label: __('Lighter', 'text-domain'), value: 'lighter' },
+						{ label: __('Bolder', 'text-domain'), value: 'bolder' },
+					]}
+					onChange={(value) => setAttributes({ pg_ContentWeight: value })}
+				/>
+				
+			
 				<RangeControl
-					label={__('Line Height', 'post-grid')}
+					label={__('Line Height', 'vayu-blocks')}
 					value={pg_lineHeight}
 					onChange={(value) => setAttributes({ pg_lineHeight: value })}
 					min={1}
 					max={3}
 					step={0.1}
 				/>
+				<h4>Color</h4>
+				<ColorPalette
+					label={__(' Color', 'vayu-blocks')}
+					colors={colors}
+					value={pg_textColor}
+					onChange={(color) => setAttributes({ pg_textColor: color })}
+				/>
+
+				
+
 			</PanelBody>
 
-			<PanelBody title={__('Featured Image', 'post-grid')} initialOpen={false}>
+			<PanelBody title={__('Featured Image', 'vayu-blocks')} initialOpen={false}>
+				<h4>Featured Image</h4>
 				<ToggleControl
-					label={__('Show Featured Image', 'post-grid')}
+					label={__('Show Featured Image', 'vayu-blocks')}
 					checked={pg_showFeaturedImage}
 					onChange={(value) => {
 						setAttributes({ pg_showFeaturedImage: value });
@@ -953,7 +986,7 @@ const handletagBorderRadiusChange = (newValues) => {
 				/>
 				{pg_showFeaturedImage && (
 					<RangeControl
-						label={__('Border Radius', 'post-grid')}
+						label={__('Border Radius', 'vayu-blocks')}
 						value={pg_imageBorderRadius}
 						onChange={(value) => setAttributes({ pg_imageBorderRadius: value })}
 						min={0}
@@ -962,382 +995,328 @@ const handletagBorderRadiusChange = (newValues) => {
 				)}
 			</PanelBody>
 			
-            < >
-					<div style={{
-						borderTop: "0.8px solid rgba(128, 128, 128, 0.209)",
-						borderBottom: "0.8px solid rgba(128, 128, 128, 0.209)",
-						paddingLeft:"17px",
-						marginTop:'0px',
-						position:"relative"
-						
-						}}>
-						<h4>Meta</h4>
-						<div style={{
-								marginTop:"-45px",
-								marginLeft:"78%",
-								position:"absolute"
-							}}>
-									<DropdownMenu
-									icon={moreVertical}
-										controls={[
-											{
-												onClick: () => {setAttributes({pg_showCategoriesMenu: !pg_showCategoriesMenu,})},
-												title: pg_showCategoriesMenu ? __('Category ✔', 'post-grid') : __('Category', 'post-grid'),
-												hidden: pg_showCategoriesMenu,
-												 // Hide if Category panel is already open
-											},
-											{
-												onClick: () => {setAttributes({pg_showTagsMenu: !pg_showTagsMenu})},
-												title: pg_showTagsMenu ? __('Tag ✔', 'post-grid') : __('Tag', 'post-grid'),
-												hidden: pg_showTagsMenu, // Hide if Tag panel is already open
-											},
-											{
-												onClick: () => {setAttributes({pg_showAuthorMenu:!pg_showAuthorMenu})},
-												title: pg_showAuthorMenu ? __('Author ✔', 'post-grid') : __('Author', 'post-grid'),
-												hidden: pg_showAuthorMenu, // Hide if Author panel is already open
-											},
-											{
-												onClick: () => {setAttributes({pg_showDateMenu:!pg_showDateMenu})},
-												title: pg_showDateMenu ? __('Date ✔', 'post-grid') : __('Date', 'post-grid'),
-												hidden: pg_showDateMenu, // Hide if Author panel is already open
-											},
+			<PanelBody title = {__('Category','vayu-blocks')} initialOpen={false}> {/* Category Meta Settings */}
+				<h2>Category</h2>
+				<ToggleControl
+				label={__('Show Categories', 'vayu-blocks')}
+				checked={pg_showCategories}
+				onChange={(value) => setAttributes({ pg_showCategories: value })}
+			/>
+			{pg_showCategories && (<>
 
-										]}
-										label={__('Select a Meta Option', 'post-grid')}
-									/>
-									</div>
-				</div>
-									
-									
-									{pg_showCategoriesMenu && (
-										<PanelBody title = {__('Category','post-grid')} > {/* Category Meta Settings */}
-										    <h2>Category</h2>
-											<ToggleControl
-											label={__('Show Categories', 'post-grid')}
-											checked={pg_showCategories}
-											onChange={(value) => setAttributes({ pg_showCategories: value })}
-										/>
-										{pg_showCategories && (<>
+				<RangeControl
+						label={__('Number of Categories', 'vayu-blocks')}
+						value={pg_numberOfCategories}
+						onChange={(value) => setAttributes({pg_numberOfCategories:value})}
+						min={1}
+						max={5}
+					/>
 
-											<RangeControl
-													label={__('Number of Categories', 'post-grid')}
-													value={pg_numberOfCategories}
-													onChange={(value) => setAttributes({pg_numberOfCategories:value})}
-													min={1}
-													max={5}
-												/>
+				<h4>{__('Font Size', 'vayu-blocks')}</h4>
+				<FontSizePicker
+					label={__('Font Size', 'vayu-blocks')}
+					fontSizes={fontSizesmeta}
+					value={pg_categoryTextSize}
+					onChange={(value) => setAttributes({ pg_categoryTextSize: value })}
+				/>
+				<h4>{__('Color', 'vayu-blocks')}</h4>
+				<ColorPalette
+					label={__('Color', 'vayu-blocks')}
+					colors={colors}
+					value={pg_categoryTextColor}
+					onChange={(color) => setAttributes({ pg_categoryTextColor: color })}
+				/>
+				<h4>{__('Background Color', 'vayu-blocks')}</h4>
+				<BackgroundSelectorControl
+					backgroundType={category_backgroundType}
+					backgroundColor={category_backgroundColor}
+					gradient={category_backgroundGradient}
+					focalPoint={category_backgroundPosition}
+					backgroundAttachment={category_backgroundAttachment}
+					backgroundRepeat={category_backgroundRepeat}
+					backgroundSize={category_backgroundSize}
+					changeBackgroundType={(value) => setAttributes({ category_backgroundType: value })}
+					changeColor={(value) => setAttributes({ category_backgroundColor: value })}
+					changeGradient={(value) => setAttributes({ category_backgroundGradient: value })}
+					changeBackgroundAttachment={(value) => setAttributes({ category_backgroundAttachment: value })}
+					changeBackgroundRepeat={(value) => setAttributes({ category_backgroundRepeat: value })}
+					changeFocalPoint={(value) => setAttributes({ category_backgroundPosition: value })}
+					changeBackgroundSize={(value) => setAttributes({ category_backgroundSize: value })}
+				/>
 
-											<h4>{__('Font Size', 'post-grid')}</h4>
-											<FontSizePicker
-												label={__('Font Size', 'post-grid')}
-												fontSizes={fontSizesmeta}
-												value={pg_categoryTextSize}
-												onChange={(value) => setAttributes({ pg_categoryTextSize: value })}
-											/>
-											<h4>{__('Color', 'post-grid')}</h4>
-											<ColorPalette
-												label={__('Color', 'post-grid')}
-												colors={colors}
-												value={pg_categoryTextColor}
-												onChange={(color) => setAttributes({ pg_categoryTextColor: color })}
-											/>
-											<h4>{__('Background Color', 'post-grid')}</h4>
-											<BackgroundSelectorControl
-												backgroundType={category_backgroundType}
-												backgroundColor={category_backgroundColor}
-												gradient={category_backgroundGradient}
-												focalPoint={category_backgroundPosition}
-												backgroundAttachment={category_backgroundAttachment}
-												backgroundRepeat={category_backgroundRepeat}
-												backgroundSize={category_backgroundSize}
-												changeBackgroundType={(value) => setAttributes({ category_backgroundType: value })}
-												changeColor={(value) => setAttributes({ category_backgroundColor: value })}
-												changeGradient={(value) => setAttributes({ category_backgroundGradient: value })}
-												changeBackgroundAttachment={(value) => setAttributes({ category_backgroundAttachment: value })}
-												changeBackgroundRepeat={(value) => setAttributes({ category_backgroundRepeat: value })}
-												changeFocalPoint={(value) => setAttributes({ category_backgroundPosition: value })}
-												changeBackgroundSize={(value) => setAttributes({ category_backgroundSize: value })}
-											/>
+	
+		<BorderBoxControlComponent
+			label={__('Border','vayu-blocks')}
+			value={{
+				all: {
+					color: attributes.pg_categoryBorderColor,
+					width: attributes.pg_categoryBorder,
+					style: attributes.categoryborderType,
+				},
+				top: {
+					color: attributes.pg_categoryTopBorderColor,
+					width: attributes.pg_categoryTopBorder,
+					style: attributes.categoryTopborderType,
+				},
+				bottom: {
+					color: attributes.pg_categoryBottomBorderColor,
+					width: attributes.pg_categoryBottomBorder,
+					style: attributes.categoryBottomborderType,
+				},
+				left: {
+					color: attributes.pg_categoryLeftBorderColor,
+					width: attributes.pg_categoryLeftBorder,
+					style: attributes.categoryLeftborderType,
+				},
+				right: {
+					color: attributes.pg_categoryRightBorderColor,
+					width: attributes.pg_categoryRightBorder,
+					style: attributes.categoryRightborderType,
+				},
+			}}
+			onChange={handlecategoryBorderChange}
+			type="border"
+		/>
+		
+			<BorderBoxControlComponent
+					label={__('Border Radius', 'vayu-blocks')}
+					value={{
+					top: attributes.pg_categoryTopBorderRadius,
+					right: attributes.pg_categoryRightBorderRadius,
+					left: attributes.pg_categoryLeftBorderRadius,
+					bottom: attributes.pg_categoryBottomBorderRadius,
+					}}
+					onChange={handlecategoryBorderRadiusChange}
+					type="borderRadius"
+				/>
+			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+				<UnitChooser
+					value={attributes.categorypaddingUnit}
+					onClick={(unit) => {
+					setAttributes({ categorypaddingUnit: unit });
+					}}
+					units={['px', 'em', '%']}
+				/>
+				<SizingControl
+					min={0}
+					type={getCategoryPaddingType()}
+					changeType={changeCategoryPaddingType}
+					max={100} // Adjust as needed
+					onChange={changeCategoryPadding}
+					options={[
+					{ label: __('Top', 'vayu-blocks'), type: 'top', value: getCategoryPadding('top') },
+					{ label: __('Right', 'vayu-blocks'), type: 'right', value: getCategoryPadding('right') },
+					{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getCategoryPadding('bottom') },
+					{ label: __('Left', 'vayu-blocks'), type: 'left', value: getCategoryPadding('left') }
+					]}
+				/>
+			</ResponsiveControl>
+								
+			</>)}
+			</PanelBody>
 
-									<h4>Border</h4>
-									<BorderBoxControlComponent
-										label={__('Border','post-grid')}
-										value={{
-											all: {
-												color: attributes.pg_categoryBorderColor,
-												width: attributes.pg_categoryBorder,
-												style: attributes.categoryborderType,
-											},
-											top: {
-												color: attributes.pg_categoryTopBorderColor,
-												width: attributes.pg_categoryTopBorder,
-												style: attributes.categoryTopborderType,
-											},
-											bottom: {
-												color: attributes.pg_categoryBottomBorderColor,
-												width: attributes.pg_categoryBottomBorder,
-												style: attributes.categoryBottomborderType,
-											},
-											left: {
-												color: attributes.pg_categoryLeftBorderColor,
-												width: attributes.pg_categoryLeftBorder,
-												style: attributes.categoryLeftborderType,
-											},
-											right: {
-												color: attributes.pg_categoryRightBorderColor,
-												width: attributes.pg_categoryRightBorder,
-												style: attributes.categoryRightborderType,
-											},
-										}}
-										onChange={handlecategoryBorderChange}
-										type="border"
-									/>
-									
-										<BorderBoxControlComponent
-												label={__('Border Radius', 'post-grid')}
-												value={{
-												top: attributes.pg_categoryTopBorderRadius,
-												right: attributes.pg_categoryRightBorderRadius,
-												left: attributes.pg_categoryLeftBorderRadius,
-												bottom: attributes.pg_categoryBottomBorderRadius,
-												}}
-												onChange={handlecategoryBorderRadiusChange}
-												type="borderRadius"
-											/>
-										<ResponsiveControl label={__('Padding', 'post-grid')}>
-											<UnitChooser
-												value={attributes.categorypaddingUnit}
-												onClick={(unit) => {
-												setAttributes({ categorypaddingUnit: unit });
-												}}
-												units={['px', 'em', '%']}
-											/>
-											<SizingControl
-												min={0}
-												type={getCategoryPaddingType()}
-												changeType={changeCategoryPaddingType}
-												max={100} // Adjust as needed
-												onChange={changeCategoryPadding}
-												options={[
-												{ label: __('Top', 'post-grid'), type: 'top', value: getCategoryPadding('top') },
-												{ label: __('Right', 'post-grid'), type: 'right', value: getCategoryPadding('right') },
-												{ label: __('Bottom', 'post-grid'), type: 'bottom', value: getCategoryPadding('bottom') },
-												{ label: __('Left', 'post-grid'), type: 'left', value: getCategoryPadding('left') }
-												]}
-											/>
-										</ResponsiveControl>
-															
-										</>)}
-										</PanelBody>
-									)}
-
-									{/* Tag Panel */}
-									{pg_showTagsMenu  && (
-									  <PanelBody title = {__('Tags','post-grid')}>
-										<h2>Tags</h2>
-										
-											<ToggleControl
-												label={__('Show Tags', 'post-grid')}
-												checked={pg_showTags}
-												onChange={(value) => setAttributes({ pg_showTags: value })}
-											/>
-										{/* Tag Meta Settings */}
-										{pg_showTags && (<>
-											<RangeControl
-												label={__('Number of Tags', 'post-grid')}
-												value={pg_numberOfTags}
-												onChange={(value) => setAttributes({pg_numberOfTags:value})}
-												min={1}
-												max={5}
-											/>
-											
-										<h4>{__('Font Size', 'post-grid')}</h4>
-										<FontSizePicker
-										  label={__('Font Size', 'post-grid')}
-										  fontSizes={fontSizesmeta}
-										  value={pg_tagTextSize}
-										  onChange={(value) => setAttributes({ pg_tagTextSize: value })}
-										/>
-										<h4>{__('Color', 'post-grid')}</h4>
-										<ColorPalette
-										  
-										  label={__('Color', 'post-grid')}
-										  colors={colors}
-										  value={pg_tagTextColor}
-										  onChange={(color) => setAttributes({ pg_tagTextColor: color })}
-										/>
-										<h4>{__('Background Color', 'post-grid')}</h4>
-										<BackgroundSelectorControl
-											backgroundType={tag_backgroundType}
-											backgroundColor={tag_backgroundColor}
-											
-											gradient={tag_backgroundGradient}
-											focalPoint={tag_backgroundPosition}
-											backgroundAttachment={tag_backgroundAttachment}
-											backgroundRepeat={tag_backgroundRepeat}
-											backgroundSize={tag_backgroundSize}
-											changeBackgroundType={(value) => setAttributes({ tag_backgroundType: value })}
-											changeColor={(value) => setAttributes({ tag_backgroundColor: value })}
-											changeGradient={(value) => setAttributes({ tag_backgroundGradient: value })}
-											changeBackgroundAttachment={(value) => setAttributes({ tag_backgroundAttachment: value })}
-											changeBackgroundRepeat={(value) => setAttributes({ tag_backgroundRepeat: value })}
-											changeFocalPoint={(value) => setAttributes({ tag_backgroundPosition: value })}
-											changeBackgroundSize={(value) => setAttributes({ tag_backgroundSize: value })}
-										/>
+			{/* Tag Panel */}
+			<PanelBody title = {__('Tags','vayu-blocks')} initialOpen={false}>
+			<h2>Tags</h2>
+			
+				<ToggleControl
+					label={__('Show Tags', 'vayu-blocks')}
+					checked={pg_showTags}
+					onChange={(value) => setAttributes({ pg_showTags: value })}
+				/>
+			{/* Tag Meta Settings */}
+			{pg_showTags && (<>
+				<RangeControl
+					label={__('Number of Tags', 'vayu-blocks')}
+					value={pg_numberOfTags}
+					onChange={(value) => setAttributes({pg_numberOfTags:value})}
+					min={1}
+					max={5}
+				/>
+				
+			<h4>{__('Font Size', 'vayu-blocks')}</h4>
+			<FontSizePicker
+				label={__('Font Size', 'vayu-blocks')}
+				fontSizes={fontSizesmeta}
+				value={pg_tagTextSize}
+				onChange={(value) => setAttributes({ pg_tagTextSize: value })}
+			/>
+			<h4>{__('Color', 'vayu-blocks')}</h4>
+			<ColorPalette
+				
+				label={__('Color', 'vayu-blocks')}
+				colors={colors}
+				value={pg_tagTextColor}
+				onChange={(color) => setAttributes({ pg_tagTextColor: color })}
+			/>
+			<h4>{__('Background Color', 'vayu-blocks')}</h4>
+			<BackgroundSelectorControl
+				backgroundType={tag_backgroundType}
+				backgroundColor={tag_backgroundColor}
+				
+				gradient={tag_backgroundGradient}
+				focalPoint={tag_backgroundPosition}
+				backgroundAttachment={tag_backgroundAttachment}
+				backgroundRepeat={tag_backgroundRepeat}
+				backgroundSize={tag_backgroundSize}
+				changeBackgroundType={(value) => setAttributes({ tag_backgroundType: value })}
+				changeColor={(value) => setAttributes({ tag_backgroundColor: value })}
+				changeGradient={(value) => setAttributes({ tag_backgroundGradient: value })}
+				changeBackgroundAttachment={(value) => setAttributes({ tag_backgroundAttachment: value })}
+				changeBackgroundRepeat={(value) => setAttributes({ tag_backgroundRepeat: value })}
+				changeFocalPoint={(value) => setAttributes({ tag_backgroundPosition: value })}
+				changeBackgroundSize={(value) => setAttributes({ tag_backgroundSize: value })}
+			/>
 
 
-									<h4>Border</h4>
-									<BorderBoxControlComponent
-										label={__('Border','post-grid')}
-										value={{
-											all: {
-												color: attributes.pg_tagBorderColor,
-												width: attributes.pg_tagBorder,
-												style: attributes.tagborderType,
-											},
-											top: {
-												color: attributes.pg_tagTopBorderColor,
-												width: attributes.pg_tagTopBorder,
-												style: attributes.tagTopborderType,
-											},
-											bottom: {
-												color: attributes.pg_tagBottomBorderColor,
-												width: attributes.pg_tagBottomBorder,
-												style: attributes.tagBottomborderType,
-											},
-											left: {
-												color: attributes.pg_tagLeftBorderColor,
-												width: attributes.pg_tagLeftBorder,
-												style: attributes.tagLeftborderType,
-											},
-											right: {
-												color: attributes.pg_tagRightBorderColor,
-												width: attributes.pg_tagRightBorder,
-												style: attributes.tagRightborderType,
-											},
-										}}
-										onChange={handletagBorderChange}
-										type="border"
-									/>
-						
-										<BorderBoxControlComponent
-												label={__('Border Radius', 'post-grid')}
-												value={{
-												top: attributes.pg_tagTopBorderRadius,
-												right: attributes.pg_tagRightBorderRadius,
-												left: attributes.pg_tagLeftBorderRadius,
-												bottom: attributes.pg_tagBottomBorderRadius,
-												}}
-												onChange={handletagBorderRadiusChange}
-												type="borderRadius"
-											/>
+	
+		<BorderBoxControlComponent
+			label={__('Border','vayu-blocks')}
+			value={{
+				all: {
+					color: attributes.pg_tagBorderColor,
+					width: attributes.pg_tagBorder,
+					style: attributes.tagborderType,
+				},
+				top: {
+					color: attributes.pg_tagTopBorderColor,
+					width: attributes.pg_tagTopBorder,
+					style: attributes.tagTopborderType,
+				},
+				bottom: {
+					color: attributes.pg_tagBottomBorderColor,
+					width: attributes.pg_tagBottomBorder,
+					style: attributes.tagBottomborderType,
+				},
+				left: {
+					color: attributes.pg_tagLeftBorderColor,
+					width: attributes.pg_tagLeftBorder,
+					style: attributes.tagLeftborderType,
+				},
+				right: {
+					color: attributes.pg_tagRightBorderColor,
+					width: attributes.pg_tagRightBorder,
+					style: attributes.tagRightborderType,
+				},
+			}}
+			onChange={handletagBorderChange}
+			type="border"
+		/>
 
-										<h4>Padding</h4>
-										<ResponsiveControl label={__('Padding', 'post-grid')}>
-						<UnitChooser
-							value={attributes.tagpaddingUnit}
-							onClick={(unit) => {
-							setAttributes({ tagpaddingUnit: unit });
-							}}
-							units={['px', 'em', '%']}
-						/>
-						<SizingControl
-							min={0}
-							type={getTagPaddingType()}
-							changeType={changeTagPaddingType}
-							max={100} // Adjust as needed
-							onChange={changeTagPadding}
-							options={[
-							{ label: __('Top', 'post-grid'), type: 'top', value: getTagPadding('top') },
-							{ label: __('Right', 'post-grid'), type: 'right', value: getTagPadding('right') },
-							{ label: __('Bottom', 'post-grid'), type: 'bottom', value: getTagPadding('bottom') },
-							{ label: __('Left', 'post-grid'), type: 'left', value: getTagPadding('left') }
-							]}
-						/>
-					</ResponsiveControl>
-									</>)}
-									  </PanelBody>
-									)}
-								  
-									{/* Author Panel */}
-									{pg_showAuthorMenu  && (
-									  <PanelBody title = {__('Author','post-grid')}>
-										<h2>Author</h2>
-										<ToggleControl
-												label={__('Show Author', 'post-grid')}
-												checked={pg_showAuthor}
-												onChange={(value) => setAttributes({ pg_showAuthor: value })}
-										/>
-										{(pg_showAuthor) && (	
-											<>
-										{/* Author Meta Settings */}
-										<h4>{__('Font Size', 'post-grid')}</h4>
-										<FontSizePicker
-										  label={__('Font Size', 'post-grid')}
-										  fontSizes={fontSizesauthor}
-										  value={pg_authorTextSize}
-										  onChange={(value) => setAttributes({ pg_authorTextSize: value })}
-										/>
-										<h4>{__('Color', 'post-grid')}</h4>
-										<ColorPalette
-										  label={__('Color', 'post-grid')}
-										  colors={colors}
-										  value={pg_authorTextColor}
-										  onChange={(color) => setAttributes({ pg_authorTextColor: color })}
-										/>
-										<RangeControl
-										  label={__('Image Scale', 'post-grid')}
-										  value={pg_authorImageScale}
-										  onChange={(value) => setAttributes({ pg_authorImageScale: value })}
-										  min={0.5} // Minimum scale value
-										  max={2}   // Maximum scale value
-										  step={0.1} // Step increment
-										/>
-										</>
-									)}
-									  </PanelBody>
-									)}
+			<BorderBoxControlComponent
+					label={__('Border Radius', 'vayu-blocks')}
+					value={{
+					top: attributes.pg_tagTopBorderRadius,
+					right: attributes.pg_tagRightBorderRadius,
+					left: attributes.pg_tagLeftBorderRadius,
+					bottom: attributes.pg_tagBottomBorderRadius,
+					}}
+					onChange={handletagBorderRadiusChange}
+					type="borderRadius"
+				/>
 
-									{/* Date Panel */}
-									{pg_showDateMenu  && (
-									  <PanelBody title = {__('Date','post-grid')}>
-										<h2>Date</h2>
-											<ToggleControl
-												label={__('Show Date', 'post-grid')}
-												checked={pg_showDate}
-												onChange={(value) => setAttributes({ pg_showDate: value })}
-											/>
-										{pg_showDate && (<>
-										{/* Date Meta Settings */}
-										<h4>{__('Font Size', 'post-grid')}</h4>
-										<FontSizePicker
-										  label={__('Font Size', 'post-grid')}
-										  fontSizes={fontSizesauthor}
-										  value={pg_dateTextSize}
-										  onChange={(value) => setAttributes({ pg_dateTextSize: value })}
-										/>
-										<h4>{__('Color', 'post-grid')}</h4>
-										<ColorPalette
-										 
-										  label={__('Color', 'post-grid')}
-										  colors={colors}
-										  value={pg_dateColor}
-										  onChange={(color) => setAttributes({pg_dateColor: color })}
-										/>
+			<h4>Padding</h4>
+			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+<UnitChooser
+value={attributes.tagpaddingUnit}
+onClick={(unit) => {
+setAttributes({ tagpaddingUnit: unit });
+}}
+units={['px', 'em', '%']}
+/>
+<SizingControl
+min={0}
+type={getTagPaddingType()}
+changeType={changeTagPaddingType}
+max={100} // Adjust as needed
+onChange={changeTagPadding}
+options={[
+{ label: __('Top', 'vayu-blocks'), type: 'top', value: getTagPadding('top') },
+{ label: __('Right', 'vayu-blocks'), type: 'right', value: getTagPadding('right') },
+{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getTagPadding('bottom') },
+{ label: __('Left', 'vayu-blocks'), type: 'left', value: getTagPadding('left') }
+]}
+/>
+</ResponsiveControl>
+		</>)}
+			</PanelBody>
+		
+			{/* Author Panel */}
+			<PanelBody title = {__('Author','vayu-blocks')} initialOpen={false}>
+			<h2>Author</h2>
+			<ToggleControl
+					label={__('Show Author', 'vayu-blocks')}
+					checked={pg_showAuthor}
+					onChange={(value) => setAttributes({ pg_showAuthor: value })}
+			/>
+			{(pg_showAuthor) && (	
+				<>
+			{/* Author Meta Settings */}
+			<h4>{__('Font Size', 'vayu-blocks')}</h4>
+			<FontSizePicker
+				label={__('Font Size', 'vayu-blocks')}
+				fontSizes={fontSizesauthor}
+				value={pg_authorTextSize}
+				onChange={(value) => setAttributes({ pg_authorTextSize: value })}
+			/>
+			<h4>{__('Color', 'vayu-blocks')}</h4>
+			<ColorPalette
+				label={__('Color', 'vayu-blocks')}
+				colors={colors}
+				value={pg_authorTextColor}
+				onChange={(color) => setAttributes({ pg_authorTextColor: color })}
+			/>
+			<RangeControl
+				label={__('Image Scale', 'vayu-blocks')}
+				value={pg_authorImageScale}
+				onChange={(value) => setAttributes({ pg_authorImageScale: value })}
+				min={0.5} // Minimum scale value
+				max={2}   // Maximum scale value
+				step={0.1} // Step increment
+			/>
+			</>
+		)}
+			</PanelBody>
 
-										<RangeControl
-										  label={__('Image Scale', 'post-grid')}
-										  value={pg_dateImageScale}
-										  onChange={(value) => setAttributes({ pg_dateImageScale: value })}
-										  min={0.5} // Minimum scale value
-										  max={2}   // Maximum scale value
-										  step={0.1} // Step increment
-										/>
-									</>)}
-									  </PanelBody>
-									)}
-								  
-			</> 
+
+			{/* Date Panel */}
+			<PanelBody title = {__('Date','vayu-blocks')} initialOpen={false}>
+			<h2>Date</h2>
+				<ToggleControl
+					label={__('Show Date', 'vayu-blocks')}
+					checked={pg_showDate}
+					onChange={(value) => setAttributes({ pg_showDate: value })}
+				/>
+			{pg_showDate && (<>
+			{/* Date Meta Settings */}
+			<h4>{__('Font Size', 'vayu-blocks')}</h4>
+			<FontSizePicker
+				label={__('Font Size', 'vayu-blocks')}
+				fontSizes={fontSizesauthor}
+				value={pg_dateTextSize}
+				onChange={(value) => setAttributes({ pg_dateTextSize: value })}
+			/>
+			<h4>{__('Color', 'vayu-blocks')}</h4>
+			<ColorPalette
+				
+				label={__('Color', 'vayu-blocks')}
+				colors={colors}
+				value={pg_dateColor}
+				onChange={(color) => setAttributes({pg_dateColor: color })}
+			/>
+
+			<RangeControl
+				label={__('Image Scale', 'vayu-blocks')}
+				value={pg_dateImageScale}
+				onChange={(value) => setAttributes({ pg_dateImageScale: value })}
+				min={0.5} // Minimum scale value
+				max={2}   // Maximum scale value
+				step={0.1} // Step increment
+			/>
+		</>)}
+			</PanelBody>
+							
+					
         </>
     );
 };

@@ -240,8 +240,10 @@ function generate_inline_styles($attr) {
 
     $css .= "}";
 
+ 
+
     //Tag
-    $css .= "$wrapper $post .post-grid-tag-style-new{";
+    $css .= "$wrapper $post .post-grid-tag-style-conatiner .post-grid-tag-style-new{";
         // Cursor
         $css .= "cursor: pointer;";
         // Display
@@ -257,6 +259,7 @@ function generate_inline_styles($attr) {
         // Font Weight and Box Sizing
         $css .= "font-weight: 600;";
         $css .= "box-sizing: border-box;";
+        $css .= "line-Height: 1;"; 
         
         // Text Color
         $css .= isset($attr['pg_tagTextColor']) ? "color: " . esc_attr($attr['pg_tagTextColor']) . ";" : '';
@@ -439,8 +442,8 @@ function generate_inline_styles($attr) {
     $css .= "$wrapper $post .post-grid-excerpt-view{";
 
         // Font Weight
-        $css .= "font-weight: 300;";
-        
+        $css .= isset($attr['pg_ContentWeight']) ? "font-weight: " . esc_attr($attr['pg_ContentWeight']) . ";" : '';
+
         // Text Color
         $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
         

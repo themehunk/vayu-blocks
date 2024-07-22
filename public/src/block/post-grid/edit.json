@@ -82,7 +82,7 @@
       },
       "pg_spacing":{
         "type":"number",
-        "default":3
+        "default":4
       },
       "pg_dateColor":{
         "type":"string",
@@ -178,6 +178,10 @@
       },
       
       "pg_posts": {
+        "type": "array",
+        "default": []
+      },
+      "pg_allPosts": {
         "type": "array",
         "default": []
       },
@@ -323,7 +327,7 @@
       },
       "pg_textColor": {
         "type": "string",
-        "default": "#D3D3D3"
+        "default": "black"
       },
       "pg_textSize": {
         "type": "number",
@@ -658,7 +662,7 @@
 },
 "pg_TagpaddingTop": {
   "type": "number",
-  "default": 0
+  "default": 5
 },
 "pg_TagpaddingRight": {
   "type": "number",
@@ -666,7 +670,7 @@
 },
 "pg_TagpaddingBottom": {
   "type": "number",
-  "default": 0
+  "default": 6
 },
 "pg_TagpaddingLeft": {
   "type": "number",
@@ -1304,5 +1308,38 @@
 "pg_paginationRightBorderColor":{
   "type":"string",
   "default":"black"
+},
+"pg_ContentWeight":{
+  "type":"string",
+  "default": "normal"
+},
+"selectedCategories": {
+  "type": "array",
+  "items": {
+    "type": "string"
+  },
+  "default": []
+},
+"pg_featuredImageOnly":{
+  "type": "boolean",
+  "default": false
+},
+"sortByOrder": {
+  "type": "string",
+  "default": "desc",
+  "enum": [
+    "desc",
+    "asc"
+  ]
+},
+"sortByField": {
+  "type": "string",
+  "default": "id",
+  "enum": [
+    "date",
+    "modified",
+    "title",
+    "id"
+  ]
 }
 }
