@@ -1,4 +1,3 @@
-
 import { PanelBody, ToggleControl, ColorPalette, FontSizePicker, RangeControl, __experimentalBoxControl as BoxControl, DropdownMenu, GradientPicker, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
@@ -24,6 +23,74 @@ import { useSelect } from '@wordpress/data';
 const Editor = ({ attributes, setAttributes }) => {
 
 const {
+	pg_layoutBorderRadiusunit,
+	layoutBorderRadiusType,
+	pg_layoutTopBorderRadius,
+	pg_layoutRightBorderRadius,
+	pg_layoutBottomBorderRadius,
+	pg_layoutLeftBorderRadius,
+	layoutBorderRadiusTypeTablet,
+	pg_layoutTopBorderRadiusTablet,
+	pg_layoutRightBorderRadiusTablet,
+	pg_layoutBottomBorderRadiusTablet,
+	pg_layoutLeftBorderRadiusTablet,
+	layoutBorderRadiusTypeMobile,
+	pg_layoutTopBorderRadiusMobile,
+	pg_layoutRightBorderRadiusMobile,
+	pg_layoutBottomBorderRadiusMobile,
+	pg_layoutLeftBorderRadiusMobile,
+
+	pg_featuredImageBorderRadiusunit,
+	featuredImageBorderRadiusType,
+	pg_featuredImageTopBorderRadius,
+	pg_featuredImageRightBorderRadius,
+	pg_featuredImageBottomBorderRadius,
+	pg_featuredImageLeftBorderRadius,
+	featuredImageBorderRadiusTypeTablet,
+	pg_featuredImageTopBorderRadiusTablet,
+	pg_featuredImageRightBorderRadiusTablet,
+	pg_featuredImageBottomBorderRadiusTablet,
+	pg_featuredImageLeftBorderRadiusTablet,
+	featuredImageBorderRadiusTypeMobile,
+	pg_featuredImageTopBorderRadiusMobile,
+	pg_featuredImageRightBorderRadiusMobile,
+	pg_featuredImageBottomBorderRadiusMobile,
+	pg_featuredImageLeftBorderRadiusMobile,
+
+	pg_categoryBorderRadiusunit,
+	categoryBorderRadiusType,
+	pg_categoryTopBorderRadius,
+	pg_categoryRightBorderRadius,
+	pg_categoryBottomBorderRadius,
+	pg_categoryLeftBorderRadius,
+	categoryBorderRadiusTypeTablet,
+	pg_categoryTopBorderRadiusTablet,
+	pg_categoryRightBorderRadiusTablet,
+	pg_categoryBottomBorderRadiusTablet,
+	pg_categoryLeftBorderRadiusTablet,
+	categoryBorderRadiusTypeMobile,
+	pg_categoryTopBorderRadiusMobile,
+	pg_categoryRightBorderRadiusMobile,
+	pg_categoryBottomBorderRadiusMobile,
+	pg_categoryLeftBorderRadiusMobile,
+
+	pg_tagsBorderRadiusunit,
+	tagsBorderRadiusType,
+	pg_tagsTopBorderRadius,
+	pg_tagsRightBorderRadius,
+	pg_tagsBottomBorderRadius,
+	pg_tagsLeftBorderRadius,
+	tagsBorderRadiusTypeTablet,
+	pg_tagsTopBorderRadiusTablet,
+	pg_tagsRightBorderRadiusTablet,
+	pg_tagsBottomBorderRadiusTablet,
+	pg_tagsLeftBorderRadiusTablet,
+	tagsBorderRadiusTypeMobile,
+	pg_tagsTopBorderRadiusMobile,
+	pg_tagsRightBorderRadiusMobile,
+	pg_tagsBottomBorderRadiusMobile,
+	pg_tagsLeftBorderRadiusMobile,
+
 	pg_ContentWeight,
 	pg_spacing,
 	pg_numberOfTags,
@@ -46,11 +113,6 @@ const {
 	pg_layoutLeftBorderColor,
 	pg_layoutRightBorderColor,
 
-	pg_categoryTopBorderRadius,
-	pg_categoryBottomBorderRadius,
-	pg_categoryLeftBorderRadius,
-	pg_categoryRightBorderRadius,
-
 	categoryTopborderType,
 	categoryBottomborderType,
 	categoryLeftborderType,
@@ -64,11 +126,6 @@ const {
 	pg_categoryLeftBorderColor,
 	pg_categoryRightBorderColor,
 
-	pg_featuredImageTopBorderRadius,
-	pg_featuredImageBottomBorderRadius,
-	pg_featuredImageLeftBorderRadius,
-	pg_featuredImageRightBorderRadius,
-
 	featuredImageTopborderType,
 	featuredImageBottomborderType,
 	featuredImageLeftborderType,
@@ -81,11 +138,6 @@ const {
 	pg_featuredImageBottomBorderColor,
 	pg_featuredImageLeftBorderColor,
 	pg_featuredImageRightBorderColor,
-
-	pg_tagTopBorderRadius,
-	pg_tagBottomBorderRadius,
-	pg_tagLeftBorderRadius,
-	pg_tagRightBorderRadius,
 
 	tagTopborderType,
 	tagBottomborderType,
@@ -247,7 +299,7 @@ const pick = (object, keys) => {
 		}
 		return acc;
 	}, {});
-	};
+};
 
 const fontSizes = [
 	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 10 },
@@ -286,8 +338,6 @@ const colors = [
 	{ name: 'Light Red', color: '#FF6347' },    // Light Red
 	{ name: 'Purple', color: '#800080' },       // Purple
 ];
-
-
 
 // Layout Padding
 const desktopLayoutPaddingType = {
@@ -502,12 +552,6 @@ const getCategoryPadding = (type) => {
 	}
 	return undefined;
 };
-
-
-const setpaddingtagUnit = (unit) => {
-    setAttributes({ tagpaddingUnit: unit });
-};
-
 	
 // Tag Padding
 const desktopTagPaddingType = {
@@ -614,11 +658,6 @@ const getTagPadding = (type) => {
 		: attributes[mobileTagPaddingType[type]];
 	}
 	return undefined;
-};
-
-const [ isVisible, setIsVisible ] = useState( false );
-const toggleVisible = () => {
-        setIsVisible( ( state ) => ! state );
 };
 
 //post border
@@ -729,17 +768,6 @@ const handlecategoryBorderChange = (newBorders) => {
 	setAttributes(updatedAttributes);
 };
 
-//category border-radius
-const handlecategoryBorderRadiusChange = (newValues) => {
-	console.log(newValues);
-	setAttributes({
-		pg_categoryTopBorderRadius: newValues.borderRadius.top,
-		pg_categoryLeftBorderRadius: newValues.borderRadius.left,
-		pg_categoryRightBorderRadius: newValues.borderRadius.right,
-		pg_categoryBottomBorderRadius: newValues.borderRadius.bottom,
-	});
-};
-
 //tag border
 const handletagBorderChange = (newBorders) => {
 	const updatedAttributes = {};
@@ -846,20 +874,630 @@ const handlefeaturedImageBorderChange = (newBorders) => {
 	setAttributes(updatedAttributes);
 };
 
-//featuredImage border-radius
-const handlefeaturedImageBorderRadiusChange = (newValues) => {
-	setAttributes({
-		pg_featuredImageTopBorderRadius: newValues.borderRadius.top,
-		pg_featuredImageLeftBorderRadius: newValues.borderRadius.left,
-		pg_featuredImageRightBorderRadius: newValues.borderRadius.right,
-		pg_featuredImageBottomBorderRadius: newValues.borderRadius.bottom,
-	});
+/// Function to get the current border-radius type
+const getlayoutBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.layoutBorderRadiusType;
+        case 'Tablet':
+            return attributes.layoutBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.layoutBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
 };
+
+// Function to change the border-radius type
+const changelayoutBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            layoutBorderRadiusType: value,
+            layoutBorderRadiusTypeTablet: value,
+            layoutBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            layoutBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            layoutBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changelayoutBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.layoutBorderRadiusType) {
+                setAttributes({
+                    pg_layoutTopBorderRadius: value,
+                    pg_layoutRightBorderRadius: value,
+                    pg_layoutBottomBorderRadius: value,
+                    pg_layoutLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [`pg_layout${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadius`]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.layoutBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_layoutTopBorderRadiusTablet: value,
+                    pg_layoutRightBorderRadiusTablet: value,
+                    pg_layoutBottomBorderRadiusTablet: value,
+                    pg_layoutLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [`pg_layout${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusTablet`]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.layoutBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_layoutTopBorderRadiusMobile: value,
+                    pg_layoutRightBorderRadiusMobile: value,
+                    pg_layoutBottomBorderRadiusMobile: value,
+                    pg_layoutLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [`pg_layout${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusMobile`]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const getlayoutBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.layoutBorderRadiusType === 'linked'
+                        ? attributes.pg_layoutTopBorderRadius
+                        : attributes.pg_layoutTopBorderRadius;
+                case 'Tablet':
+                    return attributes.layoutBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_layoutTopBorderRadiusTablet
+                        : attributes.pg_layoutTopBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.layoutBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_layoutTopBorderRadiusMobile
+                        : attributes.pg_layoutTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.layoutBorderRadiusType === 'linked'
+                        ? attributes.pg_layoutRightBorderRadius
+                        : attributes.pg_layoutRightBorderRadius;
+                case 'Tablet':
+                    return attributes.layoutBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_layoutRightBorderRadiusTablet
+                        : attributes.pg_layoutRightBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.layoutBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_layoutRightBorderRadiusMobile
+                        : attributes.pg_layoutRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.layoutBorderRadiusType === 'linked'
+                        ? attributes.pg_layoutBottomBorderRadius
+                        : attributes.pg_layoutBottomBorderRadius;
+                case 'Tablet':
+                    return attributes.layoutBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_layoutBottomBorderRadiusTablet
+                        : attributes.pg_layoutBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.layoutBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_layoutBottomBorderRadiusMobile
+                        : attributes.pg_layoutBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.layoutBorderRadiusType === 'linked'
+                        ? attributes.pg_layoutLeftBorderRadius
+                        : attributes.pg_layoutLeftBorderRadius;
+                case 'Tablet':
+                    return attributes.layoutBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_layoutLeftBorderRadiusTablet
+                        : attributes.pg_layoutLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.layoutBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_layoutLeftBorderRadiusMobile
+                        : attributes.pg_layoutLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handlelayoutBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_layoutTopBorderRadius: newValues.borderRadius.top,
+        pg_layoutLeftBorderRadius: newValues.borderRadius.left,
+        pg_layoutRightBorderRadius: newValues.borderRadius.right,
+        pg_layoutBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
+//featuredimage
+/// Function to get the current border-radius type
+const getfeaturedImageBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.featuredImageBorderRadiusType;
+        case 'Tablet':
+            return attributes.featuredImageBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.featuredImageBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
+};
+
+// Function to change the border-radius type
+const changefeaturedImageBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            featuredImageBorderRadiusType: value,
+            featuredImageBorderRadiusTypeTablet: value,
+            featuredImageBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            featuredImageBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            featuredImageBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changefeaturedImageBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.featuredImageBorderRadiusType) {
+                setAttributes({
+                    pg_featuredImageTopBorderRadius: value,
+                    pg_featuredImageRightBorderRadius: value,
+                    pg_featuredImageBottomBorderRadius: value,
+                    pg_featuredImageLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [`pg_featuredImage${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadius`]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.featuredImageBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_featuredImageTopBorderRadiusTablet: value,
+                    pg_featuredImageRightBorderRadiusTablet: value,
+                    pg_featuredImageBottomBorderRadiusTablet: value,
+                    pg_featuredImageLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [`pg_featuredImage${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusTablet`]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.featuredImageBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_featuredImageTopBorderRadiusMobile: value,
+                    pg_featuredImageRightBorderRadiusMobile: value,
+                    pg_featuredImageBottomBorderRadiusMobile: value,
+                    pg_featuredImageLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [`pg_featuredImage${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusMobile`]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const getfeaturedImageBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.featuredImageBorderRadiusType === 'linked'
+                        ? attributes.pg_featuredImageTopBorderRadius
+                        : attributes.pg_featuredImageTopBorderRadius;
+                case 'Tablet':
+                    return attributes.featuredImageBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_featuredImageTopBorderRadiusTablet
+                        : attributes.pg_featuredImageTopBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.featuredImageBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_featuredImageTopBorderRadiusMobile
+                        : attributes.pg_featuredImageTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.featuredImageBorderRadiusType === 'linked'
+                        ? attributes.pg_featuredImageRightBorderRadius
+                        : attributes.pg_featuredImageRightBorderRadius;
+                case 'Tablet':
+                    return attributes.featuredImageBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_featuredImageRightBorderRadiusTablet
+                        : attributes.pg_featuredImageRightBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.featuredImageBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_featuredImageRightBorderRadiusMobile
+                        : attributes.pg_featuredImageRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.featuredImageBorderRadiusType === 'linked'
+                        ? attributes.pg_featuredImageBottomBorderRadius
+                        : attributes.pg_featuredImageBottomBorderRadius;
+                case 'Tablet':
+                    return attributes.featuredImageBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_featuredImageBottomBorderRadiusTablet
+                        : attributes.pg_featuredImageBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.featuredImageBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_featuredImageBottomBorderRadiusMobile
+                        : attributes.pg_featuredImageBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.featuredImageBorderRadiusType === 'linked'
+                        ? attributes.pg_featuredImageLeftBorderRadius
+                        : attributes.pg_featuredImageLeftBorderRadius;
+                case 'Tablet':
+                    return attributes.featuredImageBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_featuredImageLeftBorderRadiusTablet
+                        : attributes.pg_featuredImageLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.featuredImageBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_featuredImageLeftBorderRadiusMobile
+                        : attributes.pg_featuredImageLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handlefeaturedImageBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_featuredImageTopBorderRadius: newValues.borderRadius.top,
+        pg_featuredImageLeftBorderRadius: newValues.borderRadius.left,
+        pg_featuredImageRightBorderRadius: newValues.borderRadius.right,
+        pg_featuredImageBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
+//category
+/// Function to get the current border-radius type
+const getcategoryBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.categoryBorderRadiusType;
+        case 'Tablet':
+            return attributes.categoryBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.categoryBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
+};
+
+
+
+// Function to change the border-radius type
+const changecategoryBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            categoryBorderRadiusType: value,
+            categoryBorderRadiusTypeTablet: value,
+            categoryBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            categoryBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            categoryBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changecategoryBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.categoryBorderRadiusType) {
+                setAttributes({
+                    pg_categoryTopBorderRadius: value,
+                    pg_categoryRightBorderRadius: value,
+                    pg_categoryBottomBorderRadius: value,
+                    pg_categoryLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [`pg_category${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadius`]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.categoryBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_categoryTopBorderRadiusTablet: value,
+                    pg_categoryRightBorderRadiusTablet: value,
+                    pg_categoryBottomBorderRadiusTablet: value,
+                    pg_categoryLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [`pg_category${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusTablet`]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.categoryBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_categoryTopBorderRadiusMobile: value,
+                    pg_categoryRightBorderRadiusMobile: value,
+                    pg_categoryBottomBorderRadiusMobile: value,
+                    pg_categoryLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [`pg_category${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusMobile`]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const getcategoryBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.categoryBorderRadiusType === 'linked'
+                        ? attributes.pg_categoryTopBorderRadius
+                        : attributes.pg_categoryTopBorderRadius;
+                case 'Tablet':
+                    return attributes.categoryBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_categoryTopBorderRadiusTablet
+                        : attributes.pg_categoryTopBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.categoryBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_categoryTopBorderRadiusMobile
+                        : attributes.pg_categoryTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.categoryBorderRadiusType === 'linked'
+                        ? attributes.pg_categoryRightBorderRadius
+                        : attributes.pg_categoryRightBorderRadius;
+                case 'Tablet':
+                    return attributes.categoryBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_categoryRightBorderRadiusTablet
+                        : attributes.pg_categoryRightBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.categoryBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_categoryRightBorderRadiusMobile
+                        : attributes.pg_categoryRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.categoryBorderRadiusType === 'linked'
+                        ? attributes.pg_categoryBottomBorderRadius
+                        : attributes.pg_categoryBottomBorderRadius;
+                case 'Tablet':
+                    return attributes.categoryBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_categoryBottomBorderRadiusTablet
+                        : attributes.pg_categoryBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.categoryBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_categoryBottomBorderRadiusMobile
+                        : attributes.pg_categoryBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.categoryBorderRadiusType === 'linked'
+                        ? attributes.pg_categoryLeftBorderRadius
+                        : attributes.pg_categoryLeftBorderRadius;
+                case 'Tablet':
+                    return attributes.categoryBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_categoryLeftBorderRadiusTablet
+                        : attributes.pg_categoryLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.categoryBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_categoryLeftBorderRadiusMobile
+                        : attributes.pg_categoryLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handlecategoryBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_categoryTopBorderRadius: newValues.borderRadius.top,
+        pg_categoryLeftBorderRadius: newValues.borderRadius.left,
+        pg_categoryRightBorderRadius: newValues.borderRadius.right,
+        pg_categoryBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
+//tags
+/// Function to get the current border-radius type
+const gettagsBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.tagsBorderRadiusType;
+        case 'Tablet':
+            return attributes.tagsBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.tagsBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
+};
+
+// Function to change the border-radius type
+const changetagsBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            tagsBorderRadiusType: value,
+            tagsBorderRadiusTypeTablet: value,
+            tagsBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            tagsBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            tagsBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changetagsBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.tagsBorderRadiusType) {
+                setAttributes({
+                    pg_tagsTopBorderRadius: value,
+                    pg_tagsRightBorderRadius: value,
+                    pg_tagsBottomBorderRadius: value,
+                    pg_tagsLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [`pg_tags${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadius`]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.tagsBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_tagsTopBorderRadiusTablet: value,
+                    pg_tagsRightBorderRadiusTablet: value,
+                    pg_tagsBottomBorderRadiusTablet: value,
+                    pg_tagsLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [`pg_tags${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusTablet`]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.tagsBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_tagsTopBorderRadiusMobile: value,
+                    pg_tagsRightBorderRadiusMobile: value,
+                    pg_tagsBottomBorderRadiusMobile: value,
+                    pg_tagsLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [`pg_tags${type.charAt(0).toUpperCase() + type.slice(1)}BorderRadiusMobile`]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const gettagsBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.tagsBorderRadiusType === 'linked'
+                        ? attributes.pg_tagsTopBorderRadius
+                        : attributes.pg_tagsTopBorderRadius;
+                case 'Tablet':
+                    return attributes.tagsBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_tagsTopBorderRadiusTablet
+                        : attributes.pg_tagsTopBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.tagsBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_tagsTopBorderRadiusMobile
+                        : attributes.pg_tagsTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.tagsBorderRadiusType === 'linked'
+                        ? attributes.pg_tagsRightBorderRadius
+                        : attributes.pg_tagsRightBorderRadius;
+                case 'Tablet':
+                    return attributes.tagsBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_tagsRightBorderRadiusTablet
+                        : attributes.pg_tagsRightBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.tagsBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_tagsRightBorderRadiusMobile
+                        : attributes.pg_tagsRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.tagsBorderRadiusType === 'linked'
+                        ? attributes.pg_tagsBottomBorderRadius
+                        : attributes.pg_tagsBottomBorderRadius;
+                case 'Tablet':
+                    return attributes.tagsBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_tagsBottomBorderRadiusTablet
+                        : attributes.pg_tagsBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.tagsBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_tagsBottomBorderRadiusMobile
+                        : attributes.pg_tagsBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return attributes.tagsBorderRadiusType === 'linked'
+                        ? attributes.pg_tagsLeftBorderRadius
+                        : attributes.pg_tagsLeftBorderRadius;
+                case 'Tablet':
+                    return attributes.tagsBorderRadiusTypeTablet === 'linked'
+                        ? attributes.pg_tagsLeftBorderRadiusTablet
+                        : attributes.pg_tagsLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return attributes.tagsBorderRadiusTypeMobile === 'linked'
+                        ? attributes.pg_tagsLeftBorderRadiusMobile
+                        : attributes.pg_tagsLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handletagsBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_tagsTopBorderRadius: newValues.borderRadius.top,
+        pg_tagsLeftBorderRadius: newValues.borderRadius.left,
+        pg_tagsRightBorderRadius: newValues.borderRadius.right,
+        pg_tagsBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
 
     return (
         <>
+
+			{/* Layout Panel */}
           <PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
-						<h4>Background Color</h4>
+						<h4>Background</h4>
 							<BackgroundSelectorControl
 								backgroundType={layout_backgroundType}
 								backgroundColor={layout_backgroundColor}
@@ -884,6 +1522,15 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 								changeBackgroundSize={(value) => setAttributes({ layout_backgroundSize: value })}
 						/>
 					
+						<RangeControl
+							label={__('Spacing', 'vayu-blocks')}
+							value={pg_spacing}
+							onChange={(value) => setAttributes({ pg_spacing: value })}
+							min={1}
+							max={10}
+							step={1}
+						/>
+
 						<BorderBoxControlComponent
 							label={__('Border','vayu-blocks')}
 							value={{
@@ -917,26 +1564,44 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 							type="border"
 						/>
 						
-							<BorderBoxControlComponent
-									label={__('Border Radius', 'vayu-blocks')}
-									value={{
-									top: attributes.pg_postTopBorderRadius,
-									right: attributes.pg_postRightBorderRadius,
-									left: attributes.pg_postLeftBorderRadius,
-									bottom: attributes.pg_postBottomBorderRadius,
-									}}
-									onChange={handleBorderRadiusChange}
-									type="borderRadius"
-								/>
+					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_layoutBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_layoutBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
 
-						<RangeControl
-							label={__('Spacing', 'vayu-blocks')}
-							value={pg_spacing}
-							onChange={(value) => setAttributes({ pg_spacing: value })}
-							min={1}
-							max={10}
-							step={1}
-						/>
+                        <SizingControl
+                            type={ getlayoutBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changelayoutBorderRadiusType }
+                            onChange={ changelayoutBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: getlayoutBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: getlayoutBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: getlayoutBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: getlayoutBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    </ResponsiveControl>
 
 					<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
 						<UnitChooser
@@ -962,6 +1627,7 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 					</ResponsiveControl>
 			</PanelBody>
 
+			{/* Title Panel */}
 			<PanelBody title={__('Title', 'vayu-blocks')} initialOpen={false}>
 				<h4>Title</h4>
 
@@ -1002,7 +1668,8 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 				/>
 
 			</PanelBody>
-			
+
+			{/* Content Panel */}
 			<PanelBody title={__('Content', 'vayu-blocks')} initialOpen={false}>
 				<h4>Content</h4>
 				<h4> Font Size</h4>
@@ -1046,6 +1713,7 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 
 			</PanelBody>
 
+			{/* Featured Image Panel */}
 			<PanelBody title={__('Featured Image', 'vayu-blocks')} initialOpen={false}>
 				<h4>Featured Image</h4>
 				<ToggleControl
@@ -1095,22 +1763,50 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 							type="border"
 						/>
 						
-							<BorderBoxControlComponent
-									label={__('Border Radius', 'vayu-blocks')}
-									value={{
-									top: attributes.pg_featuredImageTopBorderRadius,
-									right: attributes.pg_featuredImageRightBorderRadius,
-									left: attributes.pg_featuredImageLeftBorderRadius,
-									bottom: attributes.pg_featuredImageBottomBorderRadius,
-									}}
-									onChange={handlefeaturedImageBorderRadiusChange}
-									type="borderRadius"
-								/>
+						<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_featuredImageBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_featuredImageBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
 
-</>
+                        <SizingControl
+                            type={ getfeaturedImageBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changefeaturedImageBorderRadiusType }
+                            onChange={ changefeaturedImageBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: getfeaturedImageBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: getfeaturedImageBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: getfeaturedImageBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: getfeaturedImageBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    	</ResponsiveControl>
+
+					</>
 				)}
 			</PanelBody>
-			
+
+			{/* Category Panel */}
 			<PanelBody title = {__('Category','vayu-blocks')} initialOpen={false}> {/* Category Meta Settings */}
 				<h2>Category</h2>
 				<ToggleControl
@@ -1194,17 +1890,45 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 			type="border"
 		/>
 		
-			<BorderBoxControlComponent
-					label={__('Border Radius', 'vayu-blocks')}
-					value={{
-					top: attributes.pg_categoryTopBorderRadius,
-					right: attributes.pg_categoryRightBorderRadius,
-					left: attributes.pg_categoryLeftBorderRadius,
-					bottom: attributes.pg_categoryBottomBorderRadius,
-					}}
-					onChange={handlecategoryBorderRadiusChange}
-					type="borderRadius"
-				/>
+					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_categoryBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_categoryBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
+
+                        <SizingControl
+                            type={ getcategoryBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changecategoryBorderRadiusType }
+                            onChange={ changecategoryBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: getcategoryBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: getcategoryBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: getcategoryBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: getcategoryBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    	</ResponsiveControl>
+
 			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
 				<UnitChooser
 					value={attributes.categorypaddingUnit}
@@ -1319,42 +2043,70 @@ const handlefeaturedImageBorderRadiusChange = (newValues) => {
 			type="border"
 		/>
 
-			<BorderBoxControlComponent
-					label={__('Border Radius', 'vayu-blocks')}
-					value={{
-					top: attributes.pg_tagTopBorderRadius,
-					right: attributes.pg_tagRightBorderRadius,
-					left: attributes.pg_tagLeftBorderRadius,
-					bottom: attributes.pg_tagBottomBorderRadius,
-					}}
-					onChange={handletagBorderRadiusChange}
-					type="borderRadius"
-				/>
+				
+					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_tagsBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_tagsBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
+
+                        <SizingControl
+                            type={ gettagsBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changetagsBorderRadiusType }
+                            onChange={ changetagsBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: gettagsBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: gettagsBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: gettagsBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: gettagsBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    </ResponsiveControl>
 
 			<h4>Padding</h4>
 			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
-<UnitChooser
-value={attributes.tagpaddingUnit}
-onClick={(unit) => {
-setAttributes({ tagpaddingUnit: unit });
-}}
-units={['px', 'em', '%']}
-/>
-<SizingControl
-min={0}
-type={getTagPaddingType()}
-changeType={changeTagPaddingType}
-max={100} // Adjust as needed
-onChange={changeTagPadding}
-options={[
-{ label: __('Top', 'vayu-blocks'), type: 'top', value: getTagPadding('top') },
-{ label: __('Right', 'vayu-blocks'), type: 'right', value: getTagPadding('right') },
-{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getTagPadding('bottom') },
-{ label: __('Left', 'vayu-blocks'), type: 'left', value: getTagPadding('left') }
-]}
-/>
-</ResponsiveControl>
-		</>)}
+						<UnitChooser
+						value={attributes.tagpaddingUnit}
+						onClick={(unit) => {
+						setAttributes({ tagpaddingUnit: unit });
+						}}
+						units={['px', 'em', '%']}
+						/>
+						<SizingControl
+						min={0}
+						type={getTagPaddingType()}
+						changeType={changeTagPaddingType}
+						max={100} // Adjust as needed
+						onChange={changeTagPadding}
+						options={[
+						{ label: __('Top', 'vayu-blocks'), type: 'top', value: getTagPadding('top') },
+						{ label: __('Right', 'vayu-blocks'), type: 'right', value: getTagPadding('right') },
+						{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getTagPadding('bottom') },
+						{ label: __('Left', 'vayu-blocks'), type: 'left', value: getTagPadding('left') }
+						]}
+						/>
+						</ResponsiveControl>
+			</>)}
 			</PanelBody>
 		
 			{/* Author Panel */}
@@ -1393,7 +2145,6 @@ options={[
 			</>
 		)}
 			</PanelBody>
-
 
 			{/* Date Panel */}
 			<PanelBody title = {__('Date','vayu-blocks')} initialOpen={false}>

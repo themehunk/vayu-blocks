@@ -28,17 +28,98 @@ import { useSelect } from '@wordpress/data';
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        pg_layoutBorderRadiusunit,
+        layoutBorderRadiusType,
+        pg_layoutTopBorderRadius,
+        pg_layoutRightBorderRadius,
+        pg_layoutBottomBorderRadius,
+        pg_layoutLeftBorderRadius,
+        layoutBorderRadiusTypeTablet,
+        pg_layoutTopBorderRadiusTablet,
+        pg_layoutRightBorderRadiusTablet,
+        pg_layoutBottomBorderRadiusTablet,
+        pg_layoutLeftBorderRadiusTablet,
+        layoutBorderRadiusTypeMobile,
+        pg_layoutTopBorderRadiusMobile,
+        pg_layoutRightBorderRadiusMobile,
+        pg_layoutBottomBorderRadiusMobile,
+        pg_layoutLeftBorderRadiusMobile,
+        
+        pg_featuredImageBorderRadiusunit,
+        featuredImageBorderRadiusType,
+        pg_featuredImageTopBorderRadius,
+        pg_featuredImageRightBorderRadius,
+        pg_featuredImageBottomBorderRadius,
+        pg_featuredImageLeftBorderRadius,
+        featuredImageBorderRadiusTypeTablet,
+        pg_featuredImageTopBorderRadiusTablet,
+        pg_featuredImageRightBorderRadiusTablet,
+        pg_featuredImageBottomBorderRadiusTablet,
+        pg_featuredImageLeftBorderRadiusTablet,
+        featuredImageBorderRadiusTypeMobile,
+        pg_featuredImageTopBorderRadiusMobile,
+        pg_featuredImageRightBorderRadiusMobile,
+        pg_featuredImageBottomBorderRadiusMobile,
+        pg_featuredImageLeftBorderRadiusMobile,
+        
+        pg_categoryBorderRadiusunit,
+        categoryBorderRadiusType,
+        pg_categoryTopBorderRadius,
+        pg_categoryRightBorderRadius,
+        pg_categoryBottomBorderRadius,
+        pg_categoryLeftBorderRadius,
+        categoryBorderRadiusTypeTablet,
+        pg_categoryTopBorderRadiusTablet,
+        pg_categoryRightBorderRadiusTablet,
+        pg_categoryBottomBorderRadiusTablet,
+        pg_categoryLeftBorderRadiusTablet,
+        categoryBorderRadiusTypeMobile,
+        pg_categoryTopBorderRadiusMobile,
+        pg_categoryRightBorderRadiusMobile,
+        pg_categoryBottomBorderRadiusMobile,
+        pg_categoryLeftBorderRadiusMobile,
+    
+        pg_tagsBorderRadiusunit,
+        tagsBorderRadiusType,
+        pg_tagsTopBorderRadius,
+        pg_tagsRightBorderRadius,
+        pg_tagsBottomBorderRadius,
+        pg_tagsLeftBorderRadius,
+        tagsBorderRadiusTypeTablet,
+        pg_tagsTopBorderRadiusTablet,
+        pg_tagsRightBorderRadiusTablet,
+        pg_tagsBottomBorderRadiusTablet,
+        pg_tagsLeftBorderRadiusTablet,
+        tagsBorderRadiusTypeMobile,
+        pg_tagsTopBorderRadiusMobile,
+        pg_tagsRightBorderRadiusMobile,
+        pg_tagsBottomBorderRadiusMobile,
+        pg_tagsLeftBorderRadiusMobile,
+
+        pg_paginationBorderRadiusunit,
+        pg_paginationTopBorderRadius,
+        pg_paginationRightBorderRadius,
+        pg_paginationBottomBorderRadius,
+        pg_paginationLeftBorderRadius,
+        pg_paginationTopBorderRadiusTablet,
+        pg_paginationRightBorderRadiusTablet,
+        pg_paginationBottomBorderRadiusTablet,
+        pg_paginationLeftBorderRadiusTablet,
+        pg_paginationTopBorderRadiusMobile,
+        pg_paginationRightBorderRadiusMobile,
+        pg_paginationBottomBorderRadiusMobile,
+        pg_paginationLeftBorderRadiusMobile,
+        paginationBorderRadiusType,
+        paginationBorderRadiusTypeTablet,
+        paginationBorderRadiusTypeMobile,
+        
         sortByOrder,
         sortByField,
         pg_allPosts,
         selectedCategories,
         pg_ContentWeight,
         pg_spacing,
-        pg_paginationTopBorderRadius,
-		pg_paginationBottomBorderRadius,
-		pg_paginationLeftBorderRadius,
-		pg_paginationRightBorderRadius,
-
+ 
 		paginationTopborderType,
         paginationBottomborderType,
         paginationLeftborderType,
@@ -51,11 +132,6 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_paginationBottomBorderColor,
         pg_paginationLeftBorderColor,
         pg_paginationRightBorderColor,
-        
-        pg_categoryTopBorderRadius,
-		pg_categoryBottomBorderRadius,
-		pg_categoryLeftBorderRadius,
-		pg_categoryRightBorderRadius,
 
 		categoryTopborderType,
         categoryBottomborderType,
@@ -69,12 +145,6 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_categoryBottomBorderColor,
         pg_categoryLeftBorderColor,
         pg_categoryRightBorderColor,
-
-        
-		pg_tagTopBorderRadius,
-		pg_tagBottomBorderRadius,
-		pg_tagLeftBorderRadius,
-		pg_tagRightBorderRadius,
 
 		tagTopborderType,
         tagBottomborderType,
@@ -202,11 +272,6 @@ const Edit = ({ attributes, setAttributes }) => {
         layout_backgroundRepeat,
         layout_backgroundSize,
         categoryborderType,
-
-        pg_featuredImageTopBorderRadius,
-        pg_featuredImageBottomBorderRadius,
-        pg_featuredImageLeftBorderRadius,
-        pg_featuredImageRightBorderRadius,
 
         featuredImageTopborderType,
         featuredImageBottomborderType,
@@ -359,7 +424,6 @@ const Edit = ({ attributes, setAttributes }) => {
         setFullContentVisible(!isFullContentVisible);
     };
   
-
     const TitleTag = pg_blockTitleTag || 'h2';
 
     //style

@@ -14,6 +14,24 @@ import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
+        pg_paginationBorderRadiusunit,
+        pg_paginationTopBorderRadius,
+        pg_paginationRightBorderRadius,
+        pg_paginationBottomBorderRadius,
+        pg_paginationLeftBorderRadius,
+        pg_paginationTopBorderRadiusTablet,
+        pg_paginationRightBorderRadiusTablet,
+        pg_paginationBottomBorderRadiusTablet,
+        pg_paginationLeftBorderRadiusTablet,
+        pg_paginationTopBorderRadiusMobile,
+        pg_paginationRightBorderRadiusMobile,
+        pg_paginationBottomBorderRadiusMobile,
+        pg_paginationLeftBorderRadiusMobile,
+        paginationBorderRadiusType,
+        paginationBorderRadiusTypeTablet,
+        paginationBorderRadiusTypeMobile,
+        
+
         sortByOrder,
         sortByField,
         pg_featuredImageOnly,
@@ -69,11 +87,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         pg_paginationBorderRadius,
         pg_PaginationColor,
         pg_PaginationSize,
-
-        pg_paginationTopBorderRadius,
-		pg_paginationBottomBorderRadius,
-		pg_paginationLeftBorderRadius,
-		pg_paginationRightBorderRadius,
 
 		paginationTopborderType,
         paginationBottomborderType,
@@ -946,6 +959,182 @@ const PostSettings = ({ attributes, setAttributes }) => {
 		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
 	];
 
+  // Border radius types for different devices
+const desktopBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadius',
+    right: 'pg_paginationRightBorderRadius',
+    bottom: 'pg_paginationBottomBorderRadius',
+    left: 'pg_paginationLeftBorderRadius'
+};
+
+const tabletBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadiusTablet',
+    right: 'pg_paginationRightBorderRadiusTablet',
+    bottom: 'pg_paginationBottomBorderRadiusTablet',
+    left: 'pg_paginationLeftBorderRadiusTablet'
+};
+
+const mobileBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadiusMobile',
+    right: 'pg_paginationRightBorderRadiusMobile',
+    bottom: 'pg_paginationBottomBorderRadiusMobile',
+    left: 'pg_paginationLeftBorderRadiusMobile'
+};
+
+// Function to get the current border-radius type
+const getBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.paginationBorderRadiusType;
+        case 'Tablet':
+            return attributes.paginationBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.paginationBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
+};
+
+// Function to change the border-radius type
+const changeBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            paginationBorderRadiusType: value,
+            paginationBorderRadiusTypeTablet: value,
+            paginationBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            paginationBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            paginationBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changeBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.paginationBorderRadiusType) {
+                setAttributes({
+                    pg_paginationTopBorderRadius: value,
+                    pg_paginationRightBorderRadius: value,
+                    pg_paginationBottomBorderRadius: value,
+                    pg_paginationLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [desktopBorderRadiusType[type]]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.paginationBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_paginationTopBorderRadiusTablet: value,
+                    pg_paginationRightBorderRadiusTablet: value,
+                    pg_paginationBottomBorderRadiusTablet: value,
+                    pg_paginationLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [tabletBorderRadiusType[type]]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.paginationBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_paginationTopBorderRadiusMobile: value,
+                    pg_paginationRightBorderRadiusMobile: value,
+                    pg_paginationBottomBorderRadiusMobile: value,
+                    pg_paginationLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [mobileBorderRadiusType[type]]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const getBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationTopBorderRadius
+                        : attributes.pg_paginationTopBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationTopBorderRadiusTablet
+                        : attributes.pg_paginationTopBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationTopBorderRadiusMobile
+                        : attributes.pg_paginationTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationRightBorderRadius
+                        : attributes.pg_paginationRightBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationRightBorderRadiusTablet
+                        : attributes.pg_paginationRightBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationRightBorderRadiusMobile
+                        : attributes.pg_paginationRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationBottomBorderRadius
+                        : attributes.pg_paginationBottomBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationBottomBorderRadiusTablet
+                        : attributes.pg_paginationBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationBottomBorderRadiusMobile
+                        : attributes.pg_paginationBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationLeftBorderRadius
+                        : attributes.pg_paginationLeftBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationLeftBorderRadiusTablet
+                        : attributes.pg_paginationLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationLeftBorderRadiusMobile
+                        : attributes.pg_paginationLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handlePaginationBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_paginationTopBorderRadius: newValues.borderRadius.top,
+        pg_paginationLeftBorderRadius: newValues.borderRadius.left,
+        pg_paginationRightBorderRadius: newValues.borderRadius.right,
+        pg_paginationBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
+  
     return (
         <>
             <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
@@ -1188,50 +1377,78 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
                      />
 
-									<BorderBoxControlComponent
-										label={__('Border','vayu-blocks')}
-										value={{
-											all: {
-												color: attributes.pg_paginationBorderColor,
-												width: attributes.pg_paginationBorder,
-												style: attributes.paginationborderType,
-											},
-											top: {
-												color: attributes.pg_paginationTopBorderColor,
-												width: attributes.pg_paginationTopBorder,
-												style: attributes.paginationTopborderType,
-											},
-											bottom: {
-												color: attributes.pg_paginationBottomBorderColor,
-												width: attributes.pg_paginationBottomBorder,
-												style: attributes.paginationBottomborderType,
-											},
-											left: {
-												color: attributes.pg_paginationLeftBorderColor,
-												width: attributes.pg_paginationLeftBorder,
-												style: attributes.paginationLeftborderType,
-											},
-											right: {
-												color: attributes.pg_paginationRightBorderColor,
-												width: attributes.pg_paginationRightBorder,
-												style: attributes.paginationRightborderType,
-											},
-										}}
-										onChange={handlepaginationBorderChange}
-										type="border"
-									/>
-								
-									<BorderBoxControlComponent
-												label={__('Border Radius', 'vayu-blocks')}
-												value={{
-												top: attributes.pg_paginationTopBorderRadius,
-												right: attributes.pg_paginationRightBorderRadius,
-												left: attributes.pg_paginationLeftBorderRadius,
-												bottom: attributes.pg_paginationBottomBorderRadius,
-												}}
-												onChange={handlepaginationBorderRadiusChange}
-												type="borderRadius"
-									/>
+                    <BorderBoxControlComponent
+                        label={__('Border','vayu-blocks')}
+                        value={{
+                            all: {
+                                color: attributes.pg_paginationBorderColor,
+                                width: attributes.pg_paginationBorder,
+                                style: attributes.paginationborderType,
+                            },
+                            top: {
+                                color: attributes.pg_paginationTopBorderColor,
+                                width: attributes.pg_paginationTopBorder,
+                                style: attributes.paginationTopborderType,
+                            },
+                            bottom: {
+                                color: attributes.pg_paginationBottomBorderColor,
+                                width: attributes.pg_paginationBottomBorder,
+                                style: attributes.paginationBottomborderType,
+                            },
+                            left: {
+                                color: attributes.pg_paginationLeftBorderColor,
+                                width: attributes.pg_paginationLeftBorder,
+                                style: attributes.paginationLeftborderType,
+                            },
+                            right: {
+                                color: attributes.pg_paginationRightBorderColor,
+                                width: attributes.pg_paginationRightBorder,
+                                style: attributes.paginationRightborderType,
+                            },
+                        }}
+                        onChange={handlepaginationBorderChange}
+                        type="border"
+                    />
+                        
+                    <ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_paginationBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_paginationBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
+
+                        <SizingControl
+                            type={ getBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changeBorderRadiusType }
+                            onChange={ changeBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: getBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: getBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: getBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: getBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    </ResponsiveControl>
+
                      <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
                             <UnitChooser
                                 value={attributes.pg_PaginationpaddingUnit}
