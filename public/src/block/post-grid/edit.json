@@ -1341,5 +1341,72 @@
     "title",
     "id"
   ]
+},
+
+
+"pg_featuredImageTopBorderRadius":{
+  "type": "string",
+  "default": "0px"
+},
+"pg_featuredImageBottomBorderRadius":{
+  "type" : "string",
+  "default": "0px"
+},
+"pg_featuredImageLeftBorderRadius":{
+  "type": "string",
+  "default" : "0px"
+},
+"pg_featuredImageRightBorderRadius":{
+  "type": "string",
+  "default" : "0px"
+},
+
+"featuredImageTopborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageBottomborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageLeftborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageRightborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"pg_featuredImageTopBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageBottomBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageLeftBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageRightBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageTopBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageBottomBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageLeftBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageRightBorderColor":{
+  "type":"string",
+  "default":"black"
 }
 }

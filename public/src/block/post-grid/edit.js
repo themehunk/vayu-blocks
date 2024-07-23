@@ -202,6 +202,24 @@ const Edit = ({ attributes, setAttributes }) => {
         layout_backgroundRepeat,
         layout_backgroundSize,
         categoryborderType,
+
+        pg_featuredImageTopBorderRadius,
+        pg_featuredImageBottomBorderRadius,
+        pg_featuredImageLeftBorderRadius,
+        pg_featuredImageRightBorderRadius,
+
+        featuredImageTopborderType,
+        featuredImageBottomborderType,
+        featuredImageLeftborderType,
+        featuredImageRightborderType,
+        pg_featuredImageTopBorder,
+        pg_featuredImageBottomBorder,
+        pg_featuredImageLeftBorder,
+        pg_featuredImageRightBorder,
+        pg_featuredImageTopBorderColor,
+        pg_featuredImageBottomBorderColor,
+        pg_featuredImageLeftBorderColor,
+        pg_featuredImageRightBorderColor,
 		
 		category_backgroundType,
         category_backgroundColor,
@@ -383,7 +401,7 @@ const Edit = ({ attributes, setAttributes }) => {
     
     const numberOfRow= () => getView === 'Desktop' ? pg_numberOfRow : getView === 'Tablet' ? pg_numberOfRowTablet : pg_numberOfRowMobile;
     const numberOfColumns= () => getView === 'Desktop' ? pg_postLayoutColumns : getView === 'Tablet' ? pg_postLayoutColumnsTablet : pg_postLayoutColumnsMobile;
-                       
+        
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true); // Start loading
@@ -392,10 +410,12 @@ const Edit = ({ attributes, setAttributes }) => {
                 if (searchKeyword) {
                     searchParams = `&search=${encodeURIComponent(searchKeyword)}`;
                 }
+                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
+                setCategories(fetchedCategories);
     
                 // Fetch all posts
                 const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=100${searchParams}` });
-                
+    
                 // Fetch featured media for each post
                 const postsWithMedia = await Promise.all(fetchedPosts.map(async (post) => {
                     try {
@@ -410,7 +430,6 @@ const Edit = ({ attributes, setAttributes }) => {
                         }
     
                         const featuredMediaUrl = mediaResponse?.source_url || '';
-    
                         return { ...post, featured_media_url: featuredMediaUrl };
                     } catch (error) {
                         console.error(`Error fetching featured media for post ID ${post.id}:`, error);
@@ -418,70 +437,65 @@ const Edit = ({ attributes, setAttributes }) => {
                     }
                 }));
     
-                 
-                // if (selectedCategories.length > 0) {
-                //     const filteredPosts = postsWithMedia.filter(post => {
-                //         // Map post category IDs to category names
-                //         const postCategoryNames = post.categories.map(categoryId => {
-                //             const category = categories.find(cat => cat.id === categoryId);
-                //             return category ? category.name : null;
-                //         }).filter(name => name !== null);
-                
-                //         // Check if all selected category names are present in the post's category names
-                //         const matchesAll = selectedCategories.every(selectedCategoryName =>
-                //             postCategoryNames.includes(selectedCategoryName)
-                //         );
-                
-                //          // Check if the post has a featured image if the filter is enabled
-                //         const hasFeaturedImage = pg_featuredImageOnly ? !!post.featured_media : true;
-                    
-                //         return matchesAll && hasFeaturedImage;
-                //     }); 
-                //     //console.log(filteredPosts);
-                // }
-                 
-
+                // Filter posts based on categories and featured image
+                const filteredPosts = postsWithMedia.filter(post => {
+                    // Map post category IDs to category names
+                    const postCategoryNames = post.categories.map(categoryId => {
+                        const category = fetchedCategories.find(cat => cat.id === categoryId);
+                        return category ? category.name : null;
+                    }).filter(name => name !== null);
+    
+                    // Check if all selected category names are present in the post's category names
+                    const matchesAll = selectedCategories.every(selectedCategoryName =>
+                        postCategoryNames.includes(selectedCategoryName)
+                    );
+    
+                    // Check if the post has a featured image if the filter is enabled
+                    const hasFeaturedImage = pg_featuredImageOnly ? !!post.featured_media : true;
+    
+                    return matchesAll && hasFeaturedImage;
+                });
+    
+                // Check if there are no filtered posts
+                if (filteredPosts.length === 0) {
+                    setAttributes({ pg_posts: []});
+                    setLoading(false);
+                    return;
+                }
+            
                 // Generate unique IDs for the posts
-                const postsWithIDs = postsWithMedia.map(post => ({ ...post, uniqueID: generateUniqueID() }));
-                
+                const postsWithIDs = filteredPosts.map(post => ({ ...post, uniqueID: generateUniqueID() }));
+    
+                // Sort posts
                 const sortedPosts = postsWithIDs.sort((a, b) => {
-                    // Default to sorting by 'id' if sortByField is not defined
                     const field = sortByField || 'id';
-                
-                    // Get values to compare
                     let valueA = a[field];
                     let valueB = b[field];
-                
-                    // Convert values to appropriate formats if necessary
+    
                     if (field === 'date' || field === 'modified') {
-                        valueA = new Date(valueA).getTime(); // Convert to timestamp
-                        valueB = new Date(valueB).getTime(); // Convert to timestamp
+                        valueA = new Date(valueA).getTime();
+                        valueB = new Date(valueB).getTime();
                     } else if (field === 'id') {
                         valueA = Number(valueA);
                         valueB = Number(valueB);
                     } else if (field === 'title') {
-                        // Split titles for first word comparison (case-insensitive)
                         const firstWordA = String(a.title.rendered).split(/\s+/)[0].toLowerCase();
                         const firstWordB = String(b.title.rendered).split(/\s+/)[0].toLowerCase();
-
-                        // Sort by First Word
+    
                         if (firstWordA < firstWordB) return sortByOrder === 'asc' ? -1 : 1;
                         if (firstWordA > firstWordB) return sortByOrder === 'asc' ? 1 : -1;
-                    
-                        // Sort by Full Title if first words are the same
+    
                         const fullTitleA = String(a.title.rendered).toLowerCase();
                         const fullTitleB = String(b.title.rendered).toLowerCase();
-                    
+    
                         for (let i = 0; i < Math.min(fullTitleA.length, fullTitleB.length); i++) {
-                          if (fullTitleA[i] < fullTitleB[i]) return sortByOrder === 'asc' ? -1 : 1;
-                          if (fullTitleA[i] > fullTitleB[i]) return sortByOrder === 'asc' ? 1 : -1;
+                            if (fullTitleA[i] < fullTitleB[i]) return sortByOrder === 'asc' ? -1 : 1;
+                            if (fullTitleA[i] > fullTitleB[i]) return sortByOrder === 'asc' ? 1 : -1;
                         }
-                    
-                        // If all characters are the same up to the length of the shorter string
+    
                         return fullTitleA.length - fullTitleB.length;
-                      }
-                
-                    // Determine sort order
+                    }
+    
                     if (sortByOrder === 'asc') {
                         if (valueA < valueB) return -1;
                         if (valueA > valueB) return 1;
@@ -491,27 +505,24 @@ const Edit = ({ attributes, setAttributes }) => {
                         if (valueA < valueB) return 1;
                         return 0;
                     } else {
-                        return 0; // No sorting
+                        return 0;
                     }
                 });
-                
+    
                 // Paginate posts
                 const itemsPerPage = numberOfColumns() * numberOfRow();
                 const totalPosts = sortedPosts.length;
-                
-                 // Pagination
-                const postsPerPage = numberOfRow() * numberOfColumns();
-                const totalPages = Math.ceil(totalPosts / postsPerPage);
+                const totalPages = Math.ceil(totalPosts / itemsPerPage);
                 setTotalPages(totalPages);
-                
+                if (CurrentPage > 1 && totalPages<2) {
+                    setCurrentPage(1);
+                }
+                const startIndex = (CurrentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
 
-                 // Paginate posts based on the current page
-                 const startIndex = (CurrentPage - 1) * postsPerPage;
-                 const endIndex = startIndex + postsPerPage;
-                 //const paginatedPosts = sortedPosts.slice(0, itemsPerPage);
-                 const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
                 setAttributes({ pg_posts: paginatedPosts });
-                
+    
                 const uniqueAuthorIds = paginatedPosts.map(post => post.author).filter((value, index, self) => self.indexOf(value) === index);
     
                 const authors = await Promise.all(uniqueAuthorIds.map(async (authorId) => {
@@ -533,9 +544,6 @@ const Edit = ({ attributes, setAttributes }) => {
                 });
     
                 setAuthors(authorMap);
-                
-                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
-                setCategories(fetchedCategories);
     
                 const fetchedTags = await apiFetch({ path: '/wp/v2/tags' });
                 settags(fetchedTags);
@@ -548,83 +556,23 @@ const Edit = ({ attributes, setAttributes }) => {
         };
     
         fetchData();
-    }, [pg_featuredImageOnly,selectedCategories,CurrentPage,numberOfColumns(), numberOfRow(), setAttributes, searchKeyword, sortByOrder, sortByField]);
+    }, [pg_featuredImageOnly, selectedCategories, CurrentPage, numberOfColumns(), numberOfRow(), setAttributes, searchKeyword, sortByOrder, sortByField]);
     
-    //Filter
+    // Filter
     useEffect(() => {
-        if (selectedCategories.length > 0) {
-            const filteredPosts = pg_posts.filter(post => {
-                // Map post category IDs to category names
-                const postCategoryNames = post.categories.map(categoryId => {
-                    const category = categories.find(cat => cat.id === categoryId);
-                    return category ? category.name : null;
-                }).filter(name => name !== null);
-        
-                // Check if all selected category names are present in the post's category names
-                const matchesAll = selectedCategories.every(selectedCategoryName =>
-                    postCategoryNames.includes(selectedCategoryName)
-                );
-        
-                 // Check if the post has a featured image if the filter is enabled
-                const hasFeaturedImage = pg_featuredImageOnly ? !!post.featured_media : true;
-            
-                return matchesAll && hasFeaturedImage;
-            });
-        
-            setFilteredPosts(filteredPosts);
-            
-        } else {
-            const filteredPosts = pg_posts.filter(post => 
-                pg_featuredImageOnly ? !!post.featured_media : true
-            );
-    
-            setFilteredPosts(filteredPosts);
+        if (pg_posts.length > 0 && categories.length > 0) {
+            setFilteredPosts(pg_posts);
+        }else{
+            setFilteredPosts(pg_posts);
         }
-    }, [selectedCategories, pg_posts, categories,pg_featuredImageOnly]);
-  
-
+    }, [pg_posts]);
+   
     const handlePageChange = async (page) => {
         if (page!=CurrentPage){
             setCurrentPage(page);
         }
     }
 
-    // const handlePageChange = async (page) => {
-    //     try {
-    //         setCurrentPage(page);
-    //         let postsPerPage = numberOfColumns() * numberOfRow();
-    //         const offset = (page - 1) * postsPerPage;
-    //         const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=${postsPerPage}&offset=${offset}` });
-    //         const postsWithMedia = await Promise.all(fetchedPosts.map(async (post) => {
-    //             try {
-    //                 if (!post.featured_media) {
-    //                     return { ...post, featured_media_url: '' };
-    //                 }
-
-    //                 const mediaResponse = await apiFetch({ path: `/wp/v2/media/${post.featured_media}` });
-
-    //                 if (!mediaResponse || mediaResponse.code === 'rest_post_invalid_id') {
-    //                     throw new Error(`Invalid or missing featured media for post ID ${post.id}`);
-    //                 }
-
-    //                 const featuredMediaUrl = mediaResponse?.source_url || '';
-
-    //                 return { ...post, featured_media_url: featuredMediaUrl };
-    //             } catch (error) {
-    //                 console.error(`Error fetching featured media for post ID ${post.id}:`, error);
-    //                 return { ...post, featured_media_url: '' };
-    //             }
-    //         }));
-        
-    //         const postsWithIDs = postsWithMedia.map(post => ({ ...post, uniqueID: generateUniqueID() }));
-    //         setAttributes({ pg_posts: postsWithIDs });
-
-    //         setFilteredPosts(postsWithIDs);
-    //     } catch (error) {
-    //         console.error('Error fetching posts for page:', error);
-    //     }
-    // };
-    
     const handleSearchChange = (value) => {
         setSearchKeyword(value);
     };
@@ -677,8 +625,6 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
     
-   
-
     return (
         <>
             <PanelSettings
@@ -707,7 +653,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                                 )}
     
                                                 {Category() && (
-                                                    <div>
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', marginBottom : "15px",}}>
                                                         {post.categories.slice(0, pg_numberOfCategories).map((categoryId) => {
                                                             const category = categories.find(cat => cat.id === categoryId);
                                                             if (!category) return null;

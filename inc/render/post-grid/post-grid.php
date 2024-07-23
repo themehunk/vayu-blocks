@@ -240,7 +240,7 @@ class VayuBlocksPostGrid {
         $numberOfCategories = isset($this->attr['pg_numberOfCategories']) ? intval($this->attr['pg_numberOfCategories']) : 1;
     
         if ($showCategories) {
-            echo '<div>';
+            echo '<div class="post-grid-category-style-container">';
             foreach (array_slice($categories, 0, $numberOfCategories) as $category) {
                 // Expect $category to be an associative array with 'name' and 'link'
                 echo '<a href="' . esc_url($category['link']) . '" class="post-grid-category-style-new">' . esc_html($category['name']) . '</a>';

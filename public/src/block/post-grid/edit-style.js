@@ -18,8 +18,9 @@ const gridContainerStyles = (attributes) => {
     const getLayoutColumnStyle = (attributes, view) => {
 
         return {
-            gridTemplateColumns: `repeat(${view === 'Desktop' ? attributes.pg_postLayoutColumns : attributes[`pg_postLayoutColumns${view}`]}, 1fr)`
+            gridTemplateColumns: `repeat(${view === 'Desktop' ? attributes.pg_postLayoutColumns : attributes[`pg_postLayoutColumns${view}`]}, minmax(0, 1fr))`
         };
+        
     };
 
     const getLayoutRowStyle = (attributes, view) => {
@@ -44,9 +45,9 @@ const gridContainerStyles = (attributes) => {
     return {
         display: 'grid',
         ...layoutColumnsStyle,
-        ...layoutRowsStyle,
         ...gapStyle,
         maxWidth: '100%',
+        gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
 //post
@@ -126,7 +127,17 @@ const featuredImageStyles = (attributes) => ({
     display: 'block',
     width: '100%',
     height: 'auto',
-    borderRadius: `${attributes.pg_imageBorderRadius}px`,
+
+    borderTopLeftRadius: `${attributes.pg_featuredImageTopBorderRadius}`,
+    borderBottomLeftRadius: `${attributes.pg_featuredImageBottomBorderRadius}`,
+    borderBottomRightRadius: `${attributes.pg_featuredImageLeftBorderRadius}`,
+    borderTopRightRadius: `${attributes.pg_featuredImageRightBorderRadius}`,
+
+    border: `${attributes.featuredImageborderType || 'solid'} ${attributes.pg_featuredImageBorder || '0px'} ${attributes.pg_featuredImageBorderColor || 'black'}`,
+    borderTop: `${attributes.featuredImageTopborderType || 'solid'} ${attributes.pg_featuredImageTopBorder || '0px'} ${attributes.pg_featuredImageTopBorderColor || 'black'}`,
+    borderBottom: `${attributes.featuredImageBottomborderType || 'solid'} ${attributes.pg_featuredImageBottomBorder || '0px'} ${attributes.pg_featuredImageBottomBorderColor || 'black'}`,
+    borderLeft: `${attributes.featuredImageLeftborderType || 'solid'} ${attributes.pg_featuredImageLeftBorder || '0px'} ${attributes.pg_featuredImageLeftBorderColor || 'black'}`,
+    borderRight: `${attributes.featuredImageRightborderType || 'solid'} ${attributes.pg_featuredImageRightBorder || '0px'} ${attributes.pg_featuredImageRightBorderColor || 'black'}`,
 });
 
 //Category
@@ -181,6 +192,7 @@ const categoryButtonStyles = (attributes) => {
         marginLeft:'5px',
         fontWeight:'600',
         marginTop:"3%",
+       
 
         borderTopLeftRadius: `${attributes.pg_categoryTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_categoryBottomBorderRadius}`,
@@ -195,6 +207,7 @@ const categoryButtonStyles = (attributes) => {
         borderLeft: `${attributes.categoryLeftborderType || 'solid'} ${attributes.pg_categoryLeftBorder || '0px'} ${attributes.pg_categoryLeftBorderColor || 'black'}`,
         borderRight: `${attributes.categoryRightborderType || 'solid'} ${attributes.pg_categoryRightBorder || '0px'} ${attributes.pg_categoryRightBorderColor || 'black'}`,
 
+        lineHeight: 'initial',
     };
 };
   
@@ -212,7 +225,6 @@ const titleTagStyles = (attributes) => ({
 const authorAndDateContainerStyles = {
     display: 'flex', 
     alignItems: 'center',
-    gap:'3px',
     flexWrap:'wrap',
     marginLeft:"2px",
 };
@@ -221,6 +233,7 @@ const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImage
     width: '20px',
     borderRadius:"50%",
     transform: `scale(${pg_authorImageScale})`,
+
 });
 
 const authorLinkStyles = (pg_authorTextSize, pg_authorTextColor) => ({
@@ -291,7 +304,7 @@ const tagButtonStyles = (attributes ) => {
         fontWeight:'600',
         boxSizing: 'border-box', // Ensure padding and border are included in width/height
         textDecoration: 'none',
-        lineHeight: 1,
+        lineHeight: 'initial',
 
         borderTopLeftRadius: `${attributes.pg_tagTopBorderRadius}`,
         borderBottomLeftRadius: `${attributes.pg_tagBottomBorderRadius}`,

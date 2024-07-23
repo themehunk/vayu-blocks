@@ -18,10 +18,16 @@
     background-color: black; /* Ensure nested page-numbers also get styled */
 }
 
- .post-grid-tag-style-container {
+.post-grid-tag-style-container {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+}
+
+.post-grid-category-style-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
 

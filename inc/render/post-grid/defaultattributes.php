@@ -631,6 +631,27 @@ return array(
     'pg_featuredImageOnly' => false,
     'sortByOrder'=> "desc",
     'sortByField' => "Id",
+
+    'pg_featuredImageTopBorderRadius' => '0px',
+    'pg_featuredImageBottomBorderRadius' => '0px',
+    'pg_featuredImageLeftBorderRadius' => '0px',
+    'pg_featuredImageRightBorderRadius' => '0px',
+
+    'featuredImageTopborderType' => 'solid',
+    'featuredImageBottomborderType' => 'solid',
+    'featuredImageLeftborderType' => 'solid',
+    'featuredImageRightborderType' => 'solid',
+
+    'pg_featuredImageTopBorder' => '0px',
+    'pg_featuredImageBottomBorder' => '0px',
+    'pg_featuredImageLeftBorder' => '0px',
+    'pg_featuredImageRightBorder' => '0px',
+
+    'pg_featuredImageTopBorderColor' => 'black',
+    'pg_featuredImageBottomBorderColor' => 'black',
+    'pg_featuredImageLeftBorderColor' => 'black',
+    'pg_featuredImageRightBorderColor' => 'black',
+
 );
 
 

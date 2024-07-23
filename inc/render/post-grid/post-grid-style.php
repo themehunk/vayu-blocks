@@ -228,6 +228,8 @@ function generate_inline_styles($attr) {
         $css .= "margin-left: 5px;";
         $css .= "font-weight: 600;";
         $css .= "margin-top: 3%;";
+        $css .= "line-height: initial;";
+
 
         // Text color
         $css .= isset($attr['pg_categoryTextColor']) ? "color: " . esc_attr($attr['pg_categoryTextColor']) . ";" : '';
@@ -239,8 +241,6 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['pg_categoryTextSize']) ? "font-size: " . esc_attr($attr['pg_categoryTextSize']) . "px;" : '';
 
     $css .= "}";
-
- 
 
     //Tag
     $css .= "$wrapper $post .post-grid-tag-style-conatiner .post-grid-tag-style-new{";
@@ -259,7 +259,7 @@ function generate_inline_styles($attr) {
         // Font Weight and Box Sizing
         $css .= "font-weight: 600;";
         $css .= "box-sizing: border-box;";
-        $css .= "line-Height: 1;"; 
+        $css .= "line-Height: initial;"; 
         
         // Text Color
         $css .= isset($attr['pg_tagTextColor']) ? "color: " . esc_attr($attr['pg_tagTextColor']) . ";" : '';
@@ -382,8 +382,23 @@ function generate_inline_styles($attr) {
         $css .= "display: block;";
         $css .= "width: 100%;";
         $css .= "height: auto;";
-        $border_radius = isset($attr['pg_imageBorderRadius']) ? esc_attr($attr['pg_imageBorderRadius']) . 'px' : '5px';
-        $css .= "border-radius: {$border_radius};";
+
+        // Border Radius
+        $css .= isset($attr['pg_featuredImageTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_featuredImageTopBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_featuredImageBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_featuredImageBottomBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_featuredImageLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_featuredImageLeftBorderRadius']) . ";" : '';
+        $css .= isset($attr['pg_featuredImageRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_featuredImageRightBorderRadius']) . ";" : '';
+        
+        // Border
+        $css .= isset($attr['featuredImageTopborderType']) && isset($attr['pg_featuredImageTopBorder']) && isset($attr['pg_featuredImageTopBorderColor']) ? 
+            "border-top: " . esc_attr($attr['featuredImageTopborderType']) . ' ' . esc_attr($attr['pg_featuredImageTopBorder']) . " " . esc_attr($attr['pg_featuredImageTopBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageBottomborderType']) && isset($attr['pg_featuredImageBottomBorder']) && isset($attr['pg_featuredImageBottomBorderColor']) ? 
+            "border-bottom: " . esc_attr($attr['featuredImageBottomborderType']) . ' ' . esc_attr($attr['pg_featuredImageBottomBorder']) . " " . esc_attr($attr['pg_featuredImageBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageLeftborderType']) && isset($attr['pg_featuredImageLeftBorder']) && isset($attr['pg_featuredImageLeftBorderColor']) ? 
+            "border-left: " . esc_attr($attr['featuredImageLeftborderType']) . ' ' . esc_attr($attr['pg_featuredImageLeftBorder']) . " " . esc_attr($attr['pg_featuredImageLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageRightborderType']) && isset($attr['pg_featuredImageRightBorder']) && isset($attr['pg_featuredImageRightBorderColor']) ? 
+            "border-right: " . esc_attr($attr['featuredImageRightborderType']) . ' ' . esc_attr($attr['pg_featuredImageRightBorder']) . " " . esc_attr($attr['pg_featuredImageRightBorderColor']) . ";" : '';
+        
     $css .= "}";
      
     //Title Tag
@@ -403,7 +418,6 @@ function generate_inline_styles($attr) {
     $css .= "$wrapper $post .post-grid-author-date-container{";
         $css .= "    display: flex;";
         $css .= "    align-items: center;";
-        $css .= "    gap: 3px;";
         $css .= "    flex-wrap: wrap;";
         $css .= "    margin-left: 2px;";
     $css .= "}";

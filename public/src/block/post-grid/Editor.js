@@ -64,6 +64,24 @@ const {
 	pg_categoryLeftBorderColor,
 	pg_categoryRightBorderColor,
 
+	pg_featuredImageTopBorderRadius,
+	pg_featuredImageBottomBorderRadius,
+	pg_featuredImageLeftBorderRadius,
+	pg_featuredImageRightBorderRadius,
+
+	featuredImageTopborderType,
+	featuredImageBottomborderType,
+	featuredImageLeftborderType,
+	featuredImageRightborderType,
+	pg_featuredImageTopBorder,
+	pg_featuredImageBottomBorder,
+	pg_featuredImageLeftBorder,
+	pg_featuredImageRightBorder,
+	pg_featuredImageTopBorderColor,
+	pg_featuredImageBottomBorderColor,
+	pg_featuredImageLeftBorderColor,
+	pg_featuredImageRightBorderColor,
+
 	pg_tagTopBorderRadius,
 	pg_tagBottomBorderRadius,
 	pg_tagLeftBorderRadius,
@@ -780,6 +798,64 @@ const handletagBorderRadiusChange = (newValues) => {
 	});
 };
 
+//featuredImage border
+const handlefeaturedImageBorderChange = (newBorders) => {
+	const updatedAttributes = {};
+	if (newBorders.borders.top) {
+		if (newBorders.borders.top) {
+			updatedAttributes.pg_featuredImageTopBorderColor = newBorders.borders.top.color;
+			updatedAttributes.pg_featuredImageTopBorder = newBorders.borders.top.width;
+			updatedAttributes.featuredImageTopborderType = newBorders.borders.top.style;
+		}
+		if (newBorders.borders.bottom) {
+			updatedAttributes.pg_featuredImageBottomBorderColor = newBorders.borders.bottom.color;
+			updatedAttributes.pg_featuredImageBottomBorder = newBorders.borders.bottom.width;
+			updatedAttributes.featuredImageBottomborderType = newBorders.borders.bottom.style;
+		}
+		if (newBorders.borders.left) {
+			updatedAttributes.pg_featuredImageLeftBorderColor = newBorders.borders.left.color;
+			updatedAttributes.pg_featuredImageLeftBorder = newBorders.borders.left.width;
+			updatedAttributes.featuredImageLeftborderType = newBorders.borders.left.style;
+		}
+		if (newBorders.borders.right) {
+			updatedAttributes.pg_featuredImageRightBorderColor = newBorders.borders.right.color;
+			updatedAttributes.pg_featuredImageRightBorder = newBorders.borders.right.width;
+			updatedAttributes.featuredImageRightborderType = newBorders.borders.right.style;
+		}
+	} else {
+		updatedAttributes.pg_featuredImageBorderColor = newBorders.borders.color;
+		updatedAttributes.pg_featuredImageBorder = newBorders.borders.width;
+		updatedAttributes.featuredImageborderType = newBorders.borders.style;
+
+		updatedAttributes.pg_featuredImageRightBorderColor = newBorders.borders.color;
+		updatedAttributes.pg_featuredImageRightBorder = newBorders.borders.width;
+		updatedAttributes.featuredImageRightborderType = newBorders.borders.style;
+
+		updatedAttributes.pg_featuredImageLeftBorderColor = newBorders.borders.color;
+		updatedAttributes.pg_featuredImageLeftBorder = newBorders.borders.width;
+		updatedAttributes.featuredImageLeftborderType = newBorders.borders.style;
+
+		updatedAttributes.pg_featuredImageBottomBorderColor = newBorders.borders.color;
+		updatedAttributes.pg_featuredImageBottomBorder = newBorders.borders.width;
+		updatedAttributes.featuredImageBottomborderType = newBorders.borders.style;
+
+		updatedAttributes.pg_featuredImageTopBorderColor = newBorders.borders.color;
+		updatedAttributes.pg_featuredImageTopBorder = newBorders.borders.width;
+		updatedAttributes.featuredImageTopborderType = newBorders.borders.style;
+	}
+	setAttributes(updatedAttributes);
+};
+
+//featuredImage border-radius
+const handlefeaturedImageBorderRadiusChange = (newValues) => {
+	setAttributes({
+		pg_featuredImageTopBorderRadius: newValues.borderRadius.top,
+		pg_featuredImageLeftBorderRadius: newValues.borderRadius.left,
+		pg_featuredImageRightBorderRadius: newValues.borderRadius.right,
+		pg_featuredImageBottomBorderRadius: newValues.borderRadius.bottom,
+	});
+};
+
     return (
         <>
           <PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
@@ -985,13 +1061,53 @@ const handletagBorderRadiusChange = (newValues) => {
 					}}
 				/>
 				{pg_showFeaturedImage && (
-					<RangeControl
-						label={__('Border Radius', 'vayu-blocks')}
-						value={pg_imageBorderRadius}
-						onChange={(value) => setAttributes({ pg_imageBorderRadius: value })}
-						min={0}
-						max={60}
-					/>
+					<>
+					<BorderBoxControlComponent
+							label={__('Border','vayu-blocks')}
+							value={{
+								all: {
+									color: attributes.pg_featuredImageBorderColor,
+									width: attributes.pg_featuredImageBorder,
+									style: attributes.featuredImageborderType,
+								},
+								top: {
+									color: attributes.pg_featuredImageTopBorderColor,
+									width: attributes.pg_featuredImageTopBorder,
+									style: attributes.featuredImageTopborderType,
+								},
+								bottom: {
+									color: attributes.pg_featuredImageBottomBorderColor,
+									width: attributes.pg_featuredImageBottomBorder,
+									style: attributes.featuredImageBottomborderType,
+								},
+								left: {
+									color: attributes.pg_featuredImageLeftBorderColor,
+									width: attributes.pg_featuredImageLeftBorder,
+									style: attributes.featuredImageLeftborderType,
+								},
+								right: {
+									color: attributes.pg_featuredImageRightBorderColor,
+									width: attributes.pg_featuredImageRightBorder,
+									style: attributes.featuredImageRightborderType,
+								},
+							}}
+							onChange={handlefeaturedImageBorderChange}
+							type="border"
+						/>
+						
+							<BorderBoxControlComponent
+									label={__('Border Radius', 'vayu-blocks')}
+									value={{
+									top: attributes.pg_featuredImageTopBorderRadius,
+									right: attributes.pg_featuredImageRightBorderRadius,
+									left: attributes.pg_featuredImageLeftBorderRadius,
+									bottom: attributes.pg_featuredImageBottomBorderRadius,
+									}}
+									onChange={handlefeaturedImageBorderRadiusChange}
+									type="borderRadius"
+								/>
+
+</>
 				)}
 			</PanelBody>
 			
