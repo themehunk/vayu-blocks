@@ -44,3 +44,53 @@
 	transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) all 0.2s ease;
 }
 
+
+.pg-pagination-button {
+	transition: left 0.5s ease-in-out;
+}
+
+.active {
+	background-color: blue !important;
+}
+
+
+.pg-pagination-button:hover {
+    background-color: rgba(0, 0, 255, 0.851)  !important; /* Light grey background on hover */
+	transform: scale(1.1);
+	color:white !important;
+}
+
+
+// .pg-pagination-button {
+//     position: relative;
+//     overflow: hidden;
+//     transition: color 0.2s ease, transform 0.2s ease;
+// 	z-index:1;
+// }
+
+// .pg-pagination-button::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: -100%;
+//     width: 100%;
+//     height: 100%;
+//     background-color: rgba(0, 0, 255, 0.851); /* Background color on hover */
+// 	color:white !important;
+//     transition: left 0.5s ease-in-out;
+//     z-index: 0;
+// }
+
+// .pg-pagination-button:hover::before {
+//     left: 0;
+// }
+
+// .pg-pagination-button:hover {
+//     color: white !important; /* Text color on hover */
+//     transform: scale(1.1);
+// }
+
+// .pg-pagination-button span {
+//     position: relative;
+//     z-index: 1;
+// }

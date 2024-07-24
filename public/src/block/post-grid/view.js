@@ -19,18 +19,18 @@ jQuery(function($) {
             type: 'POST',
             data: data,
             success: function(response) {
-                var $wrapper = $('.th-post-grid-wrapper');
-                $wrapper.html(response); // Replace content with loaded posts
-                  
-                // Add new pagination controls
-               var $newPagination = $('.pagination');
-               $newPagination.html(data.pagination);
-  
+                var $response = $(response); // Parse response into jQuery object
+                var $newContent = $response.find('.th-post-grid-wrapper').html(); // Extract new posts
+                var $newPagination = $response.find('.pagination').html(); // Extract new pagination
+                
+                // Replace content with loaded posts
+                $('.th-post-grid-wrapper').html($newContent);
+
+                // Replace pagination controls with new pagination
+                $('.pagination').html($newPagination);
+                
                 // Move the updated pagination outside of the wrapper div
-                $newPagination.each(function() {
-                   $(this).insertAfter('.th-post-grid-wrapper');
-               });
-               
+                $('.pagination').insertAfter('.th-post-grid-wrapper');
             },
             error: function(xhr, status, error) {
               

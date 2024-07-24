@@ -6,6 +6,9 @@ import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import { Spinner } from '@wordpress/components';
 import { InnerBlocks} from '@wordpress/block-editor';
+import './editor.scss';
+import { BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+import { Toolbar, ToolbarButton, Dropdown, DropdownMenu, MenuItem, DropdownItem } from '@wordpress/components';
 
 import {
     blockStyles,
@@ -24,10 +27,12 @@ import {
     PaginationStyles
 } from './edit-style';
 import { useSelect } from '@wordpress/data';
+import { RiTranslate } from 'react-icons/ri';
 
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        customWidthlayout,
         pg_layoutBorderRadiusunit,
         layoutBorderRadiusType,
         pg_layoutTopBorderRadius,
@@ -406,6 +411,7 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_PaginationColor,
         pg_PaginationSize,
         pg_featuredImageOnly,
+        width,
     } = attributes;
 
     const [authors, setAuthors] = useState({});
@@ -474,12 +480,14 @@ const Edit = ({ attributes, setAttributes }) => {
                 if (searchKeyword) {
                     searchParams = `&search=${encodeURIComponent(searchKeyword)}`;
                 }
-                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
+                const [fetchedCategories, fetchedPosts] = await Promise.all([
+                    apiFetch({ path: '/wp/v2/categories' }),
+                    apiFetch({ path: `/wp/v2/posts?per_page=100${searchParams}` }),
+                ]);
+    
                 setCategories(fetchedCategories);
-    
-                // Fetch all posts
-                const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=100${searchParams}` });
-    
+
+
                 // Fetch featured media for each post
                 const postsWithMedia = await Promise.all(fetchedPosts.map(async (post) => {
                     try {
@@ -624,19 +632,14 @@ const Edit = ({ attributes, setAttributes }) => {
     
     // Filter
     useEffect(() => {
-        if (pg_posts.length > 0 && categories.length > 0) {
-            setFilteredPosts(pg_posts);
-        }else{
-            setFilteredPosts(pg_posts);
-        }
+        setFilteredPosts(pg_posts);
     }, [pg_posts]);
    
-    const handlePageChange = async (page) => {
-        if (page!=CurrentPage){
-            setCurrentPage(page);
-        }
-    }
-
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        // Fetch new data or perform necessary updates for the new page here
+    };
+    
     const handleSearchChange = (value) => {
         setSearchKeyword(value);
     };
@@ -695,6 +698,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 attributes={attributes}
                 setAttributes={setAttributes}
             />
+
             <AdvanceSettings attributes={attributes}>
                 <div style={blockStyle}>
                     {filteredPosts && filteredPosts.length > 0 ? (
@@ -800,20 +804,59 @@ const Edit = ({ attributes, setAttributes }) => {
                             <Spinner />
                         </>
                     )}
-    
+
                     {/* Pagination */}
                     {showpagination && totalPages > 1 && (
-                        <div className="pg-pagination" style={{ marginLeft: "45%" }}>
-                            {Array.from({ length: totalPages }, (_, index) => (
+                        <div className="pg-pagination" style={{ transform: 'translate(-50%, -50%)',   marginLeft: '60%',marginTop:'5%',}}>
+                            {CurrentPage > 1 && (
                                 <button
                                     style={PaginationStyle}
-                                    key={index}
-                                    onClick={() => handlePageChange(index + 1)}
-                                    className={`pg-pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                                    onClick={() => handlePageChange(CurrentPage - 1)}
+                                    className="pg-pagination-button"
                                 >
-                                    {index + 1}
+                                    &laquo;
                                 </button>
-                            ))}
+                            )}
+
+                            {Array.from({ length: totalPages }, (_, index) => {
+                                const page = index + 1;
+                                const isCurrentPage = page === CurrentPage;
+                                const isFirstPages = page <= 2; // Always show first 2 pages
+                                const isLastPages = page >= totalPages - 1; // Always show last 2 pages
+                                const isNearbyCurrentPage = Math.abs(page - CurrentPage) <= 1; // Show pages next to current page
+
+                                if (isFirstPages || isLastPages || isNearbyCurrentPage) {
+                                    return (
+                                        <button
+                                            style={{
+                                                ...PaginationStyle,
+                                                color: isCurrentPage ? 'white' : `${pg_PaginationColor}`,
+                                            }}
+                                            key={index}
+                                            onClick={() => handlePageChange(page)}
+                                            className={`pg-pagination-button ${isCurrentPage ? 'active' : ''}`}
+                                        >
+                                            {page}
+                                        </button>
+                                    );
+                                } else if (page === 3 && CurrentPage > 4) {
+                                    return <span key={index} className="pg-pagination-separator">...</span>;
+                                } else if (page === totalPages - 2 && CurrentPage < totalPages - 3) {
+                                    return <span key={index} className="pg-pagination-separator">...</span>;
+                                } else {
+                                    return null;
+                                }
+                            })}
+
+                            {CurrentPage < totalPages && (
+                                <button
+                                    style={PaginationStyle}
+                                    onClick={() => handlePageChange(CurrentPage + 1)}
+                                    className="pg-pagination-button"
+                                >
+                                    &raquo;
+                                </button>
+                            )}
                         </div>
                     )}
                 </div>
