@@ -181,7 +181,6 @@ class VayuBlocksPostGrid {
                     $category_ids[] = $category->term_id;
                 }
             }
-
             if (!empty($category_ids)) {
                 $args['tax_query'] = array(
                     array(
