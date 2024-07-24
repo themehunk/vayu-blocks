@@ -132,7 +132,9 @@ function generate_inline_styles($attr) {
 
     //Post
     $css .= "$wrapper $post {";
-
+        // $css .= " display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;";
         // Line height
         $css .= isset($attr['pg_spacing']) ? "line-height: " . esc_attr($attr['pg_spacing']) . ";" : '';
 
@@ -159,12 +161,15 @@ function generate_inline_styles($attr) {
             $css .= "background: none;";
         }
     
-        // Border radius
-        $css .= isset($attr['pg_postTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_postTopBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_postBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_postBottomBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_postLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_postLeftBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_postRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_postRightBorderRadius']) . ";" : '';
-                
+        $borderRadiusUnit = isset($attr['pg_layoutBorderRadiusunit']) ? esc_attr($attr['pg_layoutBorderRadiusunit']) : 'px';
+
+        // Border radius for layout
+        $css .= isset($attr['pg_layoutTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_layoutTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_layoutRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_layoutRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_layoutBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_layoutBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_layoutLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_layoutLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+        
+        
         // Font size
         $css .= isset($attr['pg_textSize']) ? "font-size: " . esc_attr($attr['pg_textSize']) . "px;" : '';
         
@@ -207,12 +212,14 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['pg_CategorypaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_CategorypaddingLeft']) . $paddingUnit . ";" : '';
         $css .= isset($attr['pg_CategorypaddingRight']) ? "padding-right: " . esc_attr($attr['pg_CategorypaddingRight']) . $paddingUnit . ";" : '';
 
-        // Border radius
-        $css .= isset($attr['pg_categoryBorderRadius']) ? "border-radius: " . esc_attr($attr['pg_categoryBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_categoryTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_categoryTopBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_categoryBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_categoryBottomBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_categoryLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_categoryLeftBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_categoryRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_categoryRightBorderRadius']) . ";" : '';
+         // Border radius for category
+        $borderRadiusUnit = isset($attr['pg_categoryBorderRadiusunit']) ? esc_attr($attr['pg_categoryBorderRadiusunit']) : 'px';
+
+        $css .= isset($attr['pg_categoryTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_categoryTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_categoryRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_categoryRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_categoryBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_categoryBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_categoryLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_categoryLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+        
 
         // Border
         $css .= isset($attr['categoryTopborderType']) && isset($attr['pg_categoryTopBorder']) && isset($attr['pg_categoryTopBorderColor']) ? 
@@ -228,6 +235,8 @@ function generate_inline_styles($attr) {
         $css .= "margin-left: 5px;";
         $css .= "font-weight: 600;";
         $css .= "margin-top: 3%;";
+        $css .= "line-height: initial;";
+
 
         // Text color
         $css .= isset($attr['pg_categoryTextColor']) ? "color: " . esc_attr($attr['pg_categoryTextColor']) . ";" : '';
@@ -241,7 +250,7 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     //Tag
-    $css .= "$wrapper $post .post-grid-tag-style-new{";
+    $css .= "$wrapper $post .post-grid-tag-style-conatiner .post-grid-tag-style-new{";
         // Cursor
         $css .= "cursor: pointer;";
         // Display
@@ -257,6 +266,7 @@ function generate_inline_styles($attr) {
         // Font Weight and Box Sizing
         $css .= "font-weight: 600;";
         $css .= "box-sizing: border-box;";
+        $css .= "line-Height: initial;"; 
         
         // Text Color
         $css .= isset($attr['pg_tagTextColor']) ? "color: " . esc_attr($attr['pg_tagTextColor']) . ";" : '';
@@ -279,12 +289,15 @@ function generate_inline_styles($attr) {
         // Font Size
         $css .= isset($attr['pg_tagTextSize']) ? "font-size: " . esc_attr($attr['pg_tagTextSize']) . "px;" : '';
         
-        // Border Radius
-        $css .= isset($attr['pg_tagTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_tagTopBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_tagBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_tagBottomBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_tagLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_tagLeftBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_tagRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_tagRightBorderRadius']) . ";" : '';
+        // Border radius for tags
+        $borderRadiusUnit = isset($attr['pg_tagsBorderRadiusunit']) ? esc_attr($attr['pg_tagsBorderRadiusunit']) : 'px';
+
+        $css .= isset($attr['pg_tagsTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_tagsTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_tagsRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_tagsRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_tagsBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_tagsBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_tagsLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_tagsLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
         
+            
         // Border
         $css .= isset($attr['tagTopborderType']) && isset($attr['pg_tagTopBorder']) && isset($attr['pg_tagTopBorderColor']) ? 
             "border-top: " . esc_attr($attr['tagTopborderType']) . ' ' . esc_attr($attr['pg_tagTopBorder']) . " " . esc_attr($attr['pg_tagTopBorderColor']) . ";" : '';
@@ -379,8 +392,25 @@ function generate_inline_styles($attr) {
         $css .= "display: block;";
         $css .= "width: 100%;";
         $css .= "height: auto;";
-        $border_radius = isset($attr['pg_imageBorderRadius']) ? esc_attr($attr['pg_imageBorderRadius']) . 'px' : '5px';
-        $css .= "border-radius: {$border_radius};";
+
+      // Border radius for featuredImage
+      $borderRadiusUnit = isset($attr['pg_featuredImageBorderRadiusunit']) ? esc_attr($attr['pg_featuredImageBorderRadiusunit']) : 'px';
+
+      $css .= isset($attr['pg_featuredImageTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_featuredImageTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_featuredImageRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_featuredImageBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_featuredImageLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+      
+        // Border
+        $css .= isset($attr['featuredImageTopborderType']) && isset($attr['pg_featuredImageTopBorder']) && isset($attr['pg_featuredImageTopBorderColor']) ? 
+            "border-top: " . esc_attr($attr['featuredImageTopborderType']) . ' ' . esc_attr($attr['pg_featuredImageTopBorder']) . " " . esc_attr($attr['pg_featuredImageTopBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageBottomborderType']) && isset($attr['pg_featuredImageBottomBorder']) && isset($attr['pg_featuredImageBottomBorderColor']) ? 
+            "border-bottom: " . esc_attr($attr['featuredImageBottomborderType']) . ' ' . esc_attr($attr['pg_featuredImageBottomBorder']) . " " . esc_attr($attr['pg_featuredImageBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageLeftborderType']) && isset($attr['pg_featuredImageLeftBorder']) && isset($attr['pg_featuredImageLeftBorderColor']) ? 
+            "border-left: " . esc_attr($attr['featuredImageLeftborderType']) . ' ' . esc_attr($attr['pg_featuredImageLeftBorder']) . " " . esc_attr($attr['pg_featuredImageLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageRightborderType']) && isset($attr['pg_featuredImageRightBorder']) && isset($attr['pg_featuredImageRightBorderColor']) ? 
+            "border-right: " . esc_attr($attr['featuredImageRightborderType']) . ' ' . esc_attr($attr['pg_featuredImageRightBorder']) . " " . esc_attr($attr['pg_featuredImageRightBorderColor']) . ";" : '';
+        
     $css .= "}";
      
     //Title Tag
@@ -394,13 +424,13 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
         $css .= "margin-block-end: 0.07em;";
         $css .= "font-weight: 600;";
+        
     $css .= "}";
      
     //author-date-container
     $css .= "$wrapper $post .post-grid-author-date-container{";
         $css .= "    display: flex;";
         $css .= "    align-items: center;";
-        $css .= "    gap: 3px;";
         $css .= "    flex-wrap: wrap;";
         $css .= "    margin-left: 2px;";
     $css .= "}";
@@ -439,8 +469,8 @@ function generate_inline_styles($attr) {
     $css .= "$wrapper $post .post-grid-excerpt-view{";
 
         // Font Weight
-        $css .= "font-weight: 300;";
-        
+        $css .= isset($attr['pg_ContentWeight']) ? "font-weight: " . esc_attr($attr['pg_ContentWeight']) . ";" : '';
+
         // Text Color
         $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
         
@@ -486,11 +516,13 @@ function generate_inline_styles($attr) {
         $css .= "margin: 20px 5px;";
         $css .="text-decoration: none;";
         
-        // Border radius
-        $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_paginationBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_paginationBottomBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_paginationLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_paginationLeftBorderRadius']) . ";" : '';
-        $css .= isset($attr['pg_paginationRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_paginationRightBorderRadius']) . ";" : '';
+        $borderRadiusUnit = isset($attr['pg_PaginationpaddingUnit']) ? esc_attr($attr['pg_PaginationpaddingUnit']) : 'px';
+
+        // Border radius for pagination
+        $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_paginationBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_paginationLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_paginationRightBorderRadius']) . $borderRadiusUnit . ";" : '';
         
         // Border
         $css .= isset($attr['PaginationTopborderType']) && isset($attr['pg_paginationTopBorder']) && isset($attr['pg_paginationTopBorderColor']) ? 
@@ -505,10 +537,9 @@ function generate_inline_styles($attr) {
     $css .= "}"; 
         
     //for tablet
-    $css .= "@media (max-width: 768px) {
+    $css .= "@media (max-width: 1024px) {
 
         $wrapper {
-
             grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsTablet']) ? $attr['pg_postLayoutColumnsTablet'] : 2) . ", 1fr);
             padding-top: " . (isset($attr['buttonpaddingTopTablet']) ? esc_attr($attr['buttonpaddingTopTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['buttonpaddingBottomTablet']) ? esc_attr($attr['buttonpaddingBottomTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
@@ -522,7 +553,12 @@ function generate_inline_styles($attr) {
             
            grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
 
-            //    borderradius for tablet
+           
+            border-top-left-radius: " . (isset($attr['pg_postTopBorderRadiusTablet']) ? esc_attr($attr['pg_postTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_postBottomBorderRadiusTablet']) ? esc_attr($attr['pg_postBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_postLeftBorderRadiusTablet']) ? esc_attr($attr['pg_postLeftBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusTablet']) ? esc_attr($attr['pg_postRightBorderRadiusTablet']) . "px" : '') . ";
+   
         }
     
         $wrapper $post {
@@ -530,20 +566,34 @@ function generate_inline_styles($attr) {
             padding-bottom: " . (isset($attr['pg_layoutpaddingBottomTablet']) ? esc_attr($attr['pg_layoutpaddingBottomTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_layoutpaddingLeftTablet']) ? esc_attr($attr['pg_layoutpaddingLeftTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
             padding-right: " . (isset($attr['pg_layoutpaddingRightTablet']) ? esc_attr($attr['pg_layoutpaddingRightTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_layoutTopBorderRadiusTablet']) ? esc_attr($attr['pg_layoutTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_layoutBottomBorderRadiusTablet']) ? esc_attr($attr['pg_layoutBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_layoutRightBorderRadiusTablet']) ? esc_attr($attr['pg_layoutRightBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_layoutLeftBorderRadiusTablet']) ? esc_attr($attr['pg_layoutLeftBorderRadiusTablet']) . "px" : '') . ";
+
         }   
 
-        $wrapper $post .post-grid-category-styles {
-            padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomTablet']) ? esc_attr($attr['pg_CategorypaddingBottomTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-left: " . (isset($attr['pg_CategorypaddingLeftTablet']) ? esc_attr($attr['pg_CategorypaddingLeftTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-right: " . (isset($attr['pg_CategorypaddingRightTablet']) ? esc_attr($attr['pg_CategorypaddingRightTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+        $wrapper $post .post-grid-image{
+            border-top-left-radius: " . (isset($attr['pg_featuredImageTopBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_featuredImageBottomBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_featuredImageRightBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageRightBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_featuredImageLeftBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageLeftBorderRadiusTablet']) . "px" : '') . ";
+
         }
+
 
         $wrapper $post .post-grid-category-style-new {
             padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['pg_CategorypaddingBottomTablet']) ? esc_attr($attr['pg_CategorypaddingBottomTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_CategorypaddingLeftTablet']) ? esc_attr($attr['pg_CategorypaddingLeftTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
             padding-right: " . (isset($attr['pg_CategorypaddingRightTablet']) ? esc_attr($attr['pg_CategorypaddingRightTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_categoryTopBorderRadiusTablet']) ? esc_attr($attr['pg_categoryTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_categoryBottomBorderRadiusTablet']) ? esc_attr($attr['pg_categoryBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_categoryRightBorderRadiusTablet']) ? esc_attr($attr['pg_categoryRightBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_categoryLeftBorderRadiusTablet']) ? esc_attr($attr['pg_categoryLeftBorderRadiusTablet']) . "px" : '') . ";
+
        
         }
 
@@ -552,7 +602,29 @@ function generate_inline_styles($attr) {
             padding-bottom: " . (isset($attr['pg_TagpaddingBottomTablet']) ? esc_attr($attr['pg_TagpaddingBottomTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_TagpaddingLeftTablet']) ? esc_attr($attr['pg_TagpaddingLeftTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
             padding-right: " . (isset($attr['pg_TagpaddingRightTablet']) ? esc_attr($attr['pg_TagpaddingRightTablet']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_tagsTopBorderRadiusTablet']) ? esc_attr($attr['pg_tagsTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_tagsBottomBorderRadiusTablet']) ? esc_attr($attr['pg_tagsBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_tagsRightBorderRadiusTablet']) ? esc_attr($attr['pg_tagsRightBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_tagsLeftBorderRadiusTablet']) ? esc_attr($attr['pg_tagsLeftBorderRadiusTablet']) . "px" : '') . ";
+
         }
+
+        .page-numbers-{$uniqueId} {
+            
+            padding-top: " . (isset($attr['pg_PaginationpaddingTopTablet']) ? esc_attr($attr['pg_PaginationpaddingTopTablet']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_PaginationpaddingBottomTablet']) ? esc_attr($attr['pg_PaginationpaddingBottomTablet']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_PaginationpaddingLeftTablet']) ? esc_attr($attr['pg_PaginationpaddingLeftTablet']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_PaginationpaddingRightTablet']) ? esc_attr($attr['pg_PaginationpaddingRightTablet']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            
+
+            border-top-left-radius: " . (isset($attr['pg_paginationTopBorderRadiusTablet']) ? esc_attr($attr['pg_paginationTopBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_paginationBottomBorderRadiusTablet']) ? esc_attr($attr['pg_paginationBottomBorderRadiusTablet']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_paginationLeftBorderRadiusTablet']) ? esc_attr($attr['pg_paginationLeftBorderRadiusTablet']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_paginationRightBorderRadiusTablet']) ? esc_attr($attr['pg_paginationRightBorderRadiusTablet']) . "px" : '') . ";
+        }
+        
+
     }";
     
     //for mobile
@@ -572,7 +644,11 @@ function generate_inline_styles($attr) {
             grid-gap: " . (isset($attr['pg_gapupMobile']) ? esc_attr($attr['pg_gapupMobile']) . 'px ' . esc_attr($attr['pg_gapMobile']) . 'px' : '') . ";
 
            
-            //borderradius for mobile
+            border-top-left-radius: " . (isset($attr['pg_postTopBorderRadiusMobile']) ? esc_attr($attr['pg_postTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_postBottomBorderRadiusMobile']) ? esc_attr($attr['pg_postBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_postLeftBorderRadiusMobile']) ? esc_attr($attr['pg_postLeftBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusMobile']) ? esc_attr($attr['pg_postRightBorderRadiusMobile']) . "px" : '') . ";
+       
             
         }
     
@@ -581,13 +657,20 @@ function generate_inline_styles($attr) {
             padding-bottom: " . (isset($attr['pg_layoutpaddingBottomMobile']) ? esc_attr($attr['pg_layoutpaddingBottomMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
             padding-left: " . (isset($attr['pg_layoutpaddingLeftMobile']) ? esc_attr($attr['pg_layoutpaddingLeftMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
             padding-right: " . (isset($attr['pg_layoutpaddingRightMobile']) ? esc_attr($attr['pg_layoutpaddingRightMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_layoutTopBorderRadiusMobile']) ? esc_attr($attr['pg_layoutTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_layoutBottomBorderRadiusMobile']) ? esc_attr($attr['pg_layoutBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_layoutRightBorderRadiusMobile']) ? esc_attr($attr['pg_layoutRightBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_layoutLeftBorderRadiusMobile']) ? esc_attr($attr['pg_layoutLeftBorderRadiusMobile']) . "px" : '') . ";
+
         }
     
-        $wrapper $post .post-grid-category-styles {
-            padding-top: " . (isset($attr['pg_CategorypaddingTopMobile']) ? esc_attr($attr['pg_CategorypaddingTopMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-bottom: " . (isset($attr['pg_CategorypaddingBottomMobile']) ? esc_attr($attr['pg_CategorypaddingBottomMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-left: " . (isset($attr['pg_CategorypaddingLeftMobile']) ? esc_attr($attr['pg_CategorypaddingLeftMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
-            padding-right: " . (isset($attr['pg_CategorypaddingRightMobile']) ? esc_attr($attr['pg_CategorypaddingRightMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+        $wrapper $post .post-grid-image{
+            border-top-left-radius: " . (isset($attr['pg_featuredImageTopBorderRadiusMobile']) ? esc_attr($attr['pg_featuredImageTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_featuredImageBottomBorderRadiusMobile']) ? esc_attr($attr['pg_featuredImageBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_featuredImageRightBorderRadiusMobile']) ? esc_attr($attr['pg_featuredImageRightBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_featuredImageLeftBorderRadiusMobile']) ? esc_attr($attr['pg_featuredImageLeftBorderRadiusMobile']) . "px" : '') . ";
+
         }
     
         $wrapper $post .post-grid-category-style-new {
@@ -595,6 +678,11 @@ function generate_inline_styles($attr) {
             padding-bottom: " . (isset($attr['pg_CategorypaddingBottomMobile']) ? esc_attr($attr['pg_CategorypaddingBottomMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_CategorypaddingLeftMobile']) ? esc_attr($attr['pg_CategorypaddingLeftMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
             padding-right: " . (isset($attr['pg_CategorypaddingRightMobile']) ? esc_attr($attr['pg_CategorypaddingRightMobile']) . esc_attr($attr['categorypaddingUnit']) : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_categoryTopBorderRadiusMobile']) ? esc_attr($attr['pg_categoryTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_categoryBottomBorderRadiusMobile']) ? esc_attr($attr['pg_categoryBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_categoryRightBorderRadiusMobile']) ? esc_attr($attr['pg_categoryRightBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_categoryLeftBorderRadiusMobile']) ? esc_attr($attr['pg_categoryLeftBorderRadiusMobile']) . "px" : '') . ";
         }
     
         $wrapper $post .post-grid-tag-style-new {
@@ -602,7 +690,27 @@ function generate_inline_styles($attr) {
             padding-bottom: " . (isset($attr['pg_TagpaddingBottomMobile']) ? esc_attr($attr['pg_TagpaddingBottomMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_TagpaddingLeftMobile']) ? esc_attr($attr['pg_TagpaddingLeftMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
             padding-right: " . (isset($attr['pg_TagpaddingRightMobile']) ? esc_attr($attr['pg_TagpaddingRightMobile']) . esc_attr($attr['tagpaddingUnit']) : '') . ";
+
+            border-top-left-radius: " . (isset($attr['pg_tagsTopBorderRadiusMobile']) ? esc_attr($attr['pg_tagsTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_tagsBottomBorderRadiusMobile']) ? esc_attr($attr['pg_tagsBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_tagsRightBorderRadiusMobile']) ? esc_attr($attr['pg_tagsRightBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_tagsLeftBorderRadiusMobile']) ? esc_attr($attr['pg_tagsLeftBorderRadiusMobile']) . "px" : '') . ";
         }
+
+        .page-numbers-{$uniqueId} {
+            
+            padding-top: " . (isset($attr['pg_PaginationpaddingTopMobile']) ? esc_attr($attr['pg_PaginationpaddingTopMobile']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-bottom: " . (isset($attr['pg_PaginationpaddingBottomMobile']) ? esc_attr($attr['pg_PaginationpaddingBottomMobile']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-left: " . (isset($attr['pg_PaginationpaddingLeftMobile']) ? esc_attr($attr['pg_PaginationpaddingLeftMobile']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            padding-right: " . (isset($attr['pg_PaginationpaddingRightMobile']) ? esc_attr($attr['pg_PaginationpaddingRightMobile']) . esc_attr($attr['pg_PaginationpaddingUnit']) : '') . ";
+            
+
+            border-top-left-radius: " . (isset($attr['pg_paginationTopBorderRadiusMobile']) ? esc_attr($attr['pg_paginationTopBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-left-radius: " . (isset($attr['pg_paginationBottomBorderRadiusMobile']) ? esc_attr($attr['pg_paginationBottomBorderRadiusMobile']) . "px" : '') . ";
+            border-bottom-right-radius: " . (isset($attr['pg_paginationLeftBorderRadiusMobile']) ? esc_attr($attr['pg_paginationLeftBorderRadiusMobile']) . "px" : '') . ";
+            border-top-right-radius: " . (isset($attr['pg_paginationRightBorderRadiusMobile']) ? esc_attr($attr['pg_paginationRightBorderRadiusMobile']) . "px" : '') . ";
+        }
+
     }";
         
     return $css;

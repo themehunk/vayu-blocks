@@ -21,8 +21,7 @@ class VayuBlocksPostGrid {
         $device_type = $this->get_device_type();
         $columns = $this->attr['pg_postLayoutColumns']; // Default value
         $rows = $this->attr['pg_numberOfRow']; // Default value
-      
-
+    
         // Adjust columns and rows based on device type
         if ($device_type === 'Desktop') {
             $columns = isset($this->attr['pg_postLayoutColumns']) ? $this->attr['pg_postLayoutColumns'] : $columns;
@@ -34,26 +33,95 @@ class VayuBlocksPostGrid {
             $columns = isset($this->attr['pg_postLayoutColumnsMobile']) ? $this->attr['pg_postLayoutColumnsMobile'] : 1;
             $rows = isset($this->attr['pg_numberOfRowMobile']) ? $this->attr['pg_numberOfRowMobile'] : $rows;
         }
-
+    
+        // Default sorting
+        $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'desc'; // Default to descending
+        $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'date'; // Default to 'date'
+    
+        // Initial query arguments
         $args = array(
             'post_type' => 'post',
             'posts_per_page' => $columns * $rows,
-            'paged' => $paged,
-            'post_status' => 'publish',
-            'offset' => ($paged - 1) * ($columns * $rows), // Calculate offset
+            
+            'orderby' => $sortByField, // Sorting field
+            'order' => $sortByOrder,   // Sorting order
         );
-      
-
+    
         if (!empty($this->attr['pg_selectedCategory'])) {
             $args['cat'] = $this->attr['pg_selectedCategory'];
         }
-
+    
         if (!empty($this->attr['pg_selectedTag'])) {
             $args['tag_id'] = $this->attr['pg_selectedTag'];
         }
-        return new WP_Query($args);
+    
+        // Filtering by categories using tax_query for AND condition
+        if (!empty($this->attr['selectedCategories']) && is_array($this->attr['selectedCategories'])) {
+            $selectedCategoryNames = array_map('sanitize_text_field', $this->attr['selectedCategories']); // Sanitize input
+            $category_ids = array();
+    
+            foreach ($selectedCategoryNames as $category_name) {
+                $category = get_term_by('name', $category_name, 'category');
+                if ($category) {
+                    $category_ids[] = $category->term_id;
+                }
+            }
+    
+            if (!empty($category_ids)) {
+                $args['tax_query'] = array(
+                    array(
+                        'taxonomy' => 'category',
+                        'field'    => 'term_id',
+                        'terms'    => $category_ids,
+                        'operator' => 'AND',
+                    ),
+                );
+            }
+        }
+    
+        // Filtering by tags
+        if (!empty($this->attr['pg_selectedTag'])) {
+            $args['tag_id'] = $this->attr['pg_selectedTag']; // Use 'tag_id' for single tag
+        }
+    
+        // Fetch all posts
+        $all_posts_query = new WP_Query($args);
+        $all_posts = $all_posts_query->posts;
+    
+        // Apply featured image filter if applicable
+        if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
+            $filtered_posts = array_filter($all_posts, function($post) {
+                return has_post_thumbnail($post->ID);
+            });
+    
+            $filtered_posts_count = count($filtered_posts); // Count filtered posts
+    
+            // Pagination arguments
+            $args['posts_per_page'] = $columns * $rows; // Items per page
+            $args['paged'] = $paged; // Current page
+    
+            // Calculate total pages based on filtered count
+            $total_pages = ceil($filtered_posts_count / $args['posts_per_page']);
+    
+            // Adjust query arguments for pagination
+            $args['post__in'] = wp_list_pluck($filtered_posts, 'ID'); // Filtered post IDs
+            $args['post__not_in'] = array(); // Ensure not to exclude any posts
+    
+            $query = new WP_Query($args);
+    
+            return $query; // Return the filtered WP_Query object
+        } else {
+            // If no featured image filter is applied, paginate as usual
+            $args['posts_per_page'] = $columns * $rows; // Items per page
+            $args['paged'] = $paged; // Current page
+    
+            $query = new WP_Query($args);
+    
+            return $query; // Return the WP_Query object
+        }
     }
-
+    
+    
     public function render($query) {
         ob_start();
             while ($query->have_posts()) {
@@ -72,9 +140,9 @@ class VayuBlocksPostGrid {
             'total'         => $query->max_num_pages,
             'current'       => max(1,$paged),
             'prev_next'     => true,
-            'prev_text'     => 'Prev',
-            'next_text'     => 'Next',
-            'end_size'      => 2,  // Number of page numbers to show at the beginning and end
+            'prev_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
+            'next_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
+            'end_size'      => 3,  // Number of page numbers to show at the beginning and end
             'mid_size'      => 0,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
@@ -83,12 +151,11 @@ class VayuBlocksPostGrid {
     
         // Generate pagination links
         $pagination_links = paginate_links($pagination_args);
-    
+
         // Wrap pagination links in a div
         $pagination = '<div class="pagination" style="margin-top: 20px; text-align: center;">';
         $pagination .= $pagination_links;
         $pagination .= '</div>';
-    
         // Add a hidden input for max pages
         $pagination .= '<input type="hidden" id="max-pages" value="' . $query->max_num_pages . '">';
     
@@ -118,7 +185,6 @@ class VayuBlocksPostGrid {
         }
 
         $tag_links = array();
-
         if (!empty($tags)) {
             foreach ($tags as $tag) {
                 $tag_links[] = array(
@@ -174,7 +240,7 @@ class VayuBlocksPostGrid {
         $numberOfCategories = isset($this->attr['pg_numberOfCategories']) ? intval($this->attr['pg_numberOfCategories']) : 1;
     
         if ($showCategories) {
-            echo '<div>';
+            echo '<div class="post-grid-category-style-container">';
             foreach (array_slice($categories, 0, $numberOfCategories) as $category) {
                 // Expect $category to be an associative array with 'name' and 'link'
                 echo '<a href="' . esc_url($category['link']) . '" class="post-grid-category-style-new">' . esc_html($category['name']) . '</a>';
@@ -305,7 +371,7 @@ class VayuBlocksPostGrid {
         $numberOfTags = isset($this->attr['pg_numberOfTags']) ? intval($this->attr['pg_numberOfTags']) : 1;
     
         if ($showTags) {
-            echo '<div style="display: flex; flex-wrap: wrap; gap: 5px;">';
+            echo '<div class="post-grid-tag-style-conatiner">';
             foreach (array_slice($tags, 0, $numberOfTags) as $tag) {
                 echo '<a href="' . esc_url($tag['link']) . '" class="post-grid-tag-style-new">' . esc_html($tag['name']) . '</a>';
             }
@@ -313,7 +379,6 @@ class VayuBlocksPostGrid {
         }
     }
     
-
     private function get_device_type() {
         $tablet_browser = 0;
         $mobile_browser = 0;

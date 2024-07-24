@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl  } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { more, arrowUp, arrowDown, trash ,moreVertical} from '@wordpress/icons';
 import {
@@ -14,6 +14,28 @@ import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
+        pg_paginationBorderRadiusunit,
+        pg_paginationTopBorderRadius,
+        pg_paginationRightBorderRadius,
+        pg_paginationBottomBorderRadius,
+        pg_paginationLeftBorderRadius,
+        pg_paginationTopBorderRadiusTablet,
+        pg_paginationRightBorderRadiusTablet,
+        pg_paginationBottomBorderRadiusTablet,
+        pg_paginationLeftBorderRadiusTablet,
+        pg_paginationTopBorderRadiusMobile,
+        pg_paginationRightBorderRadiusMobile,
+        pg_paginationBottomBorderRadiusMobile,
+        pg_paginationLeftBorderRadiusMobile,
+        paginationBorderRadiusType,
+        paginationBorderRadiusTypeTablet,
+        paginationBorderRadiusTypeMobile,
+        
+
+        sortByOrder,
+        sortByField,
+        pg_featuredImageOnly,
+        selectedCategories,
         pg_postLayoutColumns,
         pg_numberOfRow,
         pg_gap,
@@ -65,11 +87,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         pg_paginationBorderRadius,
         pg_PaginationColor,
         pg_PaginationSize,
-
-        pg_paginationTopBorderRadius,
-		pg_paginationBottomBorderRadius,
-		pg_paginationLeftBorderRadius,
-		pg_paginationRightBorderRadius,
 
 		paginationTopborderType,
         paginationBottomborderType,
@@ -936,16 +953,193 @@ const PostSettings = ({ attributes, setAttributes }) => {
 	];
 
     const fontSizes = [
-		{ name: __('Small', 'post-grid'), slug: 'small', size: 15 },
-		{ name: __('Medium', 'post-grid'), slug: 'medium', size: 20 },
-		{ name: __('Large', 'post-grid'), slug: 'large', size: 24 },
-		{ name: __('Larger', 'post-grid'), slug: 'larger', size: 28 },
+		{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 15 },
+		{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 20 },
+		{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
+		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
 	];
 
+  // Border radius types for different devices
+const desktopBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadius',
+    right: 'pg_paginationRightBorderRadius',
+    bottom: 'pg_paginationBottomBorderRadius',
+    left: 'pg_paginationLeftBorderRadius'
+};
+
+const tabletBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadiusTablet',
+    right: 'pg_paginationRightBorderRadiusTablet',
+    bottom: 'pg_paginationBottomBorderRadiusTablet',
+    left: 'pg_paginationLeftBorderRadiusTablet'
+};
+
+const mobileBorderRadiusType = {
+    top: 'pg_paginationTopBorderRadiusMobile',
+    right: 'pg_paginationRightBorderRadiusMobile',
+    bottom: 'pg_paginationBottomBorderRadiusMobile',
+    left: 'pg_paginationLeftBorderRadiusMobile'
+};
+
+// Function to get the current border-radius type
+const getBorderRadiusType = () => {
+    switch (getView) {
+        case 'Desktop':
+            return attributes.paginationBorderRadiusType;
+        case 'Tablet':
+            return attributes.paginationBorderRadiusTypeTablet;
+        case 'Mobile':
+            return attributes.paginationBorderRadiusTypeMobile;
+        default:
+            return undefined;
+    }
+};
+
+// Function to change the border-radius type
+const changeBorderRadiusType = value => {
+    if ('Desktop' === getView) {
+        setAttributes({
+            paginationBorderRadiusType: value,
+            paginationBorderRadiusTypeTablet: value,
+            paginationBorderRadiusTypeMobile: value
+        });
+    } else if ('Tablet' === getView) {
+        setAttributes({
+            paginationBorderRadiusTypeTablet: value
+        });
+    } else if ('Mobile' === getView) {
+        setAttributes({
+            paginationBorderRadiusTypeMobile: value
+        });
+    }
+};
+
+// Function to change the border-radius values
+const changeBorderRadius = (type, value) => {
+    switch (getView) {
+        case 'Desktop':
+            if ('linked' === attributes.paginationBorderRadiusType) {
+                setAttributes({
+                    pg_paginationTopBorderRadius: value,
+                    pg_paginationRightBorderRadius: value,
+                    pg_paginationBottomBorderRadius: value,
+                    pg_paginationLeftBorderRadius: value
+                });
+            } else {
+                setAttributes({ [desktopBorderRadiusType[type]]: value });
+            }
+            break;
+        case 'Tablet':
+            if ('linked' === attributes.paginationBorderRadiusTypeTablet) {
+                setAttributes({
+                    pg_paginationTopBorderRadiusTablet: value,
+                    pg_paginationRightBorderRadiusTablet: value,
+                    pg_paginationBottomBorderRadiusTablet: value,
+                    pg_paginationLeftBorderRadiusTablet: value
+                });
+            } else {
+                setAttributes({ [tabletBorderRadiusType[type]]: value });
+            }
+            break;
+        case 'Mobile':
+            if ('linked' === attributes.paginationBorderRadiusTypeMobile) {
+                setAttributes({
+                    pg_paginationTopBorderRadiusMobile: value,
+                    pg_paginationRightBorderRadiusMobile: value,
+                    pg_paginationBottomBorderRadiusMobile: value,
+                    pg_paginationLeftBorderRadiusMobile: value
+                });
+            } else {
+                setAttributes({ [mobileBorderRadiusType[type]]: value });
+            }
+            break;
+    }
+};
+
+// Function to get the current border-radius value for a specific side
+const getBorderRadius = type => {
+    switch (type) {
+        case 'top':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationTopBorderRadius
+                        : attributes.pg_paginationTopBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationTopBorderRadiusTablet
+                        : attributes.pg_paginationTopBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationTopBorderRadiusMobile
+                        : attributes.pg_paginationTopBorderRadiusMobile;
+            }
+        case 'right':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationRightBorderRadius
+                        : attributes.pg_paginationRightBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationRightBorderRadiusTablet
+                        : attributes.pg_paginationRightBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationRightBorderRadiusMobile
+                        : attributes.pg_paginationRightBorderRadiusMobile;
+            }
+        case 'bottom':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationBottomBorderRadius
+                        : attributes.pg_paginationBottomBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationBottomBorderRadiusTablet
+                        : attributes.pg_paginationBottomBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationBottomBorderRadiusMobile
+                        : attributes.pg_paginationBottomBorderRadiusMobile;
+            }
+        case 'left':
+            switch (getView) {
+                case 'Desktop':
+                    return 'linked' === attributes.paginationBorderRadiusType
+                        ? attributes.pg_paginationLeftBorderRadius
+                        : attributes.pg_paginationLeftBorderRadius;
+                case 'Tablet':
+                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                        ? attributes.pg_paginationLeftBorderRadiusTablet
+                        : attributes.pg_paginationLeftBorderRadiusTablet;
+                case 'Mobile':
+                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                        ? attributes.pg_paginationLeftBorderRadiusMobile
+                        : attributes.pg_paginationLeftBorderRadiusMobile;
+            }
+        default:
+            return undefined;
+    }
+};
+
+// Handle pagination border-radius changes
+const handlePaginationBorderRadiusChange = (newValues) => {
+    setAttributes({
+        pg_paginationTopBorderRadius: newValues.borderRadius.top,
+        pg_paginationLeftBorderRadius: newValues.borderRadius.left,
+        pg_paginationRightBorderRadius: newValues.borderRadius.right,
+        pg_paginationBottomBorderRadius: newValues.borderRadius.bottom,
+    });
+};
+
+  
     return (
         <>
-            <PanelBody title={__('Layout', 'post-grid')} initialOpen={false}>
-                <ResponsiveControl label={__('Number of Columns', 'post-grid')}>
+            <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
+                
+                <ResponsiveControl label={__('Number of Columns', 'vayu-blocks')}>
                     <RangeControl
                         type={getLayoutColumnsType()}
                         changeType={changeLayoutColumnsType}
@@ -953,11 +1147,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => changeLayoutColumns(value)}
                         min={1}
                         max={6}
-                        label={__(getView, 'post-grid')}
+                        label={__(getView, 'vayu-blocks')}
                     />
                 </ResponsiveControl>
 
-                <ResponsiveControl label={__('Number of Rows', 'post-grid')}>
+                <ResponsiveControl label={__('Number of Rows', 'vayu-blocks')}>
                         <RangeControl
                             type={getRowsType()}
                             changeType={changeRowsType}
@@ -969,10 +1163,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         />
                 </ResponsiveControl>
 
-            </PanelBody>
- 
-            <PanelBody title={__('Filter', 'post-grid')} initialOpen={false}>
-                <ResponsiveControl label={__('Gap Between Items Vertical', 'post-grid')}>
+                <ResponsiveControl label={__('Gap Between Items Vertical', 'vayu-blocks')}>
                     <RangeControl
                         value={getgap()}
                         type={getgapType()}
@@ -983,7 +1174,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         max={100}
                     />
                 </ResponsiveControl>
-                <ResponsiveControl label={__('Gap Between Items Horizantal', 'post-grid')}>
+                <ResponsiveControl label={__('Gap Between Items Horizantal', 'vayu-blocks')}>
                     <RangeControl
                         value={getgapup()}
                         type={getgapupType()}
@@ -994,12 +1185,65 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         label={getView}
                     />
                 </ResponsiveControl>
+
+            </PanelBody>
+ 
+            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
+                <FormTokenField
+                    __nextHasNoMarginBottom
+                    label="By Category"
+                    onChange={(value)=>setAttributes({selectedCategories:value}) }
+                    suggestions={[
+                        'cat1',
+                        'cat2',
+                        'uncategorised',
+                        'cat3',
+                        'cat4',
+                        'cat5'
+                    ]}
+                    value={selectedCategories}                     
+                />
+                <br />
+                <br />
+
+                <ToggleControl
+                    label={__('Featured Image Post Only', 'vayu-blocks')}
+                    checked={pg_featuredImageOnly}
+                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
+                />
+
+            <h4>Order</h4>
+            <SelectControl
+                label="Sort Order"
+                value={sortByOrder}  // Corrected typo here
+                options={[
+                    { value: 'desc', label: 'Descending' },  // Corrected typo here
+                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
+                ]}
+                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
+            />
+
+            <SelectControl
+                label="Sort By Field"
+                value={sortByField}
+                options={[
+                    { value: 'date', label: 'Date' },
+                    { value: 'modified', label: 'Last Modified' },
+                    { value: 'title', label: 'Title' },
+                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
+                ]}
+                onChange={(value) => setAttributes({ sortByField: value })}
+            />
+
+
+
             </PanelBody>
 
-            <PanelBody title={__('Layout Controls', 'post-grid')} initialOpen={false}>
-            <ResponsiveControl label={__(getView, 'post-grid')}>
+            <PanelBody title={__('Layout Controls', 'vayu-blocks')} initialOpen={false}>
+                <ResponsiveControl label={__(getView, 'vayu-blocks')}>
+                <br />
                 <ToggleControl
-                    label={__('Show Excerpt', 'post-grid')}
+                    label={__('Show Excerpt', 'vayu-blocks')}
                     checked={getExcerptview()}
                     type={getLayoutType()}
                     changeType={changeLayoutType}
@@ -1009,7 +1253,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 {getExcerptview() && (
                     <>
                         <RangeControl
-                            label={__('Number of words in excerpt', 'post-grid')}
+                            label={__('Number of words in excerpt', 'vayu-blocks')}
                             value={getExcerptnumberview()}
                             type={getExcerptnumberType()}
                             changeType={changeExcerptnumberType}
@@ -1018,7 +1262,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             max={100}
                         />
                         <TextControl
-                            label={__('Last Word', 'post-grid')}
+                            label={__('Last Word', 'vayu-blocks')}
                             value={getExcerptSelectorview()}
                             type={getExcerptSelectorType()}
                             changeType={changeExcerptSelectorType}
@@ -1030,7 +1274,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 )}
 
                 <ToggleControl
-                    label={__('Show Full Content', 'post-grid')}
+                    label={__('Show Full Content', 'vayu-blocks')}
                     checked={getFullContentview()}
                     type={getFullContentType()}
                     changeType={changeFullContentType}
@@ -1039,7 +1283,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                 <ToggleControl
-                    label={__('Show Featured Image', 'post-grid')}
+                    label={__('Show Featured Image', 'vayu-blocks')}
                     checked={getFeaturedImageview()}
                     type={getFeaturedImageType()}
                     changeType={changeFeaturedImageType}
@@ -1048,7 +1292,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                 <ToggleControl
-                    label={__('Show Categories', 'post-grid')}
+                    label={__('Show Categories', 'vayu-blocks')}
                     checked={getShowCategoriesview()}
                     type={getShowCategoriesType()}
                     changeType={changeShowCategoriesType}
@@ -1056,7 +1300,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                     {getShowCategoriesview() && (
                         <RangeControl
-                            label={__('Number of Categories', 'post-grid')}
+                            label={__('Number of Categories', 'vayu-blocks')}
                             value={pg_numberOfCategories}
                             onChange={(value) => setAttributes({pg_numberOfCategories:value})}
                             min={1}
@@ -1065,21 +1309,21 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     )}
 
                 <ToggleControl
-                    label={__('Show Author', 'post-grid')}
+                    label={__('Show Author', 'vayu-blocks')}
                     checked={getShowAuthorview()}
                     type={getShowAuthorType()}
                     changeType={changeShowAuthorType}
                     onChange={(value) => changeShowAuthor(value)}
                 />
                 <ToggleControl
-                    label={__('Show Date', 'post-grid')}
+                    label={__('Show Date', 'vayu-blocks')}
                     checked={getShowDateview()}
                     type={getShowDateType()}
                     changeType={changeShowDateType}
                     onChange={(value) => changeShowDate(value)}
                 />
                 <ToggleControl
-                    label={__('Show Tags', 'post-grid')}
+                    label={__('Show Tags', 'vayu-blocks')}
                     checked={getShowTagview()}
                     type={getShowTagType()}
                     changeType={changeShowTagType}
@@ -1087,7 +1331,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                  {getShowTagview() && (
                         <RangeControl
-                            label={__('Number of Tags', 'post-grid')}
+                            label={__('Number of Tags', 'vayu-blocks')}
                             value={pg_numberOfTags}
                             onChange={(value) => setAttributes({pg_numberOfTags:value})}
                             min={1}
@@ -1098,9 +1342,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
             </ResponsiveControl>
             </PanelBody>
 
-            <PanelBody title={__('Pagination', 'post-grid')} initialOpen={false}>
+            <PanelBody title={__('Pagination', 'vayu-blocks')} initialOpen={false}>
                 <ToggleControl
-                    label={__('Show Pagination', 'post-grid')}
+                    label={__('Show Pagination', 'vayu-blocks')}
                     checked={showpagination}
                     onChange={(value) => setAttributes({
                         showpagination:value
@@ -1111,7 +1355,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                    
                     <h4>Text Color</h4>
                     <ColorPalette
-                        label={__('Color', 'post-grid')}
+                        label={__('Color', 'vayu-blocks')}
                         colors={colors}
                         value={pg_PaginationColor}
                         onChange={(color) => setAttributes({ pg_PaginationColor: color })}
@@ -1123,7 +1367,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({ pg_PaginationSize: value })}
                     />
 
-                    <h4>{__('Background Color', 'post-grid')}</h4>
+                    <h4>{__('Background Color', 'vayu-blocks')}</h4>
                     <BackgroundSelectorControl
                         backgroundType={pg_PaginationbackgroundType}
                         backgroundColor={pg_PaginationbackgroundColor}
@@ -1133,53 +1377,79 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
                      />
 
-                                                <h4>Border</h4>
-                                
-									<BorderBoxControlComponent
-										label={__('Border','post-grid')}
-										value={{
-											all: {
-												color: attributes.pg_paginationBorderColor,
-												width: attributes.pg_paginationBorder,
-												style: attributes.paginationborderType,
-											},
-											top: {
-												color: attributes.pg_paginationTopBorderColor,
-												width: attributes.pg_paginationTopBorder,
-												style: attributes.paginationTopborderType,
-											},
-											bottom: {
-												color: attributes.pg_paginationBottomBorderColor,
-												width: attributes.pg_paginationBottomBorder,
-												style: attributes.paginationBottomborderType,
-											},
-											left: {
-												color: attributes.pg_paginationLeftBorderColor,
-												width: attributes.pg_paginationLeftBorder,
-												style: attributes.paginationLeftborderType,
-											},
-											right: {
-												color: attributes.pg_paginationRightBorderColor,
-												width: attributes.pg_paginationRightBorder,
-												style: attributes.paginationRightborderType,
-											},
-										}}
-										onChange={handlepaginationBorderChange}
-										type="border"
-									/>
-								
-									<BorderBoxControlComponent
-												label={__('Border Radius', 'post-grid')}
-												value={{
-												top: attributes.pg_paginationTopBorderRadius,
-												right: attributes.pg_paginationRightBorderRadius,
-												left: attributes.pg_paginationLeftBorderRadius,
-												bottom: attributes.pg_paginationBottomBorderRadius,
-												}}
-												onChange={handlepaginationBorderRadiusChange}
-												type="borderRadius"
-									/>
-                     <ResponsiveControl label={__('Padding', 'post-grid')}>
+                    <BorderBoxControlComponent
+                        label={__('Border','vayu-blocks')}
+                        value={{
+                            all: {
+                                color: attributes.pg_paginationBorderColor,
+                                width: attributes.pg_paginationBorder,
+                                style: attributes.paginationborderType,
+                            },
+                            top: {
+                                color: attributes.pg_paginationTopBorderColor,
+                                width: attributes.pg_paginationTopBorder,
+                                style: attributes.paginationTopborderType,
+                            },
+                            bottom: {
+                                color: attributes.pg_paginationBottomBorderColor,
+                                width: attributes.pg_paginationBottomBorder,
+                                style: attributes.paginationBottomborderType,
+                            },
+                            left: {
+                                color: attributes.pg_paginationLeftBorderColor,
+                                width: attributes.pg_paginationLeftBorder,
+                                style: attributes.paginationLeftborderType,
+                            },
+                            right: {
+                                color: attributes.pg_paginationRightBorderColor,
+                                width: attributes.pg_paginationRightBorder,
+                                style: attributes.paginationRightborderType,
+                            },
+                        }}
+                        onChange={handlepaginationBorderChange}
+                        type="border"
+                    />
+                        
+                    <ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+                        <UnitChooser
+                            value={ attributes.pg_paginationBorderRadiusunit }
+                                onClick={(unit) => {
+                                    setAttributes({ pg_paginationBorderRadiusunit : unit });
+                                }}
+                            units={ [ 'px', 'em', '%' ] }
+                        />
+
+                        <SizingControl
+                            type={ getBorderRadiusType() }
+                            min={ 0 }
+                            changeType={ changeBorderRadiusType }
+                            onChange={ changeBorderRadius }
+                            options={ [
+                                {
+                                    label: __( 'T-R', 'vayu-blocks' ),
+                                    type: 'top',
+                                    value: getBorderRadius( 'top' )
+                                },
+                                {
+                                    label: __( 'T-L', 'vayu-blocks' ),
+                                    type: 'right',
+                                    value: getBorderRadius( 'right' )
+                                },
+                                {
+                                    label: __( 'B-R', 'vayu-blocks' ),
+                                    type: 'bottom',
+                                    value: getBorderRadius( 'bottom' )
+                                },
+                                {
+                                    label: __( 'B-L', 'vayu-blocks' ),
+                                    type: 'left',
+                                    value: getBorderRadius( 'left' )
+                                }
+                            ] }
+                        />
+                    </ResponsiveControl>
+
+                     <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
                             <UnitChooser
                                 value={attributes.pg_PaginationpaddingUnit}
                                 onClick={(unit) => {
@@ -1194,10 +1464,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 max={100} // Adjust as needed
                                 onChange={changePaginationPadding}
                                 options={[
-                                { label: __('Top', 'post-grid'), type: 'top', value: getPaginationPadding('top') },
-                                { label: __('Right', 'post-grid'), type: 'right', value: getPaginationPadding('right') },
-                                { label: __('Bottom', 'post-grid'), type: 'bottom', value: getPaginationPadding('bottom') },
-                                { label: __('Left', 'post-grid'), type: 'left', value: getPaginationPadding('left') }
+                                { label: __('Top', 'vayu-blocks'), type: 'top', value: getPaginationPadding('top') },
+                                { label: __('Right', 'vayu-blocks'), type: 'right', value: getPaginationPadding('right') },
+                                { label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getPaginationPadding('bottom') },
+                                { label: __('Left', 'vayu-blocks'), type: 'left', value: getPaginationPadding('left') }
                                 ]}
                             />
                     </ResponsiveControl>

@@ -28,12 +28,98 @@ import { useSelect } from '@wordpress/data';
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
-        pg_spacing,
-        pg_paginationTopBorderRadius,
-		pg_paginationBottomBorderRadius,
-		pg_paginationLeftBorderRadius,
-		pg_paginationRightBorderRadius,
+        pg_layoutBorderRadiusunit,
+        layoutBorderRadiusType,
+        pg_layoutTopBorderRadius,
+        pg_layoutRightBorderRadius,
+        pg_layoutBottomBorderRadius,
+        pg_layoutLeftBorderRadius,
+        layoutBorderRadiusTypeTablet,
+        pg_layoutTopBorderRadiusTablet,
+        pg_layoutRightBorderRadiusTablet,
+        pg_layoutBottomBorderRadiusTablet,
+        pg_layoutLeftBorderRadiusTablet,
+        layoutBorderRadiusTypeMobile,
+        pg_layoutTopBorderRadiusMobile,
+        pg_layoutRightBorderRadiusMobile,
+        pg_layoutBottomBorderRadiusMobile,
+        pg_layoutLeftBorderRadiusMobile,
+        
+        pg_featuredImageBorderRadiusunit,
+        featuredImageBorderRadiusType,
+        pg_featuredImageTopBorderRadius,
+        pg_featuredImageRightBorderRadius,
+        pg_featuredImageBottomBorderRadius,
+        pg_featuredImageLeftBorderRadius,
+        featuredImageBorderRadiusTypeTablet,
+        pg_featuredImageTopBorderRadiusTablet,
+        pg_featuredImageRightBorderRadiusTablet,
+        pg_featuredImageBottomBorderRadiusTablet,
+        pg_featuredImageLeftBorderRadiusTablet,
+        featuredImageBorderRadiusTypeMobile,
+        pg_featuredImageTopBorderRadiusMobile,
+        pg_featuredImageRightBorderRadiusMobile,
+        pg_featuredImageBottomBorderRadiusMobile,
+        pg_featuredImageLeftBorderRadiusMobile,
+        
+        pg_categoryBorderRadiusunit,
+        categoryBorderRadiusType,
+        pg_categoryTopBorderRadius,
+        pg_categoryRightBorderRadius,
+        pg_categoryBottomBorderRadius,
+        pg_categoryLeftBorderRadius,
+        categoryBorderRadiusTypeTablet,
+        pg_categoryTopBorderRadiusTablet,
+        pg_categoryRightBorderRadiusTablet,
+        pg_categoryBottomBorderRadiusTablet,
+        pg_categoryLeftBorderRadiusTablet,
+        categoryBorderRadiusTypeMobile,
+        pg_categoryTopBorderRadiusMobile,
+        pg_categoryRightBorderRadiusMobile,
+        pg_categoryBottomBorderRadiusMobile,
+        pg_categoryLeftBorderRadiusMobile,
+    
+        pg_tagsBorderRadiusunit,
+        tagsBorderRadiusType,
+        pg_tagsTopBorderRadius,
+        pg_tagsRightBorderRadius,
+        pg_tagsBottomBorderRadius,
+        pg_tagsLeftBorderRadius,
+        tagsBorderRadiusTypeTablet,
+        pg_tagsTopBorderRadiusTablet,
+        pg_tagsRightBorderRadiusTablet,
+        pg_tagsBottomBorderRadiusTablet,
+        pg_tagsLeftBorderRadiusTablet,
+        tagsBorderRadiusTypeMobile,
+        pg_tagsTopBorderRadiusMobile,
+        pg_tagsRightBorderRadiusMobile,
+        pg_tagsBottomBorderRadiusMobile,
+        pg_tagsLeftBorderRadiusMobile,
 
+        pg_paginationBorderRadiusunit,
+        pg_paginationTopBorderRadius,
+        pg_paginationRightBorderRadius,
+        pg_paginationBottomBorderRadius,
+        pg_paginationLeftBorderRadius,
+        pg_paginationTopBorderRadiusTablet,
+        pg_paginationRightBorderRadiusTablet,
+        pg_paginationBottomBorderRadiusTablet,
+        pg_paginationLeftBorderRadiusTablet,
+        pg_paginationTopBorderRadiusMobile,
+        pg_paginationRightBorderRadiusMobile,
+        pg_paginationBottomBorderRadiusMobile,
+        pg_paginationLeftBorderRadiusMobile,
+        paginationBorderRadiusType,
+        paginationBorderRadiusTypeTablet,
+        paginationBorderRadiusTypeMobile,
+        
+        sortByOrder,
+        sortByField,
+        pg_allPosts,
+        selectedCategories,
+        pg_ContentWeight,
+        pg_spacing,
+ 
 		paginationTopborderType,
         paginationBottomborderType,
         paginationLeftborderType,
@@ -46,11 +132,6 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_paginationBottomBorderColor,
         pg_paginationLeftBorderColor,
         pg_paginationRightBorderColor,
-        
-        pg_categoryTopBorderRadius,
-		pg_categoryBottomBorderRadius,
-		pg_categoryLeftBorderRadius,
-		pg_categoryRightBorderRadius,
 
 		categoryTopborderType,
         categoryBottomborderType,
@@ -64,12 +145,6 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_categoryBottomBorderColor,
         pg_categoryLeftBorderColor,
         pg_categoryRightBorderColor,
-
-        
-		pg_tagTopBorderRadius,
-		pg_tagBottomBorderRadius,
-		pg_tagLeftBorderRadius,
-		pg_tagRightBorderRadius,
 
 		tagTopborderType,
         tagBottomborderType,
@@ -197,6 +272,19 @@ const Edit = ({ attributes, setAttributes }) => {
         layout_backgroundRepeat,
         layout_backgroundSize,
         categoryborderType,
+
+        featuredImageTopborderType,
+        featuredImageBottomborderType,
+        featuredImageLeftborderType,
+        featuredImageRightborderType,
+        pg_featuredImageTopBorder,
+        pg_featuredImageBottomBorder,
+        pg_featuredImageLeftBorder,
+        pg_featuredImageRightBorder,
+        pg_featuredImageTopBorderColor,
+        pg_featuredImageBottomBorderColor,
+        pg_featuredImageLeftBorderColor,
+        pg_featuredImageRightBorderColor,
 		
 		category_backgroundType,
         category_backgroundColor,
@@ -317,7 +405,7 @@ const Edit = ({ attributes, setAttributes }) => {
         pg_paginationBorderRadius,
         pg_PaginationColor,
         pg_PaginationSize,
-
+        pg_featuredImageOnly,
     } = attributes;
 
     const [authors, setAuthors] = useState({});
@@ -326,8 +414,16 @@ const Edit = ({ attributes, setAttributes }) => {
     const [tags, settags] = useState([]);
     const [searchKeyword, setSearchKeyword] = useState('');
     const [isSolid, setIsSolid] = useState(true);
-    const [totalPages, setTotalPages] = useState(1); // Initialize totalPages state
+    const [totalPages, setTotalPages] = useState(1); 
+    const [loading, setLoading] = useState(true);
+    const [CurrentPage, setCurrentPage] = useState(1);
+    const [isFullContentVisible, setFullContentVisible] = useState(false);
 
+    // Function to toggle content visibility
+    const toggleContentVisibility = () => {
+        setFullContentVisible(!isFullContentVisible);
+    };
+  
     const TitleTag = pg_blockTitleTag || 'h2';
 
     //style
@@ -350,7 +446,6 @@ const Edit = ({ attributes, setAttributes }) => {
     const tagButtonStyle = tagButtonStyles(attributes);
 
     const postStyle = postStyles(attributes);
-    console.log(postStyle,"edit");
 
     const authorAndDateContainerStyle = authorAndDateContainerStyles;
 
@@ -359,6 +454,7 @@ const Edit = ({ attributes, setAttributes }) => {
     const showOnlyDateStyle = showOnlyDateStyles(attributes);
 
     const fullContentStyles = fullContentStyle(attributes);
+
 
     const getView = useSelect( select => {
 		const { getView } = select( 'vayu-blocks/data' );
@@ -369,48 +465,130 @@ const Edit = ({ attributes, setAttributes }) => {
     
     const numberOfRow= () => getView === 'Desktop' ? pg_numberOfRow : getView === 'Tablet' ? pg_numberOfRowTablet : pg_numberOfRowMobile;
     const numberOfColumns= () => getView === 'Desktop' ? pg_postLayoutColumns : getView === 'Tablet' ? pg_postLayoutColumnsTablet : pg_postLayoutColumnsMobile;
-                
-          
-    //post_load
+        
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true); // Start loading
             try {
                 let searchParams = '';
                 if (searchKeyword) {
                     searchParams = `&search=${encodeURIComponent(searchKeyword)}`;
                 }
-
-                const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=${numberOfColumns() * numberOfRow()}${searchParams}` });
-               
-                
+                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
+                setCategories(fetchedCategories);
+    
+                // Fetch all posts
+                const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=100${searchParams}` });
+    
+                // Fetch featured media for each post
                 const postsWithMedia = await Promise.all(fetchedPosts.map(async (post) => {
                     try {
                         if (!post.featured_media) {
                             return { ...post, featured_media_url: '' };
                         }
-
+    
                         const mediaResponse = await apiFetch({ path: `/wp/v2/media/${post.featured_media}` });
-
+    
                         if (!mediaResponse || mediaResponse.code === 'rest_post_invalid_id') {
                             throw new Error(`Invalid or missing featured media for post ID ${post.id}`);
                         }
-
+    
                         const featuredMediaUrl = mediaResponse?.source_url || '';
-
                         return { ...post, featured_media_url: featuredMediaUrl };
                     } catch (error) {
                         console.error(`Error fetching featured media for post ID ${post.id}:`, error);
                         return { ...post, featured_media_url: '' };
                     }
                 }));
+    
+                // Filter posts based on categories and featured image
+                const filteredPosts = postsWithMedia.filter(post => {
+                    // Map post category IDs to category names
+                    const postCategoryNames = post.categories.map(categoryId => {
+                        const category = fetchedCategories.find(cat => cat.id === categoryId);
+                        return category ? category.name : null;
+                    }).filter(name => name !== null);
+    
+                    // Check if all selected category names are present in the post's category names
+                    const matchesAll = selectedCategories.every(selectedCategoryName =>
+                        postCategoryNames.includes(selectedCategoryName)
+                    );
+    
+                    // Check if the post has a featured image if the filter is enabled
+                    const hasFeaturedImage = pg_featuredImageOnly ? !!post.featured_media : true;
+    
+                    return matchesAll && hasFeaturedImage;
+                });
+    
+                // Check if there are no filtered posts
+                if (filteredPosts.length === 0) {
+                    setAttributes({ pg_posts: []});
+                    setLoading(false);
+                    return;
+                }
+            
+                // Generate unique IDs for the posts
+                const postsWithIDs = filteredPosts.map(post => ({ ...post, uniqueID: generateUniqueID() }));
+    
+                // Sort posts
+                const sortedPosts = postsWithIDs.sort((a, b) => {
+                    const field = sortByField || 'id';
+                    let valueA = a[field];
+                    let valueB = b[field];
+    
+                    if (field === 'date' || field === 'modified') {
+                        valueA = new Date(valueA).getTime();
+                        valueB = new Date(valueB).getTime();
+                    } else if (field === 'id') {
+                        valueA = Number(valueA);
+                        valueB = Number(valueB);
+                    } else if (field === 'title') {
+                        const firstWordA = String(a.title.rendered).split(/\s+/)[0].toLowerCase();
+                        const firstWordB = String(b.title.rendered).split(/\s+/)[0].toLowerCase();
+    
+                        if (firstWordA < firstWordB) return sortByOrder === 'asc' ? -1 : 1;
+                        if (firstWordA > firstWordB) return sortByOrder === 'asc' ? 1 : -1;
+    
+                        const fullTitleA = String(a.title.rendered).toLowerCase();
+                        const fullTitleB = String(b.title.rendered).toLowerCase();
+    
+                        for (let i = 0; i < Math.min(fullTitleA.length, fullTitleB.length); i++) {
+                            if (fullTitleA[i] < fullTitleB[i]) return sortByOrder === 'asc' ? -1 : 1;
+                            if (fullTitleA[i] > fullTitleB[i]) return sortByOrder === 'asc' ? 1 : -1;
+                        }
+    
+                        return fullTitleA.length - fullTitleB.length;
+                    }
+    
+                    if (sortByOrder === 'asc') {
+                        if (valueA < valueB) return -1;
+                        if (valueA > valueB) return 1;
+                        return 0;
+                    } else if (sortByOrder === 'desc') {
+                        if (valueA > valueB) return -1;
+                        if (valueA < valueB) return 1;
+                        return 0;
+                    } else {
+                        return 0;
+                    }
+                });
+    
+                // Paginate posts
+                const itemsPerPage = numberOfColumns() * numberOfRow();
+                const totalPosts = sortedPosts.length;
+                const totalPages = Math.ceil(totalPosts / itemsPerPage);
+                setTotalPages(totalPages);
+                if (CurrentPage > 1 && totalPages<2) {
+                    setCurrentPage(1);
+                }
+                const startIndex = (CurrentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const paginatedPosts = sortedPosts.slice(startIndex, endIndex);
 
-                const postsWithIDs = postsWithMedia.map(post => ({ ...post, uniqueID: generateUniqueID() }));
-                setAttributes({ pg_posts: postsWithIDs });
-                
-                
-
-                const uniqueAuthorIds = postsWithIDs.map(post => post.author).filter((value, index, self) => self.indexOf(value) === index);
-
+                setAttributes({ pg_posts: paginatedPosts });
+    
+                const uniqueAuthorIds = paginatedPosts.map(post => post.author).filter((value, index, self) => self.indexOf(value) === index);
+    
                 const authors = await Promise.all(uniqueAuthorIds.map(async (authorId) => {
                     try {
                         const author = await apiFetch({ path: `/wp/v2/users/${authorId}` });
@@ -421,68 +599,46 @@ const Edit = ({ attributes, setAttributes }) => {
                         return null;
                     }
                 }));
-
+    
                 const authorMap = {};
                 authors.forEach(author => {
                     if (author) {
                         authorMap[author.id] = author.name;
                     }
                 });
-
+    
                 setAuthors(authorMap);
-                
-                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
-                setCategories(fetchedCategories);
-
-                const fetchedTags = await apiFetch({path: 'wp/v2/tags' });
+    
+                const fetchedTags = await apiFetch({ path: '/wp/v2/tags' });
                 settags(fetchedTags);
-
-                
+    
             } catch (error) {
                 console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false); // Stop loading
             }
         };
-
+    
         fetchData();
-    }, [numberOfColumns(), numberOfRow(), setAttributes, searchKeyword]);
-
-    //filter
+    }, [pg_featuredImageOnly, selectedCategories, CurrentPage, numberOfColumns(), numberOfRow(), setAttributes, searchKeyword, sortByOrder, sortByField]);
+    
+    // Filter
     useEffect(() => {
-        if (pg_selectedTag || pg_selectedCategory) {
-            const filtered = pg_posts.filter(post => {
-                let tagMatch = true;
-                let categoryMatch = true;
-
-                if (pg_selectedTag) {
-                    tagMatch = post.tags && post.tags.some(tag => tag.name && tag.name.toLowerCase() === pg_selectedTag.toLowerCase());
-                }
-
-                if (pg_selectedCategory) {
-                    categoryMatch = post.categories && post.categories.some(category => category.id === pg_selectedCategory);
-                }
-
-                return tagMatch && categoryMatch;
-            });
-
-            setFilteredPosts(filtered);
-        } else {
-            setFilteredPosts(pg_posts || []);
+        if (pg_posts.length > 0 && categories.length > 0) {
+            setFilteredPosts(pg_posts);
+        }else{
+            setFilteredPosts(pg_posts);
         }
-    }, [pg_selectedTag, pg_selectedCategory, pg_posts]);
+    }, [pg_posts]);
+   
+    const handlePageChange = async (page) => {
+        if (page!=CurrentPage){
+            setCurrentPage(page);
+        }
+    }
 
     const handleSearchChange = (value) => {
         setSearchKeyword(value);
-    };
-
-    const getCategoryNames = (categoryIds) => {
-        return categoryIds.map(categoryId => {
-            const foundCategory = categories.find(cat => cat.id === categoryId);
-            return foundCategory ? foundCategory.name : '';
-        }).join(', ');
-    };
-
-    const getTagNames = (tagIds) => {
-        return tagIds.map(tagId => `Tag ${tagId}`).join(', ');
     };
 
     const limitExcerpt = (content, words) => {
@@ -495,60 +651,6 @@ const Edit = ({ attributes, setAttributes }) => {
         return  Math.random().toString(36).substr(2, 9);
     }
 	
-    //pagination
-    const pages = async () => {
-        try {
-        const postsPerPage = numberOfRow() * numberOfColumns();
-        const fetchedPosts = await apiFetch({ path: `/wp/v2/posts` });
-        const totalPosts = fetchedPosts.length;
-        setTotalPages(Math.ceil(totalPosts / postsPerPage));
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        }
-    };
-      
-    (async () => {
-        await pages();
-        // console.log(totalPages); // Will be available after pages() finishes
-    })();
-    const [CurrentPage, setCurrentPage] = useState(1);
-    const handlePageChange = async (page) => {
-        try {
-            setCurrentPage(page);
-            let postsPerPage = numberOfColumns() * numberOfRow();
-            const offset = (page - 1) * postsPerPage;
-            const fetchedPosts = await apiFetch({ path: `/wp/v2/posts?per_page=${postsPerPage}&offset=${offset}` });
-
-            const postsWithMedia = await Promise.all(fetchedPosts.map(async (post) => {
-                try {
-                    if (!post.featured_media) {
-                        return { ...post, featured_media_url: '' };
-                    }
-
-                    const mediaResponse = await apiFetch({ path: `/wp/v2/media/${post.featured_media}` });
-
-                    if (!mediaResponse || mediaResponse.code === 'rest_post_invalid_id') {
-                        throw new Error(`Invalid or missing featured media for post ID ${post.id}`);
-                    }
-
-                    const featuredMediaUrl = mediaResponse?.source_url || '';
-
-                    return { ...post, featured_media_url: featuredMediaUrl };
-                } catch (error) {
-                    console.error(`Error fetching featured media for post ID ${post.id}:`, error);
-                    return { ...post, featured_media_url: '' };
-                }
-            }));
-
-            const postsWithIDs = postsWithMedia.map(post => ({ ...post, uniqueID: generateUniqueID() }));
-            setAttributes({ pg_posts: postsWithIDs });
-
-            setFilteredPosts(postsWithIDs);
-        } catch (error) {
-            console.error('Error fetching posts for page:', error);
-        }
-    };
-  
     const parseHTML = (html) => {
         const element = document.createElement('div');
         element.innerHTML = html;
@@ -587,137 +689,138 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
     
-       return (
+    return (
         <>
             <PanelSettings
-			    attributes={attributes}
-			    setAttributes={setAttributes}
-		    />
-            <AdvanceSettings  attributes={attributes}>
-           
-		    <div  style={blockStyle}>
-		        {filteredPosts && filteredPosts.length > 0 ? (
-                
-                    <div  style={gridContainerStyle}>
-
-                        {postsToShow.map((post)=> (
-                        
-                            <div key={post.uniqueID} style={postStyle}>
-
-                                {FeaturedImage() && post.featured_media_url && (
-                                    <div style={{authorAndDateContainerStyle}}>
-                                        <img
-                                            src={post.featured_media_url}
-                                            alt={post.title.rendered}
-                                            style={featuredImageStyle}
-                                        />
-                                    </div>
-                                )}
-
-                                {Category() && (
-                                    <div>
-                                       {post.categories.slice(0, pg_numberOfCategories).map((categoryId) => {
-                                            const category = categories.find(cat => cat.id === categoryId);
-                                            if (!category) return null;
-
-                                            return (
-                                                <a key={categoryId} href={category.link} style={categoryButtonStyle}>
-                                                    {category.name}
-                                                </a>
-                                            );
-                                        })}
-
-                                    </div>
-                                )}
-                                
-                                <div >
-                                    <a href={post.link} style={{textDecoration:"none"}}>
-                                        <TitleTag style={titleTagStyle}>
-                                            {post.title.rendered}
-                                        </TitleTag>
-                                    </a>
-                                </div>
-
-                                {(Author() ||  ShowDate()) && (
-                                    <div style={{ ...authorAndDateContainerStyles}}>
-                                        {Author() && authors[post.author] && (
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
+            <AdvanceSettings attributes={attributes}>
+                <div style={blockStyle}>
+                    {filteredPosts && filteredPosts.length > 0 ? (
+                        <div style={gridContainerStyle}>
+                            {postsToShow.length > 0 ? (
+                                postsToShow.map((post) => (
+                                    <div key={post.uniqueID} style={postStyle}>
+                                        {loading ? (
+                                            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}><Spinner /></div>
+                                        ) : (
                                             <>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" style={authorImageStyle} />
-                                                    <a href={authors[post.author].authorLink} style={authorLinkStyle}>
-                                                        By {authors[post.author]}
-                                                    </a>
-                                            </>
-                                        )}
-                                        {ShowDate() && (
-                                            <>
-                                                <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" 
-                                                />
-                                                <span style={showOnlyDateStyle} >
-                                                    {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                </span>
-                                            </>
-                                        )}
-                                    </div>
-                                )}
-
-                                {Excerpt() && (
-                                    <div style={fullContentStyles}>
-                                        {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
-                                    </div>
-                                )}
-
-                                {FullContent() && (
-                                        <div style={fullContentStyles} >
-                                            {parseHTML(post.content.rendered)}
-                                        </div>
-                                )}
-
-                                {Tags() && (
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                                        {post.tags.slice(0, pg_numberOfTags).map((tagId) => {
-                                            const tag = tags.find(t => t.id === tagId);
-                                            if (!tag) return null;
-                                        
-                                            return (
-                                                <a key={tagId} href={tag.link} style={tagButtonStyle}>
-                                                    {tag.name}
-                                                </a>
-                                            );
-                                        })}
-                                        
-                                    </div>
-                                )}
-
-                            </div>
-                        ))}
-                    </div>
-		        ) : (
-                <>
-                    <p>{__('No post to display', 'pg-block')}</p>
-                    <Spinner />
-                </>
-		        )}
+                                                {FeaturedImage() && post.featured_media_url && (
+                                                    <div style={authorAndDateContainerStyle}>
+                                                        <img
+                                                            src={post.featured_media_url}
+                                                            alt={post.title.rendered}
+                                                            style={featuredImageStyle}
+                                                        />
+                                                    </div>
+                                                )}
     
-                {/* Pagination */}
-                {showpagination && totalPages > 1 && (
-                <div className="pg-pagination" style={{ marginLeft: "45%" }}>
-                    {Array.from({ length: totalPages }, (_, index) => ( 
-                    <button
-                        style={PaginationStyle}
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={`pg-pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-                    >
-                        {index + 1}
-                    </button>
-                    ))}
+                                                {Category() && (
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', marginBottom : "15px",}}>
+                                                        {post.categories.slice(0, pg_numberOfCategories).map((categoryId) => {
+                                                            const category = categories.find(cat => cat.id === categoryId);
+                                                            if (!category) return null;
+    
+                                                            return (
+                                                                <a key={categoryId} href={category.link} style={categoryButtonStyle}>
+                                                                    {category.name}
+                                                                </a>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
+    
+                                                <div>
+                                                    <a href={post.link} style={{ textDecoration: "none" }}>
+                                                        <TitleTag style={titleTagStyle}>
+                                                            {post.title.rendered}
+                                                        </TitleTag>
+                                                    </a>
+                                                </div>
+    
+                                                {(Author() || ShowDate()) && (
+                                                    <div style={authorAndDateContainerStyles}>
+                                                        {Author() && authors[post.author] && (
+                                                            <>
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" style={authorImageStyle} />
+                                                                <a href={authors[post.author].authorLink} style={authorLinkStyle}>
+                                                                    By {authors[post.author]}
+                                                                </a>
+                                                            </>
+                                                        )}
+                                                        {ShowDate() && (
+                                                            <>
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" />
+                                                                <span style={showOnlyDateStyle}>
+                                                                    {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                                </span>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                )}
+    
+                                                {Excerpt() && (
+                                                    <div style={fullContentStyles}>
+                                                        {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
+                                                    </div>
+                                                )}
+    
+                                                {FullContent() && (
+                                                    <div style={fullContentStyles}>
+                                                        {parseHTML(post.content.rendered)}
+                                                    </div>
+                                                )}
+    
+                                                {Tags() && (
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                                                        {post.tags.slice(0, pg_numberOfTags).map((tagId) => {
+                                                            const tag = tags.find(t => t.id === tagId);
+                                                            if (!tag) return null;
+    
+                                                            return (
+                                                                <a key={tagId} href={tag.link} style={tagButtonStyle}>
+                                                                    {tag.name}
+                                                                </a>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                ))
+                            ) : (
+                                <p>{__('No post to display', 'pg-block')}</p>
+                            )}
+                        </div>
+                    ) : (
+                        <>
+                            <p>{__('No post to display', 'pg-block')}</p>
+                            <Spinner />
+                        </>
+                    )}
+    
+                    {/* Pagination */}
+                    {showpagination && totalPages > 1 && (
+                        <div className="pg-pagination" style={{ marginLeft: "45%" }}>
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <button
+                                    style={PaginationStyle}
+                                    key={index}
+                                    onClick={() => handlePageChange(index + 1)}
+                                    className={`pg-pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                )}
-
-	        </div>
             </AdvanceSettings>
         </>
-	);
+    );
+    
 		
 };
 	

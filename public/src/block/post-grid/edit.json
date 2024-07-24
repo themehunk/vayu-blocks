@@ -82,7 +82,7 @@
       },
       "pg_spacing":{
         "type":"number",
-        "default":3
+        "default":4
       },
       "pg_dateColor":{
         "type":"string",
@@ -178,6 +178,10 @@
       },
       
       "pg_posts": {
+        "type": "array",
+        "default": []
+      },
+      "pg_allPosts": {
         "type": "array",
         "default": []
       },
@@ -323,7 +327,7 @@
       },
       "pg_textColor": {
         "type": "string",
-        "default": "#D3D3D3"
+        "default": "black"
       },
       "pg_textSize": {
         "type": "number",
@@ -658,7 +662,7 @@
 },
 "pg_TagpaddingTop": {
   "type": "number",
-  "default": 0
+  "default": 5
 },
 "pg_TagpaddingRight": {
   "type": "number",
@@ -666,7 +670,7 @@
 },
 "pg_TagpaddingBottom": {
   "type": "number",
-  "default": 0
+  "default": 6
 },
 "pg_TagpaddingLeft": {
   "type": "number",
@@ -1110,20 +1114,20 @@
   "default" : "0px"
 },
 "pg_categoryTopBorderRadius":{
-  "type": "string",
-  "default": "0px"
+  "type": "number",
+  "default": 0
 },
 "pg_categoryBottomBorderRadius":{
-  "type" : "string",
-  "default": "0px"
+  "type" : "number",
+  "default": 0
 },
 "pg_categoryLeftBorderRadius":{
-  "type": "string",
-  "default" : "0px"
+  "type": "number",
+  "default" : 0
 },
 "pg_categoryRightBorderRadius":{
-  "type": "string",
-  "default" : "0px"
+  "type": "number",
+  "default" : 0
 },
 "categoryTopborderType":{
   "type":"string",
@@ -1240,22 +1244,71 @@
 },
 
 
-"pg_paginationTopBorderRadius":{
-  "type": "string",
-  "default": "0px"
-},
-"pg_paginationBottomBorderRadius":{
-  "type" : "string",
-  "default": "0px"
-},
-"pg_paginationLeftBorderRadius":{
-  "type": "string",
-  "default" : "0px"
-},
-"pg_paginationRightBorderRadius":{
-  "type": "string",
-  "default" : "0px"
-},
+  "pg_paginationBorderRadiusunit":{
+    "type":"string",
+    "default":"px"
+  },
+  "pg_paginationTopBorderRadius": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationRightBorderRadius": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationBottomBorderRadius": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationLeftBorderRadius": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationTopBorderRadiusTablet": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationRightBorderRadiusTablet": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationBottomBorderRadiusTablet": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationLeftBorderRadiusTablet": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationTopBorderRadiusMobile": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationRightBorderRadiusMobile": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationBottomBorderRadiusMobile": {
+      "type": "number",
+      "default": 0
+  },
+  "pg_paginationLeftBorderRadiusMobile": {
+      "type": "number",
+      "default": 0
+  },
+  "paginationBorderRadiusType": {
+      "type": "string",
+      "default": "linked"
+  },
+  "paginationBorderRadiusTypeTablet": {
+      "type": "string",
+      "default": "linked"
+  },
+  "paginationBorderRadiusTypeMobile": {
+      "type": "string",
+      "default": "linked"
+  },
+
 
 "paginationTopborderType":{
   "type":"string",
@@ -1304,5 +1357,341 @@
 "pg_paginationRightBorderColor":{
   "type":"string",
   "default":"black"
-}
+},
+"pg_ContentWeight":{
+  "type":"string",
+  "default": "normal"
+},
+"selectedCategories": {
+  "type": "array",
+  "items": {
+    "type": "string"
+  },
+  "default": []
+},
+"pg_featuredImageOnly":{
+  "type": "boolean",
+  "default": false
+},
+"sortByOrder": {
+  "type": "string",
+  "default": "desc",
+  "enum": [
+    "desc",
+    "asc"
+  ]
+},
+"sortByField": {
+  "type": "string",
+  "default": "id",
+  "enum": [
+    "date",
+    "modified",
+    "title",
+    "id"
+  ]
+},
+
+"featuredImageTopborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageBottomborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageLeftborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"featuredImageRightborderType":{
+  "type":"string",
+  "default":"solid"
+},
+"pg_featuredImageTopBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageBottomBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageLeftBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageRightBorder":{
+  "type":"string",
+  "default":"0px"
+},
+"pg_featuredImageTopBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageBottomBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageLeftBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"pg_featuredImageRightBorderColor":{
+  "type":"string",
+  "default":"black"
+},
+"paginationborderradiusType":{
+  "type": "string",
+  "default" : "linked"
+},
+"paginationborderRadiusUnit ":{
+  "type":"string",
+  "default":"linked"
+},
+
+  "pg_layoutBorderRadiusunit ":{
+    "type": "string",
+    "default" : "px"
+  },
+  "layoutBorderRadiusType": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_layoutTopBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutRightBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutBottomBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutLeftBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "layoutBorderRadiusTypeTablet": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_layoutTopBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutRightBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutBottomBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutLeftBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "layoutBorderRadiusTypeMobile": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_layoutTopBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutRightBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutBottomBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_layoutLeftBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+
+    "pg_featuredImageBorderRadiusunit ":{
+    "type": "string",
+    "default" : "px"
+  },
+  "featuredImageBorderRadiusType": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_featuredImageTopBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageRightBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageBottomBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageLeftBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "featuredImageBorderRadiusTypeTablet": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_featuredImageTopBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageRightBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageBottomBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageLeftBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "featuredImageBorderRadiusTypeMobile": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_featuredImageTopBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageRightBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageBottomBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_featuredImageLeftBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+
+
+  "pg_categoryBorderRadiusunit ":{
+    "type": "string",
+    "default" : "px"
+  },
+  "categoryBorderRadiusType": {
+    "type": "string",
+    "default": "linked"
+  },
+  "categoryBorderRadiusTypeTablet": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_categoryTopBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryRightBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryBottomBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryLeftBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "categoryBorderRadiusTypeMobile": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_categoryTopBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryRightBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryBottomBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_categoryLeftBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+
+  "pg_tagsBorderRadiusunit ":{
+    "type": "string",
+    "default" : "px"
+  },
+  "tagsBorderRadiusType": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_tagsTopBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsRightBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsBottomBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsLeftBorderRadius": {
+    "type": "number",
+    "default": 0
+  },
+  "tagsBorderRadiusTypeTablet": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_tagsTopBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsRightBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsBottomBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsLeftBorderRadiusTablet": {
+    "type": "number",
+    "default": 0
+  },
+  "tagsBorderRadiusTypeMobile": {
+    "type": "string",
+    "default": "linked"
+  },
+  "pg_tagsTopBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsRightBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsBottomBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  },
+  "pg_tagsLeftBorderRadiusMobile": {
+    "type": "number",
+    "default": 0
+  }
+
 }

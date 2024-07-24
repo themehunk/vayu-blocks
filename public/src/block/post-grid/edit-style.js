@@ -18,8 +18,9 @@ const gridContainerStyles = (attributes) => {
     const getLayoutColumnStyle = (attributes, view) => {
 
         return {
-            gridTemplateColumns: `repeat(${view === 'Desktop' ? attributes.pg_postLayoutColumns : attributes[`pg_postLayoutColumns${view}`]}, 1fr)`
+            gridTemplateColumns: `repeat(${view === 'Desktop' ? attributes.pg_postLayoutColumns : attributes[`pg_postLayoutColumns${view}`]}, minmax(0, 1fr))`
         };
+        
     };
 
     const getLayoutRowStyle = (attributes, view) => {
@@ -30,7 +31,6 @@ const gridContainerStyles = (attributes) => {
         };
     };
     
-
     const getGapStyle = (attributes, view) => {
         return {
             gridGap: `${view === 'Desktop' ? attributes.pg_gapup + 'px ' + attributes.pg_gap + 'px' : attributes[`pg_gapup${view}`] + 'px ' + attributes[`pg_gap${view}`] + 'px'}`
@@ -44,9 +44,9 @@ const gridContainerStyles = (attributes) => {
     return {
         display: 'grid',
         ...layoutColumnsStyle,
-        ...layoutRowsStyle,
         ...gapStyle,
         maxWidth: '100%',
+        gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
 //post
@@ -90,6 +90,34 @@ const backgroundStyle = (attributes) => {
     }
 };
 
+const getLayoutBorderRadiusStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                borderTopLeftRadius: attributes.pg_layoutTopBorderRadius ? `${attributes.pg_layoutTopBorderRadius}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_layoutRightBorderRadius ? `${attributes.pg_layoutRightBorderRadius}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_layoutBottomBorderRadius ? `${attributes.pg_layoutBottomBorderRadius}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_layoutLeftBorderRadius ? `${attributes.pg_layoutLeftBorderRadius}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Tablet':
+            return {
+                borderTopLeftRadius: attributes.pg_layoutTopBorderRadiusTablet ? `${attributes.pg_layoutTopBorderRadiusTablet}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_layoutRightBorderRadiusTablet ? `${attributes.pg_layoutRightBorderRadiusTablet}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_layoutBottomBorderRadiusTablet ? `${attributes.pg_layoutBottomBorderRadiusTablet}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_layoutLeftBorderRadiusTablet ? `${attributes.pg_layoutLeftBorderRadiusTablet}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Mobile':
+            return {
+                borderTopLeftRadius: attributes.pg_layoutTopBorderRadiusMobile ? `${attributes.pg_layoutTopBorderRadiusMobile}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_layoutRightBorderRadiusMobile ? `${attributes.pg_layoutRightBorderRadiusMobile}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_layoutBottomBorderRadiusMobile ? `${attributes.pg_layoutBottomBorderRadiusMobile}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_layoutLeftBorderRadiusMobile ? `${attributes.pg_layoutLeftBorderRadiusMobile}${attributes.pg_layoutBorderRadiusunit || 'px'}` : undefined
+            };
+        default:
+            return {};
+    }
+};
+
 const postStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -98,16 +126,14 @@ const postStyles = (attributes) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
     }, []);
     const paddingStyles = getPaddingStyle(attributes,view);
+    const borderradiusstyles = getLayoutBorderRadiusStyle(attributes,view);
    
         
     return {
         ...paddingStyles,
         ...backgroundStyle(attributes),
+        ...borderradiusstyles,
         lineHeight : `${attributes.pg_spacing}`,
-        borderTopLeftRadius: `${attributes.pg_postTopBorderRadius}`,
-        borderBottomLeftRadius: `${attributes.pg_postBottomBorderRadius}`,
-        borderBottomRightRadius: `${attributes.pg_postLeftBorderRadius}`,
-        borderTopRightRadius: `${attributes.pg_postRightBorderRadius}`,
 
         border: `${attributes.layoutborderType || 'solid'} ${attributes.pg_layoutBorder || '0px'} ${attributes.pg_layoutBorderColor || 'black'}`,
         borderTop: `${attributes.layoutTopborderType || 'solid'} ${attributes.pg_layoutTopBorder || '0px'} ${attributes.pg_layoutTopBorderColor || 'black'}`,
@@ -121,13 +147,62 @@ const postStyles = (attributes) => {
         backgroundSize: attributes.layout_backgroundSize,
     };
 };
+
+const getfeaturedImageBorderRadiusStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                borderTopLeftRadius: attributes.pg_featuredImageTopBorderRadius ? `${attributes.pg_featuredImageTopBorderRadius}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_featuredImageRightBorderRadius ? `${attributes.pg_featuredImageRightBorderRadius}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_featuredImageBottomBorderRadius ? `${attributes.pg_featuredImageBottomBorderRadius}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_featuredImageLeftBorderRadius ? `${attributes.pg_featuredImageLeftBorderRadius}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Tablet':
+            return {
+                borderTopLeftRadius: attributes.pg_featuredImageTopBorderRadiusTablet ? `${attributes.pg_featuredImageTopBorderRadiusTablet}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_featuredImageRightBorderRadiusTablet ? `${attributes.pg_featuredImageRightBorderRadiusTablet}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_featuredImageBottomBorderRadiusTablet ? `${attributes.pg_featuredImageBottomBorderRadiusTablet}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_featuredImageLeftBorderRadiusTablet ? `${attributes.pg_featuredImageLeftBorderRadiusTablet}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Mobile':
+            return {
+                borderTopLeftRadius: attributes.pg_featuredImageTopBorderRadiusMobile ? `${attributes.pg_featuredImageTopBorderRadiusMobile}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_featuredImageRightBorderRadiusMobile ? `${attributes.pg_featuredImageRightBorderRadiusMobile}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_featuredImageBottomBorderRadiusMobile ? `${attributes.pg_featuredImageBottomBorderRadiusMobile}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_featuredImageLeftBorderRadiusMobile ? `${attributes.pg_featuredImageLeftBorderRadiusMobile}${attributes.pg_featuredImageBorderRadiusunit || 'px'}` : undefined
+            };
+        default:
+            return {};
+    }
+};
 //featured Image
-const featuredImageStyles = (attributes) => ({
-    display: 'block',
-    width: '100%',
-    height: 'auto',
-    borderRadius: `${attributes.pg_imageBorderRadius}px`,
-});
+const featuredImageStyles = (attributes) => {
+    const view = useSelect((select) => {
+        const { getView } = select('vayu-blocks/data');
+        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
+        
+        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+    }, []);
+
+    // Assuming getfeaturedImageBorderRadiusStyle is defined elsewhere
+    const borderRadiusStyles = getfeaturedImageBorderRadiusStyle(attributes, view);
+
+    return {
+        display: 'block',
+        width: '100%',
+        height: 'auto',
+        
+        // Border styles
+        border: `${attributes.featuredImageborderType || 'solid'} ${attributes.pg_featuredImageBorder || '0px'} ${attributes.pg_featuredImageBorderColor || 'black'}`,
+        borderTop: `${attributes.featuredImageTopborderType || 'solid'} ${attributes.pg_featuredImageTopBorder || '0px'} ${attributes.pg_featuredImageTopBorderColor || 'black'}`,
+        borderBottom: `${attributes.featuredImageBottomborderType || 'solid'} ${attributes.pg_featuredImageBottomBorder || '0px'} ${attributes.pg_featuredImageBottomBorderColor || 'black'}`,
+        borderLeft: `${attributes.featuredImageLeftborderType || 'solid'} ${attributes.pg_featuredImageLeftBorder || '0px'} ${attributes.pg_featuredImageLeftBorderColor || 'black'}`,
+        borderRight: `${attributes.featuredImageRightborderType || 'solid'} ${attributes.pg_featuredImageRightBorder || '0px'} ${attributes.pg_featuredImageRightBorderColor || 'black'}`,
+
+        // Include border-radius styles if any
+        ...borderRadiusStyles
+    };
+};
 
 //Category
 const getCategoryPaddingStyle = (attributes,view) => {
@@ -164,6 +239,34 @@ const getCategoryPaddingStyle = (attributes,view) => {
     }
 };
 
+const getcategoryBorderRadiusStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                borderTopLeftRadius: attributes.pg_categoryTopBorderRadius ? `${attributes.pg_categoryTopBorderRadius}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_categoryRightBorderRadius ? `${attributes.pg_categoryRightBorderRadius}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_categoryBottomBorderRadius ? `${attributes.pg_categoryBottomBorderRadius}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_categoryLeftBorderRadius ? `${attributes.pg_categoryLeftBorderRadius}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Tablet':
+            return {
+                borderTopLeftRadius: attributes.pg_categoryTopBorderRadiusTablet ? `${attributes.pg_categoryTopBorderRadiusTablet}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_categoryRightBorderRadiusTablet ? `${attributes.pg_categoryRightBorderRadiusTablet}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_categoryBottomBorderRadiusTablet ? `${attributes.pg_categoryBottomBorderRadiusTablet}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_categoryLeftBorderRadiusTablet ? `${attributes.pg_categoryLeftBorderRadiusTablet}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Mobile':
+            return {
+                borderTopLeftRadius: attributes.pg_categoryTopBorderRadiusMobile ? `${attributes.pg_categoryTopBorderRadiusMobile}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_categoryRightBorderRadiusMobile ? `${attributes.pg_categoryRightBorderRadiusMobile}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_categoryBottomBorderRadiusMobile ? `${attributes.pg_categoryBottomBorderRadiusMobile}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_categoryLeftBorderRadiusMobile ? `${attributes.pg_categoryLeftBorderRadiusMobile}${attributes.pg_categoryBorderRadiusunit || 'px'}` : undefined
+            };
+        default:
+            return {};
+    }
+};
+
 const categoryButtonStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -172,6 +275,7 @@ const categoryButtonStyles = (attributes) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
     }, []); 
     const categoryStyles = getCategoryPaddingStyle(attributes, view);
+    const categoryBorderRadiusStyles =  getcategoryBorderRadiusStyle(attributes, view);
 
     return {
         ...categoryStyles,
@@ -181,11 +285,8 @@ const categoryButtonStyles = (attributes) => {
         marginLeft:'5px',
         fontWeight:'600',
         marginTop:"3%",
-
-        borderTopLeftRadius: `${attributes.pg_categoryTopBorderRadius}`,
-        borderBottomLeftRadius: `${attributes.pg_categoryBottomBorderRadius}`,
-        borderBottomRightRadius: `${attributes.pg_categoryLeftBorderRadius}`,
-        borderTopRightRadius: `${attributes.pg_categoryRightBorderRadius}`,
+        
+        ...categoryBorderRadiusStyles,
 
         textDecoration: "none",
 
@@ -195,9 +296,11 @@ const categoryButtonStyles = (attributes) => {
         borderLeft: `${attributes.categoryLeftborderType || 'solid'} ${attributes.pg_categoryLeftBorder || '0px'} ${attributes.pg_categoryLeftBorderColor || 'black'}`,
         borderRight: `${attributes.categoryRightborderType || 'solid'} ${attributes.pg_categoryRightBorder || '0px'} ${attributes.pg_categoryRightBorderColor || 'black'}`,
 
+        lineHeight: 'initial',
     };
 };
   
+//Title
 const titleTagStyles = (attributes) => ({
     color: `${attributes.pg_TitleColor}`,
     fontSize: `${attributes.pg_TitleSize}px`,
@@ -212,7 +315,6 @@ const titleTagStyles = (attributes) => ({
 const authorAndDateContainerStyles = {
     display: 'flex', 
     alignItems: 'center',
-    gap:'3px',
     flexWrap:'wrap',
     marginLeft:"2px",
 };
@@ -221,6 +323,7 @@ const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImage
     width: '20px',
     borderRadius:"50%",
     transform: `scale(${pg_authorImageScale})`,
+
 });
 
 const authorLinkStyles = (pg_authorTextSize, pg_authorTextColor) => ({
@@ -272,6 +375,34 @@ const getTagPaddingStyle = (attributes,view) => {
     }
 };
 
+const gettagsBorderRadiusStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                borderTopLeftRadius: attributes.pg_tagsTopBorderRadius ? `${attributes.pg_tagsTopBorderRadius}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_tagsRightBorderRadius ? `${attributes.pg_tagsRightBorderRadius}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_tagsBottomBorderRadius ? `${attributes.pg_tagsBottomBorderRadius}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_tagsLeftBorderRadius ? `${attributes.pg_tagsLeftBorderRadius}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Tablet':
+            return {
+                borderTopLeftRadius: attributes.pg_tagsTopBorderRadiusTablet ? `${attributes.pg_tagsTopBorderRadiusTablet}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_tagsRightBorderRadiusTablet ? `${attributes.pg_tagsRightBorderRadiusTablet}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_tagsBottomBorderRadiusTablet ? `${attributes.pg_tagsBottomBorderRadiusTablet}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_tagsLeftBorderRadiusTablet ? `${attributes.pg_tagsLeftBorderRadiusTablet}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Mobile':
+            return {
+                borderTopLeftRadius: attributes.pg_tagsTopBorderRadiusMobile ? `${attributes.pg_tagsTopBorderRadiusMobile}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_tagsRightBorderRadiusMobile ? `${attributes.pg_tagsRightBorderRadiusMobile}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_tagsBottomBorderRadiusMobile ? `${attributes.pg_tagsBottomBorderRadiusMobile}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_tagsLeftBorderRadiusMobile ? `${attributes.pg_tagsLeftBorderRadiusMobile}${attributes.pg_tagsBorderRadiusunit || 'px'}` : undefined
+            };
+        default:
+            return {};
+    }
+};
+
 const tagButtonStyles = (attributes ) => {
     const view = useSelect((select) => {
         const { getView } = select('vayu-blocks/data');
@@ -281,7 +412,8 @@ const tagButtonStyles = (attributes ) => {
     }, []);
 
     const tagPaddingStyle = getTagPaddingStyle(attributes, view);
-   
+    const tagBorderRadiusStyle = gettagsBorderRadiusStyle(attributes, view);
+
     return {
         ...tagPaddingStyle,
         marginLeft:'5px',
@@ -291,12 +423,10 @@ const tagButtonStyles = (attributes ) => {
         fontWeight:'600',
         boxSizing: 'border-box', // Ensure padding and border are included in width/height
         textDecoration: 'none',
+        lineHeight: 'initial',
 
-        borderTopLeftRadius: `${attributes.pg_tagTopBorderRadius}`,
-        borderBottomLeftRadius: `${attributes.pg_tagBottomBorderRadius}`,
-        borderBottomRightRadius: `${attributes.pg_tagLeftBorderRadius}`,
-        borderTopRightRadius: `${attributes.pg_tagRightBorderRadius}`,
-
+       ...tagBorderRadiusStyle,
+       
         border: `${attributes.tagborderType || 'solid'} ${attributes.pg_tagBorder || '0px'} ${attributes.pg_tagBorderColor || 'black'}`,
         borderTop: `${attributes.tagTopborderType || 'solid'} ${attributes.pg_tagTopBorder || '0px'} ${attributes.pg_tagTopBorderColor || 'black'}`,
         borderBottom: `${attributes.tagBottomborderType || 'solid'} ${attributes.pg_tagBottomBorder || '0px'} ${attributes.pg_tagBottomBorderColor || 'black'}`,
@@ -313,6 +443,7 @@ const fullContentStyle= (attributes) =>({
     lineHeight: `${attributes.pg_lineHeight}`,
     marginLeft:'5px',
     marginBottom: '10px',
+    fontWeight : `${attributes.pg_ContentWeight}`,
 });
 
 //pagination
@@ -344,6 +475,34 @@ const getPaginationPaddingStyle = (attributes,view) => {
     }
 };
 
+const getPaginationBorderRadiusStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                borderTopLeftRadius: attributes.pg_paginationTopBorderRadius ? `${attributes.pg_paginationTopBorderRadius}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_paginationRightBorderRadius ? `${attributes.pg_paginationRightBorderRadius}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_paginationBottomBorderRadius ? `${attributes.pg_paginationBottomBorderRadius}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_paginationLeftBorderRadius ? `${attributes.pg_paginationLeftBorderRadius}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Tablet':
+            return {
+                borderTopLeftRadius: attributes.pg_paginationTopBorderRadiusTablet ? `${attributes.pg_paginationTopBorderRadiusTablet}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_paginationRightBorderRadiusTablet ? `${attributes.pg_paginationRightBorderRadiusTablet}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_paginationBottomBorderRadiusTablet ? `${attributes.pg_paginationBottomBorderRadiusTablet}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_paginationLeftBorderRadiusTablet ? `${attributes.pg_paginationLeftBorderRadiusTablet}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined
+            };
+        case 'Mobile':
+            return {
+                borderTopLeftRadius: attributes.pg_paginationTopBorderRadiusMobile ? `${attributes.pg_paginationTopBorderRadiusMobile}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderTopRightRadius: attributes.pg_paginationRightBorderRadiusMobile ? `${attributes.pg_paginationRightBorderRadiusMobile}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomRightRadius: attributes.pg_paginationBottomBorderRadiusMobile ? `${attributes.pg_paginationBottomBorderRadiusMobile}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined,
+                borderBottomLeftRadius: attributes.pg_paginationLeftBorderRadiusMobile ? `${attributes.pg_paginationLeftBorderRadiusMobile}${attributes.pg_paginationBorderRadiusunit || 'px'}` : undefined
+            };
+        default:
+            return {};
+    }
+};
+
 const PaginationStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -352,26 +511,27 @@ const PaginationStyles = (attributes) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
     }, []);
     const paddingStyles = getPaginationPaddingStyle(attributes,view);
-        
+    const BorderRadiusStyles = getPaginationBorderRadiusStyle(attributes,view);
+
     return {
         ...paddingStyles,
+        ...BorderRadiusStyles,
         cursor:'pointer',
         fontSize: `${attributes.pg_PaginationSize}px`,
         color: `${attributes.pg_PaginationColor}`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
         margin: '20px 5px',
 
-        borderTopLeftRadius: `${attributes.pg_paginationTopBorderRadius}`,
-        borderBottomLeftRadius: `${attributes.pg_paginationBottomBorderRadius}`,
-        borderBottomRightRadius: `${attributes.pg_paginationLeftBorderRadius}`,
-        borderTopRightRadius: `${attributes.pg_paginationRightBorderRadius}`,
-
         border: `${attributes.paginationborderType || 'solid'} ${attributes.pg_paginationBorder || '0px'} ${attributes.pg_paginationBorderColor || 'black'}`,
         borderTop: `${attributes.paginationTopborderType || 'solid'} ${attributes.pg_paginationTopBorder || '0px'} ${attributes.pg_paginationTopBorderColor || 'black'}`,
         borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'black'}`,
         borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'black'}`,
         borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'black'}`,
-
+        ':hover': {
+            background: `red`, // Change background color on hover
+            color: `white`, // Change text color on hover
+            // Add other hover styles like border changes, text shadow, etc.
+          },
     };
 };
 

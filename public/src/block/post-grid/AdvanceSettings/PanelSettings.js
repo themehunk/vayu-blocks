@@ -446,17 +446,17 @@ const PanelSettings = ({
 	}
   };
   
-  const getButtonPadding = type => {
-		switch (getView) {
+const getButtonPadding = type => {
+	switch (getView) {
 			case 'Desktop':
 				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes[desktopPaddingButtonType[type]];
 			case 'Tablet':
 				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes[tabletPaddingButtonType[type]];
 			case 'Mobile':
 				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
-		}
+	}
 		return undefined;
-  };
+};
   
 	//Z Index
 	const customTooltipZindex = value => `${value}px`
@@ -726,9 +726,6 @@ const getborderradiusHvr = type => {
 
 	return undefined;
 };
-
-
-
 
 	const getBorderRadius = type => {
 		if ( 'top' == type ) {
@@ -1643,7 +1640,6 @@ const getborderradiusHvr = type => {
 		}
 	};
 
-	
     return (
 		<Fragment>
 			<InspectorControls>
@@ -1898,6 +1894,7 @@ const getborderradiusHvr = type => {
 										}}
 										units={ [ 'px', 'em', '%' ] }
 									/>
+
 									<SizingControl
 											type={ getborderradiusType() }
 											min={ 0 }
