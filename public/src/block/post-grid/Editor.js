@@ -1,4 +1,4 @@
-import { PanelBody, ToggleControl, ColorPalette, FontSizePicker, RangeControl, __experimentalBoxControl as BoxControl, DropdownMenu, GradientPicker, SelectControl } from '@wordpress/components';
+import { PanelBody,TextControl, ToggleControl, ColorPalette, FontSizePicker, RangeControl, __experimentalBoxControl as BoxControl, DropdownMenu, GradientPicker, SelectControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import './editor.scss';
@@ -277,7 +277,10 @@ const {
 	pg_TitlelineHeight,
 	pg_TitleSize,
 	pg_TitleColor,
-	pg_dateImageScale
+	pg_dateImageScale,
+
+	width,
+	customWidthlayout,
 
 } = attributes;
 
@@ -1491,12 +1494,34 @@ const handletagsBorderRadiusChange = (newValues) => {
     });
 };
 
-
+console.log(customWidthlayout);
     return (
         <>
 
 			{/* Layout Panel */}
           <PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
+		  		<SelectControl
+					label={ __( 'Width', 'vayu-blocks' ) }
+					value={ attributes.width }
+					options={ [
+						{ label:  __( 'Default', 'vayu-blocks' ), value: '' },
+						{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: '100%' },
+						{ label: __( 'Half Width', 'vayu-blocks' ), value: '50%' },
+						{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+					] }
+					onChange={ e => setAttributes({ width: e }) }
+				/>
+				{ 'customwidth' === attributes.width && (
+					<div className="custom-width-input">
+						<TextControl
+							label={ __( 'Custom Width', 'vayu-blocks' ) }
+							value={ attributes.customWidthlayout }
+							onChange={ (value) => setAttributes({ customWidthlayout:value }) }
+							placeholder="e.g., 800px, 100%"
+						/>
+					</div>
+				)}				
+
 						<h4>Background</h4>
 							<BackgroundSelectorControl
 								backgroundType={layout_backgroundType}

@@ -136,6 +136,14 @@ function generate_inline_styles($attr) {
         // flex-direction: column;
         // justify-content: space-between;";
         // Line height
+
+        $css .= isset($attr['width']) 
+        ? ($attr['width'] === 'customwidth' && isset($attr['customWidthlayout'])
+            ? "width: " . esc_attr($attr['customWidthlayout']) . ";"
+            : "width: " . esc_attr($attr['width']) . ";")
+        : '';
+    
+
         $css .= isset($attr['pg_spacing']) ? "line-height: " . esc_attr($attr['pg_spacing']) . ";" : '';
 
         // Desktop Padding
@@ -418,13 +426,18 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['pg_TitleColor']) ? "color: " . esc_attr($attr['pg_TitleColor']) . ";" : '';
         $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
        
-        $css .= "text-overflow: ellipsis;";
+        // $css .= "text-overflow: ellipsis;";
         $css .= "margin-block-start: 0.07em;";
         $css .= "margin-left: 5px;";
         $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
         $css .= "margin-block-end: 0.07em;";
         $css .= "font-weight: 600;";
-        
+
+        // Ensure text wraps properly
+        $css .= "overflow-wrap: break-word;"; // Break words if needed
+        $css .= "word-break: break-word;"; // Break long words if necessary
+
+      
     $css .= "}";
      
     //author-date-container
@@ -551,9 +564,8 @@ function generate_inline_styles($attr) {
             margin-left: " . (isset($attr['marginLeftTablet']) ? esc_attr($attr['marginLeftTablet']) . esc_attr($attr['marginUnit']) : '') . ";
             margin-right: " . (isset($attr['marginRightTablet']) ? esc_attr($attr['marginRightTablet']) . esc_attr($attr['marginUnit']) : '') . ";   
             
-           grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
+            grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
 
-           
             border-top-left-radius: " . (isset($attr['pg_postTopBorderRadiusTablet']) ? esc_attr($attr['pg_postTopBorderRadiusTablet']) . "px" : '') . ";
             border-bottom-left-radius: " . (isset($attr['pg_postBottomBorderRadiusTablet']) ? esc_attr($attr['pg_postBottomBorderRadiusTablet']) . "px" : '') . ";
             border-bottom-right-radius: " . (isset($attr['pg_postLeftBorderRadiusTablet']) ? esc_attr($attr['pg_postLeftBorderRadiusTablet']) . "px" : '') . ";

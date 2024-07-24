@@ -305,7 +305,7 @@ export default function AdvanceSettings({ children, attributes }) {
         width: widthType === 'fullwidth' ? '100%' :
           widthType === 'inlinewidth' ? 'auto' :
           widthType === 'customwidth' ? `${customWidth}${customWidthUnit || 'px'}` : '100%',
-      
+        
           ...paddingStyles,
           ...marginStyles,  
           ...borderradiusstyles,

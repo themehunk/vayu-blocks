@@ -42,7 +42,6 @@ class VayuBlocksPostGrid {
         $args = array(
             'post_type' => 'post',
             'posts_per_page' => $columns * $rows,
-            
             'orderby' => $sortByField, // Sorting field
             'order' => $sortByOrder,   // Sorting order
         );
@@ -87,30 +86,45 @@ class VayuBlocksPostGrid {
         // Fetch all posts
         $all_posts_query = new WP_Query($args);
         $all_posts = $all_posts_query->posts;
+
     
-        // Apply featured image filter if applicable
-        if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
+       // Apply featured image filter if applicable
+       if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
+            // Filter posts to only include those with a featured image
             $filtered_posts = array_filter($all_posts, function($post) {
                 return has_post_thumbnail($post->ID);
             });
-    
-            $filtered_posts_count = count($filtered_posts); // Count filtered posts
-    
+        
+            // Count filtered posts
+            $filtered_posts_count = count($filtered_posts);
+        
             // Pagination arguments
             $args['posts_per_page'] = $columns * $rows; // Items per page
             $args['paged'] = $paged; // Current page
-    
+        
             // Calculate total pages based on filtered count
             $total_pages = ceil($filtered_posts_count / $args['posts_per_page']);
-    
+        
+            // If current page is greater than the total number of pages, set to the last page
+            if ($paged > $total_pages) {
+                $paged = $total_pages;
+                $args['paged'] = $paged;
+            }
+        
             // Adjust query arguments for pagination
             $args['post__in'] = wp_list_pluck($filtered_posts, 'ID'); // Filtered post IDs
             $args['post__not_in'] = array(); // Ensure not to exclude any posts
-    
+        
+            // Ensure `paged` argument is correct for WP_Query
+            $args['paged'] = $paged;
+        
+            // Create a new WP_Query with updated arguments
             $query = new WP_Query($args);
-    
-            return $query; // Return the filtered WP_Query object
-        } else {
+        
+            // Return the filtered WP_Query object
+            return $query;
+        }
+        else {
             // If no featured image filter is applied, paginate as usual
             $args['posts_per_page'] = $columns * $rows; // Items per page
             $args['paged'] = $paged; // Current page
@@ -120,7 +134,6 @@ class VayuBlocksPostGrid {
             return $query; // Return the WP_Query object
         }
     }
-    
     
     public function render($query) {
         ob_start();
@@ -142,8 +155,8 @@ class VayuBlocksPostGrid {
             'prev_next'     => true,
             'prev_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
             'next_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
-            'end_size'      => 3,  // Number of page numbers to show at the beginning and end
-            'mid_size'      => 0,  // Number of page numbers to show around the current page
+            'end_size'      => 2,  // Number of page numbers to show at the beginning and end
+            'mid_size'      => 1,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
             'after_page_number' => '</span>',
@@ -249,7 +262,6 @@ class VayuBlocksPostGrid {
         }
     }
     
-
     private function render_title($post_title, $post_permalink) {
         echo '<div >';
         echo '<a href="' . esc_url($post_permalink) . '"style="text-decoration: none;">';

@@ -130,6 +130,8 @@ const postStyles = (attributes) => {
    
         
     return {
+        width: `${attributes.width === 'customwidth' ? attributes.customWidthlayout : attributes.width}`,
+        
         ...paddingStyles,
         ...backgroundStyle(attributes),
         ...borderradiusstyles,
@@ -148,6 +150,7 @@ const postStyles = (attributes) => {
     };
 };
 
+//featured Image
 const getfeaturedImageBorderRadiusStyle = (attributes, view) => {
     switch (view) {
         case 'Desktop':
@@ -175,7 +178,7 @@ const getfeaturedImageBorderRadiusStyle = (attributes, view) => {
             return {};
     }
 };
-//featured Image
+
 const featuredImageStyles = (attributes) => {
     const view = useSelect((select) => {
         const { getView } = select('vayu-blocks/data');
@@ -522,11 +525,11 @@ const PaginationStyles = (attributes) => {
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
         margin: '20px 5px',
 
-        border: `${attributes.paginationborderType || 'solid'} ${attributes.pg_paginationBorder || '0px'} ${attributes.pg_paginationBorderColor || 'black'}`,
-        borderTop: `${attributes.paginationTopborderType || 'solid'} ${attributes.pg_paginationTopBorder || '0px'} ${attributes.pg_paginationTopBorderColor || 'black'}`,
-        borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'black'}`,
-        borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'black'}`,
-        borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'black'}`,
+        border: `${attributes.paginationborderType || 'solid'} ${attributes.pg_paginationBorder || '0px'} ${attributes.pg_paginationBorderColor || 'blue'}`,
+        borderTop: `${attributes.paginationTopborderType || 'solid'} ${attributes.pg_paginationTopBorder || '0px'} ${attributes.pg_paginationTopBorderColor || 'blue'}`,
+        borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'blue'}`,
+        borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'blue'}`,
+        borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'blue'}`,
         ':hover': {
             background: `red`, // Change background color on hover
             color: `white`, // Change text color on hover
