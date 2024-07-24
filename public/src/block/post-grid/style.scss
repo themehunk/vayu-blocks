@@ -1,13 +1,12 @@
-.post-grid-category-div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1%;
-}
-
 .post-grid-featured-image{
      margin-bottom: 10px;
      margin-left: 2px;
      margin-right: 2px;
+}
+
+.pagination{
+    margin-top: 20px; 
+    text-align: center;
 }
 
 .pagination a{
@@ -15,7 +14,7 @@
 }
 
 .page-numbers.current .page-numbers {
-    background-color: blue; /* Ensure nested page-numbers also get styled */
+    background-color: blue;
 }
 
 .post-grid-tag-style-container {
@@ -28,21 +27,4 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 15px;
-}
-
-
-@media (max-width: 768px) {
-  
-    .th-post-grid-wrapper .th-post-grid-inline .post-grid-titletag .post-grid-titletag-anchor{
-        font-size: 20px;
-        line-height: 100%;
-    }
-}
-
-@media (max-width: 400px) {
-    
-    .th-post-grid-wrapper .th-post-grid-inline .post-grid-titletag .post-grid-titletag-anchor{
-        font-size: 10px;
-        line-height: 1px;
-    }
 }
