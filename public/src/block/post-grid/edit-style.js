@@ -127,7 +127,7 @@ const postStyles = (attributes) => {
         
     return {
         width: `${attributes.width === 'customwidth' ? attributes.customWidthlayout : attributes.width}`,
-        
+
         ...paddingStyles,
         ...backgroundStyle(attributes),
         ...borderradiusstyles,
@@ -300,22 +300,36 @@ const categoryButtonStyles = (attributes) => {
 };
   
 //Title
-const titleTagStyles = (attributes) => ({
-    color: `${attributes.pg_TitleColor}`,
-    fontSize: `${attributes.pg_TitleSize}px`,
-    marginBlockStart: '0.07em',
-    lineHeight: `${attributes.pg_TitlelineHeight}`,
-    marginBlockEnd: '0.05em',
-    fontWeight:'600',
-    marginLeft:'5px',
-});
+const titleTagStyles = (attributes) => {
+    // Initialize the base style object
+
+    const styles = {
+        fontSize: `${attributes.pg_TitleSize}px`,
+        marginBlockStart: '0.07em',
+        lineHeight: `${attributes.pg_TitlelineHeight}`,
+        marginBlockEnd: '0.05em',
+        fontWeight: '600',
+        marginLeft: '5px',
+    };
+
+    // Conditionally add styles based on titlechoice
+    if (attributes.titlechoice === 'color') {
+        styles.color = attributes.pg_TitleColor;
+    } else if (attributes.titlechoice === 'gradient') {
+        styles.background = `${attributes.pg_TitleColor} text` ;
+        styles.WebkitTextFillColor = 'transparent';
+        styles.WebkitBackgroundClip = 'text';
+        styles.backgroundClip = 'text';
+    }
+
+    return styles;
+};
 
 //Author
 const authorAndDateContainerStyles = {
     display: 'flex', 
     alignItems: 'center',
     flexWrap:'wrap',
-    marginLeft:"2px",
 };
 
 const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImageScale) => ({

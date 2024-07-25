@@ -956,6 +956,18 @@
   "type":"string",
   "default": "black"
 },
+"pg_TitleColorhvr":{
+  "type":"string",
+  "default": "black"
+},
+"titlechoice":{
+  "type":"string",
+  "default":"color"
+},
+"titlechoicehvr":{
+  "type":"string",
+  "default":"color"
+},
 "pg_numberOfCategories":{
   "type": "number",
   "default": 1
@@ -1700,6 +1712,10 @@
   "customWidthlayout": {
     "type": "string",
     "default": ""
+  },
+  "pg_Paginationalignment" : {
+    "type": "string",
+    "default": "center"
   }
 
 }

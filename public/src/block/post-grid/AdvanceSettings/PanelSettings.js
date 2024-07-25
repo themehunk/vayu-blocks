@@ -84,7 +84,7 @@ const PanelSettings = ({
 
 	const changeCustomWidth = value => {
 		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
+			setAttributes({ customWidth: value });
 		} else if ( 'Tablet' === getView ) {
 			setAttributes({ customWidthTablet: value });
 		} else if ( 'Mobile' === getView ) {
@@ -454,7 +454,7 @@ const getButtonPadding = type => {
 				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes[tabletPaddingButtonType[type]];
 			case 'Mobile':
 				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
-	}
+		}
 		return undefined;
 };
   
@@ -1572,8 +1572,8 @@ const getborderradiusHvr = type => {
 	const customTooltiptransitionAll = value => `${value}`
 
 	// unit switch max value
-	const [customWidthUnit, setcustomWidthUnit] = useState('px');
-	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1500 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
+	const [customWidthUnit, setcustomWidthUnit] = useState('%');
+	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1200 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
@@ -1672,8 +1672,7 @@ const getborderradiusHvr = type => {
 				) || 'advanced' === tab && (
 					<Fragment>
 						
-						<PanelBody
-							title={ __( 'Layout', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
@@ -1682,15 +1681,12 @@ const getborderradiusHvr = type => {
 										value={ attributes.widthType }
 										options={ [
 											{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
-											{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
-											{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
-											{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+											{ label: __( 'Wide Width', 'vayu-blocks' ), value: 'alignwide' },
+											{ label: __( 'Full Width', 'vayu-blocks' ), value: 'alignfull' },
 										] }
-										onChange={ e => setAttributes({ widthType: e }) }
+										onChange={ e => setAttributes({ widthType: e,customWidth:100 }) }
 									/>
-									{ 'customwidth' == attributes.widthType && (
 
-									<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 									<ResponsiveControl
 									label={ __( 'Custom Width', 'vayu-blocks' ) }
 									>	
@@ -1712,12 +1708,8 @@ const getborderradiusHvr = type => {
 										allowReset={ true }
 									/>
 									</ResponsiveControl>
-									</Suspense>
-
-									) }
-
-
 									
+
 									<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 
 										<UnitChooser
@@ -1794,8 +1786,7 @@ const getborderradiusHvr = type => {
 
 						</PanelBody>
 
-						<PanelBody
-							title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
@@ -1827,7 +1818,6 @@ const getborderradiusHvr = type => {
 								] }
 								onChange={ e => setAttributes({ borderType: e }) }
 							/>	
-							
 								
 							{ 'none' !== attributes.borderType && (
 
@@ -1989,11 +1979,7 @@ const getborderradiusHvr = type => {
 										min={ -100 }
 										max={ 100 }
 									/>
-									</ControlPanelControl>
-
-									
-								
-
+									</ControlPanelControl>	
 							</>
 
 						) 	|| 'hover' ===  hover && (
@@ -2177,8 +2163,7 @@ const getborderradiusHvr = type => {
 								}
 						</PanelBody>
 
-						<PanelBody
-							title={ __( 'Background', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
@@ -2254,30 +2239,7 @@ const getborderradiusHvr = type => {
 						
 						</PanelBody>
 
-						{/* <PanelBody
-							title={ __( 'Responsive', 'vayu-blocks' ) }
-							initialOpen={ false }
-							className="th-button-panel"
-						> 
-						<ToggleControl
-										label={ __( 'Hide On Desktop', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideDesktop }
-										onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
-									/>
-						<ToggleControl
-										label={ __( 'Hide On Tablet', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideTablet }
-										onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
-									/>				
-						<ToggleControl
-										label={ __( 'Hide On Mobile', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideMobile }
-										onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
-									/>
-						</PanelBody> */}
-
-						<PanelBody
-							title={ __( 'Transition', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Transition', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 

@@ -1,7 +1,8 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody,ToggleGroupControl, ToggleGroupControlOption, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { more, arrowUp, arrowDown, trash ,moreVertical} from '@wordpress/icons';
+import { TextAlignmentControl } from '@wordpress/block-editor';
+
 import {
 	ResponsiveControl,	
     BackgroundSelectorControl,
@@ -14,6 +15,8 @@ import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
+        pg_Paginationalignment,
+
         pg_paginationBorderRadiusunit,
         pg_paginationTopBorderRadius,
         pg_paginationRightBorderRadius,
@@ -1134,6 +1137,7 @@ const handlePaginationBorderRadiusChange = (newValues) => {
     });
 };
 
+// console.log(pg_Paginationalignment);
   
     return (
         <>
@@ -1352,125 +1356,145 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                 />
                 {showpagination && (
                     <>
-                   
-                    <h4>Text Color</h4>
-                    <ColorPalette
-                        label={__('Color', 'vayu-blocks')}
-                        colors={colors}
-                        value={pg_PaginationColor}
-                        onChange={(color) => setAttributes({ pg_PaginationColor: color })}
-                    />
-                    <FontSizePicker
-                        label={__('Font Size', 'Post_blockk')}
-                        fontSizes={fontSizes}
-                        value={pg_PaginationSize}
-                        onChange={(value) => setAttributes({ pg_PaginationSize: value })}
-                    />
+                       {/* <ToggleGroupControl
+                            __nextHasNoMarginBottom
+                            isBlock
+                            label={__('Pagination Alignment', 'vayu-blocks')}
+                            value={pg_Paginationalignment}
+                            onChange={(value) => setAttributes({ pg_Paginationalignment: value })}
+                        >
+                            <ToggleGroupControlOption
+                                label="Left"
+                                value="left"
+                            />
+                            <ToggleGroupControlOption
+                                label="Center"
+                                value="center"
+                            />
+                            <ToggleGroupControlOption
+                                label="Right"
+                                value="right"
+                            />
+                        </ToggleGroupControl> */}
 
-                    <h4>{__('Background Color', 'vayu-blocks')}</h4>
-                    <BackgroundSelectorControl
-                        backgroundType={pg_PaginationbackgroundType}
-                        backgroundColor={pg_PaginationbackgroundColor}
-                        gradient={pg_PaginationbackgroundGradient}
-                        changeBackgroundType={(value) => setAttributes({ pg_PaginationbackgroundType: value })}
-                        changeColor={(value) => setAttributes({ pg_PaginationbackgroundColor: value })}
-                        changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
-                     />
-
-                    <BorderBoxControlComponent
-                        label={__('Border','vayu-blocks')}
-                        value={{
-                            all: {
-                                color: attributes.pg_paginationBorderColor,
-                                width: attributes.pg_paginationBorder,
-                                style: attributes.paginationborderType,
-                            },
-                            top: {
-                                color: attributes.pg_paginationTopBorderColor,
-                                width: attributes.pg_paginationTopBorder,
-                                style: attributes.paginationTopborderType,
-                            },
-                            bottom: {
-                                color: attributes.pg_paginationBottomBorderColor,
-                                width: attributes.pg_paginationBottomBorder,
-                                style: attributes.paginationBottomborderType,
-                            },
-                            left: {
-                                color: attributes.pg_paginationLeftBorderColor,
-                                width: attributes.pg_paginationLeftBorder,
-                                style: attributes.paginationLeftborderType,
-                            },
-                            right: {
-                                color: attributes.pg_paginationRightBorderColor,
-                                width: attributes.pg_paginationRightBorder,
-                                style: attributes.paginationRightborderType,
-                            },
-                        }}
-                        onChange={handlepaginationBorderChange}
-                        type="border"
-                    />
-                        
-                    <ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
-                        <UnitChooser
-                            value={ attributes.pg_paginationBorderRadiusunit }
-                                onClick={(unit) => {
-                                    setAttributes({ pg_paginationBorderRadiusunit : unit });
-                                }}
-                            units={ [ 'px', 'em', '%' ] }
+                        <h4>Text Color</h4>
+                        <ColorPalette
+                            label={__('Color', 'vayu-blocks')}
+                            colors={colors}
+                            value={pg_PaginationColor}
+                            onChange={(color) => setAttributes({ pg_PaginationColor: color })}
+                        />
+                        <FontSizePicker
+                            label={__('Font Size', 'Post_blockk')}
+                            fontSizes={fontSizes}
+                            value={pg_PaginationSize}
+                            onChange={(value) => setAttributes({ pg_PaginationSize: value })}
                         />
 
-                        <SizingControl
-                            type={ getBorderRadiusType() }
-                            min={ 0 }
-                            changeType={ changeBorderRadiusType }
-                            onChange={ changeBorderRadius }
-                            options={ [
-                                {
-                                    label: __( 'T-R', 'vayu-blocks' ),
-                                    type: 'top',
-                                    value: getBorderRadius( 'top' )
-                                },
-                                {
-                                    label: __( 'T-L', 'vayu-blocks' ),
-                                    type: 'right',
-                                    value: getBorderRadius( 'right' )
-                                },
-                                {
-                                    label: __( 'B-R', 'vayu-blocks' ),
-                                    type: 'bottom',
-                                    value: getBorderRadius( 'bottom' )
-                                },
-                                {
-                                    label: __( 'B-L', 'vayu-blocks' ),
-                                    type: 'left',
-                                    value: getBorderRadius( 'left' )
-                                }
-                            ] }
+                        <h4>{__('Background Color', 'vayu-blocks')}</h4>
+                        <BackgroundSelectorControl
+                            backgroundType={pg_PaginationbackgroundType}
+                            backgroundColor={pg_PaginationbackgroundColor}
+                            gradient={pg_PaginationbackgroundGradient}
+                            changeBackgroundType={(value) => setAttributes({ pg_PaginationbackgroundType: value })}
+                            changeColor={(value) => setAttributes({ pg_PaginationbackgroundColor: value })}
+                            changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
                         />
-                    </ResponsiveControl>
 
-                     <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+                        <BorderBoxControlComponent
+                            label={__('Border','vayu-blocks')}
+                            value={{
+                                all: {
+                                    color: attributes.pg_paginationBorderColor,
+                                    width: attributes.pg_paginationBorder,
+                                    style: attributes.paginationborderType,
+                                },
+                                top: {
+                                    color: attributes.pg_paginationTopBorderColor,
+                                    width: attributes.pg_paginationTopBorder,
+                                    style: attributes.paginationTopborderType,
+                                },
+                                bottom: {
+                                    color: attributes.pg_paginationBottomBorderColor,
+                                    width: attributes.pg_paginationBottomBorder,
+                                    style: attributes.paginationBottomborderType,
+                                },
+                                left: {
+                                    color: attributes.pg_paginationLeftBorderColor,
+                                    width: attributes.pg_paginationLeftBorder,
+                                    style: attributes.paginationLeftborderType,
+                                },
+                                right: {
+                                    color: attributes.pg_paginationRightBorderColor,
+                                    width: attributes.pg_paginationRightBorder,
+                                    style: attributes.paginationRightborderType,
+                                },
+                            }}
+                            onChange={handlepaginationBorderChange}
+                            type="border"
+                        />
+                            
+                        <ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
                             <UnitChooser
-                                value={attributes.pg_PaginationpaddingUnit}
-                                onClick={(unit) => {
-                                setAttributes({ pg_PaginationpaddingUnit: unit });
-                                }}
-                                units={['px', 'em', '%']}
+                                value={ attributes.pg_paginationBorderRadiusunit }
+                                    onClick={(unit) => {
+                                        setAttributes({ pg_paginationBorderRadiusunit : unit });
+                                    }}
+                                units={ [ 'px', 'em', '%' ] }
                             />
+
                             <SizingControl
-                                min={0}
-                                type={getPaginationPaddingType()}
-                                changeType={changePaginationPaddingType}
-                                max={100} // Adjust as needed
-                                onChange={changePaginationPadding}
-                                options={[
-                                { label: __('Top', 'vayu-blocks'), type: 'top', value: getPaginationPadding('top') },
-                                { label: __('Right', 'vayu-blocks'), type: 'right', value: getPaginationPadding('right') },
-                                { label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getPaginationPadding('bottom') },
-                                { label: __('Left', 'vayu-blocks'), type: 'left', value: getPaginationPadding('left') }
-                                ]}
+                                type={ getBorderRadiusType() }
+                                min={ 0 }
+                                changeType={ changeBorderRadiusType }
+                                onChange={ changeBorderRadius }
+                                options={ [
+                                    {
+                                        label: __( 'T-R', 'vayu-blocks' ),
+                                        type: 'top',
+                                        value: getBorderRadius( 'top' )
+                                    },
+                                    {
+                                        label: __( 'T-L', 'vayu-blocks' ),
+                                        type: 'right',
+                                        value: getBorderRadius( 'right' )
+                                    },
+                                    {
+                                        label: __( 'B-R', 'vayu-blocks' ),
+                                        type: 'bottom',
+                                        value: getBorderRadius( 'bottom' )
+                                    },
+                                    {
+                                        label: __( 'B-L', 'vayu-blocks' ),
+                                        type: 'left',
+                                        value: getBorderRadius( 'left' )
+                                    }
+                                ] }
                             />
-                    </ResponsiveControl>
+                        </ResponsiveControl>
+
+                        <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+                                <UnitChooser
+                                    value={attributes.pg_PaginationpaddingUnit}
+                                    onClick={(unit) => {
+                                    setAttributes({ pg_PaginationpaddingUnit: unit });
+                                    }}
+                                    units={['px', 'em', '%']}
+                                />
+                                <SizingControl
+                                    min={0}
+                                    type={getPaginationPaddingType()}
+                                    changeType={changePaginationPaddingType}
+                                    max={100} // Adjust as needed
+                                    onChange={changePaginationPadding}
+                                    options={[
+                                    { label: __('Top', 'vayu-blocks'), type: 'top', value: getPaginationPadding('top') },
+                                    { label: __('Right', 'vayu-blocks'), type: 'right', value: getPaginationPadding('right') },
+                                    { label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getPaginationPadding('bottom') },
+                                    { label: __('Left', 'vayu-blocks'), type: 'left', value: getPaginationPadding('left') }
+                                    ]}
+                                />
+                        </ResponsiveControl>
                     </>
                 )}
 

@@ -94,3 +94,50 @@
 //     position: relative;
 //     z-index: 1;
 // }
+
+.myclass{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+.components-base-control__label{
+	padding: 5px 0;
+	font-weight: 800;
+  }
+  
+.linking-controls {
+	display: flex;
+  }
+.linking-controls button {
+	width: 25px;
+	height: 28px;
+	border: 1px solid #a4afb7;
+	outline: none;
+	box-shadow: none;
+  }
+.linking-controls button svg {
+	width: 20px;
+  }
+.linking-controls button.is-primary {
+	z-index: 0;
+	background: #a4afb7;
+  }
+.linking-controls button.is-primary svg {
+	fill: #fff;
+  }
+.linking-controls button.is-primary:hover {
+	background: #a4afb7;
+	border-color: none;
+	box-shadow: none;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+  }
+.linking-controls button.is-primary:focus:not(:disabled) {
+	box-shadow: none;
+  }
+.linking-controls button .dashicon {
+	margin: 2px;
+  }
+
+  

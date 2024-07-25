@@ -16,123 +16,6 @@ class VayuBlocksPostGrid {
         global $post_grid_attributes;
         $post_grid_attributes = $this->attr;
     }
-
-    // public function get_posts($paged = 1) {
-    //     $device_type = $this->get_device_type();
-    //     $columns = $this->attr['pg_postLayoutColumns']; // Default value
-    //     $rows = $this->attr['pg_numberOfRow']; // Default value
-    
-    //     // Adjust columns and rows based on device type
-    //     if ($device_type === 'Desktop') {
-    //         $columns = isset($this->attr['pg_postLayoutColumns']) ? $this->attr['pg_postLayoutColumns'] : $columns;
-    //         $rows = isset($this->attr['pg_numberOfRow']) ? $this->attr['pg_numberOfRow'] : $rows;
-    //     } else if ($device_type === 'Tablet') {
-    //         $columns = isset($this->attr['pg_postLayoutColumnsTablet']) ? $this->attr['pg_postLayoutColumnsTablet'] : 2;
-    //         $rows = isset($this->attr['pg_numberOfRowTablet']) ? $this->attr['pg_numberOfRowTablet'] : $rows;
-    //     } else if ($device_type === 'Mobile') {
-    //         $columns = isset($this->attr['pg_postLayoutColumnsMobile']) ? $this->attr['pg_postLayoutColumnsMobile'] : 1;
-    //         $rows = isset($this->attr['pg_numberOfRowMobile']) ? $this->attr['pg_numberOfRowMobile'] : $rows;
-    //     }
-    
-    //     // Default sorting
-    //     $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'desc'; // Default to descending
-    //     $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'date'; // Default to 'date'
-    
-    //     // Initial query arguments
-    //     $args = array(
-    //         'post_type' => 'post',
-    //         'posts_per_page' => $columns * $rows,
-    //         'orderby' => $sortByField, // Sorting field
-    //         'order' => $sortByOrder,   // Sorting order
-    //     );
-    
-    //     if (!empty($this->attr['pg_selectedCategory'])) {
-    //         $args['cat'] = $this->attr['pg_selectedCategory'];
-    //     }
-    
-    //     if (!empty($this->attr['pg_selectedTag'])) {
-    //         $args['tag_id'] = $this->attr['pg_selectedTag'];
-    //     }
-    
-    //     // Filtering by categories using tax_query for AND condition
-    //     if (!empty($this->attr['selectedCategories']) && is_array($this->attr['selectedCategories'])) {
-    //         $selectedCategoryNames = array_map('sanitize_text_field', $this->attr['selectedCategories']); // Sanitize input
-    //         $category_ids = array();
-    
-    //         foreach ($selectedCategoryNames as $category_name) {
-    //             $category = get_term_by('name', $category_name, 'category');
-    //             if ($category) {
-    //                 $category_ids[] = $category->term_id;
-    //             }
-    //         }
-    
-    //         if (!empty($category_ids)) {
-    //             $args['tax_query'] = array(
-    //                 array(
-    //                     'taxonomy' => 'category',
-    //                     'field'    => 'term_id',
-    //                     'terms'    => $category_ids,
-    //                     'operator' => 'AND',
-    //                 ),
-    //             );
-    //         }
-    //     }
-    
-    //     // Filtering by tags
-    //     if (!empty($this->attr['pg_selectedTag'])) {
-    //         $args['tag_id'] = $this->attr['pg_selectedTag']; // Use 'tag_id' for single tag
-    //     }
-    
-    //     // Fetch all posts
-    //     $all_posts_query = new WP_Query($args);
-    //     $all_posts = $all_posts_query->posts;
-
-        
-    //     // Apply featured image filter if applicable
-    //     if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
-    //         // Filter posts to only include those with a featured image
-    //         $filtered_posts = array_filter($all_posts, function($post) {
-    //             return has_post_thumbnail($post->ID);
-    //         });
-        
-    //         // Count filtered posts
-    //         $filtered_posts_count = count($filtered_posts);
-        
-    //         // Pagination arguments
-    //         $args['posts_per_page'] = $columns * $rows; // Items per page
-    //         $args['paged'] = $paged; // Current page
-        
-    //         // Calculate total pages based on filtered count
-    //         $total_pages = ceil($filtered_posts_count / $args['posts_per_page']);
-        
-    //         // If current page is greater than the total number of pages, set to the last page
-    //         if ($paged > $total_pages) {
-    //             $paged = $total_pages;
-    //             $args['paged'] = $paged;
-    //         }
-        
-    //         // Adjust query arguments for pagination
-    //         $args['post__in'] = wp_list_pluck($filtered_posts, 'ID'); // Filtered post IDs
-    //         $args['post__not_in'] = array(); // Ensure not to exclude any posts
-        
-    //         // Ensure `paged` argument is correct for WP_Query
-    //         $args['paged'] = $paged;
-        
-    //         // Create a new WP_Query with updated arguments
-    //         $query = new WP_Query($args);
-        
-    //         // Return the filtered WP_Query object
-    //         return $query;
-    //     }else {
-    //         // If no featured image filter is applied, paginate as usual
-    //         $args['posts_per_page'] = $columns * $rows; // Items per page
-    //         $args['paged'] = $paged; // Current page
-    
-    //         $query = new WP_Query($args);
-    
-    //         return $query; // Return the WP_Query object
-    //     }
-    // }
         
     public function get_posts($paged = 1) {
         $device_type = $this->get_device_type();
@@ -229,7 +112,6 @@ class VayuBlocksPostGrid {
         // Return the WP_Query object
         return $query;
     }
-    
     
     public function render($query) {
         ob_start();
@@ -548,8 +430,16 @@ function post_grid_render($attr) {
     $query = $renderer->get_posts(1);
 
     if ($query->have_posts()) {
-    
-        $return =  '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
+        $className = '';
+        if (isset($attr['widthType'])) {
+            if ($attr['widthType'] === 'alignfull' || $attr['widthType'] === 'alignwide') {
+                $className = $attr['widthType'];
+            }
+        }
+
+        $return = '<div class="' . esc_attr($className) . '" >';
+        $return .= '<div >';
+        $return .=  '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
 
         $return .= $renderer->render($query);
 
@@ -557,7 +447,8 @@ function post_grid_render($attr) {
 
         // Add pagination outside the wrapper div
         $return .= '<div class="pagination">' . $renderer->render_pagination($query, 1) . '</div>';        // Render pagination controls
-
+        $return .= '</div>';
+        $return .= '</div>';
         wp_reset_postdata();
     } else {
         echo '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';

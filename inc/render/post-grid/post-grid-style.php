@@ -19,20 +19,9 @@ function generate_inline_styles($attr) {
     
     //Main div
     $css .= "$wrapper {";
-        if (isset($attr['widthType'])) {
-            if ($attr['widthType'] === 'fullwidth') {
-                $css .= "width: 100%; max-width: 100%!important;";
-            } elseif ($attr['widthType'] === 'inlinewidth') {
-                $css .= "width: auto;";
-            } elseif ($attr['widthType'] === 'customwidth') {
-                $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-                $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-            } else {
-                $css .= "width: 100%;";
-            }
-        } else {
-            $css .= "width: 100%;"; 
-        }
+
+        $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
+        $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
         
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
@@ -47,7 +36,10 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['marginBottom']) ? "margin-bottom: " . esc_attr($attr['marginBottom']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
-   
+        
+        $css .= "margin-left: auto !important;";
+        $css .= "margin-right: auto !important;";
+
         // Position and Z-index
         $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
         $css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
@@ -122,7 +114,6 @@ function generate_inline_styles($attr) {
         $css .= "display: grid;";
         $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
         $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
-        $css .= "max-width: 100%;";
         $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
         $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
         $css .= "grid-gap: {$gridGapUp} {$gridGap};";
@@ -394,6 +385,29 @@ function generate_inline_styles($attr) {
         $css .= "transition: all 0.3s ease-in-out;";
             
     $css .= "}";
+
+ // Start building the CSS string for hover styles
+$css .= "{$attr['pg_blockTitleTag']}:hover {";
+
+    // Check if `titlechoicehvr` is set and apply styles accordingly
+    if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
+        // Apply color style if titlechoicehvr is 'color'
+        if (isset($attr['pg_TitleColorhvr'])) {
+            $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
+        }
+    } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
+        // Apply gradient style if titlechoicehvr is 'gradient'
+        if (isset($attr['pg_TitleColorhvr'])) {
+            $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
+            $css .= "-webkit-background-clip: text !important;";
+            $css .= "-webkit-text-fill-color: transparent !important;";
+            $css .= "background-clip: text !important;";
+        }
+    }
+    
+// Close the CSS rule
+$css .= "}";
+    
        
     //Featured Image
     $css .= "$wrapper $post .post-grid-image{";
@@ -423,7 +437,22 @@ function generate_inline_styles($attr) {
      
     //Title Tag
     $css .= "$wrapper $post {$attr['pg_blockTitleTag']}{";
-        $css .= isset($attr['pg_TitleColor']) ? "color: " . esc_attr($attr['pg_TitleColor']) . ";" : '';
+
+        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
+            // Apply color style if titlechoice is 'color'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
+            }
+        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
+            // Apply gradient style if titlechoice is 'gradient'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+
         $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
        
         // $css .= "text-overflow: ellipsis;";
@@ -553,6 +582,8 @@ function generate_inline_styles($attr) {
     $css .= "@media (max-width: 1024px) {
 
         $wrapper {
+            width: " . (isset($attr['customWidthTablet']) ? esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) : '') . ";
+
             grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsTablet']) ? $attr['pg_postLayoutColumnsTablet'] : 2) . ", 1fr);
             padding-top: " . (isset($attr['buttonpaddingTopTablet']) ? esc_attr($attr['buttonpaddingTopTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['buttonpaddingBottomTablet']) ? esc_attr($attr['buttonpaddingBottomTablet']) . esc_attr($attr['paddingUnit']) : '') . ";
@@ -563,7 +594,9 @@ function generate_inline_styles($attr) {
             margin-bottom: " . (isset($attr['marginBottomTablet']) ? esc_attr($attr['marginBottomTablet']) . esc_attr($attr['marginUnit']) : '') . ";
             margin-left: " . (isset($attr['marginLeftTablet']) ? esc_attr($attr['marginLeftTablet']) . esc_attr($attr['marginUnit']) : '') . ";
             margin-right: " . (isset($attr['marginRightTablet']) ? esc_attr($attr['marginRightTablet']) . esc_attr($attr['marginUnit']) : '') . ";   
-            
+            margin-left: auto !important;
+            margin-right: auto !important;
+
             grid-gap: " . (isset($attr['pg_gapupTablet']) ? esc_attr($attr['pg_gapupTablet']) . 'px ' . esc_attr($attr['pg_gapTablet']) . 'px' : '') . ";
 
             border-top-left-radius: " . (isset($attr['pg_postTopBorderRadiusTablet']) ? esc_attr($attr['pg_postTopBorderRadiusTablet']) . "px" : '') . ";
@@ -643,6 +676,8 @@ function generate_inline_styles($attr) {
     $css .= "@media (max-width: 400px) {
 
         $wrapper {
+            width: " . (isset($attr['customWidthMobile']) ? esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) : '') . ";
+
             grid-template-columns: repeat(" . (isset($attr['pg_postLayoutColumnsMobile']) ? $attr['pg_postLayoutColumnsMobile'] : 1) . ", 1fr);
             padding-top: " . (isset($attr['buttonpaddingTopMobile']) ? esc_attr($attr['buttonpaddingTopMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['buttonpaddingBottomMobile']) ? esc_attr($attr['buttonpaddingBottomMobile']) . esc_attr($attr['paddingUnit']) : '') . ";
