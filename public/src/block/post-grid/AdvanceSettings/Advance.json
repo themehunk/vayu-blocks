@@ -12,11 +12,19 @@
   },
   "customWidthUnit": {
     "type": "string",
-    "default": "px"
+    "default": "%"
   },
   "customWidth": {
     "type": "number",
-    "default" : 0
+    "default" : 100
+  },
+  "customWidthTablet":{
+    "type":"number",
+    "default":100
+  },
+  "customWidthMobile":{
+    "type":"number",
+    "default":100
   },
   "paddingUnit": {
     "type": "string",

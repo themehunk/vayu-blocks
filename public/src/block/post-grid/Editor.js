@@ -1484,7 +1484,7 @@ const gettagsBorderRadius = type => {
     }
 };
 
-// Handle pagination border-radius changes
+// Handle tags border-radius changes
 const handletagsBorderRadiusChange = (newValues) => {
     setAttributes({
         pg_tagsTopBorderRadius: newValues.borderRadius.top,
@@ -1494,33 +1494,32 @@ const handletagsBorderRadiusChange = (newValues) => {
     });
 };
 
-console.log(customWidthlayout);
     return (
         <>
 
 			{/* Layout Panel */}
-          <PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
-		  		<SelectControl
-					label={ __( 'Width', 'vayu-blocks' ) }
-					value={ attributes.width }
-					options={ [
-						{ label:  __( 'Default', 'vayu-blocks' ), value: '' },
-						{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: '100%' },
-						{ label: __( 'Half Width', 'vayu-blocks' ), value: '50%' },
-						{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
-					] }
-					onChange={ e => setAttributes({ width: e }) }
-				/>
-				{ 'customwidth' === attributes.width && (
-					<div className="custom-width-input">
-						<TextControl
-							label={ __( 'Custom Width', 'vayu-blocks' ) }
-							value={ attributes.customWidthlayout }
-							onChange={ (value) => setAttributes({ customWidthlayout:value }) }
-							placeholder="e.g., 800px, 100%"
-						/>
-					</div>
-				)}				
+			<PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
+					<SelectControl
+						label={ __( 'Width', 'vayu-blocks' ) }
+						value={ attributes.width }
+						options={ [
+							{ label:  __( 'Default', 'vayu-blocks' ), value: '' },
+							{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: '100%' },
+							{ label: __( 'Half Width', 'vayu-blocks' ), value: '50%' },
+							{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+						] }
+						onChange={ e => setAttributes({ width: e }) }
+					/>
+					{ 'customwidth' === attributes.width && (
+						<div className="custom-width-input">
+							<TextControl
+								label={ __( 'Custom Width', 'vayu-blocks' ) }
+								value={ attributes.customWidthlayout }
+								onChange={ (value) => setAttributes({ customWidthlayout:value }) }
+								placeholder="e.g., 800px, 100%"
+							/>
+						</div>
+					)}				
 
 						<h4>Background</h4>
 							<BackgroundSelectorControl
@@ -1588,68 +1587,68 @@ console.log(customWidthlayout);
 							onChange={handleBorderChange}
 							type="border"
 						/>
-						
-					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
-                        <UnitChooser
-                            value={ attributes.pg_layoutBorderRadiusunit }
-                                onClick={(unit) => {
-                                    setAttributes({ pg_layoutBorderRadiusunit : unit });
-                                }}
-                            units={ [ 'px', 'em', '%' ] }
-                        />
+							
+						<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+							<UnitChooser
+								value={ attributes.pg_layoutBorderRadiusunit }
+									onClick={(unit) => {
+										setAttributes({ pg_layoutBorderRadiusunit : unit });
+									}}
+								units={ [ 'px', 'em', '%' ] }
+							/>
 
-                        <SizingControl
-                            type={ getlayoutBorderRadiusType() }
-                            min={ 0 }
-                            changeType={ changelayoutBorderRadiusType }
-                            onChange={ changelayoutBorderRadius }
-                            options={ [
-                                {
-                                    label: __( 'T-R', 'vayu-blocks' ),
-                                    type: 'top',
-                                    value: getlayoutBorderRadius( 'top' )
-                                },
-                                {
-                                    label: __( 'T-L', 'vayu-blocks' ),
-                                    type: 'right',
-                                    value: getlayoutBorderRadius( 'right' )
-                                },
-                                {
-                                    label: __( 'B-R', 'vayu-blocks' ),
-                                    type: 'bottom',
-                                    value: getlayoutBorderRadius( 'bottom' )
-                                },
-                                {
-                                    label: __( 'B-L', 'vayu-blocks' ),
-                                    type: 'left',
-                                    value: getlayoutBorderRadius( 'left' )
-                                }
-                            ] }
-                        />
-                    </ResponsiveControl>
+							<SizingControl
+								type={ getlayoutBorderRadiusType() }
+								min={ 0 }
+								changeType={ changelayoutBorderRadiusType }
+								onChange={ changelayoutBorderRadius }
+								options={ [
+									{
+										label: __( 'T-R', 'vayu-blocks' ),
+										type: 'top',
+										value: getlayoutBorderRadius( 'top' )
+									},
+									{
+										label: __( 'T-L', 'vayu-blocks' ),
+										type: 'right',
+										value: getlayoutBorderRadius( 'right' )
+									},
+									{
+										label: __( 'B-R', 'vayu-blocks' ),
+										type: 'bottom',
+										value: getlayoutBorderRadius( 'bottom' )
+									},
+									{
+										label: __( 'B-L', 'vayu-blocks' ),
+										type: 'left',
+										value: getlayoutBorderRadius( 'left' )
+									}
+								] }
+							/>
+						</ResponsiveControl>
 
-					<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
-						<UnitChooser
-							value={attributes.pg_layoutpaddingUnit}
-							onClick={(unit) => {
-							setAttributes({ pg_layoutpaddingUnit: unit });
-							}}
-							units={['px', 'em', '%']}
-						/>
-						<SizingControl
-							min={0}
-							type={getLayoutPaddingType()}
-							changeType={changeLayoutPaddingType}
-							max={100} // Adjust as needed
-							onChange={changeLayoutPadding}
-							options={[
-							{ label: __('Top', 'vayu-blocks'), type: 'top', value: getLayoutPadding('top') },
-							{ label: __('Right', 'vayu-blocks'), type: 'right', value: getLayoutPadding('right') },
-							{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getLayoutPadding('bottom') },
-							{ label: __('Left', 'vayu-blocks'), type: 'left', value: getLayoutPadding('left') }
-							]}
-						/>
-					</ResponsiveControl>
+						<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+							<UnitChooser
+								value={attributes.pg_layoutpaddingUnit}
+								onClick={(unit) => {
+								setAttributes({ pg_layoutpaddingUnit: unit });
+								}}
+								units={['px', 'em', '%']}
+							/>
+							<SizingControl
+								min={0}
+								type={getLayoutPaddingType()}
+								changeType={changeLayoutPaddingType}
+								max={100} // Adjust as needed
+								onChange={changeLayoutPadding}
+								options={[
+								{ label: __('Top', 'vayu-blocks'), type: 'top', value: getLayoutPadding('top') },
+								{ label: __('Right', 'vayu-blocks'), type: 'right', value: getLayoutPadding('right') },
+								{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getLayoutPadding('bottom') },
+								{ label: __('Left', 'vayu-blocks'), type: 'left', value: getLayoutPadding('left') }
+								]}
+							/>
+						</ResponsiveControl>
 			</PanelBody>
 
 			{/* Title Panel */}

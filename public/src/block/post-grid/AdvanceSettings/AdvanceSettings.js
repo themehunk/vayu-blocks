@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { useSelect } from '@wordpress/data';
 
 // Utility function to filter out undefined or null values
@@ -25,6 +25,8 @@ export default function AdvanceSettings({ children, attributes }) {
         widthType,
         customWidthUnit,
         customWidth,
+        customWidthTablet,
+        customWidthMobile,
         paddingUnit,
         paddingTop,
         paddingBottom,
@@ -295,21 +297,39 @@ export default function AdvanceSettings({ children, attributes }) {
         }
     };
 
+    const getWidthStyle = () => {
+        switch (getView) {
+            case 'Desktop':
+                return {
+                    width: customWidth ? `${customWidth}${customWidthUnit || '%'}` : '100%',
+                };
+            case 'Tablet':
+                return {
+                    width: customWidthTablet ? `${customWidthTablet}${customWidthUnit || '%'}` : '100%',
+                };
+            case 'Mobile':
+                return {
+                    width: customWidthMobile ? `${customWidthMobile}${customWidthUnit || '%'}` : '100%',
+                };
+            default:
+                return {};
+        }
+    };
+    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
     const borderradiusHvrstyles = getborderradiusHvrStyle();
+    const customwidthstyles  =  getWidthStyle(); 
 
     // Prepare the style object
     const styles = {
-        width: widthType === 'fullwidth' ? '100%' :
-          widthType === 'inlinewidth' ? 'auto' :
-          widthType === 'customwidth' ? `${customWidth}${customWidthUnit || 'px'}` : '100%',
-        
+
           ...paddingStyles,
           ...marginStyles,  
           ...borderradiusstyles,
-      
+          ...customwidthstyles,
+
         position: position || undefined,
         zIndex: zIndex || undefined,
         alignSelf: selfAlign || undefined,
@@ -328,8 +348,8 @@ export default function AdvanceSettings({ children, attributes }) {
         : 'none',
  
         background: backgroundType === 'color' ? backgroundColor :
-          backgroundType === 'gradient' ? backgroundGradient || undefined :
-            backgroundImage ? `url(${backgroundImage.url})` : 'none',
+        backgroundType === 'gradient' ? backgroundGradient || undefined :
+        backgroundImage ? `url(${backgroundImage.url})` : 'none',
         backgroundPosition: formatBackgroundPosition(backgroundPosition),
         backgroundAttachment: backgroundAttachment || undefined,
         backgroundRepeat: backgroundRepeat || undefined,
@@ -371,11 +391,20 @@ export default function AdvanceSettings({ children, attributes }) {
     };
 
     const blockProps = useBlockProps({
-        style: mergedStyles,
+        className: `${attributes.widthType === 'alignfull' || attributes.widthType === 'alignwide' ? attributes.widthType : ''}`,
+        style: {
+            ...mergedStyles,
+            ...(attributes.widthType === 'alignfull' && {
+                marginLeft: 'auto',
+                marginRight: 'auto',
+            }),
+        },
+
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
-
+    
+    
     return (
         <div {...blockProps}>
             {children}

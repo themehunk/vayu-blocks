@@ -23,9 +23,7 @@ import advanceJson from './AdvanceSettings/Advance.json';
 import { IoGridOutline } from "react-icons/io5";
 
 
-
 registerBlockType( metadata.name, {
-
 	...metadata,
 	attributes: { ...indexJson, ...advanceJson },
 	edit: Edit,

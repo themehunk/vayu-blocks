@@ -1700,6 +1700,10 @@
   "customWidthlayout": {
     "type": "string",
     "default": ""
+  },
+  "pg_Paginationalignment" : {
+    "type": "string",
+    "default": "center"
   }
 
 }

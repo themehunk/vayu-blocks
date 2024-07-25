@@ -459,8 +459,11 @@ return array(
     'id' => '',
     'uniqueID' => '',
     'widthType' => 'default',
-    'customWidthUnit' => 'px',
-    'customWidth' => 0,
+    'customWidthUnit' => '%',
+    'customWidth' => 100,
+    'customWidthTablet' => 100,
+    'customWidthMobile' => 100,
+    
     'paddingUnit' => 'px',
     'paddingTop' => 0,
     'paddingBottom' => 0,

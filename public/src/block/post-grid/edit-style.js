@@ -131,7 +131,7 @@ const postStyles = (attributes) => {
         
     return {
         width: `${attributes.width === 'customwidth' ? attributes.customWidthlayout : attributes.width}`,
-        
+
         ...paddingStyles,
         ...backgroundStyle(attributes),
         ...borderradiusstyles,
@@ -319,7 +319,6 @@ const authorAndDateContainerStyles = {
     display: 'flex', 
     alignItems: 'center',
     flexWrap:'wrap',
-    marginLeft:"2px",
 };
 
 const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImageScale) => ({

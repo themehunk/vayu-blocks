@@ -9,6 +9,8 @@ import { InnerBlocks} from '@wordpress/block-editor';
 import './editor.scss';
 import { BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { Toolbar, ToolbarButton, Dropdown, DropdownMenu, MenuItem, DropdownItem } from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
+
 
 import {
     blockStyles,
@@ -26,12 +28,14 @@ import {
     dateImageStyles,
     PaginationStyles
 } from './edit-style';
-import { useSelect } from '@wordpress/data';
-import { RiTranslate } from 'react-icons/ri';
+import { useSelect,useRef } from '@wordpress/data';
 
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        widthType,
+        pg_Paginationalignment,
+        
         customWidthlayout,
         pg_layoutBorderRadiusunit,
         layoutBorderRadiusType,
@@ -453,7 +457,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postStyle = postStyles(attributes);
 
-    const authorAndDateContainerStyle = authorAndDateContainerStyles;
+     const authorAndDateContainerStyle = authorAndDateContainerStyles;
 
     const PaginationStyle = PaginationStyles(attributes);
     
@@ -700,9 +704,9 @@ const Edit = ({ attributes, setAttributes }) => {
             />
 
             <AdvanceSettings attributes={attributes}>
-                <div style={blockStyle}>
+                <>
                     {filteredPosts && filteredPosts.length > 0 ? (
-                        <div style={gridContainerStyle}>
+                        <div  style={gridContainerStyle}>
                             {postsToShow.length > 0 ? (
                                 postsToShow.map((post) => (
                                     <div key={post.uniqueID} style={postStyle}>
@@ -711,7 +715,8 @@ const Edit = ({ attributes, setAttributes }) => {
                                         ) : (
                                             <>
                                                 {FeaturedImage() && post.featured_media_url && (
-                                                    <div style={authorAndDateContainerStyle}>
+                                                    // style={authorAndDateContainerStyle}
+                                                    <div >
                                                         <img
                                                             src={post.featured_media_url}
                                                             alt={post.title.rendered}
@@ -807,7 +812,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
                     {/* Pagination */}
                     {showpagination && totalPages > 1 && (
-                        <div className="pg-pagination" style={{ transform: 'translate(-50%, -50%)',   marginLeft: '60%',marginTop:'5%',}}>
+                        <div className="pg-pagination" style={{ textAlign:'center'}}>
                             {CurrentPage > 1 && (
                                 <button
                                     style={PaginationStyle}
@@ -859,7 +864,7 @@ const Edit = ({ attributes, setAttributes }) => {
                             )}
                         </div>
                     )}
-                </div>
+                </>
             </AdvanceSettings>
         </>
     );
