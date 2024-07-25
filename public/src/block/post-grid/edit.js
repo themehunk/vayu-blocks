@@ -33,6 +33,7 @@ import { useSelect,useRef } from '@wordpress/data';
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        titlechoice,
         widthType,
         pg_Paginationalignment,
         
@@ -741,8 +742,8 @@ const Edit = ({ attributes, setAttributes }) => {
                                                 )}
     
                                                 <div>
-                                                    <a href={post.link} style={{ textDecoration: "none" }}>
-                                                        <TitleTag style={titleTagStyle}>
+                                                    <a href={post.link}  style={{ textDecoration: "none" }}>
+                                                        <TitleTag class="titletag" style={titleTagStyle}>
                                                             {post.title.rendered}
                                                         </TitleTag>
                                                     </a>

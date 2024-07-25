@@ -385,6 +385,29 @@ function generate_inline_styles($attr) {
         $css .= "transition: all 0.3s ease-in-out;";
             
     $css .= "}";
+
+ // Start building the CSS string for hover styles
+$css .= "{$attr['pg_blockTitleTag']}:hover {";
+
+    // Check if `titlechoicehvr` is set and apply styles accordingly
+    if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
+        // Apply color style if titlechoicehvr is 'color'
+        if (isset($attr['pg_TitleColorhvr'])) {
+            $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
+        }
+    } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
+        // Apply gradient style if titlechoicehvr is 'gradient'
+        if (isset($attr['pg_TitleColorhvr'])) {
+            $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
+            $css .= "-webkit-background-clip: text !important;";
+            $css .= "-webkit-text-fill-color: transparent !important;";
+            $css .= "background-clip: text !important;";
+        }
+    }
+    
+// Close the CSS rule
+$css .= "}";
+    
        
     //Featured Image
     $css .= "$wrapper $post .post-grid-image{";
@@ -414,7 +437,22 @@ function generate_inline_styles($attr) {
      
     //Title Tag
     $css .= "$wrapper $post {$attr['pg_blockTitleTag']}{";
-        $css .= isset($attr['pg_TitleColor']) ? "color: " . esc_attr($attr['pg_TitleColor']) . ";" : '';
+
+        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
+            // Apply color style if titlechoice is 'color'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
+            }
+        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
+            // Apply gradient style if titlechoice is 'gradient'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+
         $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
        
         // $css .= "text-overflow: ellipsis;";

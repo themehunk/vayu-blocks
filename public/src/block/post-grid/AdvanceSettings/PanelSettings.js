@@ -1672,8 +1672,7 @@ const getborderradiusHvr = type => {
 				) || 'advanced' === tab && (
 					<Fragment>
 						
-						<PanelBody
-							title={ __( 'Layout', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
@@ -1787,8 +1786,7 @@ const getborderradiusHvr = type => {
 
 						</PanelBody>
 
-						<PanelBody
-							title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
@@ -1820,7 +1818,6 @@ const getborderradiusHvr = type => {
 								] }
 								onChange={ e => setAttributes({ borderType: e }) }
 							/>	
-							
 								
 							{ 'none' !== attributes.borderType && (
 
@@ -1982,11 +1979,7 @@ const getborderradiusHvr = type => {
 										min={ -100 }
 										max={ 100 }
 									/>
-									</ControlPanelControl>
-
-									
-								
-
+									</ControlPanelControl>	
 							</>
 
 						) 	|| 'hover' ===  hover && (
@@ -2170,8 +2163,7 @@ const getborderradiusHvr = type => {
 								}
 						</PanelBody>
 
-						<PanelBody
-							title={ __( 'Background', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
@@ -2247,30 +2239,7 @@ const getborderradiusHvr = type => {
 						
 						</PanelBody>
 
-						{/* <PanelBody
-							title={ __( 'Responsive', 'vayu-blocks' ) }
-							initialOpen={ false }
-							className="th-button-panel"
-						> 
-						<ToggleControl
-										label={ __( 'Hide On Desktop', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideDesktop }
-										onChange={ responsiveTogHideDesktop => setAttributes({ responsiveTogHideDesktop }) }
-									/>
-						<ToggleControl
-										label={ __( 'Hide On Tablet', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideTablet }
-										onChange={ responsiveTogHideTablet => setAttributes({ responsiveTogHideTablet }) }
-									/>				
-						<ToggleControl
-										label={ __( 'Hide On Mobile', 'vayu-blocks' ) }
-										checked={ attributes.responsiveTogHideMobile }
-										onChange={ responsiveTogHideMobile => setAttributes({ responsiveTogHideMobile }) }
-									/>
-						</PanelBody> */}
-
-						<PanelBody
-							title={ __( 'Transition', 'vayu-blocks' ) }
+						<PanelBody title={ __( 'Transition', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 

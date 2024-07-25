@@ -1,11 +1,18 @@
-import { PanelBody,TextControl, ToggleControl, ColorPalette, FontSizePicker, RangeControl, __experimentalBoxControl as BoxControl, DropdownMenu, GradientPicker, SelectControl } from '@wordpress/components';
+import { PanelBody,TextControl, ToggleControl, ColorPalette, FontSizePicker, RangeControl, __experimentalBoxControl as BoxControl, DropdownMenu, GradientPicker, SelectControl} from '@wordpress/components';
+import { Button, ButtonGroup } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import './editor.scss';
 import { MenuGroup, MenuItem } from '@wordpress/components';
 import { more, arrowUp, arrowDown, trash ,moreVertical} from '@wordpress/icons';
-import { Button, Popover } from '@wordpress/components';
+import { Popover } from '@wordpress/components';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
+import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
+import { MdColorLens } from "react-icons/md";
+import './editor.scss';
+import { PiGradient } from "react-icons/pi";
+
+
 
 
 import {
@@ -13,6 +20,7 @@ import {
 	ResponsiveControl,
 	SizingControl,
 	HoverControl,
+	Icon,
 	ControlPanelControl,
 	BackgroundSelectorControl,
 	UnitChooser,
@@ -277,12 +285,18 @@ const {
 	pg_TitlelineHeight,
 	pg_TitleSize,
 	pg_TitleColor,
+	pg_TitleColorhvr,
+	titlechoicehvr,
+	titlechoice,
+	
 	pg_dateImageScale,
 
 	width,
 	customWidthlayout,
 
 } = attributes;
+
+const [hover, sethover] = useState('normal');
 
 const getView = useSelect( select => {
 	const { getView } = select( 'vayu-blocks/data' );
@@ -342,6 +356,59 @@ const colors = [
 	{ name: 'Purple', color: '#800080' },       // Purple
 ];
 
+const gradient = [
+	{
+	  gradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+	  name: 'Vivid cyan blue to vivid purple',
+	  slug: 'vivid-cyan-blue-to-vivid-purple'
+	},
+	{
+	  gradient: 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)',
+	  name: 'Light green cyan to vivid green cyan',
+	  slug: 'light-green-cyan-to-vivid-green-cyan'
+	},
+	{
+	  gradient: 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
+	  name: 'Luminous vivid amber to luminous vivid orange',
+	  slug: 'luminous-vivid-amber-to-luminous-vivid-orange'
+	},
+	{
+	  gradient: 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
+	  name: 'Luminous vivid orange to vivid red',
+	  slug: 'luminous-vivid-orange-to-vivid-red'
+	},
+	{
+	  gradient: 'linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%)',
+	  name: 'Very light gray to cyan bluish gray',
+	  slug: 'very-light-gray-to-cyan-bluish-gray'
+	},
+	{
+	  gradient: 'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
+	  name: 'Cool to warm spectrum',
+	  slug: 'cool-to-warm-spectrum'
+	},
+	{
+	  gradient: 'linear-gradient(to right, #C90100 0%, #FF7B00 25%, #00D4E7 75%, #009DFF 100%)',
+	  name: 'Red to blue gradient',
+	  slug: 'red-to-blue-gradient'
+	},
+	{
+	  gradient: 'linear-gradient(45deg, #09009f, #00ff95 80%)',
+	  name: 'Blue to green gradient',
+	  slug: 'blue-to-green-gradient'
+	},
+	{
+	  gradient: 'linear-gradient(rgb(188, 12, 241), rgb(212, 4, 4))',
+	  name: 'Purple to red gradient',
+	  slug: 'purple-to-red-gradient'
+	},
+	{
+	  gradient: 'linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44)',
+	  name: 'Multicolor gradient',
+	  slug: 'multicolor-gradient'
+	}
+];
+  
 // Layout Padding
 const desktopLayoutPaddingType = {
 	top: 'pg_layoutpaddingTop',
@@ -1493,6 +1560,15 @@ const handletagsBorderRadiusChange = (newValues) => {
         pg_tagsBottomBorderRadius: newValues.borderRadius.bottom,
     });
 };
+const [titlechoiceq, setTitlechoice] = useState('color');
+const handleColorClick = () => {
+	setTitlechoice('color');
+};
+
+const handleGradientClick = () => {
+	setTitlechoice('gradient');
+};
+
 
     return (
         <>
@@ -1667,13 +1743,120 @@ const handletagsBorderRadiusChange = (newValues) => {
 					onChange={(value) => setAttributes({ pg_blockTitleTag: value })}
 				/>
 
-				<h4>Color</h4>
-				<ColorPalette
-					label={__(' Color', 'vayu-blocks')}
-					colors={colors}
-					value={pg_TitleColor}
-					onChange={(color) => setAttributes({ pg_TitleColor: color })}
-				/>
+				<>
+					<HoverControl
+						value={hover}
+						options={[
+							{
+								label: __('Normal', 'vayu-blocks'),
+								value: 'normal',
+							},
+							{
+								label: __('Hover', 'vayu-blocks'),
+								value: 'hover',
+							},
+						]}
+						onChange={sethover}
+					/>
+
+					{hover === 'normal' && (
+						<>
+							<div className="myclass">
+								<label className="components-base-control__label">{__('Color Type', 'vayu-blocks')}</label>
+								<ButtonGroup className="linking-controls">
+									<Button
+										icon={<MdColorLens />}
+										label={__('Color', 'vayu-blocks')}
+										showTooltip={true}
+										isPrimary={titlechoice === 'color'}
+										onClick={() => {
+											setAttributes({ titlechoice: 'color', pg_TitleColor: 'black' });
+										}}
+									/>
+
+									<Button
+										icon={<PiGradient />}
+										label={__('Gradient', 'vayu-blocks')}
+										showTooltip={true}
+										isPrimary={titlechoice === 'gradient'}
+										onClick={() => {
+											setAttributes({
+												titlechoice: 'gradient',
+												pg_TitleColor: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
+											});
+										}}
+									/>
+								</ButtonGroup>
+							</div>
+							{titlechoice === 'color' && (
+								<ColorPalette
+									label={__('Color', 'vayu-blocks')}
+									colors={colors}
+									value={pg_TitleColor}
+									onChange={(color) => setAttributes({ pg_TitleColor: color })}
+								/>
+							)}
+
+							{titlechoice === 'gradient' && (
+								<GradientPicker
+									value={pg_TitleColor}
+									onChange={(value) => setAttributes({ pg_TitleColor: value })}
+									gradients={gradient}
+								/>
+							)}
+						</>
+					)}
+
+					{hover === 'hover' && (
+						<>
+							<div className="myclass">
+								<label className="components-base-control__label">{__('Color Type', 'vayu-blocks')}</label>
+								<ButtonGroup className="linking-controls">
+									<Button
+										icon={<MdColorLens />}
+										label={__('Color', 'vayu-blocks')}
+										showTooltip={true}
+										isPrimary={titlechoice === 'color'}
+										onClick={() => {
+											setAttributes({ titlechoice: 'color', pg_TitleColor: 'black' });
+										}}
+									/>
+
+									<Button
+										icon={<PiGradient />}
+										label={__('Gradient', 'vayu-blocks')}
+										showTooltip={true}
+										isPrimary={titlechoice === 'gradient'}
+										onClick={() => {
+											setAttributes({
+												titlechoice: 'gradient',
+												pg_TitleColor: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
+											});
+										}}
+									/>
+								</ButtonGroup>
+							</div>
+
+							{titlechoice === 'color' && (
+								<ColorPalette
+									label={__('Color', 'vayu-blocks')}
+									colors={colors}
+									value={pg_TitleColorhvr}
+									onChange={(color) => setAttributes({ pg_TitleColorhvr: color })}
+								/>
+							)}
+
+							{titlechoice === 'gradient' && (
+								<GradientPicker
+									value={pg_TitleColorhvr}
+									onChange={(value) => setAttributes({ pg_TitleColorhvr: value })}
+									gradients={gradient}
+								/>
+							)}
+						</>
+					)}
+				</>
+
 				<h4> Font Size</h4>
 				<FontSizePicker
 					label={__(' Font Size', 'Post_blockk')}
