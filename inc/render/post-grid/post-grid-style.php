@@ -386,27 +386,27 @@ function generate_inline_styles($attr) {
             
     $css .= "}";
 
- // Start building the CSS string for hover styles
-$css .= "{$attr['pg_blockTitleTag']}:hover {";
+    // Start building the CSS string for hover styles
+    $css .= "{$attr['pg_blockTitleTag']}:hover {";
 
-    // Check if `titlechoicehvr` is set and apply styles accordingly
-    if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
-        // Apply color style if titlechoicehvr is 'color'
-        if (isset($attr['pg_TitleColorhvr'])) {
-            $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
+        // Check if `titlechoicehvr` is set and apply styles accordingly
+        if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
+            // Apply color style if titlechoicehvr is 'color'
+            if (isset($attr['pg_TitleColorhvr'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
+            }
+        } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
+            // Apply gradient style if titlechoicehvr is 'gradient'
+            if (isset($attr['pg_TitleColorhvr'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
         }
-    } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
-        // Apply gradient style if titlechoicehvr is 'gradient'
-        if (isset($attr['pg_TitleColorhvr'])) {
-            $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
-            $css .= "-webkit-background-clip: text !important;";
-            $css .= "-webkit-text-fill-color: transparent !important;";
-            $css .= "background-clip: text !important;";
-        }
-    }
-    
-// Close the CSS rule
-$css .= "}";
+        
+    // Close the CSS rule
+    $css .= "}";
     
        
     //Featured Image
@@ -455,8 +455,8 @@ $css .= "}";
 
         $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
        
-        // $css .= "text-overflow: ellipsis;";
-        $css .= "margin-block-start: 0.07em;";
+        $css .= isset($attr['pg_spacing']) ? "margin-block-start: " . esc_attr($attr['pg_spacing']) . "%;" : '';
+
         $css .= "margin-left: 5px;";
         $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
         $css .= "margin-block-end: 0.07em;";

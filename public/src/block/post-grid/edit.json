@@ -35,22 +35,6 @@
         "type": "string",
         "default": "#000000"
       },
-      "pg_categoryPaddingTop": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_categoryPaddingRight": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_categoryPaddingBottom": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_categoryPaddingLeft": {
-        "type": "number",
-        "default": 0
-      },
       "catgeorypaddingUnit": {
         "type": "string",
         "default": "px"
@@ -303,7 +287,7 @@
       },
       "pg_TagPaddingRight": {
         "type": "number",
-        "default": 10
+        "default": 0
       },
       "pg_TagPaddingBottom": {
         "type": "number",
@@ -311,7 +295,7 @@
       },
       "pg_TagPaddingLeft": {
         "type": "number",
-        "default": 10
+        "default": 0
       },
       "tagpaddingUnit": {
         "type": "string",
@@ -319,7 +303,7 @@
     },      
       "pg_tagTextColor": {
         "type": "string",
-        "default": "#D3D3D3"
+        "default": "#808080"
       },
       "pg_tagTextSize": {
         "type": "number",
@@ -450,7 +434,7 @@
 },
 "tag_backgroundColor": {
   "type": "string",
-  "default": "black"
+  "default": "transparent"
 },
 "tag_backgroundImage": {
   "type": "object",
@@ -587,19 +571,19 @@
 },
 "pg_CategorypaddingTop": {
   "type": "number",
-  "default": 5
+  "default": 2
 },
 "pg_CategorypaddingRight": {
   "type": "number",
-  "default": 10
+  "default": 5
 },
 "pg_CategorypaddingBottom": {
   "type": "number",
-  "default": 6
+  "default": 3
 },
 "pg_CategorypaddingLeft": {
   "type": "number",
-  "default": 10
+  "default": 6
 },
 "pg_CategorypaddingTablet": {
   "type": "number",
@@ -946,7 +930,7 @@
 },
 "pg_TitlelineHeight":{
   "type": "number",
-  "default": 1
+  "default": 1.2
 },
 "pg_TitleSize":{
   "type": "number",
@@ -1055,7 +1039,7 @@
 },
 "pg_PaginationColor":{
   "type":"string",
-  "default": "red"
+  "default": "blue"
 },
 "pg_PaginationSize":{
   "type":"number",
@@ -1127,19 +1111,19 @@
 },
 "pg_categoryTopBorderRadius":{
   "type": "number",
-  "default": 0
+  "default": 3
 },
 "pg_categoryBottomBorderRadius":{
   "type" : "number",
-  "default": 0
+  "default": 3
 },
 "pg_categoryLeftBorderRadius":{
   "type": "number",
-  "default" : 0
+  "default" : 3
 },
 "pg_categoryRightBorderRadius":{
   "type": "number",
-  "default" : 0
+  "default" : 3
 },
 "categoryTopborderType":{
   "type":"string",

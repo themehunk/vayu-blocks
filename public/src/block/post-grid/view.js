@@ -2,7 +2,7 @@ jQuery(function($) {
     $(document).on('click', '.pagination a', function(e) {
         e.preventDefault();
           // Remove old pagination controls
-        $('.pagination').remove();
+        // $('.pagination').remove();
     
         var href = $(this).attr('href');
         var pageMatch = href.match(/page\/(\d+)/);
@@ -32,6 +32,8 @@ jQuery(function($) {
                 // Move the updated pagination outside of the wrapper div
                 $('.pagination').insertAfter('.th-post-grid-wrapper');
             },
+
+            
             error: function(xhr, status, error) {
               
                 console.error('AJAX Error:', error);
@@ -39,3 +41,8 @@ jQuery(function($) {
         });
     });
 });
+
+
+
+
+

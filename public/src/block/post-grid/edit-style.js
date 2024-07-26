@@ -309,7 +309,7 @@ const titleTagStyles = (attributes) => {
 
     const styles = {
         fontSize: `${attributes.pg_TitleSize}px`,
-        marginBlockStart: '0.07em',
+        marginBlockStart: `${attributes.pg_spacing}%`,
         lineHeight: `${attributes.pg_TitlelineHeight}`,
         marginBlockEnd: '0.05em',
         fontWeight: '600',
