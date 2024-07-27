@@ -2,9 +2,9 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from "@wordpress/data";
 
 const blockStyles = () => ({
+
     maxWidth: "100%",
 });
-
 const gridContainerStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
