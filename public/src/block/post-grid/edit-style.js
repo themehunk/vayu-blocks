@@ -3,7 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from "@wordpress/data";
 import { useEffect } from "react";
 
-const blockStyles = (pg_textColor, pg_lineHeight) => ({
+const blockStyles = () => ({
     maxWidth: "100%",
 });
 

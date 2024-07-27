@@ -83,11 +83,12 @@ const Edit = ({ attributes, setAttributes }) => {
     const [totalPages, setTotalPages] = useState(1); 
     const [loading, setLoading] = useState(false);
     const [CurrentPage, setCurrentPage] = useState(1);
+    const [filter, setFilter] = useState({ featuredImage: false, categories: []});
 
     const TitleTag = pg_blockTitleTag || 'h2';
 
     //style
-    const blockStyle = blockStyles(pg_textColor, pg_lineHeight);
+    const blockStyle = blockStyles();
 
     const gridContainerStyle = gridContainerStyles(attributes);
     
@@ -107,7 +108,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postStyle = postStyles(attributes);
 
-     const authorAndDateContainerStyle = authorAndDateContainerStyles;
+    const authorAndDateContainerStyle = authorAndDateContainerStyles;
 
     const PaginationStyle = PaginationStyles(attributes);
     
@@ -115,7 +116,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const fullContentStyles = fullContentStyle(attributes);
 
-
+    //View
     const getView = useSelect( select => {
 		const { getView } = select( 'vayu-blocks/data' );
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
@@ -125,9 +126,8 @@ const Edit = ({ attributes, setAttributes }) => {
     
     const numberOfRow= () => getView === 'Desktop' ? pg_numberOfRow : getView === 'Tablet' ? pg_numberOfRowTablet : pg_numberOfRowMobile;
     const numberOfColumns= () => getView === 'Desktop' ? pg_postLayoutColumns : getView === 'Tablet' ? pg_postLayoutColumnsTablet : pg_postLayoutColumnsMobile;
-
-    const [filter, setFilter] = useState({ featuredImage: false, categories: []});
     
+    //load ppost
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -268,7 +268,6 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
     
-    
     return (
         <>
             <PanelSettings
@@ -288,6 +287,7 @@ const Edit = ({ attributes, setAttributes }) => {
                             {postsToShow.length > 0 ? (
                                 postsToShow.map((post) => (
                                     <div key={post.uniqueID} style={postStyle}>
+
                                         {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
                                             <div>
                                                 <img
