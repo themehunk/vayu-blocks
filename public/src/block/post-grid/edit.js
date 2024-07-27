@@ -213,7 +213,6 @@ const Edit = ({ attributes, setAttributes }) => {
     
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        // Fetch new data or perform necessary updates for the new page here
     };
     
     const limitExcerpt = (content, words) => {
