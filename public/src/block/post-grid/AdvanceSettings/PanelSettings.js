@@ -975,9 +975,6 @@ const getborderradiusHvr = type => {
 		}
 	};
 
-
-
-
 	const getBorderWidthHvrType = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -991,7 +988,6 @@ const getborderradiusHvr = type => {
 		}
 	};
 	
-
 	const changeBorderWidthHvrType = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ borderWidthHvrType: value, borderWidthHvrTypeTablet: value, borderWidthHvrTypeMobile: value });

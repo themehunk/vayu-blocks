@@ -1,6 +1,9 @@
 import { __ } from '@wordpress/i18n';
 import { useSelect } from "@wordpress/data";
-const blockStyles = (pg_textColor, pg_lineHeight) => ({
+import { useEffect } from "react";
+
+const blockStyles = () => ({
+
     maxWidth: "100%",
 });
 const gridContainerStyles = (attributes) => {

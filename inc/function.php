@@ -236,4 +236,18 @@ function vayu_blocks_get_input_values_callback($request) {
     ));
 }
 
+add_action('rest_api_init', function() {
+    add_filter('rest_post_query', 'vayu_blocks_filter_posts_with_featured_image', 10, 2);
+});
 
+function vayu_blocks_filter_posts_with_featured_image($args, $request) {
+    if (!empty($request['with_featured_image']) && $request['with_featured_image'] === 'true') {
+        $args['meta_query'] = array(
+            array(
+                'key' => '_thumbnail_id',
+                'compare' => 'EXISTS'
+            ),
+        );
+    }
+    return $args;
+}

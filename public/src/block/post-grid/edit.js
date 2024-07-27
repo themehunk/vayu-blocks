@@ -83,11 +83,12 @@ const Edit = ({ attributes, setAttributes }) => {
     const [totalPages, setTotalPages] = useState(1); 
     const [loading, setLoading] = useState(false);
     const [CurrentPage, setCurrentPage] = useState(1);
+    const [filter, setFilter] = useState({ featuredImage: false, categories: []});
 
     const TitleTag = pg_blockTitleTag || 'h2';
 
     //style
-    const blockStyle = blockStyles(pg_textColor, pg_lineHeight);
+    const blockStyle = blockStyles();
 
     const gridContainerStyle = gridContainerStyles(attributes);
     
@@ -107,7 +108,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postStyle = postStyles(attributes);
 
-     const authorAndDateContainerStyle = authorAndDateContainerStyles;
+    const authorAndDateContainerStyle = authorAndDateContainerStyles;
 
     const PaginationStyle = PaginationStyles(attributes);
     
@@ -115,7 +116,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const fullContentStyles = fullContentStyle(attributes);
 
-
+    //View
     const getView = useSelect( select => {
 		const { getView } = select( 'vayu-blocks/data' );
 		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
@@ -125,9 +126,8 @@ const Edit = ({ attributes, setAttributes }) => {
     
     const numberOfRow= () => getView === 'Desktop' ? pg_numberOfRow : getView === 'Tablet' ? pg_numberOfRowTablet : pg_numberOfRowMobile;
     const numberOfColumns= () => getView === 'Desktop' ? pg_postLayoutColumns : getView === 'Tablet' ? pg_postLayoutColumnsTablet : pg_postLayoutColumnsMobile;
-
-    const [filter, setFilter] = useState({ featuredImage: false, categories: []});
     
+    //load ppost
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -186,16 +186,16 @@ const Edit = ({ attributes, setAttributes }) => {
                     categoryNameToIdMap[categoryName] || null
                 ).filter(id => id !== null);
 
-                const allCategoriesFound = selectedCategories.every(categoryName =>
-                    categoryNameToIdMap[categoryName] !== undefined
-                );
+                // const allCategoriesFound = selectedCategories.every(categoryName =>
+                //     categoryNameToIdMap[categoryName] !== undefined
+                // );
 
-                if (!allCategoriesFound) {
-                    setLoading(true);
-                    return;
-                }else{
-                    setLoading(false);
-                }
+                // if (!allCategoriesFound) {
+                //     setLoading(true);
+                //     return;
+                // }else{
+                //     setLoading(false);
+                // }
                 // Update filter state with IDs and other parameters
                 setFilter(prevFilter => ({
                     ...prevFilter,
@@ -268,7 +268,6 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
     
-    
     return (
         <>
             <PanelSettings
@@ -279,102 +278,95 @@ const Edit = ({ attributes, setAttributes }) => {
             <AdvanceSettings attributes={attributes}>
             <>
                 {filteredPosts && filteredPosts.length > 0 ? (
-                    loading ? (
-                        <div>
-                            <h6>No post is their for selected category!</h6>
-                        </div>
-                    ) : (
-                        <div style={gridContainerStyle}>
-                            {postsToShow.length > 0 ? (
-                                postsToShow.map((post) => (
-                                    <div key={post.uniqueID} style={postStyle}>
-                                        {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
-                                            <div>
-                                                <img
-                                                    src={post._embedded['wp:featuredmedia'][0].source_url}
-                                                    alt="Featured"
-                                                    style={featuredImageStyle}
-                                                />
-                                            </div>
-                                        )}
+                    <div style={gridContainerStyle}>
+                        {postsToShow.length > 0 ? (
+                            postsToShow.map((post) => (
+                                <div key={post.uniqueID} style={postStyle}>
 
-                                        {Category() && (
-                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                                {post._embedded['wp:term'][0].slice(0, pg_numberOfCategories).map((category) => (
-                                                    <a key={category.id} href={category.link} style={categoryButtonStyle}>
-                                                        {category.name}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
-
+                                    {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
                                         <div>
-                                            
-                                            <TitleTag className="titletag" style={titleTagStyle}>
-                                                <a href={post.link} style={{ textDecoration: 'none' }}>
-                                                    {post.title.rendered}
-                                                </a>
-                                            </TitleTag>
-                                            
+                                            <img
+                                                src={post._embedded['wp:featuredmedia'][0].source_url}
+                                                alt="Featured"
+                                                style={featuredImageStyle}
+                                            />
                                         </div>
+                                    )}
 
-                                        {(Author() || ShowDate()) && (
-                                            <div style={authorAndDateContainerStyles}>
-                                                {Author() && (
-                                                    <>
-                                                        <img
-                                                            src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"
-                                                            alt="Author Logo"
-                                                            style={authorImageStyle}
-                                                        />
-                                                        <a
-                                                            href={post._embedded['author'][0].link}
-                                                            style={authorLinkStyle}
-                                                        >
-                                                            By {post._embedded['author'][0].name}
-                                                        </a>
-                                                    </>
-                                                )}
+                                    {Category() && (
+                                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                            {post._embedded['wp:term'][0].slice(0, pg_numberOfCategories).map((category) => (
+                                                <a key={category.id} href={category.link} style={categoryButtonStyle}>
+                                                    {category.name}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
 
-                                                {ShowDate() && (
-                                                    <>
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" />
-                                                        <span style={showOnlyDateStyle}>
-                                                            {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                        </span>
-                                                    </>
-                                                )}
-                                            </div>
-                                        )}
-
-                                        {Excerpt() && (
-                                            <div style={fullContentStyles}>
-                                                {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
-                                            </div>
-                                        )}
-
-                                        {FullContent() && (
-                                            <div style={fullContentStyles}>
-                                                {parseHTML(post.content.rendered)}
-                                            </div>
-                                        )}
-
-                                        {Tags() && (
-                                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
-                                                {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
-                                                    <a key={tag.id} href={tag.link} style={tagButtonStyle}>
-                                                        {tag.name}
-                                                    </a>
-                                                ))}
-                                            </div>
-                                        )}
+                                    <div>
+                                        <TitleTag className="titletag" style={titleTagStyle}>
+                                            <a href={post.link} style={{ textDecoration: 'none' }}>
+                                                {post.title.rendered}
+                                            </a>
+                                        </TitleTag>
                                     </div>
-                                ))
-                            ) : (
-                                <p>{__('No post to display', 'pg-block')}</p>
-                            )}
-                        </div>
-                    )
+
+                                    {(Author() || ShowDate()) && (
+                                        <div style={authorAndDateContainerStyles}>
+                                            {Author() && (
+                                                <>
+                                                    <img
+                                                        src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"
+                                                        alt="Author Logo"
+                                                        style={authorImageStyle}
+                                                    />
+                                                    <a
+                                                        href={post._embedded['author'][0].link}
+                                                        style={authorLinkStyle}
+                                                    >
+                                                        By {post._embedded['author'][0].name}
+                                                    </a>
+                                                </>
+                                            )}
+
+                                            {ShowDate() && (
+                                                <>
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" />
+                                                    <span style={showOnlyDateStyle}>
+                                                        {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {Excerpt() && (
+                                        <div style={fullContentStyles}>
+                                            {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
+                                        </div>
+                                    )}
+
+                                    {FullContent() && (
+                                        <div style={fullContentStyles}>
+                                            {parseHTML(post.content.rendered)}
+                                        </div>
+                                    )}
+
+                                    {Tags() && (
+                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                                            {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
+                                                <a key={tag.id} href={tag.link} style={tagButtonStyle}>
+                                                    {tag.name}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        ) : (
+                            <p>{__('No post to display', 'pg-block')}</p>
+                        )}
+                    </div>
                 ) : (
                     <>
                         <p>{__('Loading...', 'pg-block')}</p>
@@ -437,6 +429,7 @@ const Edit = ({ attributes, setAttributes }) => {
                     </div>
                 )}
             </>
+
 
             </AdvanceSettings>
         </>

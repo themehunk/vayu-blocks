@@ -32,8 +32,11 @@ class VayuBlocksPostGrid {
         }
     
         // Default sorting
-        $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'desc'; // Default to descending
-        $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'date'; // Default to 'date'
+        $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'DESC'; // Default to descending
+        $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'ID'; // Default to 'date'
+        if ($sortByField === 'id') {
+            $sortByField = strtoupper($sortByField);
+        }
         
         // Convert selected category names array to a comma-separated string
         $selectedCategoryNames = '';
@@ -47,7 +50,7 @@ class VayuBlocksPostGrid {
         $args = array(
             'post_type' => 'post',
             'orderby' => $sortByField, // Sorting field
-            'order' => $sortByOrder,   // Sorting order
+            'order' => strtoupper($sortByOrder),   // Sorting order
             'category_name' => $selectedCategoryNames,
             'posts_per_page' => $columns * $rows,
             'paged'=> $paged
