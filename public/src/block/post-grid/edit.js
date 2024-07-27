@@ -309,11 +309,13 @@ const Edit = ({ attributes, setAttributes }) => {
                                         )}
 
                                         <div>
-                                            <a href={post.link} style={{ textDecoration: 'none' }}>
-                                                <TitleTag className="titletag" style={titleTagStyle}>
+                                            
+                                            <TitleTag className="titletag" style={titleTagStyle}>
+                                                <a href={post.link} style={{ textDecoration: 'none' }}>
                                                     {post.title.rendered}
-                                                </TitleTag>
-                                            </a>
+                                                </a>
+                                            </TitleTag>
+                                            
                                         </div>
 
                                         {(Author() || ShowDate()) && (

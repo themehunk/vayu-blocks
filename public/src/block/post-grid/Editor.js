@@ -1759,9 +1759,9 @@ const handleGradientClick = () => {
 
 					{hover === 'normal' && (
 						<>
-							<div className="myclass">
-								<label className="components-base-control__label">{__('Color Type', 'vayu-blocks')}</label>
-								<ButtonGroup className="linking-controls">
+							<div className="myclasst">
+								<label className="components-base-control__labelt">{__('Color Type', 'vayu-blocks')}</label>
+								<ButtonGroup className="linking-controlst">
 									<Button
 										icon={<MdColorLens />}
 										label={__('Color', 'vayu-blocks')}
@@ -1807,9 +1807,9 @@ const handleGradientClick = () => {
 
 					{hover === 'hover' && (
 						<>
-							<div className="myclass">
-								<label className="components-base-control__label">{__('Color Type', 'vayu-blocks')}</label>
-								<ButtonGroup className="linking-controls">
+							<div className="myclasst">
+								<label className="components-base-control__labelt">{__('Color Type', 'vayu-blocks')}</label>
+								<ButtonGroup className="linking-controlst">
 									<Button
 										icon={<MdColorLens />}
 										label={__('Color', 'vayu-blocks')}

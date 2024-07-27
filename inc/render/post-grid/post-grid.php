@@ -18,7 +18,7 @@ class VayuBlocksPostGrid {
         $device_type = $this->get_device_type();
         $columns = $this->attr['pg_postLayoutColumns']; // Default value
         $rows = $this->attr['pg_numberOfRow']; // Default value
-
+    
         // Adjust columns and rows based on device type
         if ($device_type === 'Desktop') {
             $columns = isset($this->attr['pg_postLayoutColumns']) ? $this->attr['pg_postLayoutColumns'] : $columns;
@@ -30,49 +30,28 @@ class VayuBlocksPostGrid {
             $columns = isset($this->attr['pg_postLayoutColumnsMobile']) ? $this->attr['pg_postLayoutColumnsMobile'] : 1;
             $rows = isset($this->attr['pg_numberOfRowMobile']) ? $this->attr['pg_numberOfRowMobile'] : $rows;
         }
-
+    
         // Default sorting
         $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'desc'; // Default to descending
         $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'date'; // Default to 'date'
+        
+        // Convert selected category names array to a comma-separated string
+        $selectedCategoryNames = '';
+        if (!empty($this->attr['selectedCategories']) && is_array($this->attr['selectedCategories'])) {
+            $selectedCategoryNames = implode(',', array_map('sanitize_text_field', $this->attr['selectedCategories']));
+        }
 
-        // Initial query arguments
+        $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+
+        // Initial query arguments including category IDs if available
         $args = array(
             'post_type' => 'post',
             'orderby' => $sortByField, // Sorting field
             'order' => $sortByOrder,   // Sorting order
+            'category_name' => $selectedCategoryNames,
+            'posts_per_page' => $columns * $rows,
+            'paged'=> $paged
         );
-
-        if (!empty($this->attr['pg_selectedCategory'])) {
-            $args['cat'] = $this->attr['pg_selectedCategory'];
-        }
-
-        if (!empty($this->attr['pg_selectedTag'])) {
-            $args['tag_id'] = $this->attr['pg_selectedTag'];
-        }
-
-        // Filtering by categories using tax_query for AND condition
-        if (!empty($this->attr['selectedCategories']) && is_array($this->attr['selectedCategories'])) {
-            $selectedCategoryNames = array_map('sanitize_text_field', $this->attr['selectedCategories']); // Sanitize input
-            $category_ids = array();
-
-            foreach ($selectedCategoryNames as $category_name) {
-                $category = get_term_by('name', $category_name, 'category');
-                if ($category) {
-                    $category_ids[] = $category->term_id;
-                }
-            }
-            if (!empty($category_ids)) {
-                $args['tax_query'] = array(
-                    array(
-                        'taxonomy' => 'category',
-                        'field'    => 'term_id',
-                        'terms'    => $category_ids,
-                        'operator' => 'AND',
-                    ),
-                );
-            }
-        }
-
         // If filtering by featured image is enabled
         if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
             $args['meta_query'] = array(
@@ -82,34 +61,13 @@ class VayuBlocksPostGrid {
                 )
             );
         }
-
-        // Fetch posts with the current query arguments
-        $all_posts_query = new WP_Query($args);
-        $all_posts = $all_posts_query->posts;
-
-        // Count total posts for pagination
-        $total_posts_count = $all_posts_query->found_posts;
-
-        // Pagination arguments
-        $args['posts_per_page'] = $columns * $rows; // Items per page
-        $args['paged'] = $paged; // Current page
-
-        // Calculate total pages based on total count
-        $total_pages = ceil($total_posts_count / $args['posts_per_page']);
-
-        // If current page is greater than the total number of pages, set to the last page
-        if ($paged > $total_pages) {
-            $paged = $total_pages;
-            $args['paged'] = $paged;
-        }
-
-        // Create a new WP_Query with updated pagination arguments
+    
         $query = new WP_Query($args);
-
+    
         // Return the WP_Query object
         return $query;
     }
-    
+
     public function render($query) {
         ob_start();
             while ($query->have_posts()) {
@@ -119,37 +77,64 @@ class VayuBlocksPostGrid {
         return ob_get_clean();
     }
 
-    public function render_pagination($query, $paged) {
+    // public function render_pagination($query, $paged) {
+    //     if (!isset($this->attr['showpagination']) || !$this->attr['showpagination']) {
+    //         return ''; // Return an empty string if pagination should not be shown
+    //     }
+    //     // Pagination settings
+    //     $pagination_args = array(
+    //         'total'         => $query->max_num_pages,
+    //         'current'       => max(1,$paged),
+    //         'prev_next'     => true,
+    //         'prev_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
+    //         'next_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
+    //         'end_size'      => 3,  // Number of page numbers to show at the beginning and end
+    //         'mid_size'      => 0,  // Number of page numbers to show around the current page
+    //         'type'          => 'plain',
+    //         'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
+    //         'after_page_number' => '</span>',
+    //     );
+    
+    //     // Generate pagination links
+    //     $pagination_links = paginate_links($pagination_args);
+
+    //     // Wrap pagination links in a div
+    //     $pagination = '<div class="pagination" style="margin-top: 20px; text-align: center;">';
+    //     $pagination .= $pagination_links;
+    //     $pagination .= '</div>';
+    //     // Add a hidden input for max pages
+    //     $pagination .= '<input type="hidden" id="max-pages" value="' . $query->max_num_pages . '">';
+    
+    //     return $pagination;
+    // }
+
+    public function render_pagination($query) {
+        // Retrieve the current page number from the query var
+        $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+    
+        // Return early if pagination should not be shown
         if (!isset($this->attr['showpagination']) || !$this->attr['showpagination']) {
             return ''; // Return an empty string if pagination should not be shown
         }
+    
         // Pagination settings
         $pagination_args = array(
             'total'         => $query->max_num_pages,
-            'current'       => max(1,$paged),
+            'current'       => max(1, $paged),
             'prev_next'     => true,
-            'prev_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
-            'next_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
+            'prev_text'     => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
+            'next_text'     => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
             'end_size'      => 2,  // Number of page numbers to show at the beginning and end
             'mid_size'      => 2,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
-            'after_page_number' => '</span>',
+            'after_page_number'  => '</span>',
+            'add_args'      => false, // Don't add extra args to the pagination URLs
         );
     
-        // Generate pagination links
-        $pagination_links = paginate_links($pagination_args);
-        
-
-        // Wrap pagination links in a div
-        $pagination = '<div class="pagination">';
-        $pagination .= $pagination_links;
-        $pagination .= '</div>';
-        // Add a hidden input for max pages
-        $pagination .= '<input type="hidden" id="max-pages" value="' . $query->max_num_pages . '">';
-    
-        return $pagination;
-    }
+        // Generate and return pagination
+        return paginate_links($pagination_args);
+    } 
     
     private function render_post() {
         $post_id = get_the_ID();
@@ -427,7 +412,9 @@ function post_grid_render($attr) {
     
     $renderer = new VayuBlocksPostGrid($attr);
 
-    $query = $renderer->get_posts(1);
+    // Get the current page number from the query variable or default to 1
+    
+    $query = $renderer->get_posts($paged=1); // Load posts for the current page
 
     if ($query->have_posts()) {
         $className = '';
@@ -436,58 +423,59 @@ function post_grid_render($attr) {
                 $className = $attr['widthType'];
             }
         }
-        $return = '<div class="' . esc_attr($className) . '" >';
-        $return .= '<div >';
-        $return .=  '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
+        $return = '<div class="' . esc_attr($className) . '">';
+        $return .= '<div>';
+        $return .= '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
        
         $return .= $renderer->render($query);
 
         $return .= '</div>';
 
         // Add pagination outside the wrapper div
-        $return .= '<div class="pagination">' . $renderer->render_pagination($query, 1) . '</div>';        // Render pagination controls
+        $return .= '<div class="pagination">' . $renderer->render_pagination($query, $paged) . '</div>'; // Render pagination controls
         $return .= '</div>';
         $return .= '</div>';
         wp_reset_postdata();
     } else {
-        echo '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';
+        $return = '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';
     }
 
     return $return;
-
-} 
-
-function enqueue_my_scripts() {
-    wp_enqueue_script('my-script', plugins_url('../../../public/src/block/post-grid/view.js', __FILE__), array('jquery'), '1.0', true);
-    global $post_grid_attributes; // Make sure this is set
-    wp_localize_script('my-script', 'postGridAttributes', $post_grid_attributes);
-
-    wp_localize_script('my-script', 'postGridAjax', array(
-        'ajaxurl' => admin_url('admin-ajax.php')
-    ));
 }
 
-add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
+// function enqueue_my_scripts() {
+//     wp_enqueue_script('my-script', plugins_url('../../public/src/block/view.js', __FILE__), array('jquery'), '1.0', true);
+
+//     global $post_grid_attributes; // Make sure this is set
+//     wp_localize_script('my-script', 'postGridAttributes', $post_grid_attributes);
+
+//     wp_localize_script('my-script', 'postGridAjax', array(
+//         'ajaxurl' => admin_url('admin-ajax.php')
+//     ));
+// }
+
+// add_action('wp_enqueue_scripts', 'enqueue_my_scripts');
 
 
-function load_posts() {
-    if (!isset($_POST['page'])) {
-        wp_die();
-    }
-    $paged = intval($_POST['page']);
-    global $post_grid_attributes;
+// function load_posts() {
+//     if (!isset($_POST['page'])) {
+//         wp_die();
+//     }
+//     $paged = intval($_POST['page']);
+//     global $post_grid_attributes;
 
-    if (isset($_POST['attr'])) {
-        $post_grid_attributes = $_POST['attr'];
-    }
-
-    $renderer = new VayuBlocksPostGrid($post_grid_attributes);
-    $query = $renderer->get_posts($paged);
-   echo $renderer->render_pagination($query, $paged);
-    echo $renderer->render($query);
+//     if (isset($_POST['attr'])) {
+//         $post_grid_attributes = $_POST['attr'];
+//     }
+//     $renderer = new VayuBlocksPostGrid($post_grid_attributes);
+//     $query = $renderer->get_posts($paged);
+//     echo $renderer->render_pagination($query, $paged);
+//     echo $renderer->render($query);
    
-    wp_die();
-}
+//     wp_die();
+// }
 
-add_action('wp_ajax_load_posts', 'load_posts');
-add_action('wp_ajax_nopriv_load_posts', 'load_posts');
+// add_action('wp_ajax_load_posts', 'load_posts');
+// add_action('wp_ajax_nopriv_load_posts', 'load_posts');
+
+

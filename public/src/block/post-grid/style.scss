@@ -1,9 +1,3 @@
-// .post-grid-featured-image{
-//     display: flex;
-//     align-items: center;
-//     flex-wrap:wrap;
-// }
-
 .pagination{
     margin-top: 20px; 
     text-align: center;
@@ -16,6 +10,7 @@
 
 .page-numbers.current .page-numbers {
     background-color: blue;
+    color:white;
 }
 
 .post-grid-tag-style-container {

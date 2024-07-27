@@ -4,55 +4,13 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-post_blockk {
-	border: 1px dotted #f00;
-}
-
-.parent{
-	display: grid;
-	max-width: 100%;
-	grid-auto-rows: minmax(auto, auto);					
-}
-
-.ubl-switcher-bg-clr-gradient {
-	display: flex;
-	margin: 12px 0;
-	position: relative;
-	border: 1px solid #504f4f;
-	padding: 4px;
-	border-radius: 2px;
-}
-
-.switch-option {
-	padding: 8px 12px;
-	cursor: pointer;
-	transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.switch-option.selected {
-	color: #fff;
-	
-}
-
-.bg-span {
-	background-color: #000;
-	width: 49%;
-	position: absolute;
-	top: 2px;
-	height: calc(100% - 4px);
-	border-radius: 2px;
-	transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) all 0.2s ease;
-}
-
-
 .pg-pagination-button {
 	transition: left 0.5s ease-in-out;
 }
 
-.active {
-	background-color: blue !important;
+.pg-pagination .active{
+    background-color:blue !important;
 }
-
 
 .pg-pagination-button:hover {
     background-color: rgba(0, 0, 255, 0.851)  !important; /* Light grey background on hover */
@@ -60,29 +18,29 @@
 	color:white !important;
 }
 
-.myclass{
+.myclasst{
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
 }
-.components-base-control__label{
+.components-base-control__labelt{
 	padding: 5px 0;
 	font-weight: 800;
   }
   
-.linking-controls {
+.linking-controlst {
 	display: flex;
 	opacity: 0.2;
   }
-.linking-controls button {
+.linking-controlst button {
 	width: 20px;
 	cursor: pointer;
 	height: 25px;
   }
-.linking-controls button svg {
+.linking-controlst button svg {
 	width: 20px;
   }
-.linking-controls button.is-primary {
+.linking-controlst button.is-primary {
 	background: #6c1bc3a8;
 	box-shadow: none !important;
 }
