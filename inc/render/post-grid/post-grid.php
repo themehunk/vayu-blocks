@@ -52,7 +52,6 @@ class VayuBlocksPostGrid {
             'posts_per_page' => $columns * $rows,
             'paged'=> $paged
         );
-    
         // If filtering by featured image is enabled
         if (!empty($this->attr['pg_featuredImageOnly']) && $this->attr['pg_featuredImageOnly']) {
             $args['meta_query'] = array(
