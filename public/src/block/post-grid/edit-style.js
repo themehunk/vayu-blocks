@@ -1,12 +1,11 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from "@wordpress/data";
 import { useEffect } from "react";
 
 const blockStyles = () => ({
+
     maxWidth: "100%",
 });
-
 const gridContainerStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
