@@ -8,7 +8,7 @@
  
   "widthType": {
     "type": "string",
-    "default": "default"
+    "default": "alignwide"
   },
   "customWidthUnit": {
     "type": "string",

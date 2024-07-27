@@ -190,10 +190,6 @@ const {
 	pg_categoryBorderRadius,
 	pg_categoryBorder,
 	pg_categoryBorderColor,
-	pg_categoryPaddingTop,
-	pg_categoryPaddingBottom,
-	pg_categoryPaddingLeft,
-	pg_categoryPaddingRight,
 	pg_showTags,
 	pg_tagTextSize,
 	pg_tagTextColor,
@@ -1735,10 +1731,12 @@ const handleGradientClick = () => {
 					label={__('Title Tag', 'text-domain')}
 					value={attributes.pg_blockTitleTag}
 					options={[
-						{ label: __('Heading 1', 'text-domain'), value: 'h1' },
-						{ label: __('Heading 2', 'text-domain'), value: 'h2' },
-						{ label: __('Heading 3', 'text-domain'), value: 'h3' },
-						{ label: __('Heading 4', 'text-domain'), value: 'h4' },
+						{ label: __('h1', 'text-domain'), value: 'h1' },
+						{ label: __('h2', 'text-domain'), value: 'h2' },
+						{ label: __('h3', 'text-domain'), value: 'h3' },
+						{ label: __('h4', 'text-domain'), value: 'h4' },
+						{ label: __('h5', 'text-domain'), value: 'h5' },
+						{ label: __('h6', 'text-domain'), value: 'h6' },
 					]}
 					onChange={(value) => setAttributes({ pg_blockTitleTag: value })}
 				/>

@@ -10,9 +10,6 @@ class VayuBlocksPostGrid {
 
     public function __construct($attr) {
         $this->attr = $attr;
-        $default_attributes = include('defaultattributes.php');
-        $this->attr = array_merge($default_attributes, $attr);  
-
         global $post_grid_attributes;
         $post_grid_attributes = $this->attr;
     }
@@ -134,7 +131,7 @@ class VayuBlocksPostGrid {
             'prev_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&laquo;</span>',
             'next_text' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">&raquo;</span>',
             'end_size'      => 2,  // Number of page numbers to show at the beginning and end
-            'mid_size'      => 1,  // Number of page numbers to show around the current page
+            'mid_size'      => 2,  // Number of page numbers to show around the current page
             'type'          => 'plain',
             'before_page_number' => '<span class="page-numbers page-numbers-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">',
             'after_page_number' => '</span>',
@@ -142,6 +139,7 @@ class VayuBlocksPostGrid {
     
         // Generate pagination links
         $pagination_links = paginate_links($pagination_args);
+        
 
         // Wrap pagination links in a div
         $pagination = '<div class="pagination">';
@@ -423,6 +421,8 @@ class VayuBlocksPostGrid {
 
 
 function post_grid_render($attr) {
+    $default_attributes = include('defaultattributes.php');
+    $attr = array_merge($default_attributes, $attr); 
     $animated = isset($attr['className']) ? $attr['className'] : '';
     
     $renderer = new VayuBlocksPostGrid($attr);
@@ -436,11 +436,10 @@ function post_grid_render($attr) {
                 $className = $attr['widthType'];
             }
         }
-
         $return = '<div class="' . esc_attr($className) . '" >';
         $return .= '<div >';
         $return .=  '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
-
+       
         $return .= $renderer->render($query);
 
         $return .= '</div>';
@@ -459,8 +458,7 @@ function post_grid_render($attr) {
 } 
 
 function enqueue_my_scripts() {
-    wp_enqueue_script('my-script', plugins_url('../../../public/src//block/post-grid/view.js', __FILE__), array('jquery'), '1.0', true);
-
+    wp_enqueue_script('my-script', plugins_url('../../../public/src/block/post-grid/view.js', __FILE__), array('jquery'), '1.0', true);
     global $post_grid_attributes; // Make sure this is set
     wp_localize_script('my-script', 'postGridAttributes', $post_grid_attributes);
 
