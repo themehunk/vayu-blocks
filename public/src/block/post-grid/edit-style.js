@@ -43,7 +43,7 @@ const gridContainerStyles = (attributes) => {
         display: 'grid',
         ...layoutColumnsStyle,
         ...gapStyle,
-        maxWidth: '100%',
+        width: attributes.widthType === 'default' ? `${attributes.globalwidth}px` : '100%',
         gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
@@ -325,15 +325,42 @@ const titleTagStyles = (attributes) => {
     return styles;
 };
 
+const titleTagStylesatag = (attributes) => {
+    // Initialize the base style object
+
+    const styles = {
+        textDecoration: 'none',
+    };
+
+    // Conditionally add styles based on titlechoice
+    if (attributes.titlechoice === 'color') {
+        styles.color = attributes.pg_TitleColor;
+    } else if (attributes.titlechoice === 'gradient') {
+        styles.background = `${attributes.pg_TitleColor} text` ;
+        styles.WebkitTextFillColor = 'transparent';
+        styles.WebkitBackgroundClip = 'text';
+        styles.backgroundClip = 'text';
+    }
+
+    return styles;
+};
+
 //Author
 const authorAndDateContainerStyles = {
     display: 'flex', 
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexWrap:'wrap',
+};
+
+const dateSectionStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap', 
 };
 
 const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImageScale) => ({
     width: '20px',
+    alignItems: 'center',
     borderRadius:"50%",
     transform: `scale(${pg_authorImageScale})`,
 
@@ -531,7 +558,7 @@ const PaginationStyles = (attributes) => {
         ...BorderRadiusStyles,
         cursor:'pointer',
         fontSize: `${attributes.pg_PaginationSize}px`,
-        color: `${attributes.pg_PaginationColor}`,
+        color: `${attributes.pg_PaginationColor} !important`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
         margin: '20px 5px',
 
@@ -540,11 +567,6 @@ const PaginationStyles = (attributes) => {
         borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'blue'}`,
         borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'blue'}`,
         borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'blue'}`,
-        ':hover': {
-            background: `red`, // Change background color on hover
-            color: `white`, // Change text color on hover
-            // Add other hover styles like border changes, text shadow, etc.
-          },
     };
 };
 
@@ -557,11 +579,13 @@ export {
     fullContentStyle,
     showOnlyDateStyles,
     authorAndDateContainerStyles,
+    dateSectionStyles,
     tagButtonStyles,
     authorImageStyles,
     titleTagStyles,
     categoryButtonStyles,
     featuredImageStyles,
     authorLinkStyles,
-    dateImageStyles
+    dateImageStyles,
+    titleTagStylesatag
 };

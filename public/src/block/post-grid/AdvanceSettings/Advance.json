@@ -5,10 +5,12 @@
   "uniqueID": {
     "type": "string"
   },
- 
+ "globalwidth":{
+  "type":"number"
+ },
   "widthType": {
     "type": "string",
-    "default": "alignwide"
+    "default": "default"
   },
   "customWidthUnit": {
     "type": "string",

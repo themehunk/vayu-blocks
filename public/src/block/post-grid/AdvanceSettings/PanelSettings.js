@@ -36,9 +36,7 @@ import {
 	IconPicker,
 	GoogleFontsControl
 } from '../../../components/index.js';
-import { alignitemstr,alignitemcnt,alignitemend,alignitemstrech, Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../helpers/icon.js';
 
-import Select from 'react-select';
 
 const PanelSettings = ({
     attributes,
@@ -381,83 +379,83 @@ const PanelSettings = ({
 	right: 'buttonpaddingRight',
 	bottom: 'buttonpaddingBottom',
 	left: 'buttonpaddingLeft'
-  };
-  
-  const tabletPaddingButtonType = {
-	top: 'buttonpaddingTopTablet',
-	right: 'buttonpaddingRightTablet',
-	bottom: 'buttonpaddingBottomTablet',
-	left: 'buttonpaddingLeftTablet'
-  };
-  
-  const mobilePaddingButtonType = {
-	top: 'buttonpaddingTopMobile',
-	right: 'buttonpaddingRightMobile',
-	bottom: 'buttonpaddingBottomMobile',
-	left: 'buttonpaddingLeftMobile'
-  };
-  
-  const getPaddingButtonType = () => {
-	switch (getView) {
-	  case 'Desktop':
-		return attributes.buttonpaddingType;
-	  case 'Tablet':
-		return attributes.buttonpaddingTypeTablet;
-	  case 'Mobile':
-		return attributes.buttonpaddingTypeMobile;
-	  default:
+	};
+	
+	const tabletPaddingButtonType = {
+		top: 'buttonpaddingTopTablet',
+		right: 'buttonpaddingRightTablet',
+		bottom: 'buttonpaddingBottomTablet',
+		left: 'buttonpaddingLeftTablet'
+	};
+	
+	const mobilePaddingButtonType = {
+		top: 'buttonpaddingTopMobile',
+		right: 'buttonpaddingRightMobile',
+		bottom: 'buttonpaddingBottomMobile',
+		left: 'buttonpaddingLeftMobile'
+	};
+	
+	const getPaddingButtonType = () => {
+		switch (getView) {
+		case 'Desktop':
+			return attributes.buttonpaddingType;
+		case 'Tablet':
+			return attributes.buttonpaddingTypeTablet;
+		case 'Mobile':
+			return attributes.buttonpaddingTypeMobile;
+		default:
+			return undefined;
+		}
+	};
+	
+	const changePaddingButtonType = value => {
+		if ('Desktop' === getView) {
+		setAttributes({ buttonpaddingType: value });
+		} else if ('Tablet' === getView) {
+		setAttributes({ buttonpaddingTypeTablet: value });
+		} else if ('Mobile' === getView) {
+		setAttributes({ buttonpaddingTypeMobile: value });
+		}
+	};
+	
+	const changeButtonPadding = (type, value) => {
+		switch (getView) {
+		case 'Desktop':
+			if ('linked' === attributes.buttonpaddingType) {
+			setAttributes({ buttonpadding: value,buttonpaddingTop:value,buttonpaddingBottom:value,buttonpaddingLeft:value,buttonpaddingRight:value });
+			} else {
+			setAttributes({ [desktopPaddingButtonType[type]]: value });
+			}
+			break;
+		case 'Tablet':
+			if ('linked' === attributes.buttonpaddingTypeTablet) {
+			setAttributes({ buttonpaddingTablet: value,buttonpaddingTopTablet:value,buttonpaddingBottomablet:value,buttonpaddingLeftablet:value,buttonpaddingRightablet:value });
+			} else {
+			setAttributes({ [tabletPaddingButtonType[type]]: value });
+			}
+			break;
+		case 'Mobile':
+			if ('linked' === attributes.buttonpaddingTypeMobile) {
+				setAttributes({ buttonpaddingMobile: value,buttonpaddingTopMobile:value,buttonpaddingBottomablet:value,buttonpaddingLefMobile:value,buttonpaddingRighMobile:value });
+			} else {
+			setAttributes({ [mobilePaddingButtonType[type]]: value });
+			}
+			break;
+		}
+	};
+	
+	const getButtonPadding = type => {
+		switch (getView) {
+				case 'Desktop':
+					return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes[desktopPaddingButtonType[type]];
+				case 'Tablet':
+					return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes[tabletPaddingButtonType[type]];
+				case 'Mobile':
+					return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
+		}
 		return undefined;
-	}
-  };
-  
-  const changePaddingButtonType = value => {
-	if ('Desktop' === getView) {
-	  setAttributes({ buttonpaddingType: value });
-	} else if ('Tablet' === getView) {
-	  setAttributes({ buttonpaddingTypeTablet: value });
-	} else if ('Mobile' === getView) {
-	  setAttributes({ buttonpaddingTypeMobile: value });
-	}
-  };
-  
-  const changeButtonPadding = (type, value) => {
-	switch (getView) {
-	  case 'Desktop':
-		if ('linked' === attributes.buttonpaddingType) {
-		  setAttributes({ buttonpadding: value,buttonpaddingTop:value,buttonpaddingBottom:value,buttonpaddingLeft:value,buttonpaddingRight:value });
-		} else {
-		  setAttributes({ [desktopPaddingButtonType[type]]: value });
-		}
-		break;
-	  case 'Tablet':
-		if ('linked' === attributes.buttonpaddingTypeTablet) {
-		  setAttributes({ buttonpaddingTablet: value,buttonpaddingTopTablet:value,buttonpaddingBottomablet:value,buttonpaddingLeftablet:value,buttonpaddingRightablet:value });
-		} else {
-		  setAttributes({ [tabletPaddingButtonType[type]]: value });
-		}
-		break;
-	  case 'Mobile':
-		if ('linked' === attributes.buttonpaddingTypeMobile) {
-			setAttributes({ buttonpaddingMobile: value,buttonpaddingTopMobile:value,buttonpaddingBottomablet:value,buttonpaddingLefMobile:value,buttonpaddingRighMobile:value });
-		} else {
-		  setAttributes({ [mobilePaddingButtonType[type]]: value });
-		}
-		break;
-	}
-  };
-  
-const getButtonPadding = type => {
-	switch (getView) {
-			case 'Desktop':
-				return 'linked' === attributes.buttonpaddingType ? attributes.buttonpadding : attributes[desktopPaddingButtonType[type]];
-			case 'Tablet':
-				return 'linked' === attributes.buttonpaddingTypeTablet ? attributes.buttonpaddingTablet : attributes[tabletPaddingButtonType[type]];
-			case 'Mobile':
-				return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
-		}
-		return undefined;
-};
-  
+	};
+	
 	//Z Index
 	const customTooltipZindex = value => `${value}px`
 
@@ -499,233 +497,233 @@ const getButtonPadding = type => {
 	};
 
 
-//border radius
-const desktopborderradiusType = {
-	top: 'borderradiusTop',
-	right: 'borderradiusRight',
-	bottom: 'borderradiusBottom',
-	left: 'borderradiusLeft'
-};
+	//border radius
+	const desktopborderradiusType = {
+		top: 'borderradiusTop',
+		right: 'borderradiusRight',
+		bottom: 'borderradiusBottom',
+		left: 'borderradiusLeft'
+	};
 
-const tabletborderradiusType = {
-	top: 'borderradiusTopTablet',
-	right: 'borderradiusRightTablet',
-	bottom: 'borderradiusBottomTablet',
-	left: 'borderradiusLeftTablet'
-};
+	const tabletborderradiusType = {
+		top: 'borderradiusTopTablet',
+		right: 'borderradiusRightTablet',
+		bottom: 'borderradiusBottomTablet',
+		left: 'borderradiusLeftTablet'
+	};
 
-const mobileborderradiusType = {
-	top: 'borderradiusTopMobile',
-	right: 'borderradiusRightMobile',
-	bottom: 'borderradiusBottomMobile',
-	left: 'borderradiusLeftMobile'
-};
+	const mobileborderradiusType = {
+		top: 'borderradiusTopMobile',
+		right: 'borderradiusRightMobile',
+		bottom: 'borderradiusBottomMobile',
+		left: 'borderradiusLeftMobile'
+	};
 
-const getborderradiusType = () => {
-	switch (getView) {
-		case 'Desktop':
-			return attributes.borderradiusType;
-		case 'Tablet':
-			return attributes.borderradiusTypeTablet;
-		case 'Mobile':
-			return attributes.borderradiusTypeMobile;
-		default:
-			return undefined;
-	}
-};
+	const getborderradiusType = () => {
+		switch (getView) {
+			case 'Desktop':
+				return attributes.borderradiusType;
+			case 'Tablet':
+				return attributes.borderradiusTypeTablet;
+			case 'Mobile':
+				return attributes.borderradiusTypeMobile;
+			default:
+				return undefined;
+		}
+	};
 
-const changeborderradiusType = value => {
-	if ('Desktop' === getView) {
-		setAttributes({ borderradiusType: value, borderradiusTypeTablet: value, borderradiusTypeMobile: value });
-	} else if ('Tablet' === getView) {
-		setAttributes({ borderradiusTypeTablet: value });
-	} else if ('Mobile' === getView) {
-		setAttributes({ borderradiusTypeMobile: value });
-	}
-};
+	const changeborderradiusType = value => {
+		if ('Desktop' === getView) {
+			setAttributes({ borderradiusType: value, borderradiusTypeTablet: value, borderradiusTypeMobile: value });
+		} else if ('Tablet' === getView) {
+			setAttributes({ borderradiusTypeTablet: value });
+		} else if ('Mobile' === getView) {
+			setAttributes({ borderradiusTypeMobile: value });
+		}
+	};
 
-const changeborderradius = (type, value) => {
-	switch (getView) {
-		case 'Desktop':
-			if ('linked' === attributes.borderradiusType) {
-				setAttributes({ borderradius: value, borderradiusTop: value, borderradiusRight: value, borderradiusBottom: value, borderradiusLeft: value });
-			} else {
-				setAttributes({ [desktopborderradiusType[type]]: value });
-			}
-			break;
-		case 'Tablet':
-			if ('linked' === attributes.borderradiusTypeTablet) {
-				setAttributes({ borderradiusTopTablet: value, borderradiusRightTablet: value, borderradiusBottomTablet: value, borderradiusLeftTablet: value });
-			} else {
-				setAttributes({ [tabletborderradiusType[type]]: value });
-			}
-			break;
-		case 'Mobile':
-			if ('linked' === attributes.borderradiusTypeMobile) {
-				setAttributes({ borderradiusTopMobile: value, borderradiusRightMobile: value, borderradiusBottomMobile: value, borderradiusLeftMobile: value });
-			} else {
-				setAttributes({ [mobileborderradiusType[type]]: value });
-			}
-			break;
-	}
-};
+	const changeborderradius = (type, value) => {
+		switch (getView) {
+			case 'Desktop':
+				if ('linked' === attributes.borderradiusType) {
+					setAttributes({ borderradius: value, borderradiusTop: value, borderradiusRight: value, borderradiusBottom: value, borderradiusLeft: value });
+				} else {
+					setAttributes({ [desktopborderradiusType[type]]: value });
+				}
+				break;
+			case 'Tablet':
+				if ('linked' === attributes.borderradiusTypeTablet) {
+					setAttributes({ borderradiusTopTablet: value, borderradiusRightTablet: value, borderradiusBottomTablet: value, borderradiusLeftTablet: value });
+				} else {
+					setAttributes({ [tabletborderradiusType[type]]: value });
+				}
+				break;
+			case 'Mobile':
+				if ('linked' === attributes.borderradiusTypeMobile) {
+					setAttributes({ borderradiusTopMobile: value, borderradiusRightMobile: value, borderradiusBottomMobile: value, borderradiusLeftMobile: value });
+				} else {
+					setAttributes({ [mobileborderradiusType[type]]: value });
+				}
+				break;
+		}
+	};
 
-const getborderradius = type => {
-	switch (type) {
-		case 'top':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusType ? attributes.borderradiusTop : attributes.borderradiusTop;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusTopTablet : attributes.borderradiusTopTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusTopMobile : attributes.borderradiusTopMobile;
-			}
-		case 'right':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusType ? attributes.borderradiusRight : attributes.borderradiusRight;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusRightTablet : attributes.borderradiusRightTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusRightMobile : attributes.borderradiusRightMobile;
-			}
-		case 'bottom':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusType ? attributes.borderradiusBottom : attributes.borderradiusBottom;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusBottomTablet : attributes.borderradiusBottomTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusBottomMobile : attributes.borderradiusBottomMobile;
-			}
-		case 'left':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusType ? attributes.borderradiusLeft : attributes.borderradiusLeft;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusLeftTablet : attributes.borderradiusLeftTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusLeftMobile : attributes.borderradiusLeftMobile;
-			}
-	}
+	const getborderradius = type => {
+		switch (type) {
+			case 'top':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusType ? attributes.borderradiusTop : attributes.borderradiusTop;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusTopTablet : attributes.borderradiusTopTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusTopMobile : attributes.borderradiusTopMobile;
+				}
+			case 'right':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusType ? attributes.borderradiusRight : attributes.borderradiusRight;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusRightTablet : attributes.borderradiusRightTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusRightMobile : attributes.borderradiusRightMobile;
+				}
+			case 'bottom':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusType ? attributes.borderradiusBottom : attributes.borderradiusBottom;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusBottomTablet : attributes.borderradiusBottomTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusBottomMobile : attributes.borderradiusBottomMobile;
+				}
+			case 'left':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusType ? attributes.borderradiusLeft : attributes.borderradiusLeft;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusTypeTablet ? attributes.borderradiusLeftTablet : attributes.borderradiusLeftTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusTypeMobile ? attributes.borderradiusLeftMobile : attributes.borderradiusLeftMobile;
+				}
+		}
 
-	return undefined;
-};
+		return undefined;
+	};
 
-//border radius Hvr
-const desktopborderradiusHvrType = {
-	top: 'borderradiusHvrTop',
-	right: 'borderradiusHvrRight',
-	bottom: 'borderradiusHvrBottom',
-	left: 'borderradiusHvrLeft'
-};
+	//border radius Hvr
+	const desktopborderradiusHvrType = {
+		top: 'borderradiusHvrTop',
+		right: 'borderradiusHvrRight',
+		bottom: 'borderradiusHvrBottom',
+		left: 'borderradiusHvrLeft'
+	};
 
-const tabletborderradiusHvrType = {
-	top: 'borderradiusHvrTopTablet',
-	right: 'borderradiusHvrRightTablet',
-	bottom: 'borderradiusHvrBottomTablet',
-	left: 'borderradiusHvrLeftTablet'
-};
+	const tabletborderradiusHvrType = {
+		top: 'borderradiusHvrTopTablet',
+		right: 'borderradiusHvrRightTablet',
+		bottom: 'borderradiusHvrBottomTablet',
+		left: 'borderradiusHvrLeftTablet'
+	};
 
-const mobileborderradiusHvrType = {
-	top: 'borderradiusHvrTopMobile',
-	right: 'borderradiusHvrRightMobile',
-	bottom: 'borderradiusHvrBottomMobile',
-	left: 'borderradiusHvrLeftMobile'
-};
+	const mobileborderradiusHvrType = {
+		top: 'borderradiusHvrTopMobile',
+		right: 'borderradiusHvrRightMobile',
+		bottom: 'borderradiusHvrBottomMobile',
+		left: 'borderradiusHvrLeftMobile'
+	};
 
-const getborderradiusHvrType = () => {
-	switch (getView) {
-		case 'Desktop':
-			return attributes.borderradiusHvrType;
-		case 'Tablet':
-			return attributes.borderradiusHvrTypeTablet;
-		case 'Mobile':
-			return attributes.borderradiusHvrTypeMobile;
-		default:
-			return undefined;
-	}
-};
+	const getborderradiusHvrType = () => {
+		switch (getView) {
+			case 'Desktop':
+				return attributes.borderradiusHvrType;
+			case 'Tablet':
+				return attributes.borderradiusHvrTypeTablet;
+			case 'Mobile':
+				return attributes.borderradiusHvrTypeMobile;
+			default:
+				return undefined;
+		}
+	};
 
-const changeborderradiusHvrType = value => {
-	if ('Desktop' === getView) {
-		setAttributes({ borderradiusHvrType: value, borderradiusHvrTypeTablet: value, borderradiusHvrTypeMobile: value });
-	} else if ('Tablet' === getView) {
-		setAttributes({ borderradiusHvrTypeTablet: value });
-	} else if ('Mobile' === getView) {
-		setAttributes({ borderradiusHvrTypeMobile: value });
-	}
-};
+	const changeborderradiusHvrType = value => {
+		if ('Desktop' === getView) {
+			setAttributes({ borderradiusHvrType: value, borderradiusHvrTypeTablet: value, borderradiusHvrTypeMobile: value });
+		} else if ('Tablet' === getView) {
+			setAttributes({ borderradiusHvrTypeTablet: value });
+		} else if ('Mobile' === getView) {
+			setAttributes({ borderradiusHvrTypeMobile: value });
+		}
+	};
 
-const changeborderradiusHvr = (type, value) => {
-	switch (getView) {
-		case 'Desktop':
-			if ('linked' === attributes.borderradiusHvrType) {
-				setAttributes({ borderradiusHvr: value, borderradiusHvrTop: value, borderradiusHvrRight: value, borderradiusHvrBottom: value, borderradiusHvrLeft: value });
-			} else {
-				setAttributes({ [desktopborderradiusHvrType[type]]: value });
-			}
-			break;
-		case 'Tablet':
-			if ('linked' === attributes.borderradiusHvrTypeTablet) {
-				setAttributes({ borderradiusHvrTopTablet: value, borderradiusHvrRightTablet: value, borderradiusHvrBottomTablet: value, borderradiusHvrLeftTablet: value });
-			} else {
-				setAttributes({ [tabletborderradiusHvrType[type]]: value });
-			}
-			break;
-		case 'Mobile':
-			if ('linked' === attributes.borderradiusHvrTypeMobile) {
-				setAttributes({ borderradiusHvrTopMobile: value, borderradiusHvrRightMobile: value, borderradiusHvrBottomMobile: value, borderradiusHvrLeftMobile: value });
-			} else {
-				setAttributes({ [mobileborderradiusHvrType[type]]: value });
-			}
-			break;
-	}
-};
+	const changeborderradiusHvr = (type, value) => {
+		switch (getView) {
+			case 'Desktop':
+				if ('linked' === attributes.borderradiusHvrType) {
+					setAttributes({ borderradiusHvr: value, borderradiusHvrTop: value, borderradiusHvrRight: value, borderradiusHvrBottom: value, borderradiusHvrLeft: value });
+				} else {
+					setAttributes({ [desktopborderradiusHvrType[type]]: value });
+				}
+				break;
+			case 'Tablet':
+				if ('linked' === attributes.borderradiusHvrTypeTablet) {
+					setAttributes({ borderradiusHvrTopTablet: value, borderradiusHvrRightTablet: value, borderradiusHvrBottomTablet: value, borderradiusHvrLeftTablet: value });
+				} else {
+					setAttributes({ [tabletborderradiusHvrType[type]]: value });
+				}
+				break;
+			case 'Mobile':
+				if ('linked' === attributes.borderradiusHvrTypeMobile) {
+					setAttributes({ borderradiusHvrTopMobile: value, borderradiusHvrRightMobile: value, borderradiusHvrBottomMobile: value, borderradiusHvrLeftMobile: value });
+				} else {
+					setAttributes({ [mobileborderradiusHvrType[type]]: value });
+				}
+				break;
+		}
+	};
 
-const getborderradiusHvr = type => {
-	switch (type) {
-		case 'top':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrTop : attributes.borderradiusHvrTop;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrTopTablet : attributes.borderradiusHvrTopTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrTopMobile : attributes.borderradiusHvrTopMobile;
-			}
-		case 'right':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrRight : attributes.borderradiusHvrRight;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrRightTablet : attributes.borderradiusHvrRightTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrRightMobile : attributes.borderradiusHvrRightMobile;
-			}
-		case 'bottom':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrBottom : attributes.borderradiusHvrBottom;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrBottomTablet : attributes.borderradiusHvrBottomTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrBottomMobile : attributes.borderradiusHvrBottomMobile;
-			}
-		case 'left':
-			switch (getView) {
-				case 'Desktop':
-					return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrLeft : attributes.borderradiusHvrLeft;
-				case 'Tablet':
-					return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrLeftTablet : attributes.borderradiusHvrLeftTablet;
-				case 'Mobile':
-					return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrLeftMobile : attributes.borderradiusHvrLeftMobile;
-			}
-	}
+	const getborderradiusHvr = type => {
+		switch (type) {
+			case 'top':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrTop : attributes.borderradiusHvrTop;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrTopTablet : attributes.borderradiusHvrTopTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrTopMobile : attributes.borderradiusHvrTopMobile;
+				}
+			case 'right':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrRight : attributes.borderradiusHvrRight;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrRightTablet : attributes.borderradiusHvrRightTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrRightMobile : attributes.borderradiusHvrRightMobile;
+				}
+			case 'bottom':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrBottom : attributes.borderradiusHvrBottom;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrBottomTablet : attributes.borderradiusHvrBottomTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrBottomMobile : attributes.borderradiusHvrBottomMobile;
+				}
+			case 'left':
+				switch (getView) {
+					case 'Desktop':
+						return 'linked' === attributes.borderradiusHvrType ? attributes.borderradiusHvrLeft : attributes.borderradiusHvrLeft;
+					case 'Tablet':
+						return 'linked' === attributes.borderradiusHvrTypeTablet ? attributes.borderradiusHvrLeftTablet : attributes.borderradiusHvrLeftTablet;
+					case 'Mobile':
+						return 'linked' === attributes.borderradiusHvrTypeMobile ? attributes.borderradiusHvrLeftMobile : attributes.borderradiusHvrLeftMobile;
+				}
+		}
 
-	return undefined;
-};
+		return undefined;
+	};
 
 	const getBorderRadius = type => {
 		if ( 'top' == type ) {
@@ -894,8 +892,6 @@ const getborderradiusHvr = type => {
 		bottom: 'borderWidthBottomMobile',
 		left: 'borderWidthLeftMobile'
 	};
-
-	
 
 	const desktopBorderWidthTypeButton = {
 		top: 'buttonborderWidthTop',
@@ -1301,8 +1297,6 @@ const getborderradiusHvr = type => {
 		return undefined;
 	};
 
-	
-
 	//Position
 	const customTooltiphorizontalOrientationOffset = value => `${value}${attributes.horizontalOrientationOffsetUnit}`
     const customTooltiphorizontalOrientationOffsetRight = value => `${value}${attributes.horizontalOrientationOffsetRightUnit}`
@@ -1676,13 +1670,13 @@ const getborderradiusHvr = type => {
 										label={ __( 'Width', 'vayu-blocks' ) }
 										value={ attributes.widthType }
 										options={ [
-											{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
-											{ label: __( 'Wide Width', 'vayu-blocks' ), value: 'alignwide' },
-											{ label: __( 'Full Width', 'vayu-blocks' ), value: 'alignfull' },
-										] }
+											{ label:  __( `Global ${attributes.globalwidth}`, 'vayu-blocks' ), value: 'default' },
+											{ label: __( 'Custom & Full Width', 'vayu-blocks' ), value: 'alignfull' },
+										]}
 										onChange={ e => setAttributes({ widthType: e,customWidth:100 }) }
 									/>
 
+								{attributes.widthType === 'alignfull' && (
 									<ResponsiveControl
 									label={ __( 'Custom Width', 'vayu-blocks' ) }
 									>	
@@ -1694,6 +1688,7 @@ const getborderradiusHvr = type => {
 										}}
 									units={ [ 'px', 'em', '%' ] }
 									/>
+
 									<RangeControl
 										renderTooltipContent={ customTooltipCustomWidth }
 										value={ getCustomWidth() || '' }
@@ -1704,9 +1699,10 @@ const getborderradiusHvr = type => {
 										allowReset={ true }
 									/>
 									</ResponsiveControl>
-									
+									)}
 
 									<ResponsiveControl label={__('Padding', 'your-text-domain')}>
+
 
 										<UnitChooser
 											value={attributes.paddingUnit}
@@ -1755,17 +1751,6 @@ const getborderradiusHvr = type => {
 										/>
 									</ResponsiveControl>
 
-									<SelectControl
-										label={ __( 'Position', 'vayu-blocks' ) }
-										value={ attributes.position }
-										options={ [
-											{ label:  __( 'Default', 'vayu-blocks' ), value: 'relative' },
-											{ label: __( 'Absolute', 'vayu-blocks' ), value: 'absolute' },
-											{ label: __( 'Fixed', 'vayu-blocks' ), value: 'fixed' },
-											
-										] }
-										onChange={ e => setAttributes({ position: e }) }
-									/>
 									<ResponsiveControl
 										label={ __( 'Z-index', 'vayu-blocks' ) }
 										>	

@@ -11,13 +11,14 @@
 }
 
 .pg-pagination .active {
-  background-color: blue !important;
+  font-weight: bold;
+  color: black !important;
+  scale: 1.2;
 }
 
 .pg-pagination-button:hover {
-  background-color: rgba(0, 0, 255, 0.851) !important; /* Light grey background on hover */
+  font-weight: bold;
   transform: scale(1.1);
-  color: white !important;
 }
 
 .myclasst {
@@ -49,6 +50,13 @@
 .linking-controlst button.is-primary {
   background: rgba(108, 27, 195, 0.6588235294);
   box-shadow: none !important;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Hide anything that overflows */
 }
 
 /*# sourceMappingURL=post-grid.css.map*/

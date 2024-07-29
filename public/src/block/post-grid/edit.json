@@ -934,7 +934,7 @@
 },
 "pg_TitleSize":{
   "type": "number",
-  "default": 22
+  "default": 18
 },
 "pg_TitleColor":{
   "type":"string",
@@ -942,7 +942,7 @@
 },
 "pg_TitleColorhvr":{
   "type":"string",
-  "default": "black"
+  "default": "blue"
 },
 "titlechoice":{
   "type":"string",
@@ -979,67 +979,67 @@
 },
 "pg_Paginationpadding": {
   "type": "number",
-  "default": 15
+  "default": 0
 },
 "pg_PaginationpaddingTop": {
   "type": "number",
-  "default": 2
+  "default": 0
 },
 "pg_PaginationpaddingRight": {
   "type": "number",
-  "default": 9
+  "default": 0
 },
 "pg_PaginationpaddingBottom": {
   "type": "number",
-  "default": 3
+  "default": 0
 },
 "pg_PaginationpaddingLeft": {
   "type": "number",
-  "default": 9
+  "default": 0
 },
 "pg_PaginationpaddingTablet": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingTopTablet": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingRightTablet": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingBottomTablet": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingLeftTablet": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingMobile": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingTopMobile": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingRightMobile": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingBottomMobile": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationpaddingLeftMobile": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_PaginationColor":{
   "type":"string",
-  "default": "blue"
+  "default": "black"
 },
 "pg_PaginationSize":{
   "type":"number",
@@ -1087,7 +1087,7 @@
 },
 "pg_PaginationbackgroundColor":{
   "type":"string",
-  "default":"white"
+  "default":"transparent"
 },
 "pg_PaginationbackgroundGradient":{
   "type":"string",
@@ -1246,51 +1246,51 @@
   },
   "pg_paginationTopBorderRadius": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationRightBorderRadius": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationBottomBorderRadius": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationLeftBorderRadius": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationTopBorderRadiusTablet": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationRightBorderRadiusTablet": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationBottomBorderRadiusTablet": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationLeftBorderRadiusTablet": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationTopBorderRadiusMobile": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationRightBorderRadiusMobile": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationBottomBorderRadiusMobile": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "pg_paginationLeftBorderRadiusMobile": {
       "type": "number",
-      "default": 6
+      "default": 0
   },
   "paginationBorderRadiusType": {
       "type": "string",
@@ -1324,19 +1324,19 @@
 },
 "pg_paginationTopBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationBottomBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationLeftBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationRightBorder":{
   "type":"string",
-  "default":"1px"
+  "default":"0px"
 },
 "pg_paginationTopBorderColor":{
   "type":"string",

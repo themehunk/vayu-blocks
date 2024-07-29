@@ -11,9 +11,14 @@
   text-decoration: none;
 }
 
+.page-numbers:hover {
+  font-weight: bold;
+  transform: scale(1.1);
+}
+
 .page-numbers.current .page-numbers {
-  background-color: blue;
-  color: white;
+  transform: scale(1.2);
+  font-weight: bold;
 }
 
 .post-grid-tag-style-container {

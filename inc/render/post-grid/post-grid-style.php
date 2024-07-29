@@ -20,9 +20,17 @@ function generate_inline_styles($attr) {
     //Main div
     $css .= "$wrapper {";
 
-        $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
-        $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-        
+         $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
+
+       // Check if widthType is set and determine width
+        if (isset($attr['widthType'])) {
+            if ($attr['widthType'] === 'default') {
+                $css .= isset($attr['globalwidth']) ? "width: {$attr['globalwidth']}px;" : '';
+            } elseif ($attr['widthType'] === 'alignfull') {
+            $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
+            }
+        }
+
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
         $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
@@ -309,105 +317,6 @@ function generate_inline_styles($attr) {
         
     $css .= "}";
         
-    //Hover 
-    $css .= "$wrapper:hover {";
-
-        // Border styles
-        $css .= isset($attr['borderHvrType']) ? "border-style: " . esc_attr($attr['borderHvrType']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrTop']) && isset($attr['borderWidthHvrUnit']) ? "border-top-width: " . esc_attr($attr['borderWidthHvrTop']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrBottom']) && isset($attr['borderWidthHvrUnit']) ? "border-bottom-width: " . esc_attr($attr['borderWidthHvrBottom']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrLeft']) && isset($attr['borderWidthHvrUnit']) ? "border-left-width: " . esc_attr($attr['borderWidthHvrLeft']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrRight']) && isset($attr['borderWidthHvrUnit']) ? "border-right-width: " . esc_attr($attr['borderWidthHvrRight']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderColorHvr']) ? "border-color: " . esc_attr($attr['borderColorHvr']) . ";" : '';
-
-        // Border radius
-           $borderRadiusUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
-           $borderTopLeftRadius = isset($attr['borderradiusHvrTop']) ? esc_attr($attr['borderradiusHvrTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderBottomRightRadius = isset($attr['borderradiusHvrBottom']) ? esc_attr($attr['borderradiusHvrBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderBottomLeftRadius = isset($attr['borderradiusHvrLeft']) ? esc_attr($attr['borderradiusHvrLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderTopRightRadius = isset($attr['borderradiusHvrRight']) ? esc_attr($attr['borderradiusHvrRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-   
-           $css .= "border-top-left-radius: {$borderTopLeftRadius};";
-           $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
-           $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
-           $css .= "border-top-right-radius: {$borderTopRightRadius};";
-   
-        // Box-shadow
-        if (isset($attr['boxShadowHvr']) && $attr['boxShadowHvr']) {
-            // Ensure the boxShadowColorHvr and boxShadowColorOpacityHvr keys are set
-            if (isset($attr['boxShadowColorHvr'], $attr['boxShadowColorOpacityHvr'])) {
-                $boxShadowColor = 'rgba(' . implode(', ', [
-                    hexdec(substr($attr['boxShadowColorHvr'], 1, 2)), // Red
-                    hexdec(substr($attr['boxShadowColorHvr'], 3, 2)), // Green
-                    hexdec(substr($attr['boxShadowColorHvr'], 5, 2))  // Blue
-                ]) . ', ' . ((float) $attr['boxShadowColorOpacityHvr'] / 100) . ')';
-            } else {
-                $boxShadowColor = 'rgba(0, 0, 0, 0)'; // Default value in case of missing color
-            }
-
-            // Ensure each box shadow dimension key is set, use a default value if not
-            $boxShadowHorizontal = isset($attr['boxShadowHorizontalHvr']) ? esc_attr($attr['boxShadowHorizontalHvr']) : '0';
-            $boxShadowVertical = isset($attr['boxShadowVerticalHvr']) ? esc_attr($attr['boxShadowVerticalHvr']) : '0';
-            $boxShadowBlur = isset($attr['boxShadowBlurHvr']) ? esc_attr($attr['boxShadowBlurHvr']) : '0';
-            $boxShadowSpread = isset($attr['boxShadowSpreadHvr']) ? esc_attr($attr['boxShadowSpreadHvr']) : '0';
-
-            $css .= "box-shadow: " . $boxShadowHorizontal . 'px ' .
-                                    $boxShadowVertical . 'px ' .
-                                    $boxShadowBlur . 'px ' .
-                                    $boxShadowSpread . 'px ' .
-                                    $boxShadowColor . ";";
-        } else {
-            $css .= "box-shadow: none;";
-        }
-
-        // Background
-        if (isset($attr['backgroundTypeHvr'])) {
-            if ($attr['backgroundTypeHvr'] === 'color' && isset($attr['backgroundColorHvr'])) {
-                $css .= "background: " . esc_attr($attr['backgroundColorHvr']) . ";";
-            } elseif ($attr['backgroundTypeHvr'] === 'gradient' && isset($attr['backgroundGradientHvr'])) {
-                $css .= "background: " . esc_attr($attr['backgroundGradientHvr']) . ";";
-            } elseif (isset($attr['backgroundImageHvr']) && isset($attr['backgroundImageHvr']['url'])) {
-                $css .= "background: url(" . esc_url($attr['backgroundImageHvr']['url']) . ");";
-            } else {
-                $css .= "background: none;";
-            }
-        } elseif(isset($attr['backgroundColorHvr'])) { 
-            $css .= "background: " . esc_attr($attr['backgroundColorHvr']) . ";";
-        }
-
-        // Background position, attachment, repeat, size
-        $css .= isset($attr['backgroundPositionHvr']) ? "background-position: " . esc_attr($attr['backgroundPositionHvr']['x'] . ',' . $attr['backgroundPositionHvr']['y']) . ";" : '';
-        $css .= isset($attr['backgroundAttachmentHvr']) ? "background-attachment: " . esc_attr($attr['backgroundAttachmentHvr']) . ";" : '';
-        $css .= isset($attr['backgroundRepeatHvr']) ? "background-repeat: " . esc_attr($attr['backgroundRepeatHvr']) . ";" : '';
-        $css .= isset($attr['backgroundSizeHvr']) ? "background-size: " . esc_attr($attr['backgroundSizeHvr']) . ";" : '';
-
-        // Transition
-        $css .= "transition: all 0.3s ease-in-out;";
-            
-    $css .= "}";
-
-    // Start building the CSS string for hover styles
-    $css .= "{$attr['pg_blockTitleTag']} a:hover {";
-
-        // Check if `titlechoicehvr` is set and apply styles accordingly
-        if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
-            // Apply color style if titlechoicehvr is 'color'
-            if (isset($attr['pg_TitleColorhvr'])) {
-                $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
-            }
-        } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
-            // Apply gradient style if titlechoicehvr is 'gradient'
-            if (isset($attr['pg_TitleColorhvr'])) {
-                $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
-                $css .= "-webkit-background-clip: text !important;";
-                $css .= "-webkit-text-fill-color: transparent !important;";
-                $css .= "background-clip: text !important;";
-            }
-        }
-        
-    // Close the CSS rule
-    $css .= "}";
-       
     //Featured Image
     $css .= "$wrapper $post .post-grid-image{";
         $css .= "display: block;";
@@ -490,11 +399,17 @@ function generate_inline_styles($attr) {
     //author-date-container
     $css .= "$wrapper $post .post-grid-author-date-container{";
         $css .= "    display: flex;";
+        $css .= "    align-items: flex-start;";
+        $css .= "    flex-wrap: wrap;";
+    $css .= "}";
+
+    //author-date-container
+    $css .= "$wrapper $post .post-grid-author-date-container .datecontainer{";
+        $css .= "    display: flex;";
         $css .= "    align-items: center;";
         $css .= "    flex-wrap: wrap;";
-        $css .= "    margin-left: 2px;";
     $css .= "}";
-      
+
     //author-image
     $css .= "$wrapper $post .post-grid-author-date-container .post-grid-author-image {";
         $css .= "    width: 20px;";
@@ -596,6 +511,106 @@ function generate_inline_styles($attr) {
 
     $css .= "}"; 
         
+     //Hover 
+     $css .= "$wrapper:hover {";
+
+        // Border styles
+        $css .= isset($attr['borderHvrType']) ? "border-style: " . esc_attr($attr['borderHvrType']) . ";" : '';
+        $css .= isset($attr['borderWidthHvrTop']) && isset($attr['borderWidthHvrUnit']) ? "border-top-width: " . esc_attr($attr['borderWidthHvrTop']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
+        $css .= isset($attr['borderWidthHvrBottom']) && isset($attr['borderWidthHvrUnit']) ? "border-bottom-width: " . esc_attr($attr['borderWidthHvrBottom']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
+        $css .= isset($attr['borderWidthHvrLeft']) && isset($attr['borderWidthHvrUnit']) ? "border-left-width: " . esc_attr($attr['borderWidthHvrLeft']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
+        $css .= isset($attr['borderWidthHvrRight']) && isset($attr['borderWidthHvrUnit']) ? "border-right-width: " . esc_attr($attr['borderWidthHvrRight']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
+        $css .= isset($attr['borderColorHvr']) ? "border-color: " . esc_attr($attr['borderColorHvr']) . ";" : '';
+
+        // Border radius
+           $borderRadiusUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
+           $borderTopLeftRadius = isset($attr['borderradiusHvrTop']) ? esc_attr($attr['borderradiusHvrTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderBottomRightRadius = isset($attr['borderradiusHvrBottom']) ? esc_attr($attr['borderradiusHvrBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderBottomLeftRadius = isset($attr['borderradiusHvrLeft']) ? esc_attr($attr['borderradiusHvrLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+           $borderTopRightRadius = isset($attr['borderradiusHvrRight']) ? esc_attr($attr['borderradiusHvrRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+   
+           $css .= "border-top-left-radius: {$borderTopLeftRadius};";
+           $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
+           $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
+           $css .= "border-top-right-radius: {$borderTopRightRadius};";
+   
+        // Box-shadow
+        if (isset($attr['boxShadowHvr']) && $attr['boxShadowHvr']) {
+            // Ensure the boxShadowColorHvr and boxShadowColorOpacityHvr keys are set
+            if (isset($attr['boxShadowColorHvr'], $attr['boxShadowColorOpacityHvr'])) {
+                $boxShadowColor = 'rgba(' . implode(', ', [
+                    hexdec(substr($attr['boxShadowColorHvr'], 1, 2)), // Red
+                    hexdec(substr($attr['boxShadowColorHvr'], 3, 2)), // Green
+                    hexdec(substr($attr['boxShadowColorHvr'], 5, 2))  // Blue
+                ]) . ', ' . ((float) $attr['boxShadowColorOpacityHvr'] / 100) . ')';
+            } else {
+                $boxShadowColor = 'rgba(0, 0, 0, 0)'; // Default value in case of missing color
+            }
+
+            // Ensure each box shadow dimension key is set, use a default value if not
+            $boxShadowHorizontal = isset($attr['boxShadowHorizontalHvr']) ? esc_attr($attr['boxShadowHorizontalHvr']) : '0';
+            $boxShadowVertical = isset($attr['boxShadowVerticalHvr']) ? esc_attr($attr['boxShadowVerticalHvr']) : '0';
+            $boxShadowBlur = isset($attr['boxShadowBlurHvr']) ? esc_attr($attr['boxShadowBlurHvr']) : '0';
+            $boxShadowSpread = isset($attr['boxShadowSpreadHvr']) ? esc_attr($attr['boxShadowSpreadHvr']) : '0';
+
+            $css .= "box-shadow: " . $boxShadowHorizontal . 'px ' .
+                                    $boxShadowVertical . 'px ' .
+                                    $boxShadowBlur . 'px ' .
+                                    $boxShadowSpread . 'px ' .
+                                    $boxShadowColor . ";";
+        } else {
+            $css .= "box-shadow: none;";
+        }
+
+        // Background
+        if (isset($attr['backgroundTypeHvr'])) {
+            if ($attr['backgroundTypeHvr'] === 'color' && isset($attr['backgroundColorHvr'])) {
+                $css .= "background: " . esc_attr($attr['backgroundColorHvr']) . ";";
+            } elseif ($attr['backgroundTypeHvr'] === 'gradient' && isset($attr['backgroundGradientHvr'])) {
+                $css .= "background: " . esc_attr($attr['backgroundGradientHvr']) . ";";
+            } elseif (isset($attr['backgroundImageHvr']) && isset($attr['backgroundImageHvr']['url'])) {
+                $css .= "background: url(" . esc_url($attr['backgroundImageHvr']['url']) . ");";
+            } else {
+                $css .= "background: none;";
+            }
+        } elseif(isset($attr['backgroundColorHvr'])) { 
+            $css .= "background: " . esc_attr($attr['backgroundColorHvr']) . ";";
+        }
+
+        // Background position, attachment, repeat, size
+        $css .= isset($attr['backgroundPositionHvr']) ? "background-position: " . esc_attr($attr['backgroundPositionHvr']['x'] . ',' . $attr['backgroundPositionHvr']['y']) . ";" : '';
+        $css .= isset($attr['backgroundAttachmentHvr']) ? "background-attachment: " . esc_attr($attr['backgroundAttachmentHvr']) . ";" : '';
+        $css .= isset($attr['backgroundRepeatHvr']) ? "background-repeat: " . esc_attr($attr['backgroundRepeatHvr']) . ";" : '';
+        $css .= isset($attr['backgroundSizeHvr']) ? "background-size: " . esc_attr($attr['backgroundSizeHvr']) . ";" : '';
+
+        // Transition
+        $css .= "transition: all 0.3s ease-in-out;";
+            
+    $css .= "}";
+
+    // Start building the CSS string for hover styles
+    $css .= "{$attr['pg_blockTitleTag']} a:hover {";
+
+        // Check if `titlechoicehvr` is set and apply styles accordingly
+        if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
+            // Apply color style if titlechoicehvr is 'color'
+            if (isset($attr['pg_TitleColorhvr'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
+            }
+        } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
+            // Apply gradient style if titlechoicehvr is 'gradient'
+            if (isset($attr['pg_TitleColorhvr'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+        
+    // Close the CSS rule
+    $css .= "}";
+       
+    
     //for tablet
     $css .= "@media (max-width: 1024px) {
 

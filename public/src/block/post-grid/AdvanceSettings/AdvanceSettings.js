@@ -22,6 +22,7 @@ export default function AdvanceSettings({ children, attributes }) {
     };
 
     const {
+        globalwidth,
         widthType,
         customWidthUnit,
         customWidth,
@@ -315,7 +316,6 @@ export default function AdvanceSettings({ children, attributes }) {
                 return {};
         }
     };
-    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
@@ -325,10 +325,13 @@ export default function AdvanceSettings({ children, attributes }) {
     // Prepare the style object
     const styles = {
 
-          ...paddingStyles,
-          ...marginStyles,  
-          ...borderradiusstyles,
-          ...customwidthstyles,
+        ...paddingStyles,
+        ...marginStyles,  
+        ...borderradiusstyles,
+           // Conditional width styling based on widthType
+        ...(widthType === 'alignfull' ? customwidthstyles : { width: `${globalwidth}px` }),
+        marginLeft: 'auto',
+        marginRight: 'auto',
 
         position: position || undefined,
         zIndex: zIndex || undefined,
@@ -382,7 +385,6 @@ export default function AdvanceSettings({ children, attributes }) {
         backgroundRepeat: backgroundRepeatHvr || undefined,
         backgroundSize: backgroundSizeHvr || undefined,
     };
-
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {
@@ -390,14 +392,12 @@ export default function AdvanceSettings({ children, attributes }) {
         ...(isHovered ? filteredHoverStyles : {}),
     };
 
+    
+
     const blockProps = useBlockProps({
-        className: `${attributes.widthType === 'alignfull' || attributes.widthType === 'alignwide' ? attributes.widthType : ''}`,
+        className: 'alignfull',
         style: {
             ...mergedStyles,
-            ...(attributes.widthType === 'alignfull' && {
-                marginLeft: 'auto',
-                marginRight: 'auto',
-            }),
         },
 
         onMouseEnter: handleMouseEnter,

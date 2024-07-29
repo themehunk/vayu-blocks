@@ -274,15 +274,19 @@ class VayuBlocksPostGrid {
             echo '<div class="post-grid-author-date-container">';
     
             if ($showAuthor) {
+                echo '<div class="datecontainer">';
                 echo '<img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" alt="Author Logo" class="post-grid-author-image">';
                 echo '<a class="post-grid-author-span" href="' . esc_url(get_author_posts_url($post_author_id)) . '">';
                 echo esc_html($post_author_name);
                 echo '</a>';
+                echo '</div>';
             }
     
             if ($showDate) {
+                echo '<div class="datecontainer">';
                 echo '<img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" alt="Date Image" class="post-grid-date-image">';
                 echo '<span class="post-grid-date-span">' . esc_html($post_date) . '</span>';
+                echo '</div>';
             }
     
             echo '</div>';
@@ -420,13 +424,8 @@ function post_grid_render($attr) {
     $query = $renderer->get_posts($paged=1); // Load posts for the current page
 
     if ($query->have_posts()) {
-        $className = '';
-        if (isset($attr['widthType'])) {
-            if ($attr['widthType'] === 'alignfull' || $attr['widthType'] === 'alignwide') {
-                $className = $attr['widthType'];
-            }
-        }
-        $return = '<div class="' . esc_attr($className) . '">';
+        
+        $return = '<div class="alignfull" >';
         $return .= '<div>';
         $return .= '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
        

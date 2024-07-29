@@ -22,13 +22,16 @@ import {
     showOnlyDateStyles,
     fullContentStyle,
     dateImageStyles,
-    PaginationStyles
+    PaginationStyles,
+    dateSectionStyles,
+    titleTagStylesatag
 } from './edit-style';
 
 
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        globalwidth,
         sortByOrder,
         sortByField,
         selectedCategories,
@@ -83,7 +86,16 @@ const Edit = ({ attributes, setAttributes }) => {
     const [totalPages, setTotalPages] = useState(1); 
     const [CurrentPage, setCurrentPage] = useState(1);
     const [filter, setFilter] = useState({ featuredImage: false, categories: []});
+    const [Loading, setLoading] = useState(false);
 
+    // Global Settings Vayu Blocks
+	const globalcontainerWidth = ThBlockData.container_width;
+    setAttributes({globalwidth:globalcontainerWidth});
+    
+	// const globalcontainerGap = ThBlockData.container_gap;
+	// const globalpadding = ThBlockData.container_padding;
+
+    //TitleTag Define
     const TitleTag = pg_blockTitleTag || 'h2';
 
     //style
@@ -114,6 +126,8 @@ const Edit = ({ attributes, setAttributes }) => {
     const showOnlyDateStyle = showOnlyDateStyles(attributes);
 
     const fullContentStyles = fullContentStyle(attributes);
+    
+    const titleTagStylesatagq = titleTagStylesatag(attributes);
 
     //View
     const getView = useSelect( select => {
@@ -129,6 +143,7 @@ const Edit = ({ attributes, setAttributes }) => {
     //load ppost
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 // Construct the filter query parameters
                 const queryParams = [];
@@ -163,6 +178,8 @@ const Edit = ({ attributes, setAttributes }) => {
 
             } catch (error) {
                 console.error('Error fetching data:', error);
+            }finally{
+                setLoading(false);
             }
         };
         fetchData();
@@ -277,94 +294,121 @@ const Edit = ({ attributes, setAttributes }) => {
             <>
                 {filteredPosts && filteredPosts.length > 0 ? (
                     <div style={gridContainerStyle}>
-                        {postsToShow.length > 0 ? (
-                            postsToShow.map((post) => (
-                                <div key={post.uniqueID} style={postStyle}>
-
-                                    {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
-                                        <div>
-                                            <img
-                                                src={post._embedded['wp:featuredmedia'][0].source_url}
-                                                alt="Featured"
-                                                style={featuredImageStyle}
-                                            />
-                                        </div>
-                                    )}
-
-                                    {Category() && (
-                                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                            {post._embedded['wp:term'][0].slice(0, pg_numberOfCategories).map((category) => (
-                                                <a key={category.id} href={category.link} style={categoryButtonStyle}>
-                                                    {category.name}
-                                                </a>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    <div>
-                                        <TitleTag className="titletag" style={titleTagStyle}>
-                                            <a href={post.link} style={titleTagStyle}>
-                                                {post.title.rendered}
-                                            </a>
-                                        </TitleTag>
+                    {postsToShow.length > 0 ? (
+                        postsToShow.map((post) => (
+                            <div key={post.uniqueID} style={postStyle}>
+                                {Loading ? (
+                                        <div className="loader">
+                                         <Spinner/>
+                                         <h6 style={{fontSize:'15px'}}>Please Wait...</h6>
+                                         {/* This is the animated loader div */}
                                     </div>
-
-                                    {(Author() || ShowDate()) && (
-                                        <div style={authorAndDateContainerStyles}>
-                                            {Author() && (
-                                                <>
-                                                    <img
-                                                        src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"
-                                                        alt="Author Logo"
-                                                        style={authorImageStyle}
-                                                    />
-                                                    <a
-                                                        href={post._embedded['author'][0].link}
-                                                        style={authorLinkStyle}
-                                                    >
-                                                        By {post._embedded['author'][0].name}
+                                   
+                                ) : (
+                                    <>
+                                        {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
+                                            <div>
+                                                <img
+                                                    src={post._embedded['wp:featuredmedia'][0].source_url}
+                                                    alt="Featured"
+                                                    style={featuredImageStyle}
+                                                />
+                                            </div>
+                                        )}
+                
+                                        {Category() && (
+                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                                {post._embedded['wp:term'][0].slice(0, pg_numberOfCategories).map((category) => (
+                                                    <a key={category.id} href={category.link} style={categoryButtonStyle}>
+                                                        {category.name}
                                                     </a>
-                                                </>
-                                            )}
-
-                                            {ShowDate() && (
-                                                <>
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" />
-                                                    <span style={showOnlyDateStyle}>
-                                                        {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
-                                                    </span>
-                                                </>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    {Excerpt() && (
-                                        <div style={fullContentStyles}>
-                                            {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
-                                        </div>
-                                    )}
-
-                                    {FullContent() && (
-                                        <div style={fullContentStyles}>
-                                            {parseHTML(post.content.rendered)}
-                                        </div>
-                                    )}
-
-                                    {Tags() && (
-                                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                            {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
-                                                <a key={tag.id} href={tag.link} style={tagButtonStyle}>
-                                                    {tag.name}
+                                                ))}
+                                            </div>
+                                        )}
+                
+                                        <div>
+                                            <TitleTag className="titletag" style={titleTagStyle}>
+                                                <a href={post.link} style={titleTagStylesatagq} 
+                                                    onMouseEnter={(e) => {
+                                                        e.target.style.color = 'transparent';
+                                                        e.target.style.background = `${attributes.pg_TitleColorhvr}`; 
+                                                        e.target.style.backgroundClip = 'text'; 
+                                                        e.target.style.WebkitBackgroundClip = 'text';
+                                                        e.target.style.WebkitTextFillColor = 'transparent';
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.target.style.color = 'initial'; 
+                                                        e.target.style.background = 'initial'; 
+                                                        e.target.style.backgroundClip = 'initial'; 
+                                                        e.target.style.WebkitBackgroundClip = 'initial';
+                                                        e.target.style.WebkitTextFillColor = 'initial'; 
+                                                    }}
+                                                >
+                                                    {post.title.rendered}
                                                 </a>
-                                            ))}
+                                            </TitleTag>
                                         </div>
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <p>{__('No post to display', 'pg-block')}</p>
-                        )}
-                    </div>
+                
+                                        {(Author() || ShowDate()) && (
+                                            <div style={authorAndDateContainerStyles}>
+                                                {Author() && (
+                                                    <div style={dateSectionStyles}>
+                                                        <img
+                                                            src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"
+                                                            alt="Author Logo"
+                                                            style={authorImageStyle}
+                                                        />
+                                                        <a
+                                                            href={post._embedded['author'][0].link}
+                                                            style={authorLinkStyle}
+                                                        >
+                                                            By {post._embedded['author'][0].name}
+                                                        </a>
+                                                    </div>
+                                                )}
+                
+                                                {ShowDate() && (
+                                                    <div style={dateSectionStyles}>
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/2782/2782901.png" style={dateImageStyle} alt="" />
+                                                        <span style={showOnlyDateStyle}>
+                                                            {new Date(post.date).toLocaleDateString('default', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                        </span>
+                                                        </div>
+                                                )}
+                                            </div>
+                                        )}
+                
+                                        {Excerpt() && (
+                                            <div style={fullContentStyles}>
+                                                {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
+                                            </div>
+                                        )}
+                
+                                        {FullContent() && (
+                                            <div style={fullContentStyles}>
+                                                {parseHTML(post.content.rendered)}
+                                            </div>
+                                        )}
+                
+                                        {Tags() && (
+                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                                {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
+                                                    <a key={tag.id} href={tag.link} style={tagButtonStyle}>
+                                                        {tag.name}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        ))
+                    ) : (
+                        <p>{__('No post to display', 'pg-block')}</p>
+                    )}
+                </div>
+                
+               
                 ) : (
                     <>
                         <p>{__('Loading...', 'pg-block')}</p>

@@ -1191,58 +1191,7 @@ const handlePaginationBorderRadiusChange = (newValues) => {
 
             </PanelBody>
  
-            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
-                <FormTokenField
-                    __nextHasNoMarginBottom
-                    label="By Category"
-                    onChange={(value)=>setAttributes({selectedCategories:value}) }
-                    suggestions={[
-                        'cat1',
-                        'cat2',
-                        'uncategorised',
-                        'cat3',
-                        'cat4',
-                        'cat5'
-                    ]}
-                    value={selectedCategories}                     
-                />
-                <br />
-                <br />
-
-                <ToggleControl
-                    label={__('Featured Image Post Only', 'vayu-blocks')}
-                    checked={pg_featuredImageOnly}
-                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
-                />
-
-            <h4>Order</h4>
-            <SelectControl
-                label="Sort Order"
-                value={sortByOrder}  // Corrected typo here
-                options={[
-                    { value: 'desc', label: 'Descending' },  // Corrected typo here
-                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
-                ]}
-                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
-            />
-
-            <SelectControl
-                label="Sort By Field"
-                value={sortByField}
-                options={[
-                    { value: 'date', label: 'Date' },
-                    { value: 'modified', label: 'Last Modified' },
-                    { value: 'title', label: 'Title' },
-                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
-                ]}
-                onChange={(value) => setAttributes({ sortByField: value })}
-            />
-
-
-
-            </PanelBody>
-
-            <PanelBody title={__('Layout Controls', 'vayu-blocks')} initialOpen={false}>
+            <PanelBody title={__('Controls', 'vayu-blocks')} initialOpen={false}>
                 <ResponsiveControl label={__(getView, 'vayu-blocks')}>
                 <br />
                 <ToggleControl
@@ -1342,7 +1291,63 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                         />
                     )}
 
+                   
             </ResponsiveControl>
+            <br />
+            <ToggleControl
+                        label={__('Show Pagination', 'vayu-blocks')}
+                        checked={showpagination}
+                        onChange={(value) => setAttributes({
+                            showpagination:value
+                        })}
+                    />
+            </PanelBody>
+
+            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
+                <FormTokenField
+                    __experimentalAutoSelectFirstMatch
+                    __experimentalExpandOnFocus
+                    label="By Category"
+                    onChange={(value)=>setAttributes({selectedCategories:value}) }
+                    suggestions={[
+                        'cat1',
+                        'cat2',
+                        'uncategorised',
+                        'cat3',
+                        'cat4',
+                        'cat5'
+                    ]}
+                    value={selectedCategories}                     
+                />
+                <br />
+                <ToggleControl
+                    label={__('Featured Image Post Only', 'vayu-blocks')}
+                    checked={pg_featuredImageOnly}
+                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
+                />
+            <SelectControl
+                label="Sort Order"
+                value={sortByOrder}  // Corrected typo here
+                options={[
+                    { value: 'desc', label: 'Descending' },  // Corrected typo here
+                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
+                ]}
+                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
+            />
+            <SelectControl
+                label="Sort By Field"
+                value={sortByField}
+                options={[
+                    { value: 'date', label: 'Date' },
+                    { value: 'modified', label: 'Last Modified' },
+                    { value: 'title', label: 'Title' },
+                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
+                ]}
+                onChange={(value) => setAttributes({ sortByField: value })}
+            />
+
+
+
             </PanelBody>
 
             <PanelBody title={__('Pagination', 'vayu-blocks')} initialOpen={false}>
