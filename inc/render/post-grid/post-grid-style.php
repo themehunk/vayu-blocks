@@ -401,6 +401,7 @@ function generate_inline_styles($attr) {
         $css .= "    display: flex;";
         $css .= "    align-items: flex-start;";
         $css .= "    flex-wrap: wrap;";
+        $css .= "    margin-left:2px;";
     $css .= "}";
 
     //author-date-container
@@ -462,7 +463,6 @@ function generate_inline_styles($attr) {
         
     //pagination
     $css .= ".page-numbers-{$uniqueId} {";
-
         // Padding
         $paddingUnit = isset($attr['paginationpaddingUnit']) ? esc_attr($attr['paginationpaddingUnit']) : 'px';
         $css .= isset($attr['pg_PaginationpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_PaginationpaddingTop']) . $paddingUnit . ";" : '';
@@ -511,6 +511,14 @@ function generate_inline_styles($attr) {
 
     $css .= "}"; 
         
+    
+    $css .= ".pagination{";
+            
+        $css .= isset($attr['pg_Paginationalignment']) ? "text-align: " . esc_attr($attr['pg_Paginationalignment']) . ";" : '';
+        
+    $css .= "}"; 
+     
+
      //Hover 
      $css .= "$wrapper:hover {";
 

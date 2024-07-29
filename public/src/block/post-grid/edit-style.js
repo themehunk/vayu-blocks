@@ -350,6 +350,7 @@ const authorAndDateContainerStyles = {
     display: 'flex', 
     alignItems: 'flex-start',
     flexWrap:'wrap',
+    marginLeft:'2px',
 };
 
 const dateSectionStyles = {
@@ -570,6 +571,11 @@ const PaginationStyles = (attributes) => {
     };
 };
 
+const paginationnewstyle = (attributes) => ({
+    textAlign: `${attributes.pg_Paginationalignment}`,
+});
+
+
 
 export {
     PaginationStyles,
@@ -587,5 +593,6 @@ export {
     featuredImageStyles,
     authorLinkStyles,
     dateImageStyles,
-    titleTagStylesatag
+    titleTagStylesatag,
+    paginationnewstyle
 };

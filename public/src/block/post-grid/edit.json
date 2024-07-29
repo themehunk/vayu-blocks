@@ -1379,7 +1379,7 @@
 },
 "sortByField": {
   "type": "string",
-  "default": "id",
+  "default": "date",
   "enum": [
     "date",
     "modified",

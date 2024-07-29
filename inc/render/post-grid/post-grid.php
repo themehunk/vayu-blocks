@@ -33,8 +33,8 @@ class VayuBlocksPostGrid {
     
         // Default sorting
         $sortByOrder = !empty($this->attr['sortByOrder']) ? $this->attr['sortByOrder'] : 'DESC'; // Default to descending
-        $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'ID'; // Default to 'date'
-        if ($sortByField === 'id') {
+        $sortByField = !empty($this->attr['sortByField']) ? $this->attr['sortByField'] : 'date'; // Default to 'date'
+        if ($sortByField === 'id' ||$sortByField === 'Id' ) {
             $sortByField = strtoupper($sortByField);
         }
         

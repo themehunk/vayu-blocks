@@ -28,7 +28,7 @@ return array(
             
         //filter
             'sortByOrder'=> "desc",
-            'sortByField' => "id",
+            'sortByField' => "date",
             
         //layoutcontrols
             'pg_showFullContentTablet' => false,
@@ -101,6 +101,7 @@ return array(
             'pg_showAuthorMenu' => false,
 
         //pagination
+            'pg_Paginationalignment'=> 'center',
             'showpagination' => true,
             'pg_PaginationpaddingUnit' => 'px',
             'pg_Paginationpadding' => 0,

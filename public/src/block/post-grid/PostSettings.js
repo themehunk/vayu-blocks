@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl,ToogleGroupControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 import {
@@ -1141,7 +1141,6 @@ const handlePaginationBorderRadiusChange = (newValues) => {
     return (
         <>
             <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
-                
                 <ResponsiveControl label={__('Number of Columns', 'vayu-blocks')}>
                     <RangeControl
                         type={getLayoutColumnsType()}
@@ -1360,26 +1359,17 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                 />
                 {showpagination && (
                     <>
-                       {/* <ToggleGroupControl
-                            __nextHasNoMarginBottom
-                            isBlock
-                            label={__('Pagination Alignment', 'vayu-blocks')}
-                            value={pg_Paginationalignment}
-                            onChange={(value) => setAttributes({ pg_Paginationalignment: value })}
-                        >
-                            <ToggleGroupControlOption
-                                label="Left"
-                                value="left"
-                            />
-                            <ToggleGroupControlOption
-                                label="Center"
-                                value="center"
-                            />
-                            <ToggleGroupControlOption
-                                label="Right"
-                                value="right"
-                            />
-                        </ToggleGroupControl> */}
+                    
+                        <SelectControl
+                            label={ __( 'Alignment', 'vayu-blocks' ) }
+                            value={ attributes.pg_Paginationalignment }
+                            options={ [
+                                { label:  __( `Left`, 'vayu-blocks' ), value: 'left' },
+                                { label: __( 'Center', 'vayu-blocks' ), value: 'center' },
+                                { label: __( 'Right', 'vayu-blocks' ), value: 'right' },
+                            ]}
+                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }
+                        />
 
                         <h4>Text Color</h4>
                         <ColorPalette
@@ -1477,6 +1467,7 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                             />
                         </ResponsiveControl>
 
+                        
                         <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
                                 <UnitChooser
                                     value={attributes.pg_PaginationpaddingUnit}

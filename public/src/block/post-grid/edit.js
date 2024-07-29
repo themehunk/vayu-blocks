@@ -24,7 +24,8 @@ import {
     dateImageStyles,
     PaginationStyles,
     dateSectionStyles,
-    titleTagStylesatag
+    titleTagStylesatag,
+    paginationnewstyle
 } from './edit-style';
 
 
@@ -128,6 +129,8 @@ const Edit = ({ attributes, setAttributes }) => {
     const fullContentStyles = fullContentStyle(attributes);
     
     const titleTagStylesatagq = titleTagStylesatag(attributes);
+
+    const paginationnew = paginationnewstyle(attributes);
 
     //View
     const getView = useSelect( select => {
@@ -418,7 +421,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
                 {/* Pagination */}
                 {showpagination && totalPages > 1 && (
-                    <div className="pg-pagination" style={{ textAlign: 'center' }}>
+                    <div className="pg-pagination" style={paginationnew}>
                         {CurrentPage > 1 && (
                             <button
                                 style={PaginationStyle}
