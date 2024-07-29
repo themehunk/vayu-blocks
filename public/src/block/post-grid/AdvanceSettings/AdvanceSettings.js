@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect, useState,useRef } from 'react';
+import { useState} from 'react';
 import { useSelect } from '@wordpress/data';
 
 // Utility function to filter out undefined or null values

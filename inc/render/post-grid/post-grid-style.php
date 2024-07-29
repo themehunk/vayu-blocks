@@ -233,7 +233,7 @@ function generate_inline_styles($attr) {
         $css .= "text-decoration: none;";
         $css .= "margin-left: 5px;";
         $css .= "font-weight: 600;";
-        $css .= "margin-top: 3%;";
+        $css .= isset($attr['pg_spacing']) ? "margin-block-start: " . esc_attr($attr['pg_spacing']) . "%;" : '';
         $css .= "line-height: initial;";
 
 

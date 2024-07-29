@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody,ToggleGroupControl, ToggleGroupControlOption, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { TextAlignmentControl } from '@wordpress/block-editor';
 
 import {
 	ResponsiveControl,	
