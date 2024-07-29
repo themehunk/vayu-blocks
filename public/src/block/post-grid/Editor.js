@@ -5,7 +5,6 @@ import { useState } from '@wordpress/element';
 import './editor.scss';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { MdColorLens } from "react-icons/md";
-import './editor.scss';
 import { PiGradient } from "react-icons/pi";
 
 
@@ -27,6 +26,7 @@ import { useSelect } from '@wordpress/data';
 const Editor = ({ attributes, setAttributes }) => {
 
 const {
+	titlechoicehvr,
 	pg_spacing,
 	pg_numberOfTags,
 	pg_numberOfCategories,
@@ -1604,9 +1604,9 @@ const handleGradientClick = () => {
 										icon={<MdColorLens />}
 										label={__('Color', 'vayu-blocks')}
 										showTooltip={true}
-										isPrimary={titlechoice === 'color'}
+										isPrimary={titlechoicehvr === 'color'}
 										onClick={() => {
-											setAttributes({ titlechoice: 'color', pg_TitleColor: 'black' });
+											setAttributes({ titlechoicehvr: 'color', pg_TitleColorhvr: 'black' });
 										}}
 									/>
 
@@ -1614,18 +1614,18 @@ const handleGradientClick = () => {
 										icon={<PiGradient />}
 										label={__('Gradient', 'vayu-blocks')}
 										showTooltip={true}
-										isPrimary={titlechoice === 'gradient'}
+										isPrimary={titlechoicehvr === 'gradient'}
 										onClick={() => {
 											setAttributes({
-												titlechoice: 'gradient',
-												pg_TitleColor: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
+												titlechoicehvr: 'gradient',
+												pg_TitleColorhvr: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
 											});
 										}}
 									/>
 								</ButtonGroup>
 							</div>
 
-							{titlechoice === 'color' && (
+							{titlechoicehvr === 'color' && (
 								<ColorPalette
 									label={__('Color', 'vayu-blocks')}
 									colors={colors}
@@ -1634,7 +1634,7 @@ const handleGradientClick = () => {
 								/>
 							)}
 
-							{titlechoice === 'gradient' && (
+							{titlechoicehvr === 'gradient' && (
 								<GradientPicker
 									value={pg_TitleColorhvr}
 									onChange={(value) => setAttributes({ pg_TitleColorhvr: value })}

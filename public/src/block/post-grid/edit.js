@@ -5,6 +5,7 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import { Spinner } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
 
 
 import {
@@ -23,8 +24,7 @@ import {
     dateImageStyles,
     PaginationStyles
 } from './edit-style';
-import { useSelect,useRef } from '@wordpress/data';
-import { set } from 'lodash';
+
 
 const Edit = ({ attributes, setAttributes }) => {
 
@@ -81,7 +81,6 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [totalPages, setTotalPages] = useState(1); 
-    const [loading, setLoading] = useState(false);
     const [CurrentPage, setCurrentPage] = useState(1);
     const [filter, setFilter] = useState({ featuredImage: false, categories: []});
 
@@ -304,7 +303,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
                                     <div>
                                         <TitleTag className="titletag" style={titleTagStyle}>
-                                            <a href={post.link} style={{ textDecoration: 'none' }}>
+                                            <a href={post.link} style={titleTagStyle}>
                                                 {post.title.rendered}
                                             </a>
                                         </TitleTag>
@@ -352,7 +351,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                     )}
 
                                     {Tags() && (
-                                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+                                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                             {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
                                                 <a key={tag.id} href={tag.link} style={tagButtonStyle}>
                                                     {tag.name}

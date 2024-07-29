@@ -1,1 +1,30 @@
-.post-grid-featured-image{margin-bottom:10px;margin-left:2px;margin-right:2px}.pagination{margin-top:20px;text-align:center}.pagination a{text-decoration:none}.page-numbers.current .page-numbers{background-color:blue}.post-grid-tag-style-container{display:flex;flex-wrap:wrap;gap:5px}.post-grid-category-style-container{display:flex;flex-wrap:wrap;margin-bottom:15px}
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block/post-grid/style.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pagination a {
+  text-decoration: none;
+}
+
+.page-numbers.current .page-numbers {
+  background-color: blue;
+  color: white;
+}
+
+.post-grid-tag-style-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.post-grid-category-style-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*# sourceMappingURL=style-post-grid.css.map*/

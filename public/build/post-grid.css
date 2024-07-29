@@ -1,1 +1,54 @@
-.wp-block-create-block-post_blockk{border:1px dotted red}.parent{display:grid;grid-auto-rows:minmax(auto,auto);max-width:100%}.ubl-switcher-bg-clr-gradient{border:1px solid #504f4f;border-radius:2px;display:flex;margin:12px 0;padding:4px;position:relative}.switch-option{cursor:pointer;padding:8px 12px;transition:background-color .3s ease,color .3s ease}.switch-option.selected{color:#fff}.bg-span{background-color:#000;border-radius:2px;height:calc(100% - 4px);position:absolute;top:2px;transition:all .2s cubic-bezier(.175,.885,.32,1.275) ease;width:49%}.pg-pagination-button{transition:left .5s ease-in-out}.active{background-color:blue!important}.pg-pagination-button:hover{background-color:rgba(0,0,255,.851)!important;color:#fff!important;transform:scale(1.1)}
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block/post-grid/editor.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.pg-pagination-button {
+  transition: left 0.5s ease-in-out;
+}
+
+.pg-pagination .active {
+  background-color: blue !important;
+}
+
+.pg-pagination-button:hover {
+  background-color: rgba(0, 0, 255, 0.851) !important; /* Light grey background on hover */
+  transform: scale(1.1);
+  color: white !important;
+}
+
+.myclasst {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.components-base-control__labelt {
+  padding: 5px 0;
+  font-weight: 800;
+}
+
+.linking-controlst {
+  display: flex;
+  opacity: 0.2;
+}
+
+.linking-controlst button {
+  width: 20px;
+  cursor: pointer;
+  height: 25px;
+}
+
+.linking-controlst button svg {
+  width: 20px;
+}
+
+.linking-controlst button.is-primary {
+  background: rgba(108, 27, 195, 0.6588235294);
+  box-shadow: none !important;
+}
+
+/*# sourceMappingURL=post-grid.css.map*/

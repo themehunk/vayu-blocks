@@ -228,23 +228,23 @@ class VayuBlocksPostGrid {
     
     private function render_title($post_title, $post_permalink) {
         echo '<div >';
-        echo '<a href="' . esc_url($post_permalink) . '"style="text-decoration: none;">';
+        
         
         if (isset($this->attr['pg_blockTitleTag'])) {
             echo '<' . esc_attr($this->attr['pg_blockTitleTag']) . '>';
         } else {
             echo '<h4>';
         }
-        
+        echo '<a href="' . esc_url($post_permalink) . '"style="text-decoration: none;">';
         echo esc_html($post_title);
-        
+        echo '</a>';
         if (isset($this->attr['pg_blockTitleTag'])) {
             echo '</' . esc_attr($this->attr['pg_blockTitleTag']) . '>';
         } else {
             echo '</h4>';
         }
         
-        echo '</a>';
+       
         echo '</div>';
     }
     

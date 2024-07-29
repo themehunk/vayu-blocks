@@ -387,7 +387,7 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     // Start building the CSS string for hover styles
-    $css .= "{$attr['pg_blockTitleTag']}:hover {";
+    $css .= "{$attr['pg_blockTitleTag']} a:hover {";
 
         // Check if `titlechoicehvr` is set and apply styles accordingly
         if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
@@ -407,7 +407,6 @@ function generate_inline_styles($attr) {
         
     // Close the CSS rule
     $css .= "}";
-    
        
     //Featured Image
     $css .= "$wrapper $post .post-grid-image{";
@@ -469,6 +468,25 @@ function generate_inline_styles($attr) {
       
     $css .= "}";
      
+     //Title Tag
+     $css .= "$wrapper $post {$attr['pg_blockTitleTag']} a{";
+
+        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
+            // Apply color style if titlechoice is 'color'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
+            }
+        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
+            // Apply gradient style if titlechoice is 'gradient'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+    $css .= "}";
+
     //author-date-container
     $css .= "$wrapper $post .post-grid-author-date-container{";
         $css .= "    display: flex;";
@@ -626,7 +644,6 @@ function generate_inline_styles($attr) {
             border-top-right-radius: " . (isset($attr['pg_featuredImageLeftBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageLeftBorderRadiusTablet']) . "px" : '') . ";
 
         }
-
 
         $wrapper $post .post-grid-category-style-new {
             padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";

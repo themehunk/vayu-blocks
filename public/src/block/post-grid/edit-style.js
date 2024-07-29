@@ -2,9 +2,9 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from "@wordpress/data";
 
 const blockStyles = () => ({
-
     maxWidth: "100%",
 });
+
 const gridContainerStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -47,6 +47,7 @@ const gridContainerStyles = (attributes) => {
         gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
+
 //post
 const getPaddingStyle = (attributes,view) => {
     switch (view) {
@@ -280,23 +281,19 @@ const categoryButtonStyles = (attributes) => {
 
     return {
         ...categoryStyles,
+        ...categoryBorderRadiusStyles,
         color: `${attributes.pg_categoryTextColor}`,
         background: attributes.category_backgroundType === 'color' ? attributes.category_backgroundColor : attributes.category_backgroundType === 'gradient' ? `${attributes.category_backgroundGradient}` : 'none',
         fontSize: `${attributes.pg_categoryTextSize}px`,
         marginLeft:'5px',
         fontWeight:'600',
         marginBlockStart: `${attributes.pg_spacing}%`,
-        
-        ...categoryBorderRadiusStyles,
-
         textDecoration: "none",
-
         border: `${attributes.categoryborderType || 'solid'} ${attributes.pg_categoryBorder || '0px'} ${attributes.pg_categoryBorderColor || 'black'}`,
         borderTop: `${attributes.categoryTopborderType || 'solid'} ${attributes.pg_categoryTopBorder || '0px'} ${attributes.pg_categoryTopBorderColor || 'black'}`,
         borderBottom: `${attributes.categoryBottomborderType || 'solid'} ${attributes.pg_categoryBottomBorder || '0px'} ${attributes.pg_categoryBottomBorderColor || 'black'}`,
         borderLeft: `${attributes.categoryLeftborderType || 'solid'} ${attributes.pg_categoryLeftBorder || '0px'} ${attributes.pg_categoryLeftBorderColor || 'black'}`,
         borderRight: `${attributes.categoryRightborderType || 'solid'} ${attributes.pg_categoryRightBorder || '0px'} ${attributes.pg_categoryRightBorderColor || 'black'}`,
-
         lineHeight: 'initial',
     };
 };
@@ -312,6 +309,7 @@ const titleTagStyles = (attributes) => {
         marginBlockEnd: '0.05em',
         fontWeight: '600',
         marginLeft: '5px',
+        textDecoration: 'none',
     };
 
     // Conditionally add styles based on titlechoice
@@ -431,7 +429,7 @@ const tagButtonStyles = (attributes ) => {
 
     return {
         ...tagPaddingStyle,
-        marginLeft:'5px',
+        // marginLeft:'5px',
         color: `${attributes.pg_tagTextColor}`,
         background: attributes.tag_backgroundType === 'color' ? attributes.tag_backgroundColor : attributes.tag_backgroundType === 'gradient' ? `${attributes.tag_backgroundGradient}` : 'none',
         fontSize: `${attributes.pg_tagTextSize}px`,

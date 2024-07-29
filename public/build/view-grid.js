@@ -1,1 +1,38 @@
-jQuery((function(t){t(document).on("click",".pagination a",(function(r){r.preventDefault(),t(".pagination").remove();var a=t(this).attr("href").match(/page\/(\d+)/),n={action:"load_posts",page:a?parseInt(a[1]):1,attr:postGridAttributes};t.ajax({url:postGridAjax.ajaxurl,type:"POST",data:n,success:function(r){var a=t(r),n=a.find(".th-post-grid-wrapper").html(),i=a.find(".pagination").html();t(".th-post-grid-wrapper").html(n),t(".pagination").html(i),t(".pagination").insertAfter(".th-post-grid-wrapper")},error:function(t,r,a){console.error("AJAX Error:",a)}})}))}));
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!*************************************!*\
+  !*** ./src/block/post-grid/view.js ***!
+  \*************************************/
+jQuery(function ($) {
+  $(document).on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    var href = $(this).attr('href');
+    var pageMatch = href.match(/page\/(\d+)/);
+    var page = pageMatch ? parseInt(pageMatch[1]) : 1;
+    var data = {
+      action: 'load_posts',
+      page: page,
+      attr: postGridAttributes // Pass attributes to the AJAX request
+    };
+    $('.pagination').remove();
+    $.ajax({
+      url: postGridAjax.ajaxurl,
+      type: 'POST',
+      data: data,
+      success: function (response) {
+        var $wrapper = $('.th-post-grid-wrapper');
+        $wrapper.html(response); // Replace content with loaded posts
+
+        // Add new pagination controls
+        var $newPagination = $('.pagination');
+        $newPagination.html(data.pagination);
+      },
+      error: function (xhr, status, error) {
+        console.error('AJAX Error:', error);
+      }
+    });
+  });
+});
+/******/ })()
+;
+//# sourceMappingURL=view-grid.js.map
