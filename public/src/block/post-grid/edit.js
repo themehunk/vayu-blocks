@@ -237,7 +237,7 @@ const Edit = ({ attributes, setAttributes }) => {
     const limitExcerpt = (content, words) => {
         const text = content.replace(/<\/?[^>]+(>|$)/g, ""); // Strip HTML tags
         const wordsArray = text.split(" ");
-        return wordsArray.slice(0, words).join(" ") + (wordsArray.length > words ? "..." : "");
+        return wordsArray.slice(0, words).join(" ") ;
     };
 
     function generateUniqueID() {
@@ -340,7 +340,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                                         e.target.style.WebkitTextFillColor = 'transparent';
                                                     }}
                                                     onMouseLeave={(e) => {
-                                                        e.target.style.color = 'initial'; 
+                                                        e.target.style.color = `${attributes.pg_TitleColor}`; 
                                                         e.target.style.background = 'initial'; 
                                                         e.target.style.backgroundClip = 'initial'; 
                                                         e.target.style.WebkitBackgroundClip = 'initial';
@@ -383,7 +383,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 
                                         {Excerpt() && (
                                             <div style={fullContentStyles}>
-                                                {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {ExcerptSelector()}
+                                                {limitExcerpt(post.excerpt.rendered, ExcerptWords())} {' '} {ExcerptSelector()}
                                             </div>
                                         )}
                 

@@ -176,7 +176,7 @@ class VayuBlocksPostGrid {
         $this ->render_category($category_links);
         $this->render_title($post_title, $post_permalink);
         $this->render_author_and_date($post_author_id, $post_author_name, $post_date);
-        $this->render_excerpt();
+        $this->render_excerpt($post_permalink);
         $this->render_full_content();
         $this->render_tags($tag_links);
        
@@ -293,7 +293,7 @@ class VayuBlocksPostGrid {
         }
     }
     
-    private function render_excerpt() {
+    private function render_excerpt($post_permalink) {
         $device_type = $this->get_device_type();
         if ($device_type === 'Desktop') {
             $excerpt = isset($this->attr['pg_showExcerpt']) ? $this->attr['pg_showExcerpt'] : false;
@@ -310,8 +310,11 @@ class VayuBlocksPostGrid {
         }
        
         if ($excerpt) {
-            echo '<div class=" post-grid-excerpt-view">' . wp_trim_words(get_the_excerpt(), $excerpt_length, $excerpt_selector) . '</div>';
+            $excerpt_text = wp_trim_words(get_the_excerpt(), $excerpt_length, '');
+            $linked_excerpt_selector = '<a class="excerpt_selector" href="' . esc_url($post_permalink) . '">' . $excerpt_selector . '</a>';
+            echo '<div class="post-grid-excerpt-view">' . $excerpt_text .' '. $linked_excerpt_selector . '</div>';
         }
+        
     }
     
     private function render_full_content() {

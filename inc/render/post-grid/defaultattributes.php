@@ -66,7 +66,7 @@ return array(
             'layoutColumnsType' => 'default',
             'layoutColumnsTypeTablet' => 'default',
             'layoutColumnsTypeMobile' => 'default',
-            'pg_excerptSelector' => '[...]',
+            'pg_excerptSelector' => 'Read More',
             'pg_excerptWords' => 15,
             'pg_numberOfTags' => 1,
             'selectedCategories' => [],
