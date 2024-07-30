@@ -117,6 +117,25 @@ const getLayoutBorderRadiusStyle = (attributes, view) => {
     }
 };
 
+const getWidthStyle = (attributes, view) => {
+    switch (view) {
+        case 'Desktop':
+            return {
+                width: attributes.layoutcustomWidth ? `${attributes.layoutcustomWidth}${attributes.layoutcustomWidthUnit || '%'}` : '100%',
+            };
+        case 'Tablet':
+            return {
+                width: attributes.layoutcustomWidthTablet ? `${attributes.layoutcustomWidthTablet}${attributes.layoutcustomWidthUnit || '%'}` : '100%',
+            };
+        case 'Mobile':
+            return {
+                width: attributes.layoutcustomWidthMobile ? `${attributes.layoutcustomWidthMobile}${attributes.layoutcustomWidthUnit || '%'}` : '100%',
+            };
+        default:
+            return {};
+    }
+};
+
 const postStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -126,6 +145,7 @@ const postStyles = (attributes) => {
     }, []);
     const paddingStyles = getPaddingStyle(attributes,view);
     const borderradiusstyles = getLayoutBorderRadiusStyle(attributes,view);
+    const widthstyle = getWidthStyle(attributes,view);
    
         
     return {
@@ -134,6 +154,8 @@ const postStyles = (attributes) => {
         ...paddingStyles,
         ...backgroundStyle(attributes),
         ...borderradiusstyles,
+        ...widthstyle,
+        
         lineHeight : `${attributes.pg_spacing}`,
 
         border: `${attributes.layoutborderType || 'solid'} ${attributes.pg_layoutBorder || '0px'} ${attributes.pg_layoutBorderColor || 'black'}`,
@@ -574,7 +596,6 @@ const PaginationStyles = (attributes) => {
 const paginationnewstyle = (attributes) => ({
     textAlign: `${attributes.pg_Paginationalignment}`,
 });
-
 
 
 export {

@@ -1041,6 +1041,10 @@
   "type":"string",
   "default": "black"
 },
+"pg_PaginationactiveColor":{
+  "type":"string",
+  "default": "black"
+},
 "pg_PaginationSize":{
   "type":"number",
   "default": 20
@@ -1700,6 +1704,22 @@
   "pg_Paginationalignment" : {
     "type": "string",
     "default": "center"
+  },
+  "layoutcustomWidth":{
+    "type": "number",
+    "default": 100
+  },
+	"layoutcustomWidthTablet":{
+    "type": "number",
+    "default": 100
+  },
+	"layoutcustomWidthMobile":{
+    "type": "number",
+    "default": 100
+  },
+  "layoutcustomWidthUnit": {
+    "type": "string",
+    "default": "%"
   }
 
 }

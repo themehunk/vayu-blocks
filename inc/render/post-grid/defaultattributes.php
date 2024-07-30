@@ -101,8 +101,8 @@ return array(
             'pg_showAuthorMenu' => false,
 
         //pagination
-            'pg_Paginationalignment'=> 'center',
             'showpagination' => true,
+            'pg_Paginationalignment'=> 'center',
             'pg_PaginationpaddingUnit' => 'px',
             'pg_Paginationpadding' => 0,
             'pg_paginationpaddingTop' => 0,
@@ -146,6 +146,7 @@ return array(
             'pg_PaginationpaddingBottomMobile' => 0,
             'pg_PaginationpaddingLeftMobile' => 0,
             'pg_PaginationColor' => 'black',
+            'pg_PaginationactiveColor' => 'black',
             'pg_PaginationSize' => 20,
             'pg_paginationBorderRadius' => 10,
             'pg_showPaginationBorderColorMenu' => false,
@@ -165,6 +166,10 @@ return array(
 
     //Style
         //layout
+            'layoutcustomWidth' => 100,
+            'layoutcustomWidthTablet' => 100,
+            'layoutcustomWidthMobile' => 100,
+            'layoutcustomWidthUnit' => '%',
             'pg_layoutTopBorder' => "0px",
             'pg_layoutBottomBorder' => "0px",
             'pg_layoutLeftBorder' => "0px",

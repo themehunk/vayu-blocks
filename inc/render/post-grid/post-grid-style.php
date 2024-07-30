@@ -135,13 +135,11 @@ function generate_inline_styles($attr) {
         // flex-direction: column;
         // justify-content: space-between;";
         // Line height
+        
+        $widthUnit = isset($attr['layoutcustomWidthUnit']) ? esc_attr($attr['layoutcustomWidthUnit']) : '%';
 
-        $css .= isset($attr['width']) 
-        ? ($attr['width'] === 'customwidth' && isset($attr['customWidthlayout'])
-            ? "width: " . esc_attr($attr['customWidthlayout']) . ";"
-            : "width: " . esc_attr($attr['width']) . ";")
-        : '';
-    
+        $css .= isset($attr['layoutcustomWidth']) ? "width: " . esc_attr($attr['layoutcustomWidth']) . $widthUnit . ";" : '';
+
 
         $css .= isset($attr['pg_spacing']) ? "line-height: " . esc_attr($attr['pg_spacing']) . ";" : '';
 
@@ -512,15 +510,24 @@ function generate_inline_styles($attr) {
     $css .= "}"; 
         
     
-    $css .= ".pagination{";
-            
+    $css .= ".pagination{";  
         $css .= isset($attr['pg_Paginationalignment']) ? "text-align: " . esc_attr($attr['pg_Paginationalignment']) . ";" : '';
-        
+        $css .= "margin-top: 20px;";
+        $css .= "margin-bottom: 30px;";
+    $css .= "}"; 
+
+    $css .= ".pagination a{";  
+        $css .= "text-decoration: none;";
     $css .= "}"; 
      
-
-     //Hover 
-     $css .= "$wrapper:hover {";
+    $css .= ".page-numbers.current span{";  
+        $css .= isset($attr['pg_PaginationactiveColor']) ? "color: " . esc_attr($attr['pg_PaginationactiveColor']) . ";" : '';
+        $css .= "trasform: scale(1.1);";
+        $css .= "font-weight: bold;";
+    $css .= "}"; 
+     
+    //Hover 
+    $css .= "$wrapper:hover {";
 
         // Border styles
         $css .= isset($attr['borderHvrType']) ? "border-style: " . esc_attr($attr['borderHvrType']) . ";" : '';
@@ -648,6 +655,9 @@ function generate_inline_styles($attr) {
         }
     
         $wrapper $post {
+            width: " . (isset($attr['layoutcustomWidthTablet']) ? esc_attr($attr['layoutcustomWidthTablet']) . esc_attr($attr['layoutcustomWidthUnit']) : '') . ";
+
+
             padding-top: " . (isset($attr['pg_layoutpaddingTopTablet']) ? esc_attr($attr['pg_layoutpaddingTopTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
             padding-bottom: " . (isset($attr['pg_layoutpaddingBottomTablet']) ? esc_attr($attr['pg_layoutpaddingBottomTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
             padding-left: " . (isset($attr['pg_layoutpaddingLeftTablet']) ? esc_attr($attr['pg_layoutpaddingLeftTablet']) . esc_attr($attr['pg_layoutpaddingUnit']) : '') . ";
@@ -740,6 +750,10 @@ function generate_inline_styles($attr) {
         }
     
         $wrapper $post {
+
+            width: " . (isset($attr['layoutcustomWidthMobile']) ? esc_attr($attr['layoutcustomWidthMobile']) . esc_attr($attr['layoutcustomWidthUnit']) : '') . ";
+
+
             padding-top: " . (isset($attr['pg_layoutpaddingTopMobile']) ? esc_attr($attr['pg_layoutpaddingTopMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
             padding-bottom: " . (isset($attr['pg_layoutpaddingBottomMobile']) ? esc_attr($attr['pg_layoutpaddingBottomMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";
             padding-left: " . (isset($attr['pg_layoutpaddingLeftMobile']) ? esc_attr($attr['pg_layoutpaddingLeftMobile']) . (isset($attr['pg_layoutpaddingUnit']) ? esc_attr($attr['pg_layoutpaddingUnit']) : 'px') : '') . ";

@@ -444,7 +444,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                     <button
                                         style={{
                                             ...PaginationStyle,
-                                            color: isCurrentPage ? 'white' : `${pg_PaginationColor}`,
+                                            color: isCurrentPage ? `${attributes.pg_PaginationactiveColor}` : `${pg_PaginationColor}`,
                                         }}
                                         key={index}
                                         onClick={() => handlePageChange(page)}
