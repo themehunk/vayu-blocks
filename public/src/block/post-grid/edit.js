@@ -424,7 +424,8 @@ const Edit = ({ attributes, setAttributes }) => {
                     <div className="pg-pagination" style={paginationnew}>
                         {CurrentPage > 1 && (
                             <button
-                                style={PaginationStyle}
+                                style={{...PaginationStyle,
+                                color:attributes.pg_PaginationColor}}
                                 onClick={() => handlePageChange(CurrentPage - 1)}
                                 className="pg-pagination-button"
                             >
@@ -464,7 +465,8 @@ const Edit = ({ attributes, setAttributes }) => {
 
                         {CurrentPage < totalPages && (
                             <button
-                                style={PaginationStyle}
+                                style={{...PaginationStyle,
+                                color:attributes.pg_PaginationColor}}
                                 onClick={() => handlePageChange(CurrentPage + 1)}
                                 className="pg-pagination-button"
                             >

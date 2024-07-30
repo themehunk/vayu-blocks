@@ -1355,9 +1355,10 @@ const handleGradientClick = () => {
 	setTitlechoice('gradient');
 };
 
+const maxpxvalue = attributes.globalwidth/attributes.pg_postLayoutColumns;
 // unit switch max value
 const [layoutcustomWidthUnit, setlayoutcustomWidthUnit] = useState('%');
-const maxlayoutcustomWidthUnit = layoutcustomWidthUnit === 'px' ? 1200 : layoutcustomWidthUnit === 'em' ? 50 : layoutcustomWidthUnit === '%' ? 100:'';
+const maxlayoutcustomWidthUnit = layoutcustomWidthUnit === 'px' ? maxpxvalue : layoutcustomWidthUnit === 'em' ? 50 : layoutcustomWidthUnit === '%' ? 100:'';
 const customTooltipCustomWidth = value => `${value}${attributes.layoutcustomWidthUnit}`;
 
 
@@ -1575,15 +1576,15 @@ const handleTitleTagChange = (value) => {
 			<PanelBody title={__('Title', 'vayu-blocks')} initialOpen={false}>
 
 				<SelectControl
-					label={__('Title Tag', 'text-domain')}
+					label={__('Title Tag', 'vayu-blocks')}
 					value={attributes.pg_blockTitleTag}
 					options={[
-						{ label: __('H1', 'text-domain'), value: 'h1' },
-						{ label: __('H2', 'text-domain'), value: 'h2' },
-						{ label: __('H3', 'text-domain'), value: 'h3' },
-						{ label: __('H4', 'text-domain'), value: 'h4' },
-						{ label: __('H5', 'text-domain'), value: 'h5' },
-						{ label: __('H6', 'text-domain'), value: 'h6' },
+						{ label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
+						{ label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
+						{ label: __('H3 Heading h3', 'vayu-blocks'), value: 'h3' },
+						{ label: __('H4 Heading h4', 'vayu-blocks'), value: 'h4' },
+						{ label: __('H5 Heading h5', 'vayu-blocks'), value: 'h5' },
+						{ label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
 					]}
 					onChange={handleTitleTagChange}
 				/>

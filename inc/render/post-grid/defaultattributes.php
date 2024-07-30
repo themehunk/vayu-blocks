@@ -392,10 +392,6 @@ return array(
 
         //tags
             'pg_tagBackgroundColor' => '#000000',
-            'pg_TagPaddingTop' => 0,
-            'pg_TagPaddingRight' => 0,
-            'pg_TagPaddingBottom' => 0,
-            'pg_TagPaddingLeft' => 0,
             'tagpaddingUnit' => 'px',
             'pg_tagTextColor' => '#808080',
             'pg_tagTextSize' => 12,
@@ -411,10 +407,10 @@ return array(
             'pg_TagpaddingTypeTablet' => 'linked',
             'pg_TagpaddingTypeMobile' => 'linked',
             'pg_Tagpadding' => 0,
-            'pg_TagpaddingTop' => 5,
-            'pg_TagpaddingRight' => 10,
-            'pg_TagpaddingBottom' => 6,
-            'pg_TagpaddingLeft' => 10,
+            'pg_TagpaddingTop' => 0,
+            'pg_TagpaddingRight' => 0,
+            'pg_TagpaddingBottom' => 0,
+            'pg_TagpaddingLeft' => 7,
             'pg_TagpaddingTablet' => 0,
             'pg_TagpaddingTopTablet' => 0,
             'pg_TagpaddingRightTablet' => 0,
@@ -466,16 +462,15 @@ return array(
             "pg_tagsLeftBorderRadiusMobile"=> 0,
             "tagpaddingborderRadius" => "1",
         //author
-            'pg_authorImageScale' => 0.7,
+            'pg_authorImageScale' => 0.6,
             'pg_authorTextColor' => 'gray',
             'pg_authorTextSize' => 14,
             
         //date
-        
             'pg_dateTextSize' => 14,
             'pg_dateColor' => 'gray',
             'pg_showDateMenu' => false,
-            'pg_dateImageScale' => 0.7,
+            'pg_dateImageScale' => 0.6,
 
     //Advanced
         'globalwidth'=> '',
