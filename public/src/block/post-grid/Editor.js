@@ -1355,33 +1355,92 @@ const handleGradientClick = () => {
 	setTitlechoice('gradient');
 };
 
+const maxpxvalue = attributes.globalwidth/attributes.pg_postLayoutColumns;
+// unit switch max value
+const [layoutcustomWidthUnit, setlayoutcustomWidthUnit] = useState('%');
+const maxlayoutcustomWidthUnit = layoutcustomWidthUnit === 'px' ? maxpxvalue : layoutcustomWidthUnit === 'em' ? 50 : layoutcustomWidthUnit === '%' ? 100:'';
+const customTooltipCustomWidth = value => `${value}${attributes.layoutcustomWidthUnit}`;
+
+
+const getlayoutCustomWidth = () => {
+	switch ( getView ) {
+	case 'Desktop':
+		return attributes.layoutcustomWidth;
+	case 'Tablet':
+		return attributes.layoutcustomWidthTablet;
+	case 'Mobile':
+		return attributes.layoutcustomWidthMobile;
+	default:
+		return undefined;
+	}
+};
+
+const changelayoutCustomWidth = value => {
+	if ( 'Desktop' === getView ) {
+		setAttributes({ layoutcustomWidth: value });
+	} else if ( 'Tablet' === getView ) {
+		setAttributes({ layoutcustomWidthTablet: value });
+	} else if ( 'Mobile' === getView ) {
+		setAttributes({ layoutcustomWidthMobile: value });
+	}
+};
+
+// Function to map title tag to title size
+const getTitleSize = (tag) => {
+    switch (tag) {
+        case 'h1':
+            return 24;
+        case 'h2':
+            return 18;
+        case 'h3':
+            return 16;
+        case 'h4':
+            return 12;
+        case 'h5':
+            return 10;
+        case 'h6':
+            return 8;
+        default:
+            return 16; // default size if the tag doesn't match any case
+    }
+};
+
+const handleTitleTagChange = (value) => {
+	const titleSize = getTitleSize(value);
+	setAttributes({
+		pg_blockTitleTag: value,
+		pg_TitleSize: titleSize,
+	});
+};
 
     return (
         <>
-
 			{/* Layout Panel */}
 			<PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
-					<SelectControl
-						label={ __( 'Width', 'vayu-blocks' ) }
-						value={ attributes.width }
-						options={ [
-							{ label:  __( 'Default', 'vayu-blocks' ), value: '' },
-							{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: '100%' },
-							{ label: __( 'Half Width', 'vayu-blocks' ), value: '50%' },
-							{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
-						] }
-						onChange={ e => setAttributes({ width: e }) }
-					/>
-					{ 'customwidth' === attributes.width && (
-						<div className="custom-width-input">
-							<TextControl
+
+							<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }
-								value={ attributes.customWidthlayout }
-								onChange={ (value) => setAttributes({ customWidthlayout:value }) }
-								placeholder="e.g., 800px, 100%"
-							/>
-						</div>
-					)}				
+								>	
+								<UnitChooser
+								value={ attributes.layoutcustomWidthUnit }
+								onClick={ layoutcustomWidthUnit => {
+									setAttributes({ layoutcustomWidthUnit });
+									setlayoutcustomWidthUnit(layoutcustomWidthUnit); 
+									}}
+								units={ [ 'px', 'em', '%' ] }
+								/>
+
+								<RangeControl
+									renderTooltipContent={ customTooltipCustomWidth }
+									value={ getlayoutCustomWidth() || '' }
+									onChange={ changelayoutCustomWidth }
+									step={ 1 }
+									min={ 1 }
+									max={ maxlayoutcustomWidthUnit }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
+										
 
 						<h4>Background</h4>
 							<BackgroundSelectorControl
@@ -1515,20 +1574,19 @@ const handleGradientClick = () => {
 
 			{/* Title Panel */}
 			<PanelBody title={__('Title', 'vayu-blocks')} initialOpen={false}>
-				<h4>Title</h4>
 
 				<SelectControl
-					label={__('Title Tag', 'text-domain')}
+					label={__('Title Tag', 'vayu-blocks')}
 					value={attributes.pg_blockTitleTag}
 					options={[
-						{ label: __('H1', 'text-domain'), value: 'h1' },
-						{ label: __('H2', 'text-domain'), value: 'h2' },
-						{ label: __('H3', 'text-domain'), value: 'h3' },
-						{ label: __('H4', 'text-domain'), value: 'h4' },
-						{ label: __('H5', 'text-domain'), value: 'h5' },
-						{ label: __('H6', 'text-domain'), value: 'h6' },
+						{ label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
+						{ label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
+						{ label: __('H3 Heading h3', 'vayu-blocks'), value: 'h3' },
+						{ label: __('H4 Heading h4', 'vayu-blocks'), value: 'h4' },
+						{ label: __('H5 Heading h5', 'vayu-blocks'), value: 'h5' },
+						{ label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
 					]}
-					onChange={(value) => setAttributes({ pg_blockTitleTag: value })}
+					onChange={handleTitleTagChange}
 				/>
 
 				<h4> Font Size</h4>
@@ -1667,7 +1725,6 @@ const handleGradientClick = () => {
 
 			{/* Content Panel */}
 			<PanelBody title={__('Content', 'vayu-blocks')} initialOpen={false}>
-				<h4>Content</h4>
 				<h4> Font Size</h4>
 				<FontSizePicker
 					label={__(' Font Size', 'Post_blockk')}
@@ -1688,15 +1745,6 @@ const handleGradientClick = () => {
 					onChange={(value) => setAttributes({ pg_ContentWeight: value })}
 				/>
 				
-			
-				<RangeControl
-					label={__('Line Height', 'vayu-blocks')}
-					value={pg_lineHeight}
-					onChange={(value) => setAttributes({ pg_lineHeight: value })}
-					min={1}
-					max={3}
-					step={0.1}
-				/>
 				<h4>Color</h4>
 				<ColorPalette
 					label={__(' Color', 'vayu-blocks')}
@@ -1705,13 +1753,20 @@ const handleGradientClick = () => {
 					onChange={(color) => setAttributes({ pg_textColor: color })}
 				/>
 
+				<RangeControl
+					label={__('Line Height', 'vayu-blocks')}
+					value={pg_lineHeight}
+					onChange={(value) => setAttributes({ pg_lineHeight: value })}
+					min={1}
+					max={3}
+					step={0.1}
+				/>
 				
 
 			</PanelBody>
 
 			{/* Featured Image Panel */}
 			<PanelBody title={__('Featured Image', 'vayu-blocks')} initialOpen={false}>
-				<h4>Featured Image</h4>
 				<ToggleControl
 					label={__('Show Featured Image', 'vayu-blocks')}
 					checked={pg_showFeaturedImage}
@@ -1804,7 +1859,6 @@ const handleGradientClick = () => {
 
 			{/* Category Panel */}
 			<PanelBody title = {__('Category','vayu-blocks')} initialOpen={false}> {/* Category Meta Settings */}
-				<h2>Category</h2>
 				<ToggleControl
 				label={__('Show Categories', 'vayu-blocks')}
 				checked={pg_showCategories}
@@ -1835,126 +1889,152 @@ const handleGradientClick = () => {
 					onChange={(color) => setAttributes({ pg_categoryTextColor: color })}
 				/>
 				<h4>{__('Background Color', 'vayu-blocks')}</h4>
-				<BackgroundSelectorControl
-					backgroundType={category_backgroundType}
-					backgroundColor={category_backgroundColor}
-					gradient={category_backgroundGradient}
-					focalPoint={category_backgroundPosition}
-					backgroundAttachment={category_backgroundAttachment}
-					backgroundRepeat={category_backgroundRepeat}
-					backgroundSize={category_backgroundSize}
-					changeBackgroundType={(value) => setAttributes({ category_backgroundType: value })}
-					changeColor={(value) => setAttributes({ category_backgroundColor: value })}
-					changeGradient={(value) => setAttributes({ category_backgroundGradient: value })}
-					changeBackgroundAttachment={(value) => setAttributes({ category_backgroundAttachment: value })}
-					changeBackgroundRepeat={(value) => setAttributes({ category_backgroundRepeat: value })}
-					changeFocalPoint={(value) => setAttributes({ category_backgroundPosition: value })}
-					changeBackgroundSize={(value) => setAttributes({ category_backgroundSize: value })}
-				/>
+				<>
+					<div className="myclasst">
+						<label className="components-base-control__labelt">{__('Background Type', 'vayu-blocks')}</label>
+						<ButtonGroup className="linking-controlst">
+							<Button
+								icon={<MdColorLens />}
+								label={__('Background color', 'vayu-blocks')}
+								showTooltip={true}
+								isPrimary={category_backgroundType === 'color'}
+								onClick={() => {
+									setAttributes({ category_backgroundType: 'color' });
+								}}
+							/>
 
-	
-		<BorderBoxControlComponent
-			label={__('Border','vayu-blocks')}
-			value={{
-				all: {
-					color: attributes.pg_categoryBorderColor,
-					width: attributes.pg_categoryBorder,
-					style: attributes.categoryborderType,
-				},
-				top: {
-					color: attributes.pg_categoryTopBorderColor,
-					width: attributes.pg_categoryTopBorder,
-					style: attributes.categoryTopborderType,
-				},
-				bottom: {
-					color: attributes.pg_categoryBottomBorderColor,
-					width: attributes.pg_categoryBottomBorder,
-					style: attributes.categoryBottomborderType,
-				},
-				left: {
-					color: attributes.pg_categoryLeftBorderColor,
-					width: attributes.pg_categoryLeftBorder,
-					style: attributes.categoryLeftborderType,
-				},
-				right: {
-					color: attributes.pg_categoryRightBorderColor,
-					width: attributes.pg_categoryRightBorder,
-					style: attributes.categoryRightborderType,
-				},
-			}}
-			onChange={handlecategoryBorderChange}
-			type="border"
-		/>
-		
-					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
-                        <UnitChooser
-                            value={ attributes.pg_categoryBorderRadiusunit }
-                                onClick={(unit) => {
-                                    setAttributes({ pg_categoryBorderRadiusunit : unit });
-                                }}
-                            units={ [ 'px', 'em', '%' ] }
-                        />
+							<Button
+								icon={<PiGradient />}
+								label={__('Gradient', 'vayu-blocks')}
+								showTooltip={true}
+								isPrimary={category_backgroundType === 'gradient'}
+								onClick={() => {
+									setAttributes({
+										category_backgroundType: 'gradient'
+										
+									});
+								}}
+							/>
+						</ButtonGroup>
+					</div>
+					{category_backgroundType === 'color' && (
+						<ColorPalette
+							label={__('Background Color', 'vayu-blocks')}
+							colors={colors}
+							value={category_backgroundColor}
+							onChange={(color) => setAttributes({ category_backgroundColor: color })}
+						/>
+					)}
 
-                        <SizingControl
-                            type={ getcategoryBorderRadiusType() }
-                            min={ 0 }
-                            changeType={ changecategoryBorderRadiusType }
-                            onChange={ changecategoryBorderRadius }
-                            options={ [
-                                {
-                                    label: __( 'T-R', 'vayu-blocks' ),
-                                    type: 'top',
-                                    value: getcategoryBorderRadius( 'top' )
-                                },
-                                {
-                                    label: __( 'T-L', 'vayu-blocks' ),
-                                    type: 'right',
-                                    value: getcategoryBorderRadius( 'right' )
-                                },
-                                {
-                                    label: __( 'B-R', 'vayu-blocks' ),
-                                    type: 'bottom',
-                                    value: getcategoryBorderRadius( 'bottom' )
-                                },
-                                {
-                                    label: __( 'B-L', 'vayu-blocks' ),
-                                    type: 'left',
-                                    value: getcategoryBorderRadius( 'left' )
-                                }
-                            ] }
-                        />
-                    	</ResponsiveControl>
+					{category_backgroundType === 'gradient' && (
+						<GradientPicker
+							value={category_backgroundGradient}
+							onChange={(value) => setAttributes({ category_backgroundGradient: value })}
+							gradients={gradient}
+						/>
+					)}
+				</>
 
-			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
-				<UnitChooser
-					value={attributes.categorypaddingUnit}
-					onClick={(unit) => {
-					setAttributes({ categorypaddingUnit: unit });
+				<BorderBoxControlComponent
+					label={__('Border','vayu-blocks')}
+					value={{
+						all: {
+							color: attributes.pg_categoryBorderColor,
+							width: attributes.pg_categoryBorder,
+							style: attributes.categoryborderType,
+						},
+						top: {
+							color: attributes.pg_categoryTopBorderColor,
+							width: attributes.pg_categoryTopBorder,
+							style: attributes.categoryTopborderType,
+						},
+						bottom: {
+							color: attributes.pg_categoryBottomBorderColor,
+							width: attributes.pg_categoryBottomBorder,
+							style: attributes.categoryBottomborderType,
+						},
+						left: {
+							color: attributes.pg_categoryLeftBorderColor,
+							width: attributes.pg_categoryLeftBorder,
+							style: attributes.categoryLeftborderType,
+						},
+						right: {
+							color: attributes.pg_categoryRightBorderColor,
+							width: attributes.pg_categoryRightBorder,
+							style: attributes.categoryRightborderType,
+						},
 					}}
-					units={['px', 'em', '%']}
+					onChange={handlecategoryBorderChange}
+					type="border"
 				/>
-				<SizingControl
-					min={0}
-					type={getCategoryPaddingType()}
-					changeType={changeCategoryPaddingType}
-					max={100} // Adjust as needed
-					onChange={changeCategoryPadding}
-					options={[
-					{ label: __('Top', 'vayu-blocks'), type: 'top', value: getCategoryPadding('top') },
-					{ label: __('Right', 'vayu-blocks'), type: 'right', value: getCategoryPadding('right') },
-					{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getCategoryPadding('bottom') },
-					{ label: __('Left', 'vayu-blocks'), type: 'left', value: getCategoryPadding('left') }
-					]}
-				/>
-			</ResponsiveControl>
-								
+		
+				<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+					<UnitChooser
+						value={ attributes.pg_categoryBorderRadiusunit }
+							onClick={(unit) => {
+								setAttributes({ pg_categoryBorderRadiusunit : unit });
+							}}
+						units={ [ 'px', 'em', '%' ] }
+					/>
+
+					<SizingControl
+						type={ getcategoryBorderRadiusType() }
+						min={ 0 }
+						changeType={ changecategoryBorderRadiusType }
+						onChange={ changecategoryBorderRadius }
+						options={ [
+							{
+								label: __( 'T-R', 'vayu-blocks' ),
+								type: 'top',
+								value: getcategoryBorderRadius( 'top' )
+							},
+							{
+								label: __( 'T-L', 'vayu-blocks' ),
+								type: 'right',
+								value: getcategoryBorderRadius( 'right' )
+							},
+							{
+								label: __( 'B-R', 'vayu-blocks' ),
+								type: 'bottom',
+								value: getcategoryBorderRadius( 'bottom' )
+							},
+							{
+								label: __( 'B-L', 'vayu-blocks' ),
+								type: 'left',
+								value: getcategoryBorderRadius( 'left' )
+							}
+						] }
+					/>
+				</ResponsiveControl>
+
+				<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
+					<UnitChooser
+						value={attributes.categorypaddingUnit}
+						onClick={(unit) => {
+						setAttributes({ categorypaddingUnit: unit });
+						}}
+						units={['px', 'em', '%']}
+					/>
+					<SizingControl
+						min={0}
+						type={getCategoryPaddingType()}
+						changeType={changeCategoryPaddingType}
+						max={100} // Adjust as needed
+						onChange={changeCategoryPadding}
+						options={[
+						{ label: __('Top', 'vayu-blocks'), type: 'top', value: getCategoryPadding('top') },
+						{ label: __('Right', 'vayu-blocks'), type: 'right', value: getCategoryPadding('right') },
+						{ label: __('Bottom', 'vayu-blocks'), type: 'bottom', value: getCategoryPadding('bottom') },
+						{ label: __('Left', 'vayu-blocks'), type: 'left', value: getCategoryPadding('left') }
+						]}
+					/>
+				</ResponsiveControl>
+									
 			</>)}
 			</PanelBody>
 
 			{/* Tag Panel */}
 			<PanelBody title = {__('Tags','vayu-blocks')} initialOpen={false}>
-			<h2>Tags</h2>
-			
 				<ToggleControl
 					label={__('Show Tags', 'vayu-blocks')}
 					checked={pg_showTags}
@@ -1985,99 +2065,126 @@ const handleGradientClick = () => {
 				value={pg_tagTextColor}
 				onChange={(color) => setAttributes({ pg_tagTextColor: color })}
 			/>
+
 			<h4>{__('Background Color', 'vayu-blocks')}</h4>
-			<BackgroundSelectorControl
-				backgroundType={tag_backgroundType}
-				backgroundColor={tag_backgroundColor}
-				
-				gradient={tag_backgroundGradient}
-				focalPoint={tag_backgroundPosition}
-				backgroundAttachment={tag_backgroundAttachment}
-				backgroundRepeat={tag_backgroundRepeat}
-				backgroundSize={tag_backgroundSize}
-				changeBackgroundType={(value) => setAttributes({ tag_backgroundType: value })}
-				changeColor={(value) => setAttributes({ tag_backgroundColor: value })}
-				changeGradient={(value) => setAttributes({ tag_backgroundGradient: value })}
-				changeBackgroundAttachment={(value) => setAttributes({ tag_backgroundAttachment: value })}
-				changeBackgroundRepeat={(value) => setAttributes({ tag_backgroundRepeat: value })}
-				changeFocalPoint={(value) => setAttributes({ tag_backgroundPosition: value })}
-				changeBackgroundSize={(value) => setAttributes({ tag_backgroundSize: value })}
+			<>
+				<div className="myclasst">
+					<label className="components-base-control__labelt">{__('Background Type', 'vayu-blocks')}</label>
+					<ButtonGroup className="linking-controlst">
+						<Button
+							icon={<MdColorLens />}
+							label={__('Background color', 'vayu-blocks')}
+							showTooltip={true}
+							isPrimary={tag_backgroundType === 'color'}
+							onClick={() => {
+								setAttributes({ tag_backgroundType: 'color' });
+							}}
+						/>
+
+						<Button
+							icon={<PiGradient />}
+							label={__('Gradient', 'vayu-blocks')}
+							showTooltip={true}
+							isPrimary={tag_backgroundType === 'gradient'}
+							onClick={() => {
+								setAttributes({
+									tag_backgroundType: 'gradient'
+									
+								});
+							}}
+						/>
+					</ButtonGroup>
+				</div>
+				{tag_backgroundType === 'color' && (
+					<ColorPalette
+						label={__('Background Color', 'vayu-blocks')}
+						colors={colors}
+						value={tag_backgroundColor}
+						onChange={(color) => setAttributes({ tag_backgroundColor: color })}
+					/>
+				)}
+
+				{tag_backgroundType === 'gradient' && (
+					<GradientPicker
+						value={tag_backgroundGradient}
+						onChange={(value) => setAttributes({ tag_backgroundGradient: value })}
+						gradients={gradient}
+					/>
+				)}
+			</>
+	
+			<BorderBoxControlComponent
+				label={__('Border','vayu-blocks')}
+				value={{
+					all: {
+						color: attributes.pg_tagBorderColor,
+						width: attributes.pg_tagBorder,
+						style: attributes.tagborderType,
+					},
+					top: {
+						color: attributes.pg_tagTopBorderColor,
+						width: attributes.pg_tagTopBorder,
+						style: attributes.tagTopborderType,
+					},
+					bottom: {
+						color: attributes.pg_tagBottomBorderColor,
+						width: attributes.pg_tagBottomBorder,
+						style: attributes.tagBottomborderType,
+					},
+					left: {
+						color: attributes.pg_tagLeftBorderColor,
+						width: attributes.pg_tagLeftBorder,
+						style: attributes.tagLeftborderType,
+					},
+					right: {
+						color: attributes.pg_tagRightBorderColor,
+						width: attributes.pg_tagRightBorder,
+						style: attributes.tagRightborderType,
+					},
+				}}
+				onChange={handletagBorderChange}
+				type="border"
 			/>
 
-
-	
-		<BorderBoxControlComponent
-			label={__('Border','vayu-blocks')}
-			value={{
-				all: {
-					color: attributes.pg_tagBorderColor,
-					width: attributes.pg_tagBorder,
-					style: attributes.tagborderType,
-				},
-				top: {
-					color: attributes.pg_tagTopBorderColor,
-					width: attributes.pg_tagTopBorder,
-					style: attributes.tagTopborderType,
-				},
-				bottom: {
-					color: attributes.pg_tagBottomBorderColor,
-					width: attributes.pg_tagBottomBorder,
-					style: attributes.tagBottomborderType,
-				},
-				left: {
-					color: attributes.pg_tagLeftBorderColor,
-					width: attributes.pg_tagLeftBorder,
-					style: attributes.tagLeftborderType,
-				},
-				right: {
-					color: attributes.pg_tagRightBorderColor,
-					width: attributes.pg_tagRightBorder,
-					style: attributes.tagRightborderType,
-				},
-			}}
-			onChange={handletagBorderChange}
-			type="border"
-		/>
-
 				
-					<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
-                        <UnitChooser
-                            value={ attributes.pg_tagsBorderRadiusunit }
-                                onClick={(unit) => {
-                                    setAttributes({ pg_tagsBorderRadiusunit : unit });
-                                }}
-                            units={ [ 'px', 'em', '%' ] }
-                        />
+			<ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
+				<UnitChooser
+					value={ attributes.pg_tagsBorderRadiusunit }
+						onClick={(unit) => {
+							setAttributes({ pg_tagsBorderRadiusunit : unit });
+						}}
+					units={ [ 'px', 'em', '%' ] }
+				/>
 
-                        <SizingControl
-                            type={ gettagsBorderRadiusType() }
-                            min={ 0 }
-                            changeType={ changetagsBorderRadiusType }
-                            onChange={ changetagsBorderRadius }
-                            options={ [
-                                {
-                                    label: __( 'T-R', 'vayu-blocks' ),
-                                    type: 'top',
-                                    value: gettagsBorderRadius( 'top' )
-                                },
-                                {
-                                    label: __( 'T-L', 'vayu-blocks' ),
-                                    type: 'right',
-                                    value: gettagsBorderRadius( 'right' )
-                                },
-                                {
-                                    label: __( 'B-R', 'vayu-blocks' ),
-                                    type: 'bottom',
-                                    value: gettagsBorderRadius( 'bottom' )
-                                },
-                                {
-                                    label: __( 'B-L', 'vayu-blocks' ),
-                                    type: 'left',
-                                    value: gettagsBorderRadius( 'left' )
-                                }
-                            ] }
-                        />
-                    </ResponsiveControl>
+				<SizingControl
+					type={ gettagsBorderRadiusType() }
+					min={ 0 }
+					changeType={ changetagsBorderRadiusType }
+					onChange={ changetagsBorderRadius }
+					options={ [
+						{
+							label: __( 'T-R', 'vayu-blocks' ),
+							type: 'top',
+							value: gettagsBorderRadius( 'top' )
+						},
+						{
+							label: __( 'T-L', 'vayu-blocks' ),
+							type: 'right',
+							value: gettagsBorderRadius( 'right' )
+						},
+						{
+							label: __( 'B-R', 'vayu-blocks' ),
+							type: 'bottom',
+							value: gettagsBorderRadius( 'bottom' )
+						},
+						{
+							label: __( 'B-L', 'vayu-blocks' ),
+							type: 'left',
+							value: gettagsBorderRadius( 'left' )
+						}
+					] }
+				/>
+			</ResponsiveControl>
 
 			<h4>Padding</h4>
 			<ResponsiveControl label={__('Padding', 'vayu-blocks')}>
@@ -2101,7 +2208,8 @@ const handleGradientClick = () => {
 						{ label: __('Left', 'vayu-blocks'), type: 'left', value: getTagPadding('left') }
 						]}
 						/>
-						</ResponsiveControl>
+			</ResponsiveControl>
+			
 			</>)}
 			</PanelBody>
 		
@@ -2144,7 +2252,6 @@ const handleGradientClick = () => {
 
 			{/* Date Panel */}
 			<PanelBody title = {__('Date','vayu-blocks')} initialOpen={false}>
-			<h2>Date</h2>
 				<ToggleControl
 					label={__('Show Date', 'vayu-blocks')}
 					checked={pg_showDate}
@@ -2178,8 +2285,7 @@ const handleGradientClick = () => {
 			/>
 		</>)}
 			</PanelBody>
-							
-					
+								
         </>
     );
 };

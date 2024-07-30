@@ -1,14 +1,20 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl,ToogleGroupControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl,ToogleGroupControl,GradientPicker, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import { Button, ButtonGroup } from '@wordpress/components';
+import './editor.scss';
+import { MdColorLens } from "react-icons/md";
+import { PiGradient } from "react-icons/pi";
+import {AlignmentToolbar} from '@wordpress/block-editor';
 
 import {
 	ResponsiveControl,	
-    BackgroundSelectorControl,
 	UnitChooser,
     SizingControl,
+    HoverControl,
 } from '../../components/index.js';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
+import { useState } from 'react';
 
 
 
@@ -88,6 +94,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         pg_PaginationbackgroundGradient,
         pg_paginationBorderRadius,
         pg_PaginationColor,
+        pg_PaginationactiveColor,
         pg_PaginationSize,
 
 		paginationTopborderType,
@@ -110,6 +117,79 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView;
 	}, []);
+
+    const colors = [
+		{ name: 'Gray', color: '#808080' },         // Dark Gray
+		{ name: 'Light Gray', color: '#D3D3D3' },   // Light Gray
+		{ name: 'Black', color: '#000' },           // Black
+		{ name: 'Light Black', color: '#333' },     // Light Black
+		{ name: 'Blue', color: '#00f' },            // Blue
+		{ name: 'Light Blue', color: '#add8e6' },   // Light Blue
+		{ name: 'Green', color: '#008000' },        // Green
+		{ name: 'Dark Blue', color: '#00008B' },    // Dark Blue
+		{ name: 'Red', color: '#f00' },             // Red
+		{ name: 'Light Red', color: '#FF6347' },    // Light Red
+		{ name: 'Purple', color: '#800080' },       // Purple
+	];
+
+    const fontSizes = [
+		{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 15 },
+		{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 20 },
+		{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
+		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
+	];
+    const gradient = [
+        {
+          gradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+          name: 'Vivid cyan blue to vivid purple',
+          slug: 'vivid-cyan-blue-to-vivid-purple'
+        },
+        {
+          gradient: 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%)',
+          name: 'Light green cyan to vivid green cyan',
+          slug: 'light-green-cyan-to-vivid-green-cyan'
+        },
+        {
+          gradient: 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
+          name: 'Luminous vivid amber to luminous vivid orange',
+          slug: 'luminous-vivid-amber-to-luminous-vivid-orange'
+        },
+        {
+          gradient: 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
+          name: 'Luminous vivid orange to vivid red',
+          slug: 'luminous-vivid-orange-to-vivid-red'
+        },
+        {
+          gradient: 'linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%)',
+          name: 'Very light gray to cyan bluish gray',
+          slug: 'very-light-gray-to-cyan-bluish-gray'
+        },
+        {
+          gradient: 'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
+          name: 'Cool to warm spectrum',
+          slug: 'cool-to-warm-spectrum'
+        },
+        {
+          gradient: 'linear-gradient(to right, #C90100 0%, #FF7B00 25%, #00D4E7 75%, #009DFF 100%)',
+          name: 'Red to blue gradient',
+          slug: 'red-to-blue-gradient'
+        },
+        {
+          gradient: 'linear-gradient(45deg, #09009f, #00ff95 80%)',
+          name: 'Blue to green gradient',
+          slug: 'blue-to-green-gradient'
+        },
+        {
+          gradient: 'linear-gradient(rgb(188, 12, 241), rgb(212, 4, 4))',
+          name: 'Purple to red gradient',
+          slug: 'purple-to-red-gradient'
+        },
+        {
+          gradient: 'linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44)',
+          name: 'Multicolor gradient',
+          slug: 'multicolor-gradient'
+        }
+    ];
 
     //Layout
     const getLayoutColumnsType = () => {
@@ -940,204 +1020,183 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
-    const colors = [
-		{ name: 'Gray', color: '#808080' },         // Dark Gray
-		{ name: 'Light Gray', color: '#D3D3D3' },   // Light Gray
-		{ name: 'Black', color: '#000' },           // Black
-		{ name: 'Light Black', color: '#333' },     // Light Black
-		{ name: 'Blue', color: '#00f' },            // Blue
-		{ name: 'Light Blue', color: '#add8e6' },   // Light Blue
-		{ name: 'Green', color: '#008000' },        // Green
-		{ name: 'Dark Blue', color: '#00008B' },    // Dark Blue
-		{ name: 'Red', color: '#f00' },             // Red
-		{ name: 'Light Red', color: '#FF6347' },    // Light Red
-		{ name: 'Purple', color: '#800080' },       // Purple
-	];
-
-    const fontSizes = [
-		{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 15 },
-		{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 20 },
-		{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
-		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
-	];
-
   // Border radius types for different devices
-const desktopBorderRadiusType = {
-    top: 'pg_paginationTopBorderRadius',
-    right: 'pg_paginationRightBorderRadius',
-    bottom: 'pg_paginationBottomBorderRadius',
-    left: 'pg_paginationLeftBorderRadius'
-};
+    const desktopBorderRadiusType = {
+        top: 'pg_paginationTopBorderRadius',
+        right: 'pg_paginationRightBorderRadius',
+        bottom: 'pg_paginationBottomBorderRadius',
+        left: 'pg_paginationLeftBorderRadius'
+    };
 
-const tabletBorderRadiusType = {
-    top: 'pg_paginationTopBorderRadiusTablet',
-    right: 'pg_paginationRightBorderRadiusTablet',
-    bottom: 'pg_paginationBottomBorderRadiusTablet',
-    left: 'pg_paginationLeftBorderRadiusTablet'
-};
+    const tabletBorderRadiusType = {
+        top: 'pg_paginationTopBorderRadiusTablet',
+        right: 'pg_paginationRightBorderRadiusTablet',
+        bottom: 'pg_paginationBottomBorderRadiusTablet',
+        left: 'pg_paginationLeftBorderRadiusTablet'
+    };
 
-const mobileBorderRadiusType = {
-    top: 'pg_paginationTopBorderRadiusMobile',
-    right: 'pg_paginationRightBorderRadiusMobile',
-    bottom: 'pg_paginationBottomBorderRadiusMobile',
-    left: 'pg_paginationLeftBorderRadiusMobile'
-};
+    const mobileBorderRadiusType = {
+        top: 'pg_paginationTopBorderRadiusMobile',
+        right: 'pg_paginationRightBorderRadiusMobile',
+        bottom: 'pg_paginationBottomBorderRadiusMobile',
+        left: 'pg_paginationLeftBorderRadiusMobile'
+    };
 
-// Function to get the current border-radius type
-const getBorderRadiusType = () => {
-    switch (getView) {
-        case 'Desktop':
-            return attributes.paginationBorderRadiusType;
-        case 'Tablet':
-            return attributes.paginationBorderRadiusTypeTablet;
-        case 'Mobile':
-            return attributes.paginationBorderRadiusTypeMobile;
-        default:
-            return undefined;
-    }
-};
+    // Function to get the current border-radius type
+    const getBorderRadiusType = () => {
+        switch (getView) {
+            case 'Desktop':
+                return attributes.paginationBorderRadiusType;
+            case 'Tablet':
+                return attributes.paginationBorderRadiusTypeTablet;
+            case 'Mobile':
+                return attributes.paginationBorderRadiusTypeMobile;
+            default:
+                return undefined;
+        }
+    };
 
-// Function to change the border-radius type
-const changeBorderRadiusType = value => {
-    if ('Desktop' === getView) {
+    // Function to change the border-radius type
+    const changeBorderRadiusType = value => {
+        if ('Desktop' === getView) {
+            setAttributes({
+                paginationBorderRadiusType: value,
+                paginationBorderRadiusTypeTablet: value,
+                paginationBorderRadiusTypeMobile: value
+            });
+        } else if ('Tablet' === getView) {
+            setAttributes({
+                paginationBorderRadiusTypeTablet: value
+            });
+        } else if ('Mobile' === getView) {
+            setAttributes({
+                paginationBorderRadiusTypeMobile: value
+            });
+        }
+    };
+
+    // Function to change the border-radius values
+    const changeBorderRadius = (type, value) => {
+        switch (getView) {
+            case 'Desktop':
+                if ('linked' === attributes.paginationBorderRadiusType) {
+                    setAttributes({
+                        pg_paginationTopBorderRadius: value,
+                        pg_paginationRightBorderRadius: value,
+                        pg_paginationBottomBorderRadius: value,
+                        pg_paginationLeftBorderRadius: value
+                    });
+                } else {
+                    setAttributes({ [desktopBorderRadiusType[type]]: value });
+                }
+                break;
+            case 'Tablet':
+                if ('linked' === attributes.paginationBorderRadiusTypeTablet) {
+                    setAttributes({
+                        pg_paginationTopBorderRadiusTablet: value,
+                        pg_paginationRightBorderRadiusTablet: value,
+                        pg_paginationBottomBorderRadiusTablet: value,
+                        pg_paginationLeftBorderRadiusTablet: value
+                    });
+                } else {
+                    setAttributes({ [tabletBorderRadiusType[type]]: value });
+                }
+                break;
+            case 'Mobile':
+                if ('linked' === attributes.paginationBorderRadiusTypeMobile) {
+                    setAttributes({
+                        pg_paginationTopBorderRadiusMobile: value,
+                        pg_paginationRightBorderRadiusMobile: value,
+                        pg_paginationBottomBorderRadiusMobile: value,
+                        pg_paginationLeftBorderRadiusMobile: value
+                    });
+                } else {
+                    setAttributes({ [mobileBorderRadiusType[type]]: value });
+                }
+                break;
+        }
+    };
+
+    // Function to get the current border-radius value for a specific side
+    const getBorderRadius = type => {
+        switch (type) {
+            case 'top':
+                switch (getView) {
+                    case 'Desktop':
+                        return 'linked' === attributes.paginationBorderRadiusType
+                            ? attributes.pg_paginationTopBorderRadius
+                            : attributes.pg_paginationTopBorderRadius;
+                    case 'Tablet':
+                        return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                            ? attributes.pg_paginationTopBorderRadiusTablet
+                            : attributes.pg_paginationTopBorderRadiusTablet;
+                    case 'Mobile':
+                        return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                            ? attributes.pg_paginationTopBorderRadiusMobile
+                            : attributes.pg_paginationTopBorderRadiusMobile;
+                }
+            case 'right':
+                switch (getView) {
+                    case 'Desktop':
+                        return 'linked' === attributes.paginationBorderRadiusType
+                            ? attributes.pg_paginationRightBorderRadius
+                            : attributes.pg_paginationRightBorderRadius;
+                    case 'Tablet':
+                        return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                            ? attributes.pg_paginationRightBorderRadiusTablet
+                            : attributes.pg_paginationRightBorderRadiusTablet;
+                    case 'Mobile':
+                        return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                            ? attributes.pg_paginationRightBorderRadiusMobile
+                            : attributes.pg_paginationRightBorderRadiusMobile;
+                }
+            case 'bottom':
+                switch (getView) {
+                    case 'Desktop':
+                        return 'linked' === attributes.paginationBorderRadiusType
+                            ? attributes.pg_paginationBottomBorderRadius
+                            : attributes.pg_paginationBottomBorderRadius;
+                    case 'Tablet':
+                        return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                            ? attributes.pg_paginationBottomBorderRadiusTablet
+                            : attributes.pg_paginationBottomBorderRadiusTablet;
+                    case 'Mobile':
+                        return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                            ? attributes.pg_paginationBottomBorderRadiusMobile
+                            : attributes.pg_paginationBottomBorderRadiusMobile;
+                }
+            case 'left':
+                switch (getView) {
+                    case 'Desktop':
+                        return 'linked' === attributes.paginationBorderRadiusType
+                            ? attributes.pg_paginationLeftBorderRadius
+                            : attributes.pg_paginationLeftBorderRadius;
+                    case 'Tablet':
+                        return 'linked' === attributes.paginationBorderRadiusTypeTablet
+                            ? attributes.pg_paginationLeftBorderRadiusTablet
+                            : attributes.pg_paginationLeftBorderRadiusTablet;
+                    case 'Mobile':
+                        return 'linked' === attributes.paginationBorderRadiusTypeMobile
+                            ? attributes.pg_paginationLeftBorderRadiusMobile
+                            : attributes.pg_paginationLeftBorderRadiusMobile;
+                }
+            default:
+                return undefined;
+        }
+    };
+
+    // Handle pagination border-radius changes
+    const handlePaginationBorderRadiusChange = (newValues) => {
         setAttributes({
-            paginationBorderRadiusType: value,
-            paginationBorderRadiusTypeTablet: value,
-            paginationBorderRadiusTypeMobile: value
+            pg_paginationTopBorderRadius: newValues.borderRadius.top,
+            pg_paginationLeftBorderRadius: newValues.borderRadius.left,
+            pg_paginationRightBorderRadius: newValues.borderRadius.right,
+            pg_paginationBottomBorderRadius: newValues.borderRadius.bottom,
         });
-    } else if ('Tablet' === getView) {
-        setAttributes({
-            paginationBorderRadiusTypeTablet: value
-        });
-    } else if ('Mobile' === getView) {
-        setAttributes({
-            paginationBorderRadiusTypeMobile: value
-        });
-    }
-};
+    };
 
-// Function to change the border-radius values
-const changeBorderRadius = (type, value) => {
-    switch (getView) {
-        case 'Desktop':
-            if ('linked' === attributes.paginationBorderRadiusType) {
-                setAttributes({
-                    pg_paginationTopBorderRadius: value,
-                    pg_paginationRightBorderRadius: value,
-                    pg_paginationBottomBorderRadius: value,
-                    pg_paginationLeftBorderRadius: value
-                });
-            } else {
-                setAttributes({ [desktopBorderRadiusType[type]]: value });
-            }
-            break;
-        case 'Tablet':
-            if ('linked' === attributes.paginationBorderRadiusTypeTablet) {
-                setAttributes({
-                    pg_paginationTopBorderRadiusTablet: value,
-                    pg_paginationRightBorderRadiusTablet: value,
-                    pg_paginationBottomBorderRadiusTablet: value,
-                    pg_paginationLeftBorderRadiusTablet: value
-                });
-            } else {
-                setAttributes({ [tabletBorderRadiusType[type]]: value });
-            }
-            break;
-        case 'Mobile':
-            if ('linked' === attributes.paginationBorderRadiusTypeMobile) {
-                setAttributes({
-                    pg_paginationTopBorderRadiusMobile: value,
-                    pg_paginationRightBorderRadiusMobile: value,
-                    pg_paginationBottomBorderRadiusMobile: value,
-                    pg_paginationLeftBorderRadiusMobile: value
-                });
-            } else {
-                setAttributes({ [mobileBorderRadiusType[type]]: value });
-            }
-            break;
-    }
-};
+    const [hover, sethover] = useState('normal');
 
-// Function to get the current border-radius value for a specific side
-const getBorderRadius = type => {
-    switch (type) {
-        case 'top':
-            switch (getView) {
-                case 'Desktop':
-                    return 'linked' === attributes.paginationBorderRadiusType
-                        ? attributes.pg_paginationTopBorderRadius
-                        : attributes.pg_paginationTopBorderRadius;
-                case 'Tablet':
-                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
-                        ? attributes.pg_paginationTopBorderRadiusTablet
-                        : attributes.pg_paginationTopBorderRadiusTablet;
-                case 'Mobile':
-                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
-                        ? attributes.pg_paginationTopBorderRadiusMobile
-                        : attributes.pg_paginationTopBorderRadiusMobile;
-            }
-        case 'right':
-            switch (getView) {
-                case 'Desktop':
-                    return 'linked' === attributes.paginationBorderRadiusType
-                        ? attributes.pg_paginationRightBorderRadius
-                        : attributes.pg_paginationRightBorderRadius;
-                case 'Tablet':
-                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
-                        ? attributes.pg_paginationRightBorderRadiusTablet
-                        : attributes.pg_paginationRightBorderRadiusTablet;
-                case 'Mobile':
-                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
-                        ? attributes.pg_paginationRightBorderRadiusMobile
-                        : attributes.pg_paginationRightBorderRadiusMobile;
-            }
-        case 'bottom':
-            switch (getView) {
-                case 'Desktop':
-                    return 'linked' === attributes.paginationBorderRadiusType
-                        ? attributes.pg_paginationBottomBorderRadius
-                        : attributes.pg_paginationBottomBorderRadius;
-                case 'Tablet':
-                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
-                        ? attributes.pg_paginationBottomBorderRadiusTablet
-                        : attributes.pg_paginationBottomBorderRadiusTablet;
-                case 'Mobile':
-                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
-                        ? attributes.pg_paginationBottomBorderRadiusMobile
-                        : attributes.pg_paginationBottomBorderRadiusMobile;
-            }
-        case 'left':
-            switch (getView) {
-                case 'Desktop':
-                    return 'linked' === attributes.paginationBorderRadiusType
-                        ? attributes.pg_paginationLeftBorderRadius
-                        : attributes.pg_paginationLeftBorderRadius;
-                case 'Tablet':
-                    return 'linked' === attributes.paginationBorderRadiusTypeTablet
-                        ? attributes.pg_paginationLeftBorderRadiusTablet
-                        : attributes.pg_paginationLeftBorderRadiusTablet;
-                case 'Mobile':
-                    return 'linked' === attributes.paginationBorderRadiusTypeMobile
-                        ? attributes.pg_paginationLeftBorderRadiusMobile
-                        : attributes.pg_paginationLeftBorderRadiusMobile;
-            }
-        default:
-            return undefined;
-    }
-};
-
-// Handle pagination border-radius changes
-const handlePaginationBorderRadiusChange = (newValues) => {
-    setAttributes({
-        pg_paginationTopBorderRadius: newValues.borderRadius.top,
-        pg_paginationLeftBorderRadius: newValues.borderRadius.left,
-        pg_paginationRightBorderRadius: newValues.borderRadius.right,
-        pg_paginationBottomBorderRadius: newValues.borderRadius.bottom,
-    });
-};
-
-// console.log(pg_Paginationalignment);
-  
     return (
         <>
             <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
@@ -1359,41 +1418,105 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                 />
                 {showpagination && (
                     <>
-                    
-                        <SelectControl
-                            label={ __( 'Alignment', 'vayu-blocks' ) }
+                        <AlignmentToolbar
+                            label={__('Alignment', 'Post_blockk')}
                             value={ attributes.pg_Paginationalignment }
-                            options={ [
-                                { label:  __( `Left`, 'vayu-blocks' ), value: 'left' },
-                                { label: __( 'Center', 'vayu-blocks' ), value: 'center' },
-                                { label: __( 'Right', 'vayu-blocks' ), value: 'right' },
-                            ]}
-                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }
-                        />
-
-                        <h4>Text Color</h4>
-                        <ColorPalette
-                            label={__('Color', 'vayu-blocks')}
-                            colors={colors}
-                            value={pg_PaginationColor}
-                            onChange={(color) => setAttributes({ pg_PaginationColor: color })}
-                        />
+                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }									
+                            isCollapsed={ false }
+                        /> 
                         <FontSizePicker
                             label={__('Font Size', 'Post_blockk')}
                             fontSizes={fontSizes}
                             value={pg_PaginationSize}
                             onChange={(value) => setAttributes({ pg_PaginationSize: value })}
                         />
+                        
+                        <br />
+                        <HoverControl
+                            value={hover}
+                            options={[
+                                {
+                                    label: __('Normal', 'vayu-blocks'),
+                                    value: 'normal',
+                                },
+                                {
+                                    label: __('Active', 'vayu-blocks'),
+                                    value: 'active',
+                                },
+                            ]}
+                            onChange={sethover}
+                        />
+
+                        {hover === 'normal' && (
+                            <>
+                            <h5>Text Color</h5>
+                            <ColorPalette
+                                label={__('Color', 'vayu-blocks')}
+                                colors={colors}
+                                value={pg_PaginationColor}
+                                onChange={(color) => setAttributes({ pg_PaginationColor: color })}
+                            />
+                            </>
+                        )}
+                        {hover === 'active' && (
+                            <>
+                            <h5>Active Text Color</h5>
+                            <ColorPalette
+                                label={__('Color', 'vayu-blocks')}
+                                colors={colors}
+                                value={pg_PaginationactiveColor}
+                                onChange={(color) => setAttributes({ pg_PaginationactiveColor: color })}
+                            />
+                            </>
+                        )}
+
 
                         <h4>{__('Background Color', 'vayu-blocks')}</h4>
-                        <BackgroundSelectorControl
-                            backgroundType={pg_PaginationbackgroundType}
-                            backgroundColor={pg_PaginationbackgroundColor}
-                            gradient={pg_PaginationbackgroundGradient}
-                            changeBackgroundType={(value) => setAttributes({ pg_PaginationbackgroundType: value })}
-                            changeColor={(value) => setAttributes({ pg_PaginationbackgroundColor: value })}
-                            changeGradient={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
-                        />
+                        <>
+                        <div className="myclasst">
+                            <label className="components-base-control__labelt">{__('Background Type', 'vayu-blocks')}</label>
+                            <ButtonGroup className="linking-controlst">
+                                <Button
+                                    icon={<MdColorLens />}
+                                    label={__('Background color', 'vayu-blocks')}
+                                    showTooltip={true}
+                                    isPrimary={pg_PaginationbackgroundType === 'color'}
+                                    onClick={() => {
+                                        setAttributes({ pg_PaginationbackgroundType: 'color' });
+                                    }}
+                                />
+
+                                <Button
+                                    icon={<PiGradient />}
+                                    label={__('Gradient', 'vayu-blocks')}
+                                    showTooltip={true}
+                                    isPrimary={pg_PaginationbackgroundType === 'gradient'}
+                                    onClick={() => {
+                                        setAttributes({
+                                            pg_PaginationbackgroundType: 'gradient'
+                                            
+                                        });
+                                    }}
+                                />
+                            </ButtonGroup>
+                        </div>
+                        {pg_PaginationbackgroundType === 'color' && (
+                            <ColorPalette
+                                label={__('Background Color', 'vayu-blocks')}
+                                colors={colors}
+                                value={pg_PaginationbackgroundColor}
+                                onChange={(color) => setAttributes({ pg_PaginationbackgroundColor: color })}
+                            />
+                        )}
+
+                        {pg_PaginationbackgroundType === 'gradient' && (
+                            <GradientPicker
+                                value={pg_PaginationbackgroundGradient}
+                                onChange={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
+                                gradients={gradient}
+                            />
+                        )}
+                        </>
 
                         <BorderBoxControlComponent
                             label={__('Border','vayu-blocks')}

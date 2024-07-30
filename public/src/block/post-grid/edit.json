@@ -1,7 +1,7 @@
 {
     "pg_authorImageScale": {
         "type": "number",
-        "default": 0.7
+        "default": 0.6
       },
       "pg_authorTextColor": {
         "type": "string",
@@ -281,22 +281,6 @@
         "type": "string",
         "default": "#000000"
       },
-      "pg_TagPaddingTop": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_TagPaddingRight": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_TagPaddingBottom": {
-        "type": "number",
-        "default": 0
-      },
-      "pg_TagPaddingLeft": {
-        "type": "number",
-        "default": 0
-      },
       "tagpaddingUnit": {
         "type": "string",
         "default": "px"
@@ -551,11 +535,9 @@
   "type": "string",
   "default": "px"
 },
-
-
 "pg_CategorypaddingType": {
   "type": "string",
-  "default": "linked"
+  "default": "unlinked"
 },
 "pg_CategorypaddingTypeTablet": {
   "type": "string",
@@ -630,7 +612,7 @@
 
 "pg_TagpaddingType": {
   "type": "string",
-  "default": "linked"
+  "default": "unlinked"
 },
 "pg_TagpaddingTypeTablet": {
   "type": "string",
@@ -646,19 +628,19 @@
 },
 "pg_TagpaddingTop": {
   "type": "number",
-  "default": 5
+  "default": 0
 },
 "pg_TagpaddingRight": {
   "type": "number",
-  "default": 10
+  "default": 0
 },
 "pg_TagpaddingBottom": {
   "type": "number",
-  "default": 6
+  "default": 0
 },
 "pg_TagpaddingLeft": {
   "type": "number",
-  "default": 10
+  "default": 7
 },
 "pg_TagpaddingTablet": {
   "type": "number",
@@ -700,9 +682,6 @@
   "type": "number",
   "default": 0
 },
-
-
-
 "layoutColumnsType": {
   "type": "string",
   "default": "default"
@@ -958,7 +937,7 @@
 },
 "pg_dateImageScale":{
   "type":"number",
-  "default":0.7
+  "default":0.6
 },
 
 "pg_PaginationpaddingUnit":{
@@ -1038,6 +1017,10 @@
   "default": 0
 },
 "pg_PaginationColor":{
+  "type":"string",
+  "default": "black"
+},
+"pg_PaginationactiveColor":{
   "type":"string",
   "default": "black"
 },
@@ -1700,6 +1683,22 @@
   "pg_Paginationalignment" : {
     "type": "string",
     "default": "center"
+  },
+  "layoutcustomWidth":{
+    "type": "number",
+    "default": 100
+  },
+	"layoutcustomWidthTablet":{
+    "type": "number",
+    "default": 100
+  },
+	"layoutcustomWidthMobile":{
+    "type": "number",
+    "default": 100
+  },
+  "layoutcustomWidthUnit": {
+    "type": "string",
+    "default": "%"
   }
 
 }

@@ -1,29 +1,7 @@
-// .post-grid-featured-image{
-//     display: flex;
-//     align-items: center;
-//     flex-wrap:wrap;
-// }
-
-.pagination{
-    margin-top: 20px; 
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.pagination a{
-    text-decoration: none;
-}
 
 .page-numbers:hover {
     font-weight: bold;
     transform: scale(1.1);
-}
-
-.page-numbers.current .page-numbers {
-    // background-color: blue;
-   // color:black;
-    transform: scale(1.1);
-    font-weight: bold;
 }
 
 .post-grid-tag-style-container {

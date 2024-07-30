@@ -1670,8 +1670,8 @@ const PanelSettings = ({
 										label={ __( 'Width', 'vayu-blocks' ) }
 										value={ attributes.widthType }
 										options={ [
-											{ label:  __( `Global ${attributes.globalwidth}`, 'vayu-blocks' ), value: 'default' },
-											{ label: __( 'Custom & Full Width', 'vayu-blocks' ), value: 'alignfull' },
+											{ label:  __( `Global max (${attributes.globalwidth}px) wide`, 'vayu-blocks' ), value: 'default' },
+											{ label: __( 'Full Width', 'vayu-blocks' ), value: 'alignfull' },
 										]}
 										onChange={ e => setAttributes({ widthType: e,customWidth:100 }) }
 									/>
