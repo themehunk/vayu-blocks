@@ -5,7 +5,6 @@ import { useState } from '@wordpress/element';
 import './editor.scss';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { MdColorLens } from "react-icons/md";
-import './editor.scss';
 import { PiGradient } from "react-icons/pi";
 
 
@@ -27,6 +26,7 @@ import { useSelect } from '@wordpress/data';
 const Editor = ({ attributes, setAttributes }) => {
 
 const {
+	titlechoicehvr,
 	pg_spacing,
 	pg_numberOfTags,
 	pg_numberOfCategories,
@@ -116,9 +116,9 @@ const fontSizesmeta =   [
 	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 18},
 ];
 const fontSizeextra =   [
-	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 18 },
-	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 22 },
-	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 25 },
+	{ name: __('Small', 'vayu-blocks'), slug: 'small', size: 16 },
+	{ name: __('Medium', 'vayu-blocks'), slug: 'medium', size: 18 },
+	{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
 	{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28},
 ];
 const fontSizesauthor= [
@@ -1521,15 +1521,24 @@ const handleGradientClick = () => {
 					label={__('Title Tag', 'text-domain')}
 					value={attributes.pg_blockTitleTag}
 					options={[
-						{ label: __('h1', 'text-domain'), value: 'h1' },
-						{ label: __('h2', 'text-domain'), value: 'h2' },
-						{ label: __('h3', 'text-domain'), value: 'h3' },
-						{ label: __('h4', 'text-domain'), value: 'h4' },
-						{ label: __('h5', 'text-domain'), value: 'h5' },
-						{ label: __('h6', 'text-domain'), value: 'h6' },
+						{ label: __('H1', 'text-domain'), value: 'h1' },
+						{ label: __('H2', 'text-domain'), value: 'h2' },
+						{ label: __('H3', 'text-domain'), value: 'h3' },
+						{ label: __('H4', 'text-domain'), value: 'h4' },
+						{ label: __('H5', 'text-domain'), value: 'h5' },
+						{ label: __('H6', 'text-domain'), value: 'h6' },
 					]}
 					onChange={(value) => setAttributes({ pg_blockTitleTag: value })}
 				/>
+
+				<h4> Font Size</h4>
+				<FontSizePicker
+					label={__('Font Size', 'vayu-blocks')}
+					fontSizes={fontSizeextra}
+					value={pg_TitleSize}
+					onChange={(value) => setAttributes({ pg_TitleSize: value })}
+				/>
+				<br />
 
 				<>
 					<HoverControl
@@ -1604,9 +1613,9 @@ const handleGradientClick = () => {
 										icon={<MdColorLens />}
 										label={__('Color', 'vayu-blocks')}
 										showTooltip={true}
-										isPrimary={titlechoice === 'color'}
+										isPrimary={titlechoicehvr === 'color'}
 										onClick={() => {
-											setAttributes({ titlechoice: 'color', pg_TitleColor: 'black' });
+											setAttributes({ titlechoicehvr: 'color', pg_TitleColorhvr: 'black' });
 										}}
 									/>
 
@@ -1614,18 +1623,18 @@ const handleGradientClick = () => {
 										icon={<PiGradient />}
 										label={__('Gradient', 'vayu-blocks')}
 										showTooltip={true}
-										isPrimary={titlechoice === 'gradient'}
+										isPrimary={titlechoicehvr === 'gradient'}
 										onClick={() => {
 											setAttributes({
-												titlechoice: 'gradient',
-												pg_TitleColor: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
+												titlechoicehvr: 'gradient',
+												pg_TitleColorhvr: 'linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%)',
 											});
 										}}
 									/>
 								</ButtonGroup>
 							</div>
 
-							{titlechoice === 'color' && (
+							{titlechoicehvr === 'color' && (
 								<ColorPalette
 									label={__('Color', 'vayu-blocks')}
 									colors={colors}
@@ -1634,7 +1643,7 @@ const handleGradientClick = () => {
 								/>
 							)}
 
-							{titlechoice === 'gradient' && (
+							{titlechoicehvr === 'gradient' && (
 								<GradientPicker
 									value={pg_TitleColorhvr}
 									onChange={(value) => setAttributes({ pg_TitleColorhvr: value })}
@@ -1645,14 +1654,6 @@ const handleGradientClick = () => {
 					)}
 				</>
 
-				<h4> Font Size</h4>
-				<FontSizePicker
-					label={__(' Font Size', 'Post_blockk')}
-					fontSizes={fontSizeextra}
-					value={pg_TitleSize}
-					onChange={(value) => setAttributes({ pg_TitleSize: value })}
-				/>
-				<br />
 				<RangeControl
 					label={__('Line Height', 'vayu-blocks')}
 					value={pg_TitlelineHeight}

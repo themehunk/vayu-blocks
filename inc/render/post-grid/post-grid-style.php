@@ -20,9 +20,17 @@ function generate_inline_styles($attr) {
     //Main div
     $css .= "$wrapper {";
 
-        $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
-        $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-        
+         $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
+
+       // Check if widthType is set and determine width
+        if (isset($attr['widthType'])) {
+            if ($attr['widthType'] === 'default') {
+                $css .= isset($attr['globalwidth']) ? "width: {$attr['globalwidth']}px;" : '';
+            } elseif ($attr['widthType'] === 'alignfull') {
+            $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
+            }
+        }
+
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
         $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
@@ -309,8 +317,210 @@ function generate_inline_styles($attr) {
         
     $css .= "}";
         
-    //Hover 
-    $css .= "$wrapper:hover {";
+    //Featured Image
+    $css .= "$wrapper $post .post-grid-image{";
+        $css .= "display: block;";
+        $css .= "width: 100%;";
+        $css .= "height: auto;";
+
+      // Border radius for featuredImage
+      $borderRadiusUnit = isset($attr['pg_featuredImageBorderRadiusunit']) ? esc_attr($attr['pg_featuredImageBorderRadiusunit']) : 'px';
+
+      $css .= isset($attr['pg_featuredImageTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_featuredImageTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_featuredImageRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_featuredImageBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+      $css .= isset($attr['pg_featuredImageLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_featuredImageLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+      
+        // Border
+        $css .= isset($attr['featuredImageTopborderType']) && isset($attr['pg_featuredImageTopBorder']) && isset($attr['pg_featuredImageTopBorderColor']) ? 
+            "border-top: " . esc_attr($attr['featuredImageTopborderType']) . ' ' . esc_attr($attr['pg_featuredImageTopBorder']) . " " . esc_attr($attr['pg_featuredImageTopBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageBottomborderType']) && isset($attr['pg_featuredImageBottomBorder']) && isset($attr['pg_featuredImageBottomBorderColor']) ? 
+            "border-bottom: " . esc_attr($attr['featuredImageBottomborderType']) . ' ' . esc_attr($attr['pg_featuredImageBottomBorder']) . " " . esc_attr($attr['pg_featuredImageBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageLeftborderType']) && isset($attr['pg_featuredImageLeftBorder']) && isset($attr['pg_featuredImageLeftBorderColor']) ? 
+            "border-left: " . esc_attr($attr['featuredImageLeftborderType']) . ' ' . esc_attr($attr['pg_featuredImageLeftBorder']) . " " . esc_attr($attr['pg_featuredImageLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['featuredImageRightborderType']) && isset($attr['pg_featuredImageRightBorder']) && isset($attr['pg_featuredImageRightBorderColor']) ? 
+            "border-right: " . esc_attr($attr['featuredImageRightborderType']) . ' ' . esc_attr($attr['pg_featuredImageRightBorder']) . " " . esc_attr($attr['pg_featuredImageRightBorderColor']) . ";" : '';
+        
+    $css .= "}";
+     
+    //Title Tag
+    $css .= "$wrapper $post {$attr['pg_blockTitleTag']}{";
+
+        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
+            // Apply color style if titlechoice is 'color'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
+            }
+        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
+            // Apply gradient style if titlechoice is 'gradient'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+
+        $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
+       
+        $css .= isset($attr['pg_spacing']) ? "margin-block-start: " . esc_attr($attr['pg_spacing']) . "%;" : '';
+
+        $css .= "margin-left: 5px;";
+        $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
+        $css .= "margin-block-end: 0.07em;";
+        $css .= "font-weight: 600;";
+
+        // Ensure text wraps properly
+        $css .= "overflow-wrap: break-word;"; // Break words if needed
+        $css .= "word-break: break-word;"; // Break long words if necessary
+
+      
+    $css .= "}";
+     
+     //Title Tag
+     $css .= "$wrapper $post {$attr['pg_blockTitleTag']} a{";
+
+        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
+            // Apply color style if titlechoice is 'color'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
+            }
+        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
+            // Apply gradient style if titlechoice is 'gradient'
+            if (isset($attr['pg_TitleColor'])) {
+                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "background-clip: text !important;";
+            }
+        }
+    $css .= "}";
+
+    //author-date-container
+    $css .= "$wrapper $post .post-grid-author-date-container{";
+        $css .= "    display: flex;";
+        $css .= "    align-items: flex-start;";
+        $css .= "    flex-wrap: wrap;";
+        $css .= "    margin-left:2px;";
+    $css .= "}";
+
+    //author-date-container
+    $css .= "$wrapper $post .post-grid-author-date-container .datecontainer{";
+        $css .= "    display: flex;";
+        $css .= "    align-items: center;";
+        $css .= "    flex-wrap: wrap;";
+    $css .= "}";
+
+    //author-image
+    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-author-image {";
+        $css .= "    width: 20px;";
+        $css .= "    border-radius: 50%;";
+        $css .= "transform: scale(" . esc_attr($attr['pg_authorImageScale']) . ");";
+    $css .= "}";
+      
+    //author-span
+    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-author-span{";
+        $css .= "    text-decoration: none;";
+        $css .= "font-size: " . esc_attr($attr['pg_authorTextSize']) . "px;";
+        $css .= "color: " . esc_attr($attr['pg_authorTextColor']) . ";";
+        // Cursor
+        $css .= "cursor: pointer;";
+        $css .= "    margin-right: 10px;";
+    $css .= "}";
+
+    //date-image
+    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-date-image{";
+        $css .= "transform: scale(" . esc_attr($attr['pg_dateImageScale']) . ");";
+        $css .= "width: 20px;";
+      
+    $css .= "}";
+        
+    //date-span
+    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-date-span{";
+        $css .= "font-size: " . esc_attr($attr['pg_dateTextSize']) . "px;";
+        $css .= "color: " . esc_attr($attr['pg_dateColor']) . ";";
+    $css .= "}";
+        
+    //content
+    $css .= "$wrapper $post .post-grid-excerpt-view{";
+
+        // Font Weight
+        $css .= isset($attr['pg_ContentWeight']) ? "font-weight: " . esc_attr($attr['pg_ContentWeight']) . ";" : '';
+
+        // Text Color
+        $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
+        
+        // Font Size
+        $css .= isset($attr['pg_textSize']) ? "font-size: " . esc_attr($attr['pg_textSize']) . "px;" : '';
+        
+        // Line Height
+        $css .= isset($attr['pg_lineHeight']) ? "line-height: " . esc_attr($attr['pg_lineHeight']) . ";" : '';
+        
+        // Margin Left
+        $css .= "margin-left: 5px;";
+        
+    $css .= "}";
+        
+    //pagination
+    $css .= ".page-numbers-{$uniqueId} {";
+        // Padding
+        $paddingUnit = isset($attr['paginationpaddingUnit']) ? esc_attr($attr['paginationpaddingUnit']) : 'px';
+        $css .= isset($attr['pg_PaginationpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_PaginationpaddingTop']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_PaginationpaddingBottom']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_PaginationpaddingLeft']) . $paddingUnit . ";" : '';
+        $css .= isset($attr['pg_PaginationpaddingRight']) ? "padding-right: " . esc_attr($attr['pg_PaginationpaddingRight']) . $paddingUnit . ";" : '';
+        
+        // Cursor
+        $css .= "cursor: pointer;";
+        
+        // Font size
+        $css .= isset($attr['pg_PaginationSize']) ? "font-size: " . esc_attr($attr['pg_PaginationSize']) . "px;" : '';
+        
+        // Color
+        $css .= isset($attr['pg_PaginationColor']) ? "color: " . esc_attr($attr['pg_PaginationColor']) . ";" : '';
+        // Background
+        if (isset($attr['pg_PaginationbackgroundType'])) {
+            if ($attr['pg_PaginationbackgroundType'] === 'color') {
+                $css .= isset($attr['pg_PaginationbackgroundColor']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundColor']) . ";" : '';
+            } elseif ($attr['pg_PaginationbackgroundType'] === 'gradient') {
+                $css .= isset($attr['pg_PaginationbackgroundGradient']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundGradient']) . ";" : '';
+            }
+        }
+        
+        // Margin
+        $css .= "margin: 20px 5px;";
+        $css .="text-decoration: none;";
+        
+        $borderRadiusUnit = isset($attr['pg_PaginationpaddingUnit']) ? esc_attr($attr['pg_PaginationpaddingUnit']) : 'px';
+
+        // Border radius for pagination
+        $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_paginationBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_paginationLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
+        $css .= isset($attr['pg_paginationRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_paginationRightBorderRadius']) . $borderRadiusUnit . ";" : '';
+        
+        // Border
+        $css .= isset($attr['PaginationTopborderType']) && isset($attr['pg_paginationTopBorder']) && isset($attr['pg_paginationTopBorderColor']) ? 
+        "border-top: " . esc_attr($attr['PaginationTopborderType']) . ' ' . esc_attr($attr['pg_paginationTopBorder']) . " " . esc_attr($attr['pg_paginationTopBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationBottomborderType']) && isset($attr['pg_paginationBottomBorder']) && isset($attr['pg_paginationBottomBorderColor']) ? 
+        "border-bottom: " . esc_attr($attr['PaginationBottomborderType']) . ' ' . esc_attr($attr['pg_paginationBottomBorder']) . " " . esc_attr($attr['pg_paginationBottomBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationLeftborderType']) && isset($attr['pg_paginationLeftBorder']) && isset($attr['pg_paginationLeftBorderColor']) ? 
+        "border-left: " . esc_attr($attr['PaginationLeftborderType']) . ' ' . esc_attr($attr['pg_paginationLeftBorder']) . " " . esc_attr($attr['pg_paginationLeftBorderColor']) . ";" : '';
+        $css .= isset($attr['PaginationRightborderType']) && isset($attr['pg_paginationRightBorder']) && isset($attr['pg_paginationRightBorderColor']) ? 
+        "border-right: " . esc_attr($attr['PaginationRightborderType']) . ' ' . esc_attr($attr['pg_paginationRightBorder']) . " " . esc_attr($attr['pg_paginationRightBorderColor']) . ";" : '';
+
+    $css .= "}"; 
+        
+    
+    $css .= ".pagination{";
+            
+        $css .= isset($attr['pg_Paginationalignment']) ? "text-align: " . esc_attr($attr['pg_Paginationalignment']) . ";" : '';
+        
+    $css .= "}"; 
+     
+
+     //Hover 
+     $css .= "$wrapper:hover {";
 
         // Border styles
         $css .= isset($attr['borderHvrType']) ? "border-style: " . esc_attr($attr['borderHvrType']) . ";" : '';
@@ -387,13 +597,13 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     // Start building the CSS string for hover styles
-    $css .= "{$attr['pg_blockTitleTag']}:hover {";
+    $css .= "{$attr['pg_blockTitleTag']} a:hover {";
 
         // Check if `titlechoicehvr` is set and apply styles accordingly
         if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
             // Apply color style if titlechoicehvr is 'color'
             if (isset($attr['pg_TitleColorhvr'])) {
-                $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . ";";
+                $css .= "color: " . esc_attr($attr['pg_TitleColorhvr']) . " !important;";
             }
         } elseif (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'gradient') {
             // Apply gradient style if titlechoicehvr is 'gradient'
@@ -407,177 +617,8 @@ function generate_inline_styles($attr) {
         
     // Close the CSS rule
     $css .= "}";
+       
     
-       
-    //Featured Image
-    $css .= "$wrapper $post .post-grid-image{";
-        $css .= "display: block;";
-        $css .= "width: 100%;";
-        $css .= "height: auto;";
-
-      // Border radius for featuredImage
-      $borderRadiusUnit = isset($attr['pg_featuredImageBorderRadiusunit']) ? esc_attr($attr['pg_featuredImageBorderRadiusunit']) : 'px';
-
-      $css .= isset($attr['pg_featuredImageTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_featuredImageTopBorderRadius']) . $borderRadiusUnit . ";" : '';
-      $css .= isset($attr['pg_featuredImageRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_featuredImageRightBorderRadius']) . $borderRadiusUnit . ";" : '';
-      $css .= isset($attr['pg_featuredImageBottomBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_featuredImageBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
-      $css .= isset($attr['pg_featuredImageLeftBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_featuredImageLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
-      
-        // Border
-        $css .= isset($attr['featuredImageTopborderType']) && isset($attr['pg_featuredImageTopBorder']) && isset($attr['pg_featuredImageTopBorderColor']) ? 
-            "border-top: " . esc_attr($attr['featuredImageTopborderType']) . ' ' . esc_attr($attr['pg_featuredImageTopBorder']) . " " . esc_attr($attr['pg_featuredImageTopBorderColor']) . ";" : '';
-        $css .= isset($attr['featuredImageBottomborderType']) && isset($attr['pg_featuredImageBottomBorder']) && isset($attr['pg_featuredImageBottomBorderColor']) ? 
-            "border-bottom: " . esc_attr($attr['featuredImageBottomborderType']) . ' ' . esc_attr($attr['pg_featuredImageBottomBorder']) . " " . esc_attr($attr['pg_featuredImageBottomBorderColor']) . ";" : '';
-        $css .= isset($attr['featuredImageLeftborderType']) && isset($attr['pg_featuredImageLeftBorder']) && isset($attr['pg_featuredImageLeftBorderColor']) ? 
-            "border-left: " . esc_attr($attr['featuredImageLeftborderType']) . ' ' . esc_attr($attr['pg_featuredImageLeftBorder']) . " " . esc_attr($attr['pg_featuredImageLeftBorderColor']) . ";" : '';
-        $css .= isset($attr['featuredImageRightborderType']) && isset($attr['pg_featuredImageRightBorder']) && isset($attr['pg_featuredImageRightBorderColor']) ? 
-            "border-right: " . esc_attr($attr['featuredImageRightborderType']) . ' ' . esc_attr($attr['pg_featuredImageRightBorder']) . " " . esc_attr($attr['pg_featuredImageRightBorderColor']) . ";" : '';
-        
-    $css .= "}";
-     
-    //Title Tag
-    $css .= "$wrapper $post {$attr['pg_blockTitleTag']}{";
-
-        if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
-            // Apply color style if titlechoice is 'color'
-            if (isset($attr['pg_TitleColor'])) {
-                $css .= "color: " . esc_attr($attr['pg_TitleColor']) . ";";
-            }
-        } elseif (isset($attr['titlechoice']) && $attr['titlechoice'] === 'gradient') {
-            // Apply gradient style if titlechoice is 'gradient'
-            if (isset($attr['pg_TitleColor'])) {
-                $css .= "background: " . esc_attr($attr['pg_TitleColor']) . " !important;";
-                $css .= "-webkit-background-clip: text !important;";
-                $css .= "-webkit-text-fill-color: transparent !important;";
-                $css .= "background-clip: text !important;";
-            }
-        }
-
-        $css .= isset($attr['pg_TitleSize']) ? "font-size: " . esc_attr($attr['pg_TitleSize']) . "px;" : '';
-       
-        $css .= isset($attr['pg_spacing']) ? "margin-block-start: " . esc_attr($attr['pg_spacing']) . "%;" : '';
-
-        $css .= "margin-left: 5px;";
-        $css .= isset($attr['pg_TitlelineHeight']) ? "line-height: " . esc_attr($attr['pg_TitlelineHeight']) . ";" : '';
-        $css .= "margin-block-end: 0.07em;";
-        $css .= "font-weight: 600;";
-
-        // Ensure text wraps properly
-        $css .= "overflow-wrap: break-word;"; // Break words if needed
-        $css .= "word-break: break-word;"; // Break long words if necessary
-
-      
-    $css .= "}";
-     
-    //author-date-container
-    $css .= "$wrapper $post .post-grid-author-date-container{";
-        $css .= "    display: flex;";
-        $css .= "    align-items: center;";
-        $css .= "    flex-wrap: wrap;";
-        $css .= "    margin-left: 2px;";
-    $css .= "}";
-      
-    //author-image
-    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-author-image {";
-        $css .= "    width: 20px;";
-        $css .= "    border-radius: 50%;";
-        $css .= "transform: scale(" . esc_attr($attr['pg_authorImageScale']) . ");";
-    $css .= "}";
-      
-    //author-span
-    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-author-span{";
-        $css .= "    text-decoration: none;";
-        $css .= "font-size: " . esc_attr($attr['pg_authorTextSize']) . "px;";
-        $css .= "color: " . esc_attr($attr['pg_authorTextColor']) . ";";
-        // Cursor
-        $css .= "cursor: pointer;";
-        $css .= "    margin-right: 10px;";
-    $css .= "}";
-
-    //date-image
-    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-date-image{";
-        $css .= "transform: scale(" . esc_attr($attr['pg_dateImageScale']) . ");";
-        $css .= "width: 20px;";
-      
-    $css .= "}";
-        
-    //date-span
-    $css .= "$wrapper $post .post-grid-author-date-container .post-grid-date-span{";
-        $css .= "font-size: " . esc_attr($attr['pg_dateTextSize']) . "px;";
-        $css .= "color: " . esc_attr($attr['pg_dateColor']) . ";";
-    $css .= "}";
-        
-    //content
-    $css .= "$wrapper $post .post-grid-excerpt-view{";
-
-        // Font Weight
-        $css .= isset($attr['pg_ContentWeight']) ? "font-weight: " . esc_attr($attr['pg_ContentWeight']) . ";" : '';
-
-        // Text Color
-        $css .= isset($attr['pg_textColor']) ? "color: " . esc_attr($attr['pg_textColor']) . ";" : '';
-        
-        // Font Size
-        $css .= isset($attr['pg_textSize']) ? "font-size: " . esc_attr($attr['pg_textSize']) . "px;" : '';
-        
-        // Line Height
-        $css .= isset($attr['pg_lineHeight']) ? "line-height: " . esc_attr($attr['pg_lineHeight']) . ";" : '';
-        
-        // Margin Left
-        $css .= "margin-left: 5px;";
-        
-    $css .= "}";
-        
-    //pagination
-    $css .= ".page-numbers-{$uniqueId} {";
-
-        // Padding
-        $paddingUnit = isset($attr['paginationpaddingUnit']) ? esc_attr($attr['paginationpaddingUnit']) : 'px';
-        $css .= isset($attr['pg_PaginationpaddingTop']) ? "padding-top: " . esc_attr($attr['pg_PaginationpaddingTop']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_PaginationpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['pg_PaginationpaddingBottom']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_PaginationpaddingLeft']) ? "padding-left: " . esc_attr($attr['pg_PaginationpaddingLeft']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['pg_PaginationpaddingRight']) ? "padding-right: " . esc_attr($attr['pg_PaginationpaddingRight']) . $paddingUnit . ";" : '';
-        
-        // Cursor
-        $css .= "cursor: pointer;";
-        
-        // Font size
-        $css .= isset($attr['pg_PaginationSize']) ? "font-size: " . esc_attr($attr['pg_PaginationSize']) . "px;" : '';
-        
-        // Color
-        $css .= isset($attr['pg_PaginationColor']) ? "color: " . esc_attr($attr['pg_PaginationColor']) . ";" : '';
-        // Background
-        if (isset($attr['pg_PaginationbackgroundType'])) {
-            if ($attr['pg_PaginationbackgroundType'] === 'color') {
-                $css .= isset($attr['pg_PaginationbackgroundColor']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundColor']) . ";" : '';
-            } elseif ($attr['pg_PaginationbackgroundType'] === 'gradient') {
-                $css .= isset($attr['pg_PaginationbackgroundGradient']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundGradient']) . ";" : '';
-            }
-        }
-        
-        // Margin
-        $css .= "margin: 20px 5px;";
-        $css .="text-decoration: none;";
-        
-        $borderRadiusUnit = isset($attr['pg_PaginationpaddingUnit']) ? esc_attr($attr['pg_PaginationpaddingUnit']) : 'px';
-
-        // Border radius for pagination
-        $css .= isset($attr['pg_paginationTopBorderRadius']) ? "border-top-left-radius: " . esc_attr($attr['pg_paginationTopBorderRadius']) . $borderRadiusUnit . ";" : '';
-        $css .= isset($attr['pg_paginationBottomBorderRadius']) ? "border-bottom-left-radius: " . esc_attr($attr['pg_paginationBottomBorderRadius']) . $borderRadiusUnit . ";" : '';
-        $css .= isset($attr['pg_paginationLeftBorderRadius']) ? "border-bottom-right-radius: " . esc_attr($attr['pg_paginationLeftBorderRadius']) . $borderRadiusUnit . ";" : '';
-        $css .= isset($attr['pg_paginationRightBorderRadius']) ? "border-top-right-radius: " . esc_attr($attr['pg_paginationRightBorderRadius']) . $borderRadiusUnit . ";" : '';
-        
-        // Border
-        $css .= isset($attr['PaginationTopborderType']) && isset($attr['pg_paginationTopBorder']) && isset($attr['pg_paginationTopBorderColor']) ? 
-        "border-top: " . esc_attr($attr['PaginationTopborderType']) . ' ' . esc_attr($attr['pg_paginationTopBorder']) . " " . esc_attr($attr['pg_paginationTopBorderColor']) . ";" : '';
-        $css .= isset($attr['PaginationBottomborderType']) && isset($attr['pg_paginationBottomBorder']) && isset($attr['pg_paginationBottomBorderColor']) ? 
-        "border-bottom: " . esc_attr($attr['PaginationBottomborderType']) . ' ' . esc_attr($attr['pg_paginationBottomBorder']) . " " . esc_attr($attr['pg_paginationBottomBorderColor']) . ";" : '';
-        $css .= isset($attr['PaginationLeftborderType']) && isset($attr['pg_paginationLeftBorder']) && isset($attr['pg_paginationLeftBorderColor']) ? 
-        "border-left: " . esc_attr($attr['PaginationLeftborderType']) . ' ' . esc_attr($attr['pg_paginationLeftBorder']) . " " . esc_attr($attr['pg_paginationLeftBorderColor']) . ";" : '';
-        $css .= isset($attr['PaginationRightborderType']) && isset($attr['pg_paginationRightBorder']) && isset($attr['pg_paginationRightBorderColor']) ? 
-        "border-right: " . esc_attr($attr['PaginationRightborderType']) . ' ' . esc_attr($attr['pg_paginationRightBorder']) . " " . esc_attr($attr['pg_paginationRightBorderColor']) . ";" : '';
-
-    $css .= "}"; 
-        
     //for tablet
     $css .= "@media (max-width: 1024px) {
 
@@ -626,7 +667,6 @@ function generate_inline_styles($attr) {
             border-top-right-radius: " . (isset($attr['pg_featuredImageLeftBorderRadiusTablet']) ? esc_attr($attr['pg_featuredImageLeftBorderRadiusTablet']) . "px" : '') . ";
 
         }
-
 
         $wrapper $post .post-grid-category-style-new {
             padding-top: " . (isset($attr['pg_CategorypaddingTopTablet']) ? esc_attr($attr['pg_CategorypaddingTopTablet']) . esc_attr($attr['categorypaddingUnit']) : '') . ";

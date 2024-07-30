@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl,ToogleGroupControl, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 import {
@@ -1141,7 +1141,6 @@ const handlePaginationBorderRadiusChange = (newValues) => {
     return (
         <>
             <PanelBody  title={__('Layout', 'vayu-blocks')} initialOpen={false}>
-                
                 <ResponsiveControl label={__('Number of Columns', 'vayu-blocks')}>
                     <RangeControl
                         type={getLayoutColumnsType()}
@@ -1191,58 +1190,7 @@ const handlePaginationBorderRadiusChange = (newValues) => {
 
             </PanelBody>
  
-            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
-                <FormTokenField
-                    __nextHasNoMarginBottom
-                    label="By Category"
-                    onChange={(value)=>setAttributes({selectedCategories:value}) }
-                    suggestions={[
-                        'cat1',
-                        'cat2',
-                        'uncategorised',
-                        'cat3',
-                        'cat4',
-                        'cat5'
-                    ]}
-                    value={selectedCategories}                     
-                />
-                <br />
-                <br />
-
-                <ToggleControl
-                    label={__('Featured Image Post Only', 'vayu-blocks')}
-                    checked={pg_featuredImageOnly}
-                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
-                />
-
-            <h4>Order</h4>
-            <SelectControl
-                label="Sort Order"
-                value={sortByOrder}  // Corrected typo here
-                options={[
-                    { value: 'desc', label: 'Descending' },  // Corrected typo here
-                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
-                ]}
-                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
-            />
-
-            <SelectControl
-                label="Sort By Field"
-                value={sortByField}
-                options={[
-                    { value: 'date', label: 'Date' },
-                    { value: 'modified', label: 'Last Modified' },
-                    { value: 'title', label: 'Title' },
-                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
-                ]}
-                onChange={(value) => setAttributes({ sortByField: value })}
-            />
-
-
-
-            </PanelBody>
-
-            <PanelBody title={__('Layout Controls', 'vayu-blocks')} initialOpen={false}>
+            <PanelBody title={__('Controls', 'vayu-blocks')} initialOpen={false}>
                 <ResponsiveControl label={__(getView, 'vayu-blocks')}>
                 <br />
                 <ToggleControl
@@ -1342,7 +1290,63 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                         />
                     )}
 
+                   
             </ResponsiveControl>
+            <br />
+            <ToggleControl
+                        label={__('Show Pagination', 'vayu-blocks')}
+                        checked={showpagination}
+                        onChange={(value) => setAttributes({
+                            showpagination:value
+                        })}
+                    />
+            </PanelBody>
+
+            <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
+                <FormTokenField
+                    __experimentalAutoSelectFirstMatch
+                    __experimentalExpandOnFocus
+                    label="By Category"
+                    onChange={(value)=>setAttributes({selectedCategories:value}) }
+                    suggestions={[
+                        'cat1',
+                        'cat2',
+                        'uncategorised',
+                        'cat3',
+                        'cat4',
+                        'cat5'
+                    ]}
+                    value={selectedCategories}                     
+                />
+                <br />
+                <ToggleControl
+                    label={__('Featured Image Post Only', 'vayu-blocks')}
+                    checked={pg_featuredImageOnly}
+                    onChange={(value) => setAttributes({ pg_featuredImageOnly: value })}
+                />
+            <SelectControl
+                label="Sort Order"
+                value={sortByOrder}  // Corrected typo here
+                options={[
+                    { value: 'desc', label: 'Descending' },  // Corrected typo here
+                    { value: 'asc', label: 'Ascending' }      // Corrected typo here
+                ]}
+                onChange={(value) => setAttributes({ sortByOrder: value })}  // Corrected typo here
+            />
+            <SelectControl
+                label="Sort By Field"
+                value={sortByField}
+                options={[
+                    { value: 'date', label: 'Date' },
+                    { value: 'modified', label: 'Last Modified' },
+                    { value: 'title', label: 'Title' },
+                    { value: 'id', label: 'Post ID' }  // Corrected 'Id' to 'id' and 'PostId' to 'Post ID'
+                ]}
+                onChange={(value) => setAttributes({ sortByField: value })}
+            />
+
+
+
             </PanelBody>
 
             <PanelBody title={__('Pagination', 'vayu-blocks')} initialOpen={false}>
@@ -1355,26 +1359,17 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                 />
                 {showpagination && (
                     <>
-                       {/* <ToggleGroupControl
-                            __nextHasNoMarginBottom
-                            isBlock
-                            label={__('Pagination Alignment', 'vayu-blocks')}
-                            value={pg_Paginationalignment}
-                            onChange={(value) => setAttributes({ pg_Paginationalignment: value })}
-                        >
-                            <ToggleGroupControlOption
-                                label="Left"
-                                value="left"
-                            />
-                            <ToggleGroupControlOption
-                                label="Center"
-                                value="center"
-                            />
-                            <ToggleGroupControlOption
-                                label="Right"
-                                value="right"
-                            />
-                        </ToggleGroupControl> */}
+                    
+                        <SelectControl
+                            label={ __( 'Alignment', 'vayu-blocks' ) }
+                            value={ attributes.pg_Paginationalignment }
+                            options={ [
+                                { label:  __( `Left`, 'vayu-blocks' ), value: 'left' },
+                                { label: __( 'Center', 'vayu-blocks' ), value: 'center' },
+                                { label: __( 'Right', 'vayu-blocks' ), value: 'right' },
+                            ]}
+                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }
+                        />
 
                         <h4>Text Color</h4>
                         <ColorPalette
@@ -1472,6 +1467,7 @@ const handlePaginationBorderRadiusChange = (newValues) => {
                             />
                         </ResponsiveControl>
 
+                        
                         <ResponsiveControl label={__('Padding', 'vayu-blocks')}>
                                 <UnitChooser
                                     value={attributes.pg_PaginationpaddingUnit}

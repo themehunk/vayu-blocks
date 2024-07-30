@@ -2,9 +2,9 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from "@wordpress/data";
 
 const blockStyles = () => ({
-
     maxWidth: "100%",
 });
+
 const gridContainerStyles = (attributes) => {
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -43,10 +43,11 @@ const gridContainerStyles = (attributes) => {
         display: 'grid',
         ...layoutColumnsStyle,
         ...gapStyle,
-        maxWidth: '100%',
+        width: attributes.widthType === 'default' ? `${attributes.globalwidth}px` : '100%',
         gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
+
 //post
 const getPaddingStyle = (attributes,view) => {
     switch (view) {
@@ -280,23 +281,19 @@ const categoryButtonStyles = (attributes) => {
 
     return {
         ...categoryStyles,
+        ...categoryBorderRadiusStyles,
         color: `${attributes.pg_categoryTextColor}`,
         background: attributes.category_backgroundType === 'color' ? attributes.category_backgroundColor : attributes.category_backgroundType === 'gradient' ? `${attributes.category_backgroundGradient}` : 'none',
         fontSize: `${attributes.pg_categoryTextSize}px`,
         marginLeft:'5px',
         fontWeight:'600',
         marginBlockStart: `${attributes.pg_spacing}%`,
-        
-        ...categoryBorderRadiusStyles,
-
         textDecoration: "none",
-
         border: `${attributes.categoryborderType || 'solid'} ${attributes.pg_categoryBorder || '0px'} ${attributes.pg_categoryBorderColor || 'black'}`,
         borderTop: `${attributes.categoryTopborderType || 'solid'} ${attributes.pg_categoryTopBorder || '0px'} ${attributes.pg_categoryTopBorderColor || 'black'}`,
         borderBottom: `${attributes.categoryBottomborderType || 'solid'} ${attributes.pg_categoryBottomBorder || '0px'} ${attributes.pg_categoryBottomBorderColor || 'black'}`,
         borderLeft: `${attributes.categoryLeftborderType || 'solid'} ${attributes.pg_categoryLeftBorder || '0px'} ${attributes.pg_categoryLeftBorderColor || 'black'}`,
         borderRight: `${attributes.categoryRightborderType || 'solid'} ${attributes.pg_categoryRightBorder || '0px'} ${attributes.pg_categoryRightBorderColor || 'black'}`,
-
         lineHeight: 'initial',
     };
 };
@@ -312,6 +309,27 @@ const titleTagStyles = (attributes) => {
         marginBlockEnd: '0.05em',
         fontWeight: '600',
         marginLeft: '5px',
+        textDecoration: 'none',
+    };
+
+    // Conditionally add styles based on titlechoice
+    if (attributes.titlechoice === 'color') {
+        styles.color = attributes.pg_TitleColor;
+    } else if (attributes.titlechoice === 'gradient') {
+        styles.background = `${attributes.pg_TitleColor} text` ;
+        styles.WebkitTextFillColor = 'transparent';
+        styles.WebkitBackgroundClip = 'text';
+        styles.backgroundClip = 'text';
+    }
+
+    return styles;
+};
+
+const titleTagStylesatag = (attributes) => {
+    // Initialize the base style object
+
+    const styles = {
+        textDecoration: 'none',
     };
 
     // Conditionally add styles based on titlechoice
@@ -330,12 +348,20 @@ const titleTagStyles = (attributes) => {
 //Author
 const authorAndDateContainerStyles = {
     display: 'flex', 
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexWrap:'wrap',
+    marginLeft:'2px',
+};
+
+const dateSectionStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap', 
 };
 
 const authorImageStyles = (pg_authorTextSize, pg_authorTextColor, pg_authorImageScale) => ({
     width: '20px',
+    alignItems: 'center',
     borderRadius:"50%",
     transform: `scale(${pg_authorImageScale})`,
 
@@ -431,7 +457,7 @@ const tagButtonStyles = (attributes ) => {
 
     return {
         ...tagPaddingStyle,
-        marginLeft:'5px',
+        // marginLeft:'5px',
         color: `${attributes.pg_tagTextColor}`,
         background: attributes.tag_backgroundType === 'color' ? attributes.tag_backgroundColor : attributes.tag_backgroundType === 'gradient' ? `${attributes.tag_backgroundGradient}` : 'none',
         fontSize: `${attributes.pg_tagTextSize}px`,
@@ -533,7 +559,7 @@ const PaginationStyles = (attributes) => {
         ...BorderRadiusStyles,
         cursor:'pointer',
         fontSize: `${attributes.pg_PaginationSize}px`,
-        color: `${attributes.pg_PaginationColor}`,
+        color: `${attributes.pg_PaginationColor} !important`,
         background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
         margin: '20px 5px',
 
@@ -542,13 +568,13 @@ const PaginationStyles = (attributes) => {
         borderBottom: `${attributes.paginationBottomborderType || 'solid'} ${attributes.pg_paginationBottomBorder || '0px'} ${attributes.pg_paginationBottomBorderColor || 'blue'}`,
         borderLeft: `${attributes.paginationLeftborderType || 'solid'} ${attributes.pg_paginationLeftBorder || '0px'} ${attributes.pg_paginationLeftBorderColor || 'blue'}`,
         borderRight: `${attributes.paginationRightborderType || 'solid'} ${attributes.pg_paginationRightBorder || '0px'} ${attributes.pg_paginationRightBorderColor || 'blue'}`,
-        ':hover': {
-            background: `red`, // Change background color on hover
-            color: `white`, // Change text color on hover
-            // Add other hover styles like border changes, text shadow, etc.
-          },
     };
 };
+
+const paginationnewstyle = (attributes) => ({
+    textAlign: `${attributes.pg_Paginationalignment}`,
+});
+
 
 
 export {
@@ -559,11 +585,14 @@ export {
     fullContentStyle,
     showOnlyDateStyles,
     authorAndDateContainerStyles,
+    dateSectionStyles,
     tagButtonStyles,
     authorImageStyles,
     titleTagStyles,
     categoryButtonStyles,
     featuredImageStyles,
     authorLinkStyles,
-    dateImageStyles
+    dateImageStyles,
+    titleTagStylesatag,
+    paginationnewstyle
 };

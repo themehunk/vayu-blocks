@@ -805,6 +805,7 @@ export default function Edit({
 				...transitiondur,
 				...ShaperStyle
 			}, x => x?.includes?.( 'undefined' ));
+			
 
 			
 			const blockProps = useBlockProps({
