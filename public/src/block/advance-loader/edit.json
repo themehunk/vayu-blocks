@@ -1,0 +1,140 @@
+{
+    "dots":{
+        "type": "boolean",
+        "default":true
+    },
+    "infinite":{
+        "type": "boolean",
+        "default":true
+    },
+    "speed": {
+        "type": "number",
+        "default": 500
+    },
+    "slidesToShow" :{
+        "type": "number",
+        "default": 1
+    },
+    "slidesToScroll" :{
+        "type": "number",
+        "default": 1
+    },
+    "row" :{
+        "type": "number",
+        "default": 1
+    },
+    "slidesPerRow" :{
+        "type": "number",
+        "default": 1
+    },
+    "centerMode":{
+        "type": "boolean",
+        "default": false
+    },
+    "fade":{
+        "type": "boolean",
+        "default": false
+    },
+    "waitForAnimate":{
+        "type": "boolean",
+        "default": false
+    },
+    "lazyLoad":{
+        "type": "boolean",
+        "default": false
+    },
+    "autoplay":{
+        "type": "boolean",
+        "default": false
+    },
+    "autoplaySpeed": {
+        "type": "number",
+        "default": 2000
+    },
+    "pauseOnHover":{
+        "type": "boolean",
+        "default": false
+    },
+    "focusOnSelect":{
+        "type": "boolean",
+        "default": false
+    },
+    "rtl":{
+        "type": "boolean",
+        "default": false
+    },
+    "slidercount":{
+        "type":"number",
+        "default": 3
+    },
+    "sliderTexts": {
+        "type": "array",
+        "default": [
+            { "heading": "Default Heading", "paragraph": "Default Paragraph" }
+        ]
+    },
+    "sliderButtons": {
+        "type": "array",
+        "default": [
+            {
+                "showButton1": true,
+                "button1Text": "Button 1",
+                "button1Url": "",
+                "showButton2": true,
+                "button2Text": "Button 2",
+                "button2Url": ""
+            },
+            {
+                "showButton1": true,
+                "button1Text": "Button 1",
+                "button1Url": "",
+                "showButton2": true,
+                "button2Text": "Button 2",
+                "button2Url": ""
+            },
+            {
+                "showButton1": true,
+                "button1Text": "Button 1",
+                "button1Url": "",
+                "showButton2": true,
+                "button2Text": "Button 2",
+                "button2Url": ""
+            }
+        ]
+    },
+    "sliderStyles": {
+        "type": "array",
+        "default": [
+            {
+                "layout": {
+                    "backgroundColor": "blue",
+                    "padding": 10,
+                    "alignment": "left",
+                    "borderRadius": 0
+                },
+                "heading": {
+                    "fontSize": 25,
+                    "fontWeight": "normal",
+                    "textColor": "#000000"
+                },
+                "paragraph": {
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textColor": "#000000"
+                },
+                "button1": {
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textColor": "#000000"
+                },
+                "button2": {
+                    "fontSize": 16,
+                    "fontWeight": "normal",
+                    "textColor": "#000000"
+                }
+            }
+        ]
+    }
+    
+
+}

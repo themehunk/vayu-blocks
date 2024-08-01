@@ -5,7 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function generate_inline_styles($attr) {
-
     $css = '';
     // Generate unique ID
     $uniqueId = $attr['pg_posts'][0]['uniqueID'];
