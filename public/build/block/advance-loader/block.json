@@ -1,0 +1,14 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "vayu-blocks/advance-loader",
+  "version": "0.2.0",
+  "title": "Advance Loader",
+  "category": "vayu-blocks",
+  "description": "A custom Loader to display block with options for dots and aerrow.",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "vayu-blocks",
+  "viewScript": "file:./view.js"
+}

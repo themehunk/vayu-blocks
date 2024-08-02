@@ -32,9 +32,6 @@ import {
 	ControlPanelControl,
 	BackgroundSelectorControl,
 	UnitChooser,
-	ToogleGroupControl,
-	IconPicker,
-	GoogleFontsControl
 } from '../../../components/index.js';
 
 

@@ -17,4 +17,27 @@
   flex-wrap: wrap;
 }
 
+.excerpt_selector {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.excerpt_selector::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.excerpt_selector:hover::after {
+  visibility: visible;
+  width: 100%;
+}
+
 /*# sourceMappingURL=style-post-grid.css.map*/

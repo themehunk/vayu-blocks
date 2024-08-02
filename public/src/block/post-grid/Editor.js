@@ -140,7 +140,6 @@ const colors = [
 	{ name: 'Light Red', color: '#FF6347' },    // Light Red
 	{ name: 'Purple', color: '#800080' },       // Purple
 ];
-
 const gradient = [
 	{
 	  gradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
@@ -1345,15 +1344,6 @@ const handletagsBorderRadiusChange = (newValues) => {
         pg_tagsBottomBorderRadius: newValues.borderRadius.bottom,
     });
 };
-const [titlechoiceq, setTitlechoice] = useState('color');
-
-const handleColorClick = () => {
-	setTitlechoice('color');
-};
-
-const handleGradientClick = () => {
-	setTitlechoice('gradient');
-};
 
 const maxpxvalue = attributes.globalwidth/attributes.pg_postLayoutColumns;
 // unit switch max value
@@ -1361,7 +1351,7 @@ const [layoutcustomWidthUnit, setlayoutcustomWidthUnit] = useState('%');
 const maxlayoutcustomWidthUnit = layoutcustomWidthUnit === 'px' ? maxpxvalue : layoutcustomWidthUnit === 'em' ? 50 : layoutcustomWidthUnit === '%' ? 100:'';
 const customTooltipCustomWidth = value => `${value}${attributes.layoutcustomWidthUnit}`;
 
-
+//layout width
 const getlayoutCustomWidth = () => {
 	switch ( getView ) {
 	case 'Desktop':

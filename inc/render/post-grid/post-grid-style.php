@@ -5,7 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function generate_inline_styles($attr) {
-
     $css = '';
     // Generate unique ID
     $uniqueId = $attr['pg_posts'][0]['uniqueID'];
@@ -604,7 +603,7 @@ function generate_inline_styles($attr) {
     $css .= "}";
 
     // Start building the CSS string for hover styles
-    $css .= "{$attr['pg_blockTitleTag']} a:hover {";
+    $css .= "$wrapper $post {$attr['pg_blockTitleTag']} a:hover {";
 
         // Check if `titlechoicehvr` is set and apply styles accordingly
         if (isset($attr['titlechoicehvr']) && $attr['titlechoicehvr'] === 'color') {
@@ -625,7 +624,6 @@ function generate_inline_styles($attr) {
     // Close the CSS rule
     $css .= "}";
        
-    
     //for tablet
     $css .= "@media (max-width: 1024px) {
 

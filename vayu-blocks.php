@@ -54,6 +54,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/vayu-sites/vayu-sites.php';
         require_once 'inc/render/post-grid/post-grid.php';
         require_once 'inc/render/post-grid/post-grid-style.php';
+        require_once 'inc/render/advance-loader/advance-loader.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -118,7 +119,16 @@ class Vayu_Block_Plugin {
                  'frontend_style' => 'post-grid-frontend-style',
                 'status'         => get_option('button_value'),
                 'render_callback' => 'post_grid_render'
-            )
+            ),
+            array(
+                'name'           => 'vayu-blocks/advance-loader',
+                'script_handle'  => 'advance-loader',
+                 'editor_style'   => 'advance-loader-editor-style',
+                 'frontend_style' => 'advance-loader-frontend-style',
+                'status'         => get_option('button_value'),
+                'render_callback' => 'advance_loader_render'
+            ),
+            
         );
 
         // Check if WooCommerce is active
