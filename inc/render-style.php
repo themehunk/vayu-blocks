@@ -93,7 +93,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 		if ( $block['blockName'] === 'vayu-blocks/post-grid' ) {
 			 $css .= generate_inline_styles($block['attrs']);
 	 	}
-	 	if ( $block['blockName'] === 'vayu-blocks/advance-loader' ) {
+	 	if ( $block['blockName'] === 'vayu-blocks/advance-slider' ) {
 			$css .= generate_inline_styles($block['attrs']);
 		} 		
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {

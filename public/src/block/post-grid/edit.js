@@ -193,7 +193,7 @@ const Edit = ({ attributes, setAttributes }) => {
             try {
                 // Fetch categories to get IDs
                 const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
-    
+                setAttributes({pg_allCategories:fetchedCategories});
                 // Create a mapping of category names to IDs
                 const categoryNameToIdMap = fetchedCategories.reduce((acc, category) => {
                     acc[category.name] = category.id;
@@ -228,7 +228,7 @@ const Edit = ({ attributes, setAttributes }) => {
         };
     
         fetchCategoriesAndUpdateFilter();
-    }, [pg_featuredImageOnly, selectedCategories]);
+    }, [pg_featuredImageOnly, selectedCategories,pg_posts]);
     
     const handlePageChange = (page) => {
         setCurrentPage(page);
