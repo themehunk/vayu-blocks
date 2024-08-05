@@ -3,6 +3,7 @@ import { PanelBody, TextControl,ToggleControl,ToogleGroupControl,GradientPicker,
 import { useSelect } from '@wordpress/data';
 import { Button, ButtonGroup } from '@wordpress/components';
 import './editor.scss';
+import apiFetch from '@wordpress/api-fetch';
 import { MdColorLens } from "react-icons/md";
 import { PiGradient } from "react-icons/pi";
 import {AlignmentToolbar} from '@wordpress/block-editor';
@@ -14,12 +15,13 @@ import {
     HoverControl,
 } from '../../components/index.js';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
+        pg_allCategories,
         pg_Paginationalignment,
 
         pg_paginationBorderRadiusunit,
@@ -1195,6 +1197,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
+    // Assuming pg_allCategories is defined and has a 'name' property
+    const suggestions = pg_allCategories.length > 0 
+    ? pg_allCategories.map(category => category.name)
+    : [];// Define your validation function
+
+    // useEffect(() => {
+    //     const fetchCategories = async () => {
+    //         try {
+    //             // Fetch categories to get IDs
+    //             const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
+    //                 setAttributes({pg_allCategories:fetchedCategories});
+    //         } catch (error) {
+    //             console.error('Error fetching categories', error);
+    //         }
+    //     };
+    //     fetchCategories();
+    // }, []);
+    
+
+    const tokenIsValid = (token) => {
+        return suggestions.includes(token);
+    };
+    
     const [hover, sethover] = useState('normal');
 
     return (
@@ -1363,19 +1388,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
             <PanelBody title={__('Filter', 'vayu-blocks')} initialOpen={false}>
                 <FormTokenField
+                    __experimentalValidateInput={tokenIsValid}
                     __experimentalAutoSelectFirstMatch
                     __experimentalExpandOnFocus
                     label="By Category"
                     onChange={(value)=>setAttributes({selectedCategories:value}) }
-                    suggestions={[
-                        'cat1',
-                        'cat2',
-                        'uncategorised',
-                        'cat3',
-                        'cat4',
-                        'cat5'
-                    ]}
-                    value={selectedCategories}                     
+                    suggestions={suggestions}
+                    value={selectedCategories}   
                 />
                 <br />
                 <ToggleControl

@@ -27,6 +27,12 @@
         "type": "number",
         "default": 200
       },
+      "pg_allCategories": {
+        "type": "array",
+        "default": []
+      },
+
+
       "pg_blockTitleTag": {
         "type": "string",
         "default": "h2"

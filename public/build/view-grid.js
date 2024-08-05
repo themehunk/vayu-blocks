@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 var __webpack_exports__ = {};
 /*!******************************************!*\
-  !*** ./src/block/advance-loader/view.js ***!
+  !*** ./src/block/advance-slider/view.js ***!
   \******************************************/
 
 /******/ })()

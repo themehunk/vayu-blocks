@@ -1,0 +1,99 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block/advance-slider/editor.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+.slider-settings {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s ease;
+  background-color: #fff;
+  overflow: hidden; /* Ensures content does not overflow */
+}
+
+.slider-settings.expanded {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer; /* Indicates that the header is clickable */
+}
+
+.slider-title {
+  font-weight: bold;
+  flex: 1;
+}
+
+.slider-actions {
+  display: flex;
+  align-items: center;
+}
+
+.delete-button,
+.expand-button {
+  margin-left: 10px;
+}
+
+.slider-content {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  max-height: 0; /* Initial hidden state */
+  overflow: hidden; /* Hide overflow during transition */
+  transition: max-height 0.3s ease; /* Smooth transition */
+}
+
+.slider-settings.expanded .slider-content {
+  max-height: auto; /* Adjust based on content height */
+}
+
+.slider-content .components-base-control {
+  margin-bottom: 10px; /* General margin for components inside slider-content */
+}
+
+.myclasst {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.components-base-control__labelt {
+  padding: 5px 0;
+  font-weight: 800;
+}
+
+.linking-controlst {
+  display: flex;
+  opacity: 0.2;
+}
+
+.linking-controlst button {
+  width: 20px;
+  cursor: pointer;
+  height: 25px;
+}
+
+.linking-controlst button svg {
+  width: 20px;
+}
+
+.linking-controlst button.is-primary {
+  background: rgba(108, 27, 195, 0.6588235294);
+  box-shadow: none !important;
+}
+
+.slider-slide {
+  height: 300px;
+  padding: 20px;
+  background-size: cover; /* Ensure background images cover the area */
+  background-position: center; /* Center background images */
+  background-repeat: no-repeat;
+  overflow: hidden; /* Prevents overflow */
+  text-align: center;
+}
+
+/*# sourceMappingURL=advance-slider.css.map*/
