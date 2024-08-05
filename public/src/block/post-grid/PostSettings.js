@@ -1202,6 +1202,19 @@ const PostSettings = ({ attributes, setAttributes }) => {
     ? pg_allCategories.map(category => category.name)
     : [];// Define your validation function
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                // Fetch categories to get IDs
+                const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
+                    setAttributes({pg_allCategories:fetchedCategories});
+            } catch (error) {
+                console.error('Error fetching categories', error);
+            }
+        };
+        fetchCategories();
+    }, []);
+    
 
     const tokenIsValid = (token) => {
         return suggestions.includes(token);
