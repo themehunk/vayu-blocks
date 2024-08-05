@@ -194,6 +194,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 // Fetch categories to get IDs
                 const fetchedCategories = await apiFetch({ path: '/wp/v2/categories' });
                 // Create a mapping of category names to IDs
+                setAttributes({pg_allCategories:fetchedCategories});
                 const categoryNameToIdMap = fetchedCategories.reduce((acc, category) => {
                     acc[category.name] = category.id;
                     return acc;
