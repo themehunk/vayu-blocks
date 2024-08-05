@@ -32,14 +32,14 @@ display: none !important;
   #vayu-blocks-container .header-text{
     flex-grow: initial;
   }
-  .header-text b{
+  #vayu-blocks-container .header-text b{
   color: #666060;
 }
-.header-text .aisb-verifybtn{
+#vayu-blocks-container .header-text .aisb-verifybtn{
   display: flex;
   align-items: center;
 }
-.header-text .aisb-verifybtn > span{
+#vayu-blocks-container .header-text .aisb-verifybtn > span{
   margin-top: 0;
 }
 #vayu-blocks-container .header-text .aisb-verifybtn > a:not(.activate-now){
