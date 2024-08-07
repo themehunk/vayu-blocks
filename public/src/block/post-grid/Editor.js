@@ -1722,7 +1722,7 @@ const handleTitleTagChange = (value) => {
 					value={pg_textSize}
 					onChange={(value) => setAttributes({ pg_textSize: value })}
 				/>
-						<br />
+				<br />
 				<SelectControl
 					label={__('Font Weight', 'text-domain')}
 					value={attributes.pg_ContentWeight}

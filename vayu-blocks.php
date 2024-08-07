@@ -126,7 +126,7 @@ class Vayu_Block_Plugin {
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
                 'status'         => get_option('button_value'),
-                'render_callback' => 'advance_slider_render'
+                'render_callback' => 'vayu_blocks_advance_slider_render'
             ),
             
         );

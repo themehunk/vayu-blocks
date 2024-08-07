@@ -19,6 +19,7 @@ import {
 } from '@wordpress/element';
 
 import PostSettings from '../postSettings';
+import SlideSettings from '../SlideSettings';
 
 /**
  * Internal dependencies
@@ -60,7 +61,7 @@ const PanelSettings = ({
 		}, {});
 	  };
     
-    const [ tab, setTab ] = useState( 'setting' );
+    const [ tab, setTab ] = useState( 'slide' );
 	const [ hover, setHover ] = useState( 'normal' );
 
     const getCustomWidth = () => {
@@ -1633,6 +1634,11 @@ const PanelSettings = ({
 			<InsSettingHeader value={ tab }
 						options={[
 							{
+								label: __( 'Slide', 'vayu-blocks' ),
+								value: 'slide',
+								icon: 'slide'
+							},
+							{
 								label: __( 'Setting', 'vayu-blocks' ),
 								value: 'setting',
 								icon: 'colorwand'
@@ -1645,10 +1651,16 @@ const PanelSettings = ({
 						]}
 						onChange={ setTab }
 				/>
-				{'setting' === tab && (
-									<Fragment>
-										<PostSettings attributes={attributes} setAttributes={setAttributes} />
-									</Fragment>
+
+				{'slide' === tab && (
+					<Fragment>
+						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
+					</Fragment>
+
+				) || 'setting' === tab && (
+						<Fragment>
+							<PostSettings attributes={attributes} setAttributes={setAttributes} />
+						</Fragment>
 
 				) || 'advanced' === tab && (
 					<Fragment>
