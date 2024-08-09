@@ -15,6 +15,7 @@ import {
 
 import { IoEllipsisVerticalCircleOutline, IoColorPaletteOutline } from 'react-icons/io5';
 import { RiSettings5Fill } from 'react-icons/ri';
+import { CiSliderHorizontal } from "react-icons/ci";
 
 /**
  * Internal dependencies.
@@ -33,6 +34,8 @@ const InsSettingHeader = ({
         return IoColorPaletteOutline;
       case 'colorpalette':
         return RiSettings5Fill;
+      case 'slide':
+        return CiSliderHorizontal;
       default:
         return null; // or a fallback component
     }
