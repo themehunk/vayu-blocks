@@ -3,7 +3,7 @@
  * Plugin Name:       Vayu Blocks
 *  Plugin URI:         https://themehunk.com/vayu-blocks
  * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
- * Requires at least: 6.5
+ * Requires at least: 6.6
  * Requires PHP:      7.0
  * Version:           1.1.0
  * Author:            ThemeHunk
@@ -158,7 +158,7 @@ class Vayu_Block_Plugin {
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
             );
 
-            // Register editor style
+            // Register editor
             wp_register_style(
                 $block['editor_style'],
                 VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',

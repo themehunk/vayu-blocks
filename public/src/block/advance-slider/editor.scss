@@ -3,15 +3,18 @@
     border-radius: 4px;
     padding: 10px 8px;
     margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: cubic-bezier(0.25, 0.46, 0.45, 0.94) 3s ease;
     background-color: #fff;
-    overflow: hidden; /* Ensures content does not overflow */
+    overflow: hidden;
 }
 
-.vayu_blocks_slider-settings.expanded {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.vayu_blocks_slider-settings:hover {
+    background-color: rgba(128,128,128,0.05);
 }
+
+// .vayu_blocks_slider-settings.expanded {
+//     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+// }
 
 .vayu_blocks_slider-header {
     display: flex;
@@ -31,26 +34,9 @@
 }
 
 .vayu_blocks_delete-button,
+.vayu_blocks_copy-button
 .vayu_blocks_expand-button {
     margin-left: 10px;
-}
-
-.vayu_blocks_slider-content {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid #ddd;
-    max-height: 0; /* Initial hidden state */
-    overflow: hidden; /* Hide overflow during transition */
-    transition: max-height 0.3s ease; /* Smooth transition */
-}
-
-.vayu_blocks_slider-settings.expanded .vayu_blocks_slider-content {
-    max-height: 100%; /* Adjust based on content height */
-}
-
-
-.vayu_blocks_slider-content .vayu_blocks_ {
-    margin-bottom: 10px; /* General margin for components inside slider-content */
 }
 
 
@@ -83,6 +69,37 @@
 }
 
 
+.vayu_blocks_add-slide{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vayu_blocks_slide_settings_main{
+    padding: 5px;
+}
+
+
+
+
+.vayu_blocks_slider-content {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    max-height: 0; /* Initial hidden state */
+    overflow: hidden; /* Hide overflow during transition */
+    transition: max-height 0.3s ease; /* Smooth transition */
+}
+
+.vayu_blocks_slider-settings.expanded .vayu_blocks_slider-content {
+    max-height: 100%; /* Adjust based on content height */
+}
+
+.vayu_blocks_slider-content .vayu_blocks_ {
+    margin-bottom: 10px; /* General margin for components inside slider-content */
+}
+
+//three buttons
 .vayu_blocks_button-container {
     position: relative; /* Ensure the active indicator is positioned relative to this container */
     margin-bottom: 10px; /* Space between buttons and content below */
@@ -94,12 +111,12 @@
 .vayu_blocks_custom-button {
     position: relative; /* For positioning the active indicator */
     border: none;
-    padding: 10px 15px; /* Adjust padding as needed */
-    background-color: #fff; /* Background color of buttons */
+    padding: 15px 21px; /* Adjust padding as needed */
+    background-color: transparent; /* Background color of buttons */
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease; /* Smooth background color transition */
-    z-index: 1; /* Ensure buttons are above the active indicator */
+    z-index: 0; /* Ensure buttons are above the active indicator */
 }
 
 .vayu_blocks_custom-button:hover {
@@ -108,19 +125,55 @@
 
 .vayu_blocks_custom-button-active {
     position: absolute;
-    height: 36px; /* Thickness of the indicator bar */
-    width: 100%; /* Full width of the button */
-    bottom:1px; /* Position it just below the button */
-    left: 1px;
-    right:2px; /* Align to the left of the button */
+    height: 46px; /* Thickness of the indicator bar */
+    width: calc(32.33%); /* Adjust to button width minus border */
+    bottom: 1px; /* Position it just below the button */
     background-color: black;
-    color: white !important;
     display: flex;
+    left: 1px;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: white;
     border: 1px solid black;
-    z-index: 0; /* Ensure it is below the buttons */
-    transition: all 0.3s ease; /* Smooth transition effect */
+    z-index: 1; 
+    transition: all 0.5s ease; /* Smooth transition effect */
 }
 
+.vayu_blocks_textarea{
+    width:91%;
+    margin-left:3px;
+}
+
+.vayu_blocks_togglecontrol{
+    margin-left:3px;
+}
+.duotone-filters{
+    display:none;
+}
+  
+  
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.change-button {
+    position: absolute;
+    bottom: 2%; /* Start from the bottom of the container */
+    left: 0%;
+    height: 0; /* Start with height 0 */
+    overflow: hidden; /* Hide overflowing content */
+    padding: 0 100px; /* Padding is kept for expansion */
+    background-color: black; /* Change this color as needed */
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: height 0.3s ease, padding 0.3s ease; /* Smooth expansion effect */
+    z-index: 10; /* Ensure the button is above the image */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.image-container:hover .change-button {
+    height: 35px; /* Set the desired height when expanded */
+    padding: 8px 100px; /* Adjust padding to match the height */
+}

@@ -19,6 +19,9 @@ Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor wi
 #### Advance Container [FREE]
 Container block allows you to create visually consistent and organized sections within your content area.
 
+#### Post Grid [FREE]
+The Post Grid block is an essential content element designed to showcase a collection of posts in a visually appealing grid format. This block allows you to organize and display your content with ease, making it perfect for blogs and news websites. With customizable options for layout, spacing, and styling, the Post Grid block enhances the user experience by presenting your posts in a clean, structured way, ensuring that your content stands out and remains accessible to your audience.
+
 #### Advance Heading [FREE]
 Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.
 
@@ -43,10 +46,29 @@ Discover how to make the most of Vayu Blocks with our detailed and user-friendly
 ### Useful Resources
 The plugin is relying on the service behind www.themehunk.com and wpthemes.themehunk.com for accessing the page Template content like template images. No account is required to access the service template collection and the privacy policy can be found [here](https://themehunk.com/privacy-policy/).
 
-### Google Font
-The plugin is used to googlefont in google api.
-License: Open Font License, Version 3.7.
-License URL: https://openfontlicense.org/
+### Supported Themes
+These themes have been tested and are compatible with search plugin without significant issues. Also you can use this plugin to your Block, Elementor, WooCommerce Pages:
+
+* [TH Shop Mania](https://wordpress.org/themes/th-shop-mania/) - by ThemeHunk
+* [Top Store](https://wordpress.org/themes/top-store/) - by ThemeHunk
+* [Open Shop](https://wordpress.org/themes/open-shop/) - by ThemeHunk
+* [Zita](https://wordpress.org/themes/zita/) - by ThemeHunk
+* [Big Store](https://wordpress.org/themes/big-store/) - by ThemeHunk
+* [M Shop](https://wordpress.org/themes/m-shop/) - by ThemeHunk
+* [Royal Shop](https://wordpress.org/themes/royal-shop/) - by ThemeHunk
+* [Open Mart](https://wordpress.org/themes/open-mart/) - by ThemeHunk
+* [GoGo](https://wordpress.org/themes/gogo/) - by ThemeHunk
+* [Twenty Twenty-Two](https://wordpress.org/themes/twentytwentytwo/) - by WordPress.org
+* [Hello Elementor](https://wordpress.org/themes/hello-elementor/) - by Elementor
+* [OceanWP](https://wordpress.org/themes/oceanwp/) - by oceanwp
+* [Neve](https://wordpress.org/themes/neve/) - by Themeisle
+* [Go](https://wordpress.org/themes/go/) - by GoDaddy
+* [GeneratePress](https://wordpress.org/themes/generatepress/) - by Tom
+* [Hestia](https://wordpress.org/themes/hestia/) - by Themeisle
+* [Colibri WP](https://wordpress.org/themes/colibri-wp/) - by Extend Themes
+* [Kadence](https://wordpress.org/themes/kadence/) - by Ben Ritner – Kadence WP
+* [Astra](https://wordpress.org/themes/astra/) - by Brainstorm Force
+* [Storefront](https://wordpress.org/themes/storefront/) - by Automattic
 
 == Installation ==
 
@@ -91,6 +113,7 @@ create a new thread on the [Support](https://themehunk.com/contact-us/) And also
 =1.1.0 =
 * New : Post Grid Block Added
 * Update : Other theme block style not worinkg issue fixed.
+* Update : Style issue fixed.
 
 =1.0.9 =
 * Update : Plugin images added.

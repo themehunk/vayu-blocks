@@ -142,7 +142,7 @@ max-width: 1230px;
 
 .aisb-dashboard .aisb-left-content {
   background: #fff;
-  padding: 135px 35px;
+  padding: 70px 35px;
   border-radius: 10px;
   text-align: center;
   margin-bottom: 55px;
@@ -1112,7 +1112,7 @@ input[type=text]:focus{
     margin: 0;
 }
 .aisb-left-content.unsused{
-  padding: 0;
+  padding: 0 0 35px 0;
 }
 
 /*** Responsive Css **/

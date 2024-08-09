@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
-    ToggleControl,
     RangeControl,
-    __experimentalBoxControl as BoxControl,
+    ToggleControl, 
 } from '@wordpress/components';
+import { MediaPlaceholder, MediaUploadCheck,PanelColorSettings } from '@wordpress/block-editor';
 
 
 
@@ -17,6 +17,28 @@ const PostSettings = ({ attributes, setAttributes }) => {
         const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
     }, []);
+
+
+    const handleImageSelect = (index, media) => {
+        // Create a new array of images for the specified index
+        const newPagingImages = [...attributes.pagingImages];
+        newPagingImages[index] = media.url; // Update the image URL at the specified index
+    
+        // Update the attributes with the new pagingImages array
+        setAttributes({ pagingImages: newPagingImages });
+    };
+
+    useEffect(() => {
+        const totalSlides = attributes.slides.length;
+        const slidesPerPage = attributes.slidesToShow * attributes.slidesPerRow;
+        const calculatedTotalPages = Math.ceil(totalSlides / slidesPerPage);
+
+        setAttributes({ custompagingvalue: calculatedTotalPages+1 });
+    }, [
+        attributes.slides,
+        attributes.slidesToShow,
+        attributes.slidesPerRow
+    ]);
 
     return (
         <>
@@ -90,19 +112,24 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                 {attributes.autoplay && (
                     <>
-                    <RangeControl
-                        label={__('Auto play Speed', 'vayu-blocks')}
-                        value={attributes.autoplaySpeed}
-                        onChange={(value) => setAttributes({ autoplaySpeed: value })}
-                        min={100}
-                        max={5000}
-                        step={1}
-                    />
-                    <ToggleControl
-                    label={__('Pause On Hover', 'vayu-blocks')}
-                    checked={attributes.pauseOnHover}
-                    onChange={(value) => setAttributes({ pauseOnHover: value })}
-                    />
+                        <RangeControl
+                            label={__('Auto play Speed', 'vayu-blocks')}
+                            value={attributes.autoplaySpeed}
+                            onChange={(value) => setAttributes({ autoplaySpeed: value })}
+                            min={100}
+                            max={5000}
+                            step={1}
+                        />
+                        <ToggleControl
+                            label={__('Right To Left', 'vayu-blocks')}
+                            checked={attributes.rtl}
+                            onChange={(value) => setAttributes({ rtl: value })}
+                        />
+                        <ToggleControl
+                            label={__('Pause On Hover', 'vayu-blocks')}
+                            checked={attributes.pauseOnHover}
+                            onChange={(value) => setAttributes({ pauseOnHover: value })}
+                        />
                     </>
                 )}
 
@@ -113,27 +140,27 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                 <h6>Enable this option to ensure that clicking on any slide will move it to the center, enhancing focus and interaction.</h6>
 
-                <ToggleControl
-                    label={__('Right To Left', 'vayu-blocks')}
-                    checked={attributes.rtl}
-                    onChange={(value) => setAttributes({ rtl: value })}
-                />
-
             </PanelBody>
 
             <PanelBody title={__('Pagination','vayu-blocks')} initialOpen={false}>
 
-            <ToggleControl
-                label={__('Show Dots', 'vayu-blocks')}
-                checked={attributes.dots}
-                onChange={(value) => setAttributes({ dots: value })}
-            />
+                <ToggleControl
+                    label={__('Show Dots', 'vayu-blocks')}
+                    checked={attributes.dots}
+                    onChange={(value) => setAttributes({ dots: value })}
+                />
 
-            <ToggleControl
-                label={__('Arrow', 'vayu-blocks')}
-                checked={attributes.aerrow}
-                onChange={(value) => setAttributes({ aerrow: value })}
-            />
+                <ToggleControl
+                    label={__('Arrow', 'vayu-blocks')}
+                    checked={attributes.arrow}
+                    onChange={(value) => setAttributes({ arrow: value })}
+                />
+
+                <ToggleControl
+                    label={__('custom Paging', 'vayu-blocks')}
+                    checked={attributes.customPaging}
+                    onChange={(value) => setAttributes({ customPaging: value })}
+                />
             </PanelBody>
         </>
 

@@ -1627,6 +1627,10 @@ const PanelSettings = ({
 		}
 	};
 
+	// Global Settings Vayu Blocks
+	const globalcontainerWidth = ThBlockData.container_width;
+    setAttributes({globalwidth:globalcontainerWidth});
+	
     return (
 		<Fragment>
 			<InspectorControls>

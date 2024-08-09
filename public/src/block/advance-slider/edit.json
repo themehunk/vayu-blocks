@@ -1,4 +1,7 @@
 {
+    "globalwidth":{
+        "type":"number"
+    },
     "dots": {
         "type": "boolean",
         "default": true
@@ -67,9 +70,17 @@
         "type": "number",
         "default": 2
     },
-    "aerrow":{
+    "arrow":{
         "type":"boolean",
         "default":"false"
+    },
+    "customPaging":{
+        "type":"boolean",
+        "default":false
+    },
+    "custompagingvalue":{
+        "type":"number",
+        "default":0
     },
     "slides": {
         "type": "array",
@@ -79,6 +90,8 @@
                     "button1":{
                         "show": true,
                         "text": "button 1",
+                        "link": "",
+                        "newtab": true,
                         "size": 20,
                         "backgroundColor": "blue",
                         "backgroundType":"color",
@@ -111,10 +124,18 @@
                             "bottom":"5px",
                             "left":"5px"
                             
+                        },
+                        "padding":{
+                            "top": "10px",
+                            "right":"20px",
+                            "bottom":"10px",
+                            "left":"20px"
                         } 
                     },
                     "button2":{
                         "show": true,
+                        "link": "",
+                        "newtab": true,
                         "text": "button 2",
                         "size": 20,
                         "backgroundColor": "blue",
@@ -148,14 +169,22 @@
                             "bottom":"5px",
                             "left":"5px"
                             
+                        },
+                        "padding":{
+                            "top": "10px",
+                            "right":"20px",
+                            "bottom":"10px",
+                            "left":"20px"
                         } 
                     },
                     "heading":{
                         "text": "Slider",
                         "tag" : "h2",
+                        "newtab": true,
                         "size" : 28,
                         "fontWeight": "bold",
-                        "color" : "white"
+                        "color" : "black",
+                        "link": ""
                     },
                     "border":{
                         "color": "black",
@@ -185,19 +214,34 @@
                         "left":"5px"
                         
                     },
-                    "opacity": 0.8,
+                    "padding":{
+                        "top": "20px",
+                        "right":"20px",
+                        "bottom":"20px",
+                        "left":"20px"
+                    },
+                    "opacity": 0.2,
+                    "backgroundBlend":"lighten",
                     "backgroundImage": "",
+                    "focalPoint": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
                     "backgroundType": "color",
-                    "backgroundColor": "black",
+                    "backgroundColor": "",
+                    "duotone": "",
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "alignment": "center"
                 }
+                
             },
             {
                 "layout": {
                     "button1":{
                         "show": true,
                         "text": "button 1",
+                        "link": "",
+                        "newtab": true,
                         "size": 20,
                         "backgroundColor": "blue",
                         "backgroundType":"color",
@@ -230,11 +274,19 @@
                             "bottom":"5px",
                             "left":"5px"
                             
-                        } 
+                        },
+                        "padding":{
+                            "top": "10px",
+                            "right":"20px",
+                            "bottom":"10px",
+                            "left":"20px"
+                        }  
                     },
                     "button2":{
                         "show": true,
                         "text": "button 2",
+                        "link": "",
+                        "newtab": true,
                         "size": 20,
                         "backgroundColor": "blue",
                         "backgroundType":"color",
@@ -267,14 +319,22 @@
                             "bottom":"5px",
                             "left":"5px"
                             
-                        }
+                        },
+                        "padding":{
+                            "top": "10px",
+                            "right":"20px",
+                            "bottom":"10px",
+                            "left":"20px"
+                        }  
                     },
                     "heading":{
                         "text": "Slider",
                         "tag" : "h2",
                         "size" : 28,
                         "fontWeight": "bold",
-                        "color" : "white"
+                        "color" : "black",
+                        "link": "",
+                        "newtab": true
                     },
                     "border":{
                         "color": "black",
@@ -302,14 +362,28 @@
                         "right":"5px",
                         "bottom":"5px",
                         "left":"5px"
+                        
                     },
-                    "opacity": 0.8,
+                    "padding":{
+                        "top": "20px",
+                        "right":"20px",
+                        "bottom":"20px",
+                        "left":"20px"
+                    },
+                    "opacity": 0.2,
+                    "backgroundBlend":"lighten",
                     "backgroundImage": "",
+                    "focalPoint": {
+                        "x": 0.5,
+                        "y": 0.5
+                    },
                     "backgroundType": "color",
-                    "backgroundColor": "black",
+                    "backgroundColor": "",
+                    "duotone": "",
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "alignment": "center"
                 }
+                
             }
         ]
     }
