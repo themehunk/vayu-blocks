@@ -78,7 +78,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 <ToggleControl
                     label={__('Infinite', 'vayu-blocks')}
                     checked={attributes.infinite}
-                    onChange={(value) => setAttributes({ infinite: value, autoplay: value })}
+                    onChange={(value) => setAttributes({ infinite: value})}
                 />
 
                 <ToggleControl
@@ -108,7 +108,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 <ToggleControl
                     label={__('Auto Play', 'vayu-blocks')}
                     checked={attributes.autoplay}
-                    onChange={(value) => setAttributes({ infinite: value, autoplay: value })}
+                    onChange={(value) => {
+                        // Create an object to hold the updated attributes
+                        const updatedAttributes = {
+                            autoplay: value
+                        };
+                    
+                        // Add 'infinite' attribute conditionally
+                        if (value === true) {
+                            updatedAttributes.infinite = true;
+                        }
+                    
+                        // Update attributes
+                        setAttributes(updatedAttributes);
+                    }}
                 />
                 {attributes.autoplay && (
                     <>
