@@ -55,6 +55,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/post-grid/post-grid.php';
         require_once 'inc/render/post-grid/post-grid-style.php';
         require_once 'inc/render/advance-slider/advance-slider.php';
+        // require_once 'inc/render/image-slider-block/image-slider-block.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
 
@@ -126,8 +127,16 @@ class Vayu_Block_Plugin {
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
                 'status'         => get_option('button_value'),
-                'render_callback' => 'advance_slider_render'
+                'render_callback' => 'vayu_blocks_advance_slider_render'
             ),
+            // array(
+            //     'name'           => 'vayu-blocks/image-slider-block',
+            //     'script_handle'  => 'image-slider-block',
+            //      'editor_style'   => 'image-slider-block-editor-style',
+            //      'frontend_style' => 'image-slider-block-frontend-style',
+            //     'status'         => get_option('button_value'),
+            //     'render_callback' => 'vayu_blocks_image_slider_block_render'
+            // ),
             
         );
 
@@ -158,7 +167,7 @@ class Vayu_Block_Plugin {
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
             );
 
-            // Register editor style
+            // Register editor
             wp_register_style(
                 $block['editor_style'],
                 VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',

@@ -5,6 +5,6 @@ if (!defined('ABSPATH')) {
 
 
 
-function advance_slider_render($attr) {
+function vayu_blocks_advance_slider_render($attr) {
     return "advance-slider";
 }
