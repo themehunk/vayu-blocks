@@ -231,9 +231,11 @@
 
 .content-panel {
     display: flex;
-    gap: 10px; /* Adjust spacing between buttons as needed */
+   gap:3px;
+   margin-bottom: 5px;
     align-items: center;
     justify-content: center;
+    background-color: #e8e3e3;
 }
 
 .content-panel-button {
@@ -241,7 +243,7 @@
     background: none;
     cursor: pointer;
     position: relative;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 7px; /* Adjust padding as needed */
     font-size: 16px; /* Adjust font size as needed */
     overflow: hidden; /* Ensure pseudo-element stays within button bounds */
 }
