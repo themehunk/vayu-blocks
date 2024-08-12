@@ -11,7 +11,6 @@ const edit = ({ attributes, setAttributes }) => {
 
     function SampleNextArrow(props) {
         const { className, style, onClick } = props;
-        console.log(className);
         return (
           <div
             className={className}
@@ -100,20 +99,19 @@ const edit = ({ attributes, setAttributes }) => {
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         
-        const vayu_blocks_getBackgroundStyles = (slide) => {
+        const vayu_blocks_getBackgroundStyles = (value) => {
             let styles = {};
-        
-            if (slide.layout.backgroundType === 'color') {
-                styles.backgroundColor = slide.layout.backgroundColor;
-            } else if (slide.layout.backgroundType === 'gradient') {
-                styles.background = `-webkit-${slide.layout.backgroundGradient}`;
+            if (value.backgroundColor) {
+                styles.backgroundColor = value.backgroundColor;
+            } else if (value.backgroundGradient) {
+                styles.background = `-webkit-${value.backgroundGradient}`;
             }
         
             return styles;
         };
 
         const vayu_blocks_slideStyle = {
-            margin:'10px',
+            marginBottom:'10px',
             height: '100%',
             overflow: 'hidden',
             position:'relative',
@@ -143,14 +141,8 @@ const edit = ({ attributes, setAttributes }) => {
         };
         
         const vayu_blocks_generateButtonStyle = (button) => {
-            const background = button.backgroundType === 'color'
-                ? button.backgroundColor
-                : button.backgroundType === 'gradient'
-                ? button.backgroundGradient
-                : 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)';
-
                 return {
-                background: background,
+                ...vayu_blocks_getBackgroundStyles(button),
                 fontSize: `${button.size}px`,
                 border: 'none',
                 cursor: 'pointer',
@@ -190,6 +182,14 @@ const edit = ({ attributes, setAttributes }) => {
                 cursor: 'pointer' 
             };
         };
+        const vayu_blocks_generatesubheadingStyle = (heading) => {
+            return {
+                color: heading.color,
+                fontSize: `${heading.size}px`,
+                fontWeight: heading.fontWeight,
+
+            };
+        };
     
         const vayu_blocks_img ={
             width:'100%',
@@ -205,9 +205,9 @@ const edit = ({ attributes, setAttributes }) => {
             transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Centering when using absolute positioning
             zIndex: 1,
             height: '100%',
+            marginBottom:'8%',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
-        
 
         const vayu_blocks_color_overlay={
             position: 'absolute',
@@ -217,11 +217,11 @@ const edit = ({ attributes, setAttributes }) => {
             bottom: 0,
             width:'100%',
             height:'100%',
-            ...vayu_blocks_getBackgroundStyles(slide),
+            ...vayu_blocks_getBackgroundStyles(slide.layout),
             opacity:slide.layout.opacity,
         }
 
-
+console.log(slide.layout);
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
                 <div className="vayu_blocks_slider-slide" style={vayu_blocks_slideStyle}>
@@ -247,6 +247,12 @@ const edit = ({ attributes, setAttributes }) => {
                                 {slide.layout.heading.text}
                             </a>
                         </slide.layout.heading.tag>
+
+                        {slide.layout.subheading.show && (
+                            <slide.layout.subheading.tag style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
+                                    {slide.layout.subheading.text}
+                            </slide.layout.subheading.tag>
+                        )}
         
                         {slide.layout.button1.show && (
                             <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)}>
@@ -460,6 +466,7 @@ const edit = ({ attributes, setAttributes }) => {
                         {vayu_blocks_slides}
                     </Slider>
                 </div>
+
             </AdvanceSettings>
         </>
     );

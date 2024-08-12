@@ -186,6 +186,16 @@
                         "color" : "black",
                         "link": ""
                     },
+                    "subheading":{
+                        "show":true,
+                        "text": "lorem sub heading for oout topic has ben very important.",
+                        "tag" : "h4",
+                        "size" : 16,
+                        "fontWeight": "lighter",
+                        "color" : "black",
+                        "link": "",
+                        "newtab": true
+                    },
                     "border":{
                         "color": "black",
                         "width": "1px",
@@ -332,6 +342,16 @@
                         "tag" : "h2",
                         "size" : 28,
                         "fontWeight": "bold",
+                        "color" : "black",
+                        "link": "",
+                        "newtab": true
+                    },
+                    "subheading":{
+                        "show":true,
+                        "text": "lorem sub heading for oout topic has ben very important.",
+                        "tag" : "h4",
+                        "size" : 16,
+                        "fontWeight": "lighter",
                         "color" : "black",
                         "link": "",
                         "newtab": true

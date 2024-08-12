@@ -95,7 +95,10 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 	 	}
 	 	if ( $block['blockName'] === 'vayu-blocks/advance-slider' ) {
 			$css .= generate_inline_styles($block['attrs']);
-		} 		
+		} 	
+		// if ( $block['blockName'] === 'vayu-blocks/image-slider-block' ) {
+		// 	$css .= generate_inline_styles($block['attrs']);
+		// } 		
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
 				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);
