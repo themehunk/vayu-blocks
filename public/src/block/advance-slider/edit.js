@@ -5,35 +5,21 @@ import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
+import { FaHandPointLeft,FaHandPointRight } from "react-icons/fa";
+import { FaCircleArrowRight } from "react-icons/fa6";
+import { FaCircleArrowLeft } from "react-icons/fa6";
+import { FaCaretLeft,FaCaretRight } from "react-icons/fa6";
 
 const edit = ({ attributes, setAttributes }) => {
     const [settings, setSettings] = useState({});
 
-    function SampleNextArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-          <div
-            className={className}
-            style={{ ...style, display: "block" ,background:"blue",borderRadius:"50%"}}
-            onClick={onClick}
-          />
-        );
-    }
-      
-    function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
-        return (
-          <div
-            className={className}
-            style={{ ...style, display: "block",background:"blue",borderRadius:"50%"}}
-            onClick={onClick}
-          />
-        );
-    }
-
     useEffect(() => {
         const newSettings = {
-            dots: attributes.dots,
+            dots: attributes.dots.show,
             infinite: attributes.infinite,
             speed: attributes.speed,
             slidesToShow: attributes.slidesToShow,
@@ -45,12 +31,12 @@ const edit = ({ attributes, setAttributes }) => {
             lazyLoad: attributes.lazyLoad,
             autoplay: attributes.autoplay,
             autoplaySpeed: attributes.autoplaySpeed,
-            cssEase: 'linear',
+            cssEase: 'ease-in-out', // Smooth animation
             pauseOnHover: attributes.pauseOnHover,
             focusOnSelect: attributes.focusOnSelect,
             rtl: attributes.rtl,
             centerPadding: '60px',
-            className: 'center',
+            
         };
     
         // Conditionally add customPaging settings
@@ -67,16 +53,92 @@ const edit = ({ attributes, setAttributes }) => {
             newSettings.dotsClass = "slick-dots slick-thumb";
         }
 
-    
+         // Conditionally customize dot appearance
+        if (true) { // Replace 'true' with a condition if necessary
+            newSettings.appendDots = dots => (
+                <div
+                    style={{
+                        backgroundColor: "#ddd",
+                        borderRadius: "10px",
+                        padding: "10px",
+                        marginTop:"20px",
+                    }}
+                >
+                    <ul style={{ margin: "0px" }}> {dots} </ul>
+                </div>
+            );
+        }
+
+
+        let leftarrow;
+        let rightarrow;
+
+        let stylearrowleft={
+            fontSize: `${attributes.arrowstyleleft.size}`,
+            marginLeft:"20px",
+            background: `${attributes.arrowstyleleft.backgroundColor}`,
+            color:`${attributes.arrowstyleleft.color}`,
+
+             border: 'none',
+             cursor: 'pointer',
+            
+            //borderRadius
+            borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
+
+             //margin
+             margin: `${attributes.arrowstyleleft.margin.top || '0px'} ${attributes.arrowstyleleft.margin.right || '0px'} ${attributes.arrowstyleleft.margin.bottom || '0px'} ${attributes.arrowstyleleft.margin.left || '10px'}`,
+         };
+
+         let stylearrowright={
+            fontSize: `${attributes.arrowstyleleft.size}`,
+            background: `${attributes.arrowstyleleft.backgroundColor}`,
+            color:`${attributes.arrowstyleleft.color}`,
+
+             border: 'none',
+             cursor: 'pointer',
+            
+            //borderRadius
+            borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
+
+             //margin
+             margin: `${attributes.arrowstyleleft.margin.top || '0px'} ${attributes.arrowstyleleft.margin.left || '0px'} ${attributes.arrowstyleleft.margin.bottom || '0px'} ${attributes.arrowstyleleft.margin.right || '10px'}`,
+         };
+
+        // Determine which arrow icons to use based on the selected arrow style
+        if ('arrow' === attributes.arrowstyleleft.tag) {
+            leftarrow = <FaArrowLeft style={stylearrowleft}/>;
+            rightarrow = <FaArrowRight style={stylearrowright}/>;
+        } else if ('chevron' === attributes.arrowstyleleft.tag) {
+            leftarrow = <FaChevronLeft style={stylearrowleft}/>;
+            rightarrow = <FaChevronRight style={stylearrowright}/>;
+        } else if ('hand' === attributes.arrowstyleleft.tag) {
+            leftarrow = <FaHandPointLeft style={stylearrowleft}/>;
+            rightarrow = <FaHandPointRight style={stylearrowright}/>;
+        } else if ('circlearrow' === attributes.arrowstyleleft.tag) {
+            leftarrow = <FaCircleArrowLeft style={stylearrowleft}/>;
+            rightarrow = <FaCircleArrowRight style={stylearrowright}/>;
+        } else if ('caret' === attributes.arrowstyleleft.tag) {
+            leftarrow = <FaCaretLeft style={stylearrowleft}/>;
+            rightarrow = <FaCaretRight style={stylearrowright}/>;
+        }
+
         // Add arrow settings if needed
         if (attributes.arrow) {
-            newSettings.nextArrow = <SampleNextArrow />;
-            newSettings.prevArrow = <SamplePrevArrow />;
+            newSettings.nextArrow = (
+                <div className="next-slick-arrow">
+                    {rightarrow}
+                </div>
+            );
+            newSettings.prevArrow = (
+                <div className="prev-slick-arrow" >
+                    {leftarrow}
+                </div>
+            );
         }
     
         setSettings(newSettings);
     }, [
-        attributes.dots,
+        attributes.dots.show,
         attributes.infinite,
         attributes.speed,
         attributes.slidesToShow,
@@ -93,7 +155,8 @@ const edit = ({ attributes, setAttributes }) => {
         attributes.rtl,
         attributes.arrow,
         attributes.customPaging,
-        attributes.pagingImages
+        attributes.pagingImages,
+        attributes.arrowstyleleft
     ]);
 
 
@@ -182,6 +245,7 @@ const edit = ({ attributes, setAttributes }) => {
                 cursor: 'pointer' 
             };
         };
+
         const vayu_blocks_generatesubheadingStyle = (heading) => {
             return {
                 color: heading.color,
@@ -221,9 +285,9 @@ const edit = ({ attributes, setAttributes }) => {
             opacity:slide.layout.opacity,
         }
 
-console.log(slide.layout);
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
+
                 <div className="vayu_blocks_slider-slide" style={vayu_blocks_slideStyle}>
 
                     {slide.layout.backgroundImage && (
@@ -238,7 +302,7 @@ console.log(slide.layout);
 
                     <div style={vayu_blocks_inside_conatiner_div}>
 
-                        <slide.layout.heading.tag >
+                        <slide.layout.heading.tag className="vayu_blocks_heading">
                             <a 
                                 href={slide.layout.heading.link} 
                                 target={slide.layout.heading.newtab ? "_blank" : "_self"}
@@ -249,13 +313,13 @@ console.log(slide.layout);
                         </slide.layout.heading.tag>
 
                         {slide.layout.subheading.show && (
-                            <slide.layout.subheading.tag style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
+                            <slide.layout.subheading.tag className="vayu_blocks_sub_heading" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
                                     {slide.layout.subheading.text}
                             </slide.layout.subheading.tag>
                         )}
         
                         {slide.layout.button1.show && (
-                            <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)}>
+                            <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)} className="vayu_blocks_button1_heading">
                                 <a 
                                     href={slide.layout.button1.link} 
                                     target={slide.layout.button1.newtab ? "_blank" : "_self"}
@@ -267,7 +331,7 @@ console.log(slide.layout);
                         )}
         
                         {slide.layout.button2.show && (
-                            <button style={vayu_blocks_generateButtonStyle(slide.layout.button2)}>
+                            <button className="vayu_blocks_button2_heading" style={vayu_blocks_generateButtonStyle(slide.layout.button2)}>
                                 <a 
                                     href={slide.layout.button2.link} 
                                     target={slide.layout.button2.newtab ? "_blank" : "_self"}

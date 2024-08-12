@@ -2,10 +2,6 @@
     "globalwidth":{
         "type":"number"
     },
-    "dots": {
-        "type": "boolean",
-        "default": true
-    },
     "infinite": {
         "type": "boolean",
         "default": true
@@ -82,6 +78,40 @@
         "type":"number",
         "default":0
     },
+    "dots":{
+        "type": "object",
+        "default":{
+            "color": "gray",
+            "backgroundColor": "black",
+            "size":"10px",
+            "show": true
+        }
+    },
+    "arrowstyleleft":{
+        "type": "object",
+        "default":{
+            "color": "gray",
+            "backgroundColor": "black",
+            "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
+            "size":"20px",
+            "tag": "arrow",
+
+            "margin":{
+                "left":"10px",
+                "right":"0px",
+                "top":"0px",
+                "bottom":"0px"
+            },
+            "borderRadius":{
+                "top": "5px",
+                "right":"5px",
+                "bottom":"5px",
+                "left":"5px"
+                
+            } 
+        }
+    },
+
     "slides": {
         "type": "array",
         "default": [
