@@ -272,162 +272,152 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 ...attributes.slides,
                 {
                     layout: {
-                        button1:{
+                        button1: {
                             show: true,
-                            link:"",
-                            newtab:true,
-                            text: 'button 1',
-                            size: 20,
-                            backgroundColor: 'blue',
-                            backgroundType:'color',
-                            backgroundGradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                            color:'white',
-                            border:{
-                                color: 'white',
-                                width: '1px',
-                                style: 'solid',
-        
-                                topcolor: 'white',
-                                topwidth: '1px',
-                                topstyle: 'solid',
-        
-                                bottomcolor: 'white',
-                                bottomwidth: '1px',
-                                bottomstyle: 'solid',
-        
-                                leftcolor: 'white',
-                                leftwidth: '1px',
-                                leftstyle: 'solid',
-        
-                                rightcolor: 'white',
-                                rightwidth: '1px',
-                                rightstyle: 'solid'
-                            },
-                            borderRadius:{
-                                top: '5px',
-                                right:'5px',
-                                bottom:'5px',
-                                left:'5px'
-                            },padding:{
-                                top: '10px',
-                                right:'20px',
-                                bottom:'10px',
-                                left:'20px' 
-                            } 
-                        },
-                        button2:{
-                            show: true,
-                            text: 'button 2',
-                            link:"",
-                            newtab:true,
-                            size: 20,
-                            backgroundColor: 'blue',
-                            backgroundType:'color',
-                            backgroundGradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                            color:'white',
-                            border:{
-                                color: 'white',
-                                width: '1px',
-                                style: 'solid',
-        
-                                topcolor: 'white',
-                                topwidth: '1px',
-                                topstyle: 'solid',
-        
-                                bottomcolor: 'white',
-                                bottomwidth: '1px',
-                                bottomstyle: 'solid',
-        
-                                leftcolor: 'white',
-                                leftwidth: '1px',
-                                leftstyle: 'solid',
-        
-                                rightcolor: 'white',
-                                rightwidth: '1px',
-                                rightstyle: 'solid'
-                            },
-                            borderRadius:{
-                                top: '5px',
-                                right:'5px',
-                                bottom:'5px',
-                                left:'5px'
-                            },padding:{
-                                top: '10px',
-                                right:'20px',
-                                bottom:'10px',
-                                left:'20px' 
-                            } 
-                        },
-                        heading:{
-                            text: 'Slider',
-                            link:'',
+                            text: "Button 1",
+                            link: "",
                             newtab: true,
-                            tag: 'h2',
-                            size : 28,
+                            size: 20,
+                            backgroundColor: "blue",
+                            backgroundType: "color",
+                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
+                            color: "white",
+                            border: {
+                                color: "white",
+                                width: "1px",
+                                style: "solid",
+                                topcolor: "white",
+                                topwidth: "1px",
+                                topstyle: "solid",
+                                bottomcolor: "white",
+                                bottomwidth: "1px",
+                                bottomstyle: "solid",
+                                leftcolor: "white",
+                                leftwidth: "1px",
+                                leftstyle: "solid",
+                                rightcolor: "white",
+                                rightwidth: "1px",
+                                rightstyle: "solid"
+                            },
+                            borderRadius: {
+                                top: "5px",
+                                right: "5px",
+                                bottom: "5px",
+                                left: "5px"
+                            },
+                            padding: {
+                                top: "10px",
+                                right: "20px",
+                                bottom: "10px",
+                                left: "20px"
+                            }
+                        },
+                        button2: {
+                            show: true,
+                            text: "Button 2",
+                            link: "",
+                            newtab: true,
+                            size: 20,
+                            backgroundColor: "blue",
+                            backgroundType: "color",
+                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
+                            color: "white",
+                            border: {
+                                color: "white",
+                                width: "1px",
+                                style: "solid",
+                                topcolor: "white",
+                                topwidth: "1px",
+                                topstyle: "solid",
+                                bottomcolor: "white",
+                                bottomwidth: "1px",
+                                bottomstyle: "solid",
+                                leftcolor: "white",
+                                leftwidth: "1px",
+                                leftstyle: "solid",
+                                rightcolor: "white",
+                                rightwidth: "1px",
+                                rightstyle: "solid"
+                            },
+                            borderRadius: {
+                                top: "5px",
+                                right: "5px",
+                                bottom: "5px",
+                                left: "5px"
+                            },
+                            padding: {
+                                top: "10px",
+                                right: "20px",
+                                bottom: "10px",
+                                left: "20px"
+                            }
+                        },
+                        heading: {
+                            text: "Slider",
+                            tag: "h2",
+                            newtab: true,
+                            size: 28,
                             fontWeight: "bold",
-                            color : 'black'
+                            color: "black",
+                            link: ""
                         },
-                        subheading:{
+                        subheading: {
                             show: true,
-                            text: 'lorem sub heading for oout topic has ben very important.',
-                            link:'',
-                            newtab: true,
-                            tag: 'h4',
-                            size : 16,
+                            text: "Lorem subheading for our topic has been very important.",
+                            tag: "h4",
+                            size: 16,
                             fontWeight: "lighter",
-                            color : 'black'
+                            color: "black",
+                            link: "",
+                            newtab: true
                         },
-                        border:{
-                            color: 'black',
-                            width: '1px',
-                            style: 'solid',
-    
-                            topcolor: 'black',
-                            topwidth: '1px',
-                            topstyle: 'solid',
-    
-                            bottomcolor: 'black',
-                            bottomwidth: '1px',
-                            bottomstyle: 'solid',
-    
-                            leftcolor: 'black',
-                            leftwidth: '1px',
-                            leftstyle: 'solid',
-    
-                            rightcolor: 'black',
-                            rightwidth: '1px',
-                            rightstyle: 'solid'
+                        border: {
+                            color: "black",
+                            width: "1px",
+                            style: "solid",
+                            topcolor: "black",
+                            topwidth: "1px",
+                            topstyle: "solid",
+                            bottomcolor: "black",
+                            bottomwidth: "1px",
+                            bottomstyle: "solid",
+                            leftcolor: "black",
+                            leftwidth: "1px",
+                            leftstyle: "solid",
+                            rightcolor: "black",
+                            rightwidth: "1px",
+                            rightstyle: "solid"
                         },
-                        borderRadius:{
-                            top: '5px',
-                            right:'5px',
-                            bottom:'5px',
-                            left:'5px'
-                            
+                        borderRadius: {
+                            top: "5px",
+                            right: "5px",
+                            bottom: "5px",
+                            left: "5px"
                         },
-                        padding:{
-                            top: '20px',
-                            right:'20px',
-                            bottom:'20px',
-                            left:'20px' 
+                        padding: {
+                            top: "20px",
+                            right: "20px",
+                            bottom: "20px",
+                            left: "20px"
                         },
-                        opacity:0.2,
-                        backgroundImage: '',
+                        opacity: 0.2,
+                        backgroundBlend: "lighten",
+                        backgroundImage: "",
                         focalPoint: {
                             x: 0.5,
                             y: 0.5
                         },
-                        backgroundBlend:'lighten',
-                        backgroundType: 'color',
-                        backgroundColor: '', 
-                        duotone :"",
-                        backgroundGradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                        alignment:'center',
+                        backgroundType: "color",
+                        backgroundColor: "#000000",
+                        duotone: "",
+                        backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
+                        alignment: "center"
                     }
                 }
-            ]        
+            ]
         });
     };
+    
     
     //style-update
     const vayu_blocks_updateSliderStyles = (index, propertyPath, value) => {

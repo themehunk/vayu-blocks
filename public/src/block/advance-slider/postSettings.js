@@ -51,6 +51,31 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     ];
 
+    const vayu_blocks_fontsizes_small = [
+        {
+            name: 'Small',
+            size: 10,
+            slug: 'small'
+        },
+        {
+            name: 'Meadium',
+            size: 14,
+            slug: 'meadium'
+        },
+        {
+            name: 'Big',
+            size: 16,
+            slug: 'big'
+        },
+        {
+            name: 'ExtraBig',
+            size: 20,
+            slug: 'extrabig'
+        }
+    ];
+
+
+
 
     return (
         <>
@@ -175,56 +200,86 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     onChange={ (value) => setAttributes({ dots: { ...attributes.dots, show: value } }) }
                 />
 
-                {/* 
-                { attributes.dots.show && (
-                    <>
-                        <PanelColorGradientSettings
-                            title={ __( 'Background', 'vayu-blocks' ) }
-                            settings={[
-                                {
-                                    colorValue: attributes.dots.backgroundColor,
-                                    gradientValue: attributes.dots.backgroundGradient,
-                                    onColorChange: (color) => {
-                                        setAttributes({ dots: { ...attributes.dots, backgroundColor: color } });
-                                    },
-                                    onGradientChange: (gradient) => {
-                                        setAttributes({ dots: { ...attributes.dots, backgroundGradient: gradient } });
-                                    },
-                                    label: __( 'Background', 'vayu-blocks' ),
-                                },
-                            ]}
-                        />
-
-                        <PanelColorSettings
-                            title={ __( 'Color' ) }
-                            colorSettings={ [
-                                {
-                                    value: attributes.dots.color,
-                                    onChange: (colorValue) => {
-                                        setAttributes({ dots: { ...attributes.dots, color: colorValue } });
-                                    },
-                                    label: __( 'Color' ),
-                                },
-                            ] }
-                        />
-
-                        <FontSizePicker
-                            label={ __('Font Size', 'vayu-blocks') }
-                            fontSizes={vayu_blocks_fontsizes}
-                            onChange={(value) => setAttributes({ dots: { ...attributes.dots, size: value } })}
-                            value={ attributes.dots.size }
-                        />
-                    </>
-                )} */}
-
                 <ToggleControl
                     label={__('Arrow', 'vayu-blocks')}
                     checked={attributes.arrow}
                     onChange={(value) => setAttributes({ arrow: value })}
                 />
+
+                <ToggleControl
+                    label={__('custom Paging', 'vayu-blocks')}
+                    checked={attributes.customPaging}
+                    onChange={(value) => setAttributes({
+                        customPaging: value,
+                        
+                    })}
+                />
+
+                {attributes.dots.show && attributes.dots.customize && (
+                    <>
+                        <PanelBody title={__('Dots Style','vayu-blocks')} initialOpen={false}>
+                            <ToggleControl
+                                label={ __('On Image', 'vayu-blocks') }
+                                checked={ attributes.dots.onimage}
+                                onChange={ (value) => setAttributes({ dots: { ...attributes.dots, onimage: value } }) }
+                            />
+
+
+                            <SelectControl
+                                label={__('Dots', 'vayu-blocks')}
+                                value={attributes.dots.option}
+                                options={[
+                                    { label: __('Dots', 'vayu-blocks'), value: 'dots' },
+                                    { label: __('Square', 'vayu-blocks'), value: 'square' },
+                                    { label: __('Number', 'vayu-blocks'), value: 'number' }
+                                ]}
+                                onChange={(value)=>setAttributes({ dots: { ...attributes.dots, option: value}})}
+                            />  
+                            <PanelColorSettings
+                                    title={ __( 'Backgrund Color', 'vayu-blocks' ) }
+                                    colorSettings={ [
+                                        {
+                                            value: attributes.dots.backgroundColor,
+                                            onChange: (colorValue) => setAttributes({
+                                                dots: {
+                                                    ...attributes.dots,
+                                                    backgroundColor: colorValue,
+                                                },
+                                            }),
+                                            label: __( 'Background Color', 'vayu-blocks' ),
+                                        },
+                                        {
+                                            value: attributes.dots.color,
+                                            onChange: (colorValue) => setAttributes({
+                                                dots: {
+                                                    ...attributes.dots,
+                                                    color: colorValue,
+                                                },
+                                            }),
+                                            label: __( 'Color', 'vayu-blocks' ),
+                                        }
+                                       
+                                    ] }
+
+                                >
+                                </PanelColorSettings>
+
+                                <FontSizePicker
+                                    label={ __('Font Size', 'vayu-blocks') }
+                                    fontSizes={vayu_blocks_fontsizes_small}
+                                    onChange={(value) => setAttributes({ dots: { ...attributes.dots, size: value } })}
+                                    value={ attributes.dots.size }
+                                />
+
+
+                        </PanelBody>
+
+                    </>
+                )}
+
                 {attributes.arrow && (
                     <>
-                    <PanelBody title={__('Arrow Style','vayu-blocks')}>
+                    <PanelBody title={__('Arrow Style','vayu-blocks')} initialOpen={false}>
                      
                             <>
                                 <SelectControl
@@ -294,17 +349,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     values={attributes.arrowstyleleft.borderRadius}
                                 />
 
-
-                                <BoxControl
-                                    label={__('Margin', 'vayu-blocks')}
+                                <RangeControl
+                                    label={__('Position', 'vayu-blocks')}
+                                    value={attributes.arrowstyleleft.position}
                                     onChange={(value) => setAttributes({
                                         arrowstyleleft: {
                                             ...attributes.arrowstyleleft,
-                                            margin: value,
+                                            position: value,
                                         },
                                     })}
-                                    values={attributes.arrowstyleleft.margin}
+                                    min={-20}
+                                    max={200}
+                                    step={1}
                                 />
+                                
                             </>
 
                         
@@ -314,11 +372,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     </>
                 )}
 
-                <ToggleControl
-                    label={__('custom Paging', 'vayu-blocks')}
-                    checked={attributes.customPaging}
-                    onChange={(value) => setAttributes({ customPaging: value })}
-                />
+    
             </PanelBody>
         </>
 

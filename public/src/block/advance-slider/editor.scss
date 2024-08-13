@@ -340,15 +340,39 @@
 }
 
 
-.slick-prev {
-    left: -52px !important;
-  }
-  .slick-next:before,
-  .slick-prev:before {
-    content: "" !important;
-  }
-  .next-slick-arrow,
-  .prev-slick-arrow {
-    color: #000000;
-    font-size: 45px;
-  }
+.slick-next:before,
+.slick-prev:before {
+content: "" !important;
+}
+
+
+.slick-arrow .inside_rightarrow_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: background-color 0.3s ease-in-out;  /* Adjust this value to change the size difference */
+}
+
+.slick-arrow .inside_rightarrow_div:hover {
+    background-color: blue !important;
+}
+
+
+.slick-arrow {
+	z-index: 10;
+	cursor: pointer;
+    background: transparent;
+}
+
+
+.slick-dots li button:before{
+    display:none;
+}
+
+.slick-track{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
