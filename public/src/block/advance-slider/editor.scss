@@ -9,12 +9,8 @@
 }
 
 .vayu_blocks_slider-settings:hover {
-    background-color: rgba(128,128,128,0.02);
+    background-color: rgba(128,128,128,0.01);
 }
-
-// .vayu_blocks_slider-settings.expanded {
-//     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-// }
 
 .vayu_blocks_slider-header {
     display: flex;
@@ -267,3 +263,92 @@
 .content-panel-button:hover::after {
     width: 100%; /* Expand line to full width on hover */
 }
+
+
+
+//edit.js
+/* Animation for heading */
+.vayu_blocks_heading {
+    animation: fadeInDown 1.5s ease-out;
+    animation-delay: 0s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation for sub-heading */
+.vayu_blocks_sub_heading {
+    animation: fadeInDown 1s ease-out;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation for button 1 heading */
+.vayu_blocks_button1_heading {
+    animation: fadeInDown 1s ease-out;
+    animation-delay: 0.5s;
+}
+
+/* Animation for button 2 heading */
+.vayu_blocks_button2_heading {
+    animation: fadeInDown 1s ease-out;
+    animation-delay: 0.5s; /* Delay for the second button */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Optional: Hover effect for better interaction */
+.vayu_blocks_button1_heading:hover,
+.vayu_blocks_button2_heading:hover {
+    animation: scaleDown 0s ease-out;
+}
+
+@keyframes scaleDown {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+
+.slick-prev {
+    left: -52px !important;
+  }
+  .slick-next:before,
+  .slick-prev:before {
+    content: "" !important;
+  }
+  .next-slick-arrow,
+  .prev-slick-arrow {
+    color: #000000;
+    font-size: 45px;
+  }
