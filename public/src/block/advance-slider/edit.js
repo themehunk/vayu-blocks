@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import './editor.scss';
 import Slider from 'react-slick';
 import PanelSettings from './AdvanceSettings/PanelSettings';
@@ -18,7 +18,8 @@ import { FaSquare } from "react-icons/fa";
 
 const edit = ({ attributes, setAttributes }) => {
     const [settings, setSettings] = useState({});
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(attributes.initialSlide || 0);
+    const sliderRef = useRef(null);
 
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
@@ -48,6 +49,13 @@ const edit = ({ attributes, setAttributes }) => {
             focusOnSelect: attributes.focusOnSelect,
             rtl: attributes.rtl,
             centerPadding: '60px',
+            afterChange: (currentIndex) => {
+                setActiveIndex(currentIndex);
+            },
+            onInit: (slider) => {
+                setActiveIndex(slider.currentSlide);
+                sliderRef.current = slider;
+            },
         };
     
        
@@ -169,43 +177,7 @@ const edit = ({ attributes, setAttributes }) => {
                 </div>
             );
         }
-
-        //custom Paging
-        if (attributes.customPaging) {
-            // Calculate the total slides per page
-            const slidesPerPage = attributes.slidesToShow * attributes.slidesPerRow;
-            const totalPages = Math.ceil(attributes.slides.length / slidesPerPage);
         
-            newSettings.customPaging = function (i) {
-                // Calculate the page index based on scrolling
-                const pageIndex = Math.floor(i / attributes.slidesToScroll);
-                
-                // Calculate the first slide index for the current page
-                const startSlideIndex = pageIndex * attributes.slidesToScroll * attributes.slidesPerRow;
-        
-                // Correct the slide index for page representation
-                const slideIndexForDot = startSlideIndex < attributes.slides.length
-                    ? startSlideIndex
-                    : startSlideIndex % attributes.slides.length;
-        
-                const slide = attributes.slides[slideIndexForDot];
-                const hasImage = slide && slide.layout && slide.layout.backgroundImage;
-        
-                return (
-                    <a>
-                        {hasImage ? (
-                            <img src={slide.layout.backgroundImage} alt={`Slide ${slideIndexForDot + 1}`} />
-                        ) : (
-                            <FaCircle />
-                        )}
-                    </a>
-                );
-            };
-            newSettings.dotsClass = "slick-dots slick-thumb";
-        }
-        
-        
-    
         setSettings(newSettings);
     }, [
         attributes.dots,
@@ -227,9 +199,16 @@ const edit = ({ attributes, setAttributes }) => {
         attributes.customPaging,
         attributes.pagingImages,
         attributes.arrowstyleleft,
-        activeIndex 
+        activeIndex,
+        attributes.index
     ]);
 
+    
+    useEffect(() => {
+        if (sliderRef.current && attributes.index !== undefined) {
+            sliderRef.current.slickGoTo(attributes.index);
+        }
+    }, [attributes.index]);
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         
@@ -333,14 +312,27 @@ const edit = ({ attributes, setAttributes }) => {
             filter: slide.layout.duotone && slide.layout.duotone.length > 1 ? `url(${slide.layout.duotone})` : 'none',
         }
 
+        const calculateTopValue = (slidesToShow, slidesPerRow, hasImage) => {
+            let topValue;
+            if(slidesToShow>2 && slidesPerRow >2 ){
+                topValue=0;
+            }
+            topValue=65;
+        
+            return hasImage ? `${topValue}%` : 'auto';
+        };
+        
+        // Usage
+        const topValue = calculateTopValue(attributes.slidesToShow, attributes.slidesPerRow, slide.layout.backgroundImage);
+
         const vayu_blocks_inside_conatiner_div = {
-            position: slide.layout.backgroundImage ? 'absolute' : 'relative',
-            top: slide.layout.backgroundImage ? '80%' : 'auto',
-            left: slide.layout.backgroundImage ? '50%' : 'auto',
-            transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Centering when using absolute positioning
+            position: slide.layout.backgroundImage ? 'absolute' : '',
+            left:'50%',
+            top:topValue,
+            transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Center horizontally and vertically
             zIndex: 1,
             height: '100%',
-            marginBottom:'8%',
+            marginBottom: '8%',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
 
@@ -597,7 +589,7 @@ const edit = ({ attributes, setAttributes }) => {
 
 
                 </svg>
-                    <Slider {...settings}>
+                    <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}
                     </Slider>
                 </div>
