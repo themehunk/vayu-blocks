@@ -275,7 +275,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     layout: {
                         button1: {
                             show: true,
-                            text: "Button 1",
+                            text: "button 1",
                             link: "",
                             newtab: true,
                             size: 20,
@@ -315,9 +315,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         },
                         button2: {
                             show: true,
-                            text: "Button 2",
                             link: "",
                             newtab: true,
+                            text: "button 2",
                             size: 20,
                             backgroundColor: "blue",
                             backgroundType: "color",
@@ -364,7 +364,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         },
                         subheading: {
                             show: true,
-                            text: "Lorem subheading for our topic has been very important.",
+                            text: "lorem sub heading for our topic has been very important.",
                             tag: "h4",
                             size: 16,
                             fontWeight: "lighter",
@@ -396,11 +396,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             left: "5px"
                         },
                         padding: {
-                            top: "20px",
-                            right: "20px",
-                            bottom: "20px",
-                            left: "20px"
+                            top: "0px",
+                            right: "0px",
+                            bottom: "0px",
+                            left: "0px"
                         },
+                        customStyle: false,
                         opacity: 0.2,
                         backgroundBlend: "lighten",
                         backgroundImage: "",
@@ -408,13 +409,13 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             x: 0.5,
                             y: 0.5
                         },
-                        customStyle:false,
                         backgroundType: "color",
                         backgroundColor: "#000000",
                         duotone: "",
                         backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                         alignment: "center"
                     }
+                    
                 }
             ]
         });

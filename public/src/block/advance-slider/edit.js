@@ -57,8 +57,7 @@ const edit = ({ attributes, setAttributes }) => {
                 sliderRef.current = slider;
             },
         };
-    
-       
+           
         //Dots Styling
         let dotstyle;
 
@@ -82,20 +81,21 @@ const edit = ({ attributes, setAttributes }) => {
         // Conditionally customize dot appearance
         if (attributes.dots.customize && attributes.customPaging===false) { // Replace 'true' with a condition if necessary
             newSettings.appendDots = dots => (
-                <div style={{background:`${attributes.dots.backgroundColor}`}}>
+                <div>
                 <ul  style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         listStyle: 'none',
                         padding: '0px',
-                        margin: attributes.dots.onimage ? '80px' : '0px',
+                        margin: attributes.dots.onimage ? `${attributes.dots.position}px` : '0px',
+                        
                     }}>
                     {dots.map((dot, index) => (
                         <li key={index} style={{ margin: '0 5px' }}>
                             <button
                                 style={{
-                                    color: activeIndex === index ? 'gray' : attributes.dots.color || '#000',
+                                    color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
                                     cursor: 'pointer',
                                     background: 'none', 
                                     borderColor: activeIndex === index ? 'gray' : 'transparent',
@@ -107,9 +107,9 @@ const edit = ({ attributes, setAttributes }) => {
                                     justifyContent:'center',
                                     padding: '3px', 
                                     fontSize: addPxIfNeeded(attributes.dots.size),
+                                    background:`${attributes.dots.backgroundColor}`
                                 }}
                                 onClick={(e) => handleDotClick(e, dot, index)}
-                                   
                             >
                                 {dotstyle || index + 1}
                             </button>
@@ -250,7 +250,7 @@ const edit = ({ attributes, setAttributes }) => {
             borderRadius: `${slide.layout.borderRadius.top || '0px'} ${slide.layout.borderRadius.right || '0px'} ${slide.layout.borderRadius.bottom || '0px'} ${slide.layout.borderRadius.left || '0px'}`,
 
             //padding
-            padding: `${slide.layout.padding.top || '20px'} ${slide.layout.padding.right || '20px'} ${slide.layout.padding.bottom || '20px'} ${slide.layout.padding.left || '20px'}`,
+            padding: `${slide.layout.padding.top || '0px'} ${slide.layout.padding.right || '0px'} ${slide.layout.padding.bottom || '0px'} ${slide.layout.padding.left || '0px'}`,
         };
         
         const vayu_blocks_generateButtonStyle = (button) => {

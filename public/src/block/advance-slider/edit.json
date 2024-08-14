@@ -95,8 +95,9 @@
             "show": true,
             "customize": true,
             "onimage":false,
-            "option":"dots"
-
+            "option":"dots",
+            "activeColor":"gray",
+            "position" : 80
         }
     },
     "arrowstyleleft":{

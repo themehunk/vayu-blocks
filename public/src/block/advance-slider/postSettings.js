@@ -134,23 +134,27 @@ const PostSettings = ({ attributes, setAttributes }) => {
             }
         });
     
-        // Step 2: Create a copy of the slides array
-        const newSlides = [...attributes.slides];
-    
-        // Iterate through each slide
-        newSlides.forEach((slide) => {
-            // Check if customStyle is false for the current slide
+        // Iterate through each slide and update the property only where customStyle is false
+        attributes.slides.forEach((slide, index) => {
             if (slide.layout.customStyle === false) {
-                console.log("kubver");
-                // Replace layout with the updated global layout
-                slide.layout = { ...newGlobal.layout };
+                let slideProperty = slide.layout;
+                properties.forEach((prop, idx) => {
+                    if (idx === properties.length - 1) {
+                        slideProperty[prop] = value;
+                    } else {
+                        if (!slideProperty[prop]) {
+                            slideProperty[prop] = {};
+                        }
+                        slideProperty = slideProperty[prop];
+                    }
+                });
             }
         });
     
         // Update the attributes with the new values
-        setAttributes({ global: newGlobal, slides: newSlides });
+        setAttributes({ global: newGlobal, slides: attributes.slides });
     };
-
+    
     //border
      const vayu_blocks_handleslideBorderChange = (property, newBorders) => { 
         const updatedAttributes = {};
@@ -893,7 +897,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                 {attributes.dots.show && attributes.dots.customize && (
                     <>
-                        <PanelBody title={__('Dots Style','vayu-blocks')} initialOpen={false}>
+                        <p className='vayu_blocks_dots'>Dots Style</p>
                             <ToggleControl
                                 label={ __('On Image', 'vayu-blocks') }
                                 checked={ attributes.dots.onimage}
@@ -911,6 +915,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 ]}
                                 onChange={(value)=>setAttributes({ dots: { ...attributes.dots, option: value}})}
                             />  
+
                             <PanelColorSettings
                                     title={ __( 'Backgrund Color', 'vayu-blocks' ) }
                                     colorSettings={ [
@@ -933,6 +938,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 },
                                             }),
                                             label: __( 'Color', 'vayu-blocks' ),
+                                        },
+                                        {
+                                            value: attributes.dots.activeColor,
+                                            onChange: (colorValue) => setAttributes({
+                                                dots: {
+                                                    ...attributes.dots,
+                                                    activeColor: colorValue,
+                                                },
+                                            }),
+                                            label: __( 'Acvtive Color', 'vayu-blocks' ),
                                         }
                                        
                                     ] }
@@ -940,22 +955,28 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 >
                                 </PanelColorSettings>
 
-                                <FontSizePicker
-                                    label={ __('Font Size', 'vayu-blocks') }
-                                    fontSizes={vayu_blocks_fontsizes_small}
-                                    onChange={(value) => setAttributes({ dots: { ...attributes.dots, size: value } })}
-                                    value={ attributes.dots.size }
+                            {attributes.dots.onimage && (
+                                <RangeControl
+                                    label={__('Position', 'vayu-blocks')}
+                                    value={attributes.dots.position}
+                                    onChange={(value) => setAttributes({
+                                        dots: {
+                                            ...attributes.dots,
+                                            position: value,
+                                        },
+                                    })}
+                                    min={0}
+                                    max={100}
+                                    step={1}
                                 />
-
-
-                        </PanelBody>
+                            )}
 
                     </>
                 )}
 
                 {attributes.arrow && (
                     <>
-                    <PanelBody title={__('Arrow Style','vayu-blocks')} initialOpen={false}>
+                     <p className='vayu_blocks_dots'>Arrow Style</p>
                      
                             <>
                                 <SelectControl
@@ -1013,7 +1034,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     value={attributes.arrowstyleleft.size}
                                 />
 
-
+                                <br />
                                 <BoxControl
                                     label={__('Border Radius', 'vayu-blocks')}
                                     onChange={(value) => setAttributes({
@@ -1040,10 +1061,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 />
                                 
                             </>
-
-                        
-                        
-                    </PanelBody>
 
                     </>
                 )}
