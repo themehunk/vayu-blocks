@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import './editor.scss';
 import Slider from 'react-slick';
 import PanelSettings from './AdvanceSettings/PanelSettings';
@@ -13,9 +13,22 @@ import { FaHandPointLeft,FaHandPointRight } from "react-icons/fa";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { FaCircleArrowLeft } from "react-icons/fa6";
 import { FaCaretLeft,FaCaretRight } from "react-icons/fa6";
+import { FaCircle } from "react-icons/fa";
+import { FaSquare } from "react-icons/fa";
 
 const edit = ({ attributes, setAttributes }) => {
     const [settings, setSettings] = useState({});
+    const [activeIndex, setActiveIndex] = useState(attributes.initialSlide || 0);
+    const sliderRef = useRef(null);
+
+    const addPxIfNeeded = (value) => {
+        // Check if the value ends with 'px' or other units (e.g., 'em', '%')
+        if (typeof value === 'string' && (value.endsWith('px') || value.endsWith('em') || value.endsWith('%'))) {
+            return value;
+        }
+        // Default to adding 'px' if no units are present
+        return `${value}px`;
+    };
 
     useEffect(() => {
         const newSettings = {
@@ -36,109 +49,138 @@ const edit = ({ attributes, setAttributes }) => {
             focusOnSelect: attributes.focusOnSelect,
             rtl: attributes.rtl,
             centerPadding: '60px',
-            
+            afterChange: (currentIndex) => {
+                setActiveIndex(currentIndex);
+            },
+            onInit: (slider) => {
+                setActiveIndex(slider.currentSlide);
+                sliderRef.current = slider;
+            },
         };
-    
-        // Conditionally add customPaging settings
-        if (attributes.customPaging) {
-            
-            newSettings.customPaging = function(i) {
-               
-                return (
-                    <a>
-                        <img src={attributes.slides[i].layout.backgroundImage} />
-                    </a>
-                );
-            };
-            newSettings.dotsClass = "slick-dots slick-thumb";
+           
+        //Dots Styling
+        let dotstyle;
+
+        if ('dots' === attributes.dots.option) {
+            dotstyle = <FaCircle />; // Example for dots
+        } else if ('square' === attributes.dots.option) {
+            dotstyle = <FaSquare />; // Example for squares
+        } else if ('number' === attributes.dots.option) {
+            dotstyle = null; // No specific style for numbers
         }
 
-         // Conditionally customize dot appearance
-        if (true) { // Replace 'true' with a condition if necessary
+        const handleDotClick = (e, dot, index) => {
+            // Call the existing onClick handler
+            if (dot.props.children.props.onClick) {
+                dot.props.children.props.onClick(e);
+            }
+            // Set the active index
+            setActiveIndex(index);
+        };
+
+        // Conditionally customize dot appearance
+        if (attributes.dots.customize && attributes.customPaging===false) { // Replace 'true' with a condition if necessary
             newSettings.appendDots = dots => (
-                <div
-                    style={{
-                        backgroundColor: "#ddd",
-                        borderRadius: "10px",
-                        padding: "10px",
-                        marginTop:"20px",
-                    }}
-                >
-                    <ul style={{ margin: "0px" }}> {dots} </ul>
-                </div>
+                <div>
+                <ul  style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        listStyle: 'none',
+                        padding: '0px',
+                        margin: attributes.dots.onimage ? `${attributes.dots.position}px` : '0px',
+                        
+                    }}>
+                    {dots.map((dot, index) => (
+                        <li key={index} style={{ margin: '0 5px' }}>
+                            <button
+                                style={{
+                                    color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
+                                    cursor: 'pointer',
+                                    background: 'none', 
+                                    borderColor: activeIndex === index ? 'gray' : 'transparent',
+                                    borderWidth: '1px',
+                                    borderStyle: 'solid',
+                                    borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
+                                    display:'flex',
+                                    alignItems:'center',
+                                    justifyContent:'center',
+                                    padding: '3px', 
+                                    fontSize: addPxIfNeeded(attributes.dots.size),
+                                    background:`${attributes.dots.backgroundColor}`
+                                }}
+                                onClick={(e) => handleDotClick(e, dot, index)}
+                            >
+                                {dotstyle || index + 1}
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
             );
         }
 
-
+        //arrow styling
         let leftarrow;
         let rightarrow;
 
         let stylearrowleft={
             fontSize: `${attributes.arrowstyleleft.size}`,
-            marginLeft:"20px",
-            background: `${attributes.arrowstyleleft.backgroundColor}`,
-            color:`${attributes.arrowstyleleft.color}`,
-
-             border: 'none',
-             cursor: 'pointer',
-            
-            //borderRadius
-            borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
-
-             //margin
-             margin: `${attributes.arrowstyleleft.margin.top || '0px'} ${attributes.arrowstyleleft.margin.right || '0px'} ${attributes.arrowstyleleft.margin.bottom || '0px'} ${attributes.arrowstyleleft.margin.left || '10px'}`,
+            color:`${attributes.arrowstyleleft.color}`,   
          };
 
-         let stylearrowright={
-            fontSize: `${attributes.arrowstyleleft.size}`,
+         let stylearrow_div = {
             background: `${attributes.arrowstyleleft.backgroundColor}`,
-            color:`${attributes.arrowstyleleft.color}`,
-
-             border: 'none',
-             cursor: 'pointer',
-            
             //borderRadius
             borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
+               
+             border: 'none',
+             cursor: 'pointer',
 
-             //margin
-             margin: `${attributes.arrowstyleleft.margin.top || '0px'} ${attributes.arrowstyleleft.margin.left || '0px'} ${attributes.arrowstyleleft.margin.bottom || '0px'} ${attributes.arrowstyleleft.margin.right || '10px'}`,
-         };
+         }
 
         // Determine which arrow icons to use based on the selected arrow style
         if ('arrow' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaArrowLeft style={stylearrowleft}/>;
-            rightarrow = <FaArrowRight style={stylearrowright}/>;
+            rightarrow = <FaArrowRight style={ stylearrowleft}/>;
         } else if ('chevron' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaChevronLeft style={stylearrowleft}/>;
-            rightarrow = <FaChevronRight style={stylearrowright}/>;
+            rightarrow = <FaChevronRight style={ stylearrowleft}/>;
         } else if ('hand' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaHandPointLeft style={stylearrowleft}/>;
-            rightarrow = <FaHandPointRight style={stylearrowright}/>;
+            rightarrow = <FaHandPointRight style={ stylearrowleft}/>;
         } else if ('circlearrow' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaCircleArrowLeft style={stylearrowleft}/>;
-            rightarrow = <FaCircleArrowRight style={stylearrowright}/>;
+            rightarrow = <FaCircleArrowRight style={ stylearrowleft}/>;
         } else if ('caret' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaCaretLeft style={stylearrowleft}/>;
-            rightarrow = <FaCaretRight style={stylearrowright}/>;
+            rightarrow = <FaCaretRight style={ stylearrowleft}/>;
         }
 
         // Add arrow settings if needed
         if (attributes.arrow) {
             newSettings.nextArrow = (
-                <div className="next-slick-arrow">
+                <div className="next-slick-arrow" >
+                    <div className="inside_rightarrow_div" style={{
+                        ...stylearrow_div,
+                        marginLeft: `-${attributes.arrowstyleleft.position + 30}px`, 
+                    }}>
                     {rightarrow}
+                    </div>
                 </div>
             );
             newSettings.prevArrow = (
-                <div className="prev-slick-arrow" >
+                <div className="prev-slick-arrow">
+                    <div className="inside_rightarrow_div" style={{...stylearrow_div, marginLeft:`${attributes.arrowstyleleft.position}px`}}>
                     {leftarrow}
+                    </div>
                 </div>
             );
         }
-    
+        
         setSettings(newSettings);
     }, [
-        attributes.dots.show,
+        attributes.dots,
         attributes.infinite,
         attributes.speed,
         attributes.slidesToShow,
@@ -156,9 +198,17 @@ const edit = ({ attributes, setAttributes }) => {
         attributes.arrow,
         attributes.customPaging,
         attributes.pagingImages,
-        attributes.arrowstyleleft
+        attributes.arrowstyleleft,
+        activeIndex,
+        attributes.index
     ]);
 
+    
+    useEffect(() => {
+        if (sliderRef.current && attributes.index !== undefined) {
+            sliderRef.current.slickGoTo(attributes.index);
+        }
+    }, [attributes.index]);
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         
@@ -200,7 +250,7 @@ const edit = ({ attributes, setAttributes }) => {
             borderRadius: `${slide.layout.borderRadius.top || '0px'} ${slide.layout.borderRadius.right || '0px'} ${slide.layout.borderRadius.bottom || '0px'} ${slide.layout.borderRadius.left || '0px'}`,
 
             //padding
-            padding: `${slide.layout.padding.top || '20px'} ${slide.layout.padding.right || '20px'} ${slide.layout.padding.bottom || '20px'} ${slide.layout.padding.left || '20px'}`,
+            padding: `${slide.layout.padding.top || '0px'} ${slide.layout.padding.right || '0px'} ${slide.layout.padding.bottom || '0px'} ${slide.layout.padding.left || '0px'}`,
         };
         
         const vayu_blocks_generateButtonStyle = (button) => {
@@ -262,14 +312,27 @@ const edit = ({ attributes, setAttributes }) => {
             filter: slide.layout.duotone && slide.layout.duotone.length > 1 ? `url(${slide.layout.duotone})` : 'none',
         }
 
+        const calculateTopValue = (slidesToShow, slidesPerRow, hasImage) => {
+            let topValue;
+            if(slidesToShow>2 && slidesPerRow >2 ){
+                topValue=0;
+            }
+            topValue=65;
+        
+            return hasImage ? `${topValue}%` : 'auto';
+        };
+        
+        // Usage
+        const topValue = calculateTopValue(attributes.slidesToShow, attributes.slidesPerRow, slide.layout.backgroundImage);
+
         const vayu_blocks_inside_conatiner_div = {
-            position: slide.layout.backgroundImage ? 'absolute' : 'relative',
-            top: slide.layout.backgroundImage ? '80%' : 'auto',
-            left: slide.layout.backgroundImage ? '50%' : 'auto',
-            transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Centering when using absolute positioning
+            position: slide.layout.backgroundImage ? 'absolute' : '',
+            left:'50%',
+            top:topValue,
+            transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Center horizontally and vertically
             zIndex: 1,
             height: '100%',
-            marginBottom:'8%',
+            marginBottom: '8%',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
 
@@ -526,7 +589,7 @@ const edit = ({ attributes, setAttributes }) => {
 
 
                 </svg>
-                    <Slider {...settings}>
+                    <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}
                     </Slider>
                 </div>
