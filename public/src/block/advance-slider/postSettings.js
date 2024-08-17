@@ -12,6 +12,7 @@ import {
     FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
+    DuotonePicker,
 } from '@wordpress/components';
 import {
     HoverControl,
@@ -154,6 +155,59 @@ const PostSettings = ({ attributes, setAttributes }) => {
         // Update the attributes with the new values
         setAttributes({ global: newGlobal, slides: attributes.slides });
     };
+
+    //Background style update with global attributes
+    const vayu_blocks_updateSliderBackgroundStyles = (propertyPath, value) => {
+        
+        // Default value for the property if it's undefined
+        if (value === undefined) {
+            value = '';
+        }
+    
+        // Step 1: Create a copy of the global attributes and update the specified property
+        const newGlobal = { ...attributes.global };
+    
+        // Ensure the layout object exists
+        if (!newGlobal.layout) {
+            newGlobal.layout = {};
+        }
+    
+        // Split the property path into individual properties
+        const properties = propertyPath.split('.');
+        let currentProperty = newGlobal.layout;
+    
+        // Traverse the properties and set the value at the correct location
+        properties.forEach((prop, idx) => {
+            if (idx === properties.length - 1) {
+                currentProperty[prop] = value;
+            } else {
+                if (!currentProperty[prop]) {
+                    currentProperty[prop] = {};
+                }
+                currentProperty = currentProperty[prop];
+            }
+        });
+    
+        // Iterate through each slide and update the property only where customStyle is false
+        attributes.slides.forEach((slide, index) => {
+            if (slide.layout.customBackgroundImage === false) {
+                let slideProperty = slide.layout;
+                properties.forEach((prop, idx) => {
+                    if (idx === properties.length - 1) {
+                        slideProperty[prop] = value;
+                    } else {
+                        if (!slideProperty[prop]) {
+                            slideProperty[prop] = {};
+                        }
+                        slideProperty = slideProperty[prop];
+                    }
+                });
+            }
+        });
+    
+        // Update the attributes with the new values
+        setAttributes({ global: newGlobal, slides: attributes.slides });
+    };
     
     //border
      const vayu_blocks_handleslideBorderChange = (property, newBorders) => { 
@@ -275,11 +329,129 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
+    //clear image
+    const vayu_blocks_clearBackgroundImageAndFocalPoint = () => {
+        vayu_blocks_updateSliderBackgroundStyles('backgroundImage', '');
+    };
+
+    //default duotone
+    const DUOTONE_PALETTE = [
+        { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
+        { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
+        { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
+        { colors: ['#000097', '#ff4747'], name: 'Blue and Red', slug: 'blue-red', id: '#duotone-blue-red' },
+        { colors: ['#8c00b7', '#fcff41'], name: 'Purple and Yellow', slug: 'purple-yellow', id: '#duotone-purple-yellow' },
+        { colors: ['#ffa500', '#008080'], name: 'Orange and Teal', slug: 'orange-teal', id: '#duotone-orange-teal' },
+        { colors: ['#ff69b4', '#0000ff'], name: 'Pink and Blue', slug: 'pink-blue', id: '#duotone-pink-blue' },
+        { colors: ['#00ffff', '#ff00ff'], name: 'Cyan and Magenta', slug: 'cyan-magenta', id: '#duotone-cyan-magenta' },
+        { colors: ['#ffff00', '#000000'], name: 'Yellow and Black', slug: 'yellow-black', id: '#duotone-yellow-black' },
+        { colors: ['#add8e6', '#90ee90'], name: 'Light Blue and Light Green', slug: 'lightblue-lightgreen', id: '#duotone-lightblue-lightgreen' },
+        { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
+    ];
+
+    //duotone change
+    const vayu_blocks_duotoneHandler = (propertyPath, value) => {
+        // Find the filter ID corresponding to the given color array
+        if (!Array.isArray(value) || value.length === 0) {
+            vayu_blocks_updateSliderBackgroundStyles(propertyPath,"");
+        }
+        const filter = DUOTONE_PALETTE.find(({ colors }) =>
+            colors.every((color, i) => color === value[i])
+        );
+    
+        if (filter) {
+            const { id } = filter;
+            console.log(id);
+            vayu_blocks_updateSliderBackgroundStyles(propertyPath,id);
+        }
+    };
+
+    //duotone value
+    const vayu_blocks_duotonevalue = () => {
+        // Get the ID from the slide's layout duotone
+        const id = attributes.global.layout.duotone;
+    
+        // Find the matching filter in the DUOTONE_PALETTE
+        const filter = DUOTONE_PALETTE.find((filter) => filter.id === id);
+    
+        // If a match is found, return the colors array
+        if (filter) {
+            return filter.colors;
+        }
+        return '';
+    };
+
     return (
         <>
+            <PanelBody  title={__('Global Background', 'vayu-blocks')} initialOpen={false}>
+                <>
+                    <p>This background will apply to all slides except those with custom backgrounds enabled.</p>
+                    <h4>{__('Background','vayu-blocks')}</h4>
+                    {attributes.global.layout.backgroundImage ? (
+                        <>         
+                        <div class="image-container">
+                            <img src={attributes.global.layout.backgroundImage} alt="slideimage" />
+                            <button class="change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint()}>Change</button>
+                        </div>
+                        <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint()}>
+                            {__('Clear', 'vayu-blocks')}
+                        </Button>
+
+                        <h4>{__('Filters', 'vayu-blocks')}</h4>
+                        <DuotonePicker
+                            label={__('Filters', 'vayu-blocks')}
+                            duotonePalette={ DUOTONE_PALETTE }
+                            disableCustomColors
+                            disableCustomDuotone
+                            value={ vayu_blocks_duotonevalue() }
+                            onChange={ (value) => vayu_blocks_duotoneHandler('duotone',value) }
+                        />
+                    </>
+                    ) : (
+                        <MediaPlaceholder
+                            icon="format-image"
+                            labels={{
+                                title: __('Background Image', 'vayu-blocks'),
+                                name: __('an image', 'vayu-blocks')
+                            }}
+                            onSelect={(media) => vayu_blocks_updateSliderBackgroundStyles('backgroundImage', media.url)}
+                            onSelectURL='true'
+                            accept="image/*"
+                            allowedTypes={['image']}
+                        />
+                    )}
+
+                    <PanelColorGradientSettings
+                        settings={[
+                            {
+                                colorValue: attributes.global.layout.backgroundColor,
+                                gradientValue: attributes.global.layout.backgroundGradient,
+                                onColorChange: (color) => {
+                                    vayu_blocks_updateSliderBackgroundStyles( 'backgroundColor', color);
+                                },
+                                onGradientChange: (gradient) => {
+                                    vayu_blocks_updateSliderBackgroundStyles( 'backgroundGradient', gradient); 
+                                },
+                                label: __( 'Background', 'vayu-blocks' ),
+                            },
+                        ]}
+                    />
+
+                    <br />
+                    <RangeControl
+                        label={__('Opacity', 'vayu-blocks')}
+                        value={attributes.global.layout.opacity}
+                        onChange={(value) => vayu_blocks_updateSliderBackgroundStyles('opacity',value)}
+                        min={0}
+                        max={1}
+                        step={0.1}
+                    />
+
+                </>
+            </PanelBody>
 
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
-
+                <p><p>This style will apply to all slides except those with custom styles enabled.</p></p>
                 <div className="content-panel">
                     <button 
                         style={{ color: isPanel === 'layout' ? 'blue' : 'initial' }} 
