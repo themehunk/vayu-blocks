@@ -267,6 +267,7 @@
                         "left":"0px"
                     },
                     "customStyle":false,
+                    "customBackgroundImage":false,
                     "opacity": 0.2,
                     "backgroundBlend":"lighten",
                     "backgroundImage": "",
@@ -435,6 +436,7 @@
                         "y": 0.5
                     },
                     "customStyle":false,
+                    "customBackgroundImage":false,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
                     "duotone": "",
