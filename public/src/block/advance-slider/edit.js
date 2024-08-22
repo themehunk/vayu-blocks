@@ -301,7 +301,6 @@ const edit = ({ attributes, setAttributes }) => {
                 color: heading.color,
                 fontSize: `${heading.size}px`,
                 fontWeight: heading.fontWeight,
-
             };
         };
     
@@ -413,7 +412,6 @@ const edit = ({ attributes, setAttributes }) => {
         );
 
     });
-
 
     return (
         <>

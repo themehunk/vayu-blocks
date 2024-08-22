@@ -7,8 +7,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 function generate_inline_styles($attr) {
     $css = '';
     // Generate unique ID
-    $uniqueId = $attr['pg_posts'][0]['uniqueID'];
-   
+    // Ensure 'pg_posts' key exists and is an array
+    if (isset($attr['pg_posts']) && is_array($attr['pg_posts']) 
+        && isset($attr['pg_posts'][0]) 
+        && isset($attr['pg_posts'][0]['uniqueID'])) {
+        
+        $uniqueId = $attr['pg_posts'][0]['uniqueID'];
+    } else {
+        // Handle the case where 'uniqueID' is not available
+        $uniqueId = 'default_value'; // Set a default value or handle as needed
+    }
     //attributes-merge
     $default_attributes = include('defaultattributes.php');
     $attr = array_merge($default_attributes, $attr);  

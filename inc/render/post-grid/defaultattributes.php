@@ -632,6 +632,4 @@ return array(
         'borderradiusHvrBottomMobile'=> 20,
         'borderradiusHvrLeftMobile'=> 20,
 );
-
-
 ?>
