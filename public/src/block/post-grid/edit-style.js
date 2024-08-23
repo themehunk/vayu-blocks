@@ -43,7 +43,6 @@ const gridContainerStyles = (attributes) => {
         display: 'grid',
         ...layoutColumnsStyle,
         ...gapStyle,
-        width: attributes.widthType === 'default' ? `${attributes.globalwidth}px` : '100%',
         gridAutoRows: 'minmax(100px, auto)' // Corrected line
     };
 };
@@ -332,6 +331,8 @@ const titleTagStyles = (attributes) => {
         fontWeight: '600',
         marginLeft: '5px',
         textDecoration: 'none',
+        display:'flex',
+        justifyContent:`${attributes.pg_layoutalignment}`,
     };
 
     // Conditionally add styles based on titlechoice
@@ -368,12 +369,14 @@ const titleTagStylesatag = (attributes) => {
 };
 
 //Author
-const authorAndDateContainerStyles = {
+const authorAndDateContainerStyles = (attributes) =>( {
     display: 'flex', 
     alignItems: 'flex-start',
     flexWrap:'wrap',
     marginLeft:'2px',
-};
+    justifyContent:`${attributes.pg_layoutalignment}`,
+    
+});
 
 const dateSectionStyles = {
     display: 'flex',
@@ -507,6 +510,8 @@ const fullContentStyle= (attributes) =>({
     marginLeft:'5px',
     marginBottom: '10px',
     fontWeight : `${attributes.pg_ContentWeight}`,
+    display:'flex',
+    justifyContent:`${attributes.pg_layoutalignment}`,
 });
 
 //pagination

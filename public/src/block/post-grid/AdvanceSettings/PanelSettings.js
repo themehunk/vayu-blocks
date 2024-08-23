@@ -1663,40 +1663,6 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
-									<SelectControl
-										label={ __( 'Width', 'vayu-blocks' ) }
-										value={ attributes.widthType }
-										options={ [
-											{ label:  __( `Global max (${attributes.globalwidth}px) wide`, 'vayu-blocks' ), value: 'default' },
-											{ label: __( 'Full Width', 'vayu-blocks' ), value: 'alignfull' },
-										]}
-										onChange={ e => setAttributes({ widthType: e,customWidth:100 }) }
-									/>
-
-								{attributes.widthType === 'alignfull' && (
-									<ResponsiveControl
-									label={ __( 'Custom Width', 'vayu-blocks' ) }
-									>	
-									<UnitChooser
-									value={ attributes.customWidthUnit }
-									onClick={ customWidthUnit => {
-										setAttributes({ customWidthUnit });
-										setcustomWidthUnit(customWidthUnit); 
-										}}
-									units={ [ 'px', 'em', '%' ] }
-									/>
-
-									<RangeControl
-										renderTooltipContent={ customTooltipCustomWidth }
-										value={ getCustomWidth() || '' }
-										onChange={ changeCustomWidth }
-										step={ 1 }
-										min={ 1 }
-										max={ maxcustomWidthUnit }
-										allowReset={ true }
-									/>
-									</ResponsiveControl>
-									)}
 
 									<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 

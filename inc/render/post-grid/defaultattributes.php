@@ -2,6 +2,7 @@
 return array(
     //Settings
         //layout
+            'pg_layoutalignment' => 'left',
             'pg_postLayoutColumns' => 3,
             'pg_postLayoutColumnsTablet' => 2,
             'pg_postLayoutColumnsMobile' => 2,

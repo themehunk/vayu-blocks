@@ -17,10 +17,9 @@ class Vayu_blocks_Advance_Slider {
 
         // Output the SVG with duotone filters
         echo $this->render_svg_filters();
-
-        echo $this->render_slider();
         echo $this->render_scripts();
-
+        echo $this->render_slider();
+    
         return ob_get_clean(); // Return the buffered output
     }
 
@@ -28,7 +27,6 @@ class Vayu_blocks_Advance_Slider {
     private function render_slider() {
         $slides_html = '';
         $animated = isset($attr['className']) ? $attr['className'] : ''; //animation
-        $slides_html .= '<div class="vayu-blocks-advance-slider">'; //advance setting container
 
             //slides
             foreach ($this->attr['slides'] as $index => $slide) {
@@ -74,9 +72,7 @@ class Vayu_blocks_Advance_Slider {
                 $slides_html .= '</div>'; // Closing slide container
             }
 
-        $slides_html .= '</div.'; //closing advance setting container
-
-        return '<div class="alignfull ' . $animated . '">' . $slides_html . '</div>'; //alignfull is default class of wordpress
+        return '<div class="vayu-blocks-advance-slider ' . $animated . '">' . $slides_html . '</div>'; //alignfull is default class of wordpress
     }
 
     // Heading
@@ -135,42 +131,54 @@ class Vayu_blocks_Advance_Slider {
         </button>";
     }
 
-    // js (jQuery)
     private function render_scripts() {
         $script = "
             <script>
                 jQuery(document).ready(function($) {
                     $('.vayu-blocks-advance-slider').slick({
-                        initialSlide: {$this->attr['initialSlide']},
+                        dots: " . ($this->attr['dots']['show'] ? 'true' : 'false') . ",
                         infinite: " . ($this->attr['infinite'] ? 'true' : 'false') . ",
+                        speed: {$this->attr['speed']},
+                        slidesToScroll: {$this->attr['slidesToScroll']},
+                        rows: {$this->attr['slidesPerRow']},
                         centerMode: " . ($this->attr['centerMode'] ? 'true' : 'false') . ",
                         fade: " . ($this->attr['fade'] ? 'true' : 'false') . ",
                         waitForAnimate: " . ($this->attr['waitForAnimate'] ? 'true' : 'false') . ",
                         lazyLoad: " . ($this->attr['lazyLoad'] ? 'true' : 'false') . ",
                         autoplay: " . ($this->attr['autoplay'] ? 'true' : 'false') . ",
                         autoplaySpeed: {$this->attr['autoplaySpeed']},
+                        cssEase: 'ease-in-out',
                         pauseOnHover: " . ($this->attr['pauseOnHover'] ? 'true' : 'false') . ",
                         focusOnSelect: " . ($this->attr['focusOnSelect'] ? 'true' : 'false') . ",
                         rtl: " . ($this->attr['rtl'] ? 'true' : 'false') . ",
-                        speed: {$this->attr['speed']},
-                        slidesToShow: {$this->attr['slidesToShow']},
-                        slidesToScroll: {$this->attr['slidesToScroll']},
-                        rows: {$this->attr['row']},
-                        slidesPerRow: {$this->attr['slidesPerRow']},
+                        centerPadding: '60px',
+                        initialSlide: {$this->attr['initialSlide']},
                         arrows: " . ($this->attr['arrow'] ? 'true' : 'false') . ",
-                        dots: " . ($this->attr['dots']['show'] ? 'true' : 'false') . ",
-                        appendDots: $('.vayu-blocks-advance-slider')
+                        appendDots: $('.vayu-blocks-advance-slider'),
+                        slidesToShow: {$this->attr['slidesToShow']}
                     });
+    
+                    // Add animation class on slide change
+                    $('.vayu-blocks-advance-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                        // Remove animation class from content elements of all slides
+                        $('.slick-slide .vayu_blocks_inside_container_div ').removeClass('slide-active');
+                    });
+
+                    $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
+                        // Add animation class to the content elements of the current active slide
+                        $('.slick-slide.slick-active .vayu_blocks_inside_container_div ').addClass('slide-active');
+                    });
+
                 });
             </script>
         ";
-
+    
         return $script;
     }
-
+    
     // Svg filters for duotone
     private function render_svg_filters() {
-        return '<svg class="duotone-filters" xmlns="http://www.w3.org/2000/svg">
+        return '<svg class="vayu_blocks_duotone-filters" xmlns="http://www.w3.org/2000/svg">
             {/* orange and red */}
             <filter id="duotone-orange-red">
                     <feColorMatrix type="matrix" result="gray"

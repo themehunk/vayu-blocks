@@ -316,11 +316,11 @@ export default function AdvanceSettings({ children, attributes }) {
                 return {};
         }
     };
+    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
     const borderradiusHvrstyles = getborderradiusHvrStyle();
-    const customwidthstyles  =  getWidthStyle(); 
 
     // Prepare the style object
     const styles = {
@@ -328,10 +328,6 @@ export default function AdvanceSettings({ children, attributes }) {
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-           // Conditional width styling based on widthType
-        ...(widthType === 'alignfull' ? customwidthstyles : { width: `${globalwidth}px` }),
-        marginLeft: 'auto',
-        marginRight: 'auto',
 
         position: position || undefined,
         zIndex: zIndex || undefined,
@@ -395,11 +391,9 @@ export default function AdvanceSettings({ children, attributes }) {
     
 
     const blockProps = useBlockProps({
-        className: 'alignfull',
         style: {
             ...mergedStyles,
         },
-
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });

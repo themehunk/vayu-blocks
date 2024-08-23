@@ -189,7 +189,7 @@ return array(
                     'backgroundType' => 'color',
                     'backgroundColor' => '#000000',
                     'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                    'alignment' => 'center center',
+                    'alignment' => 'center',
                 ),
             ),
             array(
@@ -333,7 +333,7 @@ return array(
                     'backgroundType' => 'color',
                     'backgroundColor' => '#000000',
                     'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                    'alignment' => 'center center',
+                    'alignment' => 'center',
                 ),
             ),
         ),

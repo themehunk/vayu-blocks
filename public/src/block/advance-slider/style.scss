@@ -1,5 +1,68 @@
-.slick-track{
+.vayu-blocks-advance-slider .slick-track{
     display: flex !important;
     align-items: center;
     justify-content: center;
 }
+
+.vayu_blocks_duotone-filters{
+    display:none;
+}
+
+.vayu-blocks-advance-slider .slick-slide{
+    margin:5px;
+}
+
+/* Animation for heading */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-active {
+    animation: fadeInUp 1s ease-out;
+}
+
+.vayu_blocks_heading{
+    animation: fadeInDown 1s ease-out;
+}
+
+.vayu_blocks_sub_heading {
+    animation: fadeInDown 1s ease-out;
+}
+
+.vayu_blocks_slider_button1 {
+    animation: fadeInDown 1s ease-out;
+}
+
+.vayu_blocks_slider_button2 {
+    animation: fadeInDown 1s ease-out;
+}
+

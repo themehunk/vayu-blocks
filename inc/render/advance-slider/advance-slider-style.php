@@ -202,6 +202,277 @@ function generate_inline_slider_styles($attr) {
             
     $css .= "}";
 
+    // Common dot styles
+    $css .= "$wrapper .slick-dots li button {";
+        $css .= "cursor: pointer;";
+        $css .= "background: none;";
+        $css .= "border: 1px solid transparent;";
+        $css .= "display: flex;";
+        $css .= "align-items: center;";
+        $css .= "justify-content: center;";
+        $css .= "color: " . $attr['dots']['color'] . ";";
+        $css .= "font-size: " . (strpos($attr['dots']['size'], 'px') === false ? $attr['dots']['size'] . 'px' : $attr['dots']['size']) . ";";
+        $css .= "border-radius:50%;";
+    $css .= "}\n";
+
+    // Active dot styles
+    $css .= "$wrapper .slick-dots .slick-active button {";
+        $css .= "border-color: gray;";
+        $css .= "color: " . $attr['dots']['activeColor'] . ";";
+    $css .= "}\n";
+
+    // Non-active dot styles
+    $css .= "$wrapper .slick-dots li button {";
+        $css .= "background-color: " . $attr['dots']['backgroundColor'] . ";";
+    $css .= "}\n";
+
+    // Non-active dot styles
+    $css .= "$wrapper .slick-dots li button::before {";
+        $css .= "font-Size : " . $attr['dots']['size'] ."px;";
+        $css .= "color: " . $attr['dots']['color'] . ";";
+        $css .= "opacity:1;";
+        // Set content based on dots.option
+        if ($attr['dots']['option'] === 'dots') {
+            $css .= "content: '•';"; // Use a dot character
+        } elseif ($attr['dots']['option'] === 'square') {
+            $css .= "content: '■';"; // Use a square character
+        } else {
+            $css .= "content: ''"; // No content
+        }
+    $css .= "}\n";
+   
+    $css .= "$wrapper .slick-dots .slick-active button::before {";
+        $css .= "color: " . $attr['dots']['activeColor'] . ";";
+    $css .= "}\n";
+
+    // Margin and position styling if 'onimage' is set
+    $css .= "$wrapper .slick-dots {";
+        if ($attr['dots']['onimage']) {
+            $css .= "margin-bottom: " . $attr['dots']['position'] . "px;";
+        } else {
+            $css .= "margin: 0;";
+        }
+    $css .= "}\n";
+
+    // Arrow styles
+    $css .= "$wrapper .slick-arrow {";
+        $css .= "background: " . $attr['arrowstyleleft']['backgroundColor'] . ";";
+        $css .= "border-radius: " . (
+            $attr['arrowstyleleft']['borderRadius']['top'] ?: '0px'
+        ) . " " . (
+            $attr['arrowstyleleft']['borderRadius']['right'] ?: '0px'
+        ) . " " . (
+            $attr['arrowstyleleft']['borderRadius']['bottom'] ?: '0px'
+        ) . " " . (
+            $attr['arrowstyleleft']['borderRadius']['left'] ?: '0px'
+        ) . ";";
+        $css .= "border: none;";
+        $css .= "cursor: pointer;";
+        $css .= "width: 2.5rem;";  // Fixed missing semicolon
+        $css .= "height: 2.5rem;"; // Fixed missing semicolon
+        $css .= "display: flex;";
+        $css .= "align-items: center;";
+        $css .= "justify-content: center;";
+        $css .= "opacity: 1;";  
+        $css .= "z-index: 1;";
+    $css .= "}\n";
+
+     // Arrow hover styles
+     $css .= "$wrapper .slick-arrow:hover {";
+        $css .= "background:blue;";
+      
+    $css .= "}\n";
+    
+    // Adjust left and right arrow specific styles
+    $css .= "$wrapper .slick-prev {";
+        $css .= "margin-left: " . (
+            strpos($attr['arrowstyleleft']['position'], 'px') === false ? 
+            $attr['arrowstyleleft']['position'] . 'px' : 
+            $attr['arrowstyleleft']['position']
+        ) . ";";
+    $css .= "}\n";
+    
+    $css .= "$wrapper .slick-next {";
+        $css .= "margin-right: " . (
+            strpos($attr['arrowstyleleft']['position'], 'px') === false ? 
+            $attr['arrowstyleleft']['position'] . 'px' : 
+            $attr['arrowstyleleft']['position']
+        ) . ";";
+    $css .= "}\n";
+    
+    // Arrow icon customization
+    $css .= "$wrapper .slick-prev:before, ";
+    $css .= "$wrapper .slick-next:before {";
+        $css .= "font-size: " . (
+            strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+            $attr['arrowstyleleft']['size'] . 'px' : 
+            $attr['arrowstyleleft']['size']
+        ) . ";";
+        $css .= "display: inline-block;";
+        $css .= "font-Weight:bolder;";
+        $css .= "color: " . $attr['arrowstyleleft']['color'] . ";";
+        $css .= "content:'';";
+    $css .= "}\n";
+
+    // Specific SVG icons for different arrow types
+    if ($attr['arrowstyleleft']['tag'] === 'arrow') {
+        $leftArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.293 7.293a1 1 0 010 1.414L10.414 13H21a1 1 0 110 2H10.414l4.879 4.879a1 1 0 01-1.414 1.414l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" 
+       /></svg>'; 
+        $rightArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 16.707a1 1 0 010-1.414L13.586 12H3a1 1 0 110-2h10.586L8.707 5.293a1 1 0 011.414-1.414l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+    
+        $css .= "$wrapper .slick-prev:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($leftArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+
+        $css .= "$wrapper .slick-next:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($rightArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+    }else if ($attr['arrowstyleleft']['tag'] === 'chevron'){
+        $leftArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.293 7.293a1 1 0 010 1.414L10.414 13 15.293 17.293a1 1 0 01-1.414 1.414l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+        $rightArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 011.414 0l4.879 4.879L8.707 17.293a1 1 0 01-1.414-1.414L11.586 13 8.707 9.121a1 1 0 010-1.414z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+    
+        $css .= "$wrapper .slick-prev:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($leftArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+
+        $css .= "$wrapper .slick-next:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($rightArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+    }else if ($attr['arrowstyleleft']['tag'] === 'circle'){
+        $leftArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.293 7.293a1 1 0 010 1.414L10.414 13H21a1 1 0 110 2H10.414l4.879 4.879a1 1 0 01-1.414 1.414l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+        $rightArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 011.414 0l4.879 4.879L8.707 17.293a1 1 0 01-1.414-1.414L11.586 13 8.707 9.121a1 1 0 010-1.414z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+    
+        $css .= "$wrapper .slick-prev:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($leftArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+
+        $css .= "$wrapper .slick-next:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($rightArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+    }else if ($attr['arrowstyleleft']['tag'] === 'hand'){
+        $leftArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.293 7.293a1 1 0 010 1.414L10.414 13H21a1 1 0 110 2H10.414l4.879 4.879a1 1 0 01-1.414 1.414l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+        $rightArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 011.414 0l4.879 4.879L8.707 17.293a1 1 0 01-1.414-1.414L11.586 13 8.707 9.121a1 1 0 010-1.414z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+    
+        $css .= "$wrapper .slick-prev:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($leftArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+
+        $css .= "$wrapper .slick-next:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($rightArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+    }else if ($attr['arrowstyleleft']['tag'] === 'caret'){
+        $leftArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.707 7.293a1 1 0 010 1.414L10.414 13 14.707 17.293a1 1 0 01-1.414 1.414l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 0z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+        $rightArrowSvg = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.293 7.293a1 1 0 011.414 0l4.879 4.879L9.293 17.293a1 1 0 01-1.414-1.414L11.586 13 9.293 9.121a1 1 0 010-1.414z" fill="' . esc_attr($attr['arrowstyleleft']['color']) . '" /> </svg>';
+    
+        $css .= "$wrapper .slick-prev:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($leftArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+
+        $css .= "$wrapper .slick-next:before {";
+            $css .= "background: url('data:image/svg+xml;base64," . base64_encode($rightArrowSvg) . "');";
+            $css .= "width: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+            $css .= "height: " . (
+                strpos($attr['arrowstyleleft']['size'], 'px') === false ? 
+                $attr['arrowstyleleft']['size'] . 'px' : 
+                $attr['arrowstyleleft']['size']
+            ) . ";";
+        $css .= "}";
+    }
+    
     // Loop through each slide to generate styles
     foreach ($attr['slides'] as $slide) {
 
@@ -322,7 +593,7 @@ function generate_inline_slider_styles($attr) {
             $css .= "z-index: 1;";
             $css .= "height: 100%;";
             $css .= "margin-bottom: 8%;";
-            $css .= "text-align: " . (isset($slide['layout']['alignment']) ? esc_attr($slide['layout']['alignment']) : 'left') . ";";
+            $css .= "text-align: " . esc_attr($slide['layout']['alignment']) . ";";
         $css .= "}\n";
 
         // Heading
