@@ -3,6 +3,10 @@
         "type": "number",
         "default": 0.6
       },
+      "pg_layoutalignment":{
+        "type":"string",
+        "default":"left"
+      },
       "pg_authorTextColor": {
         "type": "string",
         "default": "gray"

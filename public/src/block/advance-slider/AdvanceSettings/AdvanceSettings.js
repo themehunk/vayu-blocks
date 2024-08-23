@@ -395,7 +395,6 @@ export default function AdvanceSettings({ children, attributes }) {
     
 
     const blockProps = useBlockProps({
-        className: 'alignfull',
         style: {
             ...mergedStyles,
         },

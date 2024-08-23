@@ -26,18 +26,6 @@ function generate_inline_styles($attr) {
     
     //Main div
     $css .= "$wrapper {";
-
-         $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
-
-       // Check if widthType is set and determine width
-        if (isset($attr['widthType'])) {
-            if ($attr['widthType'] === 'default') {
-                $css .= isset($attr['globalwidth']) ? "width: {$attr['globalwidth']}px;" : '';
-            } elseif ($attr['widthType'] === 'alignfull') {
-            $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-            }
-        }
-
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
         $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
@@ -51,9 +39,6 @@ function generate_inline_styles($attr) {
         $css .= isset($attr['marginBottom']) ? "margin-bottom: " . esc_attr($attr['marginBottom']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
         $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
-        
-        $css .= "margin-left: auto !important;";
-        $css .= "margin-right: auto !important;";
 
         // Position and Z-index
         $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
@@ -261,6 +246,20 @@ function generate_inline_styles($attr) {
 
     $css .= "}";
 
+    $css .= "$wrapper $post .post-grid-category-style-container {";
+        $css .= isset($attr['pg_layoutalignment']) ? "justify-content: " . esc_attr($attr['pg_layoutalignment']) . ";" : '';
+    $css .= "}";
+        
+    $css .= "$wrapper $post .vayu_blocks_title_post_grid {";
+        $css .= "display:flex;";
+        $css .= isset($attr['pg_layoutalignment']) ? "justify-content: " . esc_attr($attr['pg_layoutalignment']) . ";" : '';
+    $css .= "}";
+
+    $css .= "$wrapper $post .post-grid-tag-style-conatiner {";
+        // $css .= "display:flex;";
+        $css .= isset($attr['pg_layoutalignment']) ? "text-align: " . esc_attr($attr['pg_layoutalignment']) . ";" : '';
+    $css .= "}";
+   
     //Tag
     $css .= "$wrapper $post .post-grid-tag-style-conatiner .post-grid-tag-style-new{";
         // Cursor
@@ -350,7 +349,6 @@ function generate_inline_styles($attr) {
      
     //Title Tag
     $css .= "$wrapper $post {$attr['pg_blockTitleTag']}{";
-
         if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
             // Apply color style if titlechoice is 'color'
             if (isset($attr['pg_TitleColor'])) {
@@ -379,11 +377,10 @@ function generate_inline_styles($attr) {
         $css .= "overflow-wrap: break-word;"; // Break words if needed
         $css .= "word-break: break-word;"; // Break long words if necessary
 
-      
     $css .= "}";
      
-     //Title Tag
-     $css .= "$wrapper $post {$attr['pg_blockTitleTag']} a{";
+    //Title Tag
+    $css .= "$wrapper $post {$attr['pg_blockTitleTag']} a{";
 
         if (isset($attr['titlechoice']) && $attr['titlechoice'] === 'color') {
             // Apply color style if titlechoice is 'color'
@@ -407,6 +404,8 @@ function generate_inline_styles($attr) {
         $css .= "    align-items: flex-start;";
         $css .= "    flex-wrap: wrap;";
         $css .= "    margin-left:2px;";
+        $css .= isset($attr['pg_layoutalignment']) ? "justify-content: " . esc_attr($attr['pg_layoutalignment']) . ";" : '';
+
     $css .= "}";
 
     //author-date-container
@@ -463,6 +462,9 @@ function generate_inline_styles($attr) {
         
         // Margin Left
         $css .= "margin-left: 5px;";
+
+
+        $css .= isset($attr['pg_layoutalignment']) ? "text-align: " . esc_attr($attr['pg_layoutalignment']) . ";" : '';
         
     $css .= "}";
         

@@ -299,17 +299,16 @@
     animation: fadeInUp 1s ease-out;
 }
 
-/* Optional: For sub-heading, button 1 and button 2 */
-.vayu_blocks_sub_heading {
-    animation: fadeInDown 1s ease-out;
-}
-
 .vayu_blocks_button1_heading {
     animation: fadeInDown 1s ease-out;
 }
 
 .vayu_blocks_button2_heading {
     animation: fadeInDown 1s ease-out;
+}
+
+.new{
+    color:red;
 }
 
 .slick-next:before,

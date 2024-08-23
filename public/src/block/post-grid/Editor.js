@@ -6,6 +6,7 @@ import './editor.scss';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { MdColorLens } from "react-icons/md";
 import { PiGradient } from "react-icons/pi";
+import {AlignmentToolbar} from '@wordpress/block-editor';
 
 
 
@@ -78,6 +79,7 @@ const {
 	pg_TitleColorhvr,
 	titlechoice,
 	pg_dateImageScale,
+	pg_layoutalignment
 
 } = attributes;
 
@@ -1409,7 +1411,7 @@ const handleTitleTagChange = (value) => {
 			<PanelBody title={__('Layout', 'vayu-blocks')} initialOpen={false}>
 
 							<ResponsiveControl
-								label={ __( 'Custom Width', 'vayu-blocks' ) }
+								label={ __( 'Post Width', 'vayu-blocks' ) }
 								>	
 								<UnitChooser
 								value={ attributes.layoutcustomWidthUnit }
@@ -1430,8 +1432,14 @@ const handleTitleTagChange = (value) => {
 									allowReset={ true }
 								/>
 							</ResponsiveControl>
-										
 
+							<AlignmentToolbar
+									label={__('Alignment', 'Post_blockk')}
+									value={ attributes.pg_layoutalignment }
+									onChange={ e => setAttributes({ pg_layoutalignment : e }) }									
+									isCollapsed={ false }
+								/> 
+										
 						<h4>Background</h4>
 							<BackgroundSelectorControl
 								backgroundType={layout_backgroundType}

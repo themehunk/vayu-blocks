@@ -1673,104 +1673,70 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
-									<SelectControl
-										label={ __( 'Width', 'vayu-blocks' ) }
-										value={ attributes.widthType }
-										options={ [
-											{ label:  __( `Global max (${attributes.globalwidth}px) wide`, 'vayu-blocks' ), value: 'default' },
-											{ label: __( 'Full Width', 'vayu-blocks' ), value: 'alignfull' },
-										]}
-										onChange={ e => setAttributes({ widthType: e,customWidth:100 }) }
-									/>
 
-								{attributes.widthType === 'alignfull' && (
-									<ResponsiveControl
-									label={ __( 'Custom Width', 'vayu-blocks' ) }
-									>	
-									<UnitChooser
-									value={ attributes.customWidthUnit }
-									onClick={ customWidthUnit => {
-										setAttributes({ customWidthUnit });
-										setcustomWidthUnit(customWidthUnit); 
-										}}
-									units={ [ 'px', 'em', '%' ] }
-									/>
-
-									<RangeControl
-										renderTooltipContent={ customTooltipCustomWidth }
-										value={ getCustomWidth() || '' }
-										onChange={ changeCustomWidth }
-										step={ 1 }
-										min={ 1 }
-										max={ maxcustomWidthUnit }
-										allowReset={ true }
-									/>
-									</ResponsiveControl>
-									)}
-
-									<ResponsiveControl label={__('Padding', 'your-text-domain')}>
+							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 
 
-										<UnitChooser
-											value={attributes.paddingUnit}
-											onClick={paddingUnit => {
-												setAttributes({ paddingUnit });
-												// Optionally update other state or props
-											}}
-											units={['px', 'em', '%']}
-										/>
-										<SizingControl
-											type={getPaddingButtonType()}
-											min={0}
-											max={maxpaddingUnit} // Define max margin unit
-											changeType={changePaddingButtonType}
-											onChange={(type, value) => changeButtonPadding(type, value)}
-											options={[
-												{ label: __('Top', 'your-text-domain'), type: 'top', value: getButtonPadding('top') },
-												{ label: __('Right', 'your-text-domain'), type: 'right', value: getButtonPadding('right') },
-												{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getButtonPadding('bottom') },
-												{ label: __('Left', 'your-text-domain'), type: 'left', value: getButtonPadding('left') }
-											]}
-										/>
-									</ResponsiveControl>
-									
-									<ResponsiveControl label={__('Margin', 'your-text-domain')}>
-										<UnitChooser
-											value={attributes.marginUnit}
-											onClick={marginUnit => {
-												setAttributes({ marginUnit });
-												// Optionally update other state or props
-											}}
-											units={['px', 'em', '%']}
-										/>
-										<SizingControl
-											type={getMarginType()}
-											min={0}
-											max={maxmarginUnit} // Define max margin unit
-											changeType={changeMarginType}
-											onChange={(type, value) => changeMargin(type, value)}
-											options={[
-												{ label: __('Top', 'your-text-domain'), type: 'top', value: getMargin('top') },
-												{ label: __('Right', 'your-text-domain'), type: 'right', value: getMargin('right') },
-												{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getMargin('bottom') },
-												{ label: __('Left', 'your-text-domain'), type: 'left', value: getMargin('left') }
-											]}
-										/>
-									</ResponsiveControl>
+								<UnitChooser
+									value={attributes.paddingUnit}
+									onClick={paddingUnit => {
+										setAttributes({ paddingUnit });
+										// Optionally update other state or props
+									}}
+									units={['px', 'em', '%']}
+								/>
+								<SizingControl
+									type={getPaddingButtonType()}
+									min={0}
+									max={maxpaddingUnit} // Define max margin unit
+									changeType={changePaddingButtonType}
+									onChange={(type, value) => changeButtonPadding(type, value)}
+									options={[
+										{ label: __('Top', 'your-text-domain'), type: 'top', value: getButtonPadding('top') },
+										{ label: __('Right', 'your-text-domain'), type: 'right', value: getButtonPadding('right') },
+										{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getButtonPadding('bottom') },
+										{ label: __('Left', 'your-text-domain'), type: 'left', value: getButtonPadding('left') }
+									]}
+								/>
+							</ResponsiveControl>
+							
+							<ResponsiveControl label={__('Margin', 'your-text-domain')}>
+								<UnitChooser
+									value={attributes.marginUnit}
+									onClick={marginUnit => {
+										setAttributes({ marginUnit });
+										// Optionally update other state or props
+									}}
+									units={['px', 'em', '%']}
+								/>
+								<SizingControl
+									type={getMarginType()}
+									min={0}
+									max={maxmarginUnit} // Define max margin unit
+									changeType={changeMarginType}
+									onChange={(type, value) => changeMargin(type, value)}
+									options={[
+										{ label: __('Top', 'your-text-domain'), type: 'top', value: getMargin('top') },
+										{ label: __('Right', 'your-text-domain'), type: 'right', value: getMargin('right') },
+										{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getMargin('bottom') },
+										{ label: __('Left', 'your-text-domain'), type: 'left', value: getMargin('left') }
+									]}
+								/>
+							</ResponsiveControl>
 
-									<ResponsiveControl
-										label={ __( 'Z-index', 'vayu-blocks' ) }
-										>	
-										<RangeControl
-											renderTooltipContent={ customTooltipZindex }
-											value={ getZindex() || '' }
-											onChange={ changeZindex }
-											step={ 1 }
-											min={ -999999 }
-											max={ 999999 }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
+							<ResponsiveControl
+								label={ __( 'Z-index', 'vayu-blocks' ) }
+								>	
+								<RangeControl
+									renderTooltipContent={ customTooltipZindex }
+									value={ getZindex() || '' }
+									onChange={ changeZindex }
+									step={ 1 }
+									min={ -999999 }
+									max={ 999999 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
 
 						</PanelBody>
 

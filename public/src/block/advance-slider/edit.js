@@ -50,7 +50,7 @@ const edit = ({ attributes, setAttributes }) => {
             rtl: attributes.rtl,
             centerPadding: '60px',
             afterChange: (currentIndex) => {
-                setActiveIndex(currentIndex);
+                setActiveIndex(currentIndex); 
             },
             onInit: (slider) => {
                 setActiveIndex(slider.currentSlide);
@@ -149,7 +149,7 @@ const edit = ({ attributes, setAttributes }) => {
         } else if ('hand' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaHandPointLeft style={stylearrowleft}/>;
             rightarrow = <FaHandPointRight style={ stylearrowleft}/>;
-        } else if ('circlearrow' === attributes.arrowstyleleft.tag) {
+        } else if ('circle' === attributes.arrowstyleleft.tag) {
             leftarrow = <FaCircleArrowLeft style={stylearrowleft}/>;
             rightarrow = <FaCircleArrowRight style={ stylearrowleft}/>;
         } else if ('caret' === attributes.arrowstyleleft.tag) {
@@ -203,8 +203,8 @@ const edit = ({ attributes, setAttributes }) => {
         attributes.index
     ]);
 
-    
     useEffect(() => {
+        
         if (sliderRef.current && attributes.index !== undefined) {
             sliderRef.current.slickGoTo(attributes.index);
         }
@@ -407,8 +407,6 @@ const edit = ({ attributes, setAttributes }) => {
                     </div>
                 </div>
             </div>
-        
-
         );
 
     });

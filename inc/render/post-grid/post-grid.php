@@ -71,7 +71,6 @@ class VayuBlocksPostGrid {
         // Rendering posts
         $output = '';
         if ($query->have_posts()) {
-            $output .= '<div class="alignfull">';
             $output .= '<div>';
             $output .= '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
             
@@ -114,7 +113,7 @@ class VayuBlocksPostGrid {
             $output .= '</div>';
             $output .= '<div class="pagination">' . $this->render_pagination($query, $paged) . '</div>'; // Render pagination controls
             $output .= '</div>';
-            $output .= '</div>';
+         
         } else {
             $output .= '<p>' . esc_html__('No posts found.', 'plugin-textdomain') . '</p>';
         }
@@ -205,7 +204,7 @@ class VayuBlocksPostGrid {
         $post_title = get_the_title();
         $post_permalink = get_permalink();
 
-        $output .= '<div >';
+        $output .= '<div class="vayu_blocks_title_post_grid">';
         
         
         if (isset($this->attr['pg_blockTitleTag'])) {
@@ -221,8 +220,7 @@ class VayuBlocksPostGrid {
         } else {
             $output .= '</h4>';
         }
-        
-       
+    
         $output .= '</div>';
 
         return $output;

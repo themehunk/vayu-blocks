@@ -120,7 +120,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const postStyle = postStyles(attributes);
 
-    const authorAndDateContainerStyle = authorAndDateContainerStyles;
+    const authorAndDateContainerStyle = authorAndDateContainerStyles(attributes);
 
     const PaginationStyle = PaginationStyles(attributes);
     
@@ -301,10 +301,10 @@ const Edit = ({ attributes, setAttributes }) => {
                         postsToShow.map((post) => (
                             <div key={post.uniqueID} style={postStyle}>
                                 {Loading ? (
-                                        <div className="loader">
-                                         <Spinner/>
-                                         <h6 style={{fontSize:'15px'}}>Please Wait...</h6>
-                                         {/* This is the animated loader div */}
+                                    <div className="loader">
+                                        <Spinner/>
+                                        <h6 style={{fontSize:'15px'}}>Please Wait...</h6>
+                                        {/* This is the animated loader div */}
                                     </div>
                                    
                                 ) : (
@@ -320,7 +320,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                         )}
                 
                                         {Category() && (
-                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap',justifyContent:`${attributes.pg_layoutalignment}` }}>
                                                 {post._embedded['wp:term'][0].slice(0, pg_numberOfCategories).map((category) => (
                                                     <a key={category.id} href={category.link} style={categoryButtonStyle}>
                                                         {category.name}
@@ -353,7 +353,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                         </div>
                 
                                         {(Author() || ShowDate()) && (
-                                            <div style={authorAndDateContainerStyles}>
+                                            <div style={authorAndDateContainerStyle}>
                                                 {Author() && (
                                                     <div style={dateSectionStyles}>
                                                         <img
@@ -394,7 +394,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                         )}
                 
                                         {Tags() && (
-                                            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                            <div style={{ display: 'flex', flexWrap: 'wrap',justifyContent:`${attributes.pg_layoutalignment}`, }}>
                                                 {post._embedded['wp:term'][1].slice(0, pg_numberOfTags).map((tag) => (
                                                     <a key={tag.id} href={tag.link} style={tagButtonStyle}>
                                                         {tag.name}
