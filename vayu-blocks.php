@@ -74,9 +74,29 @@ class Vayu_Block_Plugin {
 
     public function vayu_register_blocks() {
         
-    $container_width = absint(get_option('container_width',1250));
-    $container_gap = absint(get_option('container_gap',20));
-    $padding = absint(get_option('padding',18));
+    // $container_width = absint(get_option('container_width',1250));
+    // $container_gap = absint(get_option('container_gap',20));
+    // $padding = absint(get_option('padding',18));
+    
+    // Retrieve the settings from the database
+$settings = get_option('vayu_blocks_settings', array(
+    'container' => array(
+        'value' => '',
+        'pro' => false,
+        'description' => '',
+        'settings' => array(
+            'containerWidth' => 1250, // Default value
+            'containerGap' => 20, // Default value
+            'padding' => 18, // Default value
+        ),
+    ),
+));
+
+// Access the container settings
+$container_width = absint($settings['container']['settings']['containerWidth']);
+$container_gap = absint($settings['container']['settings']['containerGap']);
+$padding = absint($settings['container']['settings']['padding']);
+
     // $button_color = sanitize_text_field(get_option('button_color'));
 
         $blocks = array(
