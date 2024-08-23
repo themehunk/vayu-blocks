@@ -214,6 +214,8 @@ function MyPluginContent(){
         const [containerWidth, setContainerWidth] = useState('');
         const [containerGap, setContainerGap] = useState('');
         const [padding, setPadding] = useState('');
+        const [containerValue, setcontainerValue] = useState('');
+        const [containerDescription, setcontainerDescription] = useState('');
         const [buttonColor, setButtonColor] = useState('');
         
         // Function to save input values
@@ -223,7 +225,7 @@ function MyPluginContent(){
             // Gather input values (e.g., from state or refs)
             const inputData = {
                 container: {
-                    value: 'someValue', // Replace with actual value
+                    value: 1, // Replace with actual value
                     pro: false, // Replace with actual value
                     description: 'Some description', // Replace with actual value
                     settings: {
@@ -233,7 +235,7 @@ function MyPluginContent(){
                     }
                 },
                 button: {
-                    value: 'someButtonValue', // Replace with actual value
+                    value: '1', // Replace with actual value
                     pro: false, // Replace with actual value
                     description: 'Some button description', // Replace with actual value
                     settings: {
@@ -322,7 +324,9 @@ function MyPluginContent(){
                 // Dynamically update your state based on the retrieved data
                 for (let key in retrievedData) {
                     if (retrievedData.hasOwnProperty(key)) {
-                        const settings = retrievedData[key].settings;
+                        // const settings = retrievedData[key].settings;
+                        const { value, pro, description, settings } = retrievedData[key];
+
                         switch (key) {
                             case 'container':
                                 setContainerWidth(settings.containerWidth);

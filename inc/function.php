@@ -223,9 +223,9 @@ function vayu_blocks_get_input_values_callback() {
             'pro' => false,
             'description' => '',
             'settings' => array(
-                'containerWidth' => 1008,
-                'containerGap' => 9,
-                'padding' => 9,
+                'containerWidth' => 1250,
+                'containerGap' => 18,
+                'padding' => 20,
             ),
         ),
         'button' => array(
@@ -234,6 +234,46 @@ function vayu_blocks_get_input_values_callback() {
             'description' => '',
             'settings' => array(
                 'buttonColor' => '',
+            ),
+        ),
+        'heading' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+               
+            ),
+        ),
+        'spacer' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                
+            ),
+        ),
+        'product' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                
+            ),
+        ),
+        'post-grid' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                
+            ),
+        ),
+        'slider' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+            
             ),
         ),
     ));
