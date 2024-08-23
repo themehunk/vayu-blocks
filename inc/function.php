@@ -197,20 +197,36 @@ add_action('rest_api_init', function () {
 });
 
 // Callback function to save input values
+// Callback function to save input values
 function vayu_blocks_save_input_values_callback($request) {
     $data = $request->get_json_params(); // Get JSON data sent in the request
 
-    // Process and save data to the database
-    // Example:
-    $container_width = isset($data['containerWidth']) ? absint($data['containerWidth']) : 1250;
-    $container_gap = isset($data['containerGap']) ? absint($data['containerGap']) : 18;
-    $padding = isset($data['padding']) ? absint($data['padding']) : 20;
-    $button_color = isset($data['buttonColor']) ? sanitize_text_field($data['buttonColor']) : '';
+    // Retrieve the existing settings from the database
+    $settings = get_option('vayu_blocks_settings', array());
 
-    update_option('container_width', $container_width);
-    update_option('container_gap', $container_gap);
-    update_option('padding', $padding);
-    update_option('button_color', $button_color);
+    // Update the settings with the new data
+    $settings['container'] = array(
+        'value' => isset($data['container']['value']) ? sanitize_text_field($data['container']['value']) : '',
+        'pro' => isset($data['container']['pro']) ? (bool) $data['container']['pro'] : false,
+        'description' => isset($data['container']['description']) ? sanitize_text_field($data['container']['description']) : '',
+        'settings' => array(
+            'containerWidth' => isset($data['container']['settings']['containerWidth']) ? absint($data['container']['settings']['containerWidth']) : 1008,
+            'containerGap' => isset($data['container']['settings']['containerGap']) ? absint($data['container']['settings']['containerGap']) : 16,
+            'padding' => isset($data['container']['settings']['padding']) ? absint($data['container']['settings']['padding']) : 9,
+        ),
+    );
+
+    $settings['button'] = array(
+        'value' => isset($data['button']['value']) ? sanitize_text_field($data['button']['value']) : '',
+        'pro' => isset($data['button']['pro']) ? (bool) $data['button']['pro'] : false,
+        'description' => isset($data['button']['description']) ? sanitize_text_field($data['button']['description']) : '',
+        'settings' => array(
+            'buttonColor' => isset($data['button']['settings']['buttonColor']) ? sanitize_text_field($data['button']['settings']['buttonColor']) : '',
+        ),
+    );
+
+    // Save the updated settings back to the database
+    update_option('vayu_blocks_settings', $settings);
 
     return rest_ensure_response(array(
         'success' => true,
@@ -220,21 +236,32 @@ function vayu_blocks_save_input_values_callback($request) {
 
 // Callback function to retrieve input values
 function vayu_blocks_get_input_values_callback($request) {
-    // Retrieve data from the database
-    // Example:
-    $container_width = absint(get_option('container_width',1250));
-    $container_gap = absint(get_option('container_gap',20));
-    $padding = absint(get_option('padding',18));
-    $button_color = sanitize_text_field(get_option('button_color'));
+    // Retrieve the settings from the database
+    $settings = get_option('vayu_blocks_settings', array(
+        'container' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                'containerWidth' => 1250,
+                'containerGap' => 18,
+                'padding' => 20,
+            ),
+        ),
+        'button' => array(
+            'value' => '',
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                'buttonColor' => '',
+            ),
+        ),
+    ));
 
     // Prepare and return data
-    return rest_ensure_response(array(
-        'containerWidth' => $container_width,
-        'containerGap' => $container_gap,
-        'padding' => $padding,
-        'buttonColor' => $button_color,
-    ));
+    return rest_ensure_response($settings);
 }
+
 
 add_action('rest_api_init', function() {
     add_filter('rest_post_query', 'vayu_blocks_filter_posts_with_featured_image', 10, 2);

@@ -10,8 +10,26 @@ function vayu_advance_container_style($attr){
 	
 
     if(isset( $attr['uniqueID'] )){
+		
+		// Retrieve the settings from the database
+			$settings = get_option('vayu_blocks_settings', array(
+				'container' => array(
+					'value' => '',
+					'pro' => false,
+					'description' => '',
+					'settings' => array(
+						'containerWidth' => 1250, // Default value
+						'containerGap' => 20, // Default value
+						'padding' => 18, // Default value
+					),
+				),
+			));
 
-		$globalpadding = get_option('padding',18); 
+		// Access the container settings
+		$container_width = absint($settings['container']['settings']['containerWidth']);
+		$container_gap = absint($settings['container']['settings']['containerGap']);
+		$globalpadding = absint($settings['container']['settings']['padding']);
+
         
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";
         // boxed-width
@@ -20,7 +38,6 @@ function vayu_advance_container_style($attr){
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
-			$container_width = get_option('container_width',1250);
             $css .= "max-width:{$container_width}px";
         }
         $css .= "}";
@@ -256,7 +273,6 @@ function vayu_advance_container_style($attr){
              }
 
 			 //gap
-			 $container_gap = esc_attr(get_option('container_gap',20));
 			 $elementGap = isset($attr['elementGap']) ? $attr['elementGap'] : $container_gap;	
 			 $elementGapUnit = isset($attr['elementGapUnit']) ? $attr['elementGapUnit'] : 'px';
              $css .= "gap: {$elementGap}{$elementGapUnit};";

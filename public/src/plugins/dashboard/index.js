@@ -211,56 +211,73 @@ function MyPluginContent(){
             }
         }
 
-    const [containerWidth, setContainerWidth] = useState('');
-    const [containerGap, setContainerGap] = useState('');
-    const [padding, setPadding] = useState('');
-    const [buttonColor, setButtonColor] = useState(false); // Default value for checkbox
-
-    // Function to save input values
-    const saveInputValues = async () => {
-        setLoading(true); // Set loading state to true
-        const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
-        try {
-            const response = await fetch(`${Url}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    containerWidth: containerWidth,
-                    containerGap: containerGap,
-                    padding: padding,
-                    buttonColor: buttonColor,
-                }),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to save input values');
+        const [containerWidth, setContainerWidth] = useState('');
+        const [containerGap, setContainerGap] = useState('');
+        const [padding, setPadding] = useState('');
+        const [buttonColor, setButtonColor] = useState('');
+        
+        // Function to save input values
+        const saveInputValues = async () => {
+            setLoading(true); // Set loading state to true
+            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
+            try {
+                const response = await fetch(Url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        container: {
+                            value: '',
+                            pro: false,
+                            description: '',
+                            settings: {
+                                containerWidth: containerWidth,
+                                containerGap: containerGap,
+                                padding: padding,
+                            },
+                        },
+                        button: {
+                            value: '',
+                            pro: false,
+                            description: '',
+                            settings: {
+                                buttonColor: buttonColor,
+                            },
+                        },
+                    }),
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to save input values');
+                }
+                setLoading(false); // Set loading state to false
+                console.log('Input values saved successfully');
+            } catch (error) {
+                setLoading(false); // Ensure loading state is set to false on error
+                console.error('Error saving input values:', error);
             }
-            setLoading(false); // Set loading state to true
-            console.log('Input values saved successfully');
-        } catch (error) {
-            console.error('Error saving input values:', error);
-        }
-    };
-
-    // Function to retrieve input values
-    const getInputValues = async () => {
-        const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/get-input-values`;
-        try {
-            const response = await fetch(`${Url}`);
-            if (!response.ok) {
-                throw new Error('Failed to retrieve input values');
+        };
+        
+        // Function to retrieve input values
+        const getInputValues = async () => {
+            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/get-input-values`;
+            try {
+                const response = await fetch(Url);
+                if (!response.ok) {
+                    throw new Error('Failed to retrieve input values');
+                }
+                const data = await response.json();
+                // Update state with retrieved input values
+                setContainerWidth(data.container.settings.containerWidth);
+                setContainerGap(data.container.settings.containerGap);
+                setPadding(data.container.settings.padding);
+                setButtonColor(data.button.settings.buttonColor);
+                // You can also update state for value, pro, and description if needed
+            } catch (error) {
+                console.error('Error retrieving input values:', error);
             }
-            const data = await response.json();
-            // Update state with retrieved input values
-            setContainerWidth(data.containerWidth);
-            setContainerGap(data.containerGap);
-            setPadding(data.padding);
-            setButtonColor(data.buttonColor);
-        } catch (error) {
-            console.error('Error retrieving input values:', error);
-        }
-    };
+        };
+        
 
     // Fetch initial input values when component mounts
     useEffect(() => {
