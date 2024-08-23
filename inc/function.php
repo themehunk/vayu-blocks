@@ -61,6 +61,7 @@ function vayu_admin_react_script() {
         'homeUrl' => plugins_url( '/', __FILE__ ),
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'homeUrl2' => get_home_url(),
+        'nonce' => wp_create_nonce('vayu_blocks_nonce'),
     );
     
     if( class_exists('Vayu_Block_Plugin_Pro') ){
@@ -179,63 +180,42 @@ function vayu_blocks_save_toggle_switch_callback($request) {
 
 // ************* Rest API of Block Settings ************* //
 
-add_action('rest_api_init', function () {
-    
-    // Endpoint to save input values
-    register_rest_route('vayu-blocks-sett/v1', '/save-input-values', array(
-        'methods' => 'POST',
-        'callback' => 'vayu_blocks_save_input_values_callback',
-        'permission_callback' => '__return_true', // Set your permission callback here
-    ));
 
-    // Endpoint to retrieve input values
-    register_rest_route('vayu-blocks-sett/v1', '/get-input-values', array(
-        'methods' => 'GET',
-        'callback' => 'vayu_blocks_get_input_values_callback',
-        'permission_callback' => '__return_true', // Set your permission callback here
-    ));
-});
+add_action('wp_ajax_vayu_blocks_save_input_values', 'vayu_blocks_save_input_values_callback');
 
 // Callback function to save input values
-// Callback function to save input values
-function vayu_blocks_save_input_values_callback($request) {
-    $data = $request->get_json_params(); // Get JSON data sent in the request
+function vayu_blocks_save_input_values_callback() {
+    check_ajax_referer('vayu_blocks_nonce', 'security');
 
-    // Retrieve the existing settings from the database
+    // Decode the JSON string into an associative array
+    $inputData = isset($_POST['inputData']) ? json_decode(stripslashes($_POST['inputData']), true) : array();
+
     $settings = get_option('vayu_blocks_settings', array());
 
-    // Update the settings with the new data
-    $settings['container'] = array(
-        'value' => isset($data['container']['value']) ? sanitize_text_field($data['container']['value']) : '',
-        'pro' => isset($data['container']['pro']) ? (bool) $data['container']['pro'] : false,
-        'description' => isset($data['container']['description']) ? sanitize_text_field($data['container']['description']) : '',
-        'settings' => array(
-            'containerWidth' => isset($data['container']['settings']['containerWidth']) ? absint($data['container']['settings']['containerWidth']) : 1008,
-            'containerGap' => isset($data['container']['settings']['containerGap']) ? absint($data['container']['settings']['containerGap']) : 16,
-            'padding' => isset($data['container']['settings']['padding']) ? absint($data['container']['settings']['padding']) : 9,
-        ),
-    );
+    // Dynamically loop through all provided settings and update them
+    foreach ($inputData as $key => $value) {
+        $settings[$key] = array(
+            'value' => isset($value['value']) ? sanitize_text_field($value['value']) : '',
+            'pro' => isset($value['pro']) ? (bool) $value['pro'] : false,
+            'description' => isset($value['description']) ? sanitize_text_field($value['description']) : '',
+            'settings' => array_map('sanitize_text_field', $value['settings']),
+        );
+    }
 
-    $settings['button'] = array(
-        'value' => isset($data['button']['value']) ? sanitize_text_field($data['button']['value']) : '',
-        'pro' => isset($data['button']['pro']) ? (bool) $data['button']['pro'] : false,
-        'description' => isset($data['button']['description']) ? sanitize_text_field($data['button']['description']) : '',
-        'settings' => array(
-            'buttonColor' => isset($data['button']['settings']['buttonColor']) ? sanitize_text_field($data['button']['settings']['buttonColor']) : '',
-        ),
-    );
-
-    // Save the updated settings back to the database
     update_option('vayu_blocks_settings', $settings);
 
-    return rest_ensure_response(array(
+    wp_send_json_success(array(
         'success' => true,
         'message' => 'Input values saved successfully',
     ));
+
+    wp_die();
 }
 
-// Callback function to retrieve input values
-function vayu_blocks_get_input_values_callback($request) {
+
+add_action('wp_ajax_vayu_blocks_get_input_values', 'vayu_blocks_get_input_values_callback');
+
+function vayu_blocks_get_input_values_callback() {
     // Retrieve the settings from the database
     $settings = get_option('vayu_blocks_settings', array(
         'container' => array(
@@ -243,9 +223,9 @@ function vayu_blocks_get_input_values_callback($request) {
             'pro' => false,
             'description' => '',
             'settings' => array(
-                'containerWidth' => 1250,
-                'containerGap' => 18,
-                'padding' => 20,
+                'containerWidth' => 1008,
+                'containerGap' => 9,
+                'padding' => 9,
             ),
         ),
         'button' => array(
@@ -258,9 +238,10 @@ function vayu_blocks_get_input_values_callback($request) {
         ),
     ));
 
-    // Prepare and return data
-    return rest_ensure_response($settings);
+    // Ensure the response is in JSON format
+    wp_send_json_success($settings);
 }
+
 
 
 add_action('rest_api_init', function() {

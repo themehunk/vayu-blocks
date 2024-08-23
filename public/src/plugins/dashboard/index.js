@@ -218,65 +218,132 @@ function MyPluginContent(){
         
         // Function to save input values
         const saveInputValues = async () => {
-            setLoading(true); // Set loading state to true
-            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/save-input-values`;
+            setLoading(true);
+        
+            // Gather input values (e.g., from state or refs)
+            const inputData = {
+                container: {
+                    value: 'someValue', // Replace with actual value
+                    pro: false, // Replace with actual value
+                    description: 'Some description', // Replace with actual value
+                    settings: {
+                        containerWidth: containerWidth, // Assuming these are state variables
+                        containerGap: containerGap,
+                        padding: padding,
+                    }
+                },
+                button: {
+                    value: 'someButtonValue', // Replace with actual value
+                    pro: false, // Replace with actual value
+                    description: 'Some button description', // Replace with actual value
+                    settings: {
+                        buttonColor: buttonColor, // Assuming this is a state variable
+                    }
+                }
+            };
+        
+            const data = {
+                action: 'vayu_blocks_save_input_values',
+                security: vayublock.nonce,
+                inputData: JSON.stringify(inputData), // Serialize the inputData object
+            };
+        
             try {
-                const response = await fetch(Url, {
+                const response = await fetch(vayublock.ajaxurl, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     },
-                    body: JSON.stringify({
-                        container: {
-                            value: '',
-                            pro: false,
-                            description: '',
-                            settings: {
-                                containerWidth: containerWidth,
-                                containerGap: containerGap,
-                                padding: padding,
-                            },
-                        },
-                        button: {
-                            value: '',
-                            pro: false,
-                            description: '',
-                            settings: {
-                                buttonColor: buttonColor,
-                            },
-                        },
-                    }),
+                    body: new URLSearchParams(data).toString(),
                 });
-                if (!response.ok) {
+        
+                const result = await response.json();
+        
+                if (!result.success) {
                     throw new Error('Failed to save input values');
                 }
-                setLoading(false); // Set loading state to false
+        
+                setLoading(false);
                 console.log('Input values saved successfully');
             } catch (error) {
-                setLoading(false); // Ensure loading state is set to false on error
+                setLoading(false);
                 console.error('Error saving input values:', error);
             }
         };
+    
+        const handleSave = () => {
+            saveInputValues({
+                container: {
+                    value: 'someContainerValue',
+                    pro: false,
+                    description: 'Some description',
+                    settings: {
+                        containerWidth: containerWidth, // State variable
+                        containerGap: containerGap,     // State variable
+                        padding: padding                // State variable
+                    }
+                },
+                button: {
+                    value: 'someButtonValue',
+                    pro: false,
+                    description: 'Some button description',
+                    settings: {
+                        buttonColor: buttonColor // State variable
+                    }
+                }
+            });
+        };
         
-        // Function to retrieve input values
+        
+        
         const getInputValues = async () => {
-            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks-sett/v1/get-input-values`;
+            const requestData = {
+                action: 'vayu_blocks_get_input_values',
+                security: vayublock.nonce,
+            };
+        
             try {
-                const response = await fetch(Url);
-                if (!response.ok) {
+                const response = await fetch(vayublock.ajaxurl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                    },
+                    body: new URLSearchParams(requestData).toString(),
+                });
+        
+                const result = await response.json();
+        
+                if (!result.success) {
                     throw new Error('Failed to retrieve input values');
                 }
-                const data = await response.json();
-                // Update state with retrieved input values
-                setContainerWidth(data.container.settings.containerWidth);
-                setContainerGap(data.container.settings.containerGap);
-                setPadding(data.container.settings.padding);
-                setButtonColor(data.button.settings.buttonColor);
-                // You can also update state for value, pro, and description if needed
+        
+                const retrievedData = result.data;
+        
+                // Dynamically update your state based on the retrieved data
+                for (let key in retrievedData) {
+                    if (retrievedData.hasOwnProperty(key)) {
+                        const settings = retrievedData[key].settings;
+                        switch (key) {
+                            case 'container':
+                                setContainerWidth(settings.containerWidth);
+                                setContainerGap(settings.containerGap);
+                                setPadding(settings.padding);
+                                break;
+                            case 'button':
+                                setButtonColor(settings.buttonColor);
+                                break;
+                            // Add more cases as needed...
+                            default:
+                                console.log('Unknown key:', key);
+                        }
+                    }
+                }
             } catch (error) {
                 console.error('Error retrieving input values:', error);
             }
         };
+        
+        
         
 
     // Fetch initial input values when component mounts
@@ -491,7 +558,7 @@ function MyPluginContent(){
       </div>
 
       <div className='option-submit'>
-            <button onClick={saveInputValues}>
+            <button onClick={handleSave}>
             {isLoading ? <><FaSpinner className="icon-spin loader" /></> : __('Save', 'vayu-blocks')}
             </button>
       </div>
