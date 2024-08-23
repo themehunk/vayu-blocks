@@ -232,7 +232,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     ];
 
     //default duotone
-    const DUOTONE_PALETTE = [
+    const vayu_blocks_DUOTONE_PALETTE = [
         { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
         { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
         { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
@@ -258,6 +258,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     const vayu_blocks_handleCopySlide = (index) => {
         // Create a deep copy of the slide at the specified index
         const newSlide = JSON.parse(JSON.stringify(attributes.slides[index]));
+
+        // Assign a new unique ID to the copied slide
+        newSlide.layout.uniqueId = generateUniqueId();
         
         // Add the new slide to the slides array
         const updatedSlides = [...attributes.slides, newSlide];
@@ -273,6 +276,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 ...attributes.slides,
                 {
                     layout: {
+                        uniqueId: generateUniqueId(),
                         button1: {
                             show: true,
                             text: "button 1",
@@ -456,6 +460,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         setAttributes({ slides: newSlides });
     };
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+
     //border
     const vayu_blocks_handleslideBorderChange = (index, property, newBorders) => { 
         const updatedAttributes = {};
@@ -580,7 +587,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         if (!Array.isArray(value) || value.length === 0) {
             vayu_blocks_updateSliderStyles(index,propertyPath,"");
         }
-        const filter = DUOTONE_PALETTE.find(({ colors }) =>
+        const filter = vayu_blocks_DUOTONE_PALETTE.find(({ colors }) =>
             colors.every((color, i) => color === value[i])
         );
     
@@ -597,7 +604,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         // Get the ID from the slide's layout duotone
         const id = attributes.slides[index].layout.duotone;
     
-        // Find the matching filter in the DUOTONE_PALETTE
+        // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
         const filter = DUOTONE_PALETTE.find((filter) => filter.id === id);
     
         // If a match is found, return the colors array

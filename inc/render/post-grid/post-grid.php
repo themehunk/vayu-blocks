@@ -8,7 +8,6 @@ class VayuBlocksPostGrid {
     private $attr;
     private $device_type;
 
-
     public function __construct($attr) {
         $this->attr = $attr;
         $this->device_type = $this->get_device_type();

@@ -55,6 +55,7 @@ class Vayu_Block_Plugin {
         require_once 'inc/render/post-grid/post-grid.php';
         require_once 'inc/render/post-grid/post-grid-style.php';
         require_once 'inc/render/advance-slider/advance-slider.php';
+        require_once 'inc/render/advance-slider/advance-slider-style.php';
         // require_once 'inc/render/image-slider-block/image-slider-block.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );

@@ -335,7 +335,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     };
 
     //default duotone
-    const DUOTONE_PALETTE = [
+    const vayu_blocks_DUOTONE_PALETTE = [
         { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
         { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
         { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
@@ -355,7 +355,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         if (!Array.isArray(value) || value.length === 0) {
             vayu_blocks_updateSliderBackgroundStyles(propertyPath,"");
         }
-        const filter = DUOTONE_PALETTE.find(({ colors }) =>
+        const filter = vayu_blocks_DUOTONE_PALETTE.find(({ colors }) =>
             colors.every((color, i) => color === value[i])
         );
     
@@ -371,8 +371,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
         // Get the ID from the slide's layout duotone
         const id = attributes.global.layout.duotone;
     
-        // Find the matching filter in the DUOTONE_PALETTE
-        const filter = DUOTONE_PALETTE.find((filter) => filter.id === id);
+        // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
+        const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
     
         // If a match is found, return the colors array
         if (filter) {
@@ -400,7 +400,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         <h4>{__('Filters', 'vayu-blocks')}</h4>
                         <DuotonePicker
                             label={__('Filters', 'vayu-blocks')}
-                            duotonePalette={ DUOTONE_PALETTE }
+                            duotonePalette={ vayu_blocks_DUOTONE_PALETTE }
                             disableCustomColors
                             disableCustomDuotone
                             value={ vayu_blocks_duotonevalue() }

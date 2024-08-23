@@ -123,6 +123,7 @@
         "default": [
             {
                 "layout": {
+                    "uniqueId": "slide-default-1", 
                     "button1":{
                         "show": true,
                         "text": "button 1",
@@ -285,6 +286,7 @@
             },
             {
                 "layout": {
+                    "uniqueId": "slide-default-2", 
                     "button1":{
                         "show": true,
                         "text": "button 1",
@@ -610,5 +612,4 @@
             }
         }
     }
-    
 }
