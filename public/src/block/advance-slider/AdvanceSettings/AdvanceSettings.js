@@ -328,10 +328,7 @@ export default function AdvanceSettings({ children, attributes }) {
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-           // Conditional width styling based on widthType
-        ...(widthType === 'alignfull' ? customwidthstyles : { width: `${globalwidth}px` }),
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        width: '100%',
 
         position: position || undefined,
         zIndex: zIndex || undefined,

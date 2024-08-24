@@ -30,8 +30,6 @@ const edit = ({ attributes, setAttributes }) => {
         return `${value}px`;
     };
 
-    console.log(activeIndex);
-
     useEffect(() => {
         const newSettings = {
             dots: attributes.dots.show,
@@ -87,7 +85,6 @@ const edit = ({ attributes, setAttributes }) => {
             if (sliderRef.current) {
                 sliderRef.current.slickGoTo(slideToGo);
             }
-           
         
             // Set the active index based on the dot clicked
             setActiveIndex(index);
@@ -173,25 +170,49 @@ const edit = ({ attributes, setAttributes }) => {
             rightarrow = <FaCaretRight style={ stylearrowleft}/>;
         }
 
-        // Add arrow settings if needed
+         // Add arrow settings based on attributes
         if (attributes.arrow) {
             newSettings.nextArrow = (
-                <div className="next-slick-arrow" >
-                    <div className="inside_rightarrow_div" style={{
-                        ...stylearrow_div,
-                        marginLeft: `-${attributes.arrowstyleleft.position + 30}px`, 
-                    }}>
-                    {rightarrow}
+                <div className="next-slick-arrow">
+                    <div
+                        className={`inside_rightarrow_div ${
+                            attributes.arrowOnHover && attributes.arrowanimation
+                                ? 'arrow-on-hover-for-right'
+                                : attributes.arrowOnHover
+                                ? 'arrow-on-hover-only'
+                                : ''
+                        }`}                    
+                        style={{
+                            ...stylearrow_div,
+                            marginLeft: `-${attributes.arrowstyleleft.position + 30}px`,
+                            display: attributes.arrowOnHover ? 'none' : '', // Hide initially if arrowOnHover is true
+                        }}
+                    >
+                        {rightarrow}
                     </div>
                 </div>
             );
+            
             newSettings.prevArrow = (
                 <div className="prev-slick-arrow">
-                    <div className="inside_rightarrow_div" style={{...stylearrow_div, marginLeft:`${attributes.arrowstyleleft.position}px`}}>
-                    {leftarrow}
+                    <div
+                    className={`inside_rightarrow_div ${
+                        attributes.arrowOnHover && attributes.arrowanimation
+                            ? 'arrow-on-hover'
+                            : attributes.arrowOnHover
+                            ? 'arrow-on-hover-only'
+                            : ''
+                    }`} 
+                        style={{
+                            ...stylearrow_div,
+                            marginLeft: `${attributes.arrowstyleleft.position}px`,
+                            display: attributes.arrowOnHover ? 'none' : '', // Hide initially if arrowOnHover is true
+                        }}
+                    >
+                        {leftarrow}
                     </div>
                 </div>
-            );
+            );        
         }
         
         setSettings(newSettings);
@@ -216,14 +237,18 @@ const edit = ({ attributes, setAttributes }) => {
         attributes.pagingImages,
         attributes.arrowstyleleft,
         activeIndex,
-        attributes.index
+        attributes.index,
+        attributes.arrowOnHover,
+        attributes.arrowanimation
     ]);
 
     useEffect(() => {
         
         if (sliderRef.current && attributes.index !== undefined) {
             sliderRef.current.slickGoTo(attributes.index);
+            setActiveIndex(attributes.index);
         }
+        
     }, [attributes.index]);
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
@@ -327,23 +352,10 @@ const edit = ({ attributes, setAttributes }) => {
             filter: slide.layout.duotone && slide.layout.duotone.length > 1 ? `url(${slide.layout.duotone})` : 'none',
         }
 
-        const calculateTopValue = (slidesToShow, slidesPerRow, hasImage) => {
-            let topValue;
-            if(slidesToShow>2 && slidesPerRow >2 ){
-                topValue=0;
-            }
-            topValue=65;
-        
-            return hasImage ? `${topValue}%` : 'auto';
-        };
-        
-        // Usage
-        const topValue = calculateTopValue(attributes.slidesToShow, attributes.slidesPerRow, slide.layout.backgroundImage);
-
         const vayu_blocks_inside_conatiner_div = {
             position: slide.layout.backgroundImage ? 'absolute' : '',
             left:'50%',
-            top:topValue,
+            top:'0%',
             transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Center horizontally and vertically
             zIndex: 1,
             height: '100%',

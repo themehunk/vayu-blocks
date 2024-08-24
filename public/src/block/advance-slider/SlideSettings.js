@@ -69,27 +69,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
-    // const vayu_blocks_handleExpandToggle = (slideIndex) => {
-    //     const { slidesToShow, slidesPerRow, slidesToScroll, index: currentIndex } = attributes;
-    
-    //     // Calculate total slides per page
-    //     const slidesPerPage = slidesToShow * slidesPerRow;
-    
-    //     // Calculate the new page based on slide index and slidesToScroll
-    //     let newPage = Math.floor((slideIndex - slidesToShow + slidesToScroll) / (slidesPerPage - slidesToScroll)) + 1;
-    //     newPage = Math.max(newPage, 0); // Ensure newPage is at least 0
-    
-    //     // Update expanded index (toggle) as per the existing logic
-    //     setExpandedIndex(expandedIndex === slideIndex ? null : slideIndex);
-    
-    //     // Check if the new page is different from the current page
-    //     if (newPage !== currentIndex) {
-    //         // Update the index attribute to reflect the new page
-    //         setAttributes({ index: newPage });
-    //     }
-    // };
-    
-    
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
 
     const vayu_blocks_colors = [
         { name: 'Gray', color: '#808080' },
@@ -464,8 +445,10 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     };
     
     //style-update
-    const vayu_blocks_updateSliderStyles = (index, propertyPath, value) => {
-
+    const vayu_blocks_updateSliderStyles = (index, propertyPath, value='') => {
+        if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
+            return;
+        }
         if (value === undefined) {
             value = '';
         }
@@ -496,9 +479,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
         setAttributes({ slides: newSlides });
     };
-
-    // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
 
     //border
     const vayu_blocks_handleslideBorderChange = (index, property, newBorders) => { 
@@ -642,7 +622,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         const id = attributes.slides[index].layout.duotone;
     
         // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
-        const filter = DUOTONE_PALETTE.find((filter) => filter.id === id);
+        const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
     
         // If a match is found, return the colors array
         if (filter) {
@@ -667,7 +647,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
     
-
     return (
         
             <div class="vayu_blocks_slide_settings_main">
@@ -740,78 +719,66 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                 {0=== activeButton &&(
                                     <>
-                                        <br />
-                                        <ToggleControl
-                                            label={__('Custom Background', 'vayu-blocks')}
-                                            checked={attributes.slides[index].layout.customBackground}
-                                            onChange={(value) => vayu_blocks_updateSliderStyles(index,"customBackground",value)}
-                                        />
-                                        <p>By this the global background will inactie for this slide.</p>
+                                        <h4>{__('Background','vayu-blocks')}</h4>
+                                        {attributes.slides[index].layout.backgroundImage ? (
+                                            <>         
+                                                <div class="image-container">
+                                                    <img src={attributes.slides[index].layout.backgroundImage} alt="slideimage" />
+                                                    <button class="change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>Change</button>
+                                                </div>
+                                                <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>
+                                                    {__('Clear', 'vayu-blocks')}
+                                                </Button>
 
-                                        {attributes.slides[index].layout.customBackground && (
-                                            <>
-                                                <h4>{__('Background','vayu-blocks')}</h4>
-                                                {attributes.slides[index].layout.backgroundImage ? (
-                                                    <>         
-                                                        <div class="image-container">
-                                                            <img src={attributes.slides[index].layout.backgroundImage} alt="slideimage" />
-                                                            <button class="change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>Change</button>
-                                                        </div>
-                                                        <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>
-                                                            {__('Clear', 'vayu-blocks')}
-                                                        </Button>
-
-                                                        <h4>{__('Filters', 'vayu-blocks')}</h4>
-                                                        <DuotonePicker
-                                                            label={__('Filters', 'vayu-blocks')}
-                                                            duotonePalette={ DUOTONE_PALETTE }
-                                                            disableCustomColors
-                                                            disableCustomDuotone
-                                                            value={ vayu_blocks_duotonevalue(index) }
-                                                            onChange={ (value) => vayu_blocks_duotoneHandler(index,'duotone',value) }
-                                                        />
-                                                    </>
-                                                        ) : (
-                                                            <MediaPlaceholder
-                                                                icon="format-image"
-                                                                labels={{
-                                                                    title: __('Background Image', 'vayu-blocks'),
-                                                                    name: __('an image', 'vayu-blocks')
-                                                                }}
-                                                                onSelect={(media) => vayu_blocks_updateSliderStyles(index, 'backgroundImage', media.url)}
-                                                                onSelectURL='true'
-                                                                accept="image/*"
-                                                                allowedTypes={['image']}
-                                                            />
-                                                        )}
-
-                                                <PanelColorGradientSettings
-                                                    settings={[
-                                                        {
-                                                            colorValue: attributes.slides[index].layout.backgroundColor,
-                                                            gradientValue: attributes.slides[index].layout.backgroundGradient,
-                                                            onColorChange: (color) => {
-                                                                vayu_blocks_updateSliderStyles(index, 'backgroundColor', color);
-                                                            },
-                                                            onGradientChange: (gradient) => {
-                                                                vayu_blocks_updateSliderStyles(index, 'backgroundGradient', gradient); 
-                                                            },
-                                                            label: __( 'Background', 'vayu-blocks' ),
-                                                        },
-                                                    ]}
-                                                />
-
-                                                <br />
-                                                <RangeControl
-                                                    label={__('Opacity', 'vayu-blocks')}
-                                                    value={attributes.slides[index].layout.opacity}
-                                                    onChange={(value) => vayu_blocks_updateSliderStyles(index,'opacity',value)}
-                                                    min={0}
-                                                    max={1}
-                                                    step={0.1}
+                                                <h4>{__('Filters', 'vayu-blocks')}</h4>
+                                                <DuotonePicker
+                                                    label={__('Filters', 'vayu-blocks')}
+                                                    duotonePalette={ vayu_blocks_DUOTONE_PALETTE }
+                                                    disableCustomColors
+                                                    disableCustomDuotone
+                                                    value={ vayu_blocks_duotonevalue(index) }
+                                                    onChange={ (value) => vayu_blocks_duotoneHandler(index,'duotone',value) }
                                                 />
                                             </>
-                                        )}
+                                                ) : (
+                                                    <MediaPlaceholder
+                                                        icon="format-image"
+                                                        labels={{
+                                                            title: __('Background Image', 'vayu-blocks'),
+                                                            name: __('an image', 'vayu-blocks')
+                                                        }}
+                                                        onSelect={(media) => vayu_blocks_updateSliderStyles(index, 'backgroundImage', media.url)}
+                                                        onSelectURL='true'
+                                                        accept="image/*"
+                                                        allowedTypes={['image']}
+                                                    />
+                                                )}
+
+                                        <PanelColorGradientSettings
+                                            settings={[
+                                                {
+                                                    colorValue: attributes.slides[index].layout.backgroundColor,
+                                                    gradientValue: attributes.slides[index].layout.backgroundGradient,
+                                                    onColorChange: (color) => {
+                                                        vayu_blocks_updateSliderStyles(index, 'backgroundColor', color);
+                                                    },
+                                                    onGradientChange: (gradient) => {
+                                                        vayu_blocks_updateSliderStyles(index, 'backgroundGradient', gradient); 
+                                                    },
+                                                    label: __( 'Background', 'vayu-blocks' ),
+                                                },
+                                            ]}
+                                        />
+
+                                        <br />
+                                        <RangeControl
+                                            label={__('Opacity', 'vayu-blocks')}
+                                            value={attributes.slides[index].layout.opacity}
+                                            onChange={(value) => vayu_blocks_updateSliderStyles(index,'opacity',value)}
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                        />
                                     </>
                                 )}
 

@@ -63,7 +63,6 @@
 	box-shadow: none !important;
 }
 
-
 .vayu_blocks_add-slide{
     display:flex;
     align-items: center;
@@ -145,7 +144,6 @@
 .duotone-filters{
     display:none;
 }
-  
   
 .image-container {
     position: relative;
@@ -353,4 +351,43 @@ content: "" !important;
     background: #ddcdcd;
     padding: 8px;
     font-weight:bold;
+}
+
+@keyframes slideInFromBottomLeft {
+    from {
+        opacity: 0; /* Start invisible */
+        transform: translate(-100%, 100%); /* Start from bottom left */
+    }
+    to {
+        opacity: 1; /* Fade in */
+        transform: translate(0, 0); /* End at original position */
+    }
+}
+
+@keyframes slideInFromBottomRight {
+    from {
+        opacity: 0; /* Start invisible */
+        transform: translate(100%, 100%); /* Start from bottom left */
+    }
+    to {
+        opacity: 1; /* Fade in */
+        transform: translate(0, 0); /* End at original position */
+    }
+}
+
+.slider-container:hover .inside_rightarrow_div.arrow-on-hover{
+    display:flex !important;
+    position: relative; /* Position relative to allow for left and bottom positioning */
+    animation: slideInFromBottomLeft 1s ease-out;
+}
+
+.slider-container:hover .inside_rightarrow_div.arrow-on-hover-for-right{
+    display:flex !important;
+    position: relative; /* Position relative to allow for left and bottom positioning */
+    animation: slideInFromBottomRight 1s ease-out;
+}
+
+.slider-container:hover .inside_rightarrow_div.arrow-on-hover-only{
+    display:flex !important;
+    position: relative; /* Position relative to allow for left and bottom positioning */
 }

@@ -106,6 +106,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     //style update with global attributes
     const vayu_blocks_updateSliderStyles = (propertyPath, value) => {
+
+          if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
+            return;
+        }
         // Default value for the property if it's undefined
         if (value === undefined) {
             value = '';
@@ -383,7 +387,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     return (
         <>
-            <PanelBody  title={__('Global Background', 'vayu-blocks')} initialOpen={false}>
+            {/* <PanelBody  title={__('Global Background', 'vayu-blocks')} initialOpen={false}>
                 <>
                     <p>This background will apply to all slides except those with custom backgrounds enabled.</p>
                     <h4>{__('Background','vayu-blocks')}</h4>
@@ -448,7 +452,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     />
 
                 </>
-            </PanelBody>
+            </PanelBody> */}
 
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
                 <p><p>This style will apply to all slides except those with custom styles enabled.</p></p>
@@ -985,13 +989,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ centerMode: value })}
                 />
 
-                <ToggleControl
+                {/* <ToggleControl
                     label={__('Fade', 'vayu-blocks')}
                     checked={attributes.fade}
                     onChange={(value) => setAttributes({ fade: value })}
                 />
               <h6>Slide fade controls the smooth transition between slides by gradually fading them in and out.</h6>
-                <ToggleControl
+                 */}
+
+                 <ToggleControl
                     label={__('Animate', 'vayu-blocks')}
                     checked={attributes.waitForAnimate}
                     onChange={(value) => setAttributes({ waitForAnimate: value })}
@@ -1073,9 +1079,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             <ToggleControl
                                 label={ __('On Image', 'vayu-blocks') }
                                 checked={ attributes.dots.onimage}
-                                onChange={ (value) => setAttributes({ dots: { ...attributes.dots, onimage: value } }) }
+                                onChange={ (value) => setAttributes({ dots: { ...attributes.dots, onimage: value, position:60 } }) }
                             />
-
 
                             <SelectControl
                                 label={__('Dots', 'vayu-blocks')}
@@ -1151,6 +1156,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                      <p className='vayu_blocks_dots'>Arrow Style</p>
                      
                             <>
+                                <ToggleControl
+                                    label={__('Arrow on hover', 'vayu-blocks')}
+                                    checked={attributes.arrowOnHover}
+                                    onChange={(value) => setAttributes({ arrowOnHover: value })}
+                                />
+
+                                {attributes.arrowOnHover && (
+                                    <ToggleControl
+                                        label={__('With Animation', 'vayu-blocks')}
+                                        checked={attributes.arrowanimation}
+                                        onChange={(value) => setAttributes({ arrowanimation: value })}
+                                    />
+                                )}
+                                    
                                 <SelectControl
                                     label={__('Arrow', 'vayu-blocks')}
                                     value={attributes.arrowstyleleft.tag}
@@ -1227,7 +1246,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                             position: value,
                                         },
                                     })}
-                                    min={-20}
+                                    min={-30}
                                     max={200}
                                     step={1}
                                 />

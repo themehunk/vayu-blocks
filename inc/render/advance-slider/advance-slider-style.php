@@ -16,16 +16,7 @@ function generate_inline_slider_styles($attr) {
     //Main div
     $css .= "$wrapper {";
 
-        $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : '%';
-
-      // Check if widthType is set and determine width
-       if (isset($attr['widthType'])) {
-           if ($attr['widthType'] === 'default') {
-               $css .= isset($attr['globalwidth']) ? "width: {$attr['globalwidth']}px;" : '';
-           } elseif ($attr['widthType'] === 'alignfull') {
-           $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-           }
-       }
+        $css .= "width:100%;";
 
        // Desktop Padding
        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
@@ -41,8 +32,6 @@ function generate_inline_slider_styles($attr) {
        $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
        $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
        
-       $css .= "margin-left: auto !important;";
-       $css .= "margin-right: auto !important;";
 
        // Position and Z-index
        $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
@@ -270,17 +259,63 @@ function generate_inline_slider_styles($attr) {
         $css .= "cursor: pointer;";
         $css .= "width: 2.5rem;";  // Fixed missing semicolon
         $css .= "height: 2.5rem;"; // Fixed missing semicolon
-        $css .= "display: flex;";
+        
         $css .= "align-items: center;";
         $css .= "justify-content: center;";
         $css .= "opacity: 1;";  
         $css .= "z-index: 1;";
+        // Conditional display property
+        if ($attr['arrowOnHover'] === true) {
+            $css .= "display: none !important;";
+        } else {
+            $css .= "display: flex;";
+        }
     $css .= "}\n";
 
-     // Arrow hover styles
-     $css .= "$wrapper .slick-arrow:hover {";
+    $css .= "$wrapper:hover .slick-next {";
+        $css .= "display: flex !important;";  // Ensure arrows are visible on hover
+        // Apply animation if both conditions are true
+        if ($attr['arrowOnHover'] && $attr['arrowanimation']) {
+            $css .= "animation: slideInFromBottomRight 1s ease-out;";
+        }
+        $css .= "animation-fill-mode: forwards;"; // Ensure final state persists
+    $css .= "}\n";
+
+    $css .= "$wrapper:hover .slick-prev {";
+        $css .= "display: flex !important;";  // Ensure arrows are visible on hover
+        if($attr['arrowOnHover'] && $attr['arrowanimation']){
+            $css .= "animation: slideInFromBottomLeft 1s ease-out;"; // Apply animation
+        }
+        $css .= "animation-fill-mode: forwards;"; // Ensure final state persists
+    $css .= "}\n";
+    
+    // Keyframes
+    $css .= "@keyframes slideInFromBottomRight {";
+        $css .= "from {";
+            $css .= "opacity: 0;"; /* Start invisible */
+            $css .= "transform: translate(100%, 100%);"; /* Start from bottom right */
+        $css .= "}";
+        $css .= "to {";
+            $css .= "opacity: 1;"; /* Fade in */
+            $css .= "transform: translate(0, 0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+
+    // Keyframes
+    $css .= "@keyframes slideInFromBottomLeft {";
+        $css .= "from {";
+            $css .= "opacity: 0;"; /* Start invisible */
+            $css .= "transform: translate(-100%, 100%);"; /* Start from bottom left */
+        $css .= "}";
+        $css .= "to {";
+            $css .= "opacity: 1;"; /* Fade in */
+            $css .= "transform: translate(0, 0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+        
+    // Arrow hover styles
+    $css .= "$wrapper .slick-arrow:hover {";
         $css .= "background:blue;";
-      
     $css .= "}\n";
     
     // Adjust left and right arrow specific styles
@@ -313,6 +348,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "color: " . $attr['arrowstyleleft']['color'] . ";";
         $css .= "content:'';";
     $css .= "}\n";
+
 
     // Specific SVG icons for different arrow types
     if ($attr['arrowstyleleft']['tag'] === 'arrow') {
@@ -588,7 +624,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "$container $insideContainer {";
             $css .= "position: " . (!empty($slide['layout']['backgroundImage']) ? 'absolute' : '') . ";";
             $css .= "left: 50%;";
-            $css .= "top: 50%;";
+            $css .= "top: 0%;";
             $css .= "transform: " . (!empty($slide['layout']['backgroundImage']) ? 'translate(-50%, -50%)' : 'none') . ";";
             $css .= "z-index: 1;";
             $css .= "height: 100%;";
