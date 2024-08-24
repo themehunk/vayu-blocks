@@ -78,6 +78,14 @@
         "type":"boolean",
         "default":"false"
     },
+    "arrowOnHover" :{
+        "type":"boolean",
+        "default": false
+    },
+    "arrowanimation" :{
+        "type":"boolean",
+        "default": true
+    },
     "customPaging":{
         "type":"boolean",
         "default":false
@@ -97,7 +105,7 @@
             "onimage":false,
             "option":"dots",
             "activeColor":"gray",
-            "position" : 80
+            "position" : 0
         }
     },
     "arrowstyleleft":{
@@ -108,7 +116,7 @@
             "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
             "size":"20px",
             "tag": "arrow",
-            "position":35,
+            "position":0,
             "borderRadius":{
                 "top": "50px",
                 "right":"50px",
