@@ -33,7 +33,7 @@ const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense}) => {
     };
     if( !proStatus || proStatus && verifyLicense ){
         return (
-            <label className="toggle-switch">
+            <label className="toggle-switch new-toggle">
                 <input type="checkbox" checked={isChecked} onChange={handleChange} />
                 <span className="slider round"></span>
             </label>
@@ -332,6 +332,7 @@ function MyPluginContent(){
                                 setContainerWidth(settings.containerWidth);
                                 setContainerGap(settings.containerGap);
                                 setPadding(settings.padding);
+                                setcontainerValue(value);
                                 break;
                             case 'button':
                                 setButtonColor(settings.buttonColor);
@@ -421,7 +422,7 @@ function MyPluginContent(){
                     <div className='th-sw-right'>
                         <div>
                         <label className='block-label'>{getDescription(key).icon}{key}</label>
-                        <ToggleSwitch initialValue={value} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
+                        <ToggleSwitch initialValue={containerValue} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
                         </div>
                     </div>
                     <div className='th-sw-bottom'>
