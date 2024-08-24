@@ -30,6 +30,8 @@ const edit = ({ attributes, setAttributes }) => {
         return `${value}px`;
     };
 
+    console.log(activeIndex);
+
     useEffect(() => {
         const newSettings = {
             dots: attributes.dots.show,
@@ -50,7 +52,12 @@ const edit = ({ attributes, setAttributes }) => {
             rtl: attributes.rtl,
             centerPadding: '60px',
             afterChange: (currentIndex) => {
-                setActiveIndex(currentIndex); 
+                let newvalue = currentIndex;
+                if (currentIndex > attributes.slidesToScroll-1) {
+                    newvalue = Math.floor(currentIndex / attributes.slidesToScroll);
+                }
+                
+                setActiveIndex(newvalue); 
             },
             onInit: (slider) => {
                 setActiveIndex(slider.currentSlide);
@@ -70,12 +77,21 @@ const edit = ({ attributes, setAttributes }) => {
         }
 
         const handleDotClick = (e, dot, index) => {
-            // Call the existing onClick handler
-            if (dot.props.children.props.onClick) {
-                dot.props.children.props.onClick(e);
+            // Prevent default click action
+            e.preventDefault();
+    
+            // Calculate the correct slide index to go to based on slidesToScroll
+            const slideToGo = index * attributes.slidesToScroll;
+    
+            // Use sliderRef to directly manipulate the slider
+            if (sliderRef.current) {
+                sliderRef.current.slickGoTo(slideToGo);
             }
-            // Set the active index
+           
+        
+            // Set the active index based on the dot clicked
             setActiveIndex(index);
+
         };
 
         // Conditionally customize dot appearance

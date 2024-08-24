@@ -49,10 +49,47 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     const [hover, sethover] = useState('normal');
     const [button, setbutton] = useState('button1');
 
-    const vayu_blocks_handleExpandToggle = (index) => {
-        setExpandedIndex(expandedIndex === index ? null : index);
-        setAttributes({index:index});
+
+    const vayu_blocks_handleExpandToggle = (slideIndex) => {
+        const { slidesToShow, slidesPerRow, slidesToScroll, index: currentIndex } = attributes;
+    
+        // Calculate total slides per page
+        const slidesPerPage = slidesToShow * slidesPerRow;
+    
+        // Calculate the new page number based on the slide index
+        const newPage = Math.floor(slideIndex / slidesPerPage);
+    
+        // Update expanded index (toggle) as per the existing logic
+        setExpandedIndex(expandedIndex === slideIndex ? null : slideIndex);
+    
+        // Check if the new page is different from the current page
+        if (newPage !== currentIndex) {
+            // Update the index attribute to reflect the new page
+            setAttributes({ index: newPage });
+        }
     };
+
+    // const vayu_blocks_handleExpandToggle = (slideIndex) => {
+    //     const { slidesToShow, slidesPerRow, slidesToScroll, index: currentIndex } = attributes;
+    
+    //     // Calculate total slides per page
+    //     const slidesPerPage = slidesToShow * slidesPerRow;
+    
+    //     // Calculate the new page based on slide index and slidesToScroll
+    //     let newPage = Math.floor((slideIndex - slidesToShow + slidesToScroll) / (slidesPerPage - slidesToScroll)) + 1;
+    //     newPage = Math.max(newPage, 0); // Ensure newPage is at least 0
+    
+    //     // Update expanded index (toggle) as per the existing logic
+    //     setExpandedIndex(expandedIndex === slideIndex ? null : slideIndex);
+    
+    //     // Check if the new page is different from the current page
+    //     if (newPage !== currentIndex) {
+    //         // Update the index attribute to reflect the new page
+    //         setAttributes({ index: newPage });
+    //     }
+    // };
+    
+    
 
     const vayu_blocks_colors = [
         { name: 'Gray', color: '#808080' },
