@@ -295,7 +295,7 @@ export default function Edit({
 				if(attributes.contentWidthType=='fullwidth'){
 
 					containerStyles = {...containerStyles,
-						width: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
+						maxWidth: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
 					}; 
 	
 				}
@@ -849,7 +849,7 @@ export default function Edit({
 
 			let rootContainerClassName = "";
 			rootContainerClassName = supportsLayout
-				? `th-root-block-container alignfull th-block-container-${attributes.uniqueID}`
+				? `th-root-block-container alignwide th-block-container-${attributes.uniqueID}`
 				: 'wp-block';
 
 			return (

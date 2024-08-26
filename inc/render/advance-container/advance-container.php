@@ -46,7 +46,7 @@ function vayu_advance_container_style($attr){
             // full-width
             if (isset($attr['fullcontentWidth'])) {
                 $fullcontentWidthUnit = isset($attr['fullcontentWidthUnit']) ? $attr['fullcontentWidthUnit'] : '%';
-                $css .= "max-width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
+                $css .= "max-width: 100%;
 				width: {$attr['fullcontentWidth']}{$fullcontentWidthUnit};
 				margin-left: auto;
 				margin-right: auto; ";
