@@ -183,7 +183,6 @@ function vayu_blocks_save_toggle_switch_callback($request) {
 
 add_action('wp_ajax_vayu_blocks_save_input_values', 'vayu_blocks_save_input_values_callback');
 
-// Callback function to save input values
 function vayu_blocks_save_input_values_callback() {
     check_ajax_referer('vayu_blocks_nonce', 'security');
 
@@ -195,16 +194,30 @@ function vayu_blocks_save_input_values_callback() {
 
     // Loop through each provided setting
     foreach ($inputData as $key => $value) {
-        // If the setting already exists, update only the 'value' and 'settings' keys
-        if (isset($settings[$key])) {
-            $settings[$key]['value'] = isset($value['value']) ? sanitize_text_field($value['value']) : $settings[$key]['value'];
-            $settings[$key]['settings'] = isset($value['settings']) ? vayu_blocks_array_merge_recursive_distinct($settings[$key]['settings'], array_map('sanitize_text_field', $value['settings'])) : $settings[$key]['settings'];
-        } else {
-            // If the setting doesn't exist, create a new entry with only 'value' and 'settings'
-            $settings[$key] = array(
-                'value' => isset($value['value']) ? sanitize_text_field($value['value']) : '',
-                'settings' => isset($value['settings']) ? array_map('sanitize_text_field', $value['settings']) : array(),
-            );
+        // Check if only the 'value' key is present, indicating a toggle switch change
+        if (isset($value['value']) && !isset($value['settings'])) {
+            // Update only the 'value' key
+            if (isset($settings[$key])) {
+                $settings[$key]['value'] = sanitize_text_field($value['value']);
+            } else {
+                // If the setting doesn't exist, create a new entry with just 'value'
+                $settings[$key] = array(
+                    'value' => sanitize_text_field($value['value']),
+                    'settings' => array(), // Default empty settings array
+                );
+            }
+        } elseif (isset($value['settings'])) { // If 'settings' key is present, handle block settings
+            // Update the 'settings' key and optionally the 'value' key
+            if (isset($settings[$key])) {
+                $settings[$key]['value'] = isset($value['value']) ? sanitize_text_field($value['value']) : 0; // Default to 0 if not provided
+                $settings[$key]['settings'] = isset($value['settings']) ? vayu_blocks_array_merge_recursive_distinct($settings[$key]['settings'], array_map('sanitize_text_field', $value['settings'])) : $settings[$key]['settings'];
+            } else {
+                // If the setting doesn't exist, create a new entry with only 'value' and 'settings'
+                $settings[$key] = array(
+                    'value' => isset($value['value']) ? sanitize_text_field($value['value']) : 0, // Default to 0 if not provided
+                    'settings' => isset($value['settings']) ? array_map('sanitize_text_field', $value['settings']) : array(),
+                );
+            }
         }
     }
 
@@ -238,13 +251,14 @@ function vayu_blocks_array_merge_recursive_distinct(array &$array1, array &$arra
 
 
 
+
 add_action('wp_ajax_vayu_blocks_get_input_values', 'vayu_blocks_get_input_values_callback');
 
 function vayu_blocks_get_input_values_callback() {
     // Retrieve the settings from the database
     $settings = get_option('vayu_blocks_settings', array(
         'container' => array(
-            'value' => '',
+            'value' => 1,
             'settings' => array(
                 'containerWidth' => 1250,
                 'containerGap' => 18,
@@ -252,37 +266,37 @@ function vayu_blocks_get_input_values_callback() {
             ),
         ),
         'button' => array(
-            'value' => '',
+            'value' => 0,
             'settings' => array(
                 'buttonColor' => '',
             ),
         ),
         'heading' => array(
-            'value' => '',
+            'value' => 0,
             'settings' => array(
                
             ),
         ),
         'spacer' => array(
-            'value' => '',
+            'value' => 0,
             'settings' => array(
                 
             ),
         ),
         'product' => array(
-            'value' => '',
+            'value' => 0,
             'settings' => array(
                 
             ),
         ),
-        'post-grid' => array(
-            'value' => '',
+        'postGrid' => array(
+            'value' => 0,
             'settings' => array(
                 
             ),
         ),
         'slider' => array(
-            'value' => '',
+            'value' => 0,
             'settings' => array(
             
             ),

@@ -62,12 +62,12 @@ class Vayu_Block_Plugin {
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
 
         // Set default values for toggle switch options
-        add_option( 'container_value', 1 ); // Turn on by default
-        add_option( 'button_value', 1 ); // Turn on by default
-        add_option( 'wooproduct_value', 1 ); // Turn on by default
-        add_option( 'heading_value', 1 ); // Turn on by default
-        add_option( 'spacer_value', 1 ); // Turn on by default
-        add_option( 'productfilter_value', 1 ); // Turn on by default
+        // add_option( 'container_value', 1 ); // Turn on by default
+        // add_option( 'button_value', 1 ); // Turn on by default
+        // add_option( 'wooproduct_value', 1 ); // Turn on by default
+        // add_option( 'heading_value', 1 ); // Turn on by default
+        // add_option( 'spacer_value', 1 ); // Turn on by default
+        // add_option( 'productfilter_value', 1 ); // Turn on by default
 
     }
 
@@ -80,7 +80,7 @@ class Vayu_Block_Plugin {
     // Retrieve the settings from the database
 $settings = get_option('vayu_blocks_settings', array(
     'container' => array(
-        'value' => '',
+        'value' => 1,
         'pro' => false,
         'description' => '',
         'settings' => array(
@@ -95,6 +95,19 @@ $settings = get_option('vayu_blocks_settings', array(
 $container_width = absint($settings['container']['settings']['containerWidth']);
 $container_gap = absint($settings['container']['settings']['containerGap']);
 $padding = absint($settings['container']['settings']['padding']);
+// Access the value key for each block
+// Assuming $settings is an associative array with optional keys
+$container_value = isset($settings['container']['value']) ? absint($settings['container']['value']) : 1;
+$button_value = isset($settings['button']['value']) ? absint($settings['button']['value']) : 0;
+$heading_value = isset($settings['heading']['value']) ? absint($settings['heading']['value']) : 0;
+$spacer_value = isset($settings['spacer']['value']) ? absint($settings['spacer']['value']) : 0;
+$product_value = isset($settings['product']['value']) ? absint($settings['product']['value']) : 0;
+$post_grid_value = isset($settings['postGrid']['value']) ? absint($settings['postGrid']['value']) : 0;
+$slider_value = isset($settings['slider']['value']) ? absint($settings['slider']['value']) : 0;
+
+// Output values
+
+
 
     // $button_color = sanitize_text_field(get_option('button_color'));
 
@@ -104,7 +117,7 @@ $padding = absint($settings['container']['settings']['padding']);
                 'script_handle'  => 'advance-container',
                 'editor_style'   => 'advance-container-editor-style',
                 'frontend_style' => 'advance-container-frontend-style',
-                'status'         => get_option('container_value'),
+                'status'         => $container_value,
                 'localize_data'  => array(
                     'homeUrl' => get_home_url(),
                     'container_width' => $container_width,
@@ -117,28 +130,28 @@ $padding = absint($settings['container']['settings']['padding']);
                 'script_handle'  => 'advance-heading',
                 'editor_style'   => 'advance-heading-editor-style',
                 'frontend_style' => 'advance-heading-frontend-style',
-                'status'         => get_option('heading_value'),
+                'status'         => $heading_value,
             ),
             array(
                 'name'           => 'vayu-blocks/advance-spacer',
                 'script_handle'  => 'advance-spacer',
                 'editor_style'   => 'advance-spacer-editor-style',
                 'frontend_style' => 'advance-spacer-frontend-style',
-                'status'         => get_option('spacer_value'),
+                'status'         => $spacer_value,
             ),
             array(
                 'name'           => 'vayu-blocks/advance-button',
                 'script_handle'  => 'advance-button',
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
-                'status'         => get_option('button_value'),
+                'status'         => $button_value,
             ),
             array(
                 'name'           => 'vayu-blocks/post-grid',
                 'script_handle'  => 'post-grid',
                  'editor_style'   => 'post-grid-editor-style',
                  'frontend_style' => 'post-grid-frontend-style',
-                'status'         => get_option('button_value'),
+                'status'         => $post_grid_value,
                 'render_callback' => 'post_grid_render'
             ),
             array(
@@ -146,7 +159,7 @@ $padding = absint($settings['container']['settings']['padding']);
                 'script_handle'  => 'advance-slider',
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
-                'status'         => get_option('button_value'),
+                'status'         => $slider_value,
                 'render_callback' => 'vayu_blocks_advance_slider_render'
             ),
             // array(
@@ -168,7 +181,7 @@ $padding = absint($settings['container']['settings']['padding']);
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
-                'status'         => get_option('wooproduct_value'),
+                'status'         =>  $product_value,
                 'render_callback' => array( 
                     new Vayu_Advance_Product_Tab(),
                     'render_callback'

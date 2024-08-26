@@ -16,14 +16,7 @@ import { VerifyKey } from '../../vayu-sites/template/verifykey';
 import UpgradeButton from '../../vayu-sites/template/UpgradeButton';
 
 
-function ChildComponent(props) {
-    
-    return (
-        applyFilters('vayu_blocks_panelItems')
-    );
-}
-
-const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense}) => {
+const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense }) => {
     const [isChecked, setIsChecked] = useState(initialValue);
 
     const handleChange = () => {
@@ -31,25 +24,22 @@ const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense}) => {
         setIsChecked(newValue);
         onChange(newValue); // Callback to parent component
     };
-    if( !proStatus || proStatus && verifyLicense ){
+
+    if (!proStatus || (proStatus && verifyLicense)) {
         return (
             <label className="toggle-switch new-toggle">
                 <input type="checkbox" checked={isChecked} onChange={handleChange} />
                 <span className="slider round"></span>
             </label>
         );
-    }
-    else{
+    } else {
         return (
             <label className="toggle-switch">
                 <MdLockOutline />
-                 <span className="pro">
-                    {'pro'}
-                </span>
+                <span className="pro">{'pro'}</span>
             </label>
-        );  
+        );
     }
-    
 };
 
 function MyPluginContent(){
@@ -95,64 +85,287 @@ function MyPluginContent(){
 
     // Toggle Switch
 
-        const [toggleSwitches, setToggleSwitches] = useState({}); // Store toggle switch values
+    const [toggleSwitches, setToggleSwitches] = useState({
+        container: true,
+        button: false,
+        heading: false,
+        spacer: false,
+        product: false,
+        postGrid: false,
+        slider: false,
+    });
+
+    const [containerWidth, setContainerWidth] = useState('');
+    const [containerGap, setContainerGap] = useState('');
+    const [padding, setPadding] = useState('');
+    const [containerValue, setcontainerValue] = useState(true);
+    const [buttonValue, setbuttonValue] = useState(0);
+    const [headingValue, setheadingValue] = useState(0);
+    const [productValue, setproductValue] = useState(0);
+    const [spacerValue, setspacerValue] = useState(0);
+    const [postGridValue, setpostGridValue] = useState(0);
+    const [sliderValue, setsliderValue] = useState(0);
+    const [buttonColor, setButtonColor] = useState(0);
+
+     // Fetch initial input values when component mounts
+     useEffect(() => {
+        getInputValues();
+    }, []);
     
-        // Fetch toggle switch values when component mounts
-        useEffect(() => {
-            fetchToggleSwitchValues();
-        }, []);
+    useEffect(() => {
+        // Call handleSave whenever toggleSwitches state changes
+        handleSave();
+    }, [toggleSwitches]);
+
     
-        // Function to fetch toggle switch values
-        const fetchToggleSwitchValues = async () => {
-            setLoading(true);
-            setclassLoading('loading');
-            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks/v1/get-toggle-switch-values`;
-            try {
-                const response = await fetch(`${Url}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch toggle switch values');
+
+
+// const saveInputValues = async () => {
+//     setLoading(true);
+
+//     // Gather all block data dynamically, assuming the relevant state variables exist for each block
+//     const blockData = {
+//         container: {
+//             value: containerValue,
+//             settings: {
+//                 containerWidth,
+//                 containerGap,
+//                 padding,
+//             },
+//         },
+//         button: {
+//             value: buttonValue,
+//             settings: {
+//                 buttonColor,
+//             },
+//         },
+//         heading: {
+//             value: headingValue,
+//             settings: {
+//                 // Add other heading-related settings here
+//             },
+//         },
+//         spacer: {
+//             value: spacerValue,
+//             settings: {
+//                 // Add other spacer-related settings here
+//             },
+//         },
+//         product: {
+//             value: productValue,
+//             settings: {
+//                 // Add other product-related settings here
+//             },
+//         },
+//         postGrid: {
+//             value: postGridValue,
+//             settings: {
+//                 // Add other post-grid-related settings here
+//             },
+//         },
+//         slider: {
+//             value: sliderValue,
+//             settings: {
+//                 // Add other slider-related settings here
+//             },
+//         },
+//         // Add more blocks as needed...
+//     };
+
+//     const data = {
+//         action: 'vayu_blocks_save_input_values',
+//         security: vayublock.nonce,
+//         inputData: JSON.stringify(blockData), // Serialize the block data object
+//     };
+
+//     try {
+//         const response = await fetch(vayublock.ajaxurl, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//             },
+//             body: new URLSearchParams(data).toString(),
+//         });
+
+//         const result = await response.json();
+
+//         if (!result.success) {
+//             throw new Error('Failed to save input values');
+//         }
+
+//         setLoading(false);
+//         console.log('Input values saved successfully');
+//     } catch (error) {
+//         setLoading(false);
+//         console.error('Error saving input values:', error);
+//     }
+// };
+
+// Assuming this is your AJAX call function
+const saveInputValues = (blockData) => {
+    // Convert boolean true/false to 1/0
+    Object.keys(blockData).forEach(key => {
+        if (typeof blockData[key].value === 'boolean') {
+            blockData[key].value = blockData[key].value ? 1 : 0;
+        }
+    });
+
+    return fetch(vayublock.ajaxurl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            action: 'vayu_blocks_save_input_values',
+            security: vayublock.nonce,
+            inputData: JSON.stringify(blockData),
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        return data;
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        throw error;
+    });
+};
+
+
+
+const handleToggleSwitchChange = (key, newValue) => {
+    setToggleSwitches(prevState => ({
+        ...prevState,
+        [key]: newValue,
+    }));
+};
+
+
+const handleSave = () => {
+    const blocks = [
+        {
+            name: 'container',
+            value: toggleSwitches.container || 1,
+            settings: { containerWidth, containerGap, padding }
+        },
+        {
+            name: 'button',
+            value: toggleSwitches.button || 0,
+            settings: { buttonColor }
+        },
+        {
+            name: 'heading',
+            value: toggleSwitches.heading || 0,
+            settings: {}
+        },
+        {
+            name: 'spacer',
+            value: toggleSwitches.spacer || 0,
+            settings: {}
+        },
+        {
+            name: 'product',
+            value: toggleSwitches.product || 0,
+            settings: {}
+        },
+        {
+            name: 'postGrid',
+            value: toggleSwitches['postGrid'] || 0,
+            settings: {}
+        },
+        {
+            name: 'slider',
+            value: toggleSwitches.slider || 0,
+            settings: {}
+        },
+    ];
+
+    const blockData = blocks.reduce((acc, block) => {
+        acc[block.name] = {
+            value: block.value,
+            settings: block.settings,
+        };
+        return acc;
+    }, {});
+
+    saveInputValues(blockData);
+};
+const getInputValues = async () => {
+    const requestData = {
+        action: 'vayu_blocks_get_input_values',
+        security: vayublock.nonce,
+    };
+
+    try {
+        const response = await fetch(vayublock.ajaxurl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            },
+            body: new URLSearchParams(requestData).toString(),
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error('Failed to retrieve input values');
+        }
+
+        const retrievedData = result.data;
+
+        // Update state dynamically based on the retrieved data
+        for (let key in retrievedData) {
+            if (retrievedData.hasOwnProperty(key)) {
+                const { value, settings } = retrievedData[key];
+
+                // Normalize key names if necessary
+                const normalizedKey = key.replace(/-/, '');
+
+                // Always update toggle switches
+                setToggleSwitches(prevState => ({
+                    ...prevState,
+                    [normalizedKey]: value === '1' // Convert "1"/"0" to true/false
+                }));
+
+                switch (normalizedKey) {
+                    case 'container':
+                        setContainerWidth(settings.containerWidth);
+                        setContainerGap(settings.containerGap);
+                        setPadding(settings.padding);
+                        setcontainerValue(value);
+                        break;
+                    case 'button':
+                        setButtonColor(settings.buttonColor);
+                        setbuttonValue(value);
+                        break;
+                    case 'heading':
+                        setheadingValue(value);
+                        break;
+                    case 'product':
+                        setproductValue(value);
+                        break;
+                    case 'spacer':
+                        setspacerValue(value);
+                        break;
+
+                    case 'postGrid':
+                        setpostGridValue(value);
+                        break;
+                    case 'slider':
+                        setsliderValue(value);
+                        break;
+                    // Add more cases as needed...
                 }
-                setLoading(false);
-                setclassLoading('');
-                const data = await response.json();
-                setToggleSwitches(data);
-               
-            } catch (error) {
-                console.error('Error fetching toggle switch values:', error);
             }
-        };
-    
-        // Function to save toggle switch value
-        const saveToggleSwitchValue = async (key, value) => {
-            const Url = `${vayublock.homeUrl2}/wp-json/vayu-blocks/v1/save-toggle-switch`;
-            try {
-                const response = await fetch(`${Url}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        key: key,
-                        value: value,
-                    }),
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to save toggle switch value');
-                }
-            } catch (error) {
-                console.error('Error saving toggle switch value:', error);
-            }
-        };
-    
-        // Callback function to handle toggle switch change
-        const handleToggleSwitchChange = (key, newValue) => {
-            setToggleSwitches(prevState => ({
-                ...prevState,
-                [key]: newValue,
-            }));
-            saveToggleSwitchValue(key, newValue);
-        };
-    
+        }
+    } catch (error) {
+        console.error('Error retrieving input values:', error);
+    }
+};
+
+        
+
         function getDescription(key) {
             switch (key) {
                 case 'container':
@@ -165,15 +378,15 @@ function MyPluginContent(){
                     };
                 case 'button':
                     return {
-                        value: '',
+                        value: buttonValue,
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
-                case 'woo Product':
+                case 'Product':
                     return {
-                        value: '',
+                        value: productValue,
                         icon: <SiWoo />,
                         description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -181,7 +394,7 @@ function MyPluginContent(){
                     };
                 case 'heading':
                     return {
-                        value: '',
+                        value: headingValue,
                         icon: <RxHeading />,
                         description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -189,7 +402,7 @@ function MyPluginContent(){
                     };
                 case 'spacer':
                     return {
-                        value: '',
+                        value: spacerValue,
                         icon: <AiOutlineArrowsAlt />,
                         description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
                         link1: '#',
@@ -198,7 +411,7 @@ function MyPluginContent(){
 
                     case 'pointer':
                     return {
-                        value: '',
+                        value: buttonValue,
                         icon: <RxButton />,
                         description: __('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
@@ -213,148 +426,28 @@ function MyPluginContent(){
                         link1: '#',
                         link2: '#'
                     };
+
+                    case 'postGrid':
+                    return {
+                        value: postGridValue,
+                        icon: <RxButton />,
+                        description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
+
+                    case 'slider':
+                    return {
+                        value: sliderValue,
+                        icon: <RxButton />,
+                        description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
                 default:
                     return '';
             }
         }
-
-        const [containerWidth, setContainerWidth] = useState('');
-        const [containerGap, setContainerGap] = useState('');
-        const [padding, setPadding] = useState('');
-        const [containerValue, setcontainerValue] = useState(true);
-        const [containerDescription, setcontainerDescription] = useState('');
-        const [buttonColor, setButtonColor] = useState('');
-        
-        // Function to save input values
-     // Function to save input values
-const saveInputValues = async (blockData) => {
-    setLoading(true);
-
-    const data = {
-        action: 'vayu_blocks_save_input_values',
-        security: vayublock.nonce,
-        inputData: JSON.stringify(blockData), // Serialize the block data object
-    };
-
-    try {
-        const response = await fetch(vayublock.ajaxurl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
-            body: new URLSearchParams(data).toString(),
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-            throw new Error('Failed to save input values');
-        }
-
-        setLoading(false);
-        console.log('Input values saved successfully');
-    } catch (error) {
-        setLoading(false);
-        console.error('Error saving input values:', error);
-    }
-};
-
-// Function to handle the save action
-const handleSave = () => {
-    const blocks = [
-        {
-            name: 'container',
-            settings: {
-                containerWidth, // Ensure these are defined in state
-                containerGap,
-                padding,
-            },
-            value: '', // State variable for container value
-        },
-        {
-            name: 'button',
-            settings: {
-                buttonColor, // Ensure this is defined in state
-            },
-            value: '', // State variable for button value
-        },
-        // Add more blocks as needed, ensuring their state variables are properly managed
-    ];
-
-    // Build the blockData object dynamically
-    const blockData = blocks.reduce((acc, block) => {
-        acc[block.name] = {
-            value: block.value, // Use the dynamic value from state
-            pro: false, // Static if not dynamic
-            description: `Some ${block.name} description`, // Static description if not dynamic
-            settings: block.settings, // Use the dynamic settings from each block
-        };
-        return acc;
-    }, {});
-
-    saveInputValues(blockData);
-};
-
-        
-        
-        
-        const getInputValues = async () => {
-            const requestData = {
-                action: 'vayu_blocks_get_input_values',
-                security: vayublock.nonce,
-            };
-        
-            try {
-                const response = await fetch(vayublock.ajaxurl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    },
-                    body: new URLSearchParams(requestData).toString(),
-                });
-        
-                const result = await response.json();
-        
-                if (!result.success) {
-                    throw new Error('Failed to retrieve input values');
-                }
-        
-                const retrievedData = result.data;
-        
-                // Dynamically update your state based on the retrieved data
-                for (let key in retrievedData) {
-                    if (retrievedData.hasOwnProperty(key)) {
-                        // const settings = retrievedData[key].settings;
-                        const { value, pro, description, settings } = retrievedData[key];
-
-                        switch (key) {
-                            case 'container':
-                                setContainerWidth(settings.containerWidth);
-                                setContainerGap(settings.containerGap);
-                                setPadding(settings.padding);
-                                setcontainerValue(value);
-                                break;
-                            case 'button':
-                                setButtonColor(settings.buttonColor);
-                                break;
-                            // Add more cases as needed...
-                            default:
-                                console.log('Unknown key:', key);
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error retrieving input values:', error);
-            }
-        };
-        
-        
-        
-
-    // Fetch initial input values when component mounts
-    useEffect(() => {
-        getInputValues();
-    }, []);
 
     // Function to handle checkbox change
     const handleCheckboxChange = (e) => {
@@ -418,11 +511,11 @@ const handleSave = () => {
 
         <div className={`sw-wrapprer ${vayuProStatus} ${classLoading}`}>
         {isLoading ? (<div className="vayu-loader"></div>) : (<> {Object.entries(toggleSwitches).map(([key, value]) => (
-               <div className={`sw-box ${key}`} key={key}>
+               <div className={`sw-box ${key}`} key={key} values={value}>
                     <div className='th-sw-right'>
                         <div>
                         <label className='block-label'>{getDescription(key).icon}{key}</label>
-                        <ToggleSwitch initialValue={containerValue} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
+                        <ToggleSwitch initialValue={getDescription(key).value} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
                         </div>
                     </div>
                     <div className='th-sw-bottom'>
@@ -439,7 +532,6 @@ const handleSave = () => {
         }
            
         </div>
-
         
                 </div>
                 <div className="th-sidebar">
