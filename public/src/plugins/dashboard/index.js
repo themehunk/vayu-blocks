@@ -204,11 +204,6 @@ function MyPluginContent(){
 // Assuming this is your AJAX call function
 const saveInputValues = (blockData) => {
     // Convert boolean true/false to 1/0
-    Object.keys(blockData).forEach(key => {
-        if (typeof blockData[key].value === 'boolean') {
-            blockData[key].value = blockData[key].value ? 1 : 0;
-        }
-    });
 
     return fetch(vayublock.ajaxurl, {
         method: 'POST',

@@ -209,13 +209,15 @@ function vayu_blocks_save_input_values_callback() {
         } elseif (isset($value['settings'])) { // If 'settings' key is present, handle block settings
             // Update the 'settings' key and optionally the 'value' key
             if (isset($settings[$key])) {
-                $settings[$key]['value'] = isset($value['value']) ? sanitize_text_field($value['value']) : 0; // Default to 0 if not provided
-                $settings[$key]['settings'] = isset($value['settings']) ? vayu_blocks_array_merge_recursive_distinct($settings[$key]['settings'], array_map('sanitize_text_field', $value['settings'])) : $settings[$key]['settings'];
+                $settings[$key]['settings'] = vayu_blocks_array_merge_recursive_distinct($settings[$key]['settings'], array_map('sanitize_text_field', $value['settings']));
+                if (isset($value['value'])) {
+                    $settings[$key]['value'] = sanitize_text_field($value['value']);
+                }
             } else {
-                // If the setting doesn't exist, create a new entry with only 'value' and 'settings'
+                // If the setting doesn't exist, create a new entry with both 'value' and 'settings'
                 $settings[$key] = array(
-                    'value' => isset($value['value']) ? sanitize_text_field($value['value']) : 0, // Default to 0 if not provided
-                    'settings' => isset($value['settings']) ? array_map('sanitize_text_field', $value['settings']) : array(),
+                    'value' => isset($value['value']) ? sanitize_text_field($value['value']) : '',
+                    'settings' => array_map('sanitize_text_field', $value['settings']),
                 );
             }
         }
