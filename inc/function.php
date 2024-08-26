@@ -190,20 +190,28 @@ function vayu_blocks_save_input_values_callback() {
     // Decode the JSON string into an associative array
     $inputData = isset($_POST['inputData']) ? json_decode(stripslashes($_POST['inputData']), true) : array();
 
+    // Get the current settings from the database
     $settings = get_option('vayu_blocks_settings', array());
 
-    // Dynamically loop through all provided settings and update them
+    // Loop through each provided setting
     foreach ($inputData as $key => $value) {
-        $settings[$key] = array(
-            'value' => isset($value['value']) ? sanitize_text_field($value['value']) : '',
-            'pro' => isset($value['pro']) ? (bool) $value['pro'] : false,
-            'description' => isset($value['description']) ? sanitize_text_field($value['description']) : '',
-            'settings' => array_map('sanitize_text_field', $value['settings']),
-        );
+        // If the setting already exists, update only the 'value' and 'settings' keys
+        if (isset($settings[$key])) {
+            $settings[$key]['value'] = isset($value['value']) ? sanitize_text_field($value['value']) : $settings[$key]['value'];
+            $settings[$key]['settings'] = isset($value['settings']) ? vayu_blocks_array_merge_recursive_distinct($settings[$key]['settings'], array_map('sanitize_text_field', $value['settings'])) : $settings[$key]['settings'];
+        } else {
+            // If the setting doesn't exist, create a new entry with only 'value' and 'settings'
+            $settings[$key] = array(
+                'value' => isset($value['value']) ? sanitize_text_field($value['value']) : '',
+                'settings' => isset($value['settings']) ? array_map('sanitize_text_field', $value['settings']) : array(),
+            );
+        }
     }
 
+    // Update the settings in the database
     update_option('vayu_blocks_settings', $settings);
 
+    // Return success response
     wp_send_json_success(array(
         'success' => true,
         'message' => 'Input values saved successfully',
@@ -211,6 +219,23 @@ function vayu_blocks_save_input_values_callback() {
 
     wp_die();
 }
+
+// Helper function to merge arrays recursively with distinct values
+function vayu_blocks_array_merge_recursive_distinct(array &$array1, array &$array2) {
+    $merged = $array1;
+
+    foreach ($array2 as $key => &$value) {
+        if (is_array($value) && isset($merged[$key]) && is_array($merged[$key])) {
+            $merged[$key] = vayu_blocks_array_merge_recursive_distinct($merged[$key], $value);
+        } else {
+            $merged[$key] = $value;
+        }
+    }
+
+    return $merged;
+}
+
+
 
 
 add_action('wp_ajax_vayu_blocks_get_input_values', 'vayu_blocks_get_input_values_callback');
@@ -220,8 +245,6 @@ function vayu_blocks_get_input_values_callback() {
     $settings = get_option('vayu_blocks_settings', array(
         'container' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                 'containerWidth' => 1250,
                 'containerGap' => 18,
@@ -230,48 +253,36 @@ function vayu_blocks_get_input_values_callback() {
         ),
         'button' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                 'buttonColor' => '',
             ),
         ),
         'heading' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                
             ),
         ),
         'spacer' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                 
             ),
         ),
         'product' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                 
             ),
         ),
         'post-grid' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
                 
             ),
         ),
         'slider' => array(
             'value' => '',
-            'pro' => false,
-            'description' => '',
             'settings' => array(
             
             ),

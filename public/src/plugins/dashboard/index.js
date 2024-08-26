@@ -157,6 +157,7 @@ function MyPluginContent(){
             switch (key) {
                 case 'container':
                     return {
+                        value: containerValue,
                         icon: <RxGroup />,
                         description: __('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks'),
                         link1: '#',
@@ -164,6 +165,7 @@ function MyPluginContent(){
                     };
                 case 'button':
                     return {
+                        value: '',
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
@@ -171,6 +173,7 @@ function MyPluginContent(){
                     };
                 case 'woo Product':
                     return {
+                        value: '',
                         icon: <SiWoo />,
                         description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -178,6 +181,7 @@ function MyPluginContent(){
                     };
                 case 'heading':
                     return {
+                        value: '',
                         icon: <RxHeading />,
                         description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -185,6 +189,7 @@ function MyPluginContent(){
                     };
                 case 'spacer':
                     return {
+                        value: '',
                         icon: <AiOutlineArrowsAlt />,
                         description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
                         link1: '#',
@@ -193,6 +198,7 @@ function MyPluginContent(){
 
                     case 'pointer':
                     return {
+                        value: '',
                         icon: <RxButton />,
                         description: __('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
@@ -201,6 +207,7 @@ function MyPluginContent(){
 
                     case 'product Filter':
                     return {
+                        value: '',
                         icon: <SiWoo />,
                         description: __('Product filter Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
@@ -214,87 +221,80 @@ function MyPluginContent(){
         const [containerWidth, setContainerWidth] = useState('');
         const [containerGap, setContainerGap] = useState('');
         const [padding, setPadding] = useState('');
-        const [containerValue, setcontainerValue] = useState('');
+        const [containerValue, setcontainerValue] = useState(true);
         const [containerDescription, setcontainerDescription] = useState('');
         const [buttonColor, setButtonColor] = useState('');
         
         // Function to save input values
-        const saveInputValues = async () => {
-            setLoading(true);
-        
-            // Gather input values (e.g., from state or refs)
-            const inputData = {
-                container: {
-                    value: 1, // Replace with actual value
-                    pro: false, // Replace with actual value
-                    description: 'Some description', // Replace with actual value
-                    settings: {
-                        containerWidth: containerWidth, // Assuming these are state variables
-                        containerGap: containerGap,
-                        padding: padding,
-                    }
-                },
-                button: {
-                    value: '1', // Replace with actual value
-                    pro: false, // Replace with actual value
-                    description: 'Some button description', // Replace with actual value
-                    settings: {
-                        buttonColor: buttonColor, // Assuming this is a state variable
-                    }
-                }
-            };
-        
-            const data = {
-                action: 'vayu_blocks_save_input_values',
-                security: vayublock.nonce,
-                inputData: JSON.stringify(inputData), // Serialize the inputData object
-            };
-        
-            try {
-                const response = await fetch(vayublock.ajaxurl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    },
-                    body: new URLSearchParams(data).toString(),
-                });
-        
-                const result = await response.json();
-        
-                if (!result.success) {
-                    throw new Error('Failed to save input values');
-                }
-        
-                setLoading(false);
-                console.log('Input values saved successfully');
-            } catch (error) {
-                setLoading(false);
-                console.error('Error saving input values:', error);
-            }
+     // Function to save input values
+const saveInputValues = async (blockData) => {
+    setLoading(true);
+
+    const data = {
+        action: 'vayu_blocks_save_input_values',
+        security: vayublock.nonce,
+        inputData: JSON.stringify(blockData), // Serialize the block data object
+    };
+
+    try {
+        const response = await fetch(vayublock.ajaxurl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            },
+            body: new URLSearchParams(data).toString(),
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error('Failed to save input values');
+        }
+
+        setLoading(false);
+        console.log('Input values saved successfully');
+    } catch (error) {
+        setLoading(false);
+        console.error('Error saving input values:', error);
+    }
+};
+
+// Function to handle the save action
+const handleSave = () => {
+    const blocks = [
+        {
+            name: 'container',
+            settings: {
+                containerWidth, // Ensure these are defined in state
+                containerGap,
+                padding,
+            },
+            value: '', // State variable for container value
+        },
+        {
+            name: 'button',
+            settings: {
+                buttonColor, // Ensure this is defined in state
+            },
+            value: '', // State variable for button value
+        },
+        // Add more blocks as needed, ensuring their state variables are properly managed
+    ];
+
+    // Build the blockData object dynamically
+    const blockData = blocks.reduce((acc, block) => {
+        acc[block.name] = {
+            value: block.value, // Use the dynamic value from state
+            pro: false, // Static if not dynamic
+            description: `Some ${block.name} description`, // Static description if not dynamic
+            settings: block.settings, // Use the dynamic settings from each block
         };
-    
-        const handleSave = () => {
-            saveInputValues({
-                container: {
-                    value: 'someContainerValue',
-                    pro: false,
-                    description: 'Some description',
-                    settings: {
-                        containerWidth: containerWidth, // State variable
-                        containerGap: containerGap,     // State variable
-                        padding: padding                // State variable
-                    }
-                },
-                button: {
-                    value: 'someButtonValue',
-                    pro: false,
-                    description: 'Some button description',
-                    settings: {
-                        buttonColor: buttonColor // State variable
-                    }
-                }
-            });
-        };
+        return acc;
+    }, {});
+
+    saveInputValues(blockData);
+};
+
         
         
         
