@@ -89,9 +89,9 @@ const Edit = ({ attributes, setAttributes }) => {
     const [filter, setFilter] = useState({ featuredImage: false, categories: []});
     const [Loading, setLoading] = useState(false);
 
-    // Global Settings Vayu Blocks
-	const globalcontainerWidth = ThBlockData.container_width;
-    setAttributes({globalwidth:globalcontainerWidth});
+    // // Global Settings Vayu Blocks
+	// const globalcontainerWidth = ThBlockData.container_width;
+    // setAttributes({globalwidth:globalcontainerWidth});
     
 	// const globalcontainerGap = ThBlockData.container_gap;
 	// const globalpadding = ThBlockData.container_padding;
