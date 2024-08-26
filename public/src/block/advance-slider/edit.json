@@ -16,7 +16,11 @@
     },
     "centerMode": {
         "type": "boolean",
-        "default": false
+        "default": true
+    },
+    "dotslength":{
+        "type":"number",
+        "default":0
     },
     "fade": {
         "type": "boolean",
@@ -108,6 +112,10 @@
             "position" : 0
         }
     },
+    "swipe":{
+        "type": "boolean",
+        "default": false
+    },
     "arrowstyleleft":{
         "type": "object",
         "default":{
@@ -117,12 +125,12 @@
             "size":"20px",
             "tag": "arrow",
             "position":0,
+            "opacity":0.5,
             "borderRadius":{
                 "top": "50px",
                 "right":"50px",
                 "bottom":"50px",
                 "left":"50px"
-                
             } 
         }
     },

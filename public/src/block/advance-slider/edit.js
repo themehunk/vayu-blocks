@@ -20,6 +20,7 @@ const edit = ({ attributes, setAttributes }) => {
     const [settings, setSettings] = useState({});
     const [activeIndex, setActiveIndex] = useState(attributes.initialSlide || 0);
     const sliderRef = useRef(null);
+    const [dotscount, setdotscount] = useState(1);
 
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
@@ -47,20 +48,20 @@ const edit = ({ attributes, setAttributes }) => {
             cssEase: 'ease-in-out', // Smooth animation
             pauseOnHover: attributes.pauseOnHover,
             focusOnSelect: attributes.focusOnSelect,
-            rtl: attributes.rtl,
             centerPadding: '60px',
+            swipe: attributes.swipe,
             afterChange: (currentIndex) => {
+ 
                 let newvalue = currentIndex;
                 if (currentIndex > attributes.slidesToScroll-1) {
                     newvalue = Math.floor(currentIndex / attributes.slidesToScroll);
                 }
-                
                 setActiveIndex(newvalue); 
             },
             onInit: (slider) => {
                 setActiveIndex(slider.currentSlide);
                 sliderRef.current = slider;
-            },
+            }
         };
            
         //Dots Styling
@@ -93,44 +94,56 @@ const edit = ({ attributes, setAttributes }) => {
 
         // Conditionally customize dot appearance
         if (attributes.dots.customize && attributes.customPaging===false) { // Replace 'true' with a condition if necessary
-            newSettings.appendDots = dots => (
-                <div>
-                <ul  style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        listStyle: 'none',
-                        padding: '0px',
-                        margin: attributes.dots.onimage ? `${attributes.dots.position}px` : '0px',
+            newSettings.appendDots = dots => {
+                setdotscount(dots.length);
+                setAttributes({dotslength:dotscount});
+                    if(dotscount>1){
+                    return (
                         
-                    }}>
-                    {dots.map((dot, index) => (
-                        <li key={index} style={{ margin: '0 5px' }}>
-                            <button
-                                style={{
-                                    color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
-                                    cursor: 'pointer',
-                                    background: 'none', 
-                                    borderColor: activeIndex === index ? 'gray' : 'transparent',
-                                    borderWidth: '1px',
-                                    borderStyle: 'solid',
-                                    borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
-                                    display:'flex',
-                                    alignItems:'center',
-                                    justifyContent:'center',
-                                    padding: '3px', 
-                                    fontSize: addPxIfNeeded(attributes.dots.size),
-                                    background:`${attributes.dots.backgroundColor}`
-                                }}
-                                onClick={(e) => handleDotClick(e, dot, index)}
-                            >
-                                {dotstyle || index + 1}
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-            );
+                        <div> 
+                            <ul style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                listStyle: 'none',
+                                padding: '0px',
+                                margin: attributes.dots.onimage ? `${attributes.dots.position}px` : '0px',
+                            }}>
+                                {dots.map((dot, index) => (
+                                    <li key={index} style={{ margin: '0 5px' }}>
+                                        <button
+                                            style={{
+                                                color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
+                                                cursor: 'pointer',
+                                                background: 'none', 
+                                                borderColor: activeIndex === index ? 'gray' : 'transparent',
+                                                borderWidth: '1px',
+                                                borderStyle: 'solid',
+                                                borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                padding: '3px', 
+                                                fontSize: addPxIfNeeded(attributes.dots.size),
+                                                background: `${attributes.dots.backgroundColor}`
+                                            }}
+                                            onClick={(e) => handleDotClick(e, dot, index)}
+                                        >
+                                            {dotstyle || index + 1}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>  
+                    );
+                } else{
+                return (
+                    <div style={{display:'none'}}>
+                    </div>
+                )
+                }
+            };
+            
         }
 
         //arrow styling
@@ -140,17 +153,17 @@ const edit = ({ attributes, setAttributes }) => {
         let stylearrowleft={
             fontSize: `${attributes.arrowstyleleft.size}`,
             color:`${attributes.arrowstyleleft.color}`,   
-         };
+        };
 
-         let stylearrow_div = {
+        let stylearrow_div = {
             background: `${attributes.arrowstyleleft.backgroundColor}`,
             //borderRadius
             borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
                
-             border: 'none',
-             cursor: 'pointer',
-
-         }
+            border: 'none',
+            cursor: 'pointer',
+            opacity: `${attributes.arrowstyleleft.opacity}`,
+        }
 
         // Determine which arrow icons to use based on the selected arrow style
         if ('arrow' === attributes.arrowstyleleft.tag) {
@@ -170,8 +183,8 @@ const edit = ({ attributes, setAttributes }) => {
             rightarrow = <FaCaretRight style={ stylearrowleft}/>;
         }
 
-         // Add arrow settings based on attributes
-        if (attributes.arrow) {
+        // Add arrow settings based on attributes
+        if (attributes.arrow && dotscount>1) {
             newSettings.nextArrow = (
                 <div className="next-slick-arrow">
                     <div
@@ -214,6 +227,7 @@ const edit = ({ attributes, setAttributes }) => {
                 </div>
             );        
         }
+       
         
         setSettings(newSettings);
     }, [
@@ -239,8 +253,11 @@ const edit = ({ attributes, setAttributes }) => {
         activeIndex,
         attributes.index,
         attributes.arrowOnHover,
-        attributes.arrowanimation
+        attributes.arrowanimation,
+        attributes.swipe,
+        dotscount
     ]);
+
 
     useEffect(() => {
         
@@ -250,6 +267,7 @@ const edit = ({ attributes, setAttributes }) => {
         }
         
     }, [attributes.index]);
+
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         
@@ -292,6 +310,9 @@ const edit = ({ attributes, setAttributes }) => {
 
             //padding
             padding: `${slide.layout.padding.top || '0px'} ${slide.layout.padding.right || '0px'} ${slide.layout.padding.bottom || '0px'} ${slide.layout.padding.left || '0px'}`,
+   
+            background:`url(${slide.layout.backgroundImage})`,
+              
         };
         
         const vayu_blocks_generateButtonStyle = (button) => {
@@ -345,21 +366,10 @@ const edit = ({ attributes, setAttributes }) => {
             };
         };
     
-        const vayu_blocks_img ={
-            width:'100%',
-            height:'100%',
-            zIndex: 0,
-            filter: slide.layout.duotone && slide.layout.duotone.length > 1 ? `url(${slide.layout.duotone})` : 'none',
-        }
-
         const vayu_blocks_inside_conatiner_div = {
-            position: slide.layout.backgroundImage ? 'absolute' : '',
-            left:'50%',
-            top:'0%',
-            transform: slide.layout.backgroundImage ? 'translate(-50%, -50%)' : 'none', // Center horizontally and vertically
-            zIndex: 1,
+            zIndex: 10000,
             height: '100%',
-            marginBottom: '8%',
+            position:'relative',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
 
@@ -373,6 +383,7 @@ const edit = ({ attributes, setAttributes }) => {
             height:'100%',
             ...vayu_blocks_getBackgroundStyles(slide.layout),
             opacity:slide.layout.opacity,
+            zIndex:1,
         }
 
         return (
@@ -380,15 +391,8 @@ const edit = ({ attributes, setAttributes }) => {
 
                 <div className="vayu_blocks_slider-slide" style={vayu_blocks_slideStyle}>
 
-                    {slide.layout.backgroundImage && (
-                            <img 
-                                style={vayu_blocks_img} 
-                                src={slide.layout.backgroundImage} 
-                                alt="Slide Background" 
-                            />
-                    )}
-
-                    <div style={vayu_blocks_color_overlay}></div>
+                    <div style={vayu_blocks_color_overlay}>
+                    </div>
 
                     <div style={vayu_blocks_inside_conatiner_div}>
 
@@ -445,174 +449,6 @@ const edit = ({ attributes, setAttributes }) => {
             <AdvanceSettings attributes={attributes}>
                 
                 <div  class="slider-container">
-                <svg class="duotone-filters" xmlns="http://www.w3.org/2000/svg">
-                    {/* orange and red */}
-                    <filter id="duotone-orange-red">
-                            <feColorMatrix type="matrix" result="gray"
-                                values="1 0 0 0 0
-                                        1 0 0 0 0
-                                        1 0 0 0 0
-                                        0 0 0 1 0" />
-                            <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                <feFuncR type="table" tableValues="0.949 1"></feFuncR>
-                                <feFuncG type="table" tableValues="0.6 0.8"></feFuncG>
-                                <feFuncB type="table" tableValues="0.5 0.6"></feFuncB>
-                                <feFuncA type="table" tableValues="0 1"></feFuncA>
-                            </feComponentTransfer>
-                    </filter>
-
-                    {/* Red and Green */}
-                    <filter id="duotone-red-green">
-                            <feColorMatrix type="matrix" result="gray"
-                                values="1 0 0 0 0
-                                        1 0 0 0 0
-                                        1 0 0 0 0
-                                        0 0 0 1 0" />
-                            <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                <feFuncR type="table" tableValues="0.898 1"></feFuncR>
-                                <feFuncG type="table" tableValues="0.066 0.945"></feFuncG>
-                                <feFuncB type="table" tableValues="0.066 0.945"></feFuncB>
-                                <feFuncA type="table" tableValues="0 1"></feFuncA>
-                            </feComponentTransfer>
-                    </filter>
-
-                    {/* Black and White */}
-                    <filter id="duotone-black-white">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0 1"></feFuncR>
-                            <feFuncG type="table" tableValues="0 1"></feFuncG>
-                            <feFuncB type="table" tableValues="0 1"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Blue and Red */}
-                    <filter id="duotone-blue-red">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.929 0.996"></feFuncR>
-                            <feFuncG type="table" tableValues="0.117 0.257"></feFuncG>
-                            <feFuncB type="table" tableValues="0.717 0.949"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Purple and Yellow */}
-                    <filter id="duotone-purple-yellow">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.537 0.988"></feFuncR>
-                            <feFuncG type="table" tableValues="0.129 0.929"></feFuncG>
-                            <feFuncB type="table" tableValues="0.746 0.059"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Orange and Teal */}
-                    <filter id="duotone-orange-teal">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.949 0.204"></feFuncR>
-                            <feFuncG type="table" tableValues="0.517 0.835"></feFuncG>
-                            <feFuncB type="table" tableValues="0.318 0.549"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Pink and Blue */}
-                    <filter id="duotone-pink-blue">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.949 0.235"></feFuncR>
-                            <feFuncG type="table" tableValues="0.349 0.553"></feFuncG>
-                            <feFuncB type="table" tableValues="0.529 0.847"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Cyan and Magenta */}
-                    <filter id="duotone-cyan-magenta">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.0 0.847"></feFuncR>
-                            <feFuncG type="table" tableValues="0.796 0.122"></feFuncG>
-                            <feFuncB type="table" tableValues="0.996 0.643"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Yellow and Black */}
-                    <filter id="duotone-yellow-black">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="1 0.125"></feFuncR>
-                            <feFuncG type="table" tableValues="0.839 0.125"></feFuncG>
-                            <feFuncB type="table" tableValues="0.062 0.062"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Light Blue and Light Green */}
-                    <filter id="duotone-lightblue-lightgreen">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.678 0.678"></feFuncR>
-                            <feFuncG type="table" tableValues="0.847 0.996"></feFuncG>
-                            <feFuncB type="table" tableValues="0.847 0.678"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-                    {/* Gray and Yellow */}
-                    <filter id="duotone-gray-yellow">
-                        <feColorMatrix type="matrix" result="gray"
-                            values="1 0 0 0 0
-                                    1 0 0 0 0
-                                    1 0 0 0 0
-                                    0 0 0 1 0" />
-                        <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                            <feFuncR type="table" tableValues="0.678 1"></feFuncR>
-                            <feFuncG type="table" tableValues="0.678 1"></feFuncG>
-                            <feFuncB type="table" tableValues="0.678 0.278"></feFuncB>
-                            <feFuncA type="table" tableValues="0 1"></feFuncA>
-                        </feComponentTransfer>
-                    </filter>
-
-
-                </svg>
                     <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}
                     </Slider>

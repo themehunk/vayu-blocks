@@ -387,72 +387,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     return (
         <>
-            {/* <PanelBody  title={__('Global Background', 'vayu-blocks')} initialOpen={false}>
-                <>
-                    <p>This background will apply to all slides except those with custom backgrounds enabled.</p>
-                    <h4>{__('Background','vayu-blocks')}</h4>
-                    {attributes.global.layout.backgroundImage ? (
-                        <>         
-                        <div class="image-container">
-                            <img src={attributes.global.layout.backgroundImage} alt="slideimage" />
-                            <button class="change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint()}>Change</button>
-                        </div>
-                        <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint()}>
-                            {__('Clear', 'vayu-blocks')}
-                        </Button>
-
-                        <h4>{__('Filters', 'vayu-blocks')}</h4>
-                        <DuotonePicker
-                            label={__('Filters', 'vayu-blocks')}
-                            duotonePalette={ vayu_blocks_DUOTONE_PALETTE }
-                            disableCustomColors
-                            disableCustomDuotone
-                            value={ vayu_blocks_duotonevalue() }
-                            onChange={ (value) => vayu_blocks_duotoneHandler('duotone',value) }
-                        />
-                    </>
-                    ) : (
-                        <MediaPlaceholder
-                            icon="format-image"
-                            labels={{
-                                title: __('Background Image', 'vayu-blocks'),
-                                name: __('an image', 'vayu-blocks')
-                            }}
-                            onSelect={(media) => vayu_blocks_updateSliderBackgroundStyles('backgroundImage', media.url)}
-                            onSelectURL='true'
-                            accept="image/*"
-                            allowedTypes={['image']}
-                        />
-                    )}
-
-                    <PanelColorGradientSettings
-                        settings={[
-                            {
-                                colorValue: attributes.global.layout.backgroundColor,
-                                gradientValue: attributes.global.layout.backgroundGradient,
-                                onColorChange: (color) => {
-                                    vayu_blocks_updateSliderBackgroundStyles( 'backgroundColor', color);
-                                },
-                                onGradientChange: (gradient) => {
-                                    vayu_blocks_updateSliderBackgroundStyles( 'backgroundGradient', gradient); 
-                                },
-                                label: __( 'Background', 'vayu-blocks' ),
-                            },
-                        ]}
-                    />
-
-                    <br />
-                    <RangeControl
-                        label={__('Opacity', 'vayu-blocks')}
-                        value={attributes.global.layout.opacity}
-                        onChange={(value) => vayu_blocks_updateSliderBackgroundStyles('opacity',value)}
-                        min={0}
-                        max={1}
-                        step={0.1}
-                    />
-
-                </>
-            </PanelBody> */}
 
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
                 <p><p>This style will apply to all slides except those with custom styles enabled.</p></p>
@@ -965,6 +899,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 <h6>The number of slides to scroll after each slide movement, ensuring smooth and controlled transitions in the slider.</h6>
 
                 <RangeControl
+                    label = {__('Scrolling Speed', 'vayu-blocks')}
+                    value={attributes.speed}
+                    onChange={(value) => setAttributes({ speed: value })}
+                    min={1}
+                    max={5000}
+                    step={1}
+                />
+
+                <RangeControl
                     label = {__('Intial Slide', 'vayu-blocks')}
                     value={attributes.initialSlide+1}
                     onChange={(value) => setAttributes({ initialSlide: value-1 })}
@@ -997,7 +940,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
               <h6>Slide fade controls the smooth transition between slides by gradually fading them in and out.</h6>
                  */}
 
-                 <ToggleControl
+                <ToggleControl
+                    label={__('Touch Swipe', 'vayu-blocks')}
+                    checked={attributes.swipe}
+                    onChange={(value) => setAttributes({ swipe: value })}
+                />
+                
+                <ToggleControl
                     label={__('Animate', 'vayu-blocks')}
                     checked={attributes.waitForAnimate}
                     onChange={(value) => setAttributes({ waitForAnimate: value })}
@@ -1037,11 +986,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             max={5000}
                             step={1}
                         />
-                        <ToggleControl
+                        {/* <ToggleControl
                             label={__('Right To Left', 'vayu-blocks')}
                             checked={attributes.rtl}
                             onChange={(value) => setAttributes({ rtl: value })}
-                        />
+                        /> */}
                         <ToggleControl
                             label={__('Pause On Hover', 'vayu-blocks')}
                             checked={attributes.pauseOnHover}
@@ -1132,6 +1081,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 >
                                 </PanelColorSettings>
 
+
                             {attributes.dots.onimage && (
                                 <RangeControl
                                     label={__('Position', 'vayu-blocks')}
@@ -1213,6 +1163,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 >
                                 </PanelColorSettings>
 
+                                <RangeControl
+                                    label={__('Opacity', 'vayu-blocks')}
+                                    value={attributes.arrowstyleleft.opacity}
+                                    onChange={(value) => setAttributes({
+                                        arrowstyleleft: {
+                                            ...attributes.arrowstyleleft,
+                                            opacity: value,
+                                        },
+                                    })}
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                />
+
                                 <FontSizePicker
                                     label={__('Font Size', 'vayu-blocks')}
                                     fontSizes={vayu_blocks_fontsizes}
@@ -1258,6 +1222,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     
             </PanelBody>
+
         </>
 
     );

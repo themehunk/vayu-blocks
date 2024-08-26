@@ -1,7 +1,7 @@
 .vayu-blocks-advance-slider .slick-track{
     display: flex !important;
     align-items: center;
-    // justify-content: center;
+     //justify-content: center;
 }
 
 .vayu_blocks_duotone-filters{
@@ -13,16 +13,16 @@
 }
 
 /* Animation for heading */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+// @keyframes fadeInUp {
+//     from {
+//         opacity: 0;
+//         transform: translateY(10px);
+//     }
+//     to {
+//         opacity: 1;
+//         transform: translateY(0);
+//     }
+// }
 
 @keyframes fadeInLeft {
     from {
@@ -47,8 +47,22 @@
 }
 
 .slide-active {
-    animation: fadeInUp 1s ease-out;
+    opacity: 1; /* Initially hide the element */
+    animation: fadeInUp 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Custom cubic-bezier for smoother animation */
+    animation-delay: -1s; /* Negative delay to start animation slightly early */
 }
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly lower */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the original position */
+    }
+}
+
+
 
 .vayu_blocks_heading{
     animation: fadeInDown 1s ease-out;
@@ -65,7 +79,6 @@
 .vayu_blocks_slider_button2 {
     animation: fadeInDown 1s ease-out;
 }
-
 
 
 

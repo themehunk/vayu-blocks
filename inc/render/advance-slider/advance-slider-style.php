@@ -262,7 +262,7 @@ function generate_inline_slider_styles($attr) {
         
         $css .= "align-items: center;";
         $css .= "justify-content: center;";
-        $css .= "opacity: 1;";  
+        $css .= "opacity: " . $attr['arrowstyleleft']['opacity'] . ";";
         $css .= "z-index: 1;";
         // Conditional display property
         if ($attr['arrowOnHover'] === true) {
@@ -288,7 +288,7 @@ function generate_inline_slider_styles($attr) {
         }
         $css .= "animation-fill-mode: forwards;"; // Ensure final state persists
     $css .= "}\n";
-    
+
     // Keyframes
     $css .= "@keyframes slideInFromBottomRight {";
         $css .= "from {";
@@ -584,17 +584,13 @@ function generate_inline_slider_styles($attr) {
             $paddingLeft = isset($slide['layout']['padding']['left']) ? esc_attr($slide['layout']['padding']['left']) : '0px';
             
             $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
-            
+
+            $css .= "background: url({$slide['layout']['backgroundImage']}) no-repeat center center;";
+            $css .= "background-size: cover;";
+
             // End the CSS block for this slide
         $css .= "}\n";
         
-        //image
-        $css .= "$container .vayu_blocks_slide_image {";
-            $css .= "width: 100%;";
-            $css .= "height: 100%;";
-            $css .= "z-index: 0;";
-            $css .= "filter: url('$filterId');";
-        $css .= "}\n";
 
         // overlay div
         $css .= "$container .vayu_blocks_color_overlay {";
@@ -605,6 +601,7 @@ function generate_inline_slider_styles($attr) {
             $css .= "bottom: 0;";
             $css .= "width: 100%;";
             $css .= "height: 100%;";
+            $css .= "z-index: 1;";
 
             // Add opacity
             if (isset($slide['layout']['opacity'])) {
@@ -622,13 +619,9 @@ function generate_inline_slider_styles($attr) {
 
         // Inside Container div
         $css .= "$container $insideContainer {";
-            $css .= "position: " . (!empty($slide['layout']['backgroundImage']) ? 'absolute' : '') . ";";
-            $css .= "left: 50%;";
-            $css .= "top: 0%;";
-            $css .= "transform: " . (!empty($slide['layout']['backgroundImage']) ? 'translate(-50%, -50%)' : 'none') . ";";
-            $css .= "z-index: 1;";
+            $css .= "position: relative;";
+            $css .= "z-index: 3;";
             $css .= "height: 100%;";
-            $css .= "margin-bottom: 8%;";
             $css .= "text-align: " . esc_attr($slide['layout']['alignment']) . ";";
         $css .= "}\n";
 
@@ -755,3 +748,4 @@ function generate_inline_slider_styles($attr) {
 
     return $css;
 }
+
