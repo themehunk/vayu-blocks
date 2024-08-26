@@ -34,14 +34,6 @@ class Vayu_blocks_Advance_Slider {
 
                 $slides_html .= '<div class="vayu_blocks_slide_' . $uniqueId . '">';//every slide with their unique id
 
-                    // Background image
-                    if (isset($slide['layout']['backgroundImage']) && $slide['layout']['backgroundImage']) {
-                        $slides_html .= '<img class="vayu_blocks_slide_image"
-                            src="' . esc_url($slide['layout']['backgroundImage']) . '" 
-                            alt="Slide Background" 
-                            />';
-                    }
-
                     // Color overlay
                     $slides_html .= '<div class="vayu_blocks_color_overlay"></div>';
 
@@ -132,30 +124,44 @@ class Vayu_blocks_Advance_Slider {
     }
 
     private function render_scripts() {
+        // Determine the value of dots based on dotslength and dots['show']
+        $dots = ($this->attr['dotslength'] <= 1 || !$this->attr['dots']['show']) ? 'false' : 'true';
+        $infinite = $this->attr['infinite'] ? 'true' : 'false';
+        $centerMode = $this->attr['centerMode'] ? 'true' : 'false';
+        $fade = $this->attr['fade'] ? 'true' : 'false';
+        $waitForAnimate = $this->attr['waitForAnimate'] ? 'true' : 'false';
+        $lazyLoad = $this->attr['lazyLoad'] ? 'true' : 'false';
+        $autoplay = $this->attr['autoplay'] ? 'true' : 'false';
+        $pauseOnHover = $this->attr['pauseOnHover'] ? 'true' : 'false';
+        $focusOnSelect = $this->attr['focusOnSelect'] ? 'true' : 'false';
+        $rtl = $this->attr['rtl'] ? 'true' : 'false';
+        $arrows = $this->attr['arrow'] ? 'true' : 'false';
+        $swipe = $this->attr['swipe'] ? 'true' : 'false';
+    
         $script = "
             <script>
                 jQuery(document).ready(function($) {
                     $('.vayu-blocks-advance-slider').slick({
-                        dots: " . ($this->attr['dots']['show'] ? 'true' : 'false') . ",
-                        infinite: " . ($this->attr['infinite'] ? 'true' : 'false') . ",
+                        dots: {$dots},
+                        infinite: {$infinite},
                         speed: {$this->attr['speed']},
                         slidesToScroll: {$this->attr['slidesToScroll']},
                         rows: {$this->attr['slidesPerRow']},
-                        centerMode: " . ($this->attr['centerMode'] ? 'true' : 'false') . ",
-                        fade: " . ($this->attr['fade'] ? 'true' : 'false') . ",
-                        waitForAnimate: " . ($this->attr['waitForAnimate'] ? 'true' : 'false') . ",
-                        lazyLoad: " . ($this->attr['lazyLoad'] ? 'true' : 'false') . ",
-                        autoplay: " . ($this->attr['autoplay'] ? 'true' : 'false') . ",
+                        centerMode: {$centerMode},
+                        fade: {$fade},
+                        waitForAnimate: {$waitForAnimate},
+                        lazyLoad: {$lazyLoad},
+                        autoplay: {$autoplay},
                         autoplaySpeed: {$this->attr['autoplaySpeed']},
-                        cssEase: 'ease-in-out',
-                        pauseOnHover: " . ($this->attr['pauseOnHover'] ? 'true' : 'false') . ",
-                        focusOnSelect: " . ($this->attr['focusOnSelect'] ? 'true' : 'false') . ",
-                        rtl: " . ($this->attr['rtl'] ? 'true' : 'false') . ",
+                        cssEase: 'linear',
+                        pauseOnHover: {$pauseOnHover},
+                        focusOnSelect: {$focusOnSelect},
                         centerPadding: '60px',
                         initialSlide: {$this->attr['initialSlide']},
-                        arrows: " . ($this->attr['arrow'] ? 'true' : 'false') . ",
+                        arrows: {$arrows},
                         appendDots: $('.vayu-blocks-advance-slider'),
-                        slidesToShow: {$this->attr['slidesToShow']}
+                        slidesToShow: {$this->attr['slidesToShow']},
+                        swipe: {$swipe},
                     });
     
                     // Add animation class on slide change
@@ -163,18 +169,19 @@ class Vayu_blocks_Advance_Slider {
                         // Remove animation class from content elements of all slides
                         $('.slick-slide .vayu_blocks_inside_container_div ').removeClass('slide-active');
                     });
-
+    
                     $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
                         // Add animation class to the content elements of the current active slide
                         $('.slick-slide.slick-active .vayu_blocks_inside_container_div ').addClass('slide-active');
                     });
-
+    
                 });
             </script>
         ";
     
         return $script;
     }
+    
     
     // Svg filters for duotone
     private function render_svg_filters() {

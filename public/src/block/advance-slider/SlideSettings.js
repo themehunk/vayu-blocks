@@ -729,16 +729,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>
                                                     {__('Clear', 'vayu-blocks')}
                                                 </Button>
-
-                                                <h4>{__('Filters', 'vayu-blocks')}</h4>
-                                                <DuotonePicker
-                                                    label={__('Filters', 'vayu-blocks')}
-                                                    duotonePalette={ vayu_blocks_DUOTONE_PALETTE }
-                                                    disableCustomColors
-                                                    disableCustomDuotone
-                                                    value={ vayu_blocks_duotonevalue(index) }
-                                                    onChange={ (value) => vayu_blocks_duotoneHandler(index,'duotone',value) }
-                                                />
                                             </>
                                                 ) : (
                                                     <MediaPlaceholder

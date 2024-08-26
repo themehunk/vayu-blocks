@@ -3,8 +3,9 @@ return array(
     //edit.json
         'index' => 0,
         'initialSlide' => 0,
+        'dotslength' => 0,
         'infinite' => true,
-        'centerMode' => false,
+        'centerMode' => true,
         'fade' => false,
         'waitForAnimate' => false,
         'lazyLoad' => false,
@@ -23,6 +24,7 @@ return array(
         'slidercount' => 2,
         'arrow' => true, // Corrected from string "false" to boolean false
         'customPaging' => false,
+        'swipe' => false,
         'custompagingvalue' => 0,
         'dots' => array(
             'color' => 'black',
@@ -48,6 +50,7 @@ return array(
                 'bottom' => '50px',
                 'left' => '50px',
             ),
+            'opacity'=> 0.5,
         ),
         'slides' => array(
             array(
