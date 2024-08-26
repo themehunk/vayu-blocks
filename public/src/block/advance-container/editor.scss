@@ -6,7 +6,7 @@
 
 .wp-block-create-block-vayu-blocks {
 	border: 1px dotted #f00;
-}
+} 
 
 .components-panel__body.th-container-panel label,
 .components-panel__body.th-container-panel span{
@@ -70,6 +70,11 @@ width:auto;
 			background: #000;
 	}
 
+	.editor-styles-wrapper .th-root-block-container{
+     display:flex;
+	 justify-content: center;
+	}
+
 .wp-block-vayu-blocks-advance-container{
 	--background:none;
 	--background-hover: var(--background);
@@ -98,9 +103,9 @@ width:auto;
 	padding-bottom:var(--padding-bottom);
 	padding-left:var(--padding-left);
 	margin-top:var(--margin-top);
-	margin-right:var(--margin-right)!important;
+	margin-right:var(--margin-right);
 	margin-bottom:var(--margin-bottom);
-	margin-left:var(--margin-left)!important;
+	margin-left:var(--margin-left);
 	border-style:var(--border-style);
 	border-color:var(--border-color);
 	border-top-width:var(--border-top);
