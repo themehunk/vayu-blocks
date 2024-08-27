@@ -104,7 +104,7 @@ class Vayu_blocks_Advance_Slider {
         $button_text = esc_html($button['text']);
 
         return "<button class='vayu_blocks_slider_button1'>
-            <a href='{$button_link}' target='{$button_newtab}' style='text-decoration: none; cursor: pointer;'>
+            <a href='{$button_link}' class='vayu_blocks_slider_button1-anchor-tag' target='{$button_newtab}' style='text-decoration: none; cursor: pointer;'>
                 {$button_text}
             </a>
         </button>";
@@ -117,7 +117,7 @@ class Vayu_blocks_Advance_Slider {
         $button_text = esc_html($button['text']);
 
         return "<button class='vayu_blocks_slider_button2'>
-            <a href='{$button_link}' target='{$button_newtab}' style='text-decoration: none; cursor: pointer;'>
+            <a href='{$button_link}' class='vayu_blocks_slider_button2-anchor-tag' target='{$button_newtab}' style='text-decoration: none; cursor: pointer;'>
                 {$button_text}
             </a>
         </button>";

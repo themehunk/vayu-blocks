@@ -16,7 +16,7 @@
     },
     "centerMode": {
         "type": "boolean",
-        "default": true
+        "default": false
     },
     "dotslength":{
         "type":"number",
@@ -139,35 +139,34 @@
         "default": [
             {
                 "layout": {
-                    "uniqueId": "slide-default-1", 
+                    "uniqueId": "slide-default-2", 
                     "button1":{
                         "show": true,
-                        "text": "button 1",
+                        "text": "Button One",
                         "link": "",
                         "newtab": true,
                         "size": 20,
-                        "backgroundColor": "blue",
-                        "backgroundType":"color",
+                        "backgroundColor": "transparent",
                         "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        "color":"white",
+                        "color":"black",
                         "border":{
-                            "color": "white",
+                            "color": "black",
                             "width": "1px",
                             "style": "solid",
     
-                            "topcolor": "white",
+                            "topcolor": "black",
                             "topwidth": "1px",
                             "topstyle": "solid",
     
-                            "bottomcolor": "white",
+                            "bottomcolor": "black",
                             "bottomwidth": "1px",
                             "bottomstyle": "solid",
     
-                            "leftcolor": "white",
+                            "leftcolor": "black",
                             "leftwidth": "1px",
                             "leftstyle": "solid",
     
-                            "rightcolor": "white",
+                            "rightcolor": "black",
                             "rightwidth": "1px",
                             "rightstyle": "solid"
                         },
@@ -186,33 +185,32 @@
                         } 
                     },
                     "button2":{
-                        "show": true,
+                        "show": false,
+                        "text": "Button Two",
                         "link": "",
                         "newtab": true,
-                        "text": "button 2",
                         "size": 20,
-                        "backgroundColor": "blue",
-                        "backgroundType":"color",
+                        "backgroundColor": "transparent",
                         "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        "color":"white",
+                        "color":"black",
                         "border":{
-                            "color": "white",
+                            "color": "black",
                             "width": "1px",
                             "style": "solid",
     
-                            "topcolor": "white",
+                            "topcolor": "black",
                             "topwidth": "1px",
                             "topstyle": "solid",
     
-                            "bottomcolor": "white",
+                            "bottomcolor": "black",
                             "bottomwidth": "1px",
                             "bottomstyle": "solid",
     
-                            "leftcolor": "white",
+                            "leftcolor": "black",
                             "leftwidth": "1px",
                             "leftstyle": "solid",
     
-                            "rightcolor": "white",
+                            "rightcolor": "black",
                             "rightwidth": "1px",
                             "rightstyle": "solid"
                         },
@@ -241,7 +239,7 @@
                     },
                     "subheading":{
                         "show":true,
-                        "text": "lorem sub heading for oout topic has ben very important.",
+                        "text": "The subheading for our topic has played a crucial role in highlighting its significance.",
                         "tag" : "h4",
                         "size" : 16,
                         "fontWeight": "lighter",
@@ -251,23 +249,23 @@
                     },
                     "border":{
                         "color": "black",
-                        "width": "1px",
+                        "width": "0px",
                         "style": "solid",
 
                         "topcolor": "black",
-                        "topwidth": "1px",
+                        "topwidth": "0px",
                         "topstyle": "solid",
 
                         "bottomcolor": "black",
-                        "bottomwidth": "1px",
+                        "bottomwidth": "0px",
                         "bottomstyle": "solid",
 
                         "leftcolor": "black",
-                        "leftwidth": "1px",
+                        "leftwidth": "0px",
                         "leftstyle": "solid",
 
                         "rightcolor": "black",
-                        "rightwidth": "1px",
+                        "rightwidth": "0px",
                         "rightstyle": "solid"
                     },
                     "borderRadius":{
@@ -283,8 +281,6 @@
                         "bottom":"50px",
                         "left":"0px"
                     },
-                    "customStyle":false,
-                    "customBackgroundImage":false,
                     "opacity": 0.2,
                     "backgroundBlend":"lighten",
                     "backgroundImage": "",
@@ -292,6 +288,12 @@
                         "x": 0.5,
                         "y": 0.5
                     },
+                    "customStylelayout" :false,
+                    "customStyleheading":false,
+                    "customStylesubheading":false,
+                    "customStylesubbutton1":false,
+                    "customStylesubbutton2":false,
+                    "customBackgroundImage":false,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
                     "duotone": "",
@@ -305,32 +307,31 @@
                     "uniqueId": "slide-default-2", 
                     "button1":{
                         "show": true,
-                        "text": "button 1",
+                        "text": "Button One",
                         "link": "",
                         "newtab": true,
                         "size": 20,
-                        "backgroundColor": "blue",
-                        "backgroundType":"color",
+                        "backgroundColor": "transparent",
                         "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        "color":"white",
+                        "color":"black",
                         "border":{
-                            "color": "white",
+                            "color": "black",
                             "width": "1px",
                             "style": "solid",
     
-                            "topcolor": "white",
+                            "topcolor": "black",
                             "topwidth": "1px",
                             "topstyle": "solid",
     
-                            "bottomcolor": "white",
+                            "bottomcolor": "black",
                             "bottomwidth": "1px",
                             "bottomstyle": "solid",
     
-                            "leftcolor": "white",
+                            "leftcolor": "black",
                             "leftwidth": "1px",
                             "leftstyle": "solid",
     
-                            "rightcolor": "white",
+                            "rightcolor": "black",
                             "rightwidth": "1px",
                             "rightstyle": "solid"
                         },
@@ -349,33 +350,32 @@
                         } 
                     },
                     "button2":{
-                        "show": true,
+                        "show": false,
+                        "text": "Button Two",
                         "link": "",
                         "newtab": true,
-                        "text": "button 2",
                         "size": 20,
-                        "backgroundColor": "blue",
-                        "backgroundType":"color",
+                        "backgroundColor": "transparent",
                         "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        "color":"white",
+                        "color":"black",
                         "border":{
-                            "color": "white",
+                            "color": "black",
                             "width": "1px",
                             "style": "solid",
     
-                            "topcolor": "white",
+                            "topcolor": "black",
                             "topwidth": "1px",
                             "topstyle": "solid",
     
-                            "bottomcolor": "white",
+                            "bottomcolor": "black",
                             "bottomwidth": "1px",
                             "bottomstyle": "solid",
     
-                            "leftcolor": "white",
+                            "leftcolor": "black",
                             "leftwidth": "1px",
                             "leftstyle": "solid",
     
-                            "rightcolor": "white",
+                            "rightcolor": "black",
                             "rightwidth": "1px",
                             "rightstyle": "solid"
                         },
@@ -404,7 +404,7 @@
                     },
                     "subheading":{
                         "show":true,
-                        "text": "lorem sub heading for oout topic has ben very important.",
+                        "text": "The subheading for our topic has played a crucial role in highlighting its significance.",
                         "tag" : "h4",
                         "size" : 16,
                         "fontWeight": "lighter",
@@ -414,23 +414,23 @@
                     },
                     "border":{
                         "color": "black",
-                        "width": "1px",
+                        "width": "0px",
                         "style": "solid",
 
                         "topcolor": "black",
-                        "topwidth": "1px",
+                        "topwidth": "0px",
                         "topstyle": "solid",
 
                         "bottomcolor": "black",
-                        "bottomwidth": "1px",
+                        "bottomwidth": "0px",
                         "bottomstyle": "solid",
 
                         "leftcolor": "black",
-                        "leftwidth": "1px",
+                        "leftwidth": "0px",
                         "leftstyle": "solid",
 
                         "rightcolor": "black",
-                        "rightwidth": "1px",
+                        "rightwidth": "0px",
                         "rightstyle": "solid"
                     },
                     "borderRadius":{
@@ -453,7 +453,11 @@
                         "x": 0.5,
                         "y": 0.5
                     },
-                    "customStyle":false,
+                    "customStylelayout" :false,
+                    "customStyleheading":false,
+                    "customStylesubheading":false,
+                    "customStylesubbutton1":false,
+                    "customStylesubbutton2":false,
                     "customBackgroundImage":false,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
@@ -470,34 +474,34 @@
         "default":
         {
             "layout": {
+                "uniqueId": "slide-default-2", 
                 "button1":{
                     "show": true,
-                    "text": "button 1",
+                    "text": "Button One",
                     "link": "",
                     "newtab": true,
                     "size": 20,
-                    "backgroundColor": "blue",
-                    "backgroundType":"color",
+                    "backgroundColor": "transparent",
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                    "color":"white",
+                    "color":"black",
                     "border":{
-                        "color": "white",
+                        "color": "black",
                         "width": "1px",
                         "style": "solid",
 
-                        "topcolor": "white",
+                        "topcolor": "black",
                         "topwidth": "1px",
                         "topstyle": "solid",
 
-                        "bottomcolor": "white",
+                        "bottomcolor": "black",
                         "bottomwidth": "1px",
                         "bottomstyle": "solid",
 
-                        "leftcolor": "white",
+                        "leftcolor": "black",
                         "leftwidth": "1px",
                         "leftstyle": "solid",
 
-                        "rightcolor": "white",
+                        "rightcolor": "black",
                         "rightwidth": "1px",
                         "rightstyle": "solid"
                     },
@@ -516,33 +520,32 @@
                     } 
                 },
                 "button2":{
-                    "show": true,
+                    "show": false,
+                    "text": "Button Two",
                     "link": "",
                     "newtab": true,
-                    "text": "button 2",
                     "size": 20,
-                    "backgroundColor": "blue",
-                    "backgroundType":"color",
+                    "backgroundColor": "transparent",
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                    "color":"white",
+                    "color":"black",
                     "border":{
-                        "color": "white",
+                        "color": "black",
                         "width": "1px",
                         "style": "solid",
 
-                        "topcolor": "white",
+                        "topcolor": "black",
                         "topwidth": "1px",
                         "topstyle": "solid",
 
-                        "bottomcolor": "white",
+                        "bottomcolor": "black",
                         "bottomwidth": "1px",
                         "bottomstyle": "solid",
 
-                        "leftcolor": "white",
+                        "leftcolor": "black",
                         "leftwidth": "1px",
                         "leftstyle": "solid",
 
-                        "rightcolor": "white",
+                        "rightcolor": "black",
                         "rightwidth": "1px",
                         "rightstyle": "solid"
                     },
@@ -571,7 +574,7 @@
                 },
                 "subheading":{
                     "show":true,
-                    "text": "lorem sub heading for oout topic has ben very important.",
+                    "text": "The subheading for our topic has played a crucial role in highlighting its significance.",
                     "tag" : "h4",
                     "size" : 16,
                     "fontWeight": "lighter",
@@ -581,23 +584,23 @@
                 },
                 "border":{
                     "color": "black",
-                    "width": "1px",
+                    "width": "0px",
                     "style": "solid",
 
                     "topcolor": "black",
-                    "topwidth": "1px",
+                    "topwidth": "0px",
                     "topstyle": "solid",
 
                     "bottomcolor": "black",
-                    "bottomwidth": "1px",
+                    "bottomwidth": "0px",
                     "bottomstyle": "solid",
 
                     "leftcolor": "black",
-                    "leftwidth": "1px",
+                    "leftwidth": "0px",
                     "leftstyle": "solid",
 
                     "rightcolor": "black",
-                    "rightwidth": "1px",
+                    "rightwidth": "0px",
                     "rightstyle": "solid"
                 },
                 "borderRadius":{
@@ -610,7 +613,7 @@
                 "padding":{
                     "top": "0px",
                     "right":"0px",
-                    "bottom":"0px",
+                    "bottom":"50px",
                     "left":"0px"
                 },
                 "opacity": 0.2,
@@ -620,6 +623,12 @@
                     "x": 0.5,
                     "y": 0.5
                 },
+                "customStylelayout" :false,
+                "customStyleheading":false,
+                "customStylesubheading":false,
+                "customStylesubbutton1":false,
+                "customStylesubbutton2":false,
+                "customBackgroundImage":false,
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",

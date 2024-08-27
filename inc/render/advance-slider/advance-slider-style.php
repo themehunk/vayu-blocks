@@ -694,6 +694,17 @@ function generate_inline_slider_styles($attr) {
             //animation left
         $css .= "}\n";
 
+        // Button 1 anchor
+        $css .= "$container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button1-anchor-tag{";
+            $css .= "color: {$button1['color']};";
+        $css .= "}\n";
+        
+        // Button 2 anchor
+        $css .= "$container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button2-anchor-tag{";
+            $css .= "color: {$button2['color']};";
+        $css .= "}\n";
+
+
         //Button 2
         $css .= "$container $insideContainer .vayu_blocks_slider_button2 {";
             // Font Size
