@@ -276,9 +276,9 @@
                         
                     },
                     "padding":{
-                        "top": "0px",
+                        "top": "50px",
                         "right":"0px",
-                        "bottom":"0px",
+                        "bottom":"50px",
                         "left":"0px"
                     },
                     "opacity": 0.2,
@@ -294,15 +294,17 @@
                     "customStylesubbutton1":false,
                     "customStylesubbutton2":false,
                     "customBackgroundImage":false,
-                    "heightauto":false,
+                    "heightauto":true,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
                     "duotone": "",
                     "imageheight":0,
                     "gaphb" : 0,
+                    "customheight" :340,
                     "gaphsub" : 0,
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                    "alignment": "center"
+                    "alignment": "center",
+                    "alignmenttop":"center"
                 }
                 
             },
@@ -445,9 +447,9 @@
                         
                     },
                     "padding":{
-                        "top": "0px",
+                        "top": "50px",
                         "right":"0px",
-                        "bottom":"0px",
+                        "bottom":"50px",
                         "left":"0px"
                     },
                     "opacity": 0.2,
@@ -466,12 +468,14 @@
                     "imageheight":0,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
-                    "heightauto":false,
+                    "heightauto":true,
                     "duotone": "",
                     "gaphb" : 0,
                     "gaphsub" : 0,
+                    "customheight" :340,
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                    "alignment": "center"
+                    "alignment": "center",
+                    "alignmenttop":"center"
                 }
                 
             }
@@ -619,9 +623,9 @@
                     
                 },
                 "padding":{
-                    "top": "0px",
+                    "top": "50px",
                     "right":"0px",
-                    "bottom":"0px",
+                    "bottom":"50px",
                     "left":"0px"
                 },
                 "opacity": 0.2,
@@ -637,10 +641,12 @@
                 "customStylesubbutton1":false,
                 "customStylesubbutton2":false,
                 "customBackgroundImage":false,
-                "heightauto":false,
+                "heightauto":true,
+                "customheight" :340,
                 "imageheight":0,
                 "gaphb" : 0,
                 "gaphsub" : 0,
+                "alignmenttop":"center",
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",

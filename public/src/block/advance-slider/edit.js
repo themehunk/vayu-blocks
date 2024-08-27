@@ -289,13 +289,14 @@ const edit = ({ attributes, setAttributes }) => {
         const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
         const vayu_blocks_slideStyle = {
-            marginBottom:'10px',
-            height: '100%',
-            height: slide.layout.heightauto && slide.layout.imageheight > 200
-            ? `${slide.layout.imageheight}px`
-            : '100%',
+            height: slide.layout.heightauto 
+                ? (slide.layout.imageheight > 200 ? `${slide.layout.imageheight}px` : '100%')
+                : `${slide.layout.customheight}px`,
             overflow: 'hidden',
             position:'relative',
+            display:'flex',
+            justifyContent:'center',
+            alignItems:slide.layout.alignmenttop,
             
             //border
             borderColor: slide.layout.border?.color || 'transparent',
@@ -320,7 +321,13 @@ const edit = ({ attributes, setAttributes }) => {
             //padding
             padding: `${topPadding} ${rightPadding} ${bottomPadding} ${leftPadding}`,
    
-            background:`url(${slide.layout.backgroundImage})`,
+             // Conditional background image
+            ...(slide.layout.backgroundImage && {
+                background: `url(${slide.layout.backgroundImage})`,
+                backgroundSize: 'cover', // Assuming you want these properties based on your preferences
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'top center',
+            }),
               
         };
         
@@ -330,7 +337,6 @@ const edit = ({ attributes, setAttributes }) => {
                 fontSize: `${button.size}px`,
                 border: 'none',
                 cursor: 'pointer',
-                margin:'10px',
                 
                 //border
                 borderColor: button.border?.color || 'transparent',
@@ -376,8 +382,8 @@ const edit = ({ attributes, setAttributes }) => {
         };
     
         const vayu_blocks_inside_conatiner_div = {
-            zIndex: 10000,
-            height: '100%',
+            zIndex: 3,
+            // height: '100%',
             position:'relative',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
@@ -407,7 +413,7 @@ const edit = ({ attributes, setAttributes }) => {
 
                         <div style={{marginBottom: slide.layout.gaphb}}>
 
-                            <slide.layout.heading.tag className="vayu_blocks_heading" style={{marginBottom: slide.layout.gaphsub}}>
+                            <slide.layout.heading.tag className="vayu_blocks_heading" style={{marginBottom: slide.layout.gaphsub,fontSize:'0'}}>
                                 <a 
                                     href={slide.layout.heading.link} 
                                     target={slide.layout.heading.newtab ? "_blank" : "_self"}

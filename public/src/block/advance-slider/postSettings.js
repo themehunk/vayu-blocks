@@ -16,11 +16,11 @@ import {
 } from '@wordpress/components';
 import {
     HoverControl,
+    ToogleGroupControl,
 } from '../../components/index.js';
 import {AlignmentToolbar,MediaPlaceholder } from '@wordpress/block-editor';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
-import { property } from 'lodash';
-
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
@@ -490,13 +490,98 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                 {isPanel === 'layout' && (
                     <>
+                        <br />
+                        <ToggleControl
+                            label={attributes.global.layout.heightauto 
+                                ? __('Height (Auto)', 'vayu-blocks') 
+                                : `Custom Height: ${attributes.global.layout.customheight}px`}
+                            checked={attributes.global.layout.heightauto}
+                            onChange={(value) => vayu_blocks_updateSliderStyles('heightauto',value)}
+                        />  
+                        {attributes.global.layout.heightauto===false && (
+                            <RangeControl
+                                label={__('Custom Height(px)', 'vayu-blocks')}
+                                value={attributes.global.layout.customheight}
+                                onChange={(value) => vayu_blocks_updateSliderStyles('customheight',value)}
+                                min={0}
+                                max={1500}
+                                step={1}
+                            />
+                        )}
+
                         <h4>{__('Alignment', 'vayu-blocks')}</h4>
-                        <AlignmentToolbar
+
+                        <ToogleGroupControl
                             label={__('Alignment', 'vayu-blocks')}
                             value={ attributes.global.layout.alignment}
-                            onChange={(value) => vayu_blocks_updateSliderStyles('alignment', value)}								
-                            isCollapsed={ false }
+                            onChange={(value) => vayu_blocks_updateSliderStyles('alignment', value)}
+                            options={[
+                                {
+                                    icon: HorizontalLeft,
+                                    label: __( 'Left', 'vayu-blocks' ),
+                                    value: 'left'
+                                },
+                                {
+                                    icon: Center,
+                                    label: __( 'Center', 'vayu-blocks' ),
+                                    value: 'center'
+                                },
+                                {
+                                    icon: HorizontalRight,
+                                    label: __( 'Right', 'vayu-blocks' ),
+                                    value: 'right'
+                                },
+                            ]}
+                            
+                            hasIcon
                         />
+
+                        <ToogleGroupControl
+                            label={__('Alignment', 'vayu-blocks')}
+                            value={ attributes.global.layout.alignmenttop}
+                            onChange={(value) => vayu_blocks_updateSliderStyles('alignmenttop', value)}
+                            options={[
+                                {
+                                    icon: Start,
+                                    label: __( 'start', 'vayu-blocks' ),
+                                    value: 'start'
+                                },
+                                {
+                                    icon: Center,
+                                    label: __( 'Center', 'vayu-blocks' ),
+                                    value: 'center'
+                                },
+                                {
+                                    icon: End,
+                                    label: __( 'end', 'vayu-blocks' ),
+                                    value: 'end'
+                                },
+                            ]}
+                            
+                            hasIcon
+                        />
+
+                        <br />
+
+                        <RangeControl
+                            label={__('Gap Between Heading & Sub Heading', 'vayu-blocks')}
+                            className = "vayu_blocks_gphsub"
+                            value={attributes.global.layout.gaphsub}
+                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphsub', value)}
+                            min={0}
+                            max={500}
+                            step={1}
+                        />
+                        <RangeControl
+                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
+                            className = "vayu_blocks_gphb"
+                            value={attributes.global.layout.gaphb}
+                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
+                            min={0}
+                            max={500}
+                            step={1}
+                        />
+
                          <BorderBoxControlComponent
                             label={__('Border','vayu-blocks')}
                             value={{
@@ -556,11 +641,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             sides={['vertical']}
                         />
 
-                        <ToggleControl
-                            label={__('Height Auto', 'vayu-blocks')}
-                            checked={attributes.global.layout.heightauto}
-                            onChange={(value) => vayu_blocks_updateSliderStyles('heightauto',value)}
-                        />  
+                         
                     </>
                 )}
 
@@ -569,15 +650,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     <>
                         <p>This style will apply to all slides except those with custom styles enabled.</p>
 
-                        <RangeControl
-                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                            className = "vayu_blocks_gphsub"
-                            value={attributes.global.layout.gaphsub}
-                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphsub', value)}
-                            min={0}
-                            max={500}
-                            step={1}
-                        />
+                        
                     
                         <>
                             <HoverControl
@@ -717,15 +790,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 {isPanel === 'button' && (
                     <>  
                     <p>This style will apply to all slides except those with custom styles enabled.</p>
-                        <RangeControl
-                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                            className = "vayu_blocks_gphb"
-                            value={attributes.global.layout.gaphb}
-                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
-                            min={0}
-                            max={500}
-                            step={1}
-                        />
+                        
                         <>
                             <HoverControl
                                 value={button}

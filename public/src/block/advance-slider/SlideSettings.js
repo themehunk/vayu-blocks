@@ -28,9 +28,11 @@ import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
 import { URLInputButton } from '@wordpress/block-editor';
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {
     HoverControl,
+    ToogleGroupControl,
 } from '../../components/index.js';
 
 
@@ -417,9 +419,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             left: "5px"
                         },
                         padding: {
-                            top: "0px",
+                            top: "50px",
                             right: "0px",
-                            bottom: "0px",
+                            bottom: "50px",
                             left: "0px"
                         },
                         customStylelayout :false,
@@ -428,7 +430,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         customStylesubbutton1:false,
                         customStylesubbutton2:false,
                         customBackgroundImage: false,
-                        heightauto:false,
+                        customheight :340,
+                        heightauto:true,
                         imageheight:0,
                         opacity: 0.2,
                         backgroundBlend: "lighten",
@@ -443,7 +446,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         backgroundColor: "#000000",
                         duotone: "",
                         backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        alignment: "center"
+                        alignment: "center",
+                        alignmenttop: "center",
                     }
                 }
             ]
@@ -821,11 +825,23 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 />
 
                                                 <ToggleControl
-                                                    className="vayu_blocks_customstyle_toggle_control_layout_style"
-                                                    label={__('Height Auto', 'vayu-blocks')}
+                                                    className="vayu_blocks_togglecontrol"
+                                                    label={attributes.slides[index].layout.heightauto 
+                                                        ? __('Height (Auto)', 'vayu-blocks') 
+                                                        : `Custom Height: ${attributes.slides[index].layout.customheight}px`}
                                                     checked={attributes.slides[index].layout.heightauto}
                                                     onChange={(value) => vayu_blocks_updateSliderStyles(index,'heightauto',value)}
-                                                /> 
+                                                />
+                                                {attributes.slides[index].layout.heightauto===false && (
+                                                    <RangeControl
+                                                        label={__('Custom Height(px)', 'vayu-blocks')}
+                                                        value={attributes.slides[index].layout.customheight}
+                                                        onChange={(value) => vayu_blocks_updateSliderStyles(index,'customheight',value)}
+                                                        min={0}
+                                                        max={1500}
+                                                        step={1}
+                                                    />
+                                                )} 
 
                                             </>
                                         )}
@@ -834,7 +850,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             <>
                                                 <br />
                                                 <ToggleControl
-                                                    className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                    className="vayu_blocks_togglecontrol"
                                                     label={__('Custom Style', 'vayu-blocks')}
                                                     checked={attributes.slides[index].layout.customStylelayout}
                                                     onChange={(value) => vayu_blocks_updateSliderStyles(index,"customStylelayout",value)}
@@ -844,12 +860,78 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 {attributes.slides[index].layout.customStylelayout && (
                                                     <>
                                                     <h4>{__('Alignment', 'vayu-blocks')}</h4>
-                                                        <AlignmentToolbar
+                                                    
+                                                        <ToogleGroupControl
                                                             label={__('Alignment', 'vayu-blocks')}
                                                             value={ attributes.slides[index].layout.alignment}
-                                                            onChange={(value) => vayu_blocks_updateSliderStyles(index, 'alignment', value)}								
-                                                            isCollapsed={ false }
+                                                            onChange={(value) => vayu_blocks_updateSliderStyles(index,'alignment', value)}
+                                                            options={[
+                                                                {
+                                                                    icon: HorizontalLeft,
+                                                                    label: __( 'Left', 'vayu-blocks' ),
+                                                                    value: 'left'
+                                                                },
+                                                                {
+                                                                    icon: Center,
+                                                                    label: __( 'Center', 'vayu-blocks' ),
+                                                                    value: 'center'
+                                                                },
+                                                                {
+                                                                    icon: HorizontalRight,
+                                                                    label: __( 'Right', 'vayu-blocks' ),
+                                                                    value: 'right'
+                                                                },
+                                                            ]}
+                                                            
+                                                            hasIcon
                                                         />
+
+                                                        <ToogleGroupControl
+                                                            label={__('Alignment', 'vayu-blocks')}
+                                                            value={ attributes.slides[index].layout.alignmenttop}
+                                                            onChange={(value) => vayu_blocks_updateSliderStyles(index,'alignmenttop', value)}
+                                                            options={[
+                                                                {
+                                                                    icon: Start,
+                                                                    label: __( 'start', 'vayu-blocks' ),
+                                                                    value: 'start'
+                                                                },
+                                                                {
+                                                                    icon: Center,
+                                                                    label: __( 'Center', 'vayu-blocks' ),
+                                                                    value: 'center'
+                                                                },
+                                                                {
+                                                                    icon: End,
+                                                                    label: __( 'end', 'vayu-blocks' ),
+                                                                    value: 'end'
+                                                                },
+                                                            ]}
+                                                            
+                                                            hasIcon
+                                                        />
+
+                                                        <br />
+
+                                                        <RangeControl
+                                                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
+                                                            className = "vayu_blocks_gphb"
+                                                            value={attributes.slides[index].layout.gaphb}
+                                                            onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'gaphb', value)}
+                                                            min={0}
+                                                            max={500}
+                                                            step={1}
+                                                        />
+                                                        <RangeControl
+                                                            label={__('Gap Between Heading & Sub Heading', 'vayu-blocks')}
+                                                            className = "vayu_blocks_gphb"
+                                                            value={attributes.slides[index].layout.gaphsub}
+                                                            onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'gaphsub', value)}
+                                                            min={0}
+                                                            max={500}
+                                                            step={1}
+                                                        />
+
                                                         <BorderBoxControlComponent
                                                             label={__('Border','vayu-blocks')}
                                                             value={{
@@ -889,13 +971,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                             values={attributes.slides[index].layout.borderRadius}
                                                         />
 
-{/* 
-                                                        <BoxControl
-                                                            label={__('Padding','vayu-blocks')}
-                                                            onChange={(value)=> vayu_blocks_handleBorderRadius(index,'padding',value)}
-                                                            values={attributes.slides[index].layout.padding}
-                                                        /> */}
-
                                                         <BoxControl
                                                             label={__('Horizontal Padding', 'vayu-blocks')}
                                                             onChange={(value) => handlePaddingChange(index,'horizontal', value)}
@@ -930,15 +1005,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     <>
                                         <p>This style will apply to all slides except those with custom styles enabled.</p>
                                         
-                                        <RangeControl
-                                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                                            className = "vayu_blocks_gphb"
-                                            value={attributes.slides[index].layout.gaphsub}
-                                            onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'gaphsub', value)}
-                                            min={0}
-                                            max={500}
-                                            step={1}
-                                        />
+                                        
                                         <>
                                             <div className="content-panel">
                                                 <button 
@@ -986,7 +1053,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                     <br />
                                                     <ToggleControl
                                                         label={__('Custom Style', 'vayu-blocks')}
-                                                        className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                        className="vayu_blocks_togglecontrol"
                                                         checked={attributes.slides[index].layout.customStyleheading}
                                                         onChange={(value) => vayu_blocks_updateSliderStyles(index,"customStyleheading",value)}
                                                     />
@@ -1054,7 +1121,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 <>
                                                     <div className="tools-panel-wrapper-new-sub">
                                                     <ToggleControl
-                                                        className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                        className="vayu_blocks_togglecontrol"
                                                         label={__('Sub Heading', 'vayu-blocks')}
                                                         checked={attributes.slides[index].layout.subheading.show}
                                                         onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'subheading.show', value)}
@@ -1075,7 +1142,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                         <>
                                                             <br />
                                                             <ToggleControl
-                                                                className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                                className="vayu_blocks_togglecontrol"
                                                                 label={__('Custom Style', 'vayu-blocks')}
                                                                 checked={attributes.slides[index].layout.customStylesubheading}
                                                                 onChange={(value) => vayu_blocks_updateSliderStyles(index,"customStylesubheading",value)}
@@ -1148,15 +1215,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     <>
                                         <p>This style will apply to all slides except those with custom styles enabled.</p>
 
-                                        <RangeControl
-                                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                                            className = "vayu_blocks_gphb"
-                                            value={attributes.slides[index].layout.gaphb}
-                                            onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'gaphb', value)}
-                                            min={0}
-                                            max={500}
-                                            step={1}
-                                        />
                                         <>
                                             <div className="content-panel">
                                                 <button 
@@ -1216,7 +1274,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                         <>
                                                             <br />
                                                             <ToggleControl
-                                                                className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                                className="vayu_blocks_togglecontrol"
                                                                 label={__('Custom Style', 'vayu-blocks')}
                                                                 checked={attributes.slides[index].layout.customStylesubbutton1}
                                                                 onChange={(value) => vayu_blocks_updateSliderStyles(index,"customStylesubbutton1",value)}
@@ -1396,7 +1454,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                         <>
                                                             <br />
                                                             <ToggleControl
-                                                                className="vayu_blocks_customstyle_toggle_control_layout_style"
+                                                                className="vayu_blocks_togglecontrol"
                                                                 label={__('Custom Style', 'vayu-blocks')}
                                                                 checked={attributes.slides[index].layout.customStylesubbutton2}
                                                                 onChange={(value) => vayu_blocks_updateSliderStyles(index,"customStylesubbutton2",value)}

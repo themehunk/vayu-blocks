@@ -527,18 +527,27 @@ function generate_inline_slider_styles($attr) {
         $css .= "$container {";
 
             // Set margin-bottom and height
-            $css .= "margin-bottom: 10px;";
             $heightAuto = $slide['layout']['heightauto'];
+            $alignmenttop = $slide['layout']['alignmenttop'];
             $imageHeight = $slide['layout']['imageheight'];
+            $customheight = $slide['layout']['customheight'];
             // Apply conditional height logic
-            if ($heightAuto && $imageHeight > 200) {
-                $css .= "height: {$imageHeight}px;";
+            if ($heightAuto) {
+                if ($imageHeight > 200) {
+                    $css .= "height: {$imageHeight}px;";
+                } else {
+                    $css .= "height: 100%;";  // If image height is 200 or less and heightAuto is enabled
+                }
             } else {
-                $css .= "height: 100%;";
+                $css .= "height: {$customheight}px;";  // When heightAuto is disabled
             }
+
 
             $css .= "overflow: hidden;";
             $css .= "position: relative;";
+            $css .= "display: flex !important;";
+            $css .= "align-items: {$alignmenttop};";
+            $css .= "justify-content: center;";
             
             // Border properties
             $borderColor = isset($slide['layout']['border']['color']) ? esc_attr($slide['layout']['border']['color']) : 'transparent';
@@ -642,7 +651,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "$container $insideContainer {";
             $css .= "position: relative;";
             $css .= "z-index: 3;";
-            $css .= "height: 100%;";
+            // $css .= "height: 100%;";
             $css .= "text-align: " . esc_attr($slide['layout']['alignment']) . ";";
         $css .= "}\n";
 
@@ -657,6 +666,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "$container $insideContainer .vayu_blocks_heading{";
             $gaphsub = isset($slide['layout']['gaphsub']) ? esc_attr($slide['layout']['gaphsub']) : '0px';
             $css .= "margin-bottom: {$gaphsub};";
+            $css .= "font-size: 0;";
         $css .= "}\n";
 
         // Heading
