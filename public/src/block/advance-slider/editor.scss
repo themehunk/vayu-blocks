@@ -138,7 +138,7 @@
 }
 
 .vayu_blocks_togglecontrol{
-    margin-left:3px;
+    margin-left:4px;
 }
 
 .duotone-filters{
@@ -220,6 +220,41 @@
     background-color: #d7d4d4; /* Dark color */
 }
 
+.content-panel-layout {
+    display: flex;
+   gap:15px;
+   margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8e3e3;
+}
+
+.content-panel-layout-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    padding: 6px; /* Adjust padding as needed */
+    font-size: 15px; /* Adjust font size as needed */
+    overflow: hidden; /* Ensure pseudo-element stays within button bounds */
+}
+
+.content-panel-layout-button::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px; /* Adjust the line height as needed */
+    background-color: blue; /* Line color */
+    transition: width 0.3s ease; /* Smooth animation */
+}
+
+.content-panel-layout-button:hover::after {
+    width: 100%; /* Expand line to full width on hover */
+}
+
+
 .content-panel {
     display: flex;
    gap:3px;
@@ -257,6 +292,7 @@
 .content-panel-button:hover::after {
     width: 100%; /* Expand line to full width on hover */
 }
+
 
 //edit.js
 /* Animation for heading */
@@ -395,5 +431,15 @@ content: "" !important;
 .vayu_blocks_slider-slide{
     background-size: cover !important; 
     background-repeat: no-repeat !important;
-    background-position: center !important;
+    background-position: top center !important;
+}
+
+
+.vayu_blocks_gphb{
+    width: 90%;
+    margin-left: 10px;
+}
+
+.vayu_blocks_customstyle_toggle_control_layout_style{
+    margin-left: 2px;
 }

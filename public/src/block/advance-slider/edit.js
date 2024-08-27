@@ -280,11 +280,23 @@ const edit = ({ attributes, setAttributes }) => {
             return styles;
         };
 
+        // Extract padding values with default '0px'
+        const topPadding = slide.layout.padding.top || '0px';
+        const rightPadding = slide.layout.padding.right || '0px';
+        const leftPadding = slide.layout.padding.left || '0px';
+
+        const bottomPaddingValue = parseInt(slide.layout.padding.bottom, 10) || 0; // Default to 0 if parsing fails
+        const bottomPadding = (bottomPaddingValue + 50) + 'px';
+
         const vayu_blocks_slideStyle = {
-            marginBottom:'10px',
-            height: '100%',
+            height: slide.layout.heightauto 
+                ? (slide.layout.imageheight > 200 ? `${slide.layout.imageheight}px` : '100%')
+                : `${slide.layout.customheight}px`,
             overflow: 'hidden',
             position:'relative',
+            display:'flex',
+            justifyContent:'center',
+            alignItems:slide.layout.alignmenttop,
             
             //border
             borderColor: slide.layout.border?.color || 'transparent',
@@ -307,9 +319,15 @@ const edit = ({ attributes, setAttributes }) => {
             borderRadius: `${slide.layout.borderRadius.top || '0px'} ${slide.layout.borderRadius.right || '0px'} ${slide.layout.borderRadius.bottom || '0px'} ${slide.layout.borderRadius.left || '0px'}`,
 
             //padding
-            padding: `${slide.layout.padding.top || '0px'} ${slide.layout.padding.right || '0px'} ${slide.layout.padding.bottom || '0px'} ${slide.layout.padding.left || '0px'}`,
+            padding: `${topPadding} ${rightPadding} ${bottomPadding} ${leftPadding}`,
    
-            background:`url(${slide.layout.backgroundImage})`,
+             // Conditional background image
+            ...(slide.layout.backgroundImage && {
+                background: `url(${slide.layout.backgroundImage})`,
+                backgroundSize: 'cover', // Assuming you want these properties based on your preferences
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'top center',
+            }),
               
         };
         
@@ -319,7 +337,6 @@ const edit = ({ attributes, setAttributes }) => {
                 fontSize: `${button.size}px`,
                 border: 'none',
                 cursor: 'pointer',
-                margin:'10px',
                 
                 //border
                 borderColor: button.border?.color || 'transparent',
@@ -365,8 +382,8 @@ const edit = ({ attributes, setAttributes }) => {
         };
     
         const vayu_blocks_inside_conatiner_div = {
-            zIndex: 10000,
-            height: '100%',
+            zIndex: 3,
+            // height: '100%',
             position:'relative',
             textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
         };
@@ -394,45 +411,52 @@ const edit = ({ attributes, setAttributes }) => {
 
                     <div style={vayu_blocks_inside_conatiner_div}>
 
-                        <slide.layout.heading.tag className="vayu_blocks_heading">
-                            <a 
-                                href={slide.layout.heading.link} 
-                                target={slide.layout.heading.newtab ? "_blank" : "_self"}
-                                style={vayu_blocks_generateheadingStyle(slide.layout.heading)}
-                            >
-                                {slide.layout.heading.text}
-                            </a>
-                        </slide.layout.heading.tag>
+                        <div style={{marginBottom: slide.layout.gaphb}}>
 
-                        {slide.layout.subheading.show && (
-                            <slide.layout.subheading.tag className="vayu_blocks_sub_heading" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
-                                    {slide.layout.subheading.text}
-                            </slide.layout.subheading.tag>
-                        )}
-        
-                        {slide.layout.button1.show && (
-                            <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)} className="vayu_blocks_button1_heading">
+                            <slide.layout.heading.tag className="vayu_blocks_heading" style={{marginBottom: slide.layout.gaphsub,fontSize:'0'}}>
                                 <a 
-                                    href={slide.layout.button1.link} 
-                                    target={slide.layout.button1.newtab ? "_blank" : "_self"}
-                                    style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button1.color }}
+                                    href={slide.layout.heading.link} 
+                                    target={slide.layout.heading.newtab ? "_blank" : "_self"}
+                                    style={vayu_blocks_generateheadingStyle(slide.layout.heading)}
                                 >
-                                    {slide.layout.button1.text}
+                                    {slide.layout.heading.text}
                                 </a>
-                            </button>
-                        )}
+                            </slide.layout.heading.tag>
+
+                            {slide.layout.subheading.show && (
+                                <slide.layout.subheading.tag className="vayu_blocks_sub_heading" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
+                                        {slide.layout.subheading.text}
+                                </slide.layout.subheading.tag>
+                            )}
+
+                        </div>
         
-                        {slide.layout.button2.show && (
-                            <button className="vayu_blocks_button2_heading" style={vayu_blocks_generateButtonStyle(slide.layout.button2)}>
-                                <a 
-                                    href={slide.layout.button2.link} 
-                                    target={slide.layout.button2.newtab ? "_blank" : "_self"}
-                                    style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button2.color }}
-                                >
-                                    {slide.layout.button2.text}
-                                </a>
-                            </button>
-                        )}
+                        <div>
+
+                            {slide.layout.button1.show && (
+                                <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)} className="vayu_blocks_button1_heading">
+                                    <a 
+                                        href={slide.layout.button1.link} 
+                                        target={slide.layout.button1.newtab ? "_blank" : "_self"}
+                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button1.color }}
+                                    >
+                                        {slide.layout.button1.text}
+                                    </a>
+                                </button>
+                            )}
+            
+                            {slide.layout.button2.show && (
+                                <button className="vayu_blocks_button2_heading" style={vayu_blocks_generateButtonStyle(slide.layout.button2)}>
+                                    <a 
+                                        href={slide.layout.button2.link} 
+                                        target={slide.layout.button2.newtab ? "_blank" : "_self"}
+                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button2.color }}
+                                    >
+                                        {slide.layout.button2.text}
+                                    </a>
+                                </button>
+                            )}
+                        </div>
 
                     </div>
                 </div>
