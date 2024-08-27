@@ -164,14 +164,12 @@ class Vayu_blocks_Advance_Slider {
                         swipe: {$swipe},
                     });
     
-                    // Add animation class on slide change
+                    
                     $('.vayu-blocks-advance-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        // Remove animation class from content elements of all slides
                         $('.slick-slide .vayu_blocks_inside_container_div ').removeClass('slide-active');
                     });
     
                     $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
-                        // Add animation class to the content elements of the current active slide
                         $('.slick-slide.slick-active .vayu_blocks_inside_container_div ').addClass('slide-active');
                     });
     
@@ -181,7 +179,6 @@ class Vayu_blocks_Advance_Slider {
     
         return $script;
     }
-    
     
     // Svg filters for duotone
     private function render_svg_filters() {

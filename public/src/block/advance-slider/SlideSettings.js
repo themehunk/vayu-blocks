@@ -420,7 +420,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         padding: {
                             top: "0px",
                             right: "0px",
-                            bottom: "0px",
+                            bottom: "50px",
                             left: "0px"
                         },
                         customStyle: false,

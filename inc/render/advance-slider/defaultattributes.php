@@ -181,7 +181,7 @@ return array(
                     'padding' => array(
                         'top' => '0px',
                         'right' => '0px',
-                        'bottom' => '0px',
+                        'bottom' => '50px',
                         'left' => '0px',
                     ),
                     'opacity' => 0.2,
@@ -326,7 +326,7 @@ return array(
                     'padding' => array(
                         'top' => '0px',
                         'right' => '0px',
-                        'bottom' => '0px',
+                        'bottom' => '50px',
                         'left' => '0px',
                     ),
                     'opacity' => 0.2,
