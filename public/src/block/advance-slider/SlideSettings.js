@@ -18,6 +18,7 @@ import {
     DuotonePicker,
     DuotoneSwatch ,
     __experimentalToolsPanel as ToolsPanel,
+  
 
 } from '@wordpress/components';
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
@@ -297,163 +298,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 ...attributes.slides,
                 {
                     layout: {
-                        uniqueId: generateUniqueId(),
-                        button1: {
-                            show: true,
-                            text: "Button One",
-                            link: "",
-                            newtab: true,
-                            size: 20,
-                            backgroundColor: "transparent",
-                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                            color: "black",
-                            border: {
-                                color: "black",
-                                width: "1px",
-                                style: "solid",
-                                topcolor: "black",
-                                topwidth: "1px",
-                                topstyle: "solid",
-                                bottomcolor: "black",
-                                bottomwidth: "1px",
-                                bottomstyle: "solid",
-                                leftcolor: "black",
-                                leftwidth: "1px",
-                                leftstyle: "solid",
-                                rightcolor: "black",
-                                rightwidth: "1px",
-                                rightstyle: "solid"
-                            },
-                            borderRadius: {
-                                top: "5px",
-                                right: "5px",
-                                bottom: "5px",
-                                left: "5px"
-                            },
-                            padding: {
-                                top: "10px",
-                                right: "20px",
-                                bottom: "10px",
-                                left: "20px"
-                            }
-                        },
-                        button2: {
-                            show: false,
-                            text: "Button Two",
-                            link: "",
-                            newtab: true,
-                            size: 20,
-                            backgroundColor: "transparent",
-                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                            color: "black",
-                            border: {
-                                color: "black",
-                                width: "1px",
-                                style: "solid",
-                                topcolor: "black",
-                                topwidth: "1px",
-                                topstyle: "solid",
-                                bottomcolor: "black",
-                                bottomwidth: "1px",
-                                bottomstyle: "solid",
-                                leftcolor: "black",
-                                leftwidth: "1px",
-                                leftstyle: "solid",
-                                rightcolor: "black",
-                                rightwidth: "1px",
-                                rightstyle: "solid"
-                            },
-                            borderRadius: {
-                                top: "5px",
-                                right: "5px",
-                                bottom: "5px",
-                                left: "5px"
-                            },
-                            padding: {
-                                top: "10px",
-                                right: "20px",
-                                bottom: "10px",
-                                left: "20px"
-                            }
-                        },
-                        heading: {
-                            text: "Slider",
-                            tag: "h2",
-                            newtab: true,
-                            size: 28,
-                            fontWeight: "bold",
-                            color: "black",
-                            link: ""
-                        },
-                        subheading: {
-                            show: true,
-                            text: "The subheading for our topic has played a crucial role in highlighting its significance.",
-                            tag: "h4",
-                            size: 16,
-                            fontWeight: "lighter",
-                            color: "black",
-                            link: "",
-                            newtab: true
-                        },
-                        border: {
-                            color: "black",
-                            width: "0px",
-                            style: "solid",
-                            topcolor: "black",
-                            topwidth: "0px",
-                            topstyle: "solid",
-                            bottomcolor: "black",
-                            bottomwidth: "0px",
-                            bottomstyle: "solid",
-                            leftcolor: "black",
-                            leftwidth: "0px",
-                            leftstyle: "solid",
-                            rightcolor: "black",
-                            rightwidth: "0px",
-                            rightstyle: "solid"
-                        },
-                        borderRadius: {
-                            top: "5px",
-                            right: "5px",
-                            bottom: "5px",
-                            left: "5px"
-                        },
-                        padding: {
-                            top: "50px",
-                            right: "0px",
-                            bottom: "50px",
-                            left: "0px"
-                        },
-                        customStylelayout :false,
-                        customStyleheading:false,
-                        customStylesubheading:false,
-                        customStylesubbutton1:false,
-                        customStylesubbutton2:false,
-                        customBackgroundImage: false,
-                        customheight :340,
-                        heightauto:true,
-                        imageheight:0,
-                        opacity: 0.2,
-                        backgroundBlend: "lighten",
-                        backgroundImage: "",
-                        focalPoint: {
-                            x: 0.5,
-                            y: 0.5
-                        },
-                        backgroundType: "color",
-                        gaphb : 0,
-                        gaphsub : 0,
-                        backgroundColor: "#000000",
-                        duotone: "",
-                        backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        alignment: "center",
-                        alignmenttop: "center",
+                        ...attributes.global.layout,  // Use global layout attributes
+                        uniqueId: generateUniqueId()   // Add unique ID
                     }
                 }
             ]
         });
     };
-    
+   
     //style-update
     const vayu_blocks_updateSliderStyles = (index, propertyPath, value='') => {
 

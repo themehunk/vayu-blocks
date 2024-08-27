@@ -360,6 +360,9 @@ const edit = ({ attributes, setAttributes }) => {
 
                 //padding
                 padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
+
+
+                marginRight: slide.layout.button2.show ? '5px' : '0px',
             };
         };
 
@@ -430,7 +433,7 @@ const edit = ({ attributes, setAttributes }) => {
                             )}
 
                         </div>
-        
+                                
                         <div>
 
                             {slide.layout.button1.show && (

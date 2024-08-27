@@ -574,7 +574,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         />
                         <RangeControl
                             label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                            className = "vayu_blocks_gphb"
+                            className = "vayu_blocks_gphsub"
                             value={attributes.global.layout.gaphb}
                             onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
                             min={0}
