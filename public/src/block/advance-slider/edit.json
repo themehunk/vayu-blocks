@@ -278,7 +278,7 @@
                     "padding":{
                         "top": "0px",
                         "right":"0px",
-                        "bottom":"50px",
+                        "bottom":"0px",
                         "left":"0px"
                     },
                     "opacity": 0.2,
@@ -294,9 +294,13 @@
                     "customStylesubbutton1":false,
                     "customStylesubbutton2":false,
                     "customBackgroundImage":false,
+                    "heightauto":false,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
                     "duotone": "",
+                    "imageheight":0,
+                    "gaphb" : 0,
+                    "gaphsub" : 0,
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "alignment": "center"
                 }
@@ -443,7 +447,7 @@
                     "padding":{
                         "top": "0px",
                         "right":"0px",
-                        "bottom":"50px",
+                        "bottom":"0px",
                         "left":"0px"
                     },
                     "opacity": 0.2,
@@ -459,9 +463,13 @@
                     "customStylesubbutton1":false,
                     "customStylesubbutton2":false,
                     "customBackgroundImage":false,
+                    "imageheight":0,
                     "backgroundType": "color",
                     "backgroundColor": "#000000",
+                    "heightauto":false,
                     "duotone": "",
+                    "gaphb" : 0,
+                    "gaphsub" : 0,
                     "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "alignment": "center"
                 }
@@ -613,7 +621,7 @@
                 "padding":{
                     "top": "0px",
                     "right":"0px",
-                    "bottom":"50px",
+                    "bottom":"0px",
                     "left":"0px"
                 },
                 "opacity": 0.2,
@@ -629,6 +637,10 @@
                 "customStylesubbutton1":false,
                 "customStylesubbutton2":false,
                 "customBackgroundImage":false,
+                "heightauto":false,
+                "imageheight":0,
+                "gaphb" : 0,
+                "gaphsub" : 0,
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",

@@ -39,25 +39,32 @@ class Vayu_blocks_Advance_Slider {
 
                     // Inside container
                     $slides_html .= '<div class="vayu_blocks_inside_container_div">';
-                        // Heading
-                        if (isset($slide['layout']['heading'])) {
-                            $slides_html .= $this->render_heading($slide['layout']['heading']);
-                        }   
 
-                        // Subheading
-                        if (isset($slide['layout']['subheading']) && $slide['layout']['subheading']['show']) {
-                            $slides_html .= $this->render_subheading($slide['layout']['subheading']);
-                        }
+                        $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
+                            // Heading
+                            if (isset($slide['layout']['heading'])) {
+                                $slides_html .= $this->render_heading($slide['layout']['heading']);
+                            }   
 
-                        // Button 1
-                        if (isset($slide['layout']['button1']) && $slide['layout']['button1']['show']) {
-                            $slides_html .= $this->render_button1($slide['layout']['button1']);
-                        }
+                            // Subheading
+                            if (isset($slide['layout']['subheading']) && $slide['layout']['subheading']['show']) {
+                                $slides_html .= $this->render_subheading($slide['layout']['subheading']);
+                            }
 
-                        // Button 2
-                        if (isset($slide['layout']['button2']) && $slide['layout']['button2']['show']) {
-                            $slides_html .= $this->render_button2($slide['layout']['button2']);
-                        }
+                        $slides_html .= '</div>';
+
+                        $slides_html .= '<div>';
+                            // Button 1
+                            if (isset($slide['layout']['button1']) && $slide['layout']['button1']['show']) {
+                                $slides_html .= $this->render_button1($slide['layout']['button1']);
+                            }
+
+                            // Button 2
+                            if (isset($slide['layout']['button2']) && $slide['layout']['button2']['show']) {
+                                $slides_html .= $this->render_button2($slide['layout']['button2']);
+                            }
+
+                        $slides_html .= '</div>';
 
                     $slides_html .= '</div>'; // Closing inside container
 

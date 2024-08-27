@@ -528,7 +528,15 @@ function generate_inline_slider_styles($attr) {
 
             // Set margin-bottom and height
             $css .= "margin-bottom: 10px;";
-            $css .= "height: 100%;";
+            $heightAuto = $slide['layout']['heightauto'];
+            $imageHeight = $slide['layout']['imageheight'];
+            // Apply conditional height logic
+            if ($heightAuto && $imageHeight > 200) {
+                $css .= "height: {$imageHeight}px;";
+            } else {
+                $css .= "height: 100%;";
+            }
+
             $css .= "overflow: hidden;";
             $css .= "position: relative;";
             
@@ -577,12 +585,26 @@ function generate_inline_slider_styles($attr) {
             
             $css .= "border-radius: {$borderRadiusTop} {$borderRadiusRight} {$borderRadiusBottom} {$borderRadiusLeft};";
             
-            // Padding
+            // Get the padding values with defaults
             $paddingTop = isset($slide['layout']['padding']['top']) ? esc_attr($slide['layout']['padding']['top']) : '0px';
             $paddingRight = isset($slide['layout']['padding']['right']) ? esc_attr($slide['layout']['padding']['right']) : '0px';
+
+            // Get the bottom padding value or default to '0px'
             $paddingBottom = isset($slide['layout']['padding']['bottom']) ? esc_attr($slide['layout']['padding']['bottom']) : '0px';
+
+            // Convert bottom padding to an integer for comparison (remove 'px' if present)
+            $paddingBottomValue = intval(str_replace('px', '', $paddingBottom));
+
+            // Add 50px to the bottom padding value
+            $paddingBottomValue += 50;
+
+            // Apply the new bottom padding value with 'px'
+            $paddingBottom = "{$paddingBottomValue}px";
+
+            // Get the left padding value or default to '0px'
             $paddingLeft = isset($slide['layout']['padding']['left']) ? esc_attr($slide['layout']['padding']['left']) : '0px';
-            
+
+            // Apply the padding style
             $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
 
             $css .= "background: url({$slide['layout']['backgroundImage']}) no-repeat center center;";
@@ -591,7 +613,6 @@ function generate_inline_slider_styles($attr) {
             // End the CSS block for this slide
         $css .= "}\n";
         
-
         // overlay div
         $css .= "$container .vayu_blocks_color_overlay {";
             $css .= "position: absolute;";
@@ -623,6 +644,19 @@ function generate_inline_slider_styles($attr) {
             $css .= "z-index: 3;";
             $css .= "height: 100%;";
             $css .= "text-align: " . esc_attr($slide['layout']['alignment']) . ";";
+        $css .= "}\n";
+
+        // Inside Heading Container div
+        $css .= "$container $insideContainer .vayu_blocks_inside_container_heading_div{";
+            $gaphb = isset($slide['layout']['gaphb']) ? esc_attr($slide['layout']['gaphb']) : '0px';
+            $css .= "margin-bottom: {$gaphb};";
+            
+        $css .= "}\n";
+
+        // Heading Button 
+        $css .= "$container $insideContainer .vayu_blocks_heading{";
+            $gaphsub = isset($slide['layout']['gaphsub']) ? esc_attr($slide['layout']['gaphsub']) : '0px';
+            $css .= "margin-bottom: {$gaphsub};";
         $css .= "}\n";
 
         // Heading
