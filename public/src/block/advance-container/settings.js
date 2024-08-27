@@ -3100,12 +3100,12 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 							setAttributes={ setAttributes }
 							resetValues={ {
 								boxShadowHvr: false,
-								boxShadowColorHvr: undefined,
-								boxShadowColorOpacityHvr: 50,
-								boxShadowBlurHvr: 5,
-								boxShadowSpreadHvr: 1,
-								boxShadowHorizontalHvr: 0,
-								boxShadowVerticalHvr: 0
+								boxShadowColorHvr:'',
+								boxShadowColorOpacityHvr:'',
+								boxShadowBlurHvr:'',
+								boxShadowSpreadHvr:'',
+								boxShadowHorizontalHvr:'',
+								boxShadowVerticalHvr:''
 							} }
 							onClick={ () => setAttributes({ boxShadowHvr: true }) }
 						>

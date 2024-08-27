@@ -9,22 +9,22 @@
 }
 
 .editor-styles-wrapper .wp-block-vayu-blocks-advance-heading{
-	--background:none;
-	--background-hover: var(--h-background);
+	--h-background:none;
+	--h-background-hover: var(--h-background);
 	--transition:0.2s;
-	--boxShadow-hvr:var(--h-boxShadow);
+	--h-boxShadow-hvr:var(--h-boxShadow);
 	--background-attachment-hvr:var(--h-background-attachment);
 	--background-position-hvr:var(--h-background-position);
 	--background-repeat-hvr:var(--h-background-repeat);
 	--background-size-hvr:var(--h-background-size);
-	--border-top-width-hvr:var(--h-border-top-width);
-	--border-bottom-width-hvr:var(--h-border-bottom-width);
-	--border-right-width-hvr:var(--h-border-right-width);
-	--border-left-width-hvr:var(--h-border-left-width);
-	--border-top-right-radius-hvr:var(--h-border-top-right-radius);
-	--border-top-left-radius-hvr:var(--h-border-top-left-radius);
-	--border-bottom-right-radius-hvr:var(--h-border-bottom-right-radius);
-	--border-bottom-left-radius-hvr:var(--h-border-bottom-left-radius);
+	--h-border-top-width-hvr:var(--h-border-top-width);
+	--h-border-bottom-width-hvr:var(--h-border-bottom-width);
+	--h-border-right-width-hvr:var(--h-border-right-width);
+	--h-border-left-width-hvr:var(--h-border-left-width);
+	--h-border-top-right-radius-hvr:var(--h-border-top-right-radius);
+	--h-border-top-left-radius-hvr:var(--h-border-top-left-radius);
+	--h-border-bottom-right-radius-hvr:var(--h-border-bottom-right-radius);
+	--h-border-bottom-left-radius-hvr:var(--h-border-bottom-left-radius);
 	--heading-border-hvr-style:var(--heading-border-style);
 	--heading-border-hvr-color:var(--heading-border-color);
 	--heading-hvr-color:var(--heading-color);
