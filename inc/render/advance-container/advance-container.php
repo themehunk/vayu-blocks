@@ -311,7 +311,7 @@ function vayu_advance_container_style($attr){
 				 border-bottom-width: {$borderWidthHvrBottom}{$borderWidthHvrUnit}; 
 				 border-left-width: {$borderWidthHvrLeft}{$borderWidthHvrUnit}; 
 				";
-			} else {
+			} elseif(isset($attr['borderWidthHvr'])) {
 				$borderWidthHvr = isset($attr['borderWidthHvr']) ? $attr['borderWidthHvr'] : '';
 				$borderWidthHvrUnit = isset($attr['borderWidthHvrUnit']) ? $attr['borderWidthHvrUnit'] : 'px';
 				$css .= "border-width: {$borderWidthHvr}{$borderWidthHvrUnit};";
@@ -329,17 +329,18 @@ function vayu_advance_container_style($attr){
 				 border-bottom-right-radius: {$borderRadiusHvrBottom}{$borderRadiusHvrUnit}; 
 				 border-bottom-left-radius: {$borderRadiusHvrLeft}{$borderRadiusHvrUnit}; 
 				";
-			} else {
-				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : 'inherit';
+			} elseif(isset($attr['borderRadiusHvr'])) {
+				$borderRadiusHvr = isset($attr['borderRadiusHvr']) ? $attr['borderRadiusHvr'] : '';
 				$borderRadiusHvrUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
 				$css .= "border-radius: {$borderRadiusHvr}{$borderRadiusHvrUnit};";
 			}
 
 			//box hvr shadow
-			if (isset($attr['boxShadowHvr'])){
+			
+			if (isset($attr['boxShadowColorHvr'])){
 				$css .= "box-shadow: ". (isset($attr['boxShadowHorizontalHvr']) ? $attr['boxShadowHorizontalHvr'] : '0') ."px  ". (isset($attr['boxShadowVerticalHvr']) ? $attr['boxShadowVerticalHvr'] : '0') ."px ". (isset($attr['boxShadowBlurHvr']) ? $attr['boxShadowBlurHvr'] : '5') ."px ". (isset($attr['boxShadowSpreadHvr']) ? $attr['boxShadowSpreadHvr'] : '1') ."px  ". vayu_hex2rgba((isset($attr['boxShadowColorHvr']) ? $attr['boxShadowColorHvr'] : '#fff'), (isset($attr['boxShadowColorOpacityHvr']) ? $attr['boxShadowColorOpacityHvr'] : '50') ) ." ;";
 			}
-
+			
 			$css .= "transition: all ". (isset($attr['transitionAll']) ? $attr['transitionAll'] : '0.2' ). "s ease;";
 
         $css .= "}";

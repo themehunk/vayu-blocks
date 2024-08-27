@@ -232,9 +232,9 @@ export default function Edit({
 					'--boxShadow': `${ attributes.boxShadowHorizontal }px ${ attributes.boxShadowVertical }px ${ attributes.boxShadowBlur }px ${ attributes.boxShadowSpread }px ${ hexToRgba( ( attributes.boxShadowColor ? attributes.boxShadowColor : '#fff' ), attributes.boxShadowColorOpacity ) }`
 				};
 			}
-			if ( attributes.boxShadowHvr ) {
+			if ( attributes.boxShadowColorHvr ) {
 				boxShadowStyle = {...boxShadowStyle,
-					'--boxShadow-hvr': `${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '#fff' ), attributes.boxShadowColorOpacityHvr ) }`
+					'--boxShadow-hvr': `${ attributes.boxShadowHorizontalHvr }px ${ attributes.boxShadowVerticalHvr }px ${ attributes.boxShadowBlurHvr }px ${ attributes.boxShadowSpreadHvr }px ${ hexToRgba( ( attributes.boxShadowColorHvr ? attributes.boxShadowColorHvr : '' ), attributes.boxShadowColorOpacityHvr ) }`
 				};
 			}
 
@@ -244,28 +244,24 @@ export default function Edit({
 	const globalcontainerWidth = ThBlockData.container_width;
 	const globalcontainerGap = ThBlockData.container_gap;
 	const globalpadding = ThBlockData.container_padding;
-
 	let paddingValues;
-	if(attributes.padding || 'linked' != attributes.paddingType){
-		paddingValues = {
-			'--padding-top': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
-			'--padding-right': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
-			'--padding-bottom': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
-			'--padding-left': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
-		};
-	}
-	else{
-		paddingValues = {
-			'--padding-top': `${ globalpadding }px`,
-			'--padding-right': `${ globalpadding }px`,
-			'--padding-bottom': `${ globalpadding }px`,
-			'--padding-left': `${ globalpadding }px`,
-		};
-	}
+			if((!isNaN(attributes.padding) && attributes.padding!=='') || 'linked' != attributes.paddingType){
+				paddingValues = {
+					'--padding-top': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingTop }${ attributes.paddingUnit }`,
+					'--padding-right': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingRight }${ attributes.paddingUnit }`,
+					'--padding-bottom': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingBottom }${ attributes.paddingUnit }`,
+					'--padding-left': 'linked' === attributes.paddingType ? `${ attributes.padding }${ attributes.paddingUnit }` : `${ attributes.paddingLeft }${ attributes.paddingUnit }`,
+				};
+			}else{
+				paddingValues = {
+					'--padding-top': `${ globalpadding }px`,
+					'--padding-right': `${ globalpadding }px`,
+					'--padding-bottom': `${ globalpadding }px`,
+					'--padding-left': `${ globalpadding }px`,
+				};
+			}
 
 			if ( isDesktop ) {
-				
-
 				containerStyles = {
 					zIndex:   attributes.zindex,
 					...paddingValues,
