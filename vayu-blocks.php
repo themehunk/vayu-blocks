@@ -42,20 +42,8 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_PRO_SUPPORT', true );
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
-        require_once 'inc/function.php';
-        require_once 'inc/render-style.php';
-        require_once 'inc/render/advance-animation/class-blocks-animation.php';
-        require_once 'inc/render/advance-heading/advance-heading.php';
-        require_once 'inc/render/advance-container/advance-container.php';
-        require_once 'inc/render/advance-spacer/advance-spacer.php';
-        require_once 'inc/render/advance-button/advance-button.php';
-		require_once 'inc/render/advance-product-tab/advance-product-tab.php';
-        require_once 'inc/render/advance-product-tab/advance-product-tab-style.php';
-        require_once 'inc/vayu-sites/vayu-sites.php';
-        require_once 'inc/render/post-grid/post-grid.php';
-        require_once 'inc/render/post-grid/post-grid-style.php';
-        require_once 'inc/render/advance-slider/advance-slider.php';
-        require_once 'inc/render/advance-slider/advance-slider-style.php';
+        require_once VAYU_BLOCKS_DIR_PATH .'inc/init.php';
+
         // require_once 'inc/render/image-slider-block/image-slider-block.php';
 
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
@@ -112,18 +100,20 @@ $slider_value = isset($settings['slider']['value']) ? absint($settings['slider']
 
     // $button_color = sanitize_text_field(get_option('button_color'));
 
+    $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
+
         $blocks = array(
             array(
                 'name'           => 'vayu-blocks/advance-container',
                 'script_handle'  => 'advance-container',
                 'editor_style'   => 'advance-container-editor-style',
                 'frontend_style' => 'advance-container-frontend-style',
-                'status'         => $container_value,
+                'status'         => $options['container']['isActive'],
                 'localize_data'  => array(
                     'homeUrl' => get_home_url(),
-                    'container_width' => $container_width,
-                    'container_gap' => $container_gap,
-                    'container_padding' => $padding,
+                    'container_width' => $options['global']['containerWidth'],
+                    'container_gap' => $options['global']['containerGap'],
+                    'container_padding' => $options['global']['containerPadding'],
                 ),
             ),
             array(
@@ -131,28 +121,28 @@ $slider_value = isset($settings['slider']['value']) ? absint($settings['slider']
                 'script_handle'  => 'advance-heading',
                 'editor_style'   => 'advance-heading-editor-style',
                 'frontend_style' => 'advance-heading-frontend-style',
-                'status'         => $heading_value,
+                'status'         => $options['heading']['isActive'],
             ),
             array(
                 'name'           => 'vayu-blocks/advance-spacer',
                 'script_handle'  => 'advance-spacer',
                 'editor_style'   => 'advance-spacer-editor-style',
                 'frontend_style' => 'advance-spacer-frontend-style',
-                'status'         => $spacer_value,
+                'status'         => $options['spacer']['isActive'],
             ),
             array(
                 'name'           => 'vayu-blocks/advance-button',
                 'script_handle'  => 'advance-button',
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
-                'status'         => $button_value,
+                'status'         => $options['button']['isActive'],
             ),
             array(
                 'name'           => 'vayu-blocks/post-grid',
                 'script_handle'  => 'post-grid',
                  'editor_style'   => 'post-grid-editor-style',
                  'frontend_style' => 'post-grid-frontend-style',
-                'status'         => $post_grid_value,
+                'status'         => $options['postgrid']['isActive'],
                 'render_callback' => 'post_grid_render'
             ),
             array(
@@ -160,17 +150,9 @@ $slider_value = isset($settings['slider']['value']) ? absint($settings['slider']
                 'script_handle'  => 'advance-slider',
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
-                'status'         => $slider_value,
+                'status'         => $options['advanceSlider']['isActive'],
                 'render_callback' => 'vayu_blocks_advance_slider_render'
-            ),
-            // array(
-            //     'name'           => 'vayu-blocks/image-slider-block',
-            //     'script_handle'  => 'image-slider-block',
-            //      'editor_style'   => 'image-slider-block-editor-style',
-            //      'frontend_style' => 'image-slider-block-frontend-style',
-            //     'status'         => get_option('button_value'),
-            //     'render_callback' => 'vayu_blocks_image_slider_block_render'
-            // ),
+            )
             
         );
 
@@ -182,7 +164,7 @@ $slider_value = isset($settings['slider']['value']) ? absint($settings['slider']
                 'script_handle'   => 'advance-product',
                 'editor_style'    => 'advance-product-editor-style',
                 'frontend_style'  => 'advance-product-frontend-style',
-                'status'         =>  $product_value,
+                'status'         =>  $options['product']['isActive'],
                 'render_callback' => array( 
                     new Vayu_Advance_Product_Tab(),
                     'render_callback'

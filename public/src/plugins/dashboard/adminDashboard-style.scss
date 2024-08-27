@@ -327,24 +327,24 @@ input:checked + .slider:before {
   background: #Eee;
   padding: 18px;
   border-radius: 9px;
-  pointer-events: none;
+  // pointer-events: none;
   text-align: left;
 }
 .sw-wrapprer.vayu-pro-active .sw-box{
   pointer-events: initial;
   opacity: 1;
 }
-.sw-box:nth-of-type(1),
-.sw-box:nth-of-type(2),
-.sw-box:nth-of-type(3),
-.sw-box:nth-of-type(4),
-.sw-box:nth-of-type(5){
-  pointer-events: initial;
-  opacity: 1;
-}
-.sw-box h5{
-  margin: 0;
-}
+// .sw-box:nth-of-type(1),
+// .sw-box:nth-of-type(2),
+// .sw-box:nth-of-type(3),
+// .sw-box:nth-of-type(4),
+// .sw-box:nth-of-type(5){
+//   pointer-events: initial;
+//   opacity: 1;
+// }
+// .sw-box h5{
+//   margin: 0;
+// }
 .sw-box.button{
   margin-bottom: 2%!important;
   background: #Eee;
@@ -601,3 +601,8 @@ input:checked + .slider:before {
     justify-content: center;
     align-items: center;
 }
+
+
+
+/** wordpress default toggle style **/
+

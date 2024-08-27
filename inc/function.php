@@ -35,6 +35,7 @@ function vayu_blocks_editor_assets(){
         array(
             'homeUrl' => plugins_url( '/', __FILE__ ),
             'showOnboarding' => '',
+            'options'=> (new VAYU_BLOCKS_OPTION_PANEL())->get_option()
         )
     );
 
@@ -62,6 +63,7 @@ function vayu_admin_react_script() {
         'ajaxurl' => admin_url( 'admin-ajax.php' ),
         'homeUrl2' => get_home_url(),
         'nonce' => wp_create_nonce('vayu_blocks_nonce'),
+        'options'=> (new VAYU_BLOCKS_OPTION_PANEL())->get_option()
     );
     
     if( class_exists('Vayu_Block_Plugin_Pro') ){

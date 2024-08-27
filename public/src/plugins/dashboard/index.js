@@ -5,11 +5,9 @@ import { SiWoo } from "react-icons/si";
 import { MdLockOutline } from "react-icons/md";
 import { __ } from '@wordpress/i18n';
 import { IoPeopleSharp,IoSparklesSharp,IoNewspaperSharp } from "react-icons/io5";
-import { applyFilters } from '@wordpress/hooks';
-import { BiCertification, BiCoinStack } from "react-icons/bi";
+import { BiCertification } from "react-icons/bi";
 import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
-import { FaSpinner } from 'react-icons/fa';
-
+import { Spinner  } from '@wordpress/components';
 import { Provider } from 'react-redux';
 import store from "../../vayu-sites/store";
 import { VerifyKey } from '../../vayu-sites/template/verifykey';
@@ -42,26 +40,26 @@ const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense }) => {
     }
 };
 
+
 function MyPluginContent(){
 
     const [navTab, setNavTab] = useState(1);
     const [isLoading, setLoading] = useState(false);
-    const [classLoading, setclassLoading] = useState('');
+    const [activeTab, setActiveTab] = useState('welcome');
 
-    let vayuProStatus = '';
-    if(vayublock.vayuProStatus == 'activated'){
-        vayuProStatus = 'vayu-pro-active';
-    }
-    else{
-        vayuProStatus = ''; 
-    }
+    // let vayuProStatus = '';
+    // if(vayublock.vayuProStatus == 'activated'){
+    //     vayuProStatus = 'vayu-pro-active';
+    // }
+    // else{
+    //     vayuProStatus = ''; 
+    // }
     
     const NavTabClick = (tabNumber) => {
         setNavTab(tabNumber);
-  };
+    };    
 
 
-    const [activeTab, setActiveTab] = useState('welcome');
     const handleTabClick = (tab) => {
         setActiveTab(tab);
         if (tab === 'blocks') {
@@ -80,145 +78,40 @@ function MyPluginContent(){
             setActiveTab('blocks');
         }
     }, []);
-    
-    const homeUrl = vayublock.homeUrl;
+   
 
     // Toggle Switch
 
-    const [toggleSwitches, setToggleSwitches] = useState({
-        container: true,
-        button: false,
-        heading: false,
-        spacer: false,
-        product: false,
-        postGrid: false,
-        slider: false,
-    });
+    const [toggleSwitches, setToggleSwitches] = useState(vayublock.options);
 
-    const [containerWidth, setContainerWidth] = useState('');
-    const [containerGap, setContainerGap] = useState('');
-    const [padding, setPadding] = useState('');
-    const [containerValue, setcontainerValue] = useState(true);
-    const [buttonValue, setbuttonValue] = useState(0);
-    const [headingValue, setheadingValue] = useState(0);
-    const [productValue, setproductValue] = useState(0);
-    const [spacerValue, setspacerValue] = useState(0);
-    const [postGridValue, setpostGridValue] = useState(0);
-    const [sliderValue, setsliderValue] = useState(0);
-    const [buttonColor, setButtonColor] = useState(0);
+    const [btnDisabled, setBtnDisabled] = useState(true);
+    const [globalData, setGlobalData] = useState({containerWidth:vayublock.options.global.containerWidth,
+                                                containerGap:vayublock.options.global.containerGap,
+                                                containerPadding:vayublock.options.global.containerPadding,
+                                                });
 
-     // Fetch initial input values when component mounts
-     useEffect(() => {
-        getInputValues();
-    }, []);
-    
     useEffect(() => {
-        // Call handleSave whenever toggleSwitches state changes
-        handleSave();
-    }, [toggleSwitches]);
+        const newData = { ...toggleSwitches }; // Copy the object
+        delete newData['global']; // Remove the key
+        setToggleSwitches(newData); // Update state with the new object
+    }, []);
 
-    
-
-
-// const saveInputValues = async () => {
-//     setLoading(true);
-
-//     // Gather all block data dynamically, assuming the relevant state variables exist for each block
-//     const blockData = {
-//         container: {
-//             value: containerValue,
-//             settings: {
-//                 containerWidth,
-//                 containerGap,
-//                 padding,
-//             },
-//         },
-//         button: {
-//             value: buttonValue,
-//             settings: {
-//                 buttonColor,
-//             },
-//         },
-//         heading: {
-//             value: headingValue,
-//             settings: {
-//                 // Add other heading-related settings here
-//             },
-//         },
-//         spacer: {
-//             value: spacerValue,
-//             settings: {
-//                 // Add other spacer-related settings here
-//             },
-//         },
-//         product: {
-//             value: productValue,
-//             settings: {
-//                 // Add other product-related settings here
-//             },
-//         },
-//         postGrid: {
-//             value: postGridValue,
-//             settings: {
-//                 // Add other post-grid-related settings here
-//             },
-//         },
-//         slider: {
-//             value: sliderValue,
-//             settings: {
-//                 // Add other slider-related settings here
-//             },
-//         },
-//         // Add more blocks as needed...
-//     };
-
-//     const data = {
-//         action: 'vayu_blocks_save_input_values',
-//         security: vayublock.nonce,
-//         inputData: JSON.stringify(blockData), // Serialize the block data object
-//     };
-
-//     try {
-//         const response = await fetch(vayublock.ajaxurl, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-//             },
-//             body: new URLSearchParams(data).toString(),
-//         });
-
-//         const result = await response.json();
-
-//         if (!result.success) {
-//             throw new Error('Failed to save input values');
-//         }
-
-//         setLoading(false);
-//         console.log('Input values saved successfully');
-//     } catch (error) {
-//         setLoading(false);
-//         console.error('Error saving input values:', error);
-//     }
-// };
-
-// Assuming this is your AJAX call function
-const saveInputValues = (blockData) => {
-    // Convert boolean true/false to 1/0
-
+// ajax data update
+const optionPanel = (blockData) => {
     return fetch(vayublock.ajaxurl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({
-            action: 'vayu_blocks_save_input_values',
+            action: 'vayu_blocks_option_panel',
             security: vayublock.nonce,
             inputData: JSON.stringify(blockData),
         }),
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Success:', data);
+        setLoading(false);
         return data;
     })
     .catch((error) => {
@@ -228,144 +121,33 @@ const saveInputValues = (blockData) => {
 };
 
 
-
+// addons on/off data update
 const handleToggleSwitchChange = (key, newValue) => {
-    setToggleSwitches(prevState => ({
-        ...prevState,
-        [key]: newValue,
-    }));
-};
+    // type 1 is root array
+    optionPanel({type:'addons',key:key,value:newValue});
+}
 
 
-const handleSave = () => {
-    const blocks = [
-        {
-            name: 'container',
-            value: toggleSwitches.container || 1,
-            settings: { containerWidth, containerGap, padding }
-        },
-        {
-            name: 'button',
-            value: toggleSwitches.button || 0,
-            settings: { buttonColor }
-        },
-        {
-            name: 'heading',
-            value: toggleSwitches.heading || 0,
-            settings: {}
-        },
-        {
-            name: 'spacer',
-            value: toggleSwitches.spacer || 0,
-            settings: {}
-        },
-        {
-            name: 'product',
-            value: toggleSwitches.product || 0,
-            settings: {}
-        },
-        {
-            name: 'postGrid',
-            value: toggleSwitches['postGrid'] || 0,
-            settings: {}
-        },
-        {
-            name: 'slider',
-            value: toggleSwitches.slider || 0,
-            settings: {}
-        },
-    ];
+// global data change
+const handleGlobalDataChange = (e) => {
+    const { name, value } = e.target;
+    setGlobalData({ ...globalData, [name]: value });
+    setBtnDisabled(false);
+}
 
-    const blockData = blocks.reduce((acc, block) => {
-        acc[block.name] = {
-            value: block.value,
-            settings: block.settings,
-        };
-        return acc;
-    }, {});
+// global data update
+const handleToggleSwitchClick = () => {
+    setLoading(true);
+    setBtnDisabled(true);
+    optionPanel({type:'global',key:'global',value:globalData} );
+}
 
-    saveInputValues(blockData);
-};
-const getInputValues = async () => {
-    const requestData = {
-        action: 'vayu_blocks_get_input_values',
-        security: vayublock.nonce,
-    };
-
-    try {
-        const response = await fetch(vayublock.ajaxurl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
-            body: new URLSearchParams(requestData).toString(),
-        });
-
-        const result = await response.json();
-
-        if (!result.success) {
-            throw new Error('Failed to retrieve input values');
-        }
-
-        const retrievedData = result.data;
-
-        // Update state dynamically based on the retrieved data
-        for (let key in retrievedData) {
-            if (retrievedData.hasOwnProperty(key)) {
-                const { value, settings } = retrievedData[key];
-
-                // Normalize key names if necessary
-                const normalizedKey = key.replace(/-/, '');
-
-                // Always update toggle switches
-                setToggleSwitches(prevState => ({
-                    ...prevState,
-                    [normalizedKey]: value === '1' // Convert "1"/"0" to true/false
-                }));
-
-                switch (normalizedKey) {
-                    case 'container':
-                        setContainerWidth(settings.containerWidth);
-                        setContainerGap(settings.containerGap);
-                        setPadding(settings.padding);
-                        setcontainerValue(value);
-                        break;
-                    case 'button':
-                        setButtonColor(settings.buttonColor);
-                        setbuttonValue(value);
-                        break;
-                    case 'heading':
-                        setheadingValue(value);
-                        break;
-                    case 'product':
-                        setproductValue(value);
-                        break;
-                    case 'spacer':
-                        setspacerValue(value);
-                        break;
-
-                    case 'postGrid':
-                        setpostGridValue(value);
-                        break;
-                    case 'slider':
-                        setsliderValue(value);
-                        break;
-                    // Add more cases as needed...
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error retrieving input values:', error);
-    }
-};
-
-        
-
-        function getDescription(key) {
+// get all addons data
+function getDescription(key,value='') {
             switch (key) {
                 case 'container':
                     return {
-                        value: containerValue,
+                        value: value ===''? vayublock.options.container.isActive:value,
                         icon: <RxGroup />,
                         description: __('Container block allows you to create visually consistent and organized sections within your content area.', 'vayu-blocks'),
                         link1: '#',
@@ -373,15 +155,15 @@ const getInputValues = async () => {
                     };
                 case 'button':
                     return {
-                        value: buttonValue,
+                        value: vayublock.options.button.isActive,
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
-                case 'Product':
+                case 'product':
                     return {
-                        value: productValue,
+                        value: vayublock.options.product.isActive,
                         icon: <SiWoo />,
                         description: __('This enables you to seamlessly integrate your WooCommerce products into your content, in posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -389,7 +171,7 @@ const getInputValues = async () => {
                     };
                 case 'heading':
                     return {
-                        value: headingValue,
+                        value: vayublock.options.heading.isActive,
                         icon: <RxHeading />,
                         description: __('Heading block is a fundamental content block used for creating and styling headings or titles within your posts or pages.', 'vayu-blocks'),
                         link1: '#',
@@ -397,7 +179,7 @@ const getInputValues = async () => {
                     };
                 case 'spacer':
                     return {
-                        value: spacerValue,
+                        value: vayublock.options.spacer.isActive,
                         icon: <AiOutlineArrowsAlt />,
                         description: __('Spacer block is used to create empty spaces between content blocks, improving visual separation and layout control.', 'vayu-blocks'),
                         link1: '#',
@@ -406,14 +188,14 @@ const getInputValues = async () => {
 
                     case 'pointer':
                     return {
-                        value: buttonValue,
+                        value: vayublock.options.pointer.isActive,
                         icon: <RxButton />,
                         description: __('Pointer Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
                         link2: '#'
                     };
 
-                    case 'product Filter':
+                    case 'productFilter':
                     return {
                         value: '',
                         icon: <SiWoo />,
@@ -422,18 +204,18 @@ const getInputValues = async () => {
                         link2: '#'
                     };
 
-                    case 'postGrid':
+                    case 'postgrid':
                     return {
-                        value: postGridValue,
+                        value: vayublock.options.postgrid.isActive,
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
 
-                    case 'slider':
+                    case 'advanceSlider':
                     return {
-                        value: sliderValue,
+                        value: vayublock.options.advanceSlider.isActive,
                         icon: <RxButton />,
                         description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
                         link1: '#',
@@ -443,24 +225,20 @@ const getInputValues = async () => {
                     return '';
             }
         }
-
-    // Function to handle checkbox change
-    const handleCheckboxChange = (e) => {
-        setButtonColor(e.target.checked);
-    };
     // Upgrade 
        const verifyKeyCheck = VerifyKey();
 
+
+// return data
     return (
         <>
-      
         <div className="th-inner-wrap">
             
             <div className="th-header">
                 <div className="th-conatiner">
                 <div className="th-header-wrap">   
                 <div className="th-logo-wrap">
-                <img src={`${homeUrl}assets/img/logo-vayu.png`} />
+                <img src={`${vayublock.homeUrl}assets/img/logo-vayu.png`} />
                 <h2> {__('VAYU BLOCKS', 'vayu-blocks')} </h2>
                 </div>
                 <div className="th-menu-wrap">
@@ -498,167 +276,158 @@ const getInputValues = async () => {
             <div className="th-conatiner">
             {activeTab === 'welcome' && (
                 <div className="th-content-wrap th-welcome">
-                <div className="th-main">
-                    <div className="th-main-wrap">
-                        <h2>{__('Welcome to Vayu Blocks', 'vayu-blocks')}</h2>
-                        <p>{__('Enhance your Block Editor with custom Vayu Blocks, crafting dynamic, visually appealing content layouts for a seamless and beautiful user experience.', 'vayu-blocks')}</p>
-                    </div>
+                    <div className="th-main">
+                        <div className="th-main-wrap">
+                            <h2>{__('Welcome to Vayu Blocks', 'vayu-blocks')}</h2>
+                            <p>{__('Enhance your Block Editor with custom Vayu Blocks, crafting dynamic, visually appealing content layouts for a seamless and beautiful user experience.', 'vayu-blocks')}</p>
+                        </div>
 
-        <div className={`sw-wrapprer ${vayuProStatus} ${classLoading}`}>
-        {isLoading ? (<div className="vayu-loader"></div>) : (<> {Object.entries(toggleSwitches).map(([key, value]) => (
-               <div className={`sw-box ${key}`} key={key} values={value}>
-                    <div className='th-sw-right'>
-                        <div>
-                        <label className='block-label'>{getDescription(key).icon}{key}</label>
-                        <ToggleSwitch initialValue={getDescription(key).value} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} />
+                        <div className={`sw-wrapprer`}>
+
+
+                        {isLoading ? (<Spinner/>) : (<> {Object.entries(toggleSwitches).map(([key, value]) => (
+                        <div className={`sw-box ${key}`} key={key}>
+                            <div className='th-sw-right'>
+                                <div>
+                                <label className='block-label'>{getDescription(key).icon}{key}</label>
+                                {/* <ToggleSwitch initialValue={getDescription(key).value} onChange={newValue => handleToggleSwitchChange(key, newValue)} proStatus={value.pro} verifyLicense={verifyKeyCheck} /> */}
+
+                                <ToggleSwitch onChange={(newValue) => handleToggleSwitchChange(key, newValue)}   verifyLicense={verifyKeyCheck} initialValue={getDescription(key).value}  />
+
+                                </div>
+                            </div>
+                            <div className='th-sw-bottom'>
+                                <p>{getDescription(key).description}</p>
+                                {/* <a href={getDescription(key).link1} target="_blank">{__( 'View', 'vayu-blocks' )}</a> */}
+                                <a href={getDescription(key).link2} target="_blank">{__( 'Doc', 'vayu-blocks' )}</a>
+                            </div>
+
+                        </div>
+
+                        ))}
+                        </>
+                        )
+                        }
+                        </div>
+                     </div> {/* Welcome Data Close  */}
+
+{/* Welcome page sidebar  */}
+                    <div className="th-sidebar">
+                    <div className="sidebar-section">
+                        <div className="section">
+                            <div className="section-heading">
+                            <IoSparklesSharp></IoSparklesSharp>
+                            
+                            <h3>{__('Leave us a review', 'vayu-blocks')}</h3>
+                            </div>
+                            <p>{__('Show some love for Vayu Blocks by rating us and helping us grow more and do improvements.', 'vayu-blocks')}</p>
+                            <a href="https://wordpress.org/support/plugin/vayu-blocks/reviews/#new-post" target="_blank" className="sidebar-link">
+                            {__('Submit review', 'vayu-blocks')} 
+                            </a>
+                        </div>
+                    <hr />
+                    <div className="section">
+                        <div className="section-heading">
+
+                        <IoNewspaperSharp></IoNewspaperSharp>
+                        <h3>{__('Documentation', 'vayu-blocks')} </h3>
+                        </div>
+
+                        <p>{__('Go through the easy documentation to get familiar with Vayu Blocks and its Features.', 'vayu-blocks')}</p>
+                        <a href="https://themehunk.com/docs/vayu-blocks/" target="_blank" className="sidebar-link">
+                        {__('View Doc', 'vayu-blocks')} 
+                        </a>
+                    </div>
+                    <hr />
+                        <div className="section">
+                            <div className="section-heading">
+
+                            <IoPeopleSharp></IoPeopleSharp>
+
+                            <h3>{__('Support', 'vayu-blocks')}</h3>
+                            </div>
+                            <p>{__('Have a question, we are happy to help! Get in touch with our support team.', 'vayu-blocks')}</p>
+                            <a href="https://themehunk.com/contact-us/" target="_blank" className="sidebar-link">
+                            {__('Submit a Ticket', 'vayu-blocks')} 
+                            </a>
                         </div>
                     </div>
-                    <div className='th-sw-bottom'>
-                        <p>{getDescription(key).description}</p>
-                        {/* <a href={getDescription(key).link1} target="_blank">{__( 'View', 'vayu-blocks' )}</a> */}
-                        <a href={getDescription(key).link2} target="_blank">{__( 'Doc', 'vayu-blocks' )}</a>
                     </div>
-
-               </div>
-               
-            ))}
-            </>
-        )
-        }
-           
-        </div>
-        
-                </div>
-                <div className="th-sidebar">
-                    <div className="sidebar-section">
-    <div className="section">
-        <div className="section-heading">
-        <IoSparklesSharp></IoSparklesSharp>
-        
-        <h3>{__('Leave us a review', 'vayu-blocks')}</h3>
-        </div>
-        <p>{__('Show some love for Vayu Blocks by rating us and helping us grow more and do improvements.', 'vayu-blocks')}</p>
-        <a href="https://wordpress.org/support/plugin/vayu-blocks/reviews/#new-post" target="_blank" className="sidebar-link">
-        {__('Submit review', 'vayu-blocks')} 
-        </a>
-    </div>
-    <hr />
-    <div className="section">
-    <div className="section-heading">
-   
-        <IoNewspaperSharp></IoNewspaperSharp>
-        <h3>{__('Documentation', 'vayu-blocks')} </h3>
-        </div>
-        
-        <p>{__('Go through the easy documentation to get familiar with Vayu Blocks and its Features.', 'vayu-blocks')}</p>
-        <a href="https://themehunk.com/docs/vayu-blocks/" target="_blank" className="sidebar-link">
-        {__('View Doc', 'vayu-blocks')} 
-        </a>
-    </div>
-    <hr />
-    <div className="section">
-    <div className="section-heading">
-     
-        <IoPeopleSharp></IoPeopleSharp>
-        
-        <h3>{__('Support', 'vayu-blocks')}</h3>
-        </div>
-        <p>{__('Have a question, we are happy to help! Get in touch with our support team.', 'vayu-blocks')}</p>
-        <a href="https://themehunk.com/contact-us/" target="_blank" className="sidebar-link">
-        {__('Submit a Ticket', 'vayu-blocks')} 
-        </a>
-    </div>
-</div>
-</div>
                 </div>
             )}
+
+
+            {/* Setting Page  */}
             {activeTab === 'blocks' && (
                                 <div className="th-content-wrap th-block th-settings">
                                  <div className="th-main">
-      <aside>
-        <nav>
-        <a href="#" className={navTab === 1 ? 'selected' : ''} onClick={() => NavTabClick(1)}><BiCertification />{__('Editor Options','vayu-blocks')}</a>
-        {/* <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a> */}
-        </nav>
-      </aside>
-      <div className="content-wrapper">
-        {navTab === 1 && (
-           <div>
-            {/* Content for Tab 1 */}
-            <h2 className='wrapper-title'>{__('Editor Options','vayu-blocks')}</h2>
-            <div className='option-wrapper'>
-                <RxWidth /><p>{__('Container Width', 'vayu-blocks')} </p>
-                <input
-                    type='number'
-                    id="maxwidth"
-                    name="maxwidth"
-                    min="1"
-                    max="2100"
-                    value={containerWidth}
-                    onChange={(e) => setContainerWidth(e.target.value)}
-                />
-               <span className='unit'>{__('px','vayu-blocks')}</span>
-            </div>
+                    <aside>
+                        <nav>
+                        <a href="#" className={navTab === 1 ? 'selected' : ''} onClick={() => NavTabClick(1)}><BiCertification />{__('Editor Options','vayu-blocks')}</a>
+                        {/* <a href="#" className={navTab === 2 ? 'selected' : ''} onClick={() => NavTabClick(2)}><BiCoinStack />{__('Assets','vayu-blocks')}</a> */}
+                        </nav>
+                    </aside>
+                    <div className="content-wrapper">
+                        {navTab === 1 && (
+                        <div>
+                            {/* Content for Tab 1 */}
+                            <h2 className='wrapper-title'>{__('Editor Options','vayu-blocks')}</h2>
+                            <div className='option-wrapper'>
+                                <RxWidth /><p>{__('Container Width', 'vayu-blocks')} </p>
+                                <input
+                                    type='number'
+                                    id="maxwidth"
+                                    name="containerWidth"
+                                    min="1"
+                                    max="2100"
+                                    value={globalData.containerWidth}
+                                    onChange={handleGlobalDataChange}
+                                />
+                            <span className='unit'>{__('px','vayu-blocks')}</span>
+                            </div>
 
-            <div className='option-wrapper'>
-            <RxPadding /><p>{__('Padding', 'vayu-blocks')}</p>
-                <input
-                    type='number'
-                    id="padding"
-                    name="padding"
-                    min="1"
-                    max="1600"
-                    value={padding}
-                    onChange={(e) => setPadding(e.target.value)}
-                />
-                <span className='unit'>{__('px','vayu-blocks')}</span>
-            </div>
+                            <div className='option-wrapper'>
+                            <RxPadding /><p>{__('Padding', 'vayu-blocks')}</p>
+                                <input
+                                    type='number'
+                                    id="padding"
+                                    name="containerPadding"
+                                    min="1"
+                                    max="1600"
+                                    value={globalData.containerPadding}
+                                    onChange={handleGlobalDataChange}
+                                />
+                                <span className='unit'>{__('px','vayu-blocks')}</span>
+                            </div>
 
-            <div className='option-wrapper'>
-            <RxSpaceBetweenHorizontally /><p>{__('Container Gap', 'vayu-blocks')} </p>
-                <input
-                    type='number'
-                    id="maxwidth"
-                    name="maxwidth"
-                    min="1"
-                    max="2100"
-                    value={containerGap}
-                    onChange={(e) => setContainerGap(e.target.value)}
-                />
-                 <span className='unit'>{__('px','vayu-blocks')}</span>
-            </div>
+                            <div className='option-wrapper'>
+                            <RxSpaceBetweenHorizontally /><p>{__('Container Gap', 'vayu-blocks')} </p>
+                                <input
+                                    type='number'
+                                    id="maxwidth"
+                                    name="containerGap"
+                                    min="1"
+                                    max="2100"
+                                    value={globalData.containerGap}
+                                    onChange={handleGlobalDataChange}
+                                />
+                                <span className='unit'>{__('px','vayu-blocks')}</span>
+                            </div>
+                                <div className='option-submit'>
+                                    <button  onClick={()=>handleToggleSwitchClick(globalData)} disabled = {btnDisabled && 'disabled'}>  {/*onClick={handleSave} */}
+                                    {isLoading ? <Spinner style={{ height: 'calc(4px * 3)',width: 'calc(4px * 3)'}}/> : __('Save', 'vayu-blocks')}
 
-            {/* <div className='option-wrapper'>
-            <RxButton /><p>{__('Button Color', 'vayu-blocks')}</p>
-                    <input
-                        type="checkbox"
-                        name="buttoncolor"
-                        checked={buttonColor}
-                        onChange={handleCheckboxChange}
-                    />
-            </div> */}
-    
-        </div>
-        )}
-        {navTab === 2 && (
-          <div>
-            {/* Content for Tab 2 */}
-            <h2>Content for Tab 2</h2>
-            <p>This is the content for Tab 2.</p>
-          </div>
-        )}
-      </div>
+                                    
+                                    </button>
+                                </div>
 
-      <div className='option-submit'>
-            <button onClick={handleSave}>
-            {isLoading ? <><FaSpinner className="icon-spin loader" /></> : __('Save', 'vayu-blocks')}
-            </button>
-      </div>
-    </div>
-               </div> 
+                        </div>
+                        )}
+                    </div>
+                </div>
+            </div> 
             )}
-
-        {activeTab === 'sites' && window.location.assign( window.location.pathname+"?page=vayu-sites") }
+          {activeTab === 'sites' && window.location.assign( window.location.pathname+"?page=vayu-sites") }
             </div>    
             </div>
             </div>
@@ -669,7 +438,6 @@ const getInputValues = async () => {
 }
 
 const container = document.getElementById('vayu-blocks-container');
-
 if (container) {
   // Use createRoot to create a root instance and then render the component
   const root = createRoot(container);
