@@ -228,7 +228,7 @@ const edit = ({ attributes, setAttributes }) => {
             );        
         }
        
-        
+
         setSettings(newSettings);
     }, [
         attributes.dots,
@@ -258,7 +258,6 @@ const edit = ({ attributes, setAttributes }) => {
         dotscount
     ]);
 
-
     useEffect(() => {
         
         if (sliderRef.current && attributes.index !== undefined) {
@@ -267,7 +266,6 @@ const edit = ({ attributes, setAttributes }) => {
         }
         
     }, [attributes.index]);
-
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         

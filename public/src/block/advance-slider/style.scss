@@ -51,6 +51,7 @@
     animation: fadeInUp 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Custom cubic-bezier for smoother animation */
     animation-delay: -1s; /* Negative delay to start animation slightly early */
 }
+
 @keyframes fadeInUp {
     0% {
         opacity: 0;
@@ -61,8 +62,6 @@
         transform: translateY(0); /* End at the original position */
     }
 }
-
-
 
 .vayu_blocks_heading{
     animation: fadeInDown 1s ease-out;
