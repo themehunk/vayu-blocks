@@ -2101,11 +2101,11 @@ const InsSettings = ({
 							resetValues={ {
 								boxShadowHvr: false,
 								boxShadowColorHvr: undefined,
-								boxShadowColorOpacityHvr: 50,
-								boxShadowBlurHvr: 5,
-								boxShadowSpreadHvr: 1,
-								boxShadowHorizontalHvr: 0,
-								boxShadowVerticalHvr: 0
+								boxShadowColorOpacityHvr:'',
+								boxShadowBlurHvr:'',
+								boxShadowSpreadHvr:'',
+								boxShadowHorizontalHvr:'',
+								boxShadowVerticalHvr:''
 							} }
 							onClick={ () => setAttributes({ boxShadowHvr: true }) }
 						>
