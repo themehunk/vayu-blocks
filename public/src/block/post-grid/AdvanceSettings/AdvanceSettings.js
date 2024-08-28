@@ -331,7 +331,6 @@ export default function AdvanceSettings({ children, attributes }) {
 
         position: position || undefined,
         zIndex: zIndex || undefined,
-        alignSelf: selfAlign || undefined,
         order: order === 'custom' ? customOrder : 'undefined',
       
         borderStyle: borderType || undefined,

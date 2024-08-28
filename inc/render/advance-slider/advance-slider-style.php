@@ -16,7 +16,10 @@ function generate_inline_slider_styles($attr) {
     //Main div
     $css .= "$wrapper {";
 
-        $css .= "width:100%;";
+       // Check if 'customwidth' attribute is set and apply the width accordingly
+        if ($attr['widthType'] === 'customwidth') {
+            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        }
 
        // Desktop Padding
        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
@@ -114,6 +117,20 @@ function generate_inline_slider_styles($attr) {
        
     $css .= "}";
     
+    // Add media query for tablet screens
+    $css .= "@media (max-width: 768px) {";
+        $css .= "$wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
+    // Add media query for Mobile screens
+    $css .= "@media (max-width: 300px) {";
+        $css .= "$wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
     //Hover 
     $css .= "$wrapper:hover {";
 
@@ -695,7 +712,6 @@ function generate_inline_slider_styles($attr) {
             // Border
             $css .= "border: none;";
             $css .= "cursor: pointer;";
-            $css .= "margin: 10px;";
 
             $css .= "border-color: " . ($button1['border']['color'] ?? 'transparent') . ";";
             $css .= "border-width: " . ($button1['border']['width'] ?? '0') . ";";
@@ -734,7 +750,10 @@ function generate_inline_slider_styles($attr) {
             } elseif (!empty($button1['backgroundGradient'])) {
                 $css .= "background: -webkit-{$button1['backgroundGradient']};";
             }
-            
+
+            // Apply conditional margin-right based on button2.show
+            $css .= "margin-right: " . ($slide['layout']['button2']['show'] ? '5px' : '0px') . ";";
+
             //animation left
         $css .= "}\n";
 
@@ -747,7 +766,6 @@ function generate_inline_slider_styles($attr) {
         $css .= "$container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button2-anchor-tag{";
             $css .= "color: {$button2['color']};";
         $css .= "}\n";
-
 
         //Button 2
         $css .= "$container $insideContainer .vayu_blocks_slider_button2 {";
