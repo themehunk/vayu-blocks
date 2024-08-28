@@ -19,7 +19,8 @@ import { useSelect } from '@wordpress/data';
 import {
     Fragment,
     useState,
-    Suspense
+    Suspense,
+	useEffect
 } from '@wordpress/element';
 
 
@@ -77,19 +78,31 @@ const InsSettings = ({
 		  return acc;
 		}, {});
 	  };
+
+	  // State to store the initial global container width
+	  const [initialGlobalContainerWidth, setInitialGlobalContainerWidth] = useState(null);
+	  // Set the initial value only once when the component mounts
+	  useEffect(() => {
+		  if (initialGlobalContainerWidth === null) {
+			  setInitialGlobalContainerWidth(globalcontainerWidth);
+			  //console.log('Initial globalcontainerWidth:', globalcontainerWidth);
+		  }
+	  }, [globalcontainerWidth, initialGlobalContainerWidth]);
+  
     // boxed width
-const getBoxedcontentWidth = () => {
-	switch (getView) {
-	  case 'Desktop':
-		return attributes.boxedcontentWidth;
-	  case 'Tablet':
-		return attributes.boxedcontentWidthTablet;
-	  case 'Mobile':
-		return attributes.boxedcontentWidthMobile !== undefined ? attributes.boxedcontentWidthMobile : 100; // Default value for mobile view
-	  default:
-		return globalcontainerWidth;
-	}
-  };
+	const getBoxedcontentWidth = () => {
+		const defaultWidth = parseInt(initialGlobalContainerWidth) ?? 1250;
+		switch (getView) {
+			case 'Desktop':
+				return attributes.boxedcontentWidth ?? defaultWidth; // Fallback to default if undefined
+			case 'Tablet':
+				return attributes.boxedcontentWidthTablet ?? defaultWidth; // Fallback to default if undefined
+			case 'Mobile':
+				return attributes.boxedcontentWidthMobile ?? 100; // Fallback to 100 for mobile view if undefined
+			default:
+				return defaultWidth; // Fallback global default
+		}
+	};
   
   const changeBoxedcontentWidth = (value) => {
 	switch (getView) {
@@ -1567,11 +1580,10 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 								options={ [
 									{ label:  __( 'Boxed', 'vayu-blocks' ), value: 'boxed' },
 									{ label: __( 'Full Width', 'vayu-blocks' ), value: 'fullwidth' },
-									
+									{ label: __( 'Theme Default', 'vayu-blocks' ), value: 'alignwide' },
 								] }
 								onChange={ e => setAttributes({ contentWidthType: e }) }
 					/>
-
                    { 'boxed' == attributes.contentWidthType && (
                         <ResponsiveControl
                         label={ __( 'Width', 'vayu-blocks' ) }
@@ -1586,22 +1598,20 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
 						
                         <RangeControl
 								renderTooltipContent={customTooltipBoxedcontentWidth}
-								initialPosition={getBoxedcontentWidth()}
-								value={getBoxedcontentWidth() || ''}
+								initialPosition={getBoxedcontentWidth()} // Corrected syntax
+								value={getBoxedcontentWidth()} // Also ensures the fallback value
 								onChange={changeBoxedcontentWidth}
 								step={1}
 								min={1}
 								max={maxBoxedcontentWidth}
-                                allowReset={ true }
-                        />
+								allowReset={true}
+							/>
                         </ResponsiveControl>
                    )}
-
                    { 'fullwidth' == attributes.contentWidthType && (
                         <ResponsiveControl
                         label={ __( 'Width', 'vayu-blocks' ) }
                         >	
-
                         <UnitChooser
 						value={getfullcontentWidthUnitValue()}
 						onClick={(fullcontentWidthUnit) => {
@@ -1621,6 +1631,7 @@ const customTooltipfullcontentWidth = value => `${value}${attributes.fullcontent
                         />
                         </ResponsiveControl>
                         )}
+
                         <ResponsiveControl
                         label={ __( 'Min Height', 'vayu-blocks' ) }
                         >	
