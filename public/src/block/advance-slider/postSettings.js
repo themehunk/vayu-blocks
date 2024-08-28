@@ -12,13 +12,11 @@ import {
     FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
-    DuotonePicker,
 } from '@wordpress/components';
 import {
     HoverControl,
     ToogleGroupControl,
 } from '../../components/index.js';
-import {AlignmentToolbar,MediaPlaceholder } from '@wordpress/block-editor';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
@@ -574,7 +572,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         />
                         <RangeControl
                             label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                            className = "vayu_blocks_gphb"
+                            className = "vayu_blocks_gphsub"
                             value={attributes.global.layout.gaphb}
                             onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
                             min={0}
@@ -1204,7 +1202,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             />  
 
                             <PanelColorSettings
-                                    title={ __( 'Backgrund Color', 'vayu-blocks' ) }
+                                    title={ __( 'Background Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.dots.backgroundColor,

@@ -179,9 +179,9 @@ return array(
                         'left' => '5px',
                     ),
                     'padding' => array(
-                        'top' => '0px',
+                        'top' => '50px',
                         'right' => '0px',
-                        'bottom' => '0px',
+                        'bottom' => '50px',
                         'left' => '0px',
                     ),
                     'opacity' => 0.2,
@@ -208,7 +208,7 @@ return array(
             ),            
             array(
                 'layout' => array(
-                    'uniqueId' => 'slide-default-1',
+                    'uniqueId' => 'slide-default-2',
                     'imageheight'=>0,
                     'button1' => array(
                         'show' => true,

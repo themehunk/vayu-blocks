@@ -139,7 +139,7 @@
         "default": [
             {
                 "layout": {
-                    "uniqueId": "slide-default-2", 
+                    "uniqueId": "134543583587461", 
                     "button1":{
                         "show": true,
                         "text": "Button One",
@@ -310,7 +310,7 @@
             },
             {
                 "layout": {
-                    "uniqueId": "slide-default-2", 
+                    "uniqueId": "134543583587462", 
                     "button1":{
                         "show": true,
                         "text": "Button One",
@@ -486,7 +486,6 @@
         "default":
         {
             "layout": {
-                "uniqueId": "slide-default-2", 
                 "button1":{
                     "show": true,
                     "text": "Button One",
@@ -642,16 +641,16 @@
                 "customStylesubbutton2":false,
                 "customBackgroundImage":false,
                 "heightauto":true,
-                "customheight" :340,
-                "imageheight":0,
-                "gaphb" : 0,
-                "gaphsub" : 0,
-                "alignmenttop":"center",
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",
+                "imageheight":0,
+                "gaphb" : 0,
+                "customheight" :340,
+                "gaphsub" : 0,
                 "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                "alignment": "center"
+                "alignment": "center",
+                "alignmenttop":"center"
             }
         }
     }

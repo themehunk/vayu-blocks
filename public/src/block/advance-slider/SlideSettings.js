@@ -7,27 +7,22 @@ import {
     ToggleControl,
     RangeControl,
     Button,
-    ButtonGroup,
-    ColorPalette,
     TextareaControl,
     FontSizePicker,
     TextControl,
     __experimentalBoxControl as BoxControl,
     SelectControl,
-    FocalPointPicker,
-    DuotonePicker,
-    DuotoneSwatch ,
     __experimentalToolsPanel as ToolsPanel,
+  
 
 } from '@wordpress/components';
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { MdContentCopy } from "react-icons/md";
-import {AlignmentToolbar,MediaPlaceholder } from '@wordpress/block-editor';
+import {MediaPlaceholder } from '@wordpress/block-editor';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
-import { URLInputButton } from '@wordpress/block-editor';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {
@@ -188,70 +183,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     ];
 
-    const vayu_blocks_blendModeOptions = [
-        {
-            disabled: true,
-            label: 'Select an Option',
-            value: ''
-        },
-        {
-            label: 'Normal',
-            value: 'normal'
-        },
-        {
-            label: 'Multiply',
-            value: 'multiply'
-        },
-        {
-            label: 'Screen',
-            value: 'screen'
-        },
-        {
-            label: 'Overlay',
-            value: 'overlay'
-        },
-        {
-            label: 'Darken',
-            value: 'darken'
-        },
-        {
-            label: 'Lighten',
-            value: 'lighten'
-        },
-        {
-            label: 'Color-dodge',
-            value: 'color-dodge'
-        },
-        {
-            label: 'Color-burn',
-            value: 'color-burn'
-        },
-        {
-            label: 'Hard-light',
-            value: 'hard-light'
-        },
-        {
-            label: 'Soft-light',
-            value: 'soft-light'
-        },
-        {
-            label: 'Difference',
-            value: 'difference'
-        },
-        {
-            label: 'Saturation',
-            value: 'saturation'
-        },
-        {
-            label: 'Color',
-            value: 'color'
-        },
-        {
-            label: 'Luminosity',
-            value: 'luminosity'
-        }
-    ];
-
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
         { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
@@ -297,163 +228,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 ...attributes.slides,
                 {
                     layout: {
-                        uniqueId: generateUniqueId(),
-                        button1: {
-                            show: true,
-                            text: "Button One",
-                            link: "",
-                            newtab: true,
-                            size: 20,
-                            backgroundColor: "transparent",
-                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                            color: "black",
-                            border: {
-                                color: "black",
-                                width: "1px",
-                                style: "solid",
-                                topcolor: "black",
-                                topwidth: "1px",
-                                topstyle: "solid",
-                                bottomcolor: "black",
-                                bottomwidth: "1px",
-                                bottomstyle: "solid",
-                                leftcolor: "black",
-                                leftwidth: "1px",
-                                leftstyle: "solid",
-                                rightcolor: "black",
-                                rightwidth: "1px",
-                                rightstyle: "solid"
-                            },
-                            borderRadius: {
-                                top: "5px",
-                                right: "5px",
-                                bottom: "5px",
-                                left: "5px"
-                            },
-                            padding: {
-                                top: "10px",
-                                right: "20px",
-                                bottom: "10px",
-                                left: "20px"
-                            }
-                        },
-                        button2: {
-                            show: false,
-                            text: "Button Two",
-                            link: "",
-                            newtab: true,
-                            size: 20,
-                            backgroundColor: "transparent",
-                            backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                            color: "black",
-                            border: {
-                                color: "black",
-                                width: "1px",
-                                style: "solid",
-                                topcolor: "black",
-                                topwidth: "1px",
-                                topstyle: "solid",
-                                bottomcolor: "black",
-                                bottomwidth: "1px",
-                                bottomstyle: "solid",
-                                leftcolor: "black",
-                                leftwidth: "1px",
-                                leftstyle: "solid",
-                                rightcolor: "black",
-                                rightwidth: "1px",
-                                rightstyle: "solid"
-                            },
-                            borderRadius: {
-                                top: "5px",
-                                right: "5px",
-                                bottom: "5px",
-                                left: "5px"
-                            },
-                            padding: {
-                                top: "10px",
-                                right: "20px",
-                                bottom: "10px",
-                                left: "20px"
-                            }
-                        },
-                        heading: {
-                            text: "Slider",
-                            tag: "h2",
-                            newtab: true,
-                            size: 28,
-                            fontWeight: "bold",
-                            color: "black",
-                            link: ""
-                        },
-                        subheading: {
-                            show: true,
-                            text: "The subheading for our topic has played a crucial role in highlighting its significance.",
-                            tag: "h4",
-                            size: 16,
-                            fontWeight: "lighter",
-                            color: "black",
-                            link: "",
-                            newtab: true
-                        },
-                        border: {
-                            color: "black",
-                            width: "0px",
-                            style: "solid",
-                            topcolor: "black",
-                            topwidth: "0px",
-                            topstyle: "solid",
-                            bottomcolor: "black",
-                            bottomwidth: "0px",
-                            bottomstyle: "solid",
-                            leftcolor: "black",
-                            leftwidth: "0px",
-                            leftstyle: "solid",
-                            rightcolor: "black",
-                            rightwidth: "0px",
-                            rightstyle: "solid"
-                        },
-                        borderRadius: {
-                            top: "5px",
-                            right: "5px",
-                            bottom: "5px",
-                            left: "5px"
-                        },
-                        padding: {
-                            top: "50px",
-                            right: "0px",
-                            bottom: "50px",
-                            left: "0px"
-                        },
-                        customStylelayout :false,
-                        customStyleheading:false,
-                        customStylesubheading:false,
-                        customStylesubbutton1:false,
-                        customStylesubbutton2:false,
-                        customBackgroundImage: false,
-                        customheight :340,
-                        heightauto:true,
-                        imageheight:0,
-                        opacity: 0.2,
-                        backgroundBlend: "lighten",
-                        backgroundImage: "",
-                        focalPoint: {
-                            x: 0.5,
-                            y: 0.5
-                        },
-                        backgroundType: "color",
-                        gaphb : 0,
-                        gaphsub : 0,
-                        backgroundColor: "#000000",
-                        duotone: "",
-                        backgroundGradient: "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                        alignment: "center",
-                        alignmenttop: "center",
+                        ...attributes.global.layout,  // Use global layout attributes
+                        uniqueId: generateUniqueId()   // Add unique ID
                     }
                 }
             ]
         });
     };
-    
+   
     //style-update
     const vayu_blocks_updateSliderStyles = (index, propertyPath, value='') => {
 
