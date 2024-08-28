@@ -7,28 +7,15 @@
 function vayu_advance_container_style($attr){
 
     $css = '';
-	
 
     if(isset( $attr['uniqueID'] )){
-		
-		// Retrieve the settings from the database
-			$settings = get_option('vayu_blocks_settings', array(
-				'container' => array(
-					'value' => '',
-					'pro' => false,
-					'description' => '',
-					'settings' => array(
-						'containerWidth' => 1250, // Default value
-						'containerGap' => 20, // Default value
-						'padding' => 18, // Default value
-					),
-				),
-			));
+	
 
+		$options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
 		// Access the container settings
-		$container_width = absint($settings['container']['settings']['containerWidth']);
-		$container_gap = absint($settings['container']['settings']['containerGap']);
-		$globalpadding = absint($settings['container']['settings']['padding']);
+		$container_width = $options['global']['containerWidth'];
+		$container_gap   = $options['global']['containerGap'];
+		$globalpadding   = $options['global']['containerPadding'];
 
         
 		$css .= ".th-c{$attr['uniqueID']}.boxed-content > .th-inside-content-wrap{";

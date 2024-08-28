@@ -13,15 +13,24 @@ export default function Save({attributes}){
 
 	let containerClasses = classnames({
 				
-		[`${attributes.contentWidthType}-content`]: true,
+	[`${attributes.contentWidthType}-content`]: true,
 		"th-hide-desktop": attributes.responsiveTogHideDesktop,
 		"th-hide-tablet": attributes.responsiveTogHideTablet,
 		"th-hide-mobile": attributes.responsiveTogHideMobile,
 	  });
+
+	  let contentWidthClass = "";
+
+	  if(attributes.contentWidthType=='boxed' || attributes.contentWidthType=='fullwidth'){
+		  contentWidthClass = 'alignfull';
+	  }
+	  if(attributes.contentWidthType=='alignwide'){
+		contentWidthClass = 'alignwide';
+	  }
 	  
 	const blockProps = useBlockProps.save({ 
-		id:attributes.anchor,
-		className: `th-container-outside-wrapper alignfull th-c${attributes.uniqueID} ${containerClasses}`,
+			id:attributes.anchor,
+			className: `th-container-outside-wrapper ${contentWidthClass} th-c${attributes.uniqueID} ${containerClasses}`,
 	});
      
 	const Tag = attributes.containerHTMLTag;

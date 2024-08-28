@@ -843,9 +843,17 @@ export default function Edit({
 				return getSettings().supportsLayout || false;
 			}, [] );
 
+			let contentWidthClass = "";
+
+			if(attributes.contentWidthType=='fullwidth' || attributes.contentWidthType=='alignwide'){
+				contentWidthClass = 'alignwide';
+			}else{
+				contentWidthClass = 'alignfull'
+			}
+
 			let rootContainerClassName = "";
 			rootContainerClassName = supportsLayout
-				? `th-root-block-container alignwide th-block-container-${attributes.uniqueID}`
+				? `th-root-block-container ${contentWidthClass}  th-block-container-${attributes.uniqueID}`
 				: 'wp-block';
 
 			return (
@@ -888,8 +896,6 @@ export default function Edit({
 				
 			   )}
 			
-				</Fragment>
-							
+				</Fragment>			
 	        );
-
     }

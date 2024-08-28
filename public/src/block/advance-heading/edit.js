@@ -503,6 +503,7 @@ import classnames from 'classnames';
 		customwidth = {
              
 	            display:'inline-flex',
+				'--h-max-width':'fit-content',
 			
 		};
 

@@ -67,18 +67,18 @@ class Vayu_Block_Plugin {
     // $padding = absint(get_option('padding',18));
     
     // Retrieve the settings from the database
-$settings = get_option('vayu_blocks_settings', array(
-    'container' => array(
-        'value' => 1,
-        'pro' => false,
-        'description' => '',
-        'settings' => array(
-            'containerWidth' => 1250, // Default value
-            'containerGap' => 20, // Default value
-            'padding' => 18, // Default value
+    $settings = get_option('vayu_blocks_settings', array(
+        'container' => array(
+            'value' => 1,
+            'pro' => false,
+            'description' => '',
+            'settings' => array(
+                'containerWidth' => 1250, // Default value
+                'containerGap' => 20, // Default value
+                'padding' => 18, // Default value
+            ),
         ),
-    ),
-));
+    ));
 
 // Access the container settings
 $container_width = absint($settings['container']['settings']['containerWidth']);
