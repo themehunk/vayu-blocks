@@ -12,13 +12,11 @@ import {
     FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
-    DuotonePicker,
 } from '@wordpress/components';
 import {
     HoverControl,
     ToogleGroupControl,
 } from '../../components/index.js';
-import {AlignmentToolbar,MediaPlaceholder } from '@wordpress/block-editor';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
@@ -1204,7 +1202,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             />  
 
                             <PanelColorSettings
-                                    title={ __( 'Backgrund Color', 'vayu-blocks' ) }
+                                    title={ __( 'Background Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.dots.backgroundColor,

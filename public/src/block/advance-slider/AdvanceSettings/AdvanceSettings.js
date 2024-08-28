@@ -2,6 +2,8 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useState} from 'react';
 import { useSelect } from '@wordpress/data';
+import { useViewportMatch} from '@wordpress/compose';
+import { RiEqualFill } from 'react-icons/ri';
 
 // Utility function to filter out undefined or null values
 const omitBy = (object, condition) => (
@@ -322,13 +324,98 @@ export default function AdvanceSettings({ children, attributes }) {
     const borderradiusHvrstyles = getborderradiusHvrStyle();
     const customwidthstyles  =  getWidthStyle(); 
 
+    const {
+		isViewportAvailable,
+		isPreviewDesktop,
+		isPreviewTablet,
+		isPreviewMobile
+	} = useSelect( select => {
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return {
+			isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
+			isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewTablet: __experimentalGetPreviewDeviceType ? 'Tablet' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
+		};
+	}, []);
+
+
+    const isLarger = useViewportMatch( 'large', '>=' );
+
+	const isLarge = useViewportMatch( 'large', '<=' );
+
+	const isSmall = useViewportMatch( 'small', '>=' );
+
+	const isSmaller = useViewportMatch( 'small', '<=' );
+
+    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isMobile = ! isLarger && ! isLarge && ! isSmall && ! isSmaller;
+
+    if ( isViewportAvailable && ! isMobile ) {
+		isDesktop = isPreviewDesktop;
+		isTablet = isPreviewTablet;
+		isMobile = isPreviewMobile;
+	}
+    
+    let customwidth;
+
+    if( attributes.widthType=='customwidth' ) {
+
+		if ( isDesktop ) {
+
+		customwidth = {
+             
+			width:attributes.customWidth + attributes.customWidthUnit,
+			
+		};
+
+	   }
+
+	   if ( isTablet ) {
+
+		customwidth = {
+             
+			'width':attributes.customWidthTablet + attributes.customWidthUnit,
+			'max-width':attributes.customWidthTablet + attributes.customWidthUnit,
+			
+		};
+
+	   }
+
+	   if ( isMobile ) {
+
+		customwidth = {
+             
+			'width':attributes.customWidthMobile + attributes.customWidthUnit,
+			'max-width':attributes.customWidthMobile + attributes.customWidthUnit,
+			
+		};
+		
+	   }
+
+	}
+
+    // if( attributes.widthType =='inlinewidth' ) {
+
+	// 	customwidth = {
+             
+	//             display:'inline',
+			
+	// 	};
+
+	// }
+
     // Prepare the style object
     const styles = {
-
+        ...customwidth,
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-        width: '100%',
+        // width: '100%',
 
         position: position || undefined,
         zIndex: zIndex || undefined,
@@ -389,9 +476,14 @@ export default function AdvanceSettings({ children, attributes }) {
         ...(isHovered ? filteredHoverStyles : {}),
     };
 
-    
-
     const blockProps = useBlockProps({
+
+        className: attributes.widthType === 'fullwidth' 
+        ? 'alignfull' 
+        : attributes.widthType === 'customwidth' 
+            ? 'alignwide' 
+            : '',
+        
         style: {
             ...mergedStyles,
         },
@@ -399,7 +491,6 @@ export default function AdvanceSettings({ children, attributes }) {
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
-    
     
     return (
         <div {...blockProps}>

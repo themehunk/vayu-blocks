@@ -15,8 +15,6 @@ class Vayu_blocks_Advance_Slider {
     public function render() {
         ob_start(); // Start output buffering
 
-        // Output the SVG with duotone filters
-        echo $this->render_svg_filters();
         echo $this->render_scripts();
         echo $this->render_slider();
     
@@ -27,13 +25,23 @@ class Vayu_blocks_Advance_Slider {
     private function render_slider() {
         $slides_html = '';
         $animated = isset($attr['className']) ? $attr['className'] : ''; //animation
+        $className = '';
+        if (isset($this->attr['widthType'])) {
+            switch ($this->attr['widthType']) {
+                case 'fullwidth':
+                    $className = 'alignfull';
+                    break;
+                case 'customwidth':
+                    $className = 'alignwide';
+                    break;
+            }
+        }
 
             //slides
             foreach ($this->attr['slides'] as $index => $slide) {
                 $uniqueId = isset($slide['layout']['uniqueId']) ? esc_attr($slide['layout']['uniqueId']) : '';
 
                 $slides_html .= '<div class="vayu_blocks_slide_' . $uniqueId . '">';//every slide with their unique id
-
                     // Color overlay
                     $slides_html .= '<div class="vayu_blocks_color_overlay"></div>';
 
@@ -71,7 +79,7 @@ class Vayu_blocks_Advance_Slider {
                 $slides_html .= '</div>'; // Closing slide container
             }
 
-        return '<div class="vayu-blocks-advance-slider ' . $animated . '">' . $slides_html . '</div>'; //alignfull is default class of wordpress
+        return '<div class="vayu-blocks-advance-slider ' . $animated . ' ' . esc_attr($className) . '">' . $slides_html . '</div>'; //alignfull is default class of wordpress
     }
 
     // Heading
@@ -130,6 +138,7 @@ class Vayu_blocks_Advance_Slider {
         </button>";
     }
 
+    // Slider Script
     private function render_scripts() {
         // Determine the value of dots based on dotslength and dots['show']
         $dots = ($this->attr['dotslength'] <= 1 || !$this->attr['dots']['show']) ? 'false' : 'true';
@@ -187,189 +196,26 @@ class Vayu_blocks_Advance_Slider {
         return $script;
     }
     
-    // Svg filters for duotone
-    private function render_svg_filters() {
-        return '<svg class="vayu_blocks_duotone-filters" xmlns="http://www.w3.org/2000/svg">
-            {/* orange and red */}
-            <filter id="duotone-orange-red">
-                    <feColorMatrix type="matrix" result="gray"
-                        values="1 0 0 0 0
-                                1 0 0 0 0
-                                1 0 0 0 0
-                                0 0 0 1 0" />
-                    <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                        <feFuncR type="table" tableValues="0.949 1"></feFuncR>
-                        <feFuncG type="table" tableValues="0.6 0.8"></feFuncG>
-                        <feFuncB type="table" tableValues="0.5 0.6"></feFuncB>
-                        <feFuncA type="table" tableValues="0 1"></feFuncA>
-                    </feComponentTransfer>
-            </filter>
-
-            {/* Red and Green */}
-            <filter id="duotone-red-green">
-                    <feColorMatrix type="matrix" result="gray"
-                        values="1 0 0 0 0
-                                1 0 0 0 0
-                                1 0 0 0 0
-                                0 0 0 1 0" />
-                    <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                        <feFuncR type="table" tableValues="0.898 1"></feFuncR>
-                        <feFuncG type="table" tableValues="0.066 0.945"></feFuncG>
-                        <feFuncB type="table" tableValues="0.066 0.945"></feFuncB>
-                        <feFuncA type="table" tableValues="0 1"></feFuncA>
-                    </feComponentTransfer>
-            </filter>
-
-            {/* Black and White */}
-            <filter id="duotone-black-white">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0 1"></feFuncR>
-                    <feFuncG type="table" tableValues="0 1"></feFuncG>
-                    <feFuncB type="table" tableValues="0 1"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Blue and Red */}
-            <filter id="duotone-blue-red">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.929 0.996"></feFuncR>
-                    <feFuncG type="table" tableValues="0.117 0.257"></feFuncG>
-                    <feFuncB type="table" tableValues="0.717 0.949"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Purple and Yellow */}
-            <filter id="duotone-purple-yellow">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.537 0.988"></feFuncR>
-                    <feFuncG type="table" tableValues="0.129 0.929"></feFuncG>
-                    <feFuncB type="table" tableValues="0.746 0.059"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Orange and Teal */}
-            <filter id="duotone-orange-teal">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.949 0.204"></feFuncR>
-                    <feFuncG type="table" tableValues="0.517 0.835"></feFuncG>
-                    <feFuncB type="table" tableValues="0.318 0.549"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Pink and Blue */}
-            <filter id="duotone-pink-blue">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.949 0.235"></feFuncR>
-                    <feFuncG type="table" tableValues="0.349 0.553"></feFuncG>
-                    <feFuncB type="table" tableValues="0.529 0.847"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Cyan and Magenta */}
-            <filter id="duotone-cyan-magenta">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.0 0.847"></feFuncR>
-                    <feFuncG type="table" tableValues="0.796 0.122"></feFuncG>
-                    <feFuncB type="table" tableValues="0.996 0.643"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Yellow and Black */}
-            <filter id="duotone-yellow-black">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="1 0.125"></feFuncR>
-                    <feFuncG type="table" tableValues="0.839 0.125"></feFuncG>
-                    <feFuncB type="table" tableValues="0.062 0.062"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Light Blue and Light Green */}
-            <filter id="duotone-lightblue-lightgreen">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.678 0.678"></feFuncR>
-                    <feFuncG type="table" tableValues="0.847 0.996"></feFuncG>
-                    <feFuncB type="table" tableValues="0.847 0.678"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-            {/* Gray and Yellow */}
-            <filter id="duotone-gray-yellow">
-                <feColorMatrix type="matrix" result="gray"
-                    values="1 0 0 0 0
-                            1 0 0 0 0
-                            1 0 0 0 0
-                            0 0 0 1 0" />
-                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                    <feFuncR type="table" tableValues="0.678 1"></feFuncR>
-                    <feFuncG type="table" tableValues="0.678 1"></feFuncG>
-                    <feFuncB type="table" tableValues="0.678 0.278"></feFuncB>
-                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                </feComponentTransfer>
-            </filter>
-
-
-        </svg> ';
-    }
 }
 
 // Render callback for the block
 function vayu_blocks_advance_slider_render($attr) {
-    //attributes Merged
+    // Include default attributes
     $default_attributes = include('defaultattributes.php');
-    $attr = array_merge($default_attributes, $attr); 
 
+    // Merge default attributes with provided attributes
+    $attr = array_merge($default_attributes, $attr);
+
+    // Initialize the slider with the merged attributes
     $slider = new Vayu_blocks_Advance_Slider($attr);
+
+    // Determine the class name based on the widthType attribute
     
-    return $slider->render();
+
+    // Render and return the slider output inside a div with the dynamic class name
+    return  $slider->render();
 }
+
 
 // Enqueue Slick slider assets
 function vayu_enqueue_slick_slider_assets() {

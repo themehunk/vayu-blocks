@@ -7,28 +7,22 @@ import {
     ToggleControl,
     RangeControl,
     Button,
-    ButtonGroup,
-    ColorPalette,
     TextareaControl,
     FontSizePicker,
     TextControl,
     __experimentalBoxControl as BoxControl,
     SelectControl,
-    FocalPointPicker,
-    DuotonePicker,
-    DuotoneSwatch ,
     __experimentalToolsPanel as ToolsPanel,
   
 
 } from '@wordpress/components';
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { MdContentCopy } from "react-icons/md";
-import {AlignmentToolbar,MediaPlaceholder } from '@wordpress/block-editor';
+import {MediaPlaceholder } from '@wordpress/block-editor';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
-import { URLInputButton } from '@wordpress/block-editor';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {
@@ -186,70 +180,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             name: 'ExtraBig',
             size: 28,
             slug: 'extrabig'
-        }
-    ];
-
-    const vayu_blocks_blendModeOptions = [
-        {
-            disabled: true,
-            label: 'Select an Option',
-            value: ''
-        },
-        {
-            label: 'Normal',
-            value: 'normal'
-        },
-        {
-            label: 'Multiply',
-            value: 'multiply'
-        },
-        {
-            label: 'Screen',
-            value: 'screen'
-        },
-        {
-            label: 'Overlay',
-            value: 'overlay'
-        },
-        {
-            label: 'Darken',
-            value: 'darken'
-        },
-        {
-            label: 'Lighten',
-            value: 'lighten'
-        },
-        {
-            label: 'Color-dodge',
-            value: 'color-dodge'
-        },
-        {
-            label: 'Color-burn',
-            value: 'color-burn'
-        },
-        {
-            label: 'Hard-light',
-            value: 'hard-light'
-        },
-        {
-            label: 'Soft-light',
-            value: 'soft-light'
-        },
-        {
-            label: 'Difference',
-            value: 'difference'
-        },
-        {
-            label: 'Saturation',
-            value: 'saturation'
-        },
-        {
-            label: 'Color',
-            value: 'color'
-        },
-        {
-            label: 'Luminosity',
-            value: 'luminosity'
         }
     ];
 

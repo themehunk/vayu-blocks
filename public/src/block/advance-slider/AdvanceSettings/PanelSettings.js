@@ -11,6 +11,7 @@ import {
 } from '@wordpress/components';
 
 import { useSelect } from '@wordpress/data';
+import { useEffect, useRef } from 'react';
 
 import {
     Fragment,
@@ -64,30 +65,7 @@ const PanelSettings = ({
     const [ tab, setTab ] = useState( 'slide' );
 	const [ hover, setHover ] = useState( 'normal' );
 
-    const getCustomWidth = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.customWidth;
-		case 'Tablet':
-			return attributes.customWidthTablet;
-		case 'Mobile':
-			return attributes.customWidthMobile;
-		default:
-			return undefined;
-		}
-	};
 
-	const changeCustomWidth = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ customWidthTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ customWidthMobile: value });
-		}
-	};
-
-	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`;
@@ -1557,10 +1535,67 @@ const PanelSettings = ({
 
 	// Transition
 	const customTooltiptransitionAll = value => `${value}`
+	const prevUnitRef = useRef(attributes.customWidthUnit);
+    const prevUnitTabletRef = useRef(attributes.customWidthUnitTablet);
+    const prevUnitMobileRef = useRef(attributes.customWidthUnitMobile);
 
+    useEffect(() => {
+        const updateWidth = (unit) => {
+            if (unit === 'px') return 1200;
+            if (unit === 'em') return 50;
+            if (unit === '%') return 100;
+            return '';
+        };
+
+        // Get the previous and current units
+        const prevUnit = prevUnitRef.current;
+        const prevUnitTablet = prevUnitTabletRef.current;
+        const prevUnitMobile = prevUnitMobileRef.current;
+
+        const currentUnit = attributes.customWidthUnit;
+        const currentTabletUnit = attributes.customWidthUnitTablet;
+        const currentMobileUnit = attributes.customWidthUnitMobile;
+
+        // Update attributes if the unit has changed
+        if (prevUnit !== currentUnit) {
+            setAttributes({
+                customWidth: updateWidth(currentUnit),
+            });
+            prevUnitRef.current = currentUnit; // Update the previous unit reference
+        }
+
+        if (prevUnitTablet !== currentTabletUnit) {
+            setAttributes({
+                customWidthTablet: updateWidth(currentTabletUnit),
+            });
+            prevUnitTabletRef.current = currentTabletUnit; // Update the previous unit reference
+        }
+
+        if (prevUnitMobile !== currentMobileUnit) {
+            setAttributes({
+                customWidthMobile: updateWidth(currentMobileUnit),
+            });
+            prevUnitMobileRef.current = currentMobileUnit; // Update the previous unit reference
+        }
+
+    }, [attributes.customWidthUnit, attributes.customWidthUnitTablet, attributes.customWidthUnitMobile, setAttributes]);
+
+    // Compute max custom width unit
+    const maxcustomWidthUnit = (() => {
+        const updateWidth = (unit) => {
+            if (unit === 'px') return 1200;
+            if (unit === 'em') return 50;
+            if (unit === '%') return 100;
+            return '';
+        };
+
+        return updateWidth(attributes.customWidthUnit);
+    })();
+	
 	// unit switch max value
 	const [customWidthUnit, setcustomWidthUnit] = useState('%');
-	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1200 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
+	// const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
@@ -1630,6 +1665,29 @@ const PanelSettings = ({
 	// Global Settings Vayu Blocks
 	// const globalcontainerWidth = ThBlockData.container_width;
     // setAttributes({globalwidth:globalcontainerWidth});
+	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const getCustomWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customWidth;
+		case 'Tablet':
+			return attributes.customWidthTablet;
+		case 'Mobile':
+			return attributes.customWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeCustomWidth = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customWidthTablet: value, customWidthMobile: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customWidthMobile: value });
+		}
+	};
 	
     return (
 		<Fragment>
@@ -1672,8 +1730,44 @@ const PanelSettings = ({
 						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
-						>           
+						>     
 
+							<SelectControl
+								label={ __( 'Width', 'vayu-blocks' ) }
+								value={ attributes.widthType }
+								options={ [
+									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
+									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
+									// { label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
+								    { label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+								] }
+								onChange={ e => setAttributes({ widthType: e }) }
+							/>      
+
+							{ 'customwidth' == attributes.widthType && (
+
+								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+								<ResponsiveControl
+								label={ __( 'Custom Width', 'vayu-blocks' ) }
+								>	
+								<UnitChooser
+								value={ attributes.customWidthUnit }
+								onClick={ customWidthUnit => setAttributes({ customWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipCustomWidth }
+									value={ getCustomWidth() || '' }
+									onChange={ changeCustomWidth }
+									step={ 1 }
+									min={ 1 }
+									max={ maxcustomWidthUnit }
+									// allowReset={ true }
+								/>
+								</ResponsiveControl>
+								</Suspense>
+
+							) }
 							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 
 

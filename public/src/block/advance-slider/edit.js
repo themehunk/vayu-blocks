@@ -268,17 +268,6 @@ const edit = ({ attributes, setAttributes }) => {
     }, [attributes.index]);
 
     const vayu_blocks_slides = attributes.slides.map((slide) => {
-        
-        const vayu_blocks_getBackgroundStyles = (value) => {
-            let styles = {};
-            if (value.backgroundColor) {
-                styles.backgroundColor = value.backgroundColor;
-            } else if (value.backgroundGradient) {
-                styles.background = `-webkit-${value.backgroundGradient}`;
-            }
-        
-            return styles;
-        };
 
         // Extract padding values with default '0px'
         const topPadding = slide.layout.padding.top || '0px';
@@ -288,6 +277,7 @@ const edit = ({ attributes, setAttributes }) => {
         const bottomPaddingValue = parseInt(slide.layout.padding.bottom, 10) || 0; // Default to 0 if parsing fails
         const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
+        // Slide Style
         const vayu_blocks_slideStyle = {
             height: slide.layout.heightauto 
                 ? (slide.layout.imageheight > 200 ? `${slide.layout.imageheight}px` : '100%')
@@ -330,67 +320,19 @@ const edit = ({ attributes, setAttributes }) => {
             }),
               
         };
+
+        const vayu_blocks_getBackgroundStyles = (value) => {
+            let styles = {};
+            if (value.backgroundColor) {
+                styles.backgroundColor = value.backgroundColor;
+            } else if (value.backgroundGradient) {
+                styles.background = `-webkit-${value.backgroundGradient}`;
+            }
         
-        const vayu_blocks_generateButtonStyle = (button) => {
-                return {
-                ...vayu_blocks_getBackgroundStyles(button),
-                fontSize: `${button.size}px`,
-                border: 'none',
-                cursor: 'pointer',
-                
-                //border
-                borderColor: button.border?.color || 'transparent',
-                borderWidth: button.border?.width || '0',
-                borderStyle: button.border?.style || 'none',
-                borderTopColor: button.border?.topcolor || button.border?.color || 'transparent',
-                borderTopWidth: button.border?.topwidth || button.border?.width || '0',
-                borderTopStyle: button.border?.topstyle || button.border?.style || 'none',
-                borderBottomColor: button.border?.bottomcolor || button.border?.color || 'transparent',
-                borderBottomWidth: button.border?.bottomwidth || button.border?.width || '0',
-                borderBottomStyle: button.border?.bottomstyle || button.border?.style || 'none',
-                borderLeftColor: button.border?.leftcolor || button.border?.color || 'transparent',
-                borderLeftWidth: button.border?.leftwidth || button.border?.width || '0',
-                borderLeftStyle: button.border?.leftstyle || button.border?.style || 'none',
-                borderRightColor: button.border?.rightcolor || button.border?.color || 'transparent',
-                borderRightWidth: button.border?.rightwidth || button.border?.width || '0',
-                borderRightStyle: button.border?.rightstyle || button.border?.style || 'none',
-                
-                //borderRadius
-                borderRadius: `${button.borderRadius.top || '0px'} ${button.borderRadius.right || '0px'} ${button.borderRadius.bottom || '0px'} ${button.borderRadius.left || '0px'}`,
-
-                //padding
-                padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
-
-
-                marginRight: slide.layout.button2.show ? '5px' : '0px',
-            };
+            return styles;
         };
 
-        const vayu_blocks_generateheadingStyle = (heading) => {
-            return {
-                color: heading.color,
-                fontSize: `${heading.size}px`,
-                fontWeight: heading.fontWeight,
-                textDecoration: 'none', 
-                cursor: 'pointer' 
-            };
-        };
-
-        const vayu_blocks_generatesubheadingStyle = (heading) => {
-            return {
-                color: heading.color,
-                fontSize: `${heading.size}px`,
-                fontWeight: heading.fontWeight,
-            };
-        };
-    
-        const vayu_blocks_inside_conatiner_div = {
-            zIndex: 3,
-            // height: '100%',
-            position:'relative',
-            textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
-        };
-
+        // Overlay Style
         const vayu_blocks_color_overlay={
             position: 'absolute',
             top: 0,
@@ -403,6 +345,70 @@ const edit = ({ attributes, setAttributes }) => {
             opacity:slide.layout.opacity,
             zIndex:1,
         }
+
+        // Inside Container
+        const vayu_blocks_inside_conatiner_div = {
+            zIndex: 3,
+            // height: '100%',
+            position:'relative',
+            textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
+        };
+
+        // Heading Style
+        const vayu_blocks_generateheadingStyle = (heading) => {
+            return {
+                color: heading.color,
+                fontSize: `${heading.size}px`,
+                fontWeight: heading.fontWeight,
+                textDecoration: 'none', 
+                cursor: 'pointer' 
+            };
+        };
+
+        // Sub Heading Style
+        const vayu_blocks_generatesubheadingStyle = (heading) => {
+            return {
+                color: heading.color,
+                fontSize: `${heading.size}px`,
+                fontWeight: heading.fontWeight,
+            };
+        };
+
+        // Button Style
+        const vayu_blocks_generateButtonStyle = (button) => {
+            return {
+            ...vayu_blocks_getBackgroundStyles(button),
+            fontSize: `${button.size}px`,
+            border: 'none',
+            cursor: 'pointer',
+            
+            //border
+            borderColor: button.border?.color || 'transparent',
+            borderWidth: button.border?.width || '0',
+            borderStyle: button.border?.style || 'none',
+            borderTopColor: button.border?.topcolor || button.border?.color || 'transparent',
+            borderTopWidth: button.border?.topwidth || button.border?.width || '0',
+            borderTopStyle: button.border?.topstyle || button.border?.style || 'none',
+            borderBottomColor: button.border?.bottomcolor || button.border?.color || 'transparent',
+            borderBottomWidth: button.border?.bottomwidth || button.border?.width || '0',
+            borderBottomStyle: button.border?.bottomstyle || button.border?.style || 'none',
+            borderLeftColor: button.border?.leftcolor || button.border?.color || 'transparent',
+            borderLeftWidth: button.border?.leftwidth || button.border?.width || '0',
+            borderLeftStyle: button.border?.leftstyle || button.border?.style || 'none',
+            borderRightColor: button.border?.rightcolor || button.border?.color || 'transparent',
+            borderRightWidth: button.border?.rightwidth || button.border?.width || '0',
+            borderRightStyle: button.border?.rightstyle || button.border?.style || 'none',
+            
+            //borderRadius
+            borderRadius: `${button.borderRadius.top || '0px'} ${button.borderRadius.right || '0px'} ${button.borderRadius.bottom || '0px'} ${button.borderRadius.left || '0px'}`,
+
+            //padding
+            padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
+
+
+            marginRight: slide.layout.button2.show ? '5px' : '0px',
+        };
+        };
 
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
@@ -459,6 +465,7 @@ const edit = ({ attributes, setAttributes }) => {
                                     </a>
                                 </button>
                             )}
+
                         </div>
 
                     </div>

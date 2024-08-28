@@ -16,7 +16,10 @@ function generate_inline_slider_styles($attr) {
     //Main div
     $css .= "$wrapper {";
 
-        $css .= "width:100%;";
+       // Check if 'customwidth' attribute is set and apply the width accordingly
+        if ($attr['widthType'] === 'customwidth') {
+            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        }
 
        // Desktop Padding
        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
@@ -114,6 +117,20 @@ function generate_inline_slider_styles($attr) {
        
     $css .= "}";
     
+    // Add media query for tablet screens
+    $css .= "@media (max-width: 768px) {";
+        $css .= "$wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
+    // Add media query for Mobile screens
+    $css .= "@media (max-width: 300px) {";
+        $css .= "$wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
     //Hover 
     $css .= "$wrapper:hover {";
 
