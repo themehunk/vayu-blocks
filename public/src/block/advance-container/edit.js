@@ -845,7 +845,7 @@ export default function Edit({
 
 			let contentWidthClass = "";
 
-			if(attributes.contentWidthType=='fullwidth' || attributes.contentWidthType=='alignwide'){
+			if(attributes.contentWidthType=='alignwide'){
 				contentWidthClass = 'alignwide';
 			}else{
 				contentWidthClass = 'alignfull'

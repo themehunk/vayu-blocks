@@ -11,7 +11,14 @@ const Save = ({
 	attributes
 }) => {
 
-	let Classes = classnames({	
+	let headingWidthClass = "";
+
+	if( attributes.widthType =='fullwidth') {
+		headingWidthClass = 'alignfull';
+	}
+
+	let Classes = classnames(
+		headingWidthClass,{	
 		[`wp-block-th-advance-heading th-h${attributes.uniqueID}`]: true,
 		"th-hide-desktop": attributes.responsiveTogHideDesktop,
 		"th-hide-tablet": attributes.responsiveTogHideTablet,

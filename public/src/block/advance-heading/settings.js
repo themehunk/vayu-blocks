@@ -1372,7 +1372,7 @@ const InsSettings = ({
 									onChange={ changeCustomWidth }
 									step={ 1 }
 									min={ 1 }
-									max={ 1000 }
+									max={ 1700 }
 									allowReset={ true }
 								/>
 								</ResponsiveControl>
