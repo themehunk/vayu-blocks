@@ -84,6 +84,10 @@
 	}
 } 
 
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container >  :where(:not(.alignleft):not(.alignright):not(.wp-block-vayu-blocks-advance-heading.alignfull)){
+	max-width:var(--h-max-width)!important;
+}
+
 .editor-styles-wrapper .wp-block-vayu-blocks-advance-heading a{
 	font-family:var(--heading-font-family);
 	font-weight:var(--heading-font-weight);
