@@ -157,8 +157,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         // Iterate through each slide and update the property only where the relevant customStyle is false
         attributes.slides.forEach((slide, index) => {
-            if (slide.layout[customStyleProperty] === false) {
-                let slideProperty = slide.layout;
+            if (slide[customStyleProperty] === false) {
+                let slideProperty = slide;
                 console.log(slideProperty);
                 properties.forEach((prop, idx) => {
                     if (idx === properties.length - 1) {
@@ -190,7 +190,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         // Ensure the layout object exists
         if (!newGlobal) {
-            newGlobal.layout = {};
+            newGlobal = {};
         }
     
         // Split the property path into individual properties
@@ -211,8 +211,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         // Iterate through each slide and update the property only where customStyle is false
         attributes.slides.forEach((slide, index) => {
-            if (slide.layout.customBackgroundImage === false) {
-                let slideProperty = slide.layout;
+            if (slide.customBackgroundImage === false) {
+                let slideProperty = slide;
                 properties.forEach((prop, idx) => {
                     if (idx === properties.length - 1) {
                         slideProperty[prop] = value;
@@ -389,7 +389,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     //duotone value
     const vayu_blocks_duotonevalue = () => {
         // Get the ID from the slide's layout duotone
-        const id = attributes.global.layout.duotone;
+        const id = attributes.global.duotone;
     
         // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
         const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
