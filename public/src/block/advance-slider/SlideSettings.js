@@ -554,9 +554,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 <h4>{__('Background','vayu-blocks')}</h4>
                                                 {attributes.slides[index].layout.backgroundImage ? (
                                                     <>         
-                                                        <div class="image-container">
+                                                        <div class="vayu-blocks-image-container">
                                                             <img src={attributes.slides[index].layout.backgroundImage} alt="slideimage" />
-                                                            <button class="change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>Change</button>
+                                                            <button class="vayu-blocks-change-button" onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>Change</button>
                                                         </div>
                                                         <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_clearBackgroundImageAndFocalPoint(index)}>
                                                             {__('Clear', 'vayu-blocks')}

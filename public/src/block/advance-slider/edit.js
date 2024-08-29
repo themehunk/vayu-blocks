@@ -63,7 +63,8 @@ const edit = ({ attributes, setAttributes }) => {
                 sliderRef.current = slider;
             }
         };
-           
+
+
         //Dots Styling
         let dotstyle;
 
@@ -116,9 +117,9 @@ const edit = ({ attributes, setAttributes }) => {
                                                 color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
                                                 cursor: 'pointer',
                                                 background: 'none', 
-                                                borderColor: activeIndex === index ? 'gray' : 'transparent',
-                                                borderWidth: '1px',
-                                                borderStyle: 'solid',
+                                                // borderColor: activeIndex === index ? 'gray' : 'transparent',
+                                                // borderWidth: '1px',
+                                                // borderStyle: 'solid',
                                                 borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -409,6 +410,7 @@ const edit = ({ attributes, setAttributes }) => {
             marginRight: slide.layout.button2.show ? '5px' : '0px',
         };
         };
+        // console.log(attributes.slides);
 
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
@@ -422,7 +424,7 @@ const edit = ({ attributes, setAttributes }) => {
 
                         <div style={{marginBottom: slide.layout.gaphb}}>
 
-                            <slide.layout.heading.tag className="vayu_blocks_heading" style={{marginBottom: slide.layout.gaphsub,fontSize:'0'}}>
+                            <slide.layout.heading.tag className="vayu_blocks_heading-edit" style={{marginBottom: slide.layout.gaphsub,fontSize:'0'}}>
                                 <a 
                                     href={slide.layout.heading.link} 
                                     target={slide.layout.heading.newtab ? "_blank" : "_self"}
@@ -433,7 +435,7 @@ const edit = ({ attributes, setAttributes }) => {
                             </slide.layout.heading.tag>
 
                             {slide.layout.subheading.show && (
-                                <slide.layout.subheading.tag className="vayu_blocks_sub_heading" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
+                                <slide.layout.subheading.tag className="vayu_blocks_sub_heading-edit" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
                                         {slide.layout.subheading.text}
                                 </slide.layout.subheading.tag>
                             )}
@@ -480,7 +482,7 @@ const edit = ({ attributes, setAttributes }) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes}>
                 
-                <div  class="slider-container">
+                <div  class="vayu-blocks-slider-main-container">
                     <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}
                     </Slider>
@@ -492,3 +494,4 @@ const edit = ({ attributes, setAttributes }) => {
 };
 
 export default edit;
+ 

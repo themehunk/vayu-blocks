@@ -24,6 +24,29 @@ function generate_inline_styles($attr) {
     $wrapper = ".th-post-grid-wrapper-{$uniqueId}";
     $post = ".th-post-grid-inline-{$uniqueId}";
     
+    $css .= ".th-post-grid-main-wp-editor-wrapper {";
+        // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
+        if ($attr['widthType'] === 'customwidth') {
+            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        } elseif ($attr['widthType'] === 'inlinewidth') {
+            $css .= "display: inline-flex;";
+        }
+    $css .= "}";
+    
+     // Add media query for tablet screens
+     $css .= "@media (max-width: 768px) {";
+        $css .= ".th-post-grid-main-wp-editor-wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
+    // Add media query for Mobile screens
+    $css .= "@media (max-width: 300px) {";
+        $css .= ".th-post-grid-main-wp-editor-wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+
     //Main div
     $css .= "$wrapper {";
         // Desktop Padding

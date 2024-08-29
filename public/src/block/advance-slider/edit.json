@@ -120,6 +120,7 @@
         "type": "object",
         "default":{
             "color": "white",
+            "hovercolor": "blue",
             "backgroundColor": "gray",
             "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
             "size":"20px",
@@ -134,7 +135,11 @@
             } 
         }
     },
-    "slides": {
+    "slidermargin":{
+        "type":"number",
+        "default":5
+    },
+    "slides":{
         "type": "array",
         "default": [
             {
@@ -477,12 +482,11 @@
                     "alignment": "center",
                     "alignmenttop":"center"
                 }
-                
             }
         ]
     },
     "global":{
-        "type":"array",
+        "type":"object",
         "default":
         {
             "layout": {

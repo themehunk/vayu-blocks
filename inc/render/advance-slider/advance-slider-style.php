@@ -212,12 +212,14 @@ function generate_inline_slider_styles($attr) {
     $css .= "$wrapper .slick-dots li button {";
         $css .= "cursor: pointer;";
         $css .= "background: none;";
-        $css .= "border: 1px solid transparent;";
+        // $css .= "border: 1px solid transparent;";
         $css .= "display: flex;";
         $css .= "align-items: center;";
         $css .= "justify-content: center;";
         $css .= "color: " . $attr['dots']['color'] . ";";
-        $css .= "font-size: " . (strpos($attr['dots']['size'], 'px') === false ? $attr['dots']['size'] . 'px' : $attr['dots']['size']) . ";";
+        if($attr['dots']['option']=== 'number'){
+            $css .= "font-size: " . (strpos($attr['dots']['size'], 'px') === false ? $attr['dots']['size'] . 'px' : $attr['dots']['size']) . ";";
+        }
         $css .= "border-radius:50%;";
     $css .= "}\n";
 
@@ -242,6 +244,7 @@ function generate_inline_slider_styles($attr) {
             $css .= "content: '•';"; // Use a dot character
         } elseif ($attr['dots']['option'] === 'square') {
             $css .= "content: '■';"; // Use a square character
+            $css .= "font-Size : 32px;";
         } else {
             $css .= "content: ''"; // No content
         }

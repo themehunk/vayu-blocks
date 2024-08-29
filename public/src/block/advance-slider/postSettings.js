@@ -175,6 +175,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
         setAttributes({ global: newGlobal, slides: attributes.slides });
     };
 
+    // console.log(attributes.global);
+
     //Background style update with global attributes
     const vayu_blocks_updateSliderBackgroundStyles = (propertyPath, value) => {
         
@@ -577,6 +579,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
                             min={0}
                             max={500}
+                            step={1}
+                        />
+
+                        <RangeControl
+                            label={__('Gap Between Slides', 'vayu-blocks')}
+                            value={attributes.slidermargin}
+                            onChange={(value) => setAttributes({ slidermargin: value })}
+                            min={0}
+                            max={50}
                             step={1}
                         />
 
@@ -1202,7 +1213,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             />  
 
                             <PanelColorSettings
-                                    title={ __( 'Background Color', 'vayu-blocks' ) }
+                                    title={ __( 'Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.dots.backgroundColor,
@@ -1212,7 +1223,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                     backgroundColor: colorValue,
                                                 },
                                             }),
-                                            label: __( 'Background Color', 'vayu-blocks' ),
+                                            label: __( 'Background', 'vayu-blocks' ),
                                         },
                                         {
                                             value: attributes.dots.color,
@@ -1294,7 +1305,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                                 <PanelColorSettings
-                                    title={ __( 'Backgrund Color', 'vayu-blocks' ) }
+                                    title={ __( 'Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.arrowstyleleft.backgroundColor,
@@ -1304,7 +1315,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                     backgroundColor: colorValue,
                                                 },
                                             }),
-                                            label: __( 'Background Color', 'vayu-blocks' ),
+                                            label: __( 'Background', 'vayu-blocks' ),
                                         },
                                         {
                                             value: attributes.arrowstyleleft.color,
@@ -1315,6 +1326,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 },
                                             }),
                                             label: __( 'Color', 'vayu-blocks' ),
+                                        },
+                                        {
+                                            value: attributes.arrowstyleleft.hovercolor,
+                                            onChange: (colorValue) => setAttributes({
+                                                arrowstyleleft: {
+                                                    ...attributes.arrowstyleleft,
+                                                    hovercolor: colorValue,
+                                                },
+                                            }),
+                                            label: __( 'Hover Color', 'vayu-blocks' ),
                                         }
                                        
                                     ] }
