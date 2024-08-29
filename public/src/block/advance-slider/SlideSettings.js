@@ -228,7 +228,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 ...attributes.slides,
                 {
                     layout: {
-                        ...attributes.global.layout,  // Use global layout attributes
+                        ...attributes.global,  // Use global layout attributes
                         uniqueId: generateUniqueId()   // Add unique ID
                     }
                 }
@@ -239,11 +239,10 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     //style-update
     const vayu_blocks_updateSliderStyles = (index, propertyPath, value='') => {
 
-        // console.log(value);
-        // console.log(propertyPath);
         if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
             return;
         }
+        
         if (value === undefined) {
             value = '';
         }

@@ -182,22 +182,20 @@ class Vayu_blocks_Advance_Slider {
                     });
     
                     
-                    // Initially add the 'vayu-blocks-animate-on-slide' class to the elements in the active slide
                     $('.slick-slide.slick-active').each(function() {
                         $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('vayu-blocks-animate-on-slide');
                     });
                 
-                    // Before slide change, remove the 'vayu-blocks-animate-on-slide' class from all elements
                     $('.vayu-blocks-advance-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
                         $('.slick-slide .vayu_blocks_heading, .slick-slide .vayu_blocks_sub_heading, .slick-slide .vayu_blocks_slider_button1, .slick-slide .vayu_blocks_slider_button2').removeClass('vayu-blocks-animate-on-slide');
                     });
                 
-                    // After slide change, add the 'vayu-blocks-animate-on-slide' class to the elements in the new active slide
                     $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
                         $('.slick-slide.slick-active').each(function() {
                             $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('vayu-blocks-animate-on-slide');
                         });
                     });
+                    
                 });
             </script>
         ";

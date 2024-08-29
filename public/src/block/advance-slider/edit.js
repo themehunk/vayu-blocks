@@ -411,7 +411,31 @@ const edit = ({ attributes, setAttributes }) => {
         };
         };
         // console.log(attributes.slides);
+        // const blocks = wp.data.select('core/block-editor').getBlocks();
+        // console.log(blocks);
+        
+        //  const { global } = attributes;
 
+        // useEffect(() => {
+          
+        //         // Define the new layout object you want to add
+        //         const newLayout = {
+        //             // Your new or default layout values here
+        //         };
+    
+        //         // Merge the new layout with the existing global object, or create a new one if it doesn't exist
+        //         setAttributes({
+        //             global: {
+        //                 ...global, // Spread existing global attributes
+        //                 layout: {
+        //                     ...global?.layout, // Spread existing layout if it exists
+        //                     ...newLayout // Merge or add the new layout
+        //                 }
+        //             }
+        //         });
+        // }, []); // Empty dependency array means this runs once on mount
+    
+        
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
 
