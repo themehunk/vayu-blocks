@@ -417,9 +417,8 @@ export default function AdvanceSettings({ children, attributes }) {
         ...borderradiusstyles,
         // width: '100%',
 
-        position: position || undefined,
-        zIndex: zIndex || undefined,
-        alignSelf: selfAlign || undefined,
+        //position: position || undefined,
+        //zIndex: zIndex || undefined,
         order: order === 'custom' ? customOrder : 'undefined',
       
         borderStyle: borderType || undefined,
@@ -475,7 +474,17 @@ export default function AdvanceSettings({ children, attributes }) {
         ...styles,
         ...(isHovered ? filteredHoverStyles : {}),
     };
+   
+    // Assume attributes is available in your context
+    const animationtype = attributes.animationtype === 'animation1' 
+    ? 'fadeInUp' 
+    : attributes.animationtype === 'animation2'
+    ? 'fadeInDown' : attributes.animationtype === 'animation3'
+    ? 'fadeInLeft': attributes.animationtype === 'animation4'
+    ? 'fadeInRight'
+    : ''; // Default or fallback value
 
+    const animationopacity = attributes.animationtype === 'noanimation' ? 1 : 0;
     const blockProps = useBlockProps({
 
         className: attributes.widthType === 'fullwidth' 
@@ -488,6 +497,8 @@ export default function AdvanceSettings({ children, attributes }) {
             ...mergedStyles,
             '--slider-margin': `${attributes.slidermargin}px`,
             '--sliderarrow-hover-color': `${attributes.arrowstyleleft.hovercolor}`,
+            '--animation-type': animationtype,
+            '--animation-type-opacity' : animationopacity,
         },
 
         onMouseEnter: handleMouseEnter,

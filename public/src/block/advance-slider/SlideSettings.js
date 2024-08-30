@@ -816,7 +816,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                     />
 
                                                     <TextControl
-                                                        className='vayu_blocks_textarea'
+                                                        className='vayu_blocks_textareatextcontrol'
                                                         label="Link URL"
                                                         value={ attributes.slides[index].heading.link }
                                                         onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'heading.link', value)}

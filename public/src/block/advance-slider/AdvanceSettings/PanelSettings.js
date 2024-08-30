@@ -1819,7 +1819,7 @@ const PanelSettings = ({
 								/>
 							</ResponsiveControl>
 
-							<ResponsiveControl
+							{/* <ResponsiveControl
 								label={ __( 'Z-index', 'vayu-blocks' ) }
 								>	
 								<RangeControl
@@ -1831,7 +1831,7 @@ const PanelSettings = ({
 									max={ 999999 }
 									allowReset={ true }
 								/>
-							</ResponsiveControl>
+							</ResponsiveControl> */}
 
 						</PanelBody>
 

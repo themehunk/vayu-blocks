@@ -160,7 +160,6 @@ const edit = ({ attributes, setAttributes }) => {
             background: `${attributes.arrowstyleleft.backgroundColor}`,
             //borderRadius
             borderRadius: `${attributes.arrowstyleleft.borderRadius.top || '0px'} ${attributes.arrowstyleleft.borderRadius.right || '0px'} ${attributes.arrowstyleleft.borderRadius.bottom || '0px'} ${attributes.arrowstyleleft.borderRadius.left || '0px'}`,
-               
             border: 'none',
             cursor: 'pointer',
             opacity: `${attributes.arrowstyleleft.opacity}`,
@@ -199,6 +198,7 @@ const edit = ({ attributes, setAttributes }) => {
                         style={{
                             ...stylearrow_div,
                             marginLeft: `-${attributes.arrowstyleleft.position + 30}px`,
+                            marginTop:`${attributes.arrowstyleleft.positionVertical}px`,
                             display: attributes.arrowOnHover ? 'none' : '', // Hide initially if arrowOnHover is true
                         }}
                     >
@@ -220,6 +220,7 @@ const edit = ({ attributes, setAttributes }) => {
                         style={{
                             ...stylearrow_div,
                             marginLeft: `${attributes.arrowstyleleft.position}px`,
+                            marginTop:`${attributes.arrowstyleleft.positionVertical}px`,
                             display: attributes.arrowOnHover ? 'none' : '', // Hide initially if arrowOnHover is true
                         }}
                     >
@@ -228,7 +229,6 @@ const edit = ({ attributes, setAttributes }) => {
                 </div>
             );        
         }
-       
 
         setSettings(newSettings);
     }, [
@@ -293,9 +293,9 @@ const edit = ({ attributes, setAttributes }) => {
         const topPadding = slide.padding.top || '0px';
         const rightPadding = slide.padding.right || '0px';
         const leftPadding = slide.padding.left || '0px';
-
-        const bottomPaddingValue = parseInt(slide.padding.bottom, 10) || 0; // Default to 0 if parsing fails
-        const bottomPadding = (bottomPaddingValue + 50) + 'px';
+        const bottomPadding = slide.padding.bottom || '0px';
+        //const bottomPaddingValue = parseInt(slide.padding.bottom, 10) || 0; // Default to 0 if parsing fails
+        //const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
         // Slide Style
         const vayu_blocks_slideStyle = {
@@ -330,13 +330,13 @@ const edit = ({ attributes, setAttributes }) => {
 
             //padding
             padding: `${topPadding} ${rightPadding} ${bottomPadding} ${leftPadding}`,
-   
+            
              // Conditional background image
             ...(slide.backgroundImage && {
                 background: `url(${slide.backgroundImage})`,
                 backgroundSize: 'cover', // Assuming you want these properties based on your preferences
                 backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'top center',
+                backgroundPosition: 'center',
             }),
               
         };

@@ -411,6 +411,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     }    
 
+    console.log(attributes.arrowstyleleft);
+
     return (
         <>
 
@@ -508,7 +510,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 step={1}
                             />
                         )}
-
+                        
+                        <SelectControl
+                            label={__('Animation', 'vayu-blocks')}
+                            value={attributes.animationtype}
+                            options={[
+                                { label: __('Animation (UP)', 'vayu-blocks'), value: 'animation1' },
+                                { label: __('Animation (Down)', 'vayu-blocks'), value: 'animation2' },
+                                { label: __('Animation (Left)', 'vayu-blocks'), value: 'animation3' },
+                                { label: __('Animation (Right)', 'vayu-blocks'), value: 'animation4' },
+                                { label: __('No Animation', 'vayu-blocks'), value: 'noanimation' },
+                            ]}
+                            onChange={(value)=> setAttributes({animationtype:value})}
+                        />  
+                        
                         <h4>{__('Alignment', 'vayu-blocks')}</h4>
 
                         <ToogleGroupControl
@@ -572,6 +587,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             max={500}
                             step={1}
                         />
+
                         <RangeControl
                             label={__('Gap Between Heading & Button', 'vayu-blocks')}
                             className = "vayu_blocks_gphsub"
@@ -659,8 +675,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     <>
                         <p>This style will apply to all slides except those with custom styles enabled.</p>
 
-                        
-                    
                         <>
                             <HoverControl
                                 value={hoverbutton}
@@ -889,7 +903,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                     },
                                                 ] }
                                             >
-
                                             </PanelColorSettings>
                                             
                                             <FontSizePicker
@@ -1303,7 +1316,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     onChange={(value)=>setAttributes({ arrowstyleleft: { ...attributes.arrowstyleleft, tag: value}})}
                                 />  
 
-
                                 <PanelColorSettings
                                     title={ __( 'Color', 'vayu-blocks' ) }
                                     colorSettings={ [
@@ -1337,7 +1349,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                             }),
                                             label: __( 'Hover Color', 'vayu-blocks' ),
                                         }
-                                       
                                     ] }
 
                                 >
@@ -1382,7 +1393,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 />
 
                                 <RangeControl
-                                    label={__('Position', 'vayu-blocks')}
+                                    label={__('Horizontal Position', 'vayu-blocks')}
                                     value={attributes.arrowstyleleft.position}
                                     onChange={(value) => setAttributes({
                                         arrowstyleleft: {
@@ -1392,6 +1403,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     })}
                                     min={-30}
                                     max={200}
+                                    step={1}
+                                />
+
+                                <RangeControl
+                                    label={__('Vertical Position', 'vayu-blocks')}
+                                    value={attributes.arrowstyleleft.positionVertical}
+                                    onChange={(value) => setAttributes({
+                                        arrowstyleleft: {
+                                            ...attributes.arrowstyleleft,
+                                            positionVertical: value,
+                                        },
+                                    })}
+                                    min={-150}
+                                    max={150}
                                     step={1}
                                 />
                                 

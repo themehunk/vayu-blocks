@@ -137,6 +137,11 @@
     margin-left:3px;
 }
 
+.vayu_blocks_textareatextcontrol{
+    width:91%;
+    margin-left:3px;
+}
+
 .vayu_blocks_togglecontrol{
     margin-left:4px;
 }
@@ -293,9 +298,20 @@
 //edit.js
 /* Animation for heading */
 @keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Start slightly lower */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* End at the original position */
+    }
+}
+
+@keyframes fadeInDown {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(-20px);
     }
     to {
         opacity: 1;
@@ -306,7 +322,7 @@
 @keyframes fadeInLeft {
     from {
         opacity: 0;
-        transform: translateX(-10px);
+        transform: translateX(-20px);
     }
     to {
         opacity: 1;
@@ -314,35 +330,38 @@
     }
 }
 
-@keyframes fadeInDown {
+@keyframes fadeInRight {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateX(20px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
-.slide-active {
-    animation: fadeInUp 1s ease-out;
-}
-
 .vayu_blocks_heading-edit{
-    animation: fadeInUp 1s ease-out;
+    opacity:var(--animation-type-opacity);
+    animation: var(--animation-type) 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;
 }
 
 .vayu_blocks_sub_heading-edit {
-    animation: fadeInUp 1s ease-out;
+    opacity:var(--animation-type-opacity);
+    animation: var(--animation-type) 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation-delay: 0.5s;
 }
 
 .vayu_blocks_button1_heading {
-    animation: fadeInUp 1s ease-out;
+    opacity:var(--animation-type-opacity);
+    animation: var(--animation-type) 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation-delay: 1s;
 }
 
 .vayu_blocks_button2_heading {
-    animation: fadeInUp 1s ease-out;
+    opacity:var(--animation-type-opacity);
+    animation: var(--animation-type) 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation-delay: 1s;
 }
 
 .new{
@@ -439,7 +458,7 @@ content: "" !important;
 .vayu_blocks_slider-slide{
     background-size: cover !important; 
     background-repeat: no-repeat !important;
-    background-position: top center !important;
+    background-position: center !important;
 }
 
 
