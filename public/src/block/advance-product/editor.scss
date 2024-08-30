@@ -220,12 +220,10 @@
 	--background-size-hvr:var(--background-size);
 	--transition:0.2s;
 	--display:block;
-	width:var(--custom-width);
-	max-width:var(--custom-max-width);
+	
 	display:var(--display);
 
 	.th-product-block-wrapper{
-		
 		padding-top:var(--padding-top);
 		padding-right:var(--padding-right);
 		padding-bottom:var(--padding-bottom);

@@ -6,9 +6,6 @@
 	"title": "Advance Button",
 	"category": "vayu-blocks",
 	"description": "Example block scaffolded with Create Block tool.",
-	"supports": {
-		"html": false
-	},
 	"textdomain": "vayu-blocks",
 	"attributes": {
 		"id": {
@@ -1087,5 +1084,10 @@
 			"type": "number"
 		}
 
+	},
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false
 	}
+	
 }
