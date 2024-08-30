@@ -84,8 +84,8 @@
 	}
 } 
 
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container >  :where(:not(.alignleft):not(.alignright):not(.wp-block-vayu-blocks-advance-heading.alignfull)){
-	max-width:var(--h-max-width)!important;
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-vayu-blocks-advance-heading.alignwide{
+	max-width:var(--h-max-width);
 }
 
 .editor-styles-wrapper .wp-block-vayu-blocks-advance-heading a{
@@ -100,7 +100,6 @@
 	}
 }
 
-
 @media only screen and (min-width: 1024px)  {
 	.wp-block-vayu-blocks-advance-heading.th-hide-desktop:before {
 		content: "";
@@ -114,7 +113,6 @@
 		z-index:99999999;
 		
 	}
-
 	.block-editor-block-list__layout .block-editor-block-list__block.th-hide-desktop.wp-block-vayu-blocks-advance-heading{
 	 position: initial;
 	pointer-events:none;

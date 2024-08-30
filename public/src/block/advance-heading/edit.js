@@ -588,6 +588,9 @@ import classnames from 'classnames';
 	if( attributes.widthType =='fullwidth') {
 		headingWidthClass = 'alignfull';
 	}
+	if( attributes.widthType =='customwidth') {
+		headingWidthClass = 'alignwide';
+	}
 
 	const Classes = classnames(
 		headingWidthClass, // Include headingWidthClass directly as a string
