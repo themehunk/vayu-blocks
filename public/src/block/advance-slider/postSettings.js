@@ -411,8 +411,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     }    
 
-    console.log(attributes.arrowstyleleft);
-
     return (
         <>
 

@@ -10,6 +10,10 @@
         "type":"number",
         "default":0
     },
+    "alignment":{
+        "type":"string",
+        "default":"none"
+    },
     "infinite": {
         "type": "boolean",
         "default": true

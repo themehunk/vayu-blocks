@@ -470,3 +470,22 @@ content: "" !important;
 .vayu_blocks_customstyle_toggle_control_layout_style{
     margin-left: 2px;
 }
+
+.vayu_blocks_alignment-option {
+    display: flex;
+    margin-right:30px;
+    flex-direction: column;
+    padding: 0px 5px; /* Padding around each option */
+    cursor: pointer;
+    border-bottom: none; /* Light border for separation */
+    transition: background-color 0.2s ease;
+}
+
+.vayu_blocks_alignment-heading{
+    font-size:15px;
+}
+
+
+.vayu_blocks_alignment-heading-full{
+    font-size:15px;
+}
