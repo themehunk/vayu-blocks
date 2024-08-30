@@ -67,12 +67,25 @@ class VayuBlocksPostGrid {
         $query = new WP_Query($args);
 
         $animated = isset($attr['className']) ? $attr['className'] : '';
+        $className = '';
+        if (isset($this->attr['widthType'])) {
+            switch ($this->attr['widthType']) {
+                case 'fullwidth':
+                    $className = 'alignfull';
+                    break;
+                case 'customwidth':
+                    $className = 'alignwide';
+                    break;
+            }
+        }
+
 
         // Rendering posts
         $output = '';
         if ($query->have_posts()) {
+            $output .= '<div class="' . esc_attr($className) . ' ' . $animated . ' th-post-grid-main-wp-editor-wrapper">';
             $output .= '<div>';
-            $output .= '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . ' ' . $animated . '">';
+            $output .= '<div class="th-post-grid-wrapper th-post-grid-wrapper-' . esc_attr($this->attr['pg_posts'][0]['uniqueID']) . '">';
             
             while ($query->have_posts()) {
                 $query->the_post();
@@ -112,6 +125,7 @@ class VayuBlocksPostGrid {
 
             $output .= '</div>';
             $output .= '<div class="pagination">' . $this->render_pagination($query, $paged) . '</div>'; // Render pagination controls
+            $output .= '</div>';
             $output .= '</div>';
          
         } else {

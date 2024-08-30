@@ -1768,6 +1768,7 @@ const PanelSettings = ({
 								</Suspense>
 
 							) }
+							
 							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 
 

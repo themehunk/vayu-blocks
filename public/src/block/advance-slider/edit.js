@@ -63,7 +63,8 @@ const edit = ({ attributes, setAttributes }) => {
                 sliderRef.current = slider;
             }
         };
-           
+
+
         //Dots Styling
         let dotstyle;
 
@@ -116,9 +117,9 @@ const edit = ({ attributes, setAttributes }) => {
                                                 color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
                                                 cursor: 'pointer',
                                                 background: 'none', 
-                                                borderColor: activeIndex === index ? 'gray' : 'transparent',
-                                                borderWidth: '1px',
-                                                borderStyle: 'solid',
+                                                // borderColor: activeIndex === index ? 'gray' : 'transparent',
+                                                // borderWidth: '1px',
+                                                // borderStyle: 'solid',
                                                 borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -267,53 +268,72 @@ const edit = ({ attributes, setAttributes }) => {
         
     }, [attributes.index]);
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+   
+    useEffect(() => {
+        // Check if there is exactly one slide
+        if (attributes.slides.length === 1) {
+            // Check if a slide with the same unique ID already exists
+            const newSlide = {
+                ...attributes.global,  // Use global layout attributes
+                uniqueId: generateUniqueId()   // Add unique ID
+            };
+    
+            // Add the new slide if it does not already exist
+            const newSlides = [...attributes.slides, newSlide];
+            setAttributes({
+                slides: newSlides
+            });
+        }
+    }, [attributes.slides]); // Dependency on attributes.slides to react to changes
+    
     const vayu_blocks_slides = attributes.slides.map((slide) => {
-
         // Extract padding values with default '0px'
-        const topPadding = slide.layout.padding.top || '0px';
-        const rightPadding = slide.layout.padding.right || '0px';
-        const leftPadding = slide.layout.padding.left || '0px';
+        const topPadding = slide.padding.top || '0px';
+        const rightPadding = slide.padding.right || '0px';
+        const leftPadding = slide.padding.left || '0px';
 
-        const bottomPaddingValue = parseInt(slide.layout.padding.bottom, 10) || 0; // Default to 0 if parsing fails
+        const bottomPaddingValue = parseInt(slide.padding.bottom, 10) || 0; // Default to 0 if parsing fails
         const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
         // Slide Style
         const vayu_blocks_slideStyle = {
-            height: slide.layout.heightauto 
-                ? (slide.layout.imageheight > 200 ? `${slide.layout.imageheight}px` : '100%')
-                : `${slide.layout.customheight}px`,
+            height: slide.heightauto 
+                ? (slide.imageheight > 200 ? `${slide.imageheight}px` : '100%')
+                : `${slide.customheight}px`,
             overflow: 'hidden',
             position:'relative',
             display:'flex',
             justifyContent:'center',
-            alignItems:slide.layout.alignmenttop,
+            alignItems:slide.alignmenttop,
             
             //border
-            borderColor: slide.layout.border?.color || 'transparent',
-            borderWidth: slide.layout.border?.width || '0',
-            borderStyle: slide.layout.border?.style || 'none',
-            borderTopColor: slide.layout.border?.topcolor || slide.layout.border?.color || 'transparent',
-            borderTopWidth: slide.layout.border?.topwidth || slide.layout.border?.width || '0',
-            borderTopStyle: slide.layout.border?.topstyle || slide.layout.border?.style || 'none',
-            borderBottomColor: slide.layout.border?.bottomcolor || slide.layout.border?.color || 'transparent',
-            borderBottomWidth: slide.layout.border?.bottomwidth || slide.layout.border?.width || '0',
-            borderBottomStyle: slide.layout.border?.bottomstyle || slide.layout.border?.style || 'none',
-            borderLeftColor: slide.layout.border?.leftcolor || slide.layout.border?.color || 'transparent',
-            borderLeftWidth: slide.layout.border?.leftwidth || slide.layout.border?.width || '0',
-            borderLeftStyle: slide.layout.border?.leftstyle || slide.layout.border?.style || 'none',
-            borderRightColor: slide.layout.border?.rightcolor || slide.layout.border?.color || 'transparent',
-            borderRightWidth: slide.layout.border?.rightwidth || slide.layout.border?.width || '0',
-            borderRightStyle: slide.layout.border?.rightstyle || slide.layout.border?.style || 'none',
+            borderColor: slide.border?.color || 'transparent',
+            borderWidth: slide.border?.width || '0',
+            borderStyle: slide.border?.style || 'none',
+            borderTopColor: slide.border?.topcolor || slide.border?.color || 'transparent',
+            borderTopWidth: slide.border?.topwidth || slide.border?.width || '0',
+            borderTopStyle: slide.border?.topstyle || slide.border?.style || 'none',
+            borderBottomColor: slide.border?.bottomcolor || slide.border?.color || 'transparent',
+            borderBottomWidth: slide.border?.bottomwidth || slide.border?.width || '0',
+            borderBottomStyle: slide.border?.bottomstyle || slide.border?.style || 'none',
+            borderLeftColor: slide.border?.leftcolor || slide.border?.color || 'transparent',
+            borderLeftWidth: slide.border?.leftwidth || slide.border?.width || '0',
+            borderLeftStyle: slide.border?.leftstyle || slide.border?.style || 'none',
+            borderRightColor: slide.border?.rightcolor || slide.border?.color || 'transparent',
+            borderRightWidth: slide.border?.rightwidth || slide.border?.width || '0',
+            borderRightStyle: slide.border?.rightstyle || slide.border?.style || 'none',
             
             //borderRadius
-            borderRadius: `${slide.layout.borderRadius.top || '0px'} ${slide.layout.borderRadius.right || '0px'} ${slide.layout.borderRadius.bottom || '0px'} ${slide.layout.borderRadius.left || '0px'}`,
+            borderRadius: `${slide.borderRadius.top || '0px'} ${slide.borderRadius.right || '0px'} ${slide.borderRadius.bottom || '0px'} ${slide.borderRadius.left || '0px'}`,
 
             //padding
             padding: `${topPadding} ${rightPadding} ${bottomPadding} ${leftPadding}`,
    
              // Conditional background image
-            ...(slide.layout.backgroundImage && {
-                background: `url(${slide.layout.backgroundImage})`,
+            ...(slide.backgroundImage && {
+                background: `url(${slide.backgroundImage})`,
                 backgroundSize: 'cover', // Assuming you want these properties based on your preferences
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'top center',
@@ -341,8 +361,8 @@ const edit = ({ attributes, setAttributes }) => {
             bottom: 0,
             width:'100%',
             height:'100%',
-            ...vayu_blocks_getBackgroundStyles(slide.layout),
-            opacity:slide.layout.opacity,
+            ...vayu_blocks_getBackgroundStyles(slide),
+            opacity:slide.opacity,
             zIndex:1,
         }
 
@@ -351,7 +371,7 @@ const edit = ({ attributes, setAttributes }) => {
             zIndex: 3,
             // height: '100%',
             position:'relative',
-            textAlign: slide.layout.alignment,  // Use the alignment from slide.layout
+            textAlign: slide.alignment,  // Use the alignment from slide
         };
 
         // Heading Style
@@ -406,9 +426,13 @@ const edit = ({ attributes, setAttributes }) => {
             padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
 
 
-            marginRight: slide.layout.button2.show ? '5px' : '0px',
+            marginRight: slide.button2.show ? '5px' : '0px',
         };
         };
+
+        //console.log(attributes.slides);
+        // const blocks = wp.data.select('core/block-editor').getBlocks();
+        // console.log(blocks);
 
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
@@ -420,48 +444,48 @@ const edit = ({ attributes, setAttributes }) => {
 
                     <div style={vayu_blocks_inside_conatiner_div}>
 
-                        <div style={{marginBottom: slide.layout.gaphb}}>
+                        <div style={{marginBottom: slide.gaphb}}>
 
-                            <slide.layout.heading.tag className="vayu_blocks_heading" style={{marginBottom: slide.layout.gaphsub,fontSize:'0'}}>
+                            <slide.heading.tag className="vayu_blocks_heading-edit" style={{marginBottom: slide.gaphsub,fontSize:'0'}}>
                                 <a 
-                                    href={slide.layout.heading.link} 
-                                    target={slide.layout.heading.newtab ? "_blank" : "_self"}
-                                    style={vayu_blocks_generateheadingStyle(slide.layout.heading)}
+                                    href={slide.heading.link} 
+                                    target={slide.heading.newtab ? "_blank" : "_self"}
+                                    style={vayu_blocks_generateheadingStyle(slide.heading)}
                                 >
-                                    {slide.layout.heading.text}
+                                    {slide.heading.text}
                                 </a>
-                            </slide.layout.heading.tag>
+                            </slide.heading.tag>
 
-                            {slide.layout.subheading.show && (
-                                <slide.layout.subheading.tag className="vayu_blocks_sub_heading" style={vayu_blocks_generatesubheadingStyle(slide.layout.subheading)}>
-                                        {slide.layout.subheading.text}
-                                </slide.layout.subheading.tag>
+                            {slide.subheading.show && (
+                                <slide.subheading.tag className="vayu_blocks_sub_heading-edit" style={vayu_blocks_generatesubheadingStyle(slide.subheading)}>
+                                        {slide.subheading.text}
+                                </slide.subheading.tag>
                             )}
 
                         </div>
                                 
                         <div>
 
-                            {slide.layout.button1.show && (
-                                <button style={vayu_blocks_generateButtonStyle(slide.layout.button1)} className="vayu_blocks_button1_heading">
+                            {slide.button1.show && (
+                                <button style={vayu_blocks_generateButtonStyle(slide.button1)} className="vayu_blocks_button1_heading">
                                     <a 
-                                        href={slide.layout.button1.link} 
-                                        target={slide.layout.button1.newtab ? "_blank" : "_self"}
-                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button1.color }}
+                                        href={slide.button1.link} 
+                                        target={slide.button1.newtab ? "_blank" : "_self"}
+                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.button1.color }}
                                     >
-                                        {slide.layout.button1.text}
+                                        {slide.button1.text}
                                     </a>
                                 </button>
                             )}
             
-                            {slide.layout.button2.show && (
-                                <button className="vayu_blocks_button2_heading" style={vayu_blocks_generateButtonStyle(slide.layout.button2)}>
+                            {slide.button2.show && (
+                                <button className="vayu_blocks_button2_heading" style={vayu_blocks_generateButtonStyle(slide.button2)}>
                                     <a 
-                                        href={slide.layout.button2.link} 
-                                        target={slide.layout.button2.newtab ? "_blank" : "_self"}
-                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.layout.button2.color }}
+                                        href={slide.button2.link} 
+                                        target={slide.button2.newtab ? "_blank" : "_self"}
+                                        style={{ textDecoration: 'none', cursor: 'pointer',color: slide.button2.color }}
                                     >
-                                        {slide.layout.button2.text}
+                                        {slide.button2.text}
                                     </a>
                                 </button>
                             )}
@@ -480,7 +504,7 @@ const edit = ({ attributes, setAttributes }) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes}>
                 
-                <div  class="slider-container">
+                <div  class="vayu-blocks-slider-main-container">
                     <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}
                     </Slider>
@@ -492,3 +516,4 @@ const edit = ({ attributes, setAttributes }) => {
 };
 
 export default edit;
+ 

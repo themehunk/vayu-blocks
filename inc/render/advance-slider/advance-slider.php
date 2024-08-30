@@ -39,7 +39,7 @@ class Vayu_blocks_Advance_Slider {
 
             //slides
             foreach ($this->attr['slides'] as $index => $slide) {
-                $uniqueId = isset($slide['layout']['uniqueId']) ? esc_attr($slide['layout']['uniqueId']) : '';
+                $uniqueId = isset($slide['uniqueId']) ? esc_attr($slide['uniqueId']) : '';
 
                 $slides_html .= '<div class="vayu_blocks_slide_' . $uniqueId . '">';//every slide with their unique id
                     // Color overlay
@@ -50,26 +50,26 @@ class Vayu_blocks_Advance_Slider {
 
                         $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
                             // Heading
-                            if (isset($slide['layout']['heading'])) {
-                                $slides_html .= $this->render_heading($slide['layout']['heading']);
+                            if (isset($slide['heading'])) {
+                                $slides_html .= $this->render_heading($slide['heading']);
                             }   
 
                             // Subheading
-                            if (isset($slide['layout']['subheading']) && $slide['layout']['subheading']['show']) {
-                                $slides_html .= $this->render_subheading($slide['layout']['subheading']);
+                            if (isset($slide['subheading']) && $slide['subheading']['show']) {
+                                $slides_html .= $this->render_subheading($slide['subheading']);
                             }
 
                         $slides_html .= '</div>';
 
                         $slides_html .= '<div>';
                             // Button 1
-                            if (isset($slide['layout']['button1']) && $slide['layout']['button1']['show']) {
-                                $slides_html .= $this->render_button1($slide['layout']['button1']);
+                            if (isset($slide['button1']) && $slide['button1']['show']) {
+                                $slides_html .= $this->render_button1($slide['button1']);
                             }
 
                             // Button 2
-                            if (isset($slide['layout']['button2']) && $slide['layout']['button2']['show']) {
-                                $slides_html .= $this->render_button2($slide['layout']['button2']);
+                            if (isset($slide['button2']) && $slide['button2']['show']) {
+                                $slides_html .= $this->render_button2($slide['button2']);
                             }
 
                         $slides_html .= '</div>';
@@ -178,17 +178,24 @@ class Vayu_blocks_Advance_Slider {
                         appendDots: $('.vayu-blocks-advance-slider'),
                         slidesToShow: {$this->attr['slidesToShow']},
                         swipe: {$swipe},
+                        
                     });
     
                     
+                    $('.slick-slide.slick-active').each(function() {
+                        $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('vayu-blocks-animate-on-slide');
+                    });
+                
                     $('.vayu-blocks-advance-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        $('.slick-slide .vayu_blocks_inside_container_div ').removeClass('slide-active');
+                        $('.slick-slide .vayu_blocks_heading, .slick-slide .vayu_blocks_sub_heading, .slick-slide .vayu_blocks_slider_button1, .slick-slide .vayu_blocks_slider_button2').removeClass('vayu-blocks-animate-on-slide');
                     });
-    
+                
                     $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
-                        $('.slick-slide.slick-active .vayu_blocks_inside_container_div ').addClass('slide-active');
+                        $('.slick-slide.slick-active').each(function() {
+                            $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('vayu-blocks-animate-on-slide');
+                        });
                     });
-    
+
                 });
             </script>
         ";
@@ -210,7 +217,6 @@ function vayu_blocks_advance_slider_render($attr) {
     $slider = new Vayu_blocks_Advance_Slider($attr);
 
     // Determine the class name based on the widthType attribute
-    
 
     // Render and return the slider output inside a div with the dynamic class name
     return  $slider->render();

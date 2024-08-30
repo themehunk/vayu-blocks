@@ -208,16 +208,22 @@ function generate_inline_slider_styles($attr) {
             
     $css .= "}";
 
+    $css .= ".vayu-blocks-advance-slider .slick-slide{";
+        $css .= "margin: " . $attr['slidermargin'] . "px;";
+    $css .= "}\n";
+
     // Common dot styles
     $css .= "$wrapper .slick-dots li button {";
         $css .= "cursor: pointer;";
         $css .= "background: none;";
-        $css .= "border: 1px solid transparent;";
+        // $css .= "border: 1px solid transparent;";
         $css .= "display: flex;";
         $css .= "align-items: center;";
         $css .= "justify-content: center;";
         $css .= "color: " . $attr['dots']['color'] . ";";
-        $css .= "font-size: " . (strpos($attr['dots']['size'], 'px') === false ? $attr['dots']['size'] . 'px' : $attr['dots']['size']) . ";";
+        if($attr['dots']['option']=== 'number'){
+            $css .= "font-size: " . (strpos($attr['dots']['size'], 'px') === false ? $attr['dots']['size'] . 'px' : $attr['dots']['size']) . ";";
+        }
         $css .= "border-radius:50%;";
     $css .= "}\n";
 
@@ -242,6 +248,7 @@ function generate_inline_slider_styles($attr) {
             $css .= "content: '•';"; // Use a dot character
         } elseif ($attr['dots']['option'] === 'square') {
             $css .= "content: '■';"; // Use a square character
+            $css .= "font-Size : 32px;";
         } else {
             $css .= "content: ''"; // No content
         }
@@ -529,25 +536,25 @@ function generate_inline_slider_styles($attr) {
     // Loop through each slide to generate styles
     foreach ($attr['slides'] as $slide) {
 
-        $uniqueId = $slide['layout']['uniqueId']; //unique Id
+        $uniqueId = $slide['uniqueId']; //unique Id
 
         $container = ".vayu_blocks_slide_{$uniqueId}";
         $insideContainer = ".vayu_blocks_inside_container_div";
 
-        $heading = $slide['layout']['heading'];
-        $subheading = $slide['layout']['subheading'];
-        $button1 = $slide['layout']['button1'];
-        $button2 = $slide['layout']['button2'];
-        $filterId = $slide['layout']['duotone'];
+        $heading = $slide['heading'];
+        $subheading = $slide['subheading'];
+        $button1 = $slide['button1'];
+        $button2 = $slide['button2'];
+        $filterId = $slide['duotone'];
 
         // slide blocks
         $css .= "$container {";
 
             // Set margin-bottom and height
-            $heightAuto = $slide['layout']['heightauto'];
-            $alignmenttop = $slide['layout']['alignmenttop'];
-            $imageHeight = $slide['layout']['imageheight'];
-            $customheight = $slide['layout']['customheight'];
+            $heightAuto = $slide['heightauto'];
+            $alignmenttop = $slide['alignmenttop'];
+            $imageHeight = $slide['imageheight'];
+            $customheight = $slide['customheight'];
             // Apply conditional height logic
             if ($heightAuto) {
                 if ($imageHeight > 200) {
@@ -567,25 +574,25 @@ function generate_inline_slider_styles($attr) {
             $css .= "justify-content: center;";
             
             // Border properties
-            $borderColor = isset($slide['layout']['border']['color']) ? esc_attr($slide['layout']['border']['color']) : 'transparent';
-            $borderWidth = isset($slide['layout']['border']['width']) ? esc_attr($slide['layout']['border']['width']) : '0';
-            $borderStyle = isset($slide['layout']['border']['style']) ? esc_attr($slide['layout']['border']['style']) : 'none';
+            $borderColor = isset($slide['border']['color']) ? esc_attr($slide['border']['color']) : 'transparent';
+            $borderWidth = isset($slide['border']['width']) ? esc_attr($slide['border']['width']) : '0';
+            $borderStyle = isset($slide['border']['style']) ? esc_attr($slide['border']['style']) : 'none';
             
-            $borderTopColor = isset($slide['layout']['border']['topcolor']) ? esc_attr($slide['layout']['border']['topcolor']) : $borderColor;
-            $borderTopWidth = isset($slide['layout']['border']['topwidth']) ? esc_attr($slide['layout']['border']['topwidth']) : $borderWidth;
-            $borderTopStyle = isset($slide['layout']['border']['topstyle']) ? esc_attr($slide['layout']['border']['topstyle']) : $borderStyle;
+            $borderTopColor = isset($slide['border']['topcolor']) ? esc_attr($slide['border']['topcolor']) : $borderColor;
+            $borderTopWidth = isset($slide['border']['topwidth']) ? esc_attr($slide['border']['topwidth']) : $borderWidth;
+            $borderTopStyle = isset($slide['border']['topstyle']) ? esc_attr($slide['border']['topstyle']) : $borderStyle;
             
-            $borderBottomColor = isset($slide['layout']['border']['bottomcolor']) ? esc_attr($slide['layout']['border']['bottomcolor']) : $borderColor;
-            $borderBottomWidth = isset($slide['layout']['border']['bottomwidth']) ? esc_attr($slide['layout']['border']['bottomwidth']) : $borderWidth;
-            $borderBottomStyle = isset($slide['layout']['border']['bottomstyle']) ? esc_attr($slide['layout']['border']['bottomstyle']) : $borderStyle;
+            $borderBottomColor = isset($slide['border']['bottomcolor']) ? esc_attr($slide['border']['bottomcolor']) : $borderColor;
+            $borderBottomWidth = isset($slide['border']['bottomwidth']) ? esc_attr($slide['border']['bottomwidth']) : $borderWidth;
+            $borderBottomStyle = isset($slide['border']['bottomstyle']) ? esc_attr($slide['border']['bottomstyle']) : $borderStyle;
             
-            $borderLeftColor = isset($slide['layout']['border']['leftcolor']) ? esc_attr($slide['layout']['border']['leftcolor']) : $borderColor;
-            $borderLeftWidth = isset($slide['layout']['border']['leftwidth']) ? esc_attr($slide['layout']['border']['leftwidth']) : $borderWidth;
-            $borderLeftStyle = isset($slide['layout']['border']['leftstyle']) ? esc_attr($slide['layout']['border']['leftstyle']) : $borderStyle;
+            $borderLeftColor = isset($slide['border']['leftcolor']) ? esc_attr($slide['border']['leftcolor']) : $borderColor;
+            $borderLeftWidth = isset($slide['border']['leftwidth']) ? esc_attr($slide['border']['leftwidth']) : $borderWidth;
+            $borderLeftStyle = isset($slide['border']['leftstyle']) ? esc_attr($slide['border']['leftstyle']) : $borderStyle;
             
-            $borderRightColor = isset($slide['layout']['border']['rightcolor']) ? esc_attr($slide['layout']['border']['rightcolor']) : $borderColor;
-            $borderRightWidth = isset($slide['layout']['border']['rightwidth']) ? esc_attr($slide['layout']['border']['rightwidth']) : $borderWidth;
-            $borderRightStyle = isset($slide['layout']['border']['rightstyle']) ? esc_attr($slide['layout']['border']['rightstyle']) : $borderStyle;
+            $borderRightColor = isset($slide['border']['rightcolor']) ? esc_attr($slide['border']['rightcolor']) : $borderColor;
+            $borderRightWidth = isset($slide['border']['rightwidth']) ? esc_attr($slide['border']['rightwidth']) : $borderWidth;
+            $borderRightStyle = isset($slide['border']['rightstyle']) ? esc_attr($slide['border']['rightstyle']) : $borderStyle;
             
             $css .= "border-color: {$borderColor};";
             $css .= "border-width: {$borderWidth};";
@@ -604,19 +611,19 @@ function generate_inline_slider_styles($attr) {
             $css .= "border-right-style: {$borderRightStyle};";
             
             // Border-radius
-            $borderRadiusTop = isset($slide['layout']['borderRadius']['top']) ? esc_attr($slide['layout']['borderRadius']['top']) : '0px';
-            $borderRadiusRight = isset($slide['layout']['borderRadius']['right']) ? esc_attr($slide['layout']['borderRadius']['right']) : '0px';
-            $borderRadiusBottom = isset($slide['layout']['borderRadius']['bottom']) ? esc_attr($slide['layout']['borderRadius']['bottom']) : '0px';
-            $borderRadiusLeft = isset($slide['layout']['borderRadius']['left']) ? esc_attr($slide['layout']['borderRadius']['left']) : '0px';
+            $borderRadiusTop = isset($slide['borderRadius']['top']) ? esc_attr($slide['borderRadius']['top']) : '0px';
+            $borderRadiusRight = isset($slide['borderRadius']['right']) ? esc_attr($slide['borderRadius']['right']) : '0px';
+            $borderRadiusBottom = isset($slide['borderRadius']['bottom']) ? esc_attr($slide['borderRadius']['bottom']) : '0px';
+            $borderRadiusLeft = isset($slide['borderRadius']['left']) ? esc_attr($slide['borderRadius']['left']) : '0px';
             
             $css .= "border-radius: {$borderRadiusTop} {$borderRadiusRight} {$borderRadiusBottom} {$borderRadiusLeft};";
             
             // Get the padding values with defaults
-            $paddingTop = isset($slide['layout']['padding']['top']) ? esc_attr($slide['layout']['padding']['top']) : '0px';
-            $paddingRight = isset($slide['layout']['padding']['right']) ? esc_attr($slide['layout']['padding']['right']) : '0px';
+            $paddingTop = isset($slide['padding']['top']) ? esc_attr($slide['padding']['top']) : '0px';
+            $paddingRight = isset($slide['padding']['right']) ? esc_attr($slide['padding']['right']) : '0px';
 
             // Get the bottom padding value or default to '0px'
-            $paddingBottom = isset($slide['layout']['padding']['bottom']) ? esc_attr($slide['layout']['padding']['bottom']) : '0px';
+            $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
 
             // Convert bottom padding to an integer for comparison (remove 'px' if present)
             $paddingBottomValue = intval(str_replace('px', '', $paddingBottom));
@@ -628,13 +635,14 @@ function generate_inline_slider_styles($attr) {
             $paddingBottom = "{$paddingBottomValue}px";
 
             // Get the left padding value or default to '0px'
-            $paddingLeft = isset($slide['layout']['padding']['left']) ? esc_attr($slide['layout']['padding']['left']) : '0px';
+            $paddingLeft = isset($slide['padding']['left']) ? esc_attr($slide['padding']['left']) : '0px';
 
             // Apply the padding style
             $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
 
-            $css .= "background: url({$slide['layout']['backgroundImage']}) no-repeat center center;";
+            $css .= "background: url({$slide['backgroundImage']}) no-repeat center center;";
             $css .= "background-size: cover;";
+            $css .= "margin: " . $attr['slidermargin'] . "px;";
 
             // End the CSS block for this slide
         $css .= "}\n";
@@ -651,15 +659,15 @@ function generate_inline_slider_styles($attr) {
             $css .= "z-index: 1;";
 
             // Add opacity
-            if (isset($slide['layout']['opacity'])) {
-                $css .= "opacity: " . esc_attr($slide['layout']['opacity']) . ";";
+            if (isset($slide['opacity'])) {
+                $css .= "opacity: " . esc_attr($slide['opacity']) . ";";
             }
 
             // Apply background color or gradient based on the attr
-            if (isset($slide['layout']['backgroundColor']) && !empty($slide['layout']['backgroundColor'])) {
-                $css .= "background-color: " . esc_attr($slide['layout']['backgroundColor']) . ";";
-            } elseif (isset($slide['layout']['backgroundGradient']) && !empty($slide['layout']['backgroundGradient'])) {
-                $css .= "background: -webkit-" . esc_attr($slide['layout']['backgroundGradient']) . ";";
+            if (isset($slide['backgroundColor']) && !empty($slide['backgroundColor'])) {
+                $css .= "background-color: " . esc_attr($slide['backgroundColor']) . ";";
+            } elseif (isset($slide['backgroundGradient']) && !empty($slide['backgroundGradient'])) {
+                $css .= "background: -webkit-" . esc_attr($slide['backgroundGradient']) . ";";
             }
 
         $css .= "}\n";
@@ -669,19 +677,19 @@ function generate_inline_slider_styles($attr) {
             $css .= "position: relative;";
             $css .= "z-index: 3;";
             // $css .= "height: 100%;";
-            $css .= "text-align: " . esc_attr($slide['layout']['alignment']) . ";";
+            $css .= "text-align: " . esc_attr($slide['alignment']) . ";";
         $css .= "}\n";
 
         // Inside Heading Container div
         $css .= "$container $insideContainer .vayu_blocks_inside_container_heading_div{";
-            $gaphb = isset($slide['layout']['gaphb']) ? esc_attr($slide['layout']['gaphb']) : '0px';
+            $gaphb = isset($slide['gaphb']) ? esc_attr($slide['gaphb']) : '0px';
             $css .= "margin-bottom: {$gaphb};";
             
         $css .= "}\n";
 
         // Heading Button 
         $css .= "$container $insideContainer .vayu_blocks_heading{";
-            $gaphsub = isset($slide['layout']['gaphsub']) ? esc_attr($slide['layout']['gaphsub']) : '0px';
+            $gaphsub = isset($slide['gaphsub']) ? esc_attr($slide['gaphsub']) : '0px';
             $css .= "margin-bottom: {$gaphsub};";
             $css .= "font-size: 0;";
         $css .= "}\n";
@@ -752,7 +760,7 @@ function generate_inline_slider_styles($attr) {
             }
 
             // Apply conditional margin-right based on button2.show
-            $css .= "margin-right: " . ($slide['layout']['button2']['show'] ? '5px' : '0px') . ";";
+            $css .= "margin-right: " . ($slide['button2']['show'] ? '5px' : '0px') . ";";
 
             //animation left
         $css .= "}\n";

@@ -105,10 +105,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     //style update with global attributes
     const vayu_blocks_updateSliderStyles = (propertyPath, value) => {
-
-          if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
+        // Return early if the value is null, an empty string, or undefined for background gradients
+        if (
+            (value === null || value === '') &&
+            (propertyPath === 'backgroundGradient' ||
+                propertyPath === 'button1.backgroundGradient' ||
+                propertyPath === 'button2.backgroundGradient')
+        ) {
             return;
         }
+    
         // Default value for the property if it's undefined
         if (value === undefined) {
             value = '';
@@ -117,14 +123,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
         // Step 1: Create a copy of the global attributes and update the specified property
         const newGlobal = { ...attributes.global };
     
-        // Ensure the layout object exists
-        if (!newGlobal.layout) {
-            newGlobal.layout = {};
-        }
-    
+        
         // Split the property path into individual properties
         const properties = propertyPath.split('.');
-        let currentProperty = newGlobal.layout;
+        let currentProperty = newGlobal;
     
         // Traverse the properties and set the value at the correct location
         properties.forEach((prop, idx) => {
@@ -138,11 +140,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
             }
         });
     
+        // console.log(properties,currentProperty);
         // Determine the custom style property to check based on propertyPath
         let customStyleProperty;
-        if (propertyPath.includes('layout')) {
-            customStyleProperty = 'customStylelayout';
-        } else if (propertyPath.includes('heading')) {
+        if (propertyPath.includes('heading')) {
             customStyleProperty = 'customStyleheading';
         } else if (propertyPath.includes('subheading')) {
             customStyleProperty = 'customStylesubheading';
@@ -150,14 +151,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
             customStyleProperty = 'customStylesubbutton1';
         } else if (propertyPath.includes('button2')) {
             customStyleProperty = 'customStylesubbutton2';
-        }else {
+        } else {
             customStyleProperty = 'customStylelayout';
         }
-
+    
         // Iterate through each slide and update the property only where the relevant customStyle is false
         attributes.slides.forEach((slide, index) => {
-            if (slide.layout[customStyleProperty] === false) {
-                let slideProperty = slide.layout;
+            if (slide[customStyleProperty] === false) {
+                let slideProperty = slide;
+                console.log(slideProperty);
                 properties.forEach((prop, idx) => {
                     if (idx === properties.length - 1) {
                         slideProperty[prop] = value;
@@ -170,9 +172,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 });
             }
         });
-
+    
         // Update the attributes with the new values
-        setAttributes({ global: newGlobal, slides: attributes.slides });
+        setAttributes({ global: newGlobal, slides:  attributes.slides });
     };
 
     //Background style update with global attributes
@@ -187,13 +189,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
         const newGlobal = { ...attributes.global };
     
         // Ensure the layout object exists
-        if (!newGlobal.layout) {
-            newGlobal.layout = {};
+        if (!newGlobal) {
+            newGlobal = {};
         }
     
         // Split the property path into individual properties
         const properties = propertyPath.split('.');
-        let currentProperty = newGlobal.layout;
+        let currentProperty = newGlobal;
     
         // Traverse the properties and set the value at the correct location
         properties.forEach((prop, idx) => {
@@ -209,8 +211,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         // Iterate through each slide and update the property only where customStyle is false
         attributes.slides.forEach((slide, index) => {
-            if (slide.layout.customBackgroundImage === false) {
-                let slideProperty = slide.layout;
+            if (slide.customBackgroundImage === false) {
+                let slideProperty = slide;
                 properties.forEach((prop, idx) => {
                     if (idx === properties.length - 1) {
                         slideProperty[prop] = value;
@@ -387,7 +389,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     //duotone value
     const vayu_blocks_duotonevalue = () => {
         // Get the ID from the slide's layout duotone
-        const id = attributes.global.layout.duotone;
+        const id = attributes.global.duotone;
     
         // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
         const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
@@ -490,16 +492,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     <>
                         <br />
                         <ToggleControl
-                            label={attributes.global.layout.heightauto 
+                            label={attributes.global.heightauto 
                                 ? __('Height (Auto)', 'vayu-blocks') 
-                                : `Custom Height: ${attributes.global.layout.customheight}px`}
-                            checked={attributes.global.layout.heightauto}
+                                : `Custom Height: ${attributes.global.customheight}px`}
+                            checked={attributes.global.heightauto}
                             onChange={(value) => vayu_blocks_updateSliderStyles('heightauto',value)}
                         />  
-                        {attributes.global.layout.heightauto===false && (
+                        {attributes.global.heightauto===false && (
                             <RangeControl
                                 label={__('Custom Height(px)', 'vayu-blocks')}
-                                value={attributes.global.layout.customheight}
+                                value={attributes.global.customheight}
                                 onChange={(value) => vayu_blocks_updateSliderStyles('customheight',value)}
                                 min={0}
                                 max={1500}
@@ -511,7 +513,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                         <ToogleGroupControl
                             label={__('Alignment', 'vayu-blocks')}
-                            value={ attributes.global.layout.alignment}
+                            value={ attributes.global.alignment}
                             onChange={(value) => vayu_blocks_updateSliderStyles('alignment', value)}
                             options={[
                                 {
@@ -536,7 +538,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                         <ToogleGroupControl
                             label={__('Alignment', 'vayu-blocks')}
-                            value={ attributes.global.layout.alignmenttop}
+                            value={ attributes.global.alignmenttop}
                             onChange={(value) => vayu_blocks_updateSliderStyles('alignmenttop', value)}
                             options={[
                                 {
@@ -564,7 +566,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Gap Between Heading & Sub Heading', 'vayu-blocks')}
                             className = "vayu_blocks_gphsub"
-                            value={attributes.global.layout.gaphsub}
+                            value={attributes.global.gaphsub}
                             onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphsub', value)}
                             min={0}
                             max={500}
@@ -573,10 +575,19 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         <RangeControl
                             label={__('Gap Between Heading & Button', 'vayu-blocks')}
                             className = "vayu_blocks_gphsub"
-                            value={attributes.global.layout.gaphb}
+                            value={attributes.global.gaphb}
                             onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
                             min={0}
                             max={500}
+                            step={1}
+                        />
+
+                        <RangeControl
+                            label={__('Gap Between Slides', 'vayu-blocks')}
+                            value={attributes.slidermargin}
+                            onChange={(value) => setAttributes({ slidermargin: value })}
+                            min={0}
+                            max={50}
                             step={1}
                         />
 
@@ -584,29 +595,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             label={__('Border','vayu-blocks')}
                             value={{
                                 all: {
-                                    color: attributes.global.layout.border.color,
-                                    width: attributes.global.layout.border.width,
-                                    style: attributes.global.layout.border.style,
+                                    color: attributes.global.border.color,
+                                    width: attributes.global.border.width,
+                                    style: attributes.global.border.style,
                                 },
                                 top: {
-                                    color: attributes.global.layout.border.topcolor,
-                                    width: attributes.global.layout.border.topwidth,
-                                    style: attributes.global.layout.border.topstyle,
+                                    color: attributes.global.border.topcolor,
+                                    width: attributes.global.border.topwidth,
+                                    style: attributes.global.border.topstyle,
                                 },
                                 bottom: {
-                                    color: attributes.global.layout.border.bottomcolor,
-                                    width: attributes.global.layout.border.bottomwidth,
-                                    style: attributes.global.layout.border.bottomstyle,
+                                    color: attributes.global.border.bottomcolor,
+                                    width: attributes.global.border.bottomwidth,
+                                    style: attributes.global.border.bottomstyle,
                                 },
                                 left: {
-                                    color: attributes.global.layout.border.leftcolor,
-                                    width: attributes.global.layout.border.leftwidth,
-                                    style: attributes.global.layout.border.leftstyle,
+                                    color: attributes.global.border.leftcolor,
+                                    width: attributes.global.border.leftwidth,
+                                    style: attributes.global.border.leftstyle,
                                 },
                                 right: {
-                                    color: attributes.global.layout.border.rightcolor,
-                                    width: attributes.global.layout.border.rightwidth,
-                                    style: attributes.global.layout.border.rightstyle,
+                                    color: attributes.global.border.rightcolor,
+                                    width: attributes.global.border.rightwidth,
+                                    style: attributes.global.border.rightstyle,
                                 },
                             }}
                             onChange={(value)=>vayu_blocks_handleslideBorderChange('border',value)}
@@ -616,15 +627,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         <BoxControl
                             label={__('Border Radius','vayu-blocks')}
                             onChange={(value)=> vayu_blocks_handleBorderRadius('borderRadius',value)}
-                            values={attributes.global.layout.borderRadius}
+                            values={attributes.global.borderRadius}
                         />
 
                         <BoxControl
                             label={__('Horizontal Padding', 'vayu-blocks')}
                             onChange={(value) => handlePaddingChange('horizontal', value)}
                             values={{
-                                left: attributes.global.layout.padding.left,
-                                right: attributes.global.layout.padding.right,
+                                left: attributes.global.padding.left,
+                                right: attributes.global.padding.right,
                             }}
                             sides={['horizontal']}
                         />
@@ -633,8 +644,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             label={__('Vertical Padding', 'vayu-blocks')}
                             onChange={(value) => handlePaddingChange('vertical', value)}
                             values={{
-                                top: attributes.global.layout.padding.top,
-                                bottom: attributes.global.layout.padding.bottom,
+                                top: attributes.global.padding.top,
+                                bottom: attributes.global.padding.bottom,
                             }}
                             sides={['vertical']}
                         />
@@ -672,7 +683,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                         title={ __( 'Color Settings' ) }
                                         colorSettings={ [
                                             {
-                                                value: attributes.global.layout.heading.color,
+                                                value: attributes.global.heading.color,
                                                 onChange: (colorValue) => {
                                                     vayu_blocks_updateSliderStyles('heading.color', colorValue);
                                                 },
@@ -687,12 +698,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                         label={__('Font Size', 'vayu-blocks')}
                                         fontSizes={vayu_blocks_sizes}
                                         onChange={(value) =>  vayu_blocks_updateSliderStyles('heading.size', value)}
-                                        value={attributes.global.layout.heading.size}
+                                        value={attributes.global.heading.size}
                                     />
 
                                     <SelectControl
                                         label={__('Title Tag', 'vayu-blocks')}
-                                        value={attributes.global.layout.heading.tag}
+                                        value={attributes.global.heading.tag}
                                         options={[
                                             { label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
                                             { label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
@@ -706,7 +717,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                                     <SelectControl
                                         label={__('Font Weight', 'text-domain')}
-                                        value={attributes.global.layout.heading.fontWeight}
+                                        value={attributes.global.heading.fontWeight}
                                         options={[
                                             { label: __('Normal', 'text-domain'), value: 'normal' },
                                             { label: __('Lighter', 'text-domain'), value: 'lighter' },
@@ -723,17 +734,17 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     <ToggleControl
                                         className='vayu_blocks_togglecontrol'
                                         label={__('Sub Heading', 'vayu-blocks')}
-                                        checked={attributes.global.layout.subheading.show}
+                                        checked={attributes.global.subheading.show}
                                         onChange={(value) =>  vayu_blocks_updateSliderStyles('subheading.show', value)}
                                     />
 
-                                    {attributes.global.layout.subheading.show &&(
+                                    {attributes.global.subheading.show &&(
                                         <>
                                             <PanelColorSettings
                                                 title={ __( 'Color Settings' ) }
                                                 colorSettings={ [
                                                     {
-                                                        value: attributes.global.layout.subheading.color,
+                                                        value: attributes.global.subheading.color,
                                                         onChange: (colorValue) => {
                                                             vayu_blocks_updateSliderStyles( 'subheading.color', colorValue);
                                                         },
@@ -748,12 +759,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 label={__('Font Size', 'vayu-blocks')}
                                                 fontSizes={vayu_blocks_sizes}
                                                 onChange={(value) =>  vayu_blocks_updateSliderStyles( 'subheading.size', value)}
-                                                value={attributes.global.layout.subheading.size}
+                                                value={attributes.global.subheading.size}
                                             />
 
                                             <SelectControl
                                                 label={__('Title Tag', 'vayu-blocks')}
-                                                value={attributes.global.layout.subheading.tag}
+                                                value={attributes.global.subheading.tag}
                                                 options={[
                                                     { label: __('H1 SubHeading h1', 'vayu-blocks'), value: 'h1' },
                                                     { label: __('H2 SubHeading h2', 'vayu-blocks'), value: 'h2' },
@@ -768,7 +779,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                                             <SelectControl
                                                 label={__('Font Weight', 'text-domain')}
-                                                value={attributes.global.layout.subheading.fontWeight}
+                                                value={attributes.global.subheading.fontWeight}
                                                 options={[
                                                     { label: __('Normal', 'text-domain'), value: 'normal' },
                                                     { label: __('Lighter', 'text-domain'), value: 'lighter' },
@@ -810,11 +821,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     <ToggleControl
                                         className='vayu_blocks_togglecontrol'
                                         label={__('Button 1', 'vayu-blocks')}
-                                        checked={attributes.global.layout.button1.show}
+                                        checked={attributes.global.button1.show}
                                         onChange={(value) =>  vayu_blocks_updateSliderStyles('button1.show', value)}
                                     />
 
-                                    {attributes.global.layout.button1.show && (
+                                    {attributes.global.button1.show && (
                                         <>
                                             <div style={{marginBottom:'15px',display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
                                                 <Button
@@ -852,8 +863,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 title={ __( 'Background', 'vayu-blocks' ) }
                                                 settings={[
                                                     {
-                                                        colorValue: attributes.global.layout.button1.backgroundColor,
-                                                        gradientValue: attributes.global.layout.button1.backgroundGradient,
+                                                        colorValue: attributes.global.button1.backgroundColor,
+                                                        gradientValue: attributes.global.button1.backgroundGradient,
                                                         
                                                         onColorChange: (color) => {
                                                             vayu_blocks_updateSliderStyles( 'button1.backgroundColor', color);
@@ -870,7 +881,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 title={ __( 'Color' ) }
                                                 colorSettings={ [
                                                     {
-                                                        value: attributes.global.layout.button1.color,
+                                                        value: attributes.global.button1.color,
                                                         onChange: (colorValue) => {
                                                             vayu_blocks_updateSliderStyles( 'button1.color', colorValue);
                                                         },
@@ -885,7 +896,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 label={__('Font Size', 'vayu-blocks')}
                                                 fontSizes={vayu_blocks_fontsizes}
                                                 onChange={(value) =>  vayu_blocks_updateSliderStyles( 'button1.size', value)}
-                                                value={attributes.global.layout.button1.size}
+                                                value={attributes.global.button1.size}
                                             />
 
                                             <br />
@@ -893,29 +904,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 label={__('Border','vayu-blocks')}
                                                 value={{
                                                     all: {
-                                                        color: attributes.global.layout.button1.border.color,
-                                                        width: attributes.global.layout.button1.border.width,
-                                                        style: attributes.global.layout.button1.border.style,
+                                                        color: attributes.global.button1.border.color,
+                                                        width: attributes.global.button1.border.width,
+                                                        style: attributes.global.button1.border.style,
                                                     },
                                                     top: {
-                                                        color: attributes.global.layout.button1.border.topcolor,
-                                                        width: attributes.global.layout.button1.border.topwidth,
-                                                        style: attributes.global.layout.button1.border.topstyle,
+                                                        color: attributes.global.button1.border.topcolor,
+                                                        width: attributes.global.button1.border.topwidth,
+                                                        style: attributes.global.button1.border.topstyle,
                                                     },
                                                     bottom: {
-                                                        color: attributes.global.layout.button1.border.bottomcolor,
-                                                        width: attributes.global.layout.button1.border.bottomwidth,
-                                                        style: attributes.global.layout.button1.border.bottomstyle,
+                                                        color: attributes.global.button1.border.bottomcolor,
+                                                        width: attributes.global.button1.border.bottomwidth,
+                                                        style: attributes.global.button1.border.bottomstyle,
                                                     },
                                                     left: {
-                                                        color: attributes.global.layout.button1.border.leftcolor,
-                                                        width: attributes.global.layout.button1.border.leftwidth,
-                                                        style: attributes.global.layout.button1.border.leftstyle,
+                                                        color: attributes.global.button1.border.leftcolor,
+                                                        width: attributes.global.button1.border.leftwidth,
+                                                        style: attributes.global.button1.border.leftstyle,
                                                     },
                                                     right: {
-                                                        color: attributes.global.layout.button1.border.rightcolor,
-                                                        width: attributes.global.layout.button1.border.rightwidth,
-                                                        style: attributes.global.layout.button1.border.rightstyle,
+                                                        color: attributes.global.button1.border.rightcolor,
+                                                        width: attributes.global.button1.border.rightwidth,
+                                                        style: attributes.global.button1.border.rightstyle,
                                                     },
                                                 }}
                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange('button1.border',value)}
@@ -925,13 +936,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                             <BoxControl
                                                 label={__('Border Radius','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button1.borderRadius',value)}
-                                                values={attributes.global.layout.button1.borderRadius}
+                                                values={attributes.global.button1.borderRadius}
                                             />
 
                                             <BoxControl
                                                 label={__('Padding','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button1.padding',value)}
-                                                values={attributes.global.layout.button1.padding}
+                                                values={attributes.global.button1.padding}
                                             />
                                         </>
                                     )}
@@ -943,11 +954,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     <ToggleControl
                                         className='vayu_blocks_togglecontrol'
                                         label={__('Button 2', 'vayu-blocks')}
-                                        checked={attributes.global.layout.button2.show}
+                                        checked={attributes.global.button2.show}
                                         onChange={(value) =>  vayu_blocks_updateSliderStyles('button2.show', value)}
                                     />
 
-                                    {attributes.global.layout.button2.show && (
+                                    {attributes.global.button2.show && (
                                         <>
                                             <div style={{marginBottom:'15px',display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
                                                 <Button
@@ -985,8 +996,8 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 title={ __( 'Background', 'vayu-blocks' ) }
                                                 settings={[
                                                     {
-                                                        colorValue: attributes.global.layout.button2.backgroundColor,
-                                                        gradientValue: attributes.global.layout.button2.backgroundGradient,
+                                                        colorValue: attributes.global.button2.backgroundColor,
+                                                        gradientValue: attributes.global.button2.backgroundGradient,
                                                         
                                                         onColorChange: (color) => {
                                                             vayu_blocks_updateSliderStyles( 'button2.backgroundColor', color);
@@ -1003,7 +1014,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 title={ __( 'Color' ) }
                                                 colorSettings={ [
                                                     {
-                                                        value: attributes.global.layout.button2.color,
+                                                        value: attributes.global.button2.color,
                                                         onChange: (colorValue) => {
                                                             vayu_blocks_updateSliderStyles( 'button2.color', colorValue);
                                                         },
@@ -1018,7 +1029,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 label={__('Font Size', 'vayu-blocks')}
                                                 fontSizes={vayu_blocks_fontsizes}
                                                 onChange={(value) =>  vayu_blocks_updateSliderStyles( 'button2.size', value)}
-                                                value={attributes.global.layout.button2.size}
+                                                value={attributes.global.button2.size}
                                             />
 
                                             <br />
@@ -1026,29 +1037,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 label={__('Border','vayu-blocks')}
                                                 value={{
                                                     all: {
-                                                        color: attributes.global.layout.button2.border.color,
-                                                        width: attributes.global.layout.button2.border.width,
-                                                        style: attributes.global.layout.button2.border.style,
+                                                        color: attributes.global.button2.border.color,
+                                                        width: attributes.global.button2.border.width,
+                                                        style: attributes.global.button2.border.style,
                                                     },
                                                     top: {
-                                                        color: attributes.global.layout.button2.border.topcolor,
-                                                        width: attributes.global.layout.button2.border.topwidth,
-                                                        style: attributes.global.layout.button2.border.topstyle,
+                                                        color: attributes.global.button2.border.topcolor,
+                                                        width: attributes.global.button2.border.topwidth,
+                                                        style: attributes.global.button2.border.topstyle,
                                                     },
                                                     bottom: {
-                                                        color: attributes.global.layout.button2.border.bottomcolor,
-                                                        width: attributes.global.layout.button2.border.bottomwidth,
-                                                        style: attributes.global.layout.button2.border.bottomstyle,
+                                                        color: attributes.global.button2.border.bottomcolor,
+                                                        width: attributes.global.button2.border.bottomwidth,
+                                                        style: attributes.global.button2.border.bottomstyle,
                                                     },
                                                     left: {
-                                                        color: attributes.global.layout.button2.border.leftcolor,
-                                                        width: attributes.global.layout.button2.border.leftwidth,
-                                                        style: attributes.global.layout.button2.border.leftstyle,
+                                                        color: attributes.global.button2.border.leftcolor,
+                                                        width: attributes.global.button2.border.leftwidth,
+                                                        style: attributes.global.button2.border.leftstyle,
                                                     },
                                                     right: {
-                                                        color: attributes.global.layout.button2.border.rightcolor,
-                                                        width: attributes.global.layout.button2.border.rightwidth,
-                                                        style: attributes.global.layout.button2.border.rightstyle,
+                                                        color: attributes.global.button2.border.rightcolor,
+                                                        width: attributes.global.button2.border.rightwidth,
+                                                        style: attributes.global.button2.border.rightstyle,
                                                     },
                                                 }}
                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange('button2.border',value)}
@@ -1058,13 +1069,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                             <BoxControl
                                                 label={__('Border Radius','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button2.borderRadius',value)}
-                                                values={attributes.global.layout.button2.borderRadius}
+                                                values={attributes.global.button2.borderRadius}
                                             />
 
                                             <BoxControl
                                                 label={__('Padding','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button2.padding',value)}
-                                                values={attributes.global.layout.button2.padding}
+                                                values={attributes.global.button2.padding}
                                             />
                                         </>
                                     )}
@@ -1202,7 +1213,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             />  
 
                             <PanelColorSettings
-                                    title={ __( 'Background Color', 'vayu-blocks' ) }
+                                    title={ __( 'Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.dots.backgroundColor,
@@ -1212,7 +1223,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                     backgroundColor: colorValue,
                                                 },
                                             }),
-                                            label: __( 'Background Color', 'vayu-blocks' ),
+                                            label: __( 'Background', 'vayu-blocks' ),
                                         },
                                         {
                                             value: attributes.dots.color,
@@ -1294,7 +1305,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
 
                                 <PanelColorSettings
-                                    title={ __( 'Backgrund Color', 'vayu-blocks' ) }
+                                    title={ __( 'Color', 'vayu-blocks' ) }
                                     colorSettings={ [
                                         {
                                             value: attributes.arrowstyleleft.backgroundColor,
@@ -1304,7 +1315,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                     backgroundColor: colorValue,
                                                 },
                                             }),
-                                            label: __( 'Background Color', 'vayu-blocks' ),
+                                            label: __( 'Background', 'vayu-blocks' ),
                                         },
                                         {
                                             value: attributes.arrowstyleleft.color,
@@ -1315,6 +1326,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 },
                                             }),
                                             label: __( 'Color', 'vayu-blocks' ),
+                                        },
+                                        {
+                                            value: attributes.arrowstyleleft.hovercolor,
+                                            onChange: (colorValue) => setAttributes({
+                                                arrowstyleleft: {
+                                                    ...attributes.arrowstyleleft,
+                                                    hovercolor: colorValue,
+                                                },
+                                            }),
+                                            label: __( 'Hover Color', 'vayu-blocks' ),
                                         }
                                        
                                     ] }
