@@ -11,6 +11,7 @@ import {
 } from '@wordpress/components';
 
 import { useSelect } from '@wordpress/data';
+import { useEffect, useRef } from 'react';
 
 import {
     Fragment,
@@ -64,30 +65,6 @@ const PanelSettings = ({
     const [ tab, setTab ] = useState( 'setting' );
 	const [ hover, setHover ] = useState( 'normal' );
 
-    const getCustomWidth = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.customWidth;
-		case 'Tablet':
-			return attributes.customWidthTablet;
-		case 'Mobile':
-			return attributes.customWidthMobile;
-		default:
-			return undefined;
-		}
-	};
-
-	const changeCustomWidth = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ customWidthTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ customWidthMobile: value });
-		}
-	};
-
-	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`;
@@ -1557,10 +1534,67 @@ const PanelSettings = ({
 
 	// Transition
 	const customTooltiptransitionAll = value => `${value}`
+	const prevUnitRef = useRef(attributes.customWidthUnit);
+    const prevUnitTabletRef = useRef(attributes.customWidthUnitTablet);
+    const prevUnitMobileRef = useRef(attributes.customWidthUnitMobile);
 
+    useEffect(() => {
+        const updateWidth = (unit) => {
+            if (unit === 'px') return 1200;
+            if (unit === 'em') return 50;
+            if (unit === '%') return 100;
+            return '';
+        };
+
+        // Get the previous and current units
+        const prevUnit = prevUnitRef.current;
+        const prevUnitTablet = prevUnitTabletRef.current;
+        const prevUnitMobile = prevUnitMobileRef.current;
+
+        const currentUnit = attributes.customWidthUnit;
+        const currentTabletUnit = attributes.customWidthUnitTablet;
+        const currentMobileUnit = attributes.customWidthUnitMobile;
+
+        // Update attributes if the unit has changed
+        if (prevUnit !== currentUnit) {
+            setAttributes({
+                customWidth: updateWidth(currentUnit),
+            });
+            prevUnitRef.current = currentUnit; // Update the previous unit reference
+        }
+
+        if (prevUnitTablet !== currentTabletUnit) {
+            setAttributes({
+                customWidthTablet: updateWidth(currentTabletUnit),
+            });
+            prevUnitTabletRef.current = currentTabletUnit; // Update the previous unit reference
+        }
+
+        if (prevUnitMobile !== currentMobileUnit) {
+            setAttributes({
+                customWidthMobile: updateWidth(currentMobileUnit),
+            });
+            prevUnitMobileRef.current = currentMobileUnit; // Update the previous unit reference
+        }
+
+    }, [attributes.customWidthUnit, attributes.customWidthUnitTablet, attributes.customWidthUnitMobile, setAttributes]);
+
+    // Compute max custom width unit
+    const maxcustomWidthUnit = (() => {
+        const updateWidth = (unit) => {
+            if (unit === 'px') return 1200;
+            if (unit === 'em') return 50;
+            if (unit === '%') return 100;
+            return '';
+        };
+
+        return updateWidth(attributes.customWidthUnit);
+    })();
+	
 	// unit switch max value
 	const [customWidthUnit, setcustomWidthUnit] = useState('%');
-	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1200 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
+	// const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
@@ -1627,6 +1661,35 @@ const PanelSettings = ({
 		}
 	};
 
+
+	// Global Settings Vayu Blocks
+	// const globalcontainerWidth = ThBlockData.container_width;
+    // setAttributes({globalwidth:globalcontainerWidth});
+	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const getCustomWidth = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customWidth;
+		case 'Tablet':
+			return attributes.customWidthTablet;
+		case 'Mobile':
+			return attributes.customWidthMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeCustomWidth = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customWidthTablet: value, customWidthMobile: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customWidthMobile: value });
+		}
+	};
+
+
     return (
 		<Fragment>
 			<InspectorControls>
@@ -1663,70 +1726,105 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
+							<SelectControl
+								label={ __( 'Width', 'vayu-blocks' ) }
+								value={ attributes.widthType }
+								options={ [
+									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
+									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
+									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
+									{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+								] }
+								onChange={ e => setAttributes({ widthType: e }) }
+							/>      
 
-									<ResponsiveControl label={__('Padding', 'your-text-domain')}>
+							{ 'customwidth' == attributes.widthType && (
 
+								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+								<ResponsiveControl
+								label={ __( 'Custom Width', 'vayu-blocks' ) }
+								>	
+								<UnitChooser
+								value={ attributes.customWidthUnit }
+								onClick={ customWidthUnit => setAttributes({ customWidthUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipCustomWidth }
+									value={ getCustomWidth() || '' }
+									onChange={ changeCustomWidth }
+									step={ 1 }
+									min={ 1 }
+									max={ maxcustomWidthUnit }
+									// allowReset={ true }
+								/>
+								</ResponsiveControl>
+								</Suspense>
 
-										<UnitChooser
-											value={attributes.paddingUnit}
-											onClick={paddingUnit => {
-												setAttributes({ paddingUnit });
-												// Optionally update other state or props
-											}}
-											units={['px', 'em', '%']}
-										/>
-										<SizingControl
-											type={getPaddingButtonType()}
-											min={0}
-											max={maxpaddingUnit} // Define max margin unit
-											changeType={changePaddingButtonType}
-											onChange={(type, value) => changeButtonPadding(type, value)}
-											options={[
-												{ label: __('Top', 'your-text-domain'), type: 'top', value: getButtonPadding('top') },
-												{ label: __('Right', 'your-text-domain'), type: 'right', value: getButtonPadding('right') },
-												{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getButtonPadding('bottom') },
-												{ label: __('Left', 'your-text-domain'), type: 'left', value: getButtonPadding('left') }
-											]}
-										/>
-									</ResponsiveControl>
-									
-									<ResponsiveControl label={__('Margin', 'your-text-domain')}>
-										<UnitChooser
-											value={attributes.marginUnit}
-											onClick={marginUnit => {
-												setAttributes({ marginUnit });
-												// Optionally update other state or props
-											}}
-											units={['px', 'em', '%']}
-										/>
-										<SizingControl
-											type={getMarginType()}
-											min={0}
-											max={maxmarginUnit} // Define max margin unit
-											changeType={changeMarginType}
-											onChange={(type, value) => changeMargin(type, value)}
-											options={[
-												{ label: __('Top', 'your-text-domain'), type: 'top', value: getMargin('top') },
-												{ label: __('Right', 'your-text-domain'), type: 'right', value: getMargin('right') },
-												{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getMargin('bottom') },
-												{ label: __('Left', 'your-text-domain'), type: 'left', value: getMargin('left') }
-											]}
-										/>
-									</ResponsiveControl>
+							) }
 
-									<ResponsiveControl
-										label={ __( 'Z-index', 'vayu-blocks' ) }
-										>	
-										<RangeControl
-											renderTooltipContent={ customTooltipZindex }
-											value={ getZindex() || '' }
-											onChange={ changeZindex }
-											step={ 1 }
-											min={ -999999 }
-											max={ 999999 }
-											allowReset={ true }
-										/>
-									</ResponsiveControl>
+							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
+
+								<UnitChooser
+									value={attributes.paddingUnit}
+									onClick={paddingUnit => {
+										setAttributes({ paddingUnit });
+										// Optionally update other state or props
+									}}
+									units={['px', 'em', '%']}
+								/>
+								<SizingControl
+									type={getPaddingButtonType()}
+									min={0}
+									max={maxpaddingUnit} // Define max margin unit
+									changeType={changePaddingButtonType}
+									onChange={(type, value) => changeButtonPadding(type, value)}
+									options={[
+										{ label: __('Top', 'your-text-domain'), type: 'top', value: getButtonPadding('top') },
+										{ label: __('Right', 'your-text-domain'), type: 'right', value: getButtonPadding('right') },
+										{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getButtonPadding('bottom') },
+										{ label: __('Left', 'your-text-domain'), type: 'left', value: getButtonPadding('left') }
+									]}
+								/>
+							</ResponsiveControl>
+							
+							<ResponsiveControl label={__('Margin', 'your-text-domain')}>
+								<UnitChooser
+									value={attributes.marginUnit}
+									onClick={marginUnit => {
+										setAttributes({ marginUnit });
+										// Optionally update other state or props
+									}}
+									units={['px', 'em', '%']}
+								/>
+								<SizingControl
+									type={getMarginType()}
+									min={0}
+									max={maxmarginUnit} // Define max margin unit
+									changeType={changeMarginType}
+									onChange={(type, value) => changeMargin(type, value)}
+									options={[
+										{ label: __('Top', 'your-text-domain'), type: 'top', value: getMargin('top') },
+										{ label: __('Right', 'your-text-domain'), type: 'right', value: getMargin('right') },
+										{ label: __('Bottom', 'your-text-domain'), type: 'bottom', value: getMargin('bottom') },
+										{ label: __('Left', 'your-text-domain'), type: 'left', value: getMargin('left') }
+									]}
+								/>
+							</ResponsiveControl>
+
+							<ResponsiveControl
+								label={ __( 'Z-index', 'vayu-blocks' ) }
+								>	
+								<RangeControl
+									renderTooltipContent={ customTooltipZindex }
+									value={ getZindex() || '' }
+									onChange={ changeZindex }
+									step={ 1 }
+									min={ -999999 }
+									max={ 999999 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl>
 
 						</PanelBody>
 
@@ -1734,377 +1832,377 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
-						<HoverControl value={ hover }
-							options={[
-								{
-									label: __( 'Normal', 'vayu-blocks' ),
-									value: 'normal'
-								},
-								{
-									label: __( 'Hover', 'vayu-blocks' ),
-									value: 'hover'
-								}
-							]}
-							onChange={ setHover } />
-								
-						{ 'normal' ===  hover &&  (	
-							<>
-							<SelectControl
-								label={ __( 'Border Type', 'vayu-blocks' ) }
-								value={ attributes.borderType }
-								options={ [
-									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
-									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
-									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
-									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
-									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
-									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
-								] }
-								onChange={ e => setAttributes({ borderType: e }) }
-							/>	
-								
-							{ 'none' !== attributes.borderType && (
+							<HoverControl value={ hover }
+								options={[
+									{
+										label: __( 'Normal', 'vayu-blocks' ),
+										value: 'normal'
+									},
+									{
+										label: __( 'Hover', 'vayu-blocks' ),
+										value: 'hover'
+									}
+								]}
+								onChange={ setHover } />
+									
+							{ 'normal' ===  hover &&  (	
+								<>
+								<SelectControl
+									label={ __( 'Border Type', 'vayu-blocks' ) }
+									value={ attributes.borderType }
+									options={ [
+										{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+										{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+										{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+										{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+										{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+										{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
+									] }
+									onChange={ e => setAttributes({ borderType: e }) }
+								/>	
+									
+								{ 'none' !== attributes.borderType && (
 
+									<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+									<ResponsiveControl
+											label={ __( 'Border Width', 'vayu-blocks' ) }
+										>
+										<UnitChooser
+											value={ attributes.borderWidthUnit }
+											onClick={borderWidthUnit => {
+												setAttributes({borderWidthUnit });
+												setborderWidthUnit(borderWidthUnit);
+											}}
+											units={ [ 'px', 'em' ] }
+										/>
+										<SizingControl
+												type={ getBorderWidthType() }
+												min={ 0 }
+												max={ maxborderWidthUnit }
+												changeType={ changeBorderWidthType }
+												onChange={ changeBorderWidth }
+												options={ [
+													{
+														label: __( 'Top', 'vayu-blocks' ),
+														type: 'top',
+														value: getBorderWidth( 'top' )
+													},
+													{
+														label: __( 'Right', 'vayu-blocks' ),
+														type: 'right',
+														value: getBorderWidth( 'right' )
+													},
+													{
+														label: __( 'Bottom', 'vayu-blocks' ),
+														type: 'bottom',
+														value: getBorderWidth( 'bottom' )
+													},
+													{
+														label: __( 'Left', 'vayu-blocks' ),
+														type: 'left',
+														value: getBorderWidth( 'left' )
+													}
+												] }
+											/>
+
+										</ResponsiveControl>
+												<ColorGradientControl
+											label={ __( 'Border Color', 'vayu-blocks' ) }
+											colorValue={ attributes.borderColor }
+											onColorChange={ e => setAttributes({ borderColor: e }) }
+											enableAlpha={true} 
+											/>
+									</Suspense>
+									
+									) }
+									<ResponsiveControl
+											label={ __( 'Border Radius', 'vayu-blocks' ) }
+										>
+										<UnitChooser
+											value={ attributes.borderRadiusUnit }
+											onClick={borderRadiusUnit => {
+												setAttributes({borderRadiusUnit });
+												setborderRadiusUnit(borderRadiusUnit);
+											}}
+											units={ [ 'px', 'em', '%' ] }
+										/>
+
+										<SizingControl
+												type={ getborderradiusType() }
+												min={ 0 }
+												max={ maxborderRadiusUnit }
+												changeType={ changeborderradiusType }
+												onChange={ changeborderradius }
+												options={ [
+													{
+														label: __( 'T-R', 'vayu-blocks' ),
+														type: 'top',
+														value: getborderradius( 'top' )
+													},
+													{
+														label: __( 'T-L', 'vayu-blocks' ),
+														type: 'right',
+														value: getborderradius( 'right' )
+													},
+													{
+														label: __( 'B-R', 'vayu-blocks' ),
+														type: 'left',
+														value: getborderradius( 'left' )
+													},
+													{
+														label: __( 'B-L', 'vayu-blocks' ),
+														type: 'bottom',
+														value: getborderradius( 'bottom' )
+													}
+												] }
+											/>
+
+										</ResponsiveControl>
+
+										<ControlPanelControl
+										label={ __( 'Box Shadow', 'vayu-blocks' ) }
+										attributes={ attributes }
+										setAttributes={ setAttributes }
+										resetValues={ {
+											boxShadow: false,
+											boxShadowColor: undefined,
+											boxShadowColorOpacity: 50,
+											boxShadowBlur: 5,
+											boxShadowSpread: 1,
+											boxShadowHorizontal: 0,
+											boxShadowVertical: 0
+										} }
+										onClick={ () => setAttributes({ boxShadow: true }) }
+									>
+									
+										<ColorGradientControl
+											label={ __( 'Shadow Color', 'vayu-blocks' ) }
+											colorValue={ attributes.boxShadowColor }
+											onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+											enableAlpha={true} 
+										/>
+
+										<RangeControl
+											label={ __( 'Opacity', 'vayu-blocks' ) }
+											value={ attributes.boxShadowColorOpacity }
+											onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
+											min={ 0 }
+											max={ 100 }
+										/>
+
+										<RangeControl
+											label={ __( 'Blur', 'vayu-blocks' ) }
+											value={ attributes.boxShadowBlur }
+											onChange={ e => setAttributes({ boxShadowBlur: e }) }
+											min={ 0 }
+											max={ 100 }
+										/>
+
+										<RangeControl
+											label={ __( 'Spread', 'vayu-blocks' ) }
+											value={ attributes.boxShadowSpread }
+											onChange={ e => setAttributes({ boxShadowSpread: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
+
+										<RangeControl
+											label={ __( 'Horizontal', 'vayu-blocks' ) }
+											value={ attributes.boxShadowHorizontal }
+											onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
+
+										<RangeControl
+											label={ __( 'Vertical', 'vayu-blocks' ) }
+											value={ attributes.boxShadowVertical }
+											onChange={ e => setAttributes({ boxShadowVertical: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
+										</ControlPanelControl>	
+								</>
+
+							) 	|| 'hover' ===  hover && (
+								<>
+								<SelectControl
+									label={ __( 'Border Type', 'vayu-blocks' ) }
+									value={ attributes.borderHvrType }
+									options={ [
+										{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+										{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+										{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+										{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+										{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+										{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
+									] }
+									onChange={ e => setAttributes({ borderHvrType: e }) }
+								/>	
+
+							{ 'none' !== attributes.borderHvrType && (
 								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
-										label={ __( 'Border Width', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderWidthUnit }
-										onClick={borderWidthUnit => {
-											setAttributes({borderWidthUnit });
-											setborderWidthUnit(borderWidthUnit);
-										}}
-										units={ [ 'px', 'em' ] }
-									/>
-									<SizingControl
-											type={ getBorderWidthType() }
-											min={ 0 }
-											max={ maxborderWidthUnit }
-											changeType={ changeBorderWidthType }
-											onChange={ changeBorderWidth }
-											options={ [
-												{
-													label: __( 'Top', 'vayu-blocks' ),
-													type: 'top',
-													value: getBorderWidth( 'top' )
-												},
-												{
-													label: __( 'Right', 'vayu-blocks' ),
-													type: 'right',
-													value: getBorderWidth( 'right' )
-												},
-												{
-													label: __( 'Bottom', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getBorderWidth( 'bottom' )
-												},
-												{
-													label: __( 'Left', 'vayu-blocks' ),
-													type: 'left',
-													value: getBorderWidth( 'left' )
-												}
-											] }
+											label={ __( 'Border Width', 'vayu-blocks' ) }
+										>
+										<UnitChooser
+											value={ attributes.borderWidthHvrUnit }
+											onClick={borderWidthHvrUnit => {
+												setAttributes({borderWidthHvrUnit });
+												setborderWidthHvrUnit(borderWidthHvrUnit);
+											}}
+											units={ [ 'px', 'em' ] }
 										/>
+										<SizingControl
+												type={ getBorderWidthHvrType() }
+												min={ 0 }
+												max={ maxborderWidthHvrUnit }
+												changeType={ changeBorderWidthHvrType }
+												onChange={ changeBorderWidthHvr }
+												options={ [
+													{
+														label: __( 'Top', 'vayu-blocks' ),
+														type: 'top',
+														value: getBorderWidthHvr( 'top' )
+													},
+													{
+														label: __( 'Right', 'vayu-blocks' ),
+														type: 'right',
+														value: getBorderWidthHvr( 'right' )
+													},
+													{
+														label: __( 'Bottom', 'vayu-blocks' ),
+														type: 'bottom',
+														value: getBorderWidthHvr( 'bottom' )
+													},
+													{
+														label: __( 'Left', 'vayu-blocks' ),
+														type: 'left',
+														value: getBorderWidthHvr( 'left' )
+													}
+												] }
+											/>
 
-									</ResponsiveControl>
-											<ColorGradientControl
-										label={ __( 'Border Color', 'vayu-blocks' ) }
-										colorValue={ attributes.borderColor }
-										onColorChange={ e => setAttributes({ borderColor: e }) }
-										enableAlpha={true} 
-										/>
+										</ResponsiveControl>		
+								<ColorGradientControl
+								label={ __( 'Border Hover Color', 'vayu-blocks' ) }
+								colorValue={ attributes.borderColorHvr }
+								onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+								/>
 								</Suspense>
-								
+				
 								) }
-								<ResponsiveControl
-										label={ __( 'Border Radius', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderRadiusUnit }
-										onClick={borderRadiusUnit => {
-											setAttributes({borderRadiusUnit });
-											setborderRadiusUnit(borderRadiusUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-									/>
 
-									<SizingControl
-											type={ getborderradiusType() }
-											min={ 0 }
-											max={ maxborderRadiusUnit }
-											changeType={ changeborderradiusType }
-											onChange={ changeborderradius }
-											options={ [
-												{
-													label: __( 'T-R', 'vayu-blocks' ),
-													type: 'top',
-													value: getborderradius( 'top' )
-												},
-												{
-													label: __( 'T-L', 'vayu-blocks' ),
-													type: 'right',
-													value: getborderradius( 'right' )
-												},
-												{
-													label: __( 'B-R', 'vayu-blocks' ),
-													type: 'left',
-													value: getborderradius( 'left' )
-												},
-												{
-													label: __( 'B-L', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getborderradius( 'bottom' )
-												}
-											] }
+										<ResponsiveControl
+											label={ __( 'Border Radius', 'vayu-blocks' ) }
+										>
+										<UnitChooser
+											value={ attributes.borderRadiusHvrUnit }
+											onClick={borderRadiusHvrUnit => {
+												setAttributes({borderRadiusHvrUnit });
+												setborderRadiusHvrUnit(borderRadiusHvrUnit);
+											}}
+											units={ [ 'px', 'em', '%' ] }
+										/>
+										<SizingControl
+												type={ getborderradiusHvrType() }
+												min={ 0 }
+												max={ maxborderRadiusUnit }
+												changeType={ changeborderradiusHvrType }
+												onChange={ changeborderradiusHvr }
+												options={ [
+													{
+														label: __( 'T-R', 'vayu-blocks' ),
+														type: 'top',
+														value: getborderradiusHvr( 'top' )
+													},
+													{
+														label: __( 'T-L', 'vayu-blocks' ),
+														type: 'right',
+														value: getborderradiusHvr( 'right' )
+													},
+													{
+														label: __( 'B-R', 'vayu-blocks' ),
+														type: 'left',
+														value: getborderradiusHvr( 'left' )
+													},
+													{
+														label: __( 'B-L', 'vayu-blocks' ),
+														type: 'bottom',
+														value: getborderradiusHvr( 'bottom' )
+													}
+												] }
+											/>
+
+										</ResponsiveControl>
+
+										<ControlPanelControl
+										label={ __( 'Box Shadow', 'vayu-blocks' ) }
+										attributes={ attributes }
+										setAttributes={ setAttributes }
+										resetValues={ {
+											boxShadowHvr: false,
+											boxShadowColorHvr: undefined,
+											boxShadowColorOpacityHvr: 50,
+											boxShadowBlurHvr: 5,
+											boxShadowSpreadHvr: 1,
+											boxShadowHorizontalHvr: 0,
+											boxShadowVerticalHvr: 0
+										} }
+										onClick={ () => setAttributes({ boxShadowHvr: true }) }
+									>
+									
+										<ColorGradientControl
+											label={ __( 'Shadow Color', 'vayu-blocks' ) }
+											colorValue={ attributes.boxShadowColorHvr }
+											onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+											enableAlpha={true} 
 										/>
 
-									</ResponsiveControl>
-
-									<ControlPanelControl
-									label={ __( 'Box Shadow', 'vayu-blocks' ) }
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									resetValues={ {
-										boxShadow: false,
-										boxShadowColor: undefined,
-										boxShadowColorOpacity: 50,
-										boxShadowBlur: 5,
-										boxShadowSpread: 1,
-										boxShadowHorizontal: 0,
-										boxShadowVertical: 0
-									} }
-									onClick={ () => setAttributes({ boxShadow: true }) }
-								>
-								
-									<ColorGradientControl
-										label={ __( 'Shadow Color', 'vayu-blocks' ) }
-										colorValue={ attributes.boxShadowColor }
-										onColorChange={ e => setAttributes({ boxShadowColor: e }) }
-										enableAlpha={true} 
-									/>
-
-									<RangeControl
-										label={ __( 'Opacity', 'vayu-blocks' ) }
-										value={ attributes.boxShadowColorOpacity }
-										onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Blur', 'vayu-blocks' ) }
-										value={ attributes.boxShadowBlur }
-										onChange={ e => setAttributes({ boxShadowBlur: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Spread', 'vayu-blocks' ) }
-										value={ attributes.boxShadowSpread }
-										onChange={ e => setAttributes({ boxShadowSpread: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Horizontal', 'vayu-blocks' ) }
-										value={ attributes.boxShadowHorizontal }
-										onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Vertical', 'vayu-blocks' ) }
-										value={ attributes.boxShadowVertical }
-										onChange={ e => setAttributes({ boxShadowVertical: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-									</ControlPanelControl>	
-							</>
-
-						) 	|| 'hover' ===  hover && (
-							<>
-							<SelectControl
-								label={ __( 'Border Type', 'vayu-blocks' ) }
-								value={ attributes.borderHvrType }
-								options={ [
-									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
-									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
-									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
-									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
-									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
-									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
-								] }
-								onChange={ e => setAttributes({ borderHvrType: e }) }
-							/>	
-
-						{ 'none' !== attributes.borderHvrType && (
-							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
-							<ResponsiveControl
-										label={ __( 'Border Width', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderWidthHvrUnit }
-										onClick={borderWidthHvrUnit => {
-											setAttributes({borderWidthHvrUnit });
-											setborderWidthHvrUnit(borderWidthHvrUnit);
-										}}
-										units={ [ 'px', 'em' ] }
-									/>
-									<SizingControl
-											type={ getBorderWidthHvrType() }
+										<RangeControl
+											label={ __( 'Opacity', 'vayu-blocks' ) }
+											value={ attributes.boxShadowColorOpacityHvr }
+											onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
 											min={ 0 }
-											max={ maxborderWidthHvrUnit }
-											changeType={ changeBorderWidthHvrType }
-											onChange={ changeBorderWidthHvr }
-											options={ [
-												{
-													label: __( 'Top', 'vayu-blocks' ),
-													type: 'top',
-													value: getBorderWidthHvr( 'top' )
-												},
-												{
-													label: __( 'Right', 'vayu-blocks' ),
-													type: 'right',
-													value: getBorderWidthHvr( 'right' )
-												},
-												{
-													label: __( 'Bottom', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getBorderWidthHvr( 'bottom' )
-												},
-												{
-													label: __( 'Left', 'vayu-blocks' ),
-													type: 'left',
-													value: getBorderWidthHvr( 'left' )
-												}
-											] }
+											max={ 100 }
 										/>
 
-									</ResponsiveControl>		
-							<ColorGradientControl
-							label={ __( 'Border Hover Color', 'vayu-blocks' ) }
-							colorValue={ attributes.borderColorHvr }
-							onColorChange={ e => setAttributes({ borderColorHvr: e }) }
-							/>
-							</Suspense>
-			
-							) }
-
-									<ResponsiveControl
-										label={ __( 'Border Radius', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderRadiusHvrUnit }
-										onClick={borderRadiusHvrUnit => {
-											setAttributes({borderRadiusHvrUnit });
-											setborderRadiusHvrUnit(borderRadiusHvrUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-									/>
-									<SizingControl
-											type={ getborderradiusHvrType() }
+										<RangeControl
+											label={ __( 'Blur', 'vayu-blocks' ) }
+											value={ attributes.boxShadowBlurHvr }
+											onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
 											min={ 0 }
-											max={ maxborderRadiusUnit }
-											changeType={ changeborderradiusHvrType }
-											onChange={ changeborderradiusHvr }
-											options={ [
-												{
-													label: __( 'T-R', 'vayu-blocks' ),
-													type: 'top',
-													value: getborderradiusHvr( 'top' )
-												},
-												{
-													label: __( 'T-L', 'vayu-blocks' ),
-													type: 'right',
-													value: getborderradiusHvr( 'right' )
-												},
-												{
-													label: __( 'B-R', 'vayu-blocks' ),
-													type: 'left',
-													value: getborderradiusHvr( 'left' )
-												},
-												{
-													label: __( 'B-L', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getborderradiusHvr( 'bottom' )
-												}
-											] }
+											max={ 100 }
 										/>
 
-									</ResponsiveControl>
+										<RangeControl
+											label={ __( 'Spread', 'vayu-blocks' ) }
+											value={ attributes.boxShadowSpreadHvr }
+											onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
 
-									<ControlPanelControl
-									label={ __( 'Box Shadow', 'vayu-blocks' ) }
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									resetValues={ {
-										boxShadowHvr: false,
-										boxShadowColorHvr: undefined,
-										boxShadowColorOpacityHvr: 50,
-										boxShadowBlurHvr: 5,
-										boxShadowSpreadHvr: 1,
-										boxShadowHorizontalHvr: 0,
-										boxShadowVerticalHvr: 0
-									} }
-									onClick={ () => setAttributes({ boxShadowHvr: true }) }
-								>
-								
-									<ColorGradientControl
-										label={ __( 'Shadow Color', 'vayu-blocks' ) }
-										colorValue={ attributes.boxShadowColorHvr }
-										onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
-										enableAlpha={true} 
-									/>
+										<RangeControl
+											label={ __( 'Horizontal', 'vayu-blocks' ) }
+											value={ attributes.boxShadowHorizontalHvr }
+											onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
 
-									<RangeControl
-										label={ __( 'Opacity', 'vayu-blocks' ) }
-										value={ attributes.boxShadowColorOpacityHvr }
-										onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
+										<RangeControl
+											label={ __( 'Vertical', 'vayu-blocks' ) }
+											value={ attributes.boxShadowVerticalHvr }
+											onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
+											min={ -100 }
+											max={ 100 }
+										/>
+										</ControlPanelControl>
 
-									<RangeControl
-										label={ __( 'Blur', 'vayu-blocks' ) }
-										value={ attributes.boxShadowBlurHvr }
-										onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Spread', 'vayu-blocks' ) }
-										value={ attributes.boxShadowSpreadHvr }
-										onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Horizontal', 'vayu-blocks' ) }
-										value={ attributes.boxShadowHorizontalHvr }
-										onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Vertical', 'vayu-blocks' ) }
-										value={ attributes.boxShadowVerticalHvr }
-										onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-									</ControlPanelControl>
-
-							</>
-						)
-								}
+								</>
+							)
+							}
 						</PanelBody>
 
 						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
@@ -2112,74 +2210,74 @@ const PanelSettings = ({
 							className="th-button-panel"
 						> 
 
-						<HoverControl value={ hover }
-							options={[
-								{
-									label: __( 'Normal', 'vayu-blocks' ),
-									value: 'normal'
-								},
-								{
-									label: __( 'Hover', 'vayu-blocks' ),
-									value: 'hover'
-								}
-							]}
-							onChange={ setHover } />
-						
-						{ 'normal' ===  hover &&  (
-						
-						<BackgroundSelectorControl
-									backgroundType={ attributes.backgroundType }
-									backgroundColor={ attributes.backgroundColor }
-									image={ attributes.backgroundImage }
-								//	gradient={ attributes.backgroundGradient }
-									focalPoint={ attributes.backgroundPosition }
-									backgroundAttachment={ attributes.backgroundAttachment }
-									backgroundRepeat={ attributes.backgroundRepeat }
-									backgroundSize={ attributes.backgroundSize }
-									changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
-									changeImage={ media => {
-										setAttributes({
-											backgroundImage: pick( media, [ 'id', 'url' ])
-										});
-									}}
-									removeImage={ () => setAttributes({ backgroundImage: undefined })}
-									changeColor={ value => setAttributes({ backgroundColor: value })}
-									changeGradient={ value => setAttributes({ backgroundGradient: value }) }
-									changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
-									changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
-									changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
-									changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
-								/>
+							<HoverControl value={ hover }
+								options={[
+									{
+										label: __( 'Normal', 'vayu-blocks' ),
+										value: 'normal'
+									},
+									{
+										label: __( 'Hover', 'vayu-blocks' ),
+										value: 'hover'
+									}
+								]}
+								onChange={ setHover } />
 							
-						) || 'hover' ===  hover && (
-							<>
+							{ 'normal' ===  hover &&  (
+							
 							<BackgroundSelectorControl
-							backgroundType={ attributes.backgroundTypeHvr }
-							backgroundColor={ attributes.backgroundColorHvr }
-							image={ attributes.backgroundImageHvr }
-							gradient={ attributes.backgroundGradientHvr }
-							focalPoint={ attributes.backgroundPositionHvr }
-							backgroundAttachment={ attributes.backgroundAttachmentHvr }
-							backgroundRepeat={ attributes.backgroundRepeatHvr }
-							backgroundSize={ attributes.backgroundSizeHvr }
-							changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
-							changeImage={ media => {
-								setAttributes({
-									backgroundImageHvr: pick( media, [ 'id', 'url' ])
-								});
-							}}
-							removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
-							changeColor={ value => setAttributes({ backgroundColorHvr: value })}
-							changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
-							changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
-							changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
-							changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
-							changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
-						/>
-						
-						</>
-						
-						)}	
+										backgroundType={ attributes.backgroundType }
+										backgroundColor={ attributes.backgroundColor }
+										image={ attributes.backgroundImage }
+									//	gradient={ attributes.backgroundGradient }
+										focalPoint={ attributes.backgroundPosition }
+										backgroundAttachment={ attributes.backgroundAttachment }
+										backgroundRepeat={ attributes.backgroundRepeat }
+										backgroundSize={ attributes.backgroundSize }
+										changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
+										changeImage={ media => {
+											setAttributes({
+												backgroundImage: pick( media, [ 'id', 'url' ])
+											});
+										}}
+										removeImage={ () => setAttributes({ backgroundImage: undefined })}
+										changeColor={ value => setAttributes({ backgroundColor: value })}
+										changeGradient={ value => setAttributes({ backgroundGradient: value }) }
+										changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
+										changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
+										changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
+										changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
+									/>
+								
+							) || 'hover' ===  hover && (
+								<>
+								<BackgroundSelectorControl
+								backgroundType={ attributes.backgroundTypeHvr }
+								backgroundColor={ attributes.backgroundColorHvr }
+								image={ attributes.backgroundImageHvr }
+								gradient={ attributes.backgroundGradientHvr }
+								focalPoint={ attributes.backgroundPositionHvr }
+								backgroundAttachment={ attributes.backgroundAttachmentHvr }
+								backgroundRepeat={ attributes.backgroundRepeatHvr }
+								backgroundSize={ attributes.backgroundSizeHvr }
+								changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
+								changeImage={ media => {
+									setAttributes({
+										backgroundImageHvr: pick( media, [ 'id', 'url' ])
+									});
+								}}
+								removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
+								changeColor={ value => setAttributes({ backgroundColorHvr: value })}
+								changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
+								changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
+								changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
+								changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
+								changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
+							/>
+							
+							</>
+							
+							)}	
 						
 						</PanelBody>
 
@@ -2187,16 +2285,16 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
-						<RangeControl
-						label={ __( 'Transition Duration', 'vayu-blocks' ) }
-						renderTooltipContent={ customTooltiptransitionAll }
-						value={ attributes.transitionAll }
-						onChange={ transitionAll => setAttributes({ transitionAll }) }
-						step={ 0.1 }
-						min={ 0 }
-						max={ 3 }
-						allowReset={ true }
-						/>
+							<RangeControl
+							label={ __( 'Transition Duration', 'vayu-blocks' ) }
+							renderTooltipContent={ customTooltiptransitionAll }
+							value={ attributes.transitionAll }
+							onChange={ transitionAll => setAttributes({ transitionAll }) }
+							step={ 0.1 }
+							min={ 0 }
+							max={ 3 }
+							allowReset={ true }
+							/>
 						</PanelBody>
 						
 					</Fragment>
