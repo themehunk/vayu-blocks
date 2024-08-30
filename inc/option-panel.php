@@ -23,11 +23,7 @@ class VAYU_BLOCKS_OPTION_PANEL {
 
     public function get_option($key='',$value=''){
 
-        if (!is_user_logged_in()) {
-            wp_die('You must be logged in to perform this action.');
-        }
-
-        $vbo = get_option('vayu_blocks_options');
+    $vbo = get_option('vayu_blocks_options');
     if ($vbo ) {
        return $vbo;
 

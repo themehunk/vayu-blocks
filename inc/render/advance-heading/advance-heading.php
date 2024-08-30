@@ -83,14 +83,12 @@ function vayu_advance_heading_style($attr){
 
 		// Width
 		if (isset($attr['widthType'])) {
-			if ($attr['widthType'] == 'fullwidth') {
-				$css .= "width: 100%; ";
-			} elseif ($attr['widthType'] == 'inlinewidth') {
+			if ($attr['widthType'] == 'inlinewidth') {
 				$css .= "display: inline-flex; ";
 			} elseif ($attr['widthType'] == 'customwidth' && isset($attr['customWidth'])) {
 				$customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-				$css .= "width: {$attr['customWidth']}{$customWidthUnit}; ";
 				$css .= "max-width: {$attr['customWidth']}{$customWidthUnit}; ";
+				
 			}
 		}
 
@@ -309,8 +307,8 @@ function vayu_advance_heading_style($attr){
 			$css .= (isset($attr['lineHeightTablet']) ? "line-height:{$attr['lineHeightTablet']}" . (isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px') . ";" : '');
 		    $css .= (isset($attr['letterSpacingTablet']) ? "letter-spacing:{$attr['letterSpacingTablet']}" . (isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px') . ";" : '');
 			$css .= (isset($attr['alignTablet']) ? "text-align:{$attr['alignTablet']};" : '');
-			$css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
-            $css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."}" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
+			$css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'')."" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
+           
 			$css .= (isset($attr['zindexTablet']) ? "z-index:{$attr['zindexTablet']};}" : '');
 			
 			if (isset($attr['paddingTypeTablet']) && 'unlinked' === $attr['paddingTypeTablet']) {
@@ -466,8 +464,10 @@ function vayu_advance_heading_style($attr){
 				$css .=(isset($attr['lineHeightMobile']) ? "line-height:{$attr['lineHeightMobile']}" . (isset($attr['lineHeightUnit']) ? $attr['lineHeightUnit'] : 'px') . ";" : '');
 				$css .=(isset($attr['letterSpacingMobile']) ? "letter-spacing:{$attr['letterSpacingMobile']}" . (isset($attr['letterSpacingUnit']) ? $attr['letterSpacingUnit'] : 'px') . ";" : '');
 				$css .=(isset($attr['alignMobile']) ? "text-align:{$attr['alignMobile']};" : '');
-				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').";" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";}" : '' );
-				$css .=(isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:{".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').";" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";}" : '' );
+				
+
+				$css .= (isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'')."" . (isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' );
+				
 				$css .=(isset($attr['zindexMobile']) ? "z-index:{$attr['zindexMobile']};" : '');
 			    $css .= "}}";
 

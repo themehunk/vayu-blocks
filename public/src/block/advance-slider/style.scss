@@ -8,9 +8,7 @@
     display:none;
 }
 
-.vayu-blocks-advance-slider .slick-slide{
-    margin:5px;
-}
+
 
 /* Animation for heading */
 // @keyframes fadeInUp {
@@ -46,10 +44,41 @@
     }
 }
 
-.slide-active {
-    opacity: 1; /* Initially hide the element */
-    animation: fadeInUp 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Custom cubic-bezier for smoother animation */
-    animation-delay: -1s; /* Negative delay to start animation slightly early */
+// .slide-active {
+//     opacity: 0; /* Initially hide the element */
+//     animation: fadeInUp 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Custom cubic-bezier for smoother animation */
+//     animation-delay: -1s; /* Negative delay to start animation slightly early */
+// }
+
+/* Common animation class */
+.vayu-blocks-animate-on-slide {
+    opacity: 0; /* Initially hidden */
+    animation: fadeInUp 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation-delay: -0.3s;
+}
+
+.vayu_blocks_heading,
+.vayu_blocks_sub_heading,
+.vayu_blocks_slider_button1,
+.vayu_blocks_slider_button2{
+    opacity:0;
+}
+
+/* Apply delays to ensure sequential animation */
+.vayu_blocks_heading.vayu-blocks-animate-on-slide {
+    animation-delay: 0s; /* First element */
+}
+
+.vayu_blocks_sub_heading.vayu-blocks-animate-on-slide {
+    animation-delay: 0.5s; /* Second element */
+}
+
+.vayu_blocks_slider_button1.vayu-blocks-animate-on-slide {
+    animation-delay: 1s; /* Third element */
+}
+
+.vayu_blocks_slider_button2.vayu-blocks-animate-on-slide {
+    animation-delay: 1s; /* Fourth element */
 }
 
 @keyframes fadeInUp {
@@ -63,21 +92,6 @@
     }
 }
 
-.vayu_blocks_heading{
-    animation: fadeInDown 1s ease-out;
-}
-
-.vayu_blocks_sub_heading {
-    animation: fadeInDown 1s ease-out;
-}
-
-.vayu_blocks_slider_button1 {
-    animation: fadeInDown 1s ease-out;
-}
-
-.vayu_blocks_slider_button2 {
-    animation: fadeInDown 1s ease-out;
-}
 
 
 

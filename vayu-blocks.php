@@ -43,11 +43,7 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
         require_once VAYU_BLOCKS_DIR_PATH .'inc/init.php';
-
-        // require_once 'inc/render/image-slider-block/image-slider-block.php';
-
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
-
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
 
     }

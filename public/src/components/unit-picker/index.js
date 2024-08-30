@@ -51,6 +51,9 @@ export default class UnitChooser extends Component {
 							if ( 'deg' === unit ) {
 								unitName = _x( 'Degree', 'A size unit for CSS markup', 'vayu-blocks' );
 							}
+							if ( 'vh' === unit ) {
+								unitName = _x( 'a size of screen height', 'A size unit for CSS markup', 'vayu-blocks' );
+							}
 
 							return <Tooltip
 								/* translators: Unit type (px, em, %) */

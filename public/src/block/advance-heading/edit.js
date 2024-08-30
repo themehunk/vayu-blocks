@@ -457,8 +457,8 @@ import classnames from 'classnames';
 
 		customwidth = {
              
-			'--h-width':attributes.customWidth + attributes.customWidthUnit,
 			'--h-max-width':attributes.customWidth + attributes.customWidthUnit,
+			// '--h-max-width':'100%',
 			
 		};
 
@@ -467,10 +467,8 @@ import classnames from 'classnames';
 	   if ( isTablet ) {
 
 		customwidth = {
-             
-			'--h-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			'--h-max-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			
+             '--h-max-width':attributes.customWidth + attributes.customWidthUnit,
+			// '--h-max-width':'100%',
 		};
 
 	   }
@@ -479,8 +477,8 @@ import classnames from 'classnames';
 
 		customwidth = {
              
-			'--h-width':attributes.customWidthMobile + attributes.customWidthUnit,
 			'--h-max-width':attributes.customWidthMobile + attributes.customWidthUnit,
+			// '--h-max-width':'100%',
 			
 		};
 		
@@ -488,21 +486,14 @@ import classnames from 'classnames';
 
 	}
 
-	if( attributes.widthType =='fullwidth' ) {
-
-		customwidth = {
-             
-			width:'100%',
-			
-		};
-
-	}
+	
 
     if( attributes.widthType =='inlinewidth' ) {
 
 		customwidth = {
              
 	            display:'inline-flex',
+				'--h-max-width':'fit-content',
 			
 		};
 
@@ -581,7 +572,6 @@ import classnames from 'classnames';
 		};
 	  }
 	  
-
     const style = omitBy({
         ...stylesheet,
 		...customwidth,
@@ -593,11 +583,20 @@ import classnames from 'classnames';
 		
     }, x => x?.includes?.( 'undefined' ));
 
-	let Classes = classnames({
-		"th-hide-desktop": attributes.responsiveTogHideDesktop,
-		"th-hide-tablet": attributes.responsiveTogHideTablet,
-		"th-hide-mobile": attributes.responsiveTogHideMobile,
-	  });
+	let headingWidthClass = "";
+
+	if( attributes.widthType =='fullwidth') {
+		headingWidthClass = 'alignfull';
+	}
+
+	const Classes = classnames(
+		headingWidthClass, // Include headingWidthClass directly as a string
+		{
+		  'th-hide-desktop': attributes.responsiveTogHideDesktop,
+		  'th-hide-tablet': attributes.responsiveTogHideTablet,
+		  'th-hide-mobile': attributes.responsiveTogHideMobile,
+		}
+	  );
 
     const blockProps = useBlockProps({
 		id:`th-block-heading-${attributes.uniqueID}`,
