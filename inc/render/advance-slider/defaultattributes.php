@@ -18,7 +18,7 @@ return array(
         'rtl' => false,
         'speed' => 500,
         'slidesToShow' => 1,
-        'slidermargin' =>5,
+        'slidermargin' =>0,
         'slidesToScroll' => 1,
         'row' => 1,
         'slidesPerRow' => 1,
@@ -27,6 +27,7 @@ return array(
         'customPaging' => false,
         'swipe' => false,
         'custompagingvalue' => 0,
+        'animationtype' => 'animation1',
         'dots' => array(
             'color' => 'black',
             'backgroundColor' => 'transparent',
@@ -44,6 +45,8 @@ return array(
             'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
             'size' => '20px',
             'tag' => 'arrow',
+            'positionVertical' => 0,
+            'hovercolor'=> 'blue',
             'position' => 0,
             'borderRadius' => array(
                 'top' => '50px',
@@ -55,7 +58,7 @@ return array(
         ),
         'slides' => array(
             array(
-                'uniqueId' => 'slide-default-1',
+                'uniqueId' => '134543583587461', // Replace with a unique identifier if needed
                 'button1' => array(
                     'show' => true,
                     'text' => 'Button One',
@@ -63,7 +66,6 @@ return array(
                     'newtab' => true,
                     'size' => 20,
                     'backgroundColor' => 'transparent',
-                    'backgroundType' => 'color',
                     'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
                     'color' => 'black',
                     'border' => array(
@@ -103,7 +105,6 @@ return array(
                     'newtab' => true,
                     'size' => 20,
                     'backgroundColor' => 'transparent',
-                    'backgroundType' => 'color',
                     'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
                     'color' => 'black',
                     'border' => array(
@@ -173,10 +174,10 @@ return array(
                     'rightstyle' => 'solid',
                 ),
                 'borderRadius' => array(
-                    'top' => '5px',
-                    'right' => '5px',
-                    'bottom' => '5px',
-                    'left' => '5px',
+                    'top' => '0px',
+                    'right' => '0px',
+                    'bottom' => '0px',
+                    'left' => '0px',
                 ),
                 'padding' => array(
                     'top' => '50px',
@@ -184,28 +185,29 @@ return array(
                     'bottom' => '50px',
                     'left' => '0px',
                 ),
-                'opacity' => 0.2,
+                'opacity' => 0.3,
                 'backgroundBlend' => 'lighten',
                 'backgroundImage' => '',
-                'focalPoint' => array(
-                    'x' => 0.5,
-                    'y' => 0.5,
-                ),
-                'customStyle' => false,
+                'customStylelayout' => false,
+                'customStyleheading' => false,
+                'customStylesubheading' => false,
+                'customStylesubbutton1' => false,
+                'customStylesubbutton2' => false,
                 'customBackgroundImage' => false,
-                'heightauto'=>true,
+                'heightauto' => true,
                 'backgroundType' => 'color',
                 'backgroundColor' => '#000000',
                 'duotone' => '',
-                'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-                'alignment' => 'center',
-                'alignmenttop' => 'center',
-                'imageheight'=>0,
+                'imageheight' => 0,
                 'gaphb' => 0,
                 'customheight' => 340,
                 'gaphsub' => 0,
-            )          
+                'backgroundGradient' => 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
+                'alignment' => 'center',
+                'alignmenttop' => 'center',
+            )
         ),
+        
 
     //Advanced
         'globalwidth'=> '',
