@@ -43,62 +43,12 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
         require_once VAYU_BLOCKS_DIR_PATH .'inc/init.php';
-
-        // require_once 'inc/render/image-slider-block/image-slider-block.php';
-
         add_action( 'init', array( $this, 'vayu_register_blocks' ) );
-
         add_action('admin_menu',  array( $this, 'vayu_plugin_menu'));
-
-        // Set default values for toggle switch options
-        // add_option( 'container_value', 1 ); // Turn on by default
-        // add_option( 'button_value', 1 ); // Turn on by default
-        // add_option( 'wooproduct_value', 1 ); // Turn on by default
-        // add_option( 'heading_value', 1 ); // Turn on by default
-        // add_option( 'spacer_value', 1 ); // Turn on by default
-        // add_option( 'productfilter_value', 1 ); // Turn on by default
 
     }
 
     public function vayu_register_blocks() {
-        
-    // $container_width = absint(get_option('container_width',1250));
-    // $container_gap = absint(get_option('container_gap',20));
-    // $padding = absint(get_option('padding',18));
-    
-    // Retrieve the settings from the database
-    $settings = get_option('vayu_blocks_settings', array(
-        'container' => array(
-            'value' => 1,
-            'pro' => false,
-            'description' => '',
-            'settings' => array(
-                'containerWidth' => 1250, // Default value
-                'containerGap' => 20, // Default value
-                'padding' => 18, // Default value
-            ),
-        ),
-    ));
-
-// Access the container settings
-$container_width = absint($settings['container']['settings']['containerWidth']);
-$container_gap = absint($settings['container']['settings']['containerGap']);
-$padding = absint($settings['container']['settings']['padding']);
-// Access the value key for each block
-// Assuming $settings is an associative array with optional keys
-$container_value = isset($settings['container']['value']) ? absint($settings['container']['value']) : 1;
-$button_value = isset($settings['button']['value']) ? absint($settings['button']['value']) : 0;
-$heading_value = isset($settings['heading']['value']) ? absint($settings['heading']['value']) : 0;
-$spacer_value = isset($settings['spacer']['value']) ? absint($settings['spacer']['value']) : 0;
-$product_value = isset($settings['product']['value']) ? absint($settings['product']['value']) : 0;
-$post_grid_value = isset($settings['postGrid']['value']) ? absint($settings['postGrid']['value']) : 0;
-$slider_value = isset($settings['slider']['value']) ? absint($settings['slider']['value']) : 0;
-
-// Output values
-
-
-
-    // $button_color = sanitize_text_field(get_option('button_color'));
 
     $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
 
