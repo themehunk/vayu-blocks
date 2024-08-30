@@ -37,12 +37,12 @@ function generate_inline_slider_styles($attr) {
        
 
        // Position and Z-index
-       $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
-       $css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
+      // $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
+       //$css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
 
        // Alignment and Order
-       $css .= isset($attr['selfAlign']) ? "align-self: " . esc_attr($attr['selfAlign']) . ";" : '';
-       $css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
+       //$css .= isset($attr['selfAlign']) ? "align-self: " . esc_attr($attr['selfAlign']) . ";" : '';
+       //$css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
 
 
        // Border
@@ -106,14 +106,14 @@ function generate_inline_slider_styles($attr) {
        // Transition
        $css .= "transition-duration: " . (isset($attr['transitionAll']) ? esc_attr($attr['transitionAll']) : '0') . "s;";
        
-       // Grid properties
-       $css .= "display: grid;";
-       $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
-       $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
-       $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-       $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-       $css .= "grid-gap: {$gridGapUp} {$gridGap};";
-       $css .= "grid-auto-rows: minmax(100px, auto);";
+    //    // Grid properties
+    //    $css .= "display: grid;";
+    //    $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
+    //    $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
+    //    $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
+    //    $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
+    //    $css .= "grid-gap: {$gridGapUp} {$gridGap};";
+    //    $css .= "grid-auto-rows: minmax(100px, auto);";
        
     $css .= "}";
     
@@ -267,6 +267,34 @@ function generate_inline_slider_styles($attr) {
         }
     $css .= "}\n";
 
+    // Determine animation type and opacity
+    switch ($attr['animationtype']) {
+        case 'animation1':
+            $animationtype = 'fadeInUparrow';
+            $opacity = '0'; // Hidden initially for animation
+            break;
+        case 'animation2':
+            $animationtype = 'fadeInDownarrow';
+            $opacity = '0'; // Hidden initially for animation
+            break;
+        case 'animation3':
+            $animationtype = 'fadeInLeftarrow';
+            $opacity = '0'; // Hidden initially for animation
+            break;
+        case 'animation4':
+            $animationtype = 'fadeInRightarrow';
+            $opacity = '0'; // Hidden initially for animation
+            break;
+        case 'noanimation':
+            $animationtype = ''; // No animation
+            $opacity = $attr['arrowstyleleft']['opacity'] ?? '0';
+            break;
+        default:
+            $animationtype = ''; // Fallback animation
+            $opacity = '0'; // Hidden initially for animation
+            break;
+    }
+
     // Arrow styles
     $css .= "$wrapper .slick-arrow {";
         $css .= "background: " . $attr['arrowstyleleft']['backgroundColor'] . ";";
@@ -294,6 +322,11 @@ function generate_inline_slider_styles($attr) {
         } else {
             $css .= "display: flex;";
         }
+        $css .= "opacity: " . $opacity . ";";
+
+        // Conditional animation property
+        $css .= "animation: $animationtype 0.7s cubic-bezier(0.42, 0, 0.58, 1) forwards;";
+
     $css .= "}\n";
 
     $css .= "$wrapper:hover .slick-next {";
@@ -325,7 +358,55 @@ function generate_inline_slider_styles($attr) {
         $css .= "}";
     $css .= "}\n";
 
-    // Keyframes
+    // Keyframes for fadeInUparrow
+    $css .= "@keyframes fadeInUparrow {";
+        $css .= "0% {";
+            $css .= "opacity: 0;"; /* Start slightly hidden */
+            $css .= "transform: translateY(20px);"; /* Start slightly lower */
+        $css .= "}";
+        $css .= "100% {";
+            $css .= "opacity: " . $attr['arrowstyleleft']['opacity'] . ";";
+            $css .= "transform: translateY(0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+    
+    // Keyframes for fadeInDownarrow
+    $css .= "@keyframes fadeInDownarrow {";
+        $css .= "from {";
+            $css .= "opacity: 0;"; /* Start slightly hidden */
+            $css .= "transform: translateY(-20px);"; /* Start slightly above */
+        $css .= "}";
+        $css .= "to {";
+            $css .= "opacity: " . $attr['arrowstyleleft']['opacity'] . ";";
+            $css .= "transform: translateY(0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+    
+    // Keyframes for fadeInLeftarrow
+    $css .= "@keyframes fadeInLeftarrow {";
+        $css .= "from {";
+            $css .= "opacity: 0;"; /* Start slightly hidden */
+            $css .= "transform: translateX(-20px);"; /* Start slightly left */
+        $css .= "}";
+        $css .= "to {";
+            $css .= "opacity: " . $attr['arrowstyleleft']['opacity'] . ";";
+            $css .= "transform: translateX(0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+    
+    // Keyframes for fadeInRightarrow
+    $css .= "@keyframes fadeInRightarrow {";
+        $css .= "from {";
+            $css .= "opacity: 0;"; /* Start slightly hidden */
+            $css .= "transform: translateX(20px);"; /* Start slightly right */
+        $css .= "}";
+        $css .= "to {";
+            $css .= "opacity: " . $attr['arrowstyleleft']['opacity'] . ";";
+            $css .= "transform: translateX(0);"; /* End at original position */
+        $css .= "}";
+    $css .= "}\n";
+    
+    // Keyframes 
     $css .= "@keyframes slideInFromBottomLeft {";
         $css .= "from {";
             $css .= "opacity: 0;"; /* Start invisible */
@@ -339,8 +420,9 @@ function generate_inline_slider_styles($attr) {
         
     // Arrow hover styles
     $css .= "$wrapper .slick-arrow:hover {";
-        $css .= "background:blue;";
+        $css .= "background:" . esc_attr($attr['arrowstyleleft']['hovercolor']) . ";";
     $css .= "}\n";
+
     
     // Adjust left and right arrow specific styles
     $css .= "$wrapper .slick-prev {";
@@ -349,6 +431,7 @@ function generate_inline_slider_styles($attr) {
             $attr['arrowstyleleft']['position'] . 'px' : 
             $attr['arrowstyleleft']['position']
         ) . ";";
+        $css .= "margin-top:" . esc_attr($attr['arrowstyleleft']['positionVertical']) . "px;";
     $css .= "}\n";
     
     $css .= "$wrapper .slick-next {";
@@ -357,6 +440,21 @@ function generate_inline_slider_styles($attr) {
             $attr['arrowstyleleft']['position'] . 'px' : 
             $attr['arrowstyleleft']['position']
         ) . ";";
+
+        $css .= "margin-top: " . esc_attr($attr['arrowstyleleft']['positionVertical']) . "px;";
+    $css .= "}\n";
+
+    // Styling for slider components
+    $css .= ".vayu_blocks_heading,";
+    $css .= ".vayu_blocks_sub_heading,";
+    $css .= ".vayu_blocks_slider_button1,";
+    $css .= ".vayu_blocks_slider_button2 {";
+        if($attr['animationtype'] === 'noanimation'){
+            $css .= "opacity: 1;";
+
+        }else{
+            $css .= "opacity: 0; /* Initially hidden */";
+        }
     $css .= "}\n";
     
     // Arrow icon customization
@@ -372,7 +470,6 @@ function generate_inline_slider_styles($attr) {
         $css .= "color: " . $attr['arrowstyleleft']['color'] . ";";
         $css .= "content:'';";
     $css .= "}\n";
-
 
     // Specific SVG icons for different arrow types
     if ($attr['arrowstyleleft']['tag'] === 'arrow') {
@@ -621,21 +718,22 @@ function generate_inline_slider_styles($attr) {
             // Get the padding values with defaults
             $paddingTop = isset($slide['padding']['top']) ? esc_attr($slide['padding']['top']) : '0px';
             $paddingRight = isset($slide['padding']['right']) ? esc_attr($slide['padding']['right']) : '0px';
+            $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
+            $paddingLeft = isset($slide['padding']['left']) ? esc_attr($slide['padding']['left']) : '0px';
 
             // Get the bottom padding value or default to '0px'
-            $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
+            // $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
 
-            // Convert bottom padding to an integer for comparison (remove 'px' if present)
-            $paddingBottomValue = intval(str_replace('px', '', $paddingBottom));
+            // // Convert bottom padding to an integer for comparison (remove 'px' if present)
+            // $paddingBottomValue = intval(str_replace('px', '', $paddingBottom));
 
-            // Add 50px to the bottom padding value
-            $paddingBottomValue += 50;
+            // // Add 50px to the bottom padding value
+            // $paddingBottomValue += 50;
 
-            // Apply the new bottom padding value with 'px'
-            $paddingBottom = "{$paddingBottomValue}px";
+            // // Apply the new bottom padding value with 'px'
+            // $paddingBottom = "{$paddingBottomValue}px";
 
             // Get the left padding value or default to '0px'
-            $paddingLeft = isset($slide['padding']['left']) ? esc_attr($slide['padding']['left']) : '0px';
 
             // Apply the padding style
             $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
