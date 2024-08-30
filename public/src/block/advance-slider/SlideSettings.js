@@ -227,7 +227,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             slides: [
                 ...attributes.slides,
                 {
-                    
                     ...attributes.global,  // Use global layout attributes
                     uniqueId: generateUniqueId()   // Add unique ID
                 }
@@ -269,6 +268,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 currentProperty = currentProperty[prop];
             }
         });
+
+        // console.log(newSlides);
         
         setAttributes({ slides: newSlides });
     };

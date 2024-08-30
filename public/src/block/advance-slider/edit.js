@@ -268,6 +268,26 @@ const edit = ({ attributes, setAttributes }) => {
         
     }, [attributes.index]);
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+   
+    useEffect(() => {
+        // Check if there is exactly one slide
+        if (attributes.slides.length === 1) {
+            // Check if a slide with the same unique ID already exists
+            const newSlide = {
+                ...attributes.global,  // Use global layout attributes
+                uniqueId: generateUniqueId()   // Add unique ID
+            };
+    
+            // Add the new slide if it does not already exist
+            const newSlides = [...attributes.slides, newSlide];
+            setAttributes({
+                slides: newSlides
+            });
+        }
+    }, [attributes.slides]); // Dependency on attributes.slides to react to changes
+    
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         // Extract padding values with default '0px'
         const topPadding = slide.padding.top || '0px';
@@ -409,12 +429,11 @@ const edit = ({ attributes, setAttributes }) => {
             marginRight: slide.button2.show ? '5px' : '0px',
         };
         };
-        // console.log(attributes.slides);
+
+        //console.log(attributes.slides);
         // const blocks = wp.data.select('core/block-editor').getBlocks();
         // console.log(blocks);
 
-    
-        
         return (
             <div className="vayu_blocks_slider-container" key={slide.id}>
 
