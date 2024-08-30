@@ -66,30 +66,9 @@ const InsSettings = ({
     const [ tab, setTab ] = useState( 'setting' );
 	const [ hover, setHover ] = useState( 'normal' );
 
-    const getCustomWidth = () => {
-		switch ( getView ) {
-		case 'Desktop':
-			return attributes.customWidth;
-		case 'Tablet':
-			return attributes.customWidthTablet;
-		case 'Mobile':
-			return attributes.customWidthMobile;
-		default:
-			return undefined;
-		}
-	};
+    
 
-	const changeCustomWidth = value => {
-		if ( 'Desktop' === getView ) {
-			setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
-		} else if ( 'Tablet' === getView ) {
-			setAttributes({ customWidthTablet: value });
-		} else if ( 'Mobile' === getView ) {
-			setAttributes({ customWidthMobile: value });
-		}
-	};
-
-	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
 	const customTooltipletterSpacing = value => `${value}${attributes.letterSpacingUnit}`;
@@ -1455,8 +1434,7 @@ const InsSettings = ({
 	const customTooltiptransitionAll = value => `${value}`
 
 	// unit switch max value
-	const [customWidthUnit, setcustomWidthUnit] = useState('px');
-	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1500 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
+	
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
 	const [paddingUnit, setpaddingUnit] = useState('px');
@@ -1646,39 +1624,13 @@ const InsSettings = ({
 								value={ attributes.widthType }
 								options={ [
 									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
-									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
+				
 									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
-								    { label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
+								  
 								] }
 								onChange={ e => setAttributes({ widthType: e }) }
 							/>
-							{ 'customwidth' == attributes.widthType && (
-
-							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
-							<ResponsiveControl
-							label={ __( 'Custom Width', 'vayu-blocks' ) }
-							>	
-							<UnitChooser
-							value={ attributes.customWidthUnit }
-							onClick={ customWidthUnit => {
-								setAttributes({ customWidthUnit });
-								setcustomWidthUnit(customWidthUnit); 
-								}}
-							units={ [ 'px', 'em', '%' ] }
-							/>
-							<RangeControl
-								renderTooltipContent={ customTooltipCustomWidth }
-								value={ getCustomWidth() || '' }
-								onChange={ changeCustomWidth }
-								step={ 1 }
-								min={ 1 }
-								max={ maxcustomWidthUnit }
-								allowReset={ true }
-							/>
-							</ResponsiveControl>
-							</Suspense>
-
-							) }
+							
 
 						  <ResponsiveControl
 								label={ __( 'Padding', 'vayu-blocks' ) }

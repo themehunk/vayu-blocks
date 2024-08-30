@@ -1174,32 +1174,6 @@ const getMargin = type => {
 const [marginUnit, setmarginUnit] = useState('px');
 const maxmarginUnit = marginUnit === 'px' ? 1500 : marginUnit === 'em' ? 50 : marginUnit === '%' ? 100:'';
 
-const getCustomWidth = () => {
-	switch ( getView ) {
-	case 'Desktop':
-		return attributes.customWidth;
-	case 'Tablet':
-		return attributes.customWidthTablet;
-	case 'Mobile':
-		return attributes.customWidthMobile;
-	default:
-		return undefined;
-	}
-};
-
-const changeCustomWidth = value => {
-	if ( 'Desktop' === getView ) {
-		setAttributes({ customWidth: value, customWidthTablet: value, customWidthMobile: value });
-	} else if ( 'Tablet' === getView ) {
-		setAttributes({ customWidthTablet: value, customWidthMobile: value });
-	} else if ( 'Mobile' === getView ) {
-		setAttributes({ customWidthMobile: value });
-	}
-};
-const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
-const [customWidthUnit, setcustomWidthUnit] = useState('px');
-const maxcustomWidthUnit = customWidthUnit === 'px' ? 3000 : customWidthUnit === 'em' ? 10 : customWidthUnit === '%' ? 100:'';
-
 const customTooltipZindex = value => `${value}px`
 const getZindex = () => {
 	switch ( getView ) {
@@ -2210,41 +2184,11 @@ return (
 								value={ attributes.widthType }
 								options={ [
 									{ label: __( 'Default', 'vayu-blocks' ), value: 'default' },
-									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
 									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
-								    { label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
 								] }
 								onChange={ e => setAttributes({ widthType: e }) }
 							/>
-							{ 'customwidth' == attributes.widthType && (
-
-							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
-							<ResponsiveControl
-							label={ __( 'Custom Width', 'vayu-blocks' ) }
-							>
-
-							<UnitChooser
-								value={ attributes.customWidthUnit }
-								onClick={customWidthUnit => {
-									setAttributes({ customWidthUnit });
-									setcustomWidthUnit(customWidthUnit);
-								  }}
-			
-								units={ [ 'px', 'em', '%' ] }
-						        />
-								<RangeControl
-								    renderTooltipContent={ customTooltipCustomWidth }
-									value={ getCustomWidth() || ''  }
-									onChange={ changeCustomWidth }
-									step={ 1 }
-									min={ 0 }
-									max={ maxcustomWidthUnit }
-									allowReset={ true }
-								/>
-								</ResponsiveControl>
-							</Suspense>
-
-							) }
+							
 
                              <ResponsiveControl
 								label={ __( 'Z-index', 'vayu-blocks' ) }

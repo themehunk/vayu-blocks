@@ -579,7 +579,7 @@ import classnames from 'classnames';
 		...transitionHeadingStyle,
 		...backgroundStyle,
 		...flexProperties,
-		...PositionProperties,
+		...PositionProperties, 
 		
     }, x => x?.includes?.( 'undefined' ));
 

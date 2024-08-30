@@ -1,1 +1,0 @@
-jQuery(document).ready((function(e){e(".your-slider-class").slick({dots:!0,infinite:!0,speed:300,slidesToShow:1,slidesToScroll:1,autoplay:!0,autoplaySpeed:2e3,arrows:!0})}));

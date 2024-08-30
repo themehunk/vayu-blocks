@@ -12,22 +12,7 @@ function vayu_advance_button_style($attr){
       $css .= ".th-button-wrapper{$attr['uniqueID']}{";
 
         $css .= "box-sizing: border-box;";
-       //Width
-       if( isset($attr['widthType']) && $attr['widthType'] == 'fullwidth' ){
-        $css .= "width: 100%;max-width: 100%!important;display: flex;";
-      }
-      elseif( isset($attr['widthType']) && $attr['widthType'] == 'inlinewidth' ){
-        $css .= "width: auto;display: inline-flex;";
-      }
-      elseif( isset($attr['widthType']) && $attr['widthType'] == 'customwidth' ){
-        $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-        $css .= isset($attr['customWidth']) ? "width: {$attr['customWidth']}{$customWidthUnit};" : '';
-        $css .= "display: flex;";
-      }
-      else {
         $css .= "width: 100%;display: flex;";
-      }
-
       //background
       if ( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'image' ) {
         $css .= isset( $attr['backgroundImage']['url'] ) ? "background-image: url({$attr['backgroundImage']['url']});" : '';
@@ -419,7 +404,7 @@ function vayu_advance_button_style($attr){
     $css .= ".th-button-wrapper{$attr['uniqueID']} .th-button.th-button-inside > span:nth-of-type(1){";
       if(isset( $attr['iconPosition'] ) && $attr['iconPosition'] == 'after' ){
       
-        $css .= isset( $attr['iconSpacing'] ) ? "margin:0 0 0 {$attr['iconSpacing'] }px;" : '';
+        $css .= isset( $attr['iconSpacing'] )  ? "margin:0 0 0 {$attr['iconSpacing'] }px;" : '';
         $css .= "order: 15; display: flex; align-items: center;";
       }
       else{
@@ -440,8 +425,7 @@ function vayu_advance_button_style($attr){
     
         $css .= ".th-button-wrapper{$attr['uniqueID']}{";
         
-              $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
-              $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthTablet']) ? ($attr['customWidthTablet']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '' ;
+             
             
               //margin
               if (isset($attr['marginTypeTablet']) && 'unlinked' === $attr['marginTypeTablet']) {
@@ -700,11 +684,9 @@ function vayu_advance_button_style($attr){
 
              
      //    Mobile view
-    $css .= "@media screen and (max-width: 767px){";
-        $css .= ".th-button-wrapper{$attr['uniqueID']}{";
-            $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "width:".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
-      $css .= isset($attr['widthType']) && $attr['widthType']=='customwidth' ? "max-width:".(isset($attr['customWidthMobile']) ? ($attr['customWidthMobile']):'').(isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px') . ";" : '';
-    
+      $css .= "@media screen and (max-width: 767px){";
+      $css .= ".th-button-wrapper{$attr['uniqueID']}{";
+            
       //margin
       if (isset($attr['marginTypeMobile']) && 'unlinked' === $attr['marginTypeMobile']) {
         $marginUnit = isset($attr['marginUnit']) ? $attr['marginUnit'] : 'px';

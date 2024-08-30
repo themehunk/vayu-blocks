@@ -137,45 +137,11 @@ export default function Edit({ attributes, setAttributes, clientId,
 
   let customwidth;
 
-  if( attributes.widthType=='customwidth' ) {
-  	if ( isDesktop ) {
-  		customwidth = {
-		'--width':attributes.customWidth + attributes.customWidthUnit,
-		'--maxWidth':attributes.customWidth + attributes.customWidthUnit, 
-  	};
-}
-   if ( isTablet ) {
-  customwidth = {      
-		'--width':attributes.customWidthTablet + attributes.customWidthUnit,
-		'--maxWidth':attributes.customWidthTablet + attributes.customWidthUnit,
-  	};
-   }
-   if ( isMobile ) {
-  customwidth = {      
-   		'--width':attributes.customWidthMobile + attributes.customWidthUnit,
-    	'--maxWidth':attributes.customWidthMobile + attributes.customWidthUnit,  
- 	 };
-}
-
-}
-else if( attributes.widthType =='fullwidth' ) {
-    customwidth = {       
-      '--width':'100%',
-      '--maxWidth-fullwidth':'100%',  
-    };
-}
-else if( attributes.widthType =='inlinewidth' ) {
+  if( attributes.widthType =='inlinewidth' ) {
     customwidth = {
-      '--width':'auto',
       '--display':'inline-flex',
-    }; 
-}
-else{
-	customwidth = {       
-		'--width':'100%',
-		'--maxWidth-fullwidth':'650px',  
-	  };
-}
+      }; 
+    }   
 
 	let buttonWrapperStyle;
 	let iconPositionStyle;

@@ -5,9 +5,9 @@
 .wp-block-vayu-blocks-advance-button{
 	box-sizing: border-box;
     --width:'100%';
-	width: var(--width);
-	--maxWidth : var(--maxWidth-fullwidth);
-	max-width: var(--maxWidth);
+	// width: var(--width);
+	// --maxWidth : var(--maxWidth-fullwidth);
+	// max-width: var(--maxWidth);
 	--display: flex;
 	display: var(--display);
     justify-content: var(--justify-content);
@@ -15,11 +15,11 @@
 	padding-right: var(--paddingRight);
 	padding-bottom: var(--paddingBottom);
 	padding-left: var(--paddingLeft);
-	margin-top: var(--marginTop)!important;
-	margin-right: var(--marginRight)!important;
-	margin-bottom: var(--marginBottom)!important;
-	margin-left: var(--marginLeft)!important;
-    --background-color:rgb(238, 238, 238);
+	margin-top: var(--marginTop);
+	margin-right: var(--marginRight);
+	margin-bottom: var(--marginBottom);
+	margin-left: var(--marginLeft);
+    --background-color:transparent;
 	background-color: var(--background-color);
 	background-image: var(--backgroundImage);
 	background-attachment: var(--backgroundAttachment);
@@ -98,10 +98,10 @@
 	top: var(--top);
 	bottom: var(--bottom);
 }
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-vayu-blocks-advance-button:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
-	--maxWidth-fullwidth: 650px;
-	max-width: var(--maxWidth-fullwidth)!important;
-}
+// .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-vayu-blocks-advance-button:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+// 	--maxWidth-fullwidth: 650px;
+// 	max-width: var(--maxWidth-fullwidth)!important;
+// }
 .components-panel__body.th-button-panel label, 
 .components-panel__body.th-button-panel span {
     text-transform: capitalize !important;

@@ -690,54 +690,6 @@ export default function Edit({ attributes, setAttributes, toggleSelection, clien
 
     let customwidth;
 
-    if( attributes.widthType=='customwidth' ) {
-
-		if ( isDesktop ) {
-
-		customwidth = {
-             
-			'--custom-width':attributes.customWidth + attributes.customWidthUnit,
-			'--custom-max-width':attributes.customWidth + attributes.customWidthUnit,
-			
-		};
-
-	   }
-
-	   if ( isTablet ) {
-
-		customwidth = {
-             
-			'--custom-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			'--custom-max-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			
-		};
-
-	   }
-
-	   if ( isMobile ) {
-
-		customwidth = {
-             
-			'--custom-width':attributes.customWidthMobile + attributes.customWidthUnit,
-			'--custom-max-width':attributes.customWidthMobile + attributes.customWidthUnit,
-			
-		};
-		
-	   }
-
-	}
-
-	if( attributes.widthType =='fullwidth' ) {
-
-		customwidth = {
-             
-			'--custom-width':'100%',
-      '--custom-max-width':'100%'
-			
-		};
-
-	}
-
     if( attributes.widthType =='inlinewidth' ) {
 
 		customwidth = {

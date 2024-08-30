@@ -360,26 +360,6 @@ function vayu_advance_product_tab_style($attr){
             }
          $css .= "}";
 
-        //Custom Width
-        if(isset($attr['widthType']) && 'customwidth' === $attr['widthType'] ){
-            if(isset($attr['customWidth'])):
-            $customWidth = isset($attr['customWidth']) ? $attr['customWidth'] : '';
-            $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']}{";
-            $css .= "max-width: {$customWidth}{$customWidthUnit};width: {$customWidth}{$customWidthUnit};";
-            $css .= "}";
-            endif;
-        }
-
-        if(isset($attr['widthType']) && 'fullwidth' === $attr['widthType'] ){
-            
-            
-            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']}{";
-            $css .= "max-width: 100%;width: 100%";
-            $css .= "}";
-    
-
-        }
 
         if(isset($attr['widthType']) && 'inlinewidth' === $attr['widthType'] ){
             
@@ -791,18 +771,7 @@ function vayu_advance_product_tab_style($attr){
             }
          $css .= "}";    
 
-          //Custom Width
-        if(isset($attr['widthType']) && 'customwidth' === $attr['widthType'] ){
-            
-            if(isset($attr['customWidthTablet'])):
-            $customWidthTablet = isset($attr['customWidthTablet']) ? $attr['customWidthTablet'] : '';
-            $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']}{";
-            $css .= "max-width: {$customWidthTablet}{$customWidthUnit};width: {$customWidthTablet}{$customWidthUnit};";
-            $css .= "}";
-            endif;
-
-        }
+         
 
         // typography
 
@@ -1003,17 +972,7 @@ function vayu_advance_product_tab_style($attr){
             }
          $css .= "}"; 
 
-        //Custom Width
-        if(isset($attr['widthType']) && 'customwidth' === $attr['widthType'] ){
-            if(isset($attr['customWidthMobile'])):
-            $customWidthMobile = isset($attr['customWidthMobile']) ? $attr['customWidthMobile'] : '';
-            $customWidthUnit = isset($attr['customWidthUnit']) ? $attr['customWidthUnit'] : 'px';
-            $css .= ".wp-block-th-advance-product-tag-{$attr['uniqueID']}{";
-            $css .= "max-width: {$customWidthMobile}{$customWidthUnit};width: {$customWidthMobile}{$customWidthUnit};";
-            $css .= "}";
-            endif;
-        }
-
+       
         // typography
 
         // Font Size
