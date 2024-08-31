@@ -643,6 +643,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             onChange={(value)=> vayu_blocks_handleBorderRadius('borderRadius',value)}
                             values={attributes.global.borderRadius}
                         />
+                        
 
                         <BoxControl
                             label={__('Horizontal Padding', 'vayu-blocks')}
