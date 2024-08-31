@@ -15,7 +15,7 @@ class Vayu_blocks_Advance_Slider {
     public function render() {
         ob_start(); // Start output buffering
 
-        echo $this->render_scripts();
+        echo $this->render_scripts($this->attr);
         echo $this->render_slider();
     
         return ob_get_clean(); // Return the buffered output
@@ -140,82 +140,45 @@ class Vayu_blocks_Advance_Slider {
 
     // Slider Script
     private function render_scripts() {
-        // Determine the value of dots based on dotslength and dots['show']
-        $dots = ($this->attr['dotslength'] <= 1 || !$this->attr['dots']['show']) ? 'false' : 'true';
-        $infinite = $this->attr['infinite'] ? 'true' : 'false';
-        $centerMode = $this->attr['centerMode'] ? 'true' : 'false';
-        $fade = $this->attr['fade'] ? 'true' : 'false';
-        $waitForAnimate = $this->attr['waitForAnimate'] ? 'true' : 'false';
-        $lazyLoad = $this->attr['lazyLoad'] ? 'true' : 'false';
-        $autoplay = $this->attr['autoplay'] ? 'true' : 'false';
-        $pauseOnHover = $this->attr['pauseOnHover'] ? 'true' : 'false';
-        $focusOnSelect = $this->attr['focusOnSelect'] ? 'true' : 'false';
-        $rtl = $this->attr['rtl'] ? 'true' : 'false';
-        $arrows = $this->attr['arrow'] ? 'true' : 'false';
-        $swipe = $this->attr['swipe'] ? 'true' : 'false';
-         // Determine the animation class based on animationtype
-        $animationClass = '';
-        if ($this->attr['animationtype'] === 'animation1') {
-            $animationClass = 'vayu-blocks-animate-on-slide';
-        } elseif ($this->attr['animationtype'] === 'animation2') {
-            $animationClass = 'vayu-blocks-animate-on-slide-down';
-        } elseif ($this->attr['animationtype'] === 'animation3') {
-            $animationClass = 'vayu-blocks-animate-on-slide-left';
-        } elseif ($this->attr['animationtype'] === 'animation4') {
-            $animationClass = 'vayu-blocks-animate-on-slide-right';
-        }
-    
-        $script = "
-            <script>
-                jQuery(document).ready(function($) {
-                    $('.vayu-blocks-advance-slider').slick({
-                        dots: {$dots},
-                        infinite: {$infinite},
-                        speed: {$this->attr['speed']},
-                        slidesToScroll: {$this->attr['slidesToScroll']},
-                        rows: {$this->attr['slidesPerRow']},
-                        centerMode: {$centerMode},
-                        fade: {$fade},
-                        waitForAnimate: {$waitForAnimate},
-                        lazyLoad: {$lazyLoad},
-                        autoplay: {$autoplay},
-                        autoplaySpeed: {$this->attr['autoplaySpeed']},
-                        cssEase: 'linear',
-                        pauseOnHover: {$pauseOnHover},
-                        focusOnSelect: {$focusOnSelect},
-                        centerPadding: '60px',
-                        initialSlide: {$this->attr['initialSlide']},
-                        arrows: {$arrows},
-                        appendDots: $('.vayu-blocks-advance-slider'),
-                        slidesToShow: {$this->attr['slidesToShow']},
-                        swipe: {$swipe},
-                        
-                    });
-    
-                    // Add animation class to the active slide
-                    $('.slick-slide.slick-active').each(function() {
-                        $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('{$animationClass}');
-                    });
-    
-                    // Remove animation class before slide change
-                    $('.vayu-blocks-advance-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-                        $('.slick-slide .vayu_blocks_heading, .slick-slide .vayu_blocks_sub_heading, .slick-slide .vayu_blocks_slider_button1, .slick-slide .vayu_blocks_slider_button2').removeClass('{$animationClass}');
-                    });
-    
-                    // Add animation class after slide change
-                    $('.vayu-blocks-advance-slider').on('afterChange', function(event, slick, currentSlide) {
-                        $('.slick-slide.slick-active').each(function() {
-                            $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass('{$animationClass}');
-                        });
-                    });
-                });
-            </script>
-        ";
-    
-        return $script;
+        // Localize script with slider attributes
+        wp_enqueue_script(
+            'slider-script',
+            plugin_dir_url(__FILE__) . '../../../public/src/block/advance-slider/view.js',
+            array('jquery'),
+            null,
+            true
+        );
+
+        // Pass attributes to the script
+        wp_localize_script(
+            'slider-script',
+            'slider_params',
+            array(
+                'dotslength' => $this->attr['dotslength'],
+                'dots_show' => $this->attr['dots']['show'],
+                'infinite' => $this->attr['infinite'] ? 'true' : 'false',
+                'centerMode' => $this->attr['centerMode'] ? 'true' : 'false',
+                'fade' => $this->attr['fade'] ? 'true' : 'false',
+                'waitForAnimate' => $this->attr['waitForAnimate'] ? 'true' : 'false',
+                'lazyLoad' => $this->attr['lazyLoad'] ? 'true' : 'false',
+                'autoplay' => $this->attr['autoplay'] ? 'true' : 'false',
+                'autoplaySpeed' => $this->attr['autoplaySpeed'],
+                'pauseOnHover' => $this->attr['pauseOnHover'] ? 'true' : 'false',
+                'focusOnSelect' => $this->attr['focusOnSelect'] ? 'true' : 'false',
+                'rtl' => $this->attr['rtl'] ? 'true' : 'false',
+                'arrows' => $this->attr['arrow'] ? 'true' : 'false',
+                'swipe' => $this->attr['swipe'] ? 'true' : 'false',
+                'animationtype' => $this->attr['animationtype'],
+                'speed' => $this->attr['speed'],
+                'slidesToScroll' => $this->attr['slidesToScroll'],
+                'slidesPerRow' => $this->attr['slidesPerRow'],
+                'initialSlide' => $this->attr['initialSlide'],
+                'slidesToShow' => $this->attr['slidesToShow'],
+            )
+        );
     }
-    
 }
+     
 
 // Render callback for the block
 function vayu_blocks_advance_slider_render($attr) {
@@ -231,14 +194,18 @@ function vayu_blocks_advance_slider_render($attr) {
     // Determine the class name based on the widthType attribute
 
     // Render and return the slider output inside a div with the dynamic class name
-    return  $slider->render();
+   return '<div>' . $slider->render() . '</div>';
+
 }
 
 
-// Enqueue Slick slider assets
 function vayu_enqueue_slick_slider_assets() {
     wp_enqueue_style('slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css');
     wp_enqueue_style('slick-theme-css', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css');
     wp_enqueue_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js', array('jquery'), null, true);
+
+    // Enqueue the external slider script
+     wp_enqueue_script('slider-script', plugin_dir_url(__FILE__) . '../../../public/src/block/advance-slider/view.js', array('jquery', 'slick-js'), null, true);
+
 }
 add_action('wp_enqueue_scripts', 'vayu_enqueue_slick_slider_assets');
