@@ -175,7 +175,6 @@ export default function AdvanceSettings({ children, attributes }) {
 
     } = attributes;
 
-        // console.log(attributes);
     const formatBackgroundPosition = (pos) => {
         return pos && pos.x !== undefined && pos.y !== undefined ? `${pos.x * 100}% ${pos.y * 100}%` : undefined;
     };
@@ -398,16 +397,6 @@ export default function AdvanceSettings({ children, attributes }) {
 	   }
 
 	}
-
-    // if( attributes.widthType =='inlinewidth' ) {
-
-	// 	customwidth = {
-             
-	//             display:'inline',
-			
-	// 	};
-
-	// }
 
     // Prepare the style object
     const styles = {
