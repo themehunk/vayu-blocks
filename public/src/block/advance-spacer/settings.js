@@ -1062,7 +1062,7 @@ const InsSettings = ({
 	const [customWidthUnit, setcustomWidthUnit] = useState('px');
 	const maxcustomWidthUnit = customWidthUnit === 'px' ? 1500 : customWidthUnit === 'em' ? 50 : customWidthUnit === '%' ? 100:'';
 	const [heightUnit, setheightUnit] = useState('px');
-	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
+	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100: heightUnit === 'vh' ? 100 : '';
 	const [paddingUnit, setpaddingUnit] = useState('px');
 	const maxpaddingUnit = paddingUnit === 'px' ? 1500 : paddingUnit === 'em' ? 50 : paddingUnit === '%' ? 100:'';
 	const [marginUnit, setmarginUnit] = useState('px');
@@ -1120,7 +1120,7 @@ const InsSettings = ({
 									setAttributes({ heightUnit }); 
 									setheightUnit(heightUnit);
 								}}
-								units={ [ 'px', 'em', '%' ] }
+								units={ [ 'px', 'em', '%', 'vh' ] }
 								/>
 								<RangeControl
 								renderTooltipContent={ customTooltipHeight }

@@ -853,7 +853,7 @@ export default function Edit({
 
 			let rootContainerClassName = "";
 			rootContainerClassName = supportsLayout
-				? `th-root-block-container ${contentWidthClass}  th-block-container-${attributes.uniqueID}`
+				? `th-root-block-container ${contentWidthClass}  th-block-container-${attributes.uniqueID} wp-block`
 				: 'wp-block';
 
 			return (

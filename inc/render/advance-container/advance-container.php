@@ -39,7 +39,7 @@ function vayu_advance_container_style($attr){
 				margin-right: auto; ";
             }else{
                 $css .= "max-width:100%;
-				width:100%;  
+				
 				margin-left: auto;
 				margin-right: auto;";
             }
@@ -375,7 +375,7 @@ function vayu_advance_container_style($attr){
 					margin-right: auto;";
                 }else{
                     $css .= "
-					width:100%;
+					
 					max-width: {100%};
 					margin-left: auto;
 					margin-right: auto;";
@@ -605,7 +605,6 @@ function vayu_advance_container_style($attr){
 					  margin-right: auto;";
                   }else{
                       $css .= "
-					  width:100%;
 					  max-width:100%;
 					  margin-left: auto;
 					  margin-right: auto;";
