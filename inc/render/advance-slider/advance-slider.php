@@ -24,8 +24,10 @@ class Vayu_blocks_Advance_Slider {
     // Slider
     private function render_slider() {
         $slides_html = '';
-        $animated = isset($attr['className']) ? $attr['className'] : ''; //animation
+        $animated = isset($this->attr['className']) ? $this->attr['className'] : ''; //animation
         $className = '';
+        $uniqueId = isset($this->attr['uniqueId']) ? esc_attr($this->attr['uniqueId']) : '';
+    
         if (isset($this->attr['widthType'])) {
             switch ($this->attr['widthType']) {
                 case 'fullwidth':
@@ -36,51 +38,47 @@ class Vayu_blocks_Advance_Slider {
                     break;
             }
         }
-
-            //slides
-            foreach ($this->attr['slides'] as $index => $slide) {
-                $uniqueId = isset($slide['uniqueId']) ? esc_attr($slide['uniqueId']) : '';
-
-                $slides_html .= '<div class="vayu_blocks_slide_' . $uniqueId . '">';//every slide with their unique id
-                    // Color overlay
-                    $slides_html .= '<div class="vayu_blocks_color_overlay"></div>';
-
-                    // Inside container
-                    $slides_html .= '<div class="vayu_blocks_inside_container_div">';
-
-                        $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
-                            // Heading
-                            if (isset($slide['heading'])) {
-                                $slides_html .= $this->render_heading($slide['heading']);
-                            }   
-
-                            // Subheading
-                            if (isset($slide['subheading']) && $slide['subheading']['show']) {
-                                $slides_html .= $this->render_subheading($slide['subheading']);
-                            }
-
-                        $slides_html .= '</div>';
-
-                        $slides_html .= '<div>';
-                            // Button 1
-                            if (isset($slide['button1']) && $slide['button1']['show']) {
-                                $slides_html .= $this->render_button1($slide['button1']);
-                            }
-
-                            // Button 2
-                            if (isset($slide['button2']) && $slide['button2']['show']) {
-                                $slides_html .= $this->render_button2($slide['button2']);
-                            }
-
-                        $slides_html .= '</div>';
-
-                    $slides_html .= '</div>'; // Closing inside container
-
-                $slides_html .= '</div>'; // Closing slide container
-            }
-
-        return '<div class="vayu-blocks-advance-slider ' . $animated . ' ' . esc_attr($className) . '">' . $slides_html . '</div>'; //alignfull is default class of wordpress
+    
+        // Slides
+        foreach ($this->attr['slides'] as $index => $slide) {
+            $slideUniqueId = isset($slide['uniqueId']) ? esc_attr($slide['uniqueId']) : '';
+    
+            $slides_html .= '<div class="vayu_blocks_slide_' . $slideUniqueId . '">';
+            // Color overlay
+            $slides_html .= '<div class="vayu_blocks_color_overlay"></div>';
+    
+            // Inside container
+            $slides_html .= '<div class="vayu_blocks_inside_container_div">';
+                $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
+                    // Heading
+                    if (isset($slide['heading'])) {
+                        $slides_html .= $this->render_heading($slide['heading']);
+                    }   
+    
+                    // Subheading
+                    if (isset($slide['subheading']) && $slide['subheading']['show']) {
+                        $slides_html .= $this->render_subheading($slide['subheading']);
+                    }
+                $slides_html .= '</div>';
+    
+                $slides_html .= '<div>';
+                    // Button 1
+                    if (isset($slide['button1']) && $slide['button1']['show']) {
+                        $slides_html .= $this->render_button1($slide['button1']);
+                    }
+    
+                    // Button 2
+                    if (isset($slide['button2']) && $slide['button2']['show']) {
+                        $slides_html .= $this->render_button2($slide['button2']);
+                    }
+                $slides_html .= '</div>';
+            $slides_html .= '</div>'; // Closing inside container
+            $slides_html .= '</div>'; // Closing slide container
+        }
+    
+        return '<div class="vayu-blocks-advance-slider ' . $uniqueId . ' ' . $animated . ' ' . esc_attr($className) . '">' . $slides_html . '</div>';
     }
+    
 
     // Heading
     private function render_heading($heading) {
@@ -140,7 +138,6 @@ class Vayu_blocks_Advance_Slider {
 
     // Slider Script
     private function render_scripts() {
-        // Localize script with slider attributes
         wp_enqueue_script(
             'slider-script',
             plugin_dir_url(__FILE__) . '../../../public/src/block/advance-slider/view.js',
@@ -148,12 +145,12 @@ class Vayu_blocks_Advance_Slider {
             null,
             true
         );
-
-        // Pass attributes to the script
+    
         wp_localize_script(
             'slider-script',
             'slider_params',
             array(
+                'uniqueId' => $this->attr['uniqueId'],
                 'dotslength' => $this->attr['dotslength'],
                 'dots_show' => $this->attr['dots']['show'],
                 'infinite' => $this->attr['infinite'] ? 'true' : 'false',
@@ -177,6 +174,8 @@ class Vayu_blocks_Advance_Slider {
             )
         );
     }
+    
+    
 }
      
 
@@ -191,11 +190,10 @@ function vayu_blocks_advance_slider_render($attr) {
     // Initialize the slider with the merged attributes
     $slider = new Vayu_blocks_Advance_Slider($attr);
 
-    // Determine the class name based on the widthType attribute
+    $wrapper_attributes = get_block_wrapper_attributes();
 
     // Render and return the slider output inside a div with the dynamic class name
-   return '<div>' . $slider->render() . '</div>';
-
+   return '<div ' . $wrapper_attributes . ' class="vayu-blocks-advance-slider-main">' . $slider->render() . '</div>';
 }
 
 

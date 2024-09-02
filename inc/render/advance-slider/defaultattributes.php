@@ -2,6 +2,7 @@
 return array(
     //edit.json
         'index' => 0,
+        'uniqueId' => '',
         'initialSlide' => 0,
         'dotslength' => 0,
         'infinite' => true,

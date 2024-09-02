@@ -404,7 +404,7 @@ export default function AdvanceSettings({ children, attributes }) {
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-        // width: '100%',
+        Width: '100%',
 
         //position: position || undefined,
         //zIndex: zIndex || undefined,

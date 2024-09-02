@@ -10,8 +10,10 @@ function generate_inline_slider_styles($attr) {
     //attributes-merge
     $default_attributes = include('defaultattributes.php');
     $attr = array_merge($default_attributes, $attr);  
+    $uniqueId = $attr['uniqueId'];
 
-    $wrapper = ".vayu-blocks-advance-slider";
+    // Generate the class selector by concatenating '.' with the unique ID
+    $wrapper = '.' . esc_attr($uniqueId);
 
     //Main div
     $css .= "$wrapper {";
@@ -21,6 +23,8 @@ function generate_inline_slider_styles($attr) {
             $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
         }
 
+        $css .= "max-width:100%;";
+        
        // Desktop Padding
        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
        $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
@@ -208,7 +212,7 @@ function generate_inline_slider_styles($attr) {
             
     $css .= "}";
 
-    $css .= ".vayu-blocks-advance-slider .slick-slide{";
+    $css .= "$wrapper .slick-slide{";
         $css .= "margin: " . $attr['slidermargin'] . "px;";
     $css .= "}\n";
 
@@ -645,7 +649,7 @@ function generate_inline_slider_styles($attr) {
         $filterId = $slide['duotone'];
 
         // slide blocks
-        $css .= "$container {";
+        $css .= "$wrapper $container {";
 
             // Set margin-bottom and height
             $heightAuto = $slide['heightauto'];
@@ -746,7 +750,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
         
         // overlay div
-        $css .= "$container .vayu_blocks_color_overlay {";
+        $css .= "$wrapper $container .vayu_blocks_color_overlay {";
             $css .= "position: absolute;";
             $css .= "top: 0;";
             $css .= "left: 0;";
@@ -771,7 +775,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
 
         // Inside Container div
-        $css .= "$container $insideContainer {";
+        $css .= "$wrapper $container $insideContainer {";
             $css .= "position: relative;";
             $css .= "z-index: 3;";
             // $css .= "height: 100%;";
@@ -779,21 +783,21 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
 
         // Inside Heading Container div
-        $css .= "$container $insideContainer .vayu_blocks_inside_container_heading_div{";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_inside_container_heading_div{";
             $gaphb = isset($slide['gaphb']) ? esc_attr($slide['gaphb']) : '0px';
             $css .= "margin-bottom: {$gaphb};";
             
         $css .= "}\n";
 
         // Heading Button 
-        $css .= "$container $insideContainer .vayu_blocks_heading{";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_heading{";
             $gaphsub = isset($slide['gaphsub']) ? esc_attr($slide['gaphsub']) : '0px';
             $css .= "margin-bottom: {$gaphsub};";
             $css .= "font-size: 0;";
         $css .= "}\n";
 
         // Heading
-        $css .= "$container $insideContainer .vayu_blocks_slider_heading {";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_slider_heading {";
             $css .= "color: " . esc_attr($heading['color']) . ";";
             $css .= "font-size: " . esc_attr($heading['size']) . "px;";
             $css .= "font-weight: " . esc_attr($heading['fontWeight']) . ";";
@@ -803,7 +807,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
 
         // Sub Heading
-        $css .= "$container $insideContainer .vayu_blocks_sub_heading {";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_sub_heading {";
             $css .= "color: " . esc_attr($subheading['color']) . ";";
             $css .= "font-size: " . esc_attr($subheading['size']) . "px;";
             $css .= "font-weight: " . esc_attr($subheading['fontWeight']) . ";";
@@ -811,7 +815,7 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
 
         // Button 1
-        $css .= "$container $insideContainer .vayu_blocks_slider_button1 {";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_slider_button1 {";
             // Font Size
             $css .= "font-size: {$button1['size']}px;";
     
@@ -864,17 +868,17 @@ function generate_inline_slider_styles($attr) {
         $css .= "}\n";
 
         // Button 1 anchor
-        $css .= "$container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button1-anchor-tag{";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button1-anchor-tag{";
             $css .= "color: {$button1['color']};";
         $css .= "}\n";
         
         // Button 2 anchor
-        $css .= "$container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button2-anchor-tag{";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_slider_button1 .vayu_blocks_slider_button2-anchor-tag{";
             $css .= "color: {$button2['color']};";
         $css .= "}\n";
 
         //Button 2
-        $css .= "$container $insideContainer .vayu_blocks_slider_button2 {";
+        $css .= "$wrapper $container $insideContainer .vayu_blocks_slider_button2 {";
             // Font Size
             $css .= "font-size: {$button2['size']}px;";
     
