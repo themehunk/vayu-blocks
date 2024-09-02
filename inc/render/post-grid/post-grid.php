@@ -124,7 +124,11 @@ class VayuBlocksPostGrid {
             }
 
             $output .= '</div>';
-            $output .= '<div class="pagination">' . $this->render_pagination($query, $paged) . '</div>'; // Render pagination controls
+
+            if ($this->attr['showpagination']) {
+                $output .= '<div class="pagination">' . $this->render_pagination($query, $paged) . '</div>'; // Render pagination controls
+            }
+            
             $output .= '</div>';
             $output .= '</div>';
          

@@ -211,6 +211,7 @@ return array(
         
 
     //Advanced
+        'classNamemain' => '',
         'globalwidth'=> '',
         'width' => '',
         'customWidthlayout' => '',

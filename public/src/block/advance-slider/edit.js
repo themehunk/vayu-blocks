@@ -46,7 +46,7 @@ const edit = ({ attributes, setAttributes }) => {
             lazyLoad: attributes.lazyLoad,
             autoplay: attributes.autoplay,
             autoplaySpeed: attributes.autoplaySpeed,
-            cssEase: 'ease-in-out', // Smooth animation
+            cssEase: 'linear', // Smooth animation
             pauseOnHover: attributes.pauseOnHover,
             focusOnSelect: attributes.focusOnSelect,
             centerPadding: '60px',
@@ -295,6 +295,7 @@ const edit = ({ attributes, setAttributes }) => {
         }
     }, [attributes.slides]); // Dependency on attributes.slides to react to changes
     
+
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         // Extract padding values with default '0px'
         const topPadding = slide.padding.top || '0px';
@@ -312,7 +313,7 @@ const edit = ({ attributes, setAttributes }) => {
             overflow: 'hidden',
             position:'relative',
             display:'flex',
-            justifyContent:'center',
+            justifyContent:slide.alignment,
             alignItems:slide.alignmenttop,
             
             //border
@@ -511,7 +512,7 @@ const edit = ({ attributes, setAttributes }) => {
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
-            <AdvanceSettings attributes={attributes}>
+            <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
                 <div  class="vayu-blocks-slider-main-container" id={`${attributes.uniqueId}`}>
                     
