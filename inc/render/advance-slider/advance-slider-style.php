@@ -15,15 +15,16 @@ function generate_inline_slider_styles($attr) {
     // Generate the class selector by concatenating '.' with the unique ID
     $wrapper = '.' . esc_attr($uniqueId);
 
+
     //Main div
     $css .= "$wrapper {";
 
-       // Check if 'customwidth' attribute is set and apply the width accordingly
-        if ($attr['widthType'] === 'customwidth') {
-            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
-        }
+        $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
 
         $css .= "max-width:100%;";
+        
+        $css .= "margin-left:auto !important;";
+        $css .= "margin-right:auto !important;";
         
        // Desktop Padding
        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
@@ -39,15 +40,6 @@ function generate_inline_slider_styles($attr) {
        $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
        $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
        
-
-       // Position and Z-index
-      // $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
-       //$css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
-
-       // Alignment and Order
-       //$css .= isset($attr['selfAlign']) ? "align-self: " . esc_attr($attr['selfAlign']) . ";" : '';
-       //$css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
-
 
        // Border
        $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
@@ -110,16 +102,10 @@ function generate_inline_slider_styles($attr) {
        // Transition
        $css .= "transition-duration: " . (isset($attr['transitionAll']) ? esc_attr($attr['transitionAll']) : '0') . "s;";
        
-    //    // Grid properties
-    //    $css .= "display: grid;";
-    //    $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
-    //    $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
-    //    $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-    //    $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-    //    $css .= "grid-gap: {$gridGapUp} {$gridGap};";
-    //    $css .= "grid-auto-rows: minmax(100px, auto);";
+
        
     $css .= "}";
+   
     
     // Add media query for tablet screens
     $css .= "@media (max-width: 768px) {";
@@ -654,6 +640,7 @@ function generate_inline_slider_styles($attr) {
             // Set margin-bottom and height
             $heightAuto = $slide['heightauto'];
             $alignmenttop = $slide['alignmenttop'];
+            $alignment = $slide['alignment'];
             $imageHeight = $slide['imageheight'];
             $customheight = $slide['customheight'];
             // Apply conditional height logic
@@ -672,7 +659,7 @@ function generate_inline_slider_styles($attr) {
             $css .= "position: relative;";
             $css .= "display: flex !important;";
             $css .= "align-items: {$alignmenttop};";
-            $css .= "justify-content: center;";
+            $css .= "justify-content: {$alignment};";
             
             // Border properties
             $borderColor = isset($slide['border']['color']) ? esc_attr($slide['border']['color']) : 'transparent';

@@ -532,6 +532,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 {0=== activeButton &&(
                                     <>
                                         <div className="content-panel-layout">
+                                            <div className="vayu_blocks_content-panel-layout-inside-button">
                                             <button 
                                                 style={{ color: isPanellayout === 'background' ? 'blue' : 'initial' }} 
                                                 onClick={() => togglePanellayout('background')} 
@@ -539,6 +540,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             >
                                                 Background
                                             </button>
+                                            </div>
+                                            <div className="vayu_blocks_content-panel-layout-inside-button">
                                             <button 
                                                 style={{ color: isPanellayout === 'style' ? 'blue' : 'initial' }} 
                                                 onClick={() => togglePanellayout('style')} 
@@ -546,6 +549,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             >
                                                 Style
                                             </button>
+                                            </div>
                                         </div>
 
                                         {isPanellayout === 'background' && (
@@ -746,12 +750,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                             type="border"
                                                         />
 
-                                                        <BoxControl
-                                                            label={__('Border Radius','vayu-blocks')}
-                                                            onChange={(value)=> vayu_blocks_handleBorderRadius(index,'borderRadius',value)}
-                                                            values={attributes.slides[index].borderRadius}
-                                                        />
+                                                        <div class="vayu_blocks_borderradius">
 
+                                                            <BoxControl
+                                                                label={__('Border Radius','vayu-blocks')}
+                                                                onChange={(value)=> vayu_blocks_handleBorderRadius(index,'borderRadius',value)}
+                                                                values={attributes.slides[index].borderRadius}
+                                                            />
+                                                        </div>
+                                                        <div class="vayu_blocks_padding">
                                                         <BoxControl
                                                             label={__('Horizontal Padding', 'vayu-blocks')}
                                                             onChange={(value) => handlePaddingChange(index,'horizontal', value)}
@@ -761,7 +768,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                             }}
                                                             sides={['horizontal']}
                                                         />
+                                                        </div>
 
+                                                    <div class="vayu_blocks_padding">
                                                         <BoxControl
                                                             label={__('Vertical Padding', 'vayu-blocks')}
                                                             onChange={(value) => handlePaddingChange(index,'vertical', value)}
@@ -771,6 +780,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                             }}
                                                             sides={['vertical']}
                                                         />
+                                                        </div>
 
                                                     </>
                                                 )}
@@ -789,6 +799,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                         
                                         <>
                                             <div className="content-panel">
+                                            <div className="vayu_blocks_content-panel-layout-inside-button">
                                                 <button 
                                                     style={{ color: isPanelOpen === 'heading' ? 'blue' : 'initial' }} 
                                                     onClick={() => togglePanel('heading')} 
@@ -796,6 +807,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 >
                                                     Heading
                                                 </button>
+                                                </div>
+                                                <div className="vayu_blocks_content-panel-layout-inside-button">
                                                 <button 
                                                     style={{ color: isPanelOpen === 'button' ? 'blue' : 'initial' }} 
                                                     onClick={() => togglePanel('button')} 
@@ -803,6 +816,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 >
                                                     SubHeading
                                                 </button>
+                                                </div>
                                             </div>
 
 
@@ -998,6 +1012,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                         <>
                                             <div className="content-panel">
+                                            <div className="vayu_blocks_content-panel-layout-inside-button">
+
                                                 <button 
                                                     style={{ color: isPanel === 'button1' ? 'blue' : 'initial' }} 
                                                     onClick={() => vayu_blocks_togglePanelnew('button1')} 
@@ -1005,6 +1021,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 >
                                                     Button 1
                                                 </button>
+                                                </div>
+                                                <div className="vayu_blocks_content-panel-layout-inside-button">
+
                                                 <button 
                                                     style={{ color: isPanel === 'button2' ? 'blue' : 'initial' }} 
                                                     onClick={() => vayu_blocks_togglePanelnew('button2')} 
@@ -1012,6 +1031,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 >
                                                     Button 2
                                                 </button>
+                                                </div>
                                             </div>
 
                                             {isPanel === 'button1' && (
@@ -1170,18 +1190,20 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange(index,'button1.border',value)}
                                                                                 type="border"
                                                                             />
-
+                                                                            <div class="vayu_blocks_padding">
                                                                             <BoxControl
                                                                                 label={__('Border Radius','vayu-blocks')}
                                                                                 onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button1.borderRadius',value)}
                                                                                 values={attributes.slides[index].button1.borderRadius}
                                                                             />
-
+                                                                            </div>
+                                                                            <div class="vayu_blocks_padding">
                                                                             <BoxControl
                                                                                 label={__('Padding','vayu-blocks')}
                                                                                 onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button1.padding',value)}
                                                                                 values={attributes.slides[index].button1.padding}
                                                                             />
+                                                                            </div>
 
                                                                         </>
                                                                     )}
@@ -1350,17 +1372,22 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                     type="border"
                                                                     />
 
+                                                                    <div class="vayu_blocks_padding">
+
                                                                     <BoxControl
                                                                         label={__('Border Radius','vayu-blocks')}
                                                                         onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button2.borderRadius',value)}
                                                                         values={attributes.slides[index].button2.borderRadius}
                                                                     />
+                                                                    </div>
 
+                                                                    <div class="vayu_blocks_padding">
                                                                     <BoxControl
                                                                         label={__('Padding','vayu-blocks')}
                                                                         onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button2.padding',value)}
                                                                         values={attributes.slides[index].button2.padding}
                                                                     />  
+                                                                    </div>
 
                                                                 </>
                                                             )}

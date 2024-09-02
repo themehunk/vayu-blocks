@@ -24,19 +24,39 @@ class Vayu_blocks_Advance_Slider {
     // Slider
     private function render_slider() {
         $slides_html = '';
-        $animated = isset($this->attr['className']) ? $this->attr['className'] : ''; //animation
+        $animated = isset($this->attr['className']) ? $this->attr['className'] : ''; // animation
         $className = '';
         $uniqueId = isset($this->attr['uniqueId']) ? esc_attr($this->attr['uniqueId']) : '';
     
-        if (isset($this->attr['widthType'])) {
-            switch ($this->attr['widthType']) {
-                case 'fullwidth':
-                    $className = 'alignfull';
-                    break;
-                case 'customwidth':
-                    $className = 'alignwide';
-                    break;
-            }
+    
+        // Prepare slider data attributes
+        $data_attributes = array(
+            'data-unique-id' => $uniqueId,
+            'data-dots-length' => esc_attr($this->attr['dotslength']),
+            'data-dots-show' => esc_attr($this->attr['dots']['show'] ? 'true' : 'false'),
+            'data-infinite' => esc_attr($this->attr['infinite'] ? 'true' : 'false'),
+            'data-center-mode' => esc_attr($this->attr['centerMode'] ? 'true' : 'false'),
+            'data-fade' => esc_attr($this->attr['fade'] ? 'true' : 'false'),
+            'data-wait-for-animate' => esc_attr($this->attr['waitForAnimate'] ? 'true' : 'false'),
+            'data-lazy-load' => esc_attr($this->attr['lazyLoad'] ? 'true' : 'false'),
+            'data-autoplay' => esc_attr($this->attr['autoplay'] ? 'true' : 'false'),
+            'data-autoplay-speed' => esc_attr($this->attr['autoplaySpeed']),
+            'data-pause-on-hover' => esc_attr($this->attr['pauseOnHover'] ? 'true' : 'false'),
+            'data-focus-on-select' => esc_attr($this->attr['focusOnSelect'] ? 'true' : 'false'),
+            'data-rtl' => esc_attr($this->attr['rtl'] ? 'true' : 'false'),
+            'data-arrows' => esc_attr($this->attr['arrow'] ? 'true' : 'false'),
+            'data-swipe' => esc_attr($this->attr['swipe'] ? 'true' : 'false'),
+            'data-animation-type' => esc_attr($this->attr['animationtype']),
+            'data-speed' => esc_attr($this->attr['speed']),
+            'data-slides-to-scroll' => esc_attr($this->attr['slidesToScroll']),
+            'data-slides-per-row' => esc_attr($this->attr['slidesPerRow']),
+            'data-initial-slide' => esc_attr($this->attr['initialSlide']),
+            'data-slides-to-show' => esc_attr($this->attr['slidesToShow']),
+        );
+    
+        $data_attr_string = '';
+        foreach ($data_attributes as $key => $value) {
+            $data_attr_string .= ' ' . $key . '="' . $value . '"';
         }
     
         // Slides
@@ -49,34 +69,34 @@ class Vayu_blocks_Advance_Slider {
     
             // Inside container
             $slides_html .= '<div class="vayu_blocks_inside_container_div">';
-                $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
-                    // Heading
-                    if (isset($slide['heading'])) {
-                        $slides_html .= $this->render_heading($slide['heading']);
-                    }   
+            $slides_html .= '<div class="vayu_blocks_inside_container_heading_div">';
+            // Heading
+            if (isset($slide['heading'])) {
+                $slides_html .= $this->render_heading($slide['heading']);
+            }
     
-                    // Subheading
-                    if (isset($slide['subheading']) && $slide['subheading']['show']) {
-                        $slides_html .= $this->render_subheading($slide['subheading']);
-                    }
-                $slides_html .= '</div>';
+            // Subheading
+            if (isset($slide['subheading']) && $slide['subheading']['show']) {
+                $slides_html .= $this->render_subheading($slide['subheading']);
+            }
+            $slides_html .= '</div>';
     
-                $slides_html .= '<div>';
-                    // Button 1
-                    if (isset($slide['button1']) && $slide['button1']['show']) {
-                        $slides_html .= $this->render_button1($slide['button1']);
-                    }
+            $slides_html .= '<div>';
+            // Button 1
+            if (isset($slide['button1']) && $slide['button1']['show']) {
+                $slides_html .= $this->render_button1($slide['button1']);
+            }
     
-                    // Button 2
-                    if (isset($slide['button2']) && $slide['button2']['show']) {
-                        $slides_html .= $this->render_button2($slide['button2']);
-                    }
-                $slides_html .= '</div>';
+            // Button 2
+            if (isset($slide['button2']) && $slide['button2']['show']) {
+                $slides_html .= $this->render_button2($slide['button2']);
+            }
+            $slides_html .= '</div>';
             $slides_html .= '</div>'; // Closing inside container
             $slides_html .= '</div>'; // Closing slide container
         }
     
-        return '<div class="vayu-blocks-advance-slider ' . $uniqueId . ' ' . $animated . ' ' . esc_attr($className) . '">' . $slides_html . '</div>';
+        return '<div class="vayu-blocks-advance-slider ' . $uniqueId . ' ' . $animated . ' "' . $data_attr_string . '>' . $slides_html . '</div>';
     }
     
 
@@ -136,7 +156,6 @@ class Vayu_blocks_Advance_Slider {
         </button>";
     }
 
-    // Slider Script
     private function render_scripts() {
         wp_enqueue_script(
             'slider-script',
@@ -145,42 +164,14 @@ class Vayu_blocks_Advance_Slider {
             null,
             true
         );
-    
-        wp_localize_script(
-            'slider-script',
-            'slider_params',
-            array(
-                'uniqueId' => $this->attr['uniqueId'],
-                'dotslength' => $this->attr['dotslength'],
-                'dots_show' => $this->attr['dots']['show'],
-                'infinite' => $this->attr['infinite'] ? 'true' : 'false',
-                'centerMode' => $this->attr['centerMode'] ? 'true' : 'false',
-                'fade' => $this->attr['fade'] ? 'true' : 'false',
-                'waitForAnimate' => $this->attr['waitForAnimate'] ? 'true' : 'false',
-                'lazyLoad' => $this->attr['lazyLoad'] ? 'true' : 'false',
-                'autoplay' => $this->attr['autoplay'] ? 'true' : 'false',
-                'autoplaySpeed' => $this->attr['autoplaySpeed'],
-                'pauseOnHover' => $this->attr['pauseOnHover'] ? 'true' : 'false',
-                'focusOnSelect' => $this->attr['focusOnSelect'] ? 'true' : 'false',
-                'rtl' => $this->attr['rtl'] ? 'true' : 'false',
-                'arrows' => $this->attr['arrow'] ? 'true' : 'false',
-                'swipe' => $this->attr['swipe'] ? 'true' : 'false',
-                'animationtype' => $this->attr['animationtype'],
-                'speed' => $this->attr['speed'],
-                'slidesToScroll' => $this->attr['slidesToScroll'],
-                'slidesPerRow' => $this->attr['slidesPerRow'],
-                'initialSlide' => $this->attr['initialSlide'],
-                'slidesToShow' => $this->attr['slidesToShow'],
-            )
-        );
     }
-    
-    
+      
 }
      
 
 // Render callback for the block
 function vayu_blocks_advance_slider_render($attr) {
+
     // Include default attributes
     $default_attributes = include('defaultattributes.php');
 
@@ -189,11 +180,13 @@ function vayu_blocks_advance_slider_render($attr) {
 
     // Initialize the slider with the merged attributes
     $slider = new Vayu_blocks_Advance_Slider($attr);
-
-    $wrapper_attributes = get_block_wrapper_attributes();
+    
+    // Ensure className is sanitized and applied correctly
+    $className = isset($attr['classNamemain']) ? esc_attr($attr['classNamemain']) : '';
 
     // Render and return the slider output inside a div with the dynamic class name
-   return '<div ' . $wrapper_attributes . ' class="vayu-blocks-advance-slider-main">' . $slider->render() . '</div>';
+    return '<div class="wp_block_vayu-blocks-advance-slider-main ' . $className . '">' . $slider->render() . '</div>';
+
 }
 
 

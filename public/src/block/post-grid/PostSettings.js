@@ -1022,7 +1022,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
-  // Border radius types for different devices
+    // Border radius types for different devices
     const desktopBorderRadiusType = {
         top: 'pg_paginationTopBorderRadius',
         right: 'pg_paginationRightBorderRadius',
