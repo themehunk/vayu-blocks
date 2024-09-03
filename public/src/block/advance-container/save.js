@@ -20,13 +20,14 @@ export default function Save({attributes}){
 	  });
 
 	  let contentWidthClass = "";
-
+	  if (attributes.isRootBlock) {
 	  if(attributes.contentWidthType=='boxed' || attributes.contentWidthType=='fullwidth'){
 		  contentWidthClass = 'alignfull';
 	  }
 	  if(attributes.contentWidthType=='alignwide'){
 		contentWidthClass = 'alignwide';
 	  }
+	}
 	  
 	const blockProps = useBlockProps.save({ 
 			id:attributes.anchor,
@@ -45,7 +46,7 @@ export default function Save({attributes}){
 	return (
 		<Tag { ...blockProps } >
 			{showShouldOverlay && (
-				<div className="wp-block-th-blocks-container-overlay"/>
+			<div className="wp-block-th-blocks-container-overlay"/>
 			)}
 			<ThShaper attributes={attributes} />
 			<div className='th-inside-content-wrap th-con' >

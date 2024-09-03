@@ -65,7 +65,9 @@ export default function Edit({
 				isViewportAvailable,
 				isPreviewDesktop,
 				isPreviewTablet,
-				isPreviewMobile
+				isPreviewMobile,
+				getBlock,
+				getBlockRootClientId,
 			} = useSelect( 
 				select => {
 					const { 
@@ -86,6 +88,7 @@ export default function Edit({
 					adjacentBlock,
 					parentBlock: parentBlock ? parentBlock.name : null,
 					hasInnerBlocks,
+					
 					parentClientId,
 					isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
 					isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
@@ -93,6 +96,12 @@ export default function Edit({
 					isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
 				};
 			}, []);
+
+			
+			const isRootBlock = !parentClientId;
+			  useEffect(() => {
+				setAttributes({ isRootBlock });
+			  }, [isRootBlock]);
 
 			const omitBy = (object, condition) => (
 				Object.fromEntries(
