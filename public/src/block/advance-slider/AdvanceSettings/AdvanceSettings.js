@@ -1,9 +1,9 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useSelect } from '@wordpress/data';
 import { useViewportMatch} from '@wordpress/compose';
-import { RiEqualFill } from 'react-icons/ri';
+import { RiEqualFill, RiExternalLinkFill } from 'react-icons/ri';
 
 // Utility function to filter out undefined or null values
 const omitBy = (object, condition) => (
@@ -12,7 +12,7 @@ const omitBy = (object, condition) => (
     )
 );
 
-export default function AdvanceSettings({ children, attributes }) {
+export default function AdvanceSettings({ children, attributes,setAttributes }) {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -362,41 +362,38 @@ export default function AdvanceSettings({ children, attributes }) {
     
     let customwidth;
 
-    if( attributes.widthType=='customwidth' ) {
+    if ( isDesktop ) {
 
-		if ( isDesktop ) {
+        customwidth = {
+                
+            width:attributes.customWidth + attributes.customWidthUnit,
+            
+        };
 
-		customwidth = {
-             
-			width:attributes.customWidth + attributes.customWidthUnit,
-			
-		};
+    }
 
-	   }
+    if ( isTablet ) {
 
-	   if ( isTablet ) {
+        customwidth = {
+                
+            'width':attributes.customWidthTablet + attributes.customWidthUnit,
+            'max-width':attributes.customWidthTablet + attributes.customWidthUnit,
+            
+        };
 
-		customwidth = {
-             
-			'width':attributes.customWidthTablet + attributes.customWidthUnit,
-			'max-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			
-		};
+    }
 
-	   }
+    if ( isMobile ) {
 
-	   if ( isMobile ) {
+        customwidth = {
+                
+            'width':attributes.customWidthMobile + attributes.customWidthUnit,
+            'max-width':attributes.customWidthMobile + attributes.customWidthUnit,
+            
+        };
+    
+    }
 
-		customwidth = {
-             
-			'width':attributes.customWidthMobile + attributes.customWidthUnit,
-			'max-width':attributes.customWidthMobile + attributes.customWidthUnit,
-			
-		};
-		
-	   }
-
-	}
 
     // Prepare the style object
     const styles = {
@@ -404,10 +401,8 @@ export default function AdvanceSettings({ children, attributes }) {
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-        // width: '100%',
-
-        //position: position || undefined,
-        //zIndex: zIndex || undefined,
+        Width: '100%',
+        
         order: order === 'custom' ? customOrder : 'undefined',
       
         borderStyle: borderType || undefined,
@@ -474,14 +469,9 @@ export default function AdvanceSettings({ children, attributes }) {
     : ''; // Default or fallback value
 
     const animationopacity = attributes.animationtype === 'noanimation' ? 1 : 0;
-    const blockProps = useBlockProps({
 
-        className: attributes.widthType === 'fullwidth' 
-        ? 'alignfull' 
-        : attributes.widthType === 'customwidth' 
-            ? 'alignwide' 
-            : '',
-        
+    const blockProps = useBlockProps({
+        className: 'custom-margin',
         style: {
             ...mergedStyles,
             '--slider-margin': `${attributes.slidermargin}px`,
@@ -493,10 +483,16 @@ export default function AdvanceSettings({ children, attributes }) {
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
+
     
+    if(attributes.classNamemain !== blockProps.className) {
+        setAttributes({classNamemain: blockProps.className});
+    }
+
     return (
         <div {...blockProps}>
             {children}
         </div>
     );
 }
+

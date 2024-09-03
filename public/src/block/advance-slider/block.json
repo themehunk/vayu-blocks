@@ -7,7 +7,8 @@
     "category": "vayu-blocks",
     "description": "A custom Loader to display block with options for dots and aerrow.",
     "supports": {
-      "html": false
+      "html": false,
+      "align": ["wide", "full"]
     },
     "textdomain": "vayu-blocks",
     "viewScript": "file:./view.js"

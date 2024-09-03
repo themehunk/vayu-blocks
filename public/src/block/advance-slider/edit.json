@@ -1,4 +1,7 @@
 {
+    "uniqueId":{
+        "type":"string"
+    },
     "globalwidth":{
         "type":"number"
     },

@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
+
 import {
     PanelBody,
     ToggleControl,
@@ -16,6 +17,9 @@ import {
 import {
     HoverControl,
     ToogleGroupControl,
+    SizingControl,
+    UnitChooser,
+    ResponsiveControl,
 } from '../../components/index.js';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
@@ -159,7 +163,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         attributes.slides.forEach((slide, index) => {
             if (slide[customStyleProperty] === false) {
                 let slideProperty = slide;
-                console.log(slideProperty);
                 properties.forEach((prop, idx) => {
                     if (idx === properties.length - 1) {
                         slideProperty[prop] = value;
@@ -414,54 +417,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
     return (
         <>
 
-            <PanelBody title={__('Slider Layout', 'vayu-blocks')} initialOpen={false}>
-                <RangeControl
-                    label={__('Number Of Columns', 'vayu-blocks')}
-                    value={attributes.slidesToShow}
-                    onChange={(value) => setAttributes({ slidesToShow: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-                <RangeControl
-                    label = {__('Number Of Rows', 'vayu-blocks')}
-                    value={attributes.slidesPerRow}
-                    onChange={(value) => setAttributes({ slidesPerRow: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-
-                 <RangeControl
-                    label = {__('Number Of Slides To Scroll', 'vayu-blocks')}
-                    value={attributes.slidesToScroll}
-                    onChange={(value) => setAttributes({ slidesToScroll: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-                <h6>The number of slides to scroll after each slide movement, ensuring smooth and controlled transitions in the slider.</h6>
-
-                <RangeControl
-                    label = {__('Scrolling Speed', 'vayu-blocks')}
-                    value={attributes.speed}
-                    onChange={(value) => setAttributes({ speed: value })}
-                    min={1}
-                    max={5000}
-                    step={1}
-                />
-
-                <RangeControl
-                    label = {__('Intial Slide', 'vayu-blocks')}
-                    value={attributes.initialSlide+1}
-                    onChange={(value) => setAttributes({ initialSlide: value-1 })}
-                    min={1}
-                    max={attributes.slides.length}
-                    step={1}
-                />
-
-            </PanelBody>
-
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
                 
                 <div className="content-panel">
@@ -638,12 +593,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             type="border"
                         />
 
+                    <div class="vayu_blocks_borderradius">
                         <BoxControl
                             label={__('Border Radius','vayu-blocks')}
                             onChange={(value)=> vayu_blocks_handleBorderRadius('borderRadius',value)}
                             values={attributes.global.borderRadius}
                         />
+                      </div>  
 
+                    <div class="vayu_blocks_padding">
                         <BoxControl
                             label={__('Horizontal Padding', 'vayu-blocks')}
                             onChange={(value) => handlePaddingChange('horizontal', value)}
@@ -653,7 +611,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             }}
                             sides={['horizontal']}
                         />
+                        </div>  
 
+                        <div class="vayu_blocks_padding">
                         <BoxControl
                             label={__('Vertical Padding', 'vayu-blocks')}
                             onChange={(value) => handlePaddingChange('vertical', value)}
@@ -663,6 +623,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             }}
                             sides={['vertical']}
                         />
+                        </div>
 
                          
                     </>
@@ -944,17 +905,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 type="border"
                                             />
 
+                                            <div class="vayu_blocks_borderradius">
                                             <BoxControl
                                                 label={__('Border Radius','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button1.borderRadius',value)}
                                                 values={attributes.global.button1.borderRadius}
                                             />
-
+                                            </div>
+                                            <div class="vayu_blocks_padding">
                                             <BoxControl
                                                 label={__('Padding','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button1.padding',value)}
                                                 values={attributes.global.button1.padding}
                                             />
+                                            </div>
                                         </>
                                     )}
                                 </>
@@ -1077,17 +1041,20 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 type="border"
                                             />
 
+                                            <div class="vayu_blocks_borderradius">
                                             <BoxControl
                                                 label={__('Border Radius','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button2.borderRadius',value)}
                                                 values={attributes.global.button2.borderRadius}
                                             />
-
+                                            </div>
+                                            <div class="vayu_blocks_padding">   
                                             <BoxControl
                                                 label={__('Padding','vayu-blocks')}
                                                 onChange={(value)=> vayu_blocks_handleBorderRadius('button2.padding',value)}
                                                 values={attributes.global.button2.padding}
                                             />
+                                            </div>
                                         </>
                                     )}
                                 </>
@@ -1097,6 +1064,54 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                     </>
                 )}
+            </PanelBody>
+
+            <PanelBody title={__('Slider Layout', 'vayu-blocks')} initialOpen={false}>
+                <RangeControl
+                    label={__('Number Of Columns', 'vayu-blocks')}
+                    value={attributes.slidesToShow}
+                    onChange={(value) => setAttributes({ slidesToShow: value })}
+                    min={1}
+                    max={5}
+                    step={1}
+                />
+                <RangeControl
+                    label = {__('Number Of Rows', 'vayu-blocks')}
+                    value={attributes.slidesPerRow}
+                    onChange={(value) => setAttributes({ slidesPerRow: value })}
+                    min={1}
+                    max={5}
+                    step={1}
+                />
+
+                 <RangeControl
+                    label = {__('Number Of Slides To Scroll', 'vayu-blocks')}
+                    value={attributes.slidesToScroll}
+                    onChange={(value) => setAttributes({ slidesToScroll: value })}
+                    min={1}
+                    max={5}
+                    step={1}
+                />
+                <h6>The number of slides to scroll after each slide movement, ensuring smooth and controlled transitions in the slider.</h6>
+
+                <RangeControl
+                    label = {__('Scrolling Speed', 'vayu-blocks')}
+                    value={attributes.speed}
+                    onChange={(value) => setAttributes({ speed: value })}
+                    min={1}
+                    max={5000}
+                    step={1}
+                />
+
+                <RangeControl
+                    label = {__('Intial Slide', 'vayu-blocks')}
+                    value={attributes.initialSlide+1}
+                    onChange={(value) => setAttributes({ initialSlide: value-1 })}
+                    min={1}
+                    max={attributes.slides.length}
+                    step={1}
+                />
+
             </PanelBody>
 
             <PanelBody title={__('Slider Options','vayu-blocks')} initialOpen={false}>
@@ -1113,13 +1128,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ centerMode: value })}
                 />
 
-                {/* <ToggleControl
+                <ToggleControl
                     label={__('Fade', 'vayu-blocks')}
                     checked={attributes.fade}
                     onChange={(value) => setAttributes({ fade: value })}
                 />
-              <h6>Slide fade controls the smooth transition between slides by gradually fading them in and out.</h6>
-                 */}
+                <h6>Slide fade controls the smooth transition between slides by gradually fading them in and out.</h6>
 
                 <ToggleControl
                     label={__('Touch Swipe', 'vayu-blocks')}

@@ -15,8 +15,6 @@ import { FaCircleArrowLeft } from "react-icons/fa6";
 import { FaCaretLeft,FaCaretRight } from "react-icons/fa6";
 import { FaCircle } from "react-icons/fa";
 import { FaSquare } from "react-icons/fa";
-import { BlockControls } from '@wordpress/block-editor';
-import { ToolbarGroup,DropdownMenu  } from '@wordpress/components';
 
 
 const edit = ({ attributes, setAttributes }) => {
@@ -24,7 +22,6 @@ const edit = ({ attributes, setAttributes }) => {
     const [activeIndex, setActiveIndex] = useState(attributes.initialSlide || 0);
     const sliderRef = useRef(null);
     const [dotscount, setdotscount] = useState(1);
-    const [alignment, setAlignment] = useState(attributes.widthType || 'default');
 
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
@@ -49,7 +46,7 @@ const edit = ({ attributes, setAttributes }) => {
             lazyLoad: attributes.lazyLoad,
             autoplay: attributes.autoplay,
             autoplaySpeed: attributes.autoplaySpeed,
-            cssEase: 'ease-in-out', // Smooth animation
+            cssEase: 'linear', // Smooth animation
             pauseOnHover: attributes.pauseOnHover,
             focusOnSelect: attributes.focusOnSelect,
             centerPadding: '60px',
@@ -276,6 +273,12 @@ const edit = ({ attributes, setAttributes }) => {
     const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
    
     useEffect(() => {
+        if (!attributes.uniqueId) {
+            setAttributes({ uniqueId: 'vayu_blocks_slider_' + generateUniqueId() });
+        }
+    }, []);
+
+    useEffect(() => {
         // Check if there is exactly one slide
         if (attributes.slides.length === 1) {
             // Check if a slide with the same unique ID already exists
@@ -292,6 +295,7 @@ const edit = ({ attributes, setAttributes }) => {
         }
     }, [attributes.slides]); // Dependency on attributes.slides to react to changes
     
+
     const vayu_blocks_slides = attributes.slides.map((slide) => {
         // Extract padding values with default '0px'
         const topPadding = slide.padding.top || '0px';
@@ -309,7 +313,7 @@ const edit = ({ attributes, setAttributes }) => {
             overflow: 'hidden',
             position:'relative',
             display:'flex',
-            justifyContent:'center',
+            justifyContent:slide.alignment,
             alignItems:slide.alignmenttop,
             
             //border
@@ -504,62 +508,13 @@ const edit = ({ attributes, setAttributes }) => {
 
     });
 
-    const handleAlignmentChange = (newAlignment) => {
-        setAlignment(newAlignment);
-        setAttributes({ widthType: newAlignment });
-    };
     
     return (
         <>
-            <BlockControls>
-                <ToolbarGroup>
-                    <DropdownMenu
-                        className="vayu_blocks_dropdownmenu"
-                        icon="align-center" // Icon for the dropdown button
-                        label="Align"
-                        controls={[
-                            {
-                                title: (
-                                    <div className="vayu_blocks_alignment-option">
-                                        <div className = "vayu_blocks_alignment-heading">Align None</div>
-                                        <div className="vayu_blocks_alignment-description">Max 650px</div>
-                                    </div>
-                                ),
-                                icon: 'align-none', // Icon for 'none'
-                                onClick: () => handleAlignmentChange('default'),
-                                isActive: alignment === 'default'
-                            },
-                            {
-                                title: (
-                                    <div className="vayu_blocks_alignment-option">
-                                        <div className = "vayu_blocks_alignment-heading">Align Wide</div>
-                                        <div className="vayu_blocks_alignment-description">Max 1200px</div>
-                                    </div>
-                                ),
-                                icon: 'align-wide',
-                                onClick: () => handleAlignmentChange('customwidth'),
-                                isActive: alignment === 'customwidth'
-                            },
-                            {
-                                title: (
-                                    <div className="vayu_blocks_alignment-option">
-                                        <div className = "vayu_blocks_alignment-heading-full">Align Full</div>
-                                        <div className="vayu_blocks_alignment-description">Max 100%</div>
-                                    </div>
-                                ),
-                                icon: 'align-full-width', // Icon for 'full'
-                                onClick: () => handleAlignmentChange('fullwidth'),
-                                isActive: alignment === 'fullwidth'
-                            },
-                        ]}
-                    />
-                </ToolbarGroup>
-            </BlockControls>
-
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
-            <AdvanceSettings attributes={attributes}>
+            <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div  class="vayu-blocks-slider-main-container">
+                <div  class="vayu-blocks-slider-main-container" id={`${attributes.uniqueId}`}>
                     
                     <Slider ref={sliderRef} {...settings}>
                         {vayu_blocks_slides}

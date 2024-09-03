@@ -116,11 +116,19 @@
     background-color: #f0f0f0; /* Background color change on hover */
 }
 
+.custom-margin {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+
 .vayu_blocks_custom-button-active {
     position: absolute;
-    height: 36px; /* Thickness of the indicator bar */
+    height: 35px; /* Thickness of the indicator bar */
     width: calc(32.33%); /* Adjust to button width minus border */
-    bottom: 1px; /* Position it just below the button */
+    bottom: 1px;
+    right: 1px;
+    top: 1px; /* Position it just below the button */
     background-color: black;
     display: flex;
     left: 1px;
@@ -223,11 +231,17 @@
 
 .content-panel-layout {
     display: flex;
-   gap:15px;
-   margin-bottom: 5px;
+    gap:15px;
+    margin-bottom: 5px;
     align-items: center;
     justify-content: center;
     background-color: #e8e3e3;
+}
+
+.content-panel-layout .vayu_blocks_content-panel-layout-inside-button{
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .content-panel-layout-button {
@@ -398,7 +412,7 @@ content: "" !important;
 .vayu-blocks-slider-main-container .slick-track{
     display: flex !important;
     align-items: center;
-    justify-content: center;
+    //justify-content: center;
 }
 
 .vayu-blocks-slider-main-container .slick-slide{
@@ -487,4 +501,13 @@ content: "" !important;
 
 .vayu_blocks_alignment-heading-full{
     font-size:15px;
+}
+
+
+.vayu_blocks_borderradius .e1jovhle1 {
+    display:none;
+}
+
+.vayu_blocks_padding .e1jovhle1 {
+    margin-top: -20px;
 }
