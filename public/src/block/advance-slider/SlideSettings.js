@@ -13,13 +13,11 @@ import {
     __experimentalBoxControl as BoxControl,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
-  
-
 } from '@wordpress/components';
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { MdContentCopy } from "react-icons/md";
 import {MediaPlaceholder } from '@wordpress/block-editor';
-import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
+import BorderBoxControlComponent from './Components/BorderBoxControl/BorderBoxControlComponent';
 import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
@@ -30,6 +28,9 @@ import {
     ToogleGroupControl,
 } from '../../components/index.js';
 
+import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
+import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
+
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -39,7 +40,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     }, []);
 
     const [expandedIndex, setExpandedIndex] = useState(null);
-    const [activeButton, setActiveButton] = useState(0);
+    const [activeButton, setActiveButton] = useState('layout');
     const [activeButtonfill, setActiveButtonfill] = useState('outline');
     const [isPanelOpen, setIsPanelOpen] = useState('heading');
     const [isPanellayout, setIsPanellayout] = useState('background');
@@ -354,75 +355,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         vayu_blocks_updateSliderStyles(index, `${property}.border.Width`, borderValue);
     };
     
-    const vayu_blocks_handleButtonClick = (index) => {
-        setActiveButton(index);
-        vayu_blocks_updateIndicatorPosition(index);
-    };
-
-    const vayu_blocks_updateIndicatorPosition = (index) => {
-        const indicator = document.querySelector('.vayu_blocks_custom-button-active');
-        if (indicator) {
-            const buttons = document.querySelectorAll('.vayu_blocks_custom-button');
-            if (buttons.length > 0 && buttons[index]) {
-                let value = buttons[index].offsetLeft;
-                indicator.style.transform = `translateX(${value}px)`;
-            }
-        }
-    };
-
-    useEffect(() => {
-        vayu_blocks_updateIndicatorPosition(activeButton);
-    }, [activeButton]);
-        
-    const vayu_blocks_renderActiveButtonContent = () => {
-        if (activeButton === 0) {
-            return 'Layout';
-        } else if (activeButton === 1) {
-            return 'Heading';
-        } else if (activeButton === 2) {
-            return 'Button';
-        }
-        return '';
-    };
-
     //clear image
     const vayu_blocks_clearBackgroundImageAndFocalPoint = (index) => {
         const updatedSlides = [...attributes.slides];
         updatedSlides[index].backgroundImage = '';
         updatedSlides[index].imageheight = 0;
         setAttributes({ slides: updatedSlides });
-    };
-
-    //duotone change
-    const vayu_blocks_duotoneHandler = (index, propertyPath, value) => {
-        // Find the filter ID corresponding to the given color array
-        if (!Array.isArray(value) || value.length === 0) {
-            vayu_blocks_updateSliderStyles(index,propertyPath,"");
-        }
-        const filter = vayu_blocks_DUOTONE_PALETTE.find(({ colors }) =>
-            colors.every((color, i) => color === value[i])
-        );
-    
-        if (filter) {
-            const { id } = filter;
-            vayu_blocks_updateSliderStyles(index,propertyPath,id);
-
-        }
-    };
-
-    //duotone value
-    const vayu_blocks_duotonevalue = (index) => {
-        // Get the ID from the slide's layout duotone
-        const id = attributes.slides[index].duotone;
-    
-        // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
-        const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
-    
-        // If a match is found, return the colors array
-        if (filter) {
-            return filter.colors;
-        }
-        return '';
     };
 
     const togglePanel = (panel) => {
@@ -458,6 +396,28 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             vayu_blocks_updateSliderStyles(index,'padding.bottom',value.bottom);
         }
     } 
+
+    const handleDimensionChange = (index, property, newDimensions) => {
+        const sides = ['top', 'right', 'bottom', 'left'];
+    
+        // Update padding styles
+        if (newDimensions.padding) {
+            sides.forEach((side) => {
+                if (newDimensions.padding[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(index,`${property}padding.${side}`, newDimensions.padding[side]);
+                }
+            });
+        }
+    
+        // Update margin styles
+        if (newDimensions.margin) {
+            sides.forEach((side) => {
+                if (newDimensions.margin[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(index,`${property}margin.${side}`, newDimensions.margin[side]);
+                }
+            });
+        }
+    };
     
     return (
         
@@ -505,31 +465,19 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         {expandedIndex === index && (
                             <div className="vayu_blocks_slider-content">
 
-                                <div className="vayu_blocks_button-container">
-                                    <button 
-                                        className={`vayu_blocks_custom-button ${activeButton === 0 ? 'active' : ''}`}
-                                        onClick={() => vayu_blocks_handleButtonClick(0)}
-                                    >
-                                        Layout
-                                    </button>
-                                    <button
-                                        className={`vayu_blocks_custom-button ${activeButton === 1 ? 'active' : ''}`}
-                                        onClick={() => vayu_blocks_handleButtonClick(1)}
-                                    >
-                                        Heading
-                                    </button>
-                                    <button
-                                        className={`vayu_blocks_custom-button ${activeButton === 2 ? 'active' : ''}`}
-                                        onClick={() => vayu_blocks_handleButtonClick(2)}
-                                    >
-                                        Button
-                                    </button>
-                                    <div className="vayu_blocks_custom-button-active">
-                                        {vayu_blocks_renderActiveButtonContent()}
-                                    </div>
-                                </div>
-
-                                {0=== activeButton &&(
+                                <Vayu_Block_Toggle
+                                    value={activeButton}
+                                    onChange={(value) => setActiveButton(value)}
+                                    isBlock={true}
+                                    __nextHasNoMarginBottom={true}
+                                    options={[
+                                        { value: 'layout', label: 'Layout' },
+                                        { value: 'heading', label: 'Heading' },
+                                        { value: 'button', label: 'Button' },
+                                    ]}
+                                />
+                            
+                                {'layout'=== activeButton &&(
                                     <>
                                         <div className="content-panel-layout">
                                             <div className="vayu_blocks_content-panel-layout-inside-button">
@@ -758,29 +706,17 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                 values={attributes.slides[index].borderRadius}
                                                             />
                                                         </div>
-                                                        <div class="vayu_blocks_padding">
-                                                        <BoxControl
-                                                            label={__('Horizontal Padding', 'vayu-blocks')}
-                                                            onChange={(value) => handlePaddingChange(index,'horizontal', value)}
-                                                            values={{
-                                                                left: attributes.slides[index].padding.left,
-                                                                right: attributes.slides[index].padding.right,
+                                                
+                                                        <Vayu_Block_Dimension_Control
+                                                            value={{
+                                                                padding:attributes.slides[index].padding
                                                             }}
-                                                            sides={['horizontal']}
+                                                            para=""
+                                                            onChange={(value) => handleDimensionChange(index,'', value)}
+                                                            paddingsides={["horizontal","vertical"]}
+                                                            includePadding={true}
+                                                            includeMargin={false}
                                                         />
-                                                        </div>
-
-                                                    <div class="vayu_blocks_padding">
-                                                        <BoxControl
-                                                            label={__('Vertical Padding', 'vayu-blocks')}
-                                                            onChange={(value) => handlePaddingChange(index,'vertical', value)}
-                                                            values={{
-                                                                top: attributes.slides[index].padding.top,
-                                                                bottom: attributes.slides[index].padding.bottom,
-                                                            }}
-                                                            sides={['vertical']}
-                                                        />
-                                                        </div>
 
                                                     </>
                                                 )}
@@ -791,7 +727,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     </>
                                 )}
 
-                                {1===activeButton && (
+                                {'heading'===activeButton && (
 
                                     <>
                                         <p>This style will apply to all slides except those with custom styles enabled.</p>
@@ -1006,7 +942,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                 )}
 
-                                {2 === activeButton && (
+                                {'button' === activeButton && (
                                     <>
                                         <p>This style will apply to all slides except those with custom styles enabled.</p>
 
@@ -1197,13 +1133,18 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                                 values={attributes.slides[index].button1.borderRadius}
                                                                             />
                                                                             </div>
-                                                                            <div class="vayu_blocks_padding">
-                                                                            <BoxControl
-                                                                                label={__('Padding','vayu-blocks')}
-                                                                                onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button1.padding',value)}
-                                                                                values={attributes.slides[index].button1.padding}
+                                                                        
+                                                                            <Vayu_Block_Dimension_Control
+                                                                                value={{
+                                                                                    padding:attributes.slides[index].button1.padding
+                                                                                }}
+                                                                                para=""
+                                                                                onChange={(value) => handleDimensionChange(index,'button1.', value)}
+                                                                                paddingsides={["default"]}
+                                                                                includePadding={true}
+                                                                                includeMargin={false}
                                                                             />
-                                                                            </div>
+
 
                                                                         </>
                                                                     )}
@@ -1381,13 +1322,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                     />
                                                                     </div>
 
-                                                                    <div class="vayu_blocks_padding">
-                                                                    <BoxControl
-                                                                        label={__('Padding','vayu-blocks')}
-                                                                        onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button2.padding',value)}
-                                                                        values={attributes.slides[index].button2.padding}
-                                                                    />  
-                                                                    </div>
+                                                                    <Vayu_Block_Dimension_Control
+                                                                        value={{
+                                                                            padding:attributes.slides[index].button2.padding
+                                                                        }}
+                                                                        para=""
+                                                                        onChange={(value) => handleDimensionChange(index,'button2.', value)}
+                                                                        paddingsides={["default"]}
+                                                                        includePadding={true}
+                                                                        includeMargin={false}
+                                                                    />
 
                                                                 </>
                                                             )}
@@ -1399,7 +1343,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                         </>
                                     </>
                                 )}
-
+                            
                             </div>
                         )}
 

@@ -4,6 +4,8 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
+import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
+
 
 import {
     PanelBody,
@@ -13,6 +15,7 @@ import {
     FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
+    TabPanel 
 } from '@wordpress/components';
 import {
     HoverControl,
@@ -21,8 +24,10 @@ import {
     UnitChooser,
     ResponsiveControl,
 } from '../../components/index.js';
-import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
+import BorderBoxControlComponent from './Components/BorderBoxControl/BorderBoxControlComponent';
+
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
+import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
@@ -110,12 +115,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     //style update with global attributes
     const vayu_blocks_updateSliderStyles = (propertyPath, value) => {
         // Return early if the value is null, an empty string, or undefined for background gradients
-        if (
-            (value === null || value === '') &&
-            (propertyPath === 'backgroundGradient' ||
-                propertyPath === 'button1.backgroundGradient' ||
-                propertyPath === 'button2.backgroundGradient')
-        ) {
+        if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
             return;
         }
     
@@ -286,7 +286,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
     };
 
-    //border-radius and padding handle
+    //border-radius handler
     const vayu_blocks_handleBorderRadius = (property, value) => {
         const sides = ['top', 'right', 'bottom', 'left'];
     
@@ -353,11 +353,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
-    //clear image
-    const vayu_blocks_clearBackgroundImageAndFocalPoint = () => {
-        vayu_blocks_updateSliderBackgroundStyles('backgroundImage', '');
-    };
-
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
         { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
@@ -373,78 +368,74 @@ const PostSettings = ({ attributes, setAttributes }) => {
         { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
     ];
 
-    //duotone change
-    const vayu_blocks_duotoneHandler = (propertyPath, value) => {
-        // Find the filter ID corresponding to the given color array
-        if (!Array.isArray(value) || value.length === 0) {
-            vayu_blocks_updateSliderBackgroundStyles(propertyPath,"");
-        }
-        const filter = vayu_blocks_DUOTONE_PALETTE.find(({ colors }) =>
-            colors.every((color, i) => color === value[i])
-        );
+    // Handler to update dimensions state
+    const handleDimensionChange = (newDimensions) => {
+        const sides = ['top', 'right', 'bottom', 'left'];
     
-        if (filter) {
-            const { id } = filter;
-            vayu_blocks_updateSliderBackgroundStyles(propertyPath,id);
+        // Update padding styles
+        if (newDimensions.padding) {
+            sides.forEach((side) => {
+                if (newDimensions.padding[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(`padding.${side}`, newDimensions.padding[side]);
+                }
+            });
+        }
+    
+        // Update margin styles
+        if (newDimensions.margin) {
+            sides.forEach((side) => {
+                if (newDimensions.margin[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(`margin.${side}`, newDimensions.margin[side]);
+                }
+            });
         }
     };
 
-    //duotone value
-    const vayu_blocks_duotonevalue = () => {
-        // Get the ID from the slide's layout duotone
-        const id = attributes.global.duotone;
+    // Handler to update dimensions state
+    const handleButtonDimensionChange = (property,newDimensions) => {
+        const sides = ['top', 'right', 'bottom', 'left'];
     
-        // Find the matching filter in the vayu_blocks_DUOTONE_PALETTE
-        const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
-    
-        // If a match is found, return the colors array
-        if (filter) {
-            return filter.colors;
+        // Update padding styles
+        if (newDimensions.padding) {
+            sides.forEach((side) => {
+                if (newDimensions.padding[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(`${property}.padding.${side}`, newDimensions.padding[side]);
+                }
+            });
         }
-        return '';
+    
+        // Update margin styles
+        if (newDimensions.margin) {
+            sides.forEach((side) => {
+                if (newDimensions.margin[side] !== undefined) {
+                    vayu_blocks_updateSliderStyles(`${property}.margin.${side}`, newDimensions.margin[side]);
+                }
+            });
+        }
     };
-
-    function handlePaddingChange(side, value) {
-        if (side === 'horizontal') {
-            vayu_blocks_updateSliderStyles('padding.left',value.left);
-            vayu_blocks_updateSliderStyles('padding.right',value.right);
-        } else if (side === 'vertical') {
-            vayu_blocks_updateSliderStyles('padding.top',value.top);
-            vayu_blocks_updateSliderStyles('padding.bottom',value.bottom);
-        }
-    }    
 
     return (
         <>
 
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
-                
-                <div className="content-panel">
-                    <button 
-                        style={{ color: isPanel === 'layout' ? 'blue' : 'initial' }} 
-                        onClick={() => settogglePanelnew('layout')} 
-                        className='content-panel-button'
-                    >
-                        Layout
-                    </button>
-                    <button 
-                        style={{ color: isPanel === 'heading' ? 'blue' : 'initial' }} 
-                        onClick={() => settogglePanelnew('heading')} 
-                        className='content-panel-button'
-                    >
-                        Heading
-                    </button>
-                    <button 
-                        style={{ color: isPanel === 'button' ? 'blue' : 'initial' }} 
-                        onClick={() => settogglePanelnew('button')} 
-                        className='content-panel-button'
-                    >
-                        Button
-                    </button>
-                </div>
 
+                <Vayu_Block_Toggle
+                    value={isPanel}
+                    onChange={(value) => settogglePanelnew(value)}
+                    isBlock={true}
+                    __nextHasNoMarginBottom={true}
+                    options={[
+                        { value: 'layout', label: 'Layout' },
+                        { value: 'heading', label: 'Heading' },
+                        { value: 'button', label: 'Button' },
+                    ]}
+                />
+                
+                <div>
                 {isPanel === 'layout' && (
                     <>
+                        <p>This style will apply to all slides except those with custom styles enabled.</p>
+
                         <br />
                         <ToggleControl
                             label={attributes.global.heightauto 
@@ -593,39 +584,26 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             type="border"
                         />
 
-                    <div class="vayu_blocks_borderradius">
+                        <div class="vayu_blocks_borderradius">
                         <BoxControl
                             label={__('Border Radius','vayu-blocks')}
                             onChange={(value)=> vayu_blocks_handleBorderRadius('borderRadius',value)}
                             values={attributes.global.borderRadius}
                         />
-                      </div>  
+                      </div> 
 
-                    <div class="vayu_blocks_padding">
-                        <BoxControl
-                            label={__('Horizontal Padding', 'vayu-blocks')}
-                            onChange={(value) => handlePaddingChange('horizontal', value)}
-                            values={{
-                                left: attributes.global.padding.left,
-                                right: attributes.global.padding.right,
+                        <Vayu_Block_Dimension_Control
+                            value={{
+                                padding:attributes.global.padding
                             }}
-                            sides={['horizontal']}
+                            para=""
+                            onChange={handleDimensionChange}
+                            paddingsides={["horizontal","vertical"]}
+                            includePadding={true}
+                            
+                            includeMargin={false}
                         />
-                        </div>  
 
-                        <div class="vayu_blocks_padding">
-                        <BoxControl
-                            label={__('Vertical Padding', 'vayu-blocks')}
-                            onChange={(value) => handlePaddingChange('vertical', value)}
-                            values={{
-                                top: attributes.global.padding.top,
-                                bottom: attributes.global.padding.bottom,
-                            }}
-                            sides={['vertical']}
-                        />
-                        </div>
-
-                         
                     </>
                 )}
 
@@ -912,13 +890,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 values={attributes.global.button1.borderRadius}
                                             />
                                             </div>
-                                            <div class="vayu_blocks_padding">
-                                            <BoxControl
-                                                label={__('Padding','vayu-blocks')}
-                                                onChange={(value)=> vayu_blocks_handleBorderRadius('button1.padding',value)}
-                                                values={attributes.global.button1.padding}
+
+                                            <Vayu_Block_Dimension_Control
+                                                value={{
+                                                    padding:attributes.global.button1.padding
+                                                }}
+                                                para=""
+                                                onChange={(value)=> handleButtonDimensionChange('button1',value)}
+                                                paddingsides={["default"]}
+                                                includePadding={true}
+                                                includeMargin={false}
                                             />
-                                            </div>
+
                                         </>
                                     )}
                                 </>
@@ -1048,13 +1031,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 values={attributes.global.button2.borderRadius}
                                             />
                                             </div>
-                                            <div class="vayu_blocks_padding">   
-                                            <BoxControl
-                                                label={__('Padding','vayu-blocks')}
-                                                onChange={(value)=> vayu_blocks_handleBorderRadius('button2.padding',value)}
-                                                values={attributes.global.button2.padding}
+
+                                            <Vayu_Block_Dimension_Control
+                                                value={{
+                                                    padding:attributes.global.button2.padding
+                                                }}
+                                                para=""
+                                                onChange={(value)=> handleButtonDimensionChange('button2',value)}
+                                                paddingsides={["default"]}
+                                                includePadding={true}
+                                                includeMargin={false}
                                             />
-                                            </div>
+
                                         </>
                                     )}
                                 </>
@@ -1064,6 +1052,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                     </>
                 )}
+                </div>
             </PanelBody>
 
             <PanelBody title={__('Slider Layout', 'vayu-blocks')} initialOpen={false}>
@@ -1446,3 +1435,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 };
 
 export default PostSettings;
+
+
+
+

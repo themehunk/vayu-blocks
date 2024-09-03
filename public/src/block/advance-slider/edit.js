@@ -438,7 +438,6 @@ const edit = ({ attributes, setAttributes }) => {
         };
         };
 
-        //console.log(attributes.slides);
         // const blocks = wp.data.select('core/block-editor').getBlocks();
         // console.log(blocks);
 
