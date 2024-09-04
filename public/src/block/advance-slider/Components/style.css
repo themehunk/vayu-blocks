@@ -8,3 +8,31 @@
     margin-bottom:4px !important;
 }
 
+.vayu_block_borderradius_control .em5sgkm7{
+    display: none;
+}
+
+.vayu_block_borderradius_control{
+   margin-top: 5px;
+} 
+
+.vayu_block_borderradius_control .components-border-box-control-split-controls .em5sgkm3{
+    width: 75px;
+}
+
+.vayu_block_borderradius_control .components-border-box-control-split-controls
+{
+    grid-column:span 1 !important;
+}
+
+.vayu_block_borderradius_control .components-border-box-control-visualizer{
+    border:0px !important;
+}
+
+.vayu_block_borderradius_control .components-border-box-control label {
+    margin-bottom: 10px;
+}
+
+.vayu_block_border_control .components-border-box-control label {
+    margin-bottom: 10px;
+}

@@ -4,8 +4,6 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
-import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
-
 
 import {
     PanelBody,
@@ -24,11 +22,11 @@ import {
     UnitChooser,
     ResponsiveControl,
 } from '../../components/index.js';
-import BorderBoxControlComponent from './Components/BorderBoxControl/BorderBoxControlComponent';
 
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
-
+import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
+import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
 
 const PostSettings = ({ attributes, setAttributes }) => {
 
@@ -144,7 +142,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
             }
         });
     
-        // console.log(properties,currentProperty);
         // Determine the custom style property to check based on propertyPath
         let customStyleProperty;
         if (propertyPath.includes('heading')) {
@@ -236,48 +233,48 @@ const PostSettings = ({ attributes, setAttributes }) => {
     //border
      const vayu_blocks_handleslideBorderChange = (property, newBorders) => { 
         const updatedAttributes = {};
-    
-        if (newBorders.borders.top) {
-            if (newBorders.borders.top) {
-                updatedAttributes[`${property}.topcolor`] = newBorders.borders.top.color;
-                updatedAttributes[`${property}.topwidth`] = newBorders.borders.top.width;
-                updatedAttributes[`${property}.topstyle`] = newBorders.borders.top.style;
+
+        if(newBorders.borderRadius){
+            vayu_blocks_handleBorderRadius(`${property}Radius`,newBorders.borderRadius);
+        }
+
+        if (newBorders.border.top) {
+            if (newBorders.border.top) {
+                updatedAttributes[`${property}.topcolor`] = newBorders.border.top.color;
+                updatedAttributes[`${property}.topwidth`] = newBorders.border.top.width;
+                updatedAttributes[`${property}.topstyle`] = newBorders.border.top.style;
             }
-            if (newBorders.borders.bottom) {
-                updatedAttributes[`${property}.bottomcolor`] = newBorders.borders.bottom.color;
-                updatedAttributes[`${property}.bottomwidth`] = newBorders.borders.bottom.width;
-                updatedAttributes[`${property}.bottomstyle`] = newBorders.borders.bottom.style;
+            if (newBorders.border.bottom) {
+                updatedAttributes[`${property}.bottomcolor`] = newBorders.border.bottom.color;
+                updatedAttributes[`${property}.bottomwidth`] = newBorders.border.bottom.width;
+                updatedAttributes[`${property}.bottomstyle`] = newBorders.border.bottom.style;
             }
-            if (newBorders.borders.left) {
-                updatedAttributes[`${property}.leftcolor`] = newBorders.borders.left.color;
-                updatedAttributes[`${property}.leftwidth`] = newBorders.borders.left.width;
-                updatedAttributes[`${property}.leftstyle`] = newBorders.borders.left.style;
+            if (newBorders.border.left) {
+                updatedAttributes[`${property}.leftcolor`] = newBorders.border.left.color;
+                updatedAttributes[`${property}.leftwidth`] = newBorders.border.left.width;
+                updatedAttributes[`${property}.leftstyle`] = newBorders.border.left.style;
             }
-            if (newBorders.borders.right) {
-                updatedAttributes[`${property}.rightcolor`] = newBorders.borders.right.color;
-                updatedAttributes[`${property}.rightwidth`] = newBorders.borders.right.width;
-                updatedAttributes[`${property}.rightstyle`] = newBorders.borders.right.style;
+            if (newBorders.border.right) {
+                updatedAttributes[`${property}.rightcolor`] = newBorders.border.right.color;
+                updatedAttributes[`${property}.rightwidth`] = newBorders.border.right.width;
+                updatedAttributes[`${property}.rightstyle`] = newBorders.border.right.style;
             }
         } else {
-            updatedAttributes[`${property}.color`] = newBorders.borders.color;
-            updatedAttributes[`${property}.width`] = newBorders.borders.width;
-            updatedAttributes[`${property}.style`] = newBorders.borders.style;
+            updatedAttributes[`${property}.topcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.topwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.topstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.topcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.topwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.topstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.bottomcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.bottomwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.bottomstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.bottomcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.bottomwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.bottomstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.leftcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.leftwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.leftstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.leftcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.leftwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.leftstyle`] = newBorders.borders.style;
-    
-            updatedAttributes[`${property}.rightcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.rightwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.rightstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.rightcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.rightwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.rightstyle`] = newBorders.border.style;
         }
     
         Object.keys(updatedAttributes).forEach((key) => {
@@ -288,13 +285,30 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
     //border-radius handler
     const vayu_blocks_handleBorderRadius = (property, value) => {
-        const sides = ['top', 'right', 'bottom', 'left'];
-    
-        sides.forEach(side => {
-            if (value[side]) {
-                // Update the borderRadius for the specified side
-                vayu_blocks_updateSliderStyles(`${property}.${side}`, value[side]);
+        const updatedAttributes = {};
+
+        if (value.top) {
+            if (value.top) {
+                updatedAttributes[`${property}.top`] = value.top.width;
             }
+            if (value.bottom) {
+                updatedAttributes[`${property}.bottom`] = value.bottom.width;
+            }
+            if (value.left) {
+                updatedAttributes[`${property}.left`] = value.left.width;
+            }
+            if (value.right) {
+                updatedAttributes[`${property}.right`] = value.right.width;
+            }
+        } else {
+            updatedAttributes[`${property}.top`] = value.width;
+            updatedAttributes[`${property}.bottom`] = value.width;
+            updatedAttributes[`${property}.left`] = value.width;
+            updatedAttributes[`${property}.right`] = value.width;
+        }
+
+        Object.keys(updatedAttributes).forEach((key) => {
+            vayu_blocks_updateSliderStyles(key, updatedAttributes[key]);
         });
     };
 
@@ -551,15 +565,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             step={1}
                         />
 
-                         <BorderBoxControlComponent
-                            label={__('Border','vayu-blocks')}
-                            value={{
-                                all: {
-                                    color: attributes.global.border.color,
-                                    width: attributes.global.border.width,
-                                    style: attributes.global.border.style,
-                                },
-                                top: {
+                        <Vayu_Block_Border_Control
+                            value={{border:{
+                                top:{
                                     color: attributes.global.border.topcolor,
                                     width: attributes.global.border.topwidth,
                                     style: attributes.global.border.topstyle,
@@ -578,19 +586,28 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     color: attributes.global.border.rightcolor,
                                     width: attributes.global.border.rightwidth,
                                     style: attributes.global.border.rightstyle,
+                                }
+                            },
+                            borderRadius:{
+                                top:{
+                                    width:attributes.global.borderRadius.top
                                 },
+                                bottom:{
+                                    width:attributes.global.borderRadius.bottom
+                                },
+                                left:{
+                                    width:attributes.global.borderRadius.left
+                                },
+                                right:{
+                                    width:attributes.global.borderRadius.right
+                                }
+                            }
                             }}
                             onChange={(value)=>vayu_blocks_handleslideBorderChange('border',value)}
-                            type="border"
-                        />
-
-                        <div class="vayu_blocks_borderradius">
-                        <BoxControl
-                            label={__('Border Radius','vayu-blocks')}
-                            onChange={(value)=> vayu_blocks_handleBorderRadius('borderRadius',value)}
-                            values={attributes.global.borderRadius}
-                        />
-                      </div> 
+                            includeBorder={true}
+                            includeBorderRadius={true}
+                            para=""
+                        />  
 
                         <Vayu_Block_Dimension_Control
                             value={{
@@ -849,16 +866,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 value={attributes.global.button1.size}
                                             />
 
-                                            <br />
-                                            <BorderBoxControlComponent
-                                                label={__('Border','vayu-blocks')}
-                                                value={{
-                                                    all: {
-                                                        color: attributes.global.button1.border.color,
-                                                        width: attributes.global.button1.border.width,
-                                                        style: attributes.global.button1.border.style,
-                                                    },
-                                                    top: {
+
+                                            <Vayu_Block_Border_Control
+                                                value={{border:{
+                                                    top:{
                                                         color: attributes.global.button1.border.topcolor,
                                                         width: attributes.global.button1.border.topwidth,
                                                         style: attributes.global.button1.border.topstyle,
@@ -877,19 +888,28 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                         color: attributes.global.button1.border.rightcolor,
                                                         width: attributes.global.button1.border.rightwidth,
                                                         style: attributes.global.button1.border.rightstyle,
+                                                    }
+                                                },
+                                                borderRadius:{
+                                                    top:{
+                                                        width:attributes.global.button1.borderRadius.top
                                                     },
+                                                    bottom:{
+                                                        width:attributes.global.button1.borderRadius.bottom
+                                                    },
+                                                    left:{
+                                                        width:attributes.global.button1.borderRadius.left
+                                                    },
+                                                    right:{
+                                                        width:attributes.global.button1.borderRadius.right
+                                                    }
+                                                }
                                                 }}
                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange('button1.border',value)}
-                                                type="border"
-                                            />
-
-                                            <div class="vayu_blocks_borderradius">
-                                            <BoxControl
-                                                label={__('Border Radius','vayu-blocks')}
-                                                onChange={(value)=> vayu_blocks_handleBorderRadius('button1.borderRadius',value)}
-                                                values={attributes.global.button1.borderRadius}
-                                            />
-                                            </div>
+                                                includeBorder={true}
+                                                includeBorderRadius={true}
+                                                para=""
+                                            />  
 
                                             <Vayu_Block_Dimension_Control
                                                 value={{
@@ -990,16 +1010,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 value={attributes.global.button2.size}
                                             />
 
-                                            <br />
-                                            <BorderBoxControlComponent
-                                                label={__('Border','vayu-blocks')}
-                                                value={{
-                                                    all: {
-                                                        color: attributes.global.button2.border.color,
-                                                        width: attributes.global.button2.border.width,
-                                                        style: attributes.global.button2.border.style,
-                                                    },
-                                                    top: {
+                                            
+                                            <Vayu_Block_Border_Control
+                                                value={{border:{
+                                                    top:{
                                                         color: attributes.global.button2.border.topcolor,
                                                         width: attributes.global.button2.border.topwidth,
                                                         style: attributes.global.button2.border.topstyle,
@@ -1018,19 +1032,28 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                         color: attributes.global.button2.border.rightcolor,
                                                         width: attributes.global.button2.border.rightwidth,
                                                         style: attributes.global.button2.border.rightstyle,
+                                                    }
+                                                },
+                                                borderRadius:{
+                                                    top:{
+                                                        width:attributes.global.button2.borderRadius.top
                                                     },
+                                                    bottom:{
+                                                        width:attributes.global.button2.borderRadius.bottom
+                                                    },
+                                                    left:{
+                                                        width:attributes.global.button2.borderRadius.left
+                                                    },
+                                                    right:{
+                                                        width:attributes.global.button2.borderRadius.right
+                                                    }
+                                                }
                                                 }}
                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange('button2.border',value)}
-                                                type="border"
-                                            />
-
-                                            <div class="vayu_blocks_borderradius">
-                                            <BoxControl
-                                                label={__('Border Radius','vayu-blocks')}
-                                                onChange={(value)=> vayu_blocks_handleBorderRadius('button2.borderRadius',value)}
-                                                values={attributes.global.button2.borderRadius}
-                                            />
-                                            </div>
+                                                includeBorder={true}
+                                                includeBorderRadius={true}
+                                                para=""
+                                            />  
 
                                             <Vayu_Block_Dimension_Control
                                                 value={{
@@ -1435,7 +1458,3 @@ const PostSettings = ({ attributes, setAttributes }) => {
 };
 
 export default PostSettings;
-
-
-
-

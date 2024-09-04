@@ -17,7 +17,6 @@ import {
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { MdContentCopy } from "react-icons/md";
 import {MediaPlaceholder } from '@wordpress/block-editor';
-import BorderBoxControlComponent from './Components/BorderBoxControl/BorderBoxControlComponent';
 import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
@@ -30,6 +29,7 @@ import {
 
 import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
+import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
@@ -45,9 +45,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     const [isPanelOpen, setIsPanelOpen] = useState('heading');
     const [isPanellayout, setIsPanellayout] = useState('background');
     const [isPanel, setIsPanel] = useState('button1');
-    const [hover, sethover] = useState('normal');
-    const [button, setbutton] = useState('button1');
-
 
     const vayu_blocks_handleExpandToggle = (slideIndex) => {
         const { slidesToShow, slidesPerRow, slidesToScroll, index: currentIndex } = attributes;
@@ -276,70 +273,87 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     };
 
     //border
-    const vayu_blocks_handleslideBorderChange = (index, property, newBorders) => { 
+    const vayu_blocks_handleslideBorderChange = (index,property, newBorders) => { 
         const updatedAttributes = {};
-    
-        if (newBorders.borders.top) {
-            if (newBorders.borders.top) {
-                updatedAttributes[`${property}.topcolor`] = newBorders.borders.top.color;
-                updatedAttributes[`${property}.topwidth`] = newBorders.borders.top.width;
-                updatedAttributes[`${property}.topstyle`] = newBorders.borders.top.style;
+
+        if(newBorders.borderRadius){
+            vayu_blocks_handleBorderRadius(index,`${property}Radius`,newBorders.borderRadius);
+        }
+
+        if (newBorders.border.top) {
+            if (newBorders.border.top) {
+                updatedAttributes[`${property}.topcolor`] = newBorders.border.top.color;
+                updatedAttributes[`${property}.topwidth`] = newBorders.border.top.width;
+                updatedAttributes[`${property}.topstyle`] = newBorders.border.top.style;
             }
-            if (newBorders.borders.bottom) {
-                updatedAttributes[`${property}.bottomcolor`] = newBorders.borders.bottom.color;
-                updatedAttributes[`${property}.bottomwidth`] = newBorders.borders.bottom.width;
-                updatedAttributes[`${property}.bottomstyle`] = newBorders.borders.bottom.style;
+            if (newBorders.border.bottom) {
+                updatedAttributes[`${property}.bottomcolor`] = newBorders.border.bottom.color;
+                updatedAttributes[`${property}.bottomwidth`] = newBorders.border.bottom.width;
+                updatedAttributes[`${property}.bottomstyle`] = newBorders.border.bottom.style;
             }
-            if (newBorders.borders.left) {
-                updatedAttributes[`${property}.leftcolor`] = newBorders.borders.left.color;
-                updatedAttributes[`${property}.leftwidth`] = newBorders.borders.left.width;
-                updatedAttributes[`${property}.leftstyle`] = newBorders.borders.left.style;
+            if (newBorders.border.left) {
+                updatedAttributes[`${property}.leftcolor`] = newBorders.border.left.color;
+                updatedAttributes[`${property}.leftwidth`] = newBorders.border.left.width;
+                updatedAttributes[`${property}.leftstyle`] = newBorders.border.left.style;
             }
-            if (newBorders.borders.right) {
-                updatedAttributes[`${property}.rightcolor`] = newBorders.borders.right.color;
-                updatedAttributes[`${property}.rightwidth`] = newBorders.borders.right.width;
-                updatedAttributes[`${property}.rightstyle`] = newBorders.borders.right.style;
+            if (newBorders.border.right) {
+                updatedAttributes[`${property}.rightcolor`] = newBorders.border.right.color;
+                updatedAttributes[`${property}.rightwidth`] = newBorders.border.right.width;
+                updatedAttributes[`${property}.rightstyle`] = newBorders.border.right.style;
             }
         } else {
-            updatedAttributes[`${property}.color`] = newBorders.borders.color;
-            updatedAttributes[`${property}.width`] = newBorders.borders.width;
-            updatedAttributes[`${property}.style`] = newBorders.borders.style;
+            updatedAttributes[`${property}.topcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.topwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.topstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.topcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.topwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.topstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.bottomcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.bottomwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.bottomstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.bottomcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.bottomwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.bottomstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.leftcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.leftwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.leftstyle`] = newBorders.border.style;
     
-            updatedAttributes[`${property}.leftcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.leftwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.leftstyle`] = newBorders.borders.style;
-    
-            updatedAttributes[`${property}.rightcolor`] = newBorders.borders.color;
-            updatedAttributes[`${property}.rightwidth`] = newBorders.borders.width;
-            updatedAttributes[`${property}.rightstyle`] = newBorders.borders.style;
+            updatedAttributes[`${property}.rightcolor`] = newBorders.border.color;
+            updatedAttributes[`${property}.rightwidth`] = newBorders.border.width;
+            updatedAttributes[`${property}.rightstyle`] = newBorders.border.style;
         }
     
         Object.keys(updatedAttributes).forEach((key) => {
-            vayu_blocks_updateSliderStyles(index, key, updatedAttributes[key]);
+            vayu_blocks_updateSliderStyles(index,key, updatedAttributes[key]);
         });
     
     };
 
-    //border-radius and padding handle
-    const vayu_blocks_handleBorderRadius = (index, property, value) => {
-        const sides = ['top', 'right', 'bottom', 'left'];
-    
-        sides.forEach(side => {
-            if (value[side]) {
-                // Update the borderRadius for the specified side
-                vayu_blocks_updateSliderStyles(index, `${property}.${side}`, value[side]);
+    //border-radius handler
+    const vayu_blocks_handleBorderRadius = (index,property, value) => {
+        const updatedAttributes = {};
+
+        if (value.top) {
+            if (value.top) {
+                updatedAttributes[`${property}.top`] = value.top.width;
             }
+            if (value.bottom) {
+                updatedAttributes[`${property}.bottom`] = value.bottom.width;
+            }
+            if (value.left) {
+                updatedAttributes[`${property}.left`] = value.left.width;
+            }
+            if (value.right) {
+                updatedAttributes[`${property}.right`] = value.right.width;
+            }
+        } else {
+            updatedAttributes[`${property}.top`] = value.width;
+            updatedAttributes[`${property}.bottom`] = value.width;
+            updatedAttributes[`${property}.left`] = value.width;
+            updatedAttributes[`${property}.right`] = value.width;
+        }
+
+        Object.keys(updatedAttributes).forEach((key) => {
+            vayu_blocks_updateSliderStyles(index,key, updatedAttributes[key]);
         });
     };
-     
+
     const vayu_blocks_handleButtonfillClick = (type, index, property) => {
         setActiveButtonfill(type);
     
@@ -386,16 +400,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setIsPanel(panel); // Open the clicked panel
         }
     };
-
-    function handlePaddingChange(index,side, value) {
-        if (side === 'horizontal') {
-            vayu_blocks_updateSliderStyles(index,'padding.left',value.left);
-            vayu_blocks_updateSliderStyles(index,'padding.right',value.right);
-        } else if (side === 'vertical') {
-            vayu_blocks_updateSliderStyles(index,'padding.top',value.top);
-            vayu_blocks_updateSliderStyles(index,'padding.bottom',value.bottom);
-        }
-    } 
 
     const handleDimensionChange = (index, property, newDimensions) => {
         const sides = ['top', 'right', 'bottom', 'left'];
@@ -665,15 +669,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                             step={1}
                                                         />
 
-                                                        <BorderBoxControlComponent
-                                                            label={__('Border','vayu-blocks')}
-                                                            value={{
-                                                                all: {
-                                                                    color: attributes.slides[index].border.color,
-                                                                    width: attributes.slides[index].border.width,
-                                                                    style: attributes.slides[index].border.style,
-                                                                },
-                                                                top: {
+                                                        <Vayu_Block_Border_Control
+                                                            value={{border:{
+                                                                top:{
                                                                     color: attributes.slides[index].border.topcolor,
                                                                     width: attributes.slides[index].border.topwidth,
                                                                     style: attributes.slides[index].border.topstyle,
@@ -692,20 +690,28 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                     color: attributes.slides[index].border.rightcolor,
                                                                     width: attributes.slides[index].border.rightwidth,
                                                                     style: attributes.slides[index].border.rightstyle,
+                                                                }
+                                                            },
+                                                            borderRadius:{
+                                                                top:{
+                                                                    width:attributes.slides[index].borderRadius.top
                                                                 },
+                                                                bottom:{
+                                                                    width:attributes.slides[index].borderRadius.bottom
+                                                                },
+                                                                left:{
+                                                                    width:attributes.slides[index].borderRadius.left
+                                                                },
+                                                                right:{
+                                                                    width:attributes.slides[index].borderRadius.right
+                                                                }
+                                                            }
                                                             }}
                                                             onChange={(value)=>vayu_blocks_handleslideBorderChange(index,'border',value)}
-                                                            type="border"
-                                                        />
-
-                                                        <div class="vayu_blocks_borderradius">
-
-                                                            <BoxControl
-                                                                label={__('Border Radius','vayu-blocks')}
-                                                                onChange={(value)=> vayu_blocks_handleBorderRadius(index,'borderRadius',value)}
-                                                                values={attributes.slides[index].borderRadius}
-                                                            />
-                                                        </div>
+                                                            includeBorder={true}
+                                                            includeBorderRadius={true}
+                                                            para=""
+                                                        />  
                                                 
                                                         <Vayu_Block_Dimension_Control
                                                             value={{
@@ -1093,16 +1099,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                                 value={attributes.slides[index].button1.size}
                                                                             />
 
-                                                                            <br />
-                                                                            <BorderBoxControlComponent
-                                                                                label={__('Border','vayu-blocks')}
-                                                                                value={{
-                                                                                    all: {
-                                                                                        color: attributes.slides[index].button1.border.color,
-                                                                                        width: attributes.slides[index].button1.border.width,
-                                                                                        style: attributes.slides[index].button1.border.style,
-                                                                                    },
-                                                                                    top: {
+                                                                            <Vayu_Block_Border_Control
+                                                                                value={{border:{
+                                                                                    top:{
                                                                                         color: attributes.slides[index].button1.border.topcolor,
                                                                                         width: attributes.slides[index].button1.border.topwidth,
                                                                                         style: attributes.slides[index].button1.border.topstyle,
@@ -1121,18 +1120,28 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                                         color: attributes.slides[index].button1.border.rightcolor,
                                                                                         width: attributes.slides[index].button1.border.rightwidth,
                                                                                         style: attributes.slides[index].button1.border.rightstyle,
+                                                                                    }
+                                                                                },
+                                                                                borderRadius:{
+                                                                                    top:{
+                                                                                        width:attributes.slides[index].button1.borderRadius.top
                                                                                     },
+                                                                                    bottom:{
+                                                                                        width:attributes.slides[index].button1.borderRadius.bottom
+                                                                                    },
+                                                                                    left:{
+                                                                                        width:attributes.slides[index].button1.borderRadius.left
+                                                                                    },
+                                                                                    right:{
+                                                                                        width:attributes.slides[index].button1.borderRadius.right
+                                                                                    }
+                                                                                }
                                                                                 }}
                                                                                 onChange={(value)=>vayu_blocks_handleslideBorderChange(index,'button1.border',value)}
-                                                                                type="border"
-                                                                            />
-                                                                            <div class="vayu_blocks_padding">
-                                                                            <BoxControl
-                                                                                label={__('Border Radius','vayu-blocks')}
-                                                                                onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button1.borderRadius',value)}
-                                                                                values={attributes.slides[index].button1.borderRadius}
-                                                                            />
-                                                                            </div>
+                                                                                includeBorder={true}
+                                                                                includeBorderRadius={true}
+                                                                                para=""
+                                                                            />  
                                                                         
                                                                             <Vayu_Block_Dimension_Control
                                                                                 value={{
@@ -1280,47 +1289,49 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                     />
                                                                     
 
-                                                                    <BorderBoxControlComponent
-                                                                    label={__('Border','vayu-blocks')}
-                                                                    value={{
-                                                                        all: {
-                                                                            color: attributes.slides[index].button2.border.color,
-                                                                            width: attributes.slides[index].border.width,
-                                                                            style: attributes.slides[index].border.style,
+                                                                    <Vayu_Block_Border_Control
+                                                                        value={{border:{
+                                                                            top:{
+                                                                                color: attributes.slides[index].button2.border.topcolor,
+                                                                                width: attributes.slides[index].button2.border.topwidth,
+                                                                                style: attributes.slides[index].button2.border.topstyle,
+                                                                            },
+                                                                            bottom: {
+                                                                                color: attributes.slides[index].button2.border.bottomcolor,
+                                                                                width: attributes.slides[index].button2.border.bottomwidth,
+                                                                                style: attributes.slides[index].button2.border.bottomstyle,
+                                                                            },
+                                                                            left: {
+                                                                                color: attributes.slides[index].button2.border.leftcolor,
+                                                                                width: attributes.slides[index].button2.border.leftwidth,
+                                                                                style: attributes.slides[index].button2.border.leftstyle,
+                                                                            },
+                                                                            right: {
+                                                                                color: attributes.slides[index].button2.border.rightcolor,
+                                                                                width: attributes.slides[index].button2.border.rightwidth,
+                                                                                style: attributes.slides[index].button2.border.rightstyle,
+                                                                            }
                                                                         },
-                                                                        top: {
-                                                                            color: attributes.slides[index].button2.border.topcolor,
-                                                                            width: attributes.slides[index].border.topwidth,
-                                                                            style: attributes.slides[index].border.topstyle,
-                                                                        },
-                                                                        bottom: {
-                                                                            color: attributes.slides[index].button2.border.bottomcolor,
-                                                                            width: attributes.slides[index].button2.border.bottomwidth,
-                                                                            style: attributes.slides[index].button2.border.bottomstyle,
-                                                                        },
-                                                                        left: {
-                                                                            color: attributes.slides[index].button2.border.leftcolor,
-                                                                            width: attributes.slides[index].button2.border.leftwidth,
-                                                                            style: attributes.slides[index].button2.border.leftstyle,
-                                                                        },
-                                                                        right: {
-                                                                            color: attributes.slides[index].button2.border.rightcolor,
-                                                                            width: attributes.slides[index].button2.border.rightwidth,
-                                                                            style: attributes.slides[index].button2.border.rightstyle,
-                                                                        },
-                                                                    }}
-                                                                    onChange={(value)=>vayu_blocks_handleslideBorderChange(index,'button2.border',value)}
-                                                                    type="border"
-                                                                    />
-
-                                                                    <div class="vayu_blocks_padding">
-
-                                                                    <BoxControl
-                                                                        label={__('Border Radius','vayu-blocks')}
-                                                                        onChange={(value)=> vayu_blocks_handleBorderRadius(index,'button2.borderRadius',value)}
-                                                                        values={attributes.slides[index].button2.borderRadius}
-                                                                    />
-                                                                    </div>
+                                                                        borderRadius:{
+                                                                            top:{
+                                                                                width:attributes.slides[index].button2.borderRadius.top
+                                                                            },
+                                                                            bottom:{
+                                                                                width:attributes.slides[index].button2.borderRadius.bottom
+                                                                            },
+                                                                            left:{
+                                                                                width:attributes.slides[index].button2.borderRadius.left
+                                                                            },
+                                                                            right:{
+                                                                                width:attributes.slides[index].button2.borderRadius.right
+                                                                            }
+                                                                        }
+                                                                        }}
+                                                                        onChange={(value)=>vayu_blocks_handleslideBorderChange(index,'button2.border',value)}
+                                                                        includeBorder={true}
+                                                                        includeBorderRadius={true}
+                                                                        para=""
+                                                                    />  
 
                                                                     <Vayu_Block_Dimension_Control
                                                                         value={{
