@@ -27,6 +27,7 @@ import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/h
 import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
+import ColorPanel from './Components/ColorPanel/ColorPanel';
 
 const PostSettings = ({ attributes, setAttributes }) => {
 
@@ -428,9 +429,19 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handelBackgroundColor = (property,value) => {
+        // Update the block’s attributes or state based on the changes
+        if(value.color){
+            vayu_blocks_updateSliderStyles( `${property}.color`, value.color);
+        }
+        if(value.backgroundColor){
+            vayu_blocks_updateSliderStyles( `${property}.backgroundColor`, value.backgroundColor);
+        }
+    };
+
     return (
         <>
-
+            
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
 
                 <Vayu_Block_Toggle
@@ -827,38 +838,25 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 </Button>
                                             </div>
 
-                                            <PanelColorGradientSettings
-                                                title={ __( 'Background', 'vayu-blocks' ) }
-                                                settings={[
+                                            <ColorPanel
+                                                colorTool={[
                                                     {
-                                                        colorValue: attributes.global.button1.backgroundColor,
-                                                        gradientValue: attributes.global.button1.backgroundGradient,
-                                                        
-                                                        onColorChange: (color) => {
-                                                            vayu_blocks_updateSliderStyles( 'button1.backgroundColor', color);
-                                                        },
-                                                        onGradientChange: (gradient) => {
-                                                            vayu_blocks_updateSliderStyles( 'button1.backgroundGradient', gradient); 
-                                                        },
-                                                        label: __( 'Background', 'vayu-blocks' ),
+                                                        active: ['gradient'],
+                                                        name: 'Background',
+                                                        value: attributes.global.button1.backgroundColor,
+                                                        attribute: 'backgroundColor',
                                                     },
+                                                    {
+                                                        active: ['color'],
+                                                        name: 'Text',
+                                                        value: attributes.global.button1.color,
+                                                        attribute: 'color',
+                                                    }
                                                 ]}
+                                                handelColorPanel={(value)=>handelBackgroundColor('button1',value)}
+                                                initialTab="color"
                                             />
 
-                                            <PanelColorSettings
-                                                title={ __( 'Color' ) }
-                                                colorSettings={ [
-                                                    {
-                                                        value: attributes.global.button1.color,
-                                                        onChange: (colorValue) => {
-                                                            vayu_blocks_updateSliderStyles( 'button1.color', colorValue);
-                                                        },
-                                                        label: __( 'Color' ),
-                                                    },
-                                                ] }
-                                            >
-                                            </PanelColorSettings>
-                                            
                                             <FontSizePicker
                                                 label={__('Font Size', 'vayu-blocks')}
                                                 fontSizes={vayu_blocks_fontsizes}
@@ -970,38 +968,24 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 </Button>
                                             </div>
 
-                                            <PanelColorGradientSettings
-                                                title={ __( 'Background', 'vayu-blocks' ) }
-                                                settings={[
+                                            <ColorPanel
+                                                colorTool={[
                                                     {
-                                                        colorValue: attributes.global.button2.backgroundColor,
-                                                        gradientValue: attributes.global.button2.backgroundGradient,
-                                                        
-                                                        onColorChange: (color) => {
-                                                            vayu_blocks_updateSliderStyles( 'button2.backgroundColor', color);
-                                                        },
-                                                        onGradientChange: (gradient) => {
-                                                            vayu_blocks_updateSliderStyles( 'button2.backgroundGradient', gradient); 
-                                                        },
-                                                        label: __( 'Background', 'vayu-blocks' ),
+                                                        active: ['gradient'],
+                                                        name: 'Background',
+                                                        value: attributes.global.button2.backgroundColor,
+                                                        attribute: 'backgroundColor',
                                                     },
-                                                ]}
-                                            />
-
-                                            <PanelColorSettings
-                                                title={ __( 'Color' ) }
-                                                colorSettings={ [
                                                     {
+                                                        active: ['color'],
+                                                        name: 'Text',
                                                         value: attributes.global.button2.color,
-                                                        onChange: (colorValue) => {
-                                                            vayu_blocks_updateSliderStyles( 'button2.color', colorValue);
-                                                        },
-                                                        label: __( 'Color' ),
-                                                    },
-                                                ] }
-                                            >
-
-                                            </PanelColorSettings>
+                                                        attribute: 'color',
+                                                    }
+                                                ]}
+                                                handelColorPanel={(value)=>handelBackgroundColor('button2',value)}
+                                                initialTab="color"
+                                            />
                                             
                                             <FontSizePicker
                                                 label={__('Font Size', 'vayu-blocks')}

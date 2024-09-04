@@ -842,11 +842,8 @@ function generate_inline_slider_styles($attr) {
             $css .= ($button1['padding']['bottom'] ?? '10px') . " ";
             $css .= ($button1['padding']['left'] ?? '20px') . ";";
 
-            if (!empty($button1['backgroundColor'])) {
-                $css .= "background-color: {$button1['backgroundColor']};";
-            } elseif (!empty($button1['backgroundGradient'])) {
-                $css .= "background: -webkit-{$button1['backgroundGradient']};";
-            }
+            
+            $css .= "background-color: {$button1['backgroundColor']};";
 
             // Apply conditional margin-right based on button2.show
             $css .= "margin-right: " . ($slide['button2']['show'] ? '5px' : '0px') . ";";
@@ -905,12 +902,8 @@ function generate_inline_slider_styles($attr) {
             $css .= ($button2['padding']['right'] ?? '20px') . " ";
             $css .= ($button2['padding']['bottom'] ?? '10px') . " ";
             $css .= ($button2['padding']['left'] ?? '20px') . ";";
-
-            if (!empty($button2['backgroundColor'])) {
-                $css .= "background-color: {$button2['backgroundColor']};";
-            } elseif (!empty($button2['backgroundGradient'])) {
-                $css .= "background: -webkit-{$button2['backgroundGradient']};";
-            }
+         
+            $css .= "background-color: {$button2['backgroundColor']};";
             
             //animation left
         $css .= "}\n";

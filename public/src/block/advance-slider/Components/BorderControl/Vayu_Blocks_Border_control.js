@@ -103,7 +103,7 @@ export function Vayu_Block_Border_Control({
     para="Configure border and border radius settings.",
     includeBorder = true,
     includeBorderRadius = true,
-    borderLabel = 'Border',
+    borderLabel = 'BORDER',
     borderRadiusLabel = 'RADIUS',
     color,
     disableCustomColors=false,

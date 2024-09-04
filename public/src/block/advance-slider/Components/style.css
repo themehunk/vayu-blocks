@@ -1,3 +1,6 @@
+.vayu_blocks_dimesion_panel{
+    margin-top:20px;
+}
 
 .vayu_blocks_dimesion_panel .components-base-control__label.ej5x27r0{
     font-weight:500 !important;
@@ -16,12 +19,25 @@
    margin-top: 5px;
 } 
 
+.vayu_blocks_border_panel{
+    margin-top: 20px;
+}
+
+.vayu_blocks_border_panel .e19lxcc00{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.vayu_blocks_dimesion_panel .e19lxcc00{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .vayu_block_borderradius_control .components-border-box-control-split-controls .em5sgkm3{
     width: 75px;
 }
 
-.vayu_block_borderradius_control .components-border-box-control-split-controls
-{
+.vayu_block_borderradius_control .components-border-box-control-split-controls{
     grid-column:span 1 !important;
 }
 
@@ -35,4 +51,49 @@
 
 .vayu_block_border_control .components-border-box-control label {
     margin-bottom: 10px;
+}
+
+.vayu_block_border_control .ej5x27r2{
+    font-weight:600 !important;
+    font-size: 10px !important;
+}
+
+.vayu_block_borderradius_control .ej5x27r2{
+    font-weight:600 !important;
+    font-size: 10px !important;
+}
+
+/* ColorPanel css */
+.ubp-color-component{
+    padding: 16px;
+    width: 260px;
+}
+
+.ubp-color-container{
+    margin-bottom: 20px;
+}
+
+h2.ubp-h2-heading {
+    color: #747678;
+    padding: 10px 10px;
+}
+
+.vayu_blocks_colorpanel .components-tools-panel-item{
+    padding:5px;
+    border:1px solid rgba(128,128,128,0.25);
+}
+
+.vayu_blocks_colorpanel .e19lxcc00{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.vayu_blocks_colorpanel .components-tools-panel-item{
+    margin-bottom: -17px;
+}
+
+.vayu_blocks_colorpanel{
+    padding-bottom: 38px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.253);
+    margin-bottom: 20px;
 }

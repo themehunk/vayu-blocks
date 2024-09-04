@@ -405,7 +405,8 @@ const edit = ({ attributes, setAttributes }) => {
         // Button Style
         const vayu_blocks_generateButtonStyle = (button) => {
             return {
-            ...vayu_blocks_getBackgroundStyles(button),
+            
+            background: button.backgroundColor,
             fontSize: `${button.size}px`,
             border: 'none',
             cursor: 'pointer',
@@ -429,11 +430,8 @@ const edit = ({ attributes, setAttributes }) => {
             
             //borderRadius
             borderRadius: `${button.borderRadius.top || '0px'} ${button.borderRadius.right || '0px'} ${button.borderRadius.bottom || '0px'} ${button.borderRadius.left || '0px'}`,
-
             //padding
             padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
-
-
             marginRight: slide.button2.show ? '5px' : '0px',
         };
         };
