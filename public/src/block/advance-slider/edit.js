@@ -23,6 +23,9 @@ const edit = ({ attributes, setAttributes }) => {
     const sliderRef = useRef(null);
     const [dotscount, setdotscount] = useState(1);
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
         if (typeof value === 'string' && (value.endsWith('px') || value.endsWith('em') || value.endsWith('%'))) {
@@ -268,9 +271,6 @@ const edit = ({ attributes, setAttributes }) => {
         }
         
     }, [attributes.index]);
-
-    // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
    
     useEffect(() => {
         if (!attributes.uniqueId) {

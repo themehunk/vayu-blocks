@@ -159,6 +159,29 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     ];
 
+    const vayu_blocks_sub_heading_sizes = [
+        {
+            name: 'Small',
+            size: 12,
+            slug: 'small'
+        },
+        {
+            name: 'Meadium',
+            size: 16,
+            slug: 'meadium'
+        },
+        {
+            name: 'extraMeadium',
+            size: 20,
+            slug: 'extrameadium'
+        },
+        {
+            name: 'Big',
+            size: 24,
+            slug: 'big'
+        }
+    ];
+
     const vayu_blocks_fontsizes = [
         {
             name: 'Small',
@@ -916,7 +939,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                                                     <FontSizePicker
                                                                         label={__('Font Size', 'vayu-blocks')}
-                                                                        fontSizes={vayu_blocks_sizes}
+                                                                        fontSizes={vayu_blocks_sub_heading_sizes}
                                                                         onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'subheading.size', value)}
                                                                         value={attributes.slides[index].subheading.size}
                                                                     />

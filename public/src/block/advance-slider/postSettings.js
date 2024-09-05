@@ -4,6 +4,7 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
+import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
 
 import {
     PanelBody,
@@ -107,6 +108,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
         {
             name: 'Big',
             size: 40,
+            slug: 'big'
+        }
+    ];
+
+    const vayu_blocks_sub_heading_sizes = [
+        {
+            name: 'Small',
+            size: 12,
+            slug: 'small'
+        },
+        {
+            name: 'Meadium',
+            size: 16,
+            slug: 'meadium'
+        },
+        {
+            name: 'extraMeadium',
+            size: 20,
+            slug: 'extrameadium'
+        },
+        {
+            name: 'Big',
+            size: 24,
             slug: 'big'
         }
     ];
@@ -439,8 +463,49 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handleTypographyChange = (property,newValues) => {
+
+        if(newValues.size){
+            vayu_blocks_updateSliderStyles(`${property}.size`,newValues.size);
+        }
+        if(newValues.font){
+            vayu_blocks_updateSliderStyles(`${property}.font`,newValues.font);
+        }
+        if(newValues.appearance){
+            vayu_blocks_updateSliderStyles(`${property}.fontWeight`,newValues.appearance);
+        }
+        if(newValues.lineHeight){
+            vayu_blocks_updateSliderStyles(`${property}.lineHeight`,newValues.lineHeight);
+        }
+        if(newValues.letterSpacing){
+            vayu_blocks_updateSliderStyles(`${property}.letterSpacing`,newValues.letterSpacing);
+        }
+        if(newValues.textDecoration){
+            vayu_blocks_updateSliderStyles(`${property}.textDecoration`,newValues.textDecoration);
+        }
+        if(newValues.letterCase){
+            vayu_blocks_updateSliderStyles(`${property}.letterCase`,newValues.letterCase);
+        }
+        
+    };
+
     return (
         <>
+
+            <PanelBody title={__('Global Compoents', 'vayu-blocks')} initialOpen={false}>
+                {/* <Vayu_blocks_typographycontrol
+                    value={typographyValue}
+                    onChange={handleTypographyChange}
+                    includeSize={true}
+                    includeLineHeight={true}
+                    includefont={true}
+                    includeAppearance={true}
+                    includeLetterSpacing = {true}
+                    includeTextDecoration = {true}
+                    includeLetterCase = {true}
+                    para=""
+                /> */}
+            </PanelBody>
             
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
 
@@ -681,6 +746,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     />
 
                                     <SelectControl
+                                        label={__('Font Weight', 'text-domain')}
+                                        value={attributes.global.heading.fontWeight}
+                                        options={[
+                                            { label: __('Normal', 'text-domain'), value: 'normal' },
+                                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                            { label: __('Bold', 'text-domain'), value: 'bold' },
+                                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                                        ]}
+                                        onChange={(value) => vayu_blocks_updateSliderStyles('heading.fontWeight', value)}
+                                    />
+
+                                    <SelectControl
                                         label={__('Title Tag', 'vayu-blocks')}
                                         value={attributes.global.heading.tag}
                                         options={[
@@ -694,17 +771,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                         onChange={(value)=> vayu_blocks_updateSliderStyles('heading.tag', value)}
                                     />  
 
-                                    <SelectControl
-                                        label={__('Font Weight', 'text-domain')}
-                                        value={attributes.global.heading.fontWeight}
-                                        options={[
-                                            { label: __('Normal', 'text-domain'), value: 'normal' },
-                                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                            { label: __('Bold', 'text-domain'), value: 'bold' },
-                                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                        ]}
-                                        onChange={(value) => vayu_blocks_updateSliderStyles('heading.fontWeight', value)}
-                                    />
+                                    
                                 </>
                             )}
 
@@ -736,7 +803,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                                             <FontSizePicker
                                                 label={__('Font Size', 'vayu-blocks')}
-                                                fontSizes={vayu_blocks_sizes}
+                                                fontSizes={vayu_blocks_sub_heading_sizes}
                                                 onChange={(value) =>  vayu_blocks_updateSliderStyles( 'subheading.size', value)}
                                                 value={attributes.global.subheading.size}
                                             />
@@ -1441,4 +1508,4 @@ const PostSettings = ({ attributes, setAttributes }) => {
     );
 };
 
-export default PostSettings;
+export default PostSettings; 

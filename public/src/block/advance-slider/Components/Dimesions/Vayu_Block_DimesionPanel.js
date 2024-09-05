@@ -29,7 +29,8 @@ export function Vayu_Block_DimesionPanel({
     MarginSetting = [],
     isshownBydefault,
     paddinglabel,
-    marginlabel
+    marginlabel,
+    resetAll= true,
 }) {
     const { padding, margin } = values;
 
@@ -58,16 +59,28 @@ export function Vayu_Block_DimesionPanel({
     const paddingSidesConfig = getBoxControlSides(paddingSidesArray, paddinglabel);
     const marginSidesConfig = getBoxControlSides(marginSidesArray, marginlabel);
 
-    const resetAll = () => {
+    // Reset all settings to default values
+    const handleResetAll = () => {
         onChange({
-            padding: undefined,
-            margin: undefined,
+            padding:{
+                top:'0px',
+                bottom:'0px',
+                left:'0px',
+                right:'0px'
+            },
+            margin:{
+                top:'0px',
+                bottom:'0px',
+                left:'0px',
+                right:'0px'
+            },
+
         });
     };
 
     return (
         <div className="vayu_blocks_dimesion_panel">
-            <ToolsPanel label={__(label)} resetAll={resetAll}>
+            <ToolsPanel label={__(label)} resetAll={resetAll ? handleResetAll : undefined}>
                 <PanelDescription>
                     {__(para)}
                 </PanelDescription>
@@ -76,9 +89,8 @@ export function Vayu_Block_DimesionPanel({
                     <>
                     {isshownBydefault.includes('padding') ? (
                         <ToolsPanelItem
-                            hasValue={() => !!padding}
+                            hasValue={() => !padding}
                             label={__(paddinglabel, 'vayu_blocks')}
-                            onDeselect={() => handlePaddingChange(undefined)}
                             isShownByDefault
                         >
                             {paddingSidesConfig.default && (
@@ -110,9 +122,9 @@ export function Vayu_Block_DimesionPanel({
                         </ToolsPanelItem>
                     ) : (
                         <ToolsPanelItem
-                            hasValue={() => !!padding}
+                            hasValue={() => !padding}
                             label={__(paddinglabel, 'vayu_blocks')}
-                            onDeselect={() => handlePaddingChange(undefined)}
+            
                         >
                             {paddingSidesConfig.default && (
                                 <BoxControl
@@ -144,13 +156,14 @@ export function Vayu_Block_DimesionPanel({
                     )}
                     </>
                 )}
+
                 {includeMargin && (
                     <>
                     {isshownBydefault.includes('margin') ? (
                         <ToolsPanelItem
-                            hasValue={() => !!margin}
+                            hasValue={() => !margin}
                             label={__(marginlabel, 'vayu_blocks')}
-                            onDeselect={() => handleMarginChange(undefined)}
+                     
                             isShownByDefault
                         >
                             {marginSidesConfig.default && (
@@ -182,9 +195,9 @@ export function Vayu_Block_DimesionPanel({
                         </ToolsPanelItem>
                     ) : (
                         <ToolsPanelItem
-                            hasValue={() => !!margin}
+                            hasValue={() => !margin}
                             label={__(marginlabel, 'vayu_blocks')}
-                            onDeselect={() => handleMarginChange(undefined)}
+                         
                         >
                             {marginSidesConfig.default && (
                                 <BoxControl
