@@ -215,6 +215,15 @@ function getDescription(key,value='') {
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
+
+                    case 'advanceQueryLoop':
+                    return {
+                        value: vayublock.options.advanceQueryLoop.isActive,
+                        icon: <RxButton />,
+                        description: __('Easily design attractive Query Loop with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
                 default:
                     return '';
             }

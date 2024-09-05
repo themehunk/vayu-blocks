@@ -305,6 +305,12 @@ function vayu_blocks_get_input_values_callback() {
             
             ),
         ),
+        'queryloop' => array(
+            'value' => 0,
+            'settings' => array(
+            
+            ),
+        ),
     ));
 
     // Ensure the response is in JSON format
