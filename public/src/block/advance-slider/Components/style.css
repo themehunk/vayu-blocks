@@ -19,9 +19,9 @@
    margin-top: 5px;
 } 
 
-.vayu_blocks_border_panel{
+/* .vayu_blocks_border_panel{
     margin-top: 20px;
-}
+} */
 
 .vayu_blocks_border_panel .e19lxcc00{
     padding-left: 0px;
@@ -109,8 +109,8 @@ margin-top: 5%;
 }
 
 .vayu_block_border_control .ej5x27r2{
-    font-weight:600 !important;
-    font-size: 10px !important;
+    font-weight:500 !important;
+    font-size: 11px !important;
 }
 
 .vayu_block_borderradius_control .ej5x27r2{
@@ -148,7 +148,5 @@ h2.ubp-h2-heading {
 }
 
 .vayu_blocks_colorpanel{
-    padding-bottom: 38px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.253);
     margin-bottom: 20px;
 }

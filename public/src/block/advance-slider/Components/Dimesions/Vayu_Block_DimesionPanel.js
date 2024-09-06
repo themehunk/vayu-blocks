@@ -78,30 +78,49 @@ export function Vayu_Block_DimesionPanel({
         });
     };
 
+    function toSentenceCase(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+    
+    const formattedLabel = toSentenceCase(paddinglabel);
+    
+    const formattedLabelMARGIN = toSentenceCase(marginlabel);    
+
     return (
         <div className="vayu_blocks_dimesion_panel">
             <ToolsPanel label={__(label)} resetAll={resetAll ? handleResetAll : undefined}>
-                <PanelDescription>
-                    {__(para)}
-                </PanelDescription>
+                {para &&  (
+                    <PanelDescription>
+                        {__(para)}
+                    </PanelDescription>
+                )}
+                
 
                 {includePadding && (
                     <>
                     {isshownBydefault.includes('padding') ? (
-                        <ToolsPanelItem
-                            hasValue={() => !padding}
-                            label={__(paddinglabel, 'vayu_blocks')}
-                            isShownByDefault
-                        >
+                        <>
                             {paddingSidesConfig.default && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(formattedLabel, 'vayu_blocks')}
+                                    isShownByDefault
+                                >
                                 <BoxControl
                                     label={__(paddinglabel, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
                                     values={padding}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {paddingSidesConfig.horizontal && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(`Horizontal ${formattedLabel}`, 'vayu_blocks')}
+                                    isShownByDefault
+                                >
                                 <BoxControl
                                     label={__(`HORIZONTAL ${paddinglabel}`, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
@@ -109,8 +128,15 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['left', 'right']}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {paddingSidesConfig.vertical && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(`Vertical ${formattedLabel}`, 'vayu_blocks')}
+                                    isShownByDefault
+                                >
                                 <BoxControl
                                     label={__(`VERTICAL ${paddinglabel}`, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
@@ -118,23 +144,32 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['top', 'bottom']}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
-                        </ToolsPanelItem>
+                        </>
+                        
                     ) : (
-                        <ToolsPanelItem
-                            hasValue={() => !padding}
-                            label={__(paddinglabel, 'vayu_blocks')}
-            
-                        >
+                        <>
+                        
                             {paddingSidesConfig.default && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(formattedLabel, 'vayu_blocks')}
+                                >
                                 <BoxControl
                                     label={__(paddinglabel, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
                                     values={padding}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {paddingSidesConfig.horizontal && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(`Horizontal ${formattedLabel}`, 'vayu_blocks')}
+                                >
                                 <BoxControl
                                     label={__(`HORIZONTAL ${paddinglabel}`, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
@@ -142,8 +177,15 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['left', 'right']}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {paddingSidesConfig.vertical && (
+                                <ToolsPanelItem
+                                    hasValue={() => !padding}
+                                    label={__(`Vertical ${formattedLabel}`, 'vayu_blocks')}
+                    
+                                >
                                 <BoxControl
                                     label={__(`VERTICAL ${paddinglabel}`, 'vayu_blocks')}
                                     onChange={handlePaddingChange}
@@ -151,8 +193,10 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['top', 'bottom']}
                                     {...Object.fromEntries(PaddingSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
-                        </ToolsPanelItem>
+                        
+                    </>
                     )}
                     </>
                 )}
@@ -160,21 +204,29 @@ export function Vayu_Block_DimesionPanel({
                 {includeMargin && (
                     <>
                     {isshownBydefault.includes('margin') ? (
-                        <ToolsPanelItem
-                            hasValue={() => !margin}
-                            label={__(marginlabel, 'vayu_blocks')}
-                     
-                            isShownByDefault
-                        >
+                        <>
+                        
                             {marginSidesConfig.default && (
+                                <ToolsPanelItem
+                                    hasValue={() => !margin}
+                                    label={__(formattedLabelMARGIN, 'vayu_blocks')}
+                                    isShownByDefault
+                                >
                                 <BoxControl
                                     label={__(marginlabel, 'vayu_blocks')}
                                     onChange={handleMarginChange}
                                     values={margin}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {marginSidesConfig.horizontal && (
+                                <ToolsPanelItem
+                                hasValue={() => !margin}
+                                label={__(`Horizontal ${formattedLabelMARGIN}`, 'vayu_blocks')}
+                                isShownByDefault
+                            >
                                 <BoxControl
                                     label={__(`HORIZONTAL ${marginlabel}`, 'vayu_blocks')}
                                     onChange={handleMarginChange}
@@ -182,8 +234,15 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['left', 'right']}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
+
                             {marginSidesConfig.vertical && (
+                                <ToolsPanelItem
+                                    hasValue={() => !margin}
+                                    label={__(`Vertical ${formattedLabelMARGIN}`, 'vayu_blocks')}
+                                    isShownByDefault
+                                >
                                 <BoxControl
                                     label={__(`VERTICAL ${marginlabel}`, 'vayu_blocks')}
                                     onChange={handleMarginChange}
@@ -191,23 +250,33 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['top', 'bottom']}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
-                        </ToolsPanelItem>
+
+                        </>
                     ) : (
-                        <ToolsPanelItem
-                            hasValue={() => !margin}
-                            label={__(marginlabel, 'vayu_blocks')}
-                         
-                        >
+                        <>
+                        
                             {marginSidesConfig.default && (
+                                <ToolsPanelItem
+                                hasValue={() => !margin}
+                                label={__(formattedLabelMARGIN, 'vayu_blocks')}
+                             
+                            >
                                 <BoxControl
                                     label={__(marginlabel, 'vayu_blocks')}
                                     onChange={handleMarginChange}
                                     values={margin}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
                             {marginSidesConfig.horizontal && (
+                                <ToolsPanelItem
+                                hasValue={() => !margin}
+                                label={__(`Horizontal ${formattedLabelMARGIN}`, 'vayu_blocks')}
+                             
+                            >
                                 <BoxControl
                                     label={__(`HORIZONTAL ${marginlabel}`, 'vayu_blocks')}
                                     onChange={handleMarginChange}
@@ -215,8 +284,14 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['left', 'right']}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
                             {marginSidesConfig.vertical && (
+                                <ToolsPanelItem
+                                hasValue={() => !margin}
+                                label={__(`Vertical ${formattedLabelMARGIN}`, 'vayu_blocks')}
+                             
+                            >
                                 <BoxControl
                                     label={__(`VERTICAL ${marginlabel}`, 'vayu_blocks')}
                                     onChange={handleMarginChange}
@@ -224,10 +299,13 @@ export function Vayu_Block_DimesionPanel({
                                     sides={['top', 'bottom']}
                                     {...Object.fromEntries(MarginSetting.map(setting => [setting, true]))}
                                 />
+                                </ToolsPanelItem>
                             )}
-                        </ToolsPanelItem>
+                        
+                        </>
                     )}
                     </>
+                    
                 )}
             </ToolsPanel>
         </div>

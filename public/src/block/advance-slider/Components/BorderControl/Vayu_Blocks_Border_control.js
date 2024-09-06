@@ -140,15 +140,16 @@ export function Vayu_Block_Border_Control({
         <div className="vayu_blocks_border_panel">
             <ToolsPanel label={__(label)} resetAll={resetAll}>
                 
-                <PanelDescription>
-                    {__(para)}
-                </PanelDescription>
+                {para &&  (
+                    <PanelDescription>
+                        {__(para)}
+                    </PanelDescription>
+                )}
 
                 {includeBorder && (
                     <ToolsPanelItem
                         hasValue={() => !!border}
-                        label={__(borderLabel, 'vayu_blocks')}
-                        onDeselect={() => handleBorderChange(undefined)}
+                        label={__('Border', 'vayu_blocks')}
                         isShownByDefault
                     >
                         <div class="vayu_block_border_control">
@@ -169,8 +170,7 @@ export function Vayu_Block_Border_Control({
                 {includeBorderRadius && (
                     <ToolsPanelItem
                         hasValue={() => !!borderRadius}
-                        label={__(borderRadiusLabel, 'vayu_blocks')}
-                        onDeselect={() => handleBorderRadiusChange(undefined)}
+                        label={__('Radius', 'vayu_blocks')}
                         isShownByDefault
                     >
                         <div class="vayu_block_borderradius_control">

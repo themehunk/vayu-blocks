@@ -493,8 +493,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         <>
 
             <PanelBody title={__('Global Compoents', 'vayu-blocks')} initialOpen={false}>
-                {/* <Vayu_blocks_typographycontrol
-                    value={typographyValue}
+                 <Vayu_blocks_typographycontrol
                     onChange={handleTypographyChange}
                     includeSize={true}
                     includeLineHeight={true}
@@ -504,7 +503,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     includeTextDecoration = {true}
                     includeLetterCase = {true}
                     para=""
-                /> */}
+                /> 
             </PanelBody>
             
             <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
@@ -738,23 +737,21 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                                     </PanelColorSettings>
 
-                                    <FontSizePicker
-                                        label={__('Font Size', 'vayu-blocks')}
-                                        fontSizes={vayu_blocks_sizes}
-                                        onChange={(value) =>  vayu_blocks_updateSliderStyles('heading.size', value)}
-                                        value={attributes.global.heading.size}
-                                    />
-
-                                    <SelectControl
-                                        label={__('Font Weight', 'text-domain')}
-                                        value={attributes.global.heading.fontWeight}
-                                        options={[
+                                    <Vayu_blocks_typographycontrol
+                                        onChange={(value)=> handleTypographyChange("heading",value)}
+                                        includeSize={true}
+                                        value={{size:attributes.global.heading.size,
+                                            appearance: attributes.global.heading.fontWeight
+                                        }}
+                                        includeAppearance={true}
+                                        vayu_blocks_sizes={vayu_blocks_sizes}
+                                        appearanceOptions= {[
                                             { label: __('Normal', 'text-domain'), value: 'normal' },
                                             { label: __('Lighter', 'text-domain'), value: 'lighter' },
                                             { label: __('Bold', 'text-domain'), value: 'bold' },
                                             { label: __('Bolder', 'text-domain'), value: 'bolder' },
                                         ]}
-                                        onChange={(value) => vayu_blocks_updateSliderStyles('heading.fontWeight', value)}
+                                        para=""
                                     />
 
                                     <SelectControl
@@ -801,11 +798,21 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                                             </PanelColorSettings>
 
-                                            <FontSizePicker
-                                                label={__('Font Size', 'vayu-blocks')}
-                                                fontSizes={vayu_blocks_sub_heading_sizes}
-                                                onChange={(value) =>  vayu_blocks_updateSliderStyles( 'subheading.size', value)}
-                                                value={attributes.global.subheading.size}
+                                            <Vayu_blocks_typographycontrol
+                                                onChange={(value)=> handleTypographyChange("subheading",value)}
+                                                includeSize={true}
+                                                value={{size:attributes.global.subheading.size,
+                                                    appearance: attributes.global.subheading.fontWeight
+                                                }}
+                                                includeAppearance={true}
+                                                vayu_blocks_sizes={vayu_blocks_sub_heading_sizes}
+                                                appearanceOptions= {[
+                                                    { label: __('Normal', 'text-domain'), value: 'normal' },
+                                                    { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                                    { label: __('Bold', 'text-domain'), value: 'bold' },
+                                                    { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                                                ]}
+                                                para=""
                                             />
 
                                             <SelectControl
@@ -823,17 +830,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                             />
                                             
 
-                                            <SelectControl
-                                                label={__('Font Weight', 'text-domain')}
-                                                value={attributes.global.subheading.fontWeight}
-                                                options={[
-                                                    { label: __('Normal', 'text-domain'), value: 'normal' },
-                                                    { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                                    { label: __('Bold', 'text-domain'), value: 'bold' },
-                                                    { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                                ]}
-                                                onChange={(value) => vayu_blocks_updateSliderStyles('subheading.fontWeight', value)}
-                                            />
                                         </>
                                     )}
                                 </>
@@ -924,13 +920,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 initialTab="color"
                                             />
 
-                                            <FontSizePicker
-                                                label={__('Font Size', 'vayu-blocks')}
-                                                fontSizes={vayu_blocks_fontsizes}
-                                                onChange={(value) =>  vayu_blocks_updateSliderStyles( 'button1.size', value)}
-                                                value={attributes.global.button1.size}
+                                            <Vayu_blocks_typographycontrol
+                                                onChange={(value)=> handleTypographyChange("button1",value)}
+                                                includeSize={true}
+                                                value={{size:attributes.global.button1.size}}
+                                                vayu_blocks_sizes={vayu_blocks_fontsizes}
+                                                para=""
                                             />
-
 
                                             <Vayu_Block_Border_Control
                                                 value={{border:{
@@ -1054,11 +1050,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                                 initialTab="color"
                                             />
                                             
-                                            <FontSizePicker
-                                                label={__('Font Size', 'vayu-blocks')}
-                                                fontSizes={vayu_blocks_fontsizes}
-                                                onChange={(value) =>  vayu_blocks_updateSliderStyles( 'button2.size', value)}
-                                                value={attributes.global.button2.size}
+                                            <Vayu_blocks_typographycontrol
+                                                onChange={(value)=> handleTypographyChange("button2",value)}
+                                                includeSize={true}
+                                                value={{size:attributes.global.button2.size}}
+                                                vayu_blocks_sizes={vayu_blocks_fontsizes}
+                                                para=""
                                             />
 
                                             

@@ -30,6 +30,7 @@ import {
 import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
 import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
+import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from './Components/ColorPanel/ColorPanel';
 
 
@@ -457,6 +458,32 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handleTypographyChange = (index,property,newValues) => {
+
+        if(newValues.size){
+            vayu_blocks_updateSliderStyles(index,`${property}.size`,newValues.size);
+        }
+        if(newValues.font){
+            vayu_blocks_updateSliderStyles(index,`${property}.font`,newValues.font);
+        }
+        if(newValues.appearance){
+            vayu_blocks_updateSliderStyles(index,`${property}.fontWeight`,newValues.appearance);
+        }
+        if(newValues.lineHeight){
+            vayu_blocks_updateSliderStyles(index,`${property}.lineHeight`,newValues.lineHeight);
+        }
+        if(newValues.letterSpacing){
+            vayu_blocks_updateSliderStyles(index,`${property}.letterSpacing`,newValues.letterSpacing);
+        }
+        if(newValues.textDecoration){
+            vayu_blocks_updateSliderStyles(index,`${property}.textDecoration`,newValues.textDecoration);
+        }
+        if(newValues.letterCase){
+            vayu_blocks_updateSliderStyles(index,`${property}.letterCase`,newValues.letterCase);
+        }
+        
+    };
+
     return (
         
             <div class="vayu_blocks_slide_settings_main">
@@ -847,12 +874,25 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                                             </PanelColorSettings>
 
-                                                            <FontSizePicker
-                                                                label={__('Font Size', 'vayu-blocks')}
-                                                                fontSizes={vayu_blocks_sizes}
-                                                                onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'heading.size', value)}
-                                                                value={attributes.slides[index].heading.size}
-                                                            />
+                                                            <div className="vayu_blocks_heading_unitcontrol_slides">
+                                                                <Vayu_blocks_typographycontrol
+                                                                    
+                                                                    onChange={(value)=> handleTypographyChange(index,"heading",value)}
+                                                                    includeSize={true}
+                                                                    value={{size:attributes.slides[index].heading.size,
+                                                                        appearance: attributes.slides[index].heading.fontWeight
+                                                                    }}
+                                                                    includeAppearance={true}
+                                                                    vayu_blocks_sizes={vayu_blocks_sizes}
+                                                                    appearanceOptions= {[
+                                                                        { label: __('Normal', 'text-domain'), value: 'normal' },
+                                                                        { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                                                        { label: __('Bold', 'text-domain'), value: 'bold' },
+                                                                        { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                                                                    ]}
+                                                                    para=""
+                                                                />
+                                                            </div>
 
                                                             <SelectControl
                                                                 label={__('Title Tag', 'vayu-blocks')}
@@ -866,19 +906,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                     { label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
                                                                 ]}
                                                                 onChange={(value)=> vayu_blocks_updateSliderStyles(index,'heading.tag', value)}
-                                                            />  
-
-                                                            <SelectControl
-                                                                label={__('Font Weight', 'text-domain')}
-                                                                value={slide.heading.fontWeight}
-                                                                options={[
-                                                                    { label: __('Normal', 'text-domain'), value: 'normal' },
-                                                                    { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                                                    { label: __('Bold', 'text-domain'), value: 'bold' },
-                                                                    { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                                                ]}
-                                                                onChange={(value) => vayu_blocks_updateSliderStyles(index,'heading.fontWeight', value)}
-                                                            />
+                                                            /> 
                                                 
                                                         </>
                                                     )}
@@ -937,12 +965,25 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                                                     </PanelColorSettings>
 
-                                                                    <FontSizePicker
-                                                                        label={__('Font Size', 'vayu-blocks')}
-                                                                        fontSizes={vayu_blocks_sub_heading_sizes}
-                                                                        onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'subheading.size', value)}
-                                                                        value={attributes.slides[index].subheading.size}
+                                                                    
+                                                                    <div className="vayu_blocks_heading_unitcontrol_slides">
+                                                                    <Vayu_blocks_typographycontrol
+                                                                        onChange={(value)=> handleTypographyChange(index,"subheading",value)}
+                                                                        includeSize={true}
+                                                                        value={{size:attributes.slides[index].subheading.size,
+                                                                            appearance: attributes.slides[index].subheading.fontWeight
+                                                                        }}
+                                                                        includeAppearance={true}
+                                                                        vayu_blocks_sizes={vayu_blocks_sub_heading_sizes}
+                                                                        appearanceOptions= {[
+                                                                            { label: __('Normal', 'text-domain'), value: 'normal' },
+                                                                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                                                            { label: __('Bold', 'text-domain'), value: 'bold' },
+                                                                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                                                                        ]}
+                                                                        para=""
                                                                     />
+                                                                    </div>
 
                                                                     <SelectControl
                                                                         label={__('Title Tag', 'vayu-blocks')}
@@ -958,18 +999,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                         onChange={(value)=> vayu_blocks_updateSliderStyles(index,'subheading.tag', value)}
                                                                     />
                                                                     
-
-                                                                    <SelectControl
-                                                                        label={__('Font Weight', 'text-domain')}
-                                                                        value={slide.subheading.fontWeight}
-                                                                        options={[
-                                                                            { label: __('Normal', 'text-domain'), value: 'normal' },
-                                                                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                                                            { label: __('Bold', 'text-domain'), value: 'bold' },
-                                                                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                                                        ]}
-                                                                        onChange={(value) => vayu_blocks_updateSliderStyles(index,'subheading.fontWeight', value)}
-                                                                    />
                                                                 </>
                                                             )}
                                                         </>
@@ -1111,12 +1140,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                                 initialTab="color"
                                                                             />
                                                                         
-                                                                            <FontSizePicker
-                                                                                label={__('Font Size', 'vayu-blocks')}
-                                                                                fontSizes={vayu_blocks_fontsizes}
-                                                                                onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'button1.size', value)}
-                                                                                value={attributes.slides[index].button1.size}
+
+                                                                            <Vayu_blocks_typographycontrol
+                                                                                onChange={(value)=> handleTypographyChange(index,"button1",value)}
+                                                                                includeSize={true}
+                                                                                value={{size:attributes.slides[index].button1.size}}
+                                                                                vayu_blocks_sizes={vayu_blocks_fontsizes}
+                                                                                para=""
                                                                             />
+
+
 
                                                                             <Vayu_Block_Border_Control
                                                                                 value={{border:{
@@ -1285,11 +1318,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                         initialTab="color"
                                                                     />
 
-                                                                    <FontSizePicker
-                                                                        label={__('Font Size', 'vayu-blocks')}
-                                                                        fontSizes={vayu_blocks_fontsizes}
-                                                                        onChange={(value) =>  vayu_blocks_updateSliderStyles(index, 'button2.size', value)}
-                                                                        value={attributes.slides[index].button2.size}
+                                                                    <Vayu_blocks_typographycontrol
+                                                                        onChange={(value)=> handleTypographyChange(index,"button2",value)}
+                                                                        includeSize={true}
+                                                                        value={{size:attributes.slides[index].button2.size}}
+                                                                        vayu_blocks_sizes={vayu_blocks_fontsizes}
+                                                                        para=""
                                                                     />
                                                                     
 

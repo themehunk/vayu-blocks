@@ -295,7 +295,11 @@ export function Vayu_blocks_typographycontrol ({
     return (
         <div className="vayu_blocks_typography_panel">
             <ToolsPanel label={__(label)} resetAll={resetAll ? handleResetAll : undefined}>
-                <PanelDescription>{__(para)}</PanelDescription>
+                {para &&  (
+                    <PanelDescription>
+                        {__(para)}
+                    </PanelDescription>
+                )}
 
                 {includeFont && (
                     <ToolsPanelItem
