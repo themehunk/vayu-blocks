@@ -33,7 +33,9 @@
 	},
 	"dependencies": {
 		"@mui/material": "^5.15.14",
+		"@wordpress/core-data": "^7.7.0",
 		"@wordpress/hooks": "^3.50.0",
+		"@wordpress/html-entities": "^4.7.0",
 		"@wordpress/icons": "^9.23.0",
 		"@wordpress/interactivity": "^6.7.0",
 		"array-move": "^3.0.1",
