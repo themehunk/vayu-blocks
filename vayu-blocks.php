@@ -102,6 +102,13 @@ class Vayu_Block_Plugin {
                  'frontend_style' => 'advance-slider-frontend-style',
                 'status'         => $options['advanceSlider']['isActive'],
                 'render_callback' => 'vayu_blocks_advance_slider_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/advance-query-loop-block',
+                'script_handle'  => 'advance-query-loop',
+                'editor_style'   => 'advance-query-loop-editor-style',
+                'frontend_style' => 'advance-query-loop-frontend-style',
+                'status'         => $options['advanceQueryLoop']['isActive'],
             )
             
         );

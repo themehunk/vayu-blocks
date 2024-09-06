@@ -2,8 +2,9 @@ const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 module.exports = {
 	...defaultConfig,
   entry:{
-    'post-grid': './src/block/post-grid',
-    'advance-slider': './src/block/advance-slider',
+     'advance-query-loop':'./src/block/advance-query-loop',
+     'post-grid': './src/block/post-grid',
+     'advance-slider': './src/block/advance-slider',
      'advance-heading':'./src/block/advance-heading',
      'advance-spacer':'./src/block/advance-spacer',
      'advance-container':'./src/block/advance-container',

@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "vayu-blocks/advance-query-loop",
+	"title": "Advance Query Loop Block",
+	"category": "vayu-blocks",
+    "textdomain": "vayu-blocks",
+	"icon": "loop",
+	"attributes": {
+		"namespace": {
+			"type": "string",
+			"default": "core/posts-list"
+		},
+        "queryId": {
+			"type": "number"
+		},
+		"query": {
+			"type": "object",
+			"default": {
+				"perPage": null,
+				"pages": 0,
+				"offset": 0,
+				"postType": "post",
+				"order": "desc",
+				"orderBy": "date",
+				"author": "",
+				"search": "",
+				"exclude": [],
+				"sticky": "",
+				"inherit": true,
+				"taxQuery": null,
+				"parents": []
+			}
+		}
+	},
+    "providesContext": {
+		"queryId": "queryId",
+		"query": "query",
+		"displayLayout": "displayLayout"
+	},
+	"supports": {
+		"align": [ "wide", "full" ],
+		"html": false,
+		"layout": true,
+		"interactivity": true
+	}
+}
