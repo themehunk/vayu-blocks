@@ -163,7 +163,6 @@
                     "newtab": true,
                     "size": 20,
                     "backgroundColor": "transparent",
-                    "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "color":"black",
                     "border":{
                         "color": "black",
@@ -207,7 +206,6 @@
                     "newtab": true,
                     "size": 20,
                     "backgroundColor": "transparent",
-                    "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "color":"black",
                     "border":{
                         "color": "black",
@@ -332,7 +330,6 @@
                     "newtab": true,
                     "size": 20,
                     "backgroundColor": "transparent",
-                    "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "color":"black",
                     "border":{
                         "color": "black",
@@ -376,7 +373,6 @@
                     "newtab": true,
                     "size": 20,
                     "backgroundColor": "transparent",
-                    "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
                     "color":"black",
                     "border":{
                         "color": "black",
@@ -458,7 +454,6 @@
                     "right":"0px",
                     "bottom":"0px",
                     "left":"0px"
-                    
                 },
                 "padding":{
                     "top": "50px",
