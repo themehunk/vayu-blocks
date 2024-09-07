@@ -474,6 +474,7 @@ return array(
             'pg_dateImageScale' => 0.6,
 
     //Advanced
+        'classNamemain' => '',
         'globalwidth'=> '',
         'width' => '',
         'customWidthlayout' => '',

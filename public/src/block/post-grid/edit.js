@@ -293,7 +293,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 setAttributes={setAttributes}
             />
 
-            <AdvanceSettings attributes={attributes}>
+            <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
             <div>
                 {filteredPosts && filteredPosts.length > 0 ? (
                     <div style={gridContainerStyle}>

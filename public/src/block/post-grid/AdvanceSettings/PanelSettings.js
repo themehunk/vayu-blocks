@@ -1726,21 +1726,7 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						>           
-							<SelectControl
-								label={ __( 'Width', 'vayu-blocks' ) }
-								value={ attributes.widthType }
-								options={ [
-									{ label:  __( 'Default', 'vayu-blocks' ), value: 'default' },
-									{ label: __( 'Full Width(100%)', 'vayu-blocks' ), value: 'fullwidth' },
-									{ label: __( 'Inline(Auto)', 'vayu-blocks' ), value: 'inlinewidth' },
-									{ label: __( 'Custom', 'vayu-blocks' ), value: 'customwidth' },
-								] }
-								onChange={ e => setAttributes({ widthType: e }) }
-							/>      
-
-							{ 'customwidth' == attributes.widthType && (
-
-								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }
 								>	
@@ -1760,8 +1746,6 @@ const PanelSettings = ({
 								/>
 								</ResponsiveControl>
 								</Suspense>
-
-							) }
 
 							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
 

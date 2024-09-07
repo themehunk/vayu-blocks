@@ -1,7 +1,10 @@
 {"id": {
     "type": "string"
   },
-  
+  "classNamemain":{
+    "type":"string",
+    "default":""
+  },
   "uniqueID": {
     "type": "string"
   },
