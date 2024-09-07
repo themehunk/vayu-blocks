@@ -6,7 +6,7 @@ import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 const edit = ({ attributes, setAttributes }) => {
     
     // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+    const generateUniqueId = () =>  new Date().getTime() + '----' + Math.floor(Math.random() * 1000);
 
     // Ensure the uniqueId is set if it's not
     if (!attributes.uniqueId) {
@@ -55,7 +55,7 @@ const edit = ({ attributes, setAttributes }) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-slider-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
                     <div className="vayu_blocks_image_flip_wrapper">
                         {attributes.image && (
 

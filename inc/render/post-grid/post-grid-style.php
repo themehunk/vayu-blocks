@@ -26,11 +26,8 @@ function generate_inline_styles($attr) {
     
     $css .= ".th-post-grid-main-wp-editor-wrapper {";
         // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
-        if ($attr['widthType'] === 'customwidth') {
-            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
-        } elseif ($attr['widthType'] === 'inlinewidth') {
-            $css .= "display: inline-flex;";
-        }
+        $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        
     $css .= "}";
     
      // Add media query for tablet screens
@@ -49,6 +46,7 @@ function generate_inline_styles($attr) {
 
     //Main div
     $css .= "$wrapper {";
+
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
         $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
