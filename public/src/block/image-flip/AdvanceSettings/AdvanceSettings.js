@@ -458,26 +458,20 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...(isHovered ? filteredHoverStyles : {}),
     };
    
-    // Assume attributes is available in your context
-    const animationtype = attributes.animationtype === 'animation1' 
-    ? 'fadeInUp' 
-    : attributes.animationtype === 'animation2'
-    ? 'fadeInDown' : attributes.animationtype === 'animation3'
-    ? 'fadeInLeft': attributes.animationtype === 'animation4'
-    ? 'fadeInRight'
-    : ''; // Default or fallback value
 
-    const animationopacity = attributes.animationtype === 'noanimation' ? 1 : 0;
 
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
-            '--slider-margin': `${attributes.slidermargin}px`,
-            '--sliderarrow-hover-color': `${attributes.arrowstyleleft.hovercolor}`,
-            '--animation-type': animationtype,
-            '--animation-type-opacity' : animationopacity,
-            '--image-hover-effect' : `${attributes.imagehvreffect}`
+            '--image-hover-effect' : `${attributes.imagehvreffect}`,
+            '--image-filter-effect' : `${attributes.imagehvrfilter}`,
+            '--image-opacity' : `${attributes.opacity}`,
+            '--overlay-effect': `${attributes.mageoverlayouteffect}`,
+            '--overlay-transitiontime': `${attributes.overlaytransitiontime}s`,
+            '--image-transitiontime': `${attributes.imagetransitiontime}s`,
+            '--button-hvr-background': `${attributes.buttonhvrbackground}s`,
+            '--button-hvr-color': `${attributes.buttonhvrcolor}s`,
         },
 
         onMouseEnter: handleMouseEnter,
