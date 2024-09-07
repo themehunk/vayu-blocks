@@ -27,31 +27,47 @@
 }
 
 //edit.js
-.vayu_blocks_image_flip_wrapper{
 
-    overflow: hidden;
-
-}
 .vayu_blocks_image_flip_wrapper {
     width: 100%;
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
+    min-height: 300px;
 }
 
 .vayu_blocks_image_flip_image {
     width: 100%;
-    transform-origin: 50% 50%;
     height: 100%; /* Ensure the image fills the container */
-    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
     object-fit: cover; /* Ensures the image content covers the container */
+    opacity:var(--image-opacity);
 }
 
 /* Apply the custom hover effect */
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);
-    filter: var(--image-hover-effect-filter, none);
+    filter: var(--image-filter-effect, none);
     opacity: var(--image-hover-effect-opacity, 1);
+}
+
+.grayScale {
+    --image-filter-effect:grayscale(100%);
+}
+
+/* Define hover effects using custom properties */
+.grayScalereverse {
+    filter:grayscale(100%);
+    transition: filter var(--image-transitiontime) ease; /* Smooth transition for blur effect */
+}
+
+/* Remove blur on hover for glow effect */
+.grayScalereverse :hover {
+    filter: none; /* Remove blur on hover */
+}
+
+.sepia {
+--image-filter-effect:sepia(100%);
 }
 
 /* Define hover effects using custom properties */
@@ -100,21 +116,164 @@
 }
 
 .blur {
-    --image-hover-effect-filter: blur(3px);
+    --image-filter-effect: blur(3px);
 }
-
-/* Define hover effects using custom properties */
-.glow {
-    filter: blur(3px); /* Initial blur */
-    transition: filter 0.3s ease; /* Smooth transition for blur effect */
-}
-
-/* Remove blur on hover for glow effect */
-.glow:hover {
-    filter: none; /* Remove blur on hover */
-}
-
 
 .shine {
-    --image-hover-effect-filter: grayscale(100%);
+    --image-filter-effect: grayscale(100%);
+}
+
+/* Overlay styles */
+.vayu_blocks_overlay_main_wrapper {
+    background-color: rgb(13, 27, 228); /* Default background */
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: var(--overlay-transitiontime) ease;
+    opacity: 0; /* Initially hidden */
+    z-index: 10;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;    /* Center items horizontally */
+    justify-content: center;
+}
+
+/* Hover the image and show the overlay */
+.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {
+    opacity: 1; /* Make the overlay visible on hover */
+}
+
+/* Custom overlay hover effects */
+.overlayfade-in {
+    opacity: 0;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in {
+    opacity: 1;
+}
+
+.overlayfade-in-up {
+    transform: translateY(100%); /* Start from below the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {
+    transform: translateY(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-down {
+    transform: translateY(-100%); /* Start from above the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {
+    transform: translateY(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-left {
+    transform: translateX(-100%); /* Start from the left of the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-left {
+    transform: translateX(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-right {
+    transform: translateX(100%); /* Start from the right of the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-right {
+    transform: translateX(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayflip-horizontal {
+    transform: rotateY(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
+    transform: rotateY(0);
+}
+
+
+.overlayflip-vertical {
+    transform: rotateX(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+    transform: rotateX(0);
+}
+
+
+.overlayzoom-in-up {
+    transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+
+.overlayzoom-in-left {
+    transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+}
+
+
+.overlayzoom-in-right {
+    transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+}
+
+.overlayzoom-in-down {
+    transform: scale(0.5) translateY(50%); /* Larger movement down for more emphasis */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+
+.overlaypartial-overlay {
+    width: 50%; /* Custom size for partial overlay */
+    opacity: 0;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlaypartial-overlay {
+    opacity: 1;
+}
+
+.vayu-blocks-slider-main-container {
+    min-height: 300px; /* Adjust this value as needed */
+    position: relative; /* Ensure positioning context for child elements */
+    background:gray;
 }

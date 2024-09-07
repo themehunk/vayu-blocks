@@ -105,7 +105,17 @@ export function Vayu_Block_Border_Control({
     includeBorderRadius = true,
     borderLabel = 'BORDER',
     borderRadiusLabel = 'RADIUS',
-    color,
+    color=[
+        { name: 'Blue 20', color: '#72aee6' },
+        { name: 'Red', color: '#ff0000' },
+        { name: 'Green', color: '#00ff00' },
+        { name: 'Blue', color: '#0000ff' },
+        { name: 'Yellow', color: '#ffff00' },
+        { name: 'Purple', color: '#800080' },
+        { name: 'Orange', color: '#ffa500' },
+        { name: 'Pink', color: '#ffc0cb' },
+        { name: 'Teal', color: '#008080' },
+    ],
     disableCustomColors=false,
     popoverPlacement,
     enableAlpha=false,
@@ -157,7 +167,7 @@ export function Vayu_Block_Border_Control({
                             label={__(borderLabel, 'vayu_blocks')}
                             onChange={handleBorderChange}
                             value={border}
-                            color={color}
+                            colors={color}
                             disableCustomColors={disableCustomColors}
                             popoverPlacement={popoverPlacement}
                             enableAlpha={enableAlpha}

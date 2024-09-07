@@ -261,8 +261,7 @@ export function Vayu_Block_DimesionPanel({
                                 <ToolsPanelItem
                                 hasValue={() => !margin}
                                 label={__(formattedLabelMARGIN, 'vayu_blocks')}
-                             
-                            >
+                                >
                                 <BoxControl
                                     label={__(marginlabel, 'vayu_blocks')}
                                     onChange={handleMarginChange}

@@ -30,1469 +30,407 @@ import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Block
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
 import ColorPanel from './Components/ColorPanel/ColorPanel';
 
+
+
 const PostSettings = ({ attributes, setAttributes }) => {
-
-    const [hover, sethover] = useState('left');
-    const [isPanel, settogglePanelnew] = useState('layout');
-    const [hoverbutton, sethoverbutton] = useState('normal');
-    const [button, setbutton] = useState('button1');
-    const [activeButtonfill, setActiveButtonfill] = useState('outline');
-
-    const getView = useSelect((select) => {
-        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
-    }, []);
-
-    const vayu_blocks_fontsizes = [
-        {
-            name: 'Small',
-            size: 16,
-            slug: 'small'
-        },
-        {
-            name: 'Meadium',
-            size: 20,
-            slug: 'meadium'
-        },
-        {
-            name: 'Big',
-            size: 24,
-            slug: 'big'
-        },
-        {
-            name: 'ExtraBig',
-            size: 28,
-            slug: 'extrabig'
-        }
-    ];
-
-    const vayu_blocks_fontsizes_small = [
-        {
-            name: 'Small',
-            size: 10,
-            slug: 'small'
-        },
-        {
-            name: 'Meadium',
-            size: 14,
-            slug: 'meadium'
-        },
-        {
-            name: 'Big',
-            size: 16,
-            slug: 'big'
-        },
-        {
-            name: 'ExtraBig',
-            size: 20,
-            slug: 'extrabig'
-        }
-    ];
+    const [activeButton, setActiveButton] = useState('normal');
 
     const vayu_blocks_sizes = [
         {
             name: 'Small',
-            size: 20,
+            size: '16px',
             slug: 'small'
         },
         {
             name: 'Meadium',
-            size: 28,
+            size: '28px',
             slug: 'meadium'
         },
         {
             name: 'extraMeadium',
-            size: 32,
+            size: '32px',
             slug: 'extrameadium'
         },
         {
             name: 'Big',
-            size: 40,
+            size: '40px',
             slug: 'big'
         }
     ];
-
-    const vayu_blocks_sub_heading_sizes = [
-        {
-            name: 'Small',
-            size: 12,
-            slug: 'small'
-        },
-        {
-            name: 'Meadium',
-            size: 16,
-            slug: 'meadium'
-        },
-        {
-            name: 'extraMeadium',
-            size: 20,
-            slug: 'extrameadium'
-        },
-        {
-            name: 'Big',
-            size: 24,
-            slug: 'big'
-        }
-    ];
-
-    //style update with global attributes
-    const vayu_blocks_updateSliderStyles = (propertyPath, value) => {
-        // Return early if the value is null, an empty string, or undefined for background gradients
-        if((value===null || value === '') && (propertyPath === 'backgroundGradient' || propertyPath ==='button1.backgroundGradient' || propertyPath ==='button2.backgroundGradient')){
-            return;
-        }
     
-        // Default value for the property if it's undefined
-        if (value === undefined) {
-            value = '';
-        }
+    const handleTypographyChange = (newValues) => {
     
-        // Step 1: Create a copy of the global attributes and update the specified property
-        const newGlobal = { ...attributes.global };
-    
-        
-        // Split the property path into individual properties
-        const properties = propertyPath.split('.');
-        let currentProperty = newGlobal;
-    
-        // Traverse the properties and set the value at the correct location
-        properties.forEach((prop, idx) => {
-            if (idx === properties.length - 1) {
-                currentProperty[prop] = value;
-            } else {
-                if (!currentProperty[prop]) {
-                    currentProperty[prop] = {};
-                }
-                currentProperty = currentProperty[prop];
-            }
-        });
-    
-        // Determine the custom style property to check based on propertyPath
-        let customStyleProperty;
-        if (propertyPath.includes('heading')) {
-            customStyleProperty = 'customStyleheading';
-        } else if (propertyPath.includes('subheading')) {
-            customStyleProperty = 'customStylesubheading';
-        } else if (propertyPath.includes('button1')) {
-            customStyleProperty = 'customStylesubbutton1';
-        } else if (propertyPath.includes('button2')) {
-            customStyleProperty = 'customStylesubbutton2';
-        } else {
-            customStyleProperty = 'customStylelayout';
-        }
-    
-        // Iterate through each slide and update the property only where the relevant customStyle is false
-        attributes.slides.forEach((slide, index) => {
-            if (slide[customStyleProperty] === false) {
-                let slideProperty = slide;
-                properties.forEach((prop, idx) => {
-                    if (idx === properties.length - 1) {
-                        slideProperty[prop] = value;
-                    } else {
-                        if (!slideProperty[prop]) {
-                            slideProperty[prop] = {};
-                        }
-                        slideProperty = slideProperty[prop];
-                    }
-                });
-            }
-        });
-    
-        // Update the attributes with the new values
-        setAttributes({ global: newGlobal, slides:  attributes.slides });
-    };
-
-    //Background style update with global attributes
-    const vayu_blocks_updateSliderBackgroundStyles = (propertyPath, value) => {
-        
-        // Default value for the property if it's undefined
-        if (value === undefined) {
-            value = '';
-        }
-    
-        // Step 1: Create a copy of the global attributes and update the specified property
-        const newGlobal = { ...attributes.global };
-    
-        // Ensure the layout object exists
-        if (!newGlobal) {
-            newGlobal = {};
-        }
-    
-        // Split the property path into individual properties
-        const properties = propertyPath.split('.');
-        let currentProperty = newGlobal;
-    
-        // Traverse the properties and set the value at the correct location
-        properties.forEach((prop, idx) => {
-            if (idx === properties.length - 1) {
-                currentProperty[prop] = value;
-            } else {
-                if (!currentProperty[prop]) {
-                    currentProperty[prop] = {};
-                }
-                currentProperty = currentProperty[prop];
-            }
-        });
-    
-        // Iterate through each slide and update the property only where customStyle is false
-        attributes.slides.forEach((slide, index) => {
-            if (slide.customBackgroundImage === false) {
-                let slideProperty = slide;
-                properties.forEach((prop, idx) => {
-                    if (idx === properties.length - 1) {
-                        slideProperty[prop] = value;
-                    } else {
-                        if (!slideProperty[prop]) {
-                            slideProperty[prop] = {};
-                        }
-                        slideProperty = slideProperty[prop];
-                    }
-                });
-            }
-        });
-    
-        // Update the attributes with the new values
-        setAttributes({ global: newGlobal, slides: attributes.slides });
-    };
-    
-    //border
-     const vayu_blocks_handleslideBorderChange = (property, newBorders) => { 
-        const updatedAttributes = {};
-
-        if(newBorders.borderRadius){
-            vayu_blocks_handleBorderRadius(`${property}Radius`,newBorders.borderRadius);
-        }
-
-        if (newBorders.border.top) {
-            if (newBorders.border.top) {
-                updatedAttributes[`${property}.topcolor`] = newBorders.border.top.color;
-                updatedAttributes[`${property}.topwidth`] = newBorders.border.top.width;
-                updatedAttributes[`${property}.topstyle`] = newBorders.border.top.style;
-            }
-            if (newBorders.border.bottom) {
-                updatedAttributes[`${property}.bottomcolor`] = newBorders.border.bottom.color;
-                updatedAttributes[`${property}.bottomwidth`] = newBorders.border.bottom.width;
-                updatedAttributes[`${property}.bottomstyle`] = newBorders.border.bottom.style;
-            }
-            if (newBorders.border.left) {
-                updatedAttributes[`${property}.leftcolor`] = newBorders.border.left.color;
-                updatedAttributes[`${property}.leftwidth`] = newBorders.border.left.width;
-                updatedAttributes[`${property}.leftstyle`] = newBorders.border.left.style;
-            }
-            if (newBorders.border.right) {
-                updatedAttributes[`${property}.rightcolor`] = newBorders.border.right.color;
-                updatedAttributes[`${property}.rightwidth`] = newBorders.border.right.width;
-                updatedAttributes[`${property}.rightstyle`] = newBorders.border.right.style;
-            }
-        } else {
-            updatedAttributes[`${property}.topcolor`] = newBorders.border.color;
-            updatedAttributes[`${property}.topwidth`] = newBorders.border.width;
-            updatedAttributes[`${property}.topstyle`] = newBorders.border.style;
-    
-            updatedAttributes[`${property}.bottomcolor`] = newBorders.border.color;
-            updatedAttributes[`${property}.bottomwidth`] = newBorders.border.width;
-            updatedAttributes[`${property}.bottomstyle`] = newBorders.border.style;
-    
-            updatedAttributes[`${property}.leftcolor`] = newBorders.border.color;
-            updatedAttributes[`${property}.leftwidth`] = newBorders.border.width;
-            updatedAttributes[`${property}.leftstyle`] = newBorders.border.style;
-    
-            updatedAttributes[`${property}.rightcolor`] = newBorders.border.color;
-            updatedAttributes[`${property}.rightwidth`] = newBorders.border.width;
-            updatedAttributes[`${property}.rightstyle`] = newBorders.border.style;
-        }
-    
-        Object.keys(updatedAttributes).forEach((key) => {
-            vayu_blocks_updateSliderStyles(key, updatedAttributes[key]);
-        });
-    
-    };
-
-    //border-radius handler
-    const vayu_blocks_handleBorderRadius = (property, value) => {
-        const updatedAttributes = {};
-
-        if (value.top) {
-            if (value.top) {
-                updatedAttributes[`${property}.top`] = value.top.width;
-            }
-            if (value.bottom) {
-                updatedAttributes[`${property}.bottom`] = value.bottom.width;
-            }
-            if (value.left) {
-                updatedAttributes[`${property}.left`] = value.left.width;
-            }
-            if (value.right) {
-                updatedAttributes[`${property}.right`] = value.right.width;
-            }
-        } else {
-            updatedAttributes[`${property}.top`] = value.width;
-            updatedAttributes[`${property}.bottom`] = value.width;
-            updatedAttributes[`${property}.left`] = value.width;
-            updatedAttributes[`${property}.right`] = value.width;
-        }
-
-        Object.keys(updatedAttributes).forEach((key) => {
-            vayu_blocks_updateSliderStyles(key, updatedAttributes[key]);
-        });
-    };
-
-    const vayu_blocks_handleButtonfillClick = (type, property) => {
-        setActiveButtonfill(type);
-    
-        const backgroundValue = type === 'fill' 
-            ? 'blue' 
-            : 'transparent';
-    
-        const borderValue = type === 'fill'
-            ? `0px`
-            : `1px`;
-    
-        vayu_blocks_updateSliderStyles( `${property}.backgroundColor`, backgroundValue);
-        vayu_blocks_updateSliderStyles( `${property}.border.Width`, borderValue);
-    };
-     
-    const vayu_blocks_getCurrentNavigationValue = () => {
-        if (attributes.dots.show && attributes.arrow) {
-            return 'both';
-        } else if (attributes.dots.show) {
-            return 'dots';
-        } else if (attributes.arrow) {
-            return 'arrow';
-        } else {
-            return 'none';
+        if(newValues){
+            setAttributes({ heading: newValues})
         }
     };
 
-    const vayu_blocks_handle_navigation = (value) => {
-        let showDots = false;
-        let showArrow = false;
-    
-        switch (value) {
-            case 'dots':
-                showDots = true;
-                break;
-            case 'arrow':
-                showArrow = true;
-                break;
-            case 'both':
-                showDots = true;
-                showArrow = true;
-                break;
-            case 'none':
-            default:
-                showDots = false;
-                showArrow = false;
-                break;
-        }
-    
-        setAttributes({ 
-            dots: { ...attributes.dots, show: showDots },
-            arrow: showArrow
-        });
-    };
-
-    //default duotone
-    const vayu_blocks_DUOTONE_PALETTE = [
-        { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
-        { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
-        { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
-        { colors: ['#000097', '#ff4747'], name: 'Blue and Red', slug: 'blue-red', id: '#duotone-blue-red' },
-        { colors: ['#8c00b7', '#fcff41'], name: 'Purple and Yellow', slug: 'purple-yellow', id: '#duotone-purple-yellow' },
-        { colors: ['#ffa500', '#008080'], name: 'Orange and Teal', slug: 'orange-teal', id: '#duotone-orange-teal' },
-        { colors: ['#ff69b4', '#0000ff'], name: 'Pink and Blue', slug: 'pink-blue', id: '#duotone-pink-blue' },
-        { colors: ['#00ffff', '#ff00ff'], name: 'Cyan and Magenta', slug: 'cyan-magenta', id: '#duotone-cyan-magenta' },
-        { colors: ['#ffff00', '#000000'], name: 'Yellow and Black', slug: 'yellow-black', id: '#duotone-yellow-black' },
-        { colors: ['#add8e6', '#90ee90'], name: 'Light Blue and Light Green', slug: 'lightblue-lightgreen', id: '#duotone-lightblue-lightgreen' },
-        { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
-    ];
-
-    // Handler to update dimensions state
-    const handleDimensionChange = (newDimensions) => {
+    const handleButtonDimensionChange = (newDimensions) => {
         const sides = ['top', 'right', 'bottom', 'left'];
-    
-        // Update padding styles
-        if (newDimensions.padding) {
-            sides.forEach((side) => {
-                if (newDimensions.padding[side] !== undefined) {
-                    vayu_blocks_updateSliderStyles(`padding.${side}`, newDimensions.padding[side]);
-                }
-            });
-        }
     
         // Update margin styles
         if (newDimensions.margin) {
             sides.forEach((side) => {
                 if (newDimensions.margin[side] !== undefined) {
-                    vayu_blocks_updateSliderStyles(`margin.${side}`, newDimensions.margin[side]);
+                    setAttributes({headingmargin:value.margin})
                 }
             });
         }
     };
 
-    // Handler to update dimensions state
-    const handleButtonDimensionChange = (property,newDimensions) => {
-        const sides = ['top', 'right', 'bottom', 'left'];
+    const handlecaptionTypographyChange = (newValues) => {
     
-        // Update padding styles
-        if (newDimensions.padding) {
-            sides.forEach((side) => {
-                if (newDimensions.padding[side] !== undefined) {
-                    vayu_blocks_updateSliderStyles(`${property}.padding.${side}`, newDimensions.padding[side]);
-                }
-            });
-        }
-    
-        // Update margin styles
-        if (newDimensions.margin) {
-            sides.forEach((side) => {
-                if (newDimensions.margin[side] !== undefined) {
-                    vayu_blocks_updateSliderStyles(`${property}.margin.${side}`, newDimensions.margin[side]);
-                }
-            });
+        if(newValues){
+            setAttributes({ caption: newValues})
         }
     };
 
-    const handelBackgroundColor = (property,value) => {
-        // Update the block’s attributes or state based on the changes
+    const handlenewbuttonDimensionChange = (newDimensions) => {
+
+            if(newDimensions.padding.top){
+                setAttributes({buttonpaddingtop:newDimensions.padding.top})
+            }
+            if(newDimensions.padding.bottom){
+                setAttributes({buttonpaddingbottom:newDimensions.padding.bottom})
+            }
+            if(newDimensions.padding.left){
+                setAttributes({buttonpaddingleft:newDimensions.padding.left})
+            }
+            if(newDimensions.padding.right){
+                setAttributes({buttonpaddingright:newDimensions.padding.right})
+            }
+    };
+
+    const handleButtonColor = (value) => {
         if(value.color){
-            vayu_blocks_updateSliderStyles( `${property}.color`, value.color);
+            setAttributes({buttoncolor:value.color})
         }
-        if(value.backgroundColor){
-            vayu_blocks_updateSliderStyles( `${property}.backgroundColor`, value.backgroundColor);
+        if(value.background){
+            setAttributes({buttonbackground:value.background})
         }
+    }
+
+    const vayu_blocks_handleslideBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ buttonborderRadius: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ buttonborder: updatedAttributes });
     };
-
-    const handleTypographyChange = (property,newValues) => {
-
-        if(newValues.size){
-            vayu_blocks_updateSliderStyles(`${property}.size`,newValues.size);
-        }
-        if(newValues.font){
-            vayu_blocks_updateSliderStyles(`${property}.font`,newValues.font);
-        }
-        if(newValues.appearance){
-            vayu_blocks_updateSliderStyles(`${property}.fontWeight`,newValues.appearance);
-        }
-        if(newValues.lineHeight){
-            vayu_blocks_updateSliderStyles(`${property}.lineHeight`,newValues.lineHeight);
-        }
-        if(newValues.letterSpacing){
-            vayu_blocks_updateSliderStyles(`${property}.letterSpacing`,newValues.letterSpacing);
-        }
-        if(newValues.textDecoration){
-            vayu_blocks_updateSliderStyles(`${property}.textDecoration`,newValues.textDecoration);
-        }
-        if(newValues.letterCase){
-            vayu_blocks_updateSliderStyles(`${property}.letterCase`,newValues.letterCase);
-        }
-        
-    };
-
+    
     return (
         <>
-            
-            <PanelBody title={__('Global Style', 'vayu-blocks')} initialOpen={false}>
-
-                <Vayu_Block_Toggle
-                    value={isPanel}
-                    onChange={(value) => settogglePanelnew(value)}
-                    isBlock={true}
-                    __nextHasNoMarginBottom={true}
-                    options={[
-                        { value: 'layout', label: 'Layout' },
-                        { value: 'heading', label: 'Heading' },
-                        { value: 'button', label: 'Button' },
-                    ]}
+        
+            <PanelBody title={__('Heading', 'vayu-blocks')} initialOpen={false}>
+                <ToggleControl
+                    className='vayu_blocks_togglecontrol'
+                    label={__('Overlay', 'vayu-blocks')}
+                    checked={attributes.overlay}
+                    onChange={(value) =>  setAttributes({overlay:value})}
                 />
-                
-                <div>
-                {isPanel === 'layout' && (
+                {attributes.overlay && (
                     <>
-                        <p>This style will apply to all slides except those with custom styles enabled.</p>
+                        <Vayu_blocks_typographycontrol
+                            value={{
+                                font: attributes.heading.font,
+                                size: attributes.heading.size,
+                                appearance: attributes.heading.appearance, // Bold font
+                                letterSpacing: attributes.heading.letterSpacing,
+                            }}
+                            onChange={(newValues)=>handleTypographyChange(newValues)}
+                            para=""
+                            includeFont={true}
+                            includeSize={true}
+                            includeAppearance={true}
+                            includeLetterSpacing={true}
+                            letterSpacingunits={[
+                                { label: 'px', value: 'px' },
+                                { label: 'em', value: 'em' },
+                                { label: 'rem', value: 'rem' }
+                            ]}
+                            vayu_blocks_sizes={vayu_blocks_sizes}
+                            appearanceOptions= {[
+                                { label: __('Normal', 'text-domain'), value: 'normal' },
+                                { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                { label: __('Bold', 'text-domain'), value: 'bold' },
+                                { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                            ]}
+                        />
 
-                        <br />
-                        <ToggleControl
-                            label={attributes.global.heightauto 
-                                ? __('Height (Auto)', 'vayu-blocks') 
-                                : `Custom Height: ${attributes.global.customheight}px`}
-                            checked={attributes.global.heightauto}
-                            onChange={(value) => vayu_blocks_updateSliderStyles('heightauto',value)}
-                        />  
-                        {attributes.global.heightauto===false && (
-                            <RangeControl
-                                label={__('Custom Height(px)', 'vayu-blocks')}
-                                value={attributes.global.customheight}
-                                onChange={(value) => vayu_blocks_updateSliderStyles('customheight',value)}
-                                min={0}
-                                max={1500}
-                                step={1}
-                            />
-                        )}
-                        
+                        <ColorPanel
+                            colorTool={[
+                                {
+                                    active: ['color'],
+                                    name: 'Text',
+                                    value: attributes.headingcolor,
+                                    attribute: 'color',
+                                }
+                            ]}
+                            handelColorPanel={(value)=>setAttributes({headingcolor:value.color})}
+                            initialTab="color"
+                        />
+
                         <SelectControl
-                            label={__('Animation', 'vayu-blocks')}
-                            value={attributes.animationtype}
+                            label={__('Tag', 'vayu-blocks')}
+                            value={attributes.headingtag}
                             options={[
-                                { label: __('Animation (UP)', 'vayu-blocks'), value: 'animation1' },
-                                { label: __('Animation (Down)', 'vayu-blocks'), value: 'animation2' },
-                                { label: __('Animation (Left)', 'vayu-blocks'), value: 'animation3' },
-                                { label: __('Animation (Right)', 'vayu-blocks'), value: 'animation4' },
-                                { label: __('No Animation', 'vayu-blocks'), value: 'noanimation' },
+                                { label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
+                                { label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
+                                { label: __('H3 Heading h3', 'vayu-blocks'), value: 'h3' },
+                                { label: __('H4 Heading h4', 'vayu-blocks'), value: 'h4' },
+                                { label: __('H5 Heading h5', 'vayu-blocks'), value: 'h5' },
+                                { label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
                             ]}
-                            onChange={(value)=> setAttributes({animationtype:value})}
-                        />  
-                        
-                        <h4>{__('Alignment', 'vayu-blocks')}</h4>
+                            onChange={(value)=> setAttributes({headingtag:value})}
+                        /> 
 
-                        <ToogleGroupControl
-                            label={__('Alignment', 'vayu-blocks')}
-                            value={ attributes.global.alignment}
-                            onChange={(value) => vayu_blocks_updateSliderStyles('alignment', value)}
+                    </>
+                )}
+            </PanelBody>
+
+            <PanelBody title={__('Image Caption', 'vayu-blocks')} initialOpen={false}>
+                <ToggleControl
+                    className='vayu_blocks_togglecontrol'
+                    label={__('Overlay', 'vayu-blocks')}
+                    checked={attributes.overlay}
+                    onChange={(value) =>  setAttributes({overlay:value})}
+                />
+                {attributes.overlay && (
+                    <>
+                        <Vayu_blocks_typographycontrol
+                            value={{
+                                font: attributes.caption.font,
+                                size: attributes.caption.size,
+                                appearance: attributes.caption.appearance, // Bold font
+                                letterSpacing: attributes.caption.letterSpacing,
+                                letterCase: attributes.caption.letterCase
+                            }}
+                            onChange={(newValues)=>handlecaptionTypographyChange(newValues)}
+                            para=""
+                            includeFont={true}
+                            includeSize={true}
+                            includeAppearance={true}
+                            includeLetterSpacing={true}
+                            includeLetterCase={true}
+                            letterSpacingunits={[
+                                { label: 'px', value: 'px' },
+                                { label: 'em', value: 'em' },
+                                { label: 'rem', value: 'rem' }
+                            ]}
+                            vayu_blocks_sizes={vayu_blocks_sizes}
+                            appearanceOptions= {[
+                                { label: __('Normal', 'text-domain'), value: 'normal' },
+                                { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                { label: __('Bold', 'text-domain'), value: 'bold' },
+                                { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                            ]}
+                        />
+
+                        <ColorPanel
+                            colorTool={[
+                                {
+                                    active: ['color'],
+                                    name: 'Text',
+                                    value: attributes.captioncolor,
+                                    attribute: 'color',
+                                }
+                            ]}
+                            handelColorPanel={(value)=>setAttributes({captioncolor:value.color})}
+                            initialTab="color"
+                        />
+
+                        <SelectControl
+                            label={__('Tag', 'vayu-blocks')}
+                            value={attributes.captiontag}
                             options={[
-                                {
-                                    icon: HorizontalLeft,
-                                    label: __( 'Left', 'vayu-blocks' ),
-                                    value: 'left'
-                                },
-                                {
-                                    icon: Center,
-                                    label: __( 'Center', 'vayu-blocks' ),
-                                    value: 'center'
-                                },
-                                {
-                                    icon: HorizontalRight,
-                                    label: __( 'Right', 'vayu-blocks' ),
-                                    value: 'right'
-                                },
+                                { label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
+                                { label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
+                                { label: __('H3 Heading h3', 'vayu-blocks'), value: 'h3' },
+                                { label: __('H4 Heading h4', 'vayu-blocks'), value: 'h4' },
+                                { label: __('H5 Heading h5', 'vayu-blocks'), value: 'h5' },
+                                { label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
                             ]}
-                            
-                            hasIcon
-                        />
+                            onChange={(value)=> setAttributes({captiontag:value})}
+                        /> 
 
-                        <ToogleGroupControl
-                            label={__('Alignment', 'vayu-blocks')}
-                            value={ attributes.global.alignmenttop}
-                            onChange={(value) => vayu_blocks_updateSliderStyles('alignmenttop', value)}
-                            options={[
+                    </>
+                )}
+            </PanelBody>
+
+            <PanelBody title={__('Button', 'vayu-blocks')} initialOpen={false}>
+                <ToggleControl
+                    className='vayu_blocks_togglecontrol'
+                    label={__('Overlay', 'vayu-blocks')}
+                    checked={attributes.overlay}
+                    onChange={(value) =>  setAttributes({overlay:value})}
+                />
+                {attributes.overlay && (
+                    <>
+                        <ColorPanel
+                            colorTool={[
                                 {
-                                    icon: Start,
-                                    label: __( 'start', 'vayu-blocks' ),
-                                    value: 'start'
+                                    active: ['gradient'],
+                                    name: 'Background',
+                                    value: attributes.buttonbackground,
+                                    attribute: 'background',
                                 },
                                 {
-                                    icon: Center,
-                                    label: __( 'Center', 'vayu-blocks' ),
-                                    value: 'center'
+                                    active: ['color'],
+                                    name: 'Text',
+                                    value: attributes.buttoncolor,
+                                    attribute: 'color',
                                 },
-                                {
-                                    icon: End,
-                                    label: __( 'end', 'vayu-blocks' ),
-                                    value: 'end'
-                                },
+
                             ]}
-                            
-                            hasIcon
-                        />
-
-                        <br />
-
-                        <RangeControl
-                            label={__('Gap Between Heading & Sub Heading', 'vayu-blocks')}
-                            className = "vayu_blocks_gphsub"
-                            value={attributes.global.gaphsub}
-                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphsub', value)}
-                            min={0}
-                            max={500}
-                            step={1}
-                        />
-
-                        <RangeControl
-                            label={__('Gap Between Heading & Button', 'vayu-blocks')}
-                            className = "vayu_blocks_gphsub"
-                            value={attributes.global.gaphb}
-                            onChange={(value) =>  vayu_blocks_updateSliderStyles('gaphb', value)}
-                            min={0}
-                            max={500}
-                            step={1}
-                        />
-
-                        <RangeControl
-                            label={__('Gap Between Slides', 'vayu-blocks')}
-                            value={attributes.slidermargin}
-                            onChange={(value) => setAttributes({ slidermargin: value })}
-                            min={0}
-                            max={50}
-                            step={1}
+                            handelColorPanel={(value)=> handleButtonColor(value)}
+                            initialTab="color"
                         />
 
                         <Vayu_Block_Border_Control
                             value={{border:{
                                 top:{
-                                    color: attributes.global.border.topcolor,
-                                    width: attributes.global.border.topwidth,
-                                    style: attributes.global.border.topstyle,
+                                    color: attributes.buttonborder.topcolor,
+                                    width: attributes.buttonborder.topwidth,
+                                    style: attributes.buttonborder.topstyle,
                                 },
                                 bottom: {
-                                    color: attributes.global.border.bottomcolor,
-                                    width: attributes.global.border.bottomwidth,
-                                    style: attributes.global.border.bottomstyle,
+                                    color: attributes.buttonborder.bottomcolor,
+                                    width: attributes.buttonborder.bottomwidth,
+                                    style: attributes.buttonborder.bottomstyle,
                                 },
                                 left: {
-                                    color: attributes.global.border.leftcolor,
-                                    width: attributes.global.border.leftwidth,
-                                    style: attributes.global.border.leftstyle,
+                                    color: attributes.buttonborder.leftcolor,
+                                    width: attributes.buttonborder.leftwidth,
+                                    style: attributes.buttonborder.leftstyle,
                                 },
                                 right: {
-                                    color: attributes.global.border.rightcolor,
-                                    width: attributes.global.border.rightwidth,
-                                    style: attributes.global.border.rightstyle,
+                                    color: attributes.buttonborder.rightcolor,
+                                    width: attributes.buttonborder.rightwidth,
+                                    style: attributes.buttonborder.rightstyle,
                                 }
                             },
                             borderRadius:{
                                 top:{
-                                    width:attributes.global.borderRadius.top
+                                    width: attributes.buttonborderRadius.top,
                                 },
                                 bottom:{
-                                    width:attributes.global.borderRadius.bottom
+                                    width: attributes.buttonborderRadius.bottom,
                                 },
                                 left:{
-                                    width:attributes.global.borderRadius.left
+                                    width: attributes.buttonborderRadius.left,
                                 },
                                 right:{
-                                    width:attributes.global.borderRadius.right
+                                    width: attributes.buttonborderRadius.right,
                                 }
                             }
                             }}
-                            onChange={(value)=>vayu_blocks_handleslideBorderChange('border',value)}
+                            onChange={(value)=>vayu_blocks_handleslideBorderChange(value)}
                             includeBorder={true}
                             includeBorderRadius={true}
-                            color={[
-                                { name: 'Blue 20', color: '#72aee6' },
-                                { name: 'Red', color: '#ff0000' },
-                                { name: 'Green', color: '#00ff00' },
-                                { name: 'Blue', color: '#0000ff' },
-                                { name: 'Yellow', color: '#ffff00' },
-                                { name: 'Purple', color: '#800080' },
-                                { name: 'Orange', color: '#ffa500' },
-                                { name: 'Pink', color: '#ffc0cb' },
-                                { name: 'Teal', color: '#008080' },
-                            ]}
                             para=""
                         />  
 
                         <Vayu_Block_Dimension_Control
                             value={{
-                                padding:attributes.global.padding
+                                padding:{
+                                    top:attributes.buttonpaddingtop,
+                                    bottom:attributes.buttonpaddingbottom,
+                                    left:attributes.buttonpaddingleft,
+                                    right:attributes.buttonpaddingright,
+                                }
                             }}
                             para=""
-                            onChange={handleDimensionChange}
-                            paddingsides={["horizontal","vertical"]}
-                            includePadding={true}
-                            
+                            onChange={(value)=> handlenewbuttonDimensionChange(value)}
+                            paddingsides={["default"]}
                             includeMargin={false}
+                            includePadding={true}
                         />
 
                     </>
                 )}
-
-                {isPanel === 'heading' && (
-
-                    <>
-                        <p>This style will apply to all slides except those with custom styles enabled.</p>
-
-                        <>
-                            <HoverControl
-                                value={hoverbutton}
-                                options={[
-                                    {
-                                        label: __('Heading', 'vayu-blocks'),
-                                        value: 'normal',
-                                    },
-                                    {
-                                        label: __('Sub Heading', 'vayu-blocks'),
-                                        value: 'active',
-                                    },
-                                ]}
-                                onChange={sethoverbutton}
-                            />
-
-                            {'normal' === hoverbutton && (
-                                <>
-                                    <ColorPanel
-                                        colorTool={[
-                                            {
-                                                active: ['color'],
-                                                name: 'Text',
-                                                value: attributes.global.heading.color,
-                                                attribute: 'color',
-                                            }
-                                        ]}
-                                        handelColorPanel={(value)=>handelBackgroundColor('heading',value)}
-                                        initialTab="color"
-                                    />
-
-                                    <Vayu_blocks_typographycontrol
-                                        onChange={(value)=> handleTypographyChange("heading",value)}
-                                        includeSize={true}
-                                        value={{size:attributes.global.heading.size,
-                                            appearance: attributes.global.heading.fontWeight
-                                        }}
-                                        includeAppearance={true}
-                                        vayu_blocks_sizes={vayu_blocks_sizes}
-                                        appearanceOptions= {[
-                                            { label: __('Normal', 'text-domain'), value: 'normal' },
-                                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                            { label: __('Bold', 'text-domain'), value: 'bold' },
-                                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                        ]}
-                                        para=""
-                                    />
-
-                                    <SelectControl
-                                        label={__('Title Tag', 'vayu-blocks')}
-                                        value={attributes.global.heading.tag}
-                                        options={[
-                                            { label: __('H1 Heading h1', 'vayu-blocks'), value: 'h1' },
-                                            { label: __('H2 Heading h2', 'vayu-blocks'), value: 'h2' },
-                                            { label: __('H3 Heading h3', 'vayu-blocks'), value: 'h3' },
-                                            { label: __('H4 Heading h4', 'vayu-blocks'), value: 'h4' },
-                                            { label: __('H5 Heading h5', 'vayu-blocks'), value: 'h5' },
-                                            { label: __('H6 Heading h6', 'vayu-blocks'), value: 'h6' },
-                                        ]}
-                                        onChange={(value)=> vayu_blocks_updateSliderStyles('heading.tag', value)}
-                                    />  
-
-                                    
-                                </>
-                            )}
-
-                            {'active' === hoverbutton && (
-                                <>
-                                    <ToggleControl
-                                        className='vayu_blocks_togglecontrol'
-                                        label={__('Sub Heading', 'vayu-blocks')}
-                                        checked={attributes.global.subheading.show}
-                                        onChange={(value) =>  vayu_blocks_updateSliderStyles('subheading.show', value)}
-                                    />
-
-                                    {attributes.global.subheading.show &&(
-                                        <>
-
-                                            <ColorPanel
-                                                colorTool={[
-                                                    {
-                                                        active: ['color'],
-                                                        name: 'Text',
-                                                        value: attributes.global.subheading.color,
-                                                        attribute: 'color',
-                                                    }
-                                                ]}
-                                                handelColorPanel={(value)=>handelBackgroundColor('subheading',value)}
-                                                initialTab="color"
-                                            />
-
-
-                                            <Vayu_blocks_typographycontrol
-                                                onChange={(value)=> handleTypographyChange("subheading",value)}
-                                                includeSize={true}
-                                                value={{size:attributes.global.subheading.size,
-                                                    appearance: attributes.global.subheading.fontWeight
-                                                }}
-                                                includeAppearance={true}
-                                                vayu_blocks_sizes={vayu_blocks_sub_heading_sizes}
-                                                appearanceOptions= {[
-                                                    { label: __('Normal', 'text-domain'), value: 'normal' },
-                                                    { label: __('Lighter', 'text-domain'), value: 'lighter' },
-                                                    { label: __('Bold', 'text-domain'), value: 'bold' },
-                                                    { label: __('Bolder', 'text-domain'), value: 'bolder' },
-                                                ]}
-                                                para=""
-                                            />
-
-                                            <SelectControl
-                                                label={__('Title Tag', 'vayu-blocks')}
-                                                value={attributes.global.subheading.tag}
-                                                options={[
-                                                    { label: __('H1 SubHeading h1', 'vayu-blocks'), value: 'h1' },
-                                                    { label: __('H2 SubHeading h2', 'vayu-blocks'), value: 'h2' },
-                                                    { label: __('H3 SubHeading h3', 'vayu-blocks'), value: 'h3' },
-                                                    { label: __('H4 SubHeading h4', 'vayu-blocks'), value: 'h4' },
-                                                    { label: __('H5 SubHeading h5', 'vayu-blocks'), value: 'h5' },
-                                                    { label: __('H6 SubHeading h6', 'vayu-blocks'), value: 'h6' },
-                                                ]}
-                                                onChange={(value)=> vayu_blocks_updateSliderStyles('subheading.tag', value)}
-                                            />
-                                            
-
-                                        </>
-                                    )}
-                                </>
-                            )}
-                        </>
-                    </>
-                )}
-
-                {isPanel === 'button' && (
-                    <>  
-                    <p>This style will apply to all slides except those with custom styles enabled.</p>
-                        
-                        <>
-                            <HoverControl
-                                value={button}
-                                options={[
-                                    {
-                                        label: __('Button 1', 'vayu-blocks'),
-                                        value: 'button1',
-                                    },
-                                    {
-                                        label: __('Button 2', 'vayu-blocks'),
-                                        value: 'button2',
-                                    },
-                                ]}
-                                onChange={setbutton}
-                            />
-
-                            {button==='button1' && (
-                                <>
-                                    <ToggleControl
-                                        className='vayu_blocks_togglecontrol'
-                                        label={__('Button 1', 'vayu-blocks')}
-                                        checked={attributes.global.button1.show}
-                                        onChange={(value) =>  vayu_blocks_updateSliderStyles('button1.show', value)}
-                                    />
-
-                                    {attributes.global.button1.show && (
-                                        <>
-                                            <div style={{marginBottom:'15px',display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
-                                                <Button
-                                                    style={{ 
-                                                        background: activeButtonfill === 'fill' ? 'black' : 'white',
-                                                        color: activeButtonfill === 'fill' ? 'white' : 'black', 
-                                                        borderWidth: "1px", 
-                                                        borderStyle:"solid", 
-                                                        borderColor:"black", 
-                                                        padding: "18px 35px"
-                                                        }}
-                                                        
-                                                    onClick={() => vayu_blocks_handleButtonfillClick('fill',"button1")}
-                                                >
-                                                    Fill
-                                                </Button>
-                                                <Button
-                                                    style={{ 
-                                                        background: activeButtonfill === 'outline' ? 'black' : 'white' ,
-                                                        color: activeButtonfill === 'outline' ? 'white' : 'black', 
-                                                        borderWidth: "1px", 
-                                                        borderStyle:"solid", 
-                                                        borderColor:"black", 
-                                                        padding: "18px 22px",
-                                                        marginLeft:"8px"
-                                                    }}
-
-                                                    onClick={() => vayu_blocks_handleButtonfillClick('outline',"button1")}
-                                                >
-                                                    Outline
-                                                </Button>
-                                            </div>
-
-                                            <ColorPanel
-                                                colorTool={[
-                                                    {
-                                                        active: ['gradient'],
-                                                        name: 'Background',
-                                                        value: attributes.global.button1.backgroundColor,
-                                                        attribute: 'backgroundColor',
-                                                    },
-                                                    {
-                                                        active: ['color'],
-                                                        name: 'Text',
-                                                        value: attributes.global.button1.color,
-                                                        attribute: 'color',
-                                                    }
-                                                ]}
-                                                handelColorPanel={(value)=>handelBackgroundColor('button1',value)}
-                                                initialTab="color"
-                                            />
-
-                                            <Vayu_blocks_typographycontrol
-                                                onChange={(value)=> handleTypographyChange("button1",value)}
-                                                includeSize={true}
-                                                value={{size:attributes.global.button1.size}}
-                                                vayu_blocks_sizes={vayu_blocks_fontsizes}
-                                                para=""
-                                            />
-
-                                            <Vayu_Block_Border_Control
-                                                value={{border:{
-                                                    top:{
-                                                        color: attributes.global.button1.border.topcolor,
-                                                        width: attributes.global.button1.border.topwidth,
-                                                        style: attributes.global.button1.border.topstyle,
-                                                    },
-                                                    bottom: {
-                                                        color: attributes.global.button1.border.bottomcolor,
-                                                        width: attributes.global.button1.border.bottomwidth,
-                                                        style: attributes.global.button1.border.bottomstyle,
-                                                    },
-                                                    left: {
-                                                        color: attributes.global.button1.border.leftcolor,
-                                                        width: attributes.global.button1.border.leftwidth,
-                                                        style: attributes.global.button1.border.leftstyle,
-                                                    },
-                                                    right: {
-                                                        color: attributes.global.button1.border.rightcolor,
-                                                        width: attributes.global.button1.border.rightwidth,
-                                                        style: attributes.global.button1.border.rightstyle,
-                                                    }
-                                                },
-                                                borderRadius:{
-                                                    top:{
-                                                        width:attributes.global.button1.borderRadius.top
-                                                    },
-                                                    bottom:{
-                                                        width:attributes.global.button1.borderRadius.bottom
-                                                    },
-                                                    left:{
-                                                        width:attributes.global.button1.borderRadius.left
-                                                    },
-                                                    right:{
-                                                        width:attributes.global.button1.borderRadius.right
-                                                    }
-                                                }
-                                                }}
-                                                onChange={(value)=>vayu_blocks_handleslideBorderChange('button1.border',value)}
-                                                includeBorder={true}
-                                                includeBorderRadius={true}
-                                                para=""
-                                            />  
-
-                                            <Vayu_Block_Dimension_Control
-                                                value={{
-                                                    padding:attributes.global.button1.padding
-                                                }}
-                                                para=""
-                                                onChange={(value)=> handleButtonDimensionChange('button1',value)}
-                                                paddingsides={["default"]}
-                                                includePadding={true}
-                                                includeMargin={false}
-                                            />
-
-                                        </>
-                                    )}
-                                </>
-                            )}
-
-                            {button==='button2' && (
-                                <>
-                                    <ToggleControl
-                                        className='vayu_blocks_togglecontrol'
-                                        label={__('Button 2', 'vayu-blocks')}
-                                        checked={attributes.global.button2.show}
-                                        onChange={(value) =>  vayu_blocks_updateSliderStyles('button2.show', value)}
-                                    />
-
-                                    {attributes.global.button2.show && (
-                                        <>
-                                            <div style={{marginBottom:'15px',display: 'flex',alignItems: 'center',justifyContent: 'center'}}>
-                                                <Button
-                                                    style={{ 
-                                                        background: activeButtonfill === 'fill' ? 'black' : 'white',
-                                                        color: activeButtonfill === 'fill' ? 'white' : 'black', 
-                                                        borderWidth: "1px", 
-                                                        borderStyle:"solid", 
-                                                        borderColor:"black", 
-                                                        padding: "18px 35px"
-                                                        }}
-                                                        
-                                                    onClick={() => vayu_blocks_handleButtonfillClick('fill',"button2")}
-                                                >
-                                                    Fill
-                                                </Button>
-                                                <Button
-                                                    style={{ 
-                                                        background: activeButtonfill === 'outline' ? 'black' : 'white' ,
-                                                        color: activeButtonfill === 'outline' ? 'white' : 'black', 
-                                                        borderWidth: "1px", 
-                                                        borderStyle:"solid", 
-                                                        borderColor:"black", 
-                                                        padding: "18px 22px",
-                                                        marginLeft:"8px"
-                                                    }}
-
-                                                    onClick={() => vayu_blocks_handleButtonfillClick('outline',"button2")}
-                                                >
-                                                    Outline
-                                                </Button>
-                                            </div>
-
-                                            <ColorPanel
-                                                colorTool={[
-                                                    {
-                                                        active: ['gradient'],
-                                                        name: 'Background',
-                                                        value: attributes.global.button2.backgroundColor,
-                                                        attribute: 'backgroundColor',
-                                                    },
-                                                    {
-                                                        active: ['color'],
-                                                        name: 'Text',
-                                                        value: attributes.global.button2.color,
-                                                        attribute: 'color',
-                                                    }
-                                                ]}
-                                                handelColorPanel={(value)=>handelBackgroundColor('button2',value)}
-                                                initialTab="color"
-                                            />
-                                            
-                                            <Vayu_blocks_typographycontrol
-                                                onChange={(value)=> handleTypographyChange("button2",value)}
-                                                includeSize={true}
-                                                value={{size:attributes.global.button2.size}}
-                                                vayu_blocks_sizes={vayu_blocks_fontsizes}
-                                                para=""
-                                            />
-
-                                            
-                                            <Vayu_Block_Border_Control
-                                                value={{border:{
-                                                    top:{
-                                                        color: attributes.global.button2.border.topcolor,
-                                                        width: attributes.global.button2.border.topwidth,
-                                                        style: attributes.global.button2.border.topstyle,
-                                                    },
-                                                    bottom: {
-                                                        color: attributes.global.button2.border.bottomcolor,
-                                                        width: attributes.global.button2.border.bottomwidth,
-                                                        style: attributes.global.button2.border.bottomstyle,
-                                                    },
-                                                    left: {
-                                                        color: attributes.global.button2.border.leftcolor,
-                                                        width: attributes.global.button2.border.leftwidth,
-                                                        style: attributes.global.button2.border.leftstyle,
-                                                    },
-                                                    right: {
-                                                        color: attributes.global.button2.border.rightcolor,
-                                                        width: attributes.global.button2.border.rightwidth,
-                                                        style: attributes.global.button2.border.rightstyle,
-                                                    }
-                                                },
-                                                borderRadius:{
-                                                    top:{
-                                                        width:attributes.global.button2.borderRadius.top
-                                                    },
-                                                    bottom:{
-                                                        width:attributes.global.button2.borderRadius.bottom
-                                                    },
-                                                    left:{
-                                                        width:attributes.global.button2.borderRadius.left
-                                                    },
-                                                    right:{
-                                                        width:attributes.global.button2.borderRadius.right
-                                                    }
-                                                }
-                                                }}
-                                                onChange={(value)=>vayu_blocks_handleslideBorderChange('button2.border',value)}
-                                                includeBorder={true}
-                                                includeBorderRadius={true}
-                                                para=""
-                                            />  
-
-                                            <Vayu_Block_Dimension_Control
-                                                value={{
-                                                    padding:attributes.global.button2.padding
-                                                }}
-                                                para=""
-                                                onChange={(value)=> handleButtonDimensionChange('button2',value)}
-                                                paddingsides={["default"]}
-                                                includePadding={true}
-                                                includeMargin={false}
-                                            />
-
-                                        </>
-                                    )}
-                                </>
-                            )}
-
-                        </>
-
-                    </>
-                )}
-                </div>
-            </PanelBody>
-
-            <PanelBody title={__('Slider Layout', 'vayu-blocks')} initialOpen={false}>
-                <RangeControl
-                    label={__('Number Of Columns', 'vayu-blocks')}
-                    value={attributes.slidesToShow}
-                    onChange={(value) => setAttributes({ slidesToShow: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-                <RangeControl
-                    label = {__('Number Of Rows', 'vayu-blocks')}
-                    value={attributes.slidesPerRow}
-                    onChange={(value) => setAttributes({ slidesPerRow: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-
-                 <RangeControl
-                    label = {__('Number Of Slides To Scroll', 'vayu-blocks')}
-                    value={attributes.slidesToScroll}
-                    onChange={(value) => setAttributes({ slidesToScroll: value })}
-                    min={1}
-                    max={5}
-                    step={1}
-                />
-                <h6>The number of slides to scroll after each slide movement, ensuring smooth and controlled transitions in the slider.</h6>
-
-                <RangeControl
-                    label = {__('Scrolling Speed', 'vayu-blocks')}
-                    value={attributes.speed}
-                    onChange={(value) => setAttributes({ speed: value })}
-                    min={1}
-                    max={5000}
-                    step={1}
-                />
-
-                <RangeControl
-                    label = {__('Intial Slide', 'vayu-blocks')}
-                    value={attributes.initialSlide+1}
-                    onChange={(value) => setAttributes({ initialSlide: value-1 })}
-                    min={1}
-                    max={attributes.slides.length}
-                    step={1}
-                />
-
-            </PanelBody>
-
-            <PanelBody title={__('Slider Options','vayu-blocks')} initialOpen={false}>
-
-                <ToggleControl
-                    label={__('Infinite', 'vayu-blocks')}
-                    checked={attributes.infinite}
-                    onChange={(value) => setAttributes({ infinite: value})}
-                />
-
-                <ToggleControl
-                    label={__('Center Mode', 'vayu-blocks')}
-                    checked={attributes.centerMode}
-                    onChange={(value) => setAttributes({ centerMode: value })}
-                />
-
-                <ToggleControl
-                    label={__('Fade', 'vayu-blocks')}
-                    checked={attributes.fade}
-                    onChange={(value) => setAttributes({ fade: value })}
-                />
-                <h6>Slide fade controls the smooth transition between slides by gradually fading them in and out.</h6>
-
-                <ToggleControl
-                    label={__('Touch Swipe', 'vayu-blocks')}
-                    checked={attributes.swipe}
-                    onChange={(value) => setAttributes({ swipe: value })}
-                />
-                
-                <ToggleControl
-                    label={__('Animate', 'vayu-blocks')}
-                    checked={attributes.waitForAnimate}
-                    onChange={(value) => setAttributes({ waitForAnimate: value })}
-                />
-
-                <ToggleControl
-                    label={__('Lazy Load', 'vayu-blocks')}
-                    checked={attributes.lazyLoad}
-                    onChange={(value) => setAttributes({ lazyLoad: value })}
-                />
-
-                <ToggleControl
-                    label={__('Auto Play', 'vayu-blocks')}
-                    checked={attributes.autoplay}
-                    onChange={(value) => {
-                        // Create an object to hold the updated attributes
-                        const updatedAttributes = {
-                            autoplay: value
-                        };
-                    
-                        // Add 'infinite' attribute conditionally
-                        if (value === true) {
-                            updatedAttributes.infinite = true;
-                        }
-                    
-                        // Update attributes
-                        setAttributes(updatedAttributes);
-                    }}
-                />
-                {attributes.autoplay && (
-                    <>
-                        <RangeControl
-                            label={__('Auto play Speed', 'vayu-blocks')}
-                            value={attributes.autoplaySpeed}
-                            onChange={(value) => setAttributes({ autoplaySpeed: value })}
-                            min={100}
-                            max={5000}
-                            step={1}
-                        />
-                        {/* <ToggleControl
-                            label={__('Right To Left', 'vayu-blocks')}
-                            checked={attributes.rtl}
-                            onChange={(value) => setAttributes({ rtl: value })}
-                        /> */}
-                        <ToggleControl
-                            label={__('Pause On Hover', 'vayu-blocks')}
-                            checked={attributes.pauseOnHover}
-                            onChange={(value) => setAttributes({ pauseOnHover: value })}
-                        />
-                    </>
-                )}
-
-                <ToggleControl
-                    label={__('Focus', 'vayu-blocks')}
-                    checked={attributes.focusOnSelect}
-                    onChange={(value) => setAttributes({ focusOnSelect: value })}
-                />
-                <h6>Enable this option to ensure that clicking on any slide will move it to the center, enhancing focus and interaction.</h6>
-
-            </PanelBody>
-
-            <PanelBody title={__('Navigation','vayu-blocks')} initialOpen={false}>
-
-                <SelectControl
-                    label={__('Navigation', 'vayu-blocks')}
-                    value={vayu_blocks_getCurrentNavigationValue()}
-                    options={[
-                        { label: __('Dots', 'vayu-blocks'), value: 'dots' },
-                        { label: __('Arrow', 'vayu-blocks'), value: 'arrow' },
-                        { label: __('Dots & Arrow both', 'vayu-blocks'), value: 'both' },
-                        { label: __('None', 'vayu-blocks'), value: 'none' },
-                    ]}
-                    onChange={(value) => vayu_blocks_handle_navigation(value)}
-                />
-
-                {attributes.dots.show && attributes.dots.customize && (
-                    <>
-                        <p className='vayu_blocks_dots'>Dots Style</p>
-                            <ToggleControl
-                                label={ __('On Image', 'vayu-blocks') }
-                                checked={ attributes.dots.onimage}
-                                onChange={ (value) => setAttributes({ dots: { ...attributes.dots, onimage: value, position:60 } }) }
-                            />
-
-                            <SelectControl
-                                label={__('Dots', 'vayu-blocks')}
-                                value={attributes.dots.option}
-                                options={[
-                                    { label: __('Dots', 'vayu-blocks'), value: 'dots' },
-                                    { label: __('Square', 'vayu-blocks'), value: 'square' },
-                                    { label: __('Number', 'vayu-blocks'), value: 'number' }
-                                ]}
-                                onChange={(value)=>setAttributes({ dots: { ...attributes.dots, option: value}})}
-                            />  
-
-                            <PanelColorSettings
-                                    title={ __( 'Color', 'vayu-blocks' ) }
-                                    colorSettings={ [
-                                        {
-                                            value: attributes.dots.backgroundColor,
-                                            onChange: (colorValue) => setAttributes({
-                                                dots: {
-                                                    ...attributes.dots,
-                                                    backgroundColor: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Background', 'vayu-blocks' ),
-                                        },
-                                        {
-                                            value: attributes.dots.color,
-                                            onChange: (colorValue) => setAttributes({
-                                                dots: {
-                                                    ...attributes.dots,
-                                                    color: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Color', 'vayu-blocks' ),
-                                        },
-                                        {
-                                            value: attributes.dots.activeColor,
-                                            onChange: (colorValue) => setAttributes({
-                                                dots: {
-                                                    ...attributes.dots,
-                                                    activeColor: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Acvtive Color', 'vayu-blocks' ),
-                                        }
-                                       
-                                    ] }
-
-                                >
-                                </PanelColorSettings>
-
-
-                            {attributes.dots.onimage && (
-                                <RangeControl
-                                    label={__('Position', 'vayu-blocks')}
-                                    value={attributes.dots.position}
-                                    onChange={(value) => setAttributes({
-                                        dots: {
-                                            ...attributes.dots,
-                                            position: value,
-                                        },
-                                    })}
-                                    min={0}
-                                    max={100}
-                                    step={1}
-                                />
-                            )}
-
-                    </>
-                )}
-
-                {attributes.arrow && (
-                    <>
-                     <p className='vayu_blocks_dots'>Arrow Style</p>
-                     
-                            <>
-                                <ToggleControl
-                                    label={__('Arrow on hover', 'vayu-blocks')}
-                                    checked={attributes.arrowOnHover}
-                                    onChange={(value) => setAttributes({ arrowOnHover: value })}
-                                />
-
-                                {attributes.arrowOnHover && (
-                                    <ToggleControl
-                                        label={__('With Animation', 'vayu-blocks')}
-                                        checked={attributes.arrowanimation}
-                                        onChange={(value) => setAttributes({ arrowanimation: value })}
-                                    />
-                                )}
-                                    
-                                <SelectControl
-                                    label={__('Arrow', 'vayu-blocks')}
-                                    value={attributes.arrowstyleleft.tag}
-                                    options={[
-                                        { label: __('Arrow', 'vayu-blocks'), value: 'arrow' },
-                                        { label: __('Chevron', 'vayu-blocks'), value: 'chevron' },
-                                        { label: __('Hand', 'vayu-blocks'), value: 'hand' },
-                                        { label: __('Circle Arrow', 'vayu-blocks'), value: 'circle' },
-                                        { label: __('Caret', 'vayu-blocks'), value: 'caret' },
-                                    ]}
-                                    onChange={(value)=>setAttributes({ arrowstyleleft: { ...attributes.arrowstyleleft, tag: value}})}
-                                />  
-
-                                <PanelColorSettings
-                                    title={ __( 'Color', 'vayu-blocks' ) }
-                                    colorSettings={ [
-                                        {
-                                            value: attributes.arrowstyleleft.backgroundColor,
-                                            onChange: (colorValue) => setAttributes({
-                                                arrowstyleleft: {
-                                                    ...attributes.arrowstyleleft,
-                                                    backgroundColor: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Background', 'vayu-blocks' ),
-                                        },
-                                        {
-                                            value: attributes.arrowstyleleft.color,
-                                            onChange: (colorValue) => setAttributes({
-                                                arrowstyleleft: {
-                                                    ...attributes.arrowstyleleft,
-                                                    color: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Color', 'vayu-blocks' ),
-                                        },
-                                        {
-                                            value: attributes.arrowstyleleft.hovercolor,
-                                            onChange: (colorValue) => setAttributes({
-                                                arrowstyleleft: {
-                                                    ...attributes.arrowstyleleft,
-                                                    hovercolor: colorValue,
-                                                },
-                                            }),
-                                            label: __( 'Hover Color', 'vayu-blocks' ),
-                                        }
-                                    ] }
-
-                                >
-                                </PanelColorSettings>
-
-                                <RangeControl
-                                    label={__('Opacity', 'vayu-blocks')}
-                                    value={attributes.arrowstyleleft.opacity}
-                                    onChange={(value) => setAttributes({
-                                        arrowstyleleft: {
-                                            ...attributes.arrowstyleleft,
-                                            opacity: value,
-                                        },
-                                    })}
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                />
-
-                                <FontSizePicker
-                                    label={__('Font Size', 'vayu-blocks')}
-                                    fontSizes={vayu_blocks_fontsizes}
-                                    onChange={(value) => setAttributes({
-                                        arrowstyleleft: {
-                                            ...attributes.arrowstyleleft,
-                                            size: value,
-                                        },
-                                    })}
-                                    value={attributes.arrowstyleleft.size}
-                                />
-
-                                <br />
-                                <BoxControl
-                                    label={__('Border Radius', 'vayu-blocks')}
-                                    onChange={(value) => setAttributes({
-                                        arrowstyleleft: {
-                                            ...attributes.arrowstyleleft,
-                                            borderRadius: value,
-                                        },
-                                    })}
-                                    values={attributes.arrowstyleleft.borderRadius}
-                                />
-
-                                <RangeControl
-                                    label={__('Horizontal Position', 'vayu-blocks')}
-                                    value={attributes.arrowstyleleft.position}
-                                    onChange={(value) => setAttributes({
-                                        arrowstyleleft: {
-                                            ...attributes.arrowstyleleft,
-                                            position: value,
-                                        },
-                                    })}
-                                    min={-30}
-                                    max={200}
-                                    step={1}
-                                />
-
-                                <RangeControl
-                                    label={__('Vertical Position', 'vayu-blocks')}
-                                    value={attributes.arrowstyleleft.positionVertical}
-                                    onChange={(value) => setAttributes({
-                                        arrowstyleleft: {
-                                            ...attributes.arrowstyleleft,
-                                            positionVertical: value,
-                                        },
-                                    })}
-                                    min={-150}
-                                    max={150}
-                                    step={1}
-                                />
-                                
-                            </>
-
-                    </>
-                )}
-
-    
             </PanelBody>
 
         </>

@@ -5,32 +5,28 @@
     "globalwidth":{
         "type":"number"
     },
-    "arrowstyleleft":{
-        "type": "object",
-        "default":{
-            "color": "white",
-            "hovercolor": "blue",
-            "backgroundColor": "gray",
-            "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-            "size":"20px",
-            "tag": "arrow",
-            "position":0,
-            "positionVertical":0,
-            "opacity":0.5,
-            "borderRadius":{
-                "top": "50px",
-                "right":"50px",
-                "bottom":"50px",
-                "left":"50px"
-            } 
-        }
-    },
-
 
     "image":{
         "type":"string",
         "default":""
     },
+    "opacity":{
+        "type":"number",
+        "default":1
+    },
+    "overlaytransitiontime":{
+        "type":"number",
+        "default":0.5
+    },
+    "imagetransitiontime":{
+        "type":"number",
+        "default":0.5
+    },
+    "overlay":{
+        "type":"boolean",
+        "default":true
+    },
+
     "imagehvreffect":{
         "type":"string",
         "default":"none"
@@ -65,6 +61,95 @@
     },
     "overlaycolor":{
         "type":"string",
-        "default":"red"
+        "default":"#444"
+    },
+    "heading": {
+        "type": "object",
+        "default": {
+            "font": "default",
+            "size": "16px",
+            "appearance": "normal",
+            "letterSpacing": "0px"
+        }
+    },
+    "headingcolor":{
+        "type":"string",
+        "default":"black"
+    },
+    "headingtag":{
+        "type":"string",
+        "default":"h2"
+    },
+    "caption": {
+        "type": "object",
+        "default": {
+            "font": "default",
+            "size": "16px",
+            "appearance": "normal",
+            "letterSpacing": "0px",
+            "letterCase": "none"
+        }
+    },
+    "captioncolor":{
+        "type":"string",
+        "default":"black"
+    },
+    "captiontag":{
+        "type":"string",
+        "default":"h2"
+    },
+    "buttonbackground":{
+        "type":"string",
+        "default":"black"
+    },
+    "buttoncolor":{
+        "type":"string",
+        "default":"white"
+    },
+    "buttonborderRadius":{
+        "type":"object",
+        "default":{
+        "top": "3px",
+        "bottom": "3px",
+        "left": "3px",
+        "right": "3px"
     }
+    },
+    "buttonborder":{
+        "type":"object",
+        "default":{
+        "topcolor": "black",
+        "topwidth": "1px",
+        "topstyle": "solid",
+
+        "bottomcolor": "black",
+        "bottomwidth": "1px",
+        "bottomstyle": "solid",
+
+        "leftcolor": "black",
+        "leftwidth": "1px",
+        "leftstyle": "solid",
+
+        "rightcolor": "black",
+        "rightwidth": "1px",
+        "rightstyle": "solid"
+    }
+    },
+    "buttonpaddingtop":{
+        "type":"string",
+        "default":"5px"
+    },
+    "buttonpaddingbottom":{
+        "type":"string",
+        "default":"5px"
+    },
+    "buttonpaddingleft":{
+        "type":"string",
+        "default":"5px"
+    },
+    "buttonpaddingright":{
+        "type":"string",
+        "default":"5px"
+    }
+
 }

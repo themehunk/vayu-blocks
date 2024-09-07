@@ -59,6 +59,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({image:""})}>
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
+
+                            <br />
+                            <RangeControl
+                                label={__('Opacity', 'vayu-blocks')}
+                                value={attributes.opacity}
+                                onChange={(value) => setAttributes({opacity:value})}
+                                min={0}
+                                max={1}
+                                step={0.1}
+                            />
                         </>
                         ) : (
                             <MediaPlaceholder
@@ -91,6 +101,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         ]}
                         onChange={(value) => setAttributes({ imagehvrfilter: value })}
                     />
+
                     <SelectControl
                         label={__('Image Hover Effect', 'vayu-blocks')}
                         value={attributes.imagehvreffect}
@@ -111,39 +122,74 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
 
-                    <SelectControl
+                    <RangeControl
+                        label={__('Image Transition Time', 'vayu-blocks')}
+                        value={attributes.imagetransitiontime}
+                        onChange={(value) => setAttributes({imagetransitiontime:value})}
+                        min={0}
+                        max={5}
+                        step={0.1}
+                    />
+
+                    {attributes.overlay && (
+                        <>
+                        <SelectControl
                         label={__('Image Overlay', 'vayu-blocks')}
                         value={attributes.imageoverlayouteffect}
                         options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Fade In', 'vayu-blocks'), value: 'fade-in' },
-                            { label: __('Fade In Up', 'vayu-blocks'), value: 'fade-in-up' },
-                            { label: __('Fade In Down', 'vayu-blocks'), value: 'fade-in-down' },
-                            { label: __('Fade In Left', 'vayu-blocks'), value: 'fade-in-left' },
-                            { label: __('Fade In Right', 'vayu-blocks'), value: 'fade-in-right' },
-                            { label: __('Flip Horizontal', 'vayu-blocks'), value: 'flip-horizontal' },
-                            { label: __('Flip Vertical', 'vayu-blocks'), value: 'flip-vertical' },
-                            { label: __('Zoom In Up', 'vayu-blocks'), value: 'zoom-in-up' },
-                            { label: __('Zoom In Left', 'vayu-blocks'), value: 'zoom-in-left' },
-                            { label: __('Zoom In Right', 'vayu-blocks'), value: 'zoom-in-right' },
-                            { label: __('Zoom In Down', 'vayu-blocks'), value: 'zoom-in-down' },
-                            { label: __('Partial Overlay', 'vayu-blocks'), value: 'partial-overlay' },
+                            { label: __('None', 'vayu-blocks'), value: 'overlaynone' },
+                            { label: __('Fade In', 'vayu-blocks'), value: 'overlayfade-in' },
+                            { label: __('Fade In Up', 'vayu-blocks'), value: 'overlayfade-in-up' },
+                            { label: __('Fade In Down', 'vayu-blocks'), value: 'overlayfade-in-down' },
+                            { label: __('Fade In Left', 'vayu-blocks'), value: 'overlayfade-in-left' },
+                            { label: __('Fade In Right', 'vayu-blocks'), value: 'overlayfade-in-right' },
+                            { label: __('Flip Horizontal', 'vayu-blocks'), value: 'overlayflip-horizontal' },
+                            { label: __('Flip Vertical', 'vayu-blocks'), value: 'overlayflip-vertical' },
+                            { label: __('Zoom In Up', 'vayu-blocks'), value: 'overlayzoom-in-up' },
+                            { label: __('Zoom In Left', 'vayu-blocks'), value: 'overlayzoom-in-left' },
+                            { label: __('Zoom In Right', 'vayu-blocks'), value: 'overlayzoom-in-right' },
+                            { label: __('Zoom In Down', 'vayu-blocks'), value: 'overlayzoom-in-down' },
+                            { label: __('Partial Overlay', 'vayu-blocks'), value: 'overlaypartial-overlay' },
                           
                         ]}
                         onChange={(value) => setAttributes({ imageoverlayouteffect: value })}
                     />
 
+                    <RangeControl
+                        label={__('Overlay Transition Time', 'vayu-blocks')}
+                        value={attributes.overlaytransitiontime}
+                        onChange={(value) => setAttributes({overlaytransitiontime:value})}
+                        min={0}
+                        max={5}
+                        step={0.1}
+                    />
+
+                    </>
+
+                    )}
+
+                    
+                    
+
                 </PanelBody>
 
                 <PanelBody title={__('Image Overlay')} initialOpen={false}>
+                <ToggleControl
+                    className='vayu_blocks_togglecontrol'
+                    label={__('Overlay', 'vayu-blocks')}
+                    checked={attributes.overlay}
+                    onChange={(value) =>  setAttributes({overlay:value})}
+                />
+                {attributes.overlay && (
+                    <>
                     <Vayu_Block_Toggle
                         value={activeButton}
                         onChange={(value) => setActiveButton(value)}
                         isBlock={true}
                         __nextHasNoMarginBottom={true}
                         options={[
-                            { value: 'Content', label: 'content' },
-                            { value: 'Color', label: 'color' },
+                            { value: 'content', label: 'Content' },
+                            { value: 'color', label: 'Color' },
                         ]}
                     />
 
@@ -186,19 +232,23 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     )}
 
                     {activeButton === 'color' && (
+                        <>
                         <ColorPanel
                             colorTool={[
                                 {
-                                    active: ['color'],
-                                    name: 'Text',
+                                    active: ['gradient'],
+                                    name: 'Background',
                                     value: attributes.overlaycolor,
-                                    attribute: 'Background',
+                                    attribute: 'color',
                                 }
                             ]}
                             handelColorPanel={(value)=>setAttributes({overlaycolor:value.color})}
                             initialTab="color"
                         />
+                    </>
                     )}
+                </>
+                )}
 
                 </PanelBody>
 
