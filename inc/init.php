@@ -14,4 +14,5 @@ require_once VAYU_BLOCKS_DIR_PATH .'inc/render/post-grid/post-grid.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/post-grid/post-grid-style.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-slider/advance-slider.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-slider/advance-slider-style.php';
+require_once VAYU_BLOCKS_DIR_PATH .'inc/render/image-flip/image-flip.php';
 require_once VAYU_BLOCKS_DIR_PATH . '/inc/admin-api.php';

@@ -1,7 +1,9 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useSelect } from '@wordpress/data';
+import { useViewportMatch} from '@wordpress/compose';
+import { RiEqualFill, RiExternalLinkFill } from 'react-icons/ri';
 
 // Utility function to filter out undefined or null values
 const omitBy = (object, condition) => (
@@ -10,7 +12,7 @@ const omitBy = (object, condition) => (
     )
 );
 
-export default function AdvanceSettings({ children, attributes }) {
+export default function AdvanceSettings({ children, attributes,setAttributes }) {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -112,68 +114,67 @@ export default function AdvanceSettings({ children, attributes }) {
         transitionAll,
 
 
-     buttonpaddingTop, 
-     buttonpaddingRight, 
-     buttonpaddingBottom, 
-     buttonpaddingLeft, 
-     buttonpaddingTopTablet,
-    buttonpaddingRightTablet,
-    buttonpaddingBottomTablet,
-    buttonpaddingLeftTablet,
-    buttonpaddingTopMobile, 
-    buttonpaddingRightMobile,
-    buttonpaddingBottomMobile,
-    buttonpaddingLeftMobile,
-    buttonpadding,
-    buttonpaddingMobile,
-    buttonpaddingTablet,
+        buttonpaddingTop, 
+        buttonpaddingRight, 
+        buttonpaddingBottom, 
+        buttonpaddingLeft, 
+        buttonpaddingTopTablet,
+        buttonpaddingRightTablet,
+        buttonpaddingBottomTablet,
+        buttonpaddingLeftTablet,
+        buttonpaddingTopMobile, 
+        buttonpaddingRightMobile,
+        buttonpaddingBottomMobile,
+        buttonpaddingLeftMobile,
+        buttonpadding,
+        buttonpaddingMobile,
+        buttonpaddingTablet,
 
-     marginTopTablet,
-     marginRightTablet,
-     marginBottomTablet,
-     marginLeftTablet,
-     marginTopMobile,
-     marginRightMobile,
-     marginBottomMobile,
-     marginLeftMobile,
+        marginTopTablet,
+        marginRightTablet,
+        marginBottomTablet,
+        marginLeftTablet,
+        marginTopMobile,
+        marginRightMobile,
+        marginBottomMobile,
+        marginLeftMobile,
 
-     borderradiusTop,
-     borderradiusBottom,
-     borderradiusLeft,
-     borderradiusRight,
-     borderradiusType,
-     borderradiusTypeTablet,
-     borderradiusTypeMobile,
-     borderradiusTopTablet,
-     borderradiusRightTablet,
-     borderradiusBottomTablet,
-     borderradiusLeftTablet,
-     borderradiusTopMobile,
-     borderradiusRightMobile,
-     borderradiusBottomMobile,
-     borderradiusLeftMobile,
-     borderRadiusUnit,
+        borderradiusTop,
+        borderradiusBottom,
+        borderradiusLeft,
+        borderradiusRight,
+        borderradiusType,
+        borderradiusTypeTablet,
+        borderradiusTypeMobile,
+        borderradiusTopTablet,
+        borderradiusRightTablet,
+        borderradiusBottomTablet,
+        borderradiusLeftTablet,
+        borderradiusTopMobile,
+        borderradiusRightMobile,
+        borderradiusBottomMobile,
+        borderradiusLeftMobile,
+        borderRadiusUnit,
 
-     borderradiusHvrTop,
-     borderradiusHvrBottom,
-     borderradiusHvrLeft,
-     borderradiusHvrRight,
-     borderradiusHvrType,
-     borderradiusHvrTypeTablet,
-     borderradiusHvrTypeMobile,
-     borderradiusHvrTopTablet,
-     borderradiusHvrRightTablet,
-     borderradiusHvrBottomTablet,
-     borderradiusHvrLeftTablet,
-     borderradiusHvrTopMobile,
-     borderradiusHvrRightMobile,
-     borderradiusHvrBottomMobile,
-     borderradiusHvrLeftMobile,
-     borderRadiusHvrUnit,
+        borderradiusHvrTop,
+        borderradiusHvrBottom,
+        borderradiusHvrLeft,
+        borderradiusHvrRight,
+        borderradiusHvrType,
+        borderradiusHvrTypeTablet,
+        borderradiusHvrTypeMobile,
+        borderradiusHvrTopTablet,
+        borderradiusHvrRightTablet,
+        borderradiusHvrBottomTablet,
+        borderradiusHvrLeftTablet,
+        borderradiusHvrTopMobile,
+        borderradiusHvrRightMobile,
+        borderradiusHvrBottomMobile,
+        borderradiusHvrLeftMobile,
+        borderRadiusHvrUnit,
 
     } = attributes;
 
-        // console.log(attributes);
     const formatBackgroundPosition = (pos) => {
         return pos && pos.x !== undefined && pos.y !== undefined ? `${pos.x * 100}% ${pos.y * 100}%` : undefined;
     };
@@ -322,20 +323,85 @@ export default function AdvanceSettings({ children, attributes }) {
     const borderradiusHvrstyles = getborderradiusHvrStyle();
     const customwidthstyles  =  getWidthStyle(); 
 
+    const {
+		isViewportAvailable,
+		isPreviewDesktop,
+		isPreviewTablet,
+		isPreviewMobile
+	} = useSelect( select => {
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return {
+			isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
+			isPreviewDesktop: __experimentalGetPreviewDeviceType ? 'Desktop' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewTablet: __experimentalGetPreviewDeviceType ? 'Tablet' === __experimentalGetPreviewDeviceType() : false,
+			isPreviewMobile: __experimentalGetPreviewDeviceType ? 'Mobile' === __experimentalGetPreviewDeviceType() : false
+		};
+	}, []);
+
+
+    const isLarger = useViewportMatch( 'large', '>=' );
+
+	const isLarge = useViewportMatch( 'large', '<=' );
+
+	const isSmall = useViewportMatch( 'small', '>=' );
+
+	const isSmaller = useViewportMatch( 'small', '<=' );
+
+    let isDesktop = isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isTablet = ! isLarger && ! isLarge && isSmall && ! isSmaller;
+
+	let isMobile = ! isLarger && ! isLarge && ! isSmall && ! isSmaller;
+
+    if ( isViewportAvailable && ! isMobile ) {
+		isDesktop = isPreviewDesktop;
+		isTablet = isPreviewTablet;
+		isMobile = isPreviewMobile;
+	}
+    
+    let customwidth;
+
+    if ( isDesktop ) {
+
+        customwidth = {
+                
+            width:attributes.customWidth + attributes.customWidthUnit,
+            
+        };
+
+    }
+
+    // console.log(customwidth);
+    if ( isTablet ) {
+
+        customwidth = {
+                
+            'width':attributes.customWidthTablet + attributes.customWidthUnit,
+            
+        };
+
+    }
+
+    if ( isMobile ) {
+
+        customwidth = {
+                
+            'width':attributes.customWidthMobile + attributes.customWidthUnit,
+            
+        };
+    
+    }
+
+
     // Prepare the style object
     const styles = {
-
+        ...customwidth,
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-           // Conditional width styling based on widthType
-        ...(widthType === 'alignfull' ? customwidthstyles : { width: `${globalwidth}px` }),
-        marginLeft: 'auto',
-        marginRight: 'auto',
-
-        position: position || undefined,
-        zIndex: zIndex || undefined,
-        alignSelf: selfAlign || undefined,
+        
+        
         order: order === 'custom' ? customOrder : 'undefined',
       
         borderStyle: borderType || undefined,
@@ -391,23 +457,42 @@ export default function AdvanceSettings({ children, attributes }) {
         ...styles,
         ...(isHovered ? filteredHoverStyles : {}),
     };
+   
+    // Assume attributes is available in your context
+    const animationtype = attributes.animationtype === 'animation1' 
+    ? 'fadeInUp' 
+    : attributes.animationtype === 'animation2'
+    ? 'fadeInDown' : attributes.animationtype === 'animation3'
+    ? 'fadeInLeft': attributes.animationtype === 'animation4'
+    ? 'fadeInRight'
+    : ''; // Default or fallback value
 
-    
+    const animationopacity = attributes.animationtype === 'noanimation' ? 1 : 0;
 
     const blockProps = useBlockProps({
-        className: 'alignfull',
+        className: 'custom-margin',
         style: {
             ...mergedStyles,
+            '--slider-margin': `${attributes.slidermargin}px`,
+            '--sliderarrow-hover-color': `${attributes.arrowstyleleft.hovercolor}`,
+            '--animation-type': animationtype,
+            '--animation-type-opacity' : animationopacity,
+            '--image-hover-effect' : `${attributes.imagehvreffect}`
         },
 
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
+
     
-    
+    if(attributes.classNamemain !== blockProps.className) {
+        setAttributes({classNamemain: blockProps.className});
+    }
+
     return (
         <div {...blockProps}>
             {children}
         </div>
     );
 }
+

@@ -20,14 +20,14 @@ import save from './save';
 import metadata from './block.json';
 import advancejson from './AdvanceSettings/Advance.json';
 import indexjson from './edit.json';
-import { TfiLayoutSlider } from "react-icons/tfi";
+import { FaRegImage } from "react-icons/fa";
 
 
 registerBlockType( metadata.name, {
 	...metadata,
 	attributes: {...indexjson, ...advancejson},
 	edit: Edit,
-	icon: <TfiLayoutSlider style={{color:'#6c1bc3'}} />,
+	icon: <FaRegImage style={{color:'#6c1bc3'}} />,
 	save,
 } );
 
