@@ -3,13 +3,14 @@ if (!defined('ABSPATH')) exit;
 
 function vayu_blocks_categories( $categories ) {
     return array_merge(
-        $categories,
+
         [
             [
                 'slug'  => 'vayu-blocks',
                 'title' => __( 'Vayu Blocks', 'vayu-blocks' ),
             ],
-        ]
+        ],
+        $categories
     );
 }
 add_filter( 'block_categories_all', 'vayu_blocks_categories', 11, 2);
