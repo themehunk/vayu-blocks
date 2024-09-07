@@ -859,20 +859,18 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                                     {attributes.slides[index].customStyleheading && (
                                                         <>
-                                                            <PanelColorSettings
-                                                                title={ __( 'Color Settings' ) }
-                                                                colorSettings={ [
+                                                            <ColorPanel
+                                                                colorTool={[
                                                                     {
+                                                                        active: ['color'],
+                                                                        name: 'Text',
                                                                         value: attributes.slides[index].heading.color,
-                                                                        onChange: (colorValue) => {
-                                                                            vayu_blocks_updateSliderStyles(index, 'heading.color', colorValue);
-                                                                        },
-                                                                        label: __( 'Heading Color' ),
-                                                                    },
-                                                                ] }
-                                                            >
-
-                                                            </PanelColorSettings>
+                                                                        attribute: 'color',
+                                                                    }
+                                                                ]}
+                                                                handelColorPanel={(value)=>handelBackgroundColor(index,'heading',value)}
+                                                                initialTab="color"
+                                                            />
 
                                                             <div className="vayu_blocks_heading_unitcontrol_slides">
                                                                 <Vayu_blocks_typographycontrol
@@ -950,20 +948,20 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                                             {attributes.slides[index].customStylesubheading && (
                                                                 <>
-                                                                    <PanelColorSettings
-                                                                        title={ __( 'Color Settings' ) }
-                                                                        colorSettings={ [
-                                                                            {
-                                                                                value: attributes.slides[index].subheading.color,
-                                                                                onChange: (colorValue) => {
-                                                                                    vayu_blocks_updateSliderStyles(index, 'subheading.color', colorValue);
-                                                                                },
-                                                                                label: __( 'Color' ),
-                                                                            },
-                                                                        ] }
-                                                                    >
 
-                                                                    </PanelColorSettings>
+
+                                                                    <ColorPanel
+                                                                        colorTool={[
+                                                                            {
+                                                                                active: ['color'],
+                                                                                name: 'Text',
+                                                                                value: attributes.slides[index].subheading.color,
+                                                                                attribute: 'color',
+                                                                            }
+                                                                        ]}
+                                                                        handelColorPanel={(value)=>handelBackgroundColor(index,'subheading',value)}
+                                                                        initialTab="color"
+                                                                    />
 
                                                                     
                                                                     <div className="vayu_blocks_heading_unitcontrol_slides">

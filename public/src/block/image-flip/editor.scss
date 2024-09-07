@@ -1,0 +1,120 @@
+ 
+.vayu-blocks-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.vayu-blocks-change-button {
+    position: absolute;
+    bottom: 2%; /* Start from the bottom of the container */
+    left: 0%;
+    height: 0; /* Start with height 0 */
+    overflow: hidden; /* Hide overflowing content */
+    padding: 0px 100px; /* Padding is kept for expansion */
+    background-color: black; /* Change this color as needed */
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: height 0.3s ease, padding 0.3s ease; /* Smooth expansion effect */
+    z-index: 10; /* Ensure the button is above the image */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.vayu-blocks-image-container:hover .vayu-blocks-change-button {
+    height: 38px; /* Set the desired height when expanded */
+    padding: 0px 100px; /* Adjust padding to match the height */
+}
+
+//edit.js
+.vayu_blocks_image_flip_wrapper{
+
+    overflow: hidden;
+
+}
+.vayu_blocks_image_flip_wrapper {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Keeps the outer frame fixed */
+    position: relative;
+}
+
+.vayu_blocks_image_flip_image {
+    width: 100%;
+    transform-origin: 50% 50%;
+    height: 100%; /* Ensure the image fills the container */
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+    object-fit: cover; /* Ensures the image content covers the container */
+}
+
+/* Apply the custom hover effect */
+.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
+    transform: var(--image-hover-effect-transform, none);
+    filter: var(--image-hover-effect-filter, none);
+    opacity: var(--image-hover-effect-opacity, 1);
+}
+
+/* Define hover effects using custom properties */
+.zoom-in {
+    --image-hover-effect-transform: scale(1.5);
+}
+
+.zoom-out {
+    --image-hover-effect-transform: scale(0.8);
+}
+
+.fade-in {
+    --image-hover-effect-opacity: 1;
+}
+
+.fade-out {
+    --image-hover-effect-opacity: 0.5;
+}
+
+.slide-up {
+    --image-hover-effect-transform: translateY(-10px);
+}
+
+.slide-down {
+    --image-hover-effect-transform: translateY(10px);
+}
+
+.slide-left {
+    --image-hover-effect-transform: translateX(-10px);
+}
+
+.slide-right {
+    --image-hover-effect-transform: translateX(10px);
+}
+
+.flip-horizontal {
+    --image-hover-effect-transform: rotateY(180deg);
+}
+
+.flip-vertical {
+    --image-hover-effect-transform: rotateX(180deg);
+}
+
+.rotate {
+    --image-hover-effect-transform: rotate(-30deg);
+}
+
+.blur {
+    --image-hover-effect-filter: blur(3px);
+}
+
+/* Define hover effects using custom properties */
+.glow {
+    filter: blur(3px); /* Initial blur */
+    transition: filter 0.3s ease; /* Smooth transition for blur effect */
+}
+
+/* Remove blur on hover for glow effect */
+.glow:hover {
+    filter: none; /* Remove blur on hover */
+}
+
+
+.shine {
+    --image-hover-effect-filter: grayscale(100%);
+}

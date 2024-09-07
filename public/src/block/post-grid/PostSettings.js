@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { PanelBody, TextControl,ToggleControl,ToogleGroupControl,GradientPicker, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
+import { PanelBody, TextControl,ToggleControl,GradientPicker, ColorPalette, FontSizePicker, RangeControl,  DropdownMenu, SelectControl ,FormTokenField } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { Button, ButtonGroup } from '@wordpress/components';
 import './editor.scss';
@@ -7,17 +7,20 @@ import apiFetch from '@wordpress/api-fetch';
 import { MdColorLens } from "react-icons/md";
 import { PiGradient } from "react-icons/pi";
 import {AlignmentToolbar} from '@wordpress/block-editor';
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {
 	ResponsiveControl,	
 	UnitChooser,
     SizingControl,
+    ToogleGroupControl,
     HoverControl,
 } from '../../components/index.js';
 import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { useEffect, useState } from 'react';
-
-
+import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typography/Vayu_blocks_typographycontrol.js';
+import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel.js';
+import {Vayu_Block_Border_Control} from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control.js';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {
@@ -140,6 +143,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 		{ name: __('Large', 'vayu-blocks'), slug: 'large', size: 24 },
 		{ name: __('Larger', 'vayu-blocks'), slug: 'larger', size: 28 },
 	];
+
     const gradient = [
         {
           gradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
@@ -396,7 +400,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 break;
         }
     };
-
 
     //Featured Image
     const getFeaturedImageview = () => {
@@ -967,47 +970,44 @@ const PostSettings = ({ attributes, setAttributes }) => {
     //pagination border
     const handlepaginationBorderChange = (newBorders) => {
         const updatedAttributes = {};
-        if (newBorders.borders.top) {
-            if (newBorders.borders.top) {
-                updatedAttributes.pg_paginationTopBorderColor = newBorders.borders.top.color;
-                updatedAttributes.pg_paginationTopBorder = newBorders.borders.top.width;
-                updatedAttributes.paginationTopborderType = newBorders.borders.top.style;
+        if (newBorders.border.top) {
+            if (newBorders.border.top) {
+                updatedAttributes.pg_paginationTopBorderColor = newBorders.border.top.color;
+                updatedAttributes.pg_paginationTopBorder = newBorders.border.top.width;
+                updatedAttributes.paginationTopborderType = newBorders.border.top.style;
             }
-            if (newBorders.borders.bottom) {
-                updatedAttributes.pg_paginationBottomBorderColor = newBorders.borders.bottom.color;
-                updatedAttributes.pg_paginationBottomBorder = newBorders.borders.bottom.width;
-                updatedAttributes.paginationBottomborderType = newBorders.borders.bottom.style;
+            if (newBorders.border.bottom) {
+                updatedAttributes.pg_paginationBottomBorderColor = newBorders.border.bottom.color;
+                updatedAttributes.pg_paginationBottomBorder = newBorders.border.bottom.width;
+                updatedAttributes.paginationBottomborderType = newBorders.border.bottom.style;
             }
-            if (newBorders.borders.left) {
-                updatedAttributes.pg_paginationLeftBorderColor = newBorders.borders.left.color;
-                updatedAttributes.pg_paginationLeftBorder = newBorders.borders.left.width;
-                updatedAttributes.paginationLeftborderType = newBorders.borders.left.style;
+            if (newBorders.border.left) {
+                updatedAttributes.pg_paginationLeftBorderColor = newBorders.border.left.color;
+                updatedAttributes.pg_paginationLeftBorder = newBorders.border.left.width;
+                updatedAttributes.paginationLeftborderType = newBorders.border.left.style;
             }
-            if (newBorders.borders.right) {
-                updatedAttributes.pg_paginationRightBorderColor = newBorders.borders.right.color;
-                updatedAttributes.pg_paginationRightBorder = newBorders.borders.right.width;
-                updatedAttributes.paginationRightborderType = newBorders.borders.right.style;
+            if (newBorders.border.right) {
+                updatedAttributes.pg_paginationRightBorderColor = newBorders.border.right.color;
+                updatedAttributes.pg_paginationRightBorder = newBorders.border.right.width;
+                updatedAttributes.paginationRightborderType = newBorders.border.right.style;
             }
         } else {
-            updatedAttributes.pg_paginationBorderColor = newBorders.borders.color;
-            updatedAttributes.pg_paginationBorder = newBorders.borders.width;
-            updatedAttributes.paginationborderType = newBorders.borders.style;
 
-            updatedAttributes.pg_paginationRightBorderColor = newBorders.borders.color;
-            updatedAttributes.pg_paginationRightBorder = newBorders.borders.width;
-            updatedAttributes.paginationRightborderType = newBorders.borders.style;
+            updatedAttributes.pg_paginationRightBorderColor = newBorders.border.color;
+            updatedAttributes.pg_paginationRightBorder = newBorders.border.width;
+            updatedAttributes.paginationRightborderType = newBorders.border.style;
 
-            updatedAttributes.pg_paginationLeftBorderColor = newBorders.borders.color;
-            updatedAttributes.pg_paginationLeftBorder = newBorders.borders.width;
-            updatedAttributes.paginationLeftborderType = newBorders.borders.style;
+            updatedAttributes.pg_paginationLeftBorderColor = newBorders.border.color;
+            updatedAttributes.pg_paginationLeftBorder = newBorders.border.width;
+            updatedAttributes.paginationLeftborderType = newBorders.border.style;
 
-            updatedAttributes.pg_paginationBottomBorderColor = newBorders.borders.color;
-            updatedAttributes.pg_paginationBottomBorder = newBorders.borders.width;
-            updatedAttributes.paginationBottomborderType = newBorders.borders.style;
+            updatedAttributes.pg_paginationBottomBorderColor = newBorders.border.color;
+            updatedAttributes.pg_paginationBottomBorder = newBorders.border.width;
+            updatedAttributes.paginationBottomborderType = newBorders.border.style;
 
-            updatedAttributes.pg_paginationTopBorderColor = newBorders.borders.color;
-            updatedAttributes.pg_paginationTopBorder = newBorders.borders.width;
-            updatedAttributes.paginationTopborderType = newBorders.borders.style;
+            updatedAttributes.pg_paginationTopBorderColor = newBorders.border.color;
+            updatedAttributes.pg_paginationTopBorder = newBorders.border.width;
+            updatedAttributes.paginationTopborderType = newBorders.border.style;
         }
         setAttributes(updatedAttributes);
     };
@@ -1207,6 +1207,19 @@ const PostSettings = ({ attributes, setAttributes }) => {
     };
     
     const [hover, sethover] = useState('normal');
+
+    const handelBackgroundColor = (value) => {
+        // Update the block’s attributes or state based on the changes
+        if(value.color){
+            setAttributes({pg_PaginationColor:value.color});
+        }
+        if(value.activeColor){
+            setAttributes({pg_PaginationactiveColor:value.activeColor});
+        }
+        if(value.background){
+            setAttributes({pg_PaginationbackgroundColor:value.background});
+        }
+    };
 
     return (
         <>
@@ -1423,114 +1436,71 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 />
                 {showpagination && (
                     <>
-                        <AlignmentToolbar
-                            label={__('Alignment', 'Post_blockk')}
-                            value={ attributes.pg_Paginationalignment }
-                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }									
-                            isCollapsed={ false }
-                        /> 
-                        <FontSizePicker
-                            label={__('Font Size', 'Post_blockk')}
-                            fontSizes={fontSizes}
-                            value={pg_PaginationSize}
-                            onChange={(value) => setAttributes({ pg_PaginationSize: value })}
-                        />
-                        
-                        <br />
-                        <HoverControl
-                            value={hover}
+                        <h4>Alignment</h4>
+                        <ToogleGroupControl
+                            label={__('Alignment', 'vayu-blocks')}
+                            value={ attributes.pg_Paginationalignment}
+                            onChange={ e => setAttributes({ pg_Paginationalignment : e }) }		
                             options={[
                                 {
-                                    label: __('Normal', 'vayu-blocks'),
-                                    value: 'normal',
+                                    icon: HorizontalLeft,
+                                    label: __( 'Left', 'vayu-blocks' ),
+                                    value: 'left'
                                 },
                                 {
-                                    label: __('Active', 'vayu-blocks'),
-                                    value: 'active',
+                                    icon: Center,
+                                    label: __( 'Center', 'vayu-blocks' ),
+                                    value: 'center'
+                                },
+                                {
+                                    icon: HorizontalRight,
+                                    label: __( 'Right', 'vayu-blocks' ),
+                                    value: 'right'
                                 },
                             ]}
-                            onChange={sethover}
+                            
+                            hasIcon
                         />
 
-                        {hover === 'normal' && (
-                            <>
-                            <h5>Text Color</h5>
-                            <ColorPalette
-                                label={__('Color', 'vayu-blocks')}
-                                colors={colors}
-                                value={pg_PaginationColor}
-                                onChange={(color) => setAttributes({ pg_PaginationColor: color })}
+                        <br/>
+
+                        <Vayu_blocks_typographycontrol
+                            onChange={(value) => setAttributes({ pg_PaginationSize: value.size })}
+                            value={{size:pg_PaginationSize}}
+                            includeSize={true}
+                            vayu_blocks_sizes={fontSizes}
+                            para=""
+                        /> 
+
+                       
+                            <ColorPanel
+                                colorTool={[
+                                    {
+                                        active: ['gradient'],
+                                        name: 'Background',
+                                        value: pg_PaginationbackgroundColor,
+                                        attribute: 'background',
+                                    },
+                                    {
+                                        active: ['color'],
+                                        name: 'Text',
+                                        value: pg_PaginationColor,
+                                        attribute: 'color',
+                                    },
+                                    {
+                                        active: ['color'],
+                                        name: 'Active Text',
+                                        value: pg_PaginationactiveColor,
+                                        attribute: 'activeColor',
+                                    }
+                                ]}
+
+                                handelColorPanel={(value)=>handelBackgroundColor(value)}
+                                initialTab="color"
                             />
-                            </>
-                        )}
-                        {hover === 'active' && (
-                            <>
-                            <h5>Active Text Color</h5>
-                            <ColorPalette
-                                label={__('Color', 'vayu-blocks')}
-                                colors={colors}
-                                value={pg_PaginationactiveColor}
-                                onChange={(color) => setAttributes({ pg_PaginationactiveColor: color })}
-                            />
-                            </>
-                        )}
 
-
-                        <h4>{__('Background Color', 'vayu-blocks')}</h4>
-                        <>
-                        <div className="myclasst">
-                            <label className="components-base-control__labelt">{__('Background Type', 'vayu-blocks')}</label>
-                            <ButtonGroup className="linking-controlst">
-                                <Button
-                                    icon={<MdColorLens />}
-                                    label={__('Background color', 'vayu-blocks')}
-                                    showTooltip={true}
-                                    isPrimary={pg_PaginationbackgroundType === 'color'}
-                                    onClick={() => {
-                                        setAttributes({ pg_PaginationbackgroundType: 'color' });
-                                    }}
-                                />
-
-                                <Button
-                                    icon={<PiGradient />}
-                                    label={__('Gradient', 'vayu-blocks')}
-                                    showTooltip={true}
-                                    isPrimary={pg_PaginationbackgroundType === 'gradient'}
-                                    onClick={() => {
-                                        setAttributes({
-                                            pg_PaginationbackgroundType: 'gradient'
-                                            
-                                        });
-                                    }}
-                                />
-                            </ButtonGroup>
-                        </div>
-                        {pg_PaginationbackgroundType === 'color' && (
-                            <ColorPalette
-                                label={__('Background Color', 'vayu-blocks')}
-                                colors={colors}
-                                value={pg_PaginationbackgroundColor}
-                                onChange={(color) => setAttributes({ pg_PaginationbackgroundColor: color })}
-                            />
-                        )}
-
-                        {pg_PaginationbackgroundType === 'gradient' && (
-                            <GradientPicker
-                                value={pg_PaginationbackgroundGradient}
-                                onChange={(value) => setAttributes({ pg_PaginationbackgroundGradient: value })}
-                                gradients={gradient}
-                            />
-                        )}
-                        </>
-
-                        <BorderBoxControlComponent
-                            label={__('Border','vayu-blocks')}
-                            value={{
-                                all: {
-                                    color: attributes.pg_paginationBorderColor,
-                                    width: attributes.pg_paginationBorder,
-                                    style: attributes.paginationborderType,
-                                },
+                        <Vayu_Block_Border_Control
+                            value={{border:{
                                 top: {
                                     color: attributes.pg_paginationTopBorderColor,
                                     width: attributes.pg_paginationTopBorder,
@@ -1551,10 +1521,13 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                     width: attributes.pg_paginationRightBorder,
                                     style: attributes.paginationRightborderType,
                                 },
+                            }
                             }}
-                            onChange={handlepaginationBorderChange}
-                            type="border"
-                        />
+                            onChange={(value)=>handlepaginationBorderChange(value)}
+                            includeBorder={true}
+                            includeBorderRadius={false}
+                            para=""
+                        />  
                             
                         <ResponsiveControl label={ __( 'Border Radius', 'vayu-blocks' ) } >
                             <UnitChooser

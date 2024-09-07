@@ -1,7 +1,10 @@
 {"id": {
     "type": "string"
   },
-  
+  "classNamemain":{
+    "type":"string",
+    "default":""
+  },
   "uniqueID": {
     "type": "string"
   },
@@ -459,7 +462,7 @@
 },
 "marginBottom": {
   "type": "number",
-  "default": 0
+  "default": 40
 },
 "marginLeft": {
   "type": "number",

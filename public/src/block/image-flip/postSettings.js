@@ -667,6 +667,17 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             onChange={(value)=>vayu_blocks_handleslideBorderChange('border',value)}
                             includeBorder={true}
                             includeBorderRadius={true}
+                            color={[
+                                { name: 'Blue 20', color: '#72aee6' },
+                                { name: 'Red', color: '#ff0000' },
+                                { name: 'Green', color: '#00ff00' },
+                                { name: 'Blue', color: '#0000ff' },
+                                { name: 'Yellow', color: '#ffff00' },
+                                { name: 'Purple', color: '#800080' },
+                                { name: 'Orange', color: '#ffa500' },
+                                { name: 'Pink', color: '#ffc0cb' },
+                                { name: 'Teal', color: '#008080' },
+                            ]}
                             para=""
                         />  
 

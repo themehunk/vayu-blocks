@@ -1,0 +1,70 @@
+{
+    "uniqueId":{
+        "type":"string"
+    },
+    "globalwidth":{
+        "type":"number"
+    },
+    "arrowstyleleft":{
+        "type": "object",
+        "default":{
+            "color": "white",
+            "hovercolor": "blue",
+            "backgroundColor": "gray",
+            "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
+            "size":"20px",
+            "tag": "arrow",
+            "position":0,
+            "positionVertical":0,
+            "opacity":0.5,
+            "borderRadius":{
+                "top": "50px",
+                "right":"50px",
+                "bottom":"50px",
+                "left":"50px"
+            } 
+        }
+    },
+
+
+    "image":{
+        "type":"string",
+        "default":""
+    },
+    "imagehvreffect":{
+        "type":"string",
+        "default":"none"
+    },
+    "imagehvrfilter":{
+        "type":"string",
+        "default":"none"
+    },
+    "imageoverlayouteffect":{
+        "type":"string",
+        "default":"none"
+    },
+    "headingtext":{
+        "type":"string",
+        "default":"Heading"
+    },
+    "imageCaption":{
+        "type":"string",
+        "default":"this is Image Caption"
+    },
+    "buttontext":{
+        "type":"string",
+        "default":"Button"
+    },
+    "buttonlink":{
+        "type":"string",
+        "default":""
+    },
+    "buttonnewtab" : {
+        "type": "boolean",
+        "default":false
+    },
+    "overlaycolor":{
+        "type":"string",
+        "default":"red"
+    }
+}
