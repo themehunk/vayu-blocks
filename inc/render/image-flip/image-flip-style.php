@@ -18,7 +18,6 @@ function generate_inline_image_flip_styles($attr) {
 
     $inline = '.vayu_blocks_image_flip_wrapper';
 
-
     $css .= ".wp_block_vayu-blocks-image-flip-main {";
         // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
         $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
@@ -538,6 +537,18 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 1;";
     $css .= "}";
 
+    $transitionDelay = max(0, esc_attr($attr['overlaytransitiontime']) - 0.3);
+
+    $css .= ".vayu_block_animation_overlay_inside {";
+        $css .= "    transition-delay: " . $transitionDelay . "s !important;";
+        $css .= "    animation-fill-mode: forwards !important;";
+        $css .= "    opacity: 0;";
+        $css .= "    transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
+    $css .= "}";
+    
+    $css .= ".vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {";
+        $css .= "    opacity: 1;";
+    $css .= "}";
 
     //for tablet
     $css .= "@media (max-width: 1024px) {

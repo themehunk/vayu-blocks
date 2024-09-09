@@ -63,12 +63,12 @@ class Vayu_blocks_image_flip {
             $buttonText = isset($attributes['buttontext']) ? esc_html($attributes['buttontext']) : '';
             $buttonTarget = $buttonNewTab ? '_blank' : '_self';
             $buttonRel = $buttonNewTab ? 'noopener noreferrer' : '';
-    
+            
             $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClass . '">';
     
-                $overlay .= '<' . $headingTag . ' class="vayu_blocks_heading_image_flip">' . $headingText . '</' . $headingTag . '>';
+                $overlay .= '<' . $headingTag . ' class="vayu_blocks_heading_image_flip vayu_block_animation_overlay_inside ' . $overlayClass . '">' . $headingText . '</' . $headingTag . '>';
     
-                $overlay .= '<' . $captionTag . ' class="vayu_blocks_caption_image_flip">' . $captionText . '</' . $captionTag . '>';
+                $overlay .= '<' . $captionTag . ' class="vayu_blocks_caption_image_flip vayu_block_animation_overlay_inside ' . $overlayClass . '">' . $captionText . '</' . $captionTag . '>';
     
                 if ($buttonLink) {
                     $overlay .= '<a
@@ -79,7 +79,7 @@ class Vayu_blocks_image_flip {
                                 >
                                     <button
                                         type="button"
-                                        class="vayu_blocks_image_flip_button"
+                                        class="vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ' . $overlayClass . '"
                                     >
                                         ' . $buttonText . '
                                     </button>
@@ -87,7 +87,7 @@ class Vayu_blocks_image_flip {
                 } else {
                     $overlay .= '<button
                                     type="button"
-                                    class="vayu_blocks_image_flip_button"
+                                    class="vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ' . $overlayClass . '"
                                 >
                                     ' . $buttonText . '
                                 </button>';

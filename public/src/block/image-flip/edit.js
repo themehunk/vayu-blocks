@@ -256,11 +256,11 @@ const edit = ({ attributes, setAttributes }) => {
                         {attributes.overlay && (
                             <div className={`vayu_blocks_overlay_main_wrapper ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
                                
-                                <attributes.headingtag style = {vayu_blocks_heading_tag}>
+                                <attributes.headingtag style = {vayu_blocks_heading_tag} className={`vayu_block_animation_overlay_inside ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
                                 {attributes.headingtext}   
                                 </attributes.headingtag>
 
-                                <attributes.captiontag style = {vayu_blocks_caption_tag}>
+                                <attributes.captiontag style = {vayu_blocks_caption_tag} className={`vayu_block_animation_overlay_inside ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
                                 {attributes.imageCaption}
                                 </attributes.captiontag>
 
@@ -274,7 +274,7 @@ const edit = ({ attributes, setAttributes }) => {
                                     >
                                         <button
                                             type="button"
-                                            className="vayu_blocks_image_flip_button"
+                                            className={`vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
                                             style={vayu_blocks_image_flip_button_style}
                                         >
                                             {attributes.buttontext}
@@ -283,7 +283,7 @@ const edit = ({ attributes, setAttributes }) => {
                                 ) : (
                                     <button
                                         type="button"
-                                        className="vayu_blocks_image_flip_button"
+                                        className={`vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
                                         style={vayu_blocks_image_flip_button_style}
                                     >
                                         {attributes.buttontext}

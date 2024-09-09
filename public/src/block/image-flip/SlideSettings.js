@@ -183,7 +183,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     />
 
                     <SelectControl
-                        label={__('Image Hover Effect', 'vayu-blocks')}
+                        label={__('Image Effect', 'vayu-blocks')}
                         value={attributes.imagehvreffect}
                         options={[
                             { label: __('None', 'vayu-blocks'), value: 'none' },
@@ -279,16 +279,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
 
                         <div>
-                        <Vayu_Block_Toggle
-                            value={activeButton}
-                            onChange={(value) => setActiveButton(value)}
-                            isBlock={true}
-                            __nextHasNoMarginBottom={true}
-                            options={[
-                                { value: 'content', label: 'Content' },
-                                { value: 'color', label: 'Color' },
-                            ]}
-                        />
+                            <Vayu_Block_Toggle
+                                value={activeButton}
+                                onChange={(value) => setActiveButton(value)}
+                                isBlock={true}
+                                __nextHasNoMarginBottom={true}
+                                options={[
+                                    { value: 'content', label: 'Content' },
+                                    { value: 'color', label: 'Color' },
+                                ]}
+                            />
                         </div>
 
                         <div>
@@ -336,7 +336,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     colorTool={[
                                         {
                                             active: ['gradient'],
-                                            name: 'Background',
+                                            name: 'Overlay',
                                             value: attributes.overlaycolor,
                                             attribute: 'color',
                                         }

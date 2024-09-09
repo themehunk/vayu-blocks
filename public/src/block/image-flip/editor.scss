@@ -207,7 +207,6 @@
     transform: rotateY(0);
 }
 
-
 .overlayflip-vertical {
     transform: rotateX(90deg);
 }
@@ -240,6 +239,16 @@
     opacity: 1;
 }
 
+.vayu_block_animation_overlay_inside{
+    transition-delay: calc(var(--overlay-transitiontime) - 0.3s) !important;
+    animation-fill-mode: forwards !important;
+    opacity:0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {
+    opacity:1;
+}
 
 .overlayzoom-in-right {
     transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
