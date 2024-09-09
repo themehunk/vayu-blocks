@@ -365,7 +365,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "font-size: " . esc_attr($attr['heading']['size']) . ";";
         $css .= "font-weight: " . esc_attr($attr['heading']['appearance']) . ";";
         $css .= "letter-spacing: " . esc_attr($attr['heading']['letterSpacing']) . ";";
-        $css .= "text-transform: " . esc_attr($attr['heading']['letterCase']) . ";"; // Changed from `letterCase` to `text-transform` for CSS
         $css .= "color: " . esc_attr($attr['headingcolor']) . ";";
     $css .= "}";
 

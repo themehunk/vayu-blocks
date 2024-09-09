@@ -16,7 +16,7 @@ return array(
     'buttontext' => 'Button',
     'buttonlink' => '',
     'buttonnewtab' => false,
-    'overlaycolor' => '#444',
+    'overlaycolor' => '#b1c5a4',
     'heading' => array(
         'font' => 'default',
         'size' => '16px',

@@ -61,7 +61,7 @@
     },
     "overlaycolor":{
         "type":"string",
-        "default":"#444"
+        "default":"#b1c5a4"
     },
     "heading": {
         "type": "object",
