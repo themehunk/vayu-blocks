@@ -99,7 +99,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 		} 
 
 		if ( $block['blockName'] === 'vayu-blocks/image-flip' ) {
-			$css .= generate_inline_slider_styles($block['attrs']);
+			$css .= generate_inline_image_flip_styles($block['attrs']);
 		} 
 
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {

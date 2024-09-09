@@ -16,25 +16,10 @@ import {
     FocalPointPicker,
     DuotonePicker
 } from '@wordpress/components';
-import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
-import { MdContentCopy } from "react-icons/md";
 import {MediaPlaceholder } from '@wordpress/block-editor';
-import { Dashicon } from '@wordpress/components';
-import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
-import { PanelColorSettings } from '@wordpress/block-editor';
-import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
-import {
-    HoverControl,
-    ToogleGroupControl,
-} from '../../components/index.js';
-
-import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
-import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
-import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from './Components/ColorPanel/ColorPanel';
-
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -186,7 +171,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 <PanelBody title={__('Image Effect','vayu-blocks')} initialOpen={false}>
                     <SelectControl
                         label={__('Image Filter', 'vayu-blocks')}
-                        value={attributes.imageoverlayeffect}
+                        value={attributes.imagehvrfilter}
                         options={[
                             { label: __('None', 'vayu-blocks'), value: 'none' },
                             { label: __('Blur', 'vayu-blocks'), value: 'blur' },

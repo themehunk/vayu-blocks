@@ -470,8 +470,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--overlay-effect': `${attributes.mageoverlayouteffect}`,
             '--overlay-transitiontime': `${attributes.overlaytransitiontime}s`,
             '--image-transitiontime': `${attributes.imagetransitiontime}s`,
-            '--button-hvr-background': `${attributes.buttonhvrbackground}s`,
-            '--button-hvr-color': `${attributes.buttonhvrcolor}s`,
             '--overlay-opacity': `${opacity}`,
         },
 

@@ -1,35 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
-import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
-import { PanelColorSettings } from '@wordpress/block-editor';
 import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
 
 import {
     PanelBody,
-    ToggleControl,
-    RangeControl,
-    Button,
-    FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
-    TabPanel 
 } from '@wordpress/components';
-import {
-    HoverControl,
-    ToogleGroupControl,
-    SizingControl,
-    UnitChooser,
-    ResponsiveControl,
-} from '../../components/index.js';
 
-import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
 import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
-import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
 import ColorPanel from './Components/ColorPanel/ColorPanel';
-
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
@@ -62,19 +44,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         if(newValues){
             setAttributes({ heading: newValues})
-        }
-    };
-
-    const handleButtonDimensionChange = (newDimensions) => {
-        const sides = ['top', 'right', 'bottom', 'left'];
-    
-        // Update margin styles
-        if (newDimensions.margin) {
-            sides.forEach((side) => {
-                if (newDimensions.margin[side] !== undefined) {
-                    setAttributes({headingmargin:value.margin})
-                }
-            });
         }
     };
 
@@ -343,7 +312,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 name: 'Text',
                                 value: attributes.buttoncolor,
                                 attribute: 'color',
-                            },
+                            }
 
                         ]}
                         handelColorPanel={(value)=> handleButtonColor(value)}

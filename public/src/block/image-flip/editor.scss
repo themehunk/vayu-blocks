@@ -33,7 +33,7 @@
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
-    min-height: 300px;
+    // min-height: 300px;
 }
 
 .vayu_blocks_image_flip_image {
@@ -47,12 +47,13 @@
 /* Apply the custom hover effect */
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);
-    filter: var(--image-filter-effect, none);
+    filter: var(--image-filter-effect-filter);
+    background:red;
     opacity: var(--image-hover-effect-opacity, 1);
 }
 
 .grayScale {
-    --image-filter-effect:grayscale(100%);
+    --image-filter-effect-filter:grayscale(100%);
 }
 
 /* Define hover effects using custom properties */
@@ -67,7 +68,7 @@
 }
 
 .sepia {
---image-filter-effect:sepia(100%);
+--image-filter-effect-filter:sepia(100%);
 }
 
 /* Define hover effects using custom properties */
@@ -116,11 +117,11 @@
 }
 
 .blur {
-    --image-filter-effect: blur(3px);
+    --image-filter-effect-filter: blur(3px);
 }
 
 .shine {
-    --image-filter-effect: grayscale(100%);
+    --image-filter-effect-filter: grayscale(100%);
 }
 
 /* Overlay styles */
@@ -219,7 +220,7 @@
 .overlayzoom-in-up {
     transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {
@@ -231,7 +232,7 @@
 .overlayzoom-in-left {
     transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {
@@ -243,7 +244,7 @@
 .overlayzoom-in-right {
     transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
@@ -254,7 +255,7 @@
 .overlayzoom-in-down {
     transform: scale(0.5) translateY(50%); /* Larger movement down for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {

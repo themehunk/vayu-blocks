@@ -10,7 +10,6 @@
         "type":"string",
         "default":""
     },
-    
     "opacity":{
         "type":"number",
         "default":1
@@ -46,7 +45,7 @@
     },
     "imageCaption":{
         "type":"string",
-        "default":"this is Image Caption"
+        "default":"This is image caption"
     },
     "buttontext":{
         "type":"string",
@@ -70,7 +69,8 @@
             "font": "default",
             "size": "16px",
             "appearance": "normal",
-            "letterSpacing": "0px"
+            "letterSpacing": "0px",
+            "letterCase": "none"
         }
     },
     "headingcolor":{
@@ -175,5 +175,6 @@
         "type":"boolean",
         "default":false
     }
+
 
 }

@@ -65,7 +65,7 @@ const edit = ({ attributes, setAttributes }) => {
             : attributes.imageaspectratio.replace('/', '/')) 
         : 'auto',
 
-        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : 'none',
+        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
     };
     
     return (
@@ -246,22 +246,18 @@ const edit = ({ attributes, setAttributes }) => {
                     </div>
 
                     <div className="vayu_blocks_image_flip_wrapper">
-
-                      
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png'}                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
-                       
-                        
+                    
                         {/* Conditionally render overlay */}
                         {attributes.overlay && (
                             <div className={`vayu_blocks_overlay_main_wrapper ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
                                
                                 <attributes.headingtag style = {vayu_blocks_heading_tag}>
-                                {attributes.headingtext}
-                                    
+                                {attributes.headingtext}   
                                 </attributes.headingtag>
 
                                 <attributes.captiontag style = {vayu_blocks_caption_tag}>
