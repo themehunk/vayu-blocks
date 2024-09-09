@@ -8,7 +8,6 @@ import {
     RangeControl,
     Button,
     TextareaControl,
-    FontSizePicker,
     TextControl,
     __experimentalBoxControl as BoxControl,
     SelectControl,
@@ -18,8 +17,8 @@ import {
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
-import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
-import ColorPanel from './Components/ColorPanel/ColorPanel';
+import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
+import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -30,7 +29,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
     }, []);
 
-    
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
         { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },

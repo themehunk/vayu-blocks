@@ -3,10 +3,6 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 
-import {
-    TextControl
-} from '@wordpress/components';
-
 const edit = ({ attributes, setAttributes }) => {
     
     // Utility function to generate a unique ID
@@ -246,6 +242,7 @@ const edit = ({ attributes, setAttributes }) => {
                     </div>
 
                     <div className="vayu_blocks_image_flip_wrapper">
+
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png'}                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 

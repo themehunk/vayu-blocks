@@ -393,7 +393,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     
     }
 
-
     // Prepare the style object
     const styles = {
         ...customwidth,

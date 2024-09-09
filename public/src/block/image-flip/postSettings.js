@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
@@ -6,16 +6,14 @@ import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks
 import {
     PanelBody,
     SelectControl,
-    __experimentalBoxControl as BoxControl,
 } from '@wordpress/components';
 
-import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Dimension_Control';
-import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
-import ColorPanel from './Components/ColorPanel/ColorPanel';
+import {Vayu_Block_Dimension_Control} from '../advance-slider/Components/Dimesions/Vayu_Block_Dimension_Control';
+import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel';
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
-    const [activeButton, setActiveButton] = useState('normal');
 
     const vayu_blocks_sizes = [
         {
