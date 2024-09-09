@@ -247,14 +247,13 @@ const edit = ({ attributes, setAttributes }) => {
 
                     <div className="vayu_blocks_image_flip_wrapper">
 
-                        {attributes.image && (
+                      
                             <img 
                                 style= {vayu_blocks_image_settings}
-                                src={attributes.image} 
-                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
+                                src={attributes.image ? attributes.image : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png'}                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
-                        )}
+                       
                         
                         {/* Conditionally render overlay */}
                         {attributes.overlay && (
