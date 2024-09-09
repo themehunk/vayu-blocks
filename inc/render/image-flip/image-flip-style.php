@@ -221,7 +221,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
   
     // Append CSS rules to $css
-    $css .= "$inline {";
+    $css .= "$wrapper $inline {";
         $css .= "    width: 100%;";
         $css .= "    height: auto;";
         $css .= "    overflow: hidden; /* Keeps the outer frame fixed */";
@@ -232,7 +232,7 @@ function generate_inline_image_flip_styles($attr) {
     $transitionTime = isset($attr['imagetransitiontime']) ? esc_attr($attr['imagetransitiontime']) : '0.5'; // Default to 0.5s if not set
 
     // Append CSS rules to $css
-    $css .= ".vayu_blocks_image_flip_image {";
+    $css .= "$wrapper .vayu_blocks_image_flip_image {";
         $css .= "    width: 100%;";
         $css .= "    height: 100%; /* Ensure the image fills the container */";
         $css .= "    transition: transform ${transitionTime}s ease, filter ${transitionTime}s ease, opacity ${transitionTime}s ease;";
@@ -267,14 +267,14 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
     // Append hover effect CSS rules
-    $css .= "$inline:hover .vayu_blocks_image_flip_image {";
+    $css .= " $wrapper $inline:hover .vayu_blocks_image_flip_image {";
         $css .= "    transform: var(--image-hover-effect-transform, none);";
         $css .= "    filter: var(--image-filter-effect, none);";
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
     $css .= "}";
 
     /* Global hover effect CSS */
-    $css .= "$inline:hover .vayu_blocks_image_flip_image {";
+    $css .= "$wrapper $inline:hover .vayu_blocks_image_flip_image {";
         $css .= "    transform: var(--image-hover-effect-transform, none);";
         $css .= "    filter: var(--image-filter-effect, none);";
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
@@ -360,7 +360,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
 
-    $css .= ".vayu_blocks_heading_image_flip {";
+    $css .= "$wrapper .vayu_blocks_heading_image_flip {";
         $css .= "font-family: " . esc_attr($attr['heading']['font']) . ";";
         $css .= "font-size: " . esc_attr($attr['heading']['size']) . ";";
         $css .= "font-weight: " . esc_attr($attr['heading']['appearance']) . ";";
@@ -370,7 +370,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
 
-    $css .= ".vayu_blocks_caption_image_flip {";
+    $css .= "$wrapper .vayu_blocks_caption_image_flip {";
         $css .= "font-family: " . esc_attr($attr['caption']['font']) . ";";
         $css .= "font-size: " . esc_attr($attr['caption']['size']) . ";";
         $css .= "font-weight: " . esc_attr($attr['caption']['appearance']) . ";";
@@ -380,7 +380,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
 
-    $css .= ".vayu_blocks_image_flip_button {";
+    $css .= "$wrapper .vayu_blocks_image_flip_button {";
         $css .= "background: " . esc_attr($attr['buttonbackground']) . ";";
         $css .= "border-top: " . esc_attr($attr['buttonborder']['topwidth']) . " " . esc_attr($attr['buttonborder']['topstyle']) . " " . esc_attr($attr['buttonborder']['topcolor']) . ";";
         $css .= "border-bottom: " . esc_attr($attr['buttonborder']['bottomwidth']) . " " . esc_attr($attr['buttonborder']['bottomstyle']) . " " . esc_attr($attr['buttonborder']['bottomcolor']) . ";";
@@ -396,7 +396,7 @@ function generate_inline_image_flip_styles($attr) {
 
 
     /* Overlay styles */
-    $css .= ".vayu_blocks_overlay_main_wrapper {";
+    $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . "; /* Default background */";
         $css .= "width: 100%;";
         $css .= "height: 100%;";
@@ -413,7 +413,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
         /* Hover the image and show the overlay */
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {";
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {";
         $css .= "opacity: 1; /* Make the overlay visible on hover */";
     $css .= "}";
 
@@ -422,7 +422,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 0;";
     $css .= "}";
 
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in {";
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayfade-in {";
         $css .= "opacity: 1;";
     $css .= "}";
 
@@ -432,7 +432,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease; /* Smooth transition */";
     $css .= "}";
 
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {";
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {";
         $css .= "transform: translateY(0); /* Moves to the original position */";
         $css .= "opacity: 1; /* Fade in */";
     $css .= "}";
@@ -539,14 +539,14 @@ function generate_inline_image_flip_styles($attr) {
 
     $transitionDelay = max(0, esc_attr($attr['overlaytransitiontime']) - 0.3);
 
-    $css .= ".vayu_block_animation_overlay_inside {";
+    $css .= "$wrapper .vayu_block_animation_overlay_inside {";
         $css .= "    transition-delay: " . $transitionDelay . "s !important;";
         $css .= "    animation-fill-mode: forwards !important;";
         $css .= "    opacity: 0;";
         $css .= "    transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
     $css .= "}";
     
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {";
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {";
         $css .= "    opacity: 1;";
     $css .= "}";
 
