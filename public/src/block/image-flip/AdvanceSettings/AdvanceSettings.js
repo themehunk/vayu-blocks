@@ -458,20 +458,21 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...(isHovered ? filteredHoverStyles : {}),
     };
    
+    let opacity = attributes.showPreview ? 1 : 0;
 
-
+    
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
             '--image-hover-effect' : `${attributes.imagehvreffect}`,
             '--image-filter-effect' : `${attributes.imagehvrfilter}`,
-            '--image-opacity' : `${attributes.opacity}`,
             '--overlay-effect': `${attributes.mageoverlayouteffect}`,
             '--overlay-transitiontime': `${attributes.overlaytransitiontime}s`,
             '--image-transitiontime': `${attributes.imagetransitiontime}s`,
             '--button-hvr-background': `${attributes.buttonhvrbackground}s`,
             '--button-hvr-color': `${attributes.buttonhvrcolor}s`,
+            '--overlay-opacity': `${opacity}`,
         },
 
         onMouseEnter: handleMouseEnter,

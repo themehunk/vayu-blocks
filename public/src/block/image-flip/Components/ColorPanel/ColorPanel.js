@@ -377,6 +377,7 @@ const ColorPanel = (props) =>{
               colors={ textColors }
               value={color}
               onChange={handleClick }
+              enableAlpha
           />);
         }
     };

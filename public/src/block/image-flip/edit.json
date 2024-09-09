@@ -151,6 +151,29 @@
     "buttonpaddingright":{
         "type":"string",
         "default":"5px"
+    },
+   "focalPoint": {
+        "type": "object",
+        "default": {
+            "x": 0.5,
+            "y": 0.5
+        }
+    },
+    "imagecover":{
+        "type":"string",
+        "default": "cover"
+    },
+    "imageaspectratio":{
+        "type":"string",
+        "default":"orginal"
+    },
+    "duotone": {
+        "type":"string",
+        "default":""
+    },
+    "showPreview":{
+        "type":"boolean",
+        "default":false
     }
 
 }
