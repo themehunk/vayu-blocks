@@ -1,5 +1,21 @@
+/**
+ * WordPress dependencies
+ */
+import { useSelect, useDispatch } from '@wordpress/data';
+import { useInstanceId } from '@wordpress/compose';
+import { useEffect } from '@wordpress/element';
+import {
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+	store as blockEditorStore,
+	useInnerBlocksProps,
+	InnerBlocks,
+} from '@wordpress/block-editor';
+
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { store as coreStore } from '@wordpress/core-data';
+
 import './editor.scss';
 import InsSettings from './settings.js';
 
@@ -15,18 +31,109 @@ const TEMPLATE = [
 		],
 	],
 ];
+const DEFAULTS_POSTS_PER_PAGE = 3;
 
-const Edit = ({ attributes, setAttributes }) => {
+const Edit = ({
+	attributes,
+	setAttributes,
+	name,
+	clientId,
+}) => {
+	const {
+		queryId,
+		query,
+		query: { inherit } = {},
+		displayLayout,
+		enhancedPagination,
+		tagName: TagName = 'div',
+
+	} = attributes;
+
+	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(blockEditorStore);
+
+	// Use the current Edit component for useInstanceId
+	const instanceId = useInstanceId(Edit);
+
+	const { postsPerPage } = useSelect( ( select ) => {
+		const { getSettings } = select( blockEditorStore );
+		const { getEntityRecord, getEntityRecordEdits, canUser } =
+			select( coreStore );
+		const settingPerPage = canUser( 'read', {
+			kind: 'root',
+			name: 'site',
+		} )
+			? +getEntityRecord( 'root', 'site' )?.posts_per_page
+			: +getSettings().postsPerPage;
+
+		// Gets changes made via the template area posts per page setting. These won't be saved
+		// until the page is saved, but we should reflect this setting within the query loops
+		// that inherit it.
+		const editedSettingPerPage = +getEntityRecordEdits( 'root', 'site' )
+			?.posts_per_page;
+
+		return {
+			postsPerPage:
+				editedSettingPerPage ||
+				settingPerPage ||
+				DEFAULTS_POSTS_PER_PAGE,
+		};
+	}, [] );
+
+	useEffect( () => {
+		const newQuery = {};
+		// When we inherit from global query always need to set the `perPage`
+		// based on the reading settings.
+		if ( inherit && query.perPage !== postsPerPage ) {
+			newQuery.perPage = postsPerPage;
+		} else if ( ! query.perPage && postsPerPage ) {
+			newQuery.perPage = postsPerPage;
+		}
+		if ( !! Object.keys( newQuery ).length ) {
+			__unstableMarkNextChangeAsNotPersistent();
+			updateQuery( newQuery );
+		}
+	}, [ query.perPage, postsPerPage, inherit ] );
+
+	// Define updateQuery function to update the query attribute
+	const updateQuery = (newQuery) =>
+		setAttributes({ query: { ...attributes.query, ...newQuery } });
+
+	// Query parameters for each block are scoped to their ID.
+	useEffect(() => {
+		if (!Number.isFinite(queryId)) {
+			__unstableMarkNextChangeAsNotPersistent();
+			setAttributes({ queryId: instanceId });
+		}
+	}, [queryId, instanceId]);
+
 	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		template: TEMPLATE,
+	} );
+
+	const hasInnerBlocks = useSelect(
+		( select ) =>
+			!! select( blockEditorStore ).getBlocks( clientId ).length,
+		[ clientId ]
+	);
+
 	return (
 		<>
 			<InsSettings
 				attributes={attributes}
+				setQuery={updateQuery} // Correctly pass updateQuery
 				setAttributes={setAttributes}
+				clientId={clientId}
 			/>
-			<div {...blockProps}>
-				<InnerBlocks template={TEMPLATE} templateLock={false} />
-			</div>
+			
+			{/* Render content based on whether there are inner blocks */}
+			{ hasInnerBlocks ? (
+				<div { ...innerBlocksProps }></div>
+			) : (
+				<div { ...blockProps }>
+					<p>{ __( 'No content available', 'vayu-block' ) }</p>
+				</div>
+			) }
 		</>
 	);
 };
