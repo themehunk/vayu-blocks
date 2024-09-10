@@ -254,14 +254,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 </PanelBody>
 
                 <PanelBody title={__('Overlay Content')} initialOpen={false}>
+                    
                 <ToggleControl
                     className='vayu_blocks_togglecontrol'
                     label={__('Overlay', 'vayu-blocks')}
                     checked={attributes.overlay}
-                    onChange={(value) =>  setAttributes({overlay:value})}
+                    onChange={(value) =>  setAttributes({overlay:value, showPreview: false})}
                 />
                 
-
                 {attributes.overlay && (
                     <>
                         {/* Show Preview Button */}
