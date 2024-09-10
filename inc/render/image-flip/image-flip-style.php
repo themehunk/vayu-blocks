@@ -504,7 +504,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {";
         $css .= "transform: scale(1); /* Expands outward to fill the area */";
         $css .= "opacity: 1;";
-        $$css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
+        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
     $css .= "}";
 
     /* Repeat the same approach for other effects */
@@ -607,8 +607,9 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 1;";
     $css .= "}";
 
-    $transitionDelay = max(0, esc_attr($attr['overlaytransitiontime']) - 0.3);
-
+    $transitionTime = isset($attr['overlaytransitiontime']) ? esc_attr($attr['overlaytransitiontime']) : 0;
+    $transitionDelay = max(0, $transitionTime - ($transitionTime / 2));
+    
     $css .= "$wrapper .vayu_block_animation_overlay_inside {";
         $css .= "    transition-delay: " . $transitionDelay . "s !important;";
         $css .= "    animation-fill-mode: forwards !important;";

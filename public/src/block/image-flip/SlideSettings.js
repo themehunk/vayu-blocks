@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
     ToggleControl,
@@ -9,7 +8,6 @@ import {
     Button,
     TextareaControl,
     TextControl,
-    __experimentalBoxControl as BoxControl,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
     FocalPointPicker,
@@ -18,16 +16,8 @@ import {
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
 import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
-import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
-
-    const [activeButton, setActiveButton] = useState('content');
-
-    const getView = useSelect((select) => {
-        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
-    }, []);
 
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [

@@ -236,7 +236,7 @@
 }
 
 .vayu_block_animation_overlay_inside{
-    transition-delay: calc(var(--overlay-transitiontime) - 0.3s) !important;
+    transition-delay: calc(var(--overlay-transitiontime) - var(--overlay-transitiontime)/2) !important;
     animation-fill-mode: forwards !important;
     opacity:0;
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
