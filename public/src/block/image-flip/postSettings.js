@@ -374,6 +374,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
     return (
         <>
         
+            {/* overlay style*/}
             <PanelBody title={__('Overlay', 'vayu-blocks')} initialOpen={false}>
 
                 <h4>
@@ -499,6 +500,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
             </PanelBody>
 
+            {/* image style */}
             <PanelBody title={__('Image', 'vayu-blocks')} initialOpen={false}>
 
                 <Vayu_Block_Border_Control
@@ -547,6 +549,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
             </PanelBody>
 
+            {/* heading style */}
             <PanelBody title={__('Heading', 'vayu-blocks')} initialOpen={false}>
                 <>
                     <Vayu_blocks_typographycontrol
@@ -607,6 +610,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 
             </PanelBody>
 
+            {/* Caption style */}
             <PanelBody title={__('Image Caption', 'vayu-blocks')} initialOpen={false}>
                
                 <>
@@ -668,6 +672,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 
             </PanelBody>
 
+            {/* button style */}
             <PanelBody title={__('Button', 'vayu-blocks')} initialOpen={false}>
                 
                 <>

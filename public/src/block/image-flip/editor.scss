@@ -33,6 +33,7 @@
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
+    display: grid;
     // min-height: 300px;
 }
 
@@ -223,7 +224,6 @@
     transform: scale(1) translateY(0);
     opacity: 1;
 }
-
 
 .overlayzoom-in-left {
     transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */

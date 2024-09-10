@@ -80,6 +80,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
             <div class="vayu_blocks_image-flip-settings_main">
 
+                {/* Background Image */}
                 <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
                     <h4>{__('Background','vayu-blocks')}</h4>
                     {attributes.image ? (
@@ -166,6 +167,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                 </PanelBody >
 
+                {/* Overlay and animation effect  */}
                 <PanelBody title={__('Image Effect','vayu-blocks')} initialOpen={false}>
                     <SelectControl
                         label={__('Image Filter', 'vayu-blocks')}
@@ -253,6 +255,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                 </PanelBody>
 
+                {/* overlay content */}
                 <PanelBody title={__('Overlay Content')} initialOpen={false}>
 
                 <ToggleControl

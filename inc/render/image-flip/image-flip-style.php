@@ -274,7 +274,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
         $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
 
-        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['buttonborderRadius']['left']) . ";";
+        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
 
     $css .= "}";
 
@@ -464,7 +464,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "border-left: " . esc_attr($attr['overlayborder']['leftwidth']) . " " . esc_attr($attr['overlayborder']['leftstyle']) . " " . esc_attr($attr['overlayborder']['leftcolor']) . ";";
         $css .= "border-right: " . esc_attr($attr['overlayborder']['rightwidth']) . " " . esc_attr($attr['overlayborder']['rightstyle']) . " " . esc_attr($attr['overlayborder']['rightcolor']) . ";";
 
-        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['buttonborderRadius']['left']) . ";";
+        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
 
 
     $css .= "}";

@@ -22,7 +22,7 @@ class Vayu_blocks_image_flip {
         return ob_get_clean(); // Return the buffered output
     }
 
-    //image
+    //main container containing image and overlay
     private function render_image() {
         $attributes = $this->attr; // Access attributes
         $image_html = '';
@@ -47,6 +47,7 @@ class Vayu_blocks_image_flip {
         return '<div class="vayu-blocks-image-flip-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
     }
     
+    //overlay
     private function overlay() {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
@@ -289,4 +290,3 @@ function vayu_blocks_image_flip_render($attr) {
     // Render and return the image output inside a div with the dynamic class name
     return '<div class="wp_block_vayu-blocks-image-flip-main ' . $className . '">' . $image->render() . '</div>';
 }
-

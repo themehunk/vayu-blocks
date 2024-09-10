@@ -13,6 +13,7 @@ const edit = ({ attributes, setAttributes }) => {
         setAttributes({ uniqueId: generateUniqueId() });
     }
 
+    //overlay wrapper style
     const vayu_block_overlay_style = {
         background:attributes.overlaycolor,
         borderTop: `${attributes.overlayborder.topwidth} ${attributes.overlayborder.topstyle} ${attributes.overlayborder.topcolor}`,
@@ -20,7 +21,7 @@ const edit = ({ attributes, setAttributes }) => {
         borderLeft: `${attributes.overlayborder.leftwidth} ${attributes.overlayborder.leftstyle} ${attributes.overlayborder.leftcolor}`,
         borderRight: `${attributes.overlayborder.rightwidth} ${attributes.overlayborder.rightstyle} ${attributes.overlayborder.rightcolor}`,
 
-        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.buttonborderRadius.left}`,
+        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.imageborderRadius.left}`,
 
         alignItems: 
             attributes.overlayalignment === 'center' ? 'center' :
@@ -35,6 +36,7 @@ const edit = ({ attributes, setAttributes }) => {
         gap:`${attributes.gap}px`
     }
 
+    //overlay heading style
     const vayu_blocks_heading_tag = {
         fontFamily: attributes.heading.font,
         fontSize: attributes.heading.size,
@@ -44,6 +46,7 @@ const edit = ({ attributes, setAttributes }) => {
         color: attributes.headingcolor,   
     };
 
+    //overlay caption style
     const vayu_blocks_caption_tag = {
         fontFamily: attributes.caption.font,
         fontSize: attributes.caption.size,
@@ -53,6 +56,7 @@ const edit = ({ attributes, setAttributes }) => {
         color: attributes.captioncolor,   
     };
     
+    //overlay button style
     const vayu_blocks_image_flip_button_style = {
 
         fontFamily: attributes.button.font,
@@ -76,6 +80,7 @@ const edit = ({ attributes, setAttributes }) => {
 
     };
     
+    //main container image style
     const vayu_blocks_image_settings = {
         objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
         // Apply focal point if it exists, default to center
@@ -94,7 +99,7 @@ const edit = ({ attributes, setAttributes }) => {
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
         borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
 
-        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.buttonborderRadius.left}`,
+        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
 
     };
     
@@ -105,6 +110,7 @@ const edit = ({ attributes, setAttributes }) => {
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
 
+                    {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
                         <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
                             {/* Orange and Red */}
@@ -285,6 +291,7 @@ const edit = ({ attributes, setAttributes }) => {
                     
                         {/* Conditionally render overlay */}
                         {attributes.overlay && (
+
                             <div className={`vayu_blocks_overlay_main_wrapper ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
                                
                                 <attributes.headingtag style = {vayu_blocks_heading_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
