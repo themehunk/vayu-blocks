@@ -254,7 +254,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 </PanelBody>
 
                 <PanelBody title={__('Overlay Content')} initialOpen={false}>
-                    
+
                 <ToggleControl
                     className='vayu_blocks_togglecontrol'
                     label={__('Overlay', 'vayu-blocks')}
@@ -299,7 +299,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             <TextControl
                                 className='vayu_blocks_textareatextcontrol'
                                 label="Link URL"
-                                onChange={(value) =>  setAttributes({buttonlink})}
+                                onChange={(value) =>  setAttributes({buttonlink:value})}
                                 value={attributes.buttonlink}
                                 placeholder="Enter a URL"
                             />

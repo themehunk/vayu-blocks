@@ -6,6 +6,7 @@ import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typogr
 import {
     PanelBody,
     SelectControl,
+    RangeControl
 } from '@wordpress/components';
 
 import {
@@ -58,6 +59,14 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handlebuttonTypographyChange = (newValues) => {
+    
+        if(newValues){
+            setAttributes({ button: newValues})
+        }
+
+    };
+
     const handlenewbuttonDimensionChange = (newDimensions) => {
 
             if(newDimensions.padding.top){
@@ -80,6 +89,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
         if(value.background){
             setAttributes({buttonbackground:value.background})
+        }
+        if(value.colorhvr){
+            setAttributes({buttonhvrcolor:value.colorhvr})
+        }
+        if(value.backgroundhvr){
+            setAttributes({buttonhvrbackground:value.backgroundhvr})
         }
     }
 
@@ -360,6 +375,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         <>
         
             <PanelBody title={__('Overlay', 'vayu-blocks')} initialOpen={false}>
+
                 <h4>
                 {__('Alignment', 'vayu-blocks')}
                 </h4>
@@ -412,7 +428,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     
                     hasIcon
                 />
-<br/>
+                <br/>
 
                 <ColorPanel
                     colorTool={[
@@ -470,6 +486,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     includeBorderRadius={true}
                     para=""
                 />  
+
+                <RangeControl
+                    label={__('Gap', 'vayu-blocks')}
+                    className = "vayu_blocks_gap_image_flip"
+                    value={attributes.gap}
+                    onChange={(value) =>  setAttributes({gap:value})}
+                    min={0}
+                    max={100}
+                    step={1}
+                />
 
             </PanelBody>
 
@@ -645,6 +671,34 @@ const PostSettings = ({ attributes, setAttributes }) => {
             <PanelBody title={__('Button', 'vayu-blocks')} initialOpen={false}>
                 
                 <>
+
+                    <Vayu_blocks_typographycontrol
+                        value={{
+                            font: attributes.button.font,
+                            size: attributes.button.size,
+                            appearance: attributes.button.appearance, // Bold font
+                            letterSpacing: attributes.button.letterSpacing,
+                        }}
+                        onChange={(newValues)=>handlebuttonTypographyChange(newValues)}
+                        para=""
+                        includeFont={true}
+                        includeSize={true}
+                        includeAppearance={true}
+                        includeLetterSpacing={true}
+                        letterSpacingunits={[
+                            { label: 'px', value: 'px' },
+                            { label: 'em', value: 'em' },
+                            { label: 'rem', value: 'rem' }
+                        ]}
+                        vayu_blocks_sizes={vayu_blocks_sizes}
+                        appearanceOptions= {[
+                            { label: __('Normal', 'text-domain'), value: 'normal' },
+                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                            { label: __('Bold', 'text-domain'), value: 'bold' },
+                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                        ]}
+                    />
+
                     <ColorPanel
                         colorTool={[
                             {
@@ -658,6 +712,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 name: 'Text',
                                 value: attributes.buttoncolor,
                                 attribute: 'color',
+                            },
+                            {
+                                active: ['gradient'],
+                                name: 'Hover Background',
+                                value: attributes.buttonhvrbackground,
+                                attribute: 'backgroundhvr',
+                            },
+                            {
+                                active: ['color'],
+                                name: 'Hover Text',
+                                value: attributes.buttonhvrcolor,
+                                attribute: 'colorhvr',
                             }
 
                         ]}

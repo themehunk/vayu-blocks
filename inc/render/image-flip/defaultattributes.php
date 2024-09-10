@@ -50,6 +50,15 @@ return array(
         'duotone' => '',
         'showPreview' => false,
 
+        'button' => array(
+            'font' => 'default',
+            'size' => '16px',
+            'appearance' => 'normal',
+            'letterSpacing' => '0px',
+            'letterCase' => 'none',
+        ),
+        'gap' => 0,
+
     // Button Border
         'buttonborder' => array(
             'topcolor' => 'black',
@@ -123,6 +132,9 @@ return array(
                 'left' => '3px',
                 'right' => '3px',
             ),
+
+            'buttonhvrbackground' => 'gray',
+            'buttonhvrcolor' => 'black',
         
     //Advanced
         'classNamemain' => '',

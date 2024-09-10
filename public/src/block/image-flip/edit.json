@@ -71,6 +71,16 @@
             "letterCase": "none"
         }
     },
+    "button": {
+        "type": "object",
+        "default": {
+            "font": "default",
+            "size": "16px",
+            "appearance": "normal",
+            "letterSpacing": "0px",
+            "letterCase": "none"
+        }
+    },
     "headingcolor":{
         "type":"string",
         "default":"black"
@@ -104,6 +114,14 @@
     "buttoncolor":{
         "type":"string",
         "default":"white"
+    },
+    "buttonhvrbackground":{
+        "type":"string",
+        "default":"gray"
+    },
+    "buttonhvrcolor":{
+        "type":"string",
+        "default":"black"
     },
     "buttonborderRadius":{
         "type":"object",
@@ -238,5 +256,9 @@
         "rightwidth": "1px",
         "rightstyle": "solid"
     }
+    },
+    "gap": {
+        "type":"number",
+        "default":0
     }
 }

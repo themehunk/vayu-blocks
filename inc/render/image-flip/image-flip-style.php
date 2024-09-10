@@ -392,7 +392,13 @@ function generate_inline_image_flip_styles($attr) {
 
 
     $css .= "$wrapper .vayu_blocks_image_flip_button {";
+        $css .= "font-family: " . esc_attr($attr['button']['font']) . ";";
+        $css .= "font-size: " . esc_attr($attr['button']['size']) . ";";
+        $css .= "font-weight: " . esc_attr($attr['button']['appearance']) . ";";
+        $css .= "letter-spacing: " . esc_attr($attr['button']['letterSpacing']) . ";";
+
         $css .= "background: " . esc_attr($attr['buttonbackground']) . ";";
+
         $css .= "border-top: " . esc_attr($attr['buttonborder']['topwidth']) . " " . esc_attr($attr['buttonborder']['topstyle']) . " " . esc_attr($attr['buttonborder']['topcolor']) . ";";
         $css .= "border-bottom: " . esc_attr($attr['buttonborder']['bottomwidth']) . " " . esc_attr($attr['buttonborder']['bottomstyle']) . " " . esc_attr($attr['buttonborder']['bottomcolor']) . ";";
         $css .= "border-left: " . esc_attr($attr['buttonborder']['leftwidth']) . " " . esc_attr($attr['buttonborder']['leftstyle']) . " " . esc_attr($attr['buttonborder']['leftcolor']) . ";";
@@ -403,8 +409,16 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "padding: " . esc_attr($attr['buttonpaddingtop']) . " " . esc_attr($attr['buttonpaddingright']) . " " . esc_attr($attr['buttonpaddingbottom']) . " " . esc_attr($attr['buttonpaddingleft']) . ";";
 
         $css .= "color: " . esc_attr($attr['buttoncolor']) . ";";
+
+        $css .= "cursor:pointer;";
+
     $css .= "}";
 
+    $css .= "$wrapper .vayu_blocks_image_flip_button:hover {";
+        $css .= "background: " . $attr['buttonhvrbackground'] . " !important;";
+        $css .= "color: " . $attr['buttonhvrcolor'] . " !important;";
+    $css .= "}";
+    
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . "; /* Default background */";
@@ -417,7 +431,8 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 0; ";
         $css .= "z-index: 10;";
         $css .= "display: flex;";
-        $css .= "flex-direction: column; /* Stack items vertically */";
+        $css .= "flex-direction: column;";
+        $css .= "gap:" . esc_attr($attr['gap']) . "px;";
 
         $alignment = 'center'; // Default value
 

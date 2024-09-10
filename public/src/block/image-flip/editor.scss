@@ -303,3 +303,8 @@
 .vayu_blocks_show_preview_button{
     margin-bottom:10px;
 }
+
+.vayu_blocks_image_flip_button:hover {
+    background:var(--button-hvr-background) !important;
+    color:var(--button-hvr-color) !important;
+}

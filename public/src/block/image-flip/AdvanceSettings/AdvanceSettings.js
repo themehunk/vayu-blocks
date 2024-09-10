@@ -470,6 +470,8 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--overlay-transitiontime': `${attributes.overlaytransitiontime}s`,
             '--image-transitiontime': `${attributes.imagetransitiontime}s`,
             '--overlay-opacity': `${opacity}`,
+            '--button-hvr-background': `${attributes.buttonhvrbackground}`,
+            '--button-hvr-color': `${attributes.buttonhvrcolor}`,
         },
 
         onMouseEnter: handleMouseEnter,

@@ -31,6 +31,8 @@ const edit = ({ attributes, setAttributes }) => {
             attributes.overlayalignmentvertical === 'center' ? 'center' :
             attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
             attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+
+        gap:`${attributes.gap}px`
     }
 
     const vayu_blocks_heading_tag = {
@@ -52,6 +54,13 @@ const edit = ({ attributes, setAttributes }) => {
     };
     
     const vayu_blocks_image_flip_button_style = {
+
+        fontFamily: attributes.button.font,
+        fontSize: attributes.button.size,
+        fontWeight: attributes.button.appearance,
+        letterSpacing: attributes.button.letterSpacing,
+        letterCase: attributes.button.letterCase,
+
         background: attributes.buttonbackground,
         borderTop: `${attributes.buttonborder.topwidth} ${attributes.buttonborder.topstyle} ${attributes.buttonborder.topcolor}`,
         borderBottom: `${attributes.buttonborder.bottomwidth} ${attributes.buttonborder.bottomstyle} ${attributes.buttonborder.bottomcolor}`,
@@ -63,6 +72,7 @@ const edit = ({ attributes, setAttributes }) => {
         padding: `${attributes.buttonpaddingtop} ${attributes.buttonpaddingright} ${attributes.buttonpaddingbottom} ${attributes.buttonpaddingleft}`,
 
         color:attributes.buttoncolor,
+        cursor:'pointer'
 
     };
     
@@ -291,7 +301,7 @@ const edit = ({ attributes, setAttributes }) => {
                                         href={attributes.buttonlink}
                                         target={attributes.buttonnewtab ? "_blank" : "_self"}
                                         rel={attributes.buttonnewtab ? "noopener noreferrer" : undefined} // Security best practice
-                                        style={{ textDecoration: 'none' }} // Optional: Remove underline from the link
+                                        style={{ textDecoration: 'none',cursor:'pointer' }} // Optional: Remove underline from the link
                                     >
                                         <button
                                             type="button"
