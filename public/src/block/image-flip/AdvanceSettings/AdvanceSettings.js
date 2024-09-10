@@ -472,13 +472,13 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--overlay-opacity': `${opacity}`,
             '--button-hvr-background': `${attributes.buttonhvrbackground}`,
             '--button-hvr-color': `${attributes.buttonhvrcolor}`,
+            '--overlay-border-radius' : `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.overlayborderRadius.left}`
         },
 
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
 
-    
     if(attributes.classNamemain !== blockProps.className) {
         setAttributes({classNamemain: blockProps.className});
     }

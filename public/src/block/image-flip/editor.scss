@@ -263,9 +263,8 @@
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {
     transform: scale(1); /* Expands outward to full size */
     opacity: 1;
-    border-radius:0% !important;
+    border-radius:var(--overlay-border-radius) !important;
 }
-
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
     transform: scale(1) translateX(0);

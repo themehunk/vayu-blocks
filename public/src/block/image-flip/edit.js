@@ -23,7 +23,7 @@ const edit = ({ attributes, setAttributes }) => {
         borderLeft: `${attributes.overlayborder.leftwidth} ${attributes.overlayborder.leftstyle} ${attributes.overlayborder.leftcolor}`,
         borderRight: `${attributes.overlayborder.rightwidth} ${attributes.overlayborder.rightstyle} ${attributes.overlayborder.rightcolor}`,
 
-        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.imageborderRadius.left}`,
+        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.overlayborderRadius.left}`,
 
         alignItems: 
             attributes.overlayalignment === 'center' ? 'center' :
