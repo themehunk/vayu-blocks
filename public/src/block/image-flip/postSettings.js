@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
+import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typography/Vayu_blocks_typographycontrol';
 
 import {
     PanelBody,
