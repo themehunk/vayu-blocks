@@ -1732,8 +1732,6 @@ const PanelSettings = ({
 							className="th-button-panel"
 						>     
 
-							
-
 								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }

@@ -233,14 +233,19 @@ function generate_inline_image_flip_styles($attr) {
 
     // Append CSS rules to $css
     $css .= "$wrapper .vayu_blocks_image_flip_image {";
-        $css .= "    width: 100%;";
-        $css .= "    height: 100%; /* Ensure the image fills the container */";
+
+        $css .= "width: 100%;";
+        $css .= "height: 100%;";
+        $css .= "box-sizing: border-box;";
+
         $css .= "    transition: transform ${transitionTime}s ease, filter ${transitionTime}s ease, opacity ${transitionTime}s ease;";
-        $css .= "    /* Ensures the image content covers the container */";
+
         $css .= "    opacity: 1;"; // Assuming a default opacity value
         $css .= "    object-fit: " . esc_attr($attr['imagecover']) . ";"; // Assuming this controls object-fit
+
         // Apply focal point if it exists, default to center
         $css .= "    object-position: " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['x'] * 100) : '50') . "% " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['y'] * 100) : '50') . "%;";
+
         // Apply aspect ratio if it exists
         if ($attr['imageaspectratio'] !== 'none') {
             if ($attr['imageaspectratio'] === 'original') {
@@ -263,6 +268,13 @@ function generate_inline_image_flip_styles($attr) {
                 $css .= "    filter: url(" . esc_attr($attr['duotone'][0]) . ") !important;";
             }
         }
+
+        $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
+        $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
+        $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
+        $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
+
+        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['buttonborderRadius']['left']) . ";";
 
     $css .= "}";
 
@@ -393,7 +405,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "color: " . esc_attr($attr['buttoncolor']) . ";";
     $css .= "}";
 
-
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . "; /* Default background */";
@@ -407,8 +418,40 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "z-index: 10;";
         $css .= "display: flex;";
         $css .= "flex-direction: column; /* Stack items vertically */";
-        $css .= "align-items: center;    /* Center items horizontally */";
-        $css .= "justify-content: center;";
+
+        $alignment = 'center'; // Default value
+
+        if ($attr['overlayalignment'] === 'center') {
+            $alignment = 'center';
+        } elseif ($attr['overlayalignment'] === 'left') {
+            $alignment = 'self-start';
+        } elseif ($attr['overlayalignment'] === 'right') {
+            $alignment = 'self-end';
+        }
+        
+        $css .= "align-items: $alignment;";
+
+        // Handle justify-content
+        $justifyContent = 'center'; // Default value
+        if ($attr['overlayalignmentvertical'] === 'center') {
+            $justifyContent = 'center';
+        } elseif ($attr['overlayalignmentvertical'] === 'start') {
+            $justifyContent = 'flex-start';
+        } elseif ($attr['overlayalignmentvertical'] === 'end') {
+            $justifyContent = 'flex-end';
+        }
+        $css .= "justify-content: $justifyContent;";
+        
+        $css .= "box-sizing: border-box;";
+
+        $css .= "border-top: " . esc_attr($attr['overlayborder']['topwidth']) . " " . esc_attr($attr['overlayborder']['topstyle']) . " " . esc_attr($attr['overlayborder']['topcolor']) . ";";
+        $css .= "border-bottom: " . esc_attr($attr['overlayborder']['bottomwidth']) . " " . esc_attr($attr['overlayborder']['bottomstyle']) . " " . esc_attr($attr['overlayborder']['bottomcolor']) . ";";
+        $css .= "border-left: " . esc_attr($attr['overlayborder']['leftwidth']) . " " . esc_attr($attr['overlayborder']['leftstyle']) . " " . esc_attr($attr['overlayborder']['leftcolor']) . ";";
+        $css .= "border-right: " . esc_attr($attr['overlayborder']['rightwidth']) . " " . esc_attr($attr['overlayborder']['rightstyle']) . " " . esc_attr($attr['overlayborder']['rightcolor']) . ";";
+
+        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['buttonborderRadius']['left']) . ";";
+
+
     $css .= "}";
 
         /* Hover the image and show the overlay */

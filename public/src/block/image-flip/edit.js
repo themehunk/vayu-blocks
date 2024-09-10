@@ -15,6 +15,22 @@ const edit = ({ attributes, setAttributes }) => {
 
     const vayu_block_overlay_style = {
         background:attributes.overlaycolor,
+        borderTop: `${attributes.overlayborder.topwidth} ${attributes.overlayborder.topstyle} ${attributes.overlayborder.topcolor}`,
+        borderBottom: `${attributes.overlayborder.bottomwidth} ${attributes.overlayborder.bottomstyle} ${attributes.overlayborder.bottomcolor}`,
+        borderLeft: `${attributes.overlayborder.leftwidth} ${attributes.overlayborder.leftstyle} ${attributes.overlayborder.leftcolor}`,
+        borderRight: `${attributes.overlayborder.rightwidth} ${attributes.overlayborder.rightstyle} ${attributes.overlayborder.rightcolor}`,
+
+        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.buttonborderRadius.left}`,
+
+        alignItems: 
+            attributes.overlayalignment === 'center' ? 'center' :
+            attributes.overlayalignment === 'left' ? 'self-start' :
+            attributes.overlayalignment === 'right' ? 'self-end' : 'center',
+
+        justifyContent: 
+            attributes.overlayalignmentvertical === 'center' ? 'center' :
+            attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
+            attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
     }
 
     const vayu_blocks_heading_tag = {
@@ -62,6 +78,14 @@ const edit = ({ attributes, setAttributes }) => {
         : 'auto',
 
         filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
+
+        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
+        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
+        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
+        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+
+        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.buttonborderRadius.left}`,
+
     };
     
     return (

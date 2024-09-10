@@ -137,8 +137,6 @@
     z-index: 10;
     display: flex;
     flex-direction: column; /* Stack items vertically */
-    align-items: center;    /* Center items horizontally */
-    justify-content: center;
 }
 
 /* Hover the image and show the overlay */
@@ -215,7 +213,6 @@
     transform: rotateX(0);
 }
 
-
 .overlayzoom-in-up {
     transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
     opacity: 0;
@@ -272,7 +269,6 @@
     opacity: 1;
 }
 
-
 .overlaypartial-overlay {
     width: 50%; /* Custom size for partial overlay */
     opacity: 0;
@@ -288,6 +284,10 @@
 //     background:gray;
 // }
 
+.wp-block-vayu-blocks-image-flip{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
 
 .vayu_blocks_image_toolspanel_flip .e19lxcc00{
     grid-template-columns: repeat(1, minmax(0px, 1fr));
