@@ -19,74 +19,71 @@ import { usePostTypes } from './utils/usePostTypes';
 import { useTaxonomies } from './utils/useTaxonomies';
 import TaxonomyControls from './TaxonomyControls'; 
 
-const InsSettings = ({ attributes, setAttributes }) => {
-	const { query } = attributes;
-	const { order, orderBy, postType, taxQuery, search } = query;
+const InsSettings = ({ attributes, setQuery, setAttributes }) => { // Destructure directly from props
+	const { query, displayLayout } = attributes;
+	const {
+		order,
+		orderBy,
+		author: authorIds,
+		pages,
+		postType,
+		perPage,
+		offset,
+		sticky,
+		inherit,
+		taxQuery,
+		parents,
+	} = query;
 
 	// Fetch post types and taxonomies
-	const postTypesSelectOptions = usePostTypes();
-
+	const { postTypesTaxonomiesMap, postTypesSelectOptions } = usePostTypes();
 	const taxonomies = useTaxonomies(postType);
 
-	// State management for search query
-	const [querySearch, setQuerySearch] = useState(search);
-	
-	const onChangeDebounced = useCallback(
-		debounce(() => {
-			if (query.search !== querySearch) {
-				setAttributes({ query: { ...query, search: querySearch } });
-			}
-		}, 250),
-		[querySearch, query.search]
-	);
-
-	// Effect to handle debounced changes
-	useEffect(() => {
-		onChangeDebounced();
-		return onChangeDebounced.cancel;
-	}, [querySearch, onChangeDebounced]);
-
-	// Handle post type change
-	const onPostTypeChange = (newPostType) => {
-		const supportedTaxonomies = taxonomies.map((tax) => tax.slug);
-		const updatedTaxQuery = Object.entries(taxQuery || {}).reduce(
-			(acc, [taxonomySlug, terms]) => {
-				if (supportedTaxonomies.includes(taxonomySlug)) {
-					acc[taxonomySlug] = terms;
+	const onPostTypeChange = ( newValue ) => {
+		const updateQuery = { postType: newValue };
+		// We need to dynamically update the `taxQuery` property,
+		// by removing any not supported taxonomy from the query.
+		const supportedTaxonomies = postTypesTaxonomiesMap[ newValue ];
+		const updatedTaxQuery = Object.entries( taxQuery || {} ).reduce(
+			( accumulator, [ taxonomySlug, terms ] ) => {
+				if ( supportedTaxonomies.includes( taxonomySlug ) ) {
+					accumulator[ taxonomySlug ] = terms;
 				}
-				return acc;
+				return accumulator;
 			},
 			{}
 		);
+		updateQuery.taxQuery = !! Object.keys( updatedTaxQuery ).length
+			? updatedTaxQuery
+			: undefined;
 
-		// Update query with new post type and taxonomies
-		setAttributes({
-			query: {
-				...query,
-				postType: newPostType,
-				taxQuery: Object.keys(updatedTaxQuery).length ? updatedTaxQuery : null,
-			},
-		});
+		if ( newValue !== 'post' ) {
+			updateQuery.sticky = '';
+		}
+		// We need to reset `parents` because they are tied to each post type.
+		updateQuery.parents = [];
+		setQuery( updateQuery );
 	};
+	const [ querySearch, setQuerySearch ] = useState( query.search );
+	const onChangeDebounced = useCallback(
+		debounce( () => {
+			if ( query.search !== querySearch ) {
+				setQuery( { search: querySearch } );
+			}
+		}, 250 ),
+		[ querySearch, query.search ]
+	);
+	useEffect( () => {
+		onChangeDebounced();
+		return onChangeDebounced.cancel;
+	}, [ querySearch, onChangeDebounced ] );
 
 	// Order options for SelectControl
 	const orderOptions = [
-		{
-			label: __('Newest to oldest', 'vayu-blocks'),
-			value: 'date/desc',
-		},
-		{
-			label: __('Oldest to newest', 'vayu-blocks'),
-			value: 'date/asc',
-		},
-		{
-			label: __('A → Z', 'vayu-blocks'),
-			value: 'title/asc',
-		},
-		{
-			label: __('Z → A', 'vayu-blocks'),
-			value: 'title/desc',
-		},
+		{ label: __('Newest to oldest', 'vayu-blocks'), value: 'date/desc' },
+		{ label: __('Oldest to newest', 'vayu-blocks'), value: 'date/asc' },
+		{ label: __('A → Z', 'vayu-blocks'), value: 'title/asc' },
+		{ label: __('Z → A', 'vayu-blocks'), value: 'title/desc' },
 	];
 
 	// OrderControl Component to handle order selection
@@ -117,6 +114,7 @@ const InsSettings = ({ attributes, setAttributes }) => {
 						options={postTypesSelectOptions}
 						onChange={onPostTypeChange}
 					/>
+
 					{/* Order Control */}
 					<OrderControl
 						order={order}
@@ -130,39 +128,30 @@ const InsSettings = ({ attributes, setAttributes }) => {
 				<ToolsPanel
 					className="block-library-query-toolspanel__filters"
 					label={__('Filters', 'vayu-blocks')}
-					resetAll={() => {
-						setAttributes({
-							query: {
-								...query,
-								author: '',
-								parents: [],
-								search: '',
-								taxQuery: null,
-							},
-						});
-					}}
+					resetAll={ () => {
+						setQuery( {
+							author: '',
+							parents: [],
+							search: '',
+							taxQuery: null,
+						} );
+						setQuerySearch( '' );
+					} }
 				>
 					<ToolsPanelItem
-						label={__('Taxonomies', 'vayu-blocks')}
-						hasValue={() =>
-							Object.values(taxQuery || {}).some((terms) => terms.length)
-						}
-						onDeselect={() => setAttributes({ query: { ...query, taxQuery: null } })}
-					>
-						{/* Dynamically fetch and display taxonomies */}
-						<TaxonomyControls
-							taxonomies={taxonomies}
-							query={query}
-							onChange={(newTaxQuery) =>
-								setAttributes({
-									query: {
-										...query,
-										taxQuery: newTaxQuery,
-									},
-								})
+							label={ __( 'Taxonomies' ) }
+							hasValue={ () =>
+								Object.values( taxQuery || {} ).some(
+									( terms ) => !! terms.length
+								)
 							}
-						/>
-					</ToolsPanelItem>
+							onDeselect={ () => setQuery( { taxQuery: null } ) }
+						>
+							<TaxonomyControls
+								onChange={ setQuery }
+								query={ query }
+							/>
+						</ToolsPanelItem>
 				</ToolsPanel>
 			</InspectorControls>
 		</>
