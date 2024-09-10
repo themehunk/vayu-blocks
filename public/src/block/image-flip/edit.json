@@ -5,12 +5,10 @@
     "globalwidth":{
         "type":"number"
     },
-
     "image":{
         "type":"string",
         "default":""
     },
-    
     "opacity":{
         "type":"number",
         "default":1
@@ -27,7 +25,6 @@
         "type":"boolean",
         "default":true
     },
-
     "imagehvreffect":{
         "type":"string",
         "default":"none"
@@ -46,7 +43,7 @@
     },
     "imageCaption":{
         "type":"string",
-        "default":"this is Image Caption"
+        "default":"This is image caption"
     },
     "buttontext":{
         "type":"string",
@@ -62,7 +59,7 @@
     },
     "overlaycolor":{
         "type":"string",
-        "default":"#444"
+        "default":"#b1c5a4"
     },
     "heading": {
         "type": "object",
@@ -70,7 +67,8 @@
             "font": "default",
             "size": "16px",
             "appearance": "normal",
-            "letterSpacing": "0px"
+            "letterSpacing": "0px",
+            "letterCase": "none"
         }
     },
     "headingcolor":{
@@ -151,6 +149,28 @@
     "buttonpaddingright":{
         "type":"string",
         "default":"5px"
+    },
+   "focalPoint": {
+        "type": "object",
+        "default": {
+            "x": 0.5,
+            "y": 0.5
+        }
+    },
+    "imagecover":{
+        "type":"string",
+        "default": "cover"
+    },
+    "imageaspectratio":{
+        "type":"string",
+        "default":"orginal"
+    },
+    "duotone": {
+        "type":"string",
+        "default":""
+    },
+    "showPreview":{
+        "type":"boolean",
+        "default":false
     }
-
 }

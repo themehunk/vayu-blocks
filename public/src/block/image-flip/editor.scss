@@ -33,26 +33,27 @@
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
-    min-height: 300px;
+    // min-height: 300px;
 }
 
 .vayu_blocks_image_flip_image {
     width: 100%;
     height: 100%; /* Ensure the image fills the container */
     transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
-    object-fit: cover; /* Ensures the image content covers the container */
+     /* Ensures the image content covers the container */
     opacity:var(--image-opacity);
 }
 
 /* Apply the custom hover effect */
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);
-    filter: var(--image-filter-effect, none);
+    filter: var(--image-filter-effect-filter);
+    background:red;
     opacity: var(--image-hover-effect-opacity, 1);
 }
 
 .grayScale {
-    --image-filter-effect:grayscale(100%);
+    --image-filter-effect-filter:grayscale(100%);
 }
 
 /* Define hover effects using custom properties */
@@ -67,7 +68,7 @@
 }
 
 .sepia {
---image-filter-effect:sepia(100%);
+--image-filter-effect-filter:sepia(100%);
 }
 
 /* Define hover effects using custom properties */
@@ -116,11 +117,11 @@
 }
 
 .blur {
-    --image-filter-effect: blur(3px);
+    --image-filter-effect-filter: blur(3px);
 }
 
 .shine {
-    --image-filter-effect: grayscale(100%);
+    --image-filter-effect-filter: grayscale(100%);
 }
 
 /* Overlay styles */
@@ -132,7 +133,7 @@
     top: 0;
     left: 0;
     transition: var(--overlay-transitiontime) ease;
-    opacity: 0; /* Initially hidden */
+    opacity: var(--overlay-opacity); /* Initially hidden */
     z-index: 10;
     display: flex;
     flex-direction: column; /* Stack items vertically */
@@ -206,7 +207,6 @@
     transform: rotateY(0);
 }
 
-
 .overlayflip-vertical {
     transform: rotateX(90deg);
 }
@@ -219,7 +219,7 @@
 .overlayzoom-in-up {
     transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {
@@ -231,7 +231,7 @@
 .overlayzoom-in-left {
     transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {
@@ -239,11 +239,21 @@
     opacity: 1;
 }
 
+.vayu_block_animation_overlay_inside{
+    transition-delay: calc(var(--overlay-transitiontime) - 0.3s) !important;
+    animation-fill-mode: forwards !important;
+    opacity:0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {
+    opacity:1;
+}
 
 .overlayzoom-in-right {
     transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
@@ -254,7 +264,7 @@
 .overlayzoom-in-down {
     transform: scale(0.5) translateY(50%); /* Larger movement down for more emphasis */
     opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {
@@ -272,8 +282,24 @@
     opacity: 1;
 }
 
-.vayu-blocks-image-flip-main-container {
-    min-height: 300px; /* Adjust this value as needed */
-    position: relative; /* Ensure positioning context for child elements */
-    background:gray;
+// .vayu-blocks-image-flip-main-container {
+//     min-height: 300px; /* Adjust this value as needed */
+//     position: relative; /* Ensure positioning context for child elements */
+//     background:gray;
+// }
+
+
+.vayu_blocks_image_toolspanel_flip .e19lxcc00{
+    grid-template-columns: repeat(1, minmax(0px, 1fr));
+    padding-left: 0% ;
+    padding-right: 0%;
+    padding-bottom: 0%;
+}
+
+.vayu_blocks_image_flip-duotone-filters {
+    display:none;
+}
+
+.vayu_blocks_show_preview_button{
+    margin-bottom:10px;
 }
