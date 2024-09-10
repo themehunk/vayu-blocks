@@ -28,7 +28,7 @@ class Vayu_blocks_image_flip {
         $image_html = '';
         $animated = isset($attributes['className']) ? esc_attr($attributes['className']) : ''; // animation
         $uniqueId = isset($attributes['uniqueId']) ? esc_attr($attributes['uniqueId']) : '';
-        $imageSrc = !empty($attributes['image']) ? esc_url($attributes['image']) : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png';
+        $imageSrc = !empty($attributes['image']) ? esc_url($attributes['image']) :  plugins_url('../../assets/img/no-image.png', __FILE__);
 
         $imageAlt = isset($attributes['imageAlt']) ? esc_attr($attributes['imageAlt']) : 'Image ' . rand(1, 100);
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';

@@ -3,6 +3,8 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 
+import noimage from '../../../../inc/assets/img/no-image.png';
+
 const edit = ({ attributes, setAttributes }) => {
     
     // Utility function to generate a unique ID
@@ -285,7 +287,7 @@ const edit = ({ attributes, setAttributes }) => {
 
                             <img 
                                 style= {vayu_blocks_image_settings}
-                                src={attributes.image ? attributes.image : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png'}                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
+                                src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
                     
