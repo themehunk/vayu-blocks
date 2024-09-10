@@ -129,7 +129,6 @@ const edit = ({ attributes, setAttributes }) => {
                                     <feFuncA type="table" tableValues="0 1"></feFuncA>
                                 </feComponentTransfer>
                             </filter>
-
                             {/* Red and Green */}
                             <filter id="duotone-red-green">
                                 <feColorMatrix type="matrix" result="gray"

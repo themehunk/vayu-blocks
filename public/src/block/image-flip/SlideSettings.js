@@ -227,12 +227,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Fade In Right', 'vayu-blocks'), value: 'overlayfade-in-right' },
                             { label: __('Flip Horizontal', 'vayu-blocks'), value: 'overlayflip-horizontal' },
                             { label: __('Flip Vertical', 'vayu-blocks'), value: 'overlayflip-vertical' },
+                            { label: __('Zoom In circle', 'vayu-blocks'), value: 'overlayzoom-in-circle' },
                             { label: __('Zoom In Up', 'vayu-blocks'), value: 'overlayzoom-in-up' },
                             { label: __('Zoom In Left', 'vayu-blocks'), value: 'overlayzoom-in-left' },
                             { label: __('Zoom In Right', 'vayu-blocks'), value: 'overlayzoom-in-right' },
                             { label: __('Zoom In Down', 'vayu-blocks'), value: 'overlayzoom-in-down' },
                             { label: __('Partial Overlay', 'vayu-blocks'), value: 'overlaypartial-overlay' },
-                          
                         ]}
                         onChange={(value) => setAttributes({ imageoverlayouteffect: value })}
                     />

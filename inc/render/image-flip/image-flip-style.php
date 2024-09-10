@@ -494,12 +494,25 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 1; /* Fade in */";
     $css .= "}";
 
+    $css .= ".overlayzoom-in-circle {";
+        $css .= "transform: scale(0); /* Starts as a small circle from center */";
+        $css .= "opacity: 0;";
+        $css .= "border-radius: 50%; /* Ensures a perfect circle initially */";
+        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
+    $css .= "}";
+
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {";
+        $css .= "transform: scale(1); /* Expands outward to fill the area */";
+        $css .= "opacity: 1;";
+        $css .= "border-radius: 0%; /* Transitions to a rectangle or original shape */";
+    $css .= "}";
+
     /* Repeat the same approach for other effects */
 
     $css .= ".overlayfade-in-down {";
         $css .= "transform: translateY(-100%); /* Start from above the container */";
         $css .= "opacity: 0; /* Initially hidden */";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease; /* Smooth transition */";
+        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
     $css .= "}";
 
     $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {";

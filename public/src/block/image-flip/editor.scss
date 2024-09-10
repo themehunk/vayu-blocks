@@ -49,7 +49,6 @@
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);
     filter: var(--image-filter-effect-filter);
-    background:red;
     opacity: var(--image-hover-effect-opacity, 1);
 }
 
@@ -252,6 +251,21 @@
     opacity: 0;
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
+
+/* Initial state: starts small in the center as a circle */
+.overlayzoom-in-circle {
+    transform: scale(0); /* Starts from center as a small circle */
+    opacity: 0;
+    border-radius: 50% !important; /* Ensures it's a perfect circle */
+    transition: transform var(--overlay-transitiontime) ease-out, opacity var(--overlay-transitiontime) ease-out; /* Fast circular animation */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {
+    transform: scale(1); /* Expands outward to full size */
+    opacity: 1;
+    border-radius:0% !important;
+}
+
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
     transform: scale(1) translateX(0);
