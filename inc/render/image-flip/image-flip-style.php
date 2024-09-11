@@ -226,6 +226,8 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "    height: auto;";
         $css .= "    overflow: hidden; /* Keeps the outer frame fixed */";
         $css .= "    position: relative;";
+        $css .= "perspective: 1000px;";
+        $css .= "transform-style: preserve-3d;";
     $css .= "}";
 
     // Assuming $attr['imagetransitiontime'] contains the transition time value
@@ -233,6 +235,10 @@ function generate_inline_image_flip_styles($attr) {
 
     // Append CSS rules to $css
     $css .= "$wrapper .vayu_blocks_image_flip_image {";
+
+        if($attr['imagehvreffect'] === 'flip-front' || $attr['inagehvreffect']) {
+            $css .= "backface-visibility: hidden;";
+        }
 
         $css .= "width: 100%;";
         $css .= "height: 100%;";
@@ -292,6 +298,14 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
     $css .= "}";
 
+    $css .= ".flip-front {";
+        $css .= "  --image-hover-effect-transform: rotateY(180deg);";
+    $css .= "}";
+
+    $css .= ".flip-back {";
+        $css .= "  --image-hover-effect-transform: rotateX(180deg);";
+    $css .= "}";
+        
     /* Grayscale */
     $css .= ".grayScale {";
         $css .= "    --image-filter-effect: grayscale(100%);";
