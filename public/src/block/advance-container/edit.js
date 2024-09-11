@@ -301,6 +301,8 @@ export default function Edit({
 
 					containerStyles = {...containerStyles,
 						maxWidth: attributes.fullcontentWidth + attributes.fullcontentWidthUnit,
+						marginLeft:'auto',
+						marginRight:'auto',
 					}; 
 	
 				}
