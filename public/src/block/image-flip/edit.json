@@ -71,6 +71,16 @@
             "letterCase": "none"
         }
     },
+    "button": {
+        "type": "object",
+        "default": {
+            "font": "default",
+            "size": "16px",
+            "appearance": "normal",
+            "letterSpacing": "0px",
+            "letterCase": "none"
+        }
+    },
     "headingcolor":{
         "type":"string",
         "default":"black"
@@ -104,6 +114,14 @@
     "buttoncolor":{
         "type":"string",
         "default":"white"
+    },
+    "buttonhvrbackground":{
+        "type":"string",
+        "default":"gray"
+    },
+    "buttonhvrcolor":{
+        "type":"string",
+        "default":"black"
     },
     "buttonborderRadius":{
         "type":"object",
@@ -172,5 +190,75 @@
     "showPreview":{
         "type":"boolean",
         "default":false
+    },
+    "overlayborderRadius":{
+        "type":"object",
+        "default":{
+        "top": "3px",
+        "bottom": "3px",
+        "left": "3px",
+        "right": "3px"
+    }
+    },
+    "overlayborder":{
+        "type":"object",
+        "default":{
+        "topcolor": "black",
+        "topwidth": "1px",
+        "topstyle": "solid",
+
+        "bottomcolor": "black",
+        "bottomwidth": "1px",
+        "bottomstyle": "solid",
+
+        "leftcolor": "black",
+        "leftwidth": "1px",
+        "leftstyle": "solid",
+
+        "rightcolor": "black",
+        "rightwidth": "1px",
+        "rightstyle": "solid"
+    }
+    },
+    "overlayalignment":{
+        "type":"string",
+        "default":"center"
+    },
+    "overlayalignmentvertical":{
+        "type":"string",
+        "default":"center"
+    },
+    "imageborderRadius":{
+        "type":"object",
+        "default":{
+        "top": "3px",
+        "bottom": "3px",
+        "left": "3px",
+        "right": "3px"
+    }
+    },
+    "imageborder":{
+        "type":"object",
+        "default":{
+        "topcolor": "black",
+        "topwidth": "1px",
+        "topstyle": "solid",
+
+        "bottomcolor": "black",
+        "bottomwidth": "1px",
+        "bottomstyle": "solid",
+
+        "leftcolor": "black",
+        "leftwidth": "1px",
+        "leftstyle": "solid",
+
+        "rightcolor": "black",
+        "rightwidth": "1px",
+        "rightstyle": "solid"
+    }
+    },
+    "gap": {
+        "type":"number",
+        "default":0
     }
 }

@@ -233,14 +233,19 @@ function generate_inline_image_flip_styles($attr) {
 
     // Append CSS rules to $css
     $css .= "$wrapper .vayu_blocks_image_flip_image {";
-        $css .= "    width: 100%;";
-        $css .= "    height: 100%; /* Ensure the image fills the container */";
+
+        $css .= "width: 100%;";
+        $css .= "height: 100%;";
+        $css .= "box-sizing: border-box;";
+
         $css .= "    transition: transform ${transitionTime}s ease, filter ${transitionTime}s ease, opacity ${transitionTime}s ease;";
-        $css .= "    /* Ensures the image content covers the container */";
+
         $css .= "    opacity: 1;"; // Assuming a default opacity value
         $css .= "    object-fit: " . esc_attr($attr['imagecover']) . ";"; // Assuming this controls object-fit
+
         // Apply focal point if it exists, default to center
         $css .= "    object-position: " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['x'] * 100) : '50') . "% " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['y'] * 100) : '50') . "%;";
+
         // Apply aspect ratio if it exists
         if ($attr['imageaspectratio'] !== 'none') {
             if ($attr['imageaspectratio'] === 'original') {
@@ -263,6 +268,13 @@ function generate_inline_image_flip_styles($attr) {
                 $css .= "    filter: url(" . esc_attr($attr['duotone'][0]) . ") !important;";
             }
         }
+
+        $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
+        $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
+        $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
+        $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
+
+        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
 
     $css .= "}";
 
@@ -380,7 +392,13 @@ function generate_inline_image_flip_styles($attr) {
 
 
     $css .= "$wrapper .vayu_blocks_image_flip_button {";
+        $css .= "font-family: " . esc_attr($attr['button']['font']) . ";";
+        $css .= "font-size: " . esc_attr($attr['button']['size']) . ";";
+        $css .= "font-weight: " . esc_attr($attr['button']['appearance']) . ";";
+        $css .= "letter-spacing: " . esc_attr($attr['button']['letterSpacing']) . ";";
+
         $css .= "background: " . esc_attr($attr['buttonbackground']) . ";";
+
         $css .= "border-top: " . esc_attr($attr['buttonborder']['topwidth']) . " " . esc_attr($attr['buttonborder']['topstyle']) . " " . esc_attr($attr['buttonborder']['topcolor']) . ";";
         $css .= "border-bottom: " . esc_attr($attr['buttonborder']['bottomwidth']) . " " . esc_attr($attr['buttonborder']['bottomstyle']) . " " . esc_attr($attr['buttonborder']['bottomcolor']) . ";";
         $css .= "border-left: " . esc_attr($attr['buttonborder']['leftwidth']) . " " . esc_attr($attr['buttonborder']['leftstyle']) . " " . esc_attr($attr['buttonborder']['leftcolor']) . ";";
@@ -391,9 +409,16 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "padding: " . esc_attr($attr['buttonpaddingtop']) . " " . esc_attr($attr['buttonpaddingright']) . " " . esc_attr($attr['buttonpaddingbottom']) . " " . esc_attr($attr['buttonpaddingleft']) . ";";
 
         $css .= "color: " . esc_attr($attr['buttoncolor']) . ";";
+
+        $css .= "cursor:pointer;";
+
     $css .= "}";
 
-
+    $css .= "$wrapper .vayu_blocks_image_flip_button:hover {";
+        $css .= "background: " . $attr['buttonhvrbackground'] . " !important;";
+        $css .= "color: " . $attr['buttonhvrcolor'] . " !important;";
+    $css .= "}";
+    
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . "; /* Default background */";
@@ -406,9 +431,42 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 0; ";
         $css .= "z-index: 10;";
         $css .= "display: flex;";
-        $css .= "flex-direction: column; /* Stack items vertically */";
-        $css .= "align-items: center;    /* Center items horizontally */";
-        $css .= "justify-content: center;";
+        $css .= "flex-direction: column;";
+        $css .= "gap:" . esc_attr($attr['gap']) . "px;";
+
+        $alignment = 'center'; // Default value
+
+        if ($attr['overlayalignment'] === 'center') {
+            $alignment = 'center';
+        } elseif ($attr['overlayalignment'] === 'left') {
+            $alignment = 'self-start';
+        } elseif ($attr['overlayalignment'] === 'right') {
+            $alignment = 'self-end';
+        }
+        
+        $css .= "align-items: $alignment;";
+
+        // Handle justify-content
+        $justifyContent = 'center'; // Default value
+        if ($attr['overlayalignmentvertical'] === 'center') {
+            $justifyContent = 'center';
+        } elseif ($attr['overlayalignmentvertical'] === 'start') {
+            $justifyContent = 'flex-start';
+        } elseif ($attr['overlayalignmentvertical'] === 'end') {
+            $justifyContent = 'flex-end';
+        }
+        $css .= "justify-content: $justifyContent;";
+        
+        $css .= "box-sizing: border-box;";
+
+        $css .= "border-top: " . esc_attr($attr['overlayborder']['topwidth']) . " " . esc_attr($attr['overlayborder']['topstyle']) . " " . esc_attr($attr['overlayborder']['topcolor']) . ";";
+        $css .= "border-bottom: " . esc_attr($attr['overlayborder']['bottomwidth']) . " " . esc_attr($attr['overlayborder']['bottomstyle']) . " " . esc_attr($attr['overlayborder']['bottomcolor']) . ";";
+        $css .= "border-left: " . esc_attr($attr['overlayborder']['leftwidth']) . " " . esc_attr($attr['overlayborder']['leftstyle']) . " " . esc_attr($attr['overlayborder']['leftcolor']) . ";";
+        $css .= "border-right: " . esc_attr($attr['overlayborder']['rightwidth']) . " " . esc_attr($attr['overlayborder']['rightstyle']) . " " . esc_attr($attr['overlayborder']['rightcolor']) . ";";
+
+        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
+
+
     $css .= "}";
 
         /* Hover the image and show the overlay */
@@ -436,12 +494,25 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 1; /* Fade in */";
     $css .= "}";
 
+    $css .= ".overlayzoom-in-circle {";
+        $css .= "transform: scale(0); /* Starts as a small circle from center */";
+        $css .= "opacity: 0;";
+        $css .= "border-radius: 50%; /* Ensures a perfect circle initially */";
+        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
+    $css .= "}";
+
+    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {";
+        $css .= "transform: scale(1); /* Expands outward to fill the area */";
+        $css .= "opacity: 1;";
+        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
+    $css .= "}";
+
     /* Repeat the same approach for other effects */
 
     $css .= ".overlayfade-in-down {";
         $css .= "transform: translateY(-100%); /* Start from above the container */";
         $css .= "opacity: 0; /* Initially hidden */";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease; /* Smooth transition */";
+        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
     $css .= "}";
 
     $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {";
@@ -536,8 +607,9 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "opacity: 1;";
     $css .= "}";
 
-    $transitionDelay = max(0, esc_attr($attr['overlaytransitiontime']) - 0.3);
-
+    $transitionTime = isset($attr['overlaytransitiontime']) ? esc_attr($attr['overlaytransitiontime']) : 0;
+    $transitionDelay = max(0, $transitionTime - ($transitionTime / 2));
+    
     $css .= "$wrapper .vayu_block_animation_overlay_inside {";
         $css .= "    transition-delay: " . $transitionDelay . "s !important;";
         $css .= "    animation-fill-mode: forwards !important;";

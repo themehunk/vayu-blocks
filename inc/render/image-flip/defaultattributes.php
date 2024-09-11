@@ -50,6 +50,15 @@ return array(
         'duotone' => '',
         'showPreview' => false,
 
+        'button' => array(
+            'font' => 'default',
+            'size' => '16px',
+            'appearance' => 'normal',
+            'letterSpacing' => '0px',
+            'letterCase' => 'none',
+        ),
+        'gap' => 0,
+
     // Button Border
         'buttonborder' => array(
             'topcolor' => 'black',
@@ -73,6 +82,59 @@ return array(
             'left' => '3px',
             'right' => '3px',
         ),
+    // overlay Border
+        'overlayborder' => array(
+            'topcolor' => 'black',
+            'topwidth' => '1px',
+            'topstyle' => 'solid',
+            'bottomcolor' => 'black',
+            'bottomwidth' => '1px',
+            'bottomstyle' => 'solid',
+            'leftcolor' => 'black',
+            'leftwidth' => '1px',
+            'leftstyle' => 'solid',
+            'rightcolor' => 'black',
+            'rightwidth' => '1px',
+            'rightstyle' => 'solid',
+        ),
+
+    // overlay Border Radius
+        'overlayborderRadius' => array(
+            'top' => '3px',
+            'bottom' => '3px',
+            'left' => '3px',
+            'right' => '3px',
+        ),
+
+        'overlayalignment' => 'center',
+        'overlayalignmentvertical' => 'center',
+
+        // image Border
+            'imageborder' => array(
+                'topcolor' => 'black',
+                'topwidth' => '1px',
+                'topstyle' => 'solid',
+                'bottomcolor' => 'black',
+                'bottomwidth' => '1px',
+                'bottomstyle' => 'solid',
+                'leftcolor' => 'black',
+                'leftwidth' => '1px',
+                'leftstyle' => 'solid',
+                'rightcolor' => 'black',
+                'rightwidth' => '1px',
+                'rightstyle' => 'solid',
+            ),
+    
+        // image Border Radius
+            'imageborderRadius' => array(
+                'top' => '3px',
+                'bottom' => '3px',
+                'left' => '3px',
+                'right' => '3px',
+            ),
+
+            'buttonhvrbackground' => 'gray',
+            'buttonhvrcolor' => 'black',
         
     //Advanced
         'classNamemain' => '',

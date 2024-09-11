@@ -3,6 +3,8 @@ import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 
+import noimage from '../../../../inc/assets/img/no-image.png';
+
 const edit = ({ attributes, setAttributes }) => {
     
     // Utility function to generate a unique ID
@@ -13,10 +15,30 @@ const edit = ({ attributes, setAttributes }) => {
         setAttributes({ uniqueId: generateUniqueId() });
     }
 
+    //overlay wrapper style
     const vayu_block_overlay_style = {
         background:attributes.overlaycolor,
+        borderTop: `${attributes.overlayborder.topwidth} ${attributes.overlayborder.topstyle} ${attributes.overlayborder.topcolor}`,
+        borderBottom: `${attributes.overlayborder.bottomwidth} ${attributes.overlayborder.bottomstyle} ${attributes.overlayborder.bottomcolor}`,
+        borderLeft: `${attributes.overlayborder.leftwidth} ${attributes.overlayborder.leftstyle} ${attributes.overlayborder.leftcolor}`,
+        borderRight: `${attributes.overlayborder.rightwidth} ${attributes.overlayborder.rightstyle} ${attributes.overlayborder.rightcolor}`,
+
+        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.overlayborderRadius.left}`,
+
+        alignItems: 
+            attributes.overlayalignment === 'center' ? 'center' :
+            attributes.overlayalignment === 'left' ? 'self-start' :
+            attributes.overlayalignment === 'right' ? 'self-end' : 'center',
+
+        justifyContent: 
+            attributes.overlayalignmentvertical === 'center' ? 'center' :
+            attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
+            attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+
+        gap:`${attributes.gap}px`
     }
 
+    //overlay heading style
     const vayu_blocks_heading_tag = {
         fontFamily: attributes.heading.font,
         fontSize: attributes.heading.size,
@@ -26,6 +48,7 @@ const edit = ({ attributes, setAttributes }) => {
         color: attributes.headingcolor,   
     };
 
+    //overlay caption style
     const vayu_blocks_caption_tag = {
         fontFamily: attributes.caption.font,
         fontSize: attributes.caption.size,
@@ -35,7 +58,15 @@ const edit = ({ attributes, setAttributes }) => {
         color: attributes.captioncolor,   
     };
     
+    //overlay button style
     const vayu_blocks_image_flip_button_style = {
+
+        fontFamily: attributes.button.font,
+        fontSize: attributes.button.size,
+        fontWeight: attributes.button.appearance,
+        letterSpacing: attributes.button.letterSpacing,
+        letterCase: attributes.button.letterCase,
+
         background: attributes.buttonbackground,
         borderTop: `${attributes.buttonborder.topwidth} ${attributes.buttonborder.topstyle} ${attributes.buttonborder.topcolor}`,
         borderBottom: `${attributes.buttonborder.bottomwidth} ${attributes.buttonborder.bottomstyle} ${attributes.buttonborder.bottomcolor}`,
@@ -47,9 +78,11 @@ const edit = ({ attributes, setAttributes }) => {
         padding: `${attributes.buttonpaddingtop} ${attributes.buttonpaddingright} ${attributes.buttonpaddingbottom} ${attributes.buttonpaddingleft}`,
 
         color:attributes.buttoncolor,
+        cursor:'pointer'
 
     };
     
+    //main container image style
     const vayu_blocks_image_settings = {
         objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
         // Apply focal point if it exists, default to center
@@ -62,6 +95,14 @@ const edit = ({ attributes, setAttributes }) => {
         : 'auto',
 
         filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
+
+        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
+        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
+        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
+        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+
+        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
+
     };
     
     return (
@@ -71,6 +112,7 @@ const edit = ({ attributes, setAttributes }) => {
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
 
+                    {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
                         <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
                             {/* Orange and Red */}
@@ -87,7 +129,6 @@ const edit = ({ attributes, setAttributes }) => {
                                     <feFuncA type="table" tableValues="0 1"></feFuncA>
                                 </feComponentTransfer>
                             </filter>
-
                             {/* Red and Green */}
                             <filter id="duotone-red-green">
                                 <feColorMatrix type="matrix" result="gray"
@@ -245,12 +286,13 @@ const edit = ({ attributes, setAttributes }) => {
 
                             <img 
                                 style= {vayu_blocks_image_settings}
-                                src={attributes.image ? attributes.image : 'http://localhost/wordpress/wp-content/plugins/elementor/assets/images/placeholder.png'}                                alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
+                                src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
                     
                         {/* Conditionally render overlay */}
                         {attributes.overlay && (
+
                             <div className={`vayu_blocks_overlay_main_wrapper ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
                                
                                 <attributes.headingtag style = {vayu_blocks_heading_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
@@ -267,7 +309,7 @@ const edit = ({ attributes, setAttributes }) => {
                                         href={attributes.buttonlink}
                                         target={attributes.buttonnewtab ? "_blank" : "_self"}
                                         rel={attributes.buttonnewtab ? "noopener noreferrer" : undefined} // Security best practice
-                                        style={{ textDecoration: 'none' }} // Optional: Remove underline from the link
+                                        style={{ textDecoration: 'none',cursor:'pointer' }} // Optional: Remove underline from the link
                                     >
                                         <button
                                             type="button"

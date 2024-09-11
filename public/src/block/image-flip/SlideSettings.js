@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
     ToggleControl,
@@ -9,7 +8,6 @@ import {
     Button,
     TextareaControl,
     TextControl,
-    __experimentalBoxControl as BoxControl,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
     FocalPointPicker,
@@ -18,16 +16,8 @@ import {
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
 import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
-import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
-
-    const [activeButton, setActiveButton] = useState('content');
-
-    const getView = useSelect((select) => {
-        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
-    }, []);
 
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
@@ -80,6 +70,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
             <div class="vayu_blocks_image-flip-settings_main">
 
+                {/* Background Image */}
                 <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
                     <h4>{__('Background','vayu-blocks')}</h4>
                     {attributes.image ? (
@@ -166,9 +157,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                 </PanelBody >
 
+                {/* Overlay and animation effect  */}
                 <PanelBody title={__('Image Effect','vayu-blocks')} initialOpen={false}>
                     <SelectControl
                         label={__('Image Filter', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
                         value={attributes.imagehvrfilter}
                         options={[
                             { label: __('None', 'vayu-blocks'), value: 'none' },
@@ -179,6 +172,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         ]}
                         onChange={(value) => setAttributes({ imagehvrfilter: value })}
                     />
+                    <p>If Duotone is applied, the image Filter won't work but image effect will.</p>
 
                     <SelectControl
                         label={__('Image Effect', 'vayu-blocks')}
@@ -223,12 +217,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Fade In Right', 'vayu-blocks'), value: 'overlayfade-in-right' },
                             { label: __('Flip Horizontal', 'vayu-blocks'), value: 'overlayflip-horizontal' },
                             { label: __('Flip Vertical', 'vayu-blocks'), value: 'overlayflip-vertical' },
+                            { label: __('Zoom In circle', 'vayu-blocks'), value: 'overlayzoom-in-circle' },
                             { label: __('Zoom In Up', 'vayu-blocks'), value: 'overlayzoom-in-up' },
                             { label: __('Zoom In Left', 'vayu-blocks'), value: 'overlayzoom-in-left' },
                             { label: __('Zoom In Right', 'vayu-blocks'), value: 'overlayzoom-in-right' },
                             { label: __('Zoom In Down', 'vayu-blocks'), value: 'overlayzoom-in-down' },
                             { label: __('Partial Overlay', 'vayu-blocks'), value: 'overlaypartial-overlay' },
-                          
                         ]}
                         onChange={(value) => setAttributes({ imageoverlayouteffect: value })}
                     />
@@ -251,15 +245,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                 </PanelBody>
 
-                <PanelBody title={__('Image Overlay')} initialOpen={false}>
+                {/* overlay content */}
+                <PanelBody title={__('Overlay Content')} initialOpen={false}>
+
                 <ToggleControl
                     className='vayu_blocks_togglecontrol'
                     label={__('Overlay', 'vayu-blocks')}
                     checked={attributes.overlay}
-                    onChange={(value) =>  setAttributes({overlay:value})}
+                    onChange={(value) =>  setAttributes({overlay:value, showPreview: false})}
                 />
                 
-
                 {attributes.overlay && (
                     <>
                         {/* Show Preview Button */}
@@ -275,76 +270,43 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             The overlay will be visible, and the animation effect will be turned off.
                         </p>
 
-
-                        <div>
-                            <Vayu_Block_Toggle
-                                value={activeButton}
-                                onChange={(value) => setActiveButton(value)}
-                                isBlock={true}
-                                __nextHasNoMarginBottom={true}
-                                options={[
-                                    { value: 'content', label: 'Content' },
-                                    { value: 'color', label: 'Color' },
-                                ]}
+                        <>
+                            <TextareaControl
+                                label={__('Heading', 'vayu-blocks')}
+                                onChange={(value) =>  setAttributes({headingtext:value})}
+                                value={attributes.headingtext}
                             />
-                        </div>
 
-                        <div>
-                            {activeButton === 'content' && (
-                                <>
-                                    <TextareaControl
-                                        label={__('Heading', 'vayu-blocks')}
-                                        onChange={(value) =>  setAttributes({headingtext:value})}
-                                        value={attributes.headingtext}
-                                    />
+                            <TextareaControl
+                                label={__('Image Caption', 'vayu-blocks')}
+                                onChange={(value) =>  setAttributes({imageCaption:value})}
+                                value={attributes.imageCaption}
+                            />
 
-                                    <TextareaControl
-                                        label={__('Image Caption', 'vayu-blocks')}
-                                        onChange={(value) =>  setAttributes({imageCaption:value})}
-                                        value={attributes.imageCaption}
-                                    />
+                            <TextareaControl
+                                label={__('Button Text', 'vayu-blocks')}
+                                onChange={(value) =>  setAttributes({buttontext:value})}
+                                value={attributes.buttontext}
+                            />
 
-                                    <TextareaControl
-                                        label={__('Button Text', 'vayu-blocks')}
-                                        onChange={(value) =>  setAttributes({buttontext:value})}
-                                        value={attributes.buttontext}
-                                    />
+                            <TextControl
+                                className='vayu_blocks_textareatextcontrol'
+                                label="Link URL"
+                                onChange={(value) =>  setAttributes({buttonlink:value})}
+                                value={attributes.buttonlink}
+                                placeholder="Enter a URL"
+                            />
 
-                                    <TextControl
-                                        className='vayu_blocks_textareatextcontrol'
-                                        label="Link URL"
-                                        onChange={(value) =>  setAttributes({buttonlink})}
-                                        value={attributes.buttonlink}
-                                        placeholder="Enter a URL"
-                                    />
+                            <ToggleControl
+                                className='vayu_blocks_togglecontrol'
+                                label="Open in new tab"
+                                checked={attributes.buttonnewtab}
+                                onChange={(value) =>  setAttributes({buttonnewtab:value})}
+                            />
 
-                                    <ToggleControl
-                                        className='vayu_blocks_togglecontrol'
-                                        label="Open in new tab"
-                                        checked={attributes.buttonnewtab}
-                                        onChange={(value) =>  setAttributes({buttonnewtab:value})}
-                                    />
-
-                                </>
-                            )}
-
-                            {activeButton === 'color' && (
-                                <>
-                                <ColorPanel
-                                    colorTool={[
-                                        {
-                                            active: ['gradient'],
-                                            name: 'Overlay',
-                                            value: attributes.overlaycolor,
-                                            attribute: 'color',
-                                        }
-                                    ]}
-                                    handelColorPanel={(value)=>setAttributes({overlaycolor:value.color})}
-                                    initialTab="color"
-                                />
-                            </>
-                            )}
-                        </div>
+                        </>
+                            
+                           
                     </>
                 )}
 

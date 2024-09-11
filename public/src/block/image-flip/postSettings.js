@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typography/Vayu_blocks_typographycontrol';
@@ -6,7 +6,14 @@ import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typogr
 import {
     PanelBody,
     SelectControl,
+    RangeControl
 } from '@wordpress/components';
+
+import {
+    ToogleGroupControl,
+} from '../../components/index.js';
+
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {Vayu_Block_Dimension_Control} from '../advance-slider/Components/Dimesions/Vayu_Block_Dimension_Control';
 import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
@@ -52,6 +59,14 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handlebuttonTypographyChange = (newValues) => {
+    
+        if(newValues){
+            setAttributes({ button: newValues})
+        }
+
+    };
+
     const handlenewbuttonDimensionChange = (newDimensions) => {
 
             if(newDimensions.padding.top){
@@ -74,6 +89,12 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
         if(value.background){
             setAttributes({buttonbackground:value.background})
+        }
+        if(value.colorhvr){
+            setAttributes({buttonhvrcolor:value.colorhvr})
+        }
+        if(value.backgroundhvr){
+            setAttributes({buttonhvrbackground:value.backgroundhvr})
         }
     }
 
@@ -167,10 +188,368 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         setAttributes({ buttonborder: updatedAttributes });
     };
+
+    const vayu_blocks_handleoverlayBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
     
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ overlayborderRadius: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ overlayborder: updatedAttributes });
+    };
+    
+    const vayu_blocks_handleimageBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ imageborderRadius: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ imageborder: updatedAttributes });
+    };
+
     return (
         <>
         
+            {/* overlay style*/}
+            <PanelBody title={__('Overlay', 'vayu-blocks')} initialOpen={false}>
+
+                <h4>
+                {__('Alignment', 'vayu-blocks')}
+                </h4>
+                <ToogleGroupControl
+                    label={__('Alignment', 'vayu-blocks')}
+                    value={ attributes.overlayalignment}
+                    onChange={(value) => setAttributes({overlayalignment:value})}
+                    options={[
+                        {
+                            icon: HorizontalLeft,
+                            label: __( 'Left', 'vayu-blocks' ),
+                            value: 'left'
+                        },
+                        {
+                            icon: Center,
+                            label: __( 'Center', 'vayu-blocks' ),
+                            value: 'center'
+                        },
+                        {
+                            icon: HorizontalRight,
+                            label: __( 'Right', 'vayu-blocks' ),
+                            value: 'right'
+                        },
+                    ]}
+                    
+                    hasIcon
+                />
+
+                <ToogleGroupControl
+                    label={__('Alignment', 'vayu-blocks')}
+                    value={ attributes.overlayalignmentvertical}
+                    onChange={(value) => setAttributes({overlayalignmentvertical:value})}
+                    options={[
+                        {
+                            icon: Start,
+                            label: __( 'start', 'vayu-blocks' ),
+                            value: 'start'
+                        },
+                        {
+                            icon: Center,
+                            label: __( 'Center', 'vayu-blocks' ),
+                            value: 'center'
+                        },
+                        {
+                            icon: End,
+                            label: __( 'end', 'vayu-blocks' ),
+                            value: 'end'
+                        },
+                    ]}
+                    
+                    hasIcon
+                />
+                <br/>
+
+                <ColorPanel
+                    colorTool={[
+                        {
+                            active: ['gradient'],
+                            name: 'Overlay',
+                            value: attributes.overlaycolor,
+                            attribute: 'color',
+                        }
+                    ]}
+                    handelColorPanel={(value)=>setAttributes({overlaycolor:value.color})}
+                    initialTab="color"
+                />
+
+                <Vayu_Block_Border_Control
+                    value={{border:{
+                        top:{
+                            color: attributes.overlayborder.topcolor,
+                            width: attributes.overlayborder.topwidth,
+                            style: attributes.overlayborder.topstyle,
+                        },
+                        bottom: {
+                            color: attributes.overlayborder.bottomcolor,
+                            width: attributes.overlayborder.bottomwidth,
+                            style: attributes.overlayborder.bottomstyle,
+                        },
+                        left: {
+                            color: attributes.overlayborder.leftcolor,
+                            width: attributes.overlayborder.leftwidth,
+                            style: attributes.overlayborder.leftstyle,
+                        },
+                        right: {
+                            color: attributes.overlayborder.rightcolor,
+                            width: attributes.overlayborder.rightwidth,
+                            style: attributes.overlayborder.rightstyle,
+                        }
+                    },
+                    borderRadius:{
+                        top:{
+                            width: attributes.overlayborderRadius.top,
+                        },
+                        bottom:{
+                            width: attributes.overlayborderRadius.bottom,
+                        },
+                        left:{
+                            width: attributes.overlayborderRadius.left,
+                        },
+                        right:{
+                            width: attributes.overlayborderRadius.right,
+                        }
+                    }
+                    }}
+                    onChange={(value)=>vayu_blocks_handleoverlayBorderChange(value)}
+                    includeBorder={true}
+                    includeBorderRadius={true}
+                    para=""
+                />  
+
+                <RangeControl
+                    label={__('Gap', 'vayu-blocks')}
+                    className = "vayu_blocks_gap_image_flip"
+                    value={attributes.gap}
+                    onChange={(value) =>  setAttributes({gap:value})}
+                    min={0}
+                    max={100}
+                    step={1}
+                />
+
+            </PanelBody>
+
+            {/* image style */}
+            <PanelBody title={__('Image', 'vayu-blocks')} initialOpen={false}>
+
+                <Vayu_Block_Border_Control
+                    value={{border:{
+                        top:{
+                            color: attributes.imageborder.topcolor,
+                            width: attributes.imageborder.topwidth,
+                            style: attributes.imageborder.topstyle,
+                        },
+                        bottom: {
+                            color: attributes.imageborder.bottomcolor,
+                            width: attributes.imageborder.bottomwidth,
+                            style: attributes.imageborder.bottomstyle,
+                        },
+                        left: {
+                            color: attributes.imageborder.leftcolor,
+                            width: attributes.imageborder.leftwidth,
+                            style: attributes.imageborder.leftstyle,
+                        },
+                        right: {
+                            color: attributes.imageborder.rightcolor,
+                            width: attributes.imageborder.rightwidth,
+                            style: attributes.imageborder.rightstyle,
+                        }
+                    },
+                    borderRadius:{
+                        top:{
+                            width: attributes.imageborderRadius.top,
+                        },
+                        bottom:{
+                            width: attributes.imageborderRadius.bottom,
+                        },
+                        left:{
+                            width: attributes.imageborderRadius.left,
+                        },
+                        right:{
+                            width: attributes.imageborderRadius.right,
+                        }
+                    }
+                    }}
+                    onChange={(value)=>vayu_blocks_handleimageBorderChange(value)}
+                    includeBorder={true}
+                    includeBorderRadius={true}
+                    para=""
+                />  
+
+            </PanelBody>
+
+            {/* heading style */}
             <PanelBody title={__('Heading', 'vayu-blocks')} initialOpen={false}>
                 <>
                     <Vayu_blocks_typographycontrol
@@ -231,6 +610,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 
             </PanelBody>
 
+            {/* Caption style */}
             <PanelBody title={__('Image Caption', 'vayu-blocks')} initialOpen={false}>
                
                 <>
@@ -240,7 +620,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             size: attributes.caption.size,
                             appearance: attributes.caption.appearance, // Bold font
                             letterSpacing: attributes.caption.letterSpacing,
-                            letterCase: attributes.caption.letterCase
                         }}
                         onChange={(newValues)=>handlecaptionTypographyChange(newValues)}
                         para=""
@@ -248,7 +627,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         includeSize={true}
                         includeAppearance={true}
                         includeLetterSpacing={true}
-                        includeLetterCase={true}
                         letterSpacingunits={[
                             { label: 'px', value: 'px' },
                             { label: 'em', value: 'em' },
@@ -294,9 +672,38 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 
             </PanelBody>
 
+            {/* button style */}
             <PanelBody title={__('Button', 'vayu-blocks')} initialOpen={false}>
                 
                 <>
+
+                    <Vayu_blocks_typographycontrol
+                        value={{
+                            font: attributes.button.font,
+                            size: attributes.button.size,
+                            appearance: attributes.button.appearance, // Bold font
+                            letterSpacing: attributes.button.letterSpacing,
+                        }}
+                        onChange={(newValues)=>handlebuttonTypographyChange(newValues)}
+                        para=""
+                        includeFont={true}
+                        includeSize={true}
+                        includeAppearance={true}
+                        includeLetterSpacing={true}
+                        letterSpacingunits={[
+                            { label: 'px', value: 'px' },
+                            { label: 'em', value: 'em' },
+                            { label: 'rem', value: 'rem' }
+                        ]}
+                        vayu_blocks_sizes={vayu_blocks_sizes}
+                        appearanceOptions= {[
+                            { label: __('Normal', 'text-domain'), value: 'normal' },
+                            { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                            { label: __('Bold', 'text-domain'), value: 'bold' },
+                            { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                        ]}
+                    />
+
                     <ColorPanel
                         colorTool={[
                             {
@@ -310,6 +717,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 name: 'Text',
                                 value: attributes.buttoncolor,
                                 attribute: 'color',
+                            },
+                            {
+                                active: ['gradient'],
+                                name: 'Hover Background',
+                                value: attributes.buttonhvrbackground,
+                                attribute: 'backgroundhvr',
+                            },
+                            {
+                                active: ['color'],
+                                name: 'Hover Text',
+                                value: attributes.buttonhvrcolor,
+                                attribute: 'colorhvr',
                             }
 
                         ]}

@@ -33,6 +33,7 @@
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
+    display: grid;
     // min-height: 300px;
 }
 
@@ -48,7 +49,6 @@
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);
     filter: var(--image-filter-effect-filter);
-    background:red;
     opacity: var(--image-hover-effect-opacity, 1);
 }
 
@@ -137,8 +137,6 @@
     z-index: 10;
     display: flex;
     flex-direction: column; /* Stack items vertically */
-    align-items: center;    /* Center items horizontally */
-    justify-content: center;
 }
 
 /* Hover the image and show the overlay */
@@ -215,7 +213,6 @@
     transform: rotateX(0);
 }
 
-
 .overlayzoom-in-up {
     transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
     opacity: 0;
@@ -226,7 +223,6 @@
     transform: scale(1) translateY(0);
     opacity: 1;
 }
-
 
 .overlayzoom-in-left {
     transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */
@@ -240,7 +236,7 @@
 }
 
 .vayu_block_animation_overlay_inside{
-    transition-delay: calc(var(--overlay-transitiontime) - 0.3s) !important;
+    transition-delay: calc(var(--overlay-transitiontime) - var(--overlay-transitiontime)/2) !important;
     animation-fill-mode: forwards !important;
     opacity:0;
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
@@ -254,6 +250,20 @@
     transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
     opacity: 0;
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+/* Initial state: starts small in the center as a circle */
+.overlayzoom-in-circle {
+    transform: scale(0); /* Starts from center as a small circle */
+    opacity: 0;
+    border-radius: 50% !important; /* Ensures it's a perfect circle */
+    transition: transform var(--overlay-transitiontime) ease-out, opacity var(--overlay-transitiontime) ease-out; /* Fast circular animation */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {
+    transform: scale(1); /* Expands outward to full size */
+    opacity: 1;
+    border-radius:var(--overlay-border-radius) !important;
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
@@ -272,7 +282,6 @@
     opacity: 1;
 }
 
-
 .overlaypartial-overlay {
     width: 50%; /* Custom size for partial overlay */
     opacity: 0;
@@ -288,6 +297,10 @@
 //     background:gray;
 // }
 
+.wp-block-vayu-blocks-image-flip{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
 
 .vayu_blocks_image_toolspanel_flip .e19lxcc00{
     grid-template-columns: repeat(1, minmax(0px, 1fr));
@@ -302,4 +315,9 @@
 
 .vayu_blocks_show_preview_button{
     margin-bottom:10px;
+}
+
+.vayu_blocks_image_flip_button:hover {
+    background:var(--button-hvr-background) !important;
+    color:var(--button-hvr-color) !important;
 }

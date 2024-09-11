@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "title": "Image Flip",
     "category": "vayu-blocks",
-    "description": "A custom loader designed to display a block with options for flip animation, supporting navigation controls such as dots and arrows.",
+    "description": "A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.",
     "supports": {
       "html": false,
       "align": ["wide", "full"]
