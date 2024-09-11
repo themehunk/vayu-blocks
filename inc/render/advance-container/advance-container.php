@@ -25,7 +25,7 @@ function vayu_advance_container_style($attr){
 			$css .= "max-width: {$attr['boxedcontentWidth']}{$boxedcontentWidthUnit}; margin: auto;";
 
 		}else{
-            $css .= "max-width:{$container_width}px";
+            $css .= "max-width:{$container_width}px;margin: auto;";
         }
         $css .= "}";
 
