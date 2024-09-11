@@ -22,8 +22,6 @@ registerBlockType( name, {
 	description: __( 'Advance Query Block', 'vayu-blocks' ),
 	icon,
 	edit,
-	save,
-    variations,
 	example: {
 		viewportWidth: 650,
 		attributes: {
@@ -61,4 +59,6 @@ registerBlockType( name, {
 			},
 		],
 	},
+	save,
+    variations,
 });
