@@ -96,19 +96,20 @@ class Vayu_Block_Plugin {
                 'render_callback' => 'post_grid_render'
             ),
             array(
-                'name'           => 'vayu-blocks/advance-slider',
-                'script_handle'  => 'advance-slider',
+                'name'            => 'vayu-blocks/advance-slider',
+                'script_handle'   => 'advance-slider',
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
-                'status'         => $options['advanceSlider']['isActive'],
+                'status'          => $options['advanceSlider']['isActive'],
                 'render_callback' => 'vayu_blocks_advance_slider_render'
             ),
             array(
-                'name'           => 'vayu-blocks/advance-query-loop-block',
-                'script_handle'  => 'advance-query-loop',
-                'editor_style'   => 'advance-query-loop-editor-style',
-                'frontend_style' => 'advance-query-loop-frontend-style',
-                'status'         => $options['advanceQueryLoop']['isActive'],
+                'name'            => 'vayu-blocks/advance-query-loop',
+                'script_handle'   => 'advance-query-loop',
+                'editor_style'    => 'advance-query-loop-editor-style',
+                'frontend_style'  => 'advance-query-loop-frontend-style',
+                'status'          => $options['advanceQueryLoop']['isActive'],
+                //'render_callback' => 'vayu_blocks_advance_query_loop_render'
             ),
             array(
                 'name'           => 'vayu-blocks/image-flip',
@@ -117,7 +118,7 @@ class Vayu_Block_Plugin {
                  'frontend_style' => 'image-flip-frontend-style',
                 'status'         => $options['imageFlip']['isActive'],
                 'render_callback' => 'vayu_blocks_image_flip_render'
-            ),
+            )
             
         );
 
