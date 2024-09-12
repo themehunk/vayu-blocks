@@ -60,15 +60,24 @@ class Vayu_blocks_image_flip {
     private function overlay() {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
-    
+
+        $overlayClasses = ' ' . $attributes['imageoverlayouteffect'];
+
         // Check if overlay should be rendered
         if (isset($attributes['overlay']) && $attributes['overlay']) {
-            $overlayClass = esc_attr($attributes['imageoverlayouteffect']);
-            $overlayfrontClass = esc_attr($attributes['imagehvreffect']) === 'flip-front' ? 'flip-front-overlay' : '';
-            $overlaybackClass = esc_attr($attributes['imagehvreffect']) === 'flip-back' ? 'flip-front-overlay-vertical' : '';
 
-            $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClass . ' ' . $overlayfrontClass . ' ' . $overlaybackClass . '">';
-                $overlay .= ' <div class="vayu_blocks_inner_content">';
+            if ($attributes['imagehvreffect'] !== 'flip-front' && $attributes['imagehvreffect'] !== 'flip-back') {
+                $overlayClasses .= ' ' . $attributes['imageoverlayouteffect'];
+            }
+            if ($attributes['imagehvreffect'] === 'flip-front') {
+                $overlayClasses .= ' overlayflip-horizontal';
+            }
+            if ($attributes['imagehvreffect'] === 'flip-back') {
+                $overlayClasses .= ' overlayflip-vertical';
+            }
+
+            $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClasses . '">';
+                $overlay .= '<div class="vayu_blocks_inner_content">';
                     $overlay .= $this->content;
                 $overlay .= '</div>';  
             $overlay .= '</div>';

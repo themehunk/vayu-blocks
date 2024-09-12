@@ -208,15 +208,7 @@
 }
 
 .overlayflip-horizontal {
-    transform: rotateY(90deg);
-}
-
-.flip-front-overlay{
-    transform:rotateY(-180deg);
-}
-
-.flip-front-overlay-vertical{
-    transform:rotateX(-180deg);
+    transform: rotateY(-90deg);
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
@@ -224,7 +216,7 @@
 }
 
 .overlayflip-vertical {
-    transform: rotateX(90deg);
+    transform: rotateX(-90deg);
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {

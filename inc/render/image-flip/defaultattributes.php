@@ -20,31 +20,6 @@ return array(
         'imageaspectratio' => 'original',
         'duotone' => '',
         'showPreview' => false,
-        
-    // overlay Border
-        'overlayborder' => array(
-            'topcolor' => 'black',
-            'topwidth' => '1px',
-            'topstyle' => 'solid',
-            'bottomcolor' => 'black',
-            'bottomwidth' => '1px',
-            'bottomstyle' => 'solid',
-            'leftcolor' => 'black',
-            'leftwidth' => '1px',
-            'leftstyle' => 'solid',
-            'rightcolor' => 'black',
-            'rightwidth' => '1px',
-            'rightstyle' => 'solid',
-        ),
-
-    // overlay Border Radius
-        'overlayborderRadius' => array(
-            'top' => '3px',
-            'bottom' => '3px',
-            'left' => '3px',
-            'right' => '3px',
-        ),
-
         'overlayalignment' => 'center',
         'overlayalignmentvertical' => 'center',
 
@@ -71,9 +46,6 @@ return array(
                 'left' => '3px',
                 'right' => '3px',
             ),
-
-            'buttonhvrbackground' => 'gray',
-            'buttonhvrcolor' => 'black',
         
     //Advanced
         'classNamemain' => '',

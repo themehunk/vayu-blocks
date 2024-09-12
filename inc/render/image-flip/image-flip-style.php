@@ -469,7 +469,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {";
         $css .= "transform: scale(1); ";
         $css .= "opacity: 1;";
-        $css .= "border-radius: " . esc_attr($attr['overlayborderRadius']['top']) . " " . esc_attr($attr['overlayborderRadius']['right']) . " " . esc_attr($attr['overlayborderRadius']['bottom']) . " " . esc_attr($attr['overlayborderRadius']['left']) . ";";
+        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
     $css .= "}";
 
     /* Repeat the same approach for other effects */
@@ -509,7 +509,7 @@ function generate_inline_image_flip_styles($attr) {
 
     /* Flip effects */
     $css .= ".overlayflip-horizontal {";
-        $css .= "transform: rotateY(90deg);";
+        $css .= "transform: rotateY(-90deg);";
     $css .= "}";
 
     $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {";
@@ -517,7 +517,7 @@ function generate_inline_image_flip_styles($attr) {
     $css .= "}";
 
     $css .= ".overlayflip-vertical {";
-        $css .= "transform: rotateX(90deg);";
+        $css .= "transform: rotateX(-90deg);";
     $css .= "}";
 
     

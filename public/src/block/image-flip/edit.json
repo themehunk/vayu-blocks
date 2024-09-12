@@ -64,35 +64,6 @@
         "type":"boolean",
         "default":false
     },
-    "overlayborderRadius":{
-        "type":"object",
-        "default":{
-        "top": "3px",
-        "bottom": "3px",
-        "left": "3px",
-        "right": "3px"
-    }
-    },
-    "overlayborder":{
-        "type":"object",
-        "default":{
-        "topcolor": "black",
-        "topwidth": "1px",
-        "topstyle": "solid",
-
-        "bottomcolor": "black",
-        "bottomwidth": "1px",
-        "bottomstyle": "solid",
-
-        "leftcolor": "black",
-        "leftwidth": "1px",
-        "leftstyle": "solid",
-
-        "rightcolor": "black",
-        "rightwidth": "1px",
-        "rightstyle": "solid"
-    }
-    },
     "overlayalignment":{
         "type":"string",
         "default":"center"

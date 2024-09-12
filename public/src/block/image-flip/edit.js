@@ -267,6 +267,7 @@ const edit = (props) => {
                     </div>
 
                     <div className="vayu_blocks_image_flip_wrapper">
+
                         <div className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
                                 style= {vayu_blocks_image_settings}
@@ -286,7 +287,11 @@ const edit = (props) => {
 
                         {attributes.overlay && (
 
-                            <div className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect==='flip-front' ? 'flip-front-overlay' : ''} ${attributes.imagehvreffect==='flip-back' ? 'flip-front-overlay-vertical' : ''} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
+                            <div className={`vayu_blocks_overlay_main_wrapper 
+                                ${!attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} 
+                                ${!attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} 
+                                ${!attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''}
+                            `} style={vayu_block_overlay_style}>
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
                                         template={REVIEW_TEMPLATE} 
@@ -295,6 +300,7 @@ const edit = (props) => {
 
                             </div>
                         )}
+
                     </div>
 
 

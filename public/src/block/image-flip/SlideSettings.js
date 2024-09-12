@@ -196,6 +196,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
 
+                    {(attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back') && (
+                        <p>For the flip animation overlay, the effect is animated by default. However, when using the flip animations, the overlay animation may stop and remain static.</p>
+                    )}
+
+
                     <RangeControl
                         label={__('Image Transition Time', 'vayu-blocks')}
                         value={attributes.imagetransitiontime}
