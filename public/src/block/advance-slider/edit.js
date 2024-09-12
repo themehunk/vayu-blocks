@@ -23,6 +23,9 @@ const edit = ({ attributes, setAttributes }) => {
     const sliderRef = useRef(null);
     const [dotscount, setdotscount] = useState(1);
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
         if (typeof value === 'string' && (value.endsWith('px') || value.endsWith('em') || value.endsWith('%'))) {
@@ -268,9 +271,6 @@ const edit = ({ attributes, setAttributes }) => {
         }
         
     }, [attributes.index]);
-
-    // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
    
     useEffect(() => {
         if (!attributes.uniqueId) {
@@ -405,7 +405,8 @@ const edit = ({ attributes, setAttributes }) => {
         // Button Style
         const vayu_blocks_generateButtonStyle = (button) => {
             return {
-            ...vayu_blocks_getBackgroundStyles(button),
+            
+            background: button.backgroundColor,
             fontSize: `${button.size}px`,
             border: 'none',
             cursor: 'pointer',
@@ -429,16 +430,12 @@ const edit = ({ attributes, setAttributes }) => {
             
             //borderRadius
             borderRadius: `${button.borderRadius.top || '0px'} ${button.borderRadius.right || '0px'} ${button.borderRadius.bottom || '0px'} ${button.borderRadius.left || '0px'}`,
-
             //padding
             padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
-
-
             marginRight: slide.button2.show ? '5px' : '0px',
         };
         };
 
-        //console.log(attributes.slides);
         // const blocks = wp.data.select('core/block-editor').getBlocks();
         // console.log(blocks);
 

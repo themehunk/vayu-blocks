@@ -110,6 +110,14 @@ class Vayu_Block_Plugin {
                 'frontend_style'  => 'advance-query-loop-frontend-style',
                 'status'          => $options['advanceQueryLoop']['isActive'],
                 //'render_callback' => 'vayu_blocks_advance_query_loop_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/image-flip',
+                'script_handle'  => 'image-flip',
+                 'editor_style'   => 'image-flip-editor-style',
+                 'frontend_style' => 'image-flip-frontend-style',
+                'status'         => $options['imageFlip']['isActive'],
+                'render_callback' => 'vayu_blocks_image_flip_render'
             )
             
         );

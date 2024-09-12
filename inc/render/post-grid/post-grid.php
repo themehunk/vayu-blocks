@@ -67,17 +67,7 @@ class VayuBlocksPostGrid {
         $query = new WP_Query($args);
 
         $animated = isset($attr['className']) ? $attr['className'] : '';
-        $className = '';
-        if (isset($this->attr['widthType'])) {
-            switch ($this->attr['widthType']) {
-                case 'fullwidth':
-                    $className = 'alignfull';
-                    break;
-                case 'customwidth':
-                    $className = 'alignwide';
-                    break;
-            }
-        }
+        $className = $this->attr['classNamemain'];
 
 
         // Rendering posts
