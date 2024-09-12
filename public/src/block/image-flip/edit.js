@@ -2,11 +2,13 @@ import React from 'react';
 import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
-
 import noimage from '../../../../inc/assets/img/no-image.png';
+import { InnerBlocks } from '@wordpress/block-editor';
 
-const edit = ({ attributes, setAttributes }) => {
-    
+
+const edit = (props) => {
+    const { attributes, setAttributes} = props;
+
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
 //        const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
@@ -22,12 +24,12 @@ const edit = ({ attributes, setAttributes }) => {
     //overlay wrapper style
     const vayu_block_overlay_style = {
         background:attributes.overlaycolor,
-        borderTop: `${attributes.overlayborder.topwidth} ${attributes.overlayborder.topstyle} ${attributes.overlayborder.topcolor}`,
-        borderBottom: `${attributes.overlayborder.bottomwidth} ${attributes.overlayborder.bottomstyle} ${attributes.overlayborder.bottomcolor}`,
-        borderLeft: `${attributes.overlayborder.leftwidth} ${attributes.overlayborder.leftstyle} ${attributes.overlayborder.leftcolor}`,
-        borderRight: `${attributes.overlayborder.rightwidth} ${attributes.overlayborder.rightstyle} ${attributes.overlayborder.rightcolor}`,
+        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
+        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
+        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
+        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
 
-        borderRadius: `${attributes.overlayborderRadius.top} ${attributes.overlayborderRadius.right} ${attributes.overlayborderRadius.bottom} ${attributes.overlayborderRadius.left}`,
+        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
 
         alignItems: 
             attributes.overlayalignment === 'center' ? 'center' :
@@ -39,53 +41,8 @@ const edit = ({ attributes, setAttributes }) => {
             attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
             attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
 
-        gap:`${attributes.gap}px`
     }
 
-    //overlay heading style
-    const vayu_blocks_heading_tag = {
-        fontFamily: attributes.heading.font,
-        fontSize: attributes.heading.size,
-        fontWeight: attributes.heading.appearance,
-        letterSpacing: attributes.heading.letterSpacing,
-        letterCase: attributes.heading.letterCase,
-        color: attributes.headingcolor,   
-    };
-
-    //overlay caption style
-    const vayu_blocks_caption_tag = {
-        fontFamily: attributes.caption.font,
-        fontSize: attributes.caption.size,
-        fontWeight: attributes.caption.appearance,
-        letterSpacing: attributes.caption.letterSpacing,
-        letterCase: attributes.caption.letterCase,
-        color: attributes.captioncolor,   
-    };
-    
-    //overlay button style
-    const vayu_blocks_image_flip_button_style = {
-
-        fontFamily: attributes.button.font,
-        fontSize: attributes.button.size,
-        fontWeight: attributes.button.appearance,
-        letterSpacing: attributes.button.letterSpacing,
-        letterCase: attributes.button.letterCase,
-
-        background: attributes.buttonbackground,
-        borderTop: `${attributes.buttonborder.topwidth} ${attributes.buttonborder.topstyle} ${attributes.buttonborder.topcolor}`,
-        borderBottom: `${attributes.buttonborder.bottomwidth} ${attributes.buttonborder.bottomstyle} ${attributes.buttonborder.bottomcolor}`,
-        borderLeft: `${attributes.buttonborder.leftwidth} ${attributes.buttonborder.leftstyle} ${attributes.buttonborder.leftcolor}`,
-        borderRight: `${attributes.buttonborder.rightwidth} ${attributes.buttonborder.rightstyle} ${attributes.buttonborder.rightcolor}`,
-
-        borderRadius: `${attributes.buttonborderRadius.top} ${attributes.buttonborderRadius.right} ${attributes.buttonborderRadius.bottom} ${attributes.buttonborderRadius.left}`,
-
-        padding: `${attributes.buttonpaddingtop} ${attributes.buttonpaddingright} ${attributes.buttonpaddingbottom} ${attributes.buttonpaddingleft}`,
-
-        color:attributes.buttoncolor,
-        cursor:'pointer'
-
-    };
-    
     //main container image style
     const vayu_blocks_image_settings = {
         ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
@@ -113,8 +70,25 @@ const edit = ({ attributes, setAttributes }) => {
 
     };
 
-    console.log(attributes.overlaycolor);
-    
+    const REVIEW_TEMPLATE = [
+        ['vayu-blocks/advance-container'
+            , {
+                verticalAlignment: 'center',
+                isStackedOnMobile: true,
+                width: '100%',
+
+            },
+              
+            [
+                ['vayu-blocks/advance-heading', { placeholder: 'Title' }],
+                ['core/paragraph', { placeholder: 'Paragraph' }],
+                ['vayu-blocks/advance-button', { placeholder: 'Button' }],
+            ]   
+
+        ],
+    ];  
+ 
+
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
@@ -292,55 +266,35 @@ const edit = ({ attributes, setAttributes }) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper">                  
+                    <div className="vayu_blocks_image_flip_wrapper">
+                        <div className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
 
-                            
-                            {attributes.overlay && (
-
-                                <div className={`vayu_blocks_overlay_main_wrapper
-                                ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
-                                
-                                    <attributes.headingtag style = {vayu_blocks_heading_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
-                                    {attributes.headingtext}   
-                                    </attributes.headingtag>
-
-                                    <attributes.captiontag style = {vayu_blocks_caption_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
-                                    {attributes.imageCaption}
-                                    </attributes.captiontag>
-
-
-                                    {attributes.buttonlink ? (
-                                        <a
-                                            href={attributes.buttonlink}
-                                            target={attributes.buttonnewtab ? "_blank" : "_self"}
-                                            rel={attributes.buttonnewtab ? "noopener noreferrer" : undefined} // Security best practice
-                                            style={{ textDecoration: 'none',cursor:'pointer' }} // Optional: Remove underline from the link
-                                        >
-                                            <button
-                                                type="button"
-                                                className={`vayu_blocks_image_flip_button ${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
-                                                style={vayu_blocks_image_flip_button_style}
-                                            >
-                                                {attributes.buttontext}
-                                            </button>
-                                        </a>
-                                    ) : (
-                                        <button
-                                            type="button"
-                                            className={`vayu_blocks_image_flip_button ${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
-                                            style={vayu_blocks_image_flip_button_style}
-                                        >
-                                            {attributes.buttontext}
-                                        </button>
-                                    )}
-
+                            {!attributes.overlay && (
+                                <div className="vayu_blocks_inner_content-image">
+                                    <InnerBlocks 
+                                        template={REVIEW_TEMPLATE} 
+                                    />
                                 </div>
                             )}
+
+                        </div>  
+
+                        {attributes.overlay && (
+
+                            <div className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect==='flip-front' ? 'flip-front-overlay' : ''} ${attributes.imagehvreffect==='flip-back' ? 'flip-front-overlay-vertical' : ''} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
+                                <div className="vayu_blocks_inner_content">
+                                    <InnerBlocks 
+                                        template={REVIEW_TEMPLATE} 
+                                    />
+                                </div>
+
+                            </div>
+                        )}
                     </div>
 
 

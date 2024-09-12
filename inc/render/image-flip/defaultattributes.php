@@ -11,36 +11,7 @@ return array(
         'imagehvreffect' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
-        'headingtext' => 'Heading',
-        'imageCaption' => 'This is image caption',
-        'buttontext' => 'Button',
-        'buttonlink' => '',
-        'buttonnewtab' => false,
-        'overlaycolor' => '#b1c5a4',
-        'heading' => array(
-            'font' => 'default',
-            'size' => '16px',
-            'appearance' => 'normal',
-            'letterSpacing' => '0px',
-            'letterCase' => 'none',
-        ),
-        'headingcolor' => 'black',
-        'headingtag' => 'h2',
-        'caption' => array(
-            'font' => 'default',
-            'size' => '16px',
-            'appearance' => 'normal',
-            'letterSpacing' => '0px',
-            'letterCase' => 'none',
-        ),
-        'captioncolor' => 'black',
-        'captiontag' => 'h2',
-        'buttonbackground' => 'black',
-        'buttoncolor' => 'white',
-        'buttonpaddingtop' => '5px',
-        'buttonpaddingbottom' => '5px',
-        'buttonpaddingleft' => '5px',
-        'buttonpaddingright' => '5px',
+        'overlaycolor' => '#3A4DDEDE',
         'focalPoint' => array(
             'x' => 0.5,
             'y' => 0.5,
@@ -49,39 +20,7 @@ return array(
         'imageaspectratio' => 'original',
         'duotone' => '',
         'showPreview' => false,
-
-        'button' => array(
-            'font' => 'default',
-            'size' => '16px',
-            'appearance' => 'normal',
-            'letterSpacing' => '0px',
-            'letterCase' => 'none',
-        ),
-        'gap' => 0,
-
-    // Button Border
-        'buttonborder' => array(
-            'topcolor' => 'black',
-            'topwidth' => '1px',
-            'topstyle' => 'solid',
-            'bottomcolor' => 'black',
-            'bottomwidth' => '1px',
-            'bottomstyle' => 'solid',
-            'leftcolor' => 'black',
-            'leftwidth' => '1px',
-            'leftstyle' => 'solid',
-            'rightcolor' => 'black',
-            'rightwidth' => '1px',
-            'rightstyle' => 'solid',
-        ),
-
-    // Button Border Radius
-        'buttonborderRadius' => array(
-            'top' => '3px',
-            'bottom' => '3px',
-            'left' => '3px',
-            'right' => '3px',
-        ),
+        
     // overlay Border
         'overlayborder' => array(
             'topcolor' => 'black',

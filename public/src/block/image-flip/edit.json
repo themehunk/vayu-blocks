@@ -37,136 +37,9 @@
         "type":"string",
         "default":"none"
     },
-    "headingtext":{
-        "type":"string",
-        "default":"Heading"
-    },
-    "imageCaption":{
-        "type":"string",
-        "default":"This is image caption"
-    },
-    "buttontext":{
-        "type":"string",
-        "default":"Button"
-    },
-    "buttonlink":{
-        "type":"string",
-        "default":""
-    },
-    "buttonnewtab" : {
-        "type": "boolean",
-        "default":false
-    },
     "overlaycolor":{
         "type":"string",
-        "default":"#b1c5a4"
-    },
-    "heading": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "button": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "headingcolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "headingtag":{
-        "type":"string",
-        "default":"h2"
-    },
-    "caption": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "captioncolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "captiontag":{
-        "type":"string",
-        "default":"h2"
-    },
-    "buttonbackground":{
-        "type":"string",
-        "default":"black"
-    },
-    "buttoncolor":{
-        "type":"string",
-        "default":"white"
-    },
-    "buttonhvrbackground":{
-        "type":"string",
-        "default":"gray"
-    },
-    "buttonhvrcolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "buttonborderRadius":{
-        "type":"object",
-        "default":{
-        "top": "3px",
-        "bottom": "3px",
-        "left": "3px",
-        "right": "3px"
-    }
-    },
-    "buttonborder":{
-        "type":"object",
-        "default":{
-        "topcolor": "black",
-        "topwidth": "1px",
-        "topstyle": "solid",
-
-        "bottomcolor": "black",
-        "bottomwidth": "1px",
-        "bottomstyle": "solid",
-
-        "leftcolor": "black",
-        "leftwidth": "1px",
-        "leftstyle": "solid",
-
-        "rightcolor": "black",
-        "rightwidth": "1px",
-        "rightstyle": "solid"
-    }
-    },
-    "buttonpaddingtop":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingbottom":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingleft":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingright":{
-        "type":"string",
-        "default":"5px"
+        "default":"#3A4DDEDE"
     },
    "focalPoint": {
         "type": "object",
@@ -256,9 +129,5 @@
         "rightwidth": "1px",
         "rightstyle": "solid"
     }
-    },
-    "gap": {
-        "type":"number",
-        "default":0
     }
 }
