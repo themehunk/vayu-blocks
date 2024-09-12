@@ -8,8 +8,12 @@ import noimage from '../../../../inc/assets/img/no-image.png';
 const edit = ({ attributes, setAttributes }) => {
     
     // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '----' + Math.floor(Math.random() * 1000);
-
+    const generateUniqueId = () => {
+//        const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
+        const randomPart = Math.random().toString(36).substring(2, 10); // Generate random alphanumeric string
+        return `-${randomPart}`;
+    };
+    
     // Ensure the uniqueId is set if it's not
     if (!attributes.uniqueId) {
         setAttributes({ uniqueId: generateUniqueId() });
@@ -84,6 +88,10 @@ const edit = ({ attributes, setAttributes }) => {
     
     //main container image style
     const vayu_blocks_image_settings = {
+        ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
+            backfaceVisibility: 'hidden',
+        }),
+
         objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
         // Apply focal point if it exists, default to center
         objectPosition: `${attributes.focalPoint?.x * 100 || 50}% ${attributes.focalPoint?.y * 100 || 50}%`,
@@ -104,6 +112,8 @@ const edit = ({ attributes, setAttributes }) => {
         borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
 
     };
+
+    console.log(attributes.overlaycolor);
     
     return (
         <>
@@ -282,35 +292,44 @@ const edit = ({ attributes, setAttributes }) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper">
-
+                    <div className="vayu_blocks_image_flip_wrapper">                  
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
-                    
-                        {/* Conditionally render overlay */}
-                        {attributes.overlay && (
 
-                            <div className={`vayu_blocks_overlay_main_wrapper ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
-                               
-                                <attributes.headingtag style = {vayu_blocks_heading_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
-                                {attributes.headingtext}   
-                                </attributes.headingtag>
+                            
+                            {attributes.overlay && (
 
-                                <attributes.captiontag style = {vayu_blocks_caption_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
-                                {attributes.imageCaption}
-                                </attributes.captiontag>
+                                <div className={`vayu_blocks_overlay_main_wrapper
+                                ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`} style={vayu_block_overlay_style}>
+                                
+                                    <attributes.headingtag style = {vayu_blocks_heading_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
+                                    {attributes.headingtext}   
+                                    </attributes.headingtag>
+
+                                    <attributes.captiontag style = {vayu_blocks_caption_tag} className={`${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}>
+                                    {attributes.imageCaption}
+                                    </attributes.captiontag>
 
 
-                                {attributes.buttonlink ? (
-                                    <a
-                                        href={attributes.buttonlink}
-                                        target={attributes.buttonnewtab ? "_blank" : "_self"}
-                                        rel={attributes.buttonnewtab ? "noopener noreferrer" : undefined} // Security best practice
-                                        style={{ textDecoration: 'none',cursor:'pointer' }} // Optional: Remove underline from the link
-                                    >
+                                    {attributes.buttonlink ? (
+                                        <a
+                                            href={attributes.buttonlink}
+                                            target={attributes.buttonnewtab ? "_blank" : "_self"}
+                                            rel={attributes.buttonnewtab ? "noopener noreferrer" : undefined} // Security best practice
+                                            style={{ textDecoration: 'none',cursor:'pointer' }} // Optional: Remove underline from the link
+                                        >
+                                            <button
+                                                type="button"
+                                                className={`vayu_blocks_image_flip_button ${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
+                                                style={vayu_blocks_image_flip_button_style}
+                                            >
+                                                {attributes.buttontext}
+                                            </button>
+                                        </a>
+                                    ) : (
                                         <button
                                             type="button"
                                             className={`vayu_blocks_image_flip_button ${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
@@ -318,21 +337,12 @@ const edit = ({ attributes, setAttributes }) => {
                                         >
                                             {attributes.buttontext}
                                         </button>
-                                    </a>
-                                ) : (
-                                    <button
-                                        type="button"
-                                        className={`vayu_blocks_image_flip_button ${attributes.showPreview ? '' : 'vayu_block_animation_overlay_inside'} ${attributes.showPreview ? '' : attributes.imageoverlayouteffect}`}
-                                        style={vayu_blocks_image_flip_button_style}
-                                    >
-                                        {attributes.buttontext}
-                                    </button>
-                                )}
+                                    )}
 
-                            </div>
-                        )}
-
+                                </div>
+                            )}
                     </div>
+
 
                 </div>
             </AdvanceSettings>

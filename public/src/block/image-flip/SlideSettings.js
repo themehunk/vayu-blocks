@@ -190,6 +190,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Flip Horizontal', 'vayu-blocks'), value: 'flip-horizontal' },
                             { label: __('Flip Vertical', 'vayu-blocks'), value: 'flip-vertical' },
                             { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
+                            { label: __('Flip-front', 'vayu-blocks'), value: 'flip-front' },
+                            { label: __('flip-back', 'vayu-blocks'), value: 'flip-back' },
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />

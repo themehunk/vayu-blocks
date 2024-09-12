@@ -371,6 +371,15 @@ const PostSettings = ({ attributes, setAttributes }) => {
         setAttributes({ imageborder: updatedAttributes });
     };
 
+    const handlecoloroverlay = (value) => {
+        if(value.color === undefined ){
+            setAttributes({overlaycolor: 'transparent'})
+        }
+        else{
+            setAttributes({overlaycolor: value.color})
+        }
+    }
+
     return (
         <>
         
@@ -440,9 +449,10 @@ const PostSettings = ({ attributes, setAttributes }) => {
                             attribute: 'color',
                         }
                     ]}
-                    handelColorPanel={(value)=>setAttributes({overlaycolor:value.color})}
+                    handelColorPanel={(value) => handlecoloroverlay(value)}                                          
                     initialTab="color"
                 />
+
 
                 <Vayu_Block_Border_Control
                     value={{border:{
