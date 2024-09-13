@@ -96,18 +96,18 @@ class Vayu_Block_Plugin {
                 'render_callback' => 'post_grid_render'
             ),
             array(
-                'name'            => 'vayu-blocks/advance-slider',
-                'script_handle'   => 'advance-slider',
+                 'name'            => 'vayu-blocks/advance-slider',
+                 'script_handle'   => 'advance-slider',
                  'editor_style'   => 'advance-slider-editor-style',
                  'frontend_style' => 'advance-slider-frontend-style',
-                'status'          => $options['advanceSlider']['isActive'],
-                'render_callback' => 'vayu_blocks_advance_slider_render'
+                 'status'          => $options['advanceSlider']['isActive'],
+                 'render_callback' => 'vayu_blocks_advance_slider_render'
             ),
             array(
                 'name'            => 'vayu-blocks/advance-query-loop',
                 'script_handle'   => 'advance-query-loop',
-                'editor_style'    => 'advance-query-loop-editor-style',
-                'frontend_style'  => 'advance-query-loop-frontend-style',
+                'editor_style'    => '',
+                'frontend_style'  => '',
                 'status'          => $options['advanceQueryLoop']['isActive'],
                 //'render_callback' => 'vayu_blocks_advance_query_loop_render'
             ),
@@ -148,7 +148,7 @@ class Vayu_Block_Plugin {
                 array( 'wp-blocks', 'wp-element', 'wp-editor' ),
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
             );
-
+            if ( ! empty( $block['editor_style'] ) ) {
             // Register editor
             wp_register_style(
                 $block['editor_style'],
@@ -156,7 +156,8 @@ class Vayu_Block_Plugin {
                 array( 'wp-edit-blocks' ),
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
             );
-
+            }
+            if ( ! empty( $block['frontend_style'] ) ) {
             // Register front end block style
             wp_register_style(
                 $block['frontend_style'],
@@ -164,6 +165,7 @@ class Vayu_Block_Plugin {
                 array(),
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
             );
+            }
 
             // Localize the script with data
             if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
@@ -175,11 +177,20 @@ class Vayu_Block_Plugin {
             }
 
             // Prepare the arguments for registering the block
-            $block_args = array(
-                'editor_script'   => $block['script_handle'],
-                'editor_style'    => $block['editor_style'],
-                'style'           => $block['frontend_style'],
-            );
+                $block_args = array(
+                    'editor_script' => $block['script_handle']
+                );
+
+                // Add editor style if it's set
+                if ( ! empty( $block['editor_style'] ) ) {
+                    $block_args['editor_style'] = $block['editor_style'];
+                }
+
+                // Add frontend style if it's set
+                if ( ! empty( $block['frontend_style'] ) ) {
+                    $block_args['style'] = $block['frontend_style'];
+                }
+
 
             // Check if the render callback is set and not null
             if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
