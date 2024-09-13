@@ -2,7 +2,7 @@
 import { registerBlockVariation } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { loop as icon } from '@wordpress/icons';
-
+import './edit.js';
 // Define the inner block template with a grid layout
 const TEMPLATE = [
     [
@@ -24,6 +24,7 @@ const TEMPLATE = [
         ],
     ],
 ];
+
 // Register a new variation for the core/query block
 registerBlockVariation('core/query', {
     name: 'vayu-blocks/advance-query-loop',
@@ -36,7 +37,7 @@ registerBlockVariation('core/query', {
         query: {
             order: 'desc',
             orderBy: 'date',
-			perPage: null,
+			perPage: 5,
 			pages : 0,
 			offset : 0,
 			postType : "post",
