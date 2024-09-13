@@ -34,7 +34,6 @@
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
     display: grid;
-    // min-height: 300px;
     perspective: 1000px;
     transform-style: preserve-3d;
 }
@@ -110,6 +109,7 @@
 .flip-horizontal {
     --image-hover-effect-transform: rotateY(180deg);
 }
+
 .flip-front {
     --image-hover-effect-transform: rotateY(180deg);
     --image-hover-effect-opacity: 0;
