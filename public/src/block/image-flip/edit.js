@@ -70,19 +70,33 @@ const edit = (props) => {
 
     };
 
-    const REVIEW_TEMPLATE = [
+
+    const image_flip_template = [
         ['vayu-blocks/advance-container'
             , {
                 verticalAlignment: 'center',
                 isStackedOnMobile: true,
                 width: '100%',
-
+                alignItems:'center',
+                elementGap:21,
+                AlignItem:'center',
             },
               
             [
-                ['vayu-blocks/advance-heading', { placeholder: 'Title' }],
-                ['core/paragraph', { placeholder: 'Paragraph' }],
-                ['vayu-blocks/advance-button', { placeholder: 'Button' }],
+                ['vayu-blocks/advance-heading', {
+                    fontVariant:'bold',
+                    content:'Image Flip Title...'
+                }],
+
+                ['vayu-blocks/advance-button',{
+                    buttonbackgroundColor:'#4e75ff',
+                    buttonbackgroundColorHvr:'#2F3DA3',
+                    buttonpaddingTop: 10,
+                    buttonpaddingRight: 50,
+                    buttonpaddingBottom: 10,
+                    buttonpaddingLeft: 50,
+                    align:'center',
+                }],
             ]   
 
         ],
@@ -275,31 +289,22 @@ const edit = (props) => {
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
 
-                            {!attributes.overlay && (
-                                <div className="vayu_blocks_inner_content-image">
-                                    <InnerBlocks 
-                                        template={REVIEW_TEMPLATE} 
-                                    />
-                                </div>
-                            )}
-
                         </div>  
 
-                        {attributes.overlay && (
-
                             <div className={`vayu_blocks_overlay_main_wrapper 
-                                ${!attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} 
-                                ${!attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} 
-                                ${!attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''}
+                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} 
+                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} 
+                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''}
+                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} 
+                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''}
                             `} style={vayu_block_overlay_style}>
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
-                                        template={REVIEW_TEMPLATE} 
+                                        template={image_flip_template} 
                                     />
                                 </div>
 
                             </div>
-                        )}
 
                     </div>
 

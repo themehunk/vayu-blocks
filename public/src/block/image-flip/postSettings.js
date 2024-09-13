@@ -127,16 +127,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
         
             {/* overlay style*/}
             <PanelBody title={__('Overlay', 'vayu-blocks')} initialOpen={false}>
+
                 <ToggleControl
                         className='vayu_blocks_togglecontrol'
-                        label={__('Overlay', 'vayu-blocks')}
+                        label={attributes.overlay ? __('With Hover', 'vayu-blocks') : __('Without Hover', 'vayu-blocks')}
                         checked={attributes.overlay}
                         onChange={(value) =>  setAttributes({overlay:value, showPreview: false})}
                     />
                     
-                    {attributes.overlay && (
+                    {/* Show Preview Button */}
+
+                    {!attributes.overlay && (
                         <>
-                            {/* Show Preview Button */}
                             <Button
                                 isPrimary
                                 onClick={() => setAttributes({showPreview:!attributes.showPreview})}
@@ -147,8 +149,9 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         
                             <p>
                                 The overlay will be visible, and the animation effect will be turned off.
-                            </p>         
-                            
+                            </p>  
+                        </>       
+                    )} 
 
                     <h4>
                     {__('Alignment', 'vayu-blocks')}
@@ -216,8 +219,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         handelColorPanel={(value) => handlecoloroverlay(value)}                                          
                         initialTab="color"
                     />
-                </>
-                    )}
 
             </PanelBody>
 

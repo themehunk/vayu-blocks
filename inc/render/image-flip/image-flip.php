@@ -41,13 +41,7 @@ class Vayu_blocks_image_flip {
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
                                     class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" 
-                                />';
-                if (!isset($attributes['overlay']) || !$attributes['overlay']) {
-                    $image_html .= '<div class="vayu_blocks_inner_content-image">';
-                        $image_html .= $this->content;
-                    $image_html .= '</div>';
-                }
-                            
+                                />';             
             $image_html .= '</div>';
             // Append the overlay HTML
             $image_html .= $this->overlay();
@@ -61,27 +55,31 @@ class Vayu_blocks_image_flip {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
 
-        $overlayClasses = ' ' . $attributes['imageoverlayouteffect'];
+        $overlayClasses = '';
 
-        // Check if overlay should be rendered
-        if (isset($attributes['overlay']) && $attributes['overlay']) {
-
-            if ($attributes['imagehvreffect'] !== 'flip-front' && $attributes['imagehvreffect'] !== 'flip-back') {
+        if(isset($attributes['overlay']) && !$attributes['overlay']){
+            if ($attributes['imagehvreffect'] !== 'flip-front' && $attributes['imagehvreffect'] !== 'flip-back' && $attributes['imagehvreffect'] !== 'flip-front-left' && $attributes['imagehvreffect'] !== 'flip-back-bottom') {
                 $overlayClasses .= ' ' . $attributes['imageoverlayouteffect'];
             }
-            if ($attributes['imagehvreffect'] === 'flip-front') {
+            elseif ($attributes['imagehvreffect'] === 'flip-front') {
                 $overlayClasses .= ' overlayflip-horizontal';
             }
-            if ($attributes['imagehvreffect'] === 'flip-back') {
+            elseif ($attributes['imagehvreffect'] === 'flip-back') {
                 $overlayClasses .= ' overlayflip-vertical';
             }
-
-            $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClasses . '">';
-                $overlay .= '<div class="vayu_blocks_inner_content">';
-                    $overlay .= $this->content;
-                $overlay .= '</div>';  
-            $overlay .= '</div>';
+            elseif ($attributes['imagehvreffect'] === 'flip-back-bottom') {
+                $overlayClasses .= ' overlayflip-vertical-bottom';
+            }
+            elseif ($attributes['imagehvreffect'] === 'flip-front-left') {
+                $overlayClasses .= ' overlayflip-horizontal-left';
+            }
         }
+
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClasses . '">';
+            $overlay .= '<div class="vayu_blocks_inner_content">';
+                $overlay .= $this->content;
+            $overlay .= '</div>';  
+        $overlay .= '</div>';
     
         return $overlay;
     }

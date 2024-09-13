@@ -190,13 +190,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Flip Horizontal', 'vayu-blocks'), value: 'flip-horizontal' },
                             { label: __('Flip Vertical', 'vayu-blocks'), value: 'flip-vertical' },
                             { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
-                            { label: __('Flip-front', 'vayu-blocks'), value: 'flip-front' },
-                            { label: __('flip-back', 'vayu-blocks'), value: 'flip-back' },
+                            { label: __('Flip-Right', 'vayu-blocks'), value: 'flip-front' },
+                            { label: __('Flip-Left', 'vayu-blocks'), value: 'flip-front-left' },
+                            { label: __('flip-Top', 'vayu-blocks'), value: 'flip-back' },
+                            { label: __('flip-Bottom', 'vayu-blocks'), value: 'flip-back-bottom' },
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
 
-                    {(attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back') && (
+                    {(attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' || attributes.imagehvreffect === 'flip-front-left' || attributes.imagehvreffect === 'flip-back-bottom' ) && (
                         <p>For the flip animation overlay, the effect is animated by default. However, when using the flip animations, the overlay animation may stop and remain static.</p>
                     )}
 

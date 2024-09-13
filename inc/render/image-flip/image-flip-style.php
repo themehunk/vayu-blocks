@@ -244,7 +244,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "height: 100%;";
         $css .= "box-sizing: border-box;";
 
-        $css .= "    transition: transform ${transitionTime}s ease, filter ${transitionTime}s ease, opacity ${transitionTime}s ease;";
+        $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
 
         $css .= "    opacity: 1;"; // Assuming a default opacity value
         $css .= "    object-fit: " . esc_attr($attr['imagecover']) . ";"; // Assuming this controls object-fit
@@ -306,6 +306,14 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "  --image-hover-effect-transform: rotateX(180deg);";
     $css .= "}";
         
+    $css .= ".flip-front-left {";
+        $css .= "  --image-hover-effect-transform: rotateY(-180deg);";
+    $css .= "}";
+
+    $css .= ".flip-back-bottom {";
+        $css .= "  --image-hover-effect-transform: rotateX(-180deg);";
+    $css .= "}";
+
     /* Grayscale */
     $css .= ".grayScale {";
         $css .= "    --image-filter-effect: grayscale(100%);";
@@ -395,7 +403,16 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "top: 0;";
         $css .= "left: 0;";
         $css .= "transition: " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-        $css .= "opacity: 0; ";
+
+        if (isset($attr['overlay']) && $attr['overlay']) {
+        // If overlay is set and true, set opacity to 1
+            $css .= "opacity: 1; ";
+        } else {
+            // If overlay is not set or false, set opacity to 0
+            $css .= "opacity: 0; ";
+        }
+
+        
         $css .= "z-index: 10;";
         $css .= "display: flex;";
 
@@ -516,23 +533,30 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "transform: rotateY(0);";
     $css .= "}";
 
+    $css .= ".overlayflip-horizontal-left {";
+        $css .= "transform: rotateY(90deg);";
+    $css .= "}";
+
+    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {";
+        $css .= "transform: rotateY(0);";
+    $css .= "}";
+
     $css .= ".overlayflip-vertical {";
         $css .= "transform: rotateX(-90deg);";
     $css .= "}";
 
-    
-    $css .= ".flip-front-overlay {";
-        $css .= "transform: rotateY(-180deg);";
-    $css .= "}";
-    
-    $css .= ".flip-front-overlay-vertical {";
-        $css .= "transform: rotateX(-180deg);";
-    $css .= "}";
-    
     $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {";
         $css .= "transform: rotateX(0);";
     $css .= "}";
 
+    $css .= ".overlayflip-vertical-bottom {";
+        $css .= "transform: rotateX(90deg);";
+    $css .= "}";
+
+    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {";
+        $css .= "transform: rotateX(0);";
+    $css .= "}";
+    
     /* Zoom effects */
     $css .= ".overlayzoom-in-up {";
         $css .= "transform: scale(0.5) translateY(-50%);";

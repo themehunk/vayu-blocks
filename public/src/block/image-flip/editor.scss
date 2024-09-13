@@ -120,6 +120,16 @@
     --image-hover-effect-opacity: 0;
 }
 
+.flip-front-left {
+    --image-hover-effect-transform: rotateY(-180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-back-bottom {
+    --image-hover-effect-transform: rotateX(-180deg);
+    --image-hover-effect-opacity: 0;
+}
+
 .flip-vertical {
     --image-hover-effect-transform: rotateX(180deg);
 }
@@ -215,11 +225,27 @@
     transform: rotateY(0);
 }
 
+.overlayflip-horizontal-left {
+    transform: rotateY(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
+    transform: rotateY(0);
+}
+
 .overlayflip-vertical {
     transform: rotateX(-90deg);
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+    transform: rotateX(0);
+}
+
+.overlayflip-vertical-bottom {
+    transform: rotateX(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
     transform: rotateX(0);
 }
 
@@ -300,12 +326,6 @@
 .vayu_blocks_image_flip_wrapper:hover .overlaypartial-overlay {
     opacity: 1;
 }
-
-// .vayu-blocks-image-flip-main-container {
-//     min-height: 300px; /* Adjust this value as needed */
-//     position: relative; /* Ensure positioning context for child elements */
-//     background:gray;
-// }
 
 .wp-block-vayu-blocks-image-flip{
     margin-left:auto !important;

@@ -7,11 +7,11 @@ return array(
         'opacity' => 1,
         'overlaytransitiontime' => 0.5,
         'imagetransitiontime' => 0.5,
-        'overlay' => true,
+        'overlay' => false,
         'imagehvreffect' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
-        'overlaycolor' => '#3A4DDEDE',
+        'overlaycolor' => 'rgba(106, 111, 248, 0.17)',
         'focalPoint' => array(
             'x' => 0.5,
             'y' => 0.5,
@@ -25,26 +25,26 @@ return array(
 
         // image Border
             'imageborder' => array(
-                'topcolor' => 'black',
-                'topwidth' => '1px',
+                'topcolor' => 'rgb(183, 191, 249)',
+                'topwidth' => '2px',
                 'topstyle' => 'solid',
-                'bottomcolor' => 'black',
-                'bottomwidth' => '1px',
+                'bottomcolor' => 'rgb(183, 191, 249)',
+                'bottomwidth' => '2px',
                 'bottomstyle' => 'solid',
-                'leftcolor' => 'black',
-                'leftwidth' => '1px',
+                'leftcolor' => 'rgb(183, 191, 249)',
+                'leftwidth' => '2px',
                 'leftstyle' => 'solid',
-                'rightcolor' => 'black',
-                'rightwidth' => '1px',
+                'rightcolor' => 'rgb(183, 191, 249)',
+                'rightwidth' => '2px',
                 'rightstyle' => 'solid',
             ),
     
         // image Border Radius
             'imageborderRadius' => array(
-                'top' => '3px',
-                'bottom' => '3px',
-                'left' => '3px',
-                'right' => '3px',
+                'top' => '4px',
+                'bottom' => '4px',
+                'left' => '4px',
+                'right' => '4px',
             ),
         
     //Advanced

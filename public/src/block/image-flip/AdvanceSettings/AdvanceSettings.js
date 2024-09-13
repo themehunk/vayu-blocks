@@ -457,7 +457,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...(isHovered ? filteredHoverStyles : {}),
     };
    
-    let opacity = attributes.showPreview ? 1 : 0;
+    let opacity = (attributes.showPreview || attributes.overlay) ? 1 : 0;
 
     
     const blockProps = useBlockProps({
