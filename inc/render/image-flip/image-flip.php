@@ -7,8 +7,9 @@ class Vayu_blocks_image_flip {
 
     private $attr; //attributes
 
-    public function __construct($attr) {
+    public function __construct($attr,$content) {
         $this->attr = $attr;
+        $this->content = $content;
     }
 
     //Render
@@ -35,11 +36,13 @@ class Vayu_blocks_image_flip {
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
     
         $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
-            $image_html .= '<img 
-                                src="' . $imageSrc . '" 
-                                alt="' . $imageAlt . '" 
-                                class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" 
-                            />';
+            $image_html .= '<div class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" >';            
+                $image_html .= '<img 
+                                    src="' . $imageSrc . '" 
+                                    alt="' . $imageAlt . '" 
+                                    class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" 
+                                />';             
+            $image_html .= '</div>';
             // Append the overlay HTML
             $image_html .= $this->overlay();
         $image_html .= '</div>';
@@ -51,51 +54,32 @@ class Vayu_blocks_image_flip {
     private function overlay() {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
-    
-        // Check if overlay should be rendered
-        if (isset($attributes['overlay']) && $attributes['overlay']) {
-            $overlayClass = esc_attr($attributes['imageoverlayouteffect']);
-            $headingTag = isset($attributes['headingtag']) ? esc_html($attributes['headingtag']) : 'h2'; // Default to h2 if not set
-            $captionTag = isset($attributes['captiontag']) ? esc_html($attributes['captiontag']) : 'p'; // Default to p if not set
-            $headingText = isset($attributes['headingtext']) ? esc_html($attributes['headingtext']) : '';
-            $captionText = isset($attributes['imageCaption']) ? esc_html($attributes['imageCaption']) : '';
-            $buttonLink = isset($attributes['buttonlink']) ? esc_url($attributes['buttonlink']) : '';
-            $buttonNewTab = isset($attributes['buttonnewtab']) ? $attributes['buttonnewtab'] : false;
-            $buttonText = isset($attributes['buttontext']) ? esc_html($attributes['buttontext']) : '';
-            $buttonTarget = $buttonNewTab ? '_blank' : '_self';
-            $buttonRel = $buttonNewTab ? 'noopener noreferrer' : '';
-            
-            $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClass . '">';
-    
-                $overlay .= '<' . $headingTag . ' class="vayu_blocks_heading_image_flip vayu_block_animation_overlay_inside ' . $overlayClass . '">' . $headingText . '</' . $headingTag . '>';
-    
-                $overlay .= '<' . $captionTag . ' class="vayu_blocks_caption_image_flip vayu_block_animation_overlay_inside ' . $overlayClass . '">' . $captionText . '</' . $captionTag . '>';
-    
-                if ($buttonLink) {
-                    $overlay .= '<a
-                                    href="' . $buttonLink . '"
-                                    target="' . $buttonTarget . '"
-                                    rel="' . $buttonRel . '"
-                                    style="text-decoration: none;"
-                                >
-                                    <button
-                                        type="button"
-                                        class="vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ' . $overlayClass . '"
-                                    >
-                                        ' . $buttonText . '
-                                    </button>
-                                </a>';
-                } else {
-                    $overlay .= '<button
-                                    type="button"
-                                    class="vayu_blocks_image_flip_button vayu_block_animation_overlay_inside ' . $overlayClass . '"
-                                >
-                                    ' . $buttonText . '
-                                </button>';
-                }
-    
-            $overlay .= '</div>';
+
+        $overlayClasses = '';
+
+        if(isset($attributes['overlay']) && !$attributes['overlay']){
+            if ($attributes['imagehvreffect'] !== 'flip-front' && $attributes['imagehvreffect'] !== 'flip-back' && $attributes['imagehvreffect'] !== 'flip-front-left' && $attributes['imagehvreffect'] !== 'flip-back-bottom') {
+                $overlayClasses .= ' ' . $attributes['imageoverlayouteffect'];
+            }
+            elseif ($attributes['imagehvreffect'] === 'flip-front') {
+                $overlayClasses .= ' overlayflip-horizontal';
+            }
+            elseif ($attributes['imagehvreffect'] === 'flip-back') {
+                $overlayClasses .= ' overlayflip-vertical';
+            }
+            elseif ($attributes['imagehvreffect'] === 'flip-back-bottom') {
+                $overlayClasses .= ' overlayflip-vertical-bottom';
+            }
+            elseif ($attributes['imagehvreffect'] === 'flip-front-left') {
+                $overlayClasses .= ' overlayflip-horizontal-left';
+            }
         }
+
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClasses . '">';
+            $overlay .= '<div class="vayu_blocks_inner_content">';
+                $overlay .= $this->content;
+            $overlay .= '</div>';  
+        $overlay .= '</div>';
     
         return $overlay;
     }
@@ -274,7 +258,7 @@ class Vayu_blocks_image_flip {
 }
 
 // Render callback for the block
-function vayu_blocks_image_flip_render($attr) {
+function vayu_blocks_image_flip_render($attr,$content) {
     // Include default attributes
     $default_attributes = include('defaultattributes.php');
 
@@ -282,7 +266,7 @@ function vayu_blocks_image_flip_render($attr) {
     $attr = array_merge($default_attributes, $attr);
 
     // Initialize the image with the merged attributes
-    $image = new Vayu_blocks_image_flip($attr);
+    $image = new Vayu_blocks_image_flip($attr,$content);
     
     // Ensure className is sanitized and applied correctly
     $className = isset($attr['classNamemain']) ? esc_attr($attr['classNamemain']) : '';

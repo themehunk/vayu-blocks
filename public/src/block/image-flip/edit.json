@@ -23,7 +23,7 @@
     },
     "overlay":{
         "type":"boolean",
-        "default":true
+        "default":false
     },
     "imagehvreffect":{
         "type":"string",
@@ -37,136 +37,9 @@
         "type":"string",
         "default":"none"
     },
-    "headingtext":{
-        "type":"string",
-        "default":"Heading"
-    },
-    "imageCaption":{
-        "type":"string",
-        "default":"This is image caption"
-    },
-    "buttontext":{
-        "type":"string",
-        "default":"Button"
-    },
-    "buttonlink":{
-        "type":"string",
-        "default":""
-    },
-    "buttonnewtab" : {
-        "type": "boolean",
-        "default":false
-    },
     "overlaycolor":{
         "type":"string",
-        "default":"#b1c5a4"
-    },
-    "heading": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "button": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "headingcolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "headingtag":{
-        "type":"string",
-        "default":"h2"
-    },
-    "caption": {
-        "type": "object",
-        "default": {
-            "font": "default",
-            "size": "16px",
-            "appearance": "normal",
-            "letterSpacing": "0px",
-            "letterCase": "none"
-        }
-    },
-    "captioncolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "captiontag":{
-        "type":"string",
-        "default":"h2"
-    },
-    "buttonbackground":{
-        "type":"string",
-        "default":"black"
-    },
-    "buttoncolor":{
-        "type":"string",
-        "default":"white"
-    },
-    "buttonhvrbackground":{
-        "type":"string",
-        "default":"gray"
-    },
-    "buttonhvrcolor":{
-        "type":"string",
-        "default":"black"
-    },
-    "buttonborderRadius":{
-        "type":"object",
-        "default":{
-        "top": "3px",
-        "bottom": "3px",
-        "left": "3px",
-        "right": "3px"
-    }
-    },
-    "buttonborder":{
-        "type":"object",
-        "default":{
-        "topcolor": "black",
-        "topwidth": "1px",
-        "topstyle": "solid",
-
-        "bottomcolor": "black",
-        "bottomwidth": "1px",
-        "bottomstyle": "solid",
-
-        "leftcolor": "black",
-        "leftwidth": "1px",
-        "leftstyle": "solid",
-
-        "rightcolor": "black",
-        "rightwidth": "1px",
-        "rightstyle": "solid"
-    }
-    },
-    "buttonpaddingtop":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingbottom":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingleft":{
-        "type":"string",
-        "default":"5px"
-    },
-    "buttonpaddingright":{
-        "type":"string",
-        "default":"5px"
+        "default":"rgba(106, 111, 248, 0.17)"
     },
    "focalPoint": {
         "type": "object",
@@ -191,35 +64,6 @@
         "type":"boolean",
         "default":false
     },
-    "overlayborderRadius":{
-        "type":"object",
-        "default":{
-        "top": "3px",
-        "bottom": "3px",
-        "left": "3px",
-        "right": "3px"
-    }
-    },
-    "overlayborder":{
-        "type":"object",
-        "default":{
-        "topcolor": "black",
-        "topwidth": "1px",
-        "topstyle": "solid",
-
-        "bottomcolor": "black",
-        "bottomwidth": "1px",
-        "bottomstyle": "solid",
-
-        "leftcolor": "black",
-        "leftwidth": "1px",
-        "leftstyle": "solid",
-
-        "rightcolor": "black",
-        "rightwidth": "1px",
-        "rightstyle": "solid"
-    }
-    },
     "overlayalignment":{
         "type":"string",
         "default":"center"
@@ -231,34 +75,30 @@
     "imageborderRadius":{
         "type":"object",
         "default":{
-        "top": "3px",
-        "bottom": "3px",
-        "left": "3px",
-        "right": "3px"
+        "top": "4px",
+        "bottom": "4px",
+        "left": "4px",
+        "right": "4px"
     }
     },
     "imageborder":{
         "type":"object",
         "default":{
-        "topcolor": "black",
-        "topwidth": "1px",
+        "topcolor": "rgb(183, 191, 249)",
+        "topwidth": "2px",
         "topstyle": "solid",
 
-        "bottomcolor": "black",
-        "bottomwidth": "1px",
+        "bottomcolor": "rgb(183, 191, 249)",
+        "bottomwidth": "2px",
         "bottomstyle": "solid",
 
-        "leftcolor": "black",
-        "leftwidth": "1px",
+        "leftcolor": "rgb(183, 191, 249)",
+        "leftwidth": "2px",
         "leftstyle": "solid",
 
-        "rightcolor": "black",
-        "rightwidth": "1px",
+        "rightcolor": "rgb(183, 191, 249)",
+        "rightwidth": "2px",
         "rightstyle": "solid"
     }
-    },
-    "gap": {
-        "type":"number",
-        "default":0
     }
 }

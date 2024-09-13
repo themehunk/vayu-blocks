@@ -34,7 +34,6 @@
     overflow: hidden; /* Keeps the outer frame fixed */
     position: relative;
     display: grid;
-    // min-height: 300px;
     perspective: 1000px;
     transform-style: preserve-3d;
 }
@@ -45,6 +44,7 @@
     transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
      /* Ensures the image content covers the container */
     opacity:var(--image-opacity);
+    display: block;
 }
 
 /* Apply the custom hover effect */
@@ -109,11 +109,25 @@
 .flip-horizontal {
     --image-hover-effect-transform: rotateY(180deg);
 }
+
 .flip-front {
     --image-hover-effect-transform: rotateY(180deg);
+    --image-hover-effect-opacity: 0;
 }
+
 .flip-back {
     --image-hover-effect-transform: rotateX(180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-front-left {
+    --image-hover-effect-transform: rotateY(-180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-back-bottom {
+    --image-hover-effect-transform: rotateX(-180deg);
+    --image-hover-effect-opacity: 0;
 }
 
 .flip-vertical {
@@ -143,7 +157,6 @@
     opacity: var(--overlay-opacity); /* Initially hidden */
     z-index: 10;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
 }
 
 /* Hover the image and show the overlay */
@@ -205,18 +218,34 @@
 }
 
 .overlayflip-horizontal {
-    transform: rotateY(90deg);
+    transform: rotateY(-90deg);
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
     transform: rotateY(0);
 }
 
+.overlayflip-horizontal-left {
+    transform: rotateY(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
+    transform: rotateY(0);
+}
+
 .overlayflip-vertical {
-    transform: rotateX(90deg);
+    transform: rotateX(-90deg);
 }
 
 .vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+    transform: rotateX(0);
+}
+
+.overlayflip-vertical-bottom {
+    transform: rotateX(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
     transform: rotateX(0);
 }
 
@@ -298,12 +327,6 @@
     opacity: 1;
 }
 
-// .vayu-blocks-image-flip-main-container {
-//     min-height: 300px; /* Adjust this value as needed */
-//     position: relative; /* Ensure positioning context for child elements */
-//     background:gray;
-// }
-
 .wp-block-vayu-blocks-image-flip{
     margin-left:auto !important;
     margin-right:auto !important;
@@ -327,4 +350,15 @@
 .vayu_blocks_image_flip_button:hover {
     background:var(--button-hvr-background) !important;
     color:var(--button-hvr-color) !important;
+}
+
+.vayu_blocks_inner_content-image{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
