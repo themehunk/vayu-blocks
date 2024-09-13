@@ -16,6 +16,7 @@ import {
 import { IoEllipsisVerticalCircleOutline, IoColorPaletteOutline } from 'react-icons/io5';
 import { RiSettings5Fill } from 'react-icons/ri';
 import { CiSliderHorizontal } from "react-icons/ci";
+import { FaImage } from "react-icons/fa";
 
 /**
  * Internal dependencies.
@@ -30,6 +31,8 @@ const InsSettingHeader = ({
     switch (icon) {
       case 'colorwand':
         return IoEllipsisVerticalCircleOutline;
+      case 'image':
+        return FaImage;
       case 'diamond':
         return IoColorPaletteOutline;
       case 'colorpalette':

@@ -304,7 +304,7 @@ const categoryButtonStyles = (attributes) => {
         ...categoryStyles,
         ...categoryBorderRadiusStyles,
         color: `${attributes.pg_categoryTextColor}`,
-        background: attributes.category_backgroundType === 'color' ? attributes.category_backgroundColor : attributes.category_backgroundType === 'gradient' ? `${attributes.category_backgroundGradient}` : 'none',
+        background: attributes.category_backgroundColor,
         fontSize: `${attributes.pg_categoryTextSize}px`,
         marginLeft:'5px',
         fontWeight:'600',
@@ -484,7 +484,7 @@ const tagButtonStyles = (attributes ) => {
         ...tagPaddingStyle,
         // marginLeft:'5px',
         color: `${attributes.pg_tagTextColor}`,
-        background: attributes.tag_backgroundType === 'color' ? attributes.tag_backgroundColor : attributes.tag_backgroundType === 'gradient' ? `${attributes.tag_backgroundGradient}` : 'none',
+        background: attributes.tag_backgroundColor,
         fontSize: `${attributes.pg_tagTextSize}px`,
         fontWeight:'600',
         boxSizing: 'border-box', // Ensure padding and border are included in width/height
@@ -587,7 +587,7 @@ const PaginationStyles = (attributes) => {
         cursor:'pointer',
         fontSize: `${attributes.pg_PaginationSize}px`,
         color: `${attributes.pg_PaginationColor} !important`,
-        background: attributes.pg_PaginationbackgroundType === 'color' ? attributes.pg_PaginationbackgroundColor : attributes.pg_PaginationbackgroundType === 'gradient' ? `${attributes.pg_PaginationbackgroundGradient}` : 'none',
+        background: attributes.pg_PaginationbackgroundColor,
         margin: '20px 5px',
 
         border: `${attributes.paginationborderType || 'solid'} ${attributes.pg_paginationBorder || '0px'} ${attributes.pg_paginationBorderColor || 'blue'}`,

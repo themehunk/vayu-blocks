@@ -317,6 +317,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                 return {};
         }
     };
+    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
@@ -372,12 +373,12 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
     }
 
+    // console.log(customwidth);
     if ( isTablet ) {
 
         customwidth = {
                 
             'width':attributes.customWidthTablet + attributes.customWidthUnit,
-            'max-width':attributes.customWidthTablet + attributes.customWidthUnit,
             
         };
 
@@ -388,7 +389,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         customwidth = {
                 
             'width':attributes.customWidthMobile + attributes.customWidthUnit,
-            'max-width':attributes.customWidthMobile + attributes.customWidthUnit,
             
         };
     
@@ -401,7 +401,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
-        Width: '100%',
+        
         
         order: order === 'custom' ? customOrder : 'undefined',
       
