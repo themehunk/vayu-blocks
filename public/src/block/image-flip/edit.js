@@ -85,6 +85,7 @@ const edit = (props) => {
             [
                 ['vayu-blocks/advance-heading', {
                     fontVariant:'bold',
+                    fontFamily:'unset',
                     content:'Image Flip Title...'
                 }],
 
