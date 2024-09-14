@@ -114,10 +114,19 @@ class Vayu_Block_Plugin {
             array(
                 'name'           => 'vayu-blocks/image-flip',
                 'script_handle'  => 'image-flip',
-                 'editor_style'   => 'image-flip-editor-style',
-                 'frontend_style' => 'image-flip-frontend-style',
+                'editor_style'   => 'image-flip-editor-style',
+                'frontend_style' => 'image-flip-frontend-style',
                 'status'         => $options['imageFlip']['isActive'],
                 'render_callback' => 'vayu_blocks_image_flip_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/mega-menu',
+                'script_handle'  => 'mega-menu',
+                'script'         => 'view-mega-menu',
+                'editor_style'   => 'mega-menu-editor-style',
+                'frontend_style' => 'mega-menu-frontend-style',
+                'status'         => $options['megaMenu']['isActive'],
+                'render_callback' => 'vayu_blocks_mega_menu_render'
             )
             
         );
@@ -167,6 +176,22 @@ class Vayu_Block_Plugin {
             );
             }
 
+           if(isset($block['script'])){
+            wp_register_script(
+                $block['script'],
+                VAYU_BLOCKS_URL . 'public/build/' . $block['script'] . '.js',
+                array( 'wp-blocks', 'wp-element', 'wp-editor' ),
+                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script'] . '.js' ),
+            );
+
+            add_filter('script_loader_tag', function ($tag, $handle) {
+                if ('view-mega-menu' === $handle) {
+                    return str_replace(' src', ' type="module" src', $tag);
+                }
+                return $tag;
+            }, 10, 2);
+        }
+
             // Localize the script with data
             if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
                 wp_localize_script(
@@ -177,6 +202,12 @@ class Vayu_Block_Plugin {
             }
 
             // Prepare the arguments for registering the block
+            $block_args = array(
+                'editor_script'   => $block['script_handle'],
+                'script'           => isset($block['script'])?$block['script']:'',
+                'editor_style'    => $block['editor_style'],
+                'style'           => $block['frontend_style'],
+            );
                 $block_args = array(
                     'editor_script' => $block['script_handle']
                 );
@@ -190,7 +221,6 @@ class Vayu_Block_Plugin {
                 if ( ! empty( $block['frontend_style'] ) ) {
                     $block_args['style'] = $block['frontend_style'];
                 }
-
 
             // Check if the render callback is set and not null
             if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
@@ -252,6 +282,7 @@ class Vayu_Block_Plugin {
 
     <?php }
 }
+
 
 
 function vayu_block_plugin_init( ) {
