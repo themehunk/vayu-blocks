@@ -1,64 +1,57 @@
-/**
- * Wordpress dependencies
- */
-import { registerBlockType } from '@wordpress/blocks';
+
+import { registerBlockVariation } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { loop as icon } from '@wordpress/icons';
-import './style.scss';
+import './edit.js';
+// Define the inner block template with a grid layout
+const TEMPLATE = [
+    [
+        'core/post-template',
+        {}, // Grid layout with 2 columns
+        [
+            ['core/post-title'],
+            ['core/post-date'],
+            ['core/post-excerpt'],
+        ],
+    ],
+	[
+        'core/query-pagination',
+        {}, // Additional attributes for pagination can be set here if needed
+        [
+            ['core/query-pagination-previous'],
+            ['core/query-pagination-numbers'],
+            ['core/query-pagination-next'],
+        ],
+    ],
+];
 
-/**
- * Internal dependencies
- */
-import edit from './edit';
-import save from './save';
-import metadata from './block.json';
-import variations from './variations';
-
-const { name } = metadata;
-
-registerBlockType( name, {
-	...metadata,
-	title: __( 'Advance Query Loop Block', 'vayu-blocks' ),
-	description: __( 'Advance Query Block', 'vayu-blocks' ),
-	icon,
-	edit,
-	example: {
-		viewportWidth: 650,
-		attributes: {
-			namespace: 'core/posts-list',
-			query: {
-				perPage: 4,
-				pages: 1,
-				offset: 0,
-				postType: 'post',
-				order: 'desc',
-				orderBy: 'date',
-				author: '',
-				search: '',
-				sticky: 'exclude',
-				inherit: true,
-			},
-		},
-		innerBlocks: [
-			{
-				name: 'core/post-template',
-				attributes: {
-					layout: {
-						type: 'grid',
-						columnCount: 2,
-					},
-				},
-				innerBlocks: [
-					{
-						name: 'core/post-title',
-					},
-					{
-						name: 'core/post-date',
-					}
-				],
-			},
-		],
-	},
-	save,
-    variations,
+// Register a new variation for the core/query block
+registerBlockVariation('core/query', {
+    name: 'vayu-blocks/advance-query-loop',
+    title: __('Advance Query Block', 'vayu-blocks'),
+    description: __('A custom block extending the core Query Loop block with dynamic post templates.', 'vayu-blocks'),
+    icon,
+	category: 'vayu-blocks', 
+    attributes: {
+        namespace: 'vayu-blocks/advance-query-loop',
+        query: {
+            order: 'desc',
+            orderBy: 'date',
+			perPage: 5,
+			pages : 0,
+			offset : 0,
+			postType : "post",
+			author: "",
+			search: "",
+			exclude: [],
+			sticky: "",
+			taxQuery: null,
+			parents: [],
+			inherit: false,
+        }
+    },
+	scope: [ 'inserter' ],
+    innerBlocks: TEMPLATE,
+    isActive: (blockAttributes) => blockAttributes.namespace === 'vayu-blocks/advance-query-loop',
+    allowedControls: ['inherit', 'sticky', 'order', 'taxQuery', 'search', 'author','exclude','postType'],
 });

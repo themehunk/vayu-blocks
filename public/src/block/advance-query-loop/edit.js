@@ -1,108 +1,55 @@
-/**
- * WordPress dependencies
- */
-import { useSelect, useDispatch } from '@wordpress/data';
-import { useInstanceId } from '@wordpress/compose';
-import { useEffect } from '@wordpress/element';
-import {
-	BlockControls,
-	InspectorControls,
-	useBlockProps,
-	store as blockEditorStore,
-	useInnerBlocksProps,
-	InnerBlocks,
-} from '@wordpress/block-editor';
-
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { store as coreStore } from '@wordpress/core-data';
+import { PostExcludeControls } from './post-exclude-controls';
+/**
+ * Higher-Order Component to add custom controls
+ */
+const withAdvancedQueryControls = (BlockEdit) => (props) => {
 
-import './editor.scss';
-import InsSettings from './settings.js';
+    const { attributes, setAttributes } = props;
 
-const DEFAULTS_POSTS_PER_PAGE = 3;
+    const { query: { perPage, offset = 0 } = {} } = attributes;
+    
+    if (props.name !== 'core/query') {
+        return <BlockEdit {...props} />;
+    }
 
-// Template for inner blocks
-const TEMPLATE = [
-	[
-		'core/post-template',
-		{ layout: { type: 'grid', columnCount: 2 } },
-		[
-			['core/post-title'],
-			['core/post-date'],
-			['core/post-excerpt'],
-		],
-	],
-];
-const Edit = ({ attributes, setAttributes, clientId }) => {
-	
-    const {
-		queryId,
-		query,
-		query: { inherit } = {},
-		displayLayout,
-		enhancedPagination,
-		tagName: TagName = 'div',
-	} = attributes;
-
-    const { __unstableMarkNextChangeAsNotPersistent } = useDispatch(blockEditorStore);
-
-    const instanceId = useInstanceId(Edit);
-
-    const { postsPerPage } = useSelect((select) => {
-        const { getSettings } = select(blockEditorStore);
-        const { getEntityRecord, getEntityRecordEdits, canUser } = select(coreStore);
-        const settingPerPage = canUser('read', { kind: 'root', name: 'site' })
-            ? +getEntityRecord('root', 'site')?.posts_per_page
-            : +getSettings().postsPerPage;
-
-        const editedSettingPerPage = +getEntityRecordEdits('root', 'site')?.posts_per_page;
-
-        return {
-            postsPerPage: editedSettingPerPage || settingPerPage || DEFAULTS_POSTS_PER_PAGE,
-        };
-    }, []);
-
-    useEffect(() => {
-        const newQuery = {};
-        if (inherit && query.perPage !== postsPerPage) {
-            newQuery.perPage = postsPerPage;
-        } else if (!query.perPage && postsPerPage) {
-            newQuery.perPage = postsPerPage;
-        }
-        if (!!Object.keys(newQuery).length) {
-            __unstableMarkNextChangeAsNotPersistent();
-            updateQuery(newQuery);
-        }
-    }, [query.perPage, postsPerPage, inherit]);
-
-    const updateQuery = (newQuery) => setAttributes({ query: { ...query, ...newQuery } });
-
-    useEffect(() => {
-        if (!Number.isFinite(queryId)) {
-            __unstableMarkNextChangeAsNotPersistent();
-            setAttributes({ queryId: instanceId });
-        }
-    }, [queryId, instanceId, setAttributes, __unstableMarkNextChangeAsNotPersistent]);
-
-    const blockProps = useBlockProps();
-	const innerBlocksProps = useInnerBlocksProps(blockProps, { template: TEMPLATE });
-
-	// const hasInnerBlocks = useSelect(
-	// 	(select) => !!select(blockEditorStore).getBlocks(clientId).length,
-	// 	[clientId]
-	// );
+    // Check if the current block variation is the advanced query loop
+    const isAdvancedQueryLoop = attributes.namespace === 'vayu-blocks/advance-query-loop';
 
     return (
         <>
-            <InsSettings
-                attributes={attributes}
-                setQuery={updateQuery}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-           <div { ...innerBlocksProps }></div>
+            <BlockEdit {...props} />
+            {isAdvancedQueryLoop && (
+                <InspectorControls>
+                    <PanelBody title={__('Advanced Query Settings', 'vayu-blocks')}>
+                        <RangeControl
+                            label={ __( 'Posts Per Page', 'advanced-query-loop' ) }
+                            min={ 1 }
+                            max={ 50 }
+                            onChange={ ( newCount ) => {
+                                setAttributes( {
+                                    query: {
+                                        ...attributes.query,
+                                        perPage: newCount,
+                                        offset,
+                                    },
+                                } );
+                            } }
+                            value={ perPage }
+                        />
+                         <PostExcludeControls { ...props } />
+                    </PanelBody>
+                </InspectorControls>
+            )}
         </>
     );
 };
 
-export default Edit;
+// Apply the custom controls to the block editor
+wp.hooks.addFilter(
+    'editor.BlockEdit',
+    'vayu-blocks/with-advanced-query-controls',
+    withAdvancedQueryControls
+);

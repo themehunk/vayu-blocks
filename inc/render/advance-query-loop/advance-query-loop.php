@@ -1,42 +1,15 @@
 <?php 
-function advance_block_query( $query, $block ) {
-    // Check if the block is 'core/post-template'
-    if ( isset( $block->name ) && 'core/post-template' === $block->name ) {
-        // Get the content of the post where the block is used
-        $post_id = get_the_ID();
-        $post_content = get_post_field( 'post_content', $post_id );
+// function vayu_query_looop_customize_query_block( $query, $block ) {
+//     // Ensure this only affects our custom variation
+//     if ( isset( $block['attrs']['namespace'] ) && 'vayu-blocks/advance-query-loop-block' === $block['attrs']['namespace'] ) {
+//         // Modify query parameters as needed
+//         $query['post_type']      = $block['attrs']['query']['postType'];
+//         $query['posts_per_page'] = $block['attrs']['query']['perPage'];
+//         $query['order']          = $block['attrs']['query']['order'];
+//         $query['orderby']        = $block['attrs']['query']['orderBy'];
+//     }
 
-        // Parse the post content into blocks
-        $blocks = parse_blocks( $post_content );
-
-        // Loop through the blocks to find the specific block
-        foreach ( $blocks as $block_data ) {
-            if ( 'vayu-blocks/advance-query-loop' === $block_data['blockName'] ) {
-                $query_vars = isset( $block_data['attrs']['query'] ) ? $block_data['attrs']['query'] : array();
-
-                // Modify the query parameters based on the attributes
-                if ( isset( $query_vars['postType'] ) ) {
-                    $query['post_type'] = $query_vars['postType'];
-                }
-
-                if ( isset( $query_vars['perPage'] ) ) {
-                    $query['posts_per_page'] = $query_vars['perPage'];
-                }
-
-                if ( isset( $query_vars['order'] ) ) {
-                    $query['order'] = $query_vars['order'];
-                }
-
-                if ( isset( $query_vars['orderBy'] ) ) {
-                    $query['orderby'] = $query_vars['orderBy'];
-                }
-
-                // Add any other custom query modifications here
-                break; // Exit the loop once the block is found and query is modified
-            }
-        }
-    }
-
-    return $query;
-}
-add_filter( 'query_loop_block_query_vars', 'advance_block_query', 10, 2 );
+//     return $query;
+// }
+// // Add the filter to customize query parameters for the core/query block
+// add_filter( 'query_loop_block_query_vars', 'vayu_query_looop_customize_query_block', 10, 2 );

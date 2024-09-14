@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
 
+
 function generate_inline_image_flip_styles($attr) {
 
     $css = '';
