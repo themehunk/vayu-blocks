@@ -114,10 +114,18 @@ class Vayu_Block_Plugin {
             array(
                 'name'           => 'vayu-blocks/image-flip',
                 'script_handle'  => 'image-flip',
-                 'editor_style'   => 'image-flip-editor-style',
-                 'frontend_style' => 'image-flip-frontend-style',
+                'editor_style'   => 'image-flip-editor-style',
+                'frontend_style' => 'image-flip-frontend-style',
                 'status'         => $options['imageFlip']['isActive'],
                 'render_callback' => 'vayu_blocks_image_flip_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/mega-menu',
+                'script_handle'  => 'mega-menu',
+                'editor_style'   => 'mega-menu-editor-style',
+                'frontend_style' => 'mega-menu-frontend-style',
+                'status'         => $options['megaMenu']['isActive'],
+                'render_callback' => 'vayu_blocks_mega_menu_render'
             )
             
         );
@@ -241,6 +249,7 @@ class Vayu_Block_Plugin {
 
     <?php }
 }
+
 
 
 function vayu_block_plugin_init( ) {
