@@ -122,6 +122,7 @@ class Vayu_Block_Plugin {
             array(
                 'name'           => 'vayu-blocks/mega-menu',
                 'script_handle'  => 'mega-menu',
+                'script'         => 'view-mega-menu',
                 'editor_style'   => 'mega-menu-editor-style',
                 'frontend_style' => 'mega-menu-frontend-style',
                 'status'         => $options['megaMenu']['isActive'],
@@ -173,6 +174,22 @@ class Vayu_Block_Plugin {
                 filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
             );
 
+           if(isset($block['script'])){
+            wp_register_script(
+                $block['script'],
+                VAYU_BLOCKS_URL . 'public/build/' . $block['script'] . '.js',
+                array( 'wp-blocks', 'wp-element', 'wp-editor' ),
+                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script'] . '.js' ),
+            );
+
+            add_filter('script_loader_tag', function ($tag, $handle) {
+                if ('view-mega-menu' === $handle) {
+                    return str_replace(' src', ' type="module" src', $tag);
+                }
+                return $tag;
+            }, 10, 2);
+        }
+
             // Localize the script with data
             if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
                 wp_localize_script(
@@ -185,6 +202,7 @@ class Vayu_Block_Plugin {
             // Prepare the arguments for registering the block
             $block_args = array(
                 'editor_script'   => $block['script_handle'],
+                'script'           => isset($block['script'])?$block['script']:'',
                 'editor_style'    => $block['editor_style'],
                 'style'           => $block['frontend_style'],
             );

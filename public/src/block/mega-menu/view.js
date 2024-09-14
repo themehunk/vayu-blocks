@@ -1,7 +1,5 @@
 import { store, getContext } from '@wordpress/interactivity';
-
 const { actions } = store( 'vayu-blocks/mega-menu', {
-
 	actions: {
 		toggleMenu() {
 			const context = getContext();

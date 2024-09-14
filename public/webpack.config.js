@@ -23,7 +23,7 @@ module.exports = {
      'view-grid': './src/block/post-grid/view.js',
      'view-grid': './src/block/advance-slider/view.js',
      'view-grid': './src/block/image-flip/view.js',
-     'view-menu': './src/block/mega-menu/view.js',
+     'view-mega-menu': './src/block/mega-menu/view.js',
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',
 		 'anim-typing': './src/block/animation/frontend/typing/index.js',
