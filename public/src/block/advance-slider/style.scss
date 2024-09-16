@@ -8,20 +8,6 @@
     display:none;
 }
 
-
-
-/* Animation for heading */
-// @keyframes fadeInUp {
-//     from {
-//         opacity: 0;
-//         transform: translateY(10px);
-//     }
-//     to {
-//         opacity: 1;
-//         transform: translateY(0);
-//     }
-// }
-
 .slide-active {
     opacity: 0; /* Initially hide the element */
     animation: fadeInUp 2.5s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Custom cubic-bezier for smoother animation */

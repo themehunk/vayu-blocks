@@ -275,6 +275,17 @@ function generate_inline_image_flip_styles($attr) {
             }
         }
 
+        if ($attr['imageborderradiuscircle'] === 'circle') {
+            // Apply a border-radius of 50% for circular images
+            $css .= "border-radius: 50%;";
+        } else {
+            // Apply individual border-radius values if not a circle
+            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
+                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
+            }
+        }
+        
+
         // Top border
         if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
             $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
@@ -295,11 +306,15 @@ function generate_inline_image_flip_styles($attr) {
             $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
         }
 
-        // Border radius
-        if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
-            $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
-        }
+    $css .= "}";
 
+    // Append CSS rules to $css
+    $css .= "$wrapper .vayu_blocks_image_flip_image-container {";
+        $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
+        $css .= "justify-content: center;";
+        $css .= "display: flex;";
+        $css .= "align-items: center;";
+    
     $css .= "}";
 
     // Append hover effect CSS rules
@@ -478,9 +493,14 @@ function generate_inline_image_flip_styles($attr) {
             $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
         }
 
-        // Border radius
-        if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
-            $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
+        if ($attr['imageborderradiuscircle'] === 'circle') {
+            // Apply a border-radius of 50% for circular images
+            $css .= "border-radius: 50%;";
+        } else {
+            // Apply individual border-radius values if not a circle
+            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
+                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
+            }
         }
 
 

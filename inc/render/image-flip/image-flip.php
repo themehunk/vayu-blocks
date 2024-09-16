@@ -36,7 +36,7 @@ class Vayu_blocks_image_flip {
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
     
         $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
-            $image_html .= '<div class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" >';            
+            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 

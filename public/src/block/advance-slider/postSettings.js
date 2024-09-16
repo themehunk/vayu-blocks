@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
-import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
 import { PanelColorSettings } from '@wordpress/block-editor';
 import {Vayu_blocks_typographycontrol} from './Components/Typography/Vayu_blocks_typographycontrol';
 
@@ -14,14 +13,10 @@ import {
     FontSizePicker,
     SelectControl,
     __experimentalBoxControl as BoxControl,
-    TabPanel 
 } from '@wordpress/components';
 import {
     HoverControl,
     ToogleGroupControl,
-    SizingControl,
-    UnitChooser,
-    ResponsiveControl,
 } from '../../components/index.js';
 
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
@@ -29,19 +24,14 @@ import {Vayu_Block_Dimension_Control} from './Components/Dimesions/Vayu_Block_Di
 import { Vayu_Block_Border_Control } from './Components/BorderControl/Vayu_Blocks_Border_control';
 import Vayu_Block_Toggle from './Components/ToggleGroupControl/Vayu_Block_Toggle';
 import ColorPanel from './Components/ColorPanel/ColorPanel';
+import {MediaPlaceholder } from '@wordpress/block-editor';
 
 const PostSettings = ({ attributes, setAttributes }) => {
 
-    const [hover, sethover] = useState('left');
     const [isPanel, settogglePanelnew] = useState('layout');
     const [hoverbutton, sethoverbutton] = useState('normal');
     const [button, setbutton] = useState('button1');
     const [activeButtonfill, setActiveButtonfill] = useState('outline');
-
-    const getView = useSelect((select) => {
-        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
-    }, []);
 
     const vayu_blocks_fontsizes = [
         {
@@ -62,29 +52,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         {
             name: 'ExtraBig',
             size: 28,
-            slug: 'extrabig'
-        }
-    ];
-
-    const vayu_blocks_fontsizes_small = [
-        {
-            name: 'Small',
-            size: 10,
-            slug: 'small'
-        },
-        {
-            name: 'Meadium',
-            size: 14,
-            slug: 'meadium'
-        },
-        {
-            name: 'Big',
-            size: 16,
-            slug: 'big'
-        },
-        {
-            name: 'ExtraBig',
-            size: 20,
             slug: 'extrabig'
         }
     ];
@@ -200,59 +167,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
     
         // Update the attributes with the new values
         setAttributes({ global: newGlobal, slides:  attributes.slides });
-    };
-
-    //Background style update with global attributes
-    const vayu_blocks_updateSliderBackgroundStyles = (propertyPath, value) => {
-        
-        // Default value for the property if it's undefined
-        if (value === undefined) {
-            value = '';
-        }
-    
-        // Step 1: Create a copy of the global attributes and update the specified property
-        const newGlobal = { ...attributes.global };
-    
-        // Ensure the layout object exists
-        if (!newGlobal) {
-            newGlobal = {};
-        }
-    
-        // Split the property path into individual properties
-        const properties = propertyPath.split('.');
-        let currentProperty = newGlobal;
-    
-        // Traverse the properties and set the value at the correct location
-        properties.forEach((prop, idx) => {
-            if (idx === properties.length - 1) {
-                currentProperty[prop] = value;
-            } else {
-                if (!currentProperty[prop]) {
-                    currentProperty[prop] = {};
-                }
-                currentProperty = currentProperty[prop];
-            }
-        });
-    
-        // Iterate through each slide and update the property only where customStyle is false
-        attributes.slides.forEach((slide, index) => {
-            if (slide.customBackgroundImage === false) {
-                let slideProperty = slide;
-                properties.forEach((prop, idx) => {
-                    if (idx === properties.length - 1) {
-                        slideProperty[prop] = value;
-                    } else {
-                        if (!slideProperty[prop]) {
-                            slideProperty[prop] = {};
-                        }
-                        slideProperty = slideProperty[prop];
-                    }
-                });
-            }
-        });
-    
-        // Update the attributes with the new values
-        setAttributes({ global: newGlobal, slides: attributes.slides });
     };
     
     //border
@@ -392,21 +306,6 @@ const PostSettings = ({ attributes, setAttributes }) => {
         });
     };
 
-    //default duotone
-    const vayu_blocks_DUOTONE_PALETTE = [
-        { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
-        { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
-        { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
-        { colors: ['#000097', '#ff4747'], name: 'Blue and Red', slug: 'blue-red', id: '#duotone-blue-red' },
-        { colors: ['#8c00b7', '#fcff41'], name: 'Purple and Yellow', slug: 'purple-yellow', id: '#duotone-purple-yellow' },
-        { colors: ['#ffa500', '#008080'], name: 'Orange and Teal', slug: 'orange-teal', id: '#duotone-orange-teal' },
-        { colors: ['#ff69b4', '#0000ff'], name: 'Pink and Blue', slug: 'pink-blue', id: '#duotone-pink-blue' },
-        { colors: ['#00ffff', '#ff00ff'], name: 'Cyan and Magenta', slug: 'cyan-magenta', id: '#duotone-cyan-magenta' },
-        { colors: ['#ffff00', '#000000'], name: 'Yellow and Black', slug: 'yellow-black', id: '#duotone-yellow-black' },
-        { colors: ['#add8e6', '#90ee90'], name: 'Light Blue and Light Green', slug: 'lightblue-lightgreen', id: '#duotone-lightblue-lightgreen' },
-        { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
-    ];
-
     // Handler to update dimensions state
     const handleDimensionChange = (newDimensions) => {
         const sides = ['top', 'right', 'bottom', 'left'];
@@ -488,6 +387,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
         
     };
+
 
     return (
         <>
@@ -720,6 +620,45 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                         handelColorPanel={(value)=>handelBackgroundColor('heading',value)}
                                         initialTab="color"
                                     />
+
+                                    <h4>{__('Background','vayu-blocks')}</h4>
+                                        {attributes.global.heading.image ? (
+                                            <>         
+                                                <div class="vayu-blocks-image-container">
+                                                    <img src={attributes.global.heading.image} alt="slideimage" />
+                                                    <button class="vayu-blocks-change-button" onClick={() => vayu_blocks_updateSliderStyles('heading.image','')}>Change</button>
+                                                </div>
+
+                                                <br/>
+                                                <br/>
+                                                <ToggleControl
+                                                    label={__('Animate text')}
+                                                    checked={attributes.global.heading.animation}
+                                                    onChange={(value) => vayu_blocks_updateSliderStyles('heading.animation',value)}
+                                                /> 
+                                                <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_updateSliderStyles('heading.image','')}>
+                                                    {__('Clear', 'vayu-blocks')}
+                                                </Button>
+                                            </>
+                                            ) : (
+                                                <>
+                                                <MediaPlaceholder
+                                                    icon="format-image"
+                                                    labels={{
+                                                        title: __('Background Image', 'vayu-blocks'),
+                                                        name: __('an image', 'vayu-blocks')
+                                                    }}
+                                                    onSelect={(media) => {
+                                                        vayu_blocks_updateSliderStyles('heading.image', media.url);
+                                                    }}                                                                
+                                                    onSelectURL='true'
+                                                    accept="image/*"
+                                                    allowedTypes={['image']}
+                                                />
+                                                <br/>
+                                                </>
+                                            )}
+                                    <p>If an image is applied, the color will automatically become transparent.</p>
 
                                     <Vayu_blocks_typographycontrol
                                         onChange={(value)=> handleTypographyChange("heading",value)}

@@ -146,6 +146,8 @@ return array(
                     'fontWeight' => 'bold',
                     'color' => 'black',
                     'link' => '',
+                    'image' => '',
+                    'animation' => true,
                 ),
                 'subheading' => array(
                     'show' => true,
@@ -195,7 +197,7 @@ return array(
                 'customStylesubbutton1' => false,
                 'customStylesubbutton2' => false,
                 'customBackgroundImage' => false,
-                'heightauto' => true,
+                'heightauto' => false,
                 'backgroundType' => 'color',
                 'backgroundColor' => '#000000',
                 'duotone' => '',
