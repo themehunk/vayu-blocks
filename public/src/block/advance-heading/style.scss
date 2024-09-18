@@ -24,3 +24,25 @@
 .wp-block-vayu-blocks-advance-heading a{
 	text-decoration: none;
 }
+
+
+.vayu_blocks_heading_image-heading {
+    background-size: 200% 100% !important; /* Extend background horizontally */
+    background-clip: text;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; /* Text needs to be transparent */
+}
+
+.vayu_blocks_heading_image_animation-heading{
+    animation: headinganimation 8s linear infinite !important;
+}
+
+@keyframes headinganimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0; /* Move background horizontally */
+    }
+}
+

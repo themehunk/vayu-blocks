@@ -12,9 +12,12 @@
 	 Placeholder,
 	 Spinner,
 	 ToggleControl,
+	 Button,
  } from '@wordpress/components';
  
  import { useSelect } from '@wordpress/data';
+ import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel.js';
+ import {MediaPlaceholder } from '@wordpress/block-editor';
  
  import {
      Fragment,
@@ -1116,6 +1119,15 @@ const InsSettings = ({
 		}
 	};
 
+	const setcolorpanelfunction = value => {
+		if(value === 'color'){
+			setcolorpanel(value);
+		}
+		if(value === 'image'){
+			setcolorpanel(value);
+		}
+	}
+
 	// verticalOrientationOffset right
 	const getverticalOrientationOffsetBottom = () => {
 		switch ( getView ) {
@@ -1139,6 +1151,17 @@ const InsSettings = ({
 			setAttributes({ verticalOrientationnOffsetBottomMobile: value });
 		}
 	};
+
+	const handlecolorcolorpanel =(value)=> {
+		if(value.color){
+			setAttributes({headingColor:value.color});
+			setAttributes({headingimage:''});
+		}
+		if(value.colorhvr){
+			setAttributes({headingHvrColor:value.colorhvr});
+		}
+	}
+	const [colorpanel, setcolorpanel] = useState('color');
 
 	const [fontSizeUnit, setfontSizeUnit] = useState('px');
 	const maxfontSizeUnit = fontSizeUnit === 'px' ? 150 :fontSizeUnit === 'em' ? 10 : fontSizeUnit === '%' ? 100:'';
@@ -1211,41 +1234,85 @@ const InsSettings = ({
 								/> 
                 </ResponsiveControl> 			
 
-				<HoverControl value={ hover }
+				<HoverControl value={ colorpanel }
 					options={[
 						{
-							label: __( 'Normal', 'vayu-blocks' ),
-							value: 'normal'
+							label: __( 'Color', 'vayu-blocks' ),
+							value: 'color'
 						},
 						{
-							label: __( 'Hover', 'vayu-blocks' ),
-							value: 'hover'
+							label: __( 'Image', 'vayu-blocks' ),
+							value: 'image'
 						}
 					]}
-					onChange={ setHover } />
-						
-				{ 'normal' ===  hover &&  (	
-						
-				<ColorGradientControl
-								label={ __( 'Heading Color', 'vayu-blocks' ) }
-								colorValue={ attributes.headingColor }
-								onColorChange={ e => setAttributes({ headingColor: e }) }
-								enableAlpha={true}
-							/>	
-			 
+					onChange={ setcolorpanelfunction } />
 
-				) || 'hover' ===  hover && (
-			    <>
-				<ColorGradientControl
-					label={ __( 'Heading Hover Color', 'vayu-blocks' ) }
-					colorValue={ attributes.headingHvrColor }
-					onColorChange={ e => setAttributes({ headingHvrColor: e }) }
-					enableAlpha={true}
-				/>
+					{colorpanel === 'color' && (
+					<ColorPanel
+						colorTool={[
+							{
+								active: ['color'],
+								name: 'Text',
+								value: attributes.headingColor,
+								attribute: 'color',
+							},
+							{
+								active: ['color'],
+								name: 'Hover Text',
+								value: attributes.headingHvrColor,
+								attribute: 'colorhvr',
+							}
 
-				</>
-			
-				) }
+						]}
+						handelColorPanel={(value)=>handlecolorcolorpanel(value)}
+						initialTab="color"
+					/>
+					)}
+
+					{colorpanel === 'image' && (			
+						<>
+							<h4>{__('Background','vayu-blocks')}</h4>
+							{attributes.headingimage ? (
+								<>         
+									<div class="vayu-blocks-image-container">
+										<img src={attributes.headingimage} alt="slideimage" />
+										<button class="vayu-blocks-change-button" onClick={() => setAttributes({headingimage:''})}>Change</button>
+									</div>
+
+									<br/>
+									<br/>
+									<ToggleControl
+										label={__('Animate text')}
+										checked={attributes.headinganimation}
+										onChange={(value) => setAttributes({headinganimation:value})}
+									/> 
+									<Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({headingimage:''})}>
+										{__('Clear', 'vayu-blocks')}
+									</Button>
+								</>
+								) : (
+									<>
+									<MediaPlaceholder
+										icon="format-image"
+										labels={{
+											title: __('Background Image', 'vayu-blocks'),
+											name: __('an image', 'vayu-blocks')
+										}}
+										onSelect={(media) => {
+											setAttributes({
+												headingimage: media.url, // Make sure 'headingImage' matches the attribute name
+												headingColor: 'transparent' // Correct spelling of 'transparent'
+											});
+										}}                                                               
+										onSelectURL='true'
+										accept="image/*"
+										allowedTypes={['image']}
+									/>
+									<br/>
+									</>
+								)}
+						</>	
+					)}
 
                 </PanelBody>
 				<PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }

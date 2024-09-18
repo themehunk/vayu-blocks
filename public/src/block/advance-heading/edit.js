@@ -571,7 +571,8 @@ import classnames from 'classnames';
 		  '--h-background-hover': attributes.backgroundGradientHvr,
 		};
 	  }
-	  
+
+ 
     const style = omitBy({
         ...stylesheet,
 		...customwidth,
@@ -580,7 +581,7 @@ import classnames from 'classnames';
 		...backgroundStyle,
 		...flexProperties,
 		...PositionProperties, 
-		
+		backgroundImage: attributes.headingimage ? `url(${attributes.headingimage})` : undefined
     }, x => x?.includes?.( 'undefined' ));
 
 	let headingWidthClass = "";
@@ -594,6 +595,8 @@ import classnames from 'classnames';
 
 	const Classes = classnames(
 		headingWidthClass, // Include headingWidthClass directly as a string
+		attributes.headingimage && attributes.headinganimation ? 'vayu_blocks_heading_image_animation-heading' : null, // Conditional class
+    	attributes.headingimage  ? 'vayu_blocks_heading_image-heading' : null, // Conditional class for image without animation
 		{
 		  'th-hide-desktop': attributes.responsiveTogHideDesktop,
 		  'th-hide-tablet': attributes.responsiveTogHideTablet,
