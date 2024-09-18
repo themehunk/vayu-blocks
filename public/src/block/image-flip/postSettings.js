@@ -130,7 +130,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
                 <ToggleControl
                         className='vayu_blocks_togglecontrol'
-                        label={attributes.overlay ? __('With Hover', 'vayu-blocks') : __('Without Hover', 'vayu-blocks')}
+                        label={attributes.overlay ? __('Without Hover', 'vayu-blocks') : __('With Hover', 'vayu-blocks')}
                         checked={attributes.overlay}
                         onChange={(value) =>  setAttributes({overlay:value, showPreview: false})}
                     />
@@ -222,29 +222,31 @@ const PostSettings = ({ attributes, setAttributes }) => {
 
             </PanelBody>
 
-            <PanelBody title={__('Overlay Effect', 'vayu-blocks')} initialOpen={false}>
-                <SelectControl
-                        label={__('Image Overlay', 'vayu-blocks')}
-                        value={attributes.imageoverlayouteffect}
-                        options={[
-                            { label: __('None', 'vayu-blocks'), value: 'overlaynone' },
-                            { label: __('Fade In', 'vayu-blocks'), value: 'overlayfade-in' },
-                            { label: __('Fade In Up', 'vayu-blocks'), value: 'overlayfade-in-up' },
-                            { label: __('Fade In Down', 'vayu-blocks'), value: 'overlayfade-in-down' },
-                            { label: __('Fade In Left', 'vayu-blocks'), value: 'overlayfade-in-left' },
-                            { label: __('Fade In Right', 'vayu-blocks'), value: 'overlayfade-in-right' },
-                            { label: __('Flip Horizontal', 'vayu-blocks'), value: 'overlayflip-horizontal' },
-                            { label: __('Flip Vertical', 'vayu-blocks'), value: 'overlayflip-vertical' },
-                            { label: __('Zoom In circle', 'vayu-blocks'), value: 'overlayzoom-in-circle' },
-                            { label: __('Zoom In Up', 'vayu-blocks'), value: 'overlayzoom-in-up' },
-                            { label: __('Zoom In Left', 'vayu-blocks'), value: 'overlayzoom-in-left' },
-                            { label: __('Zoom In Right', 'vayu-blocks'), value: 'overlayzoom-in-right' },
-                            { label: __('Zoom In Down', 'vayu-blocks'), value: 'overlayzoom-in-down' },
-                            { label: __('Partial Overlay', 'vayu-blocks'), value: 'overlaypartial-overlay' },
-                        ]}
-                        onChange={(value) => setAttributes({ imageoverlayouteffect: value })}
-                    />
-            </PanelBody>
+            {attributes.overlay===false && (
+                <PanelBody title={__('Overlay Effect', 'vayu-blocks')} initialOpen={false}>
+                    <SelectControl
+                            label={__('Image Overlay', 'vayu-blocks')}
+                            value={attributes.imageoverlayouteffect}
+                            options={[
+                                { label: __('None', 'vayu-blocks'), value: 'overlaynone' },
+                                { label: __('Fade In', 'vayu-blocks'), value: 'overlayfade-in' },
+                                { label: __('Fade In Up', 'vayu-blocks'), value: 'overlayfade-in-up' },
+                                { label: __('Fade In Down', 'vayu-blocks'), value: 'overlayfade-in-down' },
+                                { label: __('Fade In Left', 'vayu-blocks'), value: 'overlayfade-in-left' },
+                                { label: __('Fade In Right', 'vayu-blocks'), value: 'overlayfade-in-right' },
+                                { label: __('Flip Horizontal', 'vayu-blocks'), value: 'overlayflip-horizontal' },
+                                { label: __('Flip Vertical', 'vayu-blocks'), value: 'overlayflip-vertical' },
+                                { label: __('Zoom In circle', 'vayu-blocks'), value: 'overlayzoom-in-circle' },
+                                { label: __('Zoom In Up', 'vayu-blocks'), value: 'overlayzoom-in-up' },
+                                { label: __('Zoom In Left', 'vayu-blocks'), value: 'overlayzoom-in-left' },
+                                { label: __('Zoom In Right', 'vayu-blocks'), value: 'overlayzoom-in-right' },
+                                { label: __('Zoom In Down', 'vayu-blocks'), value: 'overlayzoom-in-down' },
+                                { label: __('Partial Overlay', 'vayu-blocks'), value: 'overlaypartial-overlay' },
+                            ]}
+                            onChange={(value) => setAttributes({ imageoverlayouteffect: value })}
+                        />
+                </PanelBody>
+             )}
 
             {/* Global style */}
             <PanelBody title={__('Global', 'vayu-blocks')} initialOpen={false}>

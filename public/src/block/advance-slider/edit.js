@@ -121,9 +121,6 @@ const edit = ({ attributes, setAttributes }) => {
                                                 color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
                                                 cursor: 'pointer',
                                                 background: 'none', 
-                                                // borderColor: activeIndex === index ? 'gray' : 'transparent',
-                                                // borderWidth: '1px',
-                                                // borderStyle: 'solid',
                                                 borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -302,8 +299,6 @@ const edit = ({ attributes, setAttributes }) => {
         const rightPadding = slide.padding.right || '0px';
         const leftPadding = slide.padding.left || '0px';
         const bottomPadding = slide.padding.bottom || '0px';
-        //const bottomPaddingValue = parseInt(slide.padding.bottom, 10) || 0; // Default to 0 if parsing fails
-        //const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
         // Slide Style
         const vayu_blocks_slideStyle = {
@@ -384,13 +379,15 @@ const edit = ({ attributes, setAttributes }) => {
 
         // Heading Style
         const vayu_blocks_generateheadingStyle = (heading) => {
-            return {
-                color: heading.color,
+            const style = {
+                color: heading.image ? 'transparent' : heading.color,
                 fontSize: `${heading.size}px`,
                 fontWeight: heading.fontWeight,
-                textDecoration: 'none', 
-                cursor: 'pointer' 
+                textDecoration: 'none',
+                cursor: 'pointer',
+                backgroundImage: heading.image ? `url(${heading.image})` : 'none',
             };
+            return style;
         };
 
         // Sub Heading Style
@@ -452,7 +449,10 @@ const edit = ({ attributes, setAttributes }) => {
                         <div style={{marginBottom: slide.gaphb}}>
 
                             <slide.heading.tag className="vayu_blocks_heading-edit" style={{marginBottom: slide.gaphsub,fontSize:'0'}}>
-                                <a 
+                                <a  
+                                    className={
+                                        `${slide.heading.image ? "vayu_blocks_heading_image" : ""} ${slide.heading.image && slide.heading.animation ? "vayu_blocks_heading_image_animation" : ""}`.trim()
+                                    }
                                     href={slide.heading.link} 
                                     target={slide.heading.newtab ? "_blank" : "_self"}
                                     style={vayu_blocks_generateheadingStyle(slide.heading)}
@@ -505,7 +505,6 @@ const edit = ({ attributes, setAttributes }) => {
 
     });
 
-    
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />

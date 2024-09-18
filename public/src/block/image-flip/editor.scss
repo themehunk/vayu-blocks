@@ -47,6 +47,13 @@
     display: block;
 }
 
+.vayu_blocks_image_flip_image-container {
+    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
+     /* Ensures the image content covers the container */
+    opacity:var(--image-opacity);
+    display: block;
+}
+
 /* Apply the custom hover effect */
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
     transform: var(--image-hover-effect-transform, none);

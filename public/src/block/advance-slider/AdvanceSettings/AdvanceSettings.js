@@ -470,6 +470,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
     const animationopacity = attributes.animationtype === 'noanimation' ? 1 : 0;
 
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {

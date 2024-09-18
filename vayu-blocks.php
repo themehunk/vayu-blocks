@@ -204,7 +204,7 @@ class Vayu_Block_Plugin {
             // Prepare the arguments for registering the block
             $block_args = array(
                 'editor_script'   => $block['script_handle'],
-                'script'           => isset($block['script'])?$block['script']:'',
+                //'script'           => isset($block['script'])?$block['script']:'',
                 'editor_style'    => $block['editor_style'],
                 'style'           => $block['frontend_style'],
             );

@@ -516,3 +516,26 @@ content: "" !important;
 .vayu_blocks_heading_unitcontrol_slides .vayu_blocks_typography_panel .vayu_blocks_size_all .ej5x27r3{
     margin-right:13px;
 }
+
+
+.vayu_blocks_heading_image {
+    font-family: "Ranchers", cursive !important;
+    display: inline-flex !important;
+    background-size: 200% 100% !important; /* Extend background horizontally */
+    background-clip: text;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; /* Text needs to be transparent */
+}
+
+.vayu_blocks_heading_image_animation{
+    animation: headinganimation 8s linear infinite !important;
+}
+
+@keyframes headinganimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0; /* Move background horizontally */
+    }
+}

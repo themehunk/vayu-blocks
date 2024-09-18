@@ -16,6 +16,7 @@ return array(
             'x' => 0.5,
             'y' => 0.5,
         ),
+        'imageborderradiuscircle' => 'square',
         'imagecover' => 'cover',
         'imageaspectratio' => 'original',
         'duotone' => '',

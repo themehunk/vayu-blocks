@@ -114,6 +114,17 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     { value: 'cover', label: 'Cover' },
                                 ]}
                             />
+
+                            <Vayu_Block_Toggle
+                                value={attributes.imageborderradiuscircle}
+                                onChange={(value) => setAttributes({imageborderradiuscircle:value})}
+                                isBlock={true}
+                                __nextHasNoMarginBottom={true}
+                                options={[
+                                    { value: 'square', label: 'Square' },
+                                    { value: 'circle', label: 'Circle' },
+                                ]}
+                            />
                           
                             <div class= "vayu_blocks_image_toolspanel_flip">
                             <ToolsPanel
@@ -190,10 +201,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Flip Horizontal', 'vayu-blocks'), value: 'flip-horizontal' },
                             { label: __('Flip Vertical', 'vayu-blocks'), value: 'flip-vertical' },
                             { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
-                            { label: __('Flip-Right', 'vayu-blocks'), value: 'flip-front' },
-                            { label: __('Flip-Left', 'vayu-blocks'), value: 'flip-front-left' },
-                            { label: __('flip-Top', 'vayu-blocks'), value: 'flip-back' },
-                            { label: __('flip-Bottom', 'vayu-blocks'), value: 'flip-back-bottom' },
+                            ...(attributes.overlay === false ? [
+                                { label: __('Flip Right', 'vayu-blocks'), value: 'flip-front' },
+                                { label: __('Flip Left', 'vayu-blocks'), value: 'flip-front-left' },
+                                { label: __('Flip Top', 'vayu-blocks'), value: 'flip-back' },
+                                { label: __('Flip Bottom', 'vayu-blocks'), value: 'flip-back-bottom' }
+                            ] : [])
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />

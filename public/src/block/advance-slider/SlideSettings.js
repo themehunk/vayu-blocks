@@ -1,29 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
 import {
-    PanelBody,
     ToggleControl,
     RangeControl,
     Button,
     TextareaControl,
-    FontSizePicker,
     TextControl,
-    __experimentalBoxControl as BoxControl,
     SelectControl,
-    __experimentalToolsPanel as ToolsPanel,
 } from '@wordpress/components';
 import { FaCaretDown, FaCaretRight } from 'react-icons/fa';
 import { MdContentCopy } from "react-icons/md";
 import {MediaPlaceholder } from '@wordpress/block-editor';
 import { Dashicon } from '@wordpress/components';
 import {	__experimentalPanelColorGradientSettings as PanelColorGradientSettings} from '@wordpress/block-editor';
-import { PanelColorSettings } from '@wordpress/block-editor';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import {
-    HoverControl,
     ToogleGroupControl,
 } from '../../components/index.js';
 
@@ -36,10 +29,6 @@ import ColorPanel from './Components/ColorPanel/ColorPanel';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
-    const getView = useSelect((select) => {
-        const { __experimentalGetPreviewDeviceType } = select('core/edit-post') || {};
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : null;
-    }, []);
 
     const [expandedIndex, setExpandedIndex] = useState(null);
     const [activeButton, setActiveButton] = useState('layout');
@@ -69,73 +58,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     // Utility function to generate a unique ID
     const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
-
-    const vayu_blocks_colors = [
-        { name: 'Gray', color: '#808080' },
-        { name: 'Light Gray', color: '#D3D3D3' },
-        { name: 'Black', color: '#000' },
-        { name: 'Light Black', color: '#333' },
-        { name: 'Blue', color: '#00f' },
-        { name: 'Light Blue', color: '#add8e6' },
-        { name: 'Green', color: '#008000' },
-        { name: 'Dark Blue', color: '#00008B' },
-        { name: 'Red', color: '#f00' },
-        { name: 'Light Red', color: '#FF6347' },
-        { name: 'Purple', color: '#800080' },
-    ];
-
-    const vayu_blocks_gradients = [
-        {
-          gradient: 'linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)',
-          name: 'Vivid cyan blue to vivid purple',
-          slug: 'vivid-cyan-blue-to-vivid-purple'
-        },
-        {
-          gradient: 'linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,128) 100%)',
-          name: 'Light green cyan to vivid green cyan',
-          slug: 'light-green-cyan-to-vivid-green-cyan'
-        },
-        {
-          gradient: 'linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%)',
-          name: 'Luminous vivid amber to luminous vivid orange',
-          slug: 'luminous-vivid-amber-to-luminous-vivid-orange'
-        },
-        {
-          gradient: 'linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%)',
-          name: 'Luminous vivid orange to vivid red',
-          slug: 'luminous-vivid-orange-to-vivid-red'
-        },
-        {
-          gradient: 'linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%)',
-          name: 'Very light gray to cyan bluish gray',
-          slug: 'very-light-gray-to-cyan-bluish-gray'
-        },
-        {
-          gradient: 'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
-          name: 'Cool to warm spectrum',
-          slug: 'cool-to-warm-spectrum'
-        },
-        {
-          gradient: 'linear-gradient(to right, #C90100 0%, #FF7B00 25%, #00D4E7 75%, #009DFF 100%)',
-          name: 'Red to blue gradient',
-          slug: 'red-to-blue-gradient'
-        },
-        {
-          gradient: 'linear-gradient(45deg, #09009f, #00ff95 80%)',
-          name: 'Blue to green gradient',
-          slug: 'blue-to-green-gradient'
-        },
-        {
-          gradient: 'linear-gradient(rgb(188, 12, 241), rgb(212, 4, 4))',
-          name: 'Purple to red gradient',
-          slug: 'purple-to-red-gradient'
-        },
-        {
-          gradient: 'linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44)',
-          name: 'Multicolor gradient',
-          slug: 'multicolor-gradient'
-        }
-    ];
 
     const vayu_blocks_sizes = [
         {
@@ -204,21 +126,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             size: 28,
             slug: 'extrabig'
         }
-    ];
-
-    //default duotone
-    const vayu_blocks_DUOTONE_PALETTE = [
-        { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
-        { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
-        { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
-        { colors: ['#000097', '#ff4747'], name: 'Blue and Red', slug: 'blue-red', id: '#duotone-blue-red' },
-        { colors: ['#8c00b7', '#fcff41'], name: 'Purple and Yellow', slug: 'purple-yellow', id: '#duotone-purple-yellow' },
-        { colors: ['#ffa500', '#008080'], name: 'Orange and Teal', slug: 'orange-teal', id: '#duotone-orange-teal' },
-        { colors: ['#ff69b4', '#0000ff'], name: 'Pink and Blue', slug: 'pink-blue', id: '#duotone-pink-blue' },
-        { colors: ['#00ffff', '#ff00ff'], name: 'Cyan and Magenta', slug: 'cyan-magenta', id: '#duotone-cyan-magenta' },
-        { colors: ['#ffff00', '#000000'], name: 'Yellow and Black', slug: 'yellow-black', id: '#duotone-yellow-black' },
-        { colors: ['#add8e6', '#90ee90'], name: 'Light Blue and Light Green', slug: 'lightblue-lightgreen', id: '#duotone-lightblue-lightgreen' },
-        { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
     ];
 
     //delete slide
@@ -292,8 +199,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             }
         });
 
-        // console.log(newSlides);
-        
         setAttributes({ slides: newSlides });
     };
 
@@ -871,6 +776,50 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                                 handelColorPanel={(value)=>handelBackgroundColor(index,'heading',value)}
                                                                 initialTab="color"
                                                             />
+
+                                                                <h4>{__('Background','vayu-blocks')}</h4>
+                                                                {attributes.slides[index].heading.image ? (
+                                                                    <>         
+                                                                        <div class="vayu-blocks-image-container">
+                                                                            <img src={attributes.slides[index].heading.image} alt="slideimage" />
+                                                                            <button class="vayu-blocks-change-button" onClick={() => vayu_blocks_updateSliderStyles(index,'heading.image','')}>Change</button>
+                                                                        </div>
+
+                                                                        <br/>
+                                                                        <br/>
+
+                                                                        <ToggleControl
+                                                                            label={__('Animate text background')}
+                                                                            checked={attributes.slides[index].heading.animation}
+                                                                            onChange={(value) => vayu_blocks_updateSliderStyles(index,'heading.animation',value)}
+                                                                        /> 
+
+                                                                        <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => vayu_blocks_updateSliderStyles(index,'heading.image','')}>
+                                                                            {__('Clear', 'vayu-blocks')}
+                                                                        </Button>
+                                                                    </>
+                                                                    ) : (
+                                                                        <>
+                                                                        <MediaPlaceholder
+                                                                            icon="format-image"
+                                                                            labels={{
+                                                                                title: __('Background Image', 'vayu-blocks'),
+                                                                                name: __('an image', 'vayu-blocks')
+                                                                            }}
+                                                                            onSelect={(media) => {
+                                                                                vayu_blocks_updateSliderStyles(index,'heading.image', media.url);
+                                                                            }}                                                                
+                                                                            onSelectURL='true'
+                                                                            accept="image/*"
+                                                                            allowedTypes={['image']}
+                                                                        />
+                                                                        <br/>
+                                                                        </>
+                                                                    )}
+
+                                                                    
+                                                            <p>If an image is applied, the color will automatically become transparent.</p>
+                                                            
 
                                                             <div className="vayu_blocks_heading_unitcontrol_slides">
                                                                 <Vayu_blocks_typographycontrol

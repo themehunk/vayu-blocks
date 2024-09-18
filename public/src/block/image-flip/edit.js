@@ -21,6 +21,12 @@ const edit = (props) => {
         setAttributes({ uniqueId: generateUniqueId() });
     }
 
+    // Determine the borderRadius based on condition
+    const borderRadius = attributes.imageborderradiuscircle === 'circle' 
+    ? '50%' 
+    : `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`;
+
+
     //overlay wrapper style
     const vayu_block_overlay_style = {
         background:attributes.overlaycolor,
@@ -29,7 +35,7 @@ const edit = (props) => {
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
         borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
 
-        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
+        borderRadius: borderRadius,
 
         alignItems: 
             attributes.overlayalignment === 'center' ? 'center' :
@@ -59,17 +65,19 @@ const edit = (props) => {
             : attributes.imageaspectratio.replace('/', '/')) 
         : 'auto',
 
-        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
-
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
         borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
 
-        borderRadius: `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`,
+
+        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
+
+        borderRadius: borderRadius,
 
     };
 
+    
 
     const image_flip_template = [
         ['vayu-blocks/advance-container'
@@ -283,7 +291,7 @@ const edit = (props) => {
 
                     <div className="vayu_blocks_image_flip_wrapper">
 
-                        <div className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
+                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
@@ -292,13 +300,11 @@ const edit = (props) => {
 
                         </div>  
 
-                            <div className={`vayu_blocks_overlay_main_wrapper 
-                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} 
-                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} 
-                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''}
-                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} 
-                                ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''}
-                            `} style={vayu_block_overlay_style}>
+                            <div 
+                                className={`vayu_blocks_overlay_main_wrapper ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''}`} 
+                                style={vayu_block_overlay_style}
+                            >
+
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
                                         template={image_flip_template} 

@@ -249,7 +249,9 @@
                     "size" : 28,
                     "fontWeight": "bold",
                     "color" : "black",
-                    "link": ""
+                    "link": "",
+                    "image" : "",
+                    "animation" : true
                 },
                 "subheading":{
                     "show":true,
@@ -304,7 +306,7 @@
                 "customStylesubbutton1":false,
                 "customStylesubbutton2":false,
                 "customBackgroundImage":false,
-                "heightauto":true,
+                "heightauto":false,
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",
@@ -416,7 +418,9 @@
                     "size" : 28,
                     "fontWeight": "bold",
                     "color" : "black",
-                    "link": ""
+                    "link": "",
+                    "image" : "",
+                    "animation" : true
                 },
                 "subheading":{
                     "show":true,
@@ -470,7 +474,7 @@
                 "customStylesubbutton1":false,
                 "customStylesubbutton2":false,
                 "customBackgroundImage":false,
-                "heightauto":true,
+                "heightauto":false,
                 "backgroundType": "color",
                 "backgroundColor": "#000000",
                 "duotone": "",

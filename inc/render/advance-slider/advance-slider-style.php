@@ -705,29 +705,6 @@ function generate_inline_slider_styles($attr) {
             $borderRadiusLeft = isset($slide['borderRadius']['left']) ? esc_attr($slide['borderRadius']['left']) : '0px';
             
             $css .= "border-radius: {$borderRadiusTop} {$borderRadiusRight} {$borderRadiusBottom} {$borderRadiusLeft};";
-            
-            // Get the padding values with defaults
-            $paddingTop = isset($slide['padding']['top']) ? esc_attr($slide['padding']['top']) : '0px';
-            $paddingRight = isset($slide['padding']['right']) ? esc_attr($slide['padding']['right']) : '0px';
-            $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
-            $paddingLeft = isset($slide['padding']['left']) ? esc_attr($slide['padding']['left']) : '0px';
-
-            // Get the bottom padding value or default to '0px'
-            // $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
-
-            // // Convert bottom padding to an integer for comparison (remove 'px' if present)
-            // $paddingBottomValue = intval(str_replace('px', '', $paddingBottom));
-
-            // // Add 50px to the bottom padding value
-            // $paddingBottomValue += 50;
-
-            // // Apply the new bottom padding value with 'px'
-            // $paddingBottom = "{$paddingBottomValue}px";
-
-            // Get the left padding value or default to '0px'
-
-            // Apply the padding style
-            $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
 
             $css .= "background: url({$slide['backgroundImage']}) no-repeat center center;";
             $css .= "background-size: cover;";
@@ -763,6 +740,14 @@ function generate_inline_slider_styles($attr) {
 
         // Inside Container div
         $css .= "$wrapper $container $insideContainer {";
+            // Get the padding values with defaults
+            $paddingTop = isset($slide['padding']['top']) ? esc_attr($slide['padding']['top']) : '0px';
+            $paddingRight = isset($slide['padding']['right']) ? esc_attr($slide['padding']['right']) : '0px';
+            $paddingBottom = isset($slide['padding']['bottom']) ? esc_attr($slide['padding']['bottom']) : '0px';
+            $paddingLeft = isset($slide['padding']['left']) ? esc_attr($slide['padding']['left']) : '0px';
+
+            // Apply the padding style
+            $css .= "padding: {$paddingTop} {$paddingRight} {$paddingBottom} {$paddingLeft};";
             $css .= "position: relative;";
             $css .= "z-index: 3;";
             // $css .= "height: 100%;";
@@ -790,7 +775,35 @@ function generate_inline_slider_styles($attr) {
             $css .= "font-weight: " . esc_attr($heading['fontWeight']) . ";";
             $css .= "text-decoration: none;";
             $css .= "cursor: pointer;";
+
+            if (!empty($heading['image'])) {
+                $css .= "background: url(" . esc_url($heading['image']) . ") no-repeat center center;";
+                $css .= "background-size: 200% 100% !important;"; /* Extend background horizontally */
+                $css .= "-webkit-background-clip: text !important;";
+                $css .= "-webkit-text-fill-color: transparent !important;";
+                $css .= "font-family: 'Ranchers', cursive !important;";
+                $css .= "display: inline-flex !important;";
+            } else {
+                // If no image is provided, you can add default styles or remove this block if not needed
+                $css .= "color: " . esc_attr($heading['color']) . ";";
+            }
+
+            if (!empty($heading['animation'])) {
+                $css .= "animation: headinganimation 8s linear infinite !important;";
+            }
+
             //animation left
+        $css .= "}\n";
+
+        // Define keyframes for animation
+        $css .= "@keyframes headinganimation {";
+            $css .= "0% {";
+                $css .= "background-position: 0 0;";
+            $css .= "}";
+
+            $css .= "100% {";
+                $css .= "background-position: 100% 0;"; // Move background horizontally
+            $css .= "}";
         $css .= "}\n";
 
         // Sub Heading

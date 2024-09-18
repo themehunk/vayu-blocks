@@ -100,5 +100,9 @@
         "rightwidth": "2px",
         "rightstyle": "solid"
     }
+    },
+    "imageborderradiuscircle":{
+        "type":"string",
+        "default":"square"
     }
 }
