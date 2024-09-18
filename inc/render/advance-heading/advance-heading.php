@@ -20,6 +20,11 @@ function vayu_advance_heading_style($attr){
 				$css .= "font-family: '{$attr['fontFamily']}', sans-serif; ";
 			}
 
+			if (isset($attr['headingimage']) && !empty($attr['headingimage'])) {
+				
+				$css .= "background-image: url(" . esc_url($attr['headingimage']) . "); ";
+			}			
+
 			if (isset($attr['fontVariant'])) {
 				$fontVariant = isset($attr['fontVariant']) ? $attr['fontVariant'] : 'normal';
 				$css .= "font-weight:{$fontVariant}; ";
@@ -32,10 +37,15 @@ function vayu_advance_heading_style($attr){
 			
 		$css .= "}";
 
+
 		$css .= ".th-h{$attr['uniqueID']} {";
 	
 		//heading color
 		$css .= isset( $attr['headingColor'] ) ? "color:{$attr['headingColor']};" : '';
+		if (isset($attr['headingimage']) && !empty($attr['headingimage'])) {
+				
+			$css .= "background-image: url(" . esc_url($attr['headingimage']) . "); ";
+		}
 	
 		//heading background
 		if ( isset( $attr['backgroundType'] ) && $attr['backgroundType'] == 'image' ) {
@@ -620,5 +630,7 @@ function vayu_advance_heading_style($attr){
 
     }
 
+
 	return $css;
 }
+inc/render/advance-heading/advance-heading.php

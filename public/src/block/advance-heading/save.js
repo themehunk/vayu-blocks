@@ -17,8 +17,12 @@ const Save = ({
 		headingWidthClass = 'alignfull';
 	}
 
+	console.log(attributes.headingimage);
 	let Classes = classnames(
-		headingWidthClass,{	
+		headingWidthClass,
+		attributes.headingimage && attributes.headinganimation ? 'vayu_blocks_heading_image_animation-heading' : null, // Conditional class
+    	attributes.headingimage  ? 'vayu_blocks_heading_image-heading' : null, // Conditional class for image without animation
+		{	
 		[`wp-block-th-advance-heading th-h${attributes.uniqueID}`]: true,
 		"th-hide-desktop": attributes.responsiveTogHideDesktop,
 		"th-hide-tablet": attributes.responsiveTogHideTablet,
