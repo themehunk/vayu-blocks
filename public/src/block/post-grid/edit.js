@@ -32,6 +32,7 @@ import {
 const Edit = ({ attributes, setAttributes }) => {
 
     const {
+        pg_featuredimage_animate,
         globalwidth,
         sortByOrder,
         sortByField,
@@ -310,11 +311,12 @@ const Edit = ({ attributes, setAttributes }) => {
                                 ) : (
                                     <>
                                         {FeaturedImage() && post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'].length > 0 && (
-                                            <div>
+                                            <div style={{overflow:'hidden'}}>
                                                 <img
                                                     src={post._embedded['wp:featuredmedia'][0].source_url}
                                                     alt="Featured"
                                                     style={featuredImageStyle}
+                                                    className={pg_featuredimage_animate ? "animatefeaturedimage" : ""}
                                                 />
                                             </div>
                                         )}

@@ -633,4 +633,3 @@ function vayu_advance_heading_style($attr){
 
 	return $css;
 }
-inc/render/advance-heading/advance-heading.php

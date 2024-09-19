@@ -57,6 +57,6 @@
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",
     "textdomain": "vayu-blocks",
-    "viewScriptModule": "file:./view.js"
+    "viewScript": "file:./view.js"
   }
   

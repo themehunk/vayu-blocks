@@ -106,7 +106,6 @@ function generate_inline_slider_styles($attr) {
        
     $css .= "}";
    
-    
     // Add media query for tablet screens
     $css .= "@media (max-width: 768px) {";
         $css .= "$wrapper {";

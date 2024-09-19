@@ -1740,6 +1740,15 @@ const handlesizeandlineheight = (value) => {
 				/>
 				{pg_showFeaturedImage && (
 					<>
+
+					<ToggleControl
+						label={__('Animate on hover', 'vayu-blocks')}
+						checked={attributes.pg_featuredimage_animate}
+						onChange={(value) => {
+							setAttributes({ pg_featuredimage_animate: value });
+						}}
+					/>
+
 					<BorderBoxControlComponent
 							label={__('Border','vayu-blocks')}
 							value={{
