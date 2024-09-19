@@ -1,0 +1,406 @@
+import React from 'react';
+import './editor.scss';
+import { __ } from '@wordpress/i18n';
+import {
+    PanelBody,
+    ToggleControl,
+    RangeControl,
+    Button,
+    TextareaControl,
+    TextControl,
+    SelectControl,
+    __experimentalToolsPanel as ToolsPanel,
+    FocalPointPicker,
+    DuotonePicker
+} from '@wordpress/components';
+import {MediaPlaceholder } from '@wordpress/block-editor';
+
+import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
+import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
+import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
+
+import {
+    HoverControl,
+    ToogleGroupControl,
+} from '../../components/index.js';
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
+
+
+const SlideSettings = ({ attributes, setAttributes }) => {
+
+    //default duotone
+    const vayu_blocks_DUOTONE_PALETTE = [
+        { colors: ['#ff8c00', '#ff4500'], name: 'Orange and Red', slug: 'orange-red', id: '#duotone-orange-red' },
+        { colors: ['#ff0000', '#00ff00'], name: 'Red and Green', slug: 'red-green', id: '#duotone-red-green' },
+        { colors: ['#000000', '#ffffff'], name: 'Black and White', slug: 'black-white', id: '#duotone-black-white' },
+        { colors: ['#000097', '#ff4747'], name: 'Blue and Red', slug: 'blue-red', id: '#duotone-blue-red' },
+        { colors: ['#8c00b7', '#fcff41'], name: 'Purple and Yellow', slug: 'purple-yellow', id: '#duotone-purple-yellow' },
+        { colors: ['#ffa500', '#008080'], name: 'Orange and Teal', slug: 'orange-teal', id: '#duotone-orange-teal' },
+        { colors: ['#ff69b4', '#0000ff'], name: 'Pink and Blue', slug: 'pink-blue', id: '#duotone-pink-blue' },
+        { colors: ['#00ffff', '#ff00ff'], name: 'Cyan and Magenta', slug: 'cyan-magenta', id: '#duotone-cyan-magenta' },
+        { colors: ['#ffff00', '#000000'], name: 'Yellow and Black', slug: 'yellow-black', id: '#duotone-yellow-black' },
+        { colors: ['#add8e6', '#90ee90'], name: 'Light Blue and Light Green', slug: 'lightblue-lightgreen', id: '#duotone-lightblue-lightgreen' },
+        { colors: ['#808080', '#ffff00'], name: 'Gray and Yellow', slug: 'gray-yellow', id: '#duotone-gray-yellow' }
+    ];
+
+    //duotone change
+    const vayu_blocks_duotoneHandler = (value) => {
+        // Find the filter ID corresponding to the given color array
+        if (!Array.isArray(value) || value.length === 0) {
+            setAttributes({duotone:""});
+        }
+
+        const filter = vayu_blocks_DUOTONE_PALETTE.find(({ colors }) =>
+            colors.every((color, i) => color === value[i])
+        );
+    
+        if (filter) {
+            const { id } = filter;
+            setAttributes({duotone:id});
+        }
+    };
+
+    //duotone value
+    const vayu_blocks_duotonevalue = () => {
+        // Get the ID from the slide's layout duotone
+        const id = attributes.duotone;
+    
+        // Find the matching filter in the DUOTONE_PALETTE
+        const filter = vayu_blocks_DUOTONE_PALETTE.find((filter) => filter.id === id);
+    
+        // If a match is found, return the colors array
+        if (filter) {
+            return filter.colors;
+        }
+        return '';
+    };
+    
+    const vayu_blocks_sub_heading_sizes = [
+        {
+            name: 'Small',
+            size: 12,
+            slug: 'small'
+        },
+        {
+            name: 'Meadium',
+            size: 16,
+            slug: 'meadium'
+        },
+        {
+            name: 'extraMeadium',
+            size: 20,
+            slug: 'extrameadium'
+        },
+        {
+            name: 'Big',
+            size: 24,
+            slug: 'big'
+        }
+    ];
+
+    const handleTypographyChange = (newValues) => {
+
+        if(newValues.size){
+            setAttributes({captionsize:newValues.size})
+        }
+        if(newValues.appearance){
+            setAttributes({captionfontweight:newValues.appearance})
+        }  
+    };
+
+    return (
+        
+            <div class="vayu_blocks_image-flip-settings_main">
+
+                {/* Background Image */}
+                <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
+                    <h4>{__('Background','vayu-blocks')}</h4>
+                    {attributes.image ? (
+                        <>         
+
+                            <FocalPointPicker
+                                __nextHasNoMarginBottom
+                                url={ attributes.image }
+                                value={ attributes.focalPoint }
+                                onDragStart={ (value)=> setAttributes({focalPoint:value})}
+                                onDrag={ (value)=> setAttributes({focalPoint:value}) }
+                                onChange={ (value)=> setAttributes({focalPoint:value}) }
+                            />
+                            <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({image:""})}>
+                                {__('Clear', 'vayu-blocks')}
+                            </Button>
+
+
+                            <div class= "vayu_blocks_image_toolspanel_flip">
+                            <ToolsPanel
+                                label="Filter"
+                                __nextHasNoMarginBottom
+                            >
+                                <DuotonePicker
+                                    duotonePalette={ vayu_blocks_DUOTONE_PALETTE}
+                                    disableCustomColors
+                                    disableCustomDuotone
+                                    value={ vayu_blocks_duotonevalue() }
+                                    onChange={ (value) => vayu_blocks_duotoneHandler(value) }
+                                />
+                            </ToolsPanel>
+                            </div>
+
+                            <TextControl
+                            className="imagealttextrichcontrol"
+                            label="Alt text"
+                            __nextHasNoMarginBottom
+                            onChange={(value)=>setAttributes({imagealttext:value})}
+                            value={attributes.imagealttext}
+                            />
+
+                            <Vayu_Block_Toggle
+                                value={attributes.imagecover}
+                                onChange={(value) => setAttributes({imagecover:value})}
+                                isBlock={true}
+                                __nextHasNoMarginBottom={true}
+                                options={[
+                                    { value: 'contain', label: 'Contain' },
+                                    { value: 'cover', label: 'Cover' },
+                                ]}
+                            />
+
+                            <Vayu_Block_Toggle
+                                value={attributes.imageborderradiuscircle}
+                                onChange={(value) => setAttributes({imageborderradiuscircle:value})}
+                                isBlock={true}
+                                __nextHasNoMarginBottom={true}
+                                options={[
+                                    { value: 'square', label: 'Square' },
+                                    { value: 'circle', label: 'Circle' },
+                                ]}
+                            />
+                          
+                            <div class= "vayu_blocks_image_toolspanel_flip">
+                            <ToolsPanel
+                                label="Aspect Ratio"
+                                __nextHasNoMarginBottom
+                                resetAll={() => setAttributes({ imageaspectratio: 'orginal' })}
+                            >
+                                <SelectControl
+                                    value={attributes.imageaspectratio}
+                                    options={[
+                                        { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
+                                        { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
+                                        { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
+                                        { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
+                                        { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
+                                        { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
+                                        { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
+                                    ]}                                    
+                                    onChange={(value) => setAttributes({ imageaspectratio: value })}
+                                />
+
+                            </ToolsPanel>
+                            </div>
+
+                        </>
+                        ) : (
+                            <MediaPlaceholder
+                                icon="format-image"
+                                labels={{
+                                    title: __('Background Image', 'vayu-blocks'),
+                                    name: __('an image', 'vayu-blocks')
+                                }}
+                                onSelect={(media) => {
+                                    setAttributes({image:media.url})
+                                }}                                                                
+                                onSelectURL='true'
+                                accept="image/*"
+                                allowedTypes={['image']}
+                            />
+                        )}
+                    
+                </PanelBody >
+
+                {/* Overlay and animation effect  */}
+                <PanelBody title={__('On hover','vayu-blocks')} initialOpen={false}>
+                    <SelectControl
+                        label={__('Image Filter', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
+                        value={attributes.imagehvrfilter}
+                        options={[
+                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                            { label: __('Blur', 'vayu-blocks'), value: 'blur' },
+                            { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
+                            { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
+                            { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
+                        ]}
+                        onChange={(value) => setAttributes({ imagehvrfilter: value })}
+                    />
+                    <p>If Duotone is applied, the image Filter won't work but image effect will.</p>
+
+                    <SelectControl
+                        label={__('Image Effect', 'vayu-blocks')}
+                        value={attributes.imagehvreffect}
+                        options={[
+                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
+                            { label: __('Slide', 'vayu-blocks'), value: 'slide-left' },
+                        ]}
+                        onChange={(value) => setAttributes({ imagehvreffect: value })}
+                    />
+                </PanelBody>
+
+                {/* Overlay and animation effect  */}
+                <PanelBody title={__('Mask','vayu-blocks')} initialOpen={false}>
+                    <SelectControl
+                        label={__('Mask shape', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
+                        value={attributes.maskshape}
+                        options={[
+                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                            { label: __('Circle', 'vayu-blocks'), value: 'circle' },
+                            { label: __('Diamond', 'vayu-blocks'), value: 'diamond' },
+                            { label: __('Hexagone', 'vayu-blocks'), value: 'hexagone' },
+                            { label: __('Rounded', 'vayu-blocks'), value: 'rounded' },
+                            { label: __('Bob1', 'vayu-blocks'), value: 'bob1' },
+                            { label: __('Bob2', 'vayu-blocks'), value: 'bob2' },
+                            { label: __('Bob3', 'vayu-blocks'), value: 'bob3' },
+                            { label: __('Bob4', 'vayu-blocks'), value: 'bob4' },
+                        ]}
+                        onChange={(value) => setAttributes({ maskshape: value })}
+                    />
+
+                {attributes.maskshape!=='none' && (
+                    <>
+  
+                    <SelectControl
+                        label={__('Mask size', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
+                        value={attributes.masksize}
+                        variant="minimal"
+                        options={[
+                            { label: __('Auto', 'vayu-blocks'), value: 'auto' },
+                            { label: __('Contain', 'vayu-blocks'), value: 'contain' },
+                            { label: __('Cover', 'vayu-blocks'), value: 'cover' },
+                        ]}
+                        onChange={(value) => setAttributes({ masksize: value })}
+                    />
+
+                    <SelectControl
+                        label={__('Mask Position', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
+                        value={attributes.maskposition}
+                        options={[
+                            { label: __('Center Top', 'vayu-blocks'), value: 'center top' },
+                            { label: __('Center Center', 'vayu-blocks'), value: 'center center' },
+                            { label: __('Center Bottom', 'vayu-blocks'), value: 'center bottom' },
+                            { label: __('Left Top', 'vayu-blocks'), value: 'left top' },
+                            { label: __('Left Center', 'vayu-blocks'), value: 'left center' },
+                            { label: __('Left Right', 'vayu-blocks'), value: 'left right' },
+                            { label: __('Right Top', 'vayu-blocks'), value: 'right top' },
+                            { label: __('Right Center', 'vayu-blocks'), value: 'right center' },
+                            { label: __('Right Right', 'vayu-blocks'), value: 'right right' },
+                        ]}
+                        onChange={(value) => setAttributes({ maskposition: value })}
+                    />
+
+                    <SelectControl
+                        label={__('Mask Repeat', 'vayu-blocks')}
+                        __nextHasNoMarginBottom
+                        value={attributes.maskrepeat}
+                        options={[
+                            { label: __('No Repeat', 'vayu-blocks'), value: 'no-repeat' },
+                            { label: __('Repeat', 'vayu-blocks'), value: 'repeat' },
+                            { label: __('Repeat-X', 'vayu-blocks'), value: 'repeat-x' },
+                            { label: __('Repeat-Y', 'vayu-blocks'), value: 'repeat-y' },
+                        ]}
+                        onChange={(value) => setAttributes({ maskrepeat: value })}
+                    />
+
+                </>
+                )}
+
+                </PanelBody>
+
+                {/* Caption */}
+                <PanelBody title={__('Caption','vayu-blocks')} initialOpen={false}>
+                    <ToggleControl
+                        className='vayu_blocks_togglecontrol'
+                        label={__('Caption', 'vayu-blocks')}
+                        checked={attributes.caption}
+                        onChange={(value) =>  setAttributes({caption:value})}
+                    />
+                    {attributes.caption &&(
+                        <>
+                            <TextControl
+                                className="imagealttextrichcontrol"
+                                label="Text"
+                                __nextHasNoMarginBottom
+                                onChange={(value)=>setAttributes({captiontext:value})}
+                                value={attributes.captiontext}
+                            />
+
+                            <ToogleGroupControl
+                                label={__('Alignment', 'vayu-blocks')}
+                                value={ attributes.captionalignment}
+                                onChange={(value) => setAttributes({captionalignment:value})}
+                                options={[
+                                    {
+                                        icon: HorizontalLeft,
+                                        label: __( 'Left', 'vayu-blocks' ),
+                                        value: 'left'
+                                    },
+                                    {
+                                        icon: Center,
+                                        label: __( 'Center', 'vayu-blocks' ),
+                                        value: 'center'
+                                    },
+                                    {
+                                        icon: HorizontalRight,
+                                        label: __( 'Right', 'vayu-blocks' ),
+                                        value: 'right'
+                                    },
+                                ]}
+                                
+                                hasIcon
+                            />
+
+                                <ColorPanel
+                                colorTool={[
+                                    {
+                                        active: ['color'],
+                                        name: 'Text',
+                                        value: attributes.captioncolor,
+                                        attribute: 'color',
+                                    }
+                                ]}
+                                handelColorPanel={(value)=>setAttributes({captioncolor:value.color})}
+                                initialTab="color"
+                            />
+
+
+                            <div className="vayu_blocks_heading_unitcontrol_slides">
+                                <Vayu_blocks_typographycontrol
+                                    onChange={(value)=> handleTypographyChange(value)}
+                                    includeSize={true}
+                                    value={{size:attributes.captionsize,
+                                        appearance: attributes.captionfontweight
+                                    }}
+                                    includeAppearance={true}
+                                    vayu_blocks_sizes={vayu_blocks_sub_heading_sizes}
+                                    appearanceOptions= {[
+                                        { label: __('Normal', 'text-domain'), value: 'normal' },
+                                        { label: __('Lighter', 'text-domain'), value: 'lighter' },
+                                        { label: __('Bold', 'text-domain'), value: 'bold' },
+                                        { label: __('Bolder', 'text-domain'), value: 'bolder' },
+                                    ]}
+                                    para=""
+                                />
+                            </div>
+
+                        </>
+                    )}
+                </PanelBody>
+
+            </div>
+    );
+};
+
+export default SlideSettings;
