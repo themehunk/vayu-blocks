@@ -740,6 +740,7 @@ function generate_inline_image_styles($attr) {
 
    // for tablet
     $css .= "@media (max-width: 1024px) {
+
         $wrapper {
             width: " . (isset($attr['customWidthTablet']) ? esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) : 'auto') . ";
 
@@ -768,10 +769,33 @@ function generate_inline_image_styles($attr) {
             width: " . (isset($attr['imagewidthtablet']) ? esc_attr($attr['imagewidthtablet']) : 'auto') . ";
             height: " . (isset($attr['imageheighttablet']) ? esc_attr($attr['imageheighttablet']) : 'auto') . ";
         }
+
+        $wrapper .vayu_blocks_image_flip_image {
+            aspect-ratio: " . ($attr['imageaspectratiotablet'] !== 'none' 
+                ? ($attr['imageaspectratiotablet'] === 'original' 
+                    ? 'auto' 
+                    : str_replace(':', '/', esc_attr($attr['imageaspectratiotablet']))) 
+                : 'auto') . ";
+        }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper  {
+            align-items: " . (
+                $attr['overlayalignmenttablet'] === 'center' ? 'center' :
+                ($attr['overlayalignmenttablet'] === 'left' ? 'self-start' :
+                ($attr['overlayalignmenttablet'] === 'right' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $attr['overlayalignmentverticaltablet'] === 'center' ? 'center' :
+                ($attr['overlayalignmentverticaltablet'] === 'start' ? 'flex-start' :
+                ($attr['overlayalignmentverticaltablet'] === 'end' ? 'flex-end' : 'center'))
+            ) . ";
+        }
+
     }";
-    
+
    // for mobile
-    $css .= "@media (max-width: 400px) {
+    $css .= "@media (max-width: 500px) {
         $wrapper {
             width: " . (isset($attr['customWidthMobile']) ? esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) : 'auto') . ";
 
@@ -796,6 +820,28 @@ function generate_inline_image_styles($attr) {
         $wrapper $inline {
             width: " . (isset($attr['imagewidthmobile']) ? esc_attr($attr['imagewidthmobile']) : 'auto') . ";
             height: " . (isset($attr['imageheightmobile']) ? esc_attr($attr['imageheightmobile']) : 'auto') . ";
+        }
+
+        $wrapper .vayu_blocks_image_flip_image {
+            aspect-ratio: " . ($attr['imageaspectratiomobile'] !== 'none' 
+                ? ($attr['imageaspectratiomobile'] === 'original' 
+                    ? 'auto' 
+                    : str_replace(':', '/', esc_attr($attr['imageaspectratiomobile']))) 
+                : 'auto') . ";
+        }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper  {
+            align-items: " . (
+                $attr['overlayalignmentmobile'] === 'center' ? 'center' :
+                ($attr['overlayalignmentmobile'] === 'left' ? 'self-start' :
+                ($attr['overlayalignmentmobile'] === 'right' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $attr['overlayalignmentverticalmobile'] === 'center' ? 'center' :
+                ($attr['overlayalignmentverticalmobile'] === 'start' ? 'flex-start' :
+                ($attr['overlayalignmentverticalmobile'] === 'end' ? 'flex-end' : 'center'))
+            ) . ";
         }
     }";
     

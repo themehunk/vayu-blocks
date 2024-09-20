@@ -287,6 +287,73 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const getimageaspectratio = () => {
+        if('Desktop' === getView ){
+            return attributes.imageaspectratio
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.imageaspectratiotablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.imageaspectratiomobile
+        } 
+    }
+
+    const changeImageaspectratio = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ imageaspectratio: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ imageaspectratiotablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ imageaspectratiomobile: value });
+        }
+    };
+
+    const getoverlayalignment = () => {
+        if('Desktop' === getView ){
+            return attributes.overlayalignment
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlayalignmenttablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlayalignmentmobile
+        } 
+    }
+
+    const changeoverlayalignment = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlayalignment: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlayalignmenttablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlayalignmentmobile: value });
+        }
+    };
+
+    const getoverlayalignmentvertical = () => {
+        if('Desktop' === getView ){
+            return attributes.overlayalignmentvertical
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlayalignmentverticaltablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlayalignmentverticalmobile
+        } 
+    };
+
+    const changeoverlayalignmentvertical = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlayalignmentvertical: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlayalignmentverticaltablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlayalignmentverticalmobile: value });
+        }
+    };
+
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main">
@@ -309,23 +376,22 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
 
-
-                            <SelectControl
-                                label="Aspect Ratio"
-                                className='vayu_block_selectcontrol_aspect_ratio'
-                                __nextHasNoMarginBottom
-                                value={attributes.imageaspectratio}
-                                options={[
-                                    { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
-                                    { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
-                                    { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
-                                    { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
-                                    { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
-                                    { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
-                                    { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
-                                ]}                                    
-                                onChange={(value) => setAttributes({ imageaspectratio: value })}
-                            />
+                            <ResponsiveControl label="Aspect Ratio">
+                                <SelectControl
+                                    __nextHasNoMarginBottom
+                                    value={getimageaspectratio()}
+                                    options={[
+                                        { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
+                                        { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
+                                        { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
+                                        { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
+                                        { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
+                                        { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
+                                        { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
+                                    ]}                                    
+                                    onChange={(value) => changeImageaspectratio(value)}
+                                />
+                            </ResponsiveControl>
 
                             <div className='vayu_block_width_height_control'>
 
@@ -398,7 +464,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 							onChange={(value)=>setoverlayandnormal(value)} 
                         />
 
-
                         {overlay==='normal' && (
                             <>
 
@@ -445,18 +510,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     checked={attributes.overlayshow}
                                     onChange={(value) =>  setAttributes({overlayshow:value})}
                                 />
+                                
                                 {attributes.overlayshow && (<>
 
-                                <h4>
-                                    {__('Alignment', 'vayu-blocks')}
-                                    </h4>
+                                    <ResponsiveControl className="vayu_block_alignment" label={__('Alignment', 'vayu-blocks')}>
                                     <ToogleGroupControl
-                                        label={__('Alignment', 'vayu-blocks')}
-                                        value={ attributes.overlayalignment}
-                                        onChange={(value) => setAttributes({overlayalignment:value})}
+                                        value={ getoverlayalignment()}
+                                        onChange={(value) => changeoverlayalignment(value)}
                                         options={[
                                             {
-                                                icon: HorizontalLeft,
+                                                icon: Start,
                                                 label: __( 'Left', 'vayu-blocks' ),
                                                 value: 'left'
                                             },
@@ -466,7 +529,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 value: 'center'
                                             },
                                             {
-                                                icon: HorizontalRight,
+                                                icon: End,
                                                 label: __( 'Right', 'vayu-blocks' ),
                                                 value: 'right'
                                             },
@@ -477,11 +540,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                                     <ToogleGroupControl
                                         label={__('Alignment', 'vayu-blocks')}
-                                        value={ attributes.overlayalignmentvertical}
-                                        onChange={(value) => setAttributes({overlayalignmentvertical:value})}
+                                        value={getoverlayalignmentvertical ()}
+                                        onChange={(value) => changeoverlayalignmentvertical(value)}
                                         options={[
                                             {
-                                                icon: Start,
+                                                icon: HorizontalLeft,
                                                 label: __( 'start', 'vayu-blocks' ),
                                                 value: 'start'
                                             },
@@ -491,7 +554,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                 value: 'center'
                                             },
                                             {
-                                                icon: End,
+                                                icon: HorizontalRight,
                                                 label: __( 'end', 'vayu-blocks' ),
                                                 value: 'end'
                                             },
@@ -499,6 +562,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                         
                                         hasIcon
                                     />
+                                    </ResponsiveControl>
                                     <br/>
 
                                     <ColorPanel

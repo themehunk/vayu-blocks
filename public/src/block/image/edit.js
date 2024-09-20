@@ -9,6 +9,13 @@ import { useSelect } from '@wordpress/data';
 const edit = (props) => {
     const { attributes, setAttributes} = props;
 
+    const view = useSelect( select => {
+        const { getView } = select( 'vayu-blocks/data' );
+        const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+       
+        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+    }, []);
+
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
         const randomPart = Math.random().toString(30).substring(3, 10); // Generate random alphanumeric string
@@ -24,28 +31,43 @@ const edit = (props) => {
     const borderRadius = attributes.imageborderradiuscircle === 'circle' 
     ? '50%' 
     : `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`;
-
-    //overlay wrapper style
+    // Main overlay wrapper style object
     const vayu_block_overlay_style = {
-        background:attributes.overlaycolor,
+        background: attributes.overlaycolor,
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
         borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
-
         borderRadius: borderRadius,
 
-        alignItems: 
-            attributes.overlayalignment === 'center' ? 'center' :
-            attributes.overlayalignment === 'left' ? 'self-start' :
-            attributes.overlayalignment === 'right' ? 'self-end' : 'center',
 
-        justifyContent: 
-            attributes.overlayalignmentvertical === 'center' ? 'center' :
-            attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
-            attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+        ...(view === 'Desktop' && {
+            alignItems : attributes.overlayalignment === 'center' ? 'center' :
+                attributes.overlayalignment === 'left' ? 'self-start' :
+                attributes.overlayalignment === 'right' ? 'self-end' : 'center',
+            justifyContent : attributes.overlayalignmentvertical === 'center' ? 'center' :
+                attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
+                attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+        }),
 
-    }
+        ...(view === 'Tablet' && {       alignItems : attributes.overlayalignmenttablet === 'center' ? 'center' :
+            attributes.overlayalignmenttablet === 'left' ? 'self-start' :
+            attributes.overlayalignmenttablet === 'right' ? 'self-end' : 'center',
+
+            justifyContent : attributes.overlayalignmentverticaltablet === 'center' ? 'center' :
+                attributes.overlayalignmentverticaltablet === 'start' ? 'flex-start' :
+                attributes.overlayalignmentverticaltablet === 'end' ? 'flex-end' : 'center',}),
+        ...(view === 'Mobile' && {
+            alignItems : attributes.overlayalignmentmobile === 'center' ? 'center' :
+            attributes.overlayalignmentmobile === 'left' ? 'self-start' :
+            attributes.overlayalignmentmobile === 'right' ? 'self-end' : 'center',
+
+            justifyContent : attributes.overlayalignmentverticalmobile === 'center' ? 'center' :
+                attributes.overlayalignmentverticalmobile === 'start' ? 'flex-start' :
+                attributes.overlayalignmentverticalmobile === 'end' ? 'flex-end' : 'center',
+        }),
+
+    };
 
     const captionstyle = {
         fontSize:attributes.captionsize,
@@ -63,12 +85,33 @@ const edit = (props) => {
         objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
         // Apply focal point if it exists, default to center
         objectPosition: `${attributes.focalPoint?.x * 100 || 50}% ${attributes.focalPoint?.y * 100 || 50}%`,
+
          // Apply aspect ratio if it exists
-        aspectRatio: attributes.imageaspectratio !== 'none' 
-        ? (attributes.imageaspectratio === 'original' 
-            ? 'auto' // Maintain original aspect ratio
-            : attributes.imageaspectratio.replace('/', '/')) 
-        : 'auto',
+         // Apply aspect ratio based on the current view (Desktop, Tablet, Mobile)
+        ...(view === 'Desktop' && {
+            aspectRatio: attributes.imageaspectratio !== 'none'
+                ? (attributes.imageaspectratio === 'original'
+                    ? 'auto'  // Maintain original aspect ratio
+                    : attributes.imageaspectratio.replace(':', '/'))  // Replace ':' with '/'
+                : 'auto',
+        }),
+
+        ...(view === 'Tablet' && {
+            aspectRatio: attributes.imageaspectratiotablet !== 'none'
+                ? (attributes.imageaspectratiotablet === 'original'
+                    ? 'auto'  // Maintain original aspect ratio
+                    : attributes.imageaspectratiotablet.replace(':', '/'))  // Replace ':' with '/'
+                : 'auto',
+        }),
+
+        ...(view === 'Mobile' && {
+            aspectRatio: attributes.imageaspectratiomobile !== 'none'
+                ? (attributes.imageaspectratiomobile === 'original'
+                    ? 'auto'  // Maintain original aspect ratio
+                    : attributes.imageaspectratiomobile.replace(':', '/'))  // Replace ':' with '/'
+                : 'auto',
+        }),
+
 
         filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
 
@@ -90,13 +133,6 @@ const edit = (props) => {
             fontFamily:'cardo'
         }],
     ];
-
-    const view = useSelect( select => {
-        const { getView } = select( 'vayu-blocks/data' );
-        const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
-       
-        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
-    }, []);
 
     const vayu_blocks_image_wrapper_style = (() => {
         const width = attributes.imagewidth || 'auto';

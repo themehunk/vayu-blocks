@@ -20,10 +20,16 @@ return array(
         'imageborderradiuscircle' => 'square',
         'imagecover' => 'cover',
         'imageaspectratio' => 'original',
+        'imageaspectratiotablet' => 'original',
+        'imageaspectratiomobile' => 'original',
         'duotone' => '',
         'showPreview' => false,
         'overlayalignment' => 'center',
         'overlayalignmentvertical' => 'center',
+        'overlayalignmenttablet' => 'center',
+        'overlayalignmentverticaltablet' => 'center',
+        'overlayalignmentmobile' => 'center',
+        'overlayalignmentverticalmobile' => 'center',
 
         // image Border
             'imageborder' => array(
