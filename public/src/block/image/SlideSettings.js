@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
@@ -18,6 +18,7 @@ import {MediaPlaceholder } from '@wordpress/block-editor';
 import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
+import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
 
 import {
     HoverControl,
@@ -27,6 +28,8 @@ import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/h
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
+
+    const [overlay, setoverlay] = useState('normal');
 
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
@@ -108,6 +111,128 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }  
     };
 
+    const setoverlayandnormal = (value) => {
+        console.log(value);
+        if(value==='normal'){
+            setoverlay('normal');
+        }
+        if(value==='overlay'){
+            setoverlay('overlay');
+        }
+    }
+
+    const vayu_blocks_handleimageBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ imageborderRadius: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ imageborder: updatedAttributes });
+    };
+
+    const handlecoloroverlay = (value) => {
+        if(value.color){
+
+        
+        if(value.color === undefined ){
+            setAttributes({overlaycolor: 'transparent'})
+        }
+        else{
+            setAttributes({overlaycolor: value.color})
+        }
+    }   
+    else if(value.colorhvr){
+        if(value.colorhvr === undefined ){
+            setAttributes({overlayhvrcolor: 'transparent'})
+        }
+        else{
+            setAttributes({overlayhvrcolor: value.colorhvr})
+        }
+    }
+    }
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main">
@@ -116,8 +241,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
                     <h4>{__('Background','vayu-blocks')}</h4>
                     {attributes.image ? (
-                        <>         
-
+                        <>        
                             <FocalPointPicker
                                 __nextHasNoMarginBottom
                                 url={ attributes.image }
@@ -130,22 +254,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
 
-
-                            <div class= "vayu_blocks_image_toolspanel_flip">
-                            <ToolsPanel
-                                label="Filter"
-                                __nextHasNoMarginBottom
-                            >
-                                <DuotonePicker
-                                    duotonePalette={ vayu_blocks_DUOTONE_PALETTE}
-                                    disableCustomColors
-                                    disableCustomDuotone
-                                    value={ vayu_blocks_duotonevalue() }
-                                    onChange={ (value) => vayu_blocks_duotoneHandler(value) }
-                                />
-                            </ToolsPanel>
-                            </div>
-
                             <TextControl
                             className="imagealttextrichcontrol"
                             label="Alt text"
@@ -153,54 +261,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             onChange={(value)=>setAttributes({imagealttext:value})}
                             value={attributes.imagealttext}
                             />
-
-                            <Vayu_Block_Toggle
-                                value={attributes.imagecover}
-                                onChange={(value) => setAttributes({imagecover:value})}
-                                isBlock={true}
-                                __nextHasNoMarginBottom={true}
-                                options={[
-                                    { value: 'contain', label: 'Contain' },
-                                    { value: 'cover', label: 'Cover' },
-                                ]}
-                            />
-
-                            <Vayu_Block_Toggle
-                                value={attributes.imageborderradiuscircle}
-                                onChange={(value) => setAttributes({imageborderradiuscircle:value})}
-                                isBlock={true}
-                                __nextHasNoMarginBottom={true}
-                                options={[
-                                    { value: 'square', label: 'Square' },
-                                    { value: 'circle', label: 'Circle' },
-                                ]}
-                            />
-                          
-                            <div class= "vayu_blocks_image_toolspanel_flip">
-                            <ToolsPanel
-                                label="Aspect Ratio"
-                                __nextHasNoMarginBottom
-                                resetAll={() => setAttributes({ imageaspectratio: 'orginal' })}
-                            >
-                                <SelectControl
-                                    value={attributes.imageaspectratio}
-                                    options={[
-                                        { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
-                                        { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
-                                        { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
-                                        { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
-                                        { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
-                                        { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
-                                        { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
-                                    ]}                                    
-                                    onChange={(value) => setAttributes({ imageaspectratio: value })}
-                                />
-
-                            </ToolsPanel>
-                            </div>
-
                         </>
                         ) : (
+                            <>
                             <MediaPlaceholder
                                 icon="format-image"
                                 labels={{
@@ -214,38 +277,197 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 accept="image/*"
                                 allowedTypes={['image']}
                             />
+                            <br/>
+                            </>
+                        )}
+
+                        <HoverControl 
+                            value={overlay}
+							options={[
+                                { value: 'normal', label: 'Normal' },
+                                { value: 'overlay', label: 'Overlay' },
+                            ]}
+							onChange={(value)=>setoverlayandnormal(value)} 
+                        />
+
+
+                        {overlay==='normal' && (
+                            <>
+                                <SelectControl
+                                    label="Aspect Ratio"
+                                    value={attributes.imageaspectratio}
+                                    options={[
+                                        { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
+                                        { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
+                                        { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
+                                        { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
+                                        { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
+                                        { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
+                                        { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
+                                    ]}                                    
+                                    onChange={(value) => setAttributes({ imageaspectratio: value })}
+                                />
+
+                                        <p>Filter</p>
+                                        <DuotonePicker
+                                            label="Filter"
+                                            duotonePalette={ vayu_blocks_DUOTONE_PALETTE}
+                                            disableCustomColors
+                                            disableCustomDuotone
+                                            value={ vayu_blocks_duotonevalue() }
+                                            onChange={ (value) => vayu_blocks_duotoneHandler(value) }
+                                        />
+                                  
+
+                                    <SelectControl
+                                        label={__('Image Effect', 'vayu-blocks')}
+                                        value={attributes.imagehvreffect}
+                                        options={[
+                                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
+                                            { label: __('Slide', 'vayu-blocks'), value: 'slide-left' },
+                                            { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
+                                            { label: __('Clip Animation', 'vayu-blocks'), value: 'clip-animation' },
+                                            { label: __('Diagonal Expand', 'vayu-blocks'), value: 'clip-diagonal-expand' },
+                                            { label: __('Starbust', 'vayu-blocks'), value: 'clip-starburst' },
+                                            { label: __('Diamond', 'vayu-blocks'), value: 'clip-diamond' },
+                                        ]}
+                                        onChange={(value) => setAttributes({ imagehvreffect: value })}
+                                    />
+                            </>
+                        )}
+
+                        {overlay==='overlay' && (
+                            <>
+                                <ToggleControl
+                                    className='vayu_blocks_togglecontrol'
+                                    label={__('Overlay', 'vayu-blocks')}
+                                    checked={attributes.overlayshow}
+                                    onChange={(value) =>  setAttributes({overlayshow:value})}
+                                />
+                                {attributes.overlayshow && (<>
+
+                                <h4>
+                                    {__('Alignment', 'vayu-blocks')}
+                                    </h4>
+                                    <ToogleGroupControl
+                                        label={__('Alignment', 'vayu-blocks')}
+                                        value={ attributes.overlayalignment}
+                                        onChange={(value) => setAttributes({overlayalignment:value})}
+                                        options={[
+                                            {
+                                                icon: HorizontalLeft,
+                                                label: __( 'Left', 'vayu-blocks' ),
+                                                value: 'left'
+                                            },
+                                            {
+                                                icon: Center,
+                                                label: __( 'Center', 'vayu-blocks' ),
+                                                value: 'center'
+                                            },
+                                            {
+                                                icon: HorizontalRight,
+                                                label: __( 'Right', 'vayu-blocks' ),
+                                                value: 'right'
+                                            },
+                                        ]}
+                                        
+                                        hasIcon
+                                    />
+
+                                    <ToogleGroupControl
+                                        label={__('Alignment', 'vayu-blocks')}
+                                        value={ attributes.overlayalignmentvertical}
+                                        onChange={(value) => setAttributes({overlayalignmentvertical:value})}
+                                        options={[
+                                            {
+                                                icon: Start,
+                                                label: __( 'start', 'vayu-blocks' ),
+                                                value: 'start'
+                                            },
+                                            {
+                                                icon: Center,
+                                                label: __( 'Center', 'vayu-blocks' ),
+                                                value: 'center'
+                                            },
+                                            {
+                                                icon: End,
+                                                label: __( 'end', 'vayu-blocks' ),
+                                                value: 'end'
+                                            },
+                                        ]}
+                                        
+                                        hasIcon
+                                    />
+                                    <br/>
+
+                                    <ColorPanel
+                                        colorTool={[
+                                            {
+                                                active: ['gradient'],
+                                                name: 'Overlay',
+                                                value: attributes.overlaycolor,
+                                                attribute: 'color',
+                                            },
+                                            {
+                                                active: ['gradient'],
+                                                name: 'Hover',
+                                                value: attributes.overlayhvrcolor,
+                                                attribute: 'colorhvr',
+                                            }
+                                        ]}
+                                        handelColorPanel={(value) => handlecoloroverlay(value)}                                          
+                                        initialTab="color"
+                                    />
+
+                                <Vayu_Block_Border_Control
+                                    value={{border:{
+                                        top:{
+                                            color: attributes.imageborder.topcolor,
+                                            width: attributes.imageborder.topwidth,
+                                            style: attributes.imageborder.topstyle,
+                                        },
+                                        bottom: {
+                                            color: attributes.imageborder.bottomcolor,
+                                            width: attributes.imageborder.bottomwidth,
+                                            style: attributes.imageborder.bottomstyle,
+                                        },
+                                        left: {
+                                            color: attributes.imageborder.leftcolor,
+                                            width: attributes.imageborder.leftwidth,
+                                            style: attributes.imageborder.leftstyle,
+                                        },
+                                        right: {
+                                            color: attributes.imageborder.rightcolor,
+                                            width: attributes.imageborder.rightwidth,
+                                            style: attributes.imageborder.rightstyle,
+                                        }
+                                    },
+                                    borderRadius:{
+                                        top:{
+                                            width: attributes.imageborderRadius.top,
+                                        },
+                                        bottom:{
+                                            width: attributes.imageborderRadius.bottom,
+                                        },
+                                        left:{
+                                            width: attributes.imageborderRadius.left,
+                                        },
+                                        right:{
+                                            width: attributes.imageborderRadius.right,
+                                        }
+                                    }
+                                    }}
+                                    onChange={(value)=>vayu_blocks_handleimageBorderChange(value)}
+                                    includeBorder={true}
+                                    includeBorderRadius={true}
+                                    para=""
+                                />  
+                                </>)}
+                            </>
                         )}
                     
                 </PanelBody >
-
-                {/* Overlay and animation effect  */}
-                <PanelBody title={__('On hover','vayu-blocks')} initialOpen={false}>
-                    <SelectControl
-                        label={__('Image Filter', 'vayu-blocks')}
-                        __nextHasNoMarginBottom
-                        value={attributes.imagehvrfilter}
-                        options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Blur', 'vayu-blocks'), value: 'blur' },
-                            { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
-                            { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
-                            { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
-                        ]}
-                        onChange={(value) => setAttributes({ imagehvrfilter: value })}
-                    />
-                    <p>If Duotone is applied, the image Filter won't work but image effect will.</p>
-
-                    <SelectControl
-                        label={__('Image Effect', 'vayu-blocks')}
-                        value={attributes.imagehvreffect}
-                        options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
-                            { label: __('Slide', 'vayu-blocks'), value: 'slide-left' },
-                        ]}
-                        onChange={(value) => setAttributes({ imagehvreffect: value })}
-                    />
-                </PanelBody>
 
                 {/* Overlay and animation effect  */}
                 <PanelBody title={__('Mask','vayu-blocks')} initialOpen={false}>
@@ -259,10 +481,10 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Diamond', 'vayu-blocks'), value: 'diamond' },
                             { label: __('Hexagone', 'vayu-blocks'), value: 'hexagone' },
                             { label: __('Rounded', 'vayu-blocks'), value: 'rounded' },
-                            { label: __('Bob1', 'vayu-blocks'), value: 'bob1' },
-                            { label: __('Bob2', 'vayu-blocks'), value: 'bob2' },
-                            { label: __('Bob3', 'vayu-blocks'), value: 'bob3' },
-                            { label: __('Bob4', 'vayu-blocks'), value: 'bob4' },
+                            { label: __('Mask 1', 'vayu-blocks'), value: 'bob1' },
+                            { label: __('Mask 2', 'vayu-blocks'), value: 'bob2' },
+                            { label: __('Mask 3', 'vayu-blocks'), value: 'bob3' },
+                            { label: __('Mask 4', 'vayu-blocks'), value: 'bob4' },
                         ]}
                         onChange={(value) => setAttributes({ maskshape: value })}
                     />

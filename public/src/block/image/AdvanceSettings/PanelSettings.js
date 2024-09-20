@@ -19,8 +19,9 @@ import {
     Suspense
 } from '@wordpress/element';
 
-import PostSettings from '../postSettings';
 import SlideSettings from '../SlideSettings';
+import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+
 
 /**
  * Internal dependencies
@@ -1621,7 +1622,189 @@ const PanelSettings = ({
 			setAttributes({ customWidthMobile: value });
 		}
 	};
-	
+
+
+	const vayu_blocks_handleadvanceBorderChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ advanceRadius: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ advanceborder: updatedAttributes });
+    };
+	const vayu_blocks_handleadvanceBorderhvrChange = (newBorders) => {
+        const updatedAttributes = {};
+        const updatedAttributesborderradius = {};
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.borderRadius) {
+            // Handle specific side settings
+            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
+                
+                if (newBorders.borderRadius.top) {
+                    
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
+                   
+                }
+                if (newBorders.borderRadius.bottom) {
+              
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
+            
+                }
+                if (newBorders.borderRadius.left) {
+          
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
+       
+                }
+                if (newBorders.borderRadius.right) {
+
+                    
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
+
+                }
+            } else {
+                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
+                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
+            }
+
+            setAttributes({ advanceRadiushvr: updatedAttributesborderradius });
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        // Check if newBorders and newBorders.border are defined
+        if (newBorders && newBorders.border) {
+            // Handle specific side settings
+            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
+                if (newBorders.border.top) {
+                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
+                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
+                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
+                }
+                if (newBorders.border.bottom) {
+                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
+                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
+                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
+                }
+                if (newBorders.border.left) {
+                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
+                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
+                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
+                }
+                if (newBorders.border.right) {
+                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
+                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
+                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
+                }
+            } else {
+                // Handle common border settings
+                updatedAttributes[`topcolor`] = newBorders.border.color;
+                updatedAttributes[`topwidth`] = newBorders.border.width;
+                updatedAttributes[`topstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`bottomcolor`] = newBorders.border.color;
+                updatedAttributes[`bottomwidth`] = newBorders.border.width;
+                updatedAttributes[`bottomstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`leftcolor`] = newBorders.border.color;
+                updatedAttributes[`leftwidth`] = newBorders.border.width;
+                updatedAttributes[`leftstyle`] = newBorders.border.style;
+            
+                updatedAttributes[`rightcolor`] = newBorders.border.color;
+                updatedAttributes[`rightwidth`] = newBorders.border.width;
+                updatedAttributes[`rightstyle`] = newBorders.border.style;
+            }
+        } else {
+            console.error("Invalid newBorders format:", newBorders);
+        }
+    
+        setAttributes({ advanceborderhvr: updatedAttributes });
+    };
+
     return (
 		<Fragment>
 			<InspectorControls>
@@ -1632,11 +1815,6 @@ const PanelSettings = ({
 								label: __( 'Image', 'vayu-blocks' ),
 								value: 'slide',
 								icon: 'image'
-							},
-							{
-								label: __( 'Setting', 'vayu-blocks' ),
-								value: 'setting',
-								icon: 'colorwand'
 							},
 							{
 								label: __( 'Advanced', 'vayu-blocks' ),
@@ -1651,11 +1829,6 @@ const PanelSettings = ({
 					<Fragment>
 						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
 					</Fragment>
-
-				) || 'setting' === tab && (
-						<Fragment>
-							<PostSettings attributes={attributes} setAttributes={setAttributes} />
-						</Fragment>
 
 				) || 'advanced' === tab && (
 					<Fragment>
@@ -1759,118 +1932,50 @@ const PanelSettings = ({
 								
 						{ 'normal' ===  hover &&  (	
 							<>
-							<SelectControl
-								label={ __( 'Border Type', 'vayu-blocks' ) }
-								value={ attributes.borderType }
-								options={ [
-									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
-									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
-									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
-									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
-									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
-									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
-								] }
-								onChange={ e => setAttributes({ borderType: e }) }
-							/>	
-								
-							{ 'none' !== attributes.borderType && (
 
-								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
-								<ResponsiveControl
-										label={ __( 'Border Width', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderWidthUnit }
-										onClick={borderWidthUnit => {
-											setAttributes({borderWidthUnit });
-											setborderWidthUnit(borderWidthUnit);
-										}}
-										units={ [ 'px', 'em' ] }
-									/>
-
-									<SizingControl
-										type={ getBorderWidthType() }
-										min={ 0 }
-										max={ maxborderWidthUnit }
-										changeType={ changeBorderWidthType }
-										onChange={ changeBorderWidth }
-										options={ [
-											{
-												label: __( 'Top', 'vayu-blocks' ),
-												type: 'top',
-												value: getBorderWidth( 'top' )
-											},
-											{
-												label: __( 'Right', 'vayu-blocks' ),
-												type: 'right',
-												value: getBorderWidth( 'right' )
-											},
-											{
-												label: __( 'Bottom', 'vayu-blocks' ),
-												type: 'bottom',
-												value: getBorderWidth( 'bottom' )
-											},
-											{
-												label: __( 'Left', 'vayu-blocks' ),
-												type: 'left',
-												value: getBorderWidth( 'left' )
-											}
-										] }
-									/>
-
-									</ResponsiveControl>
-											<ColorGradientControl
-										label={ __( 'Border Color', 'vayu-blocks' ) }
-										colorValue={ attributes.borderColor }
-										onColorChange={ e => setAttributes({ borderColor: e }) }
-										enableAlpha={true} 
-										/>
-								</Suspense>
-								
-								) }
-								<ResponsiveControl
-										label={ __( 'Border Radius', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderRadiusUnit }
-										onClick={borderRadiusUnit => {
-											setAttributes({borderRadiusUnit });
-											setborderRadiusUnit(borderRadiusUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-									/>
-
-									<SizingControl
-											type={ getborderradiusType() }
-											min={ 0 }
-											max={ maxborderRadiusUnit }
-											changeType={ changeborderradiusType }
-											onChange={ changeborderradius }
-											options={ [
-												{
-													label: __( 'T-R', 'vayu-blocks' ),
-													type: 'top',
-													value: getborderradius( 'top' )
-												},
-												{
-													label: __( 'T-L', 'vayu-blocks' ),
-													type: 'right',
-													value: getborderradius( 'right' )
-												},
-												{
-													label: __( 'B-R', 'vayu-blocks' ),
-													type: 'left',
-													value: getborderradius( 'left' )
-												},
-												{
-													label: __( 'B-L', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getborderradius( 'bottom' )
-												}
-											] }
-										/>
-
-									</ResponsiveControl>
+								<Vayu_Block_Border_Control
+                                    value={{border:{
+                                        top:{
+                                            color: attributes.advanceborder.topcolor,
+                                            width: attributes.advanceborder.topwidth,
+                                            style: attributes.advanceborder.topstyle,
+                                        },
+                                        bottom: {
+                                            color: attributes.advanceborder.bottomcolor,
+                                            width: attributes.advanceborder.bottomwidth,
+                                            style: attributes.advanceborder.bottomstyle,
+                                        },
+                                        left: {
+                                            color: attributes.advanceborder.leftcolor,
+                                            width: attributes.advanceborder.leftwidth,
+                                            style: attributes.advanceborder.leftstyle,
+                                        },
+                                        right: {
+                                            color: attributes.advanceborder.rightcolor,
+                                            width: attributes.advanceborder.rightwidth,
+                                            style: attributes.advanceborder.rightstyle,
+                                        }
+                                    },
+                                    borderRadius:{
+                                        top:{
+                                            width: attributes.advanceRadius.top,
+                                        },
+                                        bottom:{
+                                            width: attributes.advanceRadius.bottom,
+                                        },
+                                        left:{
+                                            width: attributes.advanceRadius.left,
+                                        },
+                                        right:{
+                                            width: attributes.advanceRadius.right,
+                                        }
+                                    }
+                                    }}
+                                    onChange={(value)=>vayu_blocks_handleadvanceBorderChange(value)}
+                                    includeBorder={true}
+                                    includeBorderRadius={true}
+                                    para=""
+                                /> 
 
 									<ControlPanelControl
 									label={ __( 'Box Shadow', 'vayu-blocks' ) }
@@ -1939,115 +2044,49 @@ const PanelSettings = ({
 
 						) 	|| 'hover' ===  hover && (
 							<>
-							<SelectControl
-								label={ __( 'Border Type', 'vayu-blocks' ) }
-								value={ attributes.borderHvrType }
-								options={ [
-									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
-									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
-									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
-									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
-									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
-									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
-								] }
-								onChange={ e => setAttributes({ borderHvrType: e }) }
-							/>	
-
-						{ 'none' !== attributes.borderHvrType && (
-							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
-							<ResponsiveControl
-										label={ __( 'Border Width', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderWidthHvrUnit }
-										onClick={borderWidthHvrUnit => {
-											setAttributes({borderWidthHvrUnit });
-											setborderWidthHvrUnit(borderWidthHvrUnit);
-										}}
-										units={ [ 'px', 'em' ] }
-									/>
-									<SizingControl
-											type={ getBorderWidthHvrType() }
-											min={ 0 }
-											max={ maxborderWidthHvrUnit }
-											changeType={ changeBorderWidthHvrType }
-											onChange={ changeBorderWidthHvr }
-											options={ [
-												{
-													label: __( 'Top', 'vayu-blocks' ),
-													type: 'top',
-													value: getBorderWidthHvr( 'top' )
-												},
-												{
-													label: __( 'Right', 'vayu-blocks' ),
-													type: 'right',
-													value: getBorderWidthHvr( 'right' )
-												},
-												{
-													label: __( 'Bottom', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getBorderWidthHvr( 'bottom' )
-												},
-												{
-													label: __( 'Left', 'vayu-blocks' ),
-													type: 'left',
-													value: getBorderWidthHvr( 'left' )
-												}
-											] }
-										/>
-
-									</ResponsiveControl>		
-							<ColorGradientControl
-							label={ __( 'Border Hover Color', 'vayu-blocks' ) }
-							colorValue={ attributes.borderColorHvr }
-							onColorChange={ e => setAttributes({ borderColorHvr: e }) }
-							/>
-							</Suspense>
-			
-							) }
-
-									<ResponsiveControl
-										label={ __( 'Border Radius', 'vayu-blocks' ) }
-									>
-									<UnitChooser
-										value={ attributes.borderRadiusHvrUnit }
-										onClick={borderRadiusHvrUnit => {
-											setAttributes({borderRadiusHvrUnit });
-											setborderRadiusHvrUnit(borderRadiusHvrUnit);
-										}}
-										units={ [ 'px', 'em', '%' ] }
-									/>
-									<SizingControl
-											type={ getborderradiusHvrType() }
-											min={ 0 }
-											max={ maxborderRadiusUnit }
-											changeType={ changeborderradiusHvrType }
-											onChange={ changeborderradiusHvr }
-											options={ [
-												{
-													label: __( 'T-R', 'vayu-blocks' ),
-													type: 'top',
-													value: getborderradiusHvr( 'top' )
-												},
-												{
-													label: __( 'T-L', 'vayu-blocks' ),
-													type: 'right',
-													value: getborderradiusHvr( 'right' )
-												},
-												{
-													label: __( 'B-R', 'vayu-blocks' ),
-													type: 'left',
-													value: getborderradiusHvr( 'left' )
-												},
-												{
-													label: __( 'B-L', 'vayu-blocks' ),
-													type: 'bottom',
-													value: getborderradiusHvr( 'bottom' )
-												}
-											] }
-										/>
-
-									</ResponsiveControl>
+									<Vayu_Block_Border_Control
+                                    value={{border:{
+                                        top:{
+                                            color: attributes.advanceborderhvr.topcolor,
+                                            width: attributes.advanceborderhvr.topwidth,
+                                            style: attributes.advanceborderhvr.topstyle,
+                                        },
+                                        bottom: {
+                                            color: attributes.advanceborderhvr.bottomcolor,
+                                            width: attributes.advanceborderhvr.bottomwidth,
+                                            style: attributes.advanceborderhvr.bottomstyle,
+                                        },
+                                        left: {
+                                            color: attributes.advanceborderhvr.leftcolor,
+                                            width: attributes.advanceborderhvr.leftwidth,
+                                            style: attributes.advanceborderhvr.leftstyle,
+                                        },
+                                        right: {
+                                            color: attributes.advanceborderhvr.rightcolor,
+                                            width: attributes.advanceborderhvr.rightwidth,
+                                            style: attributes.advanceborderhvr.rightstyle,
+                                        }
+                                    },
+                                    borderRadius:{
+                                        top:{
+                                            width: attributes.advanceRadiushvr.top,
+                                        },
+                                        bottom:{
+                                            width: attributes.advanceRadiushvr.bottom,
+                                        },
+                                        left:{
+                                            width: attributes.advanceRadiushvr.left,
+                                        },
+                                        right:{
+                                            width: attributes.advanceRadiushvr.right,
+                                        }
+                                    }
+                                    }}
+                                    onChange={(value)=>vayu_blocks_handleadvanceBorderhvrChange(value)}
+                                    includeBorder={true}
+                                    includeBorderRadius={true}
+                                    para=""
+                                /> 
 
 									<ControlPanelControl
 									label={ __( 'Box Shadow', 'vayu-blocks' ) }

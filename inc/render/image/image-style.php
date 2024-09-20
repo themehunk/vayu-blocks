@@ -66,26 +66,30 @@ function generate_inline_image_styles($attr) {
         $css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
 
 
-        // Border
-        $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
-        $css .= isset($attr['borderType']) ? "border-style: " . esc_attr($attr['borderType']) . ";" : '';
-        $css .= isset($attr['borderWidthTop']) ? "border-top-width: " . esc_attr($attr['borderWidthTop']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthBottom']) ? "border-bottom-width: " . esc_attr($attr['borderWidthBottom']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthLeft']) ? "border-left-width: " . esc_attr($attr['borderWidthLeft']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthRight']) ? "border-right-width: " . esc_attr($attr['borderWidthRight']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderColor']) ? "border-color: " . esc_attr($attr['borderColor']) . ";" : '';
+        // Top border
+        if (isset($attr['advanceborder']['topwidth'], $attr['advanceborder']['topstyle'], $attr['advanceborder']['topcolor'])) {
+            $css .= "border-top: " . esc_attr($attr['advanceborder']['topwidth']) . " " . esc_attr($attr['advanceborder']['topstyle']) . " " . esc_attr($attr['advanceborder']['topcolor']) . ";";
+        }
 
-        // Border Radius
-        $borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
-        $borderTopLeftRadius = isset($attr['borderradiusTop']) ? esc_attr($attr['borderradiusTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderBottomRightRadius = isset($attr['borderradiusBottom']) ? esc_attr($attr['borderradiusBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderBottomLeftRadius = isset($attr['borderradiusLeft']) ? esc_attr($attr['borderradiusLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderTopRightRadius = isset($attr['borderradiusRight']) ? esc_attr($attr['borderradiusRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+        // Bottom border
+        if (isset($attr['advanceborder']['bottomwidth'], $attr['advanceborder']['bottomstyle'], $attr['advanceborder']['bottomcolor'])) {
+            $css .= "border-bottom: " . esc_attr($attr['advanceborder']['bottomwidth']) . " " . esc_attr($attr['advanceborder']['bottomstyle']) . " " . esc_attr($attr['advanceborder']['bottomcolor']) . ";";
+        }
 
-        $css .= "border-top-left-radius: {$borderTopLeftRadius};";
-        $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
-        $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
-        $css .= "border-top-right-radius: {$borderTopRightRadius};";
+        // Left border
+        if (isset($attr['advanceborder']['leftwidth'], $attr['advanceborder']['leftstyle'], $attr['advanceborder']['leftcolor'])) {
+            $css .= "border-left: " . esc_attr($attr['advanceborder']['leftwidth']) . " " . esc_attr($attr['advanceborder']['leftstyle']) . " " . esc_attr($attr['advanceborder']['leftcolor']) . ";";
+        }
+
+        // Right border
+        if (isset($attr['advanceborder']['rightwidth'], $attr['advanceborder']['rightstyle'], $attr['advanceborder']['rightcolor'])) {
+            $css .= "border-right: " . esc_attr($attr['advanceborder']['rightwidth']) . " " . esc_attr($attr['advanceborder']['rightstyle']) . " " . esc_attr($attr['advanceborder']['rightcolor']) . ";";
+        }
+
+        // Apply individual border-radius values if not a circle
+        if (isset($attr['advanceRadius']['top'], $attr['advanceRadius']['right'], $attr['advanceRadius']['bottom'], $attr['advanceRadius']['left'])) {
+            $css .= "border-radius: " . esc_attr($attr['advanceRadius']['top']) . " " . esc_attr($attr['advanceRadius']['right']) . " " . esc_attr($attr['advanceRadius']['bottom']) . " " . esc_attr($attr['advanceRadius']['left']) . ";";
+        }
 
         // Box-shadow
         if (isset($attr['boxShadow']) && $attr['boxShadow']) {
@@ -141,25 +145,30 @@ function generate_inline_image_styles($attr) {
     //Hover 
     $css .= "$wrapper:hover {";
 
-        // Border styles
-        $css .= isset($attr['borderHvrType']) ? "border-style: " . esc_attr($attr['borderHvrType']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrTop']) && isset($attr['borderWidthHvrUnit']) ? "border-top-width: " . esc_attr($attr['borderWidthHvrTop']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrBottom']) && isset($attr['borderWidthHvrUnit']) ? "border-bottom-width: " . esc_attr($attr['borderWidthHvrBottom']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrLeft']) && isset($attr['borderWidthHvrUnit']) ? "border-left-width: " . esc_attr($attr['borderWidthHvrLeft']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderWidthHvrRight']) && isset($attr['borderWidthHvrUnit']) ? "border-right-width: " . esc_attr($attr['borderWidthHvrRight']) . esc_attr($attr['borderWidthHvrUnit']) . ";" : '';
-        $css .= isset($attr['borderColorHvr']) ? "border-color: " . esc_attr($attr['borderColorHvr']) . ";" : '';
+        // Top border
+        if (isset($attr['advanceborderhvr']['topwidth'], $attr['advanceborderhvr']['topstyle'], $attr['advanceborderhvr']['topcolor'])) {
+            $css .= "border-top: " . esc_attr($attr['advanceborderhvr']['topwidth']) . " " . esc_attr($attr['advanceborderhvr']['topstyle']) . " " . esc_attr($attr['advanceborderhvr']['topcolor']) . ";";
+        }
 
-        // Border radius
-           $borderRadiusUnit = isset($attr['borderRadiusHvrUnit']) ? $attr['borderRadiusHvrUnit'] : 'px';
-           $borderTopLeftRadius = isset($attr['borderradiusHvrTop']) ? esc_attr($attr['borderradiusHvrTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderBottomRightRadius = isset($attr['borderradiusHvrBottom']) ? esc_attr($attr['borderradiusHvrBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderBottomLeftRadius = isset($attr['borderradiusHvrLeft']) ? esc_attr($attr['borderradiusHvrLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-           $borderTopRightRadius = isset($attr['borderradiusHvrRight']) ? esc_attr($attr['borderradiusHvrRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-   
-           $css .= "border-top-left-radius: {$borderTopLeftRadius};";
-           $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
-           $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
-           $css .= "border-top-right-radius: {$borderTopRightRadius};";
+        // Bottom border
+        if (isset($attr['advanceborderhvr']['bottomwidth'], $attr['advanceborderhvr']['bottomstyle'], $attr['advanceborderhvr']['bottomcolor'])) {
+            $css .= "border-bottom: " . esc_attr($attr['advanceborderhvr']['bottomwidth']) . " " . esc_attr($attr['advanceborderhvr']['bottomstyle']) . " " . esc_attr($attr['advanceborderhvr']['bottomcolor']) . ";";
+        }
+
+        // Left border
+        if (isset($attr['advanceborderhvr']['leftwidth'], $attr['advanceborderhvr']['leftstyle'], $attr['advanceborderhvr']['leftcolor'])) {
+            $css .= "border-left: " . esc_attr($attr['advanceborderhvr']['leftwidth']) . " " . esc_attr($attr['advanceborderhvr']['leftstyle']) . " " . esc_attr($attr['advanceborderhvr']['leftcolor']) . ";";
+        }
+
+        // Right border
+        if (isset($attr['advanceborderhvr']['rightwidth'], $attr['advanceborderhvr']['rightstyle'], $attr['advanceborderhvr']['rightcolor'])) {
+            $css .= "border-right: " . esc_attr($attr['advanceborderhvr']['rightwidth']) . " " . esc_attr($attr['advanceborderhvr']['rightstyle']) . " " . esc_attr($attr['advanceborderhvr']['rightcolor']) . ";";
+        }
+
+        // Apply individual border-radius values if not a circle
+        if (isset($attr['advanceRadiushvr']['top'], $attr['advanceRadiushvr']['right'], $attr['advanceRadiushvr']['bottom'], $attr['advanceRadiushvr']['left'])) {
+            $css .= "border-radius: " . esc_attr($attr['advanceRadiushvr']['top']) . " " . esc_attr($attr['advanceRadiushvr']['right']) . " " . esc_attr($attr['advanceRadiushvr']['bottom']) . " " . esc_attr($attr['advanceRadiushvr']['left']) . ";";
+        }
    
         // Box-shadow
         if (isset($attr['boxShadowHvr']) && $attr['boxShadowHvr']) {
@@ -271,39 +280,8 @@ function generate_inline_image_styles($attr) {
             } 
             // If duotone is an array with more than one value, apply it as a filter
             elseif (is_array($attr['duotone']) && count($attr['duotone']) > 1) {
-                $css .= "    filter: url(" . esc_attr($attr['duotone'][0]) . ") !important;";
+                $css .= "    filter: url(" . esc_attr($attr['duotone'][0]) . ") ;";
             }
-        }
-
-        if ($attr['imageborderradiuscircle'] === 'circle') {
-            // Apply a border-radius of 50% for circular images
-            $css .= "border-radius: 50%;";
-        } else {
-            // Apply individual border-radius values if not a circle
-            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
-                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
-            }
-        }
-        
-
-        // Top border
-        if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
-            $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
-        }
-
-        // Bottom border
-        if (isset($attr['imageborder']['bottomwidth'], $attr['imageborder']['bottomstyle'], $attr['imageborder']['bottomcolor'])) {
-            $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
-        }
-
-        // Left border
-        if (isset($attr['imageborder']['leftwidth'], $attr['imageborder']['leftstyle'], $attr['imageborder']['leftcolor'])) {
-            $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
-        }
-
-        // Right border
-        if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
-            $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
         }
 
     $css .= "}";
@@ -319,13 +297,6 @@ function generate_inline_image_styles($attr) {
 
     // Append hover effect CSS rules
     $css .= " $wrapper $inline:hover .vayu_blocks_image_flip_image {";
-        $css .= "    transform: var(--image-hover-effect-transform, none);";
-        $css .= "    filter: var(--image-filter-effect, none);";
-        $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
-    $css .= "}";
-
-    /* Global hover effect CSS */
-    $css .= "$wrapper $inline:hover .vayu_blocks_image_flip_image {";
         $css .= "    transform: var(--image-hover-effect-transform, none);";
         $css .= "    filter: var(--image-filter-effect, none);";
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
@@ -354,12 +325,12 @@ function generate_inline_image_styles($attr) {
 
     /* Grayscale reverse hover */
     $css .= ".grayScalereverse {";
-        $css .= "    filter: grayscale(100%);";
+        $css .= "    filter: grayscale(100%) !important;";
         $css .= "    transition: filter " . esc_attr($attr['imagetransitiontime']) . "s ease;";
     $css .= "}";
 
     $css .= ".grayScalereverse:hover {";
-        $css .= "    filter: none;";
+        $css .= "filter: none;";
     $css .= "}";
 
     /* Sepia */
@@ -426,27 +397,49 @@ function generate_inline_image_styles($attr) {
         $css .= "    --image-filter-effect: grayscale(100%);";
     $css .= "}";
 
+    /* Hover the image and show the overlay */
+    $css .= "$wrapper .vayu_blocks_overlay_main_wrapper:hover {";
+        $css .= "background-color: " . esc_attr($attr['overlayhvrcolor']) . " !important;";
+    $css .= "}";
+
+    //inerrblok animation
+    /* Initially set the paragraph opacity to 0 and position it below */
+    $css .= "$wrapper .vayu-blocks-para-innerblock {";
+        $css .= "opacity: 0;";
+        $css .= "transform: translateY(20px) perspective(500px) rotateX(90deg);";  /* Move paragraph further down */
+        $css .= "transition: opacity 0.6s ease, transform 0.6s ease;";  /* Longer and smoother transition */
+    $css .= "}";
+
+    /* Heading is in its original place initially */
+    $css .= "$wrapper .vayu-blocks-heading-innerblock {";
+        $css .= "transform: translateY(10px);";  /* Move heading slightly down initially */
+        $css .= "transition: transform 0.6s ease;";  /* Longer transition */
+    $css .= "}";
+
+    /* On hover, move heading up and make paragraph visible with a smooth 3D effect */
+    $css .= "$wrapper .vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-heading-innerblock {";
+        $css .= "transform: translateY(-20px);";  /* Move heading 10px up for more noticeable movement */
+    $css .= "}";
+
+    $css .= "$wrapper .vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-para-innerblock {";
+        $css .= "opacity: 1;";
+        $css .= "transform: translateY(0) perspective(500px) rotateX(0);";  /* Bring paragraph to its original position with smoother 3D effect */
+    $css .= "}";
+
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
-        $css .= "width: 100%;";
-        $css .= "height: 99.9%;";
+        $css .= "width: 97%;";
+        $css .= "height: 94%;";
         $css .= "position: absolute;";
         $css .= "top: 0;";
         $css .= "left: 0;";
         $css .= "transition: " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-
-        if (isset($attr['overlay']) && $attr['overlay']) {
-        // If overlay is set and true, set opacity to 1
-            $css .= "opacity: 1; ";
-        } else {
-            // If overlay is not set or false, set opacity to 0
-            $css .= "opacity: 0; ";
-        }
-
-        
+        $css .= "opacity: 1; ";
+       
         $css .= "z-index: 10;";
         $css .= "display: flex;";
+        $css .= "margin: 10px;";
 
         $alignment = 'center'; // Default value
 
@@ -552,11 +545,6 @@ function generate_inline_image_styles($attr) {
         $css .= "-webkit-mask-repeat: " . esc_attr($attr['maskrepeat']) . ";";
         $css .= "mask-position: " . esc_attr($attr['maskposition']) . ";";
         $css .= "-webkit-mask-position: " . esc_attr($attr['maskposition']) . ";";
-    $css .= "}";
-
-    /* Hover the image and show the overlay */
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {";
-        $css .= "opacity: 1;";
     $css .= "}";
 
     /* Custom overlay hover effects */

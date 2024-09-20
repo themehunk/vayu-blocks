@@ -69,50 +69,24 @@ const edit = (props) => {
             : attributes.imageaspectratio.replace('/', '/')) 
         : 'auto',
 
-        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
-        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
-        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
-        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
-
-
         filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
-
-        borderRadius: borderRadius,
 
     };
 
     const image_flip_template = [
-        ['vayu-blocks/advance-container'
-            , {
-                verticalAlignment: 'center',
-                isStackedOnMobile: true,
-                width: '100%',
-                alignItems:'center',
-                elementGap:21,
-                AlignItem:'center',
-            },
-              
-            [
-                ['vayu-blocks/advance-heading', {
-                    fontVariant:'bold',
-                    fontFamily:'unset',
-                    content:'Image Flip Title...'
-                }],
-
-                ['vayu-blocks/advance-button',{
-                    buttonbackgroundColor:'#4e75ff',
-                    buttonbackgroundColorHvr:'#2F3DA3',
-                    buttonpaddingTop: 10,
-                    buttonpaddingRight: 50,
-                    buttonpaddingBottom: 10,
-                    buttonpaddingLeft: 50,
-                    align:'center',
-                }],
-            ]   
-
-        ],
-    ];  
-
+        ['vayu-blocks/advance-heading', {
+            fontVariant: 'bold',
+            fontFamily: 'unset',
+            content: 'Image Title...',
+            className: 'vayu-blocks-heading-innerblock'
+        }],
+        ['core/paragraph', {
+            align: 'center',
+            content:'write here please.....',
+            className: 'vayu-blocks-para-innerblock'
+        }],
+    ];
+    
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
@@ -292,11 +266,11 @@ const edit = (props) => {
 
                     <div className="vayu_blocks_image_flip_wrapper">
 
-                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
+                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect}`}   >             
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
-                                className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter} ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
+                                className={`vayu_blocks_image_flip_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
                             />
 
                         </div>  
@@ -305,10 +279,9 @@ const edit = (props) => {
                             <>
                           
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect}  ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
                                 style={vayu_block_overlay_style}
                             >
-
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
                                         template={image_flip_template} 
@@ -325,7 +298,6 @@ const edit = (props) => {
                             </div>
                         )}
                        
-
                     </div>
 
                 </div>

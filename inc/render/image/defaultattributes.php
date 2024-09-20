@@ -11,7 +11,8 @@ return array(
         'imagehvreffect' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
-        'overlaycolor' => 'rgba(106, 111, 248, 0.17)',
+        'overlayhvrcolor' => 'rgba(106, 111, 248, 0.17)',
+        'overlaycolor' => '#B6BEFA38',
         'focalPoint' => array(
             'x' => 0.5,
             'y' => 0.5,
@@ -222,5 +223,51 @@ return array(
         'borderradiusHvrRightMobile'=> 20,
         'borderradiusHvrBottomMobile'=> 20,
         'borderradiusHvrLeftMobile'=> 20,
+        // advance Border
+            'advanceborder' => array(
+                'topcolor' => 'rgb(183, 191, 249)',
+                'topwidth' => '2px',
+                'topstyle' => 'solid',
+                'bottomcolor' => 'rgb(183, 191, 249)',
+                'bottomwidth' => '2px',
+                'bottomstyle' => 'solid',
+                'leftcolor' => 'rgb(183, 191, 249)',
+                'leftwidth' => '2px',
+                'leftstyle' => 'solid',
+                'rightcolor' => 'rgb(183, 191, 249)',
+                'rightwidth' => '2px',
+                'rightstyle' => 'solid',
+            ),
+
+        // advance Border Radius
+            'advanceRadius' => array(
+                'top' => '4px',
+                'bottom' => '4px',
+                'left' => '4px',
+                'right' => '4px',
+            ),
+            // advance Border
+            'advanceborderhvr' => array(
+                'topcolor' => 'rgb(183, 191, 249)',
+                'topwidth' => '2px',
+                'topstyle' => 'solid',
+                'bottomcolor' => 'rgb(183, 191, 249)',
+                'bottomwidth' => '2px',
+                'bottomstyle' => 'solid',
+                'leftcolor' => 'rgb(183, 191, 249)',
+                'leftwidth' => '2px',
+                'leftstyle' => 'solid',
+                'rightcolor' => 'rgb(183, 191, 249)',
+                'rightwidth' => '2px',
+                'rightstyle' => 'solid',
+            ),
+
+    // advance Border Radius
+        'advanceRadiushvr' => array(
+            'top' => '4px',
+            'bottom' => '4px',
+            'left' => '4px',
+            'right' => '4px',
+        ),
 );
 ?>

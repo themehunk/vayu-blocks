@@ -37,7 +37,7 @@ class Vayu_blocks_image {
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
         
         $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
-            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" >';            
+            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
@@ -71,30 +71,12 @@ class Vayu_blocks_image {
     private function overlay() {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
+        $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
 
-        $overlayClasses = '';
 
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        if(isset($attributes['overlay']) && !$attributes['overlay']){
-            if ($attributes['imagehvreffect'] !== 'flip-front' && $attributes['imagehvreffect'] !== 'flip-back' && $attributes['imagehvreffect'] !== 'flip-front-left' && $attributes['imagehvreffect'] !== 'flip-back-bottom') {
-                $overlayClasses .= ' ' . $attributes['imageoverlayouteffect'];
-            }
-            elseif ($attributes['imagehvreffect'] === 'flip-front') {
-                $overlayClasses .= ' overlayflip-horizontal';
-            }
-            elseif ($attributes['imagehvreffect'] === 'flip-back') {
-                $overlayClasses .= ' overlayflip-vertical';
-            }
-            elseif ($attributes['imagehvreffect'] === 'flip-back-bottom') {
-                $overlayClasses .= ' overlayflip-vertical-bottom';
-            }
-            elseif ($attributes['imagehvreffect'] === 'flip-front-left') {
-                $overlayClasses .= ' overlayflip-horizontal-left';
-            }
-        }
-
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $overlayClasses . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $imageHvrEffect . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  

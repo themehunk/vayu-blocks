@@ -37,7 +37,7 @@
         "type":"string",
         "default":"none"
     },
-    "overlaycolor":{
+    "overlayhvrcolor":{
         "type":"string",
         "default":"rgba(106, 111, 248, 0.17)"
     },
@@ -152,5 +152,9 @@
     "captionalignment":{
         "type":"string",
         "default":"center"
+    },
+    "overlaycolor":{
+        "type":"string",
+        "default":"#B6BEFA38"
     }
 }
