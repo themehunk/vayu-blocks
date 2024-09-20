@@ -412,7 +412,7 @@ function generate_inline_image_styles($attr) {
 
     /* Heading is in its original place initially */
     $css .= "$wrapper .vayu-blocks-heading-innerblock {";
-        $css .= "transform: translateY(10px);";  /* Move heading slightly down initially */
+        $css .= "transform: translate3d(0, 24px, 0);";  /* Move heading slightly down initially */
         $css .= "transition: transform 0.6s ease;";  /* Longer transition */
     $css .= "}";
 
