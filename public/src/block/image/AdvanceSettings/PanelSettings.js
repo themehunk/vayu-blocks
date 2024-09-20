@@ -1570,6 +1570,7 @@ const PanelSettings = ({
 			return undefined;
 		}
 	};
+
     const changeButtonAlign = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ align: value, alignTablet: value, alignMobile: value });
@@ -1714,6 +1715,7 @@ const PanelSettings = ({
     
         setAttributes({ advanceborder: updatedAttributes });
     };
+	
 	const vayu_blocks_handleadvanceBorderhvrChange = (newBorders) => {
         const updatedAttributes = {};
         const updatedAttributesborderradius = {};

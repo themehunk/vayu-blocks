@@ -336,7 +336,8 @@ const edit = (props) => {
 
                     <div className="vayu_blocks_image_flip_wrapper" style={vayu_blocks_image_wrapper_style}>
 
-                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect}`}   >             
+                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                                 
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
@@ -349,7 +350,7 @@ const edit = (props) => {
                             <>
                           
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect}  ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
                                 style={vayu_block_overlay_style}
                             >
                                 <div className="vayu_blocks_inner_content">
@@ -367,9 +368,9 @@ const edit = (props) => {
                                 <p style={captionstyle}>{attributes.captiontext}</p>
                             </div>
                         )}
-                       
-                    </div>
 
+                    </div>
+                
                 </div>
             </AdvanceSettings>
         </>

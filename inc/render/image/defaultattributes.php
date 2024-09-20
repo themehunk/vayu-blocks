@@ -9,6 +9,7 @@ return array(
         'imagetransitiontime' => 0.5,
         'overlay' => false,
         'imagehvreffect' => 'none',
+        'imagehvranimation' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
         'overlayhvrcolor' => '#00000080',

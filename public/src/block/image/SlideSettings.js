@@ -372,7 +372,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 onDrag={ (value)=> setAttributes({focalPoint:value}) }
                                 onChange={ (value)=> setAttributes({focalPoint:value}) }
                             />
-                            <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({image:""})}>
+                            <Button style={{color:'blue'}} onClick={() => setAttributes({image:""})}>
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
 
@@ -479,13 +479,30 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                   
 
                                     <SelectControl
-                                        label={__('Image Effect', 'vayu-blocks')}
+                                        label={__('Hover Effect', 'vayu-blocks')}
                                         value={attributes.imagehvreffect}
                                         options={[
                                             { label: __('None', 'vayu-blocks'), value: 'none' },
-                                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
-                                            { label: __('Slide', 'vayu-blocks'), value: 'slide-left' },
+                                            { label: __('Blur', 'vayu-blocks'), value: 'blur' },
+                                            { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
+                                            { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
                                             { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
+                                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
+                                            { label: __('Zoom Out', 'vayu-blocks'), value: 'zoom-out' },
+                                            { label: __('Slide Up', 'vayu-blocks'), value: 'slide-up' },
+                                            { label: __('Slide Down', 'vayu-blocks'), value: 'slide-down' },
+                                            { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
+                                            { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
+                                            { label: __('Rotate', 'vayu-blocks'), value: 'rotate' }
+                                        ]}
+                                        onChange={(value) => setAttributes({ imagehvreffect: value })}
+                                    />
+
+                                    <SelectControl
+                                        label={__('Image Animation', 'vayu-blocks')}
+                                        value={attributes.imagehvranimation}
+                                        options={[
+                                            { label: __('None', 'vayu-blocks'), value: 'none' },
                                             { label: __('Clip Animation', 'vayu-blocks'), value: 'clip-animation' },
                                             { label: __('Diagonal Expand', 'vayu-blocks'), value: 'clip-diagonal-expand' },
                                             { label: __('Starbust', 'vayu-blocks'), value: 'clip-starburst' },
@@ -497,7 +514,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             { label: __('Zigzag', 'vayu-blocks'), value: 'clip-zigzag' },
                                             { label: __('Diamond Expand', 'vayu-blocks'), value: ' clip-diamond-expand' },
                                         ]}
-                                        onChange={(value) => setAttributes({ imagehvreffect: value })}
+                                        onChange={(value) => setAttributes({ imagehvranimation: value })}
                                     />
                             </>
                         )}

@@ -29,6 +29,10 @@
         "type":"string",
         "default":"none"
     },
+    "imagehvranimation":{
+        "type":"string",
+        "default":"none"
+    },
     "imagehvrfilter":{
         "type":"string",
         "default":"none"

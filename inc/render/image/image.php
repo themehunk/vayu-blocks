@@ -33,11 +33,12 @@ class Vayu_blocks_image {
 
         $imageAlt = isset($attributes['imagealttext']) ? esc_attr($attributes['imagealttext']) : 'Image ' . rand(1, 100);
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
+        $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
         
         $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
-            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . '" >';            
+            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $imageHvrAnimation . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
@@ -72,11 +73,11 @@ class Vayu_blocks_image {
         $attributes = $this->attr; // Access attributes
         $overlay = '';
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
-
+        $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
 
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $imageHvrEffect . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  
