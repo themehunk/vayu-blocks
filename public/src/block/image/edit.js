@@ -78,12 +78,14 @@ const edit = (props) => {
             fontVariant: 'bold',
             fontFamily: 'unset',
             content: 'Image Title...',
-            className: 'vayu-blocks-heading-innerblock'
+            className: 'vayu-blocks-heading-innerblock',
+            headingColor:'white'
         }],
         ['core/paragraph', {
             align: 'center',
             content:'write here please.....',
-            className: 'vayu-blocks-para-innerblock'
+            className: 'vayu-blocks-para-innerblock',
+            textColor:'white'
         }],
     ];
     

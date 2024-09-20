@@ -11,8 +11,8 @@ return array(
         'imagehvreffect' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
-        'overlayhvrcolor' => 'rgba(106, 111, 248, 0.17)',
-        'overlaycolor' => '#B6BEFA38',
+        'overlayhvrcolor' => '#00000080',
+        'overlaycolor' => 'transparent',
         'focalPoint' => array(
             'x' => 0.5,
             'y' => 0.5,
@@ -28,25 +28,25 @@ return array(
         // image Border
             'imageborder' => array(
                 'topcolor' => 'rgb(183, 191, 249)',
-                'topwidth' => '2px',
+                'topwidth' => '0px',
                 'topstyle' => 'solid',
                 'bottomcolor' => 'rgb(183, 191, 249)',
-                'bottomwidth' => '2px',
+                'bottomwidth' => '0px',
                 'bottomstyle' => 'solid',
                 'leftcolor' => 'rgb(183, 191, 249)',
-                'leftwidth' => '2px',
+                'leftwidth' => '0px',
                 'leftstyle' => 'solid',
                 'rightcolor' => 'rgb(183, 191, 249)',
-                'rightwidth' => '2px',
+                'rightwidth' => '0px',
                 'rightstyle' => 'solid',
             ),
     
         // image Border Radius
             'imageborderRadius' => array(
-                'top' => '4px',
-                'bottom' => '4px',
-                'left' => '4px',
-                'right' => '4px',
+                'top' => '0px',
+                'bottom' => '0px',
+                'left' => '0px',
+                'right' => '0px',
             ),
             
             'overlayshow'=>true,

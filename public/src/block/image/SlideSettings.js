@@ -331,6 +331,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             { label: __('Diagonal Expand', 'vayu-blocks'), value: 'clip-diagonal-expand' },
                                             { label: __('Starbust', 'vayu-blocks'), value: 'clip-starburst' },
                                             { label: __('Diamond', 'vayu-blocks'), value: 'clip-diamond' },
+                                            { label: __('Diagonal slide', 'vayu-blocks'), value: 'clip-diagonal-slide' },
+                                            { label: __('Hex Pulse', 'vayu-blocks'), value: 'clip-hex-pulse' },
+                                            { label: __('Triangle Expand', 'vayu-blocks'), value: 'clip-triangle-expand' },
+                                            { label: __('Circle Burst', 'vayu-blocks'), value: 'clip-circle-burst' },
+                                            { label: __('Zigzag', 'vayu-blocks'), value: 'clip-zigzag' },
+                                            { label: __('Diamond Expand', 'vayu-blocks'), value: ' clip-diamond-expand' },
                                         ]}
                                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                                     />
