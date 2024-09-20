@@ -62,7 +62,13 @@ return array(
             'captionfontweight'=> 'normal',
             'captioncolor'=>'black',
             'captionalignment'=>'center',
-        
+            'imagewidth'=>'',
+            'imageheight'=>'',
+            'imagewidthtablet'=>'',
+            'imageheighttablet'=>'',
+            'imagewidthmobile'=>'',
+            'imageheightmobile'=>'',
+
     //Advanced
         'classNamemain' => '',
         'globalwidth'=> '',

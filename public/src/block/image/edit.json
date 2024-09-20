@@ -156,5 +156,29 @@
     "overlaycolor":{
         "type":"string",
         "default":"transparent"
+    },
+    "imagewidth":{
+        "type":"string",
+        "default":""
+    },
+    "imageheight":{
+        "type":"string",
+        "default":""
+    },
+    "imagewidthtablet":{
+        "type":"string",
+        "default":""
+    },
+    "imageheighttablet":{
+        "type":"string",
+        "default":""
+    },
+    "imagewidthmobile":{
+        "type":"string",
+        "default":""
+    },
+    "imageheightmobile":{
+        "type":"string",
+        "default":""
     }
 }

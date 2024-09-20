@@ -154,3 +154,37 @@ animation: starburst 2.5s linear infinite;
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
   }
+
+
+
+  /* Initially set the paragraph opacity to 0 and position it below */
+.vayu-blocks-para-innerblock {
+  opacity: 0;
+  transform: translateY(20px);  /* Move paragraph down */
+  transition: opacity 0.6s ease, transform 0.6s ease;  /* Smooth transition */
+}
+
+/* On hover, move paragraph up and increase opacity */
+.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-para-innerblock {
+  opacity: 1;
+  transform: translateY(0);  /* Move paragraph to its original position */
+}
+
+/* On hover out, move paragraph back down and fade out smoothly */
+.vayu_blocks_overlay_main_wrapper:not(:hover) .vayu-blocks-para-innerblock {
+  opacity: 0;
+  transform: translateY(20px);  /* Move paragraph back down */
+  transition: opacity 0.6s ease, transform 0.6s ease;  /* Smooth transition */
+}
+
+/* Heading is in its original place initially */
+.vayu-blocks-heading-innerblock {
+  transform: translate3d(0, 24px, 0);  /* Move heading slightly down initially */
+  transition: transform 0.6s ease;  /* Longer transition */
+}
+
+
+/* On hover, move heading up and make paragraph visible with a smooth 3D effect */
+.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-heading-innerblock {
+  transform: translateY(0);
+}

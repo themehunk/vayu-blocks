@@ -173,11 +173,25 @@
 }
 
 // innerblock animation
+
 /* Initially set the paragraph opacity to 0 and position it below */
 .vayu-blocks-para-innerblock {
     opacity: 0;
-    transform: translateY(20px) perspective(500px) rotateX(90deg);  /* Move paragraph further down */
-    transition: opacity 0.6s ease, transform 0.6s ease;  /* Longer and smoother transition */
+    transform: translateY(20px);  /* Move paragraph down */
+    transition: opacity 0.6s ease, transform 0.6s ease;  /* Smooth transition */
+}
+
+/* On hover, move paragraph up and increase opacity */
+.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-para-innerblock {
+    opacity: 1;
+    transform: translateY(0);  /* Move paragraph to its original position */
+}
+
+/* On hover out, move paragraph back down and fade out smoothly */
+.vayu_blocks_overlay_main_wrapper:not(:hover) .vayu-blocks-para-innerblock {
+    opacity: 0;
+    transform: translateY(20px);  /* Move paragraph back down */
+    transition: opacity 0.6s ease, transform 0.6s ease;  /* Smooth transition */
 }
 
 /* Heading is in its original place initially */
@@ -186,15 +200,15 @@
     transition: transform 0.6s ease;  /* Longer transition */
 }
 
+
 /* On hover, move heading up and make paragraph visible with a smooth 3D effect */
 .vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-heading-innerblock {
-    transform: translateY(-10px);  /* Move heading 10px up for more noticeable movement */
+    transform: translateY(0);
 }
 
-.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-para-innerblock {
-    opacity: 1;
-    transform: translateY(0) perspective(500px) rotateX(0);  /* Bring paragraph to its original position with smoother 3D effect */
-}
+.vayu_blocks_image-flip-settings_main .vayu_blocks_focal_point_picker .focal-point-picker__controls{
+    display:none !important;
+ }
 
 
 /* Custom overlay hover effects */
@@ -570,4 +584,26 @@ animation: starburst 2.5s linear infinite;
   }
   
   
+.vayu_blocks_image-flip-settings_main .vayu_block_width_height_control {
+    display: flex;
+    flex-direction: row; /* Stack vertically if needed */
+    gap: 20px; /* Space between controls */
+}
+
+.vayu_blocks_image-flip-settings_main .vayu_block_dimensions {
+    display: flex; /* Align items in a row */
+    gap: 20px; /* Space between width and height controls */
+}
+
+.vayu_block_unit_width_control,
+.vayu_block_unit_height_control {
+    flex: 1; /* Allow controls to grow equally */
+}
+
+.vayu_blocks_image-flip-settings_main .vayu_block_width_height_control .components-base-control__title{
+    align-items: center !important;
+}
   
+.vayu_blocks_image-flip-settings_main .vayu_block_selectcontrol_aspect_ratio{
+    margin-bottom:-24px;
+}

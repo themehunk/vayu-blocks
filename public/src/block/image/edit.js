@@ -4,6 +4,7 @@ import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import noimage from '../../../../inc/assets/img/no-image.png';
 import { InnerBlocks } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
@@ -89,6 +90,36 @@ const edit = (props) => {
             fontFamily:'cardo'
         }],
     ];
+
+    const view = useSelect( select => {
+        const { getView } = select( 'vayu-blocks/data' );
+        const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+       
+        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+    }, []);
+
+    const vayu_blocks_image_wrapper_style = (() => {
+        const width = attributes.imagewidth || 'auto';
+        const height = attributes.imageheight || 'auto';
+    
+        if (view === 'Desktop') {
+            return {
+                width: width,
+                height: height
+            };
+        } else if (view === 'Tablet') {
+            return {
+                width: attributes.imagewidthtablet || 'auto',
+                height: attributes.imageheighttablet || 'auto'
+            };
+        } else if (view === 'Mobile') {
+            return {
+                width: attributes.imagewidthmobile || 'auto',
+                height: attributes.imageheightmobile || 'auto'
+            };
+        }
+        return {}; // Fallback if no view matches
+    })();
     
     return (
         <>
@@ -267,7 +298,7 @@ const edit = (props) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper">
+                    <div className="vayu_blocks_image_flip_wrapper" style={vayu_blocks_image_wrapper_style}>
 
                         <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect}`}   >             
                             <img 

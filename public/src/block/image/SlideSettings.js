@@ -10,8 +10,10 @@ import {
     TextControl,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
+    __experimentalUnitControl as UnitControl,
     FocalPointPicker,
-    DuotonePicker
+    DuotonePicker,
+    Dashicon ,
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
@@ -23,13 +25,22 @@ import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderCo
 import {
     HoverControl,
     ToogleGroupControl,
+    ResponsiveControl,
 } from '../../components/index.js';
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
+import { useSelect } from '@wordpress/data';
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
     const [overlay, setoverlay] = useState('normal');
+
+    const getView = useSelect( select => {
+		const { getView } = select( 'vayu-blocks/data' );
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+	}, []);
 
     //default duotone
     const vayu_blocks_DUOTONE_PALETTE = [
@@ -112,7 +123,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     };
 
     const setoverlayandnormal = (value) => {
-        console.log(value);
         if(value==='normal'){
             setoverlay('normal');
         }
@@ -233,6 +243,50 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     }
     }
 
+    const getimagewidth = () => {
+        if('Desktop' === getView ){
+            return attributes.imagewidth
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.imagewidthtablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.imagewidthmobile
+        } 
+    };
+
+    const getimageheight = () => {
+        if('Desktop' === getView ){
+            return attributes.imageheight
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.imageheighttablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.imageheightmobile
+        } 
+    };
+
+    const changeImageWidth = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ imagewidth: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ imagewidthtablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ imagewidthmobile: value });
+        }
+    };
+
+    const changeImageHeight = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ imageheight: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ imageheighttablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ imageheightmobile: value });
+        }
+    };
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main">
@@ -243,6 +297,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     {attributes.image ? (
                         <>        
                             <FocalPointPicker
+                                className='vayu_blocks_focal_point_picker'
                                 __nextHasNoMarginBottom
                                 url={ attributes.image }
                                 value={ attributes.focalPoint }
@@ -254,13 +309,66 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
 
-                            <TextControl
+
+                            <SelectControl
+                                label="Aspect Ratio"
+                                className='vayu_block_selectcontrol_aspect_ratio'
+                                __nextHasNoMarginBottom
+                                value={attributes.imageaspectratio}
+                                options={[
+                                    { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
+                                    { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
+                                    { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
+                                    { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
+                                    { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
+                                    { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
+                                    { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
+                                ]}                                    
+                                onChange={(value) => setAttributes({ imageaspectratio: value })}
+                            />
+
+                            <div className='vayu_block_width_height_control'>
+
+                            <ResponsiveControl label={__('Width', 'vayu_blocks')}>
+                                <UnitControl
+                                    placeholder={ __( 'Auto' ) }
+                                    labelPosition="top"
+                                    size="__unstable-large"
+                                    className="vayu_block_unit_width_control"
+                                    
+                                    onChange={(value) =>changeImageWidth(value)}
+                                    value={getimagewidth()}
+                                    max={1500} // Maximum width
+                                    min={0} // Minimum width
+                                    units={'px'} 
+                                />
+                            </ResponsiveControl>
+
+                            <ResponsiveControl label={__('Height', 'vayu_blocks')}>
+                                <UnitControl
+                                    placeholder={ __( 'Auto' ) }
+                                    labelPosition="top"
+                                    size="__unstable-large"
+                                    className="vayu_block_unit_width_control"
+                                    
+                                    onChange={(value) => changeImageHeight(value)}
+                                    value={getimageheight()}
+                                    max={1500} // Maximum width
+                                    min={0} // Minimum width
+                                    units={'px'} 
+                                />
+                            </ResponsiveControl>
+
+                        </div>
+                        <TextControl
                             className="imagealttextrichcontrol"
                             label="Alt text"
                             __nextHasNoMarginBottom
                             onChange={(value)=>setAttributes({imagealttext:value})}
                             value={attributes.imagealttext}
-                            />
+                        />
+
+
                         </>
                         ) : (
                             <>
@@ -293,22 +401,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                         {overlay==='normal' && (
                             <>
-                                <SelectControl
-                                    label="Aspect Ratio"
-                                    value={attributes.imageaspectratio}
-                                    options={[
-                                        { label: __('None', 'vayu-blocks'), value: 'none' }, // No fixed aspect ratio
-                                        { label: __('Original', 'vayu-blocks'), value: 'original' }, // Original aspect ratio
-                                        { label: __('1:1 (Square)', 'vayu-blocks'), value: '1/1' },
-                                        { label: __('16:9 (Widescreen)', 'vayu-blocks'), value: '16/9' },
-                                        { label: __('4:3 (Standard)', 'vayu-blocks'), value: '4/3' },
-                                        { label: __('3:2 (Photography)', 'vayu-blocks'), value: '3/2' },
-                                        { label: __('21:9 (Cinematic)', 'vayu-blocks'), value: '21/9' }
-                                    ]}                                    
-                                    onChange={(value) => setAttributes({ imageaspectratio: value })}
-                                />
 
-                                        <p>Filter</p>
+                                    <p>Filter</p>
                                         <DuotonePicker
                                             label="Filter"
                                             duotonePalette={ vayu_blocks_DUOTONE_PALETTE}

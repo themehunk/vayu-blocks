@@ -1838,7 +1838,7 @@ const PanelSettings = ({
 							className="th-button-panel"
 						>     
 
-								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+								{/* <Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }
 								>	
@@ -1857,7 +1857,7 @@ const PanelSettings = ({
 									// allowReset={ true }
 								/>
 								</ResponsiveControl>
-								</Suspense>
+								</Suspense> */}
 
 
 
@@ -1911,6 +1911,82 @@ const PanelSettings = ({
 								/>
 							</ResponsiveControl>
 
+						</PanelBody>
+
+						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
+							initialOpen={ false }
+							className="th-button-panel"
+						> 
+
+						<HoverControl value={ hover }
+							options={[
+								{
+									label: __( 'Normal', 'vayu-blocks' ),
+									value: 'normal'
+								},
+								{
+									label: __( 'Hover', 'vayu-blocks' ),
+									value: 'hover'
+								}
+							]}
+							onChange={ setHover } />
+						
+						{ 'normal' ===  hover &&  (
+						
+						<BackgroundSelectorControl
+									backgroundType={ attributes.backgroundType }
+									backgroundColor={ attributes.backgroundColor }
+									image={ attributes.backgroundImage }
+								//	gradient={ attributes.backgroundGradient }
+									focalPoint={ attributes.backgroundPosition }
+									backgroundAttachment={ attributes.backgroundAttachment }
+									backgroundRepeat={ attributes.backgroundRepeat }
+									backgroundSize={ attributes.backgroundSize }
+									changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
+									changeImage={ media => {
+										setAttributes({
+											backgroundImage: pick( media, [ 'id', 'url' ])
+										});
+									}}
+									removeImage={ () => setAttributes({ backgroundImage: undefined })}
+									changeColor={ value => setAttributes({ backgroundColor: value })}
+									changeGradient={ value => setAttributes({ backgroundGradient: value }) }
+									changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
+									changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
+									changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
+									changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
+								/>
+							
+						) || 'hover' ===  hover && (
+							<>
+							<BackgroundSelectorControl
+							backgroundType={ attributes.backgroundTypeHvr }
+							backgroundColor={ attributes.backgroundColorHvr }
+							image={ attributes.backgroundImageHvr }
+							gradient={ attributes.backgroundGradientHvr }
+							focalPoint={ attributes.backgroundPositionHvr }
+							backgroundAttachment={ attributes.backgroundAttachmentHvr }
+							backgroundRepeat={ attributes.backgroundRepeatHvr }
+							backgroundSize={ attributes.backgroundSizeHvr }
+							changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
+							changeImage={ media => {
+								setAttributes({
+									backgroundImageHvr: pick( media, [ 'id', 'url' ])
+								});
+							}}
+							removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
+							changeColor={ value => setAttributes({ backgroundColorHvr: value })}
+							changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
+							changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
+							changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
+							changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
+							changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
+						/>
+						
+						</>
+						
+						)}	
+						
 						</PanelBody>
 
 						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
@@ -2155,82 +2231,6 @@ const PanelSettings = ({
 							</>
 						)
 								}
-						</PanelBody>
-
-						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
-							initialOpen={ false }
-							className="th-button-panel"
-						> 
-
-						<HoverControl value={ hover }
-							options={[
-								{
-									label: __( 'Normal', 'vayu-blocks' ),
-									value: 'normal'
-								},
-								{
-									label: __( 'Hover', 'vayu-blocks' ),
-									value: 'hover'
-								}
-							]}
-							onChange={ setHover } />
-						
-						{ 'normal' ===  hover &&  (
-						
-						<BackgroundSelectorControl
-									backgroundType={ attributes.backgroundType }
-									backgroundColor={ attributes.backgroundColor }
-									image={ attributes.backgroundImage }
-								//	gradient={ attributes.backgroundGradient }
-									focalPoint={ attributes.backgroundPosition }
-									backgroundAttachment={ attributes.backgroundAttachment }
-									backgroundRepeat={ attributes.backgroundRepeat }
-									backgroundSize={ attributes.backgroundSize }
-									changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
-									changeImage={ media => {
-										setAttributes({
-											backgroundImage: pick( media, [ 'id', 'url' ])
-										});
-									}}
-									removeImage={ () => setAttributes({ backgroundImage: undefined })}
-									changeColor={ value => setAttributes({ backgroundColor: value })}
-									changeGradient={ value => setAttributes({ backgroundGradient: value }) }
-									changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
-									changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
-									changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
-									changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
-								/>
-							
-						) || 'hover' ===  hover && (
-							<>
-							<BackgroundSelectorControl
-							backgroundType={ attributes.backgroundTypeHvr }
-							backgroundColor={ attributes.backgroundColorHvr }
-							image={ attributes.backgroundImageHvr }
-							gradient={ attributes.backgroundGradientHvr }
-							focalPoint={ attributes.backgroundPositionHvr }
-							backgroundAttachment={ attributes.backgroundAttachmentHvr }
-							backgroundRepeat={ attributes.backgroundRepeatHvr }
-							backgroundSize={ attributes.backgroundSizeHvr }
-							changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
-							changeImage={ media => {
-								setAttributes({
-									backgroundImageHvr: pick( media, [ 'id', 'url' ])
-								});
-							}}
-							removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
-							changeColor={ value => setAttributes({ backgroundColorHvr: value })}
-							changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
-							changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
-							changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
-							changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
-							changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
-						/>
-						
-						</>
-						
-						)}	
-						
 						</PanelBody>
 
 						<PanelBody title={ __( 'Transition', 'vayu-blocks' ) }
