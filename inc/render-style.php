@@ -102,6 +102,10 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 			$css .= generate_inline_image_flip_styles($block['attrs']);
 		} 
 
+		if ( $block['blockName'] === 'vayu-blocks/image' ) {
+			$css .= generate_inline_image_styles($block['attrs']);
+		} 
+
 		if ( $block['blockName'] === 'vayu-blocks/advance-heading' ) {
 			   if ( isset($block['attrs']['fontFamily'] ) ){
 				vayu_enqueue_google_fonts($block['attrs']['fontFamily']);

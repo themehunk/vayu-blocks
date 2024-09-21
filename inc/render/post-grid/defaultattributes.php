@@ -32,6 +32,7 @@ return array(
             'sortByField' => "date",
             
         //layoutcontrols
+            'pg_featuredimage_animate' => true,
             'pg_showFullContentTablet' => false,
             'pg_showFullContentMobile' => false,
             'pg_FullContent' => 'default',

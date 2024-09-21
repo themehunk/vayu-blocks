@@ -1,19 +1,19 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 2,
-    "name": "vayu-blocks/post-grid",
+    "name": "vayu-blocks/image",
     "version": "0.2.0",
-    "title": "Post Grid",
+    "title": "Image",
     "category": "vayu-blocks",
-    "description": "A custom block to display filtered posts with options for tags and categories.",
+    "description": "A custom image block with animated overlays that appear on hover. Supports customizable overlays.",
     "supports": {
       "html": false,
       "align": ["wide", "full"]
     },
+    "textdomain": "vayu-blocks",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",
-    "textdomain": "vayu-blocks",
     "viewScriptModule": "file:./view.js"
   }
   
