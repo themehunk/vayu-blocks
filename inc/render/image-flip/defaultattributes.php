@@ -23,6 +23,7 @@ return array(
         'showPreview' => false,
         'overlayalignment' => 'center',
         'overlayalignmentvertical' => 'center',
+        'imagealttext'  => 'imagealt',
 
         // image Border
             'imageborder' => array(

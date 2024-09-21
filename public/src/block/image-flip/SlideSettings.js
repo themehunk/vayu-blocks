@@ -104,6 +104,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             </ToolsPanel>
                             </div>
 
+                            <TextControl
+                                className="imagealttextrichcontrol"
+                                label="Alt text"
+                                __nextHasNoMarginBottom
+                                onChange={(value)=>setAttributes({imagealttext:value})}
+                                value={attributes.imagealttext}
+                            />
+
                             <Vayu_Block_Toggle
                                 value={attributes.imagecover}
                                 onChange={(value) => setAttributes({imagecover:value})}

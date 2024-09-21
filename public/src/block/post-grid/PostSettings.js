@@ -16,7 +16,6 @@ import {
     ToogleGroupControl,
     HoverControl,
 } from '../../components/index.js';
-import BorderBoxControlComponent from './Components/BorderBoxControlComponent';
 import { useEffect, useState } from 'react';
 import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typography/Vayu_blocks_typographycontrol.js';
 import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel.js';

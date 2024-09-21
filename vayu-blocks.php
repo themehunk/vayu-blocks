@@ -272,7 +272,6 @@ class Vayu_Block_Plugin {
 
     }
 
-
     public function vayu_blocks_sites_callback() {
         ?>
         <div class="themehunk-sites-menu-page-wrapper">
@@ -292,7 +291,16 @@ class Vayu_Block_Plugin {
         </div>
 
     <?php }
+
+    public function vayu_plugin_view_script(){
+        function enqueue_interactivity_on_frontend() {
+            // Enqueue wp-interactivity on the frontend
+            wp_enqueue_script_module( 'vayu-blocks-mega-menu-view-script-module-', 'http://localhost/wp63/wp-content/plugins/vayu-blocks/public/src/block/mega-menu/view.js', array(), '1.0.0' );
+        }
+        add_action( 'wp_enqueue_scripts', 'enqueue_interactivity_on_frontend' );
+    }
 }
+
 
 
 
@@ -300,5 +308,3 @@ function vayu_block_plugin_init( ) {
     new Vayu_Block_Plugin();
 }
 add_action( 'init', 'vayu_block_plugin_init', 1 );
-
-

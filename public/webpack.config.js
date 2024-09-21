@@ -24,7 +24,6 @@ module.exports = {
      'block/image/index': './src/block/image',
      'block/image/view': './src/block/image/view.js',
      'block/mega-menu/index': './src/block/mega-menu',
-     'block/mega-menu/view': './src/block/mega-menu/view.js',
 
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',

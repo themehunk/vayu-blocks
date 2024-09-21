@@ -172,13 +172,18 @@ class VayuBlocksPostGrid {
 
         if ($FeaturedImage) {
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
-             // Assuming the attributes are passed as an array to the function or class
+            $featured_image_id = get_post_thumbnail_id($post_id); // Get the ID of the featured image
+
+            // Get the alt text for the featured image
+            $alt_text = get_post_meta($featured_image_id, '_wp_attachment_image_alt', true);
+
+            // Assuming the attributes are passed as an array to the function or class
             $pg_featuredimage_animate = isset($this->attr['pg_featuredimage_animate']) ? $this->attr['pg_featuredimage_animate'] : false;
             // Check if the animation should be applied
             $animate_class = $pg_featuredimage_animate ? 'animatefeaturedimage-front' : '';
 
             $output .= '<div class="post-grid-featured-image">
-                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image ' . esc_attr($animate_class) . '">
+                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image ' . esc_attr($animate_class) . ' alt="' . esc_attr($alt_text) . '">
                   </div>';
 
         }

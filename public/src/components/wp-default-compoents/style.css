@@ -162,3 +162,17 @@ h2.ubp-h2-heading {
 .vayu_blocks_border_panel .vayu_block_border_control .components-border-control .em5sgkm7 span{
     margin-top:1px;
 }
+
+.vayu_blocks_duotone_panel .vayu_blocks_dutone_toolspanel_item{
+    border:1px solid rgba(0,0,0,0.08);
+    margin-right:5%;
+}
+
+.vayu_blocks_duotone_panel .vayu_blocks_dutone_toolspanel_item .e19lxcc00{
+    margin-bottom: 3px;
+    display:flex;
+}
+
+.vayu_blocks_toolspanel_items_popover .vayu_blocks_div_duotone{
+    padding:10px;
+}
