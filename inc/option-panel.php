@@ -28,9 +28,9 @@ class VAYU_BLOCKS_OPTION_PANEL {
     public function get_option($key='',$value=''){
 
     $vbo = get_option('vayu_blocks_options');
-    if ($vbo ) {
-       return array_merge($vbo,$this->default_option());
 
+    if ($vbo ) {
+       return array_merge($this->default_option(),$vbo);
     }else{
 
         return $this->default_option();

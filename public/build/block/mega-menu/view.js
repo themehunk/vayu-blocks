@@ -1,0 +1,1 @@
+(()=>{"use strict";const e=window.wp.interactivity,{actions:n}=(0,e.store)("vayu-blocks/mega-menu",{actions:{toggleMenu(){const t=(0,e.getContext)();t.isMenuOpen?n.closeMenu():t.isMenuOpen=!0},closeMenu(){(0,e.getContext)().isMenuOpen=!1}}})})();

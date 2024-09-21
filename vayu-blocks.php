@@ -202,6 +202,8 @@ class Vayu_Block_Plugin {
             }
     }
 
+}
+
     public function vayu_register_blocks_new() {
 
         //mega menu
