@@ -21,6 +21,7 @@ import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/V
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel.js';
 
 import {
     HoverControl,
@@ -60,7 +61,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     //duotone change
     const vayu_blocks_duotoneHandler = (value) => {
         // Find the filter ID corresponding to the given color array
-        if (!Array.isArray(value) || value.length === 0) {
+        if (!Array.isArray(value) || value.length === 0 || value=== undefined) {
             setAttributes({duotone:""});
         }
 
@@ -477,6 +478,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                             onChange={ (value) => vayu_blocks_duotoneHandler(value) }
                                         />
                                   
+                                    <DuotonePanel
+                                        value={ vayu_blocks_duotonevalue() }
+                                        onChange={ (value) => vayu_blocks_duotoneHandler(value) }
+                                        duotonePalette={vayu_blocks_DUOTONE_PALETTE}
+                                    />
 
                                     <SelectControl
                                         label={__('Hover Effect', 'vayu-blocks')}

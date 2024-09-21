@@ -146,6 +146,17 @@ export function Vayu_Block_Border_Control({
         onChange(resetValue);
     };
 
+    const borderStyles = [
+        { name: 'Solid', value: 'solid' },
+        { name: 'Dotted', value: 'dotted' },
+        { name: 'Dashed', value: 'dashed' },
+        { name: 'Double', value: 'double' },
+        { name: 'Groove', value: 'groove' },
+        { name: 'Ridge', value: 'ridge' },
+        { name: 'Inset', value: 'inset' },
+        { name: 'Outset', value: 'outset' },
+    ];
+
     return (
         <div className="vayu_blocks_border_panel">
             <ToolsPanel label={__(label)} resetAll={resetAll}>
