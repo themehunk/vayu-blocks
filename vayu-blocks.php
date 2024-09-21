@@ -67,7 +67,6 @@ class Vayu_Block_Plugin {
                         'container_padding' => $options['global']['containerPadding'],
                     ),
                 ),
-
                 array(
                     'name'           => 'vayu-blocks/advance-heading',
                     'script_handle'  => 'advance-heading',
@@ -97,10 +96,10 @@ class Vayu_Block_Plugin {
                     'frontend_style'  => 'advance-query-loop-frontend-style',
                     'status'          => $options['advanceQueryLoop']['isActive'],
                     //'render_callback' => 'vayu_blocks_advance_query_loop_render'
-                      'status'         => $options['spacer']['isActive'],
-            )
-        );
-
+                )
+                
+                
+            );
 
             // Check if WooCommerce is active
             if (class_exists('WooCommerce')) {
@@ -118,32 +117,32 @@ class Vayu_Block_Plugin {
                 );
             }
 
-    if ( isset( $block['status'] ) && ( $block['status'] == 1 ) ) {
-            // Register JavaScript file
-            wp_register_script(
-                $block['script_handle'],
-                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.js',
-                array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
-            );
-            if ( ! empty( $block['editor_style'] ) ) {
-            // Register editor
-            wp_register_style(
-                $block['editor_style'],
-                VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
-                array( 'wp-edit-blocks' ),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
-            );
-            }
-            if ( ! empty( $block['frontend_style'] ) ) {
-            // Register front end block style
-            wp_register_style(
-                $block['frontend_style'],
-                VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
-                array(),
-                filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
-            );
-            }
+            foreach (  $blocks as $key => $block ) { 
+
+        if ( isset( $block['status'] ) && ( $block['status'] == 1 ) ) {
+                // Register JavaScript file
+                wp_register_script(
+                    $block['script_handle'],
+                    VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.js',
+                    array( 'wp-blocks', 'wp-element', 'wp-editor' ),
+                    filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
+                );
+
+                // Register editor
+                wp_register_style(
+                    $block['editor_style'],
+                    VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
+                    array( 'wp-edit-blocks' ),
+                    filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
+                );
+
+                // Register front end block style
+                wp_register_style(
+                    $block['frontend_style'],
+                    VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
+                    array(),
+                    filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
+                );
 
             if(isset($block['script'])){
                 wp_register_script(
@@ -152,6 +151,14 @@ class Vayu_Block_Plugin {
                     array( 'wp-blocks', 'wp-element', 'wp-editor' ),
                     filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script'] . '.js' ),
                 );
+
+                add_filter('script_loader_tag', function ($tag, $handle) {
+                    if ('view-mega-menu' === $handle) {
+                        return str_replace(' src', ' type="module" src', $tag);
+                    }
+                    return $tag;
+                }, 10, 2);
+            }
 
                 // Localize the script with data
                 if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
@@ -174,25 +181,6 @@ class Vayu_Block_Plugin {
                 if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
                     $block_args['render_callback'] = $block['render_callback'];
                 
-            // Prepare the arguments for registering the block
-            $block_args = array(
-                'editor_script'   => $block['script_handle'],
-                //'script'           => isset($block['script'])?$block['script']:'',
-                'editor_style'    => $block['editor_style'],
-                'style'           => $block['frontend_style'],
-            );
-                $block_args = array(
-                    'editor_script' => $block['script_handle']
-                );
-
-                // Add editor style if it's set
-                if ( ! empty( $block['editor_style'] ) ) {
-                    $block_args['editor_style'] = $block['editor_style'];
-                }
-
-                // Add frontend style if it's set
-                if ( ! empty( $block['frontend_style'] ) ) {
-                    $block_args['style'] = $block['frontend_style'];
                 }
 
                 // Register each block
@@ -201,8 +189,6 @@ class Vayu_Block_Plugin {
 
             }
     }
-
-}
 
     public function vayu_register_blocks_new() {
 
@@ -292,13 +278,6 @@ class Vayu_Block_Plugin {
 
     <?php }
 
-    public function vayu_plugin_view_script(){
-        function enqueue_interactivity_on_frontend() {
-            // Enqueue wp-interactivity on the frontend
-            wp_enqueue_script_module( 'vayu-blocks-mega-menu-view-script-module-', 'http://localhost/wp63/wp-content/plugins/vayu-blocks/public/src/block/mega-menu/view.js', array(), '1.0.0' );
-        }
-        add_action( 'wp_enqueue_scripts', 'enqueue_interactivity_on_frontend' );
-    }
 }
 
 
