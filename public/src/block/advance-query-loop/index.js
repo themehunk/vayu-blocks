@@ -1,64 +1,42 @@
-/**
- * Wordpress dependencies
- */
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockVariation } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { loop as icon } from '@wordpress/icons';
-import './style.scss';
+import { createBlock } from '@wordpress/blocks';
+import './edit.js';
 
-/**
- * Internal dependencies
- */
-import edit from './edit';
-import save from './save';
-import metadata from './block.json';
-import variations from './variations';
-
-const { name } = metadata;
-
-registerBlockType( name, {
-	...metadata,
-	title: __( 'Advance Query Loop Block', 'vayu-blocks' ),
-	description: __( 'Advance Query Block', 'vayu-blocks' ),
-	icon,
-	edit,
-	example: {
-		viewportWidth: 650,
-		attributes: {
-			namespace: 'core/posts-list',
-			query: {
-				perPage: 4,
-				pages: 1,
-				offset: 0,
-				postType: 'post',
-				order: 'desc',
-				orderBy: 'date',
-				author: '',
-				search: '',
-				sticky: 'exclude',
-				inherit: true,
-			},
-		},
-		innerBlocks: [
-			{
-				name: 'core/post-template',
-				attributes: {
-					layout: {
-						type: 'grid',
-						columnCount: 2,
-					},
-				},
-				innerBlocks: [
-					{
-						name: 'core/post-title',
-					},
-					{
-						name: 'core/post-date',
-					}
-				],
-			},
-		],
-	},
-	save,
-    variations,
+// Register a new variation for the core/query block
+registerBlockVariation('core/query', {
+    name: 'vayu-blocks/advance-query-loop',
+    title: __('Advance Query Block', 'vayu-blocks'),
+    description: __('A custom block extending the core Query Loop block with dynamic post templates.', 'vayu-blocks'),
+    icon,
+    category: 'vayu-blocks', 
+    scope: ['inserter', 'transforms'],
+    attributes: {
+        namespace: 'vayu-blocks/advance-query-loop',
+    },
+    isActive: (blockAttributes) => blockAttributes.namespace === 'vayu-blocks/advance-query-loop',
+    // Specify only the allowed controls, hiding all others
+    allowedControls: ['taxQuery','author','search','exclude'], // Only these controls will be shown
+    // You can add transformations as needed
+    transforms: {
+        from: [
+            {
+                type: 'block',
+                blocks: ['core/query'],
+                transform: (attributes, innerBlocks) => {
+                    return createBlock('vayu-blocks/advance-query-loop', attributes, innerBlocks);
+                },
+            },
+        ],
+        to: [
+            {
+                type: 'block',
+                blocks: ['core/query'],
+                transform: (attributes, innerBlocks) => {
+                    return createBlock('core/query', attributes, innerBlocks);
+                },
+            },
+        ],
+    },
 });
