@@ -294,7 +294,7 @@ const edit = (props) => {
                         <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
                                 style= {vayu_blocks_image_settings}
-                                src={attributes.image ? attributes.image : noimage} alt={attributes.imageAlt || `Image ${Math.floor(Math.random() * 100)}`} 
+                                src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext || `Image ${Math.floor(Math.random() * 100)}`} 
                                 className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
                             />
 

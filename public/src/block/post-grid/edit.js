@@ -90,13 +90,6 @@ const Edit = ({ attributes, setAttributes }) => {
     const [filter, setFilter] = useState({ featuredImage: false, categories: []});
     const [Loading, setLoading] = useState(false);
 
-    // // Global Settings Vayu Blocks
-	// const globalcontainerWidth = ThBlockData.container_width;
-    // setAttributes({globalwidth:globalcontainerWidth});
-    
-	// const globalcontainerGap = ThBlockData.container_gap;
-	// const globalpadding = ThBlockData.container_padding;
-
     //TitleTag Define
     const TitleTag = pg_blockTitleTag || 'h2';
 
@@ -206,16 +199,6 @@ const Edit = ({ attributes, setAttributes }) => {
                     categoryNameToIdMap[categoryName] || null
                 ).filter(id => id !== null);
 
-                // const allCategoriesFound = selectedCategories.every(categoryName =>
-                //     categoryNameToIdMap[categoryName] !== undefined
-                // );
-
-                // if (!allCategoriesFound) {
-                //     setLoading(true);
-                //     return;
-                // }else{
-                //     setLoading(false);
-                // }
                 // Update filter state with IDs and other parameters
                 setFilter(prevFilter => ({
                     ...prevFilter,
@@ -286,7 +269,7 @@ const Edit = ({ attributes, setAttributes }) => {
     const FullContent = () => getView === 'Desktop' ? pg_showFullContent : getView === 'Tablet' ? pg_showFullContentTablet : pg_showFullContentMobile;
 
     const postsToShow = filteredPosts.length > 0 ? filteredPosts : pg_posts;
-    
+
     return (
         <>
             <PanelSettings
@@ -300,6 +283,7 @@ const Edit = ({ attributes, setAttributes }) => {
                     <div style={gridContainerStyle}>
                     {postsToShow.length > 0 ? (
                         postsToShow.map((post) => (
+                            
                             <div key={post.uniqueID} style={postStyle}>
                                 {Loading ? (
                                     <div className="loader">
@@ -314,7 +298,7 @@ const Edit = ({ attributes, setAttributes }) => {
                                             <div style={{overflow:'hidden'}}>
                                                 <img
                                                     src={post._embedded['wp:featuredmedia'][0].source_url}
-                                                    alt="Featured"
+                                                    alt={post._embedded['wp:featuredmedia'][0].alt_text}
                                                     style={featuredImageStyle}
                                                     className={pg_featuredimage_animate ? "animatefeaturedimage" : ""}
                                                 />

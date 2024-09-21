@@ -104,5 +104,9 @@
     "imageborderradiuscircle":{
         "type":"string",
         "default":"square"
+    },
+    "imagealttext":{
+        "type":"string",
+        "default":"imagealt"
     }
 }
