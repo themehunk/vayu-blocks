@@ -796,6 +796,10 @@
 		"verticalOrientationOffsetBottomUnit": {
 			"type": "string",
 			"default":"px"
+		},
+		"dynamicType": {
+			"type": "string",
+			"default": "none"
 		}
 	}
 }
