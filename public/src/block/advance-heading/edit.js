@@ -4,26 +4,29 @@
 import { __ } from '@wordpress/i18n';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import {
-	Fragment,
-	useEffect,
-	useRef
+	Fragment
 } from '@wordpress/element';
+import { useEntityProp } from '@wordpress/core-data';
 import { useViewportMatch} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import hexToRgba from 'hex-rgba';
 import classnames from 'classnames';
+
+import { useContext } from '@wordpress/element';
+import { PostContext } from '@wordpress/block-editor';
+import { useEffect, useState } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies
  */
-
  import Controls from './controls.js';
  import InsSettings from './settings.js';
  import googleFontsLoader from '../../helpers/google-fonts.js';
  import getUniqueId from '../../helpers/get-unique-id.js';
  import './editor.scss';
+ import useDynamicContent from './useDynamicContent';
 
-
- export default function Edit({ attributes, setAttributes, clientId, uniqueID }) {
+ export default function Edit({ attributes, setAttributes, clientId, uniqueID, postId }) {
   
 	const { id } = attributes;
   
@@ -610,6 +613,9 @@ import classnames from 'classnames';
 		style
 	});
 
+	const { dynamicType } = attributes;
+	const dynamicContent = useDynamicContent(dynamicType, attributes);
+	
 	return (
         <Fragment>
             <Controls 
@@ -623,7 +629,7 @@ import classnames from 'classnames';
 		<RichText
                 identifier="content"
                 tagName={ attributes.tag } // The tag here is the element output and editable in the admin
-                value={ attributes.content } // Any existing content, either from the database or an attribute default
+                value={ dynamicContent } // Any existing content, either from the database or an attribute default
                 allowedFormats={ [ 'core/bold', 'core/italic','core/link' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
                 onChange={ changeContent } // Store updated content as a block attribute
                 placeholder={ __( 'Write heading…','vayu-blocks' ) } // Display this text before any content has been added by the user

@@ -33,12 +33,6 @@ const withFilteredControls = (BlockEdit) => (props) => {
         }
     }, [fetchedPosts]);
 
-    // Function to get post ID by title
-    const getPostId = (title) => {
-        const post = posts.find(post => post.title.rendered === title);
-        return post ? post.id : null;
-    };
-
     // Check if the block is 'vayu-blocks/advance-query-loop'
     if (attributes.namespace === 'vayu-blocks/advance-query-loop') {
         return (

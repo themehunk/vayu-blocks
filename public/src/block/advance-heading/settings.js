@@ -38,7 +38,8 @@ import {
 	BackgroundSelectorControl,
 	UnitChooser,
 	ToogleGroupControl,
-	GoogleFontsControl
+	GoogleFontsControl,
+	DynamicContentSelectorPanel
 } from '../../components/index.js';
 
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
@@ -1196,6 +1197,8 @@ const InsSettings = ({
 	const maxborderWidthHvrUnit = borderWidthHvrUnit === 'px' ? 1500 : borderWidthHvrUnit === 'em' ? 50 : borderWidthHvrUnit === '%' ? 100:'';
 	const [borderRadiusHvrUnit, setborderRadiusHvrUnit] = useState('px');
 	const maxborderRadiusHvrUnit = borderRadiusHvrUnit === 'px' ? 1500 : borderRadiusHvrUnit === 'em' ? 50 : borderRadiusHvrUnit === '%' ? 100:'';
+	
+	const { dynamicType } = attributes;
 	return (
     <Fragment>
         <InspectorControls>
@@ -2341,9 +2344,11 @@ const InsSettings = ({
 				allowReset={ true }
                 />
 				</PanelBody>
-		
-		     </Fragment>
+				<PanelBody title={__('Dynamic Content', 'vayu-blocks')}>
+				<DynamicContentSelectorPanel dynamicType={ dynamicType } setAttributes={ setAttributes } />
+			 </PanelBody>
 
+		     </Fragment>
             )}
 	</div>
         </InspectorControls>
