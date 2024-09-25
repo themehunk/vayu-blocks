@@ -28,6 +28,7 @@
 	--heading-border-hvr-style:var(--heading-border-style);
 	--heading-border-hvr-color:var(--heading-border-color);
 	--heading-hvr-color:var(--heading-color);
+	--h-heading-image:var(--h-heading-image);
 	font-family:var(--heading-font-family);
 	font-weight:var(--heading-font-weight);
 	font-style:var(--heading-font-style);
@@ -83,6 +84,26 @@
         transition:var(--h-transition);
 	}
 } 
+
+.vayu_blocks_heading_image-heading {
+    background-size: 200% 100% !important; /* Extend background horizontally */
+    background-clip: text;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important; /* Text needs to be transparent */
+}
+
+.vayu_blocks_heading_image_animation-heading{
+    animation: headinganimation 8s linear infinite !important;
+}
+
+@keyframes headinganimation {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0; /* Move background horizontally */
+    }
+}
 
 .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > .wp-block-vayu-blocks-advance-heading.alignwide{
 	max-width:var(--h-max-width);

@@ -1,0 +1,371 @@
+ 
+.vayu-blocks-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.vayu-blocks-change-button {
+    position: absolute;
+    bottom: 2%; /* Start from the bottom of the container */
+    left: 0%;
+    height: 0; /* Start with height 0 */
+    overflow: hidden; /* Hide overflowing content */
+    padding: 0px 100px; /* Padding is kept for expansion */
+    background-color: black; /* Change this color as needed */
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: height 0.3s ease, padding 0.3s ease; /* Smooth expansion effect */
+    z-index: 10; /* Ensure the button is above the image */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.vayu-blocks-image-container:hover .vayu-blocks-change-button {
+    height: 38px; /* Set the desired height when expanded */
+    padding: 0px 100px; /* Adjust padding to match the height */
+}
+
+//edit.js
+
+.vayu_blocks_image_flip_wrapper {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Keeps the outer frame fixed */
+    position: relative;
+    display: grid;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.vayu_blocks_image_flip_image {
+    width: 100%;
+    height: 100%; /* Ensure the image fills the container */
+    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
+     /* Ensures the image content covers the container */
+    opacity:var(--image-opacity);
+    display: block;
+}
+
+.vayu_blocks_image_flip_image-container {
+    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
+     /* Ensures the image content covers the container */
+    opacity:var(--image-opacity);
+    display: block;
+}
+
+/* Apply the custom hover effect */
+.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
+    transform: var(--image-hover-effect-transform, none);
+    filter: var(--image-filter-effect-filter);
+    opacity: var(--image-hover-effect-opacity, 1);
+}
+
+.grayScale {
+    --image-filter-effect-filter:grayscale(100%);
+}
+
+/* Define hover effects using custom properties */
+.grayScalereverse {
+    filter:grayscale(100%);
+    transition: filter var(--image-transitiontime) ease; /* Smooth transition for blur effect */
+}
+
+/* Remove blur on hover for glow effect */
+.grayScalereverse :hover {
+    filter: none; /* Remove blur on hover */
+}
+
+.sepia {
+--image-filter-effect-filter:sepia(100%);
+}
+
+/* Define hover effects using custom properties */
+.zoom-in {
+    --image-hover-effect-transform: scale(1.5);
+}
+
+.zoom-out {
+    --image-hover-effect-transform: scale(0.8);
+}
+
+.fade-in {
+    --image-hover-effect-opacity: 1;
+}
+
+.fade-out {
+    --image-hover-effect-opacity: 0.5;
+}
+
+.slide-up {
+    --image-hover-effect-transform: translateY(-10px);
+}
+
+.slide-down {
+    --image-hover-effect-transform: translateY(10px);
+}
+
+.slide-left {
+    --image-hover-effect-transform: translateX(-10px);
+}
+
+.slide-right {
+    --image-hover-effect-transform: translateX(10px);
+}
+
+.flip-horizontal {
+    --image-hover-effect-transform: rotateY(180deg);
+}
+
+.flip-front {
+    --image-hover-effect-transform: rotateY(180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-back {
+    --image-hover-effect-transform: rotateX(180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-front-left {
+    --image-hover-effect-transform: rotateY(-180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-back-bottom {
+    --image-hover-effect-transform: rotateX(-180deg);
+    --image-hover-effect-opacity: 0;
+}
+
+.flip-vertical {
+    --image-hover-effect-transform: rotateX(180deg);
+}
+
+.rotate {
+    --image-hover-effect-transform: rotate(-30deg);
+}
+
+.blur {
+    --image-filter-effect-filter: blur(3px);
+}
+
+.shine {
+    --image-filter-effect-filter: grayscale(100%);
+}
+
+/* Overlay styles */
+.vayu_blocks_overlay_main_wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: var(--overlay-transitiontime) ease;
+    opacity: var(--overlay-opacity); /* Initially hidden */
+    z-index: 10;
+    display: flex;
+}
+
+/* Hover the image and show the overlay */
+.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {
+    opacity: 1; /* Make the overlay visible on hover */
+}
+
+/* Custom overlay hover effects */
+.overlayfade-in {
+    opacity: 0;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in {
+    opacity: 1;
+}
+
+.overlayfade-in-up {
+    transform: translateY(100%); /* Start from below the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {
+    transform: translateY(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-down {
+    transform: translateY(-100%); /* Start from above the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {
+    transform: translateY(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-left {
+    transform: translateX(-100%); /* Start from the left of the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-left {
+    transform: translateX(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayfade-in-right {
+    transform: translateX(100%); /* Start from the right of the container */
+    opacity: 0; /* Initially hidden */
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-right {
+    transform: translateX(0); /* Moves to the original position */
+    opacity: 1; /* Fade in */
+}
+
+.overlayflip-horizontal {
+    transform: rotateY(-90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
+    transform: rotateY(0);
+}
+
+.overlayflip-horizontal-left {
+    transform: rotateY(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
+    transform: rotateY(0);
+}
+
+.overlayflip-vertical {
+    transform: rotateX(-90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+    transform: rotateX(0);
+}
+
+.overlayflip-vertical-bottom {
+    transform: rotateX(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
+    transform: rotateX(0);
+}
+
+.overlayzoom-in-up {
+    transform: scale(0.5) translateY(-50%); /* Larger movement up for more emphasis */
+    opacity: 0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.overlayzoom-in-left {
+    transform: scale(0.5) translateX(-50%); /* Larger movement left for more emphasis */
+    opacity: 0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+}
+
+.vayu_block_animation_overlay_inside{
+    transition-delay: calc(var(--overlay-transitiontime) - var(--overlay-transitiontime)/2) !important;
+    animation-fill-mode: forwards !important;
+    opacity:0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {
+    opacity:1;
+}
+
+.overlayzoom-in-right {
+    transform: scale(0.5) translateX(50%); /* Larger movement right for more emphasis */
+    opacity: 0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+/* Initial state: starts small in the center as a circle */
+.overlayzoom-in-circle {
+    transform: scale(0); /* Starts from center as a small circle */
+    opacity: 0;
+    border-radius: 50% !important; /* Ensures it's a perfect circle */
+    transition: transform var(--overlay-transitiontime) ease-out, opacity var(--overlay-transitiontime) ease-out; /* Fast circular animation */
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {
+    transform: scale(1); /* Expands outward to full size */
+    opacity: 1;
+    border-radius:var(--overlay-border-radius) !important;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
+    transform: scale(1) translateX(0);
+    opacity: 1;
+}
+
+.overlayzoom-in-down {
+    transform: scale(0.5) translateY(50%); /* Larger movement down for more emphasis */
+    opacity: 0;
+    transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.overlaypartial-overlay {
+    width: 50%; /* Custom size for partial overlay */
+    opacity: 0;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlaypartial-overlay {
+    opacity: 1;
+}
+
+.wp-block-vayu-blocks-image-flip{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+
+.vayu_blocks_image_toolspanel_flip .e19lxcc00{
+    grid-template-columns: repeat(1, minmax(0px, 1fr));
+    padding-left: 0% ;
+    padding-right: 0%;
+    padding-bottom: 0%;
+}
+
+.vayu_blocks_image_flip-duotone-filters {
+    display:none;
+}
+
+.vayu_blocks_show_preview_button{
+    margin-bottom:10px;
+}
+
+.vayu_blocks_image_flip_button:hover {
+    background:var(--button-hvr-background) !important;
+    color:var(--button-hvr-color) !important;
+}
+
+.vayu_blocks_inner_content-image{
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}

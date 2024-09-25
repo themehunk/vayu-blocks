@@ -32,6 +32,7 @@ return array(
             'sortByField' => "date",
             
         //layoutcontrols
+            'pg_featuredimage_animate' => true,
             'pg_showFullContentTablet' => false,
             'pg_showFullContentMobile' => false,
             'pg_FullContent' => 'default',
@@ -474,6 +475,7 @@ return array(
             'pg_dateImageScale' => 0.6,
 
     //Advanced
+        'classNamemain' => '',
         'globalwidth'=> '',
         'width' => '',
         'customWidthlayout' => '',

@@ -35,8 +35,10 @@
         "type": "array",
         "default": []
       },
-
-
+      "pg_featuredimage_animate" :{
+        "type":"boolean",
+        "default":true
+      },
       "pg_blockTitleTag": {
         "type": "string",
         "default": "h2"

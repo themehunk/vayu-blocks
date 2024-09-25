@@ -14,10 +14,7 @@ class Vayu_blocks_Advance_Slider {
     //Render
     public function render() {
         ob_start(); // Start output buffering
-
-        echo $this->render_scripts($this->attr);
         echo $this->render_slider();
-    
         return ob_get_clean(); // Return the buffered output
     }
 
@@ -99,7 +96,6 @@ class Vayu_blocks_Advance_Slider {
         return '<div class="vayu-blocks-advance-slider ' . $uniqueId . ' ' . $animated . ' "' . $data_attr_string . '>' . $slides_html . '</div>';
     }
     
-
     // Heading
     private function render_heading($heading) {
         if (empty($heading['text'])) {
@@ -155,16 +151,6 @@ class Vayu_blocks_Advance_Slider {
             </a>
         </button>";
     }
-
-    private function render_scripts() {
-        wp_enqueue_script(
-            'slider-script',
-            plugin_dir_url(__FILE__) . '../../../public/src/block/advance-slider/view.js',
-            array('jquery'),
-            null,
-            true
-        );
-    }
       
 }
      
@@ -184,8 +170,10 @@ function vayu_blocks_advance_slider_render($attr) {
     // Ensure className is sanitized and applied correctly
     $className = isset($attr['classNamemain']) ? esc_attr($attr['classNamemain']) : '';
 
+    $uniqueId = isset($attr['uniqueId']) ? esc_attr($attr['uniqueId']) : '';
+
     // Render and return the slider output inside a div with the dynamic class name
-    return '<div class="wp_block_vayu-blocks-advance-slider-main ' . $className . '">' . $slider->render() . '</div>';
+    return '<div id=' . $uniqueId . ' class="wp_block_vayu-blocks-advance-slider-main vayu-block-' . $uniqueId . ' ' . $className . ' ">' . $slider->render() . '</div>';
 
 }
 
@@ -194,9 +182,5 @@ function vayu_enqueue_slick_slider_assets() {
     wp_enqueue_style('slick-css', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css');
     wp_enqueue_style('slick-theme-css', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css');
     wp_enqueue_script('slick-js', 'https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js', array('jquery'), null, true);
-
-    // Enqueue the external slider script
-     wp_enqueue_script('slider-script', plugin_dir_url(__FILE__) . '../../../public/src/block/advance-slider/view.js', array('jquery', 'slick-js'), null, true);
-
 }
 add_action('wp_enqueue_scripts', 'vayu_enqueue_slick_slider_assets');

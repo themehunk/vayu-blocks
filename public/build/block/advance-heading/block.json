@@ -29,6 +29,14 @@
       "default": "h2",
       "type": "string"
     },
+    "headingimage": {
+      "default": "",
+      "type": "string"
+    },
+    "headinganimation": {
+      "default": true,
+      "type": "boolean"
+    },
     "align": {
       "type": "string"
     },

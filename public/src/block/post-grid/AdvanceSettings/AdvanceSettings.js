@@ -11,7 +11,7 @@ const omitBy = (object, condition) => (
     )
 );
 
-export default function AdvanceSettings({ children, attributes }) {
+export default function AdvanceSettings({ children, attributes,setAttributes }) {
     const [isHovered, setIsHovered] = useState(false);
 
     const handleMouseEnter = () => {
@@ -362,52 +362,36 @@ export default function AdvanceSettings({ children, attributes }) {
     
     let customwidth;
 
-    if( attributes.widthType=='customwidth' ) {
+    if ( isDesktop ) {
 
-		if ( isDesktop ) {
+        customwidth = {
+                
+            width:attributes.customWidth + attributes.customWidthUnit,
+            
+        };
 
-		customwidth = {
-             
-			width:attributes.customWidth + attributes.customWidthUnit,
-			
-		};
+    }
 
-	   }
+    // console.log(customwidth);
+    if ( isTablet ) {
 
-	   if ( isTablet ) {
+        customwidth = {
+                
+            'width':attributes.customWidthTablet + attributes.customWidthUnit,
+            
+        };
 
-		customwidth = {
-             
-			'width':attributes.customWidthTablet + attributes.customWidthUnit,
-			'max-width':attributes.customWidthTablet + attributes.customWidthUnit,
-			
-		};
+    }
 
-	   }
+    if ( isMobile ) {
 
-	   if ( isMobile ) {
-
-		customwidth = {
-             
-			'width':attributes.customWidthMobile + attributes.customWidthUnit,
-			'max-width':attributes.customWidthMobile + attributes.customWidthUnit,
-			
-		};
-		
-	   }
-
-	}
-
-    if( attributes.widthType =='inlinewidth' ) {
-
-		customwidth = {
-             
-	            display:'inline-flex',
-			
-		};
-
-	}
-
+        customwidth = {
+                
+            'width':attributes.customWidthMobile + attributes.customWidthUnit,
+            
+        };
+    
+    }
     // Prepare the style object
     const styles = {
         ...customwidth,
@@ -418,7 +402,7 @@ export default function AdvanceSettings({ children, attributes }) {
         position: position || undefined,
         zIndex: zIndex || undefined,
         order: order === 'custom' ? customOrder : 'undefined',
-      
+
         borderStyle: borderType || undefined,
         borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : 0,
         borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : 0,
@@ -474,11 +458,6 @@ export default function AdvanceSettings({ children, attributes }) {
     };
 
     const blockProps = useBlockProps({
-        className: attributes.widthType === 'fullwidth' 
-        ? 'alignfull' 
-        : attributes.widthType === 'customwidth' 
-            ? 'alignwide' 
-            : '',
 
         style: {
             ...mergedStyles,
@@ -486,7 +465,10 @@ export default function AdvanceSettings({ children, attributes }) {
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
-    
+
+    if(attributes.classNamemain !== blockProps.className) {
+        setAttributes({classNamemain: blockProps.className});
+    }
     
     return (
         <div {...blockProps}>

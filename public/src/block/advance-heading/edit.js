@@ -574,7 +574,8 @@ import apiFetch from '@wordpress/api-fetch';
 		  '--h-background-hover': attributes.backgroundGradientHvr,
 		};
 	  }
-	  
+
+ 
     const style = omitBy({
         ...stylesheet,
 		...customwidth,
@@ -583,7 +584,7 @@ import apiFetch from '@wordpress/api-fetch';
 		...backgroundStyle,
 		...flexProperties,
 		...PositionProperties, 
-		
+		backgroundImage: attributes.headingimage ? `url(${attributes.headingimage})` : undefined
     }, x => x?.includes?.( 'undefined' ));
 
 	let headingWidthClass = "";
@@ -597,6 +598,8 @@ import apiFetch from '@wordpress/api-fetch';
 
 	const Classes = classnames(
 		headingWidthClass, // Include headingWidthClass directly as a string
+		attributes.headingimage && attributes.headinganimation ? 'vayu_blocks_heading_image_animation-heading' : null, // Conditional class
+    	attributes.headingimage  ? 'vayu_blocks_heading_image-heading' : null, // Conditional class for image without animation
 		{
 		  'th-hide-desktop': attributes.responsiveTogHideDesktop,
 		  'th-hide-tablet': attributes.responsiveTogHideTablet,

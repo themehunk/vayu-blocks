@@ -216,6 +216,24 @@ function getDescription(key,value='') {
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
 
+                    case 'imageFlip':
+                    return {
+                        value: vayublock.options.imageFlip.isActive,
+                        icon: <RxButton />,
+                        description: __('Turn static images into interactive elements with Vayu Blocks using image flips and animations.', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
+
+                    case 'megaMenu':
+                    return {
+                        value: vayublock.options.imageFlip.isActive,
+                        icon: <RxButton />,
+                        description: __('', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
+
                     case 'advanceQueryLoop':
                     return {
                         value: vayublock.options.advanceQueryLoop.isActive,
