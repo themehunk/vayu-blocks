@@ -805,9 +805,15 @@
 			"type": "string",
 			"default":"px"
 		},
-		"dynamicType": {
-			"type": "string",
-			"default": "none"
+		"dynamicPostType": {
+		"type": "string",
+		"default": "none"
+		},
+		"selectedPost": {
+		"type": "number"
+		},
+		"selectedSourceField": {
+		"type": "string"
 		}
 	}
 }

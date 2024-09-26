@@ -42,6 +42,8 @@ import {
 	DynamicContentSelectorPanel
 } from '../../components/index.js';
 
+import PostTypeSelect from './PostTypeSelect.js';
+
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
@@ -2357,7 +2359,10 @@ const InsSettings = ({
                 />
 				</PanelBody>
 				<PanelBody title={__('Dynamic Content', 'vayu-blocks')}>
-				<DynamicContentSelectorPanel dynamicType={ dynamicType } setAttributes={ setAttributes } />
+				<PostTypeSelect
+                        attributes={ attributes }
+                        setAttributes={ setAttributes }
+                    />
 			 </PanelBody>
 
 		     </Fragment>
