@@ -474,37 +474,54 @@ function generate_inline_image_styles($attr) {
         
         $css .= "box-sizing: border-box;";
 
-        // Top border
-        if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
-            $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
-        }
-
-        // Bottom border
-        if (isset($attr['imageborder']['bottomwidth'], $attr['imageborder']['bottomstyle'], $attr['imageborder']['bottomcolor'])) {
-            $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
-        }
-
-        // Left border
-        if (isset($attr['imageborder']['leftwidth'], $attr['imageborder']['leftstyle'], $attr['imageborder']['leftcolor'])) {
-            $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
-        }
-
-        // Right border
-        if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
-            $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
-        }
-
-        if ($attr['imageborderradiuscircle'] === 'circle') {
-            // Apply a border-radius of 50% for circular images
-            $css .= "border-radius: 50%;";
-        } else {
-            // Apply individual border-radius values if not a circle
+        
+        if ($attr['overlaybordertype'] === 'color') {
+            // Top border
+            if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
+                $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
+            }
+        
+            // Bottom border
+            if (isset($attr['imageborder']['bottomwidth'], $attr['imageborder']['bottomstyle'], $attr['imageborder']['bottomcolor'])) {
+                $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
+            }
+        
+            // Left border
+            if (isset($attr['imageborder']['leftwidth'], $attr['imageborder']['leftstyle'], $attr['imageborder']['leftcolor'])) {
+                $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
+            }
+        
+            // Right border
+            if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
+                $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
+            }
+        
+            // Apply individual border-radius values
             if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
                 $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
             }
+        } elseif ($attr['overlaybordertype'] === 'gradient') {
+            
+            $css .= "border-image: " . esc_attr($attr['overlaybordergradient']) . " 30% / " . esc_attr($attr['overlaygradienttop']) . " " . esc_attr($attr['overlaygradientbottom']) . " " . esc_attr($attr['overlaygradientleft']) . " " . esc_attr($attr['overlaygradientright']) . ";"; // Corrected the syntax
+
+        }elseif ($attr['overlaybordertype'] === 'image') {
+            $borderImage = $attr['overlayborderimagetype'] === 'custom' 
+                ? 'url(' . esc_url($attr['overlayborderimage']) . ') 40% / ' . esc_attr($attr['overlayimagetop']) . ' ' . esc_attr($attr['overlayimagebottom']) . ' ' . esc_attr($attr['overlayimageleft']) . ' ' . esc_attr($attr['overlayimageright']) . ' ' . esc_attr($attr['overlayspace'])
+                : ($attr['overlayborderimagetype'] === 'image1'
+                    ? 'url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) 10% / ' . esc_attr($attr['overlayimagetop']) . ' ' . esc_attr($attr['overlayimagebottom']) . ' ' . esc_attr($attr['overlayimageleft']) . ' ' . esc_attr($attr['overlayimageright']) . ' ' . esc_attr($attr['overlayspace'])
+                    : ($attr['overlayborderimagetype'] === 'image2'
+                        ? 'url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) 40% / ' . esc_attr($attr['overlayimagetop']) . ' ' . esc_attr($attr['overlayimagebottom']) . ' ' . esc_attr($attr['overlayimageleft']) . ' ' . esc_attr($attr['overlayimageright']) . ' ' . esc_attr($attr['overlayspace'])
+                        : ($attr['overlayborderimagetype'] === 'image3'
+                            ? 'url(https://w7.pngwing.com/pngs/1023/213/png-transparent-silver-diamond-border-diamond-graphy-gemstone-silver-frame-miscellaneous-frame-angle-thumbnail.png) 40% / ' . esc_attr($attr['overlayimagetop']) . ' ' . esc_attr($attr['overlayimagebottom']) . ' ' . esc_attr($attr['overlayimageleft']) . ' ' . esc_attr($attr['overlayimageright']) . ' ' . esc_attr($attr['overlayspace'])
+                            : ($attr['overlayborderimagetype'] === 'image4'
+                                ? 'url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) 40% / ' . esc_attr($attr['overlayimagetop']) . ' ' . esc_attr($attr['overlayimagebottom']) . ' ' . esc_attr($attr['overlayimageleft']) . ' ' . esc_attr($attr['overlayimageright']) . ' ' . esc_attr($attr['overlayspace'])
+                                : 'none'))));
+        
+            $css .= "border-image: " . $borderImage . ";"; // Use the determined border image
         }
-
-
+        
+        
+        
     $css .= "}";
 
     // Determine the SVG based on the maskshape attribute

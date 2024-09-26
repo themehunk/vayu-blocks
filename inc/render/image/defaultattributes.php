@@ -62,7 +62,6 @@ return array(
             'maskposition'=>'center center',
             'maskrepeat'=>'no-repeat',
             'imagealttext'=>'imagetext',
-
             'captiontext'=> 'Write Caption...',
             'caption'=>false,
             'captionsize'=>16,
@@ -75,6 +74,19 @@ return array(
             'imageheighttablet'=>'',
             'imagewidthmobile'=>'',
             'imageheightmobile'=>'',
+            'overlaybordertype'=>'color',
+            'overlaybordergradient'=>'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
+            'overlayborderimage'=>'',
+            'overlayborderimagetype'=>'none',
+            'overlaygradienttop'=>'5px',
+            'overlaygradientbottom'=>'5px',
+            'overlaygradientleft'=>'5px',
+            'overlaygradientright'=>'5px',
+            'overlayimagetop'=>'5px',
+            'overlayimagebottom'=>'5px',
+            'overlayimageleft'=>'5px',
+            'overlayimageright'=>'5px',
+            'overlayspace'=>'space',
 
     //Advanced
         'classNamemain' => '',

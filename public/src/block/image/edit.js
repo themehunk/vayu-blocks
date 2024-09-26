@@ -33,15 +33,40 @@ const edit = (props) => {
     ? '50%' 
     : `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`;
     // Main overlay wrapper style object
+
     const vayu_block_overlay_style = {
         background: attributes.overlaycolor,
-        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
-        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
-        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
-        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
-        borderRadius: borderRadius,
 
+        ...(attributes.overlaybordertype === 'color' && {
+            borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
+            borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
+            borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
+            borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+            borderRadius: borderRadius,
+        }),
 
+        ...(attributes.overlaybordertype === 'gradient' && {
+            borderImage:`${attributes.overlaybordergradient} 30%`,
+            borderWidth: `${attributes.overlaygradienttop} ${attributes.overlaygradientbottom} ${attributes.overlaygradientleft} ${attributes.overlaygradientright}`,
+        }),
+
+        ...(attributes.overlaybordertype === 'image' && {
+            borderImage: 
+                attributes.overlayborderimagetype === 'custom' 
+                    ? `url(${attributes.overlayborderimage}) 40% ${attributes.overlayspace}` 
+                    : attributes.overlayborderimagetype === 'image1' 
+                        ? `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) 10% ${attributes.overlayspace}`
+                        : attributes.overlayborderimagetype === 'image2' 
+                            ? `url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) 40% ${attributes.overlayspace}` 
+                            : attributes.overlayborderimagetype === 'image3' 
+                                ? `url(https://w7.pngwing.com/pngs/1023/213/png-transparent-silver-diamond-border-diamond-graphy-gemstone-silver-frame-miscellaneous-frame-angle-thumbnail.png) 40% ${attributes.overlayspace}` 
+                                : attributes.overlayborderimagetype === 'image4' 
+                                    ? `url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) 40% ${attributes.overlayspace}` 
+                                    : 'none', // fallback if needed
+
+                borderWidth: `${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright}`,
+        }),
+    
         ...(view === 'Desktop' && {
             alignItems : attributes.overlayalignment === 'center' ? 'center' :
                 attributes.overlayalignment === 'left' ? 'self-start' :
@@ -58,6 +83,7 @@ const edit = (props) => {
             justifyContent : attributes.overlayalignmentverticaltablet === 'center' ? 'center' :
                 attributes.overlayalignmentverticaltablet === 'start' ? 'flex-start' :
                 attributes.overlayalignmentverticaltablet === 'end' ? 'flex-end' : 'center',}),
+                
         ...(view === 'Mobile' && {
             alignItems : attributes.overlayalignmentmobile === 'center' ? 'center' :
             attributes.overlayalignmentmobile === 'left' ? 'self-start' :
