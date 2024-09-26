@@ -1153,14 +1153,34 @@ const InsSettings = ({
 	};
 
 	const handlecolorcolorpanel =(value)=> {
-		if(value.color){
-			setAttributes({headingColor:value.color});
+
+		// Check if value.color exists
+        if (value.color !== undefined) {
+            if (value.color === null || value.color === '') {
+                setAttributes({ headingColor: 'transparent' });
+				setAttributes({headingimage:''});
+            } else {
+                setAttributes({ headingColor: value.color });
+				setAttributes({headingimage:''});
+            }
+        } else{
+            setAttributes({ headingColor: 'transparent' });
 			setAttributes({headingimage:''});
-		}
-		if(value.colorhvr){
-			setAttributes({headingHvrColor:value.colorhvr});
-		}
+        }
+
+        // Check if value.colorhvr exists
+        if (value.colorhvr !== undefined) {
+            if (value.colorhvr === null || value.colorhvr === '') {
+                setAttributes({ headingHvrColor: 'transparent' });
+            } else {
+                setAttributes({ headingHvrColor: value.colorhvr });
+            }
+        }
+        else{
+            setAttributes({ headingHvrColor: 'transparent' });
+        }
 	}
+
 	const [colorpanel, setcolorpanel] = useState('color');
 
 	const [fontSizeUnit, setfontSizeUnit] = useState('px');

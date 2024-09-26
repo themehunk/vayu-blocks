@@ -163,7 +163,7 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
 
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
@@ -335,14 +335,14 @@ const edit = (props) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper" style={vayu_blocks_image_wrapper_style}>
+                    <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
 
-                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                        <div className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
                                  
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
-                                className={`vayu_blocks_image_flip_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
+                                className={`vayu_blocks_image_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
                             />
 
                         </div>  
@@ -351,7 +351,7 @@ const edit = (props) => {
                             <>
                           
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
                                 style={vayu_block_overlay_style}
                             >
                                 <div className="vayu_blocks_inner_content">

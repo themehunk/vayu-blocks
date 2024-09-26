@@ -76,7 +76,6 @@ const edit = (props) => {
         borderRadius: borderRadius,
 
     };
-
     
 
     const image_flip_template = [
@@ -110,7 +109,6 @@ const edit = (props) => {
 
         ],
     ];  
- 
 
     return (
         <>

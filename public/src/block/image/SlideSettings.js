@@ -17,7 +17,6 @@ import {
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
-import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
@@ -225,25 +224,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     const handlecoloroverlay = (value) => {
         if(value.color){
+            setAttributes({ overlaycolor: value.color }); 
+        }
 
+        if(value.colorhvr){
+            setAttributes({ overlayhvrcolor: value.colorhvr });
+        }
+            //fix this
         
-        if(value.color === undefined ){
-            setAttributes({overlaycolor: 'transparent'})
-        }
-        else{
-            setAttributes({overlaycolor: value.color})
-        }
-    }   
-    else if(value.colorhvr){
-        if(value.colorhvr === undefined ){
-            setAttributes({overlayhvrcolor: 'transparent'})
-        }
-        else{
-            setAttributes({overlayhvrcolor: value.colorhvr})
-        }
-    }
-    }
-
+    };
+    
     const getimagewidth = () => {
         if('Desktop' === getView ){
             return attributes.imagewidth
@@ -359,6 +349,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
             <div class="vayu_blocks_image-flip-settings_main">
 
+
                 {/* Background Image */}
                 <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
                     <h4>{__('Background','vayu-blocks')}</h4>
@@ -468,21 +459,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         {overlay==='normal' && (
                             <>
 
-                                    <p>Filter</p>
-                                        <DuotonePicker
-                                            label="Filter"
-                                            duotonePalette={ vayu_blocks_DUOTONE_PALETTE}
-                                            disableCustomColors
-                                            disableCustomDuotone
-                                            value={ vayu_blocks_duotonevalue() }
-                                            onChange={ (value) => vayu_blocks_duotoneHandler(value) }
-                                        />
-                                  
                                     <DuotonePanel
-                                        value={ vayu_blocks_duotonevalue() }
-                                        onChange={ (value) => vayu_blocks_duotoneHandler(value) }
+                                        duotoneValue={vayu_blocks_duotonevalue()}
+                                        onDuotoneChange={(value) => vayu_blocks_duotoneHandler(value)}
                                         duotonePalette={vayu_blocks_DUOTONE_PALETTE}
                                     />
+                                  
 
                                     <SelectControl
                                         label={__('Hover Effect', 'vayu-blocks')}
