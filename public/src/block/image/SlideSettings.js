@@ -822,7 +822,25 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                                     ]}
                                                     onChange={(value) => setAttributes({ overlayspace: value })}
                                                 />
-                                                
+
+                                                <RangeControl
+                                                    __nextHasNoMarginBottom
+                                                    label="Image Size"
+                                                    max={100}
+                                                    min={0}
+                                                    value={attributes.borderimagesize}
+                                                    onChange={(value)=>setAttributes({borderimagesize:value})}
+                                                />
+
+                                                <RangeControl
+                                                __nextHasNoMarginBottom
+                                                label="Border Place"
+                                                max={50}
+                                                min={0}
+                                                value={attributes.borderimageoutset}
+                                                onChange={(value)=>setAttributes({borderimageoutset:value})}
+                                                />
+                
                                             </>
                                         )}
 

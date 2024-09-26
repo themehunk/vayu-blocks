@@ -260,6 +260,15 @@
     "overlayspace":{
         "type":"string",
         "default":"space"
+    },
+    "borderimagesize":{
+        "type":"number",
+        "default":30
+    },
+    "borderimageoutset":{
+        "type":"number",
+        "default":5
     }
+    
     
 }

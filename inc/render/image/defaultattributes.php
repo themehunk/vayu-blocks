@@ -87,6 +87,7 @@ return array(
             'overlayimageleft'=>'5px',
             'overlayimageright'=>'5px',
             'overlayspace'=>'space',
+            'borderimagesize'=> 30,
 
     //Advanced
         'classNamemain' => '',

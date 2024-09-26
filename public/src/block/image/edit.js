@@ -53,18 +53,19 @@ const edit = (props) => {
         ...(attributes.overlaybordertype === 'image' && {
             borderImage: 
                 attributes.overlayborderimagetype === 'custom' 
-                    ? `url(${attributes.overlayborderimage}) 40% ${attributes.overlayspace}` 
+                    ? `url(${attributes.overlayborderimage}) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
                     : attributes.overlayborderimagetype === 'image1' 
-                        ? `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) 10% ${attributes.overlayspace}`
+                        ? `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}`
                         : attributes.overlayborderimagetype === 'image2' 
-                            ? `url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) 40% ${attributes.overlayspace}` 
+                            ? `url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
                             : attributes.overlayborderimagetype === 'image3' 
-                                ? `url(https://w7.pngwing.com/pngs/1023/213/png-transparent-silver-diamond-border-diamond-graphy-gemstone-silver-frame-miscellaneous-frame-angle-thumbnail.png) 40% ${attributes.overlayspace}` 
+                                ? `url(https://www.w3schools.com/cssref/border.png) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
                                 : attributes.overlayborderimagetype === 'image4' 
-                                    ? `url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) 40% ${attributes.overlayspace}` 
+                                    ? `url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
                                     : 'none', // fallback if needed
 
-                borderWidth: `${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright}`,
+
+                borderImageOutset : `${attributes.borderimageoutset}px`,
         }),
     
         ...(view === 'Desktop' && {
@@ -83,7 +84,7 @@ const edit = (props) => {
             justifyContent : attributes.overlayalignmentverticaltablet === 'center' ? 'center' :
                 attributes.overlayalignmentverticaltablet === 'start' ? 'flex-start' :
                 attributes.overlayalignmentverticaltablet === 'end' ? 'flex-end' : 'center',}),
-                
+
         ...(view === 'Mobile' && {
             alignItems : attributes.overlayalignmentmobile === 'center' ? 'center' :
             attributes.overlayalignmentmobile === 'left' ? 'self-start' :
