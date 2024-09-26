@@ -488,6 +488,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 							options={[
                                 { value: 'normal', label: 'Normal' },
                                 { value: 'overlay', label: 'Overlay' },
+
                             ]}
 							onChange={(value)=>setoverlayandnormal(value)} 
                         />
@@ -625,227 +626,229 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                         initialTab="color"
                                     />
 
-                                <div>
-
-                                    <h3 className='vayu_blocks_h3_toggle_border'>Border</h3>
-                                    <div>
-                                        <Vayu_Block_Toggle
-                                            value={attributes.overlaybordertype}
-                                            onChange={(value) => setAttributes({overlaybordertype:value})}
-                                            isBlock={true}
-                                            __nextHasNoMarginBottom={true}
-                                            options={[
-                                                { value: 'color', label: 'color' },
-                                                { value: 'gradient', label: 'gradient' },
-                                                { value: 'image', label: 'image' },
-                                            ]}
-                                        />
-                                    </div>
-
                                     <div>
 
-                                        {attributes.overlaybordertype === 'color' && (
-                                        
-                                            <div>
-                                                <Vayu_Block_Border_Control
-                                                    value={{border:{
-                                                        top:{
-                                                            color: attributes.imageborder.topcolor,
-                                                            width: attributes.imageborder.topwidth,
-                                                            style: attributes.imageborder.topstyle,
-                                                        },
-                                                        bottom: {
-                                                            color: attributes.imageborder.bottomcolor,
-                                                            width: attributes.imageborder.bottomwidth,
-                                                            style: attributes.imageborder.bottomstyle,
-                                                        },
-                                                        left: {
-                                                            color: attributes.imageborder.leftcolor,
-                                                            width: attributes.imageborder.leftwidth,
-                                                            style: attributes.imageborder.leftstyle,
-                                                        },
-                                                        right: {
-                                                            color: attributes.imageborder.rightcolor,
-                                                            width: attributes.imageborder.rightwidth,
-                                                            style: attributes.imageborder.rightstyle,
-                                                        }
-                                                    },
-                                                    borderRadius:{
-                                                        top:{
-                                                            width: attributes.imageborderRadius.top,
-                                                        },
-                                                        bottom:{
-                                                            width: attributes.imageborderRadius.bottom,
-                                                        },
-                                                        left:{
-                                                            width: attributes.imageborderRadius.left,
-                                                        },
-                                                        right:{
-                                                            width: attributes.imageborderRadius.right,
-                                                        }
-                                                    }
-                                                    }}
-                                                    onChange={(value)=>vayu_blocks_handleimageBorderChange(value)}
-                                                    includeBorder={true}
-                                                    includeBorderRadius={true}
-                                                    para=""
-                                                />  
-                                            </div>
-                                            
-                                        )}
-
-                                        {attributes.overlaybordertype === 'gradient' && (
-                                            <>
-                                                <GradientPicker
-                                                className='vayu_block_gradientcontrol'
-                                                gradients = {[
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(74,234,220) 0%, rgb(151,120,209) 20%, rgb(207,42,186) 40%, rgb(238,44,130) 60%, rgb(251,105,98) 80%, rgb(254,248,76) 100%)',
-                                                        name: 'Vivid cyan blue to vivid purple',
-                                                        slug: 'vivid-cyan-blue-to-vivid-purple'
-                                                    },
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(74,234,220) 0%, rgb(151,120,209) 20%, rgb(207,42,186) 40%, rgb(238,44,130) 60%, rgb(251,105,98) 80%)',
-                                                        name: 'Light green cyan to vivid green cyan',
-                                                        slug: 'light-green-cyan-to-vivid-green-cyan'
-                                                    },
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(255,200,200) 0%, rgb(255,150,150) 20%, rgb(255,100,100) 40%, rgb(255,50,50) 60%, rgb(255,0,0) 80%)',
-                                                        name: 'Luminous vivid amber to luminous vivid orange',
-                                                        slug: 'luminous-vivid-amber-to-luminous-vivid-orange'
-                                                    },
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(0,150,255) 0%, rgb(0,200,255) 20%, rgb(0,250,200) 40%, rgb(50,255,150) 60%, rgb(100,255,100) 80%)',
-                                                        name: 'Luminous vivid orange to vivid red',
-                                                        slug: 'luminous-vivid-orange-to-vivid-red'
-                                                    },
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(128,0,128) 0%, rgb(186,85,211) 20%, rgb(238,130,238) 40%, rgb(255,165,0) 60%, rgb(255,255,0) 80%)',
-                                                        name: 'Very light gray to cyan bluish gray',
-                                                        slug: 'very-light-gray-to-cyan-bluish-gray'
-                                                    },
-                                                    {
-                                                        gradient: 'linear-gradient(135deg, rgb(255,99,71) 0%, rgb(255,140,0) 20%, rgb(255,215,0) 40%, rgb(0,128,128) 60%, rgb(0,255,255) 80%)',
-                                                        name: 'Cool to warm spectrum',
-                                                        slug: 'cool-to-warm-spectrum'
-                                                    }
+                                        <h3 className='vayu_blocks_h3_toggle_border'>Border</h3>
+                                        <br/>
+                                        <div>
+                                            <HoverControl 
+                                                value={attributes.overlaybordertype}
+                                                options={[
+                                                    { value: 'color', label: 'color' },
+                                                    { value: 'gradient', label: 'gradient' },
+                                                    { value: 'image', label: 'image' },
                                                 ]}
-                                                onChange={(selectedGradient) => setAttributes({ overlaybordergradient: selectedGradient })}
-                                                value={attributes.overlaybordergradient}
-                                                />
+                                                onChange={(value) => setAttributes({overlaybordertype:value})}
+                                                isBlock={true}
+                                                __nextHasNoMarginBottom={true}
+                                            />
+                                        </div>
 
-                                                <div className='vayu_blocks_box_control_image'>
-                                                <BoxControl
-                                                    label={__('Width', 'vayu-blocks')}
-                                                    values={{ top:attributes.overlaygradienttop,bottom:attributes.overlaygradientbottom,left:attributes.overlaygradientleft,right:attributes.overlaygradientright }}
-                                                    onChange={ ( nextValues ) => setoverlaybordergradeintwidth( nextValues ) }
-                                                />
+                                        <div>
+
+                                            {attributes.overlaybordertype === 'color' && (
+                                            
+                                                <div>
+                                                    <Vayu_Block_Border_Control
+                                                        value={{border:{
+                                                            top:{
+                                                                color: attributes.imageborder.topcolor,
+                                                                width: attributes.imageborder.topwidth,
+                                                                style: attributes.imageborder.topstyle,
+                                                            },
+                                                            bottom: {
+                                                                color: attributes.imageborder.bottomcolor,
+                                                                width: attributes.imageborder.bottomwidth,
+                                                                style: attributes.imageborder.bottomstyle,
+                                                            },
+                                                            left: {
+                                                                color: attributes.imageborder.leftcolor,
+                                                                width: attributes.imageborder.leftwidth,
+                                                                style: attributes.imageborder.leftstyle,
+                                                            },
+                                                            right: {
+                                                                color: attributes.imageborder.rightcolor,
+                                                                width: attributes.imageborder.rightwidth,
+                                                                style: attributes.imageborder.rightstyle,
+                                                            }
+                                                        },
+                                                        borderRadius:{
+                                                            top:{
+                                                                width: attributes.imageborderRadius.top,
+                                                            },
+                                                            bottom:{
+                                                                width: attributes.imageborderRadius.bottom,
+                                                            },
+                                                            left:{
+                                                                width: attributes.imageborderRadius.left,
+                                                            },
+                                                            right:{
+                                                                width: attributes.imageborderRadius.right,
+                                                            }
+                                                        }
+                                                        }}
+                                                        onChange={(value)=>vayu_blocks_handleimageBorderChange(value)}
+                                                        includeBorder={true}
+                                                        includeBorderRadius={true}
+                                                        para=""
+                                                    />  
                                                 </div>
-
-                                            </>
-                                        )}
-
-                                        {attributes.overlaybordertype === 'image' && (
-                                            <>
                                                 
-                                                <SelectControl
-                                                    label={__('Image', 'vayu-blocks')}
-                                                    __nextHasNoMarginBottom
-                                                    value={attributes.overlayborderimagetype}
-                                                    options={[
-                                                        { label: __('None', 'vayu-blocks'), value: 'none' },
-                                                        { label: __('Image 1', 'vayu-blocks'), value: 'image1' },
-                                                        { label: __('Image 2', 'vayu-blocks'), value: 'image2' },
-                                                        { label: __('Image 3', 'vayu-blocks'), value: 'image3' },
-                                                        { label: __('Image 4', 'vayu-blocks'), value: 'image4' },
-                                                        { label: __('Custom', 'vayu-blocks'), value: 'custom' },
+                                            )}
+
+                                            {attributes.overlaybordertype === 'gradient' && (
+                                                <>
+                                                    <GradientPicker
+                                                    className='vayu_block_gradientcontrol'
+                                                    gradients = {[
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(74,234,220) 0%, rgb(151,120,209) 20%, rgb(207,42,186) 40%, rgb(238,44,130) 60%, rgb(251,105,98) 80%, rgb(254,248,76) 100%)',
+                                                            name: 'Vivid cyan blue to vivid purple',
+                                                            slug: 'vivid-cyan-blue-to-vivid-purple'
+                                                        },
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(74,234,220) 0%, rgb(151,120,209) 20%, rgb(207,42,186) 40%, rgb(238,44,130) 60%, rgb(251,105,98) 80%)',
+                                                            name: 'Light green cyan to vivid green cyan',
+                                                            slug: 'light-green-cyan-to-vivid-green-cyan'
+                                                        },
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(255,200,200) 0%, rgb(255,150,150) 20%, rgb(255,100,100) 40%, rgb(255,50,50) 60%, rgb(255,0,0) 80%)',
+                                                            name: 'Luminous vivid amber to luminous vivid orange',
+                                                            slug: 'luminous-vivid-amber-to-luminous-vivid-orange'
+                                                        },
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(0,150,255) 0%, rgb(0,200,255) 20%, rgb(0,250,200) 40%, rgb(50,255,150) 60%, rgb(100,255,100) 80%)',
+                                                            name: 'Luminous vivid orange to vivid red',
+                                                            slug: 'luminous-vivid-orange-to-vivid-red'
+                                                        },
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(128,0,128) 0%, rgb(186,85,211) 20%, rgb(238,130,238) 40%, rgb(255,165,0) 60%, rgb(255,255,0) 80%)',
+                                                            name: 'Very light gray to cyan bluish gray',
+                                                            slug: 'very-light-gray-to-cyan-bluish-gray'
+                                                        },
+                                                        {
+                                                            gradient: 'linear-gradient(135deg, rgb(255,99,71) 0%, rgb(255,140,0) 20%, rgb(255,215,0) 40%, rgb(0,128,128) 60%, rgb(0,255,255) 80%)',
+                                                            name: 'Cool to warm spectrum',
+                                                            slug: 'cool-to-warm-spectrum'
+                                                        }
                                                     ]}
-                                                    onChange={(value) => setAttributes({ overlayborderimagetype: value })}
-                                                />
+                                                    onChange={(selectedGradient) => setAttributes({ overlaybordergradient: selectedGradient })}
+                                                    value={attributes.overlaybordergradient}
+                                                    />
 
-                                                {attributes.overlayborderimagetype === 'custom' && (
-                                                    <>
-                                                    <h4>{__('Image','vayu-blocks')}</h4>
-                                                    {attributes.overlayborderimage ? (
-                                                        <>        
-                                                            <div class="vayu-blocks-image-container">
-                                                                <img src={attributes.overlayborderimage} alt="slideimage" />
-                                                                <button class="vayu-blocks-change-button" onClick={() => setAttributes({overlayborderimage:''})}>Change</button>
-                                                            </div>
-
-                                                            <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({overlayborderimage:''})}>
-                                                                {__('Clear', 'vayu-blocks')}
-                                                            </Button>
-
-                                                        </>
-                                                        ) : (
-                                                            <>
-                                                            <MediaPlaceholder
-                                                                icon="format-image"
-                                                                labels={{
-                                                                    title: __('Background Image', 'vayu-blocks'),
-                                                                    name: __('an image', 'vayu-blocks')
-                                                                }}
-                                                                onSelect={(media) => {
-                                                                    setAttributes({overlayborderimage:media.url})
-                                                                }}                                                          
-                                                                onSelectURL='true'
-                                                                accept="image/*"
-                                                                allowedTypes={['image']}
-                                                            />
-                                                            <br/>
-                                                            </>
-                                                        )}
-                                                </>
-                                                )}
-
-
-                                                <div className='vayu_blocks_box_control_image'>
+                                                    <div className='vayu_blocks_box_control_image'>
                                                     <BoxControl
                                                         label={__('Width', 'vayu-blocks')}
-                                                        values={{ top:attributes.overlayimagetop,bottom:attributes.overlayimagebottom,left:attributes.overlayimageleft,right:attributes.overlayimageright }}
-                                                        onChange={ ( nextValues ) => setoverlayborderimagewidth( nextValues ) }
+                                                        values={{ top:attributes.overlaygradienttop,bottom:attributes.overlaygradientbottom,left:attributes.overlaygradientleft,right:attributes.overlaygradientright }}
+                                                        onChange={ ( nextValues ) => setoverlaybordergradeintwidth( nextValues ) }
                                                     />
-                                                </div>
+                                                    </div>
 
-                                                <br/>
+                                                </>
+                                            )}
 
-                                                <SelectControl
-                                                    label={__('Image', 'vayu-blocks')}
+                                            {attributes.overlaybordertype === 'image' && (
+                                                <>
+                                                    
+                                                    <SelectControl
+                                                        label={__('Image', 'vayu-blocks')}
+                                                        __nextHasNoMarginBottom
+                                                        value={attributes.overlayborderimagetype}
+                                                        options={[
+                                                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                                                            { label: __('Image 1', 'vayu-blocks'), value: 'image1' },
+                                                            { label: __('Image 2', 'vayu-blocks'), value: 'image2' },
+                                                            { label: __('Image 3', 'vayu-blocks'), value: 'image3' },
+                                                            { label: __('Image 4', 'vayu-blocks'), value: 'image4' },
+                                                            { label: __('Custom', 'vayu-blocks'), value: 'custom' },
+                                                        ]}
+                                                        onChange={(value) => setAttributes({ overlayborderimagetype: value })}
+                                                    />
+
+                                                    {attributes.overlayborderimagetype === 'custom' && (
+                                                        <>
+                                                        <h4>{__('Image','vayu-blocks')}</h4>
+                                                        {attributes.overlayborderimage ? (
+                                                            <>        
+                                                                <div class="vayu-blocks-image-container">
+                                                                    <img src={attributes.overlayborderimage} alt="slideimage" />
+                                                                    <button class="vayu-blocks-change-button" onClick={() => setAttributes({overlayborderimage:''})}>Change</button>
+                                                                </div>
+
+                                                                <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({overlayborderimage:''})}>
+                                                                    {__('Clear', 'vayu-blocks')}
+                                                                </Button>
+
+                                                            </>
+                                                            ) : (
+                                                                <>
+                                                                <MediaPlaceholder
+                                                                    icon="format-image"
+                                                                    labels={{
+                                                                        title: __('Background Image', 'vayu-blocks'),
+                                                                        name: __('an image', 'vayu-blocks')
+                                                                    }}
+                                                                    onSelect={(media) => {
+                                                                        setAttributes({overlayborderimage:media.url})
+                                                                    }}                                                          
+                                                                    onSelectURL='true'
+                                                                    accept="image/*"
+                                                                    allowedTypes={['image']}
+                                                                />
+                                                                <br/>
+                                                                </>
+                                                            )}
+                                                    </>
+                                                    )}
+
+
+                                                    <div className='vayu_blocks_box_control_image'>
+                                                        <BoxControl
+                                                            label={__('Width', 'vayu-blocks')}
+                                                            values={{ top:attributes.overlayimagetop,bottom:attributes.overlayimagebottom,left:attributes.overlayimageleft,right:attributes.overlayimageright }}
+                                                            onChange={ ( nextValues ) => setoverlayborderimagewidth( nextValues ) }
+                                                        />
+                                                    </div>
+
+                                                    <br/>
+
+                                                    <SelectControl
+                                                        label={__('Image', 'vayu-blocks')}
+                                                        __nextHasNoMarginBottom
+                                                        value={attributes.overlayspace}
+                                                        options={[
+                                                            { label: __('Space', 'vayu-blocks'), value: 'space' },
+                                                            { label: __('Stretch', 'vayu-blocks'), value: 'stretch' },
+                                                            { label: __('Repeat', 'vayu-blocks'), value: 'repeat' },
+                                                            { label: __('Round', 'vayu-blocks'), value: 'round' },
+                                                        ]}
+                                                        onChange={(value) => setAttributes({ overlayspace: value })}
+                                                    />
+
+                                                    <RangeControl
+                                                        __nextHasNoMarginBottom
+                                                        label="Image Size"
+                                                        max={100}
+                                                        min={0}
+                                                        value={attributes.borderimagesize}
+                                                        onChange={(value)=>setAttributes({borderimagesize:value})}
+                                                    />
+
+                                                    <RangeControl
                                                     __nextHasNoMarginBottom
-                                                    value={attributes.overlayspace}
-                                                    options={[
-                                                        { label: __('Space', 'vayu-blocks'), value: 'space' },
-                                                        { label: __('Stretch', 'vayu-blocks'), value: 'stretch' },
-                                                        { label: __('Repeat', 'vayu-blocks'), value: 'repeat' },
-                                                        { label: __('Round', 'vayu-blocks'), value: 'round' },
-                                                    ]}
-                                                    onChange={(value) => setAttributes({ overlayspace: value })}
-                                                />
-
-                                                <RangeControl
-                                                    __nextHasNoMarginBottom
-                                                    label="Image Size"
-                                                    max={100}
+                                                    label="Border Place"
+                                                    max={50}
                                                     min={0}
-                                                    value={attributes.borderimagesize}
-                                                    onChange={(value)=>setAttributes({borderimagesize:value})}
-                                                />
+                                                    value={attributes.borderimageoutset}
+                                                    onChange={(value)=>setAttributes({borderimageoutset:value})}
+                                                    />
+                    
+                                                </>
+                                            )}
 
-                                                <RangeControl
-                                                __nextHasNoMarginBottom
-                                                label="Border Place"
-                                                max={50}
-                                                min={0}
-                                                value={attributes.borderimageoutset}
-                                                onChange={(value)=>setAttributes({borderimageoutset:value})}
-                                                />
-                
-                                            </>
-                                        )}
+                                        </div>
 
                                     </div>
-                                </div>
 
                                 </>
                                 )}
