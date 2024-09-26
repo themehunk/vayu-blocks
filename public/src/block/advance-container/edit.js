@@ -24,6 +24,8 @@ import ThShaper from './shaper.js';
 import getUniqueId from '../../helpers/get-unique-id.js';
 import './editor.scss';
 
+import { Placeholder , Button, ButtonGroup } from '@wordpress/components';
+
 export default function Edit({ 
 	attributes, 
 	setAttributes, 
@@ -867,6 +869,34 @@ export default function Edit({
 				? `th-root-block-container ${contentWidthClass}  th-block-container-${attributes.uniqueID} wp-block`
 				: 'wp-block';
 
+					  // Display layout options if no inner blocks are present
+	const innerBlockss = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+    if ( innerBlockss.length === 0 ) {
+        return (
+            <Placeholder
+                label={ __('Select Layout', 'vayu-blocks') }
+                instructions={ __('Choose a layout for your container', 'vayu-blocks') }
+            >
+                <ButtonGroup>
+                    <Button
+                        onClick={ () => setAttributes({ variation: 'one-column' }) }
+                    >
+                        { __('One Column', 'vayu-blocks') }
+                    </Button>
+                    <Button
+                        onClick={ () => setAttributes({ variation: 'two-columns' }) }
+                    >
+                        { __('Two Columns', 'vayu-blocks') }
+                    </Button>
+                    <Button
+                        onClick={ () => setAttributes({ variation: 'three-columns' }) }
+                    >
+                        { __('Three Columns', 'vayu-blocks') }
+                    </Button>
+                </ButtonGroup>
+            </Placeholder>
+        );
+    }
 			return (
 				<Fragment>
 				<Controls
