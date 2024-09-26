@@ -33,15 +33,41 @@ const edit = (props) => {
     ? '50%' 
     : `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`;
     // Main overlay wrapper style object
+
     const vayu_block_overlay_style = {
         background: attributes.overlaycolor,
-        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
-        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
-        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
-        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
-        borderRadius: borderRadius,
+
+        ...(attributes.overlaybordertype === 'color' && {
+            borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
+            borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
+            borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
+            borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+            borderRadius: borderRadius,
+        }),
+
+        ...(attributes.overlaybordertype === 'gradient' && {
+            borderImage:`${attributes.overlaybordergradient} 30%`,
+            borderWidth: `${attributes.overlaygradienttop} ${attributes.overlaygradientbottom} ${attributes.overlaygradientleft} ${attributes.overlaygradientright}`,
+        }),
+
+        ...(attributes.overlaybordertype === 'image' && {
+            borderImage: 
+                attributes.overlayborderimagetype === 'custom' 
+                    ? `url(${attributes.overlayborderimage}) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
+                    : attributes.overlayborderimagetype === 'image1' 
+                        ? `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}`
+                        : attributes.overlayborderimagetype === 'image2' 
+                            ? `url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
+                            : attributes.overlayborderimagetype === 'image3' 
+                                ? `url(https://www.w3schools.com/cssref/border.png) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
+                                : attributes.overlayborderimagetype === 'image4' 
+                                    ? `url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) ${attributes.borderimagesize}% / ${attributes.overlayimagetop} ${attributes.overlayimagebottom} ${attributes.overlayimageleft} ${attributes.overlayimageright} ${attributes.overlayspace}` 
+                                    : 'none', // fallback if needed
 
 
+                borderImageOutset : `${attributes.borderimageoutset}px`,
+        }),
+    
         ...(view === 'Desktop' && {
             alignItems : attributes.overlayalignment === 'center' ? 'center' :
                 attributes.overlayalignment === 'left' ? 'self-start' :
@@ -58,6 +84,7 @@ const edit = (props) => {
             justifyContent : attributes.overlayalignmentverticaltablet === 'center' ? 'center' :
                 attributes.overlayalignmentverticaltablet === 'start' ? 'flex-start' :
                 attributes.overlayalignmentverticaltablet === 'end' ? 'flex-end' : 'center',}),
+
         ...(view === 'Mobile' && {
             alignItems : attributes.overlayalignmentmobile === 'center' ? 'center' :
             attributes.overlayalignmentmobile === 'left' ? 'self-start' :
@@ -163,7 +190,7 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
 
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
@@ -335,14 +362,14 @@ const edit = (props) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper" style={vayu_blocks_image_wrapper_style}>
+                    <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
 
-                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                        <div className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
                                  
                             <img 
                                 style= {vayu_blocks_image_settings}
                                 src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
-                                className={`vayu_blocks_image_flip_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
+                                className={`vayu_blocks_image_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
                             />
 
                         </div>  
@@ -351,7 +378,7 @@ const edit = (props) => {
                             <>
                           
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
                                 style={vayu_block_overlay_style}
                             >
                                 <div className="vayu_blocks_inner_content">
@@ -364,13 +391,13 @@ const edit = (props) => {
                             </>
                         )}
 
+                    </div>
+                    
                         {attributes.caption && (
                             <div style={{textAlign:attributes.captionalignment}}>
                                 <p style={captionstyle}>{attributes.captiontext}</p>
                             </div>
                         )}
-
-                    </div>
                 
                 </div>
             </AdvanceSettings>

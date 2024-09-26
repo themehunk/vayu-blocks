@@ -16,15 +16,19 @@ const DuotonePanel = ({ duotoneValue, onDuotoneChange, duotonePalette }) => {
     };
 
     const handleDuotoneChange = (value) => {
-        onDuotoneChange(value);
-        setdutone(value);
-    };
+        if(value===undefined){
+            onDuotoneChange('');
+            setdutone('');
+        }else{
+            onDuotoneChange(value);
+            setdutone(value);
+        }
 
-    console.log(dutone);
+    };
 
     return (
         <div className="vayu_blocks_duotone_panel">
-            <ToolsPanel label={__('Duotone')}>
+            <ToolsPanel label={__('Filter')} className="vayu_block_dutone_name">
                 <ToolsPanelItem
                     className="vayu_blocks_dutone_toolspanel_item"
                     hasValue={() => !!duotoneValue}

@@ -1153,15 +1153,27 @@ const InsSettings = ({
 		}
 	};
 
-	const handlecolorcolorpanel =(value)=> {
-		if(value.color){
-			setAttributes({headingColor:value.color});
-			setAttributes({headingimage:''});
+	const handlecolorcolorpanel = (value) => {
+
+		// Handle heading color
+		if ('color' in value) {
+			if (value.color === null || value.color === '') {
+				setAttributes({ headingColor: 'transparent', headingimage: '' });
+			} else {
+				setAttributes({ headingColor: value.color, headingimage: '' });
+			}
 		}
-		if(value.colorhvr){
-			setAttributes({headingHvrColor:value.colorhvr});
+	
+		// Handle hover color
+		if ('colorhvr' in value) {
+			if (value.colorhvr === null || value.colorhvr === '') {
+				setAttributes({ headingHvrColor: 'transparent' });
+			} else {
+				setAttributes({ headingHvrColor: value.colorhvr });
+			}
 		}
-	}
+	};
+	
 	const [colorpanel, setcolorpanel] = useState('color');
 
 	const [fontSizeUnit, setfontSizeUnit] = useState('px');

@@ -281,6 +281,17 @@ class Vayu_Block_Plugin {
 }
 
 
+function enqueue_interactivity_on_frontend() {
+    // Enqueue wp-interactivity on the frontend
+    wp_enqueue_script_module( 
+        'vayu-blocks-mega-menu-view-script-module-', 
+        plugins_url( 'public/src/block/mega-menu/view.js', __FILE__ ), // Get the correct URL to the file
+        array(), 
+        '1.0.0' 
+    );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_interactivity_on_frontend' );
+
 
 
 function vayu_block_plugin_init( ) {

@@ -37,12 +37,12 @@ class Vayu_blocks_image {
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
         
-        $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
-            $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $imageHvrAnimation . '" >';            
+        $image_html .= '<div class="vayu_blocks_image__wrapper" id='. $uniqueId .'>';
+            $image_html .= '<div class="vayu_blocks_image_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $imageHvrAnimation . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
-                                    class="vayu_blocks_image_flip_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . ' '. $imagemaskshape .'" 
+                                    class="vayu_blocks__image_image ' . $imageHvrEffect . ' ' . $imageHvrFilter . ' '. $imagemaskshape .'" 
                                 />';             
             $image_html .= '</div>';
             // Append the overlay HTML
@@ -52,20 +52,20 @@ class Vayu_blocks_image {
                 $image_html .= $this->overlay(); // Ensure this method returns valid HTML
             }
 
-            // Check if the 'caption' attribute is not empty
-            if (!empty($attributes['caption'])) {
-                // Append HTML for the caption
-                $image_html .= '<div class="vayu_block_caption">';
-                    $image_html .= '<p class="vayu_block_caption_text_para">';
-                        $image_html .= esc_html($attributes['captiontext']); // Use esc_html to properly escape HTML entities
-                    $image_html .= '</p>';
-                $image_html .= '</div>';
-            }
-
-
+        
         $image_html .= '</div>';
+
+        // Check if the 'caption' attribute is not empty
+        if (!empty($attributes['caption'])) {
+            // Append HTML for the caption
+            $image_html .= '<div class="vayu_block_caption">';
+                $image_html .= '<p class="vayu_block_caption_text_para">';
+                    $image_html .= esc_html($attributes['captiontext']); // Use esc_html to properly escape HTML entities
+                $image_html .= '</p>';
+            $image_html .= '</div>';
+        }
     
-        return '<div class="vayu-blocks-image-flip-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
+        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
     }
     
     //overlay
@@ -77,7 +77,7 @@ class Vayu_blocks_image {
 
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  

@@ -208,5 +208,67 @@
     "imageheightmobile":{
         "type":"string",
         "default":""
+    },
+    "overlaybordertype":{
+        "type":"string",
+        "default":"color"
+    },
+    "overlaybordergradient":{
+        "type":"string",
+        "default":"linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)"
+    },
+    "overlayborderimage":{
+        "type":"string",
+        "default":""
+    },
+    "overlayborderimagetype":{
+        "type":"string",
+        "default":"none"
+    },
+    "overlaygradienttop":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlaygradientbottom":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlaygradientleft":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlaygradientright":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlayimagetop":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlayimagebottom":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlayimageleft":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlayimageright":{
+        "type":"string",
+        "default":"5px"
+    },
+    "overlayspace":{
+        "type":"string",
+        "default":"space"
+    },
+    "borderimagesize":{
+        "type":"number",
+        "default":30
+    },
+    "borderimageoutset":{
+        "type":"number",
+        "default":5
     }
+    
+    
 }

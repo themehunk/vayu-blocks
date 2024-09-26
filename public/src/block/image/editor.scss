@@ -26,9 +26,7 @@
     padding: 0px 100px; /* Adjust padding to match the height */
 }
 
-//edit.js
-
-.vayu_blocks_image_flip_wrapper {
+.vayu_blocks_image_wrapper {
     width: 100%;
     height: auto;
     overflow: hidden; /* Keeps the outer frame fixed */
@@ -38,16 +36,16 @@
     transform-style: preserve-3d;
 }
 
-.vayu_blocks_image_flip_image {
+.vayu_blocks_image_wrapper .vayu_blocks_image_image {
     width: 100%;
-    height: 100%; /* Ensure the image fills the container */
+    height: 100% !important; /* Ensure the image fills the container */
     transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
      /* Ensures the image content covers the container */
     opacity:var(--image-opacity);
     display: block;
 }
 
-.vayu_blocks_image_flip_image-container {
+.vayu_blocks_image-container {
     transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
      /* Ensures the image content covers the container */
     opacity:var(--image-opacity);
@@ -55,7 +53,7 @@
 }
 
 /* Apply the custom hover effect */
-.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
+.vayu_blocks_image_wrapper:hover .vayu_blocks_image_image {
     transform: var(--image-hover-effect-transform, none);
     filter: var(--image-filter-effect-filter);
     opacity: var(--image-hover-effect-opacity, 1);
@@ -154,9 +152,9 @@
 }
 
 /* Overlay styles */
-.vayu_blocks_overlay_main_wrapper {
-    width: 97%;
-    height: 95%;
+.vayu_blocks_overlay_main_wrapper_image {
+    width: 96%;
+    height: 93%;
     position: absolute;
     top: 0;
     left: 0;
@@ -164,11 +162,12 @@
     opacity: 1; /* Initially hidden */
     z-index: 10;
     display: flex;
-    margin:10px;
+    margin-left:2%;
+    margin-top: 0.8rem;
 }
 
 /* Hover the image and show the overlay */
-.vayu_blocks_overlay_main_wrapper:hover  {
+.vayu_blocks_overlay_main_wrapper_image:hover  {
     background:var(--overlay-hvr-color) !important;
 }
 
@@ -182,13 +181,13 @@
 }
 
 /* On hover, move paragraph up and increase opacity */
-.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-para-innerblock {
+.vayu_blocks_overlay_main_wrapper_image:hover .vayu-blocks-para-innerblock {
     opacity: 1;
     transform: translateY(0);  /* Move paragraph to its original position */
 }
 
 /* On hover out, move paragraph back down and fade out smoothly */
-.vayu_blocks_overlay_main_wrapper:not(:hover) .vayu-blocks-para-innerblock {
+.vayu_blocks_overlay_main_wrapper_image:not(:hover) .vayu-blocks-para-innerblock {
     opacity: 0;
     transform: translateY(20px);  /* Move paragraph back down */
     transition: opacity 0.6s ease, transform 0.6s ease;  /* Smooth transition */
@@ -200,9 +199,8 @@
     transition: transform 0.6s ease;  /* Longer transition */
 }
 
-
 /* On hover, move heading up and make paragraph visible with a smooth 3D effect */
-.vayu_blocks_overlay_main_wrapper:hover .vayu-blocks-heading-innerblock {
+.vayu_blocks_overlay_main_wrapper_image:hover .vayu-blocks-heading-innerblock {
     transform: translateY(0);
 }
 
@@ -210,13 +208,12 @@
     display:none !important;
  }
 
-
 /* Custom overlay hover effects */
 .overlayfade-in {
     opacity: 0;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayfade-in {
+.vayu_blocks_image_wrapper:hover .overlayfade-in {
     opacity: 1;
 }
 
@@ -226,7 +223,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {
+.vayu_blocks_image_wrapper:hover .overlayfade-in-up {
     transform: translateY(0); /* Moves to the original position */
     opacity: 1; /* Fade in */
 }
@@ -237,7 +234,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {
+.vayu_blocks_image_wrapper:hover .overlayfade-in-down {
     transform: translateY(0); /* Moves to the original position */
     opacity: 1; /* Fade in */
 }
@@ -248,7 +245,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-left {
+.vayu_blocks_image_wrapper:hover .overlayfade-in-left {
     transform: translateX(0); /* Moves to the original position */
     opacity: 1; /* Fade in */
 }
@@ -259,7 +256,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease; /* Smooth transition */
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayfade-in-right {
+.vayu_blocks_image_wrapper:hover .overlayfade-in-right {
     transform: translateX(0); /* Moves to the original position */
     opacity: 1; /* Fade in */
 }
@@ -268,7 +265,7 @@
     transform: rotateY(-90deg);
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
+.vayu_blocks_image_wrapper:hover .overlayflip-horizontal {
     transform: rotateY(0);
 }
 
@@ -276,7 +273,7 @@
     transform: rotateY(90deg);
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
+.vayu_blocks_image_wrapper:hover .overlayflip-horizontal-left {
     transform: rotateY(0);
 }
 
@@ -284,7 +281,7 @@
     transform: rotateX(-90deg);
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+.vayu_blocks_image_wrapper:hover .overlayflip-vertical {
     transform: rotateX(0);
 }
 
@@ -292,7 +289,7 @@
     transform: rotateX(90deg);
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
+.vayu_blocks_image_wrapper:hover .overlayflip-vertical-bottom {
     transform: rotateX(0);
 }
 
@@ -302,7 +299,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {
+.vayu_blocks_image_wrapper:hover .overlayzoom-in-up {
     transform: scale(1) translateY(0);
     opacity: 1;
 }
@@ -313,7 +310,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {
+.vayu_blocks_image_wrapper:hover .overlayzoom-in-left {
     transform: scale(1) translateX(0);
     opacity: 1;
 }
@@ -325,7 +322,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {
+.vayu_blocks_image_wrapper:hover .vayu_block_animation_overlay_inside {
     opacity:1;
 }
 
@@ -343,13 +340,13 @@
     transition: transform var(--overlay-transitiontime) ease-out, opacity var(--overlay-transitiontime) ease-out; /* Fast circular animation */
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {
+.vayu_blocks_image_wrapper:hover .overlayzoom-in-circle {
     transform: scale(1); /* Expands outward to full size */
     opacity: 1;
     border-radius:var(--overlay-border-radius) !important;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {
+.vayu_blocks_image_wrapper:hover .overlayzoom-in-right {
     transform: scale(1) translateX(0);
     opacity: 1;
 }
@@ -360,7 +357,7 @@
     transition: transform var(--overlay-transitiontime) ease, opacity var(--overlay-transitiontime) ease;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {
+.vayu_blocks_image_wrapper:hover .overlayzoom-in-down {
     transform: scale(1) translateY(0);
     opacity: 1;
 }
@@ -374,7 +371,7 @@
     max-width:90%;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlaypartial-overlay {
+.vayu_blocks_image_wrapper:hover .overlaypartial-overlay {
     opacity: 1;
 }
 
@@ -426,10 +423,10 @@
     -webkit-mask-position: var(--image-url-position);
 }
 
-.vayu_blocks_image_flip_wrapper .clip-animation { 
+.vayu_blocks_image_wrapper .clip-animation { 
     clip-path: polygon(100% 50%,84.70057014808336% 54.5684167277018%,91.0518476172854% 60.99980941685713%,82.33578363789503% 63.39392013277814%,93.30127018922194% 75%,77.76736691019323% 71.30665001530522%,80.05203820042827% 80.05203820042827%,71.30665001530522% 77.76736691019323%,75% 93.30127018922192%,63.39392013277814% 82.33578363789503%,60.99980941685714% 91.0518476172854%,54.56841672770181% 84.70057014808336%,50% 100%,45.4315832722982% 84.70057014808336%,39.000190583142874% 91.0518476172854%,36.606079867221865% 82.33578363789505%,25.00000000000001% 93.30127018922194%,28.693349984694787% 77.76736691019323%,19.947961799571733% 80.05203820042827%,22.23263308980677% 71.30665001530522%,6.698729810778076% 75.00000000000001%,17.664216362104966% 63.39392013277815%,8.948152382714603% 60.99980941685715%,15.299429851916635% 54.568416727701816%,0% 50.00000000000001%,15.299429851916635% 45.431583272298205%,8.94815238271459% 39.00019058314288%,17.66421636210496% 36.60607986722188%,6.698729810778062% 25.000000000000014%,22.23263308980676% 28.693349984694787%,19.947961799571715% 19.947961799571747%,28.69334998469477% 22.232633089806775%,24.99999999999998% 6.698729810778083%,36.60607986722184% 17.664216362104973%,39.00019058314284% 8.948152382714603%,45.43158327229816% 15.299429851916642%,49.99999999999999% 0%,54.568416727701795% 15.299429851916635%,60.99980941685711% 8.94815238271459%,63.39392013277812% 17.66421636210496%,74.99999999999997% 6.6987298107780475%,71.3066500153052% 22.23263308980675%,80.05203820042826% 19.947961799571722%,77.76736691019323% 28.69334998469477%,93.30127018922192% 24.99999999999998%,82.33578363789502% 36.60607986722184%,91.0518476172854% 39.00019058314283%,84.70057014808336% 45.43158327229816%)}
   
-.vayu_blocks_image_flip_wrapper .clip-animation { 
+.vayu_blocks_image_wrapper .clip-animation { 
     animation: clip 1s infinite
 }
   
@@ -445,7 +442,7 @@
 }
 }
   
-.vayu_blocks_image_flip_wrapper .clip-diamond {
+.vayu_blocks_image_wrapper .clip-diamond {
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     animation: diamond-rotate 4s infinite ease-in-out;
 }
@@ -459,7 +456,7 @@
 }
 }
 
-.vayu_blocks_image_flip_wrapper .clip-starburst {
+.vayu_blocks_image_wrapper .clip-starburst {
 clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 animation: starburst 2.5s linear infinite;
 }
@@ -473,7 +470,7 @@ animation: starburst 2.5s linear infinite;
     }
 }
 
-.vayu_blocks_image_flip_wrapper .clip-diagonal-expand {
+.vayu_blocks_image_wrapper .clip-diagonal-expand {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     animation: diagonal-expand 3s ease-in-out infinite;
 }
@@ -490,7 +487,7 @@ animation: starburst 2.5s linear infinite;
     }
 }
 
-.vayu_blocks_image_flip_wrapper .clip-diagonal-slide {
+.vayu_blocks_image_wrapper .clip-diagonal-slide {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     animation: diagonal-slide 4s ease-in-out infinite;
   }
@@ -507,7 +504,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_blocks_image_flip_wrapper .clip-hex-pulse {
+  .vayu_blocks_image_wrapper .clip-hex-pulse {
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     animation: hex-pulse 2.5s ease-in-out infinite;
   }
@@ -524,7 +521,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_blocks_image_flip_wrapper .clip-triangle-expand {
+  .vayu_blocks_image_wrapper .clip-triangle-expand {
     clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
     animation: triangle-to-trapezoid 3s ease-in-out infinite;
   }
@@ -538,7 +535,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_blocks_image_flip_wrapper .clip-circle-burst {
+  .vayu_blocks_image_wrapper .clip-circle-burst {
     clip-path: circle(0% at 50% 50%);
     animation: circle-burst 2s ease-out infinite;
   }
@@ -552,7 +549,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_blocks_image_flip_wrapper  .clip-zigzag {
+  .vayu_blocks_image_wrapper  .clip-zigzag {
     clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 75% 50%, 100% 75%, 100% 100%, 0% 100%, 0% 75%, 25% 50%, 0% 25%);
     animation: zigzag-reveal 3.5s ease-in-out infinite;
   }
@@ -569,7 +566,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_blocks_image_flip_wrapper  .clip-diamond-expand {
+  .vayu_blocks_image_wrapper  .clip-diamond-expand {
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     animation: diamond-expand 3s ease-in-out infinite;
   }
@@ -582,8 +579,7 @@ animation: starburst 2.5s linear infinite;
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
   }
-  
-  
+   
 .vayu_blocks_image-flip-settings_main .vayu_block_width_height_control {
     display: flex;
     flex-direction: row; /* Stack vertically if needed */
@@ -606,4 +602,41 @@ animation: starburst 2.5s linear infinite;
 
 .vayu_blocks_image-flip-settings_main .vayu_block_alignment .components-base-control__title{
     align-items: center !important;
+}
+
+
+.vayu_blocks_box_control_image .ej5x27r4{
+    margin-bottom:0px !important;
+}
+
+.vayu_blocks_h3_toggle_border{
+    margin-bottom:0 !important;
+}
+
+  
+.vayu_blocks_image-settings_main .vayu-blocks-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.vayu_blocks_image-settings_main .vayu-blocks-change-button {
+    position: absolute;
+    bottom: 2%; /* Start from the bottom of the container */
+    left: 0%;
+    height: 0; /* Start with height 0 */
+    overflow: hidden; /* Hide overflowing content */
+    padding: 0px 95px; /* Padding is kept for expansion */
+    background-color: black; /* Change this color as needed */
+    color: white;
+    opacity: 0.8;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: height 0.3s ease, padding 0.3s ease; /* Smooth expansion effect */
+    z-index: 10; /* Ensure the button is above the image */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.vayu_blocks_image-settings_main .vayu-blocks-image-container:hover .vayu-blocks-change-button {
+    height: 38px; /* Set the desired height when expanded */
+    padding: 0px 95px; /* Adjust padding to match the height */
 }

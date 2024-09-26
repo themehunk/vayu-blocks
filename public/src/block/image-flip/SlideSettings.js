@@ -16,6 +16,7 @@ import {
 import {MediaPlaceholder } from '@wordpress/block-editor';
 
 import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
+import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -88,21 +89,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 {__('Clear', 'vayu-blocks')}
                             </Button>
 
-
-                            <div class= "vayu_blocks_image_toolspanel_flip">
-                            <ToolsPanel
-                                label="Filter"
-                                __nextHasNoMarginBottom
-                            >
-                                <DuotonePicker
-                                    duotonePalette={ vayu_blocks_DUOTONE_PALETTE}
-                                    disableCustomColors
-                                    disableCustomDuotone
-                                    value={ vayu_blocks_duotonevalue() }
-                                    onChange={ (value) => vayu_blocks_duotoneHandler(value) }
-                                />
-                            </ToolsPanel>
-                            </div>
+                            <DuotonePanel
+                                duotoneValue={vayu_blocks_duotonevalue()}
+                                onDuotoneChange={(value) => vayu_blocks_duotoneHandler(value)}
+                                duotonePalette={vayu_blocks_DUOTONE_PALETTE}
+                            />
 
                             <TextControl
                                 className="imagealttextrichcontrol"
@@ -206,8 +197,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             { label: __('Slide Down', 'vayu-blocks'), value: 'slide-down' },
                             { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
                             { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
-                            { label: __('Flip Horizontal', 'vayu-blocks'), value: 'flip-horizontal' },
-                            { label: __('Flip Vertical', 'vayu-blocks'), value: 'flip-vertical' },
                             { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
                             ...(attributes.overlay === false ? [
                                 { label: __('Flip Right', 'vayu-blocks'), value: 'flip-front' },

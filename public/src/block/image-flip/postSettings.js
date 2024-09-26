@@ -114,11 +114,24 @@ const PostSettings = ({ attributes, setAttributes }) => {
     };
 
     const handlecoloroverlay = (value) => {
-        if(value.color === undefined ){
-            setAttributes({overlaycolor: 'transparent'})
+
+        // Check if value.color exists
+        if (value.color !== undefined) {
+            if (value.color === null || value.color === '') {
+                setAttributes({ overlaycolor: 'transparent' });
+            } else {
+                setAttributes({ overlaycolor: value.color });
+            }
+        } else{
+            setAttributes({ overlaycolor: 'transparent' });
         }
-        else{
-            setAttributes({overlaycolor: value.color})
+    }
+
+    const vayu_blocks_overlay_function = (value) => {
+        setAttributes({overlay:value});
+        setAttributes({showPreview:false});
+        if(value===true){
+            setAttributes({imagehvreffect:'none'})
         }
     }
 
@@ -132,7 +145,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         className='vayu_blocks_togglecontrol'
                         label={attributes.overlay ? __('Without Hover', 'vayu-blocks') : __('With Hover', 'vayu-blocks')}
                         checked={attributes.overlay}
-                        onChange={(value) =>  setAttributes({overlay:value, showPreview: false})}
+                        onChange={(value) =>  vayu_blocks_overlay_function(value)}
                     />
                     
                     {/* Show Preview Button */}
@@ -158,36 +171,11 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     </h4>
                     <ToogleGroupControl
                         label={__('Alignment', 'vayu-blocks')}
-                        value={ attributes.overlayalignment}
-                        onChange={(value) => setAttributes({overlayalignment:value})}
-                        options={[
-                            {
-                                icon: HorizontalLeft,
-                                label: __( 'Left', 'vayu-blocks' ),
-                                value: 'left'
-                            },
-                            {
-                                icon: Center,
-                                label: __( 'Center', 'vayu-blocks' ),
-                                value: 'center'
-                            },
-                            {
-                                icon: HorizontalRight,
-                                label: __( 'Right', 'vayu-blocks' ),
-                                value: 'right'
-                            },
-                        ]}
-                        
-                        hasIcon
-                    />
-
-                    <ToogleGroupControl
-                        label={__('Alignment', 'vayu-blocks')}
                         value={ attributes.overlayalignmentvertical}
                         onChange={(value) => setAttributes({overlayalignmentvertical:value})}
                         options={[
                             {
-                                icon: Start,
+                                icon: HorizontalLeft,
                                 label: __( 'start', 'vayu-blocks' ),
                                 value: 'start'
                             },
@@ -197,7 +185,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                                 value: 'center'
                             },
                             {
-                                icon: End,
+                                icon: HorizontalRight,
                                 label: __( 'end', 'vayu-blocks' ),
                                 value: 'end'
                             },
@@ -205,6 +193,32 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         
                         hasIcon
                     />
+
+                    <ToogleGroupControl
+                        label={__('Alignment', 'vayu-blocks')}
+                        value={ attributes.overlayalignment}
+                        onChange={(value) => setAttributes({overlayalignment:value})}
+                        options={[
+                            {
+                                icon: Start,
+                                label: __( 'Left', 'vayu-blocks' ),
+                                value: 'left'
+                            },
+                            {
+                                icon: Center,
+                                label: __( 'Center', 'vayu-blocks' ),
+                                value: 'center'
+                            },
+                            {
+                                icon: End,
+                                label: __( 'Right', 'vayu-blocks' ),
+                                value: 'right'
+                            },
+                        ]}
+                        
+                        hasIcon
+                    />
+
                     <br/>
 
                     <ColorPanel
