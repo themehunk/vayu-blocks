@@ -364,13 +364,13 @@ const edit = (props) => {
                             </>
                         )}
 
+                    </div>
+                    
                         {attributes.caption && (
                             <div style={{textAlign:attributes.captionalignment}}>
                                 <p style={captionstyle}>{attributes.captiontext}</p>
                             </div>
                         )}
-
-                    </div>
                 
                 </div>
             </AdvanceSettings>

@@ -461,4 +461,4 @@ const ColorPanel = (props) =>{
 return colorButton();
 };
 
-export default ColorPanel;
+export default ColorPanel; 

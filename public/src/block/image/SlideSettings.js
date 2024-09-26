@@ -223,15 +223,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     };
 
     const handlecoloroverlay = (value) => {
-        if(value.color){
-            setAttributes({ overlaycolor: value.color }); 
+        // Handle overlay color, only if 'color' is defined in the value object
+        if ('color' in value) {
+            setAttributes({ overlaycolor: value.color !== undefined ? value.color : '' });
         }
-
-        if(value.colorhvr){
-            setAttributes({ overlayhvrcolor: value.colorhvr });
+    
+        // Handle hover color, only if 'colorhvr' is defined in the value object
+        if ('colorhvr' in value) {
+            setAttributes({ overlayhvrcolor: value.colorhvr !== undefined ? value.colorhvr : '' });
         }
-            //fix this
-        
     };
     
     const getimagewidth = () => {
@@ -344,6 +344,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    const handleimageurl = (value) => {
+        setAttributes({image:value.url});
+    }
 
     return (
         
@@ -437,7 +440,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     name: __('an image', 'vayu-blocks')
                                 }}
                                 onSelect={(media) => {
-                                    setAttributes({image:media.url})
+                                    handleimageurl(media)
                                 }}                                                                
                                 onSelectURL='true'
                                 accept="image/*"

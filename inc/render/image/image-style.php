@@ -137,8 +137,8 @@ function generate_inline_image_styles($attr) {
         $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
         $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
         $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-        $css .= "grid-gap: {$gridGapUp} {$gridGap};";
-        $css .= "grid-auto-rows: minmax(100px, auto);";
+        //$css .= "grid-gap: {$gridGapUp} {$gridGap};";
+        //$css .= "grid-auto-rows: minmax(100px, auto);";
         
     $css .= "}";
      
@@ -437,7 +437,7 @@ function generate_inline_image_styles($attr) {
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
         $css .= "width: 96%;";
-        $css .= "height: 98%;";
+        $css .= "height: 93%;";
         $css .= "position: absolute;";
         $css .= "top: 0;";
         $css .= "left: 0;";

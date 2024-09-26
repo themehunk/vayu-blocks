@@ -1152,35 +1152,27 @@ const InsSettings = ({
 		}
 	};
 
-	const handlecolorcolorpanel =(value)=> {
+	const handlecolorcolorpanel = (value) => {
 
-		// Check if value.color exists
-        if (value.color !== undefined) {
-            if (value.color === null || value.color === '') {
-                setAttributes({ headingColor: 'transparent' });
-				setAttributes({headingimage:''});
-            } else {
-                setAttributes({ headingColor: value.color });
-				setAttributes({headingimage:''});
-            }
-        } else{
-            setAttributes({ headingColor: 'transparent' });
-			setAttributes({headingimage:''});
-        }
-
-        // Check if value.colorhvr exists
-        if (value.colorhvr !== undefined) {
-            if (value.colorhvr === null || value.colorhvr === '') {
-                setAttributes({ headingHvrColor: 'transparent' });
-            } else {
-                setAttributes({ headingHvrColor: value.colorhvr });
-            }
-        }
-        else{
-            setAttributes({ headingHvrColor: 'transparent' });
-        }
-	}
-
+		// Handle heading color
+		if ('color' in value) {
+			if (value.color === null || value.color === '') {
+				setAttributes({ headingColor: 'transparent', headingimage: '' });
+			} else {
+				setAttributes({ headingColor: value.color, headingimage: '' });
+			}
+		}
+	
+		// Handle hover color
+		if ('colorhvr' in value) {
+			if (value.colorhvr === null || value.colorhvr === '') {
+				setAttributes({ headingHvrColor: 'transparent' });
+			} else {
+				setAttributes({ headingHvrColor: value.colorhvr });
+			}
+		}
+	};
+	
 	const [colorpanel, setcolorpanel] = useState('color');
 
 	const [fontSizeUnit, setfontSizeUnit] = useState('px');

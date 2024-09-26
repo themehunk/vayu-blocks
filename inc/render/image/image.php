@@ -52,18 +52,18 @@ class Vayu_blocks_image {
                 $image_html .= $this->overlay(); // Ensure this method returns valid HTML
             }
 
-            // Check if the 'caption' attribute is not empty
-            if (!empty($attributes['caption'])) {
-                // Append HTML for the caption
-                $image_html .= '<div class="vayu_block_caption">';
-                    $image_html .= '<p class="vayu_block_caption_text_para">';
-                        $image_html .= esc_html($attributes['captiontext']); // Use esc_html to properly escape HTML entities
-                    $image_html .= '</p>';
-                $image_html .= '</div>';
-            }
-
-
+        
         $image_html .= '</div>';
+
+        // Check if the 'caption' attribute is not empty
+        if (!empty($attributes['caption'])) {
+            // Append HTML for the caption
+            $image_html .= '<div class="vayu_block_caption">';
+                $image_html .= '<p class="vayu_block_caption_text_para">';
+                    $image_html .= esc_html($attributes['captiontext']); // Use esc_html to properly escape HTML entities
+                $image_html .= '</p>';
+            $image_html .= '</div>';
+        }
     
         return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
     }
