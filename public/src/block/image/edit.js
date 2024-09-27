@@ -9,6 +9,8 @@ import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {MediaPlaceholder } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
+
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
@@ -494,8 +496,14 @@ const edit = (props) => {
                     )}
                     
                     {attributes.caption && (
-                        <div style={{textAlign:attributes.captionalignment}}>
-                            <p style={captionstyle}>{attributes.captiontext}</p>
+                        <div style={{ textAlign: attributes.captionalignment }}>
+                            <RichText
+                                tagName="p"
+                                value={attributes.captiontext}
+                                onChange={(newCaption) => setAttributes({ captiontext: newCaption })}
+                                placeholder={__('Add caption...', 'vayu-blocks')}
+                                style={captionstyle}
+                            />
                         </div>
                     )}
                 
