@@ -81,4 +81,4 @@ function enqueue_custom_scripts() {
     }, 10, 2);
 }
 
-//add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');

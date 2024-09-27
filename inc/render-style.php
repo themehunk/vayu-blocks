@@ -14,6 +14,7 @@ add_action( 'init', 'vayu_render_init', 99);
 
 function vayu_render_server_side_css() {
 
+
 	global $_wp_current_template_content;
 
 	$content         = '';

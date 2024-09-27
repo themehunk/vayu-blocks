@@ -808,6 +808,16 @@
     "verticalOrientationOffsetBottomUnit": {
       "type": "string",
       "default": "px"
+    },
+    "dynamicPostType": {
+      "type": "string",
+      "default": "none"
+    },
+    "selectedPost": {
+      "type": "number"
+    },
+    "selectedSourceField": {
+      "type": "string"
     }
   }
 }
