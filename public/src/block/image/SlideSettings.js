@@ -324,17 +324,35 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                             </Fragment>
 
-                            <div className="vayu_block_alignment_main_div">
-                                <ResponsiveControl className="vayu_block_alignment" label={__('Alignment', 'vayu-blocks')}>
-                                    <AlignmentMatrixControl
-                                        className='vayu_blocks_matrix_control'
-                                        value={ getimagealignment() }
+                            <div>
+                                <ResponsiveControl label={__('Alignment', 'vayu-blocks')}>
+                                    <ToogleGroupControl
+                                        label={__('Alignment', 'vayu-blocks')}
+                                        value={ getimagealignment()}
                                         onChange={(value) => changeimagealignment(value)}
+                                        options={[
+                                            {
+                                                icon: HorizontalLeft,
+                                                label: __( 'Left', 'vayu-blocks' ),
+                                                value: 'left'
+                                            },
+                                            {
+                                                icon: Center,
+                                                label: __( 'Center', 'vayu-blocks' ),
+                                                value: 'center'
+                                            },
+                                            {
+                                                icon: HorizontalRight,
+                                                label: __( 'Right', 'vayu-blocks' ),
+                                                value: 'right'
+                                            },
+                                        ]}
+                                        
+                                        hasIcon
                                     />
                                 </ResponsiveControl>
                             <br/>
                             </div>
-
 
                         <TextControl
                             className="imagealttextrichcontrol"
@@ -365,6 +383,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             </>
                         )}
                         
+                </PanelBody >
+
+                <PanelBody title={__('Advance Image Animation', 'vayu-blocks')} initialOpen={false}>
                         <DuotonePanel
                             duotoneValue={vayu_blocks_duotonevalue()}
                             onDuotoneChange={(value) => vayu_blocks_duotoneHandler(value)}
@@ -410,8 +431,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             ]}
                             onChange={(value) => setAttributes({ imagehvranimation: value })}
                         />
-                        
-                </PanelBody >
+                </PanelBody>
 
                 {/* Overlay and animation effect  */}
                 <PanelBody title={__('Mask','vayu-blocks')} initialOpen={false}>

@@ -56,9 +56,9 @@ return array(
                 'right' => '0px',
             ),
 
-            'imagealignment' => 'center center',
-            'imagealignmenttablet' => 'center center',
-            'imagealignmentmobile' => 'center center',
+            'imagealignment' => 'center',
+            'imagealignmenttablet' => 'center',
+            'imagealignmentmobile' => 'center',
             
             'overlayshow'=>true,
             'maskshape'=> 'none',

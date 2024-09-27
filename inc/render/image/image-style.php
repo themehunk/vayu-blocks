@@ -323,22 +323,12 @@ function generate_inline_image_styles($attr) {
     $css .= "}";
 
     $css .= "$wrapper $inline .vayu_blocks_image_image-container {";
-        $imagealignment = explode(' ', $attr['imagealignment']); // Split the string
-        $vertical = $imagealignment[0]; // First part (vertical)
-        $horizontal = $imagealignment[1]; // Second part (horizontal)
         $css .= "display: flex;";
-        $css .= "align-items: " . (
-            $vertical === 'center' ? 'center' :
-            ($vertical === 'top' ? 'self-start' :
-            ($vertical === 'bottom' ? 'self-end' : 'center'))
-        ) . ";";
-
         $css .= "justify-content: " . (
-            $horizontal === 'center' ? 'center' :
-            ($horizontal === 'left' ? 'flex-start' :
-            ($horizontal === 'right' ? 'flex-end' : 'center'))
+            $attr['imagealignment'] === 'center' ? 'center' :
+            ($attr['imagealignment'] === 'left' ? 'flex-start' :
+            ($attr['imagealignment'] === 'right' ? 'flex-end' : 'center'))
         ) . ";";
-
     $css .= "}";
 
     $css .= ".flip-front {";
@@ -789,9 +779,6 @@ function generate_inline_image_styles($attr) {
     $vertical = $overlayalignmenttablet[0]; // First part (vertical)
     $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-    $imagealignmenttablet = explode(' ', $attr['imagealignmenttablet']); // Split the string
-    $verticalimage = $imagealignmenttablet[0]; // First part (vertical)
-    $horizontalimage = $imagealignmenttablet[1]; // Second part (horizontal)
 
     // for tablet
     $css .= "@media (max-width: 1024px) {
@@ -850,16 +837,10 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper $inline .vayu_blocks_image_image-container{
-          align-items: " . (
-                $verticalimage === 'center' ? 'center' :
-                ($verticalimage === 'top' ? 'self-start' :
-                ($verticalimage === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
-
             justify-content: " . (
-                $horizontalimage === 'center' ? 'center' :
-                ($horizontalimage === 'left' ? 'flex-start' :
-                ($horizontalimage === 'right' ? 'flex-end' : 'center'))
+                $attr['imagealignmenttablet'] === 'center' ? 'center' :
+                ($attr['imagealignmenttablet'] === 'left' ? 'flex-start' :
+                ($attr['imagealignmenttablet'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
 
@@ -868,10 +849,6 @@ function generate_inline_image_styles($attr) {
     $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
     $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
     $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
-
-    $imagealignmentmobile = explode(' ', $attr['imagealignmentmobile']); // Split the string
-    $verticalimagemobile = $imagealignmentmobile[0]; // First part (vertical)
-    $horizontalimagemobile = $imagealignmentmobile[1]; // Second part (horizontal)
 
    // for mobile
     $css .= "@media (max-width: 500px) {
@@ -925,16 +902,11 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper $inline .vayu_blocks_image_image-container{
-          align-items: " . (
-                $verticalimagemobile === 'center' ? 'center' :
-                ($verticalimagemobile === 'top' ? 'self-start' :
-                ($verticalimagemobile === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
 
             justify-content: " . (
-                $horizontalimagemobile === 'center' ? 'center' :
-                ($horizontalimagemobile === 'left' ? 'flex-start' :
-                ($horizontalimagemobile === 'right' ? 'flex-end' : 'center'))
+                $attr['imagealignmentmobile'] === 'center' ? 'center' :
+                ($attr['imagealignmentmobile'] === 'left' ? 'flex-start' :
+                ($attr['imagealignmentmobile'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
     }";

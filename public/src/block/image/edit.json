@@ -102,15 +102,15 @@
     },
     "imagealignment":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imagealignmenttablet":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imagealignmentmobile":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imageborderRadius":{
         "type":"object",

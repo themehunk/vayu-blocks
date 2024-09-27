@@ -173,47 +173,26 @@ const edit = (props) => {
     const vayu_blocks_image_position = {
         display:'Flex',
         ...(view === 'Desktop' && {
-            alignItems: (() => {
-                const [vertical] = attributes.imagealignment.split(' ');
-                return vertical === 'center' ? 'center' :
-                       vertical === 'top' ? 'self-start' :
-                       vertical === 'bottom' ? 'self-end' : 'center';
-            })(),
             justifyContent: (() => {
-                const [, horizontal] = attributes.imagealignment.split(' ');
-                return horizontal === 'center' ? 'center' :
-                       horizontal === 'left' ? 'flex-start' :
-                       horizontal === 'right' ? 'flex-end' : 'center';
+                return attributes.imagealignment === 'center' ? 'center' :
+                       attributes.imagealignment === 'left' ? 'flex-start' :
+                       attributes.imagealignment === 'right' ? 'flex-end' : 'center';
             })(),
         }),
         
         ...(view === 'Tablet' && {
-            alignItems: (() => {
-                const [vertical] = attributes.imagealignmenttablet.split(' ');
-                return vertical === 'center' ? 'center' :
-                       vertical === 'top' ? 'self-start' :
-                       vertical === 'bottom' ? 'self-end' : 'center';
-            })(),
             justifyContent: (() => {
-                const [, horizontal] = attributes.imagealignmenttablet.split(' ');
-                return horizontal === 'center' ? 'center' :
-                       horizontal === 'left' ? 'flex-start' :
-                       horizontal === 'right' ? 'flex-end' : 'center';
+                return attributes.imagealignmenttablet === 'center' ? 'center' :
+                       attributes.imagealignmenttablet === 'left' ? 'flex-start' :
+                       attributes.imagealignmenttablet === 'right' ? 'flex-end' : 'center';
             })(),
         }),
 
         ...(view === 'Mobile' && {
-            alignItems: (() => {
-                const [vertical] = attributes.imagealignmentmobile.split(' ');
-                return vertical === 'center' ? 'center' :
-                       vertical === 'top' ? 'self-start' :
-                       vertical === 'bottom' ? 'self-end' : 'center';
-            })(),
             justifyContent: (() => {
-                const [, horizontal] = attributes.imagealignmentmobile.split(' ');
-                return horizontal === 'center' ? 'center' :
-                       horizontal === 'left' ? 'flex-start' :
-                       horizontal === 'right' ? 'flex-end' : 'center';
+                return imagealignmentmobile === 'center' ? 'center' :
+                       imagealignmentmobile === 'left' ? 'flex-start' :
+                       imagealignmentmobile === 'right' ? 'flex-end' : 'center';
             })(),
         }),
     }
