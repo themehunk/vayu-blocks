@@ -13,6 +13,9 @@ export const variations = [
 		attributes: {
 			variationSelected: true,
 		},
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+		],
 		scope: [ 'block' ],
 	},
 	{
@@ -20,13 +23,12 @@ export const variations = [
         icon: icon2,
 		attributes: {
 			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
+			direction: "row",
 		},
 		isDefault: true,
 		innerBlocks: [
-			[ 'uagb/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'uagb/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -35,22 +37,18 @@ export const variations = [
         icon: icon3,
 		attributes: {
 			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
+			 direction: "row",
 		},
 		innerBlocks: [
-			[ 'uagb/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
-			[ 'uagb/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
-			[ 'uagb/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
 		],
 		scope: [ 'block' ],
 	},
 ];
 
 export const VariationPicker = ( { clientId, setAttributes, defaultVariation } ) => {
-    console.log(clientId);
-    console.log(setAttributes);
-    console.log(defaultVariation);
 	// const { clientId, setAttributes, defaultVariation } = props;
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 
