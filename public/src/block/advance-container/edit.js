@@ -898,7 +898,9 @@ export default function Edit({
     //     });
     // };
 	
+	if ( innerBlockss.length === 0 ) {
 	return <VariationPicker { ...{ clientId, setAttributes, defaultVariation } } />
+	}
     
 			return (
 				<Fragment>
