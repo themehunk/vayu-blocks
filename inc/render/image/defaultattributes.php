@@ -25,11 +25,11 @@ return array(
         'imageaspectratiomobile' => 'original',
         'duotone' => '',
         'showPreview' => false,
-        'overlayalignment' => 'center',
+        'overlayalignment' => 'center center',
         'overlayalignmentvertical' => 'center',
-        'overlayalignmenttablet' => 'center',
+        'overlayalignmenttablet' => 'center center',
         'overlayalignmentverticaltablet' => 'center',
-        'overlayalignmentmobile' => 'center',
+        'overlayalignmentmobile' => 'center center',
         'overlayalignmentverticalmobile' => 'center',
 
         // image Border
@@ -55,6 +55,10 @@ return array(
                 'left' => '0px',
                 'right' => '0px',
             ),
+
+            'imagealignment' => 'center center',
+            'imagealignmenttablet' => 'center center',
+            'imagealignmentmobile' => 'center center',
             
             'overlayshow'=>true,
             'maskshape'=> 'none',
@@ -88,6 +92,7 @@ return array(
             'overlayimageright'=>'5px',
             'overlayspace'=>'space',
             'borderimagesize'=> 30,
+            'imagebackgroundSize' => 'cover',
 
     //Advanced
         'classNamemain' => '',

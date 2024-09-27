@@ -231,9 +231,19 @@ function generate_inline_image_styles($attr) {
   
     // Append CSS rules to $css
     $css .= "$wrapper $inline {";
-        $css .= " width: " . (isset($attr['imagewidth']) ? esc_attr($attr['imagewidth']) : 'auto') . ";";
-        $css .= " height: " . (isset($attr['imageheight']) ? esc_attr($attr['imageheight']) : 'auto') . ";";
         $css .= " overflow: hidden;";
+        if (!empty($attr['imagewidth'])) {
+            $css .= "width: " . esc_attr($attr['imagewidth']) . ";";
+        } else {
+            $css .= "width: auto;";
+        }
+        
+        if (!empty($attr['imageheight'])) {
+            $css .= "height: " . esc_attr($attr['imageheight']) . ";";
+        } else {
+            $css .= "height: auto;";
+        }
+    
         $css .= " position: relative;";
         $css .= "perspective: 1000px;";
         $css .= "transform-style: preserve-3d;";
@@ -241,7 +251,6 @@ function generate_inline_image_styles($attr) {
 
     // Assuming $attr['imagetransitiontime'] contains the transition time value
     $transitionTime = isset($attr['imagetransitiontime']) ? esc_attr($attr['imagetransitiontime']) : '0.5'; // Default to 0.5s if not set
-
     // Append CSS rules to $css
     $css .= "$wrapper .vayu_blocks__image_image {";
 
@@ -249,14 +258,25 @@ function generate_inline_image_styles($attr) {
             $css .= "backface-visibility: hidden;";
         }
 
-        $css .= "width: 100%;";
-        $css .= "height: 100%;";
+        if (!empty($attr['imagewidth'])) {
+            $css .= "width: " . esc_attr($attr['imagewidth']) . ";";
+        } else {
+            $css .= "width: auto;";
+           $css .= "max-width: 100%;";
+        }
+        
+        if (!empty($attr['imageheight'])) {
+            $css .= "height: " . esc_attr($attr['imageheight']) . ";";
+        } else {
+            $css .= "height: auto;";
+        }
+
         $css .= "box-sizing: border-box;";
 
         $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
 
         $css .= "    opacity: 1;"; // Assuming a default opacity value
-        $css .= "    object-fit: " . esc_attr($attr['imagecover']) . ";"; // Assuming this controls object-fit
+        $css .= "    object-fit: " . esc_attr($attr['imagebackgroundSize']) . ";"; // Assuming this controls object-fit
 
         // Apply focal point if it exists, default to center
         $css .= "    object-position: " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['x'] * 100) : '50') . "% " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['y'] * 100) : '50') . "%;";
@@ -300,6 +320,25 @@ function generate_inline_image_styles($attr) {
         $css .= "    transform: var(--image-hover-effect-transform, none);";
         $css .= "    filter: var(--image-filter-effect, none);";
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
+    $css .= "}";
+
+    $css .= "$wrapper $inline .vayu_blocks_image_image-container {";
+        $imagealignment = explode(' ', $attr['imagealignment']); // Split the string
+        $vertical = $imagealignment[0]; // First part (vertical)
+        $horizontal = $imagealignment[1]; // Second part (horizontal)
+        $css .= "display: flex;";
+        $css .= "align-items: " . (
+            $vertical === 'center' ? 'center' :
+            ($vertical === 'top' ? 'self-start' :
+            ($vertical === 'bottom' ? 'self-end' : 'center'))
+        ) . ";";
+
+        $css .= "justify-content: " . (
+            $horizontal === 'center' ? 'center' :
+            ($horizontal === 'left' ? 'flex-start' :
+            ($horizontal === 'right' ? 'flex-end' : 'center'))
+        ) . ";";
+
     $css .= "}";
 
     $css .= ".flip-front {";
@@ -418,7 +457,7 @@ function generate_inline_image_styles($attr) {
 
     /* On hover, move heading up and make paragraph visible with a smooth 3D effect */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image:hover .vayu-blocks-heading-innerblock {";
-        $css .= "transform: translateY(-20px);";  /* Move heading 10px up for more noticeable movement */
+        $css .= "transform: translateY(0px);";  /* Move heading 10px up for more noticeable movement */
     $css .= "}";
 
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image:hover .vayu-blocks-para-innerblock {";
@@ -432,7 +471,7 @@ function generate_inline_image_styles($attr) {
         $css .= "transform: translateY(20px);";  /* Move paragraph back down */
         $css .= "transition: opacity 0.6s ease, transform 0.6s ease;";  /* Smooth transition */
     $css .= "}";
-
+    
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
@@ -448,29 +487,6 @@ function generate_inline_image_styles($attr) {
         $css .= "display: flex;";
         $css .= "margin-left: 2%;";
         $css .= "margin-top: 0.8rem;";
-
-        $alignment = 'center'; // Default value
-
-        if ($attr['overlayalignment'] === 'center') {
-            $alignment = 'center';
-        } elseif ($attr['overlayalignment'] === 'left') {
-            $alignment = 'self-start';
-        } elseif ($attr['overlayalignment'] === 'right') {
-            $alignment = 'self-end';
-        }
-        
-        $css .= "align-items: $alignment;";
-
-        // Handle justify-content
-        $justifyContent = 'center'; // Default value
-        if ($attr['overlayalignmentvertical'] === 'center') {
-            $justifyContent = 'center';
-        } elseif ($attr['overlayalignmentvertical'] === 'start') {
-            $justifyContent = 'flex-start';
-        } elseif ($attr['overlayalignmentvertical'] === 'end') {
-            $justifyContent = 'flex-end';
-        }
-        $css .= "justify-content: $justifyContent;";
         
         $css .= "box-sizing: border-box;";
 
@@ -518,10 +534,22 @@ function generate_inline_image_styles($attr) {
                                 : 'none'))));
         
             $css .= "border-image: " . $borderImage . ";"; // Use the determined border image
-
         }
-        
-        
+            $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
+            $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+            $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
+
+            $css .= "align-items: " . (
+                $vertical === 'center' ? 'center' :
+                ($vertical === 'top' ? 'self-start' :
+                ($vertical === 'bottom' ? 'self-end' : 'center'))
+            ) . ";";
+
+            $css .= "justify-content: " . (
+                $horizontal === 'center' ? 'center' :
+                ($horizontal === 'left' ? 'flex-start' :
+                ($horizontal === 'right' ? 'flex-end' : 'center'))
+            ) . ";";
         
     $css .= "}";
 
@@ -757,7 +785,15 @@ function generate_inline_image_styles($attr) {
         $css .= "color: " . esc_attr($attr['captioncolor']) . ";";
     $css .= "}";
 
-   // for tablet
+    $overlayalignmenttablet = explode(' ', $attr['overlayalignmenttablet']); // Split the string
+    $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+    $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
+
+    $imagealignmenttablet = explode(' ', $attr['imagealignmenttablet']); // Split the string
+    $verticalimage = $imagealignmenttablet[0]; // First part (vertical)
+    $horizontalimage = $imagealignmenttablet[1]; // Second part (horizontal)
+
+    // for tablet
     $css .= "@media (max-width: 1024px) {
 
         $wrapper {
@@ -798,20 +834,44 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper .vayu_blocks_overlay_main_wrapper_image  {
+
             align-items: " . (
-                $attr['overlayalignmenttablet'] === 'center' ? 'center' :
-                ($attr['overlayalignmenttablet'] === 'left' ? 'self-start' :
-                ($attr['overlayalignmenttablet'] === 'right' ? 'self-end' : 'center'))
+                $vertical === 'center' ? 'center' :
+                ($vertical === 'top' ? 'self-start' :
+                ($vertical === 'bottom' ? 'self-end' : 'center'))
             ) . ";
 
             justify-content: " . (
-                $attr['overlayalignmentverticaltablet'] === 'center' ? 'center' :
-                ($attr['overlayalignmentverticaltablet'] === 'start' ? 'flex-start' :
-                ($attr['overlayalignmentverticaltablet'] === 'end' ? 'flex-end' : 'center'))
+                $horizontal === 'center' ? 'center' :
+                ($horizontal === 'left' ? 'flex-start' :
+                ($horizontal === 'right' ? 'flex-end' : 'center'))
+            ) . ";
+
+        }
+
+        $wrapper $inline .vayu_blocks_image_image-container{
+          align-items: " . (
+                $verticalimage === 'center' ? 'center' :
+                ($verticalimage === 'top' ? 'self-start' :
+                ($verticalimage === 'bottom' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $horizontalimage === 'center' ? 'center' :
+                ($horizontalimage === 'left' ? 'flex-start' :
+                ($horizontalimage === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
 
     }";
+
+    $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
+    $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
+    $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
+
+    $imagealignmentmobile = explode(' ', $attr['imagealignmentmobile']); // Split the string
+    $verticalimagemobile = $imagealignmentmobile[0]; // First part (vertical)
+    $horizontalimagemobile = $imagealignmentmobile[1]; // Second part (horizontal)
 
    // for mobile
     $css .= "@media (max-width: 500px) {
@@ -850,16 +910,31 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper .vayu_blocks_overlay_main_wrapper_image  {
+
             align-items: " . (
-                $attr['overlayalignmentmobile'] === 'center' ? 'center' :
-                ($attr['overlayalignmentmobile'] === 'left' ? 'self-start' :
-                ($attr['overlayalignmentmobile'] === 'right' ? 'self-end' : 'center'))
+                $verticalmobile === 'center' ? 'center' :
+                ($verticalmobile === 'top' ? 'self-start' :
+                ($verticalmobile === 'bottom' ? 'self-end' : 'center'))
             ) . ";
 
             justify-content: " . (
-                $attr['overlayalignmentverticalmobile'] === 'center' ? 'center' :
-                ($attr['overlayalignmentverticalmobile'] === 'start' ? 'flex-start' :
-                ($attr['overlayalignmentverticalmobile'] === 'end' ? 'flex-end' : 'center'))
+                $horizontalmobile === 'center' ? 'center' :
+                ($horizontalmobile === 'left' ? 'flex-start' :
+                ($horizontalmobile === 'right' ? 'flex-end' : 'center'))
+            ) . ";
+        }
+
+        $wrapper $inline .vayu_blocks_image_image-container{
+          align-items: " . (
+                $verticalimagemobile === 'center' ? 'center' :
+                ($verticalimagemobile === 'top' ? 'self-start' :
+                ($verticalimagemobile === 'bottom' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $horizontalimagemobile === 'center' ? 'center' :
+                ($horizontalimagemobile === 'left' ? 'flex-start' :
+                ($horizontalimagemobile === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
     }";

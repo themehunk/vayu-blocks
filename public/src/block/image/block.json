@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "title": "Image",
     "category": "vayu-blocks",
-    "description": "A custom image block with animated overlays that appear on hover. Supports customizable overlays.",
+    "description": "Create stunning visual experiences with a customizable image block featuring animated overlays, advanced borders, and mask support.",
     "supports": {
       "html": false,
       "align": ["wide", "full"]

@@ -5,6 +5,12 @@ import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import noimage from '../../../../inc/assets/img/no-image.png';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
+import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
+import { Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import {MediaPlaceholder } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
+
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
@@ -16,7 +22,6 @@ const edit = (props) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
     }, []);
 
-    
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
         const randomPart = Math.random().toString(30).substring(3, 10); // Generate random alphanumeric string
@@ -67,32 +72,50 @@ const edit = (props) => {
 
                 borderImageOutset : `${attributes.borderimageoutset}px`,
         }),
-    
+
         ...(view === 'Desktop' && {
-            alignItems : attributes.overlayalignment === 'center' ? 'center' :
-                attributes.overlayalignment === 'left' ? 'self-start' :
-                attributes.overlayalignment === 'right' ? 'self-end' : 'center',
-            justifyContent : attributes.overlayalignmentvertical === 'center' ? 'center' :
-                attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
-                attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignment.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignment.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+        
+        ...(view === 'Tablet' && {
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignmenttablet.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignmenttablet.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
         }),
 
-        ...(view === 'Tablet' && {       alignItems : attributes.overlayalignmenttablet === 'center' ? 'center' :
-            attributes.overlayalignmenttablet === 'left' ? 'self-start' :
-            attributes.overlayalignmenttablet === 'right' ? 'self-end' : 'center',
-
-            justifyContent : attributes.overlayalignmentverticaltablet === 'center' ? 'center' :
-                attributes.overlayalignmentverticaltablet === 'start' ? 'flex-start' :
-                attributes.overlayalignmentverticaltablet === 'end' ? 'flex-end' : 'center',}),
-
         ...(view === 'Mobile' && {
-            alignItems : attributes.overlayalignmentmobile === 'center' ? 'center' :
-            attributes.overlayalignmentmobile === 'left' ? 'self-start' :
-            attributes.overlayalignmentmobile === 'right' ? 'self-end' : 'center',
-
-            justifyContent : attributes.overlayalignmentverticalmobile === 'center' ? 'center' :
-                attributes.overlayalignmentverticalmobile === 'start' ? 'flex-start' :
-                attributes.overlayalignmentverticalmobile === 'end' ? 'flex-end' : 'center',
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignmentmobile.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignmentmobile.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
         }),
 
     };
@@ -105,12 +128,14 @@ const edit = (props) => {
 
     //main container image style
     const vayu_blocks_image_settings = {
+        width: attributes.imagewidth || 'auto',
+        height: attributes.imageheight || 'auto',
 
         ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
             backfaceVisibility: 'hidden',
         }),
 
-        objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
+        objectFit: attributes.imagebackgroundSize,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
         // Apply focal point if it exists, default to center
         objectPosition: `${attributes.focalPoint?.x * 100 || 50}% ${attributes.focalPoint?.y * 100 || 50}%`,
 
@@ -144,6 +169,54 @@ const edit = (props) => {
         filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
 
     };
+
+    const vayu_blocks_image_position = {
+        display:'Flex',
+        ...(view === 'Desktop' && {
+            alignItems: (() => {
+                const [vertical] = attributes.imagealignment.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.imagealignment.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+        
+        ...(view === 'Tablet' && {
+            alignItems: (() => {
+                const [vertical] = attributes.imagealignmenttablet.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.imagealignmenttablet.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+
+        ...(view === 'Mobile' && {
+            alignItems: (() => {
+                const [vertical] = attributes.imagealignmentmobile.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.imagealignmentmobile.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+    }
 
     const image_flip_template = [
         ['vayu-blocks/advance-heading', {
@@ -184,7 +257,15 @@ const edit = (props) => {
         }
         return {}; // Fallback if no view matches
     })();
+
+    const handleimageurl = (value) => {
+        setAttributes({image:value.url});
+    }
     
+    const handleimage = (value) => {
+        setAttributes({image:value});
+    }
+
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
@@ -362,9 +443,11 @@ const edit = (props) => {
                         </svg>
                     </div>
 
+                    {attributes.image && (
+
                     <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
 
-                        <div className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                        <div style={vayu_blocks_image_position} className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
                                  
                             <img 
                                 style= {vayu_blocks_image_settings}
@@ -392,12 +475,37 @@ const edit = (props) => {
                         )}
 
                     </div>
+
+                    )}
+                    {!attributes.image && (
+                        <MediaUploadCheck>
+                            <MediaPlaceholder
+                                icon="format-image"
+                                labels={{
+                                    title: __('Background Image', 'vayu-blocks'),
+                                    name: __('an image', 'vayu-blocks')
+                                }}
+                                onSelect={(media) => {
+                                    handleimageurl(media)
+                                }} 
+                                onSelectURL={(value) => handleimage(value)}                                                            
+                                accept="image/*"
+                                allowedTypes={['image']}
+                            />
+                        </MediaUploadCheck>
+                    )}
                     
-                        {attributes.caption && (
-                            <div style={{textAlign:attributes.captionalignment}}>
-                                <p style={captionstyle}>{attributes.captiontext}</p>
-                            </div>
-                        )}
+                    {attributes.caption && (
+                        <div style={{ textAlign: attributes.captionalignment }}>
+                            <RichText
+                                tagName="p"
+                                value={attributes.captiontext}
+                                onChange={(newCaption) => setAttributes({ captiontext: newCaption })}
+                                placeholder={__('Add caption...', 'vayu-blocks')}
+                                style={captionstyle}
+                            />
+                        </div>
+                    )}
                 
                 </div>
             </AdvanceSettings>
