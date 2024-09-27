@@ -612,8 +612,9 @@ import apiFetch from '@wordpress/api-fetch';
 		className:Classes,
 		style
 	});
-	console.log(attributes.selectedPost);
+
 	const dynamicContent = useDynamicContent(attributes);
+
 	return (
         <Fragment>
             <Controls 
