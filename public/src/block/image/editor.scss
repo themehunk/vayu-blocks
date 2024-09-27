@@ -52,7 +52,7 @@
 
 /* Apply the custom hover effect */
 .vayu_blocks_image_wrapper:hover .vayu_blocks_image_image {
-    transform: var(--image-hover-effect-transform, none);
+    transform: var(--image-hover-effect-transform) ;
     filter: var(--image-filter-effect-filter);
     opacity: var(--image-hover-effect-opacity, 1);
 }

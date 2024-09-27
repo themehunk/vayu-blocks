@@ -147,7 +147,6 @@ const edit = (props) => {
     const vayu_blocks_image_settings = {
         width: attributes.imagewidth || 'auto',
         height: attributes.imageheight || 'auto',
-        transform: `rotate(${attributes.rotation}deg)`,
 
         ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
             backfaceVisibility: 'hidden',
@@ -278,7 +277,9 @@ const edit = (props) => {
     return (
         <>
             <BlockControls>
+            {attributes.image && (
                 <ToolbarGroup>
+
                     <ToolbarButton
                         label="Rotate Image"
                         onClick={rotateImage} // Rotate both on button click
@@ -300,15 +301,18 @@ const edit = (props) => {
                         render={({ open }) => (
                             
                             <ToolbarButton
-                                label="Change Image"
-                                icon="format-image"
-                                onClick={open}
-                            />
+                            label="Change Image"
+                            onClick={open}
+                        >
+                            Replace 
+                        </ToolbarButton>
                             
                         )}
                     />
+                
                   
                 </ToolbarGroup>
+                )}
             </BlockControls>
 
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
@@ -487,38 +491,40 @@ const edit = (props) => {
                     </div>
 
                     {attributes.image && (
-
+                    
                     <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
+                        <div style={{transform:`rotate(${attributes.rotation}deg)`}}>
+                            <div style={vayu_blocks_image_position} className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                                    
+                                <img 
+                                    style= {vayu_blocks_image_settings}
+                                    src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
+                                    className={`vayu_blocks_image_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
+                                />
 
-                        <div style={vayu_blocks_image_position} className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
-                                 
-                            <img 
-                                style= {vayu_blocks_image_settings}
-                                src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
-                                className={`vayu_blocks_image_image ${attributes.imagehvrfilter} ${attributes.maskshape!=='none' ? 'maskshapeimage': ''}`} 
-                            />
+                            </div>  
 
-                        </div>  
+                            {attributes.overlayshow && (
+                                <>
+                                <div 
+                                    className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                    style={vayu_block_overlay_style}
+                                >
+                                    <div className="vayu_blocks_inner_content">
+                                        <InnerBlocks 
+                                            template={image_flip_template} 
+                                        />
+                                    </div>
 
-                        {attributes.overlayshow && (
-                            <>
-                            <div 
-                                className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
-                                style={vayu_block_overlay_style}
-                            >
-                                <div className="vayu_blocks_inner_content">
-                                    <InnerBlocks 
-                                        template={image_flip_template} 
-                                    />
                                 </div>
-
-                            </div>
-                            </>
-                        )}
-
+                                </>
+                            )}
+                          </div>    
                     </div>
+                  
 
                     )}
+
                     {!attributes.image && (
                         <MediaUploadCheck>
                             <MediaPlaceholder

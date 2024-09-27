@@ -47,7 +47,7 @@ const defaultBorderRadius = {
  * @param {string} [color] - Default color for the border.
  * @param {boolean} [disableCustomColors=false] - Whether to disable custom color options.
  * @param {string} [popoverPlacement] - The placement of the color popover.
- * @param {boolean} [enableAlpha=false] - Whether to enable alpha transparency in color picker.
+ * @param {boolean} [enableAlpha=true] - Whether to enable alpha transparency in color picker.
  * @param {boolean} [enableStyle=true] - Whether to enable style options.
  * 
  * @returns {JSX.Element} The rendered border and border-radius control panel.
@@ -118,7 +118,7 @@ export function Vayu_Block_Border_Control({
     ],   
     disableCustomColors=false,
     popoverPlacement,
-    enableAlpha=false,
+    enableAlpha=true,
     enableStyle=true
 }) {
     const { border, borderRadius } = value;

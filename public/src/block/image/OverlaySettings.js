@@ -416,6 +416,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 includeBorder={true}
                                 includeBorderRadius={true}
                                 para=""
+                                enableAlpha={true}
                             />  
                         </div>
                         

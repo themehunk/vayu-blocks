@@ -38,6 +38,7 @@ class Vayu_blocks_image {
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
         
         $image_html .= '<div class="vayu_blocks_image__wrapper" id='. $uniqueId .'>';
+            $image_html .= '<div class="vayu_blocks_rotating_div">';
             $image_html .= '<div class="vayu_blocks_image_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $imageHvrAnimation . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
@@ -53,6 +54,7 @@ class Vayu_blocks_image {
             }
 
         
+        $image_html .= '</div>';
         $image_html .= '</div>';
 
         // Check if the 'caption' attribute is not empty

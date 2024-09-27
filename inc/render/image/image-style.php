@@ -249,6 +249,11 @@ function generate_inline_image_styles($attr) {
         $css .= "transform-style: preserve-3d;";
     $css .= "}";
 
+    $css .= "$wrapper .vayu_blocks_rotating_div{";
+        $rotation = esc_attr($attr['rotation']) % 360; // This will ensure the value is within 0-359
+        $css .= "transform: rotate( " . $rotation . "deg) !important;";
+    $css .= "}";
+    
     // Assuming $attr['imagetransitiontime'] contains the transition time value
     $transitionTime = isset($attr['imagetransitiontime']) ? esc_attr($attr['imagetransitiontime']) : '0.5'; // Default to 0.5s if not set
     // Append CSS rules to $css
@@ -272,7 +277,7 @@ function generate_inline_image_styles($attr) {
         }
 
         $css .= "box-sizing: border-box;";
-        $css .= "transform: rotate( " . esc_attr($attr['rotation']) . "deg);";
+        
         $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
 
         $css .= "    opacity: 1;"; // Assuming a default opacity value
