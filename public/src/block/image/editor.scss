@@ -37,8 +37,6 @@
 }
 
 .vayu_blocks_image_wrapper .vayu_blocks_image_image {
-    width: 100%;
-    height: 100% !important; /* Ensure the image fills the container */
     transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
      /* Ensures the image content covers the container */
     opacity:var(--image-opacity);
@@ -639,4 +637,70 @@ animation: starburst 2.5s linear infinite;
 .vayu_blocks_image-settings_main .vayu-blocks-image-container:hover .vayu-blocks-change-button {
     height: 38px; /* Set the desired height when expanded */
     padding: 0px 95px; /* Adjust padding to match the height */
+}
+
+.vayu_blocks_matrix_control{
+    margin-left:100%;
+    margin-top:-24%;
+    border:1px solid rgba(128,128,128,0.23);
+}
+
+.vayu_block_alignment{
+     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.components-base-control__title_image{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.linking-controls_image{
+    display:flex;
+}
+
+.linking-controls_image button {
+  width: 25px;
+  height: 28px;
+  outline: none;
+  box-shadow: none;
+}
+.linking-controls_image button svg {
+  width: 20px;
+}
+
+.linking-controls_image button.is-primary {
+  z-index: 0;
+  background: #F1E3FF;
+}
+
+.linking-controls_image button.is-primary svg {
+  fill: #fff;
+}
+
+.linking-controls_image button.is-primary:hover {
+    background: #F1E3FF;
+  border-color: none;
+  box-shadow: none;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.linking-controls_image button.is-primary:focus:not(:disabled) {
+  box-shadow: none;
+  background:#F1E3FF;
+}
+
+.linking-controls_image button .dashicon {
+  margin: 2px;
+}
+
+.components-base-control__field_image{
+    margin-bottom:20px;
+}
+
+.components-base-control__field_image .components-button-group .components-button {
+    box-shadow: inset 0 0 0 1px #1e1e1e21;
 }

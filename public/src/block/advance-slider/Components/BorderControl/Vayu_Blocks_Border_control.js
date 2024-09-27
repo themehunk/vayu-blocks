@@ -146,6 +146,25 @@ export function Vayu_Block_Border_Control({
         onChange(resetValue);
     };
 
+    const resetborder = () => {
+        const resetValue = {
+            border: {
+                top: defaultBorder,
+                right: defaultBorder,
+                bottom: defaultBorder,
+                left: defaultBorder,
+            },
+        };
+        onChange(resetValue);
+    };
+
+    const resetborderradius = () => {
+        const resetValue = {
+            borderRadius: defaultBorderRadius,
+        };
+        onChange(resetValue);
+    };
+
     return (
         <div className="vayu_blocks_border_panel">
             <ToolsPanel label={__(label)} resetAll={resetAll}>
@@ -158,9 +177,10 @@ export function Vayu_Block_Border_Control({
 
                 {includeBorder && (
                     <ToolsPanelItem
-                        hasValue={() => !!border}
+                        hasValue={() => border}
                         label={__('Border', 'vayu_blocks')}
                         isShownByDefault
+                        onDeselect={resetborder}
                     >
                         <div class="vayu_block_border_control">
                         <BorderBoxControl
@@ -179,9 +199,10 @@ export function Vayu_Block_Border_Control({
 
                 {includeBorderRadius && (
                     <ToolsPanelItem
-                        hasValue={() => !!borderRadius}
+                        hasValue={() => borderRadius}
                         label={__('Radius', 'vayu_blocks')}
                         isShownByDefault
+                        onDeselect={resetborderradius}
                     >
                         <div class="vayu_block_borderradius_control">
                         <BorderBoxControl

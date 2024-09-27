@@ -78,7 +78,7 @@
     },
     "overlayalignment":{
         "type":"string",
-        "default":"center"
+        "default":"center center"
     },
     "overlayalignmentvertical":{
         "type":"string",
@@ -86,7 +86,7 @@
     },
     "overlayalignmenttablet":{
         "type":"string",
-        "default":"center"
+        "default":"center center"
     },
     "overlayalignmentverticaltablet":{
         "type":"string",
@@ -94,11 +94,23 @@
     },
     "overlayalignmentmobile":{
         "type":"string",
-        "default":"center"
+        "default":"center center"
     },
     "overlayalignmentverticalmobile":{
         "type":"string",
         "default":"center"
+    },
+    "imagealignment":{
+        "type":"string",
+        "default":"center center"
+    },
+    "imagealignmenttablet":{
+        "type":"string",
+        "default":"center center"
+    },
+    "imagealignmentmobile":{
+        "type":"string",
+        "default":"center center"
     },
     "imageborderRadius":{
         "type":"object",
@@ -268,7 +280,9 @@
     "borderimageoutset":{
         "type":"number",
         "default":5
-    }
-    
-    
+    },
+    "imagebackgroundSize":{
+        "type":"string",
+        "default":"cover"
+    }  
 }
