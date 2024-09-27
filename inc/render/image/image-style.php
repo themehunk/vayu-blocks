@@ -272,7 +272,7 @@ function generate_inline_image_styles($attr) {
         }
 
         $css .= "box-sizing: border-box;";
-
+        $css .= "transform: rotate( " . esc_attr($attr['rotation']) . "deg);";
         $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
 
         $css .= "    opacity: 1;"; // Assuming a default opacity value
@@ -465,21 +465,18 @@ function generate_inline_image_styles($attr) {
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
-        $css .= "width: 96%;";
-        $css .= "height: 93%;";
+        $css .= "width: " . esc_attr($attr['overlaywidth']) . ";";
+        $css .= "height: " . esc_attr($attr['overlayheight']) . ";";
         $css .= "position: absolute;";
-        $css .= "top: 0;";
-        $css .= "left: 0;";
+        $css .= "top: " . esc_attr($attr['overlaytop']) . ";";
+        $css .= "left: " . esc_attr($attr['overlayleft']) . ";";
         $css .= "transition: " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
         $css .= "opacity: 1; ";
        
         $css .= "z-index: 10;";
         $css .= "display: flex;";
-        $css .= "margin-left: 2%;";
-        $css .= "margin-top: 0.8rem;";
         
         $css .= "box-sizing: border-box;";
-
         
         if ($attr['overlaybordertype'] === 'color') {
             // Top border
@@ -525,21 +522,22 @@ function generate_inline_image_styles($attr) {
         
             $css .= "border-image: " . $borderImage . ";"; // Use the determined border image
         }
-            $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
-            $vertical = $overlayalignmenttablet[0]; // First part (vertical)
-            $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-            $css .= "align-items: " . (
-                $vertical === 'center' ? 'center' :
-                ($vertical === 'top' ? 'self-start' :
-                ($vertical === 'bottom' ? 'self-end' : 'center'))
-            ) . ";";
+        $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
+        $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+        $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-            $css .= "justify-content: " . (
-                $horizontal === 'center' ? 'center' :
-                ($horizontal === 'left' ? 'flex-start' :
-                ($horizontal === 'right' ? 'flex-end' : 'center'))
-            ) . ";";
+        $css .= "align-items: " . (
+            $vertical === 'center' ? 'center' :
+            ($vertical === 'top' ? 'self-start' :
+            ($vertical === 'bottom' ? 'self-end' : 'center'))
+        ) . ";";
+
+        $css .= "justify-content: " . (
+            $horizontal === 'center' ? 'center' :
+            ($horizontal === 'left' ? 'flex-start' :
+            ($horizontal === 'right' ? 'flex-end' : 'center'))
+        ) . ";";
         
     $css .= "}";
 
@@ -843,6 +841,13 @@ function generate_inline_image_styles($attr) {
                 ($attr['imagealignmenttablet'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
+            
+        $wrapper .vayu_blocks_overlay_main_wrapper_image{
+            width: " . (isset($attr['overlaywidthtablet']) ? esc_attr($attr['overlaywidthtablet']) : 'auto') . ";
+            height: " . (isset($attr['overlayheighttablet']) ? esc_attr($attr['overlayheighttablet']) : 'auto') . ";
+            left: " . (isset($attr['overlaylefttablet']) ? esc_attr($attr['overlaylefttablet']) : 'auto') . ";
+            top: " . (isset($attr['overlaytoptablet']) ? esc_attr($attr['overlaytoptablet']) : 'auto') . ";
+        }
 
     }";
 
@@ -909,6 +914,14 @@ function generate_inline_image_styles($attr) {
                 ($attr['imagealignmentmobile'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper_image{
+            width: " . (isset($attr['overlaywidthmobile']) ? esc_attr($attr['overlaywidthmobile']) : 'auto') . ";
+            height: " . (isset($attr['overlayheightmobile']) ? esc_attr($attr['overlayheightmobile']) : 'auto') . ";
+            left: " . (isset($attr['overlayleftmobile']) ? esc_attr($attr['overlayleftmobile']) : 'auto') . ";
+            top: " . (isset($attr['overlaytopmobile']) ? esc_attr($attr['overlaytopmobile']) : 'auto') . ";
+        }
+
     }";
     
     return $css;

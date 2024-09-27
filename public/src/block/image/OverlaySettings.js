@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {Fragment, useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
@@ -9,15 +9,18 @@ import {
     SelectControl,
     __experimentalBoxControl as BoxControl,
     __experimentalAlignmentMatrixControl as AlignmentMatrixControl,
+    __experimentalUnitControl as UnitControl,
     GradientPicker,
 	ButtonGroup,
 	Icon,
+
 } from '@wordpress/components';
 import {MediaPlaceholder} from '@wordpress/block-editor';
 
 
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import ControlPanelControl from '../../components/control-panel-control/index.js';
 
 import {
     HoverControl,
@@ -194,6 +197,95 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     }
 
+    const getoverlaywidth = () => {
+        if('Desktop' === getView ){
+            return attributes.overlaywidth
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlaywidthtablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlaywidthmobile
+        } 
+    };
+
+    const getoverlayheight = () => {
+        if('Desktop' === getView ){
+            return attributes.overlayheight
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlayheighttablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlayheightmobile
+        } 
+    };
+
+    const changeoverlayWidth = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlaywidth: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlaywidthtablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlaywidthmobile: value });
+        }
+    };
+
+    const changeoverlayHeight = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlayheight: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlayheighttablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlayheightmobile: value });
+        }
+    };
+
+    const getoverlaytop = () => {
+        if('Desktop' === getView ){
+            return attributes.overlaytop
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlaytoptablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlaytopmobile
+        } 
+    };
+
+    const getoverlayleft = () => {
+        if('Desktop' === getView ){
+            return attributes.overlayleft
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlaylefttablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlayleftmobile
+        } 
+    };
+
+    const changeoverlaytop = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlaytop: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlaytoptablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlaytopmobile: value });
+        }
+    };
+
+    const changeoverlayleft = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlayleft: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlaylefttablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlayleftmobile: value });
+        }
+    };
+
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
@@ -211,11 +303,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         <div className="vayu_block_alignment_main_div">
                             <ResponsiveControl className="vayu_block_alignment" label={__('Alignment', 'vayu-blocks')}>
 
-                            <AlignmentMatrixControl
-                                className='vayu_blocks_matrix_control'
-                                value={ getoverlayalignment() }
-                                onChange={(value) => changeoverlayalignment(value)}
-                            />
+                                <AlignmentMatrixControl
+                                    className='vayu_blocks_matrix_control'
+                                    value={ getoverlayalignment() }
+                                    onChange={(value) => changeoverlayalignment(value)}
+                                />
+
                             </ResponsiveControl>
                         <br/>
                         </div>
@@ -244,7 +337,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 
                 </PanelBody >
 
-                <PanelBody title={__('Advance Border','vayu-blocks')} initialOpen={false}>
+                <PanelBody title={__('Image Frame','vayu-blocks')} initialOpen={false}>
                 
                     <div className="components-base-control__field_image">
                         <div className="components-base-control__title_image">
@@ -376,6 +469,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             />
                             </div>
 
+                            <br/>
+
                         </>
                     )}
 
@@ -482,6 +577,105 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                         </>
                     )}
+
+                    <Fragment>
+                        <ControlPanelControl
+                            label={ __( 'Overlay advance Settings', 'vayu-blocks' ) }
+                        >
+                            <div className='vayu_block_width_height_control_overlay'>
+
+                            <ResponsiveControl label={__('Width', 'vayu_blocks')}>
+                                <UnitControl
+                                    placeholder={ __( 'Auto' ) }
+                                    labelPosition="top"
+                                    size="__unstable-large"
+                                    className="vayu_block_unit_width_control"
+                                    onChange={(value) =>changeoverlayWidth(value)}
+                                    value={getoverlaywidth()}
+                                    max={100} // Maximum width
+                                    min={2} // Minimum width
+                                    units={[
+                                        {
+                                          a11yLabel: 'Percentage (%)',
+                                          label: '%',
+                                          step: 1,
+                                          value: '%'
+                                        }
+                                      ]}
+                                />
+                            </ResponsiveControl>
+
+                            <ResponsiveControl label={__('Height', 'vayu_blocks')}>
+                                <UnitControl
+                                    placeholder={ __( 'Auto' ) }
+                                    labelPosition="top"
+                                    size="__unstable-large"
+                                    className="vayu_block_unit_width_control"
+                                    onChange={(value) => changeoverlayHeight(value)}
+                                    value={getoverlayheight()}
+                                    max={100} // Maximum width
+                                    min={2} // Minimum width
+                                    units={[
+                                        {
+                                          a11yLabel: 'Percentage (%)',
+                                          label: '%',
+                                          step: 1,
+                                          value: '%'
+                                        }
+                                      ]}
+                                />
+                            </ResponsiveControl>
+
+
+                            </div>
+
+                            <div className='vayu_block_width_height_control_overlay'>
+
+                                <ResponsiveControl label={__('Left', 'vayu_blocks')}>
+                                    <UnitControl
+                                        placeholder={ __( 'Auto' ) }
+                                        labelPosition="top"
+                                        size="__unstable-large"
+                                        className="vayu_block_unit_width_control"
+                                        onChange={(value) =>changeoverlayleft(value)}
+                                        value={getoverlayleft()}
+                                        max={1500} // Maximum width
+                                        min={0} // Minimum width
+                                        units={[
+                                            {
+                                                a11yLabel: 'Percentage (px)',
+                                                label: 'px',
+                                                step: 1,
+                                                value: 'px'
+                                            }
+                                        ]}
+                                    />
+                                </ResponsiveControl>
+
+                                <ResponsiveControl label={__('Top', 'vayu_blocks')}>
+                                    <UnitControl
+                                        placeholder={ __( 'Auto' ) }
+                                        labelPosition="top"
+                                        size="__unstable-large"
+                                        className="vayu_block_unit_width_control"
+                                        onChange={(value) => changeoverlaytop(value)}
+                                        value={getoverlaytop()}
+                                        max={1500} // Maximum width
+                                        min={0} // Minimum width
+                                        units={[
+                                            {
+                                            a11yLabel: 'Percentage (px)',
+                                            label: 'px',
+                                            step: 1,
+                                            value: 'px'
+                                            }
+                                        ]}
+                                    />
+                                </ResponsiveControl>
+                            </div>
+
+                        </ControlPanelControl>
+                    </Fragment>
 
                 </PanelBody>
 

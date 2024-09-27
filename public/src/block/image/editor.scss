@@ -151,17 +151,11 @@
 
 /* Overlay styles */
 .vayu_blocks_overlay_main_wrapper_image {
-    width: 96%;
-    height: 93%;
     position: absolute;
-    top: 0;
-    left: 0;
     transition: var(--overlay-transitiontime) ease;
     opacity: 1; /* Initially hidden */
     z-index: 10;
     display: flex;
-    margin-left:2%;
-    margin-top: 0.8rem;
 }
 
 /* Hover the image and show the overlay */
@@ -640,20 +634,30 @@ animation: starburst 2.5s linear infinite;
 }
 
 .vayu_blocks_matrix_control{
-    margin-left:100%;
-    margin-top:-24%;
     border:1px solid rgba(128,128,128,0.23);
 }
 
-.vayu_block_alignment{
-     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.vayu_block_alignment .components-base-control__field{
+    display: flex;
+    justify-content: space-between;
 }
 
 .components-base-control__title_image{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.rotate-image {
+    animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .linking-controls_image{
@@ -703,4 +707,10 @@ animation: starburst 2.5s linear infinite;
 
 .components-base-control__field_image .components-button-group .components-button {
     box-shadow: inset 0 0 0 1px #1e1e1e21;
+}
+
+.vayu_block_width_height_control_overlay{
+    display:flex;
+    gap:20px;
+    margin-left:20px;
 }

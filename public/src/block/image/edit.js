@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
@@ -10,10 +10,15 @@ import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 import { RichText } from '@wordpress/block-editor';
+import { BlockControls, AlignmentControl } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton ,DropdownMenu,ToolbarItem,Toolbar} from '@wordpress/components';
+import { transform } from 'lodash';
 
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
+
+    const [rotation, setRotation] = useState(attributes.rotation);
 
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -74,6 +79,10 @@ const edit = (props) => {
         }),
 
         ...(view === 'Desktop' && {
+            width:attributes.overlaywidth,
+            height:attributes.overlayheight,
+            top:attributes.overlaytop,
+            left:attributes.overlayleft,
             alignItems: (() => {
                 const [vertical] = attributes.overlayalignment.split(' ');
                 return vertical === 'center' ? 'center' :
@@ -89,6 +98,10 @@ const edit = (props) => {
         }),
         
         ...(view === 'Tablet' && {
+            width:attributes.overlaywidthtablet,
+            height:attributes.overlayheighttablet,
+            top:attributes.overlaytoptablet,
+            left:attributes.overlaylefttablet,
             alignItems: (() => {
                 const [vertical] = attributes.overlayalignmenttablet.split(' ');
                 return vertical === 'center' ? 'center' :
@@ -104,6 +117,10 @@ const edit = (props) => {
         }),
 
         ...(view === 'Mobile' && {
+            width:attributes.overlaywidthmobile,
+            height:attributes.overlayheightmobile,
+            top:attributes.overlaytopmobile,
+            left:attributes.overlayleftmobile,
             alignItems: (() => {
                 const [vertical] = attributes.overlayalignmentmobile.split(' ');
                 return vertical === 'center' ? 'center' :
@@ -130,6 +147,7 @@ const edit = (props) => {
     const vayu_blocks_image_settings = {
         width: attributes.imagewidth || 'auto',
         height: attributes.imageheight || 'auto',
+        transform: `rotate(${attributes.rotation}deg)`,
 
         ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
             backfaceVisibility: 'hidden',
@@ -245,8 +263,54 @@ const edit = (props) => {
         setAttributes({image:value});
     }
 
+    const rotateImage = () => {
+        const newRotation = (rotation + 90);
+        setRotation(newRotation);
+        setAttributes({ rotation: newRotation });
+    };
+
+    // Function to handle image selection/change
+    const handleImageChange = ( media ) => {
+        // Handle media upload
+        setAttributes({ image: media.url });
+    };
+
     return (
         <>
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        label="Rotate Image"
+                        onClick={rotateImage} // Rotate both on button click
+                    >
+                        {/* Icon that rotates the same degree as the image */}
+                        <span
+                            style={{
+                                display: 'inline-block',
+                                transform: `rotate(${attributes.rotation}deg)`,
+                                transition: 'transform 0.3s ease-in-out'
+                            }}
+                            className="dashicons dashicons-image-rotate"
+                        ></span>
+                    </ToolbarButton>
+
+                    <MediaUpload
+                        onSelect={handleImageChange}
+                        allowedTypes={['image']}
+                        render={({ open }) => (
+                            
+                            <ToolbarButton
+                                label="Change Image"
+                                icon="format-image"
+                                onClick={open}
+                            />
+                            
+                        )}
+                    />
+                  
+                </ToolbarGroup>
+            </BlockControls>
+
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
@@ -438,7 +502,6 @@ const edit = (props) => {
 
                         {attributes.overlayshow && (
                             <>
-                          
                             <div 
                                 className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
                                 style={vayu_block_overlay_style}
@@ -487,6 +550,7 @@ const edit = (props) => {
                     )}
                 
                 </div>
+                
             </AdvanceSettings>
         </>
     );

@@ -17,6 +17,19 @@
 }
 }
 
+.rotate-image {
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
 .vayu_blocks_image__wrapper .clip-diamond {
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     animation: diamond-rotate 4s infinite ease-in-out;
