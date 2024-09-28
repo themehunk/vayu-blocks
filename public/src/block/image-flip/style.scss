@@ -1,0 +1,93 @@
+
+.vayu_blocks_image_flip_wrapper:hover .flip-front-left {
+    transform: rotateY(180deg);
+    opacity: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .flip-front-left {
+    transform: rotateY(0deg);
+    opacity: 1;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .overlayflip-horizontal-left {
+    transform: rotateY(-180deg);
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
+    transform: rotateY(0);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .flip-front {
+    transform: rotateY(-180deg);
+    opacity: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .flip-front {
+    transform: rotateY(0deg);
+    opacity: 1;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .overlayflip-horizontal {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
+    transform: rotateY(0);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .flip-back {
+    transform: rotateX(-180deg);
+    opacity: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .flip-back {
+    transform: rotateX(0deg);
+    opacity: 1;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .overlayflip-vertical {
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
+    transform: rotateX(0);
+}
+
+
+.vayu_blocks_image_flip_wrapper:hover .flip-back-bottom {
+    transform: rotateX(180deg);
+    opacity: 0;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .flip-back-bottom {
+    transform: rotateX(0deg);
+    opacity: 1;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper .overlayflip-vertical-bottom {
+    transform: rotateX(-180deg);
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+}
+
+.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
+    transform: rotateX(0);
+}

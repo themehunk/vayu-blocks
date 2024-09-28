@@ -7,20 +7,30 @@ import {
     SelectControl,
     RangeControl,
     ToggleControl,
-    Button
+    Button,
+    __experimentalAlignmentMatrixControl as AlignmentMatrixControl,
 } from '@wordpress/components';
 
 import {
     ToogleGroupControl,
+    ResponsiveControl,
 } from '../../components/index.js';
 
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
 import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel';
+import { useSelect } from '@wordpress/data';
 
 
 const PostSettings = ({ attributes, setAttributes }) => {
+
+    const getView = useSelect( select => {
+		const { getView } = select( 'vayu-blocks/data' );
+		const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+
+		return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+	}, []);
 
     const vayu_blocks_handleimageBorderChange = (newBorders) => {
         const updatedAttributes = {};
@@ -135,6 +145,29 @@ const PostSettings = ({ attributes, setAttributes }) => {
         }
     }
 
+    const getoverlayalignment = () => {
+        if('Desktop' === getView ){
+            return attributes.overlayalignment
+        }
+        else if ( 'Tablet' === getView ) {
+            return attributes.overlayalignmenttablet
+        }
+        else if ( 'Mobile' === getView ) {
+            return attributes.overlayalignmentmobile
+        } 
+    }
+
+    const changeoverlayalignment = (value) => {
+        if (getView === 'Desktop') {
+            setAttributes({ overlayalignment: value });
+        } else if (getView === 'Tablet') {
+            setAttributes({ overlayalignmenttablet: value });
+        } else if (getView === 'Mobile') {
+            setAttributes({ overlayalignmentmobile: value });
+        }
+    };
+
+
     return (
         <>
         
@@ -166,60 +199,18 @@ const PostSettings = ({ attributes, setAttributes }) => {
                         </>       
                     )} 
 
-                    <h4>
-                    {__('Alignment', 'vayu-blocks')}
-                    </h4>
-                    <ToogleGroupControl
-                        label={__('Alignment', 'vayu-blocks')}
-                        value={ attributes.overlayalignmentvertical}
-                        onChange={(value) => setAttributes({overlayalignmentvertical:value})}
-                        options={[
-                            {
-                                icon: HorizontalLeft,
-                                label: __( 'start', 'vayu-blocks' ),
-                                value: 'start'
-                            },
-                            {
-                                icon: Center,
-                                label: __( 'Center', 'vayu-blocks' ),
-                                value: 'center'
-                            },
-                            {
-                                icon: HorizontalRight,
-                                label: __( 'end', 'vayu-blocks' ),
-                                value: 'end'
-                            },
-                        ]}
-                        
-                        hasIcon
-                    />
+                        <div className="vayu_block_alignment_main_div_flip">
+                            <ResponsiveControl className="vayu_block_alignment_flip" label={__('Alignment', 'vayu-blocks')}>
 
-                    <ToogleGroupControl
-                        label={__('Alignment', 'vayu-blocks')}
-                        value={ attributes.overlayalignment}
-                        onChange={(value) => setAttributes({overlayalignment:value})}
-                        options={[
-                            {
-                                icon: Start,
-                                label: __( 'Left', 'vayu-blocks' ),
-                                value: 'left'
-                            },
-                            {
-                                icon: Center,
-                                label: __( 'Center', 'vayu-blocks' ),
-                                value: 'center'
-                            },
-                            {
-                                icon: End,
-                                label: __( 'Right', 'vayu-blocks' ),
-                                value: 'right'
-                            },
-                        ]}
-                        
-                        hasIcon
-                    />
+                                <AlignmentMatrixControl
+                                    className='vayu_blocks_matrix_control_flip'
+                                    value={ getoverlayalignment() }
+                                    onChange={(value) => changeoverlayalignment(value)}
+                                />
 
-                    <br/>
+                            </ResponsiveControl>
+                        <br/>
+                        </div>
 
                     <ColorPanel
                         colorTool={[

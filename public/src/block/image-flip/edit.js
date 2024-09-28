@@ -4,10 +4,18 @@ import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import noimage from '../../../../inc/assets/img/no-image.png';
 import { InnerBlocks } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
+
+    const view = useSelect( select => {
+        const { getView } = select( 'vayu-blocks/data' );
+        const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
+       
+        return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
+    }, []);
 
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
@@ -37,15 +45,50 @@ const edit = (props) => {
 
         borderRadius: borderRadius,
 
-        alignItems: 
-            attributes.overlayalignment === 'center' ? 'center' :
-            attributes.overlayalignment === 'left' ? 'self-start' :
-            attributes.overlayalignment === 'right' ? 'self-end' : 'center',
+        ...(view === 'Desktop' && {
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignment.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignment.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+        
+        ...(view === 'Tablet' && {
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignmenttablet.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignmenttablet.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
-        justifyContent: 
-            attributes.overlayalignmentvertical === 'center' ? 'center' :
-            attributes.overlayalignmentvertical === 'start' ? 'flex-start' :
-            attributes.overlayalignmentvertical === 'end' ? 'flex-end' : 'center',
+        ...(view === 'Mobile' && {
+            alignItems: (() => {
+                const [vertical] = attributes.overlayalignmentmobile.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.overlayalignmentmobile.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
     }
 
@@ -77,7 +120,6 @@ const edit = (props) => {
 
     };
     
-
     const image_flip_template = [
         ['vayu-blocks/advance-container'
             , {
@@ -287,7 +329,7 @@ const edit = (props) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper">
+                    <div className="vayu_blocks_image_flip_wrapper flip-box">
 
                         <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
@@ -300,6 +342,7 @@ const edit = (props) => {
 
                             <div 
                                 className={`vayu_blocks_overlay_main_wrapper ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''}`} 
+
                                 style={vayu_block_overlay_style}
                             >
 

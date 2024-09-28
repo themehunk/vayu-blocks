@@ -21,9 +21,11 @@ return array(
         'imageaspectratio' => 'original',
         'duotone' => '',
         'showPreview' => false,
-        'overlayalignment' => 'center',
+        'overlayalignment' => 'center center',
+        'overlayalignmenttablet' => 'center center',
+        'overlayalignmentmobile' => 'center center',
         'overlayalignmentvertical' => 'center',
-        'imagealttext'  => 'imagealt',
+        'imagealttext'  => '',
 
         // image Border
             'imageborder' => array(
