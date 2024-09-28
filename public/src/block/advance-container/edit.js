@@ -25,6 +25,7 @@ import getUniqueId from '../../helpers/get-unique-id.js';
 import './editor.scss';
 
 import { Placeholder , Button, ButtonGroup } from '@wordpress/components';
+import { VariationPicker } from './variationPicker';
 
 export default function Edit({ 
 	attributes, 
@@ -70,6 +71,8 @@ export default function Edit({
 				isPreviewMobile,
 				getBlock,
 				getBlockRootClientId,
+				variations,
+				defaultVariation
 			} = useSelect( 
 				select => {
 					const { 
@@ -77,6 +80,7 @@ export default function Edit({
 						getBlock,
 						getBlockRootClientId
 					} = select( 'core/block-editor' );
+					const coreBlocks = select( 'core/blocks' );
 					 const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 					 const block = getBlock( clientId );
 					 const adjacentBlockClientId = getAdjacentBlockClientId( clientId );
@@ -86,6 +90,8 @@ export default function Edit({
 					 const hasInnerBlocks = !! ( block && block.innerBlocks.length );
 		
 				return {
+					defaultVariation: coreBlocks?.getDefaultBlockVariation( 'vayu-blocks/advance-container' ),
+					variations: coreBlocks?.getBlockVariations( 'vayu-blocks/advance-container' ),
 					adjacentBlockClientId,
 					adjacentBlock,
 					parentBlock: parentBlock ? parentBlock.name : null,
@@ -871,32 +877,31 @@ export default function Edit({
 
 					  // Display layout options if no inner blocks are present
 	const innerBlockss = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-    if ( innerBlockss.length === 0 ) {
-        return (
-            <Placeholder
-                label={ __('Select Layout', 'vayu-blocks') }
-                instructions={ __('Choose a layout for your container', 'vayu-blocks') }
-            >
-                <ButtonGroup>
-                    <Button
-                        onClick={ () => setAttributes({ variation: 'one-column' }) }
-                    >
-                        { __('One Column', 'vayu-blocks') }
-                    </Button>
-                    <Button
-                        onClick={ () => setAttributes({ variation: 'two-columns' }) }
-                    >
-                        { __('Two Columns', 'vayu-blocks') }
-                    </Button>
-                    <Button
-                        onClick={ () => setAttributes({ variation: 'three-columns' }) }
-                    >
-                        { __('Three Columns', 'vayu-blocks') }
-                    </Button>
-                </ButtonGroup>
-            </Placeholder>
-        );
-    }
+	// Manage block placeholder visibility
+	// const [ showPlaceholder, setShowPlaceholder ] = useState( true );
+	// const { replaceInnerBlocks } = useDispatch('core/block-editor');
+	// // Select the inner blocks
+    // const innerBlocks = useSelect(
+    //     (select) => select('core/block-editor').getBlocks(clientId),
+    //     [clientId]
+    // );
+
+    // // Handles layout changes based on the user's choice
+    // const switchLayout = (template) => {
+    //     replaceInnerBlocks(clientId, createBlocksFromTemplate(template), true);
+    // };
+
+    // // Function to create inner blocks from the given template
+    // const createBlocksFromTemplate = (template) => {
+    //     return template.map(([blockName, blockAttributes]) => {
+    //         return wp.blocks.createBlock(blockName, blockAttributes);
+    //     });
+    // };
+	
+	if ( innerBlockss.length === 0 ) {
+	return <VariationPicker { ...{ clientId, setAttributes, defaultVariation } } />
+	}
+    
 			return (
 				<Fragment>
 				<Controls

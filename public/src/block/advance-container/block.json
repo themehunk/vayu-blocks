@@ -952,6 +952,10 @@
 		"elementGapUnit": {
 			"type": "string",
 			"default": "px"
+		},
+		"variationSelected": {
+			"type": "boolean",
+			"default": false
 		}
 
 	}

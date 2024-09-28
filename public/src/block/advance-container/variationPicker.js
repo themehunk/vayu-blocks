@@ -1,213 +1,55 @@
-/**
- * Internal dependencies
- */
-import rowIcons from './icons';
-import { __experimentalBlockVariationPicker as BlockVariationPicker, useBlockProps } from '@wordpress/block-editor';
-import UAGB_Block_Icons from '@Controls/block-icons';
 import { __ } from '@wordpress/i18n';
+import { __experimentalBlockVariationPicker as BlockVariationPicker, useBlockProps } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
+import { RxGroup as icons } from "react-icons/rx";
+import { TfiLayoutColumn2Alt as icon2 } from "react-icons/tfi";
+import { TfiLayoutColumn3Alt as icon3 } from "react-icons/tfi";
 
-/**
- * Template option choices for predefined form layouts.
- *
- * @constant
- * @type {Array}
- */
 export const variations = [
-	{
+    {
 		name: 'one-column',
-		icon: rowIcons[ '100' ],
+        icon: icons,
 		attributes: {
 			variationSelected: true,
 		},
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+		],
 		scope: [ 'block' ],
 	},
 	{
 		name: 'two-column-split',
-		icon: rowIcons[ '50-50' ],
+        icon: icon2,
 		attributes: {
 			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
+			direction: "row",
 		},
 		isDefault: true,
 		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
 		],
 		scope: [ 'block' ],
 	},
 	{
 		name: 'three-columns-equal',
-		icon: rowIcons[ '33-33-33' ],
+        icon: icon3,
 		attributes: {
 			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
+			 direction: "row",
 		},
 		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 33, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: 'four-column',
-		icon: rowIcons[ '25-25-25-25' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: '50-50_50-50',
-		icon: rowIcons[ '50-50_50-50' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: 'two-columns-one-third-two-thirds',
-		icon: rowIcons[ '25-75' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: '33-33-33_33-33-33',
-		icon: rowIcons[ '33-33-33_33-33-33' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 31, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: 'three-columns-wider-center',
-		icon: rowIcons[ '25-50-25' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: 'two-columns-two-thirds-one-third',
-		icon: rowIcons[ '75-25' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: '75-25_25_75',
-		icon: rowIcons[ '75-25_25_75' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: '50-50_100',
-		icon: rowIcons[ '50-50_100' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[
-				'vayu-blocks/container',
-				{ widthDesktop: 100, widthSetByUser: true, directionDesktop: 'row' },
-				[
-					[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-					[ 'vayu-blocks/container', { widthDesktop: 48, widthMobile: 100, widthSetByUser: true } ],
-				],
-			],
-			[ 'vayu-blocks/container', { widthDesktop: 100, widthMobile: 100, widthSetByUser: true } ],
-		],
-		scope: [ 'block' ],
-	},
-	{
-		name: '25-75_75-25',
-		icon: rowIcons[ '25-75_75-25' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-		},
-		innerBlocks: [
-			[ 'vayu-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 73, widthMobile: 100, widthSetByUser: true } ],
-			[ 'vayu-blocks/container', { widthDesktop: 23, widthMobile: 100, widthSetByUser: true } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container', { direction: "row", } ],
 		],
 		scope: [ 'block' ],
 	},
 ];
 
-export const VariationPicker = ( props ) => {
-	const { clientId, setAttributes, defaultVariation } = props;
+export const VariationPicker = ( { clientId, setAttributes, defaultVariation } ) => {
+	// const { clientId, setAttributes, defaultVariation } = props;
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 
 	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
@@ -223,11 +65,12 @@ export const VariationPicker = ( props ) => {
 	return (
 		<div {...useBlockProps()} className="uagb-container-variation-picker">
 			<BlockVariationPicker
-				label={ __( 'Container', 'ultimate-addons-for-gutenberg' ) }
+				icon='columns'
+				label={ __( 'Container', 'vayu-blocks' ) }
 				instructions={
 					__(
 						'Select a container layout to start with.',
-						'ultimate-addons-for-gutenberg'
+						'vayu-blocks'
 					)
 				}
 				variations={ variations }
