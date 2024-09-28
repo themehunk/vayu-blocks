@@ -1,118 +1,92 @@
 import { useSelect } from '@wordpress/data';
 
+
 const useDynamicContent = (attributes) => {
-
-    const { dynamicPostType, selectedPost, selectedSourceField } = attributes;
-
-    const getPostContentRender = (coreStore, postType, field) => {
-        const posts = coreStore.getEntityRecords('postType', postType, { include: [selectedPost] });
-        console.log(posts);
-        return posts && posts.length > 0 ? posts[0][field].rendered : '';
+    const { dynamicPostType, selectedPost, selectedSourceField, contentLinkEnable, contentLinkUrl } = attributes;
+    const fetchPostData = (coreStore) => {
+        const posts = coreStore.getEntityRecords('postType', dynamicPostType, { include: [selectedPost] });
+        return posts && posts.length > 0 ? posts[0] : null;
     };
-
-    const getPostContent = (coreStore, postType, field) => {
-        const posts = coreStore.getEntityRecords('postType', postType, { include: [selectedPost] });
-        return posts && posts.length > 0 ? posts[0][field] : ''; // Return the raw field value
-    };
-
-    // date
-    const getPostContentDate = (coreStore, postType, field) => {
-        const posts = coreStore.getEntityRecords('postType', postType, { include: [selectedPost] });
-        if (posts && posts.length > 0 && posts[0][field]) {
-            const rawDate = posts[0][field]; // Get the raw field value (date)
-            const date = new Date(rawDate); // Convert the raw date string to a Date object
-            // Format the date (you can adjust this format as needed)
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
+    
+    const getAuthorDetails = (coreStore, post) => {
+        if (post && post.author) {
+            const author = coreStore.getEntityRecord('root', 'user', post.author);
+            return author ? {
+                name: author.name || '',
+                bio: author.description || '',
+                email: author.email || '',
+                link: author.link || ''
+            } : { name: '', bio: '', email: '', link: '' };
         }
-        
-        return ''; 
+        return { name: '', bio: '', email: '', link: '' };
     };
 
-    const getPostContentTime = (coreStore, postType, field) => {
-
-        const posts = coreStore.getEntityRecords('postType', postType, { include: [selectedPost] });
-        
-        if (posts && posts.length > 0 && posts[0][field]) {
-            const rawDate = posts[0][field]; // Get the raw field value (date)
-            const date = new Date(rawDate); // Convert the raw date string to a Date object
-            
-            // Format the date and time
-            const formattedDate = date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-            });
-    
-            const formattedTime = date.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-            });
-    
-            return `${formattedDate} ${formattedTime}`; // Return combined date and time
-        }
-        
-        return ''; // Return an empty string if no posts or date is found
+    const formatDateTime = (rawDate, type = 'date') => {
+        if (!rawDate) return '';
+        const date = new Date(rawDate);
+        return type === 'date'
+            ? date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+            : date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     };
 
-    // autor
-    const getAuthorDetails = (coreStore, postType, field) => {
-        const posts = coreStore.getEntityRecords('postType', postType, { include: [selectedPost] });
-    
-        if (posts && posts.length > 0) {
-            const authorId = posts[0].author; // Get the author's ID from the post
-            const authorDetails = coreStore.getEntityRecord('root', 'user', authorId); // Fetch author details using correct arguments
-    
-            if (authorDetails) {
-                const authorName = authorDetails.name || ''; // Author's name
-                const authorBio = authorDetails.description || ''; // Author's bio
-                const authorEmail = authorDetails.email || ''; // Author's email
-                
-                return {
-                    name: authorName,
-                    bio: authorBio,
-                    email: authorEmail
-                };
-            }
-        }
-    
-        return { name: '', bio: '', email: '' }; // Return empty values if no author or details are found
-    };
-
-    // main render content
-    
     return useSelect((select) => {
 
         const coreStore = select('core');
-        const author = getAuthorDetails(coreStore, dynamicPostType, 'author');
+        const post = fetchPostData(coreStore); 
+        console.log(post); 
+        const author = getAuthorDetails(coreStore, post);
+
+        const wrapWithLink = (content) => {
+
+            let dynamicUrl;
+
+            if (contentLinkUrl === 'post_url') {
+                dynamicUrl = post ? post.link : '';
+            } else if (contentLinkUrl === 'site_url') {
+                const siteInfo = coreStore.getEntityRecord('root', 'site');
+                dynamicUrl = siteInfo ? siteInfo.url : '';
+            }else if (contentLinkUrl === 'author_url') {
+                dynamicUrl = author ? author.link:'';
+            }else if (contentLinkUrl === 'archive_url') {
+                dynamicUrl = post ? post.link.replace(/\/[^\/]*$/, '') : '';
+            } else if (contentLinkUrl === 'comments_url') {
+                dynamicUrl = post ? post.link + '#comments' : ''; 
+            }else if (contentLinkUrl === 'featured_img_url') {
+                dynamicUrl = post && post.featured_media ? wp.media.attachment(post.featured_media).url : '';
+            } else {
+                dynamicUrl = ''; 
+            }
+            
+            return contentLinkEnable && dynamicUrl
+                ? `<a href="${dynamicUrl}" target="_blank" rel="noopener noreferrer">${content}</a>`
+                : content;
+        };
+
+        if (!post) return ''; 
 
         switch (selectedSourceField) {
             case 'title':
-                return getPostContentRender(coreStore, dynamicPostType, 'title'); 
+                return wrapWithLink(post.title?.rendered || '');
             case 'excerpt':
-                return getPostContentRender(coreStore, dynamicPostType, 'excerpt');
+                return wrapWithLink(post.excerpt?.rendered || '');
             case 'slug':
-                return getPostContent(coreStore, dynamicPostType, 'slug');
+                return wrapWithLink(post.slug || '');
             case 'post_date':
-                return getPostContentDate(coreStore, dynamicPostType, 'modified');
+                return wrapWithLink(formatDateTime(post.modified, 'date'));
             case 'post_time':
-                return getPostContentTime(coreStore, dynamicPostType, 'modified');
+                return wrapWithLink(formatDateTime(post.modified, 'time'));
             case 'post_id':
-                return selectedPost ? selectedPost.toString() : ''; 
+                return wrapWithLink(selectedPost ? selectedPost.toString() : '');
             case 'author_name':
-                return author.name;
+                return wrapWithLink(author.name);
             case 'author_bio':
-                return author.bio;
+                return wrapWithLink(author.bio);
             case 'author_email':
-                return author.email;
+                return wrapWithLink(author.email);
             default:
-                return attributes.content; // Default case
+                return wrapWithLink(attributes.content || '');
         }
-    }, [dynamicPostType, selectedPost, selectedSourceField]);
+    }, [dynamicPostType, selectedPost, selectedSourceField, contentLinkEnable, contentLinkUrl]);
 };
 
 export default useDynamicContent;
