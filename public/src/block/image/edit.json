@@ -43,7 +43,7 @@
     },
     "overlayhvrcolor":{
         "type":"string",
-        "default":"#00000080"
+        "default":""
     },
    "focalPoint": {
         "type": "object",
@@ -102,15 +102,15 @@
     },
     "imagealignment":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imagealignmenttablet":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imagealignmentmobile":{
         "type":"string",
-        "default":"center center"
+        "default":"center"
     },
     "imageborderRadius":{
         "type":"object",
@@ -167,7 +167,7 @@
     },
     "imagealttext":{
         "type":"string",
-        "default":"imagetext"
+        "default":""
     },
     "captiontext":{
         "type":"string",
@@ -223,7 +223,7 @@
     },
     "overlaybordertype":{
         "type":"string",
-        "default":"color"
+        "default":"gradient"
     },
     "overlaybordergradient":{
         "type":"string",
@@ -284,5 +284,57 @@
     "imagebackgroundSize":{
         "type":"string",
         "default":"cover"
-    }  
+    },
+    "overlaywidth":{
+        "type":"string",
+        "default":"95%"
+    },
+    "overlayheight":{
+        "type":"string",
+        "default":"90%"
+    },
+    "overlaywidthtablet":{
+        "type":"string",
+        "default":"95%"
+    },
+    "overlayheighttablet":{
+        "type":"string",
+        "default":"90%"
+    },
+    "overlaywidthmobile":{
+        "type":"string",
+        "default":"95%"
+    },
+    "overlayheightmobile":{
+        "type":"string",
+        "default":"90%"
+    },
+    "overlayleft":{
+        "type":"string",
+        "default":"14px"
+    },
+    "overlaytop":{
+        "type":"string",
+        "default":"19px"
+    },
+    "overlaylefttablet":{
+        "type":"string",
+        "default":"14px"
+    },
+    "overlaytoptablet":{
+        "type":"string",
+        "default":"19px"
+    },
+    "overlayleftmobile":{
+        "type":"string",
+        "default":"14px"
+    },
+    "overlaytopmobile":{
+        "type":"string",
+        "default":"19px"
+    },
+    "rotation":{
+        "type":"number",
+        "default":0
+    }
 }

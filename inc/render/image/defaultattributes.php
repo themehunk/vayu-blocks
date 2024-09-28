@@ -12,7 +12,7 @@ return array(
         'imagehvranimation' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
-        'overlayhvrcolor' => '#00000080',
+        'overlayhvrcolor' => '',
         'overlaycolor' => 'transparent',
         'focalPoint' => array(
             'x' => 0.5,
@@ -31,6 +31,7 @@ return array(
         'overlayalignmentverticaltablet' => 'center',
         'overlayalignmentmobile' => 'center center',
         'overlayalignmentverticalmobile' => 'center',
+        'rotation'=> '0',
 
         // image Border
             'imageborder' => array(
@@ -56,16 +57,16 @@ return array(
                 'right' => '0px',
             ),
 
-            'imagealignment' => 'center center',
-            'imagealignmenttablet' => 'center center',
-            'imagealignmentmobile' => 'center center',
+            'imagealignment' => 'center',
+            'imagealignmenttablet' => 'center',
+            'imagealignmentmobile' => 'center',
             
             'overlayshow'=>true,
             'maskshape'=> 'none',
             'masksize'=>'auto',
             'maskposition'=>'center center',
             'maskrepeat'=>'no-repeat',
-            'imagealttext'=>'imagetext',
+            'imagealttext'=>'',
             'captiontext'=> 'Write Caption...',
             'caption'=>false,
             'captionsize'=>16,
@@ -78,7 +79,7 @@ return array(
             'imageheighttablet'=>'',
             'imagewidthmobile'=>'',
             'imageheightmobile'=>'',
-            'overlaybordertype'=>'color',
+            'overlaybordertype'=>'gradient',
             'overlaybordergradient'=>'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
             'overlayborderimage'=>'',
             'overlayborderimagetype'=>'none',
@@ -93,6 +94,18 @@ return array(
             'overlayspace'=>'space',
             'borderimagesize'=> 30,
             'imagebackgroundSize' => 'cover',
+            'overlaywidth'=>'95%',
+            'overlayheight'=>'90%',
+            'overlaywidthtablet'=>'95%',
+            'overlayheighttablet'=>'90%',
+            'overlaywidthmobile'=>'95%',
+            'overlayheightmobile'=>'90%',
+            'overlayleft'=>'14px',
+            'overlaytop'=>'19px',
+            'overlaylefttablet'=>'14px',
+            'overlaytoptablet'=>'19px',
+            'overlayleftmobile'=>'14px',
+            'overlaytopmobile'=>'19px',
 
     //Advanced
         'classNamemain' => '',

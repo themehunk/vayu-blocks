@@ -249,6 +249,11 @@ function generate_inline_image_styles($attr) {
         $css .= "transform-style: preserve-3d;";
     $css .= "}";
 
+    $css .= "$wrapper .vayu_blocks_rotating_div{";
+        $rotation = esc_attr($attr['rotation']) % 360; // This will ensure the value is within 0-359
+        $css .= "transform: rotate( " . $rotation . "deg) !important;";
+    $css .= "}";
+    
     // Assuming $attr['imagetransitiontime'] contains the transition time value
     $transitionTime = isset($attr['imagetransitiontime']) ? esc_attr($attr['imagetransitiontime']) : '0.5'; // Default to 0.5s if not set
     // Append CSS rules to $css
@@ -272,7 +277,7 @@ function generate_inline_image_styles($attr) {
         }
 
         $css .= "box-sizing: border-box;";
-
+        
         $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
 
         $css .= "    opacity: 1;"; // Assuming a default opacity value
@@ -323,22 +328,12 @@ function generate_inline_image_styles($attr) {
     $css .= "}";
 
     $css .= "$wrapper $inline .vayu_blocks_image_image-container {";
-        $imagealignment = explode(' ', $attr['imagealignment']); // Split the string
-        $vertical = $imagealignment[0]; // First part (vertical)
-        $horizontal = $imagealignment[1]; // Second part (horizontal)
         $css .= "display: flex;";
-        $css .= "align-items: " . (
-            $vertical === 'center' ? 'center' :
-            ($vertical === 'top' ? 'self-start' :
-            ($vertical === 'bottom' ? 'self-end' : 'center'))
-        ) . ";";
-
         $css .= "justify-content: " . (
-            $horizontal === 'center' ? 'center' :
-            ($horizontal === 'left' ? 'flex-start' :
-            ($horizontal === 'right' ? 'flex-end' : 'center'))
+            $attr['imagealignment'] === 'center' ? 'center' :
+            ($attr['imagealignment'] === 'left' ? 'flex-start' :
+            ($attr['imagealignment'] === 'right' ? 'flex-end' : 'center'))
         ) . ";";
-
     $css .= "}";
 
     $css .= ".flip-front {";
@@ -475,21 +470,18 @@ function generate_inline_image_styles($attr) {
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image {";
         $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
-        $css .= "width: 96%;";
-        $css .= "height: 93%;";
+        $css .= "width: " . esc_attr($attr['overlaywidth']) . ";";
+        $css .= "height: " . esc_attr($attr['overlayheight']) . ";";
         $css .= "position: absolute;";
-        $css .= "top: 0;";
-        $css .= "left: 0;";
+        $css .= "top: " . esc_attr($attr['overlaytop']) . ";";
+        $css .= "left: " . esc_attr($attr['overlayleft']) . ";";
         $css .= "transition: " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
         $css .= "opacity: 1; ";
        
         $css .= "z-index: 10;";
         $css .= "display: flex;";
-        $css .= "margin-left: 2%;";
-        $css .= "margin-top: 0.8rem;";
         
         $css .= "box-sizing: border-box;";
-
         
         if ($attr['overlaybordertype'] === 'color') {
             // Top border
@@ -535,21 +527,22 @@ function generate_inline_image_styles($attr) {
         
             $css .= "border-image: " . $borderImage . ";"; // Use the determined border image
         }
-            $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
-            $vertical = $overlayalignmenttablet[0]; // First part (vertical)
-            $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-            $css .= "align-items: " . (
-                $vertical === 'center' ? 'center' :
-                ($vertical === 'top' ? 'self-start' :
-                ($vertical === 'bottom' ? 'self-end' : 'center'))
-            ) . ";";
+        $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
+        $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+        $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-            $css .= "justify-content: " . (
-                $horizontal === 'center' ? 'center' :
-                ($horizontal === 'left' ? 'flex-start' :
-                ($horizontal === 'right' ? 'flex-end' : 'center'))
-            ) . ";";
+        $css .= "align-items: " . (
+            $vertical === 'center' ? 'center' :
+            ($vertical === 'top' ? 'self-start' :
+            ($vertical === 'bottom' ? 'self-end' : 'center'))
+        ) . ";";
+
+        $css .= "justify-content: " . (
+            $horizontal === 'center' ? 'center' :
+            ($horizontal === 'left' ? 'flex-start' :
+            ($horizontal === 'right' ? 'flex-end' : 'center'))
+        ) . ";";
         
     $css .= "}";
 
@@ -789,9 +782,6 @@ function generate_inline_image_styles($attr) {
     $vertical = $overlayalignmenttablet[0]; // First part (vertical)
     $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-    $imagealignmenttablet = explode(' ', $attr['imagealignmenttablet']); // Split the string
-    $verticalimage = $imagealignmenttablet[0]; // First part (vertical)
-    $horizontalimage = $imagealignmenttablet[1]; // Second part (horizontal)
 
     // for tablet
     $css .= "@media (max-width: 1024px) {
@@ -850,17 +840,18 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper $inline .vayu_blocks_image_image-container{
-          align-items: " . (
-                $verticalimage === 'center' ? 'center' :
-                ($verticalimage === 'top' ? 'self-start' :
-                ($verticalimage === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
-
             justify-content: " . (
-                $horizontalimage === 'center' ? 'center' :
-                ($horizontalimage === 'left' ? 'flex-start' :
-                ($horizontalimage === 'right' ? 'flex-end' : 'center'))
+                $attr['imagealignmenttablet'] === 'center' ? 'center' :
+                ($attr['imagealignmenttablet'] === 'left' ? 'flex-start' :
+                ($attr['imagealignmenttablet'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
+        }
+            
+        $wrapper .vayu_blocks_overlay_main_wrapper_image{
+            width: " . (isset($attr['overlaywidthtablet']) ? esc_attr($attr['overlaywidthtablet']) : 'auto') . ";
+            height: " . (isset($attr['overlayheighttablet']) ? esc_attr($attr['overlayheighttablet']) : 'auto') . ";
+            left: " . (isset($attr['overlaylefttablet']) ? esc_attr($attr['overlaylefttablet']) : 'auto') . ";
+            top: " . (isset($attr['overlaytoptablet']) ? esc_attr($attr['overlaytoptablet']) : 'auto') . ";
         }
 
     }";
@@ -868,10 +859,6 @@ function generate_inline_image_styles($attr) {
     $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
     $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
     $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
-
-    $imagealignmentmobile = explode(' ', $attr['imagealignmentmobile']); // Split the string
-    $verticalimagemobile = $imagealignmentmobile[0]; // First part (vertical)
-    $horizontalimagemobile = $imagealignmentmobile[1]; // Second part (horizontal)
 
    // for mobile
     $css .= "@media (max-width: 500px) {
@@ -925,18 +912,21 @@ function generate_inline_image_styles($attr) {
         }
 
         $wrapper $inline .vayu_blocks_image_image-container{
-          align-items: " . (
-                $verticalimagemobile === 'center' ? 'center' :
-                ($verticalimagemobile === 'top' ? 'self-start' :
-                ($verticalimagemobile === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
 
             justify-content: " . (
-                $horizontalimagemobile === 'center' ? 'center' :
-                ($horizontalimagemobile === 'left' ? 'flex-start' :
-                ($horizontalimagemobile === 'right' ? 'flex-end' : 'center'))
+                $attr['imagealignmentmobile'] === 'center' ? 'center' :
+                ($attr['imagealignmentmobile'] === 'left' ? 'flex-start' :
+                ($attr['imagealignmentmobile'] === 'right' ? 'flex-end' : 'center'))
             ) . ";
         }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper_image{
+            width: " . (isset($attr['overlaywidthmobile']) ? esc_attr($attr['overlaywidthmobile']) : 'auto') . ";
+            height: " . (isset($attr['overlayheightmobile']) ? esc_attr($attr['overlayheightmobile']) : 'auto') . ";
+            left: " . (isset($attr['overlayleftmobile']) ? esc_attr($attr['overlayleftmobile']) : 'auto') . ";
+            top: " . (isset($attr['overlaytopmobile']) ? esc_attr($attr['overlaytopmobile']) : 'auto') . ";
+        }
+
     }";
     
     return $css;
