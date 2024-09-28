@@ -240,6 +240,22 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         step={0.1}
                     />
 
+                    <SelectControl
+                        label={__('wrapper Hover animation', 'vayu-blocks')}
+                        value={attributes.wrapperanimation}
+                        options={[
+                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                            { label: __('Effect 1 (3D Tilt)', 'vayu-blocks'), value: 'vayu_block_styling' },
+                            { label: __('Effect 2 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
+                            { label: __('Effect 3 (3D Clip-Path)', 'vayu-blocks'), value: 'vayu_block_styling-effect4' },
+                            { label: __('Effect 4 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
+                            { label: __('Effect 5 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
+                            { label: __('Effect 6 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
+                            { label: __('Effect 7 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' },
+                        ]}
+                        onChange={(value) => setAttributes({ wrapperanimation: value })}
+                    />
+
                 </PanelBody>
 
             </div>

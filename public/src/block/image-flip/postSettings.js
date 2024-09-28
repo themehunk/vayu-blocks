@@ -298,6 +298,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     includeBorder={true}
                     includeBorderRadius={true}
                     para=""
+                    enableAlpha={true}
                 />  
             </PanelBody>
 

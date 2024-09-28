@@ -413,7 +413,7 @@ function generate_inline_image_flip_styles($attr) {
 
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
-        $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
+        $css .= "background: " . esc_attr($attr['overlaycolor']) . ";";
         $css .= "width: 100%;";
         $css .= "height: 99.9%;";
         $css .= "position: absolute;";

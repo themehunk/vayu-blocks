@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
@@ -152,8 +152,50 @@ const edit = (props) => {
         ],
     ];  
 
+    const imageWrapperRef = useRef(null);
+
+    const tiltEffect = (e) => {
+        const wrapper = imageWrapperRef.current;
+        if (!wrapper) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const tiltX = (y - 0.5) * 20; // Adjust the multiplier for desired effect
+        const tiltY = (x - 0.5) * -20; // Adjust the multiplier for desired effect
+        
+        wrapper.style.transform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    };
+
+    const resetTilt = () => {
+        const wrapper = imageWrapperRef.current;
+        if (wrapper) {
+            wrapper.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+        }
+    };
+
+    useEffect(() => {
+        const wrapper = imageWrapperRef.current;
+        if(attributes.wrapperanimation==='vayu_block_styling-effect7'){
+
+        
+        if (wrapper) {
+            wrapper.addEventListener('mousemove', tiltEffect);
+            wrapper.addEventListener('mouseleave', resetTilt);
+        }
+    }
+        return () => {
+            if (wrapper) {
+                wrapper.removeEventListener('mousemove', tiltEffect);
+                wrapper.removeEventListener('mouseleave', resetTilt);
+            }
+        };
+    }, [attributes.wrapperanimation]);
+
     return (
         <>
+       
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
@@ -329,7 +371,7 @@ const edit = (props) => {
                         </svg>
                     </div>
 
-                    <div className="vayu_blocks_image_flip_wrapper flip-box">
+                    <div ref={imageWrapperRef} className={`vayu_blocks_image_flip_wrapper ${attributes.wrapperanimation} flip-box`}>
 
                         <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
                             <img 
@@ -353,9 +395,8 @@ const edit = (props) => {
                                 </div>
 
                             </div>
-
+                            
                     </div>
-
 
                 </div>
             </AdvanceSettings>

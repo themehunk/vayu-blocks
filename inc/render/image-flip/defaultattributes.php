@@ -50,6 +50,7 @@ return array(
                 'left' => '4px',
                 'right' => '4px',
             ),
+            'wrapperanimation'=>'none',
         
     //Advanced
         'classNamemain' => '',

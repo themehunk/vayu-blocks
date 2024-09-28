@@ -116,5 +116,9 @@
     "imagealttext":{
         "type":"string",
         "default":""
+    },
+    "wrapperanimation":{
+        "type":"string",
+        "default":"none"
     }
 }
