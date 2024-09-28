@@ -329,8 +329,8 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-main-container" style={vayu_blocks_image_position} id={`${attributes.uniqueId}`}>
-
+                <div className="vayu-blocks-image-main-container"  id={`${attributes.uniqueId}`}>
+                    <div style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
                         <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
@@ -535,6 +535,8 @@ const edit = (props) => {
                   
 
                     )}
+
+                </div>
 
                     {!attributes.image && (
                         <MediaUploadCheck>
