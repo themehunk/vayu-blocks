@@ -49,7 +49,7 @@ class Vayu_blocks_image {
 
         $image_html .= '<div class="vayu_blocks_image__wrapper" id='. $uniqueId .'>';
             $image_html .= '<div class="vayu_blocks_rotating_div">';
-            $image_html .= '<div class="vayu_blocks_image_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
+            $image_html .= '<div class=" ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
@@ -77,7 +77,7 @@ class Vayu_blocks_image {
             $image_html .= '</div>';
         }
     
-        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
+        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . ' vayu_blocks_image_image-container">' . $image_html . '</div>';
     }
     
     //overlay
@@ -98,7 +98,7 @@ class Vayu_blocks_image {
         }
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $imageHvrEffect . ' ' . $animation_classname . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  

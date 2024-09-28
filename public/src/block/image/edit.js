@@ -329,7 +329,7 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-image-main-container" style={vayu_blocks_image_position} id={`${attributes.uniqueId}`}>
 
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
@@ -505,7 +505,7 @@ const edit = (props) => {
                     
                     <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
                         <div style={{transform:`rotate(${attributes.rotation}deg)`}}>
-                            <div style={vayu_blocks_image_position} className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${getclassoverlay()}`} > 
+                            <div  className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${getclassoverlay()}`} > 
                                     
                                 <img 
                                     style= {vayu_blocks_image_settings}
