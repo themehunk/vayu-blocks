@@ -432,6 +432,19 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({ imagehvranimation: value })}
                     />
 
+                    {attributes.imagehvranimation != 'none' && (
+                        <SelectControl
+                            label={__('Animation Settings', 'vayu-blocks')}
+                            value={attributes.animationsettings}
+                            options={[
+                                { label: __('One Time', 'vayu-blocks'), value: 'one-time' },
+                                { label: __('With Hover', 'vayu-blocks'), value: 'with-hvr' },
+                                { label: __('Without Hover', 'vayu-blocks'), value: 'without-hvr' },
+                            ]}
+                            onChange={(value) => setAttributes({ animationsettings: value })}
+                        />
+                    )}
+
                     <SelectControl
                         label={__('Mask shape', 'vayu-blocks')}
                         __nextHasNoMarginBottom
