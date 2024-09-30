@@ -140,7 +140,7 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                         <option value="site_url">{ __( 'Site Url', 'vayu-blocks' ) }</option>
                         </optgroup>
                         <optgroup label={ __( 'Comments', 'vayu-blocks' ) }>
-                        <option value="comment_url">{ __( 'Comments Url', 'vayu-blocks' ) }</option>
+                        <option value="comments_url">{ __( 'Comments Url', 'vayu-blocks' ) }</option>
                         </optgroup>
                         <optgroup label={ __( 'Media', 'vayu-blocks' ) }>
                         <option value="featured_img_url">{ __( 'Featured Image Url', 'vayu-blocks' ) }</option>
