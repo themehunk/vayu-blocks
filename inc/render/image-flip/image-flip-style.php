@@ -332,22 +332,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
     $css .= "}";
 
-    $css .= ".flip-front {";
-        $css .= "  --image-hover-effect-transform: rotateY(180deg);";
-    $css .= "}";
-
-    $css .= ".flip-back {";
-        $css .= "  --image-hover-effect-transform: rotateX(180deg);";
-    $css .= "}";
-        
-    $css .= ".flip-front-left {";
-        $css .= "  --image-hover-effect-transform: rotateY(-180deg);";
-    $css .= "}";
-
-    $css .= ".flip-back-bottom {";
-        $css .= "  --image-hover-effect-transform: rotateX(-180deg);";
-    $css .= "}";
-
     /* Grayscale */
     $css .= ".grayScale {";
         $css .= "    --image-filter-effect: grayscale(100%);";
@@ -429,7 +413,7 @@ function generate_inline_image_flip_styles($attr) {
 
     /* Overlay styles */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
-        $css .= "background-color: " . esc_attr($attr['overlaycolor']) . ";";
+        $css .= "background: " . esc_attr($attr['overlaycolor']) . ";";
         $css .= "width: 100%;";
         $css .= "height: 99.9%;";
         $css .= "position: absolute;";
@@ -449,28 +433,21 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "z-index: 10;";
         $css .= "display: flex;";
 
-        $alignment = 'center'; // Default value
+        $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
+        $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+        $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
 
-        if ($attr['overlayalignment'] === 'center') {
-            $alignment = 'center';
-        } elseif ($attr['overlayalignment'] === 'left') {
-            $alignment = 'self-start';
-        } elseif ($attr['overlayalignment'] === 'right') {
-            $alignment = 'self-end';
-        }
-        
-        $css .= "align-items: $alignment;";
+        $css .= "align-items: " . (
+            $vertical === 'center' ? 'center' :
+            ($vertical === 'top' ? 'self-start' :
+            ($vertical === 'bottom' ? 'self-end' : 'center'))
+        ) . ";";
 
-        // Handle justify-content
-        $justifyContent = 'center'; // Default value
-        if ($attr['overlayalignmentvertical'] === 'center') {
-            $justifyContent = 'center';
-        } elseif ($attr['overlayalignmentvertical'] === 'start') {
-            $justifyContent = 'flex-start';
-        } elseif ($attr['overlayalignmentvertical'] === 'end') {
-            $justifyContent = 'flex-end';
-        }
-        $css .= "justify-content: $justifyContent;";
+        $css .= "justify-content: " . (
+            $horizontal === 'center' ? 'center' :
+            ($horizontal === 'left' ? 'flex-start' :
+            ($horizontal === 'right' ? 'flex-end' : 'center'))
+        ) . ";";
         
         $css .= "box-sizing: border-box;";
 
@@ -589,30 +566,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "transform: rotateY(0);";
     $css .= "}";
 
-    $css .= ".overlayflip-horizontal-left {";
-        $css .= "transform: rotateY(90deg);";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {";
-        $css .= "transform: rotateY(0);";
-    $css .= "}";
-
-    $css .= ".overlayflip-vertical {";
-        $css .= "transform: rotateX(-90deg);";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {";
-        $css .= "transform: rotateX(0);";
-    $css .= "}";
-
-    $css .= ".overlayflip-vertical-bottom {";
-        $css .= "transform: rotateX(90deg);";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {";
-        $css .= "transform: rotateX(0);";
-    $css .= "}";
-    
     /* Zoom effects */
     $css .= ".overlayzoom-in-up {";
         $css .= "transform: scale(0.5) translateY(-50%);";
@@ -686,6 +639,11 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "    opacity: 1;";
     $css .= "}";
 
+    $overlayalignmenttablet = explode(' ', $attr['overlayalignmenttablet']); // Split the string
+    $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+    $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
+
+
     //for tablet
     $css .= "@media (max-width: 1024px) {
 
@@ -713,10 +671,29 @@ function generate_inline_image_flip_styles($attr) {
             border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusTablet']) ? esc_attr($attr['pg_postRightBorderRadiusTablet']) . "px" : '') . ";
    
         }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper{
+             align-items: " . (
+                $vertical === 'center' ? 'center' :
+                ($vertical === 'top' ? 'self-start' :
+                ($vertical === 'bottom' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $horizontal === 'center' ? 'center' :
+                ($horizontal === 'left' ? 'flex-start' :
+                ($horizontal === 'right' ? 'flex-end' : 'center'))
+            ) . ";
+        }
         
 
     }";
     
+    $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
+    $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
+    $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
+
+
     //for mobile
     $css .= "@media (max-width: 400px) {
 
@@ -740,8 +717,21 @@ function generate_inline_image_flip_styles($attr) {
             border-bottom-left-radius: " . (isset($attr['pg_postBottomBorderRadiusMobile']) ? esc_attr($attr['pg_postBottomBorderRadiusMobile']) . "px" : '') . ";
             border-bottom-right-radius: " . (isset($attr['pg_postLeftBorderRadiusMobile']) ? esc_attr($attr['pg_postLeftBorderRadiusMobile']) . "px" : '') . ";
             border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusMobile']) ? esc_attr($attr['pg_postRightBorderRadiusMobile']) . "px" : '') . ";
-       
-            
+          
+        }
+
+        $wrapper .vayu_blocks_overlay_main_wrapper{
+              align-items: " . (
+                $verticalmobile === 'center' ? 'center' :
+                ($verticalmobile === 'top' ? 'self-start' :
+                ($verticalmobile === 'bottom' ? 'self-end' : 'center'))
+            ) . ";
+
+            justify-content: " . (
+                $horizontalmobile === 'center' ? 'center' :
+                ($horizontalmobile === 'left' ? 'flex-start' :
+                ($horizontalmobile === 'right' ? 'flex-end' : 'center'))
+            ) . ";  
         }
 
     }";

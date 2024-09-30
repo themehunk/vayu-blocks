@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
@@ -11,9 +11,11 @@ import {
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
     FocalPointPicker,
-    DuotonePicker
+    DuotonePicker,
+    PanelRow
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
+import ControlPanelControl from '../../components/control-panel-control/index.js';
 
 import Vayu_Block_Toggle from '../advance-slider/Components/ToggleGroupControl/Vayu_Block_Toggle';
 import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel';
@@ -85,25 +87,22 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 onDrag={ (value)=> setAttributes({focalPoint:value}) }
                                 onChange={ (value)=> setAttributes({focalPoint:value}) }
                             />
-                            <Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({image:""})}>
-                                {__('Clear', 'vayu-blocks')}
-                            </Button>
 
-                            <DuotonePanel
-                                duotoneValue={vayu_blocks_duotonevalue()}
-                                onDuotoneChange={(value) => vayu_blocks_duotoneHandler(value)}
-                                duotonePalette={vayu_blocks_DUOTONE_PALETTE}
-                            />
 
-                            <TextControl
-                                className="imagealttextrichcontrol"
-                                label="Alt text"
-                                __nextHasNoMarginBottom
-                                onChange={(value)=>setAttributes({imagealttext:value})}
-                                value={attributes.imagealttext}
-                            />
-
-                            <Vayu_Block_Toggle
+                            <Fragment>
+                                <ControlPanelControl
+                                    label={ __( 'Image Settings', 'vayu-blocks' ) }
+                                >
+                                <TextControl
+                                    className="imagealttextrichcontrol"
+                                    label="Alt text"
+                                    placeholder='Alt Text'
+                                    __nextHasNoMarginBottom
+                                    onChange={(value)=>setAttributes({imagealttext:value})}
+                                    value={attributes.imagealttext}
+                                />
+                                <br/>
+                                <Vayu_Block_Toggle
                                 value={attributes.imagecover}
                                 onChange={(value) => setAttributes({imagecover:value})}
                                 isBlock={true}
@@ -113,7 +112,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     { value: 'cover', label: 'Cover' },
                                 ]}
                             />
-
+                            <br/>
                             <Vayu_Block_Toggle
                                 value={attributes.imageborderradiuscircle}
                                 onChange={(value) => setAttributes({imageborderradiuscircle:value})}
@@ -124,7 +123,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     { value: 'circle', label: 'Circle' },
                                 ]}
                             />
-                          
+                          <br/>
                             <div class= "vayu_blocks_image_toolspanel_flip">
                             <ToolsPanel
                                 label="Aspect Ratio"
@@ -147,6 +146,25 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                             </ToolsPanel>
                             </div>
+                                </ControlPanelControl>
+                            </Fragment>
+
+                            <PanelRow>
+                                <Button
+                                    isSmall
+                                    isSecondary
+                                    onClick={() => setAttributes({image:""})}
+                                >
+                                    { __( 'Clear Image', 'vayu-blocks' ) }
+                                </Button>
+                            </PanelRow>
+                            <br/>
+
+                            <DuotonePanel
+                                duotoneValue={vayu_blocks_duotonevalue()}
+                                onDuotoneChange={(value) => vayu_blocks_duotoneHandler(value)}
+                                duotonePalette={vayu_blocks_DUOTONE_PALETTE}
+                            />
 
                         </>
                         ) : (
@@ -220,6 +238,22 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         min={0}
                         max={5}
                         step={0.1}
+                    />
+
+                    <SelectControl
+                        label={__('wrapper Hover animation', 'vayu-blocks')}
+                        value={attributes.wrapperanimation}
+                        options={[
+                            { label: __('None', 'vayu-blocks'), value: 'none' },
+                            { label: __('Effect 1 (3D Tilt)', 'vayu-blocks'), value: 'vayu_block_styling' },
+                            { label: __('Effect 2 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
+                            { label: __('Effect 3 (3D Clip-Path)', 'vayu-blocks'), value: 'vayu_block_styling-effect4' },
+                            { label: __('Effect 4 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
+                            { label: __('Effect 5 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
+                            { label: __('Effect 6 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
+                            { label: __('Effect 7 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' },
+                        ]}
+                        onChange={(value) => setAttributes({ wrapperanimation: value })}
                     />
 
                 </PanelBody>

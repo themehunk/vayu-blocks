@@ -274,6 +274,17 @@ const edit = (props) => {
         setAttributes({ image: media.url });
     };
 
+    const getclassoverlay = () => {
+        if (attributes.animationsettings === 'without-hvr') {
+            return `${attributes.imagehvranimation}`;
+        } else if (attributes.animationsettings === 'with-hvr') {
+            return `${attributes.imagehvranimation}hvr`;
+        } else if (attributes.animationsettings === 'one-time') {
+            return `${attributes.imagehvranimation}onetime`;
+        }
+    };
+    
+
     return (
         <>
             <BlockControls>
@@ -318,8 +329,8 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
-
+                <div className="vayu-blocks-image-main-container"  id={`${attributes.uniqueId}`}>
+                    <div style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
                         <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
@@ -494,7 +505,7 @@ const edit = (props) => {
                     
                     <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
                         <div style={{transform:`rotate(${attributes.rotation}deg)`}}>
-                            <div style={vayu_blocks_image_position} className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${attributes.imagehvranimation}`} > 
+                            <div  className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${getclassoverlay()}`} > 
                                     
                                 <img 
                                     style= {vayu_blocks_image_settings}
@@ -507,7 +518,7 @@ const edit = (props) => {
                             {attributes.overlayshow && (
                                 <>
                                 <div 
-                                    className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.imagehvranimation} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''}`} 
+                                    className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 
                                     style={vayu_block_overlay_style}
                                 >
                                     <div className="vayu_blocks_inner_content">
@@ -524,6 +535,8 @@ const edit = (props) => {
                   
 
                     )}
+
+                </div>
 
                     {!attributes.image && (
                         <MediaUploadCheck>

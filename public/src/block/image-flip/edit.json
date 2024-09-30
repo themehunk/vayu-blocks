@@ -66,7 +66,15 @@
     },
     "overlayalignment":{
         "type":"string",
-        "default":"center"
+        "default":"center center"
+    },
+    "overlayalignmenttablet":{
+        "type":"string",
+        "default":"center center"
+    },
+    "overlayalignmentmobile":{
+        "type":"string",
+        "default":"center center"
     },
     "overlayalignmentvertical":{
         "type":"string",
@@ -107,6 +115,10 @@
     },
     "imagealttext":{
         "type":"string",
-        "default":"imagealt"
+        "default":""
+    },
+    "wrapperanimation":{
+        "type":"string",
+        "default":"none"
     }
 }

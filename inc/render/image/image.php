@@ -36,10 +36,20 @@ class Vayu_blocks_image {
         $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
-        
+
+        $animation_classname = '';
+
+        if ($attributes['animationsettings'] === 'without-hvr') {
+            $animation_classname = $attributes['imagehvranimation'];
+        } elseif ($attributes['animationsettings'] === 'with-hvr') {
+            $animation_classname = $attributes['imagehvranimation'] . 'hvr';
+        } elseif ($attributes['animationsettings'] === 'one-time') {
+            $animation_classname = $attributes['imagehvranimation'] . 'onetime';
+        }
+
         $image_html .= '<div class="vayu_blocks_image__wrapper" id='. $uniqueId .'>';
             $image_html .= '<div class="vayu_blocks_rotating_div">';
-            $image_html .= '<div class="vayu_blocks_image_image-container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $imageHvrAnimation . '" >';            
+            $image_html .= '<div class=" ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 
@@ -67,7 +77,7 @@ class Vayu_blocks_image {
             $image_html .= '</div>';
         }
     
-        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . '">' . $image_html . '</div>';
+        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . ' vayu_blocks_image_image-container">' . $image_html . '</div>';
     }
     
     //overlay
@@ -77,6 +87,15 @@ class Vayu_blocks_image {
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
         $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
 
+        $animation_classname = '';
+
+        if ($attributes['animationsettings'] === 'without-hvr') {
+            $animation_classname = $attributes['imagehvranimation'];
+        } elseif ($attributes['animationsettings'] === 'with-hvr') {
+            $animation_classname = $attributes['imagehvranimation'] . 'hvr';
+        } elseif ($attributes['animationsettings'] === 'one-time') {
+            $animation_classname = $attributes['imagehvranimation'] . 'onetime';
+        }
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
         $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';

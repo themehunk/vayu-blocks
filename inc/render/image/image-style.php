@@ -327,8 +327,7 @@ function generate_inline_image_styles($attr) {
         $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
     $css .= "}";
 
-    $css .= "$wrapper $inline .vayu_blocks_image_image-container {";
-        $css .= "display: flex;";
+    $css .= " .vayu_blocks_image_image-container {";
         $css .= "justify-content: " . (
             $attr['imagealignment'] === 'center' ? 'center' :
             ($attr['imagealignment'] === 'left' ? 'flex-start' :
@@ -839,7 +838,7 @@ function generate_inline_image_styles($attr) {
 
         }
 
-        $wrapper $inline .vayu_blocks_image_image-container{
+         .vayu_blocks_image_image-container{
             justify-content: " . (
                 $attr['imagealignmenttablet'] === 'center' ? 'center' :
                 ($attr['imagealignmenttablet'] === 'left' ? 'flex-start' :
@@ -911,7 +910,7 @@ function generate_inline_image_styles($attr) {
             ) . ";
         }
 
-        $wrapper $inline .vayu_blocks_image_image-container{
+        .vayu_blocks_image_image-container{
 
             justify-content: " . (
                 $attr['imagealignmentmobile'] === 'center' ? 'center' :

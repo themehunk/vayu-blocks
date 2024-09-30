@@ -106,6 +106,7 @@ return array(
             'overlaytoptablet'=>'19px',
             'overlayleftmobile'=>'14px',
             'overlaytopmobile'=>'19px',
+            'animationsettings' => 'without-hvr',
 
     //Advanced
         'classNamemain' => '',

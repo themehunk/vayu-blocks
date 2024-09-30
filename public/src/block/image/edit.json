@@ -336,5 +336,9 @@
     "rotation":{
         "type":"number",
         "default":0
+    },
+    "animationsettings":{
+        "type":"string",
+        "default":"without-hvr"
     }
 }

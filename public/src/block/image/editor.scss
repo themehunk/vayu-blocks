@@ -415,13 +415,44 @@
     -webkit-mask-position: var(--image-url-position);
 }
 
-.vayu_blocks_image_wrapper .clip-animation { 
-    clip-path: polygon(100% 50%,84.70057014808336% 54.5684167277018%,91.0518476172854% 60.99980941685713%,82.33578363789503% 63.39392013277814%,93.30127018922194% 75%,77.76736691019323% 71.30665001530522%,80.05203820042827% 80.05203820042827%,71.30665001530522% 77.76736691019323%,75% 93.30127018922192%,63.39392013277814% 82.33578363789503%,60.99980941685714% 91.0518476172854%,54.56841672770181% 84.70057014808336%,50% 100%,45.4315832722982% 84.70057014808336%,39.000190583142874% 91.0518476172854%,36.606079867221865% 82.33578363789505%,25.00000000000001% 93.30127018922194%,28.693349984694787% 77.76736691019323%,19.947961799571733% 80.05203820042827%,22.23263308980677% 71.30665001530522%,6.698729810778076% 75.00000000000001%,17.664216362104966% 63.39392013277815%,8.948152382714603% 60.99980941685715%,15.299429851916635% 54.568416727701816%,0% 50.00000000000001%,15.299429851916635% 45.431583272298205%,8.94815238271459% 39.00019058314288%,17.66421636210496% 36.60607986722188%,6.698729810778062% 25.000000000000014%,22.23263308980676% 28.693349984694787%,19.947961799571715% 19.947961799571747%,28.69334998469477% 22.232633089806775%,24.99999999999998% 6.698729810778083%,36.60607986722184% 17.664216362104973%,39.00019058314284% 8.948152382714603%,45.43158327229816% 15.299429851916642%,49.99999999999999% 0%,54.568416727701795% 15.299429851916635%,60.99980941685711% 8.94815238271459%,63.39392013277812% 17.66421636210496%,74.99999999999997% 6.6987298107780475%,71.3066500153052% 22.23263308980675%,80.05203820042826% 19.947961799571722%,77.76736691019323% 28.69334998469477%,93.30127018922192% 24.99999999999998%,82.33578363789502% 36.60607986722184%,91.0518476172854% 39.00019058314283%,84.70057014808336% 45.43158327229816%)}
-  
-.vayu_blocks_image_wrapper .clip-animation { 
-    animation: clip 1s infinite
+.vayu_blocks_image_wrapper .rotate-image {
+    animation: rotate 5s linear infinite;
 }
-  
+
+.vayu_blocks_image_wrapper:hover .rotate-imagehvr {
+    animation: rotate 5s linear infinite;
+}
+
+/* Rotate only once */
+.vayu_blocks_image_wrapper .rotate-imageonetime {
+    animation: rotate 5s linear 1;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Clip-path animation that runs infinitely */
+.vayu_blocks_image_wrapper .clip-animation { 
+    clip-path: polygon(100% 50%,84.70057014808336% 54.5684167277018%,91.0518476172854% 60.99980941685713%,82.33578363789503% 63.39392013277814%,93.30127018922194% 75%,77.76736691019323% 71.30665001530522%,80.05203820042827% 80.05203820042827%,71.30665001530522% 77.76736691019323%,75% 93.30127018922192%,63.39392013277814% 82.33578363789503%,60.99980941685714% 91.0518476172854%,54.56841672770181% 84.70057014808336%,50% 100%,45.4315832722982% 84.70057014808336%,39.000190583142874% 91.0518476172854%,36.606079867221865% 82.33578363789505%,25.00000000000001% 93.30127018922194%,28.693349984694787% 77.76736691019323%,19.947961799571733% 80.05203820042827%,22.23263308980677% 71.30665001530522%,6.698729810778076% 75.00000000000001%,17.664216362104966% 63.39392013277815%,8.948152382714603% 60.99980941685715%,15.299429851916635% 54.568416727701816%,0% 50.00000000000001%,15.299429851916635% 45.431583272298205%,8.94815238271459% 39.00019058314288%,17.66421636210496% 36.60607986722188%,6.698729810778062% 25.000000000000014%,22.23263308980676% 28.693349984694787%,19.947961799571715% 19.947961799571747%,28.69334998469477% 22.232633089806775%,24.99999999999998% 6.698729810778083%,36.60607986722184% 17.664216362104973%,39.00019058314284% 8.948152382714603%,45.43158327229816% 15.299429851916642%,49.99999999999999% 0%,54.568416727701795% 15.299429851916635%,60.99980941685711% 8.94815238271459%,63.39392013277812% 17.66421636210496%,74.99999999999997% 6.6987298107780475%,71.3066500153052% 22.23263308980675%,80.05203820042826% 19.947961799571722%,77.76736691019323% 28.69334998469477%,93.30127018922192% 24.99999999999998%,82.33578363789502% 36.60607986722184%,91.0518476172854% 39.00019058314283%,84.70057014808336% 45.43158327229816%);
+    animation: clip 1s infinite;
+}
+
+/* Clip-path animation that runs only once */
+.vayu_blocks_image_wrapper .clip-animationonetime { 
+    animation: clip 1s linear 1; /* One-time animation */
+}
+
+/* Clip-path animation on hover */
+.vayu_blocks_image_wrapper:hover .clip-animationhvr { 
+    animation: clip 1s infinite; /* Infinite on hover */
+}
+
 @keyframes clip {
 0% {
     clip-path: polygon(100% 50%,84.70057014808336% 54.5684167277018%,91.0518476172854% 60.99980941685713%,82.33578363789503% 63.39392013277814%,93.30127018922194% 75%,77.76736691019323% 71.30665001530522%,80.05203820042827% 80.05203820042827%,71.30665001530522% 77.76736691019323%,75% 93.30127018922192%,63.39392013277814% 82.33578363789503%,60.99980941685714% 91.0518476172854%,54.56841672770181% 84.70057014808336%,50% 100%,45.4315832722982% 84.70057014808336%,39.000190583142874% 91.0518476172854%,36.606079867221865% 82.33578363789505%,25.00000000000001% 93.30127018922194%,28.693349984694787% 77.76736691019323%,19.947961799571733% 80.05203820042827%,22.23263308980677% 71.30665001530522%,6.698729810778076% 75.00000000000001%,17.664216362104966% 63.39392013277815%,8.948152382714603% 60.99980941685715%,15.299429851916635% 54.568416727701816%,0% 50.00000000000001%,15.299429851916635% 45.431583272298205%,8.94815238271459% 39.00019058314288%,17.66421636210496% 36.60607986722188%,6.698729810778062% 25.000000000000014%,22.23263308980676% 28.693349984694787%,19.947961799571715% 19.947961799571747%,28.69334998469477% 22.232633089806775%,24.99999999999998% 6.698729810778083%,36.60607986722184% 17.664216362104973%,39.00019058314284% 8.948152382714603%,45.43158327229816% 15.299429851916642%,49.99999999999999% 0%,54.568416727701795% 15.299429851916635%,60.99980941685711% 8.94815238271459%,63.39392013277812% 17.66421636210496%,74.99999999999997% 6.6987298107780475%,71.3066500153052% 22.23263308980675%,80.05203820042826% 19.947961799571722%,77.76736691019323% 28.69334998469477%,93.30127018922192% 24.99999999999998%,82.33578363789502% 36.60607986722184%,91.0518476172854% 39.00019058314283%,84.70057014808336% 45.43158327229816%);
@@ -438,6 +469,14 @@
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     animation: diamond-rotate 4s infinite ease-in-out;
 }
+
+.vayu_blocks_image_wrapper .clip-diamondonetime { 
+    animation:diamond-rotate 4s linear 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-diamondhvr { 
+    animation: diamond-rotate 4s infinite; /* Infinite on hover */
+}
   
 @keyframes diamond-rotate {
 0%, 100% {
@@ -453,6 +492,14 @@ clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%,
 animation: starburst 2.5s linear infinite;
 }
   
+.vayu_blocks_image_wrapper .clip-starburstonetime { 
+    animation:starburst 2.5s linear 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-starbursthvr { 
+    animation: starburst 2.5s infinite; /* Infinite on hover */
+}
+ 
 @keyframes starburst {
     0%, 100% {
         clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
@@ -465,6 +512,14 @@ animation: starburst 2.5s linear infinite;
 .vayu_blocks_image_wrapper .clip-diagonal-expand {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     animation: diagonal-expand 3s ease-in-out infinite;
+}
+
+.vayu_blocks_image_wrapper .clip-diagonal-expandonetime { 
+    animation:diagonal-expand 3s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-diagonal-expandhvr { 
+    animation: diagonal-expand 3s ease-in-out infinite; /* Infinite on hover */
 }
   
 @keyframes diagonal-expand {
@@ -482,9 +537,17 @@ animation: starburst 2.5s linear infinite;
 .vayu_blocks_image_wrapper .clip-diagonal-slide {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     animation: diagonal-slide 4s ease-in-out infinite;
-  }
+}
+
+.vayu_blocks_image_wrapper .clip-diagonal-slideonetime { 
+    animation:diagonal-slide 4s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-diagonal-slidehvr { 
+    animation: diagonal-slide 4s ease-in-out infinite; /* Infinite on hover */
+}
   
-  @keyframes diagonal-slide {
+@keyframes diagonal-slide {
     0% {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
@@ -494,14 +557,22 @@ animation: starburst 2.5s linear infinite;
     100% {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
-  }
+}
   
-  .vayu_blocks_image_wrapper .clip-hex-pulse {
+.vayu_blocks_image_wrapper .clip-hex-pulse {
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     animation: hex-pulse 2.5s ease-in-out infinite;
-  }
+}
+
+.vayu_blocks_image_wrapper .clip-hex-pulseonetime { 
+    animation:hex-pulse 2.5s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-hex-pulsehvr { 
+    animation: hex-pulse 2.5s ease-in-out infinite; /* Infinite on hover */
+}
   
-  @keyframes hex-pulse {
+@keyframes hex-pulse {
     0% {
       clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     }
@@ -511,42 +582,66 @@ animation: starburst 2.5s linear infinite;
     100% {
       clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     }
-  }
+}
   
-  .vayu_blocks_image_wrapper .clip-triangle-expand {
+.vayu_blocks_image_wrapper .clip-triangle-expand {
     clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
     animation: triangle-to-trapezoid 3s ease-in-out infinite;
-  }
+}
   
-  @keyframes triangle-to-trapezoid {
+.vayu_blocks_image_wrapper .clip-triangle-expandonetime { 
+    animation:triangle-to-trapezoid 3s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-triangle-expandhvr { 
+    animation: triangle-to-trapezoid 3s ease-in-out infinite; /* Infinite on hover */
+}
+
+@keyframes triangle-to-trapezoid {
     0%, 100% {
       clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
     }
     50% {
       clip-path: polygon(40% 0%, 90% 100%, 10% 100%);
     }
-  }
+}
   
-  .vayu_blocks_image_wrapper .clip-circle-burst {
+.vayu_blocks_image_wrapper .clip-circle-burst {
     clip-path: circle(0% at 50% 50%);
     animation: circle-burst 2s ease-out infinite;
-  }
+}
+
+.vayu_blocks_image_wrapper .clip-circle-burstonetime { 
+    animation:circle-burst 2s ease-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-circle-bursthvr { 
+    animation: circle-burst 2s ease-out infinite; /* Infinite on hover */
+}
   
-  @keyframes circle-burst {
+@keyframes circle-burst {
     0% {
       clip-path: circle(0% at 50% 50%);
     }
     100% {
       clip-path: circle(75% at 50% 50%);
     }
-  }
+}
   
-  .vayu_blocks_image_wrapper  .clip-zigzag {
+.vayu_blocks_image_wrapper .clip-zigzag {
     clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 75% 50%, 100% 75%, 100% 100%, 0% 100%, 0% 75%, 25% 50%, 0% 25%);
     animation: zigzag-reveal 3.5s ease-in-out infinite;
-  }
+}
+
+.vayu_blocks_image_wrapper .clip-zigzagonetime { 
+    animation:zigzag-reveal 3.5s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-zigzaghvr { 
+    animation: zigzag-reveal 3.5s ease-in-out infinite; /* Infinite on hover */
+}
   
-  @keyframes zigzag-reveal {
+@keyframes zigzag-reveal {
     0% {
       clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 75% 50%, 100% 75%, 100% 100%, 0% 100%, 0% 75%, 25% 50%, 0% 25%);
     }
@@ -556,22 +651,30 @@ animation: starburst 2.5s linear infinite;
     100% {
       clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 75% 50%, 100% 75%, 100% 100%, 0% 100%, 0% 75%, 25% 50%, 0% 25%);
     }
-  }
+}
   
-  .vayu_blocks_image_wrapper  .clip-diamond-expand {
+.vayu_blocks_image_wrapper .clip-diamond-expand {
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     animation: diamond-expand 3s ease-in-out infinite;
-  }
+}
+
+.vayu_blocks_image_wrapper .clip-diamond-expandonetime { 
+    animation:diamond-expand 3s ease-in-out 1; /* One-time animation */
+}
+
+.vayu_blocks_image_wrapper:hover .clip-diamond-expandhvr { 
+    animation: diamond-expand 3s ease-in-out infinite; /* Infinite on hover */
+}
   
-  @keyframes diamond-expand {
+@keyframes diamond-expand {
     0%, 100% {
       clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     }
     50% {
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
-  }
-   
+}
+  
 .vayu_blocks_image-flip-settings_main .vayu_block_width_height_control {
     display: flex;
     flex-direction: row; /* Stack vertically if needed */
@@ -646,18 +749,6 @@ animation: starburst 2.5s linear infinite;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.rotate-image {
-    animation: rotate 5s linear infinite;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 .linking-controls_image{
