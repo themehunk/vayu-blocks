@@ -38,7 +38,7 @@ class Vayu_Block_Plugin {
         define( 'VAYU_BLOCKS_URL', plugins_url( '/', __FILE__ ) );
         define( 'VAYU_BLOCKS_PATH', dirname( __FILE__ ) );
         define( 'VAYU_BLOCKS_DIR_PATH', plugin_dir_path( __FILE__ ) );
-        define( 'VAYU_BLOCKS_VERSION', '1.1.0' );
+        define( 'VAYU_BLOCKS_VERSION', '1.1.1' );
         define( 'VAYU_BLOCKS_PRO_SUPPORT', true );
         define( 'VAYU_BLOCKS_SHOW_NOTICES', false );
 
