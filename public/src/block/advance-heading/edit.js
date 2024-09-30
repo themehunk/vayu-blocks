@@ -612,6 +612,11 @@ import apiFetch from '@wordpress/api-fetch';
 
 	const dynamicContent = useDynamicContent(attributes);
 
+	// Save the dynamic content directly into the `content` attribute
+	useEffect(() => {
+		setAttributes({ content: dynamicContent });
+	}, [dynamicContent]);
+
 	return (
         <Fragment>
             <Controls 
@@ -625,7 +630,7 @@ import apiFetch from '@wordpress/api-fetch';
 		<RichText
                 identifier="content"
                 tagName={ attributes.tag } // The tag here is the element output and editable in the admin
-                value={ dynamicContent } // Any existing content, either from the database or an attribute default
+				value={ attributes.content || dynamicContent } // Any existing content, either from the database or an attribute default
                 allowedFormats={ [ 'core/bold', 'core/italic','core/link' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
                 onChange={ changeContent } // Store updated content as a block attribute
                 placeholder={ __( 'Write heading…','vayu-blocks' ) } // Display this text before any content has been added by the user

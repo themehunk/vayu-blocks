@@ -29,12 +29,20 @@ const useDynamicContent = (attributes) => {
             : date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     };
 
+    const getFeaturedImageURL = (coreStore, post) => {
+        if (post && post.featured_media) {
+            const media = coreStore.getEntityRecord('postType', 'attachment', post.featured_media);
+            return media ? media.source_url : '';
+        }
+        return '';
+    };
+
     return useSelect((select) => {
 
         const coreStore = select('core');
         const post = fetchPostData(coreStore); 
-        console.log(post); 
         const author = getAuthorDetails(coreStore, post);
+        const featuredImageURL = getFeaturedImageURL(coreStore, post);
 
         const wrapWithLink = (content) => {
 
@@ -52,7 +60,7 @@ const useDynamicContent = (attributes) => {
             } else if (contentLinkUrl === 'comments_url') {
                 dynamicUrl = post ? post.link + '#comments' : ''; 
             }else if (contentLinkUrl === 'featured_img_url') {
-                dynamicUrl = post && post.featured_media ? wp.media.attachment(post.featured_media).url : '';
+                dynamicUrl = featuredImageURL;
             } else {
                 dynamicUrl = ''; 
             }
@@ -77,6 +85,8 @@ const useDynamicContent = (attributes) => {
                 return wrapWithLink(formatDateTime(post.modified, 'time'));
             case 'post_id':
                 return wrapWithLink(selectedPost ? selectedPost.toString() : '');
+            case 'post_image':
+                return wrapWithLink(featuredImageURL ? `<img src="${featuredImageURL}" alt="Featured Image" />` : '');
             case 'author_name':
                 return wrapWithLink(author.name);
             case 'author_bio':

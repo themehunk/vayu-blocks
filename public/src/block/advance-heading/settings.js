@@ -39,7 +39,7 @@ import {
 	DynamicContentSelectorPanel
 } from '../../components/index.js';
 
-import PostTypeSelect from './PostTypeSelect.js';
+import PostTypeSelect from './dynamicPostTypeSelect.js';
 
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
@@ -1251,7 +1251,10 @@ const InsSettings = ({
 				</>
 			
 				) }
-
+                    <PostTypeSelect
+                        attributes={ attributes }
+                        setAttributes={ setAttributes }
+                    />
                 </PanelBody>
 				<PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }
 							className="th-adv-h-panel" initialOpen={ false }
@@ -2279,12 +2282,7 @@ const InsSettings = ({
 				allowReset={ true }
                 />
 				</PanelBody>
-				<PanelBody title={__('Dynamic Content', 'vayu-blocks')}>
-				<PostTypeSelect
-                        attributes={ attributes }
-                        setAttributes={ setAttributes }
-                    />
-			 </PanelBody>
+				
 
 		     </Fragment>
             )}
