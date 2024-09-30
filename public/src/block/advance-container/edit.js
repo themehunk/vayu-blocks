@@ -31,7 +31,8 @@ export default function Edit({
 	attributes, 
 	setAttributes, 
 	clientId,
-	uniqueID
+	uniqueID,
+	variationSelected
    }){
 
 			const { id } = attributes;
@@ -72,7 +73,8 @@ export default function Edit({
 				getBlock,
 				getBlockRootClientId,
 				variations,
-				defaultVariation
+				defaultVariation,
+				getBlockParents
 			} = useSelect( 
 				select => {
 					const { 
@@ -81,6 +83,8 @@ export default function Edit({
 						getBlockRootClientId
 					} = select( 'core/block-editor' );
 					const coreBlocks = select( 'core/blocks' );
+					const coreBlockEditor = select( 'core/block-editor' );
+					const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 					 const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 					 const block = getBlock( clientId );
 					 const adjacentBlockClientId = getAdjacentBlockClientId( clientId );
@@ -96,6 +100,8 @@ export default function Edit({
 					adjacentBlock,
 					parentBlock: parentBlock ? parentBlock.name : null,
 					hasInnerBlocks,
+					getBlockParents : getBlockParentStore,
+					parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
 					
 					parentClientId,
 					isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
@@ -877,28 +883,8 @@ export default function Edit({
 
 					  // Display layout options if no inner blocks are present
 	const innerBlockss = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
-	// Manage block placeholder visibility
-	// const [ showPlaceholder, setShowPlaceholder ] = useState( true );
-	// const { replaceInnerBlocks } = useDispatch('core/block-editor');
-	// // Select the inner blocks
-    // const innerBlocks = useSelect(
-    //     (select) => select('core/block-editor').getBlocks(clientId),
-    //     [clientId]
-    // );
-
-    // // Handles layout changes based on the user's choice
-    // const switchLayout = (template) => {
-    //     replaceInnerBlocks(clientId, createBlocksFromTemplate(template), true);
-    // };
-
-    // // Function to create inner blocks from the given template
-    // const createBlocksFromTemplate = (template) => {
-    //     return template.map(([blockName, blockAttributes]) => {
-    //         return wp.blocks.createBlock(blockName, blockAttributes);
-    //     });
-    // };
 	
-	if ( innerBlockss.length === 0 ) {
+	if ( ! variationSelected && innerBlockss.length === 0 && getBlockParents?.length ) {
 	return <VariationPicker { ...{ clientId, setAttributes, defaultVariation } } />
 	}
     
