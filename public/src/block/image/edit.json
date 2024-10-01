@@ -151,7 +151,7 @@
     },
     "overlayshow":{
         "type":"boolean",
-        "default":true
+        "default":false
     },
     "masksize":{
         "type":"string",
@@ -340,5 +340,17 @@
     "animationsettings":{
         "type":"string",
         "default":"without-hvr"
+    },
+    "wrapperanimation":{
+        "type":"string",
+        "default":"none"
+    },
+    "overlaywrapper":{
+        "type":"string",
+        "default":"none"
+    },
+    "animatingside":{
+        "type":"string",
+        "default":"left"
     }
 }

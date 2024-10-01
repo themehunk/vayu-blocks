@@ -30,5 +30,3 @@ registerBlockType( metadata.name, {
 	icon: <FaRegImage style={{color:'#6c1bc3'}} />,
 	save,
 } );
-
-
