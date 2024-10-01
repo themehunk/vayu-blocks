@@ -30,6 +30,7 @@ width:100%;
     position: absolute;
     right: 0;
     top: 0;
+	border: 1px dashed #999;
 }
 .block-editor-block-list__layout .block-editor-block-list__block:not([contenteditable=true]):hover:after{
     bottom: 0;
@@ -67,12 +68,12 @@ width:auto;
 	}
 	
 	.is-selected > .th-inside-container > .block-list-appender > .block-editor-inserter > button{
-		padding: 12px;
-		height:auto;
-		border:0;
-		box-shadow:none;
-		background:none;
-		color:#111;
+		padding: 0px;
+		height: auto;
+		border: 0;
+		box-shadow: none;
+		background: #111;
+		color: #fff;
 		}
 	
 	.th-root-block-container > .is-selected > .th-inside-container > .block-list-appender > .block-editor-inserter > button{
