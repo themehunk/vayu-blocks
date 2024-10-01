@@ -42,7 +42,7 @@ import {
 	DynamicContentSelectorPanel
 } from '../../components/index.js';
 
-import PostTypeSelect from './PostTypeSelect.js';
+import PostTypeSelect from './dynamicPostTypeSelect.js';
 
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
@@ -1295,7 +1295,13 @@ const InsSettings = ({
 										<img src={attributes.headingimage} alt="slideimage" />
 										<button class="vayu-blocks-change-button" onClick={() => setAttributes({headingimage:''})}>Change</button>
 									</div>
-
+				</>
+			
+				) }
+                    <PostTypeSelect
+                        attributes={ attributes }
+                        setAttributes={ setAttributes }
+                    />
 									<br/>
 									<br/>
 									<ToggleControl
@@ -1330,7 +1336,6 @@ const InsSettings = ({
 								)}
 						</>	
 					)}
-
                 </PanelBody>
 				<PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }
 							className="th-adv-h-panel" initialOpen={ false }
@@ -2358,12 +2363,7 @@ const InsSettings = ({
 				allowReset={ true }
                 />
 				</PanelBody>
-				<PanelBody title={__('Dynamic Content', 'vayu-blocks')}>
-				<PostTypeSelect
-                        attributes={ attributes }
-                        setAttributes={ setAttributes }
-                    />
-			 </PanelBody>
+				
 
 		     </Fragment>
             )}
