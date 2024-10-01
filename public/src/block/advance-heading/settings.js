@@ -38,8 +38,7 @@ import {
 	BackgroundSelectorControl,
 	UnitChooser,
 	ToogleGroupControl,
-	GoogleFontsControl,
-	DynamicContentSelectorPanel
+	GoogleFontsControl
 } from '../../components/index.js';
 
 import PostTypeSelect from './dynamicPostTypeSelect.js';
@@ -1233,201 +1232,199 @@ const InsSettings = ({
 					onChange={ setTab }
             />
 
-            {'style' === tab && (
+{'style' === tab && (
 
-                <Fragment>
+<Fragment>
 
+	<PanelBody 
+		title={ __( 'General', 'vayu-blocks' ) }
+		className="th-adv-h-panel" 
+		initialOpen={ true }
+	>
+		<ResponsiveControl label={ __( 'Alignment', 'vayu-blocks' ) }>
+			<AlignmentToolbar
+				value={ getAlignment() }
+				onChange={ changeAlignment }
+				isCollapsed={ false }
+			/> 
+		</ResponsiveControl> 			
 
-                 <PanelBody title={ __( 'General', 'vayu-blocks' ) }
-							className="th-adv-h-panel" initialOpen={ true }
-							
-						>
+		<HoverControl 
+			value={ colorpanel }
+			options={[
+				{
+					label: __( 'Color', 'vayu-blocks' ),
+					value: 'color'
+				},
+				{
+					label: __( 'Image', 'vayu-blocks' ),
+					value: 'image'
+				}
+			]}
+			onChange={ setcolorpanelfunction } 
+		/>
+
+		{colorpanel === 'color' && (
+			<ColorPanel
+				colorTool={[
+					{
+						active: ['color'],
+						name: 'Text',
+						value: attributes.headingColor,
+						attribute: 'color',
+					},
+					{
+						active: ['color'],
+						name: 'Hover Text',
+						value: attributes.headingHvrColor,
+						attribute: 'colorhvr',
+					}
+				]}
+				handelColorPanel={(value) => handlecolorcolorpanel(value)}
+				initialTab="color"
+			/>
+		)}
+
+		{colorpanel === 'image' && (			
+			<>
+				<h4>{__('Background', 'vayu-blocks')}</h4>
+				{attributes.headingimage ? (
+					<>         
+						<div className="vayu-blocks-image-container">
+							<img src={attributes.headingimage} alt="slideimage" />
+							<button 
+								className="vayu-blocks-change-button" 
+								onClick={() => setAttributes({ headingimage: '' })}
+							>
+								Change
+							</button>
+						</div>
+					</>
+				) : (
+					<>
+						<MediaPlaceholder
+							icon="format-image"
+							labels={{
+								title: __('Background Image', 'vayu-blocks'),
+								name: __('an image', 'vayu-blocks')
+							}}
+							onSelect={(media) => {
+								setAttributes({
+									headingimage: media.url,
+									headingColor: 'transparent'
+								});
+							}}                                                               
+							accept="image/*"
+							allowedTypes={['image']}
+						/>
+						<br/>
+					</>
+				)}
 				
-                <ResponsiveControl label={ __( 'Alignment', 'vayu-blocks' ) } >
-                <AlignmentToolbar
-									value={ getAlignment() }
-									onChange={ changeAlignment }
-									isCollapsed={ false }
-								/> 
-                </ResponsiveControl> 			
-
-				<HoverControl value={ colorpanel }
-					options={[
-						{
-							label: __( 'Color', 'vayu-blocks' ),
-							value: 'color'
-						},
-						{
-							label: __( 'Image', 'vayu-blocks' ),
-							value: 'image'
-						}
-					]}
-					onChange={ setcolorpanelfunction } />
-
-					{colorpanel === 'color' && (
-					<ColorPanel
-						colorTool={[
-							{
-								active: ['color'],
-								name: 'Text',
-								value: attributes.headingColor,
-								attribute: 'color',
-							},
-							{
-								active: ['color'],
-								name: 'Hover Text',
-								value: attributes.headingHvrColor,
-								attribute: 'colorhvr',
-							}
-
-						]}
-						handelColorPanel={(value)=>handlecolorcolorpanel(value)}
-						initialTab="color"
-					/>
-					)}
-
-					{colorpanel === 'image' && (			
-						<>
-							<h4>{__('Background','vayu-blocks')}</h4>
-							{attributes.headingimage ? (
-								<>         
-									<div class="vayu-blocks-image-container">
-										<img src={attributes.headingimage} alt="slideimage" />
-										<button class="vayu-blocks-change-button" onClick={() => setAttributes({headingimage:''})}>Change</button>
-									</div>
-				</>
+				<br/>
+				<br/>
+				<ToggleControl
+					label={__('Animate text')}
+					checked={attributes.headinganimation}
+					onChange={(value) => setAttributes({ headinganimation: value })}
+				/> 
+				<Button 
+					style={{ color: 'blue', marginBottom: '20px' }} 
+					onClick={() => setAttributes({ headingimage: '' })}
+				>
+					{__('Clear', 'vayu-blocks')}
+				</Button>
+				
+			</>
 			
-				) }
-                    <PostTypeSelect
-                        attributes={ attributes }
-                        setAttributes={ setAttributes }
-                    />
-									<br/>
-									<br/>
-									<ToggleControl
-										label={__('Animate text')}
-										checked={attributes.headinganimation}
-										onChange={(value) => setAttributes({headinganimation:value})}
-									/> 
-									<Button style={{color:'blue',marginBottom:'20px'}} onClick={() => setAttributes({headingimage:''})}>
-										{__('Clear', 'vayu-blocks')}
-									</Button>
-								</>
-								) : (
-									<>
-									<MediaPlaceholder
-										icon="format-image"
-										labels={{
-											title: __('Background Image', 'vayu-blocks'),
-											name: __('an image', 'vayu-blocks')
-										}}
-										onSelect={(media) => {
-											setAttributes({
-												headingimage: media.url, // Make sure 'headingImage' matches the attribute name
-												headingColor: 'transparent' // Correct spelling of 'transparent'
-											});
-										}}                                                               
-										onSelectURL='true'
-										accept="image/*"
-										allowedTypes={['image']}
-									/>
-									<br/>
-									</>
-								)}
-						</>	
-					)}
-                </PanelBody>
-				<PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }
-							className="th-adv-h-panel" initialOpen={ false }
-						>	
-						<GoogleFontsControl
-								label={ __( 'Font Family', 'vayu-blocks' ) }
-								value={ attributes.fontFamily }
-								onChangeFontFamily={ changeFontFamily }
-								valueVariant={ attributes.fontVariant }
-								onChangeFontVariant={ fontVariant => setAttributes({ fontVariant }) }
-								valueStyle={ attributes.fontStyle }
-								onChangeFontStyle={ fontStyle => setAttributes({ fontStyle }) }
-								valueTransform={ attributes.textTransform }
-								onChangeTextTransform={ textTransform => setAttributes({ textTransform }) }
-							/>
-			
-						<ResponsiveControl
-								label={ __( 'Font Size', 'vayu-blocks' ) }
-							>    
-							   
-							   <UnitChooser
-								value={ attributes.fontSizeUnit }
-								onClick={fontSizeUnit => {
-									setAttributes({ fontSizeUnit });
-									setfontSizeUnit(fontSizeUnit);
-								  }}
-			
-								units={ [ 'px', 'em', '%' ] }
-						        />
-								<RangeControl
-								    renderTooltipContent={ customTooltipFontsize }
-									value={ getFontSize() || '' }
-									onChange={ changeFontSize }
-									step={ 0.1 }
-									min={ 1 }
-									max={ maxfontSizeUnit }
-									allowReset={ true }
-								/>		
-						</ResponsiveControl>
+		)}
+		<PostTypeSelect
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+				/>
+	</PanelBody>
 
-						<ResponsiveControl
-								label={ __( 'Line Height', 'vayu-blocks' ) }
-							>
-							<UnitChooser
-								value={ attributes.lineHeightUnit }
-								onClick={lineHeightUnit => {
-									setAttributes({lineHeightUnit });
-									setlineHeightUnit(lineHeightUnit);
-								  }}
-			
-								units={ [ 'px', 'em', '%' ] }
-						    />	
-							<RangeControl
-							    renderTooltipContent={ customTooltiplineHeight }
-								value={ getlineHeight() || '' }
-								onChange={ changelineHeight }
-								step={ 0.1 }
-								min={ 0 }
-								max={ maxlineHeightUnit }
-								allowReset={ true }
-							/>
-						</ResponsiveControl>
+	<PanelBody 
+		title={ __( 'Typography', 'vayu-blocks' ) }
+		className="th-adv-h-panel" 
+		initialOpen={ false }
+	>	
+		<GoogleFontsControl
+			label={ __( 'Font Family', 'vayu-blocks' ) }
+			value={ attributes.fontFamily }
+			onChangeFontFamily={ changeFontFamily }
+			valueVariant={ attributes.fontVariant }
+			onChangeFontVariant={ fontVariant => setAttributes({ fontVariant }) }
+			valueStyle={ attributes.fontStyle }
+			onChangeFontStyle={ fontStyle => setAttributes({ fontStyle }) }
+			valueTransform={ attributes.textTransform }
+			onChangeTextTransform={ textTransform => setAttributes({ textTransform }) }
+		/>
+	
+		<ResponsiveControl label={ __( 'Font Size', 'vayu-blocks' ) }>    
+			<UnitChooser
+				value={ attributes.fontSizeUnit }
+				onClick={(fontSizeUnit) => {
+					setAttributes({ fontSizeUnit });
+					setfontSizeUnit(fontSizeUnit);
+				}}
+				units={ [ 'px', 'em', '%' ] }
+			/>
+			<RangeControl
+				renderTooltipContent={ customTooltipFontsize }
+				value={ getFontSize() || '' }
+				onChange={ changeFontSize }
+				step={ 0.1 }
+				min={ 1 }
+				max={ maxfontSizeUnit }
+				allowReset={ true }
+			/>		
+		</ResponsiveControl>
 
-						<ResponsiveControl
-								label={ __( 'Letter Spacing', 'vayu-blocks' ) }
-							>
-							   <UnitChooser
-								value={ attributes.letterSpacingUnit }
-								onClick={ letterSpacingUnit => {
-									setAttributes({letterSpacingUnit});
-									setletterSpacingUnit(letterSpacingUnit);
-								  }}
-			
-								units={ [ 'px', 'em', '%' ] }
-						    />
-							<RangeControl
-							    renderTooltipContent={ customTooltipletterSpacing }
-								value={ getletterSpacing() || '' }
-								onChange={ changeletterSpacing }
-								step={ 0.1 }
-								min={0}
-								max={ maxletterSpacingUnit }
-								allowReset={ true }
-							/>
-						</ResponsiveControl>	   
+		<ResponsiveControl label={ __( 'Line Height', 'vayu-blocks' ) }>
+			<UnitChooser
+				value={ attributes.lineHeightUnit }
+				onClick={(lineHeightUnit) => {
+					setAttributes({ lineHeightUnit });
+					setlineHeightUnit(lineHeightUnit);
+				}}
+				units={ [ 'px', 'em', '%' ] }
+			/>	
+			<RangeControl
+				renderTooltipContent={ customTooltiplineHeight }
+				value={ getlineHeight() || '' }
+				onChange={ changelineHeight }
+				step={ 0.1 }
+				min={ 0 }
+				max={ maxlineHeightUnit }
+				allowReset={ true }
+			/>
+		</ResponsiveControl>
 
-                </PanelBody>
+		<ResponsiveControl label={ __( 'Letter Spacing', 'vayu-blocks' ) }>
+			<UnitChooser
+				value={ attributes.letterSpacingUnit }
+				onClick={(letterSpacingUnit) => {
+					setAttributes({ letterSpacingUnit });
+					setletterSpacingUnit(letterSpacingUnit);
+				}}
+				units={ [ 'px', 'em', '%' ] }
+			/>
+			<RangeControl
+				renderTooltipContent={ customTooltipletterSpacing }
+				value={ getletterSpacing() || '' }
+				onChange={ changeletterSpacing }
+				step={ 0.1 }
+				min={ 0 }
+				max={ maxletterSpacingUnit }
+				allowReset={ true }
+			/>
+		</ResponsiveControl>	   
 
-                </Fragment>
+	</PanelBody>
+</Fragment>
 
-            ) || 'advanced' === tab && (
-
+) || 'advanced' === tab && (
             <Fragment>
 				<PanelBody
 					title={ __( 'Layout', 'vayu-blocks' ) }

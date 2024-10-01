@@ -2,6 +2,11 @@ import { useSelect } from '@wordpress/data';
 import { SelectControl, Spinner,ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
+/**
+ * Internal dependencies
+ */
+import {ControlPanelControl} from '../../components/index.js';
+
 
 const ContentSelect = ({ label, postType, selectedPost, onChange }) => {
     // Fetch the posts, pages, or products dynamically based on postType
@@ -71,7 +76,20 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
 
     return (
         <div>
-            {/* First SelectControl for Post Type */}
+           <ControlPanelControl
+				label={ __( 'Dynamic Content', 'vayu-blocks' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								dynamiControl: false,
+                                dynamicPostType: 'none',
+                                selectedPost: '',
+                                selectedSourceField: '',
+                                contentLinkEnable: false,
+                                contentLinkUrl: ''
+							} }
+							onClick={ () => setAttributes({ dynamiControl: true }) }
+			>
             <SelectControl
                 label={__('Content Type', 'vayu-blocks')}
                 value={dynamicPostType}
@@ -83,7 +101,6 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                 ]}
                 onChange={onPostTypeChange}
             />
-            {/* Conditionally render Content SelectControl */}
             {(dynamicPostType === 'post' || dynamicPostType === 'page' || dynamicPostType === 'product') && (
                 <>
                     <ContentSelect
@@ -108,6 +125,7 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                         <option value="post_date">{ __( 'Post Date', 'vayu-blocks' ) }</option>
                         <option value="post_time">{ __( 'Post Time', 'vayu-blocks' ) }</option>
                         <option value="post_id">{ __( 'Post Id', 'vayu-blocks' ) }</option>
+                        <option value="post_image">{ __( 'Post Featured Image', 'vayu-blocks' ) }</option>
                         </optgroup>
                         <optgroup label={ __( 'Author', 'vayu-blocks' ) }>
                         <option value="author_name">{ __( 'Name', 'vayu-blocks' ) }</option>
@@ -149,8 +167,9 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                        )}
                        </>
                     )}
-                </>
-            )}
+                 </>  
+               )}
+            </ControlPanelControl>
         </div>
     );
 };

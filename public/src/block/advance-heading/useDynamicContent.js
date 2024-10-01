@@ -1,4 +1,6 @@
 import { useSelect } from '@wordpress/data';
+//import { store as blockEditorStore } from '@wordpress/block-editor';
+
 
 
 const useDynamicContent = (attributes) => {
@@ -7,6 +9,13 @@ const useDynamicContent = (attributes) => {
         const posts = coreStore.getEntityRecords('postType', dynamicPostType, { include: [selectedPost] });
         return posts && posts.length > 0 ? posts[0] : null;
     };
+
+    // const blockContext = useSelect((select) => {
+    //     const { getBlock } = select(blockEditorStore);
+    //     return getBlock();
+    // }, []);
+
+    // console.log(blockContext);
     
     const getAuthorDetails = (coreStore, post) => {
         if (post && post.author) {
@@ -40,6 +49,7 @@ const useDynamicContent = (attributes) => {
     return useSelect((select) => {
 
         const coreStore = select('core');
+        
         const post = fetchPostData(coreStore); 
         const author = getAuthorDetails(coreStore, post);
         const featuredImageURL = getFeaturedImageURL(coreStore, post);
