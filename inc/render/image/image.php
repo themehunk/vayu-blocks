@@ -36,8 +36,9 @@ class Vayu_blocks_image {
         $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
-
+        $wrapperanimation = isset($attributes['wrapperanimation']) ? esc_attr($attributes['wrapperanimation']) : '';
         $animation_classname = '';
+
 
         if ($attributes['animationsettings'] === 'without-hvr') {
             $animation_classname = $attributes['imagehvranimation'];
@@ -47,7 +48,7 @@ class Vayu_blocks_image {
             $animation_classname = $attributes['imagehvranimation'] . 'onetime';
         }
 
-        $image_html .= '<div class="vayu_blocks_image__wrapper" id='. $uniqueId .'>';
+        $image_html .= '<div class="vayu_blocks_image__wrapper ' . $wrapperanimation . ' " id='. $uniqueId .'>';
             $image_html .= '<div class="vayu_blocks_rotating_div">';
             $image_html .= '<div class=" ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
                 $image_html .= '<img 
@@ -86,6 +87,7 @@ class Vayu_blocks_image {
         $overlay = '';
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
         $imageHvrAnimation = isset($attributes['imagehvranimation']) ? esc_attr($attributes['imagehvranimation']) : '';
+        $overlaywrapper = isset($attributes['overlaywrapper']) ? esc_attr($attributes['overlaywrapper']) : '';
 
         $animation_classname = '';
 
@@ -98,7 +100,7 @@ class Vayu_blocks_image {
         }
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $imageHvrEffect . ' ' . $imageHvrAnimation . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $overlaywrapper .' ' . $imageHvrEffect . ' ' . $animation_classname . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  
@@ -297,3 +299,15 @@ function vayu_block_image_render($attr,$content) {
     // Render and return the image output inside a div with the dynamic class name
     return '<div class="wp_block_vayu-blocks-image-main ' . $className . '">' . $image->render() . '</div>';
 }
+
+// Enqueue for front-end as well
+function enqueue_vayu_tilt_block_frontend_script() {
+    wp_enqueue_script(
+        'vayu-tilt-block-script-frontend',
+        plugins_url('tilt-effect.js', __FILE__), // Path to your tilt.js file
+        array(),
+        filemtime(plugin_dir_path(__FILE__) . 'tilt-effect.js'), // Version based on file modification time
+        true // Load in footer
+    );
+}
+add_action('wp_enqueue_scripts', 'enqueue_vayu_tilt_block_frontend_script');

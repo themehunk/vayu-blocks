@@ -61,7 +61,7 @@ return array(
             'imagealignmenttablet' => 'center',
             'imagealignmentmobile' => 'center',
             
-            'overlayshow'=>true,
+            'overlayshow'=>false,
             'maskshape'=> 'none',
             'masksize'=>'auto',
             'maskposition'=>'center center',
@@ -107,6 +107,8 @@ return array(
             'overlayleftmobile'=>'14px',
             'overlaytopmobile'=>'19px',
             'animationsettings' => 'without-hvr',
+            'wrapperanimation'=>'none',
+            'overlaywrapper'=> 'none',
 
     //Advanced
         'classNamemain' => '',

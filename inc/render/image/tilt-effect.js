@@ -15,8 +15,8 @@ function handleMove(e) {
   const yVal = e.layerY; // Store the y position
   
   // Calculate rotation values along the Y and X axes
-  const yRotation = 20 * ((xVal - width / 2) / width);
-  const xRotation = -20 * ((yVal - height / 2) / height);
+  const yRotation = 5 * ((xVal - width / 2) / width);
+  const xRotation = -5 * ((yVal - height / 2) / height);
   
   // Generate string for CSS transform property
   const string = 'perspective(500px) scale(1.1) rotateX(' + xRotation + 'deg) rotateY(' + yRotation + 'deg)';
