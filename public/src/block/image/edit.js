@@ -11,6 +11,7 @@ import {MediaPlaceholder } from '@wordpress/block-editor';
 import { RichText } from '@wordpress/block-editor';
 import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton} from '@wordpress/components';
+import { Resizable } from 're-resizable';
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
@@ -607,6 +608,7 @@ const edit = (props) => {
                         </div>
                     )}
                 
+
                 </div>
                 
             </AdvanceSettings>

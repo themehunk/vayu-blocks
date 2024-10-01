@@ -299,15 +299,3 @@ function vayu_block_image_render($attr,$content) {
     // Render and return the image output inside a div with the dynamic class name
     return '<div class="wp_block_vayu-blocks-image-main ' . $className . '">' . $image->render() . '</div>';
 }
-
-// Enqueue for front-end as well
-function enqueue_vayu_tilt_block_frontend_script() {
-    wp_enqueue_script(
-        'vayu-tilt-block-script-frontend',
-        plugins_url('tilt-effect.js', __FILE__), // Path to your tilt.js file
-        array(),
-        filemtime(plugin_dir_path(__FILE__) . 'tilt-effect.js'), // Version based on file modification time
-        true // Load in footer
-    );
-}
-add_action('wp_enqueue_scripts', 'enqueue_vayu_tilt_block_frontend_script');
