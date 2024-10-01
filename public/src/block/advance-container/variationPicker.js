@@ -4,8 +4,6 @@ import { useDispatch } from '@wordpress/data';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
 import { Path, SVG } from '@wordpress/components';
 import { RxGroup as icons } from "react-icons/rx";
-import { TfiLayoutColumn2Alt as icon2 } from "react-icons/tfi";
-import { TfiLayoutColumn3Alt as icon3 } from "react-icons/tfi";
 
 export const variations = [
     {
@@ -24,9 +22,6 @@ export const variations = [
 			variationSelected: true,
 		},
 		isDefault: true,
-		innerBlocks: [
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
-		],
 		scope: [ 'block' ],
 	},
 	{
@@ -47,8 +42,8 @@ export const variations = [
 		},
 		isDefault: true,
 		innerBlocks: [
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
 		],
 		scope: [ 'block' ],
 	},
@@ -69,9 +64,9 @@ export const variations = [
 			 direction: "row",
 		},
 		innerBlocks: [
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
-			[ 'vayu-blocks/advance-container', { direction: "row", } ],
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
 		],
 		scope: [ 'block' ],
 	},
