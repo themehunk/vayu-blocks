@@ -1234,10 +1234,6 @@ const InsSettings = ({
             />
 
             {'style' === tab && (
-
-                <Fragment>
-
-
                  <PanelBody title={ __( 'General', 'vayu-blocks' ) }
 							className="th-adv-h-panel" initialOpen={ true }
 							
@@ -1295,9 +1291,7 @@ const InsSettings = ({
 										<img src={attributes.headingimage} alt="slideimage" />
 										<button class="vayu-blocks-change-button" onClick={() => setAttributes({headingimage:''})}>Change</button>
 									</div>
-				</>
-			
-				) }
+									
                     <PostTypeSelect
                         attributes={ attributes }
                         setAttributes={ setAttributes }
@@ -1336,7 +1330,7 @@ const InsSettings = ({
 								)}
 						</>	
 					)}
-                </PanelBody>
+				
 				<PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }
 							className="th-adv-h-panel" initialOpen={ false }
 						>	
@@ -1424,7 +1418,7 @@ const InsSettings = ({
 
                 </PanelBody>
 
-                </Fragment>
+              
 
             ) || 'advanced' === tab && (
 

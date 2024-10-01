@@ -1,1 +1,93 @@
-jQuery(document).ready((function(a){a(".vayu-blocks-advance-slider").each((function(){var e=a(this),i={uniqueId:e.data("unique-id"),dotslength:e.data("dots-length"),dots_show:e.data("dots-show"),infinite:e.data("infinite"),speed:e.data("speed"),slidesToScroll:e.data("slides-to-scroll"),rows:e.data("slides-per-row"),centerMode:e.data("center-mode"),fade:e.data("fade"),waitForAnimate:e.data("wait-for-animate"),lazyLoad:e.data("lazy-load"),autoplay:e.data("autoplay"),autoplaySpeed:e.data("autoplay-speed"),pauseOnHover:e.data("pause-on-hover"),focusOnSelect:e.data("focus-on-select"),rtl:e.data("rtl"),arrows:e.data("arrows"),swipe:e.data("swipe"),animationtype:e.data("animation-type"),slidesToShow:e.data("slides-to-show"),initialSlide:e.data("initial-slide")};e.slick({dots:!(i.dotslength<=1||!i.dots_show),infinite:i.infinite,speed:i.speed,slidesToScroll:i.slidesToScroll,rows:i.rows,centerMode:i.centerMode,fade:i.fade,waitForAnimate:i.waitForAnimate,lazyLoad:i.lazyLoad,autoplay:i.autoplay,autoplaySpeed:i.autoplaySpeed,cssEase:"linear",pauseOnHover:i.pauseOnHover,focusOnSelect:i.focusOnSelect,centerPadding:"60px",initialSlide:i.initialSlide,arrows:i.arrows,appendDots:e,slidesToShow:i.slidesToShow,swipe:i.swipe});var s="";switch(i.animationtype){case"animation1":s="vayu-blocks-animate-on-slide";break;case"animation2":s="vayu-blocks-animate-on-slide-down";break;case"animation3":s="vayu-blocks-animate-on-slide-left";break;case"animation4":s="vayu-blocks-animate-on-slide-right"}a(".slick-slide.slick-active").each((function(){a(this).find(".vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2").addClass(s)})),e.on("afterChange",(function(i,o,t){e.find(".slick-slide.slick-active").each((function(){a(this).find(".vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2").addClass(s)}))})),e.on("beforeChange",(function(a,i,o,t){e.find(".slick-slide .vayu_blocks_heading, .slick-slide .vayu_blocks_sub_heading, .slick-slide .vayu_blocks_slider_button1, .slick-slide .vayu_blocks_slider_button2").removeClass(s)}))}))}));
+/******/ (() => { // webpackBootstrap
+/*!******************************************!*\
+  !*** ./src/block/advance-slider/view.js ***!
+  \******************************************/
+jQuery(document).ready(function ($) {
+  $('.vayu-blocks-advance-slider').each(function () {
+    var slider = $(this);
+    var sliderParams = {
+      uniqueId: slider.data('unique-id'),
+      dotslength: slider.data('dots-length'),
+      dots_show: slider.data('dots-show'),
+      infinite: slider.data('infinite'),
+      speed: slider.data('speed'),
+      slidesToScroll: slider.data('slides-to-scroll'),
+      rows: slider.data('slides-per-row'),
+      centerMode: slider.data('center-mode'),
+      fade: slider.data('fade'),
+      waitForAnimate: slider.data('wait-for-animate'),
+      lazyLoad: slider.data('lazy-load'),
+      autoplay: slider.data('autoplay'),
+      autoplaySpeed: slider.data('autoplay-speed'),
+      pauseOnHover: slider.data('pause-on-hover'),
+      focusOnSelect: slider.data('focus-on-select'),
+      rtl: slider.data('rtl'),
+      arrows: slider.data('arrows'),
+      swipe: slider.data('swipe'),
+      animationtype: slider.data('animation-type'),
+      slidesToShow: slider.data('slides-to-show'),
+      initialSlide: slider.data('initial-slide')
+    };
+
+    // Initialize slick for each slider instance
+    slider.slick({
+      dots: sliderParams.dotslength <= 1 || !sliderParams.dots_show ? false : true,
+      infinite: sliderParams.infinite,
+      speed: sliderParams.speed,
+      slidesToScroll: sliderParams.slidesToScroll,
+      rows: sliderParams.rows,
+      centerMode: sliderParams.centerMode,
+      fade: sliderParams.fade,
+      waitForAnimate: sliderParams.waitForAnimate,
+      lazyLoad: sliderParams.lazyLoad,
+      autoplay: sliderParams.autoplay,
+      autoplaySpeed: sliderParams.autoplaySpeed,
+      cssEase: 'linear',
+      pauseOnHover: sliderParams.pauseOnHover,
+      focusOnSelect: sliderParams.focusOnSelect,
+      centerPadding: '60px',
+      initialSlide: sliderParams.initialSlide,
+      arrows: sliderParams.arrows,
+      appendDots: slider,
+      slidesToShow: sliderParams.slidesToShow,
+      swipe: sliderParams.swipe
+    });
+
+    // Determine animation class based on sliderParams
+    var animationClass = '';
+    switch (sliderParams.animationtype) {
+      case 'animation1':
+        animationClass = 'vayu-blocks-animate-on-slide';
+        break;
+      case 'animation2':
+        animationClass = 'vayu-blocks-animate-on-slide-down';
+        break;
+      case 'animation3':
+        animationClass = 'vayu-blocks-animate-on-slide-left';
+        break;
+      case 'animation4':
+        animationClass = 'vayu-blocks-animate-on-slide-right';
+        break;
+    }
+
+    // Add animation class to the active slide
+    $('.slick-slide.slick-active').each(function () {
+      $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass(animationClass);
+    });
+
+    // Add animation class to the active slide
+    slider.on('afterChange', function (event, slick, currentSlide) {
+      slider.find('.slick-slide.slick-active').each(function () {
+        $(this).find('.vayu_blocks_heading, .vayu_blocks_sub_heading, .vayu_blocks_slider_button1, .vayu_blocks_slider_button2').addClass(animationClass);
+      });
+    });
+
+    // Remove animation class before slide change
+    slider.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+      slider.find('.slick-slide .vayu_blocks_heading, .slick-slide .vayu_blocks_sub_heading, .slick-slide .vayu_blocks_slider_button1, .slick-slide .vayu_blocks_slider_button2').removeClass(animationClass);
+    });
+  });
+});
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

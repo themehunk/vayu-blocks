@@ -818,6 +818,13 @@
     },
     "selectedSourceField": {
       "type": "string"
+    },
+    "contentLinkEnable": {
+      "type": "boolean",
+      "default": false
+    },
+    "contentLinkUrl": {
+      "type": "string"
     }
   }
 }
