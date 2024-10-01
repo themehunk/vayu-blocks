@@ -23,6 +23,9 @@ const edit = ({ attributes, setAttributes }) => {
     const sliderRef = useRef(null);
     const [dotscount, setdotscount] = useState(1);
 
+    // Utility function to generate a unique ID
+    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
+
     const addPxIfNeeded = (value) => {
         // Check if the value ends with 'px' or other units (e.g., 'em', '%')
         if (typeof value === 'string' && (value.endsWith('px') || value.endsWith('em') || value.endsWith('%'))) {
@@ -118,9 +121,6 @@ const edit = ({ attributes, setAttributes }) => {
                                                 color: activeIndex === index ? attributes.dots.activeColor : attributes.dots.color || '#000',
                                                 cursor: 'pointer',
                                                 background: 'none', 
-                                                // borderColor: activeIndex === index ? 'gray' : 'transparent',
-                                                // borderWidth: '1px',
-                                                // borderStyle: 'solid',
                                                 borderRadius: attributes.dots.option === 'square' ? '15%' : '50%',
                                                 display: 'flex',
                                                 alignItems: 'center',
@@ -268,9 +268,6 @@ const edit = ({ attributes, setAttributes }) => {
         }
         
     }, [attributes.index]);
-
-    // Utility function to generate a unique ID
-    const generateUniqueId = () =>  new Date().getTime() + '-' + Math.floor(Math.random() * 1000);
    
     useEffect(() => {
         if (!attributes.uniqueId) {
@@ -302,8 +299,6 @@ const edit = ({ attributes, setAttributes }) => {
         const rightPadding = slide.padding.right || '0px';
         const leftPadding = slide.padding.left || '0px';
         const bottomPadding = slide.padding.bottom || '0px';
-        //const bottomPaddingValue = parseInt(slide.padding.bottom, 10) || 0; // Default to 0 if parsing fails
-        //const bottomPadding = (bottomPaddingValue + 50) + 'px';
 
         // Slide Style
         const vayu_blocks_slideStyle = {
@@ -384,13 +379,15 @@ const edit = ({ attributes, setAttributes }) => {
 
         // Heading Style
         const vayu_blocks_generateheadingStyle = (heading) => {
-            return {
-                color: heading.color,
+            const style = {
+                color: heading.image ? 'transparent' : heading.color,
                 fontSize: `${heading.size}px`,
                 fontWeight: heading.fontWeight,
-                textDecoration: 'none', 
-                cursor: 'pointer' 
+                textDecoration: 'none',
+                cursor: 'pointer',
+                backgroundImage: heading.image ? `url(${heading.image})` : 'none',
             };
+            return style;
         };
 
         // Sub Heading Style
@@ -405,7 +402,8 @@ const edit = ({ attributes, setAttributes }) => {
         // Button Style
         const vayu_blocks_generateButtonStyle = (button) => {
             return {
-            ...vayu_blocks_getBackgroundStyles(button),
+            
+            background: button.backgroundColor,
             fontSize: `${button.size}px`,
             border: 'none',
             cursor: 'pointer',
@@ -429,16 +427,12 @@ const edit = ({ attributes, setAttributes }) => {
             
             //borderRadius
             borderRadius: `${button.borderRadius.top || '0px'} ${button.borderRadius.right || '0px'} ${button.borderRadius.bottom || '0px'} ${button.borderRadius.left || '0px'}`,
-
             //padding
             padding: `${button.padding.top || '10px'} ${button.padding.right || '20px'} ${button.padding.bottom || '10px'} ${button.padding.left || '20px'}`,
-
-
             marginRight: slide.button2.show ? '5px' : '0px',
         };
         };
 
-        //console.log(attributes.slides);
         // const blocks = wp.data.select('core/block-editor').getBlocks();
         // console.log(blocks);
 
@@ -455,7 +449,10 @@ const edit = ({ attributes, setAttributes }) => {
                         <div style={{marginBottom: slide.gaphb}}>
 
                             <slide.heading.tag className="vayu_blocks_heading-edit" style={{marginBottom: slide.gaphsub,fontSize:'0'}}>
-                                <a 
+                                <a  
+                                    className={
+                                        `${slide.heading.image ? "vayu_blocks_heading_image" : ""} ${slide.heading.image && slide.heading.animation ? "vayu_blocks_heading_image_animation" : ""}`.trim()
+                                    }
                                     href={slide.heading.link} 
                                     target={slide.heading.newtab ? "_blank" : "_self"}
                                     style={vayu_blocks_generateheadingStyle(slide.heading)}
@@ -508,7 +505,6 @@ const edit = ({ attributes, setAttributes }) => {
 
     });
 
-    
     return (
         <>
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />

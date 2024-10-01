@@ -19,6 +19,10 @@
     position: relative;
     display: inline-block;
 }
+.th-post-grid-main-wp-editor-wrapper{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
 
 .excerpt_selector::after {
     content: '';
@@ -35,4 +39,18 @@
 .excerpt_selector:hover::after {
     visibility: visible;
     width: 100%;
+}
+
+
+.post-grid-featured-image{
+    overflow: hidden;
+}
+
+.animatefeaturedimage-front {
+	transition: transform 0.3s ease-in-out;
+	overflow: hidden; /* Ensures the zoom doesn't go outside the container */
+}
+  
+.animatefeaturedimage-front:hover {
+transform: scale(1.3); /* Slight zoom on hover */
 }

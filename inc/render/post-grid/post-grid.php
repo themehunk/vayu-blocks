@@ -67,17 +67,7 @@ class VayuBlocksPostGrid {
         $query = new WP_Query($args);
 
         $animated = isset($attr['className']) ? $attr['className'] : '';
-        $className = '';
-        if (isset($this->attr['widthType'])) {
-            switch ($this->attr['widthType']) {
-                case 'fullwidth':
-                    $className = 'alignfull';
-                    break;
-                case 'customwidth':
-                    $className = 'alignwide';
-                    break;
-            }
-        }
+        $className = $this->attr['classNamemain'];
 
 
         // Rendering posts
@@ -182,8 +172,18 @@ class VayuBlocksPostGrid {
 
         if ($FeaturedImage) {
             $featured_image_url = get_the_post_thumbnail_url($post_id, 'full');
+            $featured_image_id = get_post_thumbnail_id($post_id); // Get the ID of the featured image
+
+            // Get the alt text for the featured image
+            $alt_text = get_post_meta($featured_image_id, '_wp_attachment_image_alt', true);
+
+            // Assuming the attributes are passed as an array to the function or class
+            $pg_featuredimage_animate = isset($this->attr['pg_featuredimage_animate']) ? $this->attr['pg_featuredimage_animate'] : false;
+            // Check if the animation should be applied
+            $animate_class = $pg_featuredimage_animate ? 'animatefeaturedimage-front' : '';
+
             $output .= '<div class="post-grid-featured-image">
-                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image">
+                    <img src="' . esc_url($featured_image_url) . '" class="post-grid-image ' . esc_attr($animate_class) . ' alt="' . esc_attr($alt_text) . '">
                   </div>';
 
         }
@@ -425,13 +425,69 @@ class VayuBlocksPostGrid {
 }
 
 function post_grid_render($attr) {
+
+
+
+
+
+
+
+
+
     //attributes Merged
     $default_attributes = include('defaultattributes.php');
     $attr = array_merge($default_attributes, $attr); 
 
     $renderer = new VayuBlocksPostGrid($attr);
 
+$style = "<style id='post-grid-style'>";
+$style .= generate_inline_styles($attr);
+$style .= "</style>";
     // Call the combined method
-    return $renderer->render_posts();
+    return $renderer->render_posts().$style;
 }
 
+
+
+$parsed_args = array(
+    'post_type'              => 'wp_navigation',
+    'no_found_rows'          => true,
+    'update_post_meta_cache' => false,
+    'update_post_term_cache' => false,
+    'order'                  => 'DESC',
+    'orderby'                => 'date',
+    'post_status'            => 'publish',
+    'posts_per_page'         => 1, // get only the most recent.
+);
+
+$navigation_post = new WP_Query( $parsed_args );
+//print_r($navigation_post);
+
+
+// We are looking to add a CSS class to a menu link.
+function myfunction( $block ) {
+
+    //print_r($block );
+
+    // Skip if not a menu link
+    if ( 'core/navigation-link' !== $block['blockName'] )   {
+      return $block;
+    }
+    //print_r($block['attrs']['label'] );
+
+    // Skip if no attributes, no label or the label isn't matching the menu item.
+    if (!$block['attrs'] || !$block['attrs']['label'] || $block['attrs']['label'] !== 'Shop'){
+      return $block;
+    }
+
+    print_r($block['attrs']['className'] );
+
+    // Add a class
+    $block['attrs']['className'] = ' add_your_class_here';
+
+    print_r($block['attrs']['className'] );
+
+    return $block;
+  }
+  
+  add_filter( 'render_block_data', 'myfunction');

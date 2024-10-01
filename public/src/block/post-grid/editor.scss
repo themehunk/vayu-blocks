@@ -19,6 +19,11 @@
 	transform: scale(1.1);
 }
 
+.wp-block-vayu-blocks-post-grid{
+    margin-left:auto !important;
+    margin-right:auto !important;
+}
+
 .myclasst{
 	display: flex;
 	justify-content: space-between;
@@ -54,4 +59,11 @@
     overflow: hidden; /* Hide anything that overflows */
 }
 
-
+.animatefeaturedimage {
+	transition: transform 0.3s ease-in-out;
+	overflow: hidden; /* Ensures the zoom doesn't go outside the container */
+}
+  
+.animatefeaturedimage:hover {
+transform: scale(1.3); /* Slight zoom on hover */
+}

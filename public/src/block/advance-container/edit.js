@@ -24,11 +24,15 @@ import ThShaper from './shaper.js';
 import getUniqueId from '../../helpers/get-unique-id.js';
 import './editor.scss';
 
+import { Placeholder , Button, ButtonGroup } from '@wordpress/components';
+import { VariationPicker } from './variationPicker';
+
 export default function Edit({ 
 	attributes, 
 	setAttributes, 
 	clientId,
-	uniqueID
+	uniqueID,
+	variationSelected
    }){
 
 			const { id } = attributes;
@@ -68,6 +72,9 @@ export default function Edit({
 				isPreviewMobile,
 				getBlock,
 				getBlockRootClientId,
+				variations,
+				defaultVariation,
+				getBlockParents
 			} = useSelect( 
 				select => {
 					const { 
@@ -75,6 +82,9 @@ export default function Edit({
 						getBlock,
 						getBlockRootClientId
 					} = select( 'core/block-editor' );
+					const coreBlocks = select( 'core/blocks' );
+					const coreBlockEditor = select( 'core/block-editor' );
+					const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 					 const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
 					 const block = getBlock( clientId );
 					 const adjacentBlockClientId = getAdjacentBlockClientId( clientId );
@@ -84,10 +94,14 @@ export default function Edit({
 					 const hasInnerBlocks = !! ( block && block.innerBlocks.length );
 		
 				return {
+					defaultVariation: coreBlocks?.getDefaultBlockVariation( 'vayu-blocks/advance-container' ),
+					variations: coreBlocks?.getBlockVariations( 'vayu-blocks/advance-container' ),
 					adjacentBlockClientId,
 					adjacentBlock,
 					parentBlock: parentBlock ? parentBlock.name : null,
 					hasInnerBlocks,
+					getBlockParents : getBlockParentStore,
+					parentBlocks : coreBlockEditor?.getBlocksByClientId( getBlockParentStore ),
 					
 					parentClientId,
 					isViewportAvailable: __experimentalGetPreviewDeviceType ? true : false,
@@ -867,6 +881,13 @@ export default function Edit({
 				? `th-root-block-container ${contentWidthClass}  th-block-container-${attributes.uniqueID} wp-block`
 				: 'wp-block';
 
+					  // Display layout options if no inner blocks are present
+	const innerBlockss = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
+
+	if ( ! variationSelected && innerBlockss.length === 0 && 0 === getBlockParents.length ) {
+	return <VariationPicker { ...{ clientId, setAttributes, defaultVariation } } />
+	}
+    
 			return (
 				<Fragment>
 				<Controls

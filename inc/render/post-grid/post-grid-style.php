@@ -26,11 +26,8 @@ function generate_inline_styles($attr) {
     
     $css .= ".th-post-grid-main-wp-editor-wrapper {";
         // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
-        if ($attr['widthType'] === 'customwidth') {
-            $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
-        } elseif ($attr['widthType'] === 'inlinewidth') {
-            $css .= "display: inline-flex;";
-        }
+        $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        
     $css .= "}";
     
      // Add media query for tablet screens
@@ -49,6 +46,7 @@ function generate_inline_styles($attr) {
 
     //Main div
     $css .= "$wrapper {";
+
         // Desktop Padding
         $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
         $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
@@ -305,20 +303,7 @@ function generate_inline_styles($attr) {
         // Text Color
         $css .= isset($attr['pg_tagTextColor']) ? "color: " . esc_attr($attr['pg_tagTextColor']) . ";" : '';
         
-        // Background
-        if (isset($attr['tag_backgroundType'])) {
-            if ($attr['tag_backgroundType'] === 'color' && isset($attr['tag_backgroundColor'])) {
-                $css .= "background: " . esc_attr($attr['tag_backgroundColor']) . ";";
-            } elseif ($attr['tag_backgroundType'] === 'gradient' && isset($attr['tag_backgroundGradient'])) {
-                $css .= "background: " . esc_attr($attr['tag_backgroundGradient']) . ";";
-            } elseif (isset($attr['tag_backgroundImage']) && isset($attr['tag_backgroundImage']['url'])) {
-                $css .= "background: url(" . esc_url($attr['tag_backgroundImage']['url']) . ");";
-            } else {
-                $css .= "background: none;";
-            }
-        } elseif (isset($attr['tag_backgroundColor'])) {
-            $css .= "background: " . esc_attr($attr['tag_backgroundColor']) . ";";
-        }
+        $css .= "background: " . esc_attr($attr['tag_backgroundColor']) . ";";
         
         // Font Size
         $css .= isset($attr['pg_tagTextSize']) ? "font-size: " . esc_attr($attr['pg_tagTextSize']) . "px;" : '';
@@ -509,13 +494,7 @@ function generate_inline_styles($attr) {
         // Color
         $css .= isset($attr['pg_PaginationColor']) ? "color: " . esc_attr($attr['pg_PaginationColor']) . ";" : '';
         // Background
-        if (isset($attr['pg_PaginationbackgroundType'])) {
-            if ($attr['pg_PaginationbackgroundType'] === 'color') {
-                $css .= isset($attr['pg_PaginationbackgroundColor']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundColor']) . ";" : '';
-            } elseif ($attr['pg_PaginationbackgroundType'] === 'gradient') {
-                $css .= isset($attr['pg_PaginationbackgroundGradient']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundGradient']) . ";" : '';
-            }
-        }
+        $css .= isset($attr['pg_PaginationbackgroundColor']) ? "background: " . esc_attr($attr['pg_PaginationbackgroundColor']) . ";" : '';
         
         // Margin
         $css .= "margin: 20px 5px;";

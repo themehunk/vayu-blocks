@@ -16,7 +16,10 @@ class VAYU_BLOCKS_OPTION_PANEL {
             'spacer' =>  array( 'isActive' => true,'type'=>'free'),
             'product' =>  array( 'isActive' => true,'type'=>'free'),
             'postgrid' =>  array( 'isActive' => true,'type'=>'free'),
+            'imageFlip' =>  array( 'isActive' => true,'type'=>'free'),
+            'image' =>  array( 'isActive' => true,'type'=>'free'),
             'advanceSlider' =>  array( 'isActive' => true,'type'=>'free'),
+            'megaMenu' =>  array( 'isActive' => true,'type'=>'free'),
             'advanceQueryLoop' =>  array( 'isActive' => true,'type'=>'free'),
         );
 
@@ -25,9 +28,9 @@ class VAYU_BLOCKS_OPTION_PANEL {
     public function get_option($key='',$value=''){
 
     $vbo = get_option('vayu_blocks_options');
-    if ($vbo ) {
-       return $vbo;
 
+    if ($vbo ) {
+       return array_merge($this->default_option(),$vbo);
     }else{
 
         return $this->default_option();

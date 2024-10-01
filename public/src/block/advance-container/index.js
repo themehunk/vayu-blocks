@@ -11,6 +11,8 @@ import edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import { RxGroup as icon } from "react-icons/rx";
+import { variations } from './variationPicker';
+
 
 const { name } = metadata;
 
@@ -25,5 +27,6 @@ registerBlockType( name, {
 	],
 	edit,
     save,
+	variations,
 	
 });
