@@ -6,8 +6,8 @@ import { Path, SVG } from '@wordpress/components';
 import { RxGroup as icons } from "react-icons/rx";
 
 export const variations = [
-    {
-		name: 'one-column',
+	{
+		name: 'one-column-join',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
@@ -20,12 +20,15 @@ export const variations = [
 		),
 		attributes: {
 			variationSelected: true,
+			direction: "row",
 		},
-		isDefault: true,
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container']
+		],
 		scope: [ 'block' ],
 	},
 	{
-		name: 'two-column-split',
+		name: 'two-column-join',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +51,7 @@ export const variations = [
 		scope: [ 'block' ],
 	},
 	{
-		name: 'three-columns-equal',
+		name: 'three-columns-equal-join',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +73,54 @@ export const variations = [
 		],
 		scope: [ 'block' ],
 	},
+	{
+		name: 'four-column-join',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "row",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
+			[ 'vayu-blocks/advance-container'],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: '40-60-join',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "row",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container',{contentWidthType: "fullwidth",fullcontentWidthUnit: 40,fullcontentWidthUnit: "%"}],
+			[ 'vayu-blocks/advance-container',{contentWidthType: "fullwidth", fullcontentWidthUnit: 60,fullcontentWidthUnit: "%"}],
+		],
+		scope: [ 'block' ],
+	},
 ];
 
 export const VariationPicker = ( { clientId, setAttributes, defaultVariation } ) => {
@@ -81,7 +132,7 @@ export const VariationPicker = ( { clientId, setAttributes, defaultVariation } )
 			setAttributes( nextVariation.attributes );
 		}
 
-		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {
+		if ( nextVariation.innerBlocks && 'one-column-join' !== nextVariation.name ) {
 			replaceInnerBlocks( clientId, createBlocksFromInnerBlocksTemplate( nextVariation.innerBlocks ) );
 		}
 	};
