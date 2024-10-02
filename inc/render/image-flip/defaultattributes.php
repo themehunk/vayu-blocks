@@ -7,7 +7,7 @@ return array(
         'opacity' => 1,
         'overlaytransitiontime' => 0.5,
         'imagetransitiontime' => 0.5,
-        'overlay' => false,
+        'overlay' => true,
         'imagehvreffect' => 'none',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
@@ -50,6 +50,55 @@ return array(
                 'left' => '4px',
                 'right' => '4px',
             ),
+
+        //back setting 
+        'backimage' => '',
+        'backopacity' => 1,
+        'backoverlaycolor' => 'rgba(106, 111, 248, 0.17)',
+        'backfocalPoint' => array(
+            'x' => 0.5,
+            'y' => 0.5,
+        ),
+        'backimageborderradiuscircle' => 'square',
+        'backimagecover' => 'cover',
+        'backimageaspectratio' => 'original',
+        'backduotone' => '',
+        'backoverlayalignment' => 'center center',
+        'backoverlayalignmenttablet' => 'center center',
+        'backoverlayalignmentmobile' => 'center center',
+        'backoverlayalignmentvertical' => 'center',
+        'backimagealttext'  => '',
+
+        // image Border
+            'backimageborder' => array(
+                'topcolor' => 'rgb(183, 191, 249)',
+                'topwidth' => '2px',
+                'topstyle' => 'solid',
+                'bottomcolor' => 'rgb(183, 191, 249)',
+                'bottomwidth' => '2px',
+                'bottomstyle' => 'solid',
+                'leftcolor' => 'rgb(183, 191, 249)',
+                'leftwidth' => '2px',
+                'leftstyle' => 'solid',
+                'rightcolor' => 'rgb(183, 191, 249)',
+                'rightwidth' => '2px',
+                'rightstyle' => 'solid',
+            ),
+    
+        // image Border Radius
+            'backimageborderRadius' => array(
+                'top' => '4px',
+                'bottom' => '4px',
+                'left' => '4px',
+                'right' => '4px',
+            ),
+            'backgroundoption' => 'color',
+            'backbackgroundoption' => 'color',
+
+            'imageposition'=> 'center',
+            'imagerepeat' => 'no-repeat',
+            'backimageposition'=> 'center',
+            'backimagerepeat' => 'no-repeat',
         
     //Advanced
         'classNamemain' => '',

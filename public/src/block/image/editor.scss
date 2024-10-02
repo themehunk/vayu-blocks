@@ -991,7 +991,7 @@ animation: starburst 2.5s linear infinite;
     }
   }
   
-  .vayu_block_styling-effect5 {
+  .vayu_block_styling-effect5:hover {
     --m:
       linear-gradient(#000 0 0) 0    0   /45% 45% no-repeat,
       linear-gradient(#000 0 0) 0    100%/45% 45% no-repeat,
@@ -1003,13 +1003,8 @@ animation: starburst 2.5s linear infinite;
     transition: .3s linear;
     cursor: pointer;
   }
-  .vayu_block_styling-effect5:hover {
-    -webkit-mask-position: 10% 10%,10% 90%,90% 10%,90% 90%;
-            mask-position: 10% 10%,10% 90%,90% 10%,90% 90%;
-    filter: grayscale(0);
-  }
 
-  .vayu_block_styling-effect6 {
+  .vayu_block_styling-effect6:hover {
     --g:#0000 ,#000 .5deg 90deg,#0000 91deg;
     --m:
       conic-gradient(from 45deg ,var(--g)) 20px 0  no-repeat,
@@ -1022,13 +1017,8 @@ animation: starburst 2.5s linear infinite;
     filter: grayscale(.5);
     cursor: pointer;
   }
-  .vayu_block_styling-effect6:hover {
-    -webkit-mask-position: 0 0;
-            mask-position: 0 0;
-    filter: grayscale(0);
-  }
 
-  .vayu_block_styling-effect8 {
+  .vayu_block_styling-effect8:hover {
     --m:
       radial-gradient(circle farthest-side at right,#000 99%,#0000) 
         0 100%/46% 92% no-repeat,
@@ -1039,11 +1029,6 @@ animation: starburst 2.5s linear infinite;
     filter: grayscale(.5);
     transition: .3s linear;
     cursor: pointer;
-  }
-  .vayu_block_styling-effect8:hover {
-    -webkit-mask-position: 7.5% 50%,92.5% 50%;
-            mask-position: 7.5% 50%,92.5% 50%;
-    filter: grayscale(0);
   }
 
   .vayu_block_styling-effect10{
