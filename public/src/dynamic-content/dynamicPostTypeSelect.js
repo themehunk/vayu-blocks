@@ -5,7 +5,7 @@ import { useState, useEffect } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import {ControlPanelControl} from '../../components/index.js';
+import {ControlPanelControl} from '../components/index.js';
 
 
 const ContentSelect = ({ label, postType, selectedPost, onChange }) => {

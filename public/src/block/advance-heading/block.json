@@ -8,6 +8,7 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"keywords": [ "heading", "title", "advanced heading" ],
 	"textdomain": "vayu-blocks",
+	"usesContext": [ "postId", "postType", "queryId" ],
 	"attributes": {
 		"id": {
 			"type": "string"

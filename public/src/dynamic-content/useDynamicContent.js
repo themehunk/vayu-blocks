@@ -1,21 +1,10 @@
-import { useSelect } from '@wordpress/data';
-//import { store as blockEditorStore } from '@wordpress/block-editor';
-
-
-
-const useDynamicContent = (attributes) => {
+    import { useSelect } from '@wordpress/data';
+    const useDynamicContent = (attributes) => {
     const { dynamicPostType, selectedPost, selectedSourceField, contentLinkEnable, contentLinkUrl } = attributes;
     const fetchPostData = (coreStore) => {
         const posts = coreStore.getEntityRecords('postType', dynamicPostType, { include: [selectedPost] });
         return posts && posts.length > 0 ? posts[0] : null;
     };
-
-    // const blockContext = useSelect((select) => {
-    //     const { getBlock } = select(blockEditorStore);
-    //     return getBlock();
-    // }, []);
-
-    // console.log(blockContext);
     
     const getAuthorDetails = (coreStore, post) => {
         if (post && post.author) {
@@ -104,7 +93,7 @@ const useDynamicContent = (attributes) => {
             case 'author_email':
                 return wrapWithLink(author.email);
             default:
-                return wrapWithLink(attributes.content || '');
+                return wrapWithLink(attributes.content);
         }
     }, [dynamicPostType, selectedPost, selectedSourceField, contentLinkEnable, contentLinkUrl]);
 };
