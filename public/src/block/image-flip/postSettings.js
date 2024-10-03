@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 
@@ -423,30 +423,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     {attributes.image ? (
                     <>         
 
-                        <FocalPointPicker
-                            __nextHasNoMarginBottom
-                            url={ attributes.image }
-                            value={ attributes.focalPoint }
-                            onDragStart={ (value)=> setAttributes({focalPoint:value})}
-                            onDrag={ (value)=> setAttributes({focalPoint:value}) }
-                            onChange={ (value)=> setAttributes({focalPoint:value}) }
-                        />
-
+                    <img 
+                        src={attributes.image} 
+                        alt={attributes.imageAlt || 'Image'}
+                        style={{ width: '100%', height: 'auto' }} 
+                    />
 
                         <Fragment>
                             <ControlPanelControl
                                 label={ __( 'Image Settings', 'vayu-blocks' ) }
                             >
-                            <TextControl
-                                className="imagealttextrichcontrol"
-                                label="Alt text"
-                                placeholder='Alt Text'
-                                __nextHasNoMarginBottom
-                                onChange={(value)=>setAttributes({imagealttext:value})}
-                                value={attributes.imagealttext}
-                            />
-
-                            <br/>
 
                             <SelectControl
                                 label={__('Background Size','vayu_blocks')}
@@ -518,7 +504,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     )}
 
 
-                    {attributes.backgroundoption && (
+                    {attributes.backgroundoption==='color' && (
                         <>
                         <ColorPanel
                             colorTool={[
@@ -623,29 +609,16 @@ const PostSettings = ({ attributes, setAttributes }) => {
                 {attributes.backimage ? (
                     <>         
 
-                        <FocalPointPicker
-                            __nextHasNoMarginBottom
-                            url={ attributes.backimage }
-                            value={ attributes.backfocalPoint }
-                            onDragStart={ (value)=> setAttributes({backfocalPoint:value})}
-                            onDrag={ (value)=> setAttributes({backfocalPoint:value}) }
-                            onChange={ (value)=> setAttributes({backfocalPoint:value}) }
+                        <img 
+                            src={attributes.backimage} 
+                            alt={attributes.backimageAlt || 'Image'}
+                            style={{ width: '100%', height: 'auto' }} 
                         />
-
 
                         <Fragment>
                             <ControlPanelControl
                                 label={ __( 'Image Settings', 'vayu-blocks' ) }
                             >
-                            <TextControl
-                                className="imagealttextrichcontrol"
-                                label="Alt text"
-                                placeholder='Alt Text'
-                                __nextHasNoMarginBottom
-                                onChange={(value)=>setAttributes({backimagealttext:value})}
-                                value={attributes.backimagealttext}
-                            />
-                            <br/>
                            <SelectControl
                                 label={__('Background Size','vayu_blocks')}
                                 value={attributes.backimagecover}

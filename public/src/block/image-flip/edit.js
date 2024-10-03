@@ -36,8 +36,21 @@ const edit = (props) => {
 
 
     //overlay wrapper style
-    const vayu_block_overlay_style = {
-        background:attributes.overlaycolor,
+    const vayu_block_flip_box_style_front = {
+        
+
+         // Apply background based on the selected background option
+        ...(attributes.backgroundoption === 'color' && {
+            background: attributes.overlaycolor,
+        }),
+
+        ...(attributes.backgroundoption === 'image' && {
+            backgroundImage: `url(${attributes.image})`,
+            backgroundSize: attributes.imagecover,          // Applies 'cover', 'contain', or other values
+            backgroundPosition: attributes.imageposition,   // Applies the positioning value, like 'center', 'top', etc.
+            backgroundRepeat: attributes.imagerepeat,       // Applies 'no-repeat', 'repeat', etc.
+        }),
+
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
@@ -92,34 +105,78 @@ const edit = (props) => {
 
     }
 
-    //main container image style
-    const vayu_blocks_image_settings = {
-        ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
-            backfaceVisibility: 'hidden',
+    // Determine the borderRadius based on condition
+    const borderRadiusback = attributes.backimageborderradiuscircle === 'circle' 
+    ? '50%' 
+    : `${attributes.backimageborderRadius.top} ${attributes.backimageborderRadius.right} ${attributes.backimageborderRadius.bottom} ${attributes.backimageborderRadius.left}`;
+
+    const vayu_block_flip_box_style_back = {
+          // Apply background based on the selected background option
+          ...(attributes.backbackgroundoption === 'color' && {
+            background: attributes.backoverlaycolor,
         }),
 
-        objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
-        // Apply focal point if it exists, default to center
-        objectPosition: `${attributes.focalPoint?.x * 100 || 50}% ${attributes.focalPoint?.y * 100 || 50}%`,
-         // Apply aspect ratio if it exists
-        aspectRatio: attributes.imageaspectratio !== 'none' 
-        ? (attributes.imageaspectratio === 'original' 
-            ? 'auto' // Maintain original aspect ratio
-            : attributes.imageaspectratio.replace('/', '/')) 
-        : 'auto',
+        ...(attributes.backbackgroundoption === 'image' && {
+            backgroundImage: `url(${attributes.backimage})`,
+            backgroundSize: attributes.backimagecover,          // Applies 'cover', 'contain', or other values
+            backgroundPosition: attributes.backimageposition,   // Applies the positioning value, like 'center', 'top', etc.
+            backgroundRepeat: attributes.backimagerepeat,       // Applies 'no-repeat', 'repeat', etc.
+        }),
 
-        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
-        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
-        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
-        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+        borderTop: `${attributes.backimageborder.topwidth} ${attributes.backimageborder.topstyle} ${attributes.backimageborder.topcolor}`,
+        borderBottom: `${attributes.backimageborder.bottomwidth} ${attributes.backimageborder.bottomstyle} ${attributes.backimageborder.bottomcolor}`,
+        borderLeft: `${attributes.backimageborder.leftwidth} ${attributes.backimageborder.leftstyle} ${attributes.backimageborder.leftcolor}`,
+        borderRight: `${attributes.backimageborder.rightwidth} ${attributes.backimageborder.rightstyle} ${attributes.backimageborder.rightcolor}`,
 
+        borderRadius: borderRadiusback,
 
-        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
+        ...(view === 'Desktop' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignment.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignment.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+        
+        ...(view === 'Tablet' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignmenttablet.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignmenttablet.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
-        borderRadius: borderRadius,
+        ...(view === 'Mobile' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignmentmobile.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignmentmobile.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
-    };
-    
+    }
+  
     const image_flip_template = [
         ['vayu-blocks/advance-container'
             , {
@@ -152,8 +209,47 @@ const edit = (props) => {
         ],
     ];  
 
+    const classname = (variablereturn) => {
+        let backclass = '';
+        let innerclass = '';
     
+        if (attributes.imagehvreffect === 'flip-front') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-front';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front';
+        } 
+        else if (attributes.imagehvreffect === 'flip-front-left') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-front-left';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
+        } 
+        else if (attributes.imagehvreffect === 'flip-back') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-back';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back';
+        } 
+        else if (attributes.imagehvreffect === 'flip-back-bottom') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-back-bottom';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
+        }
+        else if (attributes.imagehvreffect === 'flip-z') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip_z';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
+        }else if (attributes.imagehvreffect === 'flip-x') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip_x';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
+        }
+    
+        // Return the appropriate class based on the variablereturn argument
+        if (variablereturn === 'inner') {
+            return innerclass;
+        }
+    
+        if (variablereturn === 'back') {
+            return backclass;
+        }
+    
+        return ''; // Default case if variablereturn doesn't match
+    };
 
+    
     return (
         <>
        
@@ -164,12 +260,12 @@ const edit = (props) => {
 
                     <div  className={`vayu_blocks_image_flip_wrapper`}>
 
-                        <div className={`vayu_blocks_image_flip_image-container`}   >             
+                        <div className={`vayu_blocks_flip-box-inner ${classname('inner')}`}   >             
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper`} 
-                                style={vayu_block_overlay_style}
+                                className={`vayu_blocks_flip-box-front`} 
+                                style={vayu_block_flip_box_style_front}
                             >
-                                <div className="vayu_blocks_inner_content">
+                                <div className="vayu_blocks_inner_content ">
                                     <InnerBlocks 
                                         template={image_flip_template} 
                                     />
@@ -177,8 +273,8 @@ const edit = (props) => {
                             </div> 
             
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper back-main-container`} 
-                                style={vayu_block_overlay_style}
+                                className={`vayu_blocks_flip-box-back ${classname('back')}`} 
+                                style={vayu_block_flip_box_style_back}
                             >
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
