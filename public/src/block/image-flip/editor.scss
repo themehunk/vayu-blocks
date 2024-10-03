@@ -28,32 +28,7 @@
 
 //edit.js
 
-.vayu_blocks_image_flip_wrapper {
-    width: 100%;
-    height: auto;
-    overflow: hidden; /* Keeps the outer frame fixed */
-    position: relative;
-    display: grid;
-    perspective: 1000px;
-    transform-style: preserve-3d;
-}
 
-.vayu_blocks_image_flip_image {
-    width: 100%;
-    height: 100%; /* Ensure the image fills the container */
-    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease !important;
-     /* Ensures the image content covers the container */
-    opacity:var(--image-opacity);
-    display: block;
-    transition: transform var(--image-transitiontime) ease-in-out;
-}
-
-.vayu_blocks_image_flip_image-container {
-    transition: transform var(--image-transitiontime) ease, filter var(--image-transitiontime) ease, opacity var(--image-transitiontime) ease;
-     /* Ensures the image content covers the container */
-    opacity:var(--image-opacity);
-    display: block;
-}
 
 /* Apply the custom hover effect */
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_image_flip_image {
@@ -137,14 +112,16 @@
 /* Overlay styles */
 .vayu_blocks_overlay_main_wrapper {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 500px;
     transition: var(--overlay-transitiontime) ease;
     opacity: var(--overlay-opacity); /* Initially hidden */
-    z-index: 10;
     display: flex;
+}
+
+.back-main-container{
+    position:absolute;
+    top:0%;
+    left:0%;
 }
 
 /* Hover the image and show the overlay */
@@ -424,3 +401,81 @@
 .vayu_blocks_matrix_control_flip{
     border:1px solid rgba(128,128,128,0.23);
 }
+
+
+//flip settings
+
+.vayu_blocks_image_flip_wrapper{
+    background-color: transparent;
+    perspective: 1000px;
+}
+
+.vayu_blocks_flip-box-inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.vayu_blocks_flip-box-front, .vayu_blocks_flip-box-back {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+
+  //hover effect
+  .vayu_blocks_rotating_animation_back_flip-front {
+    transform: rotateY(180deg);
+  }
+
+  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-front {
+    transform: rotateY(180deg);
+  }
+
+  .vayu_blocks_rotating_animation_back_flip-front-left {
+    transform: rotateY(-180deg);
+  }
+
+  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-front-left {
+    transform: rotateY(-180deg);
+  }
+
+  .vayu_blocks_rotating_animation_back_flip-back-bottom {
+    transform: rotateX(-180deg);
+  }
+
+  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-back-bottom {
+    transform: rotateX(-180deg);
+  }
+
+  .vayu_blocks_rotating_animation_back_flip-back {
+    transform: rotateX(180deg);
+  }
+
+  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-back {
+    transform: rotateX(180deg);
+  }
+
+  .vayu_blocks_rotating_animation_back_flip_z {
+    transform: rotateY(180deg) rotateZ(90deg);
+}
+
+  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-z {
+    transform: rotateY(180deg) rotateZ(90deg);
+  }
+
+
+  .vayu_blocks_rotating_animation_back_flip_x {
+    transform: rotateX(180deg) rotateZ(90deg);
+}
+
+.vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-x {
+    transform: rotateX(180deg) rotateZ(90deg);
+}
+
+

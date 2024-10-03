@@ -36,8 +36,21 @@ const edit = (props) => {
 
 
     //overlay wrapper style
-    const vayu_block_overlay_style = {
-        background:attributes.overlaycolor,
+    const vayu_block_flip_box_style_front = {
+        
+
+         // Apply background based on the selected background option
+        ...(attributes.backgroundoption === 'color' && {
+            background: attributes.overlaycolor,
+        }),
+
+        ...(attributes.backgroundoption === 'image' && {
+            backgroundImage: `url(${attributes.image})`,
+            backgroundSize: attributes.imagecover,          // Applies 'cover', 'contain', or other values
+            backgroundPosition: attributes.imageposition,   // Applies the positioning value, like 'center', 'top', etc.
+            backgroundRepeat: attributes.imagerepeat,       // Applies 'no-repeat', 'repeat', etc.
+        }),
+
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
@@ -92,34 +105,78 @@ const edit = (props) => {
 
     }
 
-    //main container image style
-    const vayu_blocks_image_settings = {
-        ...((attributes.imagehvreffect === 'flip-front' || attributes.imagehvreffect === 'flip-back' ) && {
-            backfaceVisibility: 'hidden',
+    // Determine the borderRadius based on condition
+    const borderRadiusback = attributes.backimageborderradiuscircle === 'circle' 
+    ? '50%' 
+    : `${attributes.backimageborderRadius.top} ${attributes.backimageborderRadius.right} ${attributes.backimageborderRadius.bottom} ${attributes.backimageborderRadius.left}`;
+
+    const vayu_block_flip_box_style_back = {
+          // Apply background based on the selected background option
+          ...(attributes.backbackgroundoption === 'color' && {
+            background: attributes.backoverlaycolor,
         }),
 
-        objectFit: attributes.imagecover,  // assuming this controls object-fit (e.g., 'cover', 'contain', etc.)
-        // Apply focal point if it exists, default to center
-        objectPosition: `${attributes.focalPoint?.x * 100 || 50}% ${attributes.focalPoint?.y * 100 || 50}%`,
-         // Apply aspect ratio if it exists
-        aspectRatio: attributes.imageaspectratio !== 'none' 
-        ? (attributes.imageaspectratio === 'original' 
-            ? 'auto' // Maintain original aspect ratio
-            : attributes.imageaspectratio.replace('/', '/')) 
-        : 'auto',
+        ...(attributes.backbackgroundoption === 'image' && {
+            backgroundImage: `url(${attributes.backimage})`,
+            backgroundSize: attributes.backimagecover,          // Applies 'cover', 'contain', or other values
+            backgroundPosition: attributes.backimageposition,   // Applies the positioning value, like 'center', 'top', etc.
+            backgroundRepeat: attributes.backimagerepeat,       // Applies 'no-repeat', 'repeat', etc.
+        }),
 
-        borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
-        borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
-        borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
-        borderRight: `${attributes.imageborder.rightwidth} ${attributes.imageborder.rightstyle} ${attributes.imageborder.rightcolor}`,
+        borderTop: `${attributes.backimageborder.topwidth} ${attributes.backimageborder.topstyle} ${attributes.backimageborder.topcolor}`,
+        borderBottom: `${attributes.backimageborder.bottomwidth} ${attributes.backimageborder.bottomstyle} ${attributes.backimageborder.bottomcolor}`,
+        borderLeft: `${attributes.backimageborder.leftwidth} ${attributes.backimageborder.leftstyle} ${attributes.backimageborder.leftcolor}`,
+        borderRight: `${attributes.backimageborder.rightwidth} ${attributes.backimageborder.rightstyle} ${attributes.backimageborder.rightcolor}`,
 
+        borderRadius: borderRadiusback,
 
-        filter: attributes.duotone && attributes.duotone.length > 1 ? `url(${attributes.duotone})` : '',
+        ...(view === 'Desktop' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignment.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignment.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
+        
+        ...(view === 'Tablet' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignmenttablet.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignmenttablet.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
-        borderRadius: borderRadius,
+        ...(view === 'Mobile' && {
+            alignItems: (() => {
+                const [vertical] = attributes.backoverlayalignmentmobile.split(' ');
+                return vertical === 'center' ? 'center' :
+                       vertical === 'top' ? 'self-start' :
+                       vertical === 'bottom' ? 'self-end' : 'center';
+            })(),
+            justifyContent: (() => {
+                const [, horizontal] = attributes.backoverlayalignmentmobile.split(' ');
+                return horizontal === 'center' ? 'center' :
+                       horizontal === 'left' ? 'flex-start' :
+                       horizontal === 'right' ? 'flex-end' : 'center';
+            })(),
+        }),
 
-    };
-    
+    }
+  
     const image_flip_template = [
         ['vayu-blocks/advance-container'
             , {
@@ -152,8 +209,47 @@ const edit = (props) => {
         ],
     ];  
 
+    const classname = (variablereturn) => {
+        let backclass = '';
+        let innerclass = '';
     
+        if (attributes.imagehvreffect === 'flip-front') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-front';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front';
+        } 
+        else if (attributes.imagehvreffect === 'flip-front-left') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-front-left';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
+        } 
+        else if (attributes.imagehvreffect === 'flip-back') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-back';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back';
+        } 
+        else if (attributes.imagehvreffect === 'flip-back-bottom') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip-back-bottom';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
+        }
+        else if (attributes.imagehvreffect === 'flip-z') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip_z';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
+        }else if (attributes.imagehvreffect === 'flip-x') {
+            backclass = 'vayu_blocks_rotating_animation_back_flip_x';
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
+        }
+    
+        // Return the appropriate class based on the variablereturn argument
+        if (variablereturn === 'inner') {
+            return innerclass;
+        }
+    
+        if (variablereturn === 'back') {
+            return backclass;
+        }
+    
+        return ''; // Default case if variablereturn doesn't match
+    };
 
+    
     return (
         <>
        
@@ -162,200 +258,31 @@ const edit = (props) => {
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
 
-                    {/* svg filter for dutone with display:none and height:0*/}
-                    <div> 
-                        <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
-                            {/* Orange and Red */}
-                            <filter id="duotone-orange-red">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.8 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.3 0.5"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-                            {/* Red and Green */}
-                            <filter id="duotone-red-green">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.7 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.3 0.8"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.3 0.7"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
+                    <div  className={`vayu_blocks_image_flip_wrapper`}>
 
-                            {/* Black and White */}
-                            <filter id="duotone-black-white">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.5 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 1"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 1"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Blue and Red */}
-                            <filter id="duotone-blue-red">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 0.9"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.2 0.3"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 0.8"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Purple and Yellow */}
-                            <filter id="duotone-purple-yellow">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.5 0.8"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.2 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 0.3"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Orange and Teal */}
-                            <filter id="duotone-orange-teal">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.8 0.5"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.4 0.5"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Pink and Blue */}
-                            <filter id="duotone-pink-blue">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.7 0.4"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.3 0.5"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.6 0.7"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Cyan and Magenta */}
-                            <filter id="duotone-cyan-magenta">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.0 0.7"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.7 0.2"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.9 0.6"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Yellow and Black */}
-                            <filter id="duotone-yellow-black">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="1 0.3"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.7 0.3"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.1 0.1"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Light Blue and Light Green */}
-                            <filter id="duotone-lightblue-lightgreen">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 0.6"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.8 0.9"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.8 0.6"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Gray and Yellow */}
-                            <filter id="duotone-gray-yellow">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.6 1"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.6 0.3"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                        </svg>
-                    </div>
-
-                    <div  className={`vayu_blocks_image_flip_wrapper flip-box`}>
-
-                        <div className={`vayu_blocks_image_flip_image-container ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`}   >             
-                            <img 
-                                style= {vayu_blocks_image_settings}
-                                src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext || `Image ${Math.floor(Math.random() * 100)}`} 
-                                className={`vayu_blocks_image_flip_image ${attributes.imagehvreffect} ${attributes.imagehvrfilter}`} 
-                            />
-
-                        </div>  
-
+                        <div className={`vayu_blocks_flip-box-inner ${classname('inner')}`}   >             
                             <div 
-                                className={`vayu_blocks_overlay_main_wrapper ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect !== 'flip-front' && attributes.imagehvreffect !== 'flip-front-left' && attributes.imagehvreffect !== 'flip-back-bottom' && attributes.imagehvreffect !== 'flip-back' ? attributes.imageoverlayouteffect : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front' ? 'overlayflip-horizontal' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back' ? 'overlayflip-vertical' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-front-left' ? 'overlayflip-horizontal-left' : ''} ${!attributes.overlay && !attributes.showPreview && attributes.imagehvreffect === 'flip-back-bottom' ? 'overlayflip-vertical-bottom' : ''}`} 
-
-                                style={vayu_block_overlay_style}
+                                className={`vayu_blocks_flip-box-front`} 
+                                style={vayu_block_flip_box_style_front}
                             >
-
+                                <div className="vayu_blocks_inner_content ">
+                                    <InnerBlocks 
+                                        template={image_flip_template} 
+                                    />
+                                </div>
+                            </div> 
+            
+                            <div 
+                                className={`vayu_blocks_flip-box-back ${classname('back')}`} 
+                                style={vayu_block_flip_box_style_back}
+                            >
                                 <div className="vayu_blocks_inner_content">
                                     <InnerBlocks 
                                         template={image_flip_template} 
                                     />
                                 </div>
-
-                            </div>
+                            </div> 
+                        </div>
                             
                     </div>
 
