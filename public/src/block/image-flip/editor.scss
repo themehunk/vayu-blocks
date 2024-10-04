@@ -418,22 +418,12 @@
     transform-style: preserve-3d;
 }
 
-.vayu_blocks_flip-box-front, .vayu_blocks_flip-box-back {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-
-
   //hover effect
   .vayu_blocks_rotating_animation_back_flip-front {
     transform: rotateY(180deg);
   }
 
-  .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-front {
+  .vayu_blocks_image_flip_wrapper:hover .block-editor-block-list__layout {
     transform: rotateY(180deg);
   }
 
@@ -477,3 +467,21 @@
 .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_flip-box-inner_animation_div_flip-x {
     transform: rotateX(180deg) rotateZ(90deg);
 }
+
+
+.vayu_blocks_flip-box-inner .vayu_blocks_flip-box-front
+{
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+  }
+
+.vayu_blocks_flip-box-inner .vayu_blocks_flip-box-back {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+  }

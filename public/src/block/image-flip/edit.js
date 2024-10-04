@@ -168,22 +168,16 @@ const edit = (props) => {
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
 
-                    <div  className={`vayu_blocks_image_flip_wrapper`}>
-
-                        <div className={`vayu_blocks_flip-box-inner  ${classname('inner')}`}   >             
-                            <div 
-                                className={``} 
-                                style={vayu_block_flip_box_style_front}
-                            >
-                                <div className="vayu_blocks_inner_content ">
-                                    <InnerBlocks 
-                                        template={image_flip_template} 
-                                    />
-                                </div>
-                            </div> 
+                     <div  className={`vayu_blocks_image_flip_wrapper`}>
+ 
+                        <div className={`vayu_blocks_flip-box-inner  ${classname('inner')}`}  style={vayu_block_flip_box_style_front} >             
+                          
+                                <InnerBlocks 
+                                    template={image_flip_template} 
+                                />
                         </div>
                             
-                    </div>
+                    </div> 
 
                 </div>
             </AdvanceSettings>

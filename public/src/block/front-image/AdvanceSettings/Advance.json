@@ -462,7 +462,7 @@
 },
 "marginBottom": {
   "type": "number",
-  "default": 40
+  "default": 0
 },
 "marginLeft": {
   "type": "number",

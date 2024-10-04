@@ -424,6 +424,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         backgroundSize: backgroundSize || undefined,
       
         transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
+        display: 'grid',
         
     };
     
