@@ -6,16 +6,12 @@ import { RichText, useBlockProps } from '@wordpress/block-editor';
 import {
 	Fragment
 } from '@wordpress/element';
-import { useEntityProp } from '@wordpress/core-data';
 import { useViewportMatch} from '@wordpress/compose';
 import { useSelect, useDispatch  } from '@wordpress/data';
 import hexToRgba from 'hex-rgba';
 import classnames from 'classnames';
-
-import { useContext } from '@wordpress/element';
-import { PostContext } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 /**
  * Internal dependencies
  */
@@ -24,12 +20,13 @@ import apiFetch from '@wordpress/api-fetch';
  import googleFontsLoader from '../../helpers/google-fonts.js';
  import getUniqueId from '../../helpers/get-unique-id.js';
  import './editor.scss';
- import useDynamicContent from './useDynamicContent';
+ import useDynamicContent from '../../dynamic-content/useDynamicContent';
 
- export default function Edit({ attributes, setAttributes, clientId, uniqueID, postId }) {
-  
+ export default function Edit({ attributes, setAttributes, clientId, uniqueID, context }) {
+	
+	
 	const { id } = attributes;
-  
+
 	if ( ! id ) {
 		  setAttributes( { id: clientId } );
 	  }
@@ -67,9 +64,7 @@ import apiFetch from '@wordpress/api-fetch';
 			}
 			}, [] );
 
-    const changeContent = value => {
-		setAttributes({ content: value });
-	};
+    
 
     const {
 		isViewportAvailable,
@@ -613,12 +608,36 @@ import apiFetch from '@wordpress/api-fetch';
 		style
 	});
 
+	const { postId, postType, queryId } = context;
 	const dynamicContent = useDynamicContent(attributes);
-
-	// Save the dynamic content directly into the `content` attribute
+	const isDescendentOfQueryLoop = Number.isFinite( queryId );
+	
+	const [ title ] = useEntityProp(
+		'postType',
+		postType,
+		'title',
+		postId
+	);
+	
 	useEffect(() => {
-		setAttributes({ content: dynamicContent });
-	}, [dynamicContent]);
+		if (dynamicContent !== null && dynamicContent !== '') {
+			setAttributes({ content: dynamicContent });
+		}
+	}, [dynamicContent, setAttributes]);
+
+	if ( isDescendentOfQueryLoop && title ) {
+		// Update content when postId or postTitle changes, but only if no custom content is set
+		useEffect(() => {
+			if (postId && title ) {
+				// Only set content if it's not already manually set by the user
+				setAttributes({ content: title });
+			}
+		}, [title, attributes.content]);
+	}
+
+	const changeContent = (value) => {
+		setAttributes({ content: value });
+	};
 
 	return (
         <Fragment>
@@ -630,15 +649,17 @@ import apiFetch from '@wordpress/api-fetch';
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 			/>
-		<RichText
-                identifier="content"
-                tagName={ attributes.tag } // The tag here is the element output and editable in the admin
-				value={ attributes.content || dynamicContent } // Any existing content, either from the database or an attribute default
-                allowedFormats={ [ 'core/bold', 'core/italic','core/link' ] } // Allow the content to be made bold or italic, but do not allow other formatting options
-                onChange={ changeContent } // Store updated content as a block attribute
-                placeholder={ __( 'Write heading…','vayu-blocks' ) } // Display this text before any content has been added by the user
-                { ...blockProps }
-            />
+			
+					<RichText
+						identifier="content"
+						tagName={attributes.tag} // The tag used for content output in the editor
+						value={attributes.content} // Value stored in the block attribute
+						allowedFormats={['core/bold', 'core/italic', 'core/link']} // Allowed formatting options
+						onChange={changeContent} // Update content on change
+						placeholder={__('Write heading…', 'vayu-blocks')} // Placeholder text before user input
+						{...blockProps}
+					/>
+				
         </Fragment>
 	);
 }
