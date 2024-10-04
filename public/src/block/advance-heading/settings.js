@@ -2369,5 +2369,4 @@ const InsSettings = ({
    </Fragment>
    );
 };
-
 export default InsSettings;

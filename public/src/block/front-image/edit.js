@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
-import noimage from '../../../../inc/assets/img/no-image.png';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 
@@ -17,12 +16,13 @@ const edit = (props) => {
         return __experimentalGetPreviewDeviceType ? __experimentalGetPreviewDeviceType() : getView();
     }, []);
 
-    // Utility function to generate a unique ID
-    const generateUniqueId = () => {
-//        const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
-        const randomPart = Math.random().toString(36).substring(2, 10); // Generate random alphanumeric string
-        return `-${randomPart}`;
-    };
+// Utility function to generate a unique ID
+const generateUniqueId = () => {
+    const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
+    const randomPart = Math.random().toString(36).substring(2, 10); // Generate random alphanumeric string
+    return `${timestamp}-${randomPart}`; // Combine timestamp and random part for uniqueness
+};
+
     
     // Ensure the uniqueId is set if it's not
     if (!attributes.uniqueId) {
@@ -105,79 +105,56 @@ const edit = (props) => {
 
     }
 
-    const classname = (variablereturn) => {
-        let backclass = '';
-        let frontclass = '';
-        let innerclass = '';
-    
-        if (attributes.imagehvreffect === 'flip-front') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip-front';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front';
-        } 
-        else if (attributes.imagehvreffect === 'flip-front-left') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip-front-left';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
-        } 
-        else if (attributes.imagehvreffect === 'flip-back') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip-back';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back';
-        } 
-        else if (attributes.imagehvreffect === 'flip-back-bottom') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip-back-bottom';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
-        }
-        else if (attributes.imagehvreffect === 'flip-z') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip_z';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
-        }else if (attributes.imagehvreffect === 'flip-x') {
-            backclass = 'vayu_blocks_rotating_animation_back_flip_x';
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
-        }
-    
-        // Return the appropriate class based on the variablereturn argument
-        if (variablereturn === 'inner') {
-            return innerclass;
-        }
-    
-        if (variablereturn === 'back') {
-            return backclass;
-        }
+    const front_image_template = [
+        ['vayu-blocks/advance-container'
+            , {
+                verticalAlignment: 'center',
+                isStackedOnMobile: true,
+                width: '100%',
+                alignItems:'center',
+                elementGap:21,
+                AlignItem:'center',
+            },
+              
+            [
+                ['vayu-blocks/advance-heading', {
+                    fontVariant:'bold',
+                    fontFamily:'unset',
+                    content:'Image Flip Title...'
+                }],
 
-        if (variablereturn === 'front') {
-            return frontclass;
-        }
-    
-        return ''; // Default case if variablereturn doesn't match
-    };
+                ['vayu-blocks/advance-button',{
+                    buttonbackgroundColor:'#4e75ff',
+                    buttonbackgroundColorHvr:'#2F3DA3',
+                    buttonpaddingTop: 10,
+                    buttonpaddingRight: 50,
+                    buttonpaddingBottom: 10,
+                    buttonpaddingLeft: 50,
+                    align:'center',
+                }],
+            ]   
 
-  
-    const image_flip_template = [
-        ['vayu-blocks/front-image', {
-            className: `vayu_blocks_flip-box-front ${classname('front')}`
-        }],
-        ['vayu-blocks/front-image', {
-            className: `vayu_blocks_flip-box-back ${classname('back')}`
-        }], 
-    ];
-     
+        ],
+    ];  
+
     return (
         <>
        
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
 
-                    <div  className={`vayu_blocks_image_flip_wrapper`}>
+                    <div  className={`vayu_blocks_front_image_wrapper`} style={{width:attributes.imagewidth,height:attributes.imageheight}}>
 
-                        <div className={`vayu_blocks_flip-box-inner  ${classname('inner')}`}   >             
+                        <div className={`vayu_blocks-box-inner`} >             
                             <div 
-                                className={``} 
+                                className={`vayu_blocks_image-box-front`} 
                                 style={vayu_block_flip_box_style_front}
                             >
-                                <div className="vayu_blocks_inner_content ">
+                                <div className="vayu_blocks_front__inner_content ">
                                     <InnerBlocks 
-                                        template={image_flip_template} 
+                                        template={front_image_template} 
                                     />
                                 </div>
                             </div> 

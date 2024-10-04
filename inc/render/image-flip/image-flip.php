@@ -34,9 +34,9 @@ class Vayu_blocks_image_flip {
         $imageAlt = isset($attributes['imagealttext']) ? esc_attr($attributes['imagealttext']) : 'Image ' . rand(1, 100);
         $imageHvrEffect = isset($attributes['imagehvreffect']) ? esc_attr($attributes['imagehvreffect']) : '';
         $imageHvrFilter = isset($attributes['imagehvrfilter']) ? esc_attr($attributes['imagehvrfilter']) : '';
-        $wrapperanimation = isset($attributes['wrapperanimation']) ? esc_attr($attributes['wrapperanimation']) : '';
+       
 
-        $image_html .= '<div class="vayu_blocks_image_flip_wrapper ' . $wrapperanimation . '" id='. $uniqueId .'>';
+        $image_html .= '<div class="vayu_blocks_image_flip_wrapper" id='. $uniqueId .'>';
             $image_html .= '<div class="vayu_blocks_image_flip_image-container ' . $imageHvrEffect . ' ' . $imageHvrFilter . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
@@ -276,14 +276,3 @@ function vayu_blocks_image_flip_render($attr,$content) {
     return '<div class="wp_block_vayu-blocks-image-flip-main ' . $className . '">' . $image->render() . '</div>';
 }
 
-// Enqueue for front-end as well
-function enqueue_vayu_tilt_block_frontend_script() {
-    wp_enqueue_script(
-        'vayu-tilt-block-script-frontend',
-        plugins_url('tilt-effect.js', __FILE__), // Path to your tilt.js file
-        array(),
-        filemtime(plugin_dir_path(__FILE__) . 'tilt.js'), // Version based on file modification time
-        true // Load in footer
-    );
-}
-add_action('wp_enqueue_scripts', 'enqueue_vayu_tilt_block_frontend_script');

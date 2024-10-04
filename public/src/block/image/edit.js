@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './editor.scss';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
@@ -6,14 +6,12 @@ import noimage from '../../../../inc/assets/img/no-image.png';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 import { RichText } from '@wordpress/block-editor';
-import { BlockControls, AlignmentControl } from '@wordpress/block-editor';
-import { ToolbarGroup, ToolbarButton ,DropdownMenu,ToolbarItem,Toolbar} from '@wordpress/components';
-import { transform } from 'lodash';
-
+import { BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton} from '@wordpress/components';
+import { Resizable } from 're-resizable';
 
 const edit = (props) => {
     const { attributes, setAttributes} = props;
@@ -207,9 +205,9 @@ const edit = (props) => {
 
         ...(view === 'Mobile' && {
             justifyContent: (() => {
-                return imagealignmentmobile === 'center' ? 'center' :
-                       imagealignmentmobile === 'left' ? 'flex-start' :
-                       imagealignmentmobile === 'right' ? 'flex-end' : 'center';
+                return attributes.imagealignmentmobile === 'center' ? 'center' :
+                attributes.imagealignmentmobile === 'left' ? 'flex-start' :
+                attributes.imagealignmentmobile === 'right' ? 'flex-end' : 'center';
             })(),
         }),
     }
@@ -284,6 +282,44 @@ const edit = (props) => {
         }
     };
     
+    const imageWrapperRef = useRef(null);
+
+    const tiltEffect = (e) => {
+        const wrapper = imageWrapperRef.current;
+        if (!wrapper) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        
+        const tiltX = (y - 0.5) * 5; // Adjust the multiplier for desired effect
+        const tiltY = (x - 0.5) * -5; // Adjust the multiplier for desired effect
+        
+        wrapper.style.transform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    };
+
+    const resetTilt = () => {
+        const wrapper = imageWrapperRef.current;
+        if (wrapper) {
+            wrapper.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+        }
+    };
+
+    useEffect(() => {
+        const wrapper = imageWrapperRef.current;
+        if(attributes.wrapperanimation==='vayu_block_styling-effect7'){
+        if (wrapper) {
+            wrapper.addEventListener('mousemove', tiltEffect);
+            wrapper.addEventListener('mouseleave', resetTilt);
+        }
+    }
+        return () => {
+            if (wrapper) {
+                wrapper.removeEventListener('mousemove', tiltEffect);
+                wrapper.removeEventListener('mouseleave', resetTilt);
+            }
+        };
+    }, [attributes.wrapperanimation]);
 
     return (
         <>
@@ -329,7 +365,11 @@ const edit = (props) => {
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-main-container"  id={`${attributes.uniqueId}`}>
+            <div 
+            ref={imageWrapperRef} 
+            className={`vayu-blocks-image-main-container `}  
+            id={attributes.uniqueId}
+            >
                     <div style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
@@ -503,10 +543,10 @@ const edit = (props) => {
 
                     {attributes.image && (
                     
-                    <div className="vayu_blocks_image_wrapper" style={vayu_blocks_image_wrapper_style}>
+                    <div className={`vayu_blocks_image_wrapper ${attributes.wrapperanimation}`} style={vayu_blocks_image_wrapper_style}>
                         <div style={{transform:`rotate(${attributes.rotation}deg)`}}>
                             <div  className={`vayu_blocks_image-container ${attributes.imagehvreffect} ${getclassoverlay()}`} > 
-                                    
+                            
                                 <img 
                                     style= {vayu_blocks_image_settings}
                                     src={attributes.image ? attributes.image : noimage} alt={attributes.imagealttext} 
@@ -518,7 +558,7 @@ const edit = (props) => {
                             {attributes.overlayshow && (
                                 <>
                                 <div 
-                                    className={`vayu_blocks_overlay_main_wrapper_image ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 
+                                    className={`vayu_blocks_overlay_main_wrapper_image ${attributes.overlaywrapper} ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 
                                     style={vayu_block_overlay_style}
                                 >
                                     <div className="vayu_blocks_inner_content">
@@ -530,10 +570,10 @@ const edit = (props) => {
                                 </div>
                                 </>
                             )}
+                            
                           </div>    
                     </div>
                   
-
                     )}
 
                 </div>
@@ -568,6 +608,7 @@ const edit = (props) => {
                         </div>
                     )}
                 
+
                 </div>
                 
             </AdvanceSettings>

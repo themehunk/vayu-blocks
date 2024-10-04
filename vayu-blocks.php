@@ -232,6 +232,14 @@ class Vayu_Block_Plugin {
             )
         );
 
+        //front-image
+        register_block_type(
+            __DIR__ . '/public/build/block/front-image',
+            array(
+                'render_callback' => 'vayu_blocks_front_image_render',
+            )
+        );
+
     }
     
     // plugin menu option add
