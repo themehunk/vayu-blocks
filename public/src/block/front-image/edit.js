@@ -137,27 +137,44 @@ const generateUniqueId = () => {
         ],
     ];  
 
+    const front_image_template2 = [
+        ['vayu-blocks/advance-heading', {
+            fontVariant: 'bold',
+            fontFamily: 'unset',
+            content: 'Image Flip Title...'
+        }],
+    
+        ['vayu-blocks/advance-button', {
+            buttonbackgroundColor: '#4e75ff',
+            buttonbackgroundColorHvr: '#2F3DA3',
+            buttonpaddingTop: 10,
+            buttonpaddingRight: 50,
+            buttonpaddingBottom: 10,
+            buttonpaddingLeft: 50,
+            align: 'center',
+        }],
+    ];
+    
+    
     return (
         <>
        
             <PanelSettings attributes={attributes} setAttributes={setAttributes} />
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
-                <div className="vayu-blocks-image-main-container" id={`${attributes.uniqueId}`}>
+                <div className="vayu-blocks-front-image-main-container" id={`${attributes.uniqueId}`}>
 
                     <div  className={`vayu_blocks_front_image_wrapper`} style={{width:attributes.imagewidth,height:attributes.imageheight}}>
-
-                        <div className={`vayu_blocks-box-inner`} >             
-                            <div 
-                                className={`vayu_blocks_image-box-front`} 
-                                style={vayu_block_flip_box_style_front}
-                            >
-                                <div className="vayu_blocks_front__inner_content ">
-                                    <InnerBlocks 
-                                        template={front_image_template} 
-                                    />
-                                </div>
-                            </div> 
+      
+                        <div 
+                            className={`vayu_blocks_image-box-front`} 
+                            style={vayu_block_flip_box_style_front}
+                        >
+                        
+                            <InnerBlocks 
+                                template={front_image_template2} 
+                            />
+                                
                         </div>
                             
                     </div>
