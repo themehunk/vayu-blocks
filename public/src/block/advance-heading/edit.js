@@ -623,7 +623,7 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 		if (dynamicContent !== null && dynamicContent !== '') {
 			setAttributes({ content: dynamicContent });
 		}
-	}, [dynamicContent, setAttributes]);
+	}, [dynamicContent, setAttributes]); 
 
 	if ( isDescendentOfQueryLoop && title ) {
 		// Update content when postId or postTitle changes, but only if no custom content is set

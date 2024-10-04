@@ -46,10 +46,9 @@ import PostTypeSelect from '../../dynamic-content/dynamicPostTypeSelect.js';
 import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, OrderEnd, Custom, None, Shrink, Grow, HorizontalLeft, HorizontalRight, VerticalTop, VerticalBottom} from '../../../src/helpers/icon.js';
 
 const InsSettings = ({
-   attributes,
+   attributes, 
    setAttributes
 }) => {
-
    const getView = useSelect( select => {
 	   const { getView } = select( 'vayu-blocks/data' );
 	   const { __experimentalGetPreviewDeviceType } = select( 'core/edit-post' ) ? select( 'core/edit-post' ) : false;
