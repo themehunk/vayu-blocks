@@ -20,7 +20,6 @@ import {
 } from '@wordpress/element';
 
 import PostSettings from '../postSettings';
-import SlideSettings from '../SlideSettings';
 
 /**
  * Internal dependencies
@@ -62,9 +61,8 @@ const PanelSettings = ({
 		}, {});
 	  };
     
-    const [ tab, setTab ] = useState( 'slide' );
+    const [ tab, setTab ] = useState( 'settings' );
 	const [ hover, setHover ] = useState( 'normal' );
-
 
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
@@ -1629,13 +1627,8 @@ const PanelSettings = ({
 			<InsSettingHeader value={ tab }
 						options={[
 							{
-								label: __( 'Animation', 'vayu-blocks' ),
-								value: 'slide',
-								icon: 'image'
-							},
-							{
 								label: __( 'Style', 'vayu-blocks' ),
-								value: 'setting',
+								value: 'settings',
 								icon: 'colorwand'
 							},
 							{
@@ -1647,12 +1640,7 @@ const PanelSettings = ({
 						onChange={ setTab }
 				/>
 
-				{'slide' === tab && (
-					<Fragment>
-						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
-					</Fragment>
-
-				) || 'setting' === tab && (
+				{'settings' === tab && (
 						<Fragment>
 							<PostSettings attributes={attributes} setAttributes={setAttributes} />
 						</Fragment>

@@ -21,6 +21,9 @@ module.exports = {
      'block/advance-slider/view': './src/block/advance-slider/view.js',
      'block/image-flip/index': './src/block/image-flip',
      'block/image-flip/view': './src/block/image-flip/view.js',
+     'block/front-image/index': './src/block/front-image',
+     'block/front-image/view': './src/block/front-image/view.js',
+
      'block/image/index': './src/block/image',
      'block/image/view': './src/block/image/view.js',
      'block/mega-menu/index': './src/block/mega-menu',
