@@ -1,4 +1,4 @@
-import { useSelect } from '@wordpress/data';
+import { useSelect, useBlockEditContext  } from '@wordpress/data';
 import { SelectControl, Spinner,ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
@@ -6,6 +6,7 @@ import { useState, useEffect } from '@wordpress/element';
  * Internal dependencies
  */
 import {ControlPanelControl} from '../components/index.js';
+
 
 
 const ContentSelect = ({ label, postType, selectedPost, onChange }) => {
@@ -45,9 +46,11 @@ const ContentSelect = ({ label, postType, selectedPost, onChange }) => {
     );
 };
 
-const PostTypeSelect = ({ attributes, setAttributes }) => {
+const PostTypeSelect = ({ attributes, setAttributes, context }) => {
 
     const { dynamicPostType, selectedPost, selectedSourceField } = attributes;
+
+    console.log(context);
 
     // Handler for post type selection
     const onPostTypeChange = (selectedType) => {
@@ -76,6 +79,8 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
 
     return (
         <div>
+        {!context && (
+            <>
            <ControlPanelControl
 				label={ __( 'Dynamic Content', 'vayu-blocks' ) }
 							attributes={ attributes }
@@ -90,6 +95,7 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
 							} }
 							onClick={ () => setAttributes({ dynamiControl: true }) }
 			>
+            
             <SelectControl
                 label={__('Content Type', 'vayu-blocks')}
                 value={dynamicPostType}
@@ -101,6 +107,7 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                 ]}
                 onChange={onPostTypeChange}
             />
+    
             {(dynamicPostType === 'post' || dynamicPostType === 'page' || dynamicPostType === 'product') && (
                 <>
                     <ContentSelect
@@ -169,7 +176,79 @@ const PostTypeSelect = ({ attributes, setAttributes }) => {
                     )}
                  </>  
                )}
+           
             </ControlPanelControl>
+            </>
+            )}
+            {context && (
+            <>
+               <ControlPanelControl
+				label={ __( 'Dynamic Content', 'vayu-blocks' ) }
+							attributes={ attributes }
+							setAttributes={ setAttributes }
+							resetValues={ {
+								dynamiControlloop: false,
+                                selectedSourceField: '',
+                                contentLinkEnable: false,
+                                contentLinkUrl: ''
+							} }
+							onClick={ () => setAttributes({ dynamiControlloop: true }) }
+			    >
+                <SelectControl
+                            label={__('Select Source Field', 'vayu-blocks')}
+                            value={selectedSourceField || 'title'} // Default to title
+                            // options={sourceFields}
+                            onChange={onSourceFieldChange}
+                        >
+                        <optgroup label={ __( 'Post', 'vayu-blocks' ) }>
+                        <option value="title">{ __( 'Post Tilte', 'vayu-blocks' ) }</option>
+                        <option value="slug">{ __( 'Post Slug', 'vayu-blocks' ) }</option>
+                        <option value="excerpt">{ __( 'Post Excerpt', 'vayu-blocks' ) }</option>
+                        <option value="post_date">{ __( 'Post Date', 'vayu-blocks' ) }</option>
+                        <option value="post_time">{ __( 'Post Time', 'vayu-blocks' ) }</option>
+                        <option value="post_id">{ __( 'Post Id', 'vayu-blocks' ) }</option>
+                        <option value="post_image">{ __( 'Post Featured Image', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Author', 'vayu-blocks' ) }>
+                        <option value="author_name">{ __( 'Name', 'vayu-blocks' ) }</option>
+                        <option value="author_bio">{ __( 'Bio', 'vayu-blocks' ) }</option>
+                        <option value="author_email">{ __( 'Email', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                       </SelectControl>
+                       <ToggleControl
+                       label={ __( 'Enable Link', 'vayu-blocks' ) }
+                       checked={ attributes.contentLinkEnable }
+					   onChange={ contentLinkEnable => setAttributes({ contentLinkEnable }) }
+                       />
+                       {attributes.contentLinkEnable && (
+                       <SelectControl
+                            label={__('Select Source Url', 'vayu-blocks')}
+                            value={attributes.contentLinkUrl}
+                            onChange={contentLinkUrl => setAttributes({ contentLinkUrl }) }
+                        >
+                        <optgroup label={ __( 'Post', 'vayu-blocks' ) }>
+                        <option value="post_url">{ __( 'Post Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Archive', 'vayu-blocks' ) }>
+                        <option value="archive_url">{ __( 'Archive Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Author', 'vayu-blocks' ) }>
+                        <option value="author_url">{ __( 'Author Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Site', 'vayu-blocks' ) }>
+                        <option value="site_url">{ __( 'Site Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Comments', 'vayu-blocks' ) }>
+                        <option value="comments_url">{ __( 'Comments Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                        <optgroup label={ __( 'Media', 'vayu-blocks' ) }>
+                        <option value="featured_img_url">{ __( 'Featured Image Url', 'vayu-blocks' ) }</option>
+                        </optgroup>
+                       </SelectControl>
+                       )}
+            </ControlPanelControl>
+            </>
+            )}
         </div>
     );
 };

@@ -648,8 +648,8 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
             <InsSettings
 				attributes={ attributes }
 				setAttributes={ setAttributes }
+				context={isDescendentOfQueryLoop}
 			/>
-			
 					<RichText
 						identifier="content"
 						tagName={attributes.tag} // The tag used for content output in the editor
