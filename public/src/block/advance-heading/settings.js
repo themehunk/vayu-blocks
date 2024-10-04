@@ -47,7 +47,8 @@ import { alignBottom, alignCenter,  Start, Center , End, Strech, OrderStart, Ord
 
 const InsSettings = ({
    attributes, 
-   setAttributes
+   setAttributes,
+   context
 }) => {
    const getView = useSelect( select => {
 	   const { getView } = select( 'vayu-blocks/data' );
@@ -1340,6 +1341,7 @@ const InsSettings = ({
 	   <PostTypeSelect
 				   attributes={ attributes }
 				   setAttributes={ setAttributes }
+				   context={ context }
 			   />
    </PanelBody>
 
