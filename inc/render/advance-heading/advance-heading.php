@@ -633,3 +633,56 @@ function vayu_advance_heading_style($attr){
 
 	return $css;
 }
+
+// Renderloop function
+function vayu_blocks_advance_heading_render( $attributes, $content, $block ) {
+    // Check if the postId is set in the block context (as in a Query Loop)
+    if ( ! isset( $block->context['postId'] ) ) {
+        return $content;
+    }
+    // Fetch the title of the current post in context
+    $title = get_the_title( $block->context['postId'] );
+
+    if ( ! $title ) {
+        return ;
+    }
+
+    $tag_name = 'h2';
+    if ( isset( $attributes['tag'] ) ) {
+        $tag_name = $attributes['tag'];
+    }
+
+	$wrapper_attributes = '';
+    // Check if the title should be rendered as a link
+    if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {
+        $rel   = ! empty( $attributes['rel'] ) ? 'rel="' . esc_attr( $attributes['rel'] ) . '"' : '';
+        $title = sprintf(
+            '<a href="%1$s" target="%2$s" %3$s>%4$s</a>',
+            esc_url( get_the_permalink( $block->context['postId'] ) ),
+            esc_attr( $attributes['linkTarget'] ),
+            $rel,
+            esc_html( $title )
+        );
+    }
+
+	if ( isset( $attributes['uniqueID'] ) ) {
+        $uid = esc_attr( $attributes['uniqueID'] );
+        // Add unique ID as an `id` attribute
+        $wrapper_attributes .= ' id="' . $uid . '"';
+    }
+    
+    $classes = array();
+    $classes[] = 'wp-block-vayu-blocks-advance-heading wp-block-th-advance-heading th-h'.$uid;
+
+    // Use WordPress' block wrapper attributes for proper rendering
+    $wrapper_attributes .=get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+
+    // Return the complete block HTML
+    return sprintf(
+        '<%1$s %2$s>%3$s</%1$s>',
+        esc_attr( $tag_name ),
+        $wrapper_attributes,
+        $title
+    );
+
+}

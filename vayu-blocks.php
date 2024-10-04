@@ -73,6 +73,7 @@ class Vayu_Block_Plugin {
                     'editor_style'   => 'advance-heading-editor-style',
                     'frontend_style' => 'advance-heading-frontend-style',
                     'status'         => $options['heading']['isActive'],
+                    'render_callback' => 'vayu_blocks_advance_heading_render'
                 ),
                 array(
                     'name'           => 'vayu-blocks/advance-spacer',
