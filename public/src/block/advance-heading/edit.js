@@ -21,7 +21,7 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
  import getUniqueId from '../../helpers/get-unique-id.js';
  import './editor.scss';
  import useDynamicContent from '../../dynamic-content/useDynamicContent';
-
+ import useDynamicContentLoop from '../../dynamic-content/useDynamicContentLoop';
  export default function Edit({ attributes, setAttributes, clientId, uniqueID, context }) {
 	
 	
@@ -609,31 +609,33 @@ import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 	});
 
 	const { postId, postType, queryId } = context;
-	const dynamicContent = useDynamicContent(attributes);
 	const isDescendentOfQueryLoop = Number.isFinite( queryId );
-	
-	const [ title ] = useEntityProp(
-		'postType',
+
+	// Fetch content using DynamicContentFetcher
+	const contentToSet = useDynamicContentLoop({
+		postId,
 		postType,
-		'title',
-		postId
-	);
+		selectedSourceField: attributes.selectedSourceField,
+		attributes
+	});
+
+	if ( isDescendentOfQueryLoop) {
+		// Update content when postId or postTitle changes, but only if no custom content is set
+		useEffect(() => {
+			if (postId && contentToSet ) {
+				// Only set content if it's not already manually set by the user
+				setAttributes({ content: contentToSet });
+			}
+		}, [contentToSet, attributes.content]);
+	}
+
 	
+	const dynamicContent = useDynamicContent(attributes);
 	useEffect(() => {
 		if (dynamicContent !== null && dynamicContent !== '') {
 			setAttributes({ content: dynamicContent });
 		}
 	}, [dynamicContent, setAttributes]);
-
-	if ( isDescendentOfQueryLoop && title ) {
-		// Update content when postId or postTitle changes, but only if no custom content is set
-		useEffect(() => {
-			if (postId && title ) {
-				// Only set content if it's not already manually set by the user
-				setAttributes({ content: title });
-			}
-		}, [title, attributes.content]);
-	}
 
 	const changeContent = (value) => {
 		setAttributes({ content: value });
