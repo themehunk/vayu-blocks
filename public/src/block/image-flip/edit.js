@@ -37,21 +37,9 @@ const edit = (props) => {
 
     //overlay wrapper style
     const vayu_block_flip_box_style_front = {
-        
-
-         // Apply background based on the selected background option
-        ...(attributes.backgroundoption === 'color' && {
-            background: attributes.overlaycolor,
-        }),
-
+    
         height:'100%',
 
-        ...(attributes.backgroundoption === 'image' && {
-            backgroundImage: `url(${attributes.image})`,
-            backgroundSize: attributes.imagecover,          // Applies 'cover', 'contain', or other values
-            backgroundPosition: attributes.imageposition,   // Applies the positioning value, like 'center', 'top', etc.
-            backgroundRepeat: attributes.imagerepeat,       // Applies 'no-repeat', 'repeat', etc.
-        }),
 
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
@@ -124,6 +112,13 @@ const edit = (props) => {
         else if (attributes.imagehvreffect === 'flip-back-bottom') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
         }
+        else if (attributes.imagehvreffect === 'flip-z') {
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
+
+        }else if (attributes.imagehvreffect === 'flip-x') {
+            
+            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
+        }
     
         // Return the appropriate class based on the variablereturn argument
         if (variablereturn === 'inner') {
@@ -143,27 +138,14 @@ const edit = (props) => {
 
   
     const image_flip_template = [
-        ['vayu-blocks/front-image', {
-            className: `vayu_blocks_flip-box-front ${classname('front')}`
+        ['vayu-blocks/image', {
+            className: `vayu_blocks_flip-box-front ${classname('front')}`,
         }],
-        ['vayu-blocks/front-image', {
+        ['vayu-blocks/image', {
             className: `vayu_blocks_flip-box-back ${classname('back')}`
         }], 
     ];
 
-
-    const image_flip_template2 = [
-        ['vayu-blocks/front-image', {
-            className: `vayu_blocks_flip-box-front ${classname('front')}`,
-            content: '<InnerBlocks />'
-        }],
-        ['core/image', {
-            className: `vayu_blocks_flip-box-back ${classname('back')}`,
-            content: '<InnerBlocks />'
-        }],
-    ];
-    
-     
     return (
         <>
        
@@ -178,6 +160,7 @@ const edit = (props) => {
                           
                                 <InnerBlocks 
                                     template={image_flip_template} 
+                                    templateLock="all"
                                 />
                         </div>
                             

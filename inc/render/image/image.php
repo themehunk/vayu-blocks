@@ -27,7 +27,6 @@ class Vayu_blocks_image {
     private function render_image() {
         $attributes = $this->attr; // Access attributes
         $image_html = '';
-        $animated = isset($attributes['className']) ? esc_attr($attributes['className']) : ''; // animation
         $uniqueId = isset($attributes['uniqueId']) ? esc_attr($attributes['uniqueId']) : '';
         $imageSrc = !empty($attributes['image']) ? esc_url($attributes['image']) :  plugins_url('../../assets/img/no-image.png', __FILE__);
 
@@ -78,7 +77,7 @@ class Vayu_blocks_image {
             $image_html .= '</div>';
         }
     
-        return '<div class="vayu-blocks-image-main-container' . $uniqueId . ' ' . $animated . ' vayu_blocks_image_image-container">' . $image_html . '</div>';
+        return '<div class="vayu-blocks-image-main-container' . $uniqueId . '  vayu_blocks_image_image-container">' . $image_html . '</div>';
     }
     
     //overlay
@@ -296,6 +295,8 @@ function vayu_block_image_render($attr,$content) {
     // Ensure className is sanitized and applied correctly
     $className = isset($attr['classNamemain']) ? esc_attr($attr['classNamemain']) : '';
 
+    $animated = isset($attr['className']) ? esc_attr($attr['className']) : ''; // animation
+
     // Render and return the image output inside a div with the dynamic class name
-    return '<div class="wp_block_vayu-blocks-image-main ' . $className . '">' . $image->render() . '</div>';
-}
+    return '<div class="wp_block_vayu-blocks-image-main ' . $className . ' ' . $animated . '">' . $image->render() . '</div>';
+} 
