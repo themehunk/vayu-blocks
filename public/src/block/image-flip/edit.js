@@ -40,7 +40,6 @@ const edit = (props) => {
     
         height:'100%',
 
-
         borderTop: `${attributes.imageborder.topwidth} ${attributes.imageborder.topstyle} ${attributes.imageborder.topcolor}`,
         borderBottom: `${attributes.imageborder.bottomwidth} ${attributes.imageborder.bottomstyle} ${attributes.imageborder.bottomcolor}`,
         borderLeft: `${attributes.imageborder.leftwidth} ${attributes.imageborder.leftstyle} ${attributes.imageborder.leftcolor}`,
@@ -156,8 +155,9 @@ const edit = (props) => {
 
                      <div  className={`vayu_blocks_image_flip_wrapper`} style={vayu_block_flip_box_style_front}>
  
-                        <div className={`vayu_blocks_flip-box-inner  ${classname('inner')}`}   >             
-                          
+                              
+                     <div className={`vayu_blocks_flip-box-inner ${!attributes.back_image ? classname('inner') : ''}`}>
+
                                 <InnerBlocks 
                                     template={image_flip_template} 
                                     templateLock="all"

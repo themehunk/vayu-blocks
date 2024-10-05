@@ -24,6 +24,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
             <div class="vayu_blocks_image-flip-settings_main">
 
+            <PanelRow>
+                <ToggleControl
+                    className='vayu_blocks_togglecontrol_image_flip'
+                    label={__('Show Back Image', 'vayu-blocks')}
+                    checked={attributes.back_image}
+                    onChange={(value) =>  setAttributes({back_image:value})}
+                />
+            </PanelRow>
 
                 {/* Overlay and animation effect  */}
                 <PanelBody title={__('Advance Hover Animation','vayu-blocks')} initialOpen={false}>

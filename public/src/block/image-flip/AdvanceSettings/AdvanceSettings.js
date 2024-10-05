@@ -495,11 +495,21 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         transformstyle = 'rotateY(180deg) rotateZ(90deg)';
     }
 
+    let back_z_index =0;
+    if(attributes.back_image){
+        back_z_index = 100;
+        transformstyle= 'none';
+
+    }else{
+        back_z_index = 1;
+    }
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
            '--back-transform-style': transformstyle, 
+           '--back-z-index' : back_z_index,
         },
 
         onMouseEnter: handleMouseEnter,
