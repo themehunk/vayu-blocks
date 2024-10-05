@@ -317,6 +317,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                 return {};
         }
     };
+    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
@@ -362,22 +363,33 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     
     let customwidth;
 
+    let customheight;
+
     if ( isDesktop ) {
 
         customwidth = {
                 
-            width:attributes.customWidth + attributes.customWidthUnit,
+            'width':attributes.customWidth + attributes.customWidthUnit,
+            
+        };
+        customheight = {
+                
+            'height':attributes.customHeight + attributes.customHeightUnit,
             
         };
 
     }
 
-    // console.log(customwidth);
     if ( isTablet ) {
 
         customwidth = {
                 
             'width':attributes.customWidthTablet + attributes.customWidthUnit,
+            
+        };
+        customheight = {
+                
+            'height':attributes.customHeightTablet + attributes.customHeightUnit,
             
         };
 
@@ -390,28 +402,33 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             'width':attributes.customWidthMobile + attributes.customWidthUnit,
             
         };
+        customheight = {
+                
+            'height':attributes.customHeightMobile + attributes.customHeightUnit,
+            
+        };
     
     }
 
-    // Determine the borderRadius based on condition
-    const borderRadius = `${attributes.advanceRadius.top} ${attributes.advanceRadius.right} ${attributes.advanceRadius.bottom} ${attributes.advanceRadius.left}`;
 
-   
     // Prepare the style object
     const styles = {
         ...customwidth,
+        ...customheight,
         ...paddingStyles,
         ...marginStyles,  
+        ...borderradiusstyles,
+        
         
         order: order === 'custom' ? customOrder : 'undefined',
-
-        borderTop: `${attributes.advanceborder.topwidth} ${attributes.advanceborder.topstyle} ${attributes.advanceborder.topcolor}`,
-        borderBottom: `${attributes.advanceborder.bottomwidth} ${attributes.advanceborder.bottomstyle} ${attributes.advanceborder.bottomcolor}`,
-        borderLeft: `${attributes.advanceborder.leftwidth} ${attributes.advanceborder.leftstyle} ${attributes.advanceborder.leftcolor}`,
-        borderRight: `${attributes.advanceborder.rightwidth} ${attributes.advanceborder.rightstyle} ${attributes.advanceborder.rightcolor}`,
-
-        borderRadius: borderRadius,
-        height: '50%',
+      
+        borderStyle: borderType || undefined,
+        borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : 0,
+        borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : 0,
+        borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : 0,
+        borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : 0,
+        borderColor: borderColor || undefined,
+      
         
         boxShadow: boxShadow ?
         `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
@@ -426,23 +443,18 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         backgroundSize: backgroundSize || undefined,
       
         transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
-        display: 'grid',
         
     };
-
-    // Determine the borderRadius based on condition
-    const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
-
     
     const hoverStyles = {
-      
+        borderStyle: borderHvrType || undefined,
+        borderTopWidth: borderWidthHvrTop ? `${borderWidthHvrTop}${borderWidthHvrUnit}` : undefined,
+        borderBottomWidth: borderWidthHvrBottom ? `${borderWidthHvrBottom}${borderWidthHvrUnit}` : undefined,
+        borderLeftWidth: borderWidthHvrLeft ? `${borderWidthHvrLeft}${borderWidthHvrUnit}` : undefined,
+        borderRightWidth: borderWidthHvrRight ? `${borderWidthHvrRight}${borderWidthHvrUnit}` : undefined,
+        borderColor: borderColorHvr || undefined,
 
-        borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
-        borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
-        borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
-        borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
-
-        borderRadius: borderRadiushvr,
+        ...borderradiusHvrstyles,
 
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
@@ -457,7 +469,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         backgroundRepeat: backgroundRepeatHvr || undefined,
         backgroundSize: backgroundSizeHvr || undefined,
     };
-    
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {
@@ -465,8 +476,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...(isHovered ? filteredHoverStyles : {}),
     };
    
-    let opacity = (attributes.showPreview || attributes.overlay) ? 1 : 0;
-
     let transformstyle = 'none'; // Default value
 
     if (attributes.imagehvreffect === 'flip-front') {
@@ -479,18 +488,25 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     else if (attributes.imagehvreffect === 'flip-back-bottom') {
         transformstyle = 'rotateX(-180deg)';
     }
-    
+    else if (attributes.imagehvreffect === 'flip-z') {
+        transformstyle = 'rotateX(180deg) rotateZ(90deg)';
+    }
+    else if (attributes.imagehvreffect === 'flip-x') {
+        transformstyle = 'rotateY(180deg) rotateZ(90deg)';
+    }
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
-            '--back-transform-style': transformstyle, // Correct CSS property for transform
+           '--back-transform-style': transformstyle, 
         },
+
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
-    
 
+    
     if(attributes.classNamemain !== blockProps.className) {
         setAttributes({classNamemain: blockProps.className});
     }

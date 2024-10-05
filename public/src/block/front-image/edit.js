@@ -166,6 +166,7 @@ const generateUniqueId = () => {
 
                     <div  className={`vayu_blocks_front_image_wrapper`} >
       
+                        
                         <div 
                             className={`vayu_blocks_image-box-front`} 
                             style={vayu_block_flip_box_style_front}

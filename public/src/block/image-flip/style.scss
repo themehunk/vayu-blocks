@@ -1,93 +1,67 @@
 
-.vayu_blocks_image_flip_wrapper:hover .flip-front-left {
-    transform: rotateY(180deg);
-    opacity: 0;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_image_flip_wrapper-for-front .block-editor-inner-blocks{
+    background-color: transparent;
+    perspective: 1000px;
+    transform-origin: center;
+ 
 }
 
-.vayu_blocks_image_flip_wrapper .flip-front-left {
-    transform: rotateY(0deg);
-    opacity: 1;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_flip-box-inner-for-front {
+    perspective: 1000px;
 }
 
-.vayu_blocks_image_flip_wrapper .overlayflip-horizontal-left {
-    transform: rotateY(-180deg);
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.wp-block-vayu-blocks-image-flip {
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    height: 100%;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal-left {
-    transform: rotateY(0);
+.vayu_blocks_flip-box-inner-for-front .vayu_blocks_flip-box-front{
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    z-index:10;
+    transform-origin: center;
+  }
+
+.vayu_blocks_flip-box-inner-for-front .vayu_blocks_flip-box-back {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    transform-origin: center;
+  }
+
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-front .wp-block-vayu-blocks-image-flip{
+    transform:rotateY(180deg);
 }
 
-.vayu_blocks_image_flip_wrapper:hover .flip-front {
-    transform: rotateY(-180deg);
-    opacity: 0;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-front-left .wp-block-vayu-blocks-image-flip{
+    transform:rotateY(-180deg);
 }
 
-.vayu_blocks_image_flip_wrapper .flip-front {
-    transform: rotateY(0deg);
-    opacity: 1;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-back .wp-block-vayu-blocks-image-flip{
+    transform:rotateX(180deg);
+    transform-origin: center;
 }
 
-.vayu_blocks_image_flip_wrapper .overlayflip-horizontal {
-    transform: rotateY(180deg);
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-back-bottom .wp-block-vayu-blocks-image-flip{
+    transform:rotateX(-180deg);
+    transform-origin: center;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {
-    transform: rotateY(0);
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-z .wp-block-vayu-blocks-image-flip{
+    transform: rotateX(180deg) rotateZ(90deg);
+    transform-origin: center;
 }
 
-.vayu_blocks_image_flip_wrapper:hover .flip-back {
-    transform: rotateX(-180deg);
-    opacity: 0;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
+.vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-x .wp-block-vayu-blocks-image-flip{
+    transform: rotateY(180deg) rotateZ(90deg);
+    transform-origin: center;
 }
 
-.vayu_blocks_image_flip_wrapper .flip-back {
-    transform: rotateX(0deg);
-    opacity: 1;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
-}
-
-.vayu_blocks_image_flip_wrapper .overlayflip-vertical {
-    transform: rotateX(180deg);
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
-}
-
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical {
-    transform: rotateX(0);
-}
-
-
-.vayu_blocks_image_flip_wrapper:hover .flip-back-bottom {
-    transform: rotateX(180deg);
-    opacity: 0;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
-}
-
-.vayu_blocks_image_flip_wrapper .flip-back-bottom {
-    transform: rotateX(0deg);
-    opacity: 1;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
-}
-
-.vayu_blocks_image_flip_wrapper .overlayflip-vertical-bottom {
-    transform: rotateX(-180deg);
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out !important;
-}
-
-.vayu_blocks_image_flip_wrapper:hover .overlayflip-vertical-bottom {
-    transform: rotateX(0);
-}

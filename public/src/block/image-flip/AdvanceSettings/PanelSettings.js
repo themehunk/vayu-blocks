@@ -20,8 +20,6 @@ import {
 } from '@wordpress/element';
 
 import SlideSettings from '../SlideSettings';
-import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
-
 
 /**
  * Internal dependencies
@@ -430,6 +428,32 @@ const PanelSettings = ({
 					return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
 		}
 		return undefined;
+	};
+	
+	//Z Index
+	const customTooltipZindex = value => `${value}px`
+
+	const getZindex = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.zindex;
+		case 'Tablet':
+			return attributes.zindexTablet;
+		case 'Mobile':
+			return attributes.zindexMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeZindex = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ zindexTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ zindexMobile: value });
+		}
 	};
 
 	// Border & Box Shadow
@@ -1366,7 +1390,6 @@ const PanelSettings = ({
 			return undefined;
 		}
 	};
-
     const changeSelfAlign = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ alignSelf: value, alignSelfTablet: value, alignSelfMobile: value });
@@ -1374,6 +1397,48 @@ const PanelSettings = ({
 			setAttributes({ alignSelfTablet: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ alignSelfMobile: value });
+		}
+	};
+
+	// flex order property
+	const getorder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.order;
+		case 'Tablet':
+			return attributes.orderTablet;
+		case 'Mobile':
+			return attributes.orderMobile;
+		default:
+			return undefined;
+		}
+	};
+
+  
+
+    const changeorder = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ order: value, orderTablet: value, orderMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ orderTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ orderMobile: value });
+		}
+
+	};
+
+    //custom order
+	const getcustomOrder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customOrder;
+		case 'Tablet':
+			return attributes.customOrderTablet;
+		case 'Mobile':
+			return attributes.customOrderMobile;
+		default:
+			return undefined;
 		}
 	};
 
@@ -1473,62 +1538,11 @@ const PanelSettings = ({
     const prevUnitTabletRef = useRef(attributes.customWidthUnitTablet);
     const prevUnitMobileRef = useRef(attributes.customWidthUnitMobile);
 
-    useEffect(() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
 
-        // Get the previous and current units
-        const prevUnit = prevUnitRef.current;
-        const prevUnitTablet = prevUnitTabletRef.current;
-        const prevUnitMobile = prevUnitMobileRef.current;
-
-        const currentUnit = attributes.customWidthUnit;
-        const currentTabletUnit = attributes.customWidthUnitTablet;
-        const currentMobileUnit = attributes.customWidthUnitMobile;
-
-        // Update attributes if the unit has changed
-        if (prevUnit !== currentUnit) {
-            setAttributes({
-                customWidth: updateWidth(currentUnit),
-            });
-            prevUnitRef.current = currentUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitTablet !== currentTabletUnit) {
-            setAttributes({
-                customWidthTablet: updateWidth(currentTabletUnit),
-            });
-            prevUnitTabletRef.current = currentTabletUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitMobile !== currentMobileUnit) {
-            setAttributes({
-                customWidthMobile: updateWidth(currentMobileUnit),
-            });
-            prevUnitMobileRef.current = currentMobileUnit; // Update the previous unit reference
-        }
-
-    }, [attributes.customWidthUnit, attributes.customWidthUnitTablet, attributes.customWidthUnitMobile, setAttributes]);
-
-    // Compute max custom width unit
-    const maxcustomWidthUnit = (() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
-
-        return updateWidth(attributes.customWidthUnit);
-    })();
-	
 	// unit switch max value
 	const [customWidthUnit, setcustomWidthUnit] = useState('%');
-	// const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomHeightUnit = attributes.customHeightUnit=== 'px' ? 1200 : attributes.customHeightUnit=== 'em' ? 50 : attributes.customHeightUnit=== '%' ? 100:'';
 
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
@@ -1570,7 +1584,6 @@ const PanelSettings = ({
 			return undefined;
 		}
 	};
-
     const changeButtonAlign = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ align: value, alignTablet: value, alignMobile: value });
@@ -1601,6 +1614,7 @@ const PanelSettings = ({
 	// const globalcontainerWidth = ThBlockData.container_width;
     // setAttributes({globalwidth:globalcontainerWidth});
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const customTooltipCustomHeight = value => `${value}${attributes.customHeightUnit}`;
 	const getCustomWidth = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -1623,189 +1637,29 @@ const PanelSettings = ({
 			setAttributes({ customWidthMobile: value });
 		}
 	};
-
-
-	const vayu_blocks_handleadvanceBorderChange = (newBorders) => {
-        const updatedAttributes = {};
-        const updatedAttributesborderradius = {};
-    
-        // Check if newBorders and newBorders.border are defined
-        if (newBorders && newBorders.borderRadius) {
-            // Handle specific side settings
-            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
-                
-                if (newBorders.borderRadius.top) {
-                    
-                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
-                   
-                }
-                if (newBorders.borderRadius.bottom) {
-              
-                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
-            
-                }
-                if (newBorders.borderRadius.left) {
-          
-                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
-       
-                }
-                if (newBorders.borderRadius.right) {
-
-                    
-                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
-
-                }
-            } else {
-                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
-            }
-
-            setAttributes({ advanceRadius: updatedAttributesborderradius });
-        } else {
-            console.error("Invalid newBorders format:", newBorders);
-        }
-    
-        // Check if newBorders and newBorders.border are defined
-        if (newBorders && newBorders.border) {
-            // Handle specific side settings
-            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
-                if (newBorders.border.top) {
-                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
-                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
-                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
-                }
-                if (newBorders.border.bottom) {
-                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
-                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
-                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
-                }
-                if (newBorders.border.left) {
-                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
-                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
-                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
-                }
-                if (newBorders.border.right) {
-                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
-                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
-                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
-                }
-            } else {
-                // Handle common border settings
-                updatedAttributes[`topcolor`] = newBorders.border.color;
-                updatedAttributes[`topwidth`] = newBorders.border.width;
-                updatedAttributes[`topstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`bottomcolor`] = newBorders.border.color;
-                updatedAttributes[`bottomwidth`] = newBorders.border.width;
-                updatedAttributes[`bottomstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`leftcolor`] = newBorders.border.color;
-                updatedAttributes[`leftwidth`] = newBorders.border.width;
-                updatedAttributes[`leftstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`rightcolor`] = newBorders.border.color;
-                updatedAttributes[`rightwidth`] = newBorders.border.width;
-                updatedAttributes[`rightstyle`] = newBorders.border.style;
-            }
-        } else {
-            console.error("Invalid newBorders format:", newBorders);
-        }
-    
-        setAttributes({ advanceborder: updatedAttributes });
-    };
 	
-	const vayu_blocks_handleadvanceBorderhvrChange = (newBorders) => {
-        const updatedAttributes = {};
-        const updatedAttributesborderradius = {};
-    
-        // Check if newBorders and newBorders.border are defined
-        if (newBorders && newBorders.borderRadius) {
-            // Handle specific side settings
-            if (newBorders.borderRadius.top || newBorders.borderRadius.bottom || newBorders.borderRadius.left || newBorders.borderRadius.right) {
-                
-                if (newBorders.borderRadius.top) {
-                    
-                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.top.width;
-                   
-                }
-                if (newBorders.borderRadius.bottom) {
-              
-                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.bottom.width;
-            
-                }
-                if (newBorders.borderRadius.left) {
-          
-                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.left.width;
-       
-                }
-                if (newBorders.borderRadius.right) {
+	const getCustomHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customHeight;
+		case 'Tablet':
+			return attributes.customHeightTablet;
+		case 'Mobile':
+			return attributes.customHeightMobile;
+		default:
+			return undefined;
+		}
+	};
 
-                    
-                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.right.width;
-
-                }
-            } else {
-                    updatedAttributesborderradius[`top`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`bottom`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`left`] = newBorders.borderRadius.width;
-                    updatedAttributesborderradius[`right`] = newBorders.borderRadius.width;
-            }
-
-            setAttributes({ advanceRadiushvr: updatedAttributesborderradius });
-        } else {
-            console.error("Invalid newBorders format:", newBorders);
-        }
-    
-        // Check if newBorders and newBorders.border are defined
-        if (newBorders && newBorders.border) {
-            // Handle specific side settings
-            if (newBorders.border.top || newBorders.border.bottom || newBorders.border.left || newBorders.border.right) {
-                if (newBorders.border.top) {
-                    updatedAttributes[`topcolor`] = newBorders.border.top.color;
-                    updatedAttributes[`topwidth`] = newBorders.border.top.width;
-                    updatedAttributes[`topstyle`] = newBorders.border.top.style;
-                }
-                if (newBorders.border.bottom) {
-                    updatedAttributes[`bottomcolor`] = newBorders.border.bottom.color;
-                    updatedAttributes[`bottomwidth`] = newBorders.border.bottom.width;
-                    updatedAttributes[`bottomstyle`] = newBorders.border.bottom.style;
-                }
-                if (newBorders.border.left) {
-                    updatedAttributes[`leftcolor`] = newBorders.border.left.color;
-                    updatedAttributes[`leftwidth`] = newBorders.border.left.width;
-                    updatedAttributes[`leftstyle`] = newBorders.border.left.style;
-                }
-                if (newBorders.border.right) {
-                    updatedAttributes[`rightcolor`] = newBorders.border.right.color;
-                    updatedAttributes[`rightwidth`] = newBorders.border.right.width;
-                    updatedAttributes[`rightstyle`] = newBorders.border.right.style;
-                }
-            } else {
-                // Handle common border settings
-                updatedAttributes[`topcolor`] = newBorders.border.color;
-                updatedAttributes[`topwidth`] = newBorders.border.width;
-                updatedAttributes[`topstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`bottomcolor`] = newBorders.border.color;
-                updatedAttributes[`bottomwidth`] = newBorders.border.width;
-                updatedAttributes[`bottomstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`leftcolor`] = newBorders.border.color;
-                updatedAttributes[`leftwidth`] = newBorders.border.width;
-                updatedAttributes[`leftstyle`] = newBorders.border.style;
-            
-                updatedAttributes[`rightcolor`] = newBorders.border.color;
-                updatedAttributes[`rightwidth`] = newBorders.border.width;
-                updatedAttributes[`rightstyle`] = newBorders.border.style;
-            }
-        } else {
-            console.error("Invalid newBorders format:", newBorders);
-        }
-    
-        setAttributes({ advanceborderhvr: updatedAttributes });
-    };
+	const changeCustomHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customHeight: value, customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customHeightMobile: value });
+		}
+	};
 
     return (
 		<Fragment>
@@ -1814,9 +1668,9 @@ const PanelSettings = ({
 			<InsSettingHeader value={ tab }
 						options={[
 							{
-								label: __( 'Image', 'vayu-blocks' ),
+								label: __( 'Animation', 'vayu-blocks' ),
 								value: 'slide',
-								icon: 'image'
+								icon: 'slide'
 							},
 							{
 								label: __( 'Advanced', 'vayu-blocks' ),
@@ -1832,7 +1686,7 @@ const PanelSettings = ({
 						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
 					</Fragment>
 
-				)  || 'advanced' === tab && (
+				) || 'advanced' === tab && (
 					<Fragment>
 						
 						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
@@ -1840,7 +1694,9 @@ const PanelSettings = ({
 							className="th-button-panel"
 						>     
 
-								{/* <Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+							
+
+								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }
 								>	
@@ -1859,7 +1715,26 @@ const PanelSettings = ({
 									// allowReset={ true }
 								/>
 								</ResponsiveControl>
-								</Suspense> */}
+								</Suspense>
+
+								<ResponsiveControl
+								label={ __( 'Custom Height', 'vayu-blocks' ) }
+								>	
+								<UnitChooser
+								value={ attributes.customHeightUnit }
+								onClick={ customHeightUnit => setAttributes({ customHeightUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipCustomHeight }
+									value={ getCustomHeight() || '' }
+									onChange={ changeCustomHeight }
+									step={ 1 }
+									min={ 1 }
+									max={ maxcustomHeightUnit }
+									// allowReset={ true }
+								/>
+								</ResponsiveControl>
 
 
 
@@ -1913,6 +1788,397 @@ const PanelSettings = ({
 								/>
 							</ResponsiveControl>
 
+							{/* <ResponsiveControl
+								label={ __( 'Z-index', 'vayu-blocks' ) }
+								>	
+								<RangeControl
+									renderTooltipContent={ customTooltipZindex }
+									value={ getZindex() || '' }
+									onChange={ changeZindex }
+									step={ 1 }
+									min={ -999999 }
+									max={ 999999 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl> */}
+
+						</PanelBody>
+
+						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
+							initialOpen={ false }
+							className="th-button-panel"
+						> 
+						<HoverControl value={ hover }
+							options={[
+								{
+									label: __( 'Normal', 'vayu-blocks' ),
+									value: 'normal'
+								},
+								{
+									label: __( 'Hover', 'vayu-blocks' ),
+									value: 'hover'
+								}
+							]}
+							onChange={ setHover } />
+								
+						{ 'normal' ===  hover &&  (	
+							<>
+							<SelectControl
+								label={ __( 'Border Type', 'vayu-blocks' ) }
+								value={ attributes.borderType }
+								options={ [
+									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
+								] }
+								onChange={ e => setAttributes({ borderType: e }) }
+							/>	
+								
+							{ 'none' !== attributes.borderType && (
+
+								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+								<ResponsiveControl
+										label={ __( 'Border Width', 'vayu-blocks' ) }
+									>
+									<UnitChooser
+										value={ attributes.borderWidthUnit }
+										onClick={borderWidthUnit => {
+											setAttributes({borderWidthUnit });
+											setborderWidthUnit(borderWidthUnit);
+										}}
+										units={ [ 'px', 'em' ] }
+									/>
+									<SizingControl
+											type={ getBorderWidthType() }
+											min={ 0 }
+											max={ maxborderWidthUnit }
+											changeType={ changeBorderWidthType }
+											onChange={ changeBorderWidth }
+											options={ [
+												{
+													label: __( 'Top', 'vayu-blocks' ),
+													type: 'top',
+													value: getBorderWidth( 'top' )
+												},
+												{
+													label: __( 'Right', 'vayu-blocks' ),
+													type: 'right',
+													value: getBorderWidth( 'right' )
+												},
+												{
+													label: __( 'Bottom', 'vayu-blocks' ),
+													type: 'bottom',
+													value: getBorderWidth( 'bottom' )
+												},
+												{
+													label: __( 'Left', 'vayu-blocks' ),
+													type: 'left',
+													value: getBorderWidth( 'left' )
+												}
+											] }
+										/>
+
+									</ResponsiveControl>
+											<ColorGradientControl
+										label={ __( 'Border Color', 'vayu-blocks' ) }
+										colorValue={ attributes.borderColor }
+										onColorChange={ e => setAttributes({ borderColor: e }) }
+										enableAlpha={true} 
+										/>
+								</Suspense>
+								
+								) }
+								<ResponsiveControl
+										label={ __( 'Border Radius', 'vayu-blocks' ) }
+									>
+									<UnitChooser
+										value={ attributes.borderRadiusUnit }
+										onClick={borderRadiusUnit => {
+											setAttributes({borderRadiusUnit });
+											setborderRadiusUnit(borderRadiusUnit);
+										}}
+										units={ [ 'px', 'em', '%' ] }
+									/>
+
+									<SizingControl
+											type={ getborderradiusType() }
+											min={ 0 }
+											max={ maxborderRadiusUnit }
+											changeType={ changeborderradiusType }
+											onChange={ changeborderradius }
+											options={ [
+												{
+													label: __( 'T-R', 'vayu-blocks' ),
+													type: 'top',
+													value: getborderradius( 'top' )
+												},
+												{
+													label: __( 'T-L', 'vayu-blocks' ),
+													type: 'right',
+													value: getborderradius( 'right' )
+												},
+												{
+													label: __( 'B-R', 'vayu-blocks' ),
+													type: 'left',
+													value: getborderradius( 'left' )
+												},
+												{
+													label: __( 'B-L', 'vayu-blocks' ),
+													type: 'bottom',
+													value: getborderradius( 'bottom' )
+												}
+											] }
+										/>
+
+									</ResponsiveControl>
+
+									<ControlPanelControl
+									label={ __( 'Box Shadow', 'vayu-blocks' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									resetValues={ {
+										boxShadow: false,
+										boxShadowColor: undefined,
+										boxShadowColorOpacity: 50,
+										boxShadowBlur: 5,
+										boxShadowSpread: 1,
+										boxShadowHorizontal: 0,
+										boxShadowVertical: 0
+									} }
+									onClick={ () => setAttributes({ boxShadow: true }) }
+								>
+								
+									<ColorGradientControl
+										label={ __( 'Shadow Color', 'vayu-blocks' ) }
+										colorValue={ attributes.boxShadowColor }
+										onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+										enableAlpha={true} 
+									/>
+
+									<RangeControl
+										label={ __( 'Opacity', 'vayu-blocks' ) }
+										value={ attributes.boxShadowColorOpacity }
+										onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Blur', 'vayu-blocks' ) }
+										value={ attributes.boxShadowBlur }
+										onChange={ e => setAttributes({ boxShadowBlur: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Spread', 'vayu-blocks' ) }
+										value={ attributes.boxShadowSpread }
+										onChange={ e => setAttributes({ boxShadowSpread: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Horizontal', 'vayu-blocks' ) }
+										value={ attributes.boxShadowHorizontal }
+										onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Vertical', 'vayu-blocks' ) }
+										value={ attributes.boxShadowVertical }
+										onChange={ e => setAttributes({ boxShadowVertical: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+									</ControlPanelControl>	
+							</>
+
+						) 	|| 'hover' ===  hover && (
+							<>
+							<SelectControl
+								label={ __( 'Border Type', 'vayu-blocks' ) }
+								value={ attributes.borderHvrType }
+								options={ [
+									{ label:  __( 'None', 'vayu-blocks' ), value: 'none' },
+									{ label: __( 'Solid', 'vayu-blocks' ), value: 'solid' },
+									{ label: __( 'Double', 'vayu-blocks' ), value: 'double' },
+									{ label: __( 'Dotted', 'vayu-blocks' ), value: 'dotted' },
+									{ label: __( 'Dashed', 'vayu-blocks' ), value: 'dashed' },
+									{ label: __( 'Groove', 'vayu-blocks' ), value: 'groove' },
+								] }
+								onChange={ e => setAttributes({ borderHvrType: e }) }
+							/>	
+
+						{ 'none' !== attributes.borderHvrType && (
+							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+							<ResponsiveControl
+										label={ __( 'Border Width', 'vayu-blocks' ) }
+									>
+									<UnitChooser
+										value={ attributes.borderWidthHvrUnit }
+										onClick={borderWidthHvrUnit => {
+											setAttributes({borderWidthHvrUnit });
+											setborderWidthHvrUnit(borderWidthHvrUnit);
+										}}
+										units={ [ 'px', 'em' ] }
+									/>
+									<SizingControl
+											type={ getBorderWidthHvrType() }
+											min={ 0 }
+											max={ maxborderWidthHvrUnit }
+											changeType={ changeBorderWidthHvrType }
+											onChange={ changeBorderWidthHvr }
+											options={ [
+												{
+													label: __( 'Top', 'vayu-blocks' ),
+													type: 'top',
+													value: getBorderWidthHvr( 'top' )
+												},
+												{
+													label: __( 'Right', 'vayu-blocks' ),
+													type: 'right',
+													value: getBorderWidthHvr( 'right' )
+												},
+												{
+													label: __( 'Bottom', 'vayu-blocks' ),
+													type: 'bottom',
+													value: getBorderWidthHvr( 'bottom' )
+												},
+												{
+													label: __( 'Left', 'vayu-blocks' ),
+													type: 'left',
+													value: getBorderWidthHvr( 'left' )
+												}
+											] }
+										/>
+
+									</ResponsiveControl>		
+							<ColorGradientControl
+							label={ __( 'Border Hover Color', 'vayu-blocks' ) }
+							colorValue={ attributes.borderColorHvr }
+							onColorChange={ e => setAttributes({ borderColorHvr: e }) }
+							/>
+							</Suspense>
+			
+							) }
+
+									<ResponsiveControl
+										label={ __( 'Border Radius', 'vayu-blocks' ) }
+									>
+									<UnitChooser
+										value={ attributes.borderRadiusHvrUnit }
+										onClick={borderRadiusHvrUnit => {
+											setAttributes({borderRadiusHvrUnit });
+											setborderRadiusHvrUnit(borderRadiusHvrUnit);
+										}}
+										units={ [ 'px', 'em', '%' ] }
+									/>
+									<SizingControl
+											type={ getborderradiusHvrType() }
+											min={ 0 }
+											max={ maxborderRadiusUnit }
+											changeType={ changeborderradiusHvrType }
+											onChange={ changeborderradiusHvr }
+											options={ [
+												{
+													label: __( 'T-R', 'vayu-blocks' ),
+													type: 'top',
+													value: getborderradiusHvr( 'top' )
+												},
+												{
+													label: __( 'T-L', 'vayu-blocks' ),
+													type: 'right',
+													value: getborderradiusHvr( 'right' )
+												},
+												{
+													label: __( 'B-R', 'vayu-blocks' ),
+													type: 'left',
+													value: getborderradiusHvr( 'left' )
+												},
+												{
+													label: __( 'B-L', 'vayu-blocks' ),
+													type: 'bottom',
+													value: getborderradiusHvr( 'bottom' )
+												}
+											] }
+										/>
+
+									</ResponsiveControl>
+
+									<ControlPanelControl
+									label={ __( 'Box Shadow', 'vayu-blocks' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									resetValues={ {
+										boxShadowHvr: false,
+										boxShadowColorHvr: undefined,
+										boxShadowColorOpacityHvr: 50,
+										boxShadowBlurHvr: 5,
+										boxShadowSpreadHvr: 1,
+										boxShadowHorizontalHvr: 0,
+										boxShadowVerticalHvr: 0
+									} }
+									onClick={ () => setAttributes({ boxShadowHvr: true }) }
+								>
+								
+									<ColorGradientControl
+										label={ __( 'Shadow Color', 'vayu-blocks' ) }
+										colorValue={ attributes.boxShadowColorHvr }
+										onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+										enableAlpha={true} 
+									/>
+
+									<RangeControl
+										label={ __( 'Opacity', 'vayu-blocks' ) }
+										value={ attributes.boxShadowColorOpacityHvr }
+										onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Blur', 'vayu-blocks' ) }
+										value={ attributes.boxShadowBlurHvr }
+										onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Spread', 'vayu-blocks' ) }
+										value={ attributes.boxShadowSpreadHvr }
+										onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Horizontal', 'vayu-blocks' ) }
+										value={ attributes.boxShadowHorizontalHvr }
+										onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Vertical', 'vayu-blocks' ) }
+										value={ attributes.boxShadowVerticalHvr }
+										onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+									</ControlPanelControl>
+
+							</>
+						)
+								}
 						</PanelBody>
 
 						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
@@ -1989,250 +2255,6 @@ const PanelSettings = ({
 						
 						)}	
 						
-						</PanelBody>
-
-						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
-							initialOpen={ false }
-							className="th-button-panel"
-						> 
-						<HoverControl value={ hover }
-							options={[
-								{
-									label: __( 'Normal', 'vayu-blocks' ),
-									value: 'normal'
-								},
-								{
-									label: __( 'Hover', 'vayu-blocks' ),
-									value: 'hover'
-								}
-							]}
-							onChange={ setHover } />
-								
-						{ 'normal' ===  hover &&  (	
-							<>
-
-								<Vayu_Block_Border_Control
-                                    value={{border:{
-                                        top:{
-                                            color: attributes.advanceborder.topcolor,
-                                            width: attributes.advanceborder.topwidth,
-                                            style: attributes.advanceborder.topstyle,
-                                        },
-                                        bottom: {
-                                            color: attributes.advanceborder.bottomcolor,
-                                            width: attributes.advanceborder.bottomwidth,
-                                            style: attributes.advanceborder.bottomstyle,
-                                        },
-                                        left: {
-                                            color: attributes.advanceborder.leftcolor,
-                                            width: attributes.advanceborder.leftwidth,
-                                            style: attributes.advanceborder.leftstyle,
-                                        },
-                                        right: {
-                                            color: attributes.advanceborder.rightcolor,
-                                            width: attributes.advanceborder.rightwidth,
-                                            style: attributes.advanceborder.rightstyle,
-                                        }
-                                    },
-                                    borderRadius:{
-                                        top:{
-                                            width: attributes.advanceRadius.top,
-                                        },
-                                        bottom:{
-                                            width: attributes.advanceRadius.bottom,
-                                        },
-                                        left:{
-                                            width: attributes.advanceRadius.left,
-                                        },
-                                        right:{
-                                            width: attributes.advanceRadius.right,
-                                        }
-                                    }
-                                    }}
-                                    onChange={(value)=>vayu_blocks_handleadvanceBorderChange(value)}
-                                    includeBorder={true}
-                                    includeBorderRadius={true}
-                                    para=""
-                                /> 
-
-									<ControlPanelControl
-									label={ __( 'Box Shadow', 'vayu-blocks' ) }
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									resetValues={ {
-										boxShadow: false,
-										boxShadowColor: undefined,
-										boxShadowColorOpacity: 50,
-										boxShadowBlur: 5,
-										boxShadowSpread: 1,
-										boxShadowHorizontal: 0,
-										boxShadowVertical: 0
-									} }
-									onClick={ () => setAttributes({ boxShadow: true }) }
-								>
-								
-									<ColorGradientControl
-										label={ __( 'Shadow Color', 'vayu-blocks' ) }
-										colorValue={ attributes.boxShadowColor }
-										onColorChange={ e => setAttributes({ boxShadowColor: e }) }
-										enableAlpha={true} 
-									/>
-
-									<RangeControl
-										label={ __( 'Opacity', 'vayu-blocks' ) }
-										value={ attributes.boxShadowColorOpacity }
-										onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Blur', 'vayu-blocks' ) }
-										value={ attributes.boxShadowBlur }
-										onChange={ e => setAttributes({ boxShadowBlur: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Spread', 'vayu-blocks' ) }
-										value={ attributes.boxShadowSpread }
-										onChange={ e => setAttributes({ boxShadowSpread: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Horizontal', 'vayu-blocks' ) }
-										value={ attributes.boxShadowHorizontal }
-										onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Vertical', 'vayu-blocks' ) }
-										value={ attributes.boxShadowVertical }
-										onChange={ e => setAttributes({ boxShadowVertical: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-									</ControlPanelControl>	
-							</>
-
-						) 	|| 'hover' ===  hover && (
-							<>
-									<Vayu_Block_Border_Control
-                                    value={{border:{
-                                        top:{
-                                            color: attributes.advanceborderhvr.topcolor,
-                                            width: attributes.advanceborderhvr.topwidth,
-                                            style: attributes.advanceborderhvr.topstyle,
-                                        },
-                                        bottom: {
-                                            color: attributes.advanceborderhvr.bottomcolor,
-                                            width: attributes.advanceborderhvr.bottomwidth,
-                                            style: attributes.advanceborderhvr.bottomstyle,
-                                        },
-                                        left: {
-                                            color: attributes.advanceborderhvr.leftcolor,
-                                            width: attributes.advanceborderhvr.leftwidth,
-                                            style: attributes.advanceborderhvr.leftstyle,
-                                        },
-                                        right: {
-                                            color: attributes.advanceborderhvr.rightcolor,
-                                            width: attributes.advanceborderhvr.rightwidth,
-                                            style: attributes.advanceborderhvr.rightstyle,
-                                        }
-                                    },
-                                    borderRadius:{
-                                        top:{
-                                            width: attributes.advanceRadiushvr.top,
-                                        },
-                                        bottom:{
-                                            width: attributes.advanceRadiushvr.bottom,
-                                        },
-                                        left:{
-                                            width: attributes.advanceRadiushvr.left,
-                                        },
-                                        right:{
-                                            width: attributes.advanceRadiushvr.right,
-                                        }
-                                    }
-                                    }}
-                                    onChange={(value)=>vayu_blocks_handleadvanceBorderhvrChange(value)}
-                                    includeBorder={true}
-                                    includeBorderRadius={true}
-                                    para=""
-                                /> 
-
-									<ControlPanelControl
-									label={ __( 'Box Shadow', 'vayu-blocks' ) }
-									attributes={ attributes }
-									setAttributes={ setAttributes }
-									resetValues={ {
-										boxShadowHvr: false,
-										boxShadowColorHvr: undefined,
-										boxShadowColorOpacityHvr: 50,
-										boxShadowBlurHvr: 5,
-										boxShadowSpreadHvr: 1,
-										boxShadowHorizontalHvr: 0,
-										boxShadowVerticalHvr: 0
-									} }
-									onClick={ () => setAttributes({ boxShadowHvr: true }) }
-								>
-								
-									<ColorGradientControl
-										label={ __( 'Shadow Color', 'vayu-blocks' ) }
-										colorValue={ attributes.boxShadowColorHvr }
-										onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
-										enableAlpha={true} 
-									/>
-
-									<RangeControl
-										label={ __( 'Opacity', 'vayu-blocks' ) }
-										value={ attributes.boxShadowColorOpacityHvr }
-										onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Blur', 'vayu-blocks' ) }
-										value={ attributes.boxShadowBlurHvr }
-										onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
-										min={ 0 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Spread', 'vayu-blocks' ) }
-										value={ attributes.boxShadowSpreadHvr }
-										onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Horizontal', 'vayu-blocks' ) }
-										value={ attributes.boxShadowHorizontalHvr }
-										onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-
-									<RangeControl
-										label={ __( 'Vertical', 'vayu-blocks' ) }
-										value={ attributes.boxShadowVerticalHvr }
-										onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
-										min={ -100 }
-										max={ 100 }
-									/>
-									</ControlPanelControl>
-
-							</>
-						)
-								}
 						</PanelBody>
 
 						<PanelBody title={ __( 'Transition', 'vayu-blocks' ) }
