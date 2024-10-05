@@ -202,7 +202,11 @@
         "default":"no-repeat"
     },
     "back_image":{
+        "type":"string",
+        "default":"none"
+    },
+    "selectedanimation":{
         "type":"boolean",
-        "default":false
+        "default":true
     }
 }

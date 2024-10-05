@@ -8,7 +8,7 @@ import { useSelect } from '@wordpress/data';
 
 
 const edit = (props) => {
-    const { attributes, setAttributes} = props;
+    const { attributes, setAttributes,isSelected} = props;
 
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -156,7 +156,7 @@ const edit = (props) => {
                      <div  className={`vayu_blocks_image_flip_wrapper`} style={vayu_block_flip_box_style_front}>
  
                               
-                     <div className={`vayu_blocks_flip-box-inner ${!attributes.back_image ? classname('inner') : ''}`}>
+                     <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
 
                                 <InnerBlocks 
                                     template={image_flip_template} 
