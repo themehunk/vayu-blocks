@@ -460,11 +460,38 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
    
     let opacity = (attributes.showPreview || attributes.overlay) ? 1 : 0;
 
+    let alignItems = '';
+    let justifyContent = '';
     
+    // Function to get alignment properties based on viewport
+    const getAlignmentStyles = (overlayAlignment) => {
+        const [vertical, horizontal] = overlayAlignment.split(' ');
+    
+        return {
+            alignItems: vertical === 'center' ? 'center' :
+                        vertical === 'top' ? 'self-start' :
+                        vertical === 'bottom' ? 'self-end' : 'center',
+            justifyContent: horizontal === 'center' ? 'center' :
+                            horizontal === 'left' ? 'flex-start' :
+                            horizontal === 'right' ? 'flex-end' : 'center',
+        };
+    };
+    
+    // Set alignment based on the current view
+    if (getView  === 'Desktop') {
+        ({ alignItems, justifyContent } = getAlignmentStyles(attributes.overlayalignment));
+    } else if (getView  === 'Tablet') {
+        ({ alignItems, justifyContent } = getAlignmentStyles(attributes.overlayalignmenttablet));
+    } else if (getView  === 'Mobile') {
+        ({ alignItems, justifyContent } = getAlignmentStyles(attributes.overlayalignmentmobile));
+    }
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
+            '--image-front-align-items': alignItems,
+            '--image-front-justify-content': justifyContent,
             '--image-hover-effect' : `${attributes.imagehvreffect}`,
             '--image-filter-effect' : `${attributes.imagehvrfilter}`,
             '--overlay-effect': `${attributes.mageoverlayouteffect}`,

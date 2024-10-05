@@ -217,7 +217,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
             {/* front box*/}
             <PanelBody title={__('Front Box', 'vayu-blocks')} initialOpen={false}>   
 
-            <ResponsiveControl label={__('Width', 'vayu_blocks')}>
+            {/* <ResponsiveControl label={__('Width', 'vayu_blocks')}>
                 <UnitControl
                     placeholder={ __( 'Auto' ) }
                     labelPosition="top"
@@ -243,7 +243,7 @@ const PostSettings = ({ attributes, setAttributes }) => {
                     min={2} // Minimum width
                     units={'px'} 
                 />
-            </ResponsiveControl>
+            </ResponsiveControl> */}
 
             <h4>{__('Background','vayu-blocks')}</h4>  
                 <HoverControl

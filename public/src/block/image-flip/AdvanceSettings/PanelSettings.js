@@ -20,7 +20,6 @@ import {
 } from '@wordpress/element';
 
 import SlideSettings from '../SlideSettings';
-import PostSettings from '../postSettings.js';
 import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
 
 
@@ -1820,11 +1819,6 @@ const PanelSettings = ({
 								icon: 'image'
 							},
 							{
-								label: __( 'Overlay', 'vayu-blocks' ),
-								value: 'overlay',
-								icon: 'colorwand'
-							},
-							{
 								label: __( 'Advanced', 'vayu-blocks' ),
 								value: 'advanced',
 								icon: 'colorpalette'
@@ -1838,12 +1832,7 @@ const PanelSettings = ({
 						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
 					</Fragment>
 
-				) || 'overlay' === tab && (
-					<Fragment>
-						<PostSettings attributes={attributes} setAttributes={setAttributes} />
-					</Fragment>
-
-				) || 'advanced' === tab && (
+				)  || 'advanced' === tab && (
 					<Fragment>
 						
 						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }

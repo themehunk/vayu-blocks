@@ -396,7 +396,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     // Determine the borderRadius based on condition
     const borderRadius = `${attributes.advanceRadius.top} ${attributes.advanceRadius.right} ${attributes.advanceRadius.bottom} ${attributes.advanceRadius.left}`;
 
-
+   
     // Prepare the style object
     const styles = {
         ...customwidth,
@@ -467,17 +467,29 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
    
     let opacity = (attributes.showPreview || attributes.overlay) ? 1 : 0;
 
-   
+    let transformstyle = 'none'; // Default value
 
+    if (attributes.imagehvreffect === 'flip-front') {
+        transformstyle = 'rotateY(180deg)'; // Set flip effect if condition is true
+    }else if(attributes.imagehvreffect === 'flip-front-left'){
+        transformstyle = 'rotateY(-180deg)';
+    }else if (attributes.imagehvreffect === 'flip-back') {
+        transformstyle = 'rotateX(180deg)';
+    } 
+    else if (attributes.imagehvreffect === 'flip-back-bottom') {
+        transformstyle = 'rotateX(-180deg)';
+    }
+    
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
+            '--back-transform-style': transformstyle, // Correct CSS property for transform
         },
-
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
+    
 
     if(attributes.classNamemain !== blockProps.className) {
         setAttributes({classNamemain: blockProps.className});
