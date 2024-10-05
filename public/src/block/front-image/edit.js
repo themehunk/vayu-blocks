@@ -164,7 +164,7 @@ const generateUniqueId = () => {
                 
                 <div className="vayu-blocks-front-image-main-container" id={`${attributes.uniqueId}`}>
 
-                    <div  className={`vayu_blocks_front_image_wrapper`} style={{width:attributes.imagewidth,height:attributes.imageheight}}>
+                    <div  className={`vayu_blocks_front_image_wrapper`} >
       
                         <div 
                             className={`vayu_blocks_image-box-front`} 

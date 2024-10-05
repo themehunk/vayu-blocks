@@ -5,7 +5,9 @@
     height:100%;
 }
 
-.vayu-blocks-image-main-container{
-    width:100%;
-    height:100%;
+.vayu-blocks-front-image-main-container .vayu_blocks_image-box-front .block-editor-block-list__layout{
+    display:flex;
+    align-items: var(--image-front-align-items);
+    justify-content: var(--image-front-justify-content);
+    flex-direction: column;
 }
