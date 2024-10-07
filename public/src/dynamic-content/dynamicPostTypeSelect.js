@@ -7,8 +7,6 @@ import { useState, useEffect } from '@wordpress/element';
  */
 import {ControlPanelControl} from '../components/index.js';
 
-
-
 const ContentSelect = ({ label, postType, selectedPost, onChange }) => {
     // Fetch the posts, pages, or products dynamically based on postType
     const { content, isLoading } = useSelect((select) => {
@@ -49,8 +47,6 @@ const ContentSelect = ({ label, postType, selectedPost, onChange }) => {
 const PostTypeSelect = ({ attributes, setAttributes, context }) => {
 
     const { dynamicPostType, selectedPost, selectedSourceField } = attributes;
-
-    console.log(context);
 
     // Handler for post type selection
     const onPostTypeChange = (selectedType) => {
