@@ -166,3 +166,7 @@
 .vayu_blocks_image-flip-settings_main .togglegroupcontrol_vayu_block{
     margin:10px !important;
 }
+
+.vayu-blocks-image-main-container .vayu_blocks_image_wrapper .vayu_blocks_overlay_main_wrapper_image .vayu_blocks_inner_content {
+    height: 10% !important; /* More specific rule */
+}

@@ -57,6 +57,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         
             <div class="vayu_blocks_image-flip-settings_main">
 
+                
             <div class="togglegroupcontrol_vayu_block">
             <Vayu_Block_ToggleGroupControl
                 label={__('Show Block', 'vayu-blocks')}
@@ -65,15 +66,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 value={blockValue}
                 __nextHasNoMarginBottom={true}
                 options={[
-                    { value: 'front', label: 'Front' },
-                    { value: 'back', label: 'Back' },
+                    { value: 'front', label: 'Front Block' },
+                    { value: 'back', label: 'Back Block' },
                 ]}
             />
+
               </div>      
 
                 {/* Overlay and animation effect  */}
-                <PanelBody title={__('Advance Hover Animation','vayu-blocks')} initialOpen={false}>
-                    
+                <PanelBody title={__('Advance Hover Animation','vayu-blocks')} initialOpen={true}>
                     <SelectControl
                         label={__('Image Effect', 'vayu-blocks')}
                         value={attributes.imagehvreffect}
@@ -88,7 +89,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
-
                 </PanelBody>
                 
 

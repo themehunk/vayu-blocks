@@ -115,7 +115,6 @@ const edit = (props) => {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
 
         }else if (attributes.imagehvreffect === 'flip-x') {
-            
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
         }
     
@@ -160,13 +159,13 @@ const edit = (props) => {
 
                                 <InnerBlocks 
                                     template={image_flip_template} 
-                                    templateLock="all"
+                                    
                                 />
                         </div>
                             
                     </div> 
-
                 </div>
+
             </AdvanceSettings>
         </>
     );
