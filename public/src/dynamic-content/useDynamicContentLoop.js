@@ -132,10 +132,9 @@ import { store as coreStore } from '@wordpress/core-data';
     return wrapWithLink(content, {
         contentLinkUrl,
         contentLinkEnable,
-        postData,
+        post: postData,
         author,
         featuredImageURL
     });
 };
-
 export default useDynamicContentLoop;

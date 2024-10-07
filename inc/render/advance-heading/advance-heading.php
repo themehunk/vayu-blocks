@@ -640,49 +640,115 @@ function vayu_blocks_advance_heading_render( $attributes, $content, $block ) {
     if ( ! isset( $block->context['postId'] ) ) {
         return $content;
     }
-    // Fetch the title of the current post in context
-    $title = get_the_title( $block->context['postId'] );
 
-    if ( ! $title ) {
-        return ;
+    // Fetch the postId
+    $post_id = $block->context['postId'];
+
+    // Determine the selected source field (default to 'title')
+    $source_field = isset( $attributes['selectedSourceField'] ) ? $attributes['selectedSourceField'] : 'title';
+
+    // Fetch content based on the selected source field
+    switch ( $source_field ) {
+        case 'title':
+            $display_content = get_the_title( $post_id );
+            break;
+        case 'slug':
+            $display_content = get_post_field( 'post_name', $post_id );
+            break;
+        case 'excerpt':
+            $display_content = get_the_excerpt( $post_id );
+            break;
+        case 'post_date':
+            $display_content = get_the_date( '', $post_id );
+            break;
+        case 'post_time':
+            $display_content = get_the_time( '', $post_id );
+            break;
+        case 'post_id':
+            $display_content = $post_id;
+            break;
+        case 'post_image':
+            $display_content = get_the_post_thumbnail( $post_id );
+            break;
+        case 'author_name':
+            $display_content = get_the_author_meta( 'display_name', get_post_field( 'post_author', $post_id ) );
+            break;
+        case 'author_bio':
+            $display_content = get_the_author_meta( 'description', get_post_field( 'post_author', $post_id ) );
+            break;
+        case 'author_email':
+            $display_content = get_the_author_meta( 'user_email', get_post_field( 'post_author', $post_id ) );
+            break;
+        default:
+            $display_content = get_the_title( $post_id );
+            break;
     }
 
-    $tag_name = 'h2';
-    if ( isset( $attributes['tag'] ) ) {
-        $tag_name = $attributes['tag'];
+    if ( ! $display_content ) {
+        return;
     }
 
-	$wrapper_attributes = '';
-    // Check if the title should be rendered as a link
-    if ( isset( $attributes['isLink'] ) && $attributes['isLink'] ) {
-        $rel   = ! empty( $attributes['rel'] ) ? 'rel="' . esc_attr( $attributes['rel'] ) . '"' : '';
-        $title = sprintf(
-            '<a href="%1$s" target="%2$s" %3$s>%4$s</a>',
-            esc_url( get_the_permalink( $block->context['postId'] ) ),
-            esc_attr( $attributes['linkTarget'] ),
-            $rel,
-            esc_html( $title )
-        );
-    }
+    // Set the default tag (e.g., 'h2')
+    $tag_name = isset( $attributes['tag'] ) ? $attributes['tag'] : 'h2';
 
-	if ( isset( $attributes['uniqueID'] ) ) {
+    // Prepare wrapper attributes
+    $wrapper_attributes = '';
+    if ( isset( $attributes['uniqueID'] ) ) {
         $uid = esc_attr( $attributes['uniqueID'] );
-        // Add unique ID as an `id` attribute
         $wrapper_attributes .= ' id="' . $uid . '"';
     }
-    
-    $classes = array();
-    $classes[] = 'wp-block-vayu-blocks-advance-heading wp-block-th-advance-heading th-h'.$uid;
 
-    // Use WordPress' block wrapper attributes for proper rendering
-    $wrapper_attributes .=get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+    // Build CSS classes
+    $classes = array( 'wp-block-vayu-blocks-advance-heading' );
+    if ( isset( $attributes['uniqueID'] ) ) {
+        $classes[] = 'th-h' . esc_attr( $attributes['uniqueID'] );
+    }
+    $wrapper_attributes .= get_block_wrapper_attributes( array( 'class' => implode( ' ', $classes ) ) );
+
+    // Check if linking is enabled
+    if ( isset( $attributes['contentLinkEnable'] ) && $attributes['contentLinkEnable'] ) {
+        $link_url = '';
+        switch ( $attributes['contentLinkUrl'] ) {
+            case 'post_url':
+                $link_url = get_the_permalink( $post_id );
+                break;
+            case 'archive_url':
+                $link_url = get_post_type_archive_link( get_post_type( $post_id ) );
+                break;
+            case 'author_url':
+                $link_url = get_author_posts_url( get_post_field( 'post_author', $post_id ) );
+                break;
+            case 'site_url':
+                $link_url = get_home_url();
+                break;
+            case 'comments_url':
+                $link_url = get_comments_link( $post_id );
+                break;
+            case 'featured_img_url':
+                $link_url = wp_get_attachment_url( get_post_thumbnail_id( $post_id ) );
+                break;
+            default:
+                $link_url = '';
+        }
+
+        if ( $link_url ) {
+			$link_target = isset( $attributes['linkTarget'] ) ? esc_attr( $attributes['linkTarget'] ) : '_self';
+            $rel   = ! empty( $attributes['rel'] ) ? 'rel="' . esc_attr( $attributes['rel'] ) . '"' : '';
+            $display_content = sprintf(
+                '<a href="%1$s" target="%2$s" %3$s>%4$s</a>',
+                esc_url( $link_url ),
+                $link_target,
+                $rel,
+                esc_html( $display_content )
+            );
+        }
+    }
 
     // Return the complete block HTML
     return sprintf(
         '<%1$s %2$s>%3$s</%1$s>',
         esc_attr( $tag_name ),
         $wrapper_attributes,
-        $title
+        $display_content
     );
-
 }
