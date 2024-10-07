@@ -312,6 +312,37 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         options.push({ value: 'back', label: 'Back Block' });
     }
 
+    const animationoptions = [
+        { label: __('None', 'vayu-blocks'), value: 'none' },
+        { label: __('Blur', 'vayu-blocks'), value: 'blur' },
+        { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
+        { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
+        { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
+        { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
+        { label: __('Zoom Out', 'vayu-blocks'), value: 'zoom-out' },
+        { label: __('Slide Up', 'vayu-blocks'), value: 'slide-up' },
+        { label: __('Slide Down', 'vayu-blocks'), value: 'slide-down' },
+        { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
+        { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
+        { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
+        { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
+        { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
+        { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
+        { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
+        { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
+        { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
+        { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
+    ];
+    
+    // Conditionally add overlay options based on the overlayshow attribute
+    if (attributes.overlayshow) {
+        animationoptions.push(
+            { label: __('Overlay Effect 8 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
+            { label: __('Overlay Effect 9 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
+            { label: __('Overlay Effect 10 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
+        );
+    }
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
@@ -502,30 +533,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                     ? attributes.wrapperanimation
                                     : attributes.imagehvreffect
                             }                        
-                            options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Blur', 'vayu-blocks'), value: 'blur' },
-                            { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
-                            { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
-                            { label: __('GrayScale Reverse', 'vayu-blocks'), value: 'grayScalereverse' },
-                            { label: __('Zoom In', 'vayu-blocks'), value: 'zoom-in' },
-                            { label: __('Zoom Out', 'vayu-blocks'), value: 'zoom-out' },
-                            { label: __('Slide Up', 'vayu-blocks'), value: 'slide-up' },
-                            { label: __('Slide Down', 'vayu-blocks'), value: 'slide-down' },
-                            { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
-                            { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
-                            { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
-                            { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
-                            { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
-                            { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
-                            { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
-                            { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
-                            { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
-                            { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
-                            { label: __('Overlay Effect 8 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
-                            { label: __('Overlay Effect 9 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
-                            { label: __('Overlay Effect 10 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
-                        ]}
+                            options={animationoptions}
                         onChange={(value) => handlehoveranimation(value)}
                     />
 

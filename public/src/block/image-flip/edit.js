@@ -16,7 +16,6 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
 
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
-//        const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
         const randomPart = Math.random().toString(36).substring(2, 10); // Generate random alphanumeric string
         return `-${randomPart}`;
     };

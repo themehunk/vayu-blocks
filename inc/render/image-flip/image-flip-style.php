@@ -24,7 +24,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "margin-right: auto !important;";
     $css .= "}";
     
-
     //Main div
     $css .= "$wrapper {";
 
