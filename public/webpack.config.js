@@ -3,7 +3,6 @@ module.exports = {
 	...defaultConfig,
   entry:{
      'advance-query-loop':'./src/block/advance-query-loop',
-
      'advance-heading':'./src/block/advance-heading',
      'advance-spacer':'./src/block/advance-spacer',
      'advance-container':'./src/block/advance-container',
@@ -14,18 +13,14 @@ module.exports = {
      'component-editor': './src/components/component-editor.scss',
      'animation-index': './src/block/animation',
      'vayu-sites': './src/vayu-sites',
-     
      'block/post-grid/index': './src/block/post-grid',
      'block/post-grid/view': './src/block/post-grid/view.js',
      'block/advance-slider/index': './src/block/advance-slider',
      'block/advance-slider/view': './src/block/advance-slider/view.js',
      'block/image-flip/index': './src/block/image-flip',
      'block/image-flip/view': './src/block/image-flip/view.js',
-
      'block/image/index': './src/block/image',
      'block/image/view': './src/block/image/view.js',
-     'block/mega-menu/index': './src/block/mega-menu',
-
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',
 		 'anim-typing': './src/block/animation/frontend/typing/index.js',

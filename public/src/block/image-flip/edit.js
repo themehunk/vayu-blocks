@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import './editor.scss';
-import PanelSettings from './AdvanceSettings/PanelSettings';
-import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
-import noimage from '../../../../inc/assets/img/no-image.png';
+import React from 'react';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
+import PanelSettings from './AdvanceSettings/PanelSettings';
+import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
+import './editor.scss';
 
-
-const edit = (props) => {
-    const { attributes, setAttributes,isSelected} = props;
+const edit = ({ attributes, setAttributes,isSelected}) => {
 
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -134,13 +131,14 @@ const edit = (props) => {
         return ''; // Default case if variablereturn doesn't match
     };
 
-  
     const image_flip_template = [
         ['vayu-blocks/image', {
             className: `vayu_blocks_flip-box-front ${classname('front')}`,
+            flipSide: 'front',
         }],
         ['vayu-blocks/image', {
-            className: `vayu_blocks_flip-box-back ${classname('back')}`
+            className: `vayu_blocks_flip-box-back ${classname('back')}`,
+            flipSide: 'back',
         }], 
     ];
 
@@ -158,8 +156,7 @@ const edit = (props) => {
                      <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
 
                                 <InnerBlocks 
-                                    template={image_flip_template} 
-                                    
+                                    template={image_flip_template}  
                                 />
                         </div>
                             

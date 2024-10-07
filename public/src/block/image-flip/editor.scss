@@ -112,6 +112,7 @@
     backface-visibility: hidden !important;
     z-index:10;
     transform-origin: center;
+    opacity: var(--front-opacity);
   }
 
 .vayu_blocks_flip-box-inner .vayu_blocks_flip-box-back {

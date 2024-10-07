@@ -153,12 +153,6 @@ class Vayu_Block_Plugin {
                     filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script'] . '.js' ),
                 );
 
-                add_filter('script_loader_tag', function ($tag, $handle) {
-                    if ('view-mega-menu' === $handle) {
-                        return str_replace(' src', ' type="module" src', $tag);
-                    }
-                    return $tag;
-                }, 10, 2);
             }
 
                 // Localize the script with data
@@ -192,14 +186,7 @@ class Vayu_Block_Plugin {
     }
 
     public function vayu_register_blocks_new() {
-
-        //mega menu
-        register_block_type(
-            __DIR__ . '/public/build/block/mega-menu',
-            array(
-                'render_callback' => 'vayu_blocks_mega_menu_render',
-            )
-        );
+        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
 
         //image-flip
         register_block_type(
@@ -222,6 +209,7 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/post-grid',
             array(
                 'render_callback' => 'post_grid_render',
+                'status'     => $options['postgrid']['isActive'],
             )
         );
 
@@ -230,6 +218,7 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/image',
             array(
                 'render_callback' => 'vayu_block_image_render',
+                'status'     => $options['image']['isActive'],
             )
         );
 
@@ -280,19 +269,6 @@ class Vayu_Block_Plugin {
     <?php }
 
 }
-
-
-function enqueue_interactivity_on_frontend() {
-    // Enqueue wp-interactivity on the frontend
-    wp_enqueue_script_module( 
-        'vayu-blocks-mega-menu-view-script-module-', 
-        plugins_url( 'public/src/block/mega-menu/view.js', __FILE__ ), // Get the correct URL to the file
-        array(), 
-        '1.0.0' 
-    );
-}
-add_action( 'wp_enqueue_scripts', 'enqueue_interactivity_on_frontend' );
-
 
 
 function vayu_block_plugin_init( ) {

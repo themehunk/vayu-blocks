@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import './editor.scss';
+import { dispatch, useSelect,select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import _ from 'lodash'; // If you are using lodash
 
@@ -19,6 +19,8 @@ import {MediaPlaceholder } from '@wordpress/block-editor';
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel.js';
+import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
+import './editor.scss';
 
 import {
     HoverControl,
@@ -28,7 +30,6 @@ import {
 import ControlPanelControl from '../../components/control-panel-control/index.js';
 
 import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
-import { useSelect } from '@wordpress/data';
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
@@ -252,10 +253,82 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
     
+    const [blockValue, setBlockValue] = useState(''); // To manage the toggle state (front/back)
+
+    // Get the currently selected block
+    const selectedBlock = useSelect((select) => {
+        return select('core/block-editor').getSelectedBlock();
+    });
+
+    // Handle the toggle change event
+    const handleToggleChange = (value) => {
+        setBlockValue(value);
+
+        if (selectedBlock) {
+
+            // Get all blocks
+            const allBlocks = select('core/block-editor').getBlocks();
+
+            // Find the parent block that contains the selected block
+            const parentBlock = allBlocks.find(block => {
+                return block.innerBlocks.some(innerBlock => innerBlock.clientId === selectedBlock.clientId);
+            });
+
+            if (parentBlock) {
+
+                // If toggle value is 'flip', move to the parent flip block
+                if (value === 'flip' && parentBlock.name === 'vayu-blocks/image-flip') {
+                    dispatch('core/block-editor').selectBlock(parentBlock.clientId);
+                } 
+                // If toggle value is 'back', move to the second inner block
+                else if (value === 'back') {
+                    const backBlock = parentBlock.innerBlocks[1]; // Get second inner block
+                    if (backBlock) {
+                        dispatch('core/block-editor').selectBlock(backBlock.clientId);
+                    }
+                }
+                // If toggle value is 'back', move to the second inner block
+                else if (value === 'front') {
+                    const backBlock = parentBlock.innerBlocks[0]; // Get second inner block
+                    if (backBlock) {
+                        dispatch('core/block-editor').selectBlock(backBlock.clientId);
+                    }
+                }
+            }
+        }
+    };
+
+    // Assuming you're inside your functional component
+    const options = [
+        { value: 'flip', label: 'Flip Block' },
+    ];
+
+    // Conditionally add options based on the className attribute
+    if (attributes.className === 'vayu_blocks_flip-box-back ') {
+        options.push({ value: 'front', label: 'Front Block' });
+    }
+
+    if (attributes.className === 'vayu_blocks_flip-box-front ') {
+        options.push({ value: 'back', label: 'Back Block' });
+    }
 
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
+
+                {attributes.parentBlock === 'vayu-blocks/image-flip' && (
+                    <div class="togglegroupcontrol_vayu_block">
+                    <Vayu_Block_ToggleGroupControl
+                        label={__('Show Block', 'vayu-blocks')}
+                        onChange={handleToggleChange}
+                        isBlock={true}
+                        value={blockValue}
+                        __nextHasNoMarginBottom={true}
+                        options={options}
+                    />
+        
+                    </div> 
+                )}
 
                 {/* Background Image */}
                 <PanelBody title={__('Image','vayu-blocks')} initialOpen={true}>

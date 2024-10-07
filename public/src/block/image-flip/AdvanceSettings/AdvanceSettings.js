@@ -1,9 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useState} from 'react';
-import { dispatch, select, useSelect } from '@wordpress/data';
+import { select, useSelect } from '@wordpress/data';
 import { useViewportMatch} from '@wordpress/compose';
-import { RiEqualFill, RiExternalLinkFill } from 'react-icons/ri';
 
 // Utility function to filter out undefined or null values
 const omitBy = (object, condition) => (
@@ -539,29 +538,36 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     }, [selectedBlock]);
     
     let back_z_index =0;
+    let front_opacity =1;
 
     if (selectedBlockClass && selectedBlockClass.includes('wp-block-vayu-blocks-image-flip')) {
         // Do something for the 'wp-block-vayu-blocks-image-flip' class
         setAttributes({selectedanimation:true});
+        front_opacity=1;
     } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-front')) {
         // Do something for the 'vayu_blocks_flip-box-front' class
         back_z_index = 1;
         setAttributes({selectedanimation:false});
+        front_opacity=1;
     } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) {
         // Do something for the 'vayu_blocks_flip-box-back' class
         back_z_index = 100;
         transformstyle= 'none';
         setAttributes({selectedanimation:false});
+        front_opacity=0;
     }
     else if ((selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-front')) && (innerBlockClass && innerBlockClass.includes('vayu-blocks-heading-innerblock')) ) {
         setAttributes({selectedanimation:false});
+        front_opacity=1;
     }else if ((selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) && (innerBlockClass && innerBlockClass.includes('vayu-blocks-heading-innerblock')) ) {
         setAttributes({selectedanimation:false});
         back_z_index = 100;
         transformstyle= 'none';
+        front_opacity=0;
     }
     else{
         back_z_index = 1;
+        front_opacity=1;
         setAttributes({selectedanimation:true});
     }
     
@@ -571,6 +577,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             ...mergedStyles,
            '--back-transform-style': transformstyle, 
            '--back-z-index' : back_z_index,
+           '--front-opacity' :front_opacity,
         },
 
         onMouseEnter: handleMouseEnter,
