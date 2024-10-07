@@ -258,7 +258,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
 
                 {/* Background Image */}
-                <PanelBody title={__('Image','vayu-blocks')} initialOpen={false}>
+                <PanelBody title={__('Image','vayu-blocks')} initialOpen={true}>
                     <h4>{__('Background','vayu-blocks')}</h4>
                     {attributes.image ? (
                         <>        

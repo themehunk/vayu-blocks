@@ -265,19 +265,19 @@
   },
   "borderRadiusHvrTop": {
     "type": "number",
-    "default": 2
+    "default": 0
   },
   "borderRadiusHvrBottom": {
     "type": "number",
-    "default": 2
+    "default": 0
   },
   "borderRadiusHvrLeft": {
     "type": "number",
-    "default": 2
+    "default": 0
   },
   "borderRadiusHvrRight": {
     "type": "number",
-    "default": 2
+    "default": 0
   },
   "boxShadowHvr": {
     "type": "boolean",
@@ -563,35 +563,35 @@
 },
 "borderradiusTopTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusRightTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusBottomTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusLeftTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusTopMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusRightMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusBottomMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusLeftMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 
 
@@ -626,34 +626,34 @@
 },
 "borderradiusHvrTopTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrRightTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrBottomTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrLeftTablet": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrTopMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrRightMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrBottomMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 },
 "borderradiusHvrLeftMobile": {
   "type": "number",
-  "default": 20
+  "default": 0
 }
   }

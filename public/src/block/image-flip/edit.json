@@ -133,20 +133,20 @@
     "imageborder":{
         "type":"object",
         "default":{
-        "topcolor": "rgb(183, 191, 249)",
-        "topwidth": "2px",
+        "topcolor": "",
+        "topwidth": "0px",
         "topstyle": "solid",
 
-        "bottomcolor": "rgb(183, 191, 249)",
-        "bottomwidth": "2px",
+        "bottomcolor": "",
+        "bottomwidth": "0px",
         "bottomstyle": "solid",
 
-        "leftcolor": "rgb(183, 191, 249)",
-        "leftwidth": "2px",
+        "leftcolor": "",
+        "leftwidth": "0px",
         "leftstyle": "solid",
 
-        "rightcolor": "rgb(183, 191, 249)",
-        "rightwidth": "2px",
+        "rightcolor": "",
+        "rightwidth": "0px",
         "rightstyle": "solid"
     }
     },
@@ -160,26 +160,7 @@
         "right": "4px"
     }
     },
-    "backimageborder":{
-        "type":"object",
-        "default":{
-        "topcolor": "rgb(183, 191, 249)",
-        "topwidth": "2px",
-        "topstyle": "solid",
-
-        "bottomcolor": "rgb(183, 191, 249)",
-        "bottomwidth": "2px",
-        "bottomstyle": "solid",
-
-        "leftcolor": "rgb(183, 191, 249)",
-        "leftwidth": "2px",
-        "leftstyle": "solid",
-
-        "rightcolor": "rgb(183, 191, 249)",
-        "rightwidth": "2px",
-        "rightstyle": "solid"
-    }
-    },
+   
     "imageborderradiuscircle":{
         "type":"string",
         "default":"square"
@@ -219,5 +200,13 @@
     "backimagerepeat":{
         "type":"string",
         "default":"no-repeat"
+    },
+    "back_image":{
+        "type":"string",
+        "default":"none"
+    },
+    "selectedanimation":{
+        "type":"boolean",
+        "default":true
     }
 }
