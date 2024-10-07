@@ -822,6 +822,10 @@
 		},
 		"contentLinkUrl": {
 		"type": "string"
-		}
+		},
+		"linkTarget": {
+            "type": "string",
+            "default": "_self"
+        }
 	}
 }
