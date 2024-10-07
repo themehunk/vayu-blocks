@@ -65,3 +65,8 @@
     transform-origin: center;
 }
 
+.vayu_blocks_overlay_main_wrapper_image .vayu_blocks_inner_content >section{
+    transform:none !important;
+    position: unset !important;
+    height:auto !important;
+}

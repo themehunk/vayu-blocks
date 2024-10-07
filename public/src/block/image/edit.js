@@ -561,7 +561,7 @@ const edit = (props) => {
                                     className={`vayu_blocks_overlay_main_wrapper_image ${attributes.overlaywrapper} ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 
                                     style={vayu_block_overlay_style}
                                 >
-                                    <div className="vayu_blocks_inner_content">
+                                    <div className="vayu_blocks_inner_content" style={{height:'25%'}}>
                                         <InnerBlocks 
                                             template={image_flip_template} 
                                         />

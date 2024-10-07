@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useState} from 'react';
-import { dispatch, useSelect } from '@wordpress/data';
+import { dispatch, select, useSelect } from '@wordpress/data';
 import { useViewportMatch} from '@wordpress/compose';
 import { RiEqualFill, RiExternalLinkFill } from 'react-icons/ri';
 
@@ -410,6 +410,9 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     
     }
 
+    // Determine the borderRadius based on condition
+    const borderRadius = `${attributes.advanceRadius.top} ${attributes.advanceRadius.right} ${attributes.advanceRadius.bottom} ${attributes.advanceRadius.left}`;
+
 
     // Prepare the style object
     const styles = {
@@ -417,17 +420,16 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...customheight,
         ...paddingStyles,
         ...marginStyles,  
-        ...borderradiusstyles,
         
         
         order: order === 'custom' ? customOrder : 'undefined',
       
-        borderStyle: borderType || undefined,
-        borderTopWidth: borderWidthTop ? `${borderWidthTop}${borderWidthUnit}` : 0,
-        borderBottomWidth: borderWidthBottom ? `${borderWidthBottom}${borderWidthUnit}` : 0,
-        borderLeftWidth: borderWidthLeft ? `${borderWidthLeft}${borderWidthUnit}` : 0,
-        borderRightWidth: borderWidthRight ? `${borderWidthRight}${borderWidthUnit}` : 0,
-        borderColor: borderColor || undefined,
+        borderTop: `${attributes.advanceborder.topwidth} ${attributes.advanceborder.topstyle} ${attributes.advanceborder.topcolor}`,
+        borderBottom: `${attributes.advanceborder.bottomwidth} ${attributes.advanceborder.bottomstyle} ${attributes.advanceborder.bottomcolor}`,
+        borderLeft: `${attributes.advanceborder.leftwidth} ${attributes.advanceborder.leftstyle} ${attributes.advanceborder.leftcolor}`,
+        borderRight: `${attributes.advanceborder.rightwidth} ${attributes.advanceborder.rightstyle} ${attributes.advanceborder.rightcolor}`,
+
+        borderRadius: borderRadius,
       
         
         boxShadow: boxShadow ?
@@ -446,15 +448,17 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         
     };
     
-    const hoverStyles = {
-        borderStyle: borderHvrType || undefined,
-        borderTopWidth: borderWidthHvrTop ? `${borderWidthHvrTop}${borderWidthHvrUnit}` : undefined,
-        borderBottomWidth: borderWidthHvrBottom ? `${borderWidthHvrBottom}${borderWidthHvrUnit}` : undefined,
-        borderLeftWidth: borderWidthHvrLeft ? `${borderWidthHvrLeft}${borderWidthHvrUnit}` : undefined,
-        borderRightWidth: borderWidthHvrRight ? `${borderWidthHvrRight}${borderWidthHvrUnit}` : undefined,
-        borderColor: borderColorHvr || undefined,
+     // Determine the borderRadius based on condition
+     const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
 
-        ...borderradiusHvrstyles,
+
+    const hoverStyles = {
+        borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
+        borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
+        borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
+        borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
+
+        borderRadius: borderRadiushvr,
 
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
@@ -497,44 +501,43 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
 
     const [selectedBlockClass, setSelectedBlockClass] = useState(null);
-
+    const [innerBlockClass, setInnerBlockClass] = useState(null);
+    
     const selectedBlock = useSelect((select) => {
         return select('core/block-editor').getSelectedBlock();
     });
 
     useEffect(() => {
         if (selectedBlock) {
-            // Extract the original content
-            const selectedBlockClass = selectedBlock.originalContent;
-            console.log(selectedBlock);
-            // Check if the selected block is of type Image Flip
-            if (selectedBlockClass === 'wp-block-vayu-blocks-image-flip' || 
-                selectedBlockClass === 'vayu_blocks_flip-box-front' || 
-                selectedBlockClass === 'vayu_blocks_flip-box-back') {
+            const { name, attributes, clientId } = selectedBlock;
+            const blockClass = attributes.className || ''; // Get the className of the selected block
+            // Check if the selected block is an inner block
+            if (blockClass === 'vayu-blocks-heading-innerblock' || blockClass === 'vayu-blocks-para-innerblock') {
+                // Set only the inner block class
+                setInnerBlockClass(blockClass);
+                // Find the parent block
+                const parentBlockClientIds = select('core/block-editor').getBlockParents(clientId);
                 
-                // Trigger opening of the InspectorControls for the selected block
-                dispatch('core/block-editor').openInspectorPanel('core/block-editor');
-            }
-
-            const originalContent = selectedBlock.originalContent;
-
-            // Parse the HTML string into DOM elements
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(originalContent, 'text/html');
-
-            // Get the root element (first element in originalContent)
-            const rootElement = doc.body.firstElementChild;
-
-            if (rootElement && rootElement.className) {
-                // Store the class name of the root element in the state variable
-                setSelectedBlockClass(rootElement.className);
-
+                if (parentBlockClientIds.length > 0) {
+                    const parentBlockClientId = parentBlockClientIds[1];
+                    const parentBlock = select('core/block-editor').getBlock(parentBlockClientId);
+                    const parentBlockClass = parentBlock.attributes.className || '';
+                    // Update selectedBlockClass with parent class if needed
+                    setSelectedBlockClass(parentBlockClass);
+                } else {
+                    setSelectedBlockClass(null); // No parent found
+                }
             } else {
-                setSelectedBlockClass(null); // Reset if no class found
+                // Set the class for non-inner blocks
+                setSelectedBlockClass(blockClass);
+                setInnerBlockClass(null); // Reset inner block class
             }
+        } else {
+            setSelectedBlockClass(null); // Reset if no block is selected
+            setInnerBlockClass(null); // Reset inner block class
         }
     }, [selectedBlock]);
-
+    
     let back_z_index =0;
 
     if (selectedBlockClass && selectedBlockClass.includes('wp-block-vayu-blocks-image-flip')) {
@@ -549,7 +552,15 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         back_z_index = 100;
         transformstyle= 'none';
         setAttributes({selectedanimation:false});
-    } else{
+    }
+    else if ((selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-front')) && (innerBlockClass && innerBlockClass.includes('vayu-blocks-heading-innerblock')) ) {
+        setAttributes({selectedanimation:false});
+    }else if ((selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) && (innerBlockClass && innerBlockClass.includes('vayu-blocks-heading-innerblock')) ) {
+        setAttributes({selectedanimation:false});
+        back_z_index = 100;
+        transformstyle= 'none';
+    }
+    else{
         back_z_index = 1;
         setAttributes({selectedanimation:true});
     }
