@@ -15,127 +15,106 @@ function generate_inline_image_flip_styles($attr) {
     $uniqueId = $attr['uniqueId'];
 
     // Generate the class selector by concatenating '.' with the unique ID
-    $wrapper = '.vayu-blocks-image-flip-main-container' . esc_attr($uniqueId);
-
-    $inline = '.vayu_blocks_image_flip_wrapper';
+    $wrapper = '.vayu-blocks-image-flip-main-container-for-front' . esc_attr($uniqueId);
 
     $css .= ".wp_block_vayu-blocks-image-flip-main {";
-        // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
-        $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        // // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
+        // $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
         $css .= "margin-left: auto !important;";
         $css .= "margin-right: auto !important;";
-        
     $css .= "}";
     
-    // Add media query for tablet screens
-    $css .= "@media (max-width: 768px) {";
-        $css .= ".th-image-flip-main-wp-editor-wrapper {";
-            $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
-        $css .= "}";
-    $css .= "}";
-
-    // Add media query for Mobile screens
-    $css .= "@media (max-width: 300px) {";
-        $css .= ".th-image-flip-main-wp-editor-wrapper {";
-            $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
-        $css .= "}";
-    $css .= "}";
 
     //Main div
     $css .= "$wrapper {";
 
-        // Desktop Padding
-        $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
-        $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['buttonpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['buttonpaddingBottom']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['buttonpaddingLeft']) ? "padding-left: " . esc_attr($attr['buttonpaddingLeft']) . $paddingUnit . ";" : '';
-        $css .= isset($attr['buttonpaddingRight']) ? "padding-right: " . esc_attr($attr['buttonpaddingRight']) . $paddingUnit . ";" : '';
+        $css .= "perspective: 1000px;";
 
-        // Desktop Padding
-        $marginUnit = isset($attr['marginUnit']) ? esc_attr($attr['marginUnit']) : 'px';
-        $css .= isset($attr['marginTop']) ? "margin-top: " . esc_attr($attr['marginTop']) . $marginUnit . ";" : '';
-        $css .= isset($attr['marginBottom']) ? "margin-bottom: " . esc_attr($attr['marginBottom']) . $marginUnit . ";" : '';
-        $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
-        $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
+        $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "height: " . esc_attr($attr['customHeight']) . esc_attr($attr['customHeightUnit']) . ";";
 
-        // Position and Z-index
-        $css .= isset($attr['position']) ? "position: " . esc_attr($attr['position']) . ";" : '';
-        $css .= isset($attr['zIndex']) ? "z-index: " . esc_attr($attr['zIndex']) . ";" : '';
-
-        // Alignment and Order
-        $css .= isset($attr['selfAlign']) ? "align-self: " . esc_attr($attr['selfAlign']) . ";" : '';
-        $css .= isset($attr['order']) && $attr['order'] === 'custom' && isset($attr['customOrder']) ? "order: " . esc_attr($attr['customOrder']) . ";" : '';
-
-
-        // Border
-        $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
-        $css .= isset($attr['borderType']) ? "border-style: " . esc_attr($attr['borderType']) . ";" : '';
-        $css .= isset($attr['borderWidthTop']) ? "border-top-width: " . esc_attr($attr['borderWidthTop']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthBottom']) ? "border-bottom-width: " . esc_attr($attr['borderWidthBottom']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthLeft']) ? "border-left-width: " . esc_attr($attr['borderWidthLeft']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderWidthRight']) ? "border-right-width: " . esc_attr($attr['borderWidthRight']) . $borderWidthUnit . ";" : '';
-        $css .= isset($attr['borderColor']) ? "border-color: " . esc_attr($attr['borderColor']) . ";" : '';
-
-        // Border Radius
-        $borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
-        $borderTopLeftRadius = isset($attr['borderradiusTop']) ? esc_attr($attr['borderradiusTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderBottomRightRadius = isset($attr['borderradiusBottom']) ? esc_attr($attr['borderradiusBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderBottomLeftRadius = isset($attr['borderradiusLeft']) ? esc_attr($attr['borderradiusLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-        $borderTopRightRadius = isset($attr['borderradiusRight']) ? esc_attr($attr['borderradiusRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
-
-        $css .= "border-top-left-radius: {$borderTopLeftRadius};";
-        $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
-        $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
-        $css .= "border-top-right-radius: {$borderTopRightRadius};";
-
-        // Box-shadow
-        if (isset($attr['boxShadow']) && $attr['boxShadow']) {
-            $boxShadowColor = 'rgba(' . implode(', ', [
-                hexdec(substr($attr['boxShadowColor'], 1, 2)), // Red
-                hexdec(substr($attr['boxShadowColor'], 3, 2)), // Green
-                hexdec(substr($attr['boxShadowColor'], 5, 2))  // Blue
-            ]) . ', ' . ((float) $attr['boxShadowColorOpacity'] / 100) . ')';
-            $css .= "box-shadow: " . esc_attr($attr['boxShadowHorizontal']) . 'px ' .
-                                esc_attr($attr['boxShadowVertical']) . 'px ' .
-                                esc_attr($attr['boxShadowBlur']) . 'px ' .
-                                esc_attr($attr['boxShadowSpread']) . 'px ' .
-                                $boxShadowColor . ";";
-        } else {
-            $css .= "box-shadow: none;";
-        }
-
-        // Background
-        if (isset($attr['backgroundType'])) {
-            if ($attr['backgroundType'] === 'color' && isset($attr['backgroundColor'])) {
-                $css .= "background: " . esc_attr($attr['backgroundColor']) . ";";
-            } elseif ($attr['backgroundType'] === 'gradient' && isset($attr['backgroundGradient'])) {
-                $css .= "background: " . esc_attr($attr['backgroundGradient']) . ";";
-            } elseif (isset($attr['backgroundImage']) && isset($attr['backgroundImage']['url'])) {
-                $css .= "background: url(" . esc_url($attr['backgroundImage']['url']) . ");";
-            } else {
-                $css .= "background: none;";
-            }
-        } elseif(isset($attr['backgroundColor'])) { 
-            $css .= "background: " . esc_attr($attr['backgroundColor']) . ";";
-        }
-
-        // Background properties
-        $css .= isset($attr['backgroundPosition']) ? "background-position: " . esc_attr($attr['backgroundPosition']['x']) . ',' . esc_attr($attr['backgroundPosition']['y']) . ";" : 'background-position: 50%, 50%;';
-        $css .= isset($attr['backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['backgroundAttachment']) . ";" : '';
-        $css .= isset($attr['backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['backgroundRepeat']) . ";" : '';
-        $css .= isset($attr['backgroundSize']) ? "background-size: " . esc_attr($attr['backgroundSize']) . ";" : '';
-
-        // Transition
-        $css .= "transition-duration: " . (isset($attr['transitionAll']) ? esc_attr($attr['transitionAll']) : '0') . "s;";
+        $css .= "max-width:100%;";
         
-        // Grid properties
-        $css .= "display: grid;";
-        $gridTemplateColumns = isset($attr['pg_postLayoutColumns']) ? esc_attr($attr['pg_postLayoutColumns']) : 'auto-fit';
-        $css .= "grid-template-columns: repeat({$gridTemplateColumns}, 1fr);";
-        $gridGapUp = isset($attr['pg_gapup']) ? esc_attr($attr['pg_gapup']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-        $gridGap = isset($attr['pg_gap']) ? esc_attr($attr['pg_gap']) . "px" : '16px'; // Default value '16px' or whatever default you prefer
-        $css .= "grid-gap: {$gridGapUp} {$gridGap};";
-        $css .= "grid-auto-rows: minmax(100px, auto);";
+        $css .= "margin-left:auto !important;";
+        $css .= "margin-right:auto !important;";
+        
+       // Desktop Padding
+       $paddingUnit = isset($attr['paddingUnit']) ? esc_attr($attr['paddingUnit']) : 'px';
+       $css .= isset($attr['buttonpaddingTop']) ? "padding-top: " . esc_attr($attr['buttonpaddingTop']) . $paddingUnit . ";" : '';
+       $css .= isset($attr['buttonpaddingBottom']) ? "padding-bottom: " . esc_attr($attr['buttonpaddingBottom']) . $paddingUnit . ";" : '';
+       $css .= isset($attr['buttonpaddingLeft']) ? "padding-left: " . esc_attr($attr['buttonpaddingLeft']) . $paddingUnit . ";" : '';
+       $css .= isset($attr['buttonpaddingRight']) ? "padding-right: " . esc_attr($attr['buttonpaddingRight']) . $paddingUnit . ";" : '';
+
+       // Desktop Padding
+       $marginUnit = isset($attr['marginUnit']) ? esc_attr($attr['marginUnit']) : 'px';
+       $css .= isset($attr['marginTop']) ? "margin-top: " . esc_attr($attr['marginTop']) . $marginUnit . ";" : '';
+       $css .= isset($attr['marginBottom']) ? "margin-bottom: " . esc_attr($attr['marginBottom']) . $marginUnit . ";" : '';
+       $css .= isset($attr['marginLeft']) ? "margin-left: " . esc_attr($attr['marginLeft']) . $marginUnit . ";" : '';
+       $css .= isset($attr['marginRight']) ? "margin-right: " . esc_attr($attr['marginRight']) . $marginUnit . ";" : '';
+       
+
+       // Border
+       $borderWidthUnit = isset($attr['borderWidthUnit']) ? $attr['borderWidthUnit'] : 'px';
+       $css .= isset($attr['borderType']) ? "border-style: " . esc_attr($attr['borderType']) . ";" : '';
+       $css .= isset($attr['borderWidthTop']) ? "border-top-width: " . esc_attr($attr['borderWidthTop']) . $borderWidthUnit . ";" : '';
+       $css .= isset($attr['borderWidthBottom']) ? "border-bottom-width: " . esc_attr($attr['borderWidthBottom']) . $borderWidthUnit . ";" : '';
+       $css .= isset($attr['borderWidthLeft']) ? "border-left-width: " . esc_attr($attr['borderWidthLeft']) . $borderWidthUnit . ";" : '';
+       $css .= isset($attr['borderWidthRight']) ? "border-right-width: " . esc_attr($attr['borderWidthRight']) . $borderWidthUnit . ";" : '';
+       $css .= isset($attr['borderColor']) ? "border-color: " . esc_attr($attr['borderColor']) . ";" : '';
+
+       // Border Radius
+       $borderRadiusUnit = isset($attr['borderRadiusUnit']) ? $attr['borderRadiusUnit'] : 'px';
+       $borderTopLeftRadius = isset($attr['borderradiusTop']) ? esc_attr($attr['borderradiusTop']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+       $borderBottomRightRadius = isset($attr['borderradiusBottom']) ? esc_attr($attr['borderradiusBottom']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+       $borderBottomLeftRadius = isset($attr['borderradiusLeft']) ? esc_attr($attr['borderradiusLeft']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+       $borderTopRightRadius = isset($attr['borderradiusRight']) ? esc_attr($attr['borderradiusRight']) . $borderRadiusUnit : '0' . $borderRadiusUnit;
+
+       $css .= "border-top-left-radius: {$borderTopLeftRadius};";
+       $css .= "border-bottom-right-radius: {$borderBottomRightRadius};";
+       $css .= "border-bottom-left-radius: {$borderBottomLeftRadius};";
+       $css .= "border-top-right-radius: {$borderTopRightRadius};";
+
+       // Box-shadow
+       if (isset($attr['boxShadow']) && $attr['boxShadow']) {
+           $boxShadowColor = 'rgba(' . implode(', ', [
+               hexdec(substr($attr['boxShadowColor'], 1, 2)), // Red
+               hexdec(substr($attr['boxShadowColor'], 3, 2)), // Green
+               hexdec(substr($attr['boxShadowColor'], 5, 2))  // Blue
+           ]) . ', ' . ((float) $attr['boxShadowColorOpacity'] / 100) . ')';
+           $css .= "box-shadow: " . esc_attr($attr['boxShadowHorizontal']) . 'px ' .
+                               esc_attr($attr['boxShadowVertical']) . 'px ' .
+                               esc_attr($attr['boxShadowBlur']) . 'px ' .
+                               esc_attr($attr['boxShadowSpread']) . 'px ' .
+                               $boxShadowColor . ";";
+       } else {
+           $css .= "box-shadow: none;";
+       }
+
+       // Background
+       if (isset($attr['backgroundType'])) {
+           if ($attr['backgroundType'] === 'color' && isset($attr['backgroundColor'])) {
+               $css .= "background: " . esc_attr($attr['backgroundColor']) . ";";
+           } elseif ($attr['backgroundType'] === 'gradient' && isset($attr['backgroundGradient'])) {
+               $css .= "background: " . esc_attr($attr['backgroundGradient']) . ";";
+           } elseif (isset($attr['backgroundImage']) && isset($attr['backgroundImage']['url'])) {
+               $css .= "background: url(" . esc_url($attr['backgroundImage']['url']) . ");";
+           } else {
+               $css .= "background: none;";
+           }
+       } elseif(isset($attr['backgroundColor'])) { 
+           $css .= "background: " . esc_attr($attr['backgroundColor']) . ";";
+       }
+
+       // Background properties
+       $css .= isset($attr['backgroundPosition']) ? "background-position: " . esc_attr($attr['backgroundPosition']['x']) . ',' . esc_attr($attr['backgroundPosition']['y']) . ";" : 'background-position: 50%, 50%;';
+       $css .= isset($attr['backgroundAttachment']) ? "background-attachment: " . esc_attr($attr['backgroundAttachment']) . ";" : '';
+       $css .= isset($attr['backgroundRepeat']) ? "background-repeat: " . esc_attr($attr['backgroundRepeat']) . ";" : '';
+       $css .= isset($attr['backgroundSize']) ? "background-size: " . esc_attr($attr['backgroundSize']) . ";" : '';
+
+       // Transition
+       $css .= "transition-duration: " . (isset($attr['transitionAll']) ? esc_attr($attr['transitionAll']) : '0') . "s;";
+       
+
         
     $css .= "}";
      
@@ -216,65 +195,7 @@ function generate_inline_image_flip_styles($attr) {
             
     $css .= "}";
 
-    $css .= ".vayu_blocks_image_flip-duotone-filters {";
-        $css .= "display: none;";
-        $css .= "height: 0;";
-    $css .= "}";
-  
-    // Append CSS rules to $css
-    $css .= "$wrapper $inline {";
-        $css .= "    width: 100%;";
-        $css .= "    height: auto;";
-        $css .= "    overflow: hidden;";
-        $css .= "    position: relative;";
-        $css .= "perspective: 1000px;";
-        $css .= "transform-style: preserve-3d;";
-    $css .= "}";
-
-    // Assuming $attr['imagetransitiontime'] contains the transition time value
-    $transitionTime = isset($attr['imagetransitiontime']) ? esc_attr($attr['imagetransitiontime']) : '0.5'; // Default to 0.5s if not set
-
-    // Append CSS rules to $css
-    $css .= "$wrapper .vayu_blocks_image_flip_image {";
-
-        if($attr['imagehvreffect'] === 'flip-front' || $attr['imagehvreffect']) {
-            $css .= "backface-visibility: hidden;";
-        }
-
-        $css .= "width: 100%;";
-        $css .= "height: 100%;";
-        $css .= "box-sizing: border-box;";
-
-        $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
-
-        $css .= "    opacity: 1;"; // Assuming a default opacity value
-        $css .= "    object-fit: " . esc_attr($attr['imagecover']) . ";"; // Assuming this controls object-fit
-
-        // Apply focal point if it exists, default to center
-        $css .= "    object-position: " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['x'] * 100) : '50') . "% " . (isset($attr['focalPoint']) ? esc_attr($attr['focalPoint']['y'] * 100) : '50') . "%;";
-
-        // Apply aspect ratio if it exists
-        if ($attr['imageaspectratio'] !== 'none') {
-            if ($attr['imageaspectratio'] === 'original') {
-                $css .= "    aspect-ratio: auto;"; // Maintain original aspect ratio
-            } else {
-                $css .= "    aspect-ratio: " . str_replace('/', '/', esc_attr($attr['imageaspectratio'])) . ";";
-            }
-        } else {
-            $css .= "    aspect-ratio: auto;";
-        }
-
-       // Apply duotone filter if it exists and is a valid array or string
-        if (isset($attr['duotone']) && !empty($attr['duotone'])) {
-            // If duotone is a string, apply it directly
-            if (is_string($attr['duotone'])) {
-                $css .= "    filter: url(" . esc_attr($attr['duotone']) . ") !important;";
-            } 
-            // If duotone is an array with more than one value, apply it as a filter
-            elseif (is_array($attr['duotone']) && count($attr['duotone']) > 1) {
-                $css .= "    filter: url(" . esc_attr($attr['duotone'][0]) . ") !important;";
-            }
-        }
+   $css .= "$wrapper .vayu_blocks_image_flip_wrapper-for-front{";
 
         if ($attr['imageborderradiuscircle'] === 'circle') {
             // Apply a border-radius of 50% for circular images
@@ -285,10 +206,11 @@ function generate_inline_image_flip_styles($attr) {
                 $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
             }
         }
-        
 
-        // Top border
-        if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
+        $css .= "height: 100%;";
+
+         // Top border
+         if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
             $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
         }
 
@@ -306,132 +228,6 @@ function generate_inline_image_flip_styles($attr) {
         if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
             $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
         }
-
-    $css .= "}";
-
-    // Append CSS rules to $css
-    $css .= "$wrapper .vayu_blocks_image_flip_image-container {";
-        $css .= "    transition: transform {$transitionTime}s ease, filter {$transitionTime}s ease, opacity {$transitionTime}s ease;";
-        $css .= "justify-content: center;";
-        $css .= "display: flex;";
-        $css .= "align-items: center;";
-    
-    $css .= "}";
-
-    // Append hover effect CSS rules
-    $css .= " $wrapper $inline:hover .vayu_blocks_image_flip_image {";
-        $css .= "    transform: var(--image-hover-effect-transform, none);";
-        $css .= "    filter: var(--image-filter-effect, none);";
-        $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
-    $css .= "}";
-
-    /* Global hover effect CSS */
-    $css .= "$wrapper $inline:hover .vayu_blocks_image_flip_image {";
-        $css .= "    transform: var(--image-hover-effect-transform, none);";
-        $css .= "    filter: var(--image-filter-effect, none);";
-        $css .= "    opacity: var(--image-hover-effect-opacity, 1);";
-    $css .= "}";
-
-    /* Grayscale */
-    $css .= ".grayScale {";
-        $css .= "    --image-filter-effect: grayscale(100%);";
-    $css .= "}";
-
-    /* Grayscale reverse hover */
-    $css .= ".grayScalereverse {";
-        $css .= "    filter: grayscale(100%);";
-        $css .= "    transition: filter " . esc_attr($attr['imagetransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".grayScalereverse:hover {";
-        $css .= "    filter: none;";
-    $css .= "}";
-
-    /* Sepia */
-    $css .= ".sepia {";
-        $css .= "    --image-filter-effect: sepia(100%);";
-    $css .= "}";
-
-    /* Zoom-in and Zoom-out effects */
-    $css .= ".zoom-in {";
-        $css .= "    --image-hover-effect-transform: scale(1.5);";
-    $css .= "}";
-
-    $css .= ".zoom-out {";
-        $css .= "    --image-hover-effect-transform: scale(0.8);";
-    $css .= "}";
-
-    /* Fade-in and Fade-out effects */
-    $css .= ".fade-in {";
-        $css .= "    --image-hover-effect-opacity: 1;";
-    $css .= "}";
-
-    $css .= ".fade-out {";
-        $css .= "    --image-hover-effect-opacity: 0.5;";
-    $css .= "}";
-
-    /* Slide effects */
-    $css .= ".slide-up {";
-        $css .= "    --image-hover-effect-transform: translateY(-10px);";
-    $css .= "}";
-
-    $css .= ".slide-down {";
-        $css .= "    --image-hover-effect-transform: translateY(10px);";
-    $css .= "}";
-
-    $css .= ".slide-left {";
-        $css .= "    --image-hover-effect-transform: translateX(-10px);";
-    $css .= "}";
-
-    $css .= ".slide-right {";
-        $css .= "    --image-hover-effect-transform: translateX(10px);";
-    $css .= "}";
-
-    /* Flip effects */
-    $css .= ".flip-horizontal {";
-        $css .= "    --image-hover-effect-transform: rotateY(180deg);";
-    $css .= "}";
-
-    $css .= ".flip-vertical {";
-        $css .= "    --image-hover-effect-transform: rotateX(180deg);";
-    $css .= "}";
-
-    /* Rotate */
-    $css .= ".rotate {";
-        $css .= "    --image-hover-effect-transform: rotate(-30deg);";
-    $css .= "}";
-
-    /* Blur */
-    $css .= ".blur {";
-        $css .= "    --image-filter-effect: blur(3px);";
-    $css .= "}";
-
-    /* Shine */
-    $css .= ".shine {";
-        $css .= "    --image-filter-effect: grayscale(100%);";
-    $css .= "}";
-
-    /* Overlay styles */
-    $css .= "$wrapper .vayu_blocks_overlay_main_wrapper {";
-        $css .= "background: " . esc_attr($attr['overlaycolor']) . ";";
-        $css .= "width: 100%;";
-        $css .= "height: 99.9%;";
-        $css .= "position: absolute;";
-        $css .= "top: 0;";
-        $css .= "left: 0;";
-        $css .= "transition: " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-
-        if (isset($attr['overlay']) && $attr['overlay']) {
-        // If overlay is set and true, set opacity to 1
-            $css .= "opacity: 1; ";
-        } else {
-            // If overlay is not set or false, set opacity to 0
-            $css .= "opacity: 0; ";
-        }
-
-        
-        $css .= "z-index: 10;";
-        $css .= "display: flex;";
 
         $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
         $vertical = $overlayalignmenttablet[0]; // First part (vertical)
@@ -449,201 +245,33 @@ function generate_inline_image_flip_styles($attr) {
             ($horizontal === 'right' ? 'flex-end' : 'center'))
         ) . ";";
         
-        $css .= "box-sizing: border-box;";
-
-        // Top border
-        if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
-            $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
-        }
-
-        // Bottom border
-        if (isset($attr['imageborder']['bottomwidth'], $attr['imageborder']['bottomstyle'], $attr['imageborder']['bottomcolor'])) {
-            $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
-        }
-
-        // Left border
-        if (isset($attr['imageborder']['leftwidth'], $attr['imageborder']['leftstyle'], $attr['imageborder']['leftcolor'])) {
-            $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
-        }
-
-        // Right border
-        if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
-            $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
-        }
-
-        if ($attr['imageborderradiuscircle'] === 'circle') {
-            // Apply a border-radius of 50% for circular images
-            $css .= "border-radius: 50%;";
-        } else {
-            // Apply individual border-radius values if not a circle
-            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
-                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
-            }
-        }
+   $css .= "}";
 
 
-    $css .= "}";
-
-        /* Hover the image and show the overlay */
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .vayu_blocks_overlay_main_wrapper {";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    /* Custom overlay hover effects */
-    $css .= ".overlayfade-in {";
-        $css .= "opacity: 0;";
-    $css .= "}";
-
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayfade-in {";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    $css .= ".overlayfade-in-up {";
-        $css .= "transform: translateY(100%); ";
-        $css .= "opacity: 0; ";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayfade-in-up {";
-        $css .= "transform: translateY(0); ";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    $css .= ".overlayzoom-in-circle {";
-        $css .= "transform: scale(0); ";
-        $css .= "opacity: 0;";
-        $css .= "border-radius: 50%; ";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-circle {";
-        $css .= "transform: scale(1); ";
-        $css .= "opacity: 1;";
-        $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
-    $css .= "}";
-
-    /* Repeat the same approach for other effects */
-
-    $css .= ".overlayfade-in-down {";
-        $css .= "transform: translateY(-100%); ";
-        $css .= "opacity: 0; ";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-down {";
-        $css .= "transform: translateY(0); ";
-        $css .= "opacity: 1; ";
-    $css .= "}";
-
-    $css .= ".overlayfade-in-left {";
-        $css .= "transform: translateX(-100%); ";
-        $css .= "opacity: 0; ";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-left {";
-        $css .= "transform: translateX(0); ";
-        $css .= "opacity: 1; ";
-    $css .= "}";
-
-    $css .= ".overlayfade-in-right {";
-        $css .= "transform: translateX(100%); ";
-        $css .= "opacity: 0; ";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-        $css .= "}";
-
-        $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayfade-in-right {";
-        $css .= "transform: translateX(0); ";
-        $css .= "opacity: 1; ";
-    $css .= "}";
-
-    /* Flip effects */
-    $css .= ".overlayflip-horizontal {";
-        $css .= "transform: rotateY(-90deg);";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayflip-horizontal {";
-        $css .= "transform: rotateY(0);";
-    $css .= "}";
-
-    /* Zoom effects */
-    $css .= ".overlayzoom-in-up {";
-        $css .= "transform: scale(0.5) translateY(-50%);";
-        $css .= "opacity: 0;";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-up {";
-        $css .= "transform: scale(1) translateY(0);";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    /* Other zoom-in effects with the same pattern... */
-
-    $css .= ".overlayzoom-in-left {";
-        $css .= "transform: scale(0.5) translateX(-50%); ";
-        $css .= "opacity: 0;";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-left {";
-        $css .= "transform: scale(1) translateX(0);";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    $css .= ".overlayzoom-in-right {";
-        $css .= "transform: scale(0.5) translateX(50%); ";
-        $css .= "opacity: 0;";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-right {";
-        $css .= "transform: scale(1) translateX(0);";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    /* Continue the pattern for overlayzoom-in-down */
-    $css .= ".overlayzoom-in-down {";
-        $css .= "transform: scale(0.5) translateY(50%); ";
-        $css .= "opacity: 0;";
-        $css .= "transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_image_flip_wrapper:hover .overlayzoom-in-down {";
-        $css .= "transform: scale(1) translateY(0);";
-        $css .= "opacity: 1;";
-    $css .= "}";
-
-    $css .= ".vayu_blocks_inner_content-image {";
-        $css .= "position: absolute;";
-        $css .= "width: 100%;";
-        $css .= "height: 100%;";
-        $css .= "top: 0;";
-        $css .= "left: 0;";
-        $css .= "display: flex;";
-        $css .= "align-items: center;";
-        $css .= "justify-content: center;";
-    $css .= "}";
-
-    $transitionTime = isset($attr['overlaytransitiontime']) ? esc_attr($attr['overlaytransitiontime']) : 0;
-    $transitionDelay = max(0, $transitionTime - ($transitionTime / 2));
+    $transformstyle = 'none';
+    // Determine the transform style based on the image hover effect
+    if ($attr['imagehvreffect'] === 'flip-front') {
+        $transformstyle = 'rotateY(180deg)';
+    } elseif ($attr['imagehvreffect'] === 'flip-front-left') {
+        $transformstyle = 'rotateY(-180deg)';
+    } elseif ($attr['imagehvreffect'] === 'flip-back') {
+        $transformstyle = 'rotateX(180deg)';
+    } elseif ($attr['imagehvreffect'] === 'flip-back-bottom') {
+        $transformstyle = 'rotateX(-180deg)';
+    } elseif ($attr['imagehvreffect'] === 'flip-z') {
+        $transformstyle = 'rotateX(180deg) rotateZ(90deg)';
+    } elseif ($attr['imagehvreffect'] === 'flip-x') {
+        $transformstyle = 'rotateY(180deg) rotateZ(90deg)';
+    }
     
-    $css .= "$wrapper .vayu_block_animation_overlay_inside {";
-        $css .= "    transition-delay: " . $transitionDelay . "s !important;";
-        $css .= "    animation-fill-mode: forwards !important;";
-        $css .= "    opacity: 0;";
-        $css .= "    transition: transform " . esc_attr($attr['overlaytransitiontime']) . "s ease, opacity " . esc_attr($attr['overlaytransitiontime']) . "s ease;";
+    $css .= "$wrapper .vayu_blocks_flip-box-back {";
+        $css .= "transform: $transformstyle;"; // Ensure $transformstyle is valid
     $css .= "}";
     
-    $css .= "$wrapper .vayu_blocks_image_flip_wrapper:hover .vayu_block_animation_overlay_inside {";
-        $css .= "    opacity: 1;";
-    $css .= "}";
-
-    $overlayalignmenttablet = explode(' ', $attr['overlayalignmenttablet']); // Split the string
-    $vertical = $overlayalignmenttablet[0]; // First part (vertical)
-    $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
-
-
+   $overlayalignmenttablet = explode(' ', $attr['overlayalignmenttablet']); // Split the string
+   $vertical = $overlayalignmenttablet[0]; // First part (vertical)
+   $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
+   
     //for tablet
     $css .= "@media (max-width: 1024px) {
 
@@ -672,8 +300,8 @@ function generate_inline_image_flip_styles($attr) {
    
         }
 
-        $wrapper .vayu_blocks_overlay_main_wrapper{
-             align-items: " . (
+        $wrapper .vayu_blocks_image_flip_wrapper-for-front{
+            align-items: " . (
                 $vertical === 'center' ? 'center' :
                 ($vertical === 'top' ? 'self-start' :
                 ($vertical === 'bottom' ? 'self-end' : 'center'))
@@ -686,13 +314,25 @@ function generate_inline_image_flip_styles($attr) {
             ) . ";
         }
         
-
     }";
+    
+    // Add media query for tablet screens
+    $css .= "@media (max-width: 768px) {";
+        $css .= ".th-image-flip-main-wp-editor-wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
+    
+    // Add media query for Mobile screens
+    $css .= "@media (max-width: 300px) {";
+        $css .= ".th-image-flip-main-wp-editor-wrapper {";
+            $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
+        $css .= "}";
+    $css .= "}";
     
     $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
     $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
     $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
-
 
     //for mobile
     $css .= "@media (max-width: 400px) {
@@ -720,8 +360,8 @@ function generate_inline_image_flip_styles($attr) {
           
         }
 
-        $wrapper .vayu_blocks_overlay_main_wrapper{
-              align-items: " . (
+        $wrapper .vayu_blocks_image_flip_wrapper-for-front{
+            align-items: " . (
                 $verticalmobile === 'center' ? 'center' :
                 ($verticalmobile === 'top' ? 'self-start' :
                 ($verticalmobile === 'bottom' ? 'self-end' : 'center'))
@@ -735,6 +375,6 @@ function generate_inline_image_flip_styles($attr) {
         }
 
     }";
-        
+
     return $css;
 }

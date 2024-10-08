@@ -102,10 +102,7 @@ function vayu_cycle_through_blocks( $blocks, $post_id ) {
 		if ( $block['blockName'] === 'vayu-blocks/image-flip' ) {
 			$css .= generate_inline_image_flip_styles($block['attrs']);
 		} 
-		if ( $block['blockName'] === 'vayu-blocks/front-image' ) {
-			$css .= generate_inline_front_image_styles($block['attrs']);
-		} 
-
+		
 		if ( $block['blockName'] === 'vayu-blocks/image' ) {
 			$css .= generate_inline_image_styles($block['attrs']);
 		} 

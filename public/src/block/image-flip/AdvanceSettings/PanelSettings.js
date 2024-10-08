@@ -19,7 +19,6 @@ import {
     Suspense
 } from '@wordpress/element';
 
-import PostSettings from '../postSettings';
 import SlideSettings from '../SlideSettings';
 
 /**
@@ -429,6 +428,32 @@ const PanelSettings = ({
 					return 'linked' === attributes.buttonpaddingTypeMobile ? attributes.buttonpaddingMobile : attributes[mobilePaddingButtonType[type]];
 		}
 		return undefined;
+	};
+	
+	//Z Index
+	const customTooltipZindex = value => `${value}px`
+
+	const getZindex = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.zindex;
+		case 'Tablet':
+			return attributes.zindexTablet;
+		case 'Mobile':
+			return attributes.zindexMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeZindex = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ zindex: value, zindexTablet: value, zindexMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ zindexTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ zindexMobile: value });
+		}
 	};
 
 	// Border & Box Shadow
@@ -1365,7 +1390,6 @@ const PanelSettings = ({
 			return undefined;
 		}
 	};
-
     const changeSelfAlign = value => {
 		if ( 'Desktop' === getView ) {
 			setAttributes({ alignSelf: value, alignSelfTablet: value, alignSelfMobile: value });
@@ -1373,6 +1397,48 @@ const PanelSettings = ({
 			setAttributes({ alignSelfTablet: value });
 		} else if ( 'Mobile' === getView ) {
 			setAttributes({ alignSelfMobile: value });
+		}
+	};
+
+	// flex order property
+	const getorder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.order;
+		case 'Tablet':
+			return attributes.orderTablet;
+		case 'Mobile':
+			return attributes.orderMobile;
+		default:
+			return undefined;
+		}
+	};
+
+  
+
+    const changeorder = value => {
+
+		if ( 'Desktop' === getView ) {
+			setAttributes({ order: value, orderTablet: value, orderMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ orderTablet: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ orderMobile: value });
+		}
+
+	};
+
+    //custom order
+	const getcustomOrder = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customOrder;
+		case 'Tablet':
+			return attributes.customOrderTablet;
+		case 'Mobile':
+			return attributes.customOrderMobile;
+		default:
+			return undefined;
 		}
 	};
 
@@ -1472,62 +1538,11 @@ const PanelSettings = ({
     const prevUnitTabletRef = useRef(attributes.customWidthUnitTablet);
     const prevUnitMobileRef = useRef(attributes.customWidthUnitMobile);
 
-    useEffect(() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
 
-        // Get the previous and current units
-        const prevUnit = prevUnitRef.current;
-        const prevUnitTablet = prevUnitTabletRef.current;
-        const prevUnitMobile = prevUnitMobileRef.current;
-
-        const currentUnit = attributes.customWidthUnit;
-        const currentTabletUnit = attributes.customWidthUnitTablet;
-        const currentMobileUnit = attributes.customWidthUnitMobile;
-
-        // Update attributes if the unit has changed
-        if (prevUnit !== currentUnit) {
-            setAttributes({
-                customWidth: updateWidth(currentUnit),
-            });
-            prevUnitRef.current = currentUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitTablet !== currentTabletUnit) {
-            setAttributes({
-                customWidthTablet: updateWidth(currentTabletUnit),
-            });
-            prevUnitTabletRef.current = currentTabletUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitMobile !== currentMobileUnit) {
-            setAttributes({
-                customWidthMobile: updateWidth(currentMobileUnit),
-            });
-            prevUnitMobileRef.current = currentMobileUnit; // Update the previous unit reference
-        }
-
-    }, [attributes.customWidthUnit, attributes.customWidthUnitTablet, attributes.customWidthUnitMobile, setAttributes]);
-
-    // Compute max custom width unit
-    const maxcustomWidthUnit = (() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
-
-        return updateWidth(attributes.customWidthUnit);
-    })();
-	
 	// unit switch max value
 	const [customWidthUnit, setcustomWidthUnit] = useState('%');
-	// const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomHeightUnit = attributes.customHeightUnit=== 'px' ? 1200 : attributes.customHeightUnit=== 'em' ? 50 : attributes.customHeightUnit=== '%' ? 100:'';
 
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
@@ -1599,6 +1614,7 @@ const PanelSettings = ({
 	// const globalcontainerWidth = ThBlockData.container_width;
     // setAttributes({globalwidth:globalcontainerWidth});
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const customTooltipCustomHeight = value => `${value}${attributes.customHeightUnit}`;
 	const getCustomWidth = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -1622,6 +1638,29 @@ const PanelSettings = ({
 		}
 	};
 	
+	const getCustomHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customHeight;
+		case 'Tablet':
+			return attributes.customHeightTablet;
+		case 'Mobile':
+			return attributes.customHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeCustomHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customHeight: value, customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customHeightMobile: value });
+		}
+	};
+
     return (
 		<Fragment>
 			<InspectorControls>
@@ -1631,12 +1670,7 @@ const PanelSettings = ({
 							{
 								label: __( 'Animation', 'vayu-blocks' ),
 								value: 'slide',
-								icon: 'image'
-							},
-							{
-								label: __( 'Style', 'vayu-blocks' ),
-								value: 'setting',
-								icon: 'colorwand'
+								icon: 'slide'
 							},
 							{
 								label: __( 'Advanced', 'vayu-blocks' ),
@@ -1652,11 +1686,6 @@ const PanelSettings = ({
 						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
 					</Fragment>
 
-				) || 'setting' === tab && (
-						<Fragment>
-							<PostSettings attributes={attributes} setAttributes={setAttributes} />
-						</Fragment>
-
 				) || 'advanced' === tab && (
 					<Fragment>
 						
@@ -1664,6 +1693,8 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						>     
+
+							
 
 								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
@@ -1685,6 +1716,25 @@ const PanelSettings = ({
 								/>
 								</ResponsiveControl>
 								</Suspense>
+
+								<ResponsiveControl
+								label={ __( 'Custom Height', 'vayu-blocks' ) }
+								>	
+								<UnitChooser
+								value={ attributes.customHeightUnit }
+								onClick={ customHeightUnit => setAttributes({ customHeightUnit }) }
+								units={ [ 'px', 'em', '%' ] }
+								/>
+								<RangeControl
+									renderTooltipContent={ customTooltipCustomHeight }
+									value={ getCustomHeight() || '' }
+									onChange={ changeCustomHeight }
+									step={ 1 }
+									min={ 1 }
+									max={ maxcustomHeightUnit }
+									// allowReset={ true }
+								/>
+								</ResponsiveControl>
 
 
 
@@ -1738,6 +1788,20 @@ const PanelSettings = ({
 								/>
 							</ResponsiveControl>
 
+							{/* <ResponsiveControl
+								label={ __( 'Z-index', 'vayu-blocks' ) }
+								>	
+								<RangeControl
+									renderTooltipContent={ customTooltipZindex }
+									value={ getZindex() || '' }
+									onChange={ changeZindex }
+									step={ 1 }
+									min={ -999999 }
+									max={ 999999 }
+									allowReset={ true }
+								/>
+							</ResponsiveControl> */}
+
 						</PanelBody>
 
 						<PanelBody title={ __( 'Border & Box Shadow', 'vayu-blocks' ) }
@@ -1787,36 +1851,35 @@ const PanelSettings = ({
 										}}
 										units={ [ 'px', 'em' ] }
 									/>
-
 									<SizingControl
-										type={ getBorderWidthType() }
-										min={ 0 }
-										max={ maxborderWidthUnit }
-										changeType={ changeBorderWidthType }
-										onChange={ changeBorderWidth }
-										options={ [
-											{
-												label: __( 'Top', 'vayu-blocks' ),
-												type: 'top',
-												value: getBorderWidth( 'top' )
-											},
-											{
-												label: __( 'Right', 'vayu-blocks' ),
-												type: 'right',
-												value: getBorderWidth( 'right' )
-											},
-											{
-												label: __( 'Bottom', 'vayu-blocks' ),
-												type: 'bottom',
-												value: getBorderWidth( 'bottom' )
-											},
-											{
-												label: __( 'Left', 'vayu-blocks' ),
-												type: 'left',
-												value: getBorderWidth( 'left' )
-											}
-										] }
-									/>
+											type={ getBorderWidthType() }
+											min={ 0 }
+											max={ maxborderWidthUnit }
+											changeType={ changeBorderWidthType }
+											onChange={ changeBorderWidth }
+											options={ [
+												{
+													label: __( 'Top', 'vayu-blocks' ),
+													type: 'top',
+													value: getBorderWidth( 'top' )
+												},
+												{
+													label: __( 'Right', 'vayu-blocks' ),
+													type: 'right',
+													value: getBorderWidth( 'right' )
+												},
+												{
+													label: __( 'Bottom', 'vayu-blocks' ),
+													type: 'bottom',
+													value: getBorderWidth( 'bottom' )
+												},
+												{
+													label: __( 'Left', 'vayu-blocks' ),
+													type: 'left',
+													value: getBorderWidth( 'left' )
+												}
+											] }
+										/>
 
 									</ResponsiveControl>
 											<ColorGradientControl

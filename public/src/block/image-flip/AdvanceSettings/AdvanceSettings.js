@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useState} from 'react';
-import { useSelect } from '@wordpress/data';
+import { dispatch, useSelect } from '@wordpress/data';
 import { useViewportMatch} from '@wordpress/compose';
 import { RiEqualFill, RiExternalLinkFill } from 'react-icons/ri';
 
@@ -317,6 +317,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                 return {};
         }
     };
+    
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
     const borderradiusstyles = getborderradiusStyle();
@@ -362,22 +363,33 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     
     let customwidth;
 
+    let customheight;
+
     if ( isDesktop ) {
 
         customwidth = {
                 
-            width:attributes.customWidth + attributes.customWidthUnit,
+            'width':attributes.customWidth + attributes.customWidthUnit,
+            
+        };
+        customheight = {
+                
+            'height':attributes.customHeight + attributes.customHeightUnit,
             
         };
 
     }
 
-    // console.log(customwidth);
     if ( isTablet ) {
 
         customwidth = {
                 
             'width':attributes.customWidthTablet + attributes.customWidthUnit,
+            
+        };
+        customheight = {
+                
+            'height':attributes.customHeightTablet + attributes.customHeightUnit,
             
         };
 
@@ -390,12 +402,19 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             'width':attributes.customWidthMobile + attributes.customWidthUnit,
             
         };
+        customheight = {
+                
+            'height':attributes.customHeightMobile + attributes.customHeightUnit,
+            
+        };
     
     }
+
 
     // Prepare the style object
     const styles = {
         ...customwidth,
+        ...customheight,
         ...paddingStyles,
         ...marginStyles,  
         ...borderradiusstyles,
@@ -457,28 +476,97 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...(isHovered ? filteredHoverStyles : {}),
     };
    
-    let opacity = (attributes.showPreview || attributes.overlay) ? 1 : 0;
+    let transformstyle = 'none'; // Default value
 
+    if (attributes.imagehvreffect === 'flip-front') {
+        transformstyle = 'rotateY(180deg)'; // Set flip effect if condition is true
+    }else if(attributes.imagehvreffect === 'flip-front-left'){
+        transformstyle = 'rotateY(-180deg)';
+    }else if (attributes.imagehvreffect === 'flip-back') {
+        transformstyle = 'rotateX(180deg)';
+    } 
+    else if (attributes.imagehvreffect === 'flip-back-bottom') {
+        transformstyle = 'rotateX(-180deg)';
+    }
+    else if (attributes.imagehvreffect === 'flip-z') {
+        transformstyle = 'rotateX(180deg) rotateZ(90deg)';
+    }
+    else if (attributes.imagehvreffect === 'flip-x') {
+        transformstyle = 'rotateY(180deg) rotateZ(90deg)';
+    }
+
+
+    const [selectedBlockClass, setSelectedBlockClass] = useState(null);
+
+    const selectedBlock = useSelect((select) => {
+        return select('core/block-editor').getSelectedBlock();
+    });
+
+    useEffect(() => {
+        if (selectedBlock) {
+            // Extract the original content
+            const selectedBlockClass = selectedBlock.originalContent;
+            console.log(selectedBlock);
+            // Check if the selected block is of type Image Flip
+            if (selectedBlockClass === 'wp-block-vayu-blocks-image-flip' || 
+                selectedBlockClass === 'vayu_blocks_flip-box-front' || 
+                selectedBlockClass === 'vayu_blocks_flip-box-back') {
+                
+                // Trigger opening of the InspectorControls for the selected block
+                dispatch('core/block-editor').openInspectorPanel('core/block-editor');
+            }
+
+            const originalContent = selectedBlock.originalContent;
+
+            // Parse the HTML string into DOM elements
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(originalContent, 'text/html');
+
+            // Get the root element (first element in originalContent)
+            const rootElement = doc.body.firstElementChild;
+
+            if (rootElement && rootElement.className) {
+                // Store the class name of the root element in the state variable
+                setSelectedBlockClass(rootElement.className);
+
+            } else {
+                setSelectedBlockClass(null); // Reset if no class found
+            }
+        }
+    }, [selectedBlock]);
+
+    let back_z_index =0;
+
+    if (selectedBlockClass && selectedBlockClass.includes('wp-block-vayu-blocks-image-flip')) {
+        // Do something for the 'wp-block-vayu-blocks-image-flip' class
+        setAttributes({selectedanimation:true});
+    } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-front')) {
+        // Do something for the 'vayu_blocks_flip-box-front' class
+        back_z_index = 1;
+        setAttributes({selectedanimation:false});
+    } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) {
+        // Do something for the 'vayu_blocks_flip-box-back' class
+        back_z_index = 100;
+        transformstyle= 'none';
+        setAttributes({selectedanimation:false});
+    } else{
+        back_z_index = 1;
+        setAttributes({selectedanimation:true});
+    }
     
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
-            '--image-hover-effect' : `${attributes.imagehvreffect}`,
-            '--image-filter-effect' : `${attributes.imagehvrfilter}`,
-            '--overlay-effect': `${attributes.mageoverlayouteffect}`,
-            '--overlay-transitiontime': `${attributes.overlaytransitiontime}s`,
-            '--image-transitiontime': `${attributes.imagetransitiontime}s`,
-            '--overlay-opacity': `${opacity}`,
-            '--button-hvr-background': `${attributes.buttonhvrbackground}`,
-            '--button-hvr-color': `${attributes.buttonhvrcolor}`,
-            '--overlay-border-radius' : `${attributes.imageborderRadius.top} ${attributes.imageborderRadius.right} ${attributes.imageborderRadius.bottom} ${attributes.imageborderRadius.left}`
+           '--back-transform-style': transformstyle, 
+           '--back-z-index' : back_z_index,
         },
 
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
     });
 
+    
     if(attributes.classNamemain !== blockProps.className) {
         setAttributes({classNamemain: blockProps.className});
     }
@@ -489,4 +577,3 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         </div>
     );
 }
-

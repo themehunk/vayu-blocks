@@ -4,6 +4,8 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 import { registerBlockType } from '@wordpress/blocks';
+import { __ } from '@wordpress/i18n';
+import { InnerBlocks } from '@wordpress/block-editor';
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * All files containing `style` keyword are bundled together. The code used
@@ -11,22 +13,17 @@ import { registerBlockType } from '@wordpress/blocks';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './style.scss';
 /**
  * Internal dependencies
  */
 import Edit from './edit';
-import save from './save';
+import Save from './save';
 import metadata from './block.json';
-import advancejson from './AdvanceSettings/Advance.json';
-import indexjson from './edit.json';
-import { FaRegImage } from "react-icons/fa";
-
+import { GrTextWrap } from "react-icons/gr";
 
 registerBlockType( metadata.name, {
 	...metadata,
-	attributes: {...indexjson, ...advancejson},
-	edit: Edit,
-	icon: <FaRegImage style={{color:'#6c1bc3'}} />,
-	save,
+	icon: <GrTextWrap style={{color:'#6c1bc3'}} />,
+    edit: Edit,
+    save: Save,
 } );

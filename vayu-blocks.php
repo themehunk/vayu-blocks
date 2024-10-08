@@ -52,144 +52,130 @@ class Vayu_Block_Plugin {
     public function vayu_register_blocks() {
 
         $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
-
-            $blocks = array(
-                array(
-                    'name'           => 'vayu-blocks/advance-container',
-                    'script_handle'  => 'advance-container',
-                    'editor_style'   => 'advance-container-editor-style',
-                    'frontend_style' => 'advance-container-frontend-style',
-                    'status'         => $options['container']['isActive'],
-                    'localize_data'  => array(
-                        'homeUrl' => get_home_url(),
-                        'container_width' => $options['global']['containerWidth'],
-                        'container_gap' => $options['global']['containerGap'],
-                        'container_padding' => $options['global']['containerPadding'],
-                    ),
+    
+        $blocks = array(
+            array(
+                'name'           => 'vayu-blocks/advance-container',
+                'script_handle'  => 'advance-container',
+                'editor_style'   => 'advance-container-editor-style',
+                'frontend_style' => 'advance-container-frontend-style',
+                'status'         => $options['container']['isActive'],
+                'localize_data'  => array(
+                    'homeUrl' => get_home_url(),
+                    'container_width' => $options['global']['containerWidth'],
+                    'container_gap' => $options['global']['containerGap'],
+                    'container_padding' => $options['global']['containerPadding'],
                 ),
-                array(
-                    'name'           => 'vayu-blocks/advance-heading',
-                    'script_handle'  => 'advance-heading',
-                    'editor_style'   => 'advance-heading-editor-style',
-                    'frontend_style' => 'advance-heading-frontend-style',
-                    'status'         => $options['heading']['isActive'],
-                    'render_callback' => 'vayu_blocks_advance_heading_render'
-                ),
-                array(
-                    'name'           => 'vayu-blocks/advance-spacer',
-                    'script_handle'  => 'advance-spacer',
-                    'editor_style'   => 'advance-spacer-editor-style',
-                    'frontend_style' => 'advance-spacer-frontend-style',
-                    'status'         => $options['spacer']['isActive'],
-                ),
-                array(
-                    'name'           => 'vayu-blocks/advance-button',
-                    'script_handle'  => 'advance-button',
-                    'editor_style'   => 'advance-button-editor-style',
-                    'frontend_style' => 'advance-button-frontend-style',
-                    'status'         => $options['button']['isActive'],
-                ),
-                
-                array(
-                    'name'            => 'vayu-blocks/advance-query-loop',
-                    'script_handle'   => 'advance-query-loop',
-                    'editor_style'    => 'advance-query-loop-editor-style',
-                    'frontend_style'  => 'advance-query-loop-frontend-style',
-                    'status'          => $options['advanceQueryLoop']['isActive'],
-                    //'render_callback' => 'vayu_blocks_advance_query_loop_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/advance-heading',
+                'script_handle'  => 'advance-heading',
+                'editor_style'   => 'advance-heading-editor-style',
+                'frontend_style' => 'advance-heading-frontend-style',
+                'status'         => $options['heading']['isActive'],
+                'render_callback' => 'vayu_blocks_advance_heading_render'
+            ),
+            array(
+                'name'           => 'vayu-blocks/advance-spacer',
+                'script_handle'  => 'advance-spacer',
+                'editor_style'   => 'advance-spacer-editor-style',
+                'frontend_style' => 'advance-spacer-frontend-style',
+                'status'         => $options['spacer']['isActive'],
+            ),
+            array(
+                'name'           => 'vayu-blocks/advance-button',
+                'script_handle'  => 'advance-button',
+                'editor_style'   => 'advance-button-editor-style',
+                'frontend_style' => 'advance-button-frontend-style',
+                'status'         => $options['button']['isActive'],
+            ),
+            array(
+                'name'            => 'vayu-blocks/advance-query-loop',
+                'script_handle'   => 'advance-query-loop',
+                'status'          => $options['advanceQueryLoop']['isActive'],
+                //'render_callback' => 'vayu_blocks_advance_query_loop_render'
+            )
+        );
+    
+        // Check if WooCommerce is active
+        if (class_exists('WooCommerce')) {
+            // Add the 'vayu-blocks/advance-product' block registration array
+            $blocks[] = array(
+                'name'            => 'vayu-blocks/advance-product',
+                'script_handle'   => 'advance-product',
+                'editor_style'    => 'advance-product-editor-style',
+                'frontend_style'  => 'advance-product-frontend-style',
+                'status'         => $options['product']['isActive'],
+                'render_callback' => array(
+                    new Vayu_Advance_Product_Tab(),
+                    'render_callback'
                 )
-                
-                
             );
-
-            // Check if WooCommerce is active
-            if (class_exists('WooCommerce')) {
-                // Add the 'vayu-blocks/advance-product' block registration array
-                $blocks[] = array(
-                    'name'            => 'vayu-blocks/advance-product',
-                    'script_handle'   => 'advance-product',
-                    'editor_style'    => 'advance-product-editor-style',
-                    'frontend_style'  => 'advance-product-frontend-style',
-                    'status'         =>  $options['product']['isActive'],
-                    'render_callback' => array( 
-                        new Vayu_Advance_Product_Tab(),
-                        'render_callback'
-                    )
-                );
-            }
-
-            foreach (  $blocks as $key => $block ) { 
-
-        if ( isset( $block['status'] ) && ( $block['status'] == 1 ) ) {
+        }
+    
+        foreach ($blocks as $key => $block) {
+            if (isset($block['status']) && ($block['status'] == 1)) {
                 // Register JavaScript file
                 wp_register_script(
                     $block['script_handle'],
                     VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.js',
-                    array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                    filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js' )
+                    array('wp-blocks', 'wp-element', 'wp-editor'),
+                    filemtime(VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js')
                 );
-
-                // Register editor
-                wp_register_style(
-                    $block['editor_style'],
-                    VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
-                    array( 'wp-edit-blocks' ),
-                    filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css' )
-                );
-
-                // Register front end block style
-                wp_register_style(
-                    $block['frontend_style'],
-                    VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
-                    array(),
-                    filemtime( VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css' )
-                );
-
-            if(isset($block['script'])){
-                wp_register_script(
-                    $block['script'],
-                    VAYU_BLOCKS_URL . 'public/build/' . $block['script'] . '.js',
-                    array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                    filemtime( VAYU_BLOCKS_PATH . '/public/build/' . $block['script'] . '.js' ),
-                );
-
-                add_filter('script_loader_tag', function ($tag, $handle) {
-                    if ('view-mega-menu' === $handle) {
-                        return str_replace(' src', ' type="module" src', $tag);
-                    }
-                    return $tag;
-                }, 10, 2);
-            }
-
-                // Localize the script with data
-                if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
+    
+                // Register editor style if defined
+                if (isset($block['editor_style']) && !empty($block['editor_style'])) {
+                    wp_register_style(
+                        $block['editor_style'],
+                        VAYU_BLOCKS_URL . 'public/build/' . $block['script_handle'] . '.css',
+                        array('wp-edit-blocks'),
+                        filemtime(VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.css')
+                    );
+                }
+    
+                // Register front end block style if defined
+                if (isset($block['frontend_style']) && !empty($block['frontend_style'])) {
+                    wp_register_style(
+                        $block['frontend_style'],
+                        VAYU_BLOCKS_URL . 'public/build/style-' . $block['script_handle'] . '.css',
+                        array(),
+                        filemtime(VAYU_BLOCKS_PATH . '/public/build/style-' . $block['script_handle'] . '.css')
+                    );
+                }
+    
+                // Localize the script with data if present
+                if (isset($block['localize_data']) && !empty($block['localize_data'])) {
                     wp_localize_script(
                         $block['script_handle'],
                         'ThBlockData',
                         $block['localize_data']
                     );
                 }
-
+    
                 // Prepare the arguments for registering the block
                 $block_args = array(
-                    'editor_script'   => $block['script_handle'],
-                    //'script'           => isset($block['script'])?$block['script']:'',
-                    'editor_style'    => $block['editor_style'],
-                    'style'           => $block['frontend_style'],
+                    'editor_script' => $block['script_handle'],
                 );
-
-                // Check if the render callback is set and not null
-                if ( isset( $block['render_callback'] ) && ! is_null( $block['render_callback'] ) ) {
-                    $block_args['render_callback'] = $block['render_callback'];
-                
+    
+                if (isset($block['editor_style']) && !empty($block['editor_style'])) {
+                    $block_args['editor_style'] = $block['editor_style'];
                 }
-
-                // Register each block
-                register_block_type( $block['name'], $block_args );
+    
+                if (isset($block['frontend_style']) && !empty($block['frontend_style'])) {
+                    $block_args['style'] = $block['frontend_style'];
+                }
+    
+                // Check if the render callback is set and not null
+                if (isset($block['render_callback']) && !empty($block['render_callback'])) {
+                    $block_args['render_callback'] = $block['render_callback'];
+                }
+    
+                // Register the block
+                register_block_type($block['name'], $block_args);
             }
-
-            }
+        }
     }
+    
 
     public function vayu_register_blocks_new() {
 
@@ -232,13 +218,9 @@ class Vayu_Block_Plugin {
                 'render_callback' => 'vayu_block_image_render',
             )
         );
-
-        //front-image
+        //wrapper
         register_block_type(
-            __DIR__ . '/public/build/block/front-image',
-            array(
-                'render_callback' => 'vayu_blocks_front_image_render',
-            )
+            __DIR__ . '/public/build/block/wrapper'  
         );
 
     }
