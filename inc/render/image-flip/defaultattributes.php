@@ -8,7 +8,7 @@ return array(
         'overlaytransitiontime' => 0.5,
         'imagetransitiontime' => 0.5,
         'overlay' => true,
-        'imagehvreffect' => 'none',
+        'imagehvreffect' => 'flip-front',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
         'overlaycolor' => 'rgba(106, 111, 248, 0.17)',

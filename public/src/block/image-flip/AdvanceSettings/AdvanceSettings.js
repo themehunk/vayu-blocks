@@ -319,9 +319,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     
     const paddingStyles = getPaddingStyle();
     const marginStyles = getMarginStyle();
-    const borderradiusstyles = getborderradiusStyle();
-    const borderradiusHvrstyles = getborderradiusHvrStyle();
-    const customwidthstyles  =  getWidthStyle(); 
 
     const {
 		isViewportAvailable,
@@ -412,7 +409,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     // Determine the borderRadius based on condition
     const borderRadius = `${attributes.advanceRadius.top} ${attributes.advanceRadius.right} ${attributes.advanceRadius.bottom} ${attributes.advanceRadius.left}`;
 
-
     // Prepare the style object
     const styles = {
         ...customwidth,
@@ -446,10 +442,9 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         transition: transitionAll ? `all ${transitionAll}s ease-in-out` : undefined,
         
     };
-    
-     // Determine the borderRadius based on condition
-     const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
 
+    // Determine the borderRadius based on condition
+    const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
 
     const hoverStyles = {
         borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
@@ -498,7 +493,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         transformstyle = 'rotateY(180deg) rotateZ(90deg)';
     }
 
-
     const [selectedBlockClass, setSelectedBlockClass] = useState(null);
     const [innerBlockClass, setInnerBlockClass] = useState(null);
     
@@ -537,8 +531,13 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         }
     }, [selectedBlock]);
     
-    let back_z_index =0;
-    let front_opacity =1;
+    let back_z_index = 0;
+    let front_opacity = 1;
+    let back_opacity = 1;
+
+    if(!attributes.selectedanimation){
+        back_opacity=0;
+    }
 
     if (selectedBlockClass && selectedBlockClass.includes('wp-block-vayu-blocks-image-flip')) {
         // Do something for the 'wp-block-vayu-blocks-image-flip' class
@@ -552,6 +551,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) {
         // Do something for the 'vayu_blocks_flip-box-back' class
         back_z_index = 100;
+        back_opacity = 1;
         transformstyle= 'none';
         setAttributes({selectedanimation:false});
         front_opacity=0;
@@ -564,13 +564,15 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         back_z_index = 100;
         transformstyle= 'none';
         front_opacity=0;
+        back_opacity = 1;
     }
     else{
         back_z_index = 1;
         front_opacity=1;
+        back_opacity = 1;
         setAttributes({selectedanimation:true});
     }
-    
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
@@ -578,6 +580,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
            '--back-transform-style': transformstyle, 
            '--back-z-index' : back_z_index,
            '--front-opacity' :front_opacity,
+           '--back-opacity' : back_opacity,
         },
 
         onMouseEnter: handleMouseEnter,

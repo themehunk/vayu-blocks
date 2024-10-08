@@ -123,6 +123,7 @@
     backface-visibility: hidden !important;
     z-index:var(--back-z-index);
     transform-origin: center;
+    opacity : var(--back-opacity);
   }
 
 .vayu-blocks-image-flip-main-container:hover .vayu_blocks_flip-box-inner_animation_div_flip-front > .block-editor-inner-blocks > .block-editor-block-list__layout:nth-child(1) {

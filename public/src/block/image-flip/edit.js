@@ -144,7 +144,7 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
     return (
         <>
        
-            <PanelSettings attributes={attributes} setAttributes={setAttributes} />
+            <PanelSettings attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}/>
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
@@ -152,11 +152,11 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
                      <div  className={`vayu_blocks_image_flip_wrapper`} style={vayu_block_flip_box_style_front}>
  
                               
-                     <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
+                        <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
 
-                                <InnerBlocks 
-                                    template={image_flip_template}  
-                                />
+                            <InnerBlocks 
+                                template={image_flip_template}  
+                            />
                         </div>
                             
                     </div> 
