@@ -21,6 +21,8 @@ module.exports = {
      'block/image-flip/view': './src/block/image-flip/view.js',
      'block/image/index': './src/block/image',
      'block/image/view': './src/block/image/view.js',
+     'block/front-image/index': './src/block/front-image',
+     'block/front-image/view': './src/block/front-image/view.js',
 		 'frontend': './src/block/animation/frontend.js',
 		 'anim-count': './src/block/animation/frontend/count/index.js',
 		 'anim-typing': './src/block/animation/frontend/typing/index.js',
