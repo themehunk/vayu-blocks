@@ -220,7 +220,11 @@ class Vayu_Block_Plugin {
         );
         //wrapper
         register_block_type(
-            __DIR__ . '/public/build/block/wrapper'  
+            __DIR__ . '/public/build/block/wrapper' ,
+            array(
+                'render_callback' => 'vayu_block_wrapper_render',
+                'skip_inner_blocks' => true,
+            ) 
         );
 
     }

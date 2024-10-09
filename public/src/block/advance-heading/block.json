@@ -16,6 +16,10 @@
 		"uniqueID": {
 			"type": "string"
 		},
+		"title": {
+            "type": "string",
+            "default": ""
+        },
 		"content": {
 			"type": "string",
 			"source": "html",

@@ -9,6 +9,7 @@ require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-spacer/advance-spacer.php
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-button/advance-button.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-product-tab/advance-product-tab.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-product-tab/advance-product-tab-style.php';
+require_once VAYU_BLOCKS_DIR_PATH .'inc/render/wrapper/wrapper.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/vayu-sites/vayu-sites.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/post-grid/post-grid.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/post-grid/post-grid-style.php';

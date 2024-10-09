@@ -20,6 +20,7 @@ import Edit from './edit';
 import Save from './save';
 import metadata from './block.json';
 import { GrTextWrap } from "react-icons/gr";
+import './style.scss';
 
 registerBlockType( metadata.name, {
 	...metadata,
