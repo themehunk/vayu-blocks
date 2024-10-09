@@ -352,5 +352,8 @@
     "animatingside":{
         "type":"string",
         "default":"left"
+    },
+    "parentBlock":{
+        "type":"string"
     }
 }

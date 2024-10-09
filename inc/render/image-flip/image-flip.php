@@ -19,7 +19,7 @@ class Vayu_blocks_image_flip {
         return ob_get_clean(); // Return the buffered output
     }
 
-    //main container containing image and overlay
+    //main container containing image and innerblocks
     private function render_image() {
         $attributes = $this->attr; // Access attributes
         $image_html = '';

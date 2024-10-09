@@ -154,7 +154,6 @@ class Vayu_blocks_Advance_Slider {
       
 }
      
-
 // Render callback for the block
 function vayu_blocks_advance_slider_render($attr) {
 

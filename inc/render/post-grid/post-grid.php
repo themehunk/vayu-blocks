@@ -190,7 +190,7 @@ class VayuBlocksPostGrid {
         return $output;
     }
 
-    //title
+    //category
     private function render_category($categories) {
         $output='';
         if ($this->device_type  === 'Desktop') {
@@ -425,29 +425,14 @@ class VayuBlocksPostGrid {
 }
 
 function post_grid_render($attr) {
-
-
-
-
-
-
-
-
-
-    //attributes Merged
-    $default_attributes = include('defaultattributes.php');
+    $default_attributes = include('defaultattributes.php'); //attributes Merged
     $attr = array_merge($default_attributes, $attr); 
-
     $renderer = new VayuBlocksPostGrid($attr);
-
-$style = "<style id='post-grid-style'>";
-$style .= generate_inline_styles($attr);
-$style .= "</style>";
-    // Call the combined method
+    $style = "<style id='post-grid-style'>";
+    $style .= generate_inline_styles($attr);
+    $style .= "</style>";
     return $renderer->render_posts().$style;
 }
-
-
 
 $parsed_args = array(
     'post_type'              => 'wp_navigation',
@@ -461,31 +446,22 @@ $parsed_args = array(
 );
 
 $navigation_post = new WP_Query( $parsed_args );
-//print_r($navigation_post);
-
 
 // We are looking to add a CSS class to a menu link.
 function myfunction( $block ) {
-
-    //print_r($block );
 
     // Skip if not a menu link
     if ( 'core/navigation-link' !== $block['blockName'] )   {
       return $block;
     }
-    //print_r($block['attrs']['label'] );
 
     // Skip if no attributes, no label or the label isn't matching the menu item.
     if (!$block['attrs'] || !$block['attrs']['label'] || $block['attrs']['label'] !== 'Shop'){
       return $block;
     }
 
-    print_r($block['attrs']['className'] );
-
     // Add a class
     $block['attrs']['className'] = ' add_your_class_here';
-
-    print_r($block['attrs']['className'] );
 
     return $block;
   }

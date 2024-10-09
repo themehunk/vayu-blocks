@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-function generate_inline_image_flip_styles($attr) {
+function generate_inline_front_image_styles($attr) {
 
     $css = '';
 
@@ -15,9 +15,9 @@ function generate_inline_image_flip_styles($attr) {
     $uniqueId = $attr['uniqueId'];
 
     // Generate the class selector by concatenating '.' with the unique ID
-    $wrapper = '.vayu-blocks-image-flip-main-container-for-front' . esc_attr($uniqueId);
+    $wrapper = '.vayu-blocks-front_image-main-container-for-front' . esc_attr($uniqueId);
 
-    $css .= ".wp_block_vayu-blocks-image-flip-main {";
+    $css .= ".wp_block_vayu-blocks-front-image-main {";
         // // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
         // $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
         $css .= "margin-left: auto !important;";
@@ -30,7 +30,6 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "perspective: 1000px;";
 
         $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
-        $css .= "height: " . esc_attr($attr['customHeight']) . esc_attr($attr['customHeightUnit']) . ";";
 
         $css .= "max-width:100%;";
         
@@ -64,27 +63,27 @@ function generate_inline_image_flip_styles($attr) {
        // Top border
        if (isset($attr['advanceborder']['topwidth'], $attr['advanceborder']['topstyle'], $attr['advanceborder']['topcolor'])) {
         $css .= "border-top: " . esc_attr($attr['advanceborder']['topwidth']) . " " . esc_attr($attr['advanceborder']['topstyle']) . " " . esc_attr($attr['advanceborder']['topcolor']) . ";";
-    }
+        }
 
-    // Bottom border
-    if (isset($attr['advanceborder']['bottomwidth'], $attr['advanceborder']['bottomstyle'], $attr['advanceborder']['bottomcolor'])) {
-        $css .= "border-bottom: " . esc_attr($attr['advanceborder']['bottomwidth']) . " " . esc_attr($attr['advanceborder']['bottomstyle']) . " " . esc_attr($attr['advanceborder']['bottomcolor']) . ";";
-    }
+        // Bottom border
+        if (isset($attr['advanceborder']['bottomwidth'], $attr['advanceborder']['bottomstyle'], $attr['advanceborder']['bottomcolor'])) {
+            $css .= "border-bottom: " . esc_attr($attr['advanceborder']['bottomwidth']) . " " . esc_attr($attr['advanceborder']['bottomstyle']) . " " . esc_attr($attr['advanceborder']['bottomcolor']) . ";";
+        }
 
-    // Left border
-    if (isset($attr['advanceborder']['leftwidth'], $attr['advanceborder']['leftstyle'], $attr['advanceborder']['leftcolor'])) {
-        $css .= "border-left: " . esc_attr($attr['advanceborder']['leftwidth']) . " " . esc_attr($attr['advanceborder']['leftstyle']) . " " . esc_attr($attr['advanceborder']['leftcolor']) . ";";
-    }
+        // Left border
+        if (isset($attr['advanceborder']['leftwidth'], $attr['advanceborder']['leftstyle'], $attr['advanceborder']['leftcolor'])) {
+            $css .= "border-left: " . esc_attr($attr['advanceborder']['leftwidth']) . " " . esc_attr($attr['advanceborder']['leftstyle']) . " " . esc_attr($attr['advanceborder']['leftcolor']) . ";";
+        }
 
-    // Right border
-    if (isset($attr['advanceborder']['rightwidth'], $attr['advanceborder']['rightstyle'], $attr['advanceborder']['rightcolor'])) {
-        $css .= "border-right: " . esc_attr($attr['advanceborder']['rightwidth']) . " " . esc_attr($attr['advanceborder']['rightstyle']) . " " . esc_attr($attr['advanceborder']['rightcolor']) . ";";
-    }
+        // Right border
+        if (isset($attr['advanceborder']['rightwidth'], $attr['advanceborder']['rightstyle'], $attr['advanceborder']['rightcolor'])) {
+            $css .= "border-right: " . esc_attr($attr['advanceborder']['rightwidth']) . " " . esc_attr($attr['advanceborder']['rightstyle']) . " " . esc_attr($attr['advanceborder']['rightcolor']) . ";";
+        }
 
-    // Apply individual border-radius values if not a circle
-    if (isset($attr['advanceRadius']['top'], $attr['advanceRadius']['right'], $attr['advanceRadius']['bottom'], $attr['advanceRadius']['left'])) {
-        $css .= "border-radius: " . esc_attr($attr['advanceRadius']['top']) . " " . esc_attr($attr['advanceRadius']['right']) . " " . esc_attr($attr['advanceRadius']['bottom']) . " " . esc_attr($attr['advanceRadius']['left']) . ";";
-    }
+        // Apply individual border-radius values if not a circle
+        if (isset($attr['advanceRadius']['top'], $attr['advanceRadius']['right'], $attr['advanceRadius']['bottom'], $attr['advanceRadius']['left'])) {
+            $css .= "border-radius: " . esc_attr($attr['advanceRadius']['top']) . " " . esc_attr($attr['advanceRadius']['right']) . " " . esc_attr($attr['advanceRadius']['bottom']) . " " . esc_attr($attr['advanceRadius']['left']) . ";";
+        }
        // Box-shadow
        if (isset($attr['boxShadow']) && $attr['boxShadow']) {
            $boxShadowColor = 'rgba(' . implode(', ', [
@@ -210,84 +209,7 @@ function generate_inline_image_flip_styles($attr) {
         $css .= "transition: all 0.3s ease-in-out;";
             
     $css .= "}";
-
-   $css .= "$wrapper .vayu_blocks_image_flip_wrapper-for-front{";
-
-        if ($attr['imageborderradiuscircle'] === 'circle') {
-            // Apply a border-radius of 50% for circular images
-            $css .= "border-radius: 50%;";
-        } else {
-            // Apply individual border-radius values if not a circle
-            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
-                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
-            }
-        }
-
-        $css .= "height: 100%;";
-
-         // Top border
-         if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
-            $css .= "border-top: " . esc_attr($attr['imageborder']['topwidth']) . " " . esc_attr($attr['imageborder']['topstyle']) . " " . esc_attr($attr['imageborder']['topcolor']) . ";";
-        }
-
-        // Bottom border
-        if (isset($attr['imageborder']['bottomwidth'], $attr['imageborder']['bottomstyle'], $attr['imageborder']['bottomcolor'])) {
-            $css .= "border-bottom: " . esc_attr($attr['imageborder']['bottomwidth']) . " " . esc_attr($attr['imageborder']['bottomstyle']) . " " . esc_attr($attr['imageborder']['bottomcolor']) . ";";
-        }
-
-        // Left border
-        if (isset($attr['imageborder']['leftwidth'], $attr['imageborder']['leftstyle'], $attr['imageborder']['leftcolor'])) {
-            $css .= "border-left: " . esc_attr($attr['imageborder']['leftwidth']) . " " . esc_attr($attr['imageborder']['leftstyle']) . " " . esc_attr($attr['imageborder']['leftcolor']) . ";";
-        }
-
-        // Right border
-        if (isset($attr['imageborder']['rightwidth'], $attr['imageborder']['rightstyle'], $attr['imageborder']['rightcolor'])) {
-            $css .= "border-right: " . esc_attr($attr['imageborder']['rightwidth']) . " " . esc_attr($attr['imageborder']['rightstyle']) . " " . esc_attr($attr['imageborder']['rightcolor']) . ";";
-        }
-
-        $overlayalignmenttablet = explode(' ', $attr['overlayalignment']); // Split the string
-        $vertical = $overlayalignmenttablet[0]; // First part (vertical)
-        $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
-
-        $css .= "align-items: " . (
-            $vertical === 'center' ? 'center' :
-            ($vertical === 'top' ? 'self-start' :
-            ($vertical === 'bottom' ? 'self-end' : 'center'))
-        ) . ";";
-
-        $css .= "justify-content: " . (
-            $horizontal === 'center' ? 'center' :
-            ($horizontal === 'left' ? 'flex-start' :
-            ($horizontal === 'right' ? 'flex-end' : 'center'))
-        ) . ";";
-        
-   $css .= "}";
-
-
-    $transformstyle = 'none';
-    // Determine the transform style based on the image hover effect
-    if ($attr['imagehvreffect'] === 'flip-front') {
-        $transformstyle = 'rotateY(180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-front-left') {
-        $transformstyle = 'rotateY(-180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-back') {
-        $transformstyle = 'rotateX(180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-back-bottom') {
-        $transformstyle = 'rotateX(-180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-z') {
-        $transformstyle = 'rotateX(180deg) rotateZ(90deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-x') {
-        $transformstyle = 'rotateY(180deg) rotateZ(90deg)';
-    }
     
-    $css .= "$wrapper .vayu_blocks_flip-box-back {";
-        $css .= "transform: $transformstyle;"; // Ensure $transformstyle is valid
-    $css .= "}";
-    
-   $overlayalignmenttablet = explode(' ', $attr['overlayalignmenttablet']); // Split the string
-   $vertical = $overlayalignmenttablet[0]; // First part (vertical)
-   $horizontal = $overlayalignmenttablet[1]; // Second part (horizontal)
-   
     //for tablet
     $css .= "@media (max-width: 1024px) {
 
@@ -315,40 +237,22 @@ function generate_inline_image_flip_styles($attr) {
             border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusTablet']) ? esc_attr($attr['pg_postRightBorderRadiusTablet']) . "px" : '') . ";
    
         }
-
-        $wrapper .vayu_blocks_image_flip_wrapper-for-front{
-            align-items: " . (
-                $vertical === 'center' ? 'center' :
-                ($vertical === 'top' ? 'self-start' :
-                ($vertical === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
-
-            justify-content: " . (
-                $horizontal === 'center' ? 'center' :
-                ($horizontal === 'left' ? 'flex-start' :
-                ($horizontal === 'right' ? 'flex-end' : 'center'))
-            ) . ";
-        }
         
     }";
     
     // Add media query for tablet screens
     $css .= "@media (max-width: 768px) {";
-        $css .= ".th-image-flip-main-wp-editor-wrapper {";
+        $css .= ".th-front-image-main-wp-editor-wrapper {";
             $css .= "width: " . esc_attr($attr['customWidthTablet']) . esc_attr($attr['customWidthUnit']) . ";";
         $css .= "}";
     $css .= "}";
     
     // Add media query for Mobile screens
     $css .= "@media (max-width: 300px) {";
-        $css .= ".th-image-flip-main-wp-editor-wrapper {";
+        $css .= ".th-front-image-main-wp-editor-wrapper {";
             $css .= "width: " . esc_attr($attr['customWidthMobile']) . esc_attr($attr['customWidthUnit']) . ";";
         $css .= "}";
     $css .= "}";
-    
-    $overlayalignmentmobile = explode(' ', $attr['overlayalignmentmobile']); // Split the string
-    $verticalmobile = $overlayalignmentmobile[0]; // First part (vertical)
-    $horizontalmobile = $overlayalignmentmobile[1]; // Second part (horizontal)
 
     //for mobile
     $css .= "@media (max-width: 400px) {
@@ -374,20 +278,6 @@ function generate_inline_image_flip_styles($attr) {
             border-bottom-right-radius: " . (isset($attr['pg_postLeftBorderRadiusMobile']) ? esc_attr($attr['pg_postLeftBorderRadiusMobile']) . "px" : '') . ";
             border-top-right-radius: " . (isset($attr['pg_postRightBorderRadiusMobile']) ? esc_attr($attr['pg_postRightBorderRadiusMobile']) . "px" : '') . ";
           
-        }
-
-        $wrapper .vayu_blocks_image_flip_wrapper-for-front{
-            align-items: " . (
-                $verticalmobile === 'center' ? 'center' :
-                ($verticalmobile === 'top' ? 'self-start' :
-                ($verticalmobile === 'bottom' ? 'self-end' : 'center'))
-            ) . ";
-
-            justify-content: " . (
-                $horizontalmobile === 'center' ? 'center' :
-                ($horizontalmobile === 'left' ? 'flex-start' :
-                ($horizontalmobile === 'right' ? 'flex-end' : 'center'))
-            ) . ";  
         }
 
     }";

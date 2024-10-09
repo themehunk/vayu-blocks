@@ -634,5 +634,51 @@ return array(
         'borderradiusHvrRightMobile'=> 20,
         'borderradiusHvrBottomMobile'=> 20,
         'borderradiusHvrLeftMobile'=> 20,
+                // advance Border
+                'advanceborder' => array(
+                    'topcolor' => '',
+                    'topwidth' => '0px',
+                    'topstyle' => 'solid',
+                    'bottomcolor' => '',
+                    'bottomwidth' => '0px',
+                    'bottomstyle' => 'solid',
+                    'leftcolor' => '',
+                    'leftwidth' => '0px',
+                    'leftstyle' => 'solid',
+                    'rightcolor' => '',
+                    'rightwidth' => '0px',
+                    'rightstyle' => 'solid',
+                ),
+        
+            // advance Border Radius
+                'advanceRadius' => array(
+                    'top' => '4px',
+                    'bottom' => '4px',
+                    'left' => '4px',
+                    'right' => '4px',
+                ),
+                // advance Border
+                'advanceborderhvr' => array(
+                    'topcolor' => '',
+                    'topwidth' => '0px',
+                    'topstyle' => 'solid',
+                    'bottomcolor' => '',
+                    'bottomwidth' => '0px',
+                    'bottomstyle' => 'solid',
+                    'leftcolor' => '',
+                    'leftwidth' => '0px',
+                    'leftstyle' => 'solid',
+                    'rightcolor' => '',
+                    'rightwidth' => '0px',
+                    'rightstyle' => 'solid',
+                ),
+        
+        // advance Border Radius
+            'advanceRadiushvr' => array(
+                'top' => '4px',
+                'bottom' => '4px',
+                'left' => '4px',
+                'right' => '4px',
+            ),
 );
 ?>

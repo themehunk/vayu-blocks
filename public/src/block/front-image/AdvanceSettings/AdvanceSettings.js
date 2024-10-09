@@ -368,11 +368,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             'width':attributes.customWidth + attributes.customWidthUnit,
             
         };
-        customheight = {
-                
-            'height':attributes.customHeight + attributes.customHeightUnit,
-            
-        };
 
     }
 
@@ -383,11 +378,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             'width':attributes.customWidthTablet + attributes.customWidthUnit,
             
         };
-        customheight = {
-                
-            'height':attributes.customHeightTablet + attributes.customHeightUnit,
-            
-        };
+       
 
     }
 
@@ -396,11 +387,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         customwidth = {
                 
             'width':attributes.customWidthMobile + attributes.customWidthUnit,
-            
-        };
-        customheight = {
-                
-            'height':attributes.customHeightMobile + attributes.customHeightUnit,
             
         };
     
@@ -412,7 +398,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     // Prepare the style object
     const styles = {
         ...customwidth,
-        ...customheight,
         ...paddingStyles,
         ...marginStyles,  
         
@@ -473,100 +458,11 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...styles,
         ...(isHovered ? filteredHoverStyles : {}),
     };
-   
-    let transformstyle = 'none'; // Default value
-
-    if (attributes.imagehvreffect === 'flip-front') {
-        transformstyle = 'rotateY(180deg)'; // Set flip effect if condition is true
-    }else if(attributes.imagehvreffect === 'flip-front-left'){
-        transformstyle = 'rotateY(-180deg)';
-    }else if (attributes.imagehvreffect === 'flip-back') {
-        transformstyle = 'rotateX(180deg)';
-    } 
-    else if (attributes.imagehvreffect === 'flip-back-bottom') {
-        transformstyle = 'rotateX(-180deg)';
-    }
-    else if (attributes.imagehvreffect === 'flip-z') {
-        transformstyle = 'rotateX(180deg) rotateZ(90deg)';
-    }
-    else if (attributes.imagehvreffect === 'flip-x') {
-        transformstyle = 'rotateY(180deg) rotateZ(90deg)';
-    }
-
-    const [selectedBlockClass, setSelectedBlockClass] = useState(null);
-    
-    const selectedBlock = useSelect((select) => {
-        return select('core/block-editor').getSelectedBlock();
-    });
-    
-    useEffect(() => {
-        if (selectedBlock) {
-            const { attributes, clientId ,name} = selectedBlock;
-            const blockClass = attributes.className || ''; // Get the className of the selected block
-            // Check if the selected block is an inner block
-            if (name === 'vayu-blocks/advance-heading' || name === 'vayu-blocks/advance-button' || name==='vayu-blocks/advance-container') {
-                // Find the parent block (the immediate container)
-                const parentBlockClientIds = select('core/block-editor').getBlockParents(clientId);
-                if (parentBlockClientIds.length > 1) {
-                    // We want the first parent (the front or back image block)
-                    const parentBlockClientId = parentBlockClientIds[1]; // Get the direct parent block
-                    const parentBlock = select('core/block-editor').getBlock(parentBlockClientId);
-                    const parentBlockClass = parentBlock.attributes.className || '';
-                    // Update selectedBlockClass with parent class
-                    setSelectedBlockClass(parentBlockClass);
-                } else {
-                    setSelectedBlockClass(null); // No valid parent found
-                }
-            } else {
-                // Set the class for non-inner blocks
-                setSelectedBlockClass(blockClass);
-               
-            }
-        } else {
-            setSelectedBlockClass(null); // Reset if no block is selected
-        }
-    }, [selectedBlock]);
-    
-
-    let back_z_index = 0;
-    let front_opacity = 1;
-    let back_opacity = 1;
-
-    if(!attributes.selectedanimation){
-        back_opacity=0;
-    }
-
-    if (selectedBlockClass && selectedBlockClass.includes('wp-block-vayu-blocks-image-flip')) {
-        // Do something for the 'wp-block-vayu-blocks-image-flip' class
-        setAttributes({selectedanimation:true});
-        front_opacity=1;
-    } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-front')) {
-        // Do something for the 'vayu_blocks_flip-box-front' class
-        back_z_index = 1;
-        setAttributes({selectedanimation:false});
-        front_opacity=1;
-    } else if (selectedBlockClass && selectedBlockClass.includes('vayu_blocks_flip-box-back')) {
-        // Do something for the 'vayu_blocks_flip-box-back' class
-        back_z_index = 100;
-        back_opacity = 1;
-        transformstyle= 'none';
-        setAttributes({selectedanimation:false});
-        front_opacity=0;
-    } else{
-        back_z_index = 1;
-        front_opacity=1;
-        back_opacity = 1;
-        setAttributes({selectedanimation:true});
-    }
 
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {
             ...mergedStyles,
-           '--back-transform-style': transformstyle, 
-           '--back-z-index' : back_z_index,
-           '--front-opacity' :front_opacity,
-           '--back-opacity' : back_opacity,
         },
 
         onMouseEnter: handleMouseEnter,

@@ -31,7 +31,7 @@
     },
     "imagehvreffect":{
         "type":"string",
-        "default":"none"
+        "default":"flip-front"
     },
     "imagehvrfilter":{
         "type":"string",

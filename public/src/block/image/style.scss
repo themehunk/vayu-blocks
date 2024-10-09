@@ -546,3 +546,8 @@ animation: starburst 2.5s linear infinite;
       54px 54px 28px -10px rgba(34, 33, 81, 0.15);
   }
 }
+
+.vayu_blocks_overlay_main_wrapper_image,
+.vayu_blocks_image__wrapper {
+    transition: transform 0.5s ease; // Adjust the duration and easing as needed
+}
