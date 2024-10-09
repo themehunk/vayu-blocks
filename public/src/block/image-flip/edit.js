@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import './editor.scss';
-import PanelSettings from './AdvanceSettings/PanelSettings';
-import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
-import noimage from '../../../../inc/assets/img/no-image.png';
+import React from 'react';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
+import PanelSettings from './AdvanceSettings/PanelSettings';
+import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
+import './editor.scss';
 
-
-const edit = (props) => {
-    const { attributes, setAttributes,isSelected} = props;
+const edit = ({ attributes, setAttributes,isSelected}) => {
 
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -19,7 +16,6 @@ const edit = (props) => {
 
     // Utility function to generate a unique ID
     const generateUniqueId = () => {
-//        const timestamp = Date.now().toString(36); // Convert current timestamp to base36 (numbers + letters)
         const randomPart = Math.random().toString(36).substring(2, 10); // Generate random alphanumeric string
         return `-${randomPart}`;
     };
@@ -115,7 +111,6 @@ const edit = (props) => {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
 
         }else if (attributes.imagehvreffect === 'flip-x') {
-            
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
         }
     
@@ -135,20 +130,21 @@ const edit = (props) => {
         return ''; // Default case if variablereturn doesn't match
     };
 
-  
     const image_flip_template = [
-        ['vayu-blocks/image', {
+        ['vayu-blocks/front-image', {
             className: `vayu_blocks_flip-box-front ${classname('front')}`,
+            flipSide: 'front',
         }],
-        ['vayu-blocks/image', {
-            className: `vayu_blocks_flip-box-back ${classname('back')}`
+        ['vayu-blocks/front-image', {
+            className: `vayu_blocks_flip-box-back ${classname('back')}`,
+            flipSide: 'back',
         }], 
     ];
 
     return (
         <>
        
-            <PanelSettings attributes={attributes} setAttributes={setAttributes} />
+            <PanelSettings attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}/>
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes}>
                 
                 <div className="vayu-blocks-image-flip-main-container" id={`${attributes.uniqueId}`}>
@@ -156,17 +152,16 @@ const edit = (props) => {
                      <div  className={`vayu_blocks_image_flip_wrapper`} style={vayu_block_flip_box_style_front}>
  
                               
-                     <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
+                        <div className={`vayu_blocks_flip-box-inner ${(attributes.selectedanimation) ? classname('inner') : ''}`}>
 
-                                <InnerBlocks 
-                                    template={image_flip_template} 
-                                    templateLock="all"
-                                />
+                            <InnerBlocks 
+                                template={image_flip_template}  
+                            />
                         </div>
                             
                     </div> 
-
                 </div>
+
             </AdvanceSettings>
         </>
     );

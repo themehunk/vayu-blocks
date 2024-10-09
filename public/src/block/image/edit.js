@@ -1,22 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './editor.scss';
+import { useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+import { ToolbarGroup, ToolbarButton} from '@wordpress/components';
+import { InnerBlocks,MediaUpload, MediaUploadCheck ,MediaPlaceholder,RichText, BlockControls} from '@wordpress/block-editor';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import noimage from '../../../../inc/assets/img/no-image.png';
-import { InnerBlocks } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import {MediaPlaceholder } from '@wordpress/block-editor';
-import { RichText } from '@wordpress/block-editor';
-import { BlockControls } from '@wordpress/block-editor';
-import { ToolbarGroup, ToolbarButton} from '@wordpress/components';
-import { Resizable } from 're-resizable';
+import './editor.scss';
+import DuotoneFilters from './DuotoneFilters';
 
 const edit = (props) => {
-    const { attributes, setAttributes} = props;
+    const { attributes, setAttributes,clientId} = props;
 
     const [rotation, setRotation] = useState(attributes.rotation);
+
+    // Get the parent block's name or ID
+    const parentBlock = useSelect((select) => {
+        const { getBlockParents, getBlock } = select('core/block-editor');
+        const parentIds = getBlockParents(clientId);
+        if (parentIds.length > 0) {
+            const parentBlockId = parentIds[0];
+            const parentBlockDetails = getBlock(parentBlockId);
+            return parentBlockDetails.name; // or return parentBlockId if needed
+        }
+        return null;
+    }, [clientId]);
+
+    setAttributes({parentBlock:parentBlock});
 
     const view = useSelect( select => {
         const { getView } = select( 'vayu-blocks/data' );
@@ -143,6 +153,11 @@ const edit = (props) => {
 
     //main container image style
     const vayu_blocks_image_settings = {
+
+        ...(attributes.overlaybordertype === 'color' && {
+            borderRadius: borderRadius,
+        }),
+
         width: attributes.imagewidth || 'auto',
         height: attributes.imageheight || 'auto',
 
@@ -287,32 +302,34 @@ const edit = (props) => {
     const tiltEffect = (e) => {
         const wrapper = imageWrapperRef.current;
         if (!wrapper) return;
-
+    
         const rect = wrapper.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
-        
-        const tiltX = (y - 0.5) * 5; // Adjust the multiplier for desired effect
-        const tiltY = (x - 0.5) * -5; // Adjust the multiplier for desired effect
-        
+    
+        // Adjust the tilt based on the cursor position
+        const tiltX = (y - 0.5) * -4; // Inverted multiplier for the X tilt
+        const tiltY = (x - 0.5) * 4; // Regular multiplier for the Y tilt
+    
+        // Apply the calculated transformation
         wrapper.style.transform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
     };
-
+    
     const resetTilt = () => {
         const wrapper = imageWrapperRef.current;
         if (wrapper) {
             wrapper.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
         }
     };
-
+    
     useEffect(() => {
         const wrapper = imageWrapperRef.current;
-        if(attributes.wrapperanimation==='vayu_block_styling-effect7'){
-        if (wrapper) {
-            wrapper.addEventListener('mousemove', tiltEffect);
-            wrapper.addEventListener('mouseleave', resetTilt);
+        if (attributes.wrapperanimation === 'vayu_block_styling-effect7') {
+            if (wrapper) {
+                wrapper.addEventListener('mousemove', tiltEffect);
+                wrapper.addEventListener('mouseleave', resetTilt);
+            }
         }
-    }
         return () => {
             if (wrapper) {
                 wrapper.removeEventListener('mousemove', tiltEffect);
@@ -320,6 +337,48 @@ const edit = (props) => {
             }
         };
     }, [attributes.wrapperanimation]);
+    
+    const overlayWrapperRef = useRef(null);
+
+    const overlaytiltEffect = (e) => {
+        const wrapper = overlayWrapperRef.current;
+        if (!wrapper) return;
+    
+        const rect = wrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+    
+        // Adjust the tilt based on the cursor position
+        const tiltX = (y - 0.5) * -6; // Inverted multiplier for the X tilt
+        const tiltY = (x - 0.5) * 6; // Regular multiplier for the Y tilt
+    
+        // Apply the calculated transformation
+        wrapper.style.transform = `perspective(500px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    };
+    
+    const overlayresetTilt = () => {
+        const wrapper = overlayWrapperRef.current;
+        if (wrapper) {
+            wrapper.style.transform = 'perspective(500px) rotateX(0deg) rotateY(0deg)';
+        }
+    };
+    
+    useEffect(() => {
+        const wrapper = overlayWrapperRef.current;
+        if (attributes.wrapperanimation === 'vayu_block_styling-effect7') {
+            if (wrapper) {
+                wrapper.addEventListener('mousemove', overlaytiltEffect);
+                wrapper.addEventListener('mouseleave', overlayresetTilt);
+            }
+        }
+        return () => {
+            if (wrapper) {
+                wrapper.removeEventListener('mousemove', overlaytiltEffect);
+                wrapper.removeEventListener('mouseleave', overlayresetTilt);
+            }
+        };
+    }, [attributes.wrapperanimation]);
+    
 
     return (
         <>
@@ -373,172 +432,7 @@ const edit = (props) => {
                     <div style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div> 
-                        <svg className="vayu_blocks_image_flip-duotone-filters" xmlns="http://www.w3.org/2000/svg">
-                            {/* Orange and Red */}
-                            <filter id="duotone-orange-red">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.8 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.3 0.5"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-                            {/* Red and Green */}
-                            <filter id="duotone-red-green">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.7 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.3 0.8"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.3 0.7"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Black and White */}
-                            <filter id="duotone-black-white">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.5 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 1"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 1"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Blue and Red */}
-                            <filter id="duotone-blue-red">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 0.9"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.2 0.3"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 0.8"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Purple and Yellow */}
-                            <filter id="duotone-purple-yellow">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.5 0.8"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.2 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.5 0.3"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Orange and Teal */}
-                            <filter id="duotone-orange-teal">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.8 0.5"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.5 0.7"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.4 0.5"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Pink and Blue */}
-                            <filter id="duotone-pink-blue">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.7 0.4"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.3 0.5"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.6 0.7"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Cyan and Magenta */}
-                            <filter id="duotone-cyan-magenta">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.0 0.7"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.7 0.2"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.9 0.6"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Yellow and Black */}
-                            <filter id="duotone-yellow-black">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="1 0.3"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.7 0.3"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.1 0.1"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Light Blue and Light Green */}
-                            <filter id="duotone-lightblue-lightgreen">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 0.6"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.8 0.9"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.8 0.6"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                            {/* Gray and Yellow */}
-                            <filter id="duotone-gray-yellow">
-                                <feColorMatrix type="matrix" result="gray"
-                                    values="1 0 0 0 0
-                                            1 0 0 0 0
-                                            1 0 0 0 0
-                                            0 0 0 1 0" />
-                                <feComponentTransfer color-interpolation-filters="sRGB" result="duotone">
-                                    <feFuncR type="table" tableValues="0.6 1"></feFuncR>
-                                    <feFuncG type="table" tableValues="0.6 1"></feFuncG>
-                                    <feFuncB type="table" tableValues="0.6 0.3"></feFuncB>
-                                    <feFuncA type="table" tableValues="0 1"></feFuncA>
-                                </feComponentTransfer>
-                            </filter>
-
-                        </svg>
+                        <DuotoneFilters />
                     </div>
 
                     {attributes.image && (
@@ -557,11 +451,11 @@ const edit = (props) => {
 
                             {attributes.overlayshow && (
                                 <>
-                                <div 
+                                <div ref={overlayWrapperRef} 
                                     className={`vayu_blocks_overlay_main_wrapper_image ${attributes.overlaywrapper} ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 
                                     style={vayu_block_overlay_style}
                                 >
-                                    <div className="vayu_blocks_inner_content">
+                                    <div className="vayu_blocks_inner_content" style={{height:'25%'}}>
                                         <InnerBlocks 
                                             template={image_flip_template} 
                                         />
@@ -608,7 +502,6 @@ const edit = (props) => {
                         </div>
                     )}
                 
-
                 </div>
                 
             </AdvanceSettings>

@@ -1,0 +1,11 @@
+{
+    "uniqueId":{
+        "type":"string"
+    },
+    "globalwidth":{
+        "type":"number"
+    },
+    "parentBlock":{
+        "type":"string"
+    }
+}

@@ -97,9 +97,15 @@ class Vayu_blocks_image {
         } elseif ($attributes['animationsettings'] === 'one-time') {
             $animation_classname = $attributes['imagehvranimation'] . 'onetime';
         }
+
+        $wrapperanimation = '';
+        if($attributes['wrapperanimation'] === 'vayu_block_styling-effect7'){
+            $wrapperanimation = 'vayu_block_styling-overlay-effect'; 
+        }
+
         $imagemaskshape = isset($attributes['maskshape']) && $attributes['maskshape'] !== 'none' ? 'maskshapeimage' : '';
 
-        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image ' . $overlaywrapper .' ' . $imageHvrEffect . ' ' . $animation_classname . ' ' . $imagemaskshape . '">';
+        $overlay .= '<div class="vayu_blocks_overlay_main_wrapper_image '. $wrapperanimation .' ' . $overlaywrapper .' ' . $imageHvrEffect . ' ' . $animation_classname . ' ' . $imagemaskshape . '">';
             $overlay .= '<div class="vayu_blocks_inner_content">';
                 $overlay .= $this->content;
             $overlay .= '</div>';  

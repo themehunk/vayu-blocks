@@ -122,7 +122,6 @@ class Vayu_Block_Plugin {
                     array('wp-blocks', 'wp-element', 'wp-editor'),
                     filemtime(VAYU_BLOCKS_PATH . '/public/build/' . $block['script_handle'] . '.js')
                 );
-    
                 // Register editor style if defined
                 if (isset($block['editor_style']) && !empty($block['editor_style'])) {
                     wp_register_style(
@@ -143,8 +142,10 @@ class Vayu_Block_Plugin {
                     );
                 }
     
-                // Localize the script with data if present
-                if (isset($block['localize_data']) && !empty($block['localize_data'])) {
+ 
+
+                // Localize the script with data
+                if ( isset( $block['localize_data'] ) && ! is_null( $block['localize_data'] ) ) {
                     wp_localize_script(
                         $block['script_handle'],
                         'ThBlockData',
@@ -178,14 +179,7 @@ class Vayu_Block_Plugin {
     
 
     public function vayu_register_blocks_new() {
-
-        //mega menu
-        register_block_type(
-            __DIR__ . '/public/build/block/mega-menu',
-            array(
-                'render_callback' => 'vayu_blocks_mega_menu_render',
-            )
-        );
+        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
 
         //image-flip
         register_block_type(
@@ -208,6 +202,7 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/post-grid',
             array(
                 'render_callback' => 'post_grid_render',
+                'status'     => $options['postgrid']['isActive'],
             )
         );
 
@@ -216,6 +211,16 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/image',
             array(
                 'render_callback' => 'vayu_block_image_render',
+                'status'     => $options['image']['isActive'],
+            )
+        );
+
+        //front image
+        register_block_type(
+            __DIR__ . '/public/build/block/front-image',
+            array(
+                'render_callback' => 'vayu_blocks_front_image_render',
+                'status'     => $options['front-image']['isActive'],
             )
         );
         //wrapper
@@ -270,19 +275,6 @@ class Vayu_Block_Plugin {
     <?php }
 
 }
-
-
-function enqueue_interactivity_on_frontend() {
-    // Enqueue wp-interactivity on the frontend
-    wp_enqueue_script_module( 
-        'vayu-blocks-mega-menu-view-script-module-', 
-        plugins_url( 'public/src/block/mega-menu/view.js', __FILE__ ), // Get the correct URL to the file
-        array(), 
-        '1.0.0' 
-    );
-}
-add_action( 'wp_enqueue_scripts', 'enqueue_interactivity_on_frontend' );
-
 
 
 function vayu_block_plugin_init( ) {

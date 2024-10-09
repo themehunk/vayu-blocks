@@ -225,6 +225,15 @@ function getDescription(key,value='') {
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
 
+                    case 'image':
+                    return {
+                        value: vayublock.options.image.isActive,
+                        icon: <RxButton />,
+                        description: __(' A customizable block that adds engaging animations to images, enhancing visual appeal and user interaction on web pages.', 'vayu-blocks'),
+                        link1: '#',
+                        link2: 'https://themehunk.com/docs/vayu-blocks/#button'
+                    };
+
                     case 'megaMenu':
                     return {
                         value: vayublock.options.imageFlip.isActive,

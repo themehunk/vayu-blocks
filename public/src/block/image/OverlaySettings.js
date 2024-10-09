@@ -13,7 +13,6 @@ import {
     GradientPicker,
 	ButtonGroup,
 	Icon,
-
 } from '@wordpress/components';
 import {MediaPlaceholder} from '@wordpress/block-editor';
 

@@ -16,7 +16,8 @@ require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-slider/advance-slider.php
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/advance-slider/advance-slider-style.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/image-flip/image-flip.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/image/image.php';
-require_once VAYU_BLOCKS_DIR_PATH .'inc/render/mega-menu/mega-menu.php';
+require_once VAYU_BLOCKS_DIR_PATH .'inc/render/front-image/front-image.php';
+require_once VAYU_BLOCKS_DIR_PATH .'inc/render/front-image/front-image-style.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/image-flip/image-flip-style.php';
 require_once VAYU_BLOCKS_DIR_PATH .'inc/render/image/image-style.php';
 require_once VAYU_BLOCKS_DIR_PATH . '/inc/admin-api.php';
