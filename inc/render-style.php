@@ -91,6 +91,10 @@ function vayu_enqueue_google_fonts($font_family_string)
 function vayu_cycle_through_blocks( $blocks, $post_id ) {
 	$css = '';
 	foreach ( $blocks as $block ) {
+		if ( $block['blockName'] === 'vayu-blocks/front-image' ) {
+			$css .= generate_inline_front_image_styles($block['attrs']);
+		}
+
 		if ( $block['blockName'] === 'vayu-blocks/post-grid' ) {
 			 $css .= generate_inline_styles($block['attrs']);
 	 	}

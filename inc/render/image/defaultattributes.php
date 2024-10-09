@@ -95,6 +95,7 @@ return array(
             'borderimagesize'=> 30,
             'imagebackgroundSize' => 'cover',
             'overlaywidth'=>'95%',
+            'borderimageoutset' => 5,
             'overlayheight'=>'90%',
             'overlaywidthtablet'=>'95%',
             'overlayheighttablet'=>'90%',

@@ -39,7 +39,8 @@ import {
 
 const PanelSettings = ({
     attributes,
-    setAttributes
+    setAttributes,
+	isSelected
 }) => {
 
 
@@ -1846,7 +1847,9 @@ const PanelSettings = ({
     };
 
     return (
+		
 		<Fragment>
+			{isSelected && ( 
 			<InspectorControls>
 				<div className='th-block-ins th-button-panel'>
 			<InsSettingHeader value={ tab }
@@ -2329,8 +2332,9 @@ const PanelSettings = ({
 			}
 			</div>
 			</InspectorControls>  
-
+			)}
     	</Fragment>
+		
 	);
 }
 

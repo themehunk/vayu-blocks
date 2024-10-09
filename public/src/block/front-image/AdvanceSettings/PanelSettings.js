@@ -19,9 +19,10 @@ import {
     Suspense
 } from '@wordpress/element';
 
-import PostSettings from '../PostSettings';
-import Editor from '../Editor';
+import SlideSettings from '../SlideSettings';
 import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+
+
 /**
  * Internal dependencies
  */
@@ -38,7 +39,8 @@ import {
 
 const PanelSettings = ({
     attributes,
-    setAttributes
+    setAttributes,
+	isSelected
 }) => {
 
 
@@ -62,8 +64,9 @@ const PanelSettings = ({
 		}, {});
 	  };
     
-    const [ tab, setTab ] = useState( 'setting' );
+    const [ tab, setTab ] = useState( 'slide' );
 	const [ hover, setHover ] = useState( 'normal' );
+
 
 	const customTooltipFontsize = value => `${value}${attributes.fontSizeUnit}`;
 	const customTooltiplineHeight = value => `${value}${attributes.lineHeightUnit}`;
@@ -1538,62 +1541,11 @@ const PanelSettings = ({
     const prevUnitTabletRef = useRef(attributes.customWidthUnitTablet);
     const prevUnitMobileRef = useRef(attributes.customWidthUnitMobile);
 
-    useEffect(() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
 
-        // Get the previous and current units
-        const prevUnit = prevUnitRef.current;
-        const prevUnitTablet = prevUnitTabletRef.current;
-        const prevUnitMobile = prevUnitMobileRef.current;
-
-        const currentUnit = attributes.customWidthUnit;
-        const currentTabletUnit = attributes.customWidthUnitTablet;
-        const currentMobileUnit = attributes.customWidthUnitMobile;
-
-        // Update attributes if the unit has changed
-        if (prevUnit !== currentUnit) {
-            setAttributes({
-                customWidth: updateWidth(currentUnit),
-            });
-            prevUnitRef.current = currentUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitTablet !== currentTabletUnit) {
-            setAttributes({
-                customWidthTablet: updateWidth(currentTabletUnit),
-            });
-            prevUnitTabletRef.current = currentTabletUnit; // Update the previous unit reference
-        }
-
-        if (prevUnitMobile !== currentMobileUnit) {
-            setAttributes({
-                customWidthMobile: updateWidth(currentMobileUnit),
-            });
-            prevUnitMobileRef.current = currentMobileUnit; // Update the previous unit reference
-        }
-
-    }, [attributes.customWidthUnit, attributes.customWidthUnitTablet, attributes.customWidthUnitMobile, setAttributes]);
-
-    // Compute max custom width unit
-    const maxcustomWidthUnit = (() => {
-        const updateWidth = (unit) => {
-            if (unit === 'px') return 1200;
-            if (unit === 'em') return 50;
-            if (unit === '%') return 100;
-            return '';
-        };
-
-        return updateWidth(attributes.customWidthUnit);
-    })();
-	
 	// unit switch max value
 	const [customWidthUnit, setcustomWidthUnit] = useState('%');
-	// const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomWidthUnit = attributes.customWidthUnit=== 'px' ? 1200 : attributes.customWidthUnit=== 'em' ? 50 : attributes.customWidthUnit=== '%' ? 100:'';
+	const maxcustomHeightUnit = attributes.customHeightUnit=== 'px' ? 1200 : attributes.customHeightUnit=== 'em' ? 50 : attributes.customHeightUnit=== '%' ? 100:'';
 
 	const [heightUnit, setheightUnit] = useState('px');
 	const maxheightUnit = heightUnit === 'px' ? 1500 : heightUnit === 'em' ? 50 : heightUnit === '%' ? 100:'';
@@ -1661,11 +1613,11 @@ const PanelSettings = ({
 		}
 	};
 
-
 	// Global Settings Vayu Blocks
 	// const globalcontainerWidth = ThBlockData.container_width;
     // setAttributes({globalwidth:globalcontainerWidth});
 	const customTooltipCustomWidth = value => `${value}${attributes.customWidthUnit}`;
+	const customTooltipCustomHeight = value => `${value}${attributes.customHeightUnit}`;
 	const getCustomWidth = () => {
 		switch ( getView ) {
 		case 'Desktop':
@@ -1688,8 +1640,30 @@ const PanelSettings = ({
 			setAttributes({ customWidthMobile: value });
 		}
 	};
-
 	
+	const getCustomHeight = () => {
+		switch ( getView ) {
+		case 'Desktop':
+			return attributes.customHeight;
+		case 'Tablet':
+			return attributes.customHeightTablet;
+		case 'Mobile':
+			return attributes.customHeightMobile;
+		default:
+			return undefined;
+		}
+	};
+
+	const changeCustomHeight = value => {
+		if ( 'Desktop' === getView ) {
+			setAttributes({ customHeight: value, customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Tablet' === getView ) {
+			setAttributes({ customHeightTablet: value, customHeightMobile: value });
+		} else if ( 'Mobile' === getView ) {
+			setAttributes({ customHeightMobile: value });
+		}
+	};
+
 	const vayu_blocks_handleadvanceBorderChange = (newBorders) => {
         const updatedAttributes = {};
         const updatedAttributesborderradius = {};
@@ -1872,22 +1846,18 @@ const PanelSettings = ({
         setAttributes({ advanceborderhvr: updatedAttributes });
     };
 
-
     return (
+		
 		<Fragment>
+			{isSelected && ( 
 			<InspectorControls>
 				<div className='th-block-ins th-button-panel'>
 			<InsSettingHeader value={ tab }
 						options={[
 							{
-								label: __( 'Setting', 'vayu-blocks' ),
-								value: 'setting',
-								icon: 'colorwand'
-							},
-							{
-								label: __( 'Style', 'vayu-blocks' ),
-								value: 'style',
-								icon: 'diamond'
+								label: __( 'Background', 'vayu-blocks' ),
+								value: 'slide',
+								icon: 'slide'
 							},
 							{
 								label: __( 'Advanced', 'vayu-blocks' ),
@@ -1897,10 +1867,11 @@ const PanelSettings = ({
 						]}
 						onChange={ setTab }
 				/>
-				{'setting' === tab && (
-									<Fragment>
-										<PostSettings attributes={attributes} setAttributes={setAttributes} />
-									</Fragment>
+
+				{'slide' === tab && (
+					<Fragment>
+						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
+					</Fragment>
 
 				) || 'advanced' === tab && (
 					<Fragment>
@@ -1908,8 +1879,11 @@ const PanelSettings = ({
 						<PanelBody title={ __( 'Layout', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
-						>           
-							<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
+						>     
+
+							
+
+								<Suspense fallback={<Placeholder><Spinner/></Placeholder>}>
 								<ResponsiveControl
 								label={ __( 'Custom Width', 'vayu-blocks' ) }
 								>	
@@ -1930,7 +1904,10 @@ const PanelSettings = ({
 								</ResponsiveControl>
 								</Suspense>
 
+
+
 							<ResponsiveControl label={__('Padding', 'your-text-domain')}>
+
 
 								<UnitChooser
 									value={attributes.paddingUnit}
@@ -1979,7 +1956,7 @@ const PanelSettings = ({
 								/>
 							</ResponsiveControl>
 
-							<ResponsiveControl
+							{/* <ResponsiveControl
 								label={ __( 'Z-index', 'vayu-blocks' ) }
 								>	
 								<RangeControl
@@ -1991,7 +1968,7 @@ const PanelSettings = ({
 									max={ 999999 }
 									allowReset={ true }
 								/>
-							</ResponsiveControl>
+							</ResponsiveControl> */}
 
 						</PanelBody>
 
@@ -1999,21 +1976,21 @@ const PanelSettings = ({
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
-							<HoverControl value={ hover }
-								options={[
-									{
-										label: __( 'Normal', 'vayu-blocks' ),
-										value: 'normal'
-									},
-									{
-										label: __( 'Hover', 'vayu-blocks' ),
-										value: 'hover'
-									}
-								]}
-								onChange={ setHover } />
-									
-							{ 'normal' ===  hover &&  (	
-								<>
+						<HoverControl value={ hover }
+							options={[
+								{
+									label: __( 'Normal', 'vayu-blocks' ),
+									value: 'normal'
+								},
+								{
+									label: __( 'Hover', 'vayu-blocks' ),
+									value: 'hover'
+								}
+							]}
+							onChange={ setHover } />
+								
+						{ 'normal' ===  hover &&  (	
+							<>
 								<Vayu_Block_Border_Control
                                     value={{border:{
                                         top:{
@@ -2058,75 +2035,75 @@ const PanelSettings = ({
                                     para=""
                                 /> 
 
-										<ControlPanelControl
-										label={ __( 'Box Shadow', 'vayu-blocks' ) }
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										resetValues={ {
-											boxShadow: false,
-											boxShadowColor: undefined,
-											boxShadowColorOpacity: 50,
-											boxShadowBlur: 5,
-											boxShadowSpread: 1,
-											boxShadowHorizontal: 0,
-											boxShadowVertical: 0
-										} }
-										onClick={ () => setAttributes({ boxShadow: true }) }
-									>
-									
-										<ColorGradientControl
-											label={ __( 'Shadow Color', 'vayu-blocks' ) }
-											colorValue={ attributes.boxShadowColor }
-											onColorChange={ e => setAttributes({ boxShadowColor: e }) }
-											enableAlpha={true} 
-										/>
+									<ControlPanelControl
+									label={ __( 'Box Shadow', 'vayu-blocks' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									resetValues={ {
+										boxShadow: false,
+										boxShadowColor: undefined,
+										boxShadowColorOpacity: 50,
+										boxShadowBlur: 5,
+										boxShadowSpread: 1,
+										boxShadowHorizontal: 0,
+										boxShadowVertical: 0
+									} }
+									onClick={ () => setAttributes({ boxShadow: true }) }
+								>
+								
+									<ColorGradientControl
+										label={ __( 'Shadow Color', 'vayu-blocks' ) }
+										colorValue={ attributes.boxShadowColor }
+										onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+										enableAlpha={true} 
+									/>
 
-										<RangeControl
-											label={ __( 'Opacity', 'vayu-blocks' ) }
-											value={ attributes.boxShadowColorOpacity }
-											onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
-											min={ 0 }
-											max={ 100 }
-										/>
+									<RangeControl
+										label={ __( 'Opacity', 'vayu-blocks' ) }
+										value={ attributes.boxShadowColorOpacity }
+										onChange={ e => setAttributes({ boxShadowColorOpacity: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
 
-										<RangeControl
-											label={ __( 'Blur', 'vayu-blocks' ) }
-											value={ attributes.boxShadowBlur }
-											onChange={ e => setAttributes({ boxShadowBlur: e }) }
-											min={ 0 }
-											max={ 100 }
-										/>
+									<RangeControl
+										label={ __( 'Blur', 'vayu-blocks' ) }
+										value={ attributes.boxShadowBlur }
+										onChange={ e => setAttributes({ boxShadowBlur: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
 
-										<RangeControl
-											label={ __( 'Spread', 'vayu-blocks' ) }
-											value={ attributes.boxShadowSpread }
-											onChange={ e => setAttributes({ boxShadowSpread: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
+									<RangeControl
+										label={ __( 'Spread', 'vayu-blocks' ) }
+										value={ attributes.boxShadowSpread }
+										onChange={ e => setAttributes({ boxShadowSpread: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
 
-										<RangeControl
-											label={ __( 'Horizontal', 'vayu-blocks' ) }
-											value={ attributes.boxShadowHorizontal }
-											onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
+									<RangeControl
+										label={ __( 'Horizontal', 'vayu-blocks' ) }
+										value={ attributes.boxShadowHorizontal }
+										onChange={ e => setAttributes({ boxShadowHorizontal: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
 
-										<RangeControl
-											label={ __( 'Vertical', 'vayu-blocks' ) }
-											value={ attributes.boxShadowVertical }
-											onChange={ e => setAttributes({ boxShadowVertical: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
-										</ControlPanelControl>	
-								</>
+									<RangeControl
+										label={ __( 'Vertical', 'vayu-blocks' ) }
+										value={ attributes.boxShadowVertical }
+										onChange={ e => setAttributes({ boxShadowVertical: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+									</ControlPanelControl>	
+							</>
 
-							) 	|| 'hover' ===  hover && (
-								<>
-									<Vayu_Block_Border_Control
-                                    	value={{border:{
+						) 	|| 'hover' ===  hover && (
+							<>
+								<Vayu_Block_Border_Control
+                                    value={{border:{
                                         top:{
                                             color: attributes.advanceborderhvr.topcolor,
                                             width: attributes.advanceborderhvr.topwidth,
@@ -2169,254 +2146,100 @@ const PanelSettings = ({
                                     para=""
                                 /> 
 
-										<ControlPanelControl
-										label={ __( 'Box Shadow', 'vayu-blocks' ) }
-										attributes={ attributes }
-										setAttributes={ setAttributes }
-										resetValues={ {
-											boxShadowHvr: false,
-											boxShadowColorHvr: undefined,
-											boxShadowColorOpacityHvr: 50,
-											boxShadowBlurHvr: 5,
-											boxShadowSpreadHvr: 1,
-											boxShadowHorizontalHvr: 0,
-											boxShadowVerticalHvr: 0
-										} }
-										onClick={ () => setAttributes({ boxShadowHvr: true }) }
-									>
-									
-										<ColorGradientControl
-											label={ __( 'Shadow Color', 'vayu-blocks' ) }
-											colorValue={ attributes.boxShadowColorHvr }
-											onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
-											enableAlpha={true} 
-										/>
-
-										<RangeControl
-											label={ __( 'Opacity', 'vayu-blocks' ) }
-											value={ attributes.boxShadowColorOpacityHvr }
-											onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
-											min={ 0 }
-											max={ 100 }
-										/>
-
-										<RangeControl
-											label={ __( 'Blur', 'vayu-blocks' ) }
-											value={ attributes.boxShadowBlurHvr }
-											onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
-											min={ 0 }
-											max={ 100 }
-										/>
-
-										<RangeControl
-											label={ __( 'Spread', 'vayu-blocks' ) }
-											value={ attributes.boxShadowSpreadHvr }
-											onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
-
-										<RangeControl
-											label={ __( 'Horizontal', 'vayu-blocks' ) }
-											value={ attributes.boxShadowHorizontalHvr }
-											onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
-
-										<RangeControl
-											label={ __( 'Vertical', 'vayu-blocks' ) }
-											value={ attributes.boxShadowVerticalHvr }
-											onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
-											min={ -100 }
-											max={ 100 }
-										/>
-										</ControlPanelControl>
-
-								</>
-							)
-							}
-						</PanelBody>
-
-						<PanelBody title={ __( 'Background', 'vayu-blocks' ) }
-							initialOpen={ false }
-							className="th-button-panel"
-						> 
-
-							<HoverControl value={ hover }
-								options={[
-									{
-										label: __( 'Normal', 'vayu-blocks' ),
-										value: 'normal'
-									},
-									{
-										label: __( 'Hover', 'vayu-blocks' ),
-										value: 'hover'
-									}
-								]}
-								onChange={ setHover } />
-							
-							{ 'normal' ===  hover &&  (
-							
-							<BackgroundSelectorControl
-										backgroundType={ attributes.backgroundType }
-										backgroundColor={ attributes.backgroundColor }
-										image={ attributes.backgroundImage }
-									//	gradient={ attributes.backgroundGradient }
-										focalPoint={ attributes.backgroundPosition }
-										backgroundAttachment={ attributes.backgroundAttachment }
-										backgroundRepeat={ attributes.backgroundRepeat }
-										backgroundSize={ attributes.backgroundSize }
-										changeBackgroundType={ value => setAttributes({ backgroundType: value }) }
-										changeImage={ media => {
-											setAttributes({
-												backgroundImage: pick( media, [ 'id', 'url' ])
-											});
-										}}
-										removeImage={ () => setAttributes({ backgroundImage: undefined })}
-										changeColor={ value => setAttributes({ backgroundColor: value })}
-										changeGradient={ value => setAttributes({ backgroundGradient: value }) }
-										changeBackgroundAttachment={ value => setAttributes({ backgroundAttachment: value })}
-										changeBackgroundRepeat={ value => setAttributes({ backgroundRepeat: value })}
-										changeFocalPoint={ value => setAttributes({ backgroundPosition: value }) }
-										changeBackgroundSize={ value => setAttributes({ backgroundSize: value }) }
-									/>
+									<ControlPanelControl
+									label={ __( 'Box Shadow', 'vayu-blocks' ) }
+									attributes={ attributes }
+									setAttributes={ setAttributes }
+									resetValues={ {
+										boxShadowHvr: false,
+										boxShadowColorHvr: undefined,
+										boxShadowColorOpacityHvr: 50,
+										boxShadowBlurHvr: 5,
+										boxShadowSpreadHvr: 1,
+										boxShadowHorizontalHvr: 0,
+										boxShadowVerticalHvr: 0
+									} }
+									onClick={ () => setAttributes({ boxShadowHvr: true }) }
+								>
 								
-							) || 'hover' ===  hover && (
-								<>
-								<BackgroundSelectorControl
-								backgroundType={ attributes.backgroundTypeHvr }
-								backgroundColor={ attributes.backgroundColorHvr }
-								image={ attributes.backgroundImageHvr }
-								gradient={ attributes.backgroundGradientHvr }
-								focalPoint={ attributes.backgroundPositionHvr }
-								backgroundAttachment={ attributes.backgroundAttachmentHvr }
-								backgroundRepeat={ attributes.backgroundRepeatHvr }
-								backgroundSize={ attributes.backgroundSizeHvr }
-								changeBackgroundType={ value => setAttributes({ backgroundTypeHvr: value }) }
-								changeImage={ media => {
-									setAttributes({
-										backgroundImageHvr: pick( media, [ 'id', 'url' ])
-									});
-								}}
-								removeImage={ () => setAttributes({ backgroundImageHvr: undefined })}
-								changeColor={ value => setAttributes({ backgroundColorHvr: value })}
-								changeGradient={ value => setAttributes({ backgroundGradientHvr: value }) }
-								changeBackgroundAttachment={ value => setAttributes({ backgroundAttachmentHvr: value })}
-								changeBackgroundRepeat={ value => setAttributes({ backgroundRepeatHvr: value })}
-								changeFocalPoint={ value => setAttributes({ backgroundPositionHvr: value }) }
-								changeBackgroundSize={ value => setAttributes({ backgroundSizeHvr: value }) }
-							/>
-							
+									<ColorGradientControl
+										label={ __( 'Shadow Color', 'vayu-blocks' ) }
+										colorValue={ attributes.boxShadowColorHvr }
+										onColorChange={ e => setAttributes({ boxShadowColorHvr: e }) }
+										enableAlpha={true} 
+									/>
+
+									<RangeControl
+										label={ __( 'Opacity', 'vayu-blocks' ) }
+										value={ attributes.boxShadowColorOpacityHvr }
+										onChange={ e => setAttributes({ boxShadowColorOpacityHvr: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Blur', 'vayu-blocks' ) }
+										value={ attributes.boxShadowBlurHvr }
+										onChange={ e => setAttributes({ boxShadowBlurHvr: e }) }
+										min={ 0 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Spread', 'vayu-blocks' ) }
+										value={ attributes.boxShadowSpreadHvr }
+										onChange={ e => setAttributes({ boxShadowSpreadHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Horizontal', 'vayu-blocks' ) }
+										value={ attributes.boxShadowHorizontalHvr }
+										onChange={ e => setAttributes({ boxShadowHorizontalHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+
+									<RangeControl
+										label={ __( 'Vertical', 'vayu-blocks' ) }
+										value={ attributes.boxShadowVerticalHvr }
+										onChange={ e => setAttributes({ boxShadowVerticalHvr: e }) }
+										min={ -100 }
+										max={ 100 }
+									/>
+									</ControlPanelControl>
+
 							</>
-							
-							)}	
-						
+						)
+								}
 						</PanelBody>
 
 						<PanelBody title={ __( 'Transition', 'vayu-blocks' ) }
 							initialOpen={ false }
 							className="th-button-panel"
 						> 
-							<RangeControl
-							label={ __( 'Transition Duration', 'vayu-blocks' ) }
-							renderTooltipContent={ customTooltiptransitionAll }
-							value={ attributes.transitionAll }
-							onChange={ transitionAll => setAttributes({ transitionAll }) }
-							step={ 0.1 }
-							min={ 0 }
-							max={ 3 }
-							allowReset={ true }
-							/>
+						<RangeControl
+						label={ __( 'Transition Duration', 'vayu-blocks' ) }
+						renderTooltipContent={ customTooltiptransitionAll }
+						value={ attributes.transitionAll }
+						onChange={ transitionAll => setAttributes({ transitionAll }) }
+						step={ 0.1 }
+						min={ 0 }
+						max={ 3 }
+						allowReset={ true }
+						/>
 						</PanelBody>
 						
 					</Fragment>
 				
-				) || 'style' === tab && (
-					<Fragment>
-				<Editor attributes={attributes} setAttributes={setAttributes} />
-
-					{/* <PanelBody title={ __( 'Typographgy', 'vayu-blocks' ) }
-								className="th-adv-h-panel" initialOpen={ false }
-							>	
-							<GoogleFontsControl
-									label={ __( 'Font Family', 'vayu-blocks' ) }
-									value={ attributes.fontFamily }
-									onChangeFontFamily={ changeFontFamily }
-									valueVariant={ attributes.fontVariant }
-									onChangeFontVariant={ fontVariant => setAttributes({ fontVariant }) }
-									valueStyle={ attributes.fontStyle }
-									onChangeFontStyle={ fontStyle => setAttributes({ fontStyle }) }
-									valueTransform={ attributes.textTransform }
-									onChangeTextTransform={ textTransform => setAttributes({ textTransform }) }
-								/>
-
-							<ResponsiveControl
-									label={ __( 'Font Size', 'vayu-blocks' ) }
-								>    
-								<UnitChooser
-									value={ attributes.fontSizeUnit }
-									onClick={ fontSizeUnit => setAttributes({ fontSizeUnit }) }
-									units={ [ 'px', 'em', '%' ] }
-								/>
-									<RangeControl
-										renderTooltipContent={ customTooltipFontsize }
-										value={ getFontSize() || '' }
-										onChange={ changeFontSize }
-										step={ 0.1 }
-										min={ 1 }
-										max={ 500 }
-										allowReset={ true }
-									/>		
-							</ResponsiveControl>
-
-							<ResponsiveControl
-									label={ __( 'Line Height', 'vayu-blocks' ) }
-								>
-								<UnitChooser
-									value={ attributes.lineHeightUnit }
-									onClick={ lineHeightUnit => setAttributes({ lineHeightUnit }) }
-									units={ [ 'px', 'em', '%' ] }
-								/>
-								<RangeControl
-									renderTooltipContent={ customTooltiplineHeight }
-									value={ getlineHeight() || '' }
-									onChange={ changelineHeight }
-									step={ 0.1 }
-									min={ 0 }
-									max={ 300 }
-									allowReset={ true }
-								/>
-							</ResponsiveControl>
-
-							<ResponsiveControl
-									label={ __( 'Letter Spacing', 'vayu-blocks' ) }
-								>
-									<UnitChooser
-									value={ attributes.letterSpacingUnit }
-									onClick={ letterSpacingUnit => setAttributes({ letterSpacingUnit }) }
-									units={ [ 'px', 'em', '%' ] }
-								/>
-								<RangeControl
-									renderTooltipContent={ customTooltipletterSpacing }
-									value={ getletterSpacing() || '' }
-									onChange={ changeletterSpacing }
-									step={ 0.1 }
-									min={ -300 }
-									max={ 300 }
-									allowReset={ true }
-								/>
-							</ResponsiveControl>					   
-
-					</PanelBody> */}
-
-					</Fragment>
 				)	
 			}
 			</div>
 			</InspectorControls>  
-
+			)}
     	</Fragment>
+		
 	);
 }
 

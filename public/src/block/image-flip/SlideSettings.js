@@ -1,18 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
     PanelBody,
-    ToggleControl,
-    RangeControl,
-    Button,
-    TextareaControl,
-    TextControl,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
-    FocalPointPicker,
-    DuotonePicker,
-    PanelRow
 } from '@wordpress/components';
 import { dispatch, select, useSelect } from '@wordpress/data';
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
@@ -91,7 +83,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     />
                 </PanelBody>
                 
-
             </div>
     );
 };

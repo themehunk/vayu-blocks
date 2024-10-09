@@ -309,6 +309,13 @@ function generate_inline_image_styles($attr) {
             }
         }
 
+        if ($attr['overlaybordertype'] === 'color') {
+            // Apply individual border-radius values
+            if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
+                $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
+            }
+        }
+
     $css .= "}";
 
     // Append CSS rules to $css
@@ -481,7 +488,7 @@ function generate_inline_image_styles($attr) {
         $css .= "display: flex;";
         
         $css .= "box-sizing: border-box;";
-        
+
         if ($attr['overlaybordertype'] === 'color') {
             // Top border
             if (isset($attr['imageborder']['topwidth'], $attr['imageborder']['topstyle'], $attr['imageborder']['topcolor'])) {
