@@ -21,7 +21,6 @@ module.exports = {
      'block/image-flip/view': './src/block/image-flip/view.js',
      'block/image/index': './src/block/image',
      'block/image/view': './src/block/image/view.js',
-     'block/mega-menu/index': './src/block/mega-menu',
      'block/wrapper/index':'./src/block/wrapper',
      'block/front-image/index': './src/block/front-image',
      'block/front-image/view': './src/block/front-image/view.js',

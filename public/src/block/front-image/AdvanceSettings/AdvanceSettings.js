@@ -401,7 +401,6 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         ...paddingStyles,
         ...marginStyles,  
         
-        
         order: order === 'custom' ? customOrder : 'undefined',
       
         borderTop: `${attributes.advanceborder.topwidth} ${attributes.advanceborder.topstyle} ${attributes.advanceborder.topcolor}`,

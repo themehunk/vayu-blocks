@@ -32,10 +32,7 @@
     position: absolute !important;
     width: 100% !important;
     height: 100% !important;
-    // -webkit-backface-visibility: hidden;
-    // backface-visibility: hidden ;
     transform-origin: center;
-    overflow: hidden;
   }
 
 .vayu_blocks_image_flip_wrapper-for-front:hover .vayu_blocks_flip-box-inner_animation_div_flip-front .wp-block-vayu-blocks-image-flip{
@@ -73,5 +70,9 @@
 }
 
 .vayu_blocks_image_flip_wrapper-for-front .wp-block-vayu-blocks-front-image .wp-block-vayu-blocks-front-image .wp-block-vayu-blocks-advance-container{
+    height: 100%;
+ }
+
+ .vayu_blocks_image_flip_wrapper-for-front .vayu_blocks_flip-box-inner-for-front {
     height: 100%;
  }
