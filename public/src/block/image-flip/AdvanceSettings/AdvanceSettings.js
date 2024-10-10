@@ -568,6 +568,10 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         setAttributes({selectedanimation:true});
     }
 
+    if(attributes.imagehvreffect === 'zoom-in'){
+        back_opacity=0;
+    }
+
     const blockProps = useBlockProps({
         className: 'custom-margin',
         style: {

@@ -94,6 +94,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
+                    
                     {attributes.imagehvreffect && !(attributes.imagehvreffect === 'zoom-in' || 
               attributes.imagehvreffect === 'zoom-out' || 
               attributes.imagehvreffect === 'fade-in') && (

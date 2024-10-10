@@ -158,11 +158,13 @@
 
 .vayu-blocks-image-flip-main-container:hover .vayu_blocks_flip-box-inner_animation_div_zoom-in .vayu_blocks_flip-box-back {
     transform:scale(1);
+    opacity:1;
     z-index:100;
 }
 
 .vayu-blocks-image-flip-main-container:hover .vayu_blocks_flip-box-inner_animation_div_zoom-out .vayu_blocks_flip-box-front {
     transform:scale(0.5);
+    opacity:0;
     z-index:0;
 }
 
