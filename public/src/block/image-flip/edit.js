@@ -90,35 +90,35 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
 
     }
 
-    const classname = (variablereturn) => {
+    function classname(variablereturn) {
         let backclass = '';
         let frontclass = '';
         let innerclass = '';
-    
+
         if (attributes.imagehvreffect === 'flip-front') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front';
-        } 
+        }
         else if (attributes.imagehvreffect === 'flip-front-left') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
-        } 
+        }
         else if (attributes.imagehvreffect === 'flip-back') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back';
-        } 
+        }
         else if (attributes.imagehvreffect === 'flip-back-bottom') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
         }
         else if (attributes.imagehvreffect === 'flip-z') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
 
-        }else if (attributes.imagehvreffect === 'flip-x') {
+        } else if (attributes.imagehvreffect === 'flip-x') {
             innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
         }
-    
+
         // Return the appropriate class based on the variablereturn argument
         if (variablereturn === 'inner') {
             return innerclass;
         }
-    
+
         if (variablereturn === 'back') {
             return backclass;
         }
@@ -126,9 +126,9 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
         if (variablereturn === 'front') {
             return frontclass;
         }
-    
+
         return ''; // Default case if variablereturn doesn't match
-    };
+    }
 
     const image_flip_template = [
         ['vayu-blocks/front-image', {

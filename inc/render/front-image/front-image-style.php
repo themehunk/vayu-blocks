@@ -22,6 +22,7 @@ function generate_inline_front_image_styles($attr) {
         // $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
         $css .= "margin-left: auto !important;";
         $css .= "margin-right: auto !important;";
+        $css .= "backface-visibility: hidden;";
     $css .= "}";
     
     //Main div
