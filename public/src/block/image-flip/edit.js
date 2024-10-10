@@ -91,44 +91,45 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
     }
 
     function classname(variablereturn) {
-        let backclass = '';
-        let frontclass = '';
-        let innerclass = '';
-
-        if (attributes.imagehvreffect === 'flip-front') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front';
+        let backclass = ''; // Define backclass if needed
+        let frontclass = ''; // Define frontclass if needed
+    
+        const classMap = {
+            'flip-front': 'vayu_blocks_flip-box-inner_animation_div_flip-front',
+            'flip-front-left': 'vayu_blocks_flip-box-inner_animation_div_flip-front-left',
+            'flip-back': 'vayu_blocks_flip-box-inner_animation_div_flip-back',
+            'flip-back-bottom': 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom',
+            'flip-z': 'vayu_blocks_flip-box-inner_animation_div_flip-z',
+            'flip-x': 'vayu_blocks_flip-box-inner_animation_div_flip-x',
+            'zoom-in': 'vayu_blocks_flip-box-inner_animation_div_zoom-in',
+            'zoom-out': 'vayu_blocks_flip-box-inner_animation_div_zoom-out',
+            'fade-in': 'vayu_blocks_flip-box-inner_animation_div_fade-in',
+        };
+    
+        let innerclass = classMap[attributes.imagehvreffect] || ''; // Default to empty string if no match
+    
+        // Append '-dbox' class if attributes.dbox is truthy
+        // AND the current imagehvreffect is NOT one of the specified effects
+        if (attributes.dbox && 
+            !(attributes.imagehvreffect === 'zoom-in' || 
+              attributes.imagehvreffect === 'zoom-out' || 
+              attributes.imagehvreffect === 'fade-in')) {
+            innerclass += '-dbox';
         }
-        else if (attributes.imagehvreffect === 'flip-front-left') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
-        }
-        else if (attributes.imagehvreffect === 'flip-back') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back';
-        }
-        else if (attributes.imagehvreffect === 'flip-back-bottom') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
-        }
-        else if (attributes.imagehvreffect === 'flip-z') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
-
-        } else if (attributes.imagehvreffect === 'flip-x') {
-            innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
-        }
-
+    
         // Return the appropriate class based on the variablereturn argument
-        if (variablereturn === 'inner') {
-            return innerclass;
+        switch (variablereturn) {
+            case 'inner':
+                return innerclass;
+            case 'back':
+                return backclass; // Define backclass if needed
+            case 'front':
+                return frontclass; // Define frontclass if needed
+            default:
+                return ''; // Default case
         }
-
-        if (variablereturn === 'back') {
-            return backclass;
-        }
-
-        if (variablereturn === 'front') {
-            return frontclass;
-        }
-
-        return ''; // Default case if variablereturn doesn't match
     }
+
 
     const image_flip_template = [
         ['vayu-blocks/front-image', {
@@ -160,6 +161,8 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
                         </div>
                             
                     </div> 
+
+                    
                 </div>
 
             </AdvanceSettings>

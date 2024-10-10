@@ -14,6 +14,8 @@ import {
 } from '@wordpress/components';
 import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
 import {MediaPlaceholder} from '@wordpress/block-editor';
+import { FcUndo } from "react-icons/fc";
+import { FaRegImage } from "react-icons/fa";
 import {
 	HoverControl,
 	BackgroundSelectorControl,
@@ -22,7 +24,7 @@ import {
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
 import { dispatch, select, useSelect } from '@wordpress/data';
 import { Vayu_Block_Border_Control } from '../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
-
+import { FcRedo } from "react-icons/fc";
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -75,16 +77,30 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     // Assuming you're inside your functional component
     const options = [
-        { value: 'flip', label: 'Flip Block' },
+        { value: 'flip', label: (
+            <span className='vayu_blocks_undo_front_image'>
+               <FaRegImage style={{color:'#00BCD4'}} />
+            </span>
+        ) 
+    },
     ];
 
     // Conditionally add options based on the className attribute
     if (attributes.className === 'vayu_blocks_flip-box-back ') {
-        options.push({ value: 'front', label: 'Front Block' });
+        options.push({ value: 'front', label: (
+            <span className='vayu_blocks_undo_front_image'>
+               <FcUndo />
+            </span>
+        )
+     });
     }
 
     if (attributes.className === 'vayu_blocks_flip-box-front ') {
-        options.push({ value: 'back', label: 'Back Block' });
+        options.push({ value: 'back', label: (
+            <span className='vayu_blocks_undo_front_image'>
+               <FcRedo/>
+            </span>
+        ) });
     }
 
     const pick = (object, keys) => {

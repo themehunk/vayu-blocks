@@ -1855,14 +1855,9 @@ const PanelSettings = ({
 			<InsSettingHeader value={ tab }
 						options={[
 							{
-								label: __( 'Style', 'vayu-blocks' ),
+								label: __( 'Settings', 'vayu-blocks' ),
 								value: 'slide',
 								icon: 'slide'
-							},
-							{
-								label: __( 'Advanced', 'vayu-blocks' ),
-								value: 'advanced',
-								icon: 'colorpalette'
 							}
 						]}
 						onChange={ setTab }

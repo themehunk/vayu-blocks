@@ -40,6 +40,20 @@ class Vayu_blocks_image_flip {
             $innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-z';
         } elseif (isset($attributes['imagehvreffect']) && $attributes['imagehvreffect'] === 'flip-x') {
             $innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-x';
+        } elseif (isset($attributes['imagehvreffect']) && $attributes['imagehvreffect'] === 'zoom-in') {
+            $innerclass = 'vayu_blocks_flip-box-inner_animation_div_zoom-in';
+        } elseif (isset($attributes['imagehvreffect']) && $attributes['imagehvreffect'] === 'zoom-out') {
+            $innerclass = 'vayu_blocks_flip-box-inner_animation_div_zoom-out';
+        } elseif (isset($attributes['imagehvreffect']) && $attributes['imagehvreffect'] === 'fade-in') {
+            $innerclass = 'vayu_blocks_flip-box-inner_animation_div_fade-in';
+        } 
+
+        // Assuming $attributes is already defined and contains 'dbox' and 'imagehvreffect'
+        if ($attributes['dbox'] && !($attributes['imagehvreffect'] === 'zoom-in' || 
+                                    $attributes['imagehvreffect'] === 'zoom-out' || 
+                                    $attributes['imagehvreffect'] === 'fade-in')) {
+                                     
+            $innerclass .= '-dbox'; // Append '-dbox' if conditions are met
         }
 
         $image_html .= '<div class="vayu_blocks_image_flip_wrapper-for-front" id='. $uniqueId .'>';
