@@ -713,5 +713,69 @@
   "rightwidth": "0px",
   "rightstyle": "solid"
 }
+},
+"advancebordertype":{
+  "type":"string",
+  "default":"color"
+},
+"advancebordergradient":{
+  "type":"string",
+  "default":"linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)"
+},
+"advancegradienttop":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advancegradientbottom":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advancegradientleft":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advancegradientright":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advanceimagetop":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advanceimagebottom":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advanceimageleft":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advanceimageright":{
+        "type":"string",
+        "default":"5px"
+    },
+    "advanceborderimagetype":{
+      "type":"string",
+      "default":"none"
+  },
+  "advanceborderimage":{
+    "type":"string",
+    "default":""
+},
+"advancespace":{
+  "type":"string",
+  "default":"space"
+}, 
+"advanceborderimagesize":{
+  "type":"number",
+  "default":30
+},    
+"advanceborderimageoutset":{
+  "type":"number",
+  "default":5
+},
+"advancegradientborderimageoutset":{
+  "type":"number",
+    "default":5
 }
   }

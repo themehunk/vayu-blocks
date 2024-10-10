@@ -26,6 +26,7 @@ return array(
         'overlayalignmentmobile' => 'center center',
         'overlayalignmentvertical' => 'center',
         'imagealttext'  => '',
+        'dbox' => false,
 
         // image Border
             'imageborder' => array(

@@ -403,13 +403,39 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         
         order: order === 'custom' ? customOrder : 'undefined',
       
-        borderTop: `${attributes.advanceborder.topwidth} ${attributes.advanceborder.topstyle} ${attributes.advanceborder.topcolor}`,
-        borderBottom: `${attributes.advanceborder.bottomwidth} ${attributes.advanceborder.bottomstyle} ${attributes.advanceborder.bottomcolor}`,
-        borderLeft: `${attributes.advanceborder.leftwidth} ${attributes.advanceborder.leftstyle} ${attributes.advanceborder.leftcolor}`,
-        borderRight: `${attributes.advanceborder.rightwidth} ${attributes.advanceborder.rightstyle} ${attributes.advanceborder.rightcolor}`,
+        ...(attributes.advancebordertype === 'color' && {
+            borderTop: `${attributes.advanceborder.topwidth} ${attributes.advanceborder.topstyle} ${attributes.advanceborder.topcolor}`,
+            borderBottom: `${attributes.advanceborder.bottomwidth} ${attributes.advanceborder.bottomstyle} ${attributes.advanceborder.bottomcolor}`,
+            borderLeft: `${attributes.advanceborder.leftwidth} ${attributes.advanceborder.leftstyle} ${attributes.advanceborder.leftcolor}`,
+            borderRight: `${attributes.advanceborder.rightwidth} ${attributes.advanceborder.rightstyle} ${attributes.advanceborder.rightcolor}`,
+    
+            borderRadius: borderRadius,
+        }),
 
-        borderRadius: borderRadius,
-      
+        ...(attributes.advancebordertype === 'gradient' && {
+            borderImage:`${attributes.advancebordergradient} 30%`,
+            borderWidth: `${attributes.advancegradienttop} ${attributes.advancegradientbottom} ${attributes.advancegradientleft} ${attributes.advancegradientright}`,
+
+            borderImageOutset : `${attributes.advancegradientborderimageoutset}px`,
+        }),
+
+        ...(attributes.advancebordertype === 'image' && {
+            borderImage: 
+                attributes.advanceborderimagetype === 'custom' 
+                    ? `url(${attributes.advanceborderimage}) ${attributes.advanceborderimagesize}% / ${attributes.advanceimagetop} ${attributes.advanceimagebottom} ${attributes.advanceimageleft} ${attributes.advanceimageright} ${attributes.advancespace}` 
+                    : attributes.advanceborderimagetype === 'image1' 
+                        ? `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKE3oR0_1fMluZWzbUZo_e-0O-Rkdq6xNudQ&s) ${attributes.advanceborderimagesize}% / ${attributes.advanceimagetop} ${attributes.advanceimagebottom} ${attributes.advanceimageleft} ${attributes.advanceimageright} ${attributes.advancespace}`
+                        : attributes.advanceborderimagetype === 'image2' 
+                            ? `url(https://t4.ftcdn.net/jpg/00/90/22/23/360_F_90222304_MnOvAi5X9Rr2ywonhlSpaDPWD0MmLgiY.jpg) ${attributes.advanceborderimagesize}% / ${attributes.advanceimagetop} ${attributes.advanceimagebottom} ${attributes.advanceimageleft} ${attributes.advanceimageright} ${attributes.advancespace}` 
+                            : attributes.advanceborderimagetype === 'image3' 
+                                ? `url(https://www.w3schools.com/cssref/border.png) ${attributes.advanceborderimagesize}% / ${attributes.advanceimagetop} ${attributes.advanceimagebottom} ${attributes.advanceimageleft} ${attributes.advanceimageright} ${attributes.advancespace}` 
+                                : attributes.advanceborderimagetype === 'image4' 
+                                    ? `url(https://w7.pngwing.com/pngs/169/875/png-transparent-frame-diamond-lace-border-border-frame-symmetry-thumbnail.png) ${attributes.advanceborderimagesize}% / ${attributes.advanceimagetop} ${attributes.advanceimagebottom} ${attributes.advanceimageleft} ${attributes.advanceimageright} ${attributes.advancespace}` 
+                                    : 'none', // fallback if needed
+
+
+                borderImageOutset : `${attributes.advanceborderimageoutset}px`,
+        }),
         
         boxShadow: boxShadow ?
         `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
@@ -427,35 +453,8 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         
     };
 
-    // Determine the borderRadius based on condition
-    const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
-
-    const hoverStyles = {
-        borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
-        borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
-        borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
-        borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
-
-        borderRadius: borderRadiushvr,
-
-        boxShadow: boxShadowHvr ?
-        `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
-        : 'none',
- 
-
-        background: backgroundTypeHvr === 'color' ? backgroundColorHvr :
-            backgroundTypeHvr === 'gradient' ? backgroundGradientHvr || undefined :
-                backgroundImageHvr ? `url(${backgroundImageHvr.url})` : 'none',
-        backgroundPosition: formatBackgroundPosition(backgroundPositionHvr),
-        backgroundAttachment: backgroundAttachmentHvr || undefined,
-        backgroundRepeat: backgroundRepeatHvr || undefined,
-        backgroundSize: backgroundSizeHvr || undefined,
-    };
-    const filteredHoverStyles = omitBy(hoverStyles, value => !value);
-
     const mergedStyles = {
         ...styles,
-        ...(isHovered ? filteredHoverStyles : {}),
     };
 
     const blockProps = useBlockProps({

@@ -278,6 +278,8 @@ function generate_inline_image_flip_styles($attr) {
         $transformstyle = 'rotateX(180deg) rotateZ(90deg)';
     } elseif ($attr['imagehvreffect'] === 'flip-x') {
         $transformstyle = 'rotateY(180deg) rotateZ(90deg)';
+    } elseif ($attr['imagehvreffect'] === 'zoom-in') {
+        $transformstyle = 'scale(0.5)';
     }
     
     $css .= "$wrapper .vayu_blocks_flip-box-back {";

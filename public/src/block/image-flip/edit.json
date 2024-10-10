@@ -208,5 +208,9 @@
     "selectedanimation":{
         "type":"boolean",
         "default":true
+    },
+    "dbox":{
+        "type":"boolean",
+        "default":false
     }
 }

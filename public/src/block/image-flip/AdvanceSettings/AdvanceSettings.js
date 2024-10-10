@@ -492,6 +492,15 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
     else if (attributes.imagehvreffect === 'flip-x') {
         transformstyle = 'rotateY(180deg) rotateZ(90deg)';
     }
+    else if (attributes.imagehvreffect === 'zoom-in') {
+        transformstyle = 'scale(0.5)';
+    }
+    else if (attributes.imagehvreffect === 'zoom-out') {
+        transformstyle = '';
+    }
+    else if (attributes.imagehvreffect === 'fade-in') {
+        transformstyle = '';
+    }
 
     const [selectedBlockClass, setSelectedBlockClass] = useState(null);
     
@@ -557,6 +566,10 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         front_opacity=1;
         back_opacity = 1;
         setAttributes({selectedanimation:true});
+    }
+
+    if(attributes.imagehvreffect === 'zoom-in'){
+        back_opacity=0;
     }
 
     const blockProps = useBlockProps({

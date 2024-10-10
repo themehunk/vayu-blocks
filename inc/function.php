@@ -300,6 +300,18 @@ function vayu_blocks_get_input_values_callback() {
                 
             ),
         ),
+        'imageFlip' => array(
+            'value' => 0,
+            'settings' => array(
+                
+            ),
+        ),
+        'image' => array(
+            'value' => 0,
+            'settings' => array(
+                
+            ),
+        ),
         'slider' => array(
             'value' => 0,
             'settings' => array(

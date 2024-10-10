@@ -5,10 +5,12 @@ import {
     PanelBody,
     SelectControl,
     __experimentalToolsPanel as ToolsPanel,
+    ToggleControl
 } from '@wordpress/components';
 import { dispatch, select, useSelect } from '@wordpress/data';
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
-
+import { FcUndo } from "react-icons/fc";
+import { FcRedo } from "react-icons/fc";
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -58,8 +60,16 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 value={blockValue}
                 __nextHasNoMarginBottom={true}
                 options={[
-                    { value: 'front', label: 'Front Block' },
-                    { value: 'back', label: 'Back Block' },
+                    { value: 'front', label: (
+                        <span className='vayu_blocks_undo_front_image'>
+                           <FcUndo />
+                        </span>
+                    ) },
+                    { value: 'back', label: (
+                        <span className='vayu_blocks_undo_front_image'>
+                           <FcRedo/>
+                        </span>
+                    ) },
                 ]}
             />
 
@@ -78,9 +88,23 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                                 { label: __('Flip Bottom', 'vayu-blocks'), value: 'flip-back-bottom' },
                                 { label: __('Flip Left Top', 'vayu-blocks'), value: 'flip-z' },
                                 { label: __('Flip Right Top', 'vayu-blocks'), value: 'flip-x' },
+                                { label: __('Zoom in', 'vayu-blocks'), value: 'zoom-in' },
+                                { label: __('Zoom out', 'vayu-blocks'), value: 'zoom-out' },
+                                { label: __('Fade In', 'vayu-blocks'), value: 'fade-in' },
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
+                    
+                    {attributes.imagehvreffect && !(attributes.imagehvreffect === 'zoom-in' || 
+              attributes.imagehvreffect === 'zoom-out' || 
+              attributes.imagehvreffect === 'fade-in') && (
+                         <ToggleControl
+                            className='vayu_blocks_togglecontrol'
+                            label={__('3D Box animation', 'vayu-blocks')}
+                            checked={attributes.dbox}
+                            onChange={(value) =>  setAttributes({dbox:value})}
+                        />
+                    )}
                 </PanelBody>
                 
             </div>

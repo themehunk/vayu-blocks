@@ -214,5 +214,22 @@ return array(
         'left' => '4px',
         'right' => '4px',
     ),
+
+    'advancebordertype' =>  'color',
+    'advancebordergradient' =>  'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
+    'advancegradienttop' =>'5px',
+    'advancegradientbottom' =>'5px',
+    'advancegradientleft' =>'5px',
+    'advancegradientright' =>'5px',
+    'advanceimagetop' =>'5px',
+    'advanceimagebottom' =>'5px',
+    'advanceimageleft' =>'5px',
+    'advanceimageright' =>'5px',
+    'advanceborderimagetype' =>'none',
+    'advanceborderimage' => '',
+    'advancespace' =>  'space', 
+    'advanceborderimagesize' => 30,    
+    'advanceborderimageoutset' => 5,
+    "advancegradientborderimageoutset" => 5,
 );
 ?>

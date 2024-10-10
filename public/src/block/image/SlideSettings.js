@@ -232,7 +232,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setAttributes({
                 overlaywrapper: value,
                 wrapperanimation: 'none',
-                imagehvreffect: 'none',
             });
         }
 
@@ -241,14 +240,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setAttributes({
                 overlaywrapper:'none',
                 wrapperanimation: value,
-                imagehvreffect: 'none',
-            });
-        } else {
-            // If it's a hover effect, set the imagehvreffect attribute and reset the wrapper animation
-            setAttributes({
-                overlaywrapper:'none',
-                wrapperanimation: 'none',
-                imagehvreffect: value,
             });
         }
     };
@@ -314,6 +305,17 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     const animationoptions = [
         { label: __('None', 'vayu-blocks'), value: 'none' },
+        { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
+        { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
+        { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
+        { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
+        { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
+        { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
+        { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
+    ];
+
+    const newanimationoptions = [
+        { label: __('None', 'vayu-blocks'), value: 'none' },
         { label: __('Blur', 'vayu-blocks'), value: 'blur' },
         { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
         { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
@@ -325,13 +327,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
         { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
         { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
-        { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
-        { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
-        { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
-        { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
-        { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
-        { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
-        { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
     ];
     
     // Conditionally add overlay options based on the overlayshow attribute
@@ -526,32 +521,23 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
                     <SelectControl
                         label={__('Hover Effect', 'vayu-blocks')}
+                        value={attributes.imagehvreffect}                        
+                        options={newanimationoptions}
+                        onChange={(value) => setAttributes({imagehvreffect:value})}
+                    />
+
+                    <SelectControl
+                        label={__('3D Effect', 'vayu-blocks')}
                         value={
-                                attributes.overlaywrapper !== 'none'
-                                    ? attributes.overlaywrapper
-                                    : attributes.wrapperanimation !== 'none'
-                                    ? attributes.wrapperanimation
-                                    : attributes.imagehvreffect
-                            }                        
+                            attributes.overlaywrapper !== 'none'
+                                ? attributes.overlaywrapper
+                                : attributes.wrapperanimation !== 'none'
+                                ? attributes.wrapperanimation
+                                : 'none'
+                        }                       
                             options={animationoptions}
                         onChange={(value) => handlehoveranimation(value)}
                     />
-
-
-                    {/* {(attributes.wrapperanimation === 'vayu_block_styling' || attributes.wrapperanimation === 'vayu_block_styling-effect4') && (
-                        <>
-                            <SelectControl
-                                label={__('Animation Side', 'vayu-blocks')}
-                                value={attributes.animatingside}
-                                options={[
-                                    { label: __('Left', 'vayu-blocks'), value: 'left' },
-                                    { label: __('Right', 'vayu-blocks'), value: 'right' }
-                                ]}
-                                onChange={(value) => handleanimationside(value)}
-                            />
-                        </>
-                    )} */}
-
 
                     <SelectControl
                         label={__('Image Animation', 'vayu-blocks')}
