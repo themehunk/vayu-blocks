@@ -53,3 +53,6 @@ $wp-break-small: 600px; // Example breakpoint, adjust as necessary
 	margin-inline-start: auto;
 	margin-inline-end: auto;
 }
+.block-editor-block-list__block.wp-block.wp-block-query{
+	display:none!important;
+	}

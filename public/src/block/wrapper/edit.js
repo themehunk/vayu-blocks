@@ -29,26 +29,30 @@ const TEMPLATE = [
     ['vayu-blocks/advance-container', {}, [
 		['vayu-blocks/advance-heading',
 	    { 
+		
 		title: __('Post Title', 'vayu-blocks'),	
 		placeholder: __('Enter heading here', 'vayu-blocks') 
 	    }
 	    ],
 		['vayu-blocks/advance-heading', 
 		{ 
+			
 			title: __('Post Date', 'vayu-blocks'),
             tag: 'span',
 			selectedSourceField:'post_date',
-			fontSize:'16',
+			fontSize:'18',
 			fontSizeUnit:'px'
 
         }],
 		['vayu-blocks/advance-heading', 
 		{ 
+			
 			title: __('Post Excerpt', 'vayu-blocks'),
-            tag: 'p',
+            tag: 'span',
 			selectedSourceField:'excerpt',
 			fontSize:'18',
 			fontSizeUnit:'px'
+			
         }]
 	]],
 ];
