@@ -284,6 +284,18 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    useEffect(() => {
+        // If imagewidth is less than 200, hide the overlay
+        if (parseInt(attributes.imagewidth) < 200) {
+            setAttributes({ overlayshow: false });
+        } 
+        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
+        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
+            setAttributes({ overlayshow: false });
+        }
+    }, [attributes.imagewidth, attributes.defaultImageWidth]);
+
+
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">

@@ -294,13 +294,13 @@ function vayu_blocks_get_input_values_callback() {
                 
             ),
         ),
-        'postGrid' => array(
+        'post Grid' => array(
             'value' => 0,
             'settings' => array(
                 
             ),
         ),
-        'flipBox' => array(
+        'flip Box' => array(
             'value' => 0,
             'settings' => array(
                 

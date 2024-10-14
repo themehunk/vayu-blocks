@@ -432,19 +432,30 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         
     };
 
-    // Determine the borderRadius based on condition
-    const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
-
-    
     const hoverStyles = {
       
+        ...(attributes.advanceborderhvr && {
+            ...(attributes.advanceborderhvr.topwidth && attributes.advanceborderhvr.topstyle && attributes.advanceborderhvr.topcolor && {
+                borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.bottomwidth && attributes.advanceborderhvr.bottomstyle && attributes.advanceborderhvr.bottomcolor && {
+                borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.leftwidth && attributes.advanceborderhvr.leftstyle && attributes.advanceborderhvr.leftcolor && {
+                borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.rightwidth && attributes.advanceborderhvr.rightstyle && attributes.advanceborderhvr.rightcolor && {
+                borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
+            }),
+        }),
 
-        borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
-        borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
-        borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
-        borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
-
-        borderRadius: borderRadiushvr,
+        ...(attributes.advanceRadiushvr.top!='0px' || 
+            attributes.advanceRadiushvr.right!='0px' || 
+            attributes.advanceRadiushvr.bottom !='0px'|| 
+            attributes.advanceRadiushvr.left!='0px' ? {
+                  borderRadius: `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`
+              } : {}),
+      
 
         ...(boxShadowColorHvr && {
         boxShadow: boxShadowHvr ?
@@ -452,15 +463,22 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         : 'none',
         }),
 
-        background: backgroundTypeHvr === 'color' ? backgroundColorHvr :
-            backgroundTypeHvr === 'gradient' ? backgroundGradientHvr || undefined :
-                backgroundImageHvr ? `url(${backgroundImageHvr.url})` : 'none',
+        ...(backgroundTypeHvr === 'color' && backgroundColorHvr) && {
+            background: backgroundColorHvr,
+        },
+        ...(backgroundTypeHvr === 'gradient' && backgroundGradientHvr) && {
+            background: backgroundGradientHvr,
+        },
+        ...(backgroundTypeHvr === 'image' && backgroundImageHvr) && {
+            background: `url(${backgroundImageHvr.url})`,
+        },
         backgroundPosition: formatBackgroundPosition(backgroundPositionHvr),
         backgroundAttachment: backgroundAttachmentHvr || undefined,
         backgroundRepeat: backgroundRepeatHvr || undefined,
         backgroundSize: backgroundSizeHvr || undefined,
+
     };
-    
+
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {

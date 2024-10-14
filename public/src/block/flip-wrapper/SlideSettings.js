@@ -250,7 +250,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
         <>
 
-        {attributes.parentBlock === 'vayu-blocks/image-flip' && (
+        {attributes.parentBlock === 'vayu-blocks/flip-box' && (
             <div class="togglegroupcontrol_vayu_block">
             <Vayu_Block_ToggleGroupControl
                 label={__('Show Block', 'vayu-blocks')}
