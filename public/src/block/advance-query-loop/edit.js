@@ -50,7 +50,8 @@ const withFilteredControls = (BlockEdit) => (props) => {
                 [ 'core/query-pagination' ],
                 [ 'core/query-no-results' ],
             ],
-            scope: [ 'block' ]
+            scope: [ 'block' ],
+            isDefault:true,
         },
         {
             name: 'layout-two',
@@ -61,7 +62,8 @@ const withFilteredControls = (BlockEdit) => (props) => {
                 [ 'core/query-pagination' ],
                 [ 'core/query-no-results' ],
             ],
-            scope: [ 'block' ]
+            scope: [ 'block' ],
+            isDefault:true,
         },
     ];
 
@@ -194,5 +196,5 @@ const withFilteredControls = (BlockEdit) => (props) => {
 addFilter(
     'editor.BlockEdit',
     'vayu-blocks/with-filtered-controls',
-    withFilteredControls
+     withFilteredControls
 );
