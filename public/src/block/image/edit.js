@@ -154,6 +154,11 @@ const edit = (props) => {
     //main container image style
     const vayu_blocks_image_settings = {
 
+        ...(attributes.imageboxShadowColor && { 
+            boxShadow: attributes.imageboxShadow ?
+            `${attributes.imageboxShadowHorizontal}px ${attributes.imageboxShadowVertical}px ${attributes.imageboxShadowBlur}px ${attributes.imageboxShadowSpread}px rgba(${parseInt(attributes.imageboxShadowColor.slice(1, 3), 16)}, ${parseInt(attributes.imageboxShadowColor.slice(3, 5), 16)}, ${parseInt(attributes.imageboxShadowColor.slice(5, 7), 16)}, ${attributes.imageboxShadowColorOpacity / 100})`
+            : 'none',
+        }),
         ...(attributes.overlaybordertype === 'color' && {
             borderRadius: borderRadius,
         }),
@@ -245,27 +250,33 @@ const edit = (props) => {
     ];
 
     const vayu_blocks_image_wrapper_style = (() => {
+        // Start with an initial style object
+        const style = {
+            ...(attributes.imageboxShadowColor && {
+                boxShadow: attributes.imageboxShadow
+                    ? `${attributes.imageboxShadowHorizontal}px ${attributes.imageboxShadowVertical}px ${attributes.imageboxShadowBlur}px ${attributes.imageboxShadowSpread}px rgba(${parseInt(attributes.imageboxShadowColor.slice(1, 3), 16)}, ${parseInt(attributes.imageboxShadowColor.slice(3, 5), 16)}, ${parseInt(attributes.imageboxShadowColor.slice(5, 7), 16)}, ${attributes.imageboxShadowColorOpacity / 100})`
+                    : 'none',
+            }),
+        };
+    
+        // Determine the width and height based on the view
         const width = attributes.imagewidth || 'auto';
         const height = attributes.imageheight || 'auto';
     
         if (view === 'Desktop') {
-            return {
-                width: width,
-                height: height
-            };
+            style.width = width;
+            style.height = height;
         } else if (view === 'Tablet') {
-            return {
-                width: attributes.imagewidthtablet || 'auto',
-                height: attributes.imageheighttablet || 'auto'
-            };
+            style.width = attributes.imagewidthtablet || 'auto';
+            style.height = attributes.imageheighttablet || 'auto';
         } else if (view === 'Mobile') {
-            return {
-                width: attributes.imagewidthmobile || 'auto',
-                height: attributes.imageheightmobile || 'auto'
-            };
+            style.width = attributes.imagewidthmobile || 'auto';
+            style.height = attributes.imageheightmobile || 'auto';
         }
-        return {}; // Fallback if no view matches
+    
+        return style; // Return the constructed style object
     })();
+    
 
     const handleimageurl = (value) => {
         setAttributes({image:value.url});
@@ -379,6 +390,17 @@ const edit = (props) => {
         };
     }, [attributes.wrapperanimation]);
     
+    useEffect(() => {
+        // If imagewidth is less than 200, hide the overlay
+        if (parseInt(attributes.imagewidth) < 200) {
+            setAttributes({ overlayshow: false });
+        } 
+        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
+        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
+            setAttributes({ overlayshow: false });
+        }
+    }, [attributes.imagewidth, attributes.defaultImageWidth]);
+    
 
     return (
         <>
@@ -449,7 +471,7 @@ const edit = (props) => {
 
                             </div>  
 
-                            {attributes.overlayshow && (
+                            { attributes.overlayshow && (
                                 <>
                                 <div ref={overlayWrapperRef} 
                                     className={`vayu_blocks_overlay_main_wrapper_image ${attributes.overlaywrapper} ${attributes.imagehvreffect} ${attributes.maskshape!=='none' ? 'maskshapeimage' : ''} ${getclassoverlay()}`} 

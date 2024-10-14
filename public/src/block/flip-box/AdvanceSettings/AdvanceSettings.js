@@ -426,10 +426,12 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
         borderRadius: borderRadius,
       
-        
-        boxShadow: boxShadow ?
-        `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
-        : 'none',
+        // Conditionally include boxShadow if boxShadowColor is defined
+        ...(boxShadowColor && {
+            boxShadow: boxShadow
+                ? `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
+                : 'none',
+        }),
  
         background: backgroundType === 'color' ? backgroundColor :
         backgroundType === 'gradient' ? backgroundGradient || undefined :
@@ -454,9 +456,11 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
         borderRadius: borderRadiushvr,
 
-        boxShadow: boxShadowHvr ?
-        `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
-        : 'none',
+        ...(boxShadowColorHvr && {
+            boxShadow: boxShadowHvr ?
+            `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
+            : 'none',
+            }),
  
 
         background: backgroundTypeHvr === 'color' ? backgroundColorHvr :
@@ -513,7 +517,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             const { attributes, clientId ,name} = selectedBlock;
             const blockClass = attributes.className || ''; // Get the className of the selected block
             // Check if the selected block is an inner block
-            if (name === 'vayu-blocks/advance-heading' || name === 'vayu-blocks/advance-button' || name==='vayu-blocks/advance-container') {
+            if (name === 'vayu-blocks/image' || name === 'vayu-blocks/advance-slider' || name === 'vayu-blocks/advance-heading' || name === 'vayu-blocks/advance-button' || name==='vayu-blocks/advance-container') {
                 // Find the parent block (the immediate container)
                 const parentBlockClientIds = select('core/block-editor').getBlockParents(clientId);
                 if (parentBlockClientIds.length > 1) {

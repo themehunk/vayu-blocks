@@ -412,10 +412,14 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
         borderRadius: borderRadius,
         
-        boxShadow: boxShadow ?
-        `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
-        : 'none',
- 
+        // Conditionally include boxShadow if boxShadowColor is defined
+        ...(boxShadowColor && {
+            boxShadow: boxShadow
+                ? `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
+                : 'none',
+        }),
+
+
         background: backgroundType === 'color' ? backgroundColor :
         backgroundType === 'gradient' ? backgroundGradient || undefined :
         backgroundImage ? `url(${backgroundImage.url})` : 'none',
@@ -442,10 +446,11 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
         borderRadius: borderRadiushvr,
 
+        ...(boxShadowColorHvr && {
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
         : 'none',
- 
+        }),
 
         background: backgroundTypeHvr === 'color' ? backgroundColorHvr :
             backgroundTypeHvr === 'gradient' ? backgroundGradientHvr || undefined :

@@ -437,9 +437,12 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                 borderImageOutset : `${attributes.advanceborderimageoutset}px`,
         }),
         
-        boxShadow: boxShadow ?
-        `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
-        : 'none',
+        // Conditionally include boxShadow if boxShadowColor is defined
+        ...(boxShadowColor && {
+            boxShadow: boxShadow
+                ? `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
+                : 'none',
+        }),
  
         background: backgroundType === 'color' ? backgroundColor :
         backgroundType === 'gradient' ? backgroundGradient || undefined :

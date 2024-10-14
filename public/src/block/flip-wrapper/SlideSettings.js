@@ -237,6 +237,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     }
 
+    const vayu_blocks_box_shadow_color_handler = (e) => {
+		if(e){
+			setAttributes({ boxShadowColor: e })
+		}else{
+			setAttributes({ boxShadowColor: 'transparent' })
+		}
+	}
+
+
     return (
 
         <>
@@ -256,7 +265,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         )}
 
         <PanelBody title={ __( 'Background', 'vayu-blocks' ) }
-                        initialOpen={ false }
+                        initialOpen={ true }
                         className="th-button-panel"
                     >      
             <BackgroundSelectorControl
@@ -555,7 +564,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                     <ColorGradientControl
                         label={ __( 'Shadow Color', 'vayu-blocks' ) }
                         colorValue={ attributes.boxShadowColor }
-                        onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+                        onColorChange={ e => vayu_blocks_box_shadow_color_handler(e) }
                         enableAlpha={true} 
                     />
 
