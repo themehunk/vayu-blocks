@@ -431,7 +431,7 @@ const edit = (props) => {
             >
                     <div style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
-                    <div> 
+                    <div className='vayu_blocks_dustone_svg'> 
                         <DuotoneFilters />
                     </div>
 

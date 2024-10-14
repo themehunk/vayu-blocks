@@ -1,14 +1,15 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 2,
-    "name": "vayu-blocks/image-flip",
+    "name": "vayu-blocks/flip-wrapper",
     "version": "0.2.0",
-    "title": "Image Flip",
+    "title": "Flip Wrapper",
     "category": "vayu-blocks",
-    "description": "A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.",
+    "description": "Custom front image block with animated hover overlays, featuring image animations and fully customizable overlay effects.",
     "supports": {
       "html": false,
-      "align": ["wide", "full"]
+      "align": ["wide", "full"],
+      "inserter": false
     },
     "textdomain": "vayu-blocks",
     "editorScript": "file:./index.js",

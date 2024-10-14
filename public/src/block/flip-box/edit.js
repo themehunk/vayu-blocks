@@ -132,11 +132,11 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
 
 
     const image_flip_template = [
-        ['vayu-blocks/front-image', {
+        ['vayu-blocks/flip-wrapper', {
             className: `vayu_blocks_flip-box-front ${classname('front')}`,
             flipSide: 'front',
         }],
-        ['vayu-blocks/front-image', {
+        ['vayu-blocks/flip-wrapper', {
             className: `vayu_blocks_flip-box-back ${classname('back')}`,
             flipSide: 'back',
         }], 

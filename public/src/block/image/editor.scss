@@ -736,7 +736,7 @@ animation: starburst 2.5s linear infinite;
 }
 
 .vayu_blocks_matrix_control{
-    border:1px solid rgba(128,128,128,0.23);
+    border:1px solid rgba(128,128,128,0.23) !important;
 }
 
 .vayu_block_alignment .components-base-control__field{
@@ -1064,4 +1064,10 @@ animation: starburst 2.5s linear infinite;
 .vayu_blocks_overlay_main_wrapper_image,
 .vayu_blocks_image__wrapper {
     transition: transform 0.5s ease; // Adjust the duration and easing as needed
+}
+
+.vayu_blocks_dustone_svg{
+    width: 0;
+    height: 0;
+    display: none;
 }

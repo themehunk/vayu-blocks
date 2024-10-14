@@ -68,7 +68,7 @@ class Vayu_blocks_image_flip {
 }
 
 // Render callback for the block
-function vayu_blocks_image_flip_render($attr,$content) {
+function vayu_blocks_flip_box_render($attr,$content) {
     // Include default attributes
     $default_attributes = include('defaultattributes.php');
 

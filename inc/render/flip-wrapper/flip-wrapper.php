@@ -36,7 +36,7 @@ class Vayu_blocks_front_image {
 }
 
 // Render callback for the block
-function vayu_blocks_front_image_render($attr,$content) {
+function vayu_blocks_flip_wrapper_render($attr,$content) {
     // Include default attributes
     $default_attributes = include('defaultattributes.php');
 
