@@ -29,14 +29,12 @@ const TEMPLATE = [
     ['vayu-blocks/advance-container', {}, [
 		['vayu-blocks/advance-heading',
 	    { 
-		
 		title: __('Post Title', 'vayu-blocks'),	
 		placeholder: __('Enter heading here', 'vayu-blocks') 
 	    }
 	    ],
 		['vayu-blocks/advance-heading', 
 		{ 
-			
 			title: __('Post Date', 'vayu-blocks'),
             tag: 'span',
 			selectedSourceField:'post_date',
@@ -46,7 +44,6 @@ const TEMPLATE = [
         }],
 		['vayu-blocks/advance-heading', 
 		{ 
-			
 			title: __('Post Excerpt', 'vayu-blocks'),
             tag: 'span',
 			selectedSourceField:'excerpt',
