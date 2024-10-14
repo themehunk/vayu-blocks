@@ -472,7 +472,9 @@ function generate_inline_image_styles($attr) {
 
     /* Hover the image and show the overlay */
     $css .= "$wrapper .vayu_blocks_overlay_main_wrapper_image:hover {";
-        $css .= "background: " . esc_attr($attr['overlayhvrcolor']) . " !important;";
+            if($attr['overlayhvrcolor']){
+                $css .= "background: " . esc_attr($attr['overlayhvrcolor']) . " !important;";
+            }
     $css .= "}";
 
     //inerrblok animation

@@ -571,6 +571,12 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         // Create a Data URL
          imagePath = `data:image/svg+xml;base64,${svgBase64}`;       } 
 
+         let overlayhvrcolor=''
+         if(attributes.overlayhvrcolor){
+            overlayhvrcolor = `${attributes.overlayhvrcolor}`;
+         }else{
+            overlayhvrcolor = `${attributes.overlaycolor}`;
+         }
 
     const blockProps = useBlockProps({
         className: 'custom-margin',
@@ -589,7 +595,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--image-url-size' : `${attributes.masksize}`,
             '--image-url-position' :  `${attributes.maskposition}`,
             '--image-url-repeat' :  `${attributes.maskrepeat}`,
-            '--overlay-hvr-color' :  `${attributes.overlayhvrcolor}`,
+            '--overlay-hvr-color' :  `${overlayhvrcolor}`,
             '--image-transform': `${attributes.rotation}deg`,
         },
 
