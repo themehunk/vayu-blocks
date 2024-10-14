@@ -3,11 +3,8 @@ import {
 	useBlockProps
 } from '@wordpress/block-editor';
 
-
-const Save = ({attributes}) => {
-    const blockProps = useBlockProps.save({
-		id: attributes.uniqueID
-	});
+const Save = () => {
+    const blockProps = useBlockProps.save();
 
     return (
         <div { ...blockProps } className="vayu-wrapper-block">
