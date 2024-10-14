@@ -181,11 +181,11 @@ class Vayu_Block_Plugin {
     public function vayu_register_blocks_new() {
         $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
 
-        //image-flip
+        //flip-box
         register_block_type(
-            __DIR__ . '/public/build/block/image-flip',
+            __DIR__ . '/public/build/block/flip-box',
             array(
-                'render_callback' => 'vayu_blocks_image_flip_render',
+                'render_callback' => 'vayu_blocks_flip_box_render',
             )
         );
 
@@ -215,11 +215,11 @@ class Vayu_Block_Plugin {
             )
         );
 
-        //front image
+        //flip-wrapper
         register_block_type(
-            __DIR__ . '/public/build/block/front-image',
+            __DIR__ . '/public/build/block/flip-wrapper',
             array(
-                'render_callback' => 'vayu_blocks_front_image_render',
+                'render_callback' => 'vayu_blocks_flip_wrapper_render',
             )
         );
 

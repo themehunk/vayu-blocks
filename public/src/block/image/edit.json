@@ -355,5 +355,37 @@
     },
     "parentBlock":{
         "type":"string"
-    }
+    }, 
+    "imageboxShadow": {
+        "type": "boolean",
+        "default": false
+      },
+      "imageboxShadowColor": {
+        "type": "string",
+        "default": ""
+      },
+      "imageboxShadowColorOpacity": {
+        "type": "number",
+        "default": 50
+      },
+      "imageboxShadowBlur": {
+        "type": "number",
+        "default": 5
+      },
+      "imageboxShadowSpread": {
+        "type": "number",
+        "default": 1
+      },
+      "imageboxShadowHorizontal": {
+        "type": "number",
+        "default": 0
+      },
+      "imageboxShadowVertical": {
+        "type": "number",
+        "default": 0
+      },
+      "defaultImageWidth":{
+        "type":"number",
+        "default":0
+      }
 }

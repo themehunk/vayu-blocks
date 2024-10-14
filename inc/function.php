@@ -300,7 +300,7 @@ function vayu_blocks_get_input_values_callback() {
                 
             ),
         ),
-        'imageFlip' => array(
+        'flipBox' => array(
             'value' => 0,
             'settings' => array(
                 

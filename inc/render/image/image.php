@@ -49,7 +49,7 @@ class Vayu_blocks_image {
 
         $image_html .= '<div class="vayu_blocks_image__wrapper ' . $wrapperanimation . ' " id='. $uniqueId .'>';
             $image_html .= '<div class="vayu_blocks_rotating_div">';
-            $image_html .= '<div class=" ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
+            $image_html .= '<div class="vayu_blocks_image_image_wrapping_container ' . $imageHvrFilter . ' ' . $imageHvrEffect . ' ' . $animation_classname . '" >';            
                 $image_html .= '<img 
                                     src="' . $imageSrc . '" 
                                     alt="' . $imageAlt . '" 

@@ -1873,6 +1873,14 @@ const PanelSettings = ({
     };
 
 
+	const vayu_blocks_box_shadow_color_handler = (e) => {
+		if(e){
+			setAttributes({ boxShadowColor: e })
+		}else{
+			setAttributes({ boxShadowColor: 'transparent' })
+		}
+	}
+
     return (
 		<Fragment>
 			<InspectorControls>
@@ -2077,7 +2085,7 @@ const PanelSettings = ({
 										<ColorGradientControl
 											label={ __( 'Shadow Color', 'vayu-blocks' ) }
 											colorValue={ attributes.boxShadowColor }
-											onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+											onColorChange={ e => vayu_blocks_box_shadow_color_handler(e) }
 											enableAlpha={true} 
 										/>
 

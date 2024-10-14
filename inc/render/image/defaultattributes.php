@@ -110,6 +110,13 @@ return array(
             'animationsettings' => 'without-hvr',
             'wrapperanimation'=>'none',
             'overlaywrapper'=> 'none',
+            'imageboxShadow' => false,
+            'imageboxShadowColor' => '',
+            'imageboxShadowColorOpacity' => 50,
+            'imageboxShadowBlur' => 5,
+            'imageboxShadowSpread' => 1,
+            'imageboxShadowHorizontal' => 0,
+            'imageboxShadowVertical' => 0,
 
     //Advanced
         'classNamemain' => '',

@@ -13,8 +13,10 @@ import {
     FocalPointPicker,
     __experimentalAlignmentMatrixControl as AlignmentMatrixControl,
     PanelRow,
+    RangeControl,
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
+import { __experimentalColorGradientControl as ColorGradientControl} from '@wordpress/block-editor';
 
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
@@ -198,10 +200,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     const handleimageurl = (value) => {
         setAttributes({image:value.url});
+        setAttributes({defaultImageWidth:value.width});
     }
     
     const handleimage = (value) => {
         setAttributes({image:value});
+        setAttributes({defaultImageWidth:value.width});
     }
 
     const getimagealignment = () => {
@@ -337,6 +341,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             { label: __('Overlay Effect 10 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
         );
     }
+
+
+    const vayu_blocks_box_shadow_color_handler = (e) => {
+		if(e){
+			setAttributes({ imageboxShadowColor: e })
+		}else{
+			setAttributes({ imageboxShadowColor: 'transparent' })
+		}
+	}
 
     return (
         
@@ -494,6 +507,70 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             duotonePalette={vayu_blocks_DUOTONE_PALETTE}
                         />
 
+                <ControlPanelControl
+                    label={ __( 'Box Shadow', 'vayu-blocks' ) }
+                    attributes={ attributes }
+                    setAttributes={ setAttributes }
+                    resetValues={ {
+                        imageboxShadow: false,
+                        imageboxShadowColor: undefined,
+                        imageboxShadowColorOpacity: 50,
+                        imageboxShadowBlur: 5,
+                        imageboxShadowSpread: 1,
+                        imageboxShadowHorizontal: 0,
+                        imageboxShadowVertical: 0
+                    } }
+                    onClick={ () => setAttributes({ imageboxShadow: true }) }
+                >
+                
+                    <ColorGradientControl
+                        label={ __( 'Shadow Color', 'vayu-blocks' ) }
+                        colorValue={ attributes.imageboxShadowColor }
+                        onColorChange={ e => vayu_blocks_box_shadow_color_handler(e) }
+                        enableAlpha={true} 
+                    />
+
+                    <RangeControl
+                        label={ __( 'Opacity', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowColorOpacity }
+                        onChange={ e => setAttributes({ imageboxShadowColorOpacity: e }) }
+                        min={ 0 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Blur', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowBlur }
+                        onChange={ e => setAttributes({ imageboxShadowBlur: e }) }
+                        min={ 0 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Spread', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowSpread }
+                        onChange={ e => setAttributes({ imageboxShadowSpread: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Horizontal', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowHorizontal }
+                        onChange={ e => setAttributes({ imageboxShadowHorizontal: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Vertical', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowVertical }
+                        onChange={ e => setAttributes({ imageboxShadowVertical: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+                </ControlPanelControl>
+                        
                         </>
                         ) : (
                             <>

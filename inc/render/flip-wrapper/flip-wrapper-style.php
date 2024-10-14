@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-function generate_inline_front_image_styles($attr) {
+function generate_inline_flip_wrapper_styles($attr) {
 
     $css = '';
 

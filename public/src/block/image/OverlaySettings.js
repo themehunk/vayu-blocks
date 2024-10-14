@@ -1,4 +1,4 @@
-import React, {Fragment, useState } from 'react';
+import React, {Fragment, useEffect, useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
@@ -284,19 +284,31 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
-
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
-
                 {/* Background Image */}
                 <PanelBody title={__('Overlay','vayu-blocks')} initialOpen={false}>
-                    <ToggleControl
-                        className='vayu_blocks_togglecontrol'
-                        label={__('Overlay', 'vayu-blocks')}
-                        checked={attributes.overlayshow}
-                        onChange={(value) =>  setAttributes({overlayshow:value})}
-                    />
+                {
+                    parseInt(attributes.imagewidth) > 200  ? (
+                        <ToggleControl
+                            className='vayu_blocks_togglecontrol'
+                            label={__('Overlay', 'vayu-blocks')}
+                            checked={attributes.overlayshow}
+                            onChange={(value) => setAttributes({ overlayshow: value })}
+                        />
+                    ) : (attributes.imagewidth==='' &&  attributes.defaultImageWidth > 200) ? (
+                        <ToggleControl
+                            className='vayu_blocks_togglecontrol'
+                            label={__('Overlay', 'vayu-blocks')}
+                            checked={attributes.overlayshow}
+                            onChange={(value) => setAttributes({ overlayshow: value })}
+                        />
+                    ) : (
+                        <p>Image width is less than 200px, so the overlay cannot be used.</p>
+                    )
+                }
+                    
                     
                     {attributes.overlayshow && (<>
                         <div className="vayu_block_alignment_main_div">

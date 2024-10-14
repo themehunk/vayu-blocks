@@ -247,6 +247,23 @@ function generate_inline_image_styles($attr) {
         $css .= " position: relative;";
         $css .= "perspective: 1000px;";
         $css .= "transform-style: preserve-3d;";
+
+                 // Box-shadow
+       if (isset($attr['imageboxShadow']) && $attr['imageboxShadow']) {
+        $boxShadowColor = 'rgba(' . implode(', ', [
+            hexdec(substr($attr['imageboxShadowColor'], 1, 2)), // Red
+            hexdec(substr($attr['imageboxShadowColor'], 3, 2)), // Green
+            hexdec(substr($attr['imageboxShadowColor'], 5, 2))  // Blue
+        ]) . ', ' . ((float) $attr['imageboxShadowColorOpacity'] / 100) . ')';
+        $css .= "box-shadow: " . esc_attr($attr['imageboxShadowHorizontal']) . 'px ' .
+                            esc_attr($attr['imageboxShadowVertical']) . 'px ' .
+                            esc_attr($attr['imageboxShadowBlur']) . 'px ' .
+                            esc_attr($attr['imageboxShadowSpread']) . 'px ' .
+                            $boxShadowColor . ";";
+        } else {
+            $css .= "box-shadow: none;";
+        }
+        
     $css .= "}";
 
     $css .= "$wrapper .vayu_blocks_rotating_div{";
@@ -314,6 +331,22 @@ function generate_inline_image_styles($attr) {
             if (isset($attr['imageborderRadius']['top'], $attr['imageborderRadius']['right'], $attr['imageborderRadius']['bottom'], $attr['imageborderRadius']['left'])) {
                 $css .= "border-radius: " . esc_attr($attr['imageborderRadius']['top']) . " " . esc_attr($attr['imageborderRadius']['right']) . " " . esc_attr($attr['imageborderRadius']['bottom']) . " " . esc_attr($attr['imageborderRadius']['left']) . ";";
             }
+        }
+
+         // Box-shadow
+       if (isset($attr['imageboxShadow']) && $attr['imageboxShadow']) {
+        $boxShadowColor = 'rgba(' . implode(', ', [
+            hexdec(substr($attr['imageboxShadowColor'], 1, 2)), // Red
+            hexdec(substr($attr['imageboxShadowColor'], 3, 2)), // Green
+            hexdec(substr($attr['imageboxShadowColor'], 5, 2))  // Blue
+        ]) . ', ' . ((float) $attr['imageboxShadowColorOpacity'] / 100) . ')';
+        $css .= "box-shadow: " . esc_attr($attr['imageboxShadowHorizontal']) . 'px ' .
+                            esc_attr($attr['imageboxShadowVertical']) . 'px ' .
+                            esc_attr($attr['imageboxShadowBlur']) . 'px ' .
+                            esc_attr($attr['imageboxShadowSpread']) . 'px ' .
+                            $boxShadowColor . ";";
+        } else {
+            $css .= "box-shadow: none;";
         }
 
     $css .= "}";
