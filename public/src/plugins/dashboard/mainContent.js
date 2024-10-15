@@ -9,6 +9,10 @@ import { RxWidth, RxPadding, RxSpaceBetweenHorizontally} from "react-icons/rx";
 import { Spinner  } from '@wordpress/components';
 import { VerifyKey } from '../../vayu-sites/template/verifykey';
 import Sidebar from './sidebar';
+import { IoGridOutline } from "react-icons/io5";
+import { TfiLayoutSlider } from "react-icons/tfi";
+import { FaRegImage } from "react-icons/fa";
+import { CiImageOn } from "react-icons/ci";
 
 const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense }) => {
     const [isChecked, setIsChecked] = useState(initialValue);
@@ -198,29 +202,29 @@ function getDescription(key,value='') {
                         link2: '#'
                     };
 
-                    case 'postgrid':
+                    case 'postGrid':
                     return {
-                        value: vayublock.options.postgrid.isActive,
-                        icon: <RxButton />,
-                        description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        value: vayublock.options.postGrid.isActive,
+                        icon: < IoGridOutline  />,
+                        description: __('A custom block to display filtered posts with options for tags and categories.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
 
-                    case 'advanceSlider':
+                    case 'AdvanceSlider':
                     return {
                         value: vayublock.options.advanceSlider.isActive,
-                        icon: <RxButton />,
-                        description: __('Easily design attractive buttons with Vayu Blocks advanced customizations.', 'vayu-blocks'),
+                        icon: <TfiLayoutSlider />,
+                        description: __('A custom Loader to display block with options for dots and aerrow.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
 
-                    case 'imageFlip':
+                    case 'FlipBox':
                     return {
                         value: vayublock.options.imageFlip.isActive,
-                        icon: <RxButton />,
-                        description: __('Turn static images into interactive elements with Vayu Blocks using image flips and animations.', 'vayu-blocks'),
+                        icon: <FaRegImage />,
+                        description: __('A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'
                     };
@@ -228,7 +232,7 @@ function getDescription(key,value='') {
                     case 'image':
                     return {
                         value: vayublock.options.image.isActive,
-                        icon: <RxButton />,
+                        icon: <CiImageOn />,
                         description: __(' A customizable block that adds engaging animations to images, enhancing visual appeal and user interaction on web pages.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'

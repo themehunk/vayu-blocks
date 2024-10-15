@@ -181,6 +181,7 @@ h2.ubp-h2-heading {
 
 .vayu_blocks_duotone_panel .e19lxcc00{
     padding-left:0px;
+    padding-right: 0px;
  }
  
  .vayu_block_dutone_name h2{
@@ -189,4 +190,168 @@ h2.ubp-h2-heading {
 
  .vayu_blocks_duotone_panel .block-editor-panel-duotone-settings__dropdown{
     width:100%;
+}
+
+
+
+.vayu_blocks_animation_panel .vayu_blocks_animation_toolspanel_item{
+    border:1px solid rgba(0,0,0,0.08);
+}
+
+.vayu_blocks_animation_panel .vayu_blocks_animation_toolspanel_item:hover {
+    background:rgba(128,128,128,0.05);
+    transition: 0.3s ease-in-out;
+}
+
+.vayu_blocks_animation_panel .vayu_blocks_animation_toolspanel_item .e19lxcc00{
+    display:flex;
+}
+
+.vayu_blocks_toolspanel_items_popover .vayu_blocks_div_animation{
+    padding:10px;
+}
+
+.vayu_blocks_animation_panel .e19lxcc00{
+    padding-left:0px;
+    padding-right: 0px;
+ }
+ 
+ .vayu_block_animation_name h2{
+     font-weight:normal;
+ }
+
+ .vayu_blocks_animation_panel .block-editor-panel-animation-settings__dropdown{
+    width:100%;
+}
+
+.vayu_blocks_div_animation{
+    min-width:300px;
+    min-height: 300px;
+}
+
+.vayu_block_styling-left-svg {
+    transform: rotateY(50deg) scale(0.9) rotateX(20deg) !important;
+    transition: 0.6s ease all;
+}
+
+.vayu_block_styling-right-svg {
+    transform: rotateY(-50deg) scale(0.9) rotateX(20deg) !important;
+    transition: 0.6s ease all;
+}
+
+ 
+.vayu_block_styling-effect3-svg {
+    transform: scale(0.75) rotateY(-30deg) rotateX(45deg) translateZ(4.5rem) !important;
+    transform-origin: 42% 250%;
+    transition: 0.6s ease transform;
+    box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.25);
+  }
+   
+  .vayu_block_styling-effect4-left-svg {
+    --d: 1px;  /* the depth */
+    --a: 32deg; /* the angle */
+    --x: 25px;
+    padding-block: var(--d);
+    transform: perspective(400px) rotateY(calc(var(--_i,1)*var(--a))) !important;
+    outline-offset: calc(-1*var(--d));
+    --_d: calc(100% - var(--d));
+    --_l: 0px;
+    --_r: 0px;
+    clip-path: polygon(
+      var(--_l) calc(var(--_d) - var(--x)),
+      var(--_l) calc(var(--d)  + var(--x)), 
+      var(--d) var(--d),var(--_d) var(--d),
+      calc(var(--_d) + var(--_r)) calc(var(--d)  + var(--x)),
+      calc(var(--_d) + var(--_r)) calc(var(--_d) - var(--x)),  
+      var(--_d) var(--_d),var(--d) var(--_d)
+     );
+    transition: transform .3s,--_r .15s,--_l .15s .15s !important;
+    transition-timing-function: linear;
+  }
+
+  .vayu_block_styling-effect4-right-svg {
+    --d: 1px;  /* the depth */
+    --a: -32deg; /* the angle */
+    --x: 25px;
+    padding-block: var(--d);
+    transform: perspective(400px) rotateY(calc(var(--_i,1)*var(--a))) !important;
+    outline-offset: calc(-1*var(--d));
+    --_d: calc(100% - var(--d));
+    --_l: 0px;
+    --_r: 15px;
+    clip-path: polygon(
+      var(--_l) calc(var(--_d) - var(--x)),
+      var(--_l) calc(var(--d)  + var(--x)), 
+      var(--d) var(--d),var(--_d) var(--d),
+      calc(var(--_d) + var(--_r)) calc(var(--d)  + var(--x)),
+      calc(var(--_d) + var(--_r)) calc(var(--_d) - var(--x)),  
+      var(--_d) var(--_d),var(--d) var(--_d)
+     );
+    transition: transform .3s,--_r .15s,--_l .15s .15s !important;
+    transition-timing-function: linear;
+  }
+
+  .vayu_block_styling-effect10-svg{
+    transform:
+      rotateX(51deg)
+      rotateZ(43deg);
+    transform-style: preserve-3d;
+    box-shadow:
+      1px 1px 0 1px #f9f9fb,
+      -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+      28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+    transition:
+      .4s ease-in-out transform,
+      .4s ease-in-out box-shadow;
+  }
+
+  .vayu_block_styling-effect7-svg {
+    transition: transform 0.2s ease-out; /* Adjust the duration and timing function as needed */
+    overflow: hidden;
+}
+
+.vayu_blocks_animation_panel_svg{
+    height: 50px;
+    width: 70px;
+}
+
+.vayu_blocks_animation-none{
+    border: 1px solid #bdbdc3;
+    padding: 30px 5px;
+    margin: 5px;
+    background: #b2b0b061;
+    overflow: hidden;
+}
+
+.vayu_blocks_effect4-btton{
+    left: 36%;
+    top: 50%;
+    position: absolute;
+}
+
+.vayu_blocks_effect5-btton{
+    left: 60%;
+    top: 50%;
+    position: absolute;
+}
+
+.vayu_blocks_effect10-btton{
+    left: 5%;
+    top: 70%;
+    position: absolute;
+}
+
+.vayu_blocks_effect7-btton{
+    left: 36%;
+    top: 70%;
+    position: absolute;
+}
+
+.vayu_blocks_animation_panel_button_svg.selected{
+    border-color: blue;
+}
+
+.vayu_blocks_animation_panel_button_svg:hover {
+    cursor: pointer;
+    opacity: 0.8; /* Add hover effect */
 }

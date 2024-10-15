@@ -180,7 +180,6 @@ class Vayu_Block_Plugin {
 
     public function vayu_register_blocks_new() {
         $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
-
         //flip-box
         register_block_type(
             __DIR__ . '/public/build/block/flip-box',
@@ -202,7 +201,6 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/post-grid',
             array(
                 'render_callback' => 'post_grid_render',
-                'status'     => $options['postgrid']['isActive'],
             )
         );
 
@@ -211,7 +209,6 @@ class Vayu_Block_Plugin {
             __DIR__ . '/public/build/block/image',
             array(
                 'render_callback' => 'vayu_block_image_render',
-                'status'     => $options['image']['isActive'],
             )
         );
 

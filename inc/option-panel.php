@@ -15,7 +15,7 @@ class VAYU_BLOCKS_OPTION_PANEL {
             'heading' =>  array( 'isActive' => true,'type'=>'free'),
             'spacer' =>  array( 'isActive' => true,'type'=>'free'),
             'product' =>  array( 'isActive' => true,'type'=>'free'),
-            'postgrid' =>  array( 'isActive' => true,'type'=>'free'),
+            'postGrid' =>  array( 'isActive' => true,'type'=>'free'),
             'flipBox' =>  array( 'isActive' => true,'type'=>'free'),
             'image' =>  array( 'isActive' => true,'type'=>'free'),
             'advanceSlider' =>  array( 'isActive' => true,'type'=>'free'),

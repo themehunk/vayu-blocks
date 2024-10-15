@@ -390,18 +390,6 @@ const edit = (props) => {
         };
     }, [attributes.wrapperanimation]);
     
-    useEffect(() => {
-        // If imagewidth is less than 200, hide the overlay
-        if (parseInt(attributes.imagewidth) < 200) {
-            setAttributes({ overlayshow: false });
-        } 
-        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
-        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
-            setAttributes({ overlayshow: false });
-        }
-    }, [attributes.imagewidth, attributes.defaultImageWidth]);
-    
-
     return (
         <>
             <BlockControls>

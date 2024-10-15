@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { dispatch, useSelect,select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import _ from 'lodash'; // If you are using lodash
-
 import {
     PanelBody,
     ToggleControl,
@@ -17,21 +16,18 @@ import {
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
 import { __experimentalColorGradientControl as ColorGradientControl} from '@wordpress/block-editor';
-
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel.js';
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
 import './editor.scss';
-
+import WrapperAnimationPanel from '../../components/wp-default-compoents/Animation/WrapperAnimationPanel';
 import {
-    HoverControl,
     ToogleGroupControl,
     ResponsiveControl,
 } from '../../components/index.js';
 import ControlPanelControl from '../../components/control-panel-control/index.js';
-
-import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
+import {Center,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
@@ -229,24 +225,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setAttributes({ imagealignmentmobile: value });
         }
     };
-
-    const handlehoveranimation = (value) => {
-
-        if(value=== 'vayu_block_styling-effect5' || value=== 'vayu_block_styling-effect6' || value=== 'vayu_block_styling-effect8' ){
-            setAttributes({
-                overlaywrapper: value,
-                wrapperanimation: 'none',
-            });
-        }
-
-        else if (value.startsWith('vayu_block_styling')) {
-            // If it's a wrapper animation, set the wrapperanimation attribute and reset the hover effect
-            setAttributes({
-                overlaywrapper:'none',
-                wrapperanimation: value,
-            });
-        }
-    };
     
     const [blockValue, setBlockValue] = useState(''); // To manage the toggle state (front/back)
 
@@ -333,16 +311,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
     ];
     
-    // Conditionally add overlay options based on the overlayshow attribute
-    if (attributes.overlayshow) {
-        animationoptions.push(
-            { label: __('Overlay Effect 8 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
-            { label: __('Overlay Effect 9 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
-            { label: __('Overlay Effect 10 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
-        );
-    }
-
-
     const vayu_blocks_box_shadow_color_handler = (e) => {
 		if(e){
 			setAttributes({ imageboxShadowColor: e })
@@ -350,6 +318,17 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 			setAttributes({ imageboxShadowColor: 'transparent' })
 		}
 	}
+
+    useEffect(() => {
+        // If imagewidth is less than 200, hide the overlay
+        if (parseInt(attributes.imagewidth) < 200) {
+            setAttributes({ overlayshow: false });
+        } 
+        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
+        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
+            setAttributes({ overlayshow: false });
+        }
+    }, [attributes.imagewidth, attributes.defaultImageWidth]);
 
     return (
         
@@ -596,6 +575,15 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 {/* Overlay and animation effect  */}
                 <PanelBody title={__('Advance Animation & Mask','vayu-blocks')} initialOpen={false}>
 
+                    <div className='vayu_blocks_animation_panel'>
+                        <WrapperAnimationPanel 
+                            animationValue={attributes.wrapperanimation} 
+                            onAnimationChange={(value) => setAttributes({wrapperanimation:value})}
+                            animationOptions={animationoptions} 
+                            image={attributes.image}
+                        />
+                    </div>
+
                     <SelectControl
                         label={__('Hover Effect', 'vayu-blocks')}
                         value={attributes.imagehvreffect}                        
@@ -603,18 +591,19 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         onChange={(value) => setAttributes({imagehvreffect:value})}
                     />
 
-                    <SelectControl
-                        label={__('3D Effect', 'vayu-blocks')}
-                        value={
-                            attributes.overlaywrapper !== 'none'
-                                ? attributes.overlaywrapper
-                                : attributes.wrapperanimation !== 'none'
-                                ? attributes.wrapperanimation
-                                : 'none'
-                        }                       
-                            options={animationoptions}
-                        onChange={(value) => handlehoveranimation(value)}
-                    />
+                    {attributes.overlayshow && (
+                        <SelectControl
+                            label={__('Overlay Hover Effect', 'vayu-blocks')}
+                            value={attributes.overlaywrapper}
+                            options={[
+                                { label: __('None', 'vayu-blocks'), value: 'none' },
+                                { label: __('Overlay Effect 1 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
+                                { label: __('Overlay Effect 2 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
+                                { label: __('Overlay Effect 3 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
+                            ]}
+                            onChange={(value) => setAttributes({ overlaywrapper: value })}
+                        />
+                    )}
 
                     <SelectControl
                         label={__('Image Animation', 'vayu-blocks')}

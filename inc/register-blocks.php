@@ -46,14 +46,6 @@ $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
         //     'status'         => $options['button']['isActive'],
         // ),
         // array(
-        //     'name'           => 'vayu-blocks/post-grid',
-        //     'script_handle'  => 'post-grid',
-        //      'editor_style'   => 'post-grid-editor-style',
-        //      'frontend_style' => 'post-grid-frontend-style',
-        //     'status'         => $options['postgrid']['isActive'],
-        //     'render_callback' => 'post_grid_render'
-        // ),
-        // array(
         //      'name'            => 'vayu-blocks/advance-slider',
         //      'script_handle'   => 'advance-slider',
         //      'editor_style'   => 'advance-slider-editor-style',
@@ -69,14 +61,6 @@ $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
         //     'status'          => $options['advanceQueryLoop']['isActive'],
         //     //'render_callback' => 'vayu_blocks_advance_query_loop_render'
         // ),
-        // array(
-        //     'name'           => 'vayu-blocks/image-flip',
-        //     'script_handle'  => 'image-flip',
-        //      'editor_style'   => 'image-flip-editor-style',
-        //      'frontend_style' => 'image-flip-frontend-style',
-        //     'status'         => $options['imageFlip']['isActive'],
-        //     'render_callback' => 'vayu_blocks_image_flip_render'
-        // )
         
     );
 

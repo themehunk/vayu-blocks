@@ -296,10 +296,10 @@ return array(
 
         // advance Border Radius
             'advanceRadius' => array(
-                'top' => '4px',
-                'bottom' => '4px',
-                'left' => '4px',
-                'right' => '4px',
+                'top' => '0px',
+                'bottom' => '0px',
+                'left' => '0px',
+                'right' => '0px',
             ),
             // advance Border
             'advanceborderhvr' => array(
@@ -319,10 +319,10 @@ return array(
 
     // advance Border Radius
         'advanceRadiushvr' => array(
-            'top' => '4px',
-            'bottom' => '4px',
-            'left' => '4px',
-            'right' => '4px',
+            'top' => '0px',
+            'bottom' => '0px',
+            'left' => '0px',
+            'right' => '0px',
         ),
 );
 ?>
