@@ -1,9 +1,12 @@
-import React from 'react';
-import { InnerBlocks } from '@wordpress/block-editor';
+import React, { useState } from 'react';
+import { InnerBlocks, BlockControls } from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton} from '@wordpress/components';
 import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import './editor.scss';
-import { useSelect } from '@wordpress/data';
+import { select, useDispatch, useSelect } from '@wordpress/data';
+import { FaRegImage } from "react-icons/fa";
+import { FcUndo,FcRedo  } from "react-icons/fc";
 
 const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
 
@@ -48,7 +51,7 @@ const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
                 ['vayu-blocks/advance-heading', {
                     fontVariant:'bold',
                     fontFamily:'unset',
-                    content:'Image Flip Title...'
+                    content:'Flip Title...'
                 }],
 
                 ['vayu-blocks/advance-button',{
@@ -65,9 +68,86 @@ const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
         ],
     ];  
 
+
+    const [blockValue, setBlockValue] = useState('front'); // Default to front side
+
+    // Get the currently selected block
+    const selectedBlock = useSelect((select) => {
+        return select('core/block-editor').getSelectedBlock();
+    });
+
+    const dispatch = useDispatch(); // Get dispatch function
+
+    // Handle the toggle change event
+    const handleToggleChange = (value) => {
+        setBlockValue(value);
+
+        if (selectedBlock) {
+
+            // Get all blocks
+            const allBlocks = select('core/block-editor').getBlocks();
+
+            // Find the parent block that contains the selected block
+            const parentBlock = allBlocks.find(block => {
+                return block.innerBlocks.some(innerBlock => innerBlock.clientId === selectedBlock.clientId);
+            });
+
+            if (parentBlock) {
+
+                // If toggle value is 'flip', move to the parent flip block
+                if (value === 'flip' && parentBlock.name === 'vayu-blocks/flip-box') {
+                    dispatch('core/block-editor').selectBlock(parentBlock.clientId);
+                } 
+                // If toggle value is 'back', move to the second inner block
+                else if (value === 'back') {
+                    const backBlock = parentBlock.innerBlocks[1]; // Get second inner block
+                    if (backBlock) {
+                        dispatch('core/block-editor').selectBlock(backBlock.clientId);
+                    }
+                }
+                // If toggle value is 'back', move to the second inner block
+                else if (value === 'front') {
+                    const backBlock = parentBlock.innerBlocks[0]; // Get second inner block
+                    if (backBlock) {
+                        dispatch('core/block-editor').selectBlock(backBlock.clientId);
+                    }
+                }
+            }
+        }
+    };
+
     return (
         <>
-       
+        <BlockControls>
+            <ToolbarGroup>
+                <ToolbarButton
+                    label="View Box Flip"
+                    onClick={() => handleToggleChange('flip')}
+                >
+                    <FaRegImage style={{ color: '#6c1bc3', fontSize: '28px' }} />
+                </ToolbarButton>
+
+                {attributes.className !== 'vayu_blocks_flip-box-front ' && (
+                    <ToolbarButton
+                        label="View Front"
+                        onClick={() => handleToggleChange('front')}
+                    >
+                        <FcUndo style={{ color: '#6c1bc3', fontSize: '28px' }} />
+                    </ToolbarButton>
+                )}
+
+                {attributes.className !== 'vayu_blocks_flip-box-back ' && (
+                    <ToolbarButton
+                        label="View Back"
+                        onClick={() => handleToggleChange('back')}
+                    >
+                        <FcRedo style={{ color: '#6c1bc3', fontSize: '28px' }} />
+                    </ToolbarButton>
+                )}
+            </ToolbarGroup>
+        </BlockControls>
+
+
             <PanelSettings attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}/>
             <AdvanceSettings attributes={attributes} setAttributes={setAttributes} clientId={clientId}>
                 

@@ -531,7 +531,7 @@ animation: starburst 2.5s linear infinite;
   box-shadow:
     1px 1px 0 1px #f9f9fb,
     -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+    28px 28px 28px 0 rgba(34, 33, 81, 0.25) !important;
   transition:
     .4s ease-in-out transform,
     .4s ease-in-out box-shadow;
@@ -544,7 +544,7 @@ animation: starburst 2.5s linear infinite;
     box-shadow:
       1px 1px 0 1px #f9f9fb,
       -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-      54px 54px 28px -10px rgba(34, 33, 81, 0.15);
+      54px 54px 28px -10px rgba(34, 33, 81, 0.15) !important;
   }
 }
 

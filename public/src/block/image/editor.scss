@@ -1056,6 +1056,11 @@ animation: starburst 2.5s linear infinite;
     }
   }
 
+  .vayu_block_styling-effect10 .vayu_blocks_image-container{
+    background: var(--wrapper-effect3-color);
+  }
+  
+
   .vayu_block_styling-effect7 {
     transition: transform 0.2s ease-out; /* Adjust the duration and timing function as needed */
     overflow: hidden;

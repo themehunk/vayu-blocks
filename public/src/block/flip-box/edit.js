@@ -135,10 +135,12 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
         ['vayu-blocks/flip-wrapper', {
             className: `vayu_blocks_flip-box-front ${classname('front')}`,
             flipSide: 'front',
+            backgroundColor:'#b1c5a4',
         }],
         ['vayu-blocks/flip-wrapper', {
             className: `vayu_blocks_flip-box-back ${classname('back')}`,
             flipSide: 'back',
+            backgroundColor:'#b5bdbc',
         }], 
     ];
 
