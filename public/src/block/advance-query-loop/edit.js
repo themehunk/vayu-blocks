@@ -196,5 +196,5 @@ const withFilteredControls = (BlockEdit) => (props) => {
 addFilter(
     'editor.BlockEdit',
     'vayu-blocks/with-filtered-controls',
-     withFilteredControls
+    withFilteredControls
 );
