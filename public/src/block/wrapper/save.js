@@ -5,7 +5,6 @@ import {
 
 const Save = () => {
     const blockProps = useBlockProps.save();
-
     return (
         <div { ...blockProps } className="vayu-wrapper-block">
             <InnerBlocks.Content />
