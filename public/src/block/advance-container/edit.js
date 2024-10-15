@@ -884,7 +884,7 @@ export default function Edit({
 					  // Display layout options if no inner blocks are present
 	const innerBlockss = wp.data.select('core/block-editor').getBlock(clientId).innerBlocks;
 	
-	if ( ! variationSelected && innerBlockss.length === 0 && 0 === getBlockParents.length ) {
+	if ( ! attributes.variationSelected && innerBlockss.length === 0 && 0 === getBlockParents.length ) {
 	return <VariationPicker { ...{ clientId, setAttributes, defaultVariation } } />
 	}
     

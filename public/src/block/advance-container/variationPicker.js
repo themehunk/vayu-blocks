@@ -2,9 +2,24 @@ import { __ } from '@wordpress/i18n';
 import { __experimentalBlockVariationPicker as BlockVariationPicker, useBlockProps } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
 import { createBlocksFromInnerBlocksTemplate } from '@wordpress/blocks';
-import { Path, SVG } from '@wordpress/components';
+// import { Path, SVG } from '@wordpress/components';
 import { RxGroup as icons } from "react-icons/rx";
 
+import {
+	Defs,
+	G,
+	Path,
+	Rect,
+	SVG,
+	clipPath
+} from '@wordpress/primitives';
+
+const columnWidth = 9;  // Width of each column
+const columnSpacing = 5;  // Space between columns
+const columns = 4;  // Number of columns
+
+// Calculate total width
+const totalWidth = columns * columnWidth + (columns - 1) * columnSpacing;
 export const variations = [
 	{
 		name: 'one-column-join',
@@ -22,9 +37,6 @@ export const variations = [
 			variationSelected: true,
 			direction: "row",
 		},
-		innerBlocks: [
-			[ 'vayu-blocks/advance-container']
-		],
 		scope: [ 'block' ],
 	},
 	{
@@ -75,15 +87,28 @@ export const variations = [
 	},
 	{
 		name: 'four-column-join',
-        icon: (
+        icon: ( 
 			<SVG
-				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
-				viewBox="0 0 48 48"
-			>
-				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
-			</SVG>
+  xmlns="http://www.w3.org/2000/svg"
+  width="48"
+  height="48"
+  viewBox={`0 0 ${totalWidth} 48`}
+>
+  {[...Array(columns)].map((_, i) => {
+    const xPos = i * (columnWidth + columnSpacing);
+    return (
+      <Path
+        key={i}
+        d={`M${xPos} 10a2 2 0 0 1 2-2h${columnWidth - 2}c1.105 0 2 .895 2 2v28c0 1.105-.895 2-2 2H${xPos + 2}a2 2 0 0 1-2-2V10Z`}
+      />
+    );
+  })}
+</SVG>
+
+
+
+		  
+		  
 		),
 		attributes: {
 			variationSelected: true,
@@ -98,29 +123,7 @@ export const variations = [
 		],
 		scope: [ 'block' ],
 	},
-	{
-		name: '40-60-join',
-        icon: (
-			<SVG
-				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
-				viewBox="0 0 48 48"
-			>
-				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
-			</SVG>
-		),
-		attributes: {
-			variationSelected: true,
-			direction: "row",
-		},
-		isDefault: true,
-		innerBlocks: [
-			[ 'vayu-blocks/advance-container',{contentWidthType: "fullwidth",fullcontentWidthUnit: 40,fullcontentWidthUnit: "%"}],
-			[ 'vayu-blocks/advance-container',{contentWidthType: "fullwidth", fullcontentWidthUnit: 60,fullcontentWidthUnit: "%"}],
-		],
-		scope: [ 'block' ],
-	},
+	
 ];
 
 export const VariationPicker = ( { clientId, setAttributes, defaultVariation } ) => {
