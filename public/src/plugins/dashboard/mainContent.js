@@ -222,7 +222,7 @@ function getDescription(key,value='') {
 
                     case 'FlipBox':
                     return {
-                        value: vayublock.options.imageFlip.isActive,
+                        value: vayublock.options.flipBox.isActive,
                         icon: <FaRegImage />,
                         description: __('A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.', 'vayu-blocks'),
                         link1: '#',

@@ -294,13 +294,13 @@ function vayu_blocks_get_input_values_callback() {
                 
             ),
         ),
-        'post Grid' => array(
+        'postGrid' => array(
             'value' => 0,
             'settings' => array(
                 
             ),
         ),
-        'flip Box' => array(
+        'flipBox' => array(
             'value' => 0,
             'settings' => array(
                 
@@ -312,7 +312,7 @@ function vayu_blocks_get_input_values_callback() {
                 
             ),
         ),
-        'slider' => array(
+        'advanceSlider' => array(
             'value' => 0,
             'settings' => array(
             

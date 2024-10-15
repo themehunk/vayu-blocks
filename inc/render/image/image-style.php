@@ -193,7 +193,7 @@ function generate_inline_image_styles($attr) {
             $css .= "border-radius: " . esc_attr($attr['advanceRadiushvr']['top']) . " " . esc_attr($attr['advanceRadiushvr']['right']) . " " . esc_attr($attr['advanceRadiushvr']['bottom']) . " " . esc_attr($attr['advanceRadiushvr']['left']) . ";";
         }
 
-   if(!empty($attr['boxShadowColorHvr'])){
+        if(!empty($attr['boxShadowColorHvr'])){
         // Box-shadow
         if (isset($attr['boxShadowHvr']) && $attr['boxShadowHvr']) {
             // Ensure the boxShadowColorHvr and boxShadowColorOpacityHvr keys are set
@@ -222,7 +222,7 @@ function generate_inline_image_styles($attr) {
             }
 
         }
-    }
+        }
 
         // Background
         if (isset($attr['backgroundTypeHvr'])) {
@@ -253,6 +253,11 @@ function generate_inline_image_styles($attr) {
     $css .= ".vayu_blocks_image_flip-duotone-filters {";
         $css .= "display: none;";
         $css .= "height: 0;";
+    $css .= "}";
+
+
+    $css .= ".vayu_block_styling-effect3::after {";
+        $css .= "background:" . esc_attr($attr['wrapppereffect3color']) . ";";
     $css .= "}";
   
     // Append CSS rules to $css

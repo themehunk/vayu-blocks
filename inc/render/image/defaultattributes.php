@@ -60,6 +60,7 @@ return array(
             'imagealignment' => 'center',
             'imagealignmenttablet' => 'center',
             'imagealignmentmobile' => 'center',
+            'wrapppereffect3color' => 'white',
             
             'overlayshow'=>false,
             'maskshape'=> 'none',

@@ -387,5 +387,9 @@
       "defaultImageWidth":{
         "type":"number",
         "default":0
+      },
+      "wrapppereffect3color":{
+        "type":"string",
+        "default":"white"
       }
 }
