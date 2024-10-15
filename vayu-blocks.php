@@ -177,59 +177,66 @@ class Vayu_Block_Plugin {
         }
     }
     
-
     public function vayu_register_blocks_new() {
-        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
-        //flip-box
-        register_block_type(
-            __DIR__ . '/public/build/block/flip-box',
-            array(
+        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option(); // Fetch the options array
+        $blocks_dir = __DIR__ . '/public/build/block';
+        
+        // Define the block-specific render callbacks in an associative array
+        $blocks_with_render_callbacks = array(
+            'flip-box'      => array(
+                'isActive'        => isset($options['flipBox']['isActive']) ? $options['flipBox']['isActive'] : 0,
                 'render_callback' => 'vayu_blocks_flip_box_render',
-            )
-        );
-
-        //advance-slider
-        register_block_type(
-            __DIR__ . '/public/build/block/advance-slider',
-            array(
+            ),
+            'advance-slider'=> array(
+                'isActive'        => isset($options['advanceSlider']['isActive']) ? $options['advanceSlider']['isActive'] : 0,
                 'render_callback' => 'vayu_blocks_advance_slider_render',
-            )
-        );
-
-        //post-grid
-        register_block_type(
-            __DIR__ . '/public/build/block/post-grid',
-            array(
+            ),
+            'post-grid'     => array(
+                'isActive'        => isset($options['postGrid']['isActive']) ? $options['postGrid']['isActive'] : 0,
                 'render_callback' => 'post_grid_render',
-            )
-        );
-
-        //image
-        register_block_type(
-            __DIR__ . '/public/build/block/image',
-            array(
+            ),
+            'image'         => array(
+                'isActive'        => isset($options['image']['isActive']) ? $options['image']['isActive'] : 0,
                 'render_callback' => 'vayu_block_image_render',
-            )
-        );
-
-        //flip-wrapper
-        register_block_type(
-            __DIR__ . '/public/build/block/flip-wrapper',
-            array(
+            ),
+            'flip-wrapper'  => array(
+                'isActive'        => 1, // Assuming always active for this block
                 'render_callback' => 'vayu_blocks_flip_wrapper_render',
-            )
-        );
-
-        //wrapper
-        register_block_type(
-            __DIR__ . '/public/build/block/wrapper' ,
-            array(
+            ),
+            'wrapper'       => array(
+                'isActive'        => 1, // Assuming always active for this block
                 'render_callback' => 'vayu_block_wrapper_render',
                 'skip_inner_blocks' => true,
-            ) 
+            ),
         );
-
+    
+        foreach ( $blocks_with_render_callbacks as $block_name => $block_options ) {
+            if ($block_options['isActive'] == 1) {
+                $block_path = $blocks_dir . '/' . $block_name;
+    
+                if ( isset($block_options['skip_inner_blocks']) ) {
+                    // If the block has additional options like 'skip_inner_blocks'
+                    register_block_type(
+                        $block_path,
+                        array(
+                            'render_callback'   => $block_options['render_callback'],
+                            'skip_inner_blocks' => $block_options['skip_inner_blocks'],
+                        )
+                    );
+                } else {
+                    // Simple block with only a render callback
+                    register_block_type(
+                        $block_path,
+                        array(
+                            'render_callback' => $block_options['render_callback'],
+                        )
+                    );
+                }
+            }
+        }
     }
+    
+    
     
     // plugin menu option add
     public function vayu_plugin_menu() {

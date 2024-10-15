@@ -883,6 +883,7 @@ animation: starburst 2.5s linear infinite;
     &::after {
       transform: translateZ(-4rem) !important;
       box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.25);
+      background: var(--wrapper-effect3-color);
       &:hover {
         transform: translateZ(-1px) !important;
       }

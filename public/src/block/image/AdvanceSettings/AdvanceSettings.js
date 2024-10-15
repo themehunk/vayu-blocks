@@ -615,6 +615,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--image-url-repeat' :  `${attributes.maskrepeat}`,
             '--overlay-hvr-color' :  `${overlayhvrcolor}`,
             '--image-transform': `${attributes.rotation}deg`,
+            '--wrapper-effect3-color': `${attributes.wrapppereffect3color}`,
         },
 
         onMouseEnter: handleMouseEnter,

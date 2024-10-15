@@ -344,6 +344,7 @@ animation: starburst 2.5s linear infinite;
   transform: scale(0.75) rotateY(-30deg) rotateX(45deg) translateZ(4.5rem) !important;
   transform-origin: 50% 100%;
   transition: 0.6s ease transform;
+  overflow: visible !important;
 
   &:hover {
     transform: scale(1) !important;
@@ -371,6 +372,7 @@ animation: starburst 2.5s linear infinite;
   &::after {
     transform: translateZ(-4rem) !important;
     box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.25);
+    background: var(--wrapper-effect3-color);
     &:hover {
       transform: translateZ(-1px) !important;
     }
