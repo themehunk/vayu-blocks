@@ -118,6 +118,7 @@ return array(
             'imageboxShadowSpread' => 1,
             'imageboxShadowHorizontal' => 0,
             'imageboxShadowVertical' => 0,
+            'animationhover' => true,
 
     //Advanced
         'classNamemain' => '',

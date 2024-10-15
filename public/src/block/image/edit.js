@@ -441,7 +441,7 @@ const edit = (props) => {
             className={`vayu-blocks-image-main-container `}  
             id={attributes.uniqueId}
             >
-                    <div style={vayu_blocks_image_position}>
+                    <div className={`${attributes.animationhover ? 'vayu_blocks_hover_can_apply' : ''}`} style={vayu_blocks_image_position}>
                     {/* svg filter for dutone with display:none and height:0*/}
                     <div className='vayu_blocks_dustone_svg'> 
                         <DuotoneFilters />

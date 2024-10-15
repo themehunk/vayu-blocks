@@ -596,6 +596,8 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             masksize={attributes.masksize}
                             maskposition={attributes.maskposition}
                             maskrepeat={attributes.maskrepeat}
+                            oneffecthoverchange={(value) => setAttributes({ animationhover: value })}
+                            effecthover={attributes.animationhover}
                         />
                     </div>
 

@@ -808,21 +808,22 @@ animation: starburst 2.5s linear infinite;
 .vayu_block_styling-left {
     transform: perspective(800px) rotateY(25deg) scale(0.9) rotateX(10deg) !important;
     transition: 0.6s ease all;
-    &:hover {
-      transform: perspective(800px) rotateY(-15deg) translateY(-50px)
-        rotateX(10deg) scale(1) !important;
-    }
+}
+
+.vayu_blocks_hover_can_apply .vayu_block_styling-left:hover {
+    transform: perspective(800px) rotateY(-15deg) translateY(-50px)
+    rotateX(10deg) scale(1) !important;
 }
 
 .vayu_block_styling-right {
     transform: perspective(800px) rotateY(-25deg) scale(0.9) rotateX(10deg) !important;
     transition: 0.6s ease all;
-    &:hover {
-      transform: perspective(800px) rotateY(15deg) translateY(-50px)
-        rotateX(10deg) scale(1) !important;
-    }
 }
 
+.vayu_blocks_hover_can_apply .vayu_block_styling-right:hover {
+    transform: perspective(800px) rotateY(15deg) translateY(-50px)
+        rotateX(10deg) scale(1) !important;
+}
 
 .vayu_block_styling-effect2 {
     transform: perspective(1000px) rotateY(15deg) rotateX(10deg) scale(0.95) !important;
@@ -835,7 +836,7 @@ animation: starburst 2.5s linear infinite;
                 box-shadow 0.4s ease-in-out;
 }
 
-.vayu_block_styling-effect2:hover {
+.vayu_blocks_hover_can_apply .vayu_block_styling-effect2:hover {
     transform: perspective(1000px) rotateY(30deg) rotateX(-15deg) scale(1.05) translateY(-20px) !important;
     filter: brightness(1);
     animation: pulse 0.6s infinite alternate; /* Pulsing effect */
@@ -856,11 +857,7 @@ animation: starburst 2.5s linear infinite;
     transform: scale(0.75) rotateY(-30deg) rotateX(45deg) translateZ(4.5rem) !important;
     transform-origin: 50% 100%;
     transition: 0.6s ease transform;
-  
-    &:hover {
-      transform: scale(1) !important;
-    }
-  
+
     &::before,
     &::after {
       content: " ";
@@ -875,21 +872,28 @@ animation: starburst 2.5s linear infinite;
   
     &::before {
       transform: translateZ(4rem) !important;
-      &:hover {
-        transform: translateZ(0) !important;
-      }
     }
   
     &::after {
       transform: translateZ(-4rem) !important;
       box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.25);
       background: var(--wrapper-effect3-color);
-      &:hover {
-        transform: translateZ(-1px) !important;
-      }
     }
   }
   
+
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect3:hover {
+    transform: scale(1) !important;
+  }
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect3::before:hover {
+    transform: translateZ(0) !important;
+  }
+
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect3::after:hover {
+    transform: translateZ(-1px) !important;
+  }
+
+
   .vayu_block_styling-effect4-left {
     --d: 18px;  /* the depth */
     --a: 20deg; /* the angle */
@@ -1043,17 +1047,17 @@ animation: starburst 2.5s linear infinite;
     transition:
       .4s ease-in-out transform,
       .4s ease-in-out box-shadow;
-  
-    &:hover {
-      transform:
-        translate3d(0px, -16px, 0px)
-        rotateX(51deg)
-        rotateZ(43deg);
-      box-shadow:
-        1px 1px 0 1px #f9f9fb,
-        -1px 0 28px 0 rgba(34, 33, 81, 0.01),
-        54px 54px 28px -10px rgba(34, 33, 81, 0.15);
-    }
+  }
+
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect10:hover {
+    transform:
+      translate3d(0px, -16px, 0px)
+      rotateX(51deg)
+      rotateZ(43deg);
+    box-shadow:
+      1px 1px 0 1px #f9f9fb,
+      -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+      54px 54px 28px -10px rgba(34, 33, 81, 0.15);
   }
 
   .vayu_block_styling-effect10 .vayu_blocks_image-container{

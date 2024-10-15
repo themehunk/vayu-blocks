@@ -285,7 +285,8 @@ function generate_inline_image_styles($attr) {
         $css .= "transform-style: preserve-3d;";
 
                  // Box-shadow
-       if (isset($attr['imageboxShadow']) && $attr['imageboxShadow']) {
+       if (isset($attr['imageboxShadow']) && $attr['imageboxShadowColor']) {
+        
         $boxShadowColor = 'rgba(' . implode(', ', [
             hexdec(substr($attr['imageboxShadowColor'], 1, 2)), // Red
             hexdec(substr($attr['imageboxShadowColor'], 3, 2)), // Green
@@ -299,6 +300,7 @@ function generate_inline_image_styles($attr) {
         } else {
             $css .= "box-shadow: none;";
         }
+        
         
     $css .= "}";
 
