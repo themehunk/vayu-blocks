@@ -14,7 +14,7 @@ import {
 } from '@wordpress/components';
 import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
 import {MediaPlaceholder} from '@wordpress/block-editor';
-import { FcUndo } from "react-icons/fc";
+import { FcUndo,FcRedo  } from "react-icons/fc";
 import { FaRegImage } from "react-icons/fa";
 import {
 	HoverControl,
@@ -24,7 +24,6 @@ import {
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
 import { dispatch, select, useSelect } from '@wordpress/data';
 import { Vayu_Block_Border_Control } from '../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
-import { FcRedo } from "react-icons/fc";
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -54,7 +53,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             if (parentBlock) {
 
                 // If toggle value is 'flip', move to the parent flip block
-                if (value === 'flip' && parentBlock.name === 'vayu-blocks/image-flip') {
+                if (value === 'flip' && parentBlock.name === 'vayu-blocks/flip-box') {
                     dispatch('core/block-editor').selectBlock(parentBlock.clientId);
                 } 
                 // If toggle value is 'back', move to the second inner block

@@ -280,10 +280,12 @@ const edit = (props) => {
 
     const handleimageurl = (value) => {
         setAttributes({image:value.url});
+        setAttributes({defaultImageWidth:value.width});
     }
     
     const handleimage = (value) => {
         setAttributes({image:value});
+        setAttributes({defaultImageWidth:value.width});
     }
 
     const rotateImage = () => {

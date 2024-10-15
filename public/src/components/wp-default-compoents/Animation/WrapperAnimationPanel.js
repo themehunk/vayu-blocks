@@ -276,11 +276,11 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
         
     return (
         <div className="vayu_blocks_animation_panel">
-            <ToolsPanel label={__('3D Animation')} className="vayu_block_animation_name">
+            <ToolsPanel label={__('Animation')} className="vayu_block_animation_name">
                 <ToolsPanelItem
                     className="vayu_blocks_animation_toolspanel_item"
                     hasValue={() => !!animationValue}
-                    label={__('3D Animation')}
+                    label={__('Animation')}
                     onDeselect={() => handleAnimationClick('none')}
                     isShownByDefault
                 >
@@ -366,7 +366,7 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
                                 onClick={() => handleAnimationClick('none')} // Update the animation value when clicked
                                 title="None"
                             >
-                                <RxValueNone style={{margin:'-7px'}} className={`vayu_blocks_animation_panel_svg`} />
+                                <RxValueNone style={{margin:'-7px',transform: 'scale(0.6)',background:'none'}} className={`vayu_blocks_animation_panel_svg`} />
                             </Button>
 
                             <Button
@@ -427,7 +427,7 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
                             </Button>
 
                             <br/>
-                            {selectedAnimation === 'vayu_block_styling-effect3' && (
+                            {(selectedAnimation === 'vayu_block_styling-effect3' ||selectedAnimation === 'vayu_block_styling-effect10' ) && (
                                 <>
                                     <ColorPanel
                                         colorTool={[
@@ -468,7 +468,7 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
                             >
 
                                 
-                                <RxValueNone style={{margin:'-7px',height:'45px'}} className={`vayu_blocks_animation_panel_svg`} />
+                                <RxValueNone style={{margin:'-7px',transform: 'scale(0.6)',background:'none'}} className={`vayu_blocks_animation_panel_svg`} />
                             </Button>
 
                             <Button
@@ -600,7 +600,7 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
                                 onClick={() => handlemask_shapeClick('none')} // Update the animation value when clicked
                                 title="None"
                             >
-                                <RxValueNone style={{margin:'-7px'}} className={`vayu_blocks_animation_panel_svg`} />
+                                <RxValueNone style={{margin:'-7px',transform: 'scale(0.6)',background:'none'}} className={`vayu_blocks_animation_panel_svg`} />
                             </Button>
 
                             <Button

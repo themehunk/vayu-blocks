@@ -255,11 +255,16 @@ function generate_inline_image_styles($attr) {
         $css .= "height: 0;";
     $css .= "}";
 
-
+    // Effect 3 CSS rule
     $css .= ".vayu_block_styling-effect3::after {";
         $css .= "background:" . esc_attr($attr['wrapppereffect3color']) . ";";
     $css .= "}";
-  
+
+    // Effect 10 CSS rule
+    $css .= ".vayu_block_styling-effect10 .vayu_blocks_image_image_wrapping_container {";
+        $css .= "background:" . esc_attr($attr['wrapppereffect3color']) . ";";
+    $css .= "}";
+
     // Append CSS rules to $css
     $css .= "$wrapper $inline {";
         $css .= " overflow: hidden;";
