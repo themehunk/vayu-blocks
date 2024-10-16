@@ -534,7 +534,10 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             const { attributes, clientId ,name} = selectedBlock;
             const blockClass = attributes.className || ''; // Get the className of the selected block
             // Check if the selected block is an inner block
-            if (name === 'vayu-blocks/image' || name === 'vayu-blocks/advance-slider' || name === 'vayu-blocks/advance-heading' || name === 'vayu-blocks/advance-button' || name==='vayu-blocks/advance-container') {
+            if (blockClass.length > 0) {
+                setSelectedBlockClass(blockClass);
+            }
+            else if (name) {
                 // Find the parent block (the immediate container)
                 const parentBlockClientIds = select('core/block-editor').getBlockParents(clientId);
                 if (parentBlockClientIds.length > 1) {
@@ -544,7 +547,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                     const parentBlockClass = parentBlock.attributes.className || '';
                     // Update selectedBlockClass with parent class
                     setSelectedBlockClass(parentBlockClass);
-                } else {
+                }else {
                     setSelectedBlockClass(null); // No valid parent found
                 }
             } else {
