@@ -103,12 +103,7 @@ export const variations = [
       />
     );
   })}
-</SVG>
-
-
-
-		  
-		  
+</SVG>  
 		),
 		attributes: {
 			variationSelected: true,
@@ -120,6 +115,129 @@ export const variations = [
 			[ 'vayu-blocks/advance-container'],
 			[ 'vayu-blocks/advance-container'],
 			[ 'vayu-blocks/advance-container'],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'two-column-40-60',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "row",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 }],
+			[ 'vayu-blocks/advance-container' ,{ contentWidthType:"fullwidth",  fullcontentWidth: 66 }],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: 'three-column-25-50-25',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "row",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 25 }],
+			[ 'vayu-blocks/advance-container' ,{ contentWidthType:"fullwidth",  fullcontentWidth: 50 }],
+			[ 'vayu-blocks/advance-container' ,{ contentWidthType:"fullwidth",  fullcontentWidth: 25 }],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: '4-column-50-50',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "column",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[
+				'vayu-blocks/advance-container',
+				{ direction: "row",  },
+				[
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 50 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 50 } ],
+				],
+			],
+			[
+				'vayu-blocks/advance-container',
+				{ direction: "row",  },
+				[
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 50 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 50 } ],
+				],
+			],
+		],
+		scope: [ 'block' ],
+	},
+	{
+		name: '3-column-33-33-33',
+        icon: (
+			<SVG
+				xmlns="http://www.w3.org/2000/svg"
+				width="48"
+				height="48"
+				viewBox="0 0 48 48"
+			>
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+			</SVG>
+		),
+		attributes: {
+			variationSelected: true,
+			direction: "column",
+		},
+		isDefault: true,
+		innerBlocks: [
+			[
+				'vayu-blocks/advance-container',
+				{ direction: "row",  },
+				[
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+				],
+			],
+			[
+				'vayu-blocks/advance-container',
+				{ direction: "row",  },
+				[
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+					[ 'vayu-blocks/advance-container', { contentWidthType: "fullwidth", fullcontentWidth: 33 } ],
+				],
+			],
 		],
 		scope: [ 'block' ],
 	},
