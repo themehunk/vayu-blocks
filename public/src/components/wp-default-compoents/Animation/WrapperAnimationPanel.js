@@ -280,7 +280,7 @@ const WrapperAnimationPanel = ({oneffecthoverchange,effecthover, animationValue,
                 <ToolsPanelItem
                     className="vayu_blocks_animation_toolspanel_item"
                     hasValue={() => !!animationValue}
-                    label={__('Animation')}
+                    label={__('3D Animation')}
                     onDeselect={() => handleAnimationClick('none')}
                     isShownByDefault
                 >

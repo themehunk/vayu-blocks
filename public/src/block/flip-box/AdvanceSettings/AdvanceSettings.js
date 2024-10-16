@@ -480,30 +480,47 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
    
     let transformstyle = 'none'; // Default value
 
-    if (attributes.imagehvreffect === 'flip-front') {
-        transformstyle = 'rotateY(180deg)'; // Set flip effect if condition is true
-    }else if(attributes.imagehvreffect === 'flip-front-left'){
-        transformstyle = 'rotateY(-180deg)';
-    }else if (attributes.imagehvreffect === 'flip-back') {
-        transformstyle = 'rotateX(180deg)';
-    } 
-    else if (attributes.imagehvreffect === 'flip-back-bottom') {
-        transformstyle = 'rotateX(-180deg)';
-    }
-    else if (attributes.imagehvreffect === 'flip-z') {
+
+    if(attributes.imagehvreffect==='flip'){
+        if(attributes.flipside=== 'left'){
+            transformstyle = 'rotateY(-180deg)';
+        }else if(attributes.flipside === 'right'){
+            transformstyle = 'rotateY(180deg)';
+        } else if(attributes.flipside === 'top'){
+            transformstyle = 'rotateX(180deg)';
+        } else if(attributes.flipside==='bottom'){
+            transformstyle = 'rotateX(-180deg)';
+        }
+    } else if(attributes.imagehvreffect==='flip-z'){
         transformstyle = 'rotateX(180deg) rotateZ(90deg)';
-    }
-    else if (attributes.imagehvreffect === 'flip-x') {
+    }else if(attributes.imagehvreffect==='flip-x'){
         transformstyle = 'rotateY(180deg) rotateZ(90deg)';
-    }
-    else if (attributes.imagehvreffect === 'zoom-in') {
+    }else if(attributes.imagehvreffect==='zoom-in'){
         transformstyle = 'scale(0.5)';
-    }
-    else if (attributes.imagehvreffect === 'zoom-out') {
+    }else if(attributes.imagehvreffect==='zoom-out'){
         transformstyle = '';
-    }
-    else if (attributes.imagehvreffect === 'fade-in') {
+    }else if(attributes.imagehvreffect==='fade-in'){
         transformstyle = '';
+    }else if(attributes.imagehvreffect==='slide'){
+        if(attributes.flipside=== 'left'){
+            transformstyle = 'translateX(-105%)';
+        }else if(attributes.flipside === 'right'){
+            transformstyle = 'translateX(105%)';
+        } else if(attributes.flipside === 'top'){
+            transformstyle = 'translateY(-105%)';
+        } else if(attributes.flipside==='bottom'){
+            transformstyle = 'translateY(105%)';
+        }
+    }else if(attributes.imagehvreffect==='push'){
+        if(attributes.flipside=== 'left'){
+            transformstyle = 'translateX(-100%)';
+        }else if(attributes.flipside === 'right'){
+            transformstyle = 'translateX(100%)';
+        } else if(attributes.flipside === 'top'){
+            transformstyle = 'translateY(100%)';
+        } else if(attributes.flipside==='bottom'){
+            transformstyle = 'translateY(-100%)';
+        }
     }
 
     const [selectedBlockClass, setSelectedBlockClass] = useState(null);
@@ -517,7 +534,10 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             const { attributes, clientId ,name} = selectedBlock;
             const blockClass = attributes.className || ''; // Get the className of the selected block
             // Check if the selected block is an inner block
-            if (name === 'vayu-blocks/image' || name === 'vayu-blocks/advance-slider' || name === 'vayu-blocks/advance-heading' || name === 'vayu-blocks/advance-button' || name==='vayu-blocks/advance-container') {
+            if (blockClass.length > 0) {
+                setSelectedBlockClass(blockClass);
+            }
+            else if (name) {
                 // Find the parent block (the immediate container)
                 const parentBlockClientIds = select('core/block-editor').getBlockParents(clientId);
                 if (parentBlockClientIds.length > 1) {
@@ -527,7 +547,7 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
                     const parentBlockClass = parentBlock.attributes.className || '';
                     // Update selectedBlockClass with parent class
                     setSelectedBlockClass(parentBlockClass);
-                } else {
+                }else {
                     setSelectedBlockClass(null); // No valid parent found
                 }
             } else {

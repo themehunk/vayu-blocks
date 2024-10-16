@@ -5,8 +5,9 @@ import PanelSettings from './AdvanceSettings/PanelSettings';
 import AdvanceSettings from './AdvanceSettings/AdvanceSettings';
 import './editor.scss';
 import { select, useDispatch, useSelect } from '@wordpress/data';
-import { FaRegImage } from "react-icons/fa";
 import { FcUndo,FcRedo  } from "react-icons/fc";
+import { Icon } from '@wordpress/components';
+import { symbolFilled } from '@wordpress/icons';
 
 const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
 
@@ -124,7 +125,7 @@ const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
                     label="View Box Flip"
                     onClick={() => handleToggleChange('flip')}
                 >
-                    <FaRegImage style={{ color: '#6c1bc3', fontSize: '28px' }} />
+                    <Icon icon={symbolFilled} style={{ color: '#6c1bc3', fontSize: '28px' }} />
                 </ToolbarButton>
 
                 {attributes.className !== 'vayu_blocks_flip-box-front ' && (

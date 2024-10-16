@@ -21,12 +21,15 @@ import metadata from './block.json';
 import advancejson from './AdvanceSettings/Advance.json';
 import indexjson from './edit.json';
 import { TfiLayoutMediaOverlayAlt2 } from "react-icons/tfi";
+import { icons } from '@wordpress/icons';
+import { Icon } from '@wordpress/components';
+import { symbol} from '@wordpress/icons';
 
 
 registerBlockType( metadata.name, {
 	...metadata,
 	attributes: {...indexjson, ...advancejson},
 	edit: Edit,
-	icon: <TfiLayoutMediaOverlayAlt2 style={{color:'#6c1bc3'}} />,
+	icon: <Icon icon={symbol}  style={{color:'#6c1bc3'}} />,
 	save,
 } );

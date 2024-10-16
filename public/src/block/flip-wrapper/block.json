@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "title": "Flip Wrapper",
     "category": "vayu-blocks",
-    "description": "Custom front image block with animated hover overlays, featuring image animations and fully customizable overlay effects.",
+    "description": "Design dynamic flip wrappers with animated hover effects, where front images come to life with smooth transitions and fully customizable overlay animations.",
     "supports": {
       "html": false,
       "align": ["wide", "full"],

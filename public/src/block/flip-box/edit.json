@@ -31,7 +31,7 @@
     },
     "imagehvreffect":{
         "type":"string",
-        "default":"flip-front"
+        "default":"flip"
     },
     "imagehvrfilter":{
         "type":"string",
@@ -212,5 +212,9 @@
     "dbox":{
         "type":"boolean",
         "default":false
+    },
+    "flipside":{
+        "type":"string",
+        "default":"top"
     }
 }
