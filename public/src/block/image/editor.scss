@@ -917,14 +917,22 @@ animation: starburst 2.5s linear infinite;
     transition: transform .3s,--_r .15s,--_l .15s .15s !important;
     transition-timing-function: linear;
   }
-  .vayu_block_styling-effect4-left:hover,
+
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-left:hover{
+    --_l: var(--d);
+    --_r: var(--d);
+    --_i: -1;
+    transition-delay: 0s,.15s,0s;
+  }
+
   .vayu_block_styling-effect4-left.alt{
     --_l: var(--d);
     --_r: var(--d);
     --_i: -1;
     transition-delay: 0s,.15s,0s;
   }
-  .vayu_block_styling-effect4-left.alt:hover {
+
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-left.alt:hover {
     --_l: 0px;
     --_r: 0px;
     --_i: 1;
@@ -937,7 +945,7 @@ animation: starburst 2.5s linear infinite;
     .vayu_block_styling-effect4-left.alt{
       transition: .3s;
     }
-    .vayu_block_styling-effect4-left:hover,
+    .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-left:hover,
     .vayu_block_styling-effect4-left.alt:hover {
       --_i: 0;
       --_l: var(--d);
@@ -966,14 +974,14 @@ animation: starburst 2.5s linear infinite;
     transition: transform .3s,--_r .15s,--_l .15s .15s !important;
     transition-timing-function: linear;
   }
-  .vayu_block_styling-effect4-right:hover,
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-right:hover,
   .vayu_block_styling-effect4-right.alt{
     --_l: 0px;
     --_r: 20px;
     --_i: -1;
     transition-delay: 0s,.15s,0s;
   }
-  .vayu_block_styling-effect4-right.alt:hover {
+  .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-right.alt:hover {
     --_l: 0px;
     --_r: 0px;
     --_i: 1;
@@ -986,7 +994,7 @@ animation: starburst 2.5s linear infinite;
     .vayu_block_styling-effect4-right.alt{
       transition: .3s;
     }
-    .vayu_block_styling-effect4-right:hover,
+    .vayu_blocks_hover_can_apply .vayu_block_styling-effect4-right:hover,
     .vayu_block_styling-effect4-right.alt:hover {
       --_i: 0;
       --_l: var(--d);
