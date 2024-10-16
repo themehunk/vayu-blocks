@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "title": "Flip Box",
     "category": "vayu-blocks",
-    "description": "A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.",
+    "description": "Create stunning image flip boxes with customizable overlays and smooth flip animations that reveal engaging content on hover.",
     "supports": {
       "html": false,
       "align": ["wide", "full"]

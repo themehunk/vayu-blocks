@@ -876,7 +876,7 @@ animation: starburst 2.5s linear infinite;
   
     &::after {
       transform: translateZ(-4rem) !important;
-      box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.25);
+      box-shadow: 1rem 1rem 2rem var(--wrapper-effect3-color);
       background: var(--wrapper-effect3-color);
     }
   }
@@ -1049,7 +1049,7 @@ animation: starburst 2.5s linear infinite;
     transform-style: preserve-3d;
     border-radius: 32px;
     box-shadow:
-      1px 1px 0 1px #f9f9fb,
+      1px 1px 0 1px var(--wrapper-effect3-color),
       -1px 0 28px 0 rgba(34, 33, 81, 0.01),
       28px 28px 28px 0 rgba(34, 33, 81, 0.25);
     transition:
@@ -1063,12 +1063,12 @@ animation: starburst 2.5s linear infinite;
       rotateX(51deg)
       rotateZ(43deg);
     box-shadow:
-      1px 1px 0 1px #f9f9fb,
+      1px 1px 0 1px var(--wrapper-effect3-color),
       -1px 0 28px 0 rgba(34, 33, 81, 0.01),
       54px 54px 28px -10px rgba(34, 33, 81, 0.15);
   }
 
-  .vayu_block_styling-effect10 .vayu_blocks_image-container{
+  .vayu_block_styling-effect10{
     background: var(--wrapper-effect3-color);
   }
   

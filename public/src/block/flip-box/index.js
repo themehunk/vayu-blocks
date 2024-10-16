@@ -20,13 +20,16 @@ import save from './save';
 import metadata from './block.json';
 import advancejson from './AdvanceSettings/Advance.json';
 import indexjson from './edit.json';
-import { FaRegImage } from "react-icons/fa";
+import { icons } from '@wordpress/icons';
+import { Icon } from '@wordpress/components';
+import { symbolFilled } from '@wordpress/icons';
+
 
 
 registerBlockType( metadata.name, {
 	...metadata,
 	attributes: {...indexjson, ...advancejson},
 	edit: Edit,
-	icon: <FaRegImage style={{color:'#6c1bc3'}} />,
+	icon:  <Icon icon={symbolFilled} style={{color:'#6c1bc3'}} />,
 	save,
 } );

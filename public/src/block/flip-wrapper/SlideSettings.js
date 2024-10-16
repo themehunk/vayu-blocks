@@ -16,6 +16,8 @@ import { Bgclr, BgGraclr, BgImg} from '../../helpers/icon.js';
 import {MediaPlaceholder} from '@wordpress/block-editor';
 import { FcUndo,FcRedo  } from "react-icons/fc";
 import { FaRegImage } from "react-icons/fa";
+import { icons } from '@wordpress/icons';
+import { symbolFilled } from '@wordpress/icons';
 import {
 	HoverControl,
 	BackgroundSelectorControl,
@@ -78,7 +80,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
     const options = [
         { value: 'flip', label: (
             <span className='vayu_blocks_undo_front_image'>
-               <FaRegImage style={{color:'#00BCD4'}} />
+               <Icon icon={symbolFilled} style={{color:'#00BCD4'}} />
             </span>
         ) 
     },

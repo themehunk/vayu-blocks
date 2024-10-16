@@ -13,6 +13,9 @@ import { IoGridOutline } from "react-icons/io5";
 import { TfiLayoutSlider } from "react-icons/tfi";
 import { FaRegImage } from "react-icons/fa";
 import { CiImageOn } from "react-icons/ci";
+import { icons } from '@wordpress/icons';
+import { Icon } from '@wordpress/components';
+import { symbolFilled } from '@wordpress/icons';
 
 const ToggleSwitch = ({ initialValue, onChange, proStatus, verifyLicense }) => {
     const [isChecked, setIsChecked] = useState(initialValue);
@@ -223,7 +226,7 @@ function getDescription(key,value='') {
                     case 'FlipBox':
                     return {
                         value: vayublock.options.flipBox.isActive,
-                        icon: <FaRegImage />,
+                        icon: <Icon icon={symbolFilled} />,
                         description: __('A custom image flip block with animated overlays that appear on hover. Supports flip animations and  customizable overlays.', 'vayu-blocks'),
                         link1: '#',
                         link2: 'https://themehunk.com/docs/vayu-blocks/#button'

@@ -258,16 +258,31 @@ function generate_inline_image_styles($attr) {
     // Effect 3 CSS rule
     $css .= ".vayu_block_styling-effect3::after {";
         $css .= "background:" . esc_attr($attr['wrapppereffect3color']) . ";";
+        $css .= "box-shadow: 1rem 1rem 2rem " . esc_attr($attr['wrapppereffect3color']) . ";";
     $css .= "}";
 
     // Effect 10 CSS rule
-    $css .= ".vayu_block_styling-effect10 .vayu_blocks_image_image_wrapping_container {";
+    $css .= ".vayu_block_styling-effect10 {";
         $css .= "background:" . esc_attr($attr['wrapppereffect3color']) . ";";
+    $css .= "}";
+
+    $css .= ".vayu_block_styling-effect10 {";
+        $css .= " box-shadow:
+        1px 1px 0 1px " . esc_attr($attr['wrapppereffect3color']) . ",
+        -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+        28px 28px 28px 0 rgba(34, 33, 81, 0.25) !important;";
+    $css .= "}";
+    
+    $css .= ".vayu_block_styling-effect10:hover {";
+        $css .= " box-shadow:
+        1px 1px 0 1px " . esc_attr($attr['wrapppereffect3color']) . ",
+        -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+        54px 54px 28px -10px rgba(34, 33, 81, 0.15) !important;";
     $css .= "}";
 
     // Append CSS rules to $css
     $css .= "$wrapper $inline {";
-        $css .= " overflow: hidden;";
+        // $css .= " overflow: hidden;";
         if (!empty($attr['imagewidth'])) {
             $css .= "width: " . esc_attr($attr['imagewidth']) . ";";
         } else {
