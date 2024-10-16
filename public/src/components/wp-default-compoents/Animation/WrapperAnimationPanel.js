@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { PanelBody, Button, Popover, SelectControl } from '@wordpress/components';
 import { __experimentalHStack as HStack, __experimentalText as Text } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { __experimentalToolsPanel as ToolsPanel, __experimentalToolsPanelItem as ToolsPanelItem } from '@wordpress/components';
+import { __experimentalToolsPanel as ToolsPanel, __experimentalToolsPanelItem as ToolsPanelItem ,ToggleControl} from '@wordpress/components';
 import { RxValueNone } from "react-icons/rx";
 import ColorPanel from '../ColorPanel/ColorPanel';
 import { Fragment, useEffect } from 'react';
@@ -69,7 +69,7 @@ import ControlPanelControl from '../../control-panel-control/index';
  */
 
 
-const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffectcolorchange, effectcolor,imageanimationValue, onimageAnimationChange, onanimationsettingschange,animationsettings ,mask_shapeValue, onmask_shapeChange,onmaskrepeatChange,onmaskpositionchange,onmaskSizeChange,masksize,maskposition,maskrepeat }) => {
+const WrapperAnimationPanel = ({oneffecthoverchange,effecthover, animationValue, onAnimationChange,image,onEffectcolorchange, effectcolor,imageanimationValue, onimageAnimationChange, onanimationsettingschange,animationsettings ,mask_shapeValue, onmask_shapeChange,onmaskrepeatChange,onmaskpositionchange,onmaskSizeChange,masksize,maskposition,maskrepeat }) => {
 
     //3D animation
     const [isVisible, setIsVisible] = useState(false);
@@ -443,6 +443,18 @@ const WrapperAnimationPanel = ({ animationValue, onAnimationChange,image,onEffec
                                     />
                                 </>
                             )}
+                                {(selectedAnimation != 'none' && selectedAnimation != 'vayu_block_styling-effect7' ) && (
+                                    <>
+                                        <br/>
+                                            <ToggleControl
+                                                className='vayu_blocks_togglecontrol'
+                                                label={__('Hover Effect', 'vayu-blocks')}
+                                                checked={effecthover}
+                                                onChange={(value) => oneffecthoverchange(value)}
+                                            />
+                                    </>
+                                )}
+
                     </div>
                 </Popover>
             )}

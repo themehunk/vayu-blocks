@@ -391,5 +391,9 @@
       "wrapppereffect3color":{
         "type":"string",
         "default":"white"
+      },
+      "animationhover":{
+        "type":"boolean",
+        "default":true
       }
 }
