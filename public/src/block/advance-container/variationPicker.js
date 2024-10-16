@@ -26,8 +26,8 @@ export const variations = [
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
 				<Path d="M0 10a2 2 0 0 1 2-2h44a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Z" />
@@ -44,8 +44,8 @@ export const variations = [
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
 				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
@@ -67,8 +67,8 @@ export const variations = [
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
 				<Path d="M0 10a2 2 0 0 1 2-2h10.531c1.105 0 1.969.895 1.969 2v28c0 1.105-.864 2-1.969 2H2a2 2 0 0 1-2-2V10Zm16.5 0c0-1.105.864-2 1.969-2H29.53c1.105 0 1.969.895 1.969 2v28c0 1.105-.864 2-1.969 2H18.47c-1.105 0-1.969-.895-1.969-2V10Zm17 0c0-1.105.864-2 1.969-2H46a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H35.469c-1.105 0-1.969-.895-1.969-2V10Z" />
@@ -89,11 +89,11 @@ export const variations = [
 		name: 'four-column-join',
         icon: ( 
 			<SVG
-  xmlns="http://www.w3.org/2000/svg"
-  width="48"
-  height="48"
-  viewBox={`0 0 ${totalWidth} 48`}
->
+			xmlns="http://www.w3.org/2000/svg"
+			width="64"
+			height="64"
+			viewBox={`0 0 ${totalWidth} 48`}
+			>
   {[...Array(columns)].map((_, i) => {
     const xPos = i * (columnWidth + columnSpacing);
     return (
@@ -119,15 +119,15 @@ export const variations = [
 		scope: [ 'block' ],
 	},
 	{
-		name: 'two-column-40-60',
+		name: 'two-column-33-66',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
-				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+				<Path d="M0 10a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm17 0a2 2 0 0 1 2-2h27a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H19a2 2 0 0 1-2-2V10Z" />
 			</SVG>
 		),
 		attributes: {
@@ -146,11 +146,11 @@ export const variations = [
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
-				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+				<Path d="M0 10a2 2 0 0 1 2-2h7.531c1.105 0 1.969.895 1.969 2v28c0 1.105-.864 2-1.969 2H2a2 2 0 0 1-2-2V10Zm13.5 0c0-1.105.864-2 1.969-2H32.53c1.105 0 1.969.895 1.969 2v28c0 1.105-.864 2-1.969 2H15.47c-1.105 0-1.969-.895-1.969-2V10Zm23 0c0-1.105.864-2 1.969-2H46a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2h-7.531c-1.105 0-1.969-.895-1.969-2V10Z" />
 			</SVG>
 		),
 		attributes: {
@@ -166,15 +166,15 @@ export const variations = [
 		scope: [ 'block' ],
 	},
 	{
-		name: '4-column-50-50',
+		name: '2*2-column-50-50',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
-				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
+				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10ZM0 27a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V27Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V27Z" />
 			</SVG>
 		),
 		attributes: {
@@ -203,12 +203,12 @@ export const variations = [
 		scope: [ 'block' ],
 	},
 	{
-		name: '3-column-33-33-33',
+		name: '2*3-column-33-33-33',
         icon: (
 			<SVG
 				xmlns="http://www.w3.org/2000/svg"
-				width="48"
-				height="48"
+				width="64"
+				height="64"
 				viewBox="0 0 48 48"
 			>
 				<Path d="M0 10a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V10Zm25 0a2 2 0 0 1 2-2h19a2 2 0 0 1 2 2v28a2 2 0 0 1-2 2H27a2 2 0 0 1-2-2V10Z" />
