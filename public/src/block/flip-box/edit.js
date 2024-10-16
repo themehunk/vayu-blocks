@@ -94,26 +94,60 @@ const edit = ({ attributes, setAttributes,isSelected}) => {
         let backclass = ''; // Define backclass if needed
         let frontclass = ''; // Define frontclass if needed
     
-        const classMap = {
-            'flip-front': 'vayu_blocks_flip-box-inner_animation_div_flip-front',
-            'flip-front-left': 'vayu_blocks_flip-box-inner_animation_div_flip-front-left',
-            'flip-back': 'vayu_blocks_flip-box-inner_animation_div_flip-back',
-            'flip-back-bottom': 'vayu_blocks_flip-box-inner_animation_div_flip-back-bottom',
-            'flip-z': 'vayu_blocks_flip-box-inner_animation_div_flip-z',
-            'flip-x': 'vayu_blocks_flip-box-inner_animation_div_flip-x',
-            'zoom-in': 'vayu_blocks_flip-box-inner_animation_div_zoom-in',
-            'zoom-out': 'vayu_blocks_flip-box-inner_animation_div_zoom-out',
-            'fade-in': 'vayu_blocks_flip-box-inner_animation_div_fade-in',
-        };
     
-        let innerclass = classMap[attributes.imagehvreffect] || ''; // Default to empty string if no match
+        let innerclass = ''
     
+        if(attributes.imagehvreffect==='flip'){
+            if(attributes.flipside=== 'left'){
+                innerclass = 'vayu_blocks_flip-box-inner_animation_div_flip-front-left';
+            }else if(attributes.flipside === 'right'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_flip-front';
+            } else if(attributes.flipside === 'top'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_flip-back'
+            } else if(attributes.flipside==='bottom'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_flip-back-bottom';
+            }
+        } else if(attributes.imagehvreffect==='flip-z'){
+            innerclass='vayu_blocks_flip-box-inner_animation_div_flip-z';
+        }else if(attributes.imagehvreffect==='flip-x'){
+            innerclass='vayu_blocks_flip-box-inner_animation_div_flip-x';
+        }else if(attributes.imagehvreffect==='zoom-in'){
+            innerclass='vayu_blocks_flip-box-inner_animation_div_zoom-in';
+        }else if(attributes.imagehvreffect==='zoom-out'){
+            innerclass='vayu_blocks_flip-box-inner_animation_div_zoom-out';
+        }else if(attributes.imagehvreffect==='fade-in'){
+            innerclass='vayu_blocks_flip-box-inner_animation_div_fade-in';
+        } else if(attributes.imagehvreffect === 'slide'){
+            if(attributes.flipside=== 'left'){
+                innerclass = 'vayu_blocks_flip-box-inner_animation_div_slide_animation-left';
+            }else if(attributes.flipside === 'right'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_slide_animation-right';
+            } else if(attributes.flipside === 'top'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_slide_animation-top'
+            } else if(attributes.flipside==='bottom'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_slide_animation-bottom';
+            }
+        } else if(attributes.imagehvreffect === 'push'){
+            if(attributes.flipside=== 'left'){
+                innerclass = 'vayu_blocks_flip-box-inner_animation_div_push_animation-left';
+            }else if(attributes.flipside === 'right'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_push_animation-right';
+            } else if(attributes.flipside === 'top'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_push_animation-top'
+            } else if(attributes.flipside==='bottom'){
+                innerclass='vayu_blocks_flip-box-inner_animation_div_push_animation-bottom';
+            }
+        }
+
+
         // Append '-dbox' class if attributes.dbox is truthy
         // AND the current imagehvreffect is NOT one of the specified effects
         if (attributes.dbox && 
             !(attributes.imagehvreffect === 'zoom-in' || 
               attributes.imagehvreffect === 'zoom-out' || 
-              attributes.imagehvreffect === 'fade-in')) {
+              attributes.imagehvreffect === 'fade-in'|| 
+              attributes.imagehvreffect === 'slide'|| 
+              attributes.imagehvreffect === 'push')) {
             innerclass += '-dbox';
         }
     

@@ -266,20 +266,43 @@ function generate_inline_flip_box_styles($attr) {
 
     $transformstyle = 'none';
     // Determine the transform style based on the image hover effect
-    if ($attr['imagehvreffect'] === 'flip-front') {
-        $transformstyle = 'rotateY(180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-front-left') {
-        $transformstyle = 'rotateY(-180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-back') {
-        $transformstyle = 'rotateX(180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-back-bottom') {
-        $transformstyle = 'rotateX(-180deg)';
-    } elseif ($attr['imagehvreffect'] === 'flip-z') {
+
+    if($attr['imagehvreffect'] === 'flip'){
+        if ($attr['flipside'] === 'right') {
+            $transformstyle = 'rotateY(180deg)';
+        } elseif ($attr['flipside'] === 'left') {
+            $transformstyle = 'rotateY(-180deg)';
+        } elseif ($attr['flipside'] === 'top') {
+            $transformstyle = 'rotateX(180deg)';
+        } elseif ($attr['flipside'] === 'bottom') {
+            $transformstyle = 'rotateX(-180deg)';
+        } 
+    }elseif ($attr['imagehvreffect'] === 'flip-z') {
         $transformstyle = 'rotateX(180deg) rotateZ(90deg)';
     } elseif ($attr['imagehvreffect'] === 'flip-x') {
         $transformstyle = 'rotateY(180deg) rotateZ(90deg)';
     } elseif ($attr['imagehvreffect'] === 'zoom-in') {
         $transformstyle = 'scale(0.5)';
+    } else if($attr['imagehvreffect'] === 'slide'){
+        if ($attr['flipside'] === 'right') {
+            $transformstyle = 'translateX(105%)';
+        } elseif ($attr['flipside'] === 'left') {
+            $transformstyle = 'translateX(-105%)';
+        } elseif ($attr['flipside'] === 'top') {
+            $transformstyle = 'translateY(-105%)';
+        } elseif ($attr['flipside'] === 'bottom') {
+            $transformstyle = 'translateY(105%)';
+        } 
+    } else if($attr['imagehvreffect'] === 'push'){
+        if ($attr['flipside'] === 'right') {
+            $transformstyle = 'translateX(90%)';
+        } elseif ($attr['flipside'] === 'left') {
+            $transformstyle = 'translateX(-90%)';
+        } elseif ($attr['flipside'] === 'top') {
+            $transformstyle = 'translateY(90%)';
+        } elseif ($attr['flipside'] === 'bottom') {
+            $transformstyle = 'translateY(-90%)';
+        } 
     }
     
     $css .= "$wrapper .vayu_blocks_flip-box-back {";

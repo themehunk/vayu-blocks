@@ -8,7 +8,7 @@ return array(
         'overlaytransitiontime' => 0.5,
         'imagetransitiontime' => 0.5,
         'overlay' => true,
-        'imagehvreffect' => 'flip-front',
+        'imagehvreffect' => 'flip',
         'imagehvrfilter' => 'none',
         'imageoverlayouteffect' => 'none',
         'overlaycolor' => 'rgba(106, 111, 248, 0.17)',
@@ -27,6 +27,7 @@ return array(
         'overlayalignmentvertical' => 'center',
         'imagealttext'  => '',
         'dbox' => false,
+        'flipside' => 'top',
 
         // image Border
             'imageborder' => array(

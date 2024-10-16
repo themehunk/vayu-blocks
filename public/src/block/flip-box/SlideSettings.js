@@ -11,6 +11,10 @@ import { dispatch, select, useSelect } from '@wordpress/data';
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
 import { FcUndo } from "react-icons/fc";
 import { FcRedo } from "react-icons/fc";
+import {
+    ToogleGroupControl,
+} from '../../components/index.js';
+import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 const SlideSettings = ({ attributes, setAttributes }) => {
 
@@ -82,10 +86,9 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         value={attributes.imagehvreffect}
                         options={[
                                 { label: __('None', 'vayu-blocks'), value: 'none' },
-                                { label: __('Flip Right', 'vayu-blocks'), value: 'flip-front' },
-                                { label: __('Flip Left', 'vayu-blocks'), value: 'flip-front-left' },
-                                { label: __('Flip Top', 'vayu-blocks'), value: 'flip-back' },
-                                { label: __('Flip Bottom', 'vayu-blocks'), value: 'flip-back-bottom' },
+                                { label: __('Flip', 'vayu-blocks'), value: 'flip' },
+                                { label: __('Slide', 'vayu-blocks'), value: 'slide' },
+                                { label: __('Push', 'vayu-blocks'), value: 'push' },
                                 { label: __('Flip Left Top', 'vayu-blocks'), value: 'flip-z' },
                                 { label: __('Flip Right Top', 'vayu-blocks'), value: 'flip-x' },
                                 { label: __('Zoom in', 'vayu-blocks'), value: 'zoom-in' },
@@ -94,10 +97,47 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                         ]}
                         onChange={(value) => setAttributes({ imagehvreffect: value })}
                     />
+
+                    { (attributes.imagehvreffect==='flip' || attributes.imagehvreffect==='slide' || attributes.imagehvreffect==='push') && (
+                        <>
+                            <ToogleGroupControl
+                                label={__('Flip Side', 'vayu-blocks')}
+                                value={ attributes.flipside}
+                                onChange={(value) => setAttributes({flipside:value})}
+                                options={[
+                                    {
+                                        icon: HorizontalLeft,
+                                        label: __( 'Left', 'vayu-blocks' ),
+                                        value: 'left'
+                                    },
+                                    {
+                                        icon: HorizontalRight,
+                                        label: __( 'Right', 'vayu-blocks' ),
+                                        value: 'right'
+                                    },
+                                    {
+                                        icon: Start,
+                                        label: __( 'Start', 'vayu-blocks' ),
+                                        value: 'top'
+                                    },
+                                    {
+                                        icon: End,
+                                        label: __( 'End', 'vayu-blocks' ),
+                                        value: 'bottom'
+                                    },
+                                ]}
+                                
+                                hasIcon
+                            />
+                            <br/>
+                        </>
+                    )}
                     
                     {attributes.imagehvreffect && !(attributes.imagehvreffect === 'zoom-in' || 
               attributes.imagehvreffect === 'zoom-out' || 
-              attributes.imagehvreffect === 'fade-in') && (
+              attributes.imagehvreffect === 'fade-in'|| 
+              attributes.imagehvreffect === 'slide'|| 
+              attributes.imagehvreffect === 'push') && (
                          <ToggleControl
                             className='vayu_blocks_togglecontrol'
                             label={__('3D Box animation', 'vayu-blocks')}
