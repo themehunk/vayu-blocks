@@ -73,15 +73,7 @@ export default ( { clientId, isSelected, attributes } ) => {
 
 	// Empty non-selected Container.
 	if ( ! hasChildBlocks && ! isSelected ) {
-		appender = <Button
-			className="th-blocks-container-selector"
-			onClick={ () => selectBlock( clientId ) }
-			aria-label={ __( 'Select Container', 'vayu-blocks' ) }
-		>
-			<span className="th-blocks-container-selector__icon">
-			<Icon icon={ plus } />
-			</span>
-		</Button>;
+		appender = <ButtonBlockAppender />;
 	}
 
 	return applyFilters(
