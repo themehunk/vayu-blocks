@@ -88,12 +88,6 @@ class Vayu_Block_Plugin {
                 'editor_style'   => 'advance-button-editor-style',
                 'frontend_style' => 'advance-button-frontend-style',
                 'status'         => $options['button']['isActive'],
-            ),
-            array(
-                'name'            => 'vayu-blocks/advance-query-loop',
-                'script_handle'   => 'advance-query-loop',
-                'status'          => $options['advanceQueryLoop']['isActive'],
-                //'render_callback' => 'vayu_blocks_advance_query_loop_render'
             )
         );
     
@@ -229,6 +223,14 @@ class Vayu_Block_Plugin {
             array(
                 'render_callback' => 'vayu_block_wrapper_render',
                 'skip_inner_blocks' => true,
+            ) 
+        );
+        //advance-loop
+        register_block_type(
+            __DIR__ . '/public/build/block/advance-query-loop' ,
+            array(
+                'render_callback' => 'vayu_block_loop_render',
+                
             ) 
         );
 
