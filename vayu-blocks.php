@@ -5,7 +5,7 @@
  * Description:       The Vayu Blocks is an add-on plugin For Gutenberg Block Editor. Quickstart the Gutenberg editor with Powerful and elegant blocks to design stunning websites. Free Vayu Blocks plugin that amplifies the default WordPress Gutenberg Editor with powerful blocks.
  * Requires at least: 6.6
  * Requires PHP:      7.0
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            ThemeHunk
  * Author URI:        https://themehunk.com
  * License:           GPLv3
@@ -171,61 +171,38 @@ class Vayu_Block_Plugin {
         }
     }
     
-
     public function vayu_register_blocks_new() {
-        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option();
-
-        //image-flip
-        register_block_type(
-            __DIR__ . '/public/build/block/image-flip',
-            array(
-                'render_callback' => 'vayu_blocks_image_flip_render',
-            )
-        );
-
-        //advance-slider
-        register_block_type(
-            __DIR__ . '/public/build/block/advance-slider',
-            array(
+        $options = (new VAYU_BLOCKS_OPTION_PANEL())->get_option(); // Fetch the options array
+        $blocks_dir = __DIR__ . '/public/build/block';
+        
+        // Define the block-specific render callbacks in an associative array
+        $blocks_with_render_callbacks = array(
+            'flip-box'      => array(
+                'isActive'        => isset($options['flipBox']['isActive']) ? $options['flipBox']['isActive'] : 0,
+                'render_callback' => 'vayu_blocks_flip_box_render',
+            ),
+            'advance-slider'=> array(
+                'isActive'        => isset($options['advanceSlider']['isActive']) ? $options['advanceSlider']['isActive'] : 0,
                 'render_callback' => 'vayu_blocks_advance_slider_render',
-            )
-        );
-
-        //post-grid
-        register_block_type(
-            __DIR__ . '/public/build/block/post-grid',
-            array(
+            ),
+            'post-grid'     => array(
+                'isActive'        => isset($options['postGrid']['isActive']) ? $options['postGrid']['isActive'] : 0,
                 'render_callback' => 'post_grid_render',
-                'status'     => $options['postgrid']['isActive'],
-            )
-        );
-
-        //image
-        register_block_type(
-            __DIR__ . '/public/build/block/image',
-            array(
+            ),
+            'image'         => array(
+                'isActive'        => isset($options['image']['isActive']) ? $options['image']['isActive'] : 0,
                 'render_callback' => 'vayu_block_image_render',
-                'status'     => $options['image']['isActive'],
-            )
-        );
-
-        //front image
-        register_block_type(
-            __DIR__ . '/public/build/block/front-image',
-            array(
-                'render_callback' => 'vayu_blocks_front_image_render',
-                'status'     => $options['front-image']['isActive'],
-            )
-        );
-        //wrapper
-        register_block_type(
-            __DIR__ . '/public/build/block/wrapper' ,
-            array(
+            ),
+            'flip-wrapper'  => array(
+                'isActive'        => 1, // Assuming always active for this block
+                'render_callback' => 'vayu_blocks_flip_wrapper_render',
+            ),
+            'wrapper'       => array(
+                'isActive'        => 1, // Assuming always active for this block
                 'render_callback' => 'vayu_block_wrapper_render',
                 'skip_inner_blocks' => true,
-            ) 
+            ),
         );
-        //advance-loop
         register_block_type(
             __DIR__ . '/public/build/block/advance-query-loop' ,
             array(
@@ -234,7 +211,34 @@ class Vayu_Block_Plugin {
             ) 
         );
 
+    
+        foreach ( $blocks_with_render_callbacks as $block_name => $block_options ) {
+            if ($block_options['isActive'] == 1) {
+                $block_path = $blocks_dir . '/' . $block_name;
+    
+                if ( isset($block_options['skip_inner_blocks']) ) {
+                    // If the block has additional options like 'skip_inner_blocks'
+                    register_block_type(
+                        $block_path,
+                        array(
+                            'render_callback'   => $block_options['render_callback'],
+                            'skip_inner_blocks' => $block_options['skip_inner_blocks'],
+                        )
+                    );
+                } else {
+                    // Simple block with only a render callback
+                    register_block_type(
+                        $block_path,
+                        array(
+                            'render_callback' => $block_options['render_callback'],
+                        )
+                    );
+                }
+            }
+        }
     }
+    
+    
     
     // plugin menu option add
     public function vayu_plugin_menu() {

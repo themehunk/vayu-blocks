@@ -1,4 +1,4 @@
-import React, {Fragment, useState } from 'react';
+import React, {Fragment, useEffect, useState } from 'react';
 import './editor.scss';
 import { __ } from '@wordpress/i18n';
 import {
@@ -18,7 +18,7 @@ import {MediaPlaceholder} from '@wordpress/block-editor';
 
 
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
-import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import {Vayu_Block_Border_Control} from '../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 import ControlPanelControl from '../../components/control-panel-control/index.js';
 
 import {
@@ -284,19 +284,43 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         }
     };
 
+    useEffect(() => {
+        // If imagewidth is less than 200, hide the overlay
+        if (parseInt(attributes.imagewidth) < 200) {
+            setAttributes({ overlayshow: false });
+        } 
+        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
+        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
+            setAttributes({ overlayshow: false });
+        }
+    }, [attributes.imagewidth, attributes.defaultImageWidth]);
+
 
     return (
         
             <div class="vayu_blocks_image-flip-settings_main vayu_blocks_image-settings_main">
-
                 {/* Background Image */}
                 <PanelBody title={__('Overlay','vayu-blocks')} initialOpen={false}>
-                    <ToggleControl
-                        className='vayu_blocks_togglecontrol'
-                        label={__('Overlay', 'vayu-blocks')}
-                        checked={attributes.overlayshow}
-                        onChange={(value) =>  setAttributes({overlayshow:value})}
-                    />
+                {
+                    parseInt(attributes.imagewidth) > 200  ? (
+                        <ToggleControl
+                            className='vayu_blocks_togglecontrol'
+                            label={__('Overlay', 'vayu-blocks')}
+                            checked={attributes.overlayshow}
+                            onChange={(value) => setAttributes({ overlayshow: value })}
+                        />
+                    ) : (attributes.imagewidth==='' &&  attributes.defaultImageWidth > 200) ? (
+                        <ToggleControl
+                            className='vayu_blocks_togglecontrol'
+                            label={__('Overlay', 'vayu-blocks')}
+                            checked={attributes.overlayshow}
+                            onChange={(value) => setAttributes({ overlayshow: value })}
+                        />
+                    ) : (
+                        <p>Image width is less than 200px, so the overlay cannot be used.</p>
+                    )
+                }
+                    
                     
                     {attributes.overlayshow && (<>
                         <div className="vayu_block_alignment_main_div">

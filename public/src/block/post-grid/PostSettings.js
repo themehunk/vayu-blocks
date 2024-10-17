@@ -17,9 +17,9 @@ import {
     HoverControl,
 } from '../../components/index.js';
 import { useEffect, useState } from 'react';
-import {Vayu_blocks_typographycontrol} from '../advance-slider/Components/Typography/Vayu_blocks_typographycontrol.js';
-import ColorPanel from '../advance-slider/Components/ColorPanel/ColorPanel.js';
-import {Vayu_Block_Border_Control} from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control.js';
+import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol.js';
+import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel.js';
+import {Vayu_Block_Border_Control} from '../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 
 const PostSettings = ({ attributes, setAttributes }) => {
     const {

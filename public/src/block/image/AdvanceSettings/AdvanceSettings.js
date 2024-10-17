@@ -412,10 +412,14 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
 
         borderRadius: borderRadius,
         
-        boxShadow: boxShadow ?
-        `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
-        : 'none',
- 
+        // Conditionally include boxShadow if boxShadowColor is defined
+        ...(boxShadowColor && {
+            boxShadow: boxShadow
+                ? `${boxShadowHorizontal}px ${boxShadowVertical}px ${boxShadowBlur}px ${boxShadowSpread}px rgba(${parseInt(boxShadowColor.slice(1, 3), 16)}, ${parseInt(boxShadowColor.slice(3, 5), 16)}, ${parseInt(boxShadowColor.slice(5, 7), 16)}, ${boxShadowColorOpacity / 100})`
+                : 'none',
+        }),
+
+
         background: backgroundType === 'color' ? backgroundColor :
         backgroundType === 'gradient' ? backgroundGradient || undefined :
         backgroundImage ? `url(${backgroundImage.url})` : 'none',
@@ -428,34 +432,53 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         
     };
 
-    // Determine the borderRadius based on condition
-    const borderRadiushvr = `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`;
-
-    
     const hoverStyles = {
       
+        ...(attributes.advanceborderhvr && {
+            ...(attributes.advanceborderhvr.topwidth && attributes.advanceborderhvr.topstyle && attributes.advanceborderhvr.topcolor && {
+                borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.bottomwidth && attributes.advanceborderhvr.bottomstyle && attributes.advanceborderhvr.bottomcolor && {
+                borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.leftwidth && attributes.advanceborderhvr.leftstyle && attributes.advanceborderhvr.leftcolor && {
+                borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
+            }),
+            ...(attributes.advanceborderhvr.rightwidth && attributes.advanceborderhvr.rightstyle && attributes.advanceborderhvr.rightcolor && {
+                borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
+            }),
+        }),
 
-        borderTop: `${attributes.advanceborderhvr.topwidth} ${attributes.advanceborderhvr.topstyle} ${attributes.advanceborderhvr.topcolor}`,
-        borderBottom: `${attributes.advanceborderhvr.bottomwidth} ${attributes.advanceborderhvr.bottomstyle} ${attributes.advanceborderhvr.bottomcolor}`,
-        borderLeft: `${attributes.advanceborderhvr.leftwidth} ${attributes.advanceborderhvr.leftstyle} ${attributes.advanceborderhvr.leftcolor}`,
-        borderRight: `${attributes.advanceborderhvr.rightwidth} ${attributes.advanceborderhvr.rightstyle} ${attributes.advanceborderhvr.rightcolor}`,
+        ...(attributes.advanceRadiushvr.top!='0px' || 
+            attributes.advanceRadiushvr.right!='0px' || 
+            attributes.advanceRadiushvr.bottom !='0px'|| 
+            attributes.advanceRadiushvr.left!='0px' ? {
+                  borderRadius: `${attributes.advanceRadiushvr.top} ${attributes.advanceRadiushvr.right} ${attributes.advanceRadiushvr.bottom} ${attributes.advanceRadiushvr.left}`
+              } : {}),
+      
 
-        borderRadius: borderRadiushvr,
-
+        ...(boxShadowColorHvr && {
         boxShadow: boxShadowHvr ?
         `${boxShadowHorizontalHvr}px ${boxShadowVerticalHvr}px ${boxShadowBlurHvr}px ${boxShadowSpreadHvr}px rgba(${parseInt(boxShadowColorHvr.slice(1, 3), 16)}, ${parseInt(boxShadowColorHvr.slice(3, 5), 16)}, ${parseInt(boxShadowColorHvr.slice(5, 7), 16)}, ${boxShadowColorOpacityHvr / 100})`
         : 'none',
- 
+        }),
 
-        background: backgroundTypeHvr === 'color' ? backgroundColorHvr :
-            backgroundTypeHvr === 'gradient' ? backgroundGradientHvr || undefined :
-                backgroundImageHvr ? `url(${backgroundImageHvr.url})` : 'none',
+        ...(backgroundTypeHvr === 'color' && backgroundColorHvr) && {
+            background: backgroundColorHvr,
+        },
+        ...(backgroundTypeHvr === 'gradient' && backgroundGradientHvr) && {
+            background: backgroundGradientHvr,
+        },
+        ...(backgroundTypeHvr === 'image' && backgroundImageHvr) && {
+            background: `url(${backgroundImageHvr.url})`,
+        },
         backgroundPosition: formatBackgroundPosition(backgroundPositionHvr),
         backgroundAttachment: backgroundAttachmentHvr || undefined,
         backgroundRepeat: backgroundRepeatHvr || undefined,
         backgroundSize: backgroundSizeHvr || undefined,
+
     };
-    
+
     const filteredHoverStyles = omitBy(hoverStyles, value => !value);
 
     const mergedStyles = {
@@ -566,6 +589,12 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
         // Create a Data URL
          imagePath = `data:image/svg+xml;base64,${svgBase64}`;       } 
 
+         let overlayhvrcolor=''
+         if(attributes.overlayhvrcolor){
+            overlayhvrcolor = `${attributes.overlayhvrcolor}`;
+         }else{
+            overlayhvrcolor = `${attributes.overlaycolor}`;
+         }
 
     const blockProps = useBlockProps({
         className: 'custom-margin',
@@ -584,8 +613,9 @@ export default function AdvanceSettings({ children, attributes,setAttributes }) 
             '--image-url-size' : `${attributes.masksize}`,
             '--image-url-position' :  `${attributes.maskposition}`,
             '--image-url-repeat' :  `${attributes.maskrepeat}`,
-            '--overlay-hvr-color' :  `${attributes.overlayhvrcolor}`,
+            '--overlay-hvr-color' :  `${overlayhvrcolor}`,
             '--image-transform': `${attributes.rotation}deg`,
+            '--wrapper-effect3-color': `${attributes.wrapppereffect3color}`,
         },
 
         onMouseEnter: handleMouseEnter,
