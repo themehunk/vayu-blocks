@@ -265,7 +265,7 @@ export const VariationPicker = ( { clientId, setAttributes, defaultVariation } )
 				label={ __( 'Container', 'vayu-blocks' ) }
 				instructions={
 					__(
-						'Choose a layout of container',
+						'Choose your desired layout',
 						'vayu-blocks'
 					)
 				}
