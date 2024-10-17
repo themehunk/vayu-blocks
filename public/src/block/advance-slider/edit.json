@@ -5,486 +5,70 @@
     "globalwidth":{
         "type":"number"
     },
-    "index":{
-        "type":"number",
-        "default":0
-    },
-    "initialSlide":{
-        "type":"number",
-        "default":0
-    },
-    "alignment":{
-        "type":"string",
-        "default":"none"
-    },
-    "infinite": {
-        "type": "boolean",
-        "default": true
-    },
-    "centerMode": {
-        "type": "boolean",
-        "default": false
-    },
-    "dotslength":{
-        "type":"number",
-        "default":0
-    },
-    "fade": {
-        "type": "boolean",
-        "default": false
-    },
-    "waitForAnimate": {
-        "type": "boolean",
-        "default": false
-    },
-    "lazyLoad": {
-        "type": "boolean",
-        "default": false
-    },
     "autoplay": {
-        "type": "boolean",
-        "default": false
-    },
-    "autoplaySpeed": {
-        "type": "number",
-        "default": 3000
-    },
-    "pauseOnHover": {
-        "type": "boolean",
-        "default": false
-    },
-    "focusOnSelect": {
-        "type": "boolean",
-        "default": false
-    },
-    "rtl": {
-        "type": "boolean",
-        "default": false
-    },
-    "speed": {
-        "type": "number",
-        "default": 500
-    },
-    "slidesToShow": {
-        "type": "number",
-        "default": 1
-    },
-    "slidesToScroll": {
-        "type": "number",
-        "default": 1
-    },
-    "row": {
-        "type": "number",
-        "default": 1
-    },
-    "slidesPerRow": {
-        "type": "number",
-        "default": 1
-    },
-    "slidercount": {
-        "type": "number",
-        "default": 2
-    },
-    "arrow":{
-        "type":"boolean",
-        "default":"false"
-    },
-    "arrowOnHover" :{
-        "type":"boolean",
-        "default": false
-    },
-    "arrowanimation" :{
-        "type":"boolean",
-        "default": true
-    },
-    "customPaging":{
-        "type":"boolean",
-        "default":false
-    },
-    "custompagingvalue":{
-        "type":"number",
-        "default":0
-    },
-    "dots":{
-        "type": "object",
-        "default":{
-            "color": "black",
-            "backgroundColor": "transparent",
-            "size":"16",
-            "show": true,
-            "customize": true,
-            "onimage":false,
-            "option":"dots",
-            "activeColor":"gray",
-            "position" : 0
-        }
-    },
-    "swipe":{
-        "type": "boolean",
-        "default": false
-    },
-    "animationtype":{
-        "type":"string",
-        "default":"animation1"
-    },
-    "arrowstyleleft":{
-        "type": "object",
-        "default":{
-            "color": "white",
-            "hovercolor": "blue",
-            "backgroundColor": "gray",
-            "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-            "size":"20px",
-            "tag": "arrow",
-            "position":0,
-            "positionVertical":0,
-            "opacity":0.5,
-            "borderRadius":{
-                "top": "50px",
-                "right":"50px",
-                "bottom":"50px",
-                "left":"50px"
-            } 
-        }
-    },
-    "slidermargin":{
-        "type":"number",
-        "default":0
-    },
-    "slides":{
-        "type": "array",
-        "default": [
-            {  
-                "uniqueId": "134543583587461", 
-                "button1":{
-                    "show": true,
-                    "text": "Button One",
-                    "link": "",
-                    "newtab": true,
-                    "size": 20,
-                    "backgroundColor": "transparent",
-                    "color":"black",
-                    "border":{
-                        "color": "black",
-                        "width": "1px",
-                        "style": "solid",
+		"type": "boolean",
+		"default": false
+	},
+	"navigation": {
+		"type": "boolean",
+		"default": true
+	},
+	"pagination": {
+		"type": "boolean",
+		"default": true
+	},
+	"centeredSlides": {
+		"type": "boolean",
+		"default": false
+	},
+	"grabCursor": {
+		"type": "boolean",
+		"default": false
+	},
+	"initialSlide": {
+		"type": "number",
+		"default": 0
+	},
+	"simulateTouch": {
+		"type": "boolean",
+		"default":false
+	},
+	"loop":{
+		"type": "boolean",
+		"default": false
+	},
+	"slidesPerView":{
+		"type": "number",
+		"default": 1
+	},
+	"spaceBetween":{
+		"type": "number",
+		"default": 10
+	},
+	"freeMode":{
+		"type": "boolean",
+		"default": false
+	},
+	"mousewheel":{
+		"type": "boolean",
+		"default": false
+	},
+	"delay":{
+		"type":"number",
+		"default":"500"
+	},
+	"disableOnInteraction":{
+		"type": "boolean",
+		"default": true
+	},
+	"effect":{
+		"type":"string",
+		"default":"none"
+	},
+	"scrollbar":{
+		"type": "boolean",
+		"default": false
+	}
+	
 
-                        "topcolor": "black",
-                        "topwidth": "1px",
-                        "topstyle": "solid",
-
-                        "bottomcolor": "black",
-                        "bottomwidth": "1px",
-                        "bottomstyle": "solid",
-
-                        "leftcolor": "black",
-                        "leftwidth": "1px",
-                        "leftstyle": "solid",
-
-                        "rightcolor": "black",
-                        "rightwidth": "1px",
-                        "rightstyle": "solid"
-                    },
-                    "borderRadius":{
-                        "top": "5px",
-                        "right":"5px",
-                        "bottom":"5px",
-                        "left":"5px"
-                        
-                    },
-                    "padding":{
-                        "top": "10px",
-                        "right":"20px",
-                        "bottom":"10px",
-                        "left":"20px"
-                    } 
-                },
-                "button2":{
-                    "show": false,
-                    "text": "Button Two",
-                    "link": "",
-                    "newtab": true,
-                    "size": 20,
-                    "backgroundColor": "transparent",
-                    "color":"black",
-                    "border":{
-                        "color": "black",
-                        "width": "1px",
-                        "style": "solid",
-
-                        "topcolor": "black",
-                        "topwidth": "1px",
-                        "topstyle": "solid",
-
-                        "bottomcolor": "black",
-                        "bottomwidth": "1px",
-                        "bottomstyle": "solid",
-
-                        "leftcolor": "black",
-                        "leftwidth": "1px",
-                        "leftstyle": "solid",
-
-                        "rightcolor": "black",
-                        "rightwidth": "1px",
-                        "rightstyle": "solid"
-                    },
-                    "borderRadius":{
-                        "top": "5px",
-                        "right":"5px",
-                        "bottom":"5px",
-                        "left":"5px"
-                        
-                    },
-                    "padding":{
-                        "top": "10px",
-                        "right":"20px",
-                        "bottom":"10px",
-                        "left":"20px"
-                    } 
-                },
-                "heading":{
-                    "text": "Slider",
-                    "tag" : "h2",
-                    "newtab": true,
-                    "size" : 28,
-                    "fontWeight": "bold",
-                    "color" : "black",
-                    "link": "",
-                    "image" : "",
-                    "animation" : true
-                },
-                "subheading":{
-                    "show":true,
-                    "text": "The subheading for our topic has played a crucial role in highlighting its significance.",
-                    "tag" : "h4",
-                    "size" : 16,
-                    "fontWeight": "lighter",
-                    "color" : "black",
-                    "link": "",
-                    "newtab": true
-                },
-                "border":{
-                    "color": "black",
-                    "width": "0px",
-                    "style": "solid",
-
-                    "topcolor": "black",
-                    "topwidth": "0px",
-                    "topstyle": "solid",
-
-                    "bottomcolor": "black",
-                    "bottomwidth": "0px",
-                    "bottomstyle": "solid",
-
-                    "leftcolor": "black",
-                    "leftwidth": "0px",
-                    "leftstyle": "solid",
-
-                    "rightcolor": "black",
-                    "rightwidth": "0px",
-                    "rightstyle": "solid"
-                },
-                "borderRadius":{
-                    "top": "0px",
-                    "right":"0px",
-                    "bottom":"0px",
-                    "left":"0px"
-                    
-                },
-                "padding":{
-                    "top": "50px",
-                    "right":"0px",
-                    "bottom":"50px",
-                    "left":"0px"
-                },
-                "opacity":0.3,
-                "backgroundBlend":"lighten",
-                "backgroundImage": "",
-                "customStylelayout" :false,
-                "customStyleheading":false,
-                "customStylesubheading":false,
-                "customStylesubbutton1":false,
-                "customStylesubbutton2":false,
-                "customBackgroundImage":false,
-                "heightauto":false,
-                "backgroundType": "color",
-                "backgroundColor": "#000000",
-                "duotone": "",
-                "imageheight":0,
-                "gaphb" : 0,
-                "customheight" :340,
-                "gaphsub" : 0,
-                "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                "alignment": "center",
-                "alignmenttop":"center"  
-            }
-        ]
-    },
-    "global":{
-        "type":"object",
-        "default":
-        {  
-                "uniqueId": "", 
-                "button1":{
-                    "show": true,
-                    "text": "Button One",
-                    "link": "",
-                    "newtab": true,
-                    "size": 20,
-                    "backgroundColor": "transparent",
-                    "color":"black",
-                    "border":{
-                        "color": "black",
-                        "width": "1px",
-                        "style": "solid",
-
-                        "topcolor": "black",
-                        "topwidth": "1px",
-                        "topstyle": "solid",
-
-                        "bottomcolor": "black",
-                        "bottomwidth": "1px",
-                        "bottomstyle": "solid",
-
-                        "leftcolor": "black",
-                        "leftwidth": "1px",
-                        "leftstyle": "solid",
-
-                        "rightcolor": "black",
-                        "rightwidth": "1px",
-                        "rightstyle": "solid"
-                    },
-                    "borderRadius":{
-                        "top": "5px",
-                        "right":"5px",
-                        "bottom":"5px",
-                        "left":"5px"
-                        
-                    },
-                    "padding":{
-                        "top": "10px",
-                        "right":"20px",
-                        "bottom":"10px",
-                        "left":"20px"
-                    } 
-                },
-                "button2":{
-                    "show": false,
-                    "text": "Button Two",
-                    "link": "",
-                    "newtab": true,
-                    "size": 20,
-                    "backgroundColor": "transparent",
-                    "color":"black",
-                    "border":{
-                        "color": "black",
-                        "width": "1px",
-                        "style": "solid",
-
-                        "topcolor": "black",
-                        "topwidth": "1px",
-                        "topstyle": "solid",
-
-                        "bottomcolor": "black",
-                        "bottomwidth": "1px",
-                        "bottomstyle": "solid",
-
-                        "leftcolor": "black",
-                        "leftwidth": "1px",
-                        "leftstyle": "solid",
-
-                        "rightcolor": "black",
-                        "rightwidth": "1px",
-                        "rightstyle": "solid"
-                    },
-                    "borderRadius":{
-                        "top": "5px",
-                        "right":"5px",
-                        "bottom":"5px",
-                        "left":"5px"
-                        
-                    },
-                    "padding":{
-                        "top": "10px",
-                        "right":"20px",
-                        "bottom":"10px",
-                        "left":"20px"
-                    } 
-                },
-                "heading":{
-                    "text": "Slider",
-                    "tag" : "h2",
-                    "newtab": true,
-                    "size" : 28,
-                    "fontWeight": "bold",
-                    "color" : "black",
-                    "link": "",
-                    "image" : "",
-                    "animation" : true
-                },
-                "subheading":{
-                    "show":true,
-                    "text": "The subheading for our topic has played a crucial role in highlighting its significance.",
-                    "tag" : "h4",
-                    "size" : 16,
-                    "fontWeight": "lighter",
-                    "color" : "black",
-                    "link": "",
-                    "newtab": true
-                },
-                "border":{
-                    "color": "black",
-                    "width": "0px",
-                    "style": "solid",
-
-                    "topcolor": "black",
-                    "topwidth": "0px",
-                    "topstyle": "solid",
-
-                    "bottomcolor": "black",
-                    "bottomwidth": "0px",
-                    "bottomstyle": "solid",
-
-                    "leftcolor": "black",
-                    "leftwidth": "0px",
-                    "leftstyle": "solid",
-
-                    "rightcolor": "black",
-                    "rightwidth": "0px",
-                    "rightstyle": "solid"
-                },
-                "borderRadius":{
-                    "top": "0px",
-                    "right":"0px",
-                    "bottom":"0px",
-                    "left":"0px"
-                },
-                "padding":{
-                    "top": "50px",
-                    "right":"0px",
-                    "bottom":"50px",
-                    "left":"0px"
-                },
-                "opacity":0.3,
-                "backgroundBlend":"lighten",
-                "backgroundImage": "",
-                "customStylelayout" :false,
-                "customStyleheading":false,
-                "customStylesubheading":false,
-                "customStylesubbutton1":false,
-                "customStylesubbutton2":false,
-                "customBackgroundImage":false,
-                "heightauto":false,
-                "backgroundType": "color",
-                "backgroundColor": "#000000",
-                "duotone": "",
-                "imageheight":0,
-                "gaphb" : 0,
-                "customheight" :340,
-                "gaphsub" : 0,
-                "backgroundGradient": "linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%)",
-                "alignment": "center",
-                "alignmenttop":"center"  
-            }
-    }
 }

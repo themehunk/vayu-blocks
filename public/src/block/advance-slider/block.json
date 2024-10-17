@@ -5,11 +5,13 @@
     "version": "0.2.0",
     "title": "Advance Slider",
     "category": "vayu-blocks",
+    "keywords": ["carousel", "slideshow"],
     "description": "A custom Loader to display block with options for dots and aerrow.",
     "supports": {
-      "html": false,
-      "align": ["wide", "full"]
-    },
+		"html": false,
+		"align": ["wide", "full"],
+		"className": true
+	},
    "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",

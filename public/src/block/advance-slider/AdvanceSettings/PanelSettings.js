@@ -20,8 +20,7 @@ import {
 } from '@wordpress/element';
 
 import PostSettings from '../postSettings';
-import SlideSettings from '../SlideSettings';
-import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import { Vayu_Block_Border_Control } from '../../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 
 /**
  * Internal dependencies
@@ -1892,11 +1891,6 @@ const PanelSettings = ({
 								icon: 'slide'
 							},
 							{
-								label: __( 'Setting', 'vayu-blocks' ),
-								value: 'setting',
-								icon: 'colorwand'
-							},
-							{
 								label: __( 'Advanced', 'vayu-blocks' ),
 								value: 'advanced',
 								icon: 'colorpalette'
@@ -1907,13 +1901,8 @@ const PanelSettings = ({
 
 				{'slide' === tab && (
 					<Fragment>
-						<SlideSettings attributes={attributes} setAttributes={setAttributes} />
+						<PostSettings attributes={attributes} setAttributes={setAttributes} />
 					</Fragment>
-
-				) || 'setting' === tab && (
-						<Fragment>
-							<PostSettings attributes={attributes} setAttributes={setAttributes} />
-						</Fragment>
 
 				) || 'advanced' === tab && (
 					<Fragment>

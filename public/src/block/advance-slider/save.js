@@ -1,9 +1,17 @@
-import { __ } from '@wordpress/i18n';
+/**
+ * WordPress dependencies
+ */
+import { InnerBlocks } from '@wordpress/block-editor';
 
-const Save = ({ attributes }) => {
-    return (
-            null
-    );
-};
-
-export default Save;
+/**
+ * The save function defines the way in which the different attributes should
+ * be combined into the final markup, which is then serialized by the block
+ * editor into `post_content`.
+ *
+ * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
+ *
+ * @return {Element} Element to render.
+ */
+export default function save() {
+	return <InnerBlocks.Content />;
+}
