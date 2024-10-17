@@ -3,7 +3,7 @@ import { PanelBody, PanelRow, ToggleControl, RangeControl, SelectControl } from 
 import { useState } from '@wordpress/element';
 
 const postSettings = ( { attributes, setAttributes } ) => {
-    const { autoplay, navigation, pagination,centeredSlides,grabCursor,initialSlide,simulateTouch,loop,slidesPerView,spaceBetween,freeMode,mousewheel,delay,disableOnInteraction ,effect,scrollbar} = attributes;
+    const { autoplay, navigation, pagination,   dynamicBullets,dynamicMainBullets,centeredSlides,grabCursor,initialSlide,simulateTouch,loop,slidesPerView,spaceBetween,freeMode,mousewheel,delay,disableOnInteraction ,effect,scrollbar} = attributes;
 
 
 
@@ -131,7 +131,7 @@ const postSettings = ( { attributes, setAttributes } ) => {
         </PanelRow>
         
 
-        <PanelRow>
+        {/* <PanelRow>
             <ToggleControl
                 label={ __( 'centeredSlides', 'vayu_blocks' ) }
                 checked={ centeredSlides }
@@ -143,7 +143,7 @@ const postSettings = ( { attributes, setAttributes } ) => {
                     'vayu_blocks'
                 ) }
             />
-        </PanelRow>
+        </PanelRow> */}
 
         
         <PanelRow>
@@ -161,7 +161,7 @@ const postSettings = ( { attributes, setAttributes } ) => {
 
         </PanelRow>
         
-        <PanelRow>
+        {/* <PanelRow>
             <ToggleControl
                 label={ __( 'GrabCursor', 'vayu_blocks' ) }
                 checked={ grabCursor }
@@ -173,7 +173,7 @@ const postSettings = ( { attributes, setAttributes } ) => {
                     'vayu_blocks'
                 ) }
             />
-        </PanelRow>
+        </PanelRow> */}
         <PanelRow>
             <ToggleControl
                 label={ __( 'SimulateTouch', 'vayu_blocks' ) }
@@ -195,7 +195,7 @@ const postSettings = ( { attributes, setAttributes } ) => {
                     setAttributes( { loop: value } )
                 }
                 help={ __(
-                    'Enable this option to loop back to the first slide after reaching the last slide. THIS WILL ONLY WORK ON THE FRONTEND.',
+                    'Enable this option to loop back to the first slide after reaching the last slide.',
                     'vayu_blocks'
                 ) }
                 
@@ -254,6 +254,42 @@ const postSettings = ( { attributes, setAttributes } ) => {
                 ) }
             />
         </PanelRow>
+
+        {pagination && (
+            <>
+                <PanelRow>
+                    <ToggleControl
+                        label={ __( 'Dynamic Bullets', 'vayu_blocks' ) }
+                        checked={ dynamicBullets }
+                        onChange={ ( value ) =>
+                            setAttributes( { dynamicBullets: value } )
+                        }
+                        help={ __(
+                            'Enable dynamic bullets for pagination, allowing the number of dots to change based on the number of slides.'
+                        ) }
+                    />
+                </PanelRow>
+            {dynamicBullets && (
+                <PanelRow>
+                    <RangeControl
+                        label={ __( 'Dynamic Main Bullets', 'vayu_blocks' ) }
+                        value={ dynamicMainBullets }
+                        min={ 1 } // Minimum should be 1 since you can't show 0 slides
+                        max={ 5 }
+                        onChange={ ( value ) =>
+                            setAttributes( { dynamicMainBullets: value } )
+                        }
+                        help={ __(
+                            'Set the maximum number of main bullets to display in the pagination.',
+                            'vayu_blocks'
+                        ) }
+                    />
+                </PanelRow>
+                )}
+             
+
+            </>
+        )}
 
         <PanelRow>
             <ToggleControl

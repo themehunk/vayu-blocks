@@ -55,7 +55,7 @@
 	},
 	"delay":{
 		"type":"number",
-		"default":"500"
+		"default":500
 	},
 	"disableOnInteraction":{
 		"type": "boolean",
@@ -68,7 +68,14 @@
 	"scrollbar":{
 		"type": "boolean",
 		"default": false
+	},
+	"dynamicBullets":{
+		"type": "boolean",
+		"default": false
+	},
+	"dynamicMainBullets":{
+		"type": "number",
+		"default": 2
 	}
-	
 
 }

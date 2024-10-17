@@ -4,7 +4,7 @@
  * @see https://swiperjs.com/get-started
  */
 import { Swiper } from 'swiper';
-import { Autoplay, Keyboard, Navigation, Pagination,FreeMode, Mousewheel,EffectFlip, EffectCoverflow,EffectFade ,Scrollbar} from 'swiper/modules';
+import { Autoplay,A11y, Keyboard, Navigation, Pagination,FreeMode, Mousewheel,EffectFlip, EffectCoverflow,EffectFade ,Scrollbar} from 'swiper/modules';
 
 /**
  * Initialize the slider.
@@ -19,7 +19,7 @@ import { Autoplay, Keyboard, Navigation, Pagination,FreeMode, Mousewheel,EffectF
 export function SwiperInit( container, options = {} ) {
 
 	// Initialize the modules array with the core modules
-    const modules = [Autoplay, Keyboard, Navigation, Pagination, FreeMode, Mousewheel];
+    const modules = [Autoplay, Keyboard, Navigation, Pagination, FreeMode, Mousewheel,A11y];
 
     // Check the effect and add the corresponding effect module if needed
     if (options.effect === 'slide') {
@@ -46,8 +46,13 @@ export function SwiperInit( container, options = {} ) {
 		modules: modules,
 		navigation: options?.navigation ?? false,
 		pagination: options?.pagination ?? false,
+		pagination: {
+			enabled: options?.pagination ?? false,
+			dynamicBullets: options?.dynamicBullets ?? false,
+			dynamicMainBullets: options?.dynamicMainBullets ?? 1, // Default value if not provided
+		},
 		simulateTouch: options?.simulateTouch ?? true,
-		loop: false,
+		loop: options?.loop,
 		slidesPerView:options?.slidesPerView ?? 1,
 		spaceBetween:options?.spaceBetween ?? 10,
 		freeMode:options?.freeMode ?? true,
@@ -66,8 +71,5 @@ export function SwiperInit( container, options = {} ) {
 		scrollbar:options?.scrollbar ?? true,
 		
 	};
-
-	console.log(parameters);
-
 	return new Swiper( container, parameters );
 }

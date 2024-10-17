@@ -20,8 +20,8 @@ function generate_inline_flip_wrapper_styles($attr) {
     $css .= ".wp_block_vayu-blocks-front-image-main {";
         // // Check if 'widthType' attribute is set to 'customwidth' and apply the width accordingly
         // $css .= "width: " . esc_attr($attr['customWidth']) . esc_attr($attr['customWidthUnit']) . ";";
-        $css .= "margin-left: auto !important;";
-        $css .= "margin-right: auto !important;";
+        // $css .= "margin-left: auto !important;";
+        // $css .= "margin-right: auto !important;";
         $css .= "backface-visibility: hidden;";
         $css .= "overflow: hidden;";
 
