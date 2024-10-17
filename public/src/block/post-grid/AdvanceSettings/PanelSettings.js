@@ -21,7 +21,7 @@ import {
 
 import PostSettings from '../PostSettings';
 import Editor from '../Editor';
-import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import { Vayu_Block_Border_Control } from '../../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 /**
  * Internal dependencies
  */

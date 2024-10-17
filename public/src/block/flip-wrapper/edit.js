@@ -119,6 +119,8 @@ const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
 
     return (
         <>
+
+    {attributes.parentBlock === 'vayu-blocks/flip-box' && (
         <BlockControls>
             <ToolbarGroup>
                 <ToolbarButton
@@ -147,6 +149,8 @@ const edit = ({ attributes, setAttributes,isSelected,clientId}) => {
                 )}
             </ToolbarGroup>
         </BlockControls>
+
+            )}
 
 
             <PanelSettings attributes={attributes} setAttributes={setAttributes} isSelected={isSelected}/>

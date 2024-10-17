@@ -18,7 +18,7 @@ import {MediaPlaceholder} from '@wordpress/block-editor';
 
 
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
-import { Vayu_Block_Border_Control } from '../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import {Vayu_Block_Border_Control} from '../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 import ControlPanelControl from '../../components/control-panel-control/index.js';
 
 import {
