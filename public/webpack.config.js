@@ -24,8 +24,6 @@ module.exports = {
      //'block/mega-menu/index': './src/block/mega-menu',
      'block/advance-query-loop/index':'./src/block/advance-query-loop',
     //  'block/advance-query-loop/view':'./src/block/advance-query-loop/view.js',
-     'block/front-image/index': './src/block/front-image',
-     'block/front-image/view': './src/block/front-image/view.js',
      'block/wrapper/index':'./src/block/wrapper',
      'block/flip-wrapper/index': './src/block/flip-wrapper',
      'block/flip-wrapper/view': './src/block/flip-wrapper/view.js',

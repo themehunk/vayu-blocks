@@ -35,7 +35,7 @@
 	},
 	"loop":{
 		"type": "boolean",
-		"default": false
+		"default": true
 	},
 	"slidesPerView":{
 		"type": "number",
