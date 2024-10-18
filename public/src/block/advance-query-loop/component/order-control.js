@@ -3,21 +3,18 @@ import { __ } from '@wordpress/i18n';
 
 // Define the order options
 const orderOptions = [
-    { label: __('Newest to oldest', 'vayu-blocks'), value: 'date/desc' },
-    { label: __('Oldest to newest', 'vayu-blocks'), value: 'date/asc' },
-    { label: __('A → Z', 'vayu-blocks'), value: 'title/asc' },
-    { label: __('Z → A', 'vayu-blocks'), value: 'title/desc' },
+    { label: __('ASC', 'vayu-blocks'), value: 'asc' },
+    { label: __('DESC', 'vayu-blocks'), value: 'desc' },
 ];
 
 // OrderControl Component to handle order selection
-const OrderControl = ({ order, orderBy, onChange }) => (
+const OrderControl = ({ order, onChange }) => (
     <SelectControl
-        label={__('Order by', 'vayu-blocks')}
-        value={`${orderBy}/${order}`}
+        label={__('Order', 'vayu-blocks')}
+        value={order}
         options={orderOptions}
-        onChange={(value) => {
-            const [newOrderBy, newOrder] = value.split('/');
-            onChange({ order: newOrder, orderBy: newOrderBy });
+        onChange={(newOrder) => {
+            onChange({ order: newOrder });
         }}
     />
 );
