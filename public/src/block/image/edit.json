@@ -124,21 +124,21 @@
     "imageborder":{
         "type":"object",
         "default":{
-        "topcolor": "rgb(183, 191, 249)",
-        "topwidth": "0px",
-        "topstyle": "solid",
+        "topcolor": "#efeff1",
+        "topwidth": "2px",
+        "topstyle": "dashed",
 
-        "bottomcolor": "rgb(183, 191, 249)",
-        "bottomwidth": "0px",
-        "bottomstyle": "solid",
+        "bottomcolor": "#efeff1",
+        "bottomwidth": "2px",
+        "bottomstyle": "dashed",
 
-        "leftcolor": "rgb(183, 191, 249)",
-        "leftwidth": "0px",
-        "leftstyle": "solid",
+        "leftcolor": "#efeff1",
+        "leftwidth": "2px",
+        "leftstyle": "dashed",
 
-        "rightcolor": "rgb(183, 191, 249)",
-        "rightwidth": "0px",
-        "rightstyle": "solid"
+        "rightcolor": "#efeff1",
+        "rightwidth": "2px",
+        "rightstyle": "dashed"
     }
     },
     "imageborderradiuscircle":{
@@ -223,7 +223,7 @@
     },
     "overlaybordertype":{
         "type":"string",
-        "default":"gradient"
+        "default":"color"
     },
     "overlaybordergradient":{
         "type":"string",
@@ -355,5 +355,45 @@
     },
     "parentBlock":{
         "type":"string"
-    }
+    }, 
+    "imageboxShadow": {
+        "type": "boolean",
+        "default": false
+      },
+      "imageboxShadowColor": {
+        "type": "string",
+        "default": ""
+      },
+      "imageboxShadowColorOpacity": {
+        "type": "number",
+        "default": 50
+      },
+      "imageboxShadowBlur": {
+        "type": "number",
+        "default": 5
+      },
+      "imageboxShadowSpread": {
+        "type": "number",
+        "default": 1
+      },
+      "imageboxShadowHorizontal": {
+        "type": "number",
+        "default": 0
+      },
+      "imageboxShadowVertical": {
+        "type": "number",
+        "default": 0
+      },
+      "defaultImageWidth":{
+        "type":"number",
+        "default":0
+      },
+      "wrapppereffect3color":{
+        "type":"string",
+        "default":"white"
+      },
+      "animationhover":{
+        "type":"boolean",
+        "default":true
+      }
 }

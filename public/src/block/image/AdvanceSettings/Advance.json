@@ -643,10 +643,10 @@
 "advanceRadius":{
   "type":"object",
   "default":{
-  "top": "4px",
-  "bottom": "4px",
-  "left": "4px",
-  "right": "4px"
+  "top": "0px",
+  "bottom": "0px",
+  "left": "0px",
+  "right": "0px"
 }
 },
 "advanceborder":{
@@ -672,10 +672,10 @@
 "advanceRadiushvr":{
   "type":"object",
   "default":{
-  "top": "4px",
-  "bottom": "4px",
-  "left": "4px",
-  "right": "4px"
+  "top": "0px",
+  "bottom": "0px",
+  "left": "0px",
+  "right": "0px"
 }
 },
 "advanceborderhvr":{

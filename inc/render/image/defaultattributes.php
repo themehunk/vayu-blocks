@@ -35,18 +35,18 @@ return array(
 
         // image Border
             'imageborder' => array(
-                'topcolor' => '',
-                'topwidth' => '0px',
-                'topstyle' => 'solid',
-                'bottomcolor' => '',
-                'bottomwidth' => '0px',
-                'bottomstyle' => 'solid',
-                'leftcolor' => '',
-                'leftwidth' => '0px',
-                'leftstyle' => 'solid',
-                'rightcolor' => '',
-                'rightwidth' => '0px',
-                'rightstyle' => 'solid',
+                'topcolor' => '#efeff1',
+                'topwidth' => '2px',
+                'topstyle' => 'dashed',
+                'bottomcolor' => '#efeff1',
+                'bottomwidth' => '2px',
+                'bottomstyle' => 'dashed',
+                'leftcolor' => '#efeff1',
+                'leftwidth' => '2px',
+                'leftstyle' => 'dashed',
+                'rightcolor' => '#efeff1',
+                'rightwidth' => '2px',
+                'rightstyle' => 'dashed',
             ),
     
         // image Border Radius
@@ -60,6 +60,7 @@ return array(
             'imagealignment' => 'center',
             'imagealignmenttablet' => 'center',
             'imagealignmentmobile' => 'center',
+            'wrapppereffect3color' => 'white',
             
             'overlayshow'=>false,
             'maskshape'=> 'none',
@@ -79,7 +80,7 @@ return array(
             'imageheighttablet'=>'',
             'imagewidthmobile'=>'',
             'imageheightmobile'=>'',
-            'overlaybordertype'=>'gradient',
+            'overlaybordertype'=>'color',
             'overlaybordergradient'=>'linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%)',
             'overlayborderimage'=>'',
             'overlayborderimagetype'=>'none',
@@ -110,6 +111,14 @@ return array(
             'animationsettings' => 'without-hvr',
             'wrapperanimation'=>'none',
             'overlaywrapper'=> 'none',
+            'imageboxShadow' => false,
+            'imageboxShadowColor' => '',
+            'imageboxShadowColorOpacity' => 50,
+            'imageboxShadowBlur' => 5,
+            'imageboxShadowSpread' => 1,
+            'imageboxShadowHorizontal' => 0,
+            'imageboxShadowVertical' => 0,
+            'animationhover' => true,
 
     //Advanced
         'classNamemain' => '',
@@ -289,10 +298,10 @@ return array(
 
         // advance Border Radius
             'advanceRadius' => array(
-                'top' => '4px',
-                'bottom' => '4px',
-                'left' => '4px',
-                'right' => '4px',
+                'top' => '0px',
+                'bottom' => '0px',
+                'left' => '0px',
+                'right' => '0px',
             ),
             // advance Border
             'advanceborderhvr' => array(
@@ -312,10 +321,10 @@ return array(
 
     // advance Border Radius
         'advanceRadiushvr' => array(
-            'top' => '4px',
-            'bottom' => '4px',
-            'left' => '4px',
-            'right' => '4px',
+            'top' => '0px',
+            'bottom' => '0px',
+            'left' => '0px',
+            'right' => '0px',
         ),
 );
 ?>

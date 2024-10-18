@@ -21,7 +21,7 @@ import {
 
 import SlideSettings from '../SlideSettings';
 import OverlaySettings from '../OverlaySettings.js';
-import { Vayu_Block_Border_Control } from '../../advance-slider/Components/BorderControl/Vayu_Blocks_Border_control';
+import { Vayu_Block_Border_Control } from '../../../components/wp-default-compoents/BorderControl/Vayu_Blocks_Border_control.js';
 
 
 /**
@@ -1808,6 +1808,14 @@ const PanelSettings = ({
         setAttributes({ advanceborderhvr: updatedAttributes });
     };
 
+	const vayu_blocks_box_shadow_color_handler = (e) => {
+		if(e){
+			setAttributes({ boxShadowColor: e })
+		}else{
+			setAttributes({ boxShadowColor: 'transparent' })
+		}
+	}
+
     return (
 		<Fragment>
 			<InspectorControls>
@@ -2085,7 +2093,7 @@ const PanelSettings = ({
 									<ColorGradientControl
 										label={ __( 'Shadow Color', 'vayu-blocks' ) }
 										colorValue={ attributes.boxShadowColor }
-										onColorChange={ e => setAttributes({ boxShadowColor: e }) }
+										onColorChange={ e => vayu_blocks_box_shadow_color_handler(e) }
 										enableAlpha={true} 
 									/>
 

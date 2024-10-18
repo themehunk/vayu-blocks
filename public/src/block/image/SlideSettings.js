@@ -1,8 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { dispatch, useSelect,select } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import _ from 'lodash'; // If you are using lodash
-
 import {
     PanelBody,
     ToggleControl,
@@ -13,23 +12,23 @@ import {
     FocalPointPicker,
     __experimentalAlignmentMatrixControl as AlignmentMatrixControl,
     PanelRow,
+    RangeControl,
 } from '@wordpress/components';
 import {MediaPlaceholder } from '@wordpress/block-editor';
-
+import { __experimentalColorGradientControl as ColorGradientControl} from '@wordpress/block-editor';
 import {Vayu_blocks_typographycontrol} from '../../components/wp-default-compoents/Typography/Vayu_blocks_typographycontrol';
 import ColorPanel from '../../components/wp-default-compoents/ColorPanel/ColorPanel';
 import DuotonePanel from '../../components/wp-default-compoents/Duotone/DuotonePanel.js';
 import Vayu_Block_ToggleGroupControl from '../../components/wp-default-compoents/ToggleGroupControl/Vayu_Block_Toggle';
 import './editor.scss';
-
+import WrapperAnimationPanel from '../../components/wp-default-compoents/Animation/WrapperAnimationPanel';
+import ImageAnimation  from '../../components/wp-default-compoents/Animation/ImageAnimation.js';
 import {
-    HoverControl,
     ToogleGroupControl,
     ResponsiveControl,
 } from '../../components/index.js';
 import ControlPanelControl from '../../components/control-panel-control/index.js';
-
-import {Start, Center , End,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
+import {Center,HorizontalLeft,HorizontalRight} from '../../../src/helpers/icon.js';
 
 
 const SlideSettings = ({ attributes, setAttributes }) => {
@@ -198,10 +197,12 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     const handleimageurl = (value) => {
         setAttributes({image:value.url});
+        setAttributes({defaultImageWidth:value.width});
     }
     
     const handleimage = (value) => {
         setAttributes({image:value});
+        setAttributes({defaultImageWidth:value.width});
     }
 
     const getimagealignment = () => {
@@ -223,33 +224,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setAttributes({ imagealignmenttablet: value });
         } else if (getView === 'Mobile') {
             setAttributes({ imagealignmentmobile: value });
-        }
-    };
-
-    const handlehoveranimation = (value) => {
-
-        if(value=== 'vayu_block_styling-effect5' || value=== 'vayu_block_styling-effect6' || value=== 'vayu_block_styling-effect8' ){
-            setAttributes({
-                overlaywrapper: value,
-                wrapperanimation: 'none',
-                imagehvreffect: 'none',
-            });
-        }
-
-        else if (value.startsWith('vayu_block_styling')) {
-            // If it's a wrapper animation, set the wrapperanimation attribute and reset the hover effect
-            setAttributes({
-                overlaywrapper:'none',
-                wrapperanimation: value,
-                imagehvreffect: 'none',
-            });
-        } else {
-            // If it's a hover effect, set the imagehvreffect attribute and reset the wrapper animation
-            setAttributes({
-                overlaywrapper:'none',
-                wrapperanimation: 'none',
-                imagehvreffect: value,
-            });
         }
     };
     
@@ -314,6 +288,17 @@ const SlideSettings = ({ attributes, setAttributes }) => {
 
     const animationoptions = [
         { label: __('None', 'vayu-blocks'), value: 'none' },
+        { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
+        { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
+        { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
+        { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
+        { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
+        { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
+        { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
+    ];
+
+    const newanimationoptions = [
+        { label: __('None', 'vayu-blocks'), value: 'none' },
         { label: __('Blur', 'vayu-blocks'), value: 'blur' },
         { label: __('Sepia', 'vayu-blocks'), value: 'sepia' },
         { label: __('GrayScale', 'vayu-blocks'), value: 'grayScale' },
@@ -325,23 +310,26 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         { label: __('Slide Left', 'vayu-blocks'), value: 'slide-left' },
         { label: __('Slide Right', 'vayu-blocks'), value: 'slide-right' },
         { label: __('Rotate', 'vayu-blocks'), value: 'rotate' },
-        { label: __('Effect 1 (3D Tilt Left)', 'vayu-blocks'), value: 'vayu_block_styling-left' },
-        { label: __('Effect 2 (3D Tilt Right)', 'vayu-blocks'), value: 'vayu_block_styling-right' },
-        { label: __('Effect 3 (Depth Shift)', 'vayu-blocks'), value: 'vayu_block_styling-effect3' },
-        { label: __('Effect 4 (3D Clip-Path Left)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-left' },
-        { label: __('Effect 5 (3D Clip-Path Right)', 'vayu-blocks'), value: 'vayu_block_styling-effect4-right' },
-        { label: __('Effect 6 (3D Draft Bit)', 'vayu-blocks'), value: 'vayu_block_styling-effect10' },
-        { label: __('Effect 7 (Tilt Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect7' },
     ];
     
-    // Conditionally add overlay options based on the overlayshow attribute
-    if (attributes.overlayshow) {
-        animationoptions.push(
-            { label: __('Overlay Effect 8 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
-            { label: __('Overlay Effect 9 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
-            { label: __('Overlay Effect 10 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
-        );
-    }
+    const vayu_blocks_box_shadow_color_handler = (e) => {
+		if(e){
+			setAttributes({ imageboxShadowColor: e })
+		}else{
+			setAttributes({ imageboxShadowColor: 'transparent' })
+		}
+	}
+
+    useEffect(() => {
+        // If imagewidth is less than 200, hide the overlay
+        if (parseInt(attributes.imagewidth) < 200) {
+            setAttributes({ overlayshow: false });
+        } 
+        // If imagewidth is an empty string and defaultImageWidth is less than 200, hide the overlay
+        else if (attributes.imagewidth === '' && attributes.defaultImageWidth < 200) {
+            setAttributes({ overlayshow: false });
+        }
+    }, [attributes.imagewidth, attributes.defaultImageWidth,attributes.image]);
 
     return (
         
@@ -499,6 +487,70 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                             duotonePalette={vayu_blocks_DUOTONE_PALETTE}
                         />
 
+                <ControlPanelControl
+                    label={ __( 'Box Shadow', 'vayu-blocks' ) }
+                    attributes={ attributes }
+                    setAttributes={ setAttributes }
+                    resetValues={ {
+                        imageboxShadow: false,
+                        imageboxShadowColor: undefined,
+                        imageboxShadowColorOpacity: 50,
+                        imageboxShadowBlur: 5,
+                        imageboxShadowSpread: 1,
+                        imageboxShadowHorizontal: 0,
+                        imageboxShadowVertical: 0
+                    } }
+                    onClick={ () => setAttributes({ imageboxShadow: true }) }
+                >
+                
+                    <ColorGradientControl
+                        label={ __( 'Shadow Color', 'vayu-blocks' ) }
+                        colorValue={ attributes.imageboxShadowColor }
+                        onColorChange={ e => vayu_blocks_box_shadow_color_handler(e) }
+                        enableAlpha={true} 
+                    />
+
+                    <RangeControl
+                        label={ __( 'Opacity', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowColorOpacity }
+                        onChange={ e => setAttributes({ imageboxShadowColorOpacity: e }) }
+                        min={ 0 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Blur', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowBlur }
+                        onChange={ e => setAttributes({ imageboxShadowBlur: e }) }
+                        min={ 0 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Spread', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowSpread }
+                        onChange={ e => setAttributes({ imageboxShadowSpread: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Horizontal', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowHorizontal }
+                        onChange={ e => setAttributes({ imageboxShadowHorizontal: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+
+                    <RangeControl
+                        label={ __( 'Vertical', 'vayu-blocks' ) }
+                        value={ attributes.imageboxShadowVertical }
+                        onChange={ e => setAttributes({ imageboxShadowVertical: e }) }
+                        min={ -100 }
+                        max={ 100 }
+                    />
+                </ControlPanelControl>
+                        
                         </>
                         ) : (
                             <>
@@ -524,140 +576,61 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 {/* Overlay and animation effect  */}
                 <PanelBody title={__('Advance Animation & Mask','vayu-blocks')} initialOpen={false}>
 
+                    <div className='vayu_blocks_animation_panel'>
+                        <WrapperAnimationPanel 
+                            animationValue={attributes.wrapperanimation} 
+                            onAnimationChange={(value) => setAttributes({wrapperanimation:value})}
+                            animationOptions={animationoptions} 
+                            image={attributes.image}
+                            onEffectcolorchange={(value) => setAttributes({wrapppereffect3color:value.color})}
+                            effectcolor={attributes.wrapppereffect3color}
+                            imageanimationValue={attributes.imagehvranimation} 
+                            onimageAnimationChange={(value) => setAttributes({imagehvranimation:value})}
+                            onanimationsettingschange={(value) => setAttributes({animationsettings:value})}
+                            animationsettings={attributes.animationsettings}
+                            mask_shapeValue={attributes.maskshape}
+                            onmask_shapeChange={(value) => setAttributes({ maskshape: value })}
+                            onmaskrepeatChange={(value) => setAttributes({ maskrepeat: value })}
+                            onmaskpositionchange={(value) => setAttributes({ maskposition: value })}
+                            onmaskSizeChange={(value) => setAttributes({ masksize: value })}
+                            masksize={attributes.masksize}
+                            maskposition={attributes.maskposition}
+                            maskrepeat={attributes.maskrepeat}
+                            oneffecthoverchange={(value) => setAttributes({ animationhover: value })}
+                            effecthover={attributes.animationhover}
+                        />
+                    </div>
+
                     <SelectControl
                         label={__('Hover Effect', 'vayu-blocks')}
-                        value={
-                                attributes.overlaywrapper !== 'none'
-                                    ? attributes.overlaywrapper
-                                    : attributes.wrapperanimation !== 'none'
-                                    ? attributes.wrapperanimation
-                                    : attributes.imagehvreffect
-                            }                        
-                            options={animationoptions}
-                        onChange={(value) => handlehoveranimation(value)}
+                        value={attributes.imagehvreffect}                        
+                        options={newanimationoptions}
+                        onChange={(value) => setAttributes({imagehvreffect:value})}
                     />
 
-
-                    {/* {(attributes.wrapperanimation === 'vayu_block_styling' || attributes.wrapperanimation === 'vayu_block_styling-effect4') && (
+                    {/* {attributes.overlayshow && (
                         <>
-                            <SelectControl
-                                label={__('Animation Side', 'vayu-blocks')}
-                                value={attributes.animatingside}
-                                options={[
-                                    { label: __('Left', 'vayu-blocks'), value: 'left' },
-                                    { label: __('Right', 'vayu-blocks'), value: 'right' }
-                                ]}
-                                onChange={(value) => handleanimationside(value)}
-                            />
+                        <SelectControl
+                            label={__('Overlay Hover Effect', 'vayu-blocks')}
+                            value={attributes.overlaywrapper}
+                            options={[
+                                { label: __('None', 'vayu-blocks'), value: 'none' },
+                                { label: __('Overlay Effect 1 (Masking Effect)', 'vayu-blocks'), value: 'vayu_block_styling-effect5' },
+                                { label: __('Overlay Effect 2 (Conic Gradient)', 'vayu-blocks'), value: 'vayu_block_styling-effect6' },
+                                { label: __('Overlay Effect 3 (Radial Reveal)', 'vayu-blocks'), value: 'vayu_block_styling-effect8' }
+                            ]}
+                            onChange={(value) => setAttributes({ overlaywrapper: value })}
+                        />
+
+                        {attributes.wrapperanimation==='vayu_block_styling-effect3' && (
+                            <>
+                            <p>With Effect 3 (Depth Shift), the overlay effect will not work.</p>
+                            <br/>
+                            </>
+                        )}
                         </>
                     )} */}
-
-
-                    <SelectControl
-                        label={__('Image Animation', 'vayu-blocks')}
-                        value={attributes.imagehvranimation}
-                        options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Infinite rotate', 'vayu-blocks'), value: 'rotate-image' },
-                            { label: __('Clip Animation', 'vayu-blocks'), value: 'clip-animation' },
-                            { label: __('Diagonal Expand', 'vayu-blocks'), value: 'clip-diagonal-expand' },
-                            { label: __('Starbust', 'vayu-blocks'), value: 'clip-starburst' },
-                            { label: __('Diamond', 'vayu-blocks'), value: 'clip-diamond' },
-                            { label: __('Diagonal slide', 'vayu-blocks'), value: 'clip-diagonal-slide' },
-                            { label: __('Hex Pulse', 'vayu-blocks'), value: 'clip-hex-pulse' },
-                            { label: __('Triangle Expand', 'vayu-blocks'), value: 'clip-triangle-expand' },
-                            { label: __('Circle Burst', 'vayu-blocks'), value: 'clip-circle-burst' },
-                            { label: __('Zigzag', 'vayu-blocks'), value: 'clip-zigzag' },
-                            { label: __('Diamond Expand', 'vayu-blocks'), value: ' clip-diamond-expand' },
-                        ]}
-                        onChange={(value) => setAttributes({ imagehvranimation: value })}
-                    />
-
-                    {attributes.imagehvranimation != 'none' && (
-                        <SelectControl
-                            label={__('Animation Settings', 'vayu-blocks')}
-                            value={attributes.animationsettings}
-                            options={[
-                                { label: __('One Time', 'vayu-blocks'), value: 'one-time' },
-                                { label: __('With Hover', 'vayu-blocks'), value: 'with-hvr' },
-                                { label: __('Without Hover', 'vayu-blocks'), value: 'without-hvr' },
-                            ]}
-                            onChange={(value) => setAttributes({ animationsettings: value })}
-                        />
-                    )}
-
-                    <SelectControl
-                        label={__('Mask shape', 'vayu-blocks')}
-                        __nextHasNoMarginBottom
-                        value={attributes.maskshape}
-                        options={[
-                            { label: __('None', 'vayu-blocks'), value: 'none' },
-                            { label: __('Circle', 'vayu-blocks'), value: 'circle' },
-                            { label: __('Diamond', 'vayu-blocks'), value: 'diamond' },
-                            { label: __('Hexagone', 'vayu-blocks'), value: 'hexagone' },
-                            { label: __('Rounded', 'vayu-blocks'), value: 'rounded' },
-                            { label: __('Mask 1', 'vayu-blocks'), value: 'bob1' },
-                            { label: __('Mask 2', 'vayu-blocks'), value: 'bob2' },
-                            { label: __('Mask 3', 'vayu-blocks'), value: 'bob3' },
-                            { label: __('Mask 4', 'vayu-blocks'), value: 'bob4' },
-                        ]}
-                        onChange={(value) => setAttributes({ maskshape: value })}
-                    />
-
-                {attributes.maskshape!=='none' && (
-                    <Fragment>
-                        <ControlPanelControl
-                            label={ __( 'Mask Settings', 'vayu-blocks' ) }
-                        >
-                            <SelectControl
-                                label={__('Mask size', 'vayu-blocks')}
-                                __nextHasNoMarginBottom
-                                value={attributes.masksize}
-                                variant="minimal"
-                                options={[
-                                    { label: __('Auto', 'vayu-blocks'), value: 'auto' },
-                                    { label: __('Contain', 'vayu-blocks'), value: 'contain' },
-                                    { label: __('Cover', 'vayu-blocks'), value: 'cover' },
-                                ]}
-                                onChange={(value) => setAttributes({ masksize: value })}
-                            />
-                            <br/>
-                            <SelectControl
-                                label={__('Mask Position', 'vayu-blocks')}
-                                __nextHasNoMarginBottom
-                                value={attributes.maskposition}
-                                options={[
-                                    { label: __('Center Top', 'vayu-blocks'), value: 'center top' },
-                                    { label: __('Center Center', 'vayu-blocks'), value: 'center center' },
-                                    { label: __('Center Bottom', 'vayu-blocks'), value: 'center bottom' },
-                                    { label: __('Left Top', 'vayu-blocks'), value: 'left top' },
-                                    { label: __('Left Center', 'vayu-blocks'), value: 'left center' },
-                                    { label: __('Left Right', 'vayu-blocks'), value: 'left right' },
-                                    { label: __('Right Top', 'vayu-blocks'), value: 'right top' },
-                                    { label: __('Right Center', 'vayu-blocks'), value: 'right center' },
-                                    { label: __('Right Right', 'vayu-blocks'), value: 'right right' },
-                                ]}
-                                onChange={(value) => setAttributes({ maskposition: value })}
-                            />
-                            <br/>
-                            <SelectControl
-                                label={__('Mask Repeat', 'vayu-blocks')}
-                                __nextHasNoMarginBottom
-                                value={attributes.maskrepeat}
-                                options={[
-                                    { label: __('No Repeat', 'vayu-blocks'), value: 'no-repeat' },
-                                    { label: __('Repeat', 'vayu-blocks'), value: 'repeat' },
-                                    { label: __('Repeat-X', 'vayu-blocks'), value: 'repeat-x' },
-                                    { label: __('Repeat-Y', 'vayu-blocks'), value: 'repeat-y' },
-                                ]}
-                                onChange={(value) => setAttributes({ maskrepeat: value })}
-                            />
-
-                        </ControlPanelControl>
-                    </Fragment>
-                    
-                )}
-
+    
                 </PanelBody>
 
                 {/* Caption */}
