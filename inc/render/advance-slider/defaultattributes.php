@@ -10,7 +10,7 @@ return array(
         'grabCursor'=> false,
         'initialSlide'=> 0,
         'simulateTouch'=>false,
-        'loop'=> false,
+        'loop'=> true,
         'slidesPerView'=>1,
         'spaceBetween'=>10,
         'freeMode'=> false,

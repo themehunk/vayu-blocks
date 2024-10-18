@@ -29,8 +29,8 @@ import './editor.scss';
 
 
 //block and innerblocks with default settings
-const ALLOWED_BLOCKS = [ 'vayu-blocks/flip-wrapper' ];
-const DEFAULT_BLOCK = 'vayu-blocks/flip-wrapper';
+const ALLOWED_BLOCKS = [ 'core/cover' ];
+const DEFAULT_BLOCK = 'core/cover';
 const DEFAULT_BLOCK_ATTRIBUTES = {
 	className: 'swiper-slide',
 };
